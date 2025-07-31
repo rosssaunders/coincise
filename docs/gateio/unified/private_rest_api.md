@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-102-1) Gate API v4.102.1
+# [#](#gate-api-v4-104-0) Gate API v4.104.0
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -127,7 +127,7 @@ has been accidentally leaked, please delete the existing API and rebuild it.
 
 Gate Order matching follows Price Priority > Time priority principle.
 
-Suppose that the order book is as follows：
+Suppose that the order book is as follows:
 
 | Order | Order time | Ask/Selling price |
 | ----- | ---------- | ----------------- |
@@ -177,7 +177,7 @@ endpoint will be deprecated, and the new version of the endpoint can be found in
 the /margin/uni endpoint group. For detailed endpoint migration, please refer to
 the following table:"
 
-Margin account related endpoints：
+Margin account related endpoints:
 
 | Name                                                           | Path                         | Deprecated | New Path |
 | -------------------------------------------------------------- | ---------------------------- | ---------- | -------- |
@@ -189,7 +189,7 @@ Margin account related endpoints：
 | Get the max transferable amount for a specific margin currency | GET /margin/transferable     | No         | `-`      |
 
 The margin lending and borrowing related APIs have been migrated to the
-`/margin/uni` API group：
+`/margin/uni` API group:
 
 | Name                                                          | Old Path                                   | Deprecated | New Path                                       |
 | ------------------------------------------------------------- | ------------------------------------------ | ---------- | ---------------------------------------------- |
@@ -370,7 +370,7 @@ Earning, collateral etc |
 
 **Rate Limit**
 
-Each request to the API response header will contain the following fields:：
+Each request to the API response header will contain the following fields::
 
 - X-Gate-RateLimit-Requests-Remain - your remaining requests for current
   endpoint
@@ -554,7 +554,7 @@ The HTTP status code 2XX will be returned when all operations are successful.
 401 indicates that there is a problem with the certification. Other 4xx status
 codes indicate that the request is invalid. If it is a 5xx error, the server has
 encountered an unknown serious error when processing the request. Please give
-feedback as soon as possible。
+feedback as soon as possible.
 
 **Return Status**
 
@@ -574,12 +574,12 @@ feedback as soon as possible。
 | Type             | Description                                                                                  |
 | ---------------- | -------------------------------------------------------------------------------------------- |
 | `string`         | String type, in double quotation marks. Price and amount are also formatted in string format |
-| `integer`        | 32-bit integer，Mainly related to status codes, size, times, etc.                            |
-| `integer(int64)` | 64-bit integer，Mainly involves ID and higher precision timestamp                            |
+| `integer`        | 32-bit integer, Mainly related to status codes, size, times, etc.                            |
+| `integer(int64)` | 64-bit integer, Mainly involves ID and higher precision timestamp                            |
 | `float`          | Floating point number. Some time and stat fields use float.                                  |
-| `object`         | Object，Contains a child object{}                                                            |
-| `array`          | List，Includes multiple groups of content                                                    |
-| `boolean`        | true is true，false is false                                                                 |
+| `object`         | Object, Contains a child object{}                                                            |
+| `array`          | List, Includes multiple groups of content                                                    |
+| `boolean`        | true is true, false is false                                                                 |
 
 ## [#](#portfolio-margin-account) Portfolio Margin Account
 
@@ -731,9 +731,9 @@ New request body parameter:
 
 New response fields:
 
-| Name    | Type   | Required | Restriction | Description                 |
-| ------- | ------ | -------- | ----------- | --------------------------- |
-| stp_act | string | No       | none        | STP Strategies, including： |
+| Name    | Type   | Required | Restriction | Description                |
+| ------- | ------ | -------- | ----------- | -------------------------- |
+| stp_act | string | No       | none        | STP Strategies, including: |
 
 \- cn  
 \- co  
@@ -1750,7 +1750,7 @@ or with
 
 - Earn related
 
-| `label`                  | 含义                                                                        |
+| `label`                  | Meaning                                                                     |
 | ------------------------ | --------------------------------------------------------------------------- |
 | ERR_BALANCE_NOT_ENOUGH   | balance not enough                                                          |
 | ERR_PRODUCT_SELL_OUT     | Target quota reached                                                        |
@@ -1897,7 +1897,7 @@ Suppose the key we used is `key`, while the secret is `secret`.
 	GET /api/v4/futures/orders?contract=BTC_USD&status=finished&limit=50 HTTP/1.1
 ```
 
-Signature string：
+Signature string:
 
 ```
 	GET\n
@@ -1907,7 +1907,7 @@ Signature string：
 	1541993715
 ```
 
-Explanation：
+Explanation:
 
 - `/api/v4/futures/orders`: request url
 - `contract=BTC_USD&status=finished&limit=50`: keep the query string as it is in
@@ -1927,7 +1927,7 @@ Signature generated
 	{"contract":"BTC_USD","type":"limit","size":100,"price":6800,"time_in_force":"gtc"}
 ```
 
-Signature string：
+Signature string:
 
 ```
 	POST\n
@@ -1937,7 +1937,7 @@ Signature string：
 	1541993715
 ```
 
-Explanation：
+Explanation:
 
 - request query string is empty, use plain empty string
 - use the hashed result of the json-string-formatted request body
@@ -2019,14 +2019,14 @@ liquidity, defined by corresponding adjustment coefficients, and then uniformly
 converted to USD to calculate the total asset value and position value of the
 account.
 
-You can refer to the [Formula](#portfolio-account) in the documentation
+For specific formulas, please refer to [Margin Formula](#margin-formula)
 
 ### Parameters
 
-| Name     | In    | Type   | Required | Description                             |
-| -------- | ----- | ------ | -------- | --------------------------------------- |
-| currency | query | string | false    | Retrieve data of the specified currency |
-| sub_uid  | query | string | false    | Sub account user ID                     |
+| Name     | In    | Type   | Required | Description                      |
+| -------- | ----- | ------ | -------- | -------------------------------- |
+| currency | query | string | false    | Query by specified currency name |
+| sub_uid  | query | string | false    | Sub account user ID              |
 
 > Example responses
 
@@ -2090,75 +2090,75 @@ You can refer to the [Formula](#portfolio-account) in the documentation
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema |
-| ------ | -------------------------------------------------------------------------- | -------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | Inline |
+| Status | Meaning                                                                    | Description                 | Schema |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                             | Type           | Description                                                                                                                                                                                                                                                        |
-| -------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| » user_id                        | integer(int64) | User ID                                                                                                                                                                                                                                                            |
-| » refresh_time                   | integer(int64) | Time of the most recent refresh                                                                                                                                                                                                                                    |
-| » locked                         | boolean        | Whether the account is locked, valid in cross-currency margin/combined margin mode, false in other modes such as single-currency margin mode                                                                                                                       |
-| » balances                       | object         | none                                                                                                                                                                                                                                                               |
-| »» UnifiedBalance                | object         | none                                                                                                                                                                                                                                                               |
-| »»» available                    | string         | Available amount is valid in single currency margin/cross-currency margin/combined margin mode, and the calculation is different in different modes                                                                                                                |
-| »»» freeze                       | string         | The locked amount is valid in single currency margin/cross-currency margin/combined margin mode                                                                                                                                                                    |
-| »»» borrowed                     | string         | Borrow limit, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                                            |
-| »»» negative_liab                | string         | Negative balance loan is valid in cross-currency margin/combined margin mode, and is 0 in other modes such as single-currency margin mode                                                                                                                          |
-| »»» futures_pos_liab             | string         | Contract opening position borrowing currency (abandoned, to be offline field)                                                                                                                                                                                      |
-| »»» equity                       | string         | Equity, valid in single currency margin/cross currency margin/combined margin mode                                                                                                                                                                                 |
-| »»» total_freeze                 | string         | Total occupancy (discarded, to be offline field)                                                                                                                                                                                                                   |
-| »»» total_liab                   | string         | Total borrowing, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                                         |
-| »»» spot_in_use                  | string         | The amount of spot hedging is valid in the combined margin mode, and is 0 in other margin modes such as single currency and cross-currency margin modes                                                                                                            |
-| »»» funding                      | string         | Uniloan financial management amount, effective when Uniloan financial management is turned on as a unified account margin switch                                                                                                                                   |
-| »»» funding_version              | string         | Funding version                                                                                                                                                                                                                                                    |
-| »»» cross_balance                | string         | Full margin balance is valid in single currency margin mode, and is 0 in other modes such as cross currency margin/combined margin mode                                                                                                                            |
-| »»» iso_balance                  | string         | Isolated margin balance is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                                                         |
-| »»» im                           | string         | Full-position initial margin is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                                                    |
-| »»» mm                           | string         | The full position maintains margin, which is valid in the single currency margin mode, and other cross-currency margin combination margin mode is 0.                                                                                                               |
-| »»» imr                          | string         | Full-position initial margin rate is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                                               |
-| »»» mmr                          | string         | Full-position maintenance margin rate is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                                           |
-| »»» margin_balance               | string         | Full margin balance is valid in single currency margin mode and is 0 in other modes such as cross currency margin/combined margin mode                                                                                                                             |
-| »»» available_margin             | string         | Full margin available for full position is valid in single currency margin mode, and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                                        |
-| »»» enabled_collateral           | boolean        | Currency enabled as margin: true - Enabled, false - Disabled                                                                                                                                                                                                       |
-| »» total                         | string         | Total account assets converted to USD, i.e. the sum of `(available + freeze) * price` in all currencies (deprecated, to be deprecated, replaced by unified_account_total)                                                                                          |
-| »» borrowed                      | string         | The total borrowed amount of the account converted into USD, i.e. the sum of `borrowed * price` of all currencies (excluding Point Cards). It is valid in cross-currency margin/combined margin mode, and is 0 in other modes such as single-currency margin mode. |
-| »» total_initial_margin          | string         | Total initial margin, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                                    |
-| »» total_margin_balance          | string         | Total margin balance, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                                    |
-| »» total_maintenance_margin      | string         | Total maintenance margin is valid in cross-currency margin/combined margin mode, and is 0 in other modes such as single-currency margin mode                                                                                                                       |
-| »» total_initial_margin_rate     | string         | Total initial margin rate, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                               |
-| »» total_maintenance_margin_rate | string         | Total maintenance margin rate, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                           |
-| »» total_available_margin        | string         | Available margin amount, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                                 |
-| »» unified_account_total         | string         | Unify the total account assets, valid in single currency margin/cross-currency margin/combined margin mode                                                                                                                                                         |
-| »» unified_account_total_liab    | string         | Unify the total loan of the account, valid in the cross-currency margin/combined margin mode, and 0 in other modes such as single-currency margin mode                                                                                                             |
-| »» unified_account_total_equity  | string         | Unify the total account equity, valid in single currency margin/cross-currency margin/combined margin mode                                                                                                                                                         |
-| »» leverage                      | string         | Actual leverage, valid in cross-currency margin/combined margin mode                                                                                                                                                                                               |
-| »» spot_order_loss               | string         | Total pending order loss, in USDT, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                                       |
-| »» spot_hedge                    | boolean        | Spot hedging status, true - enabled, false - not enabled.                                                                                                                                                                                                          |
-| »» use_funding                   | boolean        | Whether to use funds as margin                                                                                                                                                                                                                                     |
-| »» is_all_collateral             | boolean        | Whether all currencies are used as margin, true - All currencies are used as margin, false - No                                                                                                                                                                    |
+| Name                             | Type           | Description                                                                                                                                                                                                                     |
+| -------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » user_id                        | integer(int64) | User ID                                                                                                                                                                                                                         |
+| » refresh_time                   | integer(int64) | Last refresh time                                                                                                                                                                                                               |
+| » locked                         | boolean        | Whether the account is locked, valid in cross-currency margin/combined margin mode, false in other modes such as single-currency margin mode                                                                                    |
+| » balances                       | object         | none                                                                                                                                                                                                                            |
+| »» UnifiedBalance                | object         | none                                                                                                                                                                                                                            |
+| »»» available                    | string         | Available balance, valid in single currency margin/cross-currency margin/combined margin mode, calculation varies by mode                                                                                                       |
+| »»» freeze                       | string         | Locked balance, valid in single currency margin/cross-currency margin/combined margin mode                                                                                                                                      |
+| »»» borrowed                     | string         | Borrowed amount, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                      |
+| »»» negative_liab                | string         | Negative balance borrowing, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                           |
+| »»» futures_pos_liab             | string         | Contract opening position borrowing currency (abandoned, to be offline field)                                                                                                                                                   |
+| »»» equity                       | string         | Equity, valid in single currency margin/cross currency margin/combined margin mode                                                                                                                                              |
+| »»» total_freeze                 | string         | Total frozen (deprecated, to be removed)                                                                                                                                                                                        |
+| »»» total_liab                   | string         | Total borrowed amount, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                |
+| »»» spot_in_use                  | string         | The amount of spot hedging is valid in the combined margin mode, and is 0 in other margin modes such as single currency and cross-currency margin modes                                                                         |
+| »»» funding                      | string         | Uniloan financial management amount, effective when turned on as a unified account margin switch                                                                                                                                |
+| »»» funding_version              | string         | Funding version                                                                                                                                                                                                                 |
+| »»» cross_balance                | string         | Full margin balance is valid in single currency margin mode, and is 0 in other modes such as cross currency margin/combined margin mode                                                                                         |
+| »»» iso_balance                  | string         | Isolated margin balance is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                      |
+| »»» im                           | string         | Full-position initial margin is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                 |
+| »»» mm                           | string         | Cross margin maintenance margin, valid in single-currency margin mode, 0 in other modes such as cross-currency margin/combined margin mode                                                                                      |
+| »»» imr                          | string         | Full-position initial margin rate is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                            |
+| »»» mmr                          | string         | Full-position maintenance margin rate is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                        |
+| »»» margin_balance               | string         | Full margin balance is valid in single currency margin mode and is 0 in other modes such as cross currency margin/combined margin mode                                                                                          |
+| »»» available_margin             | string         | Cross margin available balance, valid in single currency margin mode, 0 in other modes such as cross-currency margin/combined margin mode                                                                                       |
+| »»» enabled_collateral           | boolean        | Currency enabled as margin: true - Enabled, false - Disabled                                                                                                                                                                    |
+| »» total                         | string         | Total account assets converted to USD, i.e. the sum of `(available + freeze) * price` in all currencies (deprecated, to be removed, replaced by unified_account_total)                                                          |
+| »» borrowed                      | string         | Total borrowed amount converted to USD, i.e. the sum of `borrowed * price` of all currencies (excluding point cards), valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode |
+| »» total_initial_margin          | string         | Total initial margin, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                 |
+| »» total_margin_balance          | string         | Total margin balance, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                                 |
+| »» total_maintenance_margin      | string         | Total maintenance margin is valid in cross-currency margin/combined margin mode, and is 0 in other modes such as single-currency margin mode                                                                                    |
+| »» total_initial_margin_rate     | string         | Total initial margin rate, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                            |
+| »» total_maintenance_margin_rate | string         | Total maintenance margin rate, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                        |
+| »» total_available_margin        | string         | Available margin amount, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                              |
+| »» unified_account_total         | string         | Total unified account assets, valid in single currency margin/cross-currency margin/combined margin mode                                                                                                                        |
+| »» unified_account_total_liab    | string         | Total unified account borrowed amount, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                |
+| »» unified_account_total_equity  | string         | Total unified account equity, valid in single currency margin/cross-currency margin/combined margin mode                                                                                                                        |
+| »» leverage                      | string         | Actual leverage ratio, valid in cross-currency margin/combined margin mode                                                                                                                                                      |
+| »» spot_order_loss               | string         | Total pending order loss, in USDT, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                    |
+| »» spot_hedge                    | boolean        | Spot hedging status: true - enabled, false - disabled                                                                                                                                                                           |
+| »» use_funding                   | boolean        | Whether to use Earn funds as margin                                                                                                                                                                                             |
+| »» is_all_collateral             | boolean        | Whether all currencies are used as margin: true - all currencies as margin, false - no                                                                                                                                          |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#query-about-the-maximum-borrowing-for-the-unified-account) Query about the maximum borrowing for the unified account
+## [#](#query-maximum-borrowable-amount-for-unified-account) Query maximum borrowable amount for unified account
 
 > Code samples
 
 `GET /unified/borrowable`
 
-_Query about the maximum borrowing for the unified account_
+_Query maximum borrowable amount for unified account_
 
 ### Parameters
 
-| Name     | In    | Type   | Required | Description                             |
-| -------- | ----- | ------ | -------- | --------------------------------------- |
-| currency | query | string | true     | Retrieve data of the specified currency |
+| Name     | In    | Type   | Required | Description                      |
+| -------- | ----- | ------ | -------- | -------------------------------- |
+| currency | query | string | true     | Query by specified currency name |
 
 > Example responses
 
@@ -2173,9 +2173,9 @@ _Query about the maximum borrowing for the unified account_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
@@ -2192,19 +2192,19 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#query-about-the-maximum-transferable-for-the-unified-account) Query about the maximum transferable for the unified account
+## [#](#query-maximum-transferable-amount-for-unified-account) Query maximum transferable amount for unified account
 
 > Code samples
 
 `GET /unified/transferable`
 
-_Query about the maximum transferable for the unified account_
+_Query maximum transferable amount for unified account_
 
 ### Parameters
 
-| Name     | In    | Type   | Required | Description                             |
-| -------- | ----- | ------ | -------- | --------------------------------------- |
-| currency | query | string | true     | Retrieve data of the specified currency |
+| Name     | In    | Type   | Required | Description                      |
+| -------- | ----- | ------ | -------- | -------------------------------- |
+| currency | query | string | true     | Query by specified currency name |
 
 > Example responses
 
@@ -2219,9 +2219,9 @@ _Query about the maximum transferable for the unified account_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
@@ -2229,30 +2229,30 @@ Status Code **200**
 
 _UnifiedTransferable_
 
-| Name       | Type   | Description                                    |
-| ---------- | ------ | ---------------------------------------------- |
-| » currency | string | Currency detail                                |
-| » amount   | string | The maximum amount that can be transferred out |
+| Name       | Type   | Description                 |
+| ---------- | ------ | --------------------------- |
+| » currency | string | Currency detail             |
+| » amount   | string | Maximum transferable amount |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#batch-query-can-be-transferred-out-at-most-for-unified-accounts-each-currency-is-the-maximum-value-after-the-user-withdraws-the-currency-the-amount-of-transferable-currency-will-be-changed) Batch query can be transferred out at most for unified accounts; each currency is the maximum value. After the user withdraws the currency, the amount of transferable currency will be changed.
+## [#](#batch-query-maximum-transferable-amount-for-unified-accounts-each-currency-shows-the-maximum-value-after-user-withdrawal-the-transferable-amount-for-all-currencies-will-change) Batch query maximum transferable amount for unified accounts. Each currency shows the maximum value. After user withdrawal, the transferable amount for all currencies will change
 
 > Code samples
 
 `GET /unified/transferables`
 
-_Batch query can be transferred out at most for unified accounts; each currency
-is the maximum value. After the user withdraws the currency, the amount of
-transferable currency will be changed._
+_Batch query maximum transferable amount for unified accounts. Each currency
+shows the maximum value. After user withdrawal, the transferable amount for all
+currencies will change_
 
 ### Parameters
 
-| Name       | In    | Type   | Required | Description                                                                                     |
-| ---------- | ----- | ------ | -------- | ----------------------------------------------------------------------------------------------- |
-| currencies | query | string | true     | Specify the currency name to query in batches, and support up to 100 pass parameters at a time. |
+| Name       | In    | Type   | Required | Description                                                                                    |
+| ---------- | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------- |
+| currencies | query | string | true     | Specify the currency name to query in batches, and support up to 100 pass parameters at a time |
 
 > Example responses
 
@@ -2269,37 +2269,37 @@ transferable currency will be changed._
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                  | Type   | Description                                                               |
-| --------------------- | ------ | ------------------------------------------------------------------------- |
-| » TransferablesResult | object | Batch query unified account can be transferred up to a maximum of results |
-| »» currency           | string | Currency detail                                                           |
-| »» amount             | string | The maximum amount that can be transferred out                            |
+| Name                  | Type   | Description                                              |
+| --------------------- | ------ | -------------------------------------------------------- |
+| » TransferablesResult | object | Batch query unified account maximum transferable results |
+| »» currency           | string | Currency detail                                          |
+| »» amount             | string | Maximum transferable amount                              |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#batch-query-unified-account-can-be-borrowed-up-to-a-maximum) Batch query unified account can be borrowed up to a maximum
+## [#](#batch-query-unified-account-maximum-borrowable-amount) Batch query unified account maximum borrowable amount
 
 > Code samples
 
 `GET /unified/batch_borrowable`
 
-_Batch query unified account can be borrowed up to a maximum_
+_Batch query unified account maximum borrowable amount_
 
 ### Parameters
 
-| Name       | In    | Type            | Required | Description                                                                                                |
-| ---------- | ----- | --------------- | -------- | ---------------------------------------------------------------------------------------------------------- |
-| currencies | query | array\[string\] | true     | Specify the currency names for querying in an array, separated by commas, with a maximum of 10 currencies. |
+| Name       | In    | Type            | Required | Description                                                                                 |
+| ---------- | ----- | --------------- | -------- | ------------------------------------------------------------------------------------------- |
+| currencies | query | array\[string\] | true     | Specify currency names for querying in an array, separated by commas, maximum 10 currencies |
 
 > Example responses
 
@@ -2316,19 +2316,19 @@ _Batch query unified account can be borrowed up to a maximum_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                | Type   | Description                                                            |
-| ------------------- | ------ | ---------------------------------------------------------------------- |
-| » UnifiedBorrowable | object | Batch query unified account can be borrowed up to a maximum of results |
-| »» currency         | string | Currency detail                                                        |
-| »» amount           | string | The maximum amount to borrow                                           |
+| Name                | Type   | Description                                            |
+| ------------------- | ------ | ------------------------------------------------------ |
+| » UnifiedBorrowable | object | Batch query unified account maximum borrowable results |
+| »» currency         | string | Currency detail                                        |
+| »» amount           | string | Maximum borrowable amount                              |
 
 WARNING
 
@@ -2342,16 +2342,14 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Borrow or repay_
 
-When borrowing, it is essential to ensure that the borrowed amount is not below
-the minimum borrowing threshold for the specific cryptocurrency and does not
-exceed the maximum borrowing limit set by the platform and the user.
+When borrowing, ensure the borrowed amount is not below the minimum borrowing
+threshold for the specific cryptocurrency and does not exceed the maximum
+borrowing limit set by the platform and user.
 
-The interest on the loan will be automatically deducted from the account at
-regular intervals. It is the user's responsibility to manage the repayment of
-the borrowed amount.
+Loan interest will be automatically deducted from the account at regular
+intervals. Users are responsible for managing repayment of borrowed amounts.
 
-For repayment, the option to repay the entire borrowed amount is available by
-setting the parameter `repaid_all=true`
+For repayment, use `repaid_all=true` to repay all available amounts
 
 > Body parameter
 
@@ -2367,14 +2365,14 @@ setting the parameter `repaid_all=true`
 
 ### Parameters
 
-| Name         | In   | Type    | Required | Description                                                                                                                           |
-| ------------ | ---- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| body         | body | object  | true     | none                                                                                                                                  |
-| » currency   | body | string  | true     | Currency                                                                                                                              |
-| » type       | body | string  | true     | type: borrow - borrow, repay - repay                                                                                                  |
-| » amount     | body | string  | true     | The amount of lending or repaying                                                                                                     |
-| » repaid_all | body | boolean | false    | Full repayment is solely for repayment operations. When set to 'true,' it overrides the 'amount,' allowing for direct full repayment. |
-| » text       | body | string  | false    | User defined custom ID                                                                                                                |
+| Name         | In   | Type    | Required | Description                                                                                                                    |
+| ------------ | ---- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| body         | body | object  | true     | none                                                                                                                           |
+| » currency   | body | string  | true     | Currency                                                                                                                       |
+| » type       | body | string  | true     | Type: `borrow` - borrow, `repay` - repay                                                                                       |
+| » amount     | body | string  | true     | Borrow or repayment amount                                                                                                     |
+| » repaid_all | body | boolean | false    | Full repayment, only used for repayment operations. When set to `true`, overrides `amount` and directly repays the full amount |
+| » text       | body | string  | false    | User defined custom ID                                                                                                         |
 
 #### [#](#enumerated-values-4) Enumerated Values
 
@@ -2395,40 +2393,40 @@ setting the parameter `repaid_all=true`
 
 ### Responses
 
-| Status | Meaning                                                                    | Description           | Schema |
-| ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Operated successfully | Inline |
+| Status | Meaning                                                                    | Description          | Schema |
+| ------ | -------------------------------------------------------------------------- | -------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Operation successful | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-_Unified account loan and repayment response results_
+_Unified account borrowing and repayment response result_
 
 | Name      | Type           | Description    |
 | --------- | -------------- | -------------- |
-| » tran_id | integer(int64) | Transaction id |
+| » tran_id | integer(int64) | Transaction ID |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-loans) List loans
+## [#](#query-loans) Query loans
 
 > Code samples
 
 `GET /unified/loans`
 
-_List loans_
+_Query loans_
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                                    |
-| -------- | ----- | -------------- | -------- | -------------------------------------------------------------- |
-| currency | query | string         | false    | Retrieve data of the specified currency                        |
-| page     | query | integer(int32) | false    | Page number                                                    |
-| limit    | query | integer(int32) | false    | Maximum response items. Default: 100, minimum: 1, Maximum: 100 |
-| type     | query | string         | false    | Loan type, platform - platform, margin - margin                |
+| Name     | In    | Type           | Required | Description                                                              |
+| -------- | ----- | -------------- | -------- | ------------------------------------------------------------------------ |
+| currency | query | string         | false    | Query by specified currency name                                         |
+| page     | query | integer(int32) | false    | Page number                                                              |
+| limit    | query | integer(int32) | false    | Maximum number of items returned. Default: 100, minimum: 1, maximum: 100 |
+| type     | query | string         | false    | Loan type: platform borrowing - platform, margin borrowing - margin      |
 
 > Example responses
 
@@ -2449,45 +2447,45 @@ _List loans_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name             | Type           | Description                                     |
-| ---------------- | -------------- | ----------------------------------------------- |
-| _None_           | array          | \[Loan\]                                        |
-| » _None_         | object         | Loan                                            |
-| »» currency      | string         | Currency                                        |
-| »» currency_pair | string         | Currency pair                                   |
-| »» amount        | string         | amount                                          |
-| »» type          | string         | Loan type, platform - platform, margin - margin |
-| »» create_time   | integer(int64) | Created time                                    |
-| »» update_time   | integer(int64) | Updated time                                    |
+| Name             | Type           | Description                                                         |
+| ---------------- | -------------- | ------------------------------------------------------------------- |
+| _None_           | array          | \[Borrowing\]                                                       |
+| » _None_         | object         | Borrowing                                                           |
+| »» currency      | string         | Currency                                                            |
+| »» currency_pair | string         | Currency pair                                                       |
+| »» amount        | string         | Amount to Repay                                                     |
+| »» type          | string         | Loan type: platform borrowing - platform, margin borrowing - margin |
+| »» create_time   | integer(int64) | Created time                                                        |
+| »» update_time   | integer(int64) | Last Update Time                                                    |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#get-load-records) Get load records
+## [#](#query-loan-records) Query loan records
 
 > Code samples
 
 `GET /unified/loan_records`
 
-_Get load records_
+_Query loan records_
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                                                                                                                 |
-| -------- | ----- | -------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| type     | query | string         | false    | The types of lending records, borrow - indicates the action of borrowing funds, repay - indicates the action of repaying the borrowed funds |
-| currency | query | string         | false    | Retrieve data of the specified currency                                                                                                     |
-| page     | query | integer(int32) | false    | Page number                                                                                                                                 |
-| limit    | query | integer(int32) | false    | Maximum response items. Default: 100, minimum: 1, Maximum: 100                                                                              |
+| Name     | In    | Type           | Required | Description                                                              |
+| -------- | ----- | -------------- | -------- | ------------------------------------------------------------------------ |
+| type     | query | string         | false    | Loan record type: borrow - borrowing, repay - repayment                  |
+| currency | query | string         | false    | Query by specified currency name                                         |
+| page     | query | integer(int32) | false    | Page number                                                              |
+| limit    | query | integer(int32) | false    | Maximum number of items returned. Default: 100, minimum: 1, maximum: 100 |
 
 > Example responses
 
@@ -2510,48 +2508,48 @@ _Get load records_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name              | Type           | Description                                                                                                                                                                                                                          |
-| ----------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| » _None_          | object         | Loan records                                                                                                                                                                                                                         |
-| »» id             | integer(int64) | ID                                                                                                                                                                                                                                   |
-| »» type           | string         | type: borrow - borrow, repay - repay                                                                                                                                                                                                 |
-| »» repayment_type | string         | Repayment type, none - No repayment type, manual_repay - Manual repayment, auto_repay - Automatic repayment, cancel_auto_repay - Automatic repayment after withdrawal, different_currencies_repayment - Different currency repayment |
-| »» borrow_type    | string         | Loan type, returned when querying loan records. manual_borrow - Manual repayment , auto_borrow - Automatic repayment                                                                                                                 |
-| »» currency_pair  | string         | Currency pair                                                                                                                                                                                                                        |
-| »» currency       | string         | Currency                                                                                                                                                                                                                             |
-| »» amount         | string         | The amount of lending or repaying                                                                                                                                                                                                    |
-| »» create_time    | integer(int64) | Created time                                                                                                                                                                                                                         |
+| Name              | Type           | Description                                                                                                                                                                                                                              |
+| ----------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » _None_          | object         | Borrowing Records                                                                                                                                                                                                                        |
+| »» id             | integer(int64) | id                                                                                                                                                                                                                                       |
+| »» type           | string         | Type: `borrow` - borrow, `repay` - repay                                                                                                                                                                                                 |
+| »» repayment_type | string         | Repayment type: none - No repayment type, manual_repay - Manual repayment, auto_repay - Automatic repayment, cancel_auto_repay - Automatic repayment after order cancellation, different_currencies_repayment - Cross-currency repayment |
+| »» borrow_type    | string         | Borrowing type, returned when querying loan records: manual_borrow - Manual borrowing, auto_borrow - Automatic borrowing                                                                                                                 |
+| »» currency_pair  | string         | Currency pair                                                                                                                                                                                                                            |
+| »» currency       | string         | Currency                                                                                                                                                                                                                                 |
+| »» amount         | string         | Borrow or repayment amount                                                                                                                                                                                                               |
+| »» create_time    | integer(int64) | Created time                                                                                                                                                                                                                             |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-interest-records) List interest records
+## [#](#query-interest-deduction-records) Query interest deduction records
 
 > Code samples
 
 `GET /unified/interest_records`
 
-_List interest records_
+_Query interest deduction records_
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                                                                    |
-| -------- | ----- | -------------- | -------- | ---------------------------------------------------------------------------------------------- |
-| currency | query | string         | false    | Retrieve data of the specified currency                                                        |
-| page     | query | integer(int32) | false    | Page number                                                                                    |
-| limit    | query | integer(int32) | false    | Maximum response items. Default: 100, minimum: 1, Maximum: 100                                 |
-| from     | query | integer(int64) | false    | Start timestamp of the query                                                                   |
-| to       | query | integer(int64) | false    | Time range ending, default to current time                                                     |
-| type     | query | string         | false    | Loan type, platform loan - platform, leverage loan - margin, if not passed, defaults to margin |
+| Name     | In    | Type           | Required | Description                                                                                              |
+| -------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------- |
+| currency | query | string         | false    | Query by specified currency name                                                                         |
+| page     | query | integer(int32) | false    | Page number                                                                                              |
+| limit    | query | integer(int32) | false    | Maximum number of items returned. Default: 100, minimum: 1, maximum: 100                                 |
+| from     | query | integer(int64) | false    | Start timestamp for the query                                                                            |
+| to       | query | integer(int64) | false    | End timestamp for the query, defaults to current time if not specified                                   |
+| type     | query | string         | false    | Loan type: platform borrowing - platform, margin borrowing - margin. Defaults to margin if not specified |
 
 > Example responses
 
@@ -2573,25 +2571,25 @@ _List interest records_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name             | Type           | Description                                |
-| ---------------- | -------------- | ------------------------------------------ |
-| _None_           | array          | \[Interest record\]                        |
-| » _None_         | object         | Interest record                            |
-| »» currency      | string         | Currency name                              |
-| »» currency_pair | string         | Currency pair                              |
-| »» actual_rate   | string         | Actual rate                                |
-| »» interest      | string         | Interest                                   |
-| »» status        | integer        | Status: 0 - fail, 1 - success              |
-| »» type          | string         | Type, platform - platform，margin - margin |
-| »» create_time   | integer(int64) | Created time                               |
+| Name             | Type           | Description                                                    |
+| ---------------- | -------------- | -------------------------------------------------------------- |
+| _None_           | array          | \[Interest Deduction Record\]                                  |
+| » _None_         | object         | Interest Deduction Record                                      |
+| »» currency      | string         | Currency name                                                  |
+| »» currency_pair | string         | Currency pair                                                  |
+| »» actual_rate   | string         | Actual Rate                                                    |
+| »» interest      | string         | Interest                                                       |
+| »» status        | integer        | Status: 0 - fail, 1 - success                                  |
+| »» type          | string         | Type: platform - Platform borrowing, margin - Margin borrowing |
+| »» create_time   | integer(int64) | Created time                                                   |
 
 WARNING
 
@@ -2605,7 +2603,7 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Get user risk unit details_
 
-Retrieve user risk unit details, only valid in portfolio margin mode
+Get user risk unit details, only valid in portfolio margin mode
 
 > Example responses
 
@@ -2632,40 +2630,40 @@ Retrieve user risk unit details, only valid in portfolio margin mode
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                | Type           | Description                                               |
-| ------------------- | -------------- | --------------------------------------------------------- |
-| » user_id           | integer(int64) | User ID                                                   |
-| » spot_hedge        | boolean        | Spot hedging status, true - enabled, false - not enabled. |
-| » risk_units        | array          | Risk unit                                                 |
-| »» RiskUnits        | object         | none                                                      |
-| »»» symbol          | string         | Risk unit flag                                            |
-| »»» spot_in_use     | string         | Spot hedging utilization                                  |
-| »»» maintain_margin | string         | Maintenance margin for risk unit                          |
-| »»» initial_margin  | string         | Initial margin for risk unit                              |
-| »»» delta           | string         | Total Delta of risk unit                                  |
-| »»» gamma           | string         | Total Gamma of risk unit                                  |
-| »»» theta           | string         | Total Theta of risk unit                                  |
-| »»» vega            | string         | Total Vega of risk unit                                   |
+| Name                | Type           | Description                                           |
+| ------------------- | -------------- | ----------------------------------------------------- |
+| » user_id           | integer(int64) | User ID                                               |
+| » spot_hedge        | boolean        | Spot hedging status: true - enabled, false - disabled |
+| » risk_units        | array          | Risk unit                                             |
+| »» RiskUnits        | object         | none                                                  |
+| »»» symbol          | string         | Risk unit flag                                        |
+| »»» spot_in_use     | string         | Spot hedging occupied amount                          |
+| »»» maintain_margin | string         | Maintenance margin for risk unit                      |
+| »»» initial_margin  | string         | Initial margin for risk unit                          |
+| »»» delta           | string         | Total Delta of risk unit                              |
+| »»» gamma           | string         | Total Gamma of risk unit                              |
+| »»» theta           | string         | Total Theta of risk unit                              |
+| »»» vega            | string         | Total Vega of risk unit                               |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#set-mode-of-the-unified-account) Set mode of the unified account
+## [#](#set-unified-account-mode) Set unified account mode
 
 > Code samples
 
 `PUT /unified/unified_mode`
 
-_Set mode of the unified account_
+_Set unified account mode_
 
 Each account mode switch only requires passing the corresponding account mode
 parameter, and also supports turning on or off the configuration switches under
@@ -2674,48 +2672,35 @@ the corresponding account mode during the switch.
 - When enabling the classic account mode, mode=classic
 
 ```
-    PUT /unified/unified_mode
-    {
-      "mode": "classic"
-    }
+ PUT /unified/unified_mode
+ {
+ "mode": "classic"
+ }
 ```
 
-- When enabling the cross-currency margin mode, mode=multi_currency
+- When enabling the cross-currency margin "multi_currency", "settings": {
+  "usdt_futures": true } }
 
 ```
-    PUT /unified/unified_mode
-    {
-      "mode": "multi_currency",
-      "settings": {
-         "usdt_futures": true
-      }
-    }
-```
-
 - When enabling the portfolio margin mode, mode=portfolio
-
-```
-    PUT /unified/unified_mode
-    {
-      "mode": "portfolio",
-      "settings": {
-         "spot_hedge": true
-      }
-    }
 ```
 
+PUT /unified/unified_mode { "mode": "portfolio", "settings": { "spot_hedge":
+true } }
+
+```
 - When enabling the single-currency margin mode, mode=single_currency
+```
 
-```
-    PUT /unified/unified_mode
-    {
-      "mode": "single_currency"
-    }
-```
+PUT /unified/unified_mode { "mode": "single_currency" }
+
+````
+
+<Example>
 
 > Body parameter
 
-```
+```json
 {
   "mode": "portfolio",
   "settings": {
@@ -2724,34 +2709,34 @@ the corresponding account mode during the switch.
     "options": true
   }
 }
-```
+````
 
 ### Parameters
 
-| Name            | In   | Type    | Required | Description                                                                                           |
-| --------------- | ---- | ------- | -------- | ----------------------------------------------------------------------------------------------------- |
-| body            | body | object  | true     | none                                                                                                  |
-| » mode          | body | string  | true     | Unified account mode:                                                                                 |
-| » settings      | body | object  | false    | none                                                                                                  |
-| »» usdt_futures | body | boolean | false    | USDT contract switch. In cross-currency margin mode, it can only be turned on and not off             |
-| »» spot_hedge   | body | boolean | false    | Spot hedging switch.                                                                                  |
-| »» use_funding  | body | boolean | false    | switch, when the mode is cross-currency margin mode, whether to use Uniloan financial funds as margin |
-| »» options      | body | boolean | false    | Option switch. In cross-currency margin mode, it can only be turned on and not off                    |
+| Name            | In   | Type    | Required | Description                                                                                    |
+| --------------- | ---- | ------- | -------- | ---------------------------------------------------------------------------------------------- |
+| body            | body | object  | true     | none                                                                                           |
+| » mode          | body | string  | true     | Unified account mode:                                                                          |
+| » settings      | body | object  | false    | none                                                                                           |
+| »» usdt_futures | body | boolean | false    | USDT futures switch. In cross-currency margin mode, can only be enabled and cannot be disabled |
+| »» spot_hedge   | body | boolean | false    | Spot hedging switch                                                                            |
+| »» use_funding  | body | boolean | false    | Earn switch, when mode is cross-currency margin mode, whether to use Earn funds as margin      |
+| »» options      | body | boolean | false    | Options switch. In cross-currency margin mode, can only be enabled and cannot be disabled      |
 
 #### [#](#detailed-descriptions-7) Detailed descriptions
 
 **» mode**: Unified account mode:
 
 - `classic`: Classic account mode
-- `multi_currency`: Multi-currency margin mode
+- `multi_currency`: Cross-currency margin mode
 - `portfolio`: Portfolio margin mode
-- `single_currency`: Single Currency Margin Model
+- `single_currency`: Single-currency margin mode
 
 ### Responses
 
-| Status | Meaning                                                                            | Description | Schema |
-| ------ | ---------------------------------------------------------------------------------- | ----------- | ------ |
-| 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Success     | None   |
+| Status | Meaning                                                                            | Description      | Schema |
+| ------ | ---------------------------------------------------------------------------------- | ---------------- | ------ |
+| 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Set successfully | None   |
 
 WARNING
 
@@ -2789,9 +2774,9 @@ Unified account mode:
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
@@ -2802,37 +2787,37 @@ Status Code **200**
 | » mode | string | Unified account mode: |
 
 \- `classic`: Classic account mode  
-\- `multi_currency`: Multi-currency margin mode  
+\- `multi_currency`: Cross-currency margin mode  
 \- `portfolio`: Portfolio margin mode  
-\- `single_currency`: Single Currency Margin Model | | » settings | object |
-none | | »» usdt_futures | boolean | USDT contract switch. In cross-currency
-margin mode, it can only be turned on and not off | | »» spot_hedge | boolean |
-Spot hedging switch. | | »» use_funding | boolean | switch, when the mode is
-cross-currency margin mode, whether to use Uniloan financial funds as margin | |
-»» options | boolean | Option switch. In cross-currency margin mode, it can only
-be turned on and not off |
+\- `single_currency`: Single-currency margin mode | | » settings | object | none
+| | »» usdt_futures | boolean | USDT futures switch. In cross-currency margin
+mode, can only be enabled and cannot be disabled | | »» spot_hedge | boolean |
+Spot hedging switch | | »» use_funding | boolean | Earn switch, when mode is
+cross-currency margin mode, whether to use Earn funds as margin | | »» options |
+boolean | Options switch. In cross-currency margin mode, can only be enabled and
+cannot be disabled |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#get-unified-estimate-rate) Get unified estimate rate
+## [#](#query-unified-account-estimated-interest-rate) Query unified account estimated interest rate
 
 > Code samples
 
 `GET /unified/estimate_rate`
 
-_Get unified estimate rate_
+_Query unified account estimated interest rate_
 
-Due to fluctuations in lending depth, hourly interest rates may vary, and thus,
-I cannot provide exact rates. When a currency is not supported, the interest
-rate returned will be an empty string.
+Interest rates fluctuate hourly based on lending depth, so exact rates cannot be
+provided. When a currency is not supported, the interest rate returned will be
+an empty string
 
 ### Parameters
 
-| Name       | In    | Type            | Required | Description                                                                                                |
-| ---------- | ----- | --------------- | -------- | ---------------------------------------------------------------------------------------------------------- |
-| currencies | query | array\[string\] | true     | Specify the currency names for querying in an array, separated by commas, with a maximum of 10 currencies. |
+| Name       | In    | Type            | Required | Description                                                                                 |
+| ---------- | ----- | --------------- | -------- | ------------------------------------------------------------------------------------------- |
+| currencies | query | array\[string\] | true     | Specify currency names for querying in an array, separated by commas, maximum 10 currencies |
 
 > Example responses
 
@@ -2848,15 +2833,15 @@ rate returned will be an empty string.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-_Estimate the current hourly lending rates, categorized by currency_
+_Estimate current hourly lending rates, returned by currency_
 
 | Name                       | Type   | Description |
 | -------------------------- | ------ | ----------- |
@@ -2866,13 +2851,13 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-currency-discount-tiers) List currency discount tiers
+## [#](#query-unified-account-tiered-discount) Query unified account tiered discount
 
 > Code samples
 
 `GET /unified/currency_discount_tiers`
 
-_List currency discount tiers_
+_Query unified account tiered discount_
 
 > Example responses
 
@@ -3012,34 +2997,34 @@ _List currency discount tiers_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name              | Type   | Description                                |
-| ----------------- | ------ | ------------------------------------------ |
-| » _None_          | object | Currency discount tiers                    |
-| »» currency       | string | Currency name                              |
-| »» discount_tiers | array  | Tiered discount                            |
-| »»» tier          | string | Tier                                       |
-| »»» discount      | string | Discount                                   |
-| »»» lower_limit   | string | Lower limit                                |
-| »»» upper_limit   | string | Upper limit,＋ indicates positive infinity |
-| »»» leverage      | string | Position leverage                          |
+| Name              | Type   | Description                     |
+| ----------------- | ------ | ------------------------------- |
+| » _None_          | object | Unified account tiered discount |
+| »» currency       | string | Currency name                   |
+| »» discount_tiers | array  | Tiered discount                 |
+| »»» tier          | string | 档位                            |
+| »»» discount      | string | 保证金折扣系数                  |
+| »»» lower_limit   | string | 下限                            |
+| »»» upper_limit   | string | 上限, +表示正无穷               |
+| »»» leverage      | string | Leverage multiplier             |
 
 This operation does not require authentication
 
-## [#](#list-loan-margin-tiers) List loan margin tiers
+## [#](#query-unified-account-tiered-loan-margin) Query unified account tiered loan margin
 
 > Code samples
 
 `GET /unified/loan_margin_tiers`
 
-_List loan margin tiers_
+_Query unified account tiered loan margin_
 
 > Example responses
 
@@ -3064,9 +3049,9 @@ _List loan margin tiers_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
@@ -3074,9 +3059,9 @@ Status Code **200**
 
 | Name             | Type   | Description                                            |
 | ---------------- | ------ | ------------------------------------------------------ |
-| » _None_         | object | Unified margin tiers                                   |
+| » _None_         | object | Unified account borrowing margin tiers                 |
 | »» currency      | string | Currency name                                          |
-| »» margin_tiers  | array  | Margin tiers                                           |
+| »» margin_tiers  | array  | Tiered margin                                          |
 | »»» MarginTiers  | object | none                                                   |
 | »»»» tier        | string | Tier                                                   |
 | »»»» margin_rate | string | Discount                                               |
@@ -3094,12 +3079,14 @@ This operation does not require authentication
 
 _Portfolio margin calculator_
 
-Portfolio Margin Calculator When inputting a simulated position portfolio, each
-position includes the position name and quantity held, supporting markets within
-the range of BTC and ETH perpetual contracts, options, and spot markets. When
-inputting simulated orders, each order includes the market identifier, order
-price, and order quantity, supporting markets within the range of BTC and ETH
-perpetual contracts, options, and spot markets. Market orders are not included.
+Portfolio Margin Calculator
+
+When inputting simulated position portfolios, each position includes the
+position name and quantity held, supporting markets within the range of BTC and
+ETH perpetual contracts, options, and spot markets. When inputting simulated
+orders, each order includes the market identifier, order price, and order
+quantity, supporting markets within the range of BTC and ETH perpetual
+contracts, options, and spot markets. Market orders are not included.
 
 > Body parameter
 
@@ -3153,48 +3140,39 @@ perpetual contracts, options, and spot markets. Market orders are not included.
 
 ### Parameters
 
-| Name                    | In   | Type    | Required | Description                                                                                   |
-| ----------------------- | ---- | ------- | -------- | --------------------------------------------------------------------------------------------- |
-| body                    | body | object  | true     | none                                                                                          |
-| » spot_balances         | body | array   | false    | Spot                                                                                          |
-| »» _None_               | body | object  | false    | Spot                                                                                          |
-| »»» currency            | body | string  | true     | Currency name                                                                                 |
-| »»» equity              | body | string  | true     | Currency equity, where equity = balance - borrowed, represents the net delta exposure         |
-| »» spot_orders          | body | array   | false    | Spot orders                                                                                   |
-| »»» _None_              | body | object  | false    | Spot orders                                                                                   |
-| »»»» currency_pairs     | body | string  | true     | Currency pair                                                                                 |
-| »»»» order_price        | body | string  | true     | Price                                                                                         |
-| »»»» count              | body | string  | false    | Initial order quantity for spot trading pairs, not involved in actual calculation.            |
-| »»»» left               | body | string  | true     | Unfilled quantity, involved in actual calculation.                                            |
-| »»»» type               | body | string  | true     | Order type, sell - sell order, buy - buy order.                                               |
-| »»» futures_positions   | body | array   | false    | Futures positions                                                                             |
-| »»»» _None_             | body | object  | false    | Futures positions                                                                             |
-| »»»»» contract          | body | string  | true     | Futures name, currently only supports perpetual futures for BTC and ETH with USDT.            |
-| »»»»» size              | body | string  | true     | Position size, measured in contract units.                                                    |
-| »»»» futures_orders     | body | array   | false    | Futures order                                                                                 |
-| »»»»» _None_            | body | object  | false    | Futures order                                                                                 |
-| »»»»»» contract         | body | string  | true     | Futures name, currently only supports perpetual futures for BTC and ETH with USDT.            |
-| »»»»»» size             | body | string  | true     | Futures quantity, representing the initial order quantity, not involved in actual settlement. |
-| »»»»»» left             | body | string  | true     | Unfilled contract quantity, involved in actual calculation                                    |
-| »»»»» options_positions | body | array   | false    | Options positions                                                                             |
-| »»»»»» _None_           | body | object  | false    | Options positions                                                                             |
-| »»»»»»» options_name    | body | string  | true     | Option name, currently only supports options for BTC and ETH with USDT.                       |
-| »»»»»»» size            | body | string  | true     | Position size, measured in contract units.                                                    |
-| »»»»»» options_orders   | body | array   | false    | Option orders                                                                                 |
-| »»»»»»» _None_          | body | object  | false    | Option orders                                                                                 |
-| »»»»»»»» options_name   | body | string  | true     | Option name, currently only supports options for BTC and ETH with USDT.                       |
-| »»»»»»»» size           | body | string  | true     | Initial order quantity, not involved in actual calculation                                    |
-| »»»»»»»» left           | body | string  | true     | Unfilled contract quantity, involved in actual calculation                                    |
-| »»»»»»» spot_hedge      | body | boolean | false    | Whether to enable spot hedging.                                                               |
-
-#### [#](#detailed-descriptions-8) Detailed descriptions
-
-**»»» equity**: Currency equity, where equity = balance - borrowed, represents
-the net delta exposure of your spot positions, which can be negative. Currently
-only supports three currencies: BTC, ETH.
-
-**»»»» count**: Initial order quantity for spot trading pairs, not involved in
-actual calculation. Currently only supports three currencies: BTC, ETH.
+| Name                    | In   | Type    | Required | Description                                                                                         |
+| ----------------------- | ---- | ------- | -------- | --------------------------------------------------------------------------------------------------- |
+| body                    | body | object  | true     | none                                                                                                |
+| » spot_balances         | body | array   | false    | Spot                                                                                                |
+| »» _None_               | body | object  | false    | 现货                                                                                                |
+| »»» currency            | body | string  | true     | 币种名称                                                                                            |
+| »»» equity              | body | string  | true     | 币种权益, 权益 = 余额 - 已借, 表示您在现货部位的净delta敞口, 可以为负数. 目前仅支持BTC、ETH三个币种 |
+| »» spot_orders          | body | array   | false    | Spot orders                                                                                         |
+| »»» _None_              | body | object  | false    | 现货订单                                                                                            |
+| »»»» currency_pairs     | body | string  | true     | 市场                                                                                                |
+| »»»» order_price        | body | string  | true     | 价格                                                                                                |
+| »»»» count              | body | string  | false    | 现货交易对初始挂单数量, 不参与实际计算. 目前仅支持BTC、ETH三个币种                                  |
+| »»»» left               | body | string  | true     | 未成交数量, 参与实际计算                                                                            |
+| »»»» type               | body | string  | true     | 订单Type, sell - 卖出单, buy - 买入单                                                               |
+| »»» futures_positions   | body | array   | false    | Futures positions                                                                                   |
+| »»»» _None_             | body | object  | false    | 合约仓位                                                                                            |
+| »»»»» contract          | body | string  | true     | 合约名, 目前仅支持BTC、ETH的USDT永续合约                                                            |
+| »»»»» size              | body | string  | true     | 仓位大小, 单位是张数                                                                                |
+| »»»» futures_orders     | body | array   | false    | Futures order                                                                                       |
+| »»»»» _None_            | body | object  | false    | 合约订单                                                                                            |
+| »»»»»» contract         | body | string  | true     | 合约名, 目前仅支持BTC、ETH的USDT永续合约                                                            |
+| »»»»»» size             | body | string  | true     | 合约张数, 为初始挂单数量, 不参与实际结算                                                            |
+| »»»»»» left             | body | string  | true     | 未成交张数, 参与实际计算                                                                            |
+| »»»»» options_positions | body | array   | false    | Options positions                                                                                   |
+| »»»»»» _None_           | body | object  | false    | 期权仓位                                                                                            |
+| »»»»»»» options_name    | body | string  | true     | 期权名称, 目前只支持BTC、ETH的USDT期权                                                              |
+| »»»»»»» size            | body | string  | true     | 仓位大小, 单位是张数                                                                                |
+| »»»»»» options_orders   | body | array   | false    | Option orders                                                                                       |
+| »»»»»»» _None_          | body | object  | false    | 期权订单                                                                                            |
+| »»»»»»»» options_name   | body | string  | true     | 期权名称, 目前只支持BTC、ETH的USDT期权                                                              |
+| »»»»»»»» size           | body | string  | true     | 初始挂单张数, 不参与实际计算                                                                        |
+| »»»»»»»» left           | body | string  | true     | 未成交张数, 参与实际计算                                                                            |
+| »»»»»»» spot_hedge      | body | boolean | false    | Whether to enable spot hedging                                                                      |
 
 > Example responses
 
@@ -3288,59 +3266,55 @@ actual calculation. Currently only supports three currencies: BTC, ETH.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-_The output of the portfolio margin calculator._
+_Portfolio margin calculator output_
 
-| Name                                                                                                         | Type           | Description                                                                                                       |
-| ------------------------------------------------------------------------------------------------------------ | -------------- | ----------------------------------------------------------------------------------------------------------------- |
-| » maintain_margin_total                                                                                      | string         | Total maintenance margin, including only the portfolio margin calculation results for positions in the risk unit, |
-| excluding borrowed margin. If borrowing exists, conventional borrowing margin requirements will still apply. |
-| » initial_margin_total                                                                                       | string         | Total initial margin, calculated as the maximum of the following three combinations: position,                    |
-| position + positive delta orders, position + negative delta orders.                                          |
-| » calculate_time                                                                                             | integer(int64) | Calculate time                                                                                                    |
-| » risk_unit                                                                                                  | array          | Risk unit                                                                                                         |
-| »» _None_                                                                                                    | object         | Risk unit                                                                                                         |
-| »»» symbol                                                                                                   | string         | Risk unit name                                                                                                    |
-| »»» spot_in_use                                                                                              | string         | Spot usage                                                                                                        |
-| »»» maintain_margin                                                                                          | string         | Maintenance margin                                                                                                |
-| »»» initial_margin                                                                                           | string         | Initial margin                                                                                                    |
-| »»» margin_result                                                                                            | array          | Margin result                                                                                                     |
-| »»»» _None_                                                                                                  | object         | Margin result                                                                                                     |
-| »»»»» type                                                                                                   | string         | Position combination type                                                                                         |
+| Name                    | Type           | Description                                                                                                                                                                                                             |
+| ----------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » maintain_margin_total | string         | Total maintenance margin, including only portfolio margin calculation results for positions in risk units, excluding borrowing margin. If borrowing exists, conventional borrowing margin requirements will still apply |
+| » initial_margin_total  | string         | Total initial margin, calculated as the maximum of the following three combinations: position, position + positive delta orders, position + negative delta orders                                                       |
+| » calculate_time        | integer(int64) | Calculation time                                                                                                                                                                                                        |
+| » risk_unit             | array          | Risk unit                                                                                                                                                                                                               |
+| »» _None_               | object         | 风险单元                                                                                                                                                                                                                |
+| »»» symbol              | string         | 风险单元名称                                                                                                                                                                                                            |
+| »»» spot_in_use         | string         | 现货对冲使用量                                                                                                                                                                                                          |
+| »»» maintain_margin     | string         | 维持保证金                                                                                                                                                                                                              |
+| »»» initial_margin      | string         | 起始保证金                                                                                                                                                                                                              |
+| »»» margin_result       | array          | 保证金结果                                                                                                                                                                                                              |
+| »»»» _None_             | object         | 保证金结果                                                                                                                                                                                                              |
+| »»»»» type              | string         | 仓位组合Type                                                                                                                                                                                                            |
 
-`original_position` - Original position  
-`long_delta_original_position` - Positive delta + Original position  
-`short_delta_original_position` - Negative delta + Original position | | »»»»»
-profit_loss_ranges | array | The results of 33 pressure scenarios for MR1 | |
-»»»»»» _None_ | object | Profit and loss range | | »»»»»»» price_percentage |
-string | Percentage change in price | | »»»»»»» implied_volatility_percentage |
-string | Percentage change in implied volatility | | »»»»»»» profit_loss |
-string | PNL | | »»»»»» max_loss | object | Profit and loss range | | »»»»»»»
-price_percentage | string | Percentage change in price | | »»»»»»»
-implied_volatility_percentage | string | Percentage change in implied volatility
-| | »»»»»»» profit_loss | string | PNL | | »»»»»» mr1 | string | Stress testing
-| | »»»»»» mr2 | string | Basis spread risk | | »»»»»» mr3 | string | Volatility
-spread risk | | »»»»»» mr4 | string | Option short risk | | »»»»» delta | string
-| Total Delta of risk unit | | »»»»» gamma | string | Total Gamma of risk unit |
-| »»»»» theta | string | Total Theta of risk unit | | »»»»» vega | string |
-Total Vega of risk unit |
+`original_position` - 原始仓位  
+`long_delta_original_position` - 正向delta+原始仓位  
+`short_delta_original_position` - 负向delta+原始仓位 | | »»»»»
+profit_loss_ranges | array | mr1的33个压力场景测试结果 | | »»»»»» _None_ |
+object | 盈亏范围 | | »»»»»»» price_percentage | string | 价格变动百分比 | |
+»»»»»»» implied_volatility_percentage | string | 隐含波动率变动百分比 | |
+»»»»»»» profit_loss | string | 盈亏 | | »»»»»» max_loss | object | 盈亏范围 | |
+»»»»»»» price_percentage | string | 价格变动百分比 | | »»»»»»»
+implied_volatility_percentage | string | 隐含波动率变动百分比 | | »»»»»»»
+profit_loss | string | 盈亏 | | »»»»»» mr1 | string | 压力测试 | | »»»»»» mr2 |
+string | 基差跨期风险 | | »»»»»» mr3 | string | 波动率跨期风险 | | »»»»»» mr4 |
+string | 期权空头风险 | | »»»»» delta | string | 风险单元的 总 delta | | »»»»»
+gamma | string | 风险单元的 总 gamma | | »»»»» theta | string
+| 风险单元的 总 theta | | »»»»» vega | string | 风险单元的 总 vega |
 
 This operation does not require authentication
 
-## [#](#minimum-currency-leverage-that-can-be-set) Minimum currency leverage that can be set
+## [#](#maximum-and-minimum-currency-leverage-that-can-be-set) Maximum and minimum currency leverage that can be set
 
 > Code samples
 
 `GET /unified/leverage/user_currency_config`
 
-_Minimum currency leverage that can be set_
+_Maximum and minimum currency leverage that can be set_
 
 ### Parameters
 
@@ -3366,38 +3340,37 @@ _Minimum currency leverage that can be set_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                         | Type   | Description                                                                                                                    |
-| ---------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| » current_leverage           | string | Current leverage ratio                                                                                                         |
-| » min_leverage               | string | Minimum adjustable leverage ratio                                                                                              |
-| » max_leverage               | string | Maximum adjustable leverage ratio                                                                                              |
-| » debit                      | string | Current liabilities                                                                                                            |
-| » available_margin           | string | Available Margin                                                                                                               |
-| » borrowable                 | string | The current leverage you can choose is                                                                                         |
-| » except_leverage_borrowable | string | The maximum amount of margin that can be borrowed and the maximum amount of Uniloan that can be borrowed, whichever is smaller |
+| Name                         | Type   | Description                                                                           |
+| ---------------------------- | ------ | ------------------------------------------------------------------------------------- |
+| » current_leverage           | string | Current leverage ratio                                                                |
+| » min_leverage               | string | Minimum adjustable leverage ratio                                                     |
+| » max_leverage               | string | Maximum adjustable leverage ratio                                                     |
+| » debit                      | string | Current liabilities                                                                   |
+| » available_margin           | string | Available Margin                                                                      |
+| » borrowable                 | string | Maximum borrowable amount at current leverage                                         |
+| » except_leverage_borrowable | string | Maximum borrowable from margin and maximum borrowable from Earn, whichever is smaller |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#get-the-leverage-multiple-of-the-user-currency) Get the leverage multiple of the user currency
+## [#](#get-user-currency-leverage) Get user currency leverage
 
 > Code samples
 
 `GET /unified/leverage/user_currency_setting`
 
-_Get the leverage multiple of the user currency_
+_Get user currency leverage_
 
-Get the user's currency leverage. If currency is not passed, query all
-currencies.
+Get user currency leverage. If currency is not specified, query all currencies
 
 ### Parameters
 
@@ -3418,32 +3391,32 @@ currencies.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-_Loan currency leverage_
+_Leverage multiplier for borrowing currency_
 
 | Name       | Type   | Description   |
 | ---------- | ------ | ------------- |
 | » currency | string | Currency name |
-| » leverage | string | multiple      |
+| » leverage | string | Multiplier    |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#set-the-loan-currency-leverage) Set the loan currency leverage
+## [#](#set-loan-currency-leverage) Set loan currency leverage
 
 > Code samples
 
 `POST /unified/leverage/user_currency_setting`
 
-_Set the loan currency leverage_
+_Set loan currency leverage_
 
 > Body parameter
 
@@ -3460,13 +3433,13 @@ _Set the loan currency leverage_
 | ---------- | ---- | ------ | -------- | ------------- |
 | body       | body | object | true     | none          |
 | » currency | body | string | true     | Currency name |
-| » leverage | body | string | true     | multiple      |
+| » leverage | body | string | true     | Multiplier    |
 
 ### Responses
 
-| Status | Meaning                                                                            | Description | Schema |
-| ------ | ---------------------------------------------------------------------------------- | ----------- | ------ |
-| 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Success     | None   |
+| Status | Meaning                                                                            | Description      | Schema |
+| ------ | ---------------------------------------------------------------------------------- | ---------------- | ------ |
+| 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Set successfully | None   |
 
 WARNING
 
@@ -3505,44 +3478,44 @@ _List of loan currencies supported by unified account_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                      | Type   | Description                                      |
-| ------------------------- | ------ | ------------------------------------------------ |
-| » name                    | string | Currency name                                    |
-| » prec                    | string | Currency precision                               |
-| » min_borrow_amount       | string | The minimum debit limit is the unit of currency  |
-| » user_max_borrow_amount  | string | The minimum debit limit is the unit of currency  |
-| » total_max_borrow_amount | string | The maximum debit limit for the platform is USDT |
-| » loan_status             | string | Does the lending status                          |
+| Name                      | Type   | Description                                  |
+| ------------------------- | ------ | -------------------------------------------- |
+| » name                    | string | Currency name                                |
+| » prec                    | string | Currency precision                           |
+| » min_borrow_amount       | string | Minimum borrowable limit, in currency units  |
+| » user_max_borrow_amount  | string | User's maximum borrowable limit, in USDT     |
+| » total_max_borrow_amount | string | Platform's maximum borrowable limit, in USDT |
+| » loan_status             | string | Lending status                               |
 
-\- `disable` : Loans are prohibited  
-\- `enable`: Support lending |
+\- `disable` : Lending prohibited  
+\- `enable` : Lending supported |
 
 This operation does not require authentication
 
-## [#](#get-historical-lending-rates) get historical lending rates
+## [#](#get-historical-lending-rates) Get historical lending rates
 
 > Code samples
 
 `GET /unified/history_loan_rate`
 
-_get historical lending rates_
+_Get historical lending rates_
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                                    |
-| -------- | ----- | -------------- | -------- | -------------------------------------------------------------- |
-| tier     | query | string         | false    | The VIP level of the floating rate that needs to be queried    |
-| currency | query | string         | true     | Currency                                                       |
-| page     | query | integer(int32) | false    | Page number                                                    |
-| limit    | query | integer(int32) | false    | Maximum response items. Default: 100, minimum: 1, Maximum: 100 |
+| Name     | In    | Type           | Required | Description                                                              |
+| -------- | ----- | -------------- | -------- | ------------------------------------------------------------------------ |
+| tier     | query | string         | false    | VIP level for the floating rate to be queried                            |
+| currency | query | string         | true     | Currency                                                                 |
+| page     | query | integer(int32) | false    | Page number                                                              |
+| limit    | query | integer(int32) | false    | Maximum number of items returned. Default: 100, minimum: 1, maximum: 100 |
 
 > Example responses
 
@@ -3564,32 +3537,32 @@ _get historical lending rates_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name           | Type           | Description                                                                                                                                                                                            |
-| -------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| » currency     | string         | Currency name                                                                                                                                                                                          |
-| » tier         | string         | The VIP level of the floating rate required                                                                                                                                                            |
-| » tier_up_rate | string         | VIP level corresponding floating rate                                                                                                                                                                  |
-| » rates        | array          | Historical interest rate information, one data per hour, the array size is determined by the page and limit parameters provided by the interface request parameters, sorted from recent to far in time |
-| »» time        | integer(int64) | The hourly timestamp corresponding to the interest rate, in milliseconds                                                                                                                               |
-| »» rate        | string         | Historical interest rates for this hour                                                                                                                                                                |
+| Name           | Type           | Description                                                                                                                                                                   |
+| -------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » currency     | string         | Currency name                                                                                                                                                                 |
+| » tier         | string         | VIP level for the floating rate to be retrieved                                                                                                                               |
+| » tier_up_rate | string         | Floating rate corresponding to VIP level                                                                                                                                      |
+| » rates        | array          | Historical interest rate information, one data point per hour, array size determined by page and limit parameters from the API request, sorted by time from recent to distant |
+| »» time        | integer(int64) | Hourly timestamp corresponding to this interest rate, in milliseconds                                                                                                         |
+| »» rate        | string         | Historical interest rate for this hour                                                                                                                                        |
 
 This operation does not require authentication
 
-## [#](#set-collateral-currency) Set Collateral Currency
+## [#](#set-collateral-currency) Set collateral currency
 
 > Code samples
 
 `POST /unified/collateral_currencies`
 
-_Set Collateral Currency_
+_Set collateral currency_
 
 > Body parameter
 
@@ -3609,12 +3582,12 @@ _Set Collateral Currency_
 
 ### Parameters
 
-| Name              | In   | Type    | Required | Description                                                                                                                                                                                               |
-| ----------------- | ---- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| body              | body | object  | true     | none                                                                                                                                                                                                      |
-| » collateral_type | body | integer | false    | User-set collateral mode0(all)-All currencies used as collateral, 1(custom)-Custom currencies used as collateral; when collateral_type is 0(all), the enable_list and disable_list parameters are invalid |
-| » enable_list     | body | array   | false    | Currency list, where collateral_type=1(custom) indicates the logic of addition                                                                                                                            |
-| » disable_list    | body | array   | false    | Cancellation list, indicating the logic of cancellation                                                                                                                                                   |
+| Name              | In   | Type    | Required | Description                                                                                                                                                                                   |
+| ----------------- | ---- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body              | body | object  | true     | none                                                                                                                                                                                          |
+| » collateral_type | body | integer | false    | User-set collateral mode: 0(all)-All currencies as collateral, 1(custom)-Custom currencies as collateral. When collateral_type is 0(all), enable_list and disable_list parameters are invalid |
+| » enable_list     | body | array   | false    | Currency list, where collateral_type=1(custom) indicates the addition logic                                                                                                                   |
+| » disable_list    | body | array   | false    | Disable list, indicating the disable logic                                                                                                                                                    |
 
 #### [#](#enumerated-values-5) Enumerated Values
 
@@ -3635,15 +3608,15 @@ _Set Collateral Currency_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description   | Schema |
-| ------ | -------------------------------------------------------------------------- | ------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | UpdateSuccess | Inline |
+| Status | Meaning                                                                    | Description          | Schema |
+| ------ | -------------------------------------------------------------------------- | -------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Updated successfully | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-_Return of unified account collateral mode settings_
+_Unified account collateral mode settings response_
 
 | Name         | Type    | Description                        |
 | ------------ | ------- | ---------------------------------- |

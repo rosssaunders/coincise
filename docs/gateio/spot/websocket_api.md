@@ -2451,8 +2451,7 @@ Notification example
 }
 ```
 
-Updated user trades list. Note it is possible that multiple currency pairs'
-trades will be updated in one notification.
+Updated user trades list.
 
 Result format:
 
@@ -2620,8 +2619,7 @@ Notification example
 }
 ```
 
-Updated user trades list. Note it is possible that multiple currency pairs'
-trades will be updated in one notification.
+Updated user trades list.
 
 Result format:
 
@@ -6203,4 +6201,4 @@ Result format:
 | »»`label`        | String  | denotes error type in string format                                                                |
 | »»`message`      | String  | detailed error message                                                                             |
 
-Last Updated: 7/9/2025, 1:17:26 PM
+Last Updated: 7/23/2025, 4:08:40 AM

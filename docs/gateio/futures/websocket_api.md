@@ -797,6 +797,16 @@ How to maintain local order book:
 6.  If any subsequent notification which satisfy `U > baseID+1` is found, it
     means some updates are lost. Reconstruct local order book from step 3.
 
+Note:
+
+- Even if the `a`, `b`, or `asks`, `bids` fields in the WebSocket push message
+  are empty, users must still update the local order book's `id` and `timestamp`
+  to ensure consistency with the server's state.
+- The subscribed `level` (depth) in WebSocket should match the `limit` parameter
+  in the REST snapshot. A mismatch may result in incremental updates failing to
+  fully cover the snapshot levels, leading to misaligned or incomplete local
+  order books.
+
 ## [#](#legacy-order-book-subscription) Legacy order book subscription
 
 Code example
@@ -7580,4 +7590,4 @@ Result format:
 | »»`label`        | String  | Denotes error type in string format                                                                              |
 | »»`message`      | String  | Detailed error message                                                                                           |
 
-Last Updated: 7/13/2025, 3:05:10 AM
+Last Updated: 7/28/2025, 9:56:28 AM

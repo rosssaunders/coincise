@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-102-1) Gate API v4.102.1
+# [#](#gate-api-v4-104-0) Gate API v4.104.0
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -127,7 +127,7 @@ has been accidentally leaked, please delete the existing API and rebuild it.
 
 Gate Order matching follows Price Priority > Time priority principle.
 
-Suppose that the order book is as follows：
+Suppose that the order book is as follows:
 
 | Order | Order time | Ask/Selling price |
 | ----- | ---------- | ----------------- |
@@ -177,7 +177,7 @@ endpoint will be deprecated, and the new version of the endpoint can be found in
 the /margin/uni endpoint group. For detailed endpoint migration, please refer to
 the following table:"
 
-Margin account related endpoints：
+Margin account related endpoints:
 
 | Name                                                           | Path                         | Deprecated | New Path |
 | -------------------------------------------------------------- | ---------------------------- | ---------- | -------- |
@@ -189,7 +189,7 @@ Margin account related endpoints：
 | Get the max transferable amount for a specific margin currency | GET /margin/transferable     | No         | `-`      |
 
 The margin lending and borrowing related APIs have been migrated to the
-`/margin/uni` API group：
+`/margin/uni` API group:
 
 | Name                                                          | Old Path                                   | Deprecated | New Path                                       |
 | ------------------------------------------------------------- | ------------------------------------------ | ---------- | ---------------------------------------------- |
@@ -370,7 +370,7 @@ Earning, collateral etc |
 
 **Rate Limit**
 
-Each request to the API response header will contain the following fields:：
+Each request to the API response header will contain the following fields::
 
 - X-Gate-RateLimit-Requests-Remain - your remaining requests for current
   endpoint
@@ -554,7 +554,7 @@ The HTTP status code 2XX will be returned when all operations are successful.
 401 indicates that there is a problem with the certification. Other 4xx status
 codes indicate that the request is invalid. If it is a 5xx error, the server has
 encountered an unknown serious error when processing the request. Please give
-feedback as soon as possible。
+feedback as soon as possible.
 
 **Return Status**
 
@@ -574,12 +574,12 @@ feedback as soon as possible。
 | Type             | Description                                                                                  |
 | ---------------- | -------------------------------------------------------------------------------------------- |
 | `string`         | String type, in double quotation marks. Price and amount are also formatted in string format |
-| `integer`        | 32-bit integer，Mainly related to status codes, size, times, etc.                            |
-| `integer(int64)` | 64-bit integer，Mainly involves ID and higher precision timestamp                            |
+| `integer`        | 32-bit integer, Mainly related to status codes, size, times, etc.                            |
+| `integer(int64)` | 64-bit integer, Mainly involves ID and higher precision timestamp                            |
 | `float`          | Floating point number. Some time and stat fields use float.                                  |
-| `object`         | Object，Contains a child object{}                                                            |
-| `array`          | List，Includes multiple groups of content                                                    |
-| `boolean`        | true is true，false is false                                                                 |
+| `object`         | Object, Contains a child object{}                                                            |
+| `array`          | List, Includes multiple groups of content                                                    |
+| `boolean`        | true is true, false is false                                                                 |
 
 ## [#](#portfolio-margin-account) Portfolio Margin Account
 
@@ -731,9 +731,9 @@ New request body parameter:
 
 New response fields:
 
-| Name    | Type   | Required | Restriction | Description                 |
-| ------- | ------ | -------- | ----------- | --------------------------- |
-| stp_act | string | No       | none        | STP Strategies, including： |
+| Name    | Type   | Required | Restriction | Description                |
+| ------- | ------ | -------- | ----------- | -------------------------- |
+| stp_act | string | No       | none        | STP Strategies, including: |
 
 \- cn  
 \- co  
@@ -1750,7 +1750,7 @@ or with
 
 - Earn related
 
-| `label`                  | 含义                                                                        |
+| `label`                  | Meaning                                                                     |
 | ------------------------ | --------------------------------------------------------------------------- |
 | ERR_BALANCE_NOT_ENOUGH   | balance not enough                                                          |
 | ERR_PRODUCT_SELL_OUT     | Target quota reached                                                        |
@@ -1897,7 +1897,7 @@ Suppose the key we used is `key`, while the secret is `secret`.
 	GET /api/v4/futures/orders?contract=BTC_USD&status=finished&limit=50 HTTP/1.1
 ```
 
-Signature string：
+Signature string:
 
 ```
 	GET\n
@@ -1907,7 +1907,7 @@ Signature string：
 	1541993715
 ```
 
-Explanation：
+Explanation:
 
 - `/api/v4/futures/orders`: request url
 - `contract=BTC_USD&status=finished&limit=50`: keep the query string as it is in
@@ -1927,7 +1927,7 @@ Signature generated
 	{"contract":"BTC_USD","type":"limit","size":100,"price":6800,"time_in_force":"gtc"}
 ```
 
-Signature string：
+Signature string:
 
 ```
 	POST\n
@@ -1937,7 +1937,7 @@ Signature string：
 	1541993715
 ```
 
-Explanation：
+Explanation:
 
 - request query string is empty, use plain empty string
 - use the hashed result of the json-string-formatted request body
@@ -2004,23 +2004,23 @@ Signature generated
 
 # [#](#futures) Futures
 
-Futures contract API
+Perpetual futures
 
-## [#](#list-all-futures-contracts) List all futures contracts
+## [#](#query-all-futures-contracts) Query all futures contracts
 
 > Code samples
 
 `GET /futures/{settle}/contracts`
 
-_List all futures contracts_
+_Query all futures contracts_
 
 ### Parameters
 
-| Name   | In    | Type    | Required | Description                                               |
-| ------ | ----- | ------- | -------- | --------------------------------------------------------- |
-| settle | path  | string  | true     | Settle currency                                           |
-| limit  | query | integer | false    | Maximum number of records to be returned in a single list |
-| offset | query | integer | false    | List offset, starting from 0                              |
+| Name   | In    | Type    | Required | Description                                         |
+| ------ | ----- | ------- | -------- | --------------------------------------------------- |
+| settle | path  | string  | true     | Settle currency                                     |
+| limit  | query | integer | false    | Maximum number of records returned in a single list |
+| offset | query | integer | false    | List offset, starting from 0                        |
 
 #### [#](#enumerated-values-30) Enumerated Values
 
@@ -2086,19 +2086,19 @@ _List all futures contracts_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema                          |
-| ------ | -------------------------------------------------------------------------- | -------------- | ------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[[Contract](#schemacontract)\] |
+| Status | Meaning                                                                    | Description                 | Schema                          |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[[Contract](#schemacontract)\] |
 
 This operation does not require authentication
 
-## [#](#get-a-single-contract) Get a single contract
+## [#](#query-single-contract-information) Query single contract information
 
 > Code samples
 
 `GET /futures/{settle}/contracts/{contract}`
 
-_Get a single contract_
+_Query single contract information_
 
 ### Parameters
 
@@ -2175,25 +2175,25 @@ _Get a single contract_
 
 This operation does not require authentication
 
-## [#](#futures-order-book) Futures order book
+## [#](#query-futures-market-depth-information) Query futures market depth information
 
 > Code samples
 
 `GET /futures/{settle}/order_book`
 
-_Futures order book_
+_Query futures market depth information_
 
 Bids will be sorted by price from high to low, while asks sorted reversely
 
 ### Parameters
 
-| Name     | In    | Type    | Required | Description                                                           |
-| -------- | ----- | ------- | -------- | --------------------------------------------------------------------- |
-| settle   | path  | string  | true     | Settle currency                                                       |
-| contract | query | string  | true     | Futures contract                                                      |
-| interval | query | string  | false    | Order depth. 0 means no aggregation is applied. default to 0          |
-| limit    | query | integer | false    | Maximum number of order depth data in asks or bids                    |
-| with_id  | query | boolean | false    | Whether to return depth update ID. This ID increments by 1 each time. |
+| Name     | In    | Type    | Required | Description                                                                                   |
+| -------- | ----- | ------- | -------- | --------------------------------------------------------------------------------------------- |
+| settle   | path  | string  | true     | Settle currency                                                                               |
+| contract | query | string  | true     | Futures contract                                                                              |
+| interval | query | string  | false    | Price precision for depth aggregation, 0 means no aggregation, defaults to 0 if not specified |
+| limit    | query | integer | false    | Number of depth levels                                                                        |
+| with_id  | query | boolean | false    | Whether to return depth update ID. This ID increments by 1 each time depth changes            |
 
 #### [#](#enumerated-values-32) Enumerated Values
 
@@ -2249,24 +2249,24 @@ Status Code **200**
 | » id                        | integer(int64) | Order Book ID. Increases by 1 on every order book change. Set `with_id=true` to include this field in response |
 | » current                   | number(double) | Response data generation timestamp                                                                             |
 | » update                    | number(double) | Order book changed timestamp                                                                                   |
-| » asks                      | array          | Asks order depth                                                                                               |
+| » asks                      | array          | Ask Depth                                                                                                      |
 | »» futures_order_book_item  | object         | none                                                                                                           |
 | »»» p                       | string         | Price (quote currency)                                                                                         |
 | »»» s                       | integer(int64) | Size                                                                                                           |
-| »» bids                     | array          | Bids order depth                                                                                               |
+| »» bids                     | array          | Bid Depth                                                                                                      |
 | »»» futures_order_book_item | object         | none                                                                                                           |
 | »»»» p                      | string         | Price (quote currency)                                                                                         |
 | »»»» s                      | integer(int64) | Size                                                                                                           |
 
 This operation does not require authentication
 
-## [#](#futures-trading-history) Futures trading history
+## [#](#futures-market-transaction-records) Futures market transaction records
 
 > Code samples
 
 `GET /futures/{settle}/trades`
 
-_Futures trading history_
+_Futures market transaction records_
 
 ### Parameters
 
@@ -2274,13 +2274,13 @@ _Futures trading history_
 | -------- | ----- | -------------- | -------- | --------------------------------------------------------------------------------------------------------------- |
 | settle   | path  | string         | true     | Settle currency                                                                                                 |
 | contract | query | string         | true     | Futures contract                                                                                                |
-| limit    | query | integer        | false    | Maximum number of records to be returned in a single list                                                       |
+| limit    | query | integer        | false    | Maximum number of records returned in a single list                                                             |
 | offset   | query | integer        | false    | List offset, starting from 0                                                                                    |
 | last_id  | query | string         | false    | Specify the starting point for this list based on a previously retrieved id                                     |
 | from     | query | integer(int64) | false    | Specify starting time in Unix seconds. If not specified, `to` and `limit` will be used to limit response items. |
-| to       | query | integer(int64) | false    | Specify end time in Unix seconds, default to current time                                                       |
+| to       | query | integer(int64) | false    | Specify end time in Unix seconds, default to current time.                                                      |
 
-#### [#](#detailed-descriptions-24) Detailed descriptions
+#### [#](#detailed-descriptions-23) Detailed descriptions
 
 **last_id**: Specify the starting point for this list based on a previously
 retrieved id
@@ -2316,34 +2316,34 @@ are more than `limit`, only `limit` number will be returned.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name             | Type           | Description                                                                                                                                                                                                                                                                                                                    |
-| ---------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| _None_           | array          | none                                                                                                                                                                                                                                                                                                                           |
-| » id             | integer(int64) | Trade ID                                                                                                                                                                                                                                                                                                                       |
-| » create_time    | number(double) | Trading time                                                                                                                                                                                                                                                                                                                   |
-| » create_time_ms | number(double) | Trading time, with milliseconds set to 3 decimal places.                                                                                                                                                                                                                                                                       |
-| » contract       | string         | Futures contract                                                                                                                                                                                                                                                                                                               |
-| » size           | integer(int64) | Trading size                                                                                                                                                                                                                                                                                                                   |
-| » price          | string         | Trading price (quote currency)                                                                                                                                                                                                                                                                                                 |
-| » is_internal    | boolean        | Whether internal trade. Internal trade refers to the takeover of liquidation orders by the insurance fund and ADL users. Since it is not a normal matching on the market depth, the transaction price may deviate, and it will not be recorded in the K-line. If it is not an internal trade, this field will not be returned. |
+| Name             | Type           | Description                                                                                                                                                                                                                                                                                                                                      |
+| ---------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| _None_           | array          | none                                                                                                                                                                                                                                                                                                                                             |
+| » id             | integer(int64) | Fill ID                                                                                                                                                                                                                                                                                                                                          |
+| » create_time    | number(double) | Fill Time                                                                                                                                                                                                                                                                                                                                        |
+| » create_time_ms | number(double) | Trade time, with millisecond precision to 3 decimal places                                                                                                                                                                                                                                                                                       |
+| » contract       | string         | Futures contract                                                                                                                                                                                                                                                                                                                                 |
+| » size           | integer(int64) | Trading size                                                                                                                                                                                                                                                                                                                                     |
+| » price          | string         | Trade price (quote currency)                                                                                                                                                                                                                                                                                                                     |
+| » is_internal    | boolean        | Whether it is an internal trade. Internal trade refers to the takeover of liquidation orders by the insurance fund and ADL users. Since it is not a normal matching on the market depth, the trade price may deviate from the market, and it will not be recorded in the K-line. If it is not an internal trade, this field will not be returned |
 
 This operation does not require authentication
 
-## [#](#get-futures-candlesticks) Get futures candlesticks
+## [#](#futures-market-k-line-chart) Futures market K-line chart
 
 > Code samples
 
 `GET /futures/{settle}/candlesticks`
 
-_Get futures candlesticks_
+_Futures market K-line chart_
 
 Return specified contract candlesticks. If prefix `contract` with `mark_`, the
 contract's mark price candlesticks are returned; if prefix with `index_`, index
@@ -2354,14 +2354,14 @@ limit when specifying `from`, `to` and `interval`
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                                                                                                                                           |
-| -------- | ----- | -------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| settle   | path  | string         | true     | Settle currency                                                                                                                                                       |
-| contract | query | string         | true     | Futures contract                                                                                                                                                      |
-| from     | query | integer(int64) | false    | Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified                                                  |
-| to       | query | integer(int64) | false    | Specify the end time of the K-line chart, defaults to current time if not specified, note that the time format is Unix timestamp with second                          |
-| limit    | query | integer        | false    | Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.                    |
-| interval | query | string         | false    | Interval time between data points. Note that `1w` means natual week(Mon-Sun), while `7d` means every 7d since unix 0. Note that 30d means 1 natual month, not 30 days |
+| Name     | In    | Type           | Required | Description                                                                                                                                                        |
+| -------- | ----- | -------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| settle   | path  | string         | true     | Settle currency                                                                                                                                                    |
+| contract | query | string         | true     | Futures contract                                                                                                                                                   |
+| from     | query | integer(int64) | false    | Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified                                               |
+| to       | query | integer(int64) | false    | Specify the end time of the K-line chart, defaults to current time if not specified, note that the time format is Unix timestamp with second precision             |
+| limit    | query | integer        | false    | Maximum number of recent data points to return. `limit` conflicts with `from` and `to`. If either `from` or `to` is specified, request will be rejected.           |
+| interval | query | string         | false    | Interval time between data points. Note that `1w` means natural week(Mon-Sun), while `7d` means every 7d since unix 0. 30d represents a natural month, not 30 days |
 
 #### [#](#enumerated-values-34) Enumerated Values
 
@@ -2369,6 +2369,16 @@ limit when specifying `from`, `to` and `interval`
 | --------- | ----- |
 | settle    | btc   |
 | settle    | usdt  |
+| interval  | 10s   |
+| interval  | 1m    |
+| interval  | 5m    |
+| interval  | 15m   |
+| interval  | 30m   |
+| interval  | 1h    |
+| interval  | 4h    |
+| interval  | 8h    |
+| interval  | 1d    |
+| interval  | 7d    |
 
 > Example responses
 
@@ -2390,9 +2400,9 @@ limit when specifying `from`, `to` and `interval`
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
@@ -2412,27 +2422,27 @@ Status Code **200**
 
 This operation does not require authentication
 
-## [#](#premium-index-k-line) Premium Index K-Line
+## [#](#premium-index-k-line-chart) Premium Index K-line chart
 
 > Code samples
 
 `GET /futures/{settle}/premium_index`
 
-_Premium Index K-Line_
+_Premium Index K-line chart_
 
 Maximum of 1000 points can be returned in a query. Be sure not to exceed the
 limit when specifying from, to and interval
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                                                                                                                        |
-| -------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| settle   | path  | string         | true     | Settle currency                                                                                                                                    |
-| contract | query | string         | true     | Futures contract                                                                                                                                   |
-| from     | query | integer(int64) | false    | Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified                               |
-| to       | query | integer(int64) | false    | Specify the end time of the K-line chart, defaults to current time if not specified, note that the time format is Unix timestamp with second       |
-| limit    | query | integer        | false    | Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected. |
-| interval | query | string         | false    | Interval time between data points                                                                                                                  |
+| Name     | In    | Type           | Required | Description                                                                                                                                              |
+| -------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| settle   | path  | string         | true     | Settle currency                                                                                                                                          |
+| contract | query | string         | true     | Futures contract                                                                                                                                         |
+| from     | query | integer(int64) | false    | Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified                                     |
+| to       | query | integer(int64) | false    | Specify the end time of the K-line chart, defaults to current time if not specified, note that the time format is Unix timestamp with second precision   |
+| limit    | query | integer        | false    | Maximum number of recent data points to return. `limit` conflicts with `from` and `to`. If either `from` or `to` is specified, request will be rejected. |
+| interval | query | string         | false    | Time interval between data points                                                                                                                        |
 
 #### [#](#enumerated-values-35) Enumerated Values
 
@@ -2440,6 +2450,16 @@ limit when specifying from, to and interval
 | --------- | ----- |
 | settle    | btc   |
 | settle    | usdt  |
+| interval  | 10s   |
+| interval  | 1m    |
+| interval  | 5m    |
+| interval  | 15m   |
+| interval  | 30m   |
+| interval  | 1h    |
+| interval  | 4h    |
+| interval  | 8h    |
+| interval  | 1d    |
+| interval  | 7d    |
 
 > Example responses
 
@@ -2459,9 +2479,9 @@ limit when specifying from, to and interval
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
@@ -2473,18 +2493,18 @@ Status Code **200**
 | »» t     | number(double) | Unix timestamp in seconds     |
 | »» c     | string         | Close price                   |
 | »» h     | string         | Highest price                 |
-| »» l     | string         | Lowest price\`                |
+| »» l     | string         | Lowest price                  |
 | »» o     | string         | Open price                    |
 
 This operation does not require authentication
 
-## [#](#list-futures-tickers) List futures tickers
+## [#](#get-all-futures-trading-statistics) Get all futures trading statistics
 
 > Code samples
 
 `GET /futures/{settle}/tickers`
 
-_List futures tickers_
+_Get all futures trading statistics_
 
 ### Parameters
 
@@ -2533,9 +2553,9 @@ _List futures tickers_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
@@ -2545,16 +2565,16 @@ Status Code **200**
 | ------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------- |
 | » contract                | string | Futures contract                                                                                                       |
 | » last                    | string | Last trading price                                                                                                     |
-| » change_percentage       | string | Change percentage.                                                                                                     |
+| » change_percentage       | string | Price change percentage. Negative values indicate price decrease, e.g. -7.45                                           |
 | » total_size              | string | Contract total size                                                                                                    |
-| » low_24h                 | string | Lowest trading price in recent 24h                                                                                     |
-| » high_24h                | string | Highest trading price in recent 24h                                                                                    |
-| » volume_24h              | string | Trade size in recent 24h                                                                                               |
-| » volume_24h_btc          | string | Trade volumes in recent 24h in BTC(deprecated, use `volume_24h_base`, `volume_24h_quote`, `volume_24h_settle` instead) |
-| » volume_24h_usd          | string | Trade volumes in recent 24h in USD(deprecated, use `volume_24h_base`, `volume_24h_quote`, `volume_24h_settle` instead) |
-| » volume_24h_base         | string | Trade volume in recent 24h, in base currency                                                                           |
-| » volume_24h_quote        | string | Trade volume in recent 24h, in quote currency                                                                          |
-| » volume_24h_settle       | string | Trade volume in recent 24h, in settle currency                                                                         |
+| » low_24h                 | string | 24-hour lowest price                                                                                                   |
+| » high_24h                | string | 24-hour highest price                                                                                                  |
+| » volume_24h              | string | 24-hour trading volume                                                                                                 |
+| » volume_24h_btc          | string | 24-hour trading volume in BTC (deprecated, use `volume_24h_base`, `volume_24h_quote`, `volume_24h_settle` instead)     |
+| » volume_24h_usd          | string | 24-hour trading volume in USD (deprecated, use `volume_24h_base`, `volume_24h_quote`, `volume_24h_settle` instead)     |
+| » volume_24h_base         | string | 24-hour trading volume in base currency                                                                                |
+| » volume_24h_quote        | string | 24-hour trading volume in quote currency                                                                               |
+| » volume_24h_settle       | string | 24-hour trading volume in settle currency                                                                              |
 | » mark_price              | string | Recent mark price                                                                                                      |
 | » funding_rate            | string | Funding rate                                                                                                           |
 | » funding_rate_indicative | string | Indicative Funding rate in next period. (deprecated. use `funding_rate`)                                               |
@@ -2567,25 +2587,25 @@ Status Code **200**
 
 This operation does not require authentication
 
-## [#](#funding-rate-history) Funding rate history
+## [#](#futures-market-historical-funding-rate) Futures market historical funding rate
 
 > Code samples
 
 `GET /futures/{settle}/funding_rate`
 
-_Funding rate history_
+_Futures market historical funding rate_
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                               |
-| -------- | ----- | -------------- | -------- | --------------------------------------------------------- |
-| settle   | path  | string         | true     | Settle currency                                           |
-| contract | query | string         | true     | Futures contract                                          |
-| limit    | query | integer        | false    | Maximum number of records to be returned in a single list |
-| from     | query | integer(int64) | false    | Start timestamp                                           |
-| to       | query | integer(int64) | false    | Termination Timestamp                                     |
+| Name     | In    | Type           | Required | Description                                         |
+| -------- | ----- | -------------- | -------- | --------------------------------------------------- |
+| settle   | path  | string         | true     | Settle currency                                     |
+| contract | query | string         | true     | Futures contract                                    |
+| limit    | query | integer        | false    | Maximum number of records returned in a single list |
+| from     | query | integer(int64) | false    | Start timestamp                                     |
+| to       | query | integer(int64) | false    | Termination Timestamp                               |
 
-#### [#](#detailed-descriptions-25) Detailed descriptions
+#### [#](#detailed-descriptions-24) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -2619,9 +2639,9 @@ time format is a Unix timestamp
 
 ### Responses
 
-| Status | Meaning                                                                    | Description       | Schema     |
-| ------ | -------------------------------------------------------------------------- | ----------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | History retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description              | Schema     |
+| ------ | -------------------------------------------------------------------------- | ------------------------ | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | History query successful | \[Inline\] |
 
 ### Response Schema
 
@@ -2634,20 +2654,20 @@ Status Code **200**
 
 This operation does not require authentication
 
-## [#](#futures-insurance-balance-history) Futures insurance balance history
+## [#](#futures-market-insurance-fund-history) Futures market insurance fund history
 
 > Code samples
 
 `GET /futures/{settle}/insurance`
 
-_Futures insurance balance history_
+_Futures market insurance fund history_
 
 ### Parameters
 
-| Name   | In    | Type    | Required | Description                                               |
-| ------ | ----- | ------- | -------- | --------------------------------------------------------- |
-| settle | path  | string  | true     | Settle currency                                           |
-| limit  | query | integer | false    | Maximum number of records to be returned in a single list |
+| Name   | In    | Type    | Required | Description                                         |
+| ------ | ----- | ------- | -------- | --------------------------------------------------- |
+| settle | path  | string  | true     | Settle currency                                     |
+| limit  | query | integer | false    | Maximum number of records returned in a single list |
 
 #### [#](#enumerated-values-38) Enumerated Values
 
@@ -2671,9 +2691,9 @@ _Futures insurance balance history_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
@@ -2687,13 +2707,13 @@ Status Code **200**
 
 This operation does not require authentication
 
-## [#](#futures-stats) Futures stats
+## [#](#futures-statistics) Futures statistics
 
 > Code samples
 
 `GET /futures/{settle}/contract_stats`
 
-_Futures stats_
+_Futures statistics_
 
 ### Parameters
 
@@ -2739,39 +2759,39 @@ _Futures stats_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                | Type           | Description                              |
-| ------------------- | -------------- | ---------------------------------------- |
-| » time              | integer(int64) | Stat timestamp                           |
-| » lsr_taker         | number         | Long/short account number ratio          |
-| » lsr_account       | number         | Long/short taker size ratio              |
-| » long_liq_size     | integer(int64) | Long liquidation size                    |
-| » long_liq_amount   | number(double) | Long liquidation amount(base currency)   |
-| » long_liq_usd      | number(double) | Long liquidation volume(quote currency)  |
-| » short_liq_size    | integer(int64) | Short liquidation size                   |
-| » short_liq_amount  | number(double) | Short liquidation amount(base currency)  |
-| » short_liq_usd     | number(double) | Short liquidation volume(quote currency) |
-| » open_interest     | integer(int64) | Open interest size                       |
-| » open_interest_usd | number(double) | Open interest volume(quote currency)     |
-| » top_lsr_account   | number(double) | Top trader long/short account ratio      |
-| » top_lsr_size      | number(double) | Top trader long/short position ratio     |
+| Name                | Type           | Description                                 |
+| ------------------- | -------------- | ------------------------------------------- |
+| » time              | integer(int64) | Stat timestamp                              |
+| » lsr_taker         | number         | Long/short taker ratio                      |
+| » lsr_account       | number         | Long/short position user ratio              |
+| » long_liq_size     | integer(int64) | Long liquidation size (contracts)           |
+| » long_liq_amount   | number(double) | Long liquidation amount (base currency)     |
+| » long_liq_usd      | number(double) | Long liquidation volume (quote currency)    |
+| » short_liq_size    | integer(int64) | Short liquidation size (contracts)          |
+| » short_liq_amount  | number(double) | Short liquidation amount (base currency)    |
+| » short_liq_usd     | number(double) | Short liquidation volume (quote currency)   |
+| » open_interest     | integer(int64) | Total open interest size (contracts)        |
+| » open_interest_usd | number(double) | Total open interest volume (quote currency) |
+| » top_lsr_account   | number(double) | Top trader long/short account ratio         |
+| » top_lsr_size      | number(double) | Top trader long/short position ratio        |
 
 This operation does not require authentication
 
-## [#](#get-index-constituents) Get index constituents
+## [#](#query-index-constituents) Query index constituents
 
 > Code samples
 
 `GET /futures/{settle}/index_constituents/{index}`
 
-_Get index constituents_
+_Query index constituents_
 
 ### Parameters
 
@@ -2819,9 +2839,9 @@ _Get index constituents_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
@@ -2837,29 +2857,28 @@ Status Code **200**
 
 This operation does not require authentication
 
-## [#](#retrieve-liquidation-history) Retrieve liquidation history
+## [#](#query-liquidation-order-history) Query liquidation order history
 
 > Code samples
 
 `GET /futures/{settle}/liq_orders`
 
-_Retrieve liquidation history_
+_Query liquidation order history_
 
-The maximum time interval between `from` and `to` is **3600 seconds**. Certain
-private fields will **not be returned** in public endpoints; refer to individual
-field descriptions for details.
+The time interval between from and to is maximum 3600. Some private fields are
+not returned by public interfaces, refer to field descriptions for details
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                               |
-| -------- | ----- | -------------- | -------- | --------------------------------------------------------- |
-| settle   | path  | string         | true     | Settle currency                                           |
-| contract | query | string         | false    | Futures contract, return related data only if specified   |
-| from     | query | integer(int64) | false    | Start timestamp                                           |
-| to       | query | integer(int64) | false    | Termination Timestamp                                     |
-| limit    | query | integer        | false    | Maximum number of records to be returned in a single list |
+| Name     | In    | Type           | Required | Description                                             |
+| -------- | ----- | -------------- | -------- | ------------------------------------------------------- |
+| settle   | path  | string         | true     | Settle currency                                         |
+| contract | query | string         | false    | Futures contract, return related data only if specified |
+| from     | query | integer(int64) | false    | Start timestamp                                         |
+| to       | query | integer(int64) | false    | Termination Timestamp                                   |
+| limit    | query | integer        | false    | Maximum number of records returned in a single list     |
 
-#### [#](#detailed-descriptions-26) Detailed descriptions
+#### [#](#detailed-descriptions-25) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -2898,9 +2917,9 @@ time format is a Unix timestamp
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
@@ -2918,27 +2937,27 @@ Status Code **200**
 
 This operation does not require authentication
 
-## [#](#list-risk-limit-tiers) List risk limit tiers
+## [#](#query-risk-limit-tiers) Query risk limit tiers
 
 > Code samples
 
 `GET /futures/{settle}/risk_limit_tiers`
 
-_List risk limit tiers_
+_Query risk limit tiers_
 
 When the 'contract' parameter is not passed, the default is to query the risk
 limits for the top 100 markets.'Limit' and 'offset' correspond to pagination
 queries at the market level, not to the length of the returned array. This only
-takes effect when the 'contract' parameter is empty.
+takes effect empty.
 
 ### Parameters
 
-| Name     | In    | Type    | Required | Description                                               |
-| -------- | ----- | ------- | -------- | --------------------------------------------------------- |
-| settle   | path  | string  | true     | Settle currency                                           |
-| contract | query | string  | false    | Futures contract, return related data only if specified   |
-| limit    | query | integer | false    | Maximum number of records to be returned in a single list |
-| offset   | query | integer | false    | List offset, starting from 0                              |
+| Name     | In    | Type    | Required | Description                                             |
+| -------- | ----- | ------- | -------- | ------------------------------------------------------- |
+| settle   | path  | string  | true     | Settle currency                                         |
+| contract | query | string  | false    | Futures contract, return related data only if specified |
+| limit    | query | integer | false    | Maximum number of records returned in a single list     |
+| offset   | query | integer | false    | List offset, starting from 0                            |
 
 #### [#](#enumerated-values-42) Enumerated Values
 
@@ -3003,35 +3022,35 @@ takes effect when the 'contract' parameter is empty.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                | Type         | Description                                                                            |
-| ------------------- | ------------ | -------------------------------------------------------------------------------------- |
-| _None_              | array        | \[Retrieve risk limit configurations for different tiers under a specified contract.\] |
-| » _None_            | object       | Retrieve risk limit configurations for different tiers under a specified contract.     |
-| »» tier             | integer(int) | Tier                                                                                   |
-| »» risk_limit       | string       | Position risk limit                                                                    |
-| »» initial_rate     | string       | Initial margin rate                                                                    |
-| »» maintenance_rate | string       | Maintenance margin rate                                                                |
-| »» leverage_max     | string       | Maximum leverage                                                                       |
-| »» contract         | string       | Markets, visible only during market pagination requests                                |
-| »» deduction        | string       | Maintenance margin quick calculation deduction                                         |
+| Name                | Type         | Description                                                                           |
+| ------------------- | ------------ | ------------------------------------------------------------------------------------- |
+| _None_              | array        | \[Retrieve risk limit configurations for different tiers under a specified contract\] |
+| » _None_            | object       | Retrieve risk limit configurations for different tiers under a specified contract     |
+| »» tier             | integer(int) | Tier                                                                                  |
+| »» risk_limit       | string       | Position risk limit                                                                   |
+| »» initial_rate     | string       | Initial margin rate                                                                   |
+| »» maintenance_rate | string       | Maintenance margin rate                                                               |
+| »» leverage_max     | string       | Maximum leverage                                                                      |
+| »» contract         | string       | Market, only visible when market pagination is requested                              |
+| »» deduction        | string       | Maintenance margin quick calculation deduction amount                                 |
 
 This operation does not require authentication
 
-## [#](#query-futures-account) Query futures account
+## [#](#get-futures-account) Get futures account
 
 > Code samples
 
 `GET /futures/{settle}/accounts`
 
-_Query futures account_
+_Get futures account_
 
 ### Parameters
 
@@ -3090,9 +3109,9 @@ _Query futures account_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
@@ -3105,24 +3124,24 @@ Status Code **200**
 | » unrealised_pnl                                                               | string  | Unrealized PNL                                                                                                                                                                                  |
 | » position_margin                                                              | string  | Position margin                                                                                                                                                                                 |
 | » order_margin                                                                 | string  | Order margin of unfinished orders                                                                                                                                                               |
-| » available                                                                    | string  | The available balance for transferring or trading(including bonus. Bonus can't be be withdrawn. The transfer amount needs to deduct the bonus)                                                  |
-| » point                                                                        | string  | POINT amount                                                                                                                                                                                    |
-| » currency                                                                     | string  | Settle currency                                                                                                                                                                                 |
+| » available                                                                    | string  | Available balance for transferring or trading (including bonus. Bonus cannot be withdrawn, so transfer amount needs to deduct bonus)                                                            |
+| » point                                                                        | string  | Point card amount                                                                                                                                                                               |
+| » currency                                                                     | string  | Settlement currency                                                                                                                                                                             |
 | » in_dual_mode                                                                 | boolean | Whether dual mode is enabled                                                                                                                                                                    |
 | » enable_credit                                                                | boolean | Whether portfolio margin account mode is enabled                                                                                                                                                |
-| » position_initial_margin                                                      | string  | Initial margin position, applicable to the portfolio margin account model                                                                                                                       |
-| » maintenance_margin                                                           | string  | The maintenance deposit occupied by the position is suitable for the new classic account margin model and unified account model                                                                 |
-| » bonus                                                                        | string  | Perpetual Contract Bonus                                                                                                                                                                        |
+| » position_initial_margin                                                      | string  | Initial margin occupied by positions, applicable to unified account mode                                                                                                                        |
+| » maintenance_margin                                                           | string  | Maintenance margin occupied by positions, applicable to new classic account margin mode and unified account mode                                                                                |
+| » bonus                                                                        | string  | Bonus                                                                                                                                                                                           |
 | » enable_evolved_classic                                                       | boolean | Classic account margin mode, true-new mode, false-old mode                                                                                                                                      |
-| » cross_order_margin                                                           | string  | Full -warehouse hanging order deposit, suitable for the new classic account margin model                                                                                                        |
-| » cross_initial_margin                                                         | string  | The initial security deposit of the full warehouse is suitable for the new classic account margin model                                                                                         |
-| » cross_maintenance_margin                                                     | string  | Maintain deposit in full warehouse, suitable for new classic account margin models                                                                                                              |
-| » cross_unrealised_pnl                                                         | string  | The full warehouse does not achieve profit and loss, suitable for the new classic account margin model                                                                                          |
-| » cross_available                                                              | string  | Full warehouse available amount, suitable for the new classic account margin model                                                                                                              |
-| » cross_margin_balance                                                         | string  | Full margin balance, suitable for the new classic account margin model                                                                                                                          |
-| » cross_mmr                                                                    | string  | Maintain margin ratio for the full position, suitable for the new classic account margin model                                                                                                  |
-| » cross_imr                                                                    | string  | The initial margin rate of the full position is suitable for the new classic account margin model                                                                                               |
-| » isolated_position_margin                                                     | string  | Ware -position margin, suitable for the new classic account margin model                                                                                                                        |
+| » cross_order_margin                                                           | string  | Cross margin order margin, applicable to new classic account margin mode                                                                                                                        |
+| » cross_initial_margin                                                         | string  | Cross margin initial margin, applicable to new classic account margin mode                                                                                                                      |
+| » cross_maintenance_margin                                                     | string  | Cross margin maintenance margin, applicable to new classic account margin mode                                                                                                                  |
+| » cross_unrealised_pnl                                                         | string  | Cross margin unrealized P&L, applicable to new classic account margin mode                                                                                                                      |
+| » cross_available                                                              | string  | Cross margin available balance, applicable to new classic account margin mode                                                                                                                   |
+| » cross_margin_balance                                                         | string  | Cross margin balance, applicable to new classic account margin mode                                                                                                                             |
+| » cross_mmr                                                                    | string  | Cross margin maintenance margin rate, applicable to new classic account margin mode                                                                                                             |
+| » cross_imr                                                                    | string  | Cross margin initial margin rate, applicable to new classic account margin mode                                                                                                                 |
+| » isolated_position_margin                                                     | string  | Isolated position margin, applicable to new classic account margin mode                                                                                                                         |
 | » enable_new_dual_mode                                                         | boolean | Whether to open a new two-way position mode                                                                                                                                                     |
 | » margin_mode                                                                  | integer | Margin mode, 0-classic margin mode, 1-cross-currency margin mode, 2-combined margin mode                                                                                                        |
 | » enable_tiered_mm                                                             | boolean | Whether to enable tiered maintenance margin calculation                                                                                                                                         |
@@ -3143,31 +3162,30 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#query-account-book-2) Query account book
+## [#](#query-futures-account-change-history) Query futures account change history
 
 > Code samples
 
 `GET /futures/{settle}/account_book`
 
-_Query account book_
+_Query futures account change history_
 
 If the contract field is passed, only records containing this field after
-2023-10-30 can be filtered。 2023-10-30 can be filtered。 2023-10-30 can be
-filtered。
+2023-10-30 can be filtered.
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                               |
-| -------- | ----- | -------------- | -------- | --------------------------------------------------------- |
-| settle   | path  | string         | true     | Settle currency                                           |
-| contract | query | string         | false    | Futures contract, return related data only if specified   |
-| limit    | query | integer        | false    | Maximum number of records to be returned in a single list |
-| offset   | query | integer        | false    | List offset, starting from 0                              |
-| from     | query | integer(int64) | false    | Start timestamp                                           |
-| to       | query | integer(int64) | false    | Termination Timestamp                                     |
-| type     | query | string         | false    | Changing Type：                                           |
+| Name     | In    | Type           | Required | Description                                             |
+| -------- | ----- | -------------- | -------- | ------------------------------------------------------- |
+| settle   | path  | string         | true     | Settle currency                                         |
+| contract | query | string         | false    | Futures contract, return related data only if specified |
+| limit    | query | integer        | false    | Maximum number of records returned in a single list     |
+| offset   | query | integer        | false    | List offset, starting from 0                            |
+| from     | query | integer(int64) | false    | Start timestamp                                         |
+| to       | query | integer(int64) | false    | Termination Timestamp                                   |
+| type     | query | string         | false    | Changing Type:                                          |
 
-#### [#](#detailed-descriptions-27) Detailed descriptions
+#### [#](#detailed-descriptions-26) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -3179,17 +3197,15 @@ to (the data start time of the time range actually returned by to and limit)
 Specify the end time. If not specified, it defaults to the current time, and the
 time format is a Unix timestamp
 
-**type**: Changing Type：
+**type**: Changing Type:
 
 - dnw: Deposit & Withdraw
 - pnl: Profit & Loss by reducing position
 - fee: Trading fee
 - refr: Referrer rebate
 - fund: Funding
-- point_dnw: POINT Deposit & Withdraw
-- point_fee: POINT Trading fee
+- point_dnw: point_fee: POINT Trading fee
 - point_refr: POINT Referrer rebate
-- bonus_offset: bouns deduction
 
 #### [#](#enumerated-values-44) Enumerated Values
 
@@ -3219,9 +3235,9 @@ time format is a Unix timestamp
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
@@ -3233,20 +3249,19 @@ Status Code **200**
 | » time    | number(double) | Change time          |
 | » change  | string         | Change amount        |
 | » balance | string         | Balance after change |
-| » type    | string         | Changing Type：      |
+| » type    | string         | Changing Type:       |
 
 \- dnw: Deposit & Withdraw  
 \- pnl: Profit & Loss by reducing position  
 \- fee: Trading fee  
 \- refr: Referrer rebate  
 \- fund: Funding  
-\- point_dnw: POINT Deposit & Withdraw  
-\- point_fee: POINT Trading fee  
+\- point_dnw: point_fee: POINT Trading fee  
 \- point_refr: POINT Referrer rebate  
 \- bonus_offset: bouns deduction | | » text | string | Comment | | » contract |
-string | Futures contract, the field is only available for data after
-2023-10-30. | | » trade_id | string | trade id | | » id | string | Account
-change record ID |
+string | Futures contract, the field is only available for data after 2023-10-30
+| | » trade_id | string | trade id | | » id | string | Account change record ID
+|
 
 #### [#](#enumerated-values-45) Enumerated Values
 
@@ -3266,22 +3281,22 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-all-positions-of-a-user) List all positions of a user
+## [#](#get-user-position-list) Get user position list
 
 > Code samples
 
 `GET /futures/{settle}/positions`
 
-_List all positions of a user_
+_Get user position list_
 
 ### Parameters
 
-| Name    | In    | Type    | Required | Description                                               |
-| ------- | ----- | ------- | -------- | --------------------------------------------------------- |
-| settle  | path  | string  | true     | Settle currency                                           |
-| holding | query | boolean | false    | Return only real positions - true, return all - false.    |
-| limit   | query | integer | false    | Maximum number of records to be returned in a single list |
-| offset  | query | integer | false    | List offset, starting from 0                              |
+| Name    | In    | Type    | Required | Description                                           |
+| ------- | ----- | ------- | -------- | ----------------------------------------------------- |
+| settle  | path  | string  | true     | Settle currency                                       |
+| holding | query | boolean | false    | Return only real positions - true, return all - false |
+| limit   | query | integer | false    | Maximum number of records returned in a single list   |
+| offset  | query | integer | false    | List offset, starting from 0                          |
 
 #### [#](#enumerated-values-46) Enumerated Values
 
@@ -3337,21 +3352,21 @@ _List all positions of a user_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema                          |
-| ------ | -------------------------------------------------------------------------- | -------------- | ------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[[Position](#schemaposition)\] |
+| Status | Meaning                                                                    | Description                 | Schema                          |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[[Position](#schemaposition)\] |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#get-single-position) Get single position
+## [#](#get-single-position-information) Get single position information
 
 > Code samples
 
 `GET /futures/{settle}/positions/{contract}`
 
-_Get single position_
+_Get single position information_
 
 ### Parameters
 
@@ -3430,11 +3445,11 @@ _Update position margin_
 
 ### Parameters
 
-| Name     | In    | Type   | Required | Description                                                      |
-| -------- | ----- | ------ | -------- | ---------------------------------------------------------------- |
-| settle   | path  | string | true     | Settle currency                                                  |
-| contract | path  | string | true     | Futures contract                                                 |
-| change   | query | string | true     | Margin change amount, positive number increases, negative number |
+| Name     | In    | Type   | Required | Description                                                                |
+| -------- | ----- | ------ | -------- | -------------------------------------------------------------------------- |
+| settle   | path  | string | true     | Settle currency                                                            |
+| contract | path  | string | true     | Futures contract                                                           |
+| change   | query | string | true     | Margin change amount, positive number increases, negative number decreases |
 
 #### [#](#enumerated-values-48) Enumerated Values
 
@@ -3506,12 +3521,12 @@ _Update position leverage_
 
 ### Parameters
 
-| Name                 | In    | Type   | Required | Description                                            |
-| -------------------- | ----- | ------ | -------- | ------------------------------------------------------ |
-| settle               | path  | string | true     | Settle currency                                        |
-| contract             | path  | string | true     | Futures contract                                       |
-| leverage             | query | string | true     | New position leverage                                  |
-| cross_leverage_limit | query | string | false    | Cross margin leverage(valid only when `leverage` is 0) |
+| Name                 | In    | Type   | Required | Description                                             |
+| -------------------- | ----- | ------ | -------- | ------------------------------------------------------- |
+| settle               | path  | string | true     | Settle currency                                         |
+| contract             | path  | string | true     | Futures contract                                        |
+| leverage             | query | string | true     | New position leverage                                   |
+| cross_leverage_limit | query | string | false    | Cross margin leverage (valid only when `leverage` is 0) |
 
 #### [#](#enumerated-values-49) Enumerated Values
 
@@ -3573,13 +3588,13 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#switch-to-the-full-position-by-store-mode) Switch to the full position-by-store mode
+## [#](#switch-position-margin-mode) Switch Position Margin Mode
 
 > Code samples
 
 `POST /futures/{settle}/positions/cross_mode`
 
-_Switch to the full position-by-store mode_
+_Switch Position Margin Mode_
 
 > Body parameter
 
@@ -3592,12 +3607,12 @@ _Switch to the full position-by-store mode_
 
 ### Parameters
 
-| Name       | In   | Type   | Required | Description                                                                |
-| ---------- | ---- | ------ | -------- | -------------------------------------------------------------------------- |
-| settle     | path | string | true     | Settle currency                                                            |
-| body       | body | object | true     | none                                                                       |
-| » mode     | body | string | true     | Full position-by-position model, ISOLATED-by-position, CROSS-full position |
-| » contract | body | string | true     | Contract Market                                                            |
+| Name       | In   | Type   | Required | Description                                                                                      |
+| ---------- | ---- | ------ | -------- | ------------------------------------------------------------------------------------------------ |
+| settle     | path | string | true     | Settle currency                                                                                  |
+| body       | body | object | true     | none                                                                                             |
+| » mode     | body | string | true     | Cross margin or isolated margin mode. ISOLATED - isolated margin mode, CROSS - cross margin mode |
+| » contract | body | string | true     | Futures market                                                                                   |
 
 #### [#](#enumerated-values-50) Enumerated Values
 
@@ -3659,6 +3674,94 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
+## [#](#switch-between-cross-and-isolated-margin-modes-under-hedge-mode) Switch Between Cross and Isolated Margin Modes Under Hedge Mode
+
+> Code samples
+
+`POST /futures/{settle}/dual_comp/positions/cross_mode`
+
+_Switch Between Cross and Isolated Margin Modes Under Hedge Mode_
+
+> Body parameter
+
+```
+{
+  "mode": "ISOLATED",
+  "contract": "BTC_USDT"
+}
+```
+
+### Parameters
+
+| Name       | In   | Type   | Required | Description                                                                                      |
+| ---------- | ---- | ------ | -------- | ------------------------------------------------------------------------------------------------ |
+| settle     | path | string | true     | Settle currency                                                                                  |
+| body       | body | object | true     | none                                                                                             |
+| » mode     | body | string | true     | Cross margin or isolated margin mode. ISOLATED - isolated margin mode, CROSS - cross margin mode |
+| » contract | body | string | true     | Futures market                                                                                   |
+
+#### [#](#enumerated-values-51) Enumerated Values
+
+| Parameter | Value |
+| --------- | ----- |
+| settle    | btc   |
+| settle    | usdt  |
+
+> Example responses
+
+> 200 Response
+
+```
+[
+  {
+    "user": 10000,
+    "contract": "BTC_USDT",
+    "size": -9440,
+    "leverage": "0",
+    "risk_limit": "100",
+    "leverage_max": "100",
+    "maintenance_rate": "0.005",
+    "value": "3568.62",
+    "margin": "4.431548146258",
+    "entry_price": "3779.55",
+    "liq_price": "99999999",
+    "mark_price": "3780.32",
+    "unrealised_pnl": "-0.000507486844",
+    "realised_pnl": "0.045543982432",
+    "pnl_pnl": "0.045543982432",
+    "pnl_fund": "0",
+    "pnl_fee": "0",
+    "history_pnl": "0",
+    "last_close_pnl": "0",
+    "realised_point": "0",
+    "history_point": "0",
+    "adl_ranking": 5,
+    "pending_orders": 16,
+    "close_order": {
+      "id": 232323,
+      "price": "3779",
+      "is_liq": false
+    },
+    "mode": "single",
+    "update_time": 1684994406,
+    "update_id": 1,
+    "cross_leverage_limit": "0",
+    "risk_limit_table": "BIG_HOT_COIN_50X_V2",
+    "average_maintenance_rate": "0.005"
+  }
+]
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description      | Schema                          |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[[Position](#schemaposition)\] |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
 ## [#](#update-position-risk-limit) Update position risk limit
 
 > Code samples
@@ -3673,9 +3776,9 @@ _Update position risk limit_
 | ---------- | ----- | ------ | -------- | -------------------- |
 | settle     | path  | string | true     | Settle currency      |
 | contract   | path  | string | true     | Futures contract     |
-| risk_limit | query | string | true     | New Risk Limit Value |
+| risk_limit | query | string | true     | New risk limit value |
 
-#### [#](#enumerated-values-51) Enumerated Values
+#### [#](#enumerated-values-52) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3735,15 +3838,16 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#enable-or-disable-dual-mode) Enable or disable dual mode
+## [#](#set-position-mode) Set position mode
 
 > Code samples
 
 `POST /futures/{settle}/dual_mode`
 
-_Enable or disable dual mode_
+_Set position mode_
 
-The prerequisite for changing mode is that all positions have no holdings
+The prerequisite for changing mode is that all positions have no holdings and no
+pending orders
 
 ### Parameters
 
@@ -3752,7 +3856,7 @@ The prerequisite for changing mode is that all positions have no holdings
 | settle    | path  | string  | true     | Settle currency             |
 | dual_mode | query | boolean | true     | Whether to enable dual mode |
 
-#### [#](#enumerated-values-52) Enumerated Values
+#### [#](#enumerated-values-53) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -3803,9 +3907,9 @@ The prerequisite for changing mode is that all positions have no holdings
 
 ### Responses
 
-| Status | Meaning                                                                    | Description | Schema |
-| ------ | -------------------------------------------------------------------------- | ----------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Updated     | Inline |
+| Status | Meaning                                                                    | Description          | Schema |
+| ------ | -------------------------------------------------------------------------- | -------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Updated successfully | Inline |
 
 ### Response Schema
 
@@ -3818,24 +3922,24 @@ Status Code **200**
 | » unrealised_pnl                                                               | string  | Unrealized PNL                                                                                                                                                                                  |
 | » position_margin                                                              | string  | Position margin                                                                                                                                                                                 |
 | » order_margin                                                                 | string  | Order margin of unfinished orders                                                                                                                                                               |
-| » available                                                                    | string  | The available balance for transferring or trading(including bonus. Bonus can't be be withdrawn. The transfer amount needs to deduct the bonus)                                                  |
-| » point                                                                        | string  | POINT amount                                                                                                                                                                                    |
-| » currency                                                                     | string  | Settle currency                                                                                                                                                                                 |
+| » available                                                                    | string  | Available balance for transferring or trading (including bonus. Bonus cannot be withdrawn, so transfer amount needs to deduct bonus)                                                            |
+| » point                                                                        | string  | Point card amount                                                                                                                                                                               |
+| » currency                                                                     | string  | Settlement currency                                                                                                                                                                             |
 | » in_dual_mode                                                                 | boolean | Whether dual mode is enabled                                                                                                                                                                    |
 | » enable_credit                                                                | boolean | Whether portfolio margin account mode is enabled                                                                                                                                                |
-| » position_initial_margin                                                      | string  | Initial margin position, applicable to the portfolio margin account model                                                                                                                       |
-| » maintenance_margin                                                           | string  | The maintenance deposit occupied by the position is suitable for the new classic account margin model and unified account model                                                                 |
-| » bonus                                                                        | string  | Perpetual Contract Bonus                                                                                                                                                                        |
+| » position_initial_margin                                                      | string  | Initial margin occupied by positions, applicable to unified account mode                                                                                                                        |
+| » maintenance_margin                                                           | string  | Maintenance margin occupied by positions, applicable to new classic account margin mode and unified account mode                                                                                |
+| » bonus                                                                        | string  | Bonus                                                                                                                                                                                           |
 | » enable_evolved_classic                                                       | boolean | Classic account margin mode, true-new mode, false-old mode                                                                                                                                      |
-| » cross_order_margin                                                           | string  | Full -warehouse hanging order deposit, suitable for the new classic account margin model                                                                                                        |
-| » cross_initial_margin                                                         | string  | The initial security deposit of the full warehouse is suitable for the new classic account margin model                                                                                         |
-| » cross_maintenance_margin                                                     | string  | Maintain deposit in full warehouse, suitable for new classic account margin models                                                                                                              |
-| » cross_unrealised_pnl                                                         | string  | The full warehouse does not achieve profit and loss, suitable for the new classic account margin model                                                                                          |
-| » cross_available                                                              | string  | Full warehouse available amount, suitable for the new classic account margin model                                                                                                              |
-| » cross_margin_balance                                                         | string  | Full margin balance, suitable for the new classic account margin model                                                                                                                          |
-| » cross_mmr                                                                    | string  | Maintain margin ratio for the full position, suitable for the new classic account margin model                                                                                                  |
-| » cross_imr                                                                    | string  | The initial margin rate of the full position is suitable for the new classic account margin model                                                                                               |
-| » isolated_position_margin                                                     | string  | Ware -position margin, suitable for the new classic account margin model                                                                                                                        |
+| » cross_order_margin                                                           | string  | Cross margin order margin, applicable to new classic account margin mode                                                                                                                        |
+| » cross_initial_margin                                                         | string  | Cross margin initial margin, applicable to new classic account margin mode                                                                                                                      |
+| » cross_maintenance_margin                                                     | string  | Cross margin maintenance margin, applicable to new classic account margin mode                                                                                                                  |
+| » cross_unrealised_pnl                                                         | string  | Cross margin unrealized P&L, applicable to new classic account margin mode                                                                                                                      |
+| » cross_available                                                              | string  | Cross margin available balance, applicable to new classic account margin mode                                                                                                                   |
+| » cross_margin_balance                                                         | string  | Cross margin balance, applicable to new classic account margin mode                                                                                                                             |
+| » cross_mmr                                                                    | string  | Cross margin maintenance margin rate, applicable to new classic account margin mode                                                                                                             |
+| » cross_imr                                                                    | string  | Cross margin initial margin rate, applicable to new classic account margin mode                                                                                                                 |
+| » isolated_position_margin                                                     | string  | Isolated position margin, applicable to new classic account margin mode                                                                                                                         |
 | » enable_new_dual_mode                                                         | boolean | Whether to open a new two-way position mode                                                                                                                                                     |
 | » margin_mode                                                                  | integer | Margin mode, 0-classic margin mode, 1-cross-currency margin mode, 2-combined margin mode                                                                                                        |
 | » enable_tiered_mm                                                             | boolean | Whether to enable tiered maintenance margin calculation                                                                                                                                         |
@@ -3856,13 +3960,13 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#retrieve-position-detail-in-dual-mode) Retrieve position detail in dual mode
+## [#](#get-position-information-in-dual-mode) Get position information in dual mode
 
 > Code samples
 
 `GET /futures/{settle}/dual_comp/positions/{contract}`
 
-_Retrieve position detail in dual mode_
+_Get position information in dual mode_
 
 ### Parameters
 
@@ -3870,85 +3974,6 @@ _Retrieve position detail in dual mode_
 | -------- | ---- | ------ | -------- | ---------------- |
 | settle   | path | string | true     | Settle currency  |
 | contract | path | string | true     | Futures contract |
-
-#### [#](#enumerated-values-53) Enumerated Values
-
-| Parameter | Value |
-| --------- | ----- |
-| settle    | btc   |
-| settle    | usdt  |
-
-> Example responses
-
-> 200 Response
-
-```
-[
-  {
-    "user": 10000,
-    "contract": "BTC_USDT",
-    "size": -9440,
-    "leverage": "0",
-    "risk_limit": "100",
-    "leverage_max": "100",
-    "maintenance_rate": "0.005",
-    "value": "3568.62",
-    "margin": "4.431548146258",
-    "entry_price": "3779.55",
-    "liq_price": "99999999",
-    "mark_price": "3780.32",
-    "unrealised_pnl": "-0.000507486844",
-    "realised_pnl": "0.045543982432",
-    "pnl_pnl": "0.045543982432",
-    "pnl_fund": "0",
-    "pnl_fee": "0",
-    "history_pnl": "0",
-    "last_close_pnl": "0",
-    "realised_point": "0",
-    "history_point": "0",
-    "adl_ranking": 5,
-    "pending_orders": 16,
-    "close_order": {
-      "id": 232323,
-      "price": "3779",
-      "is_liq": false
-    },
-    "mode": "single",
-    "update_time": 1684994406,
-    "update_id": 1,
-    "cross_leverage_limit": "0",
-    "risk_limit_table": "BIG_HOT_COIN_50X_V2",
-    "average_maintenance_rate": "0.005"
-  }
-]
-```
-
-### Responses
-
-| Status | Meaning                                                                    | Description            | Schema                          |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[[Position](#schemaposition)\] |
-
-WARNING
-
-To perform this operation, you must be authenticated by API key and secret
-
-## [#](#update-position-margin-in-dual-mode) Update position margin in dual mode
-
-> Code samples
-
-`POST /futures/{settle}/dual_comp/positions/{contract}/margin`
-
-_Update position margin in dual mode_
-
-### Parameters
-
-| Name      | In    | Type   | Required | Description                                                      |
-| --------- | ----- | ------ | -------- | ---------------------------------------------------------------- |
-| settle    | path  | string | true     | Settle currency                                                  |
-| contract  | path  | string | true     | Futures contract                                                 |
-| change    | query | string | true     | Margin change amount, positive number increases, negative number |
-| dual_side | query | string | true     | Long or short position                                           |
 
 #### [#](#enumerated-values-54) Enumerated Values
 
@@ -4004,30 +4029,30 @@ _Update position margin in dual mode_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema                          |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[[Position](#schemaposition)\] |
+| Status | Meaning                                                                    | Description      | Schema                          |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[[Position](#schemaposition)\] |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#update-position-leverage-in-dual-mode) Update position leverage in dual mode
+## [#](#update-position-margin-in-dual-mode) Update position margin in dual mode
 
 > Code samples
 
-`POST /futures/{settle}/dual_comp/positions/{contract}/leverage`
+`POST /futures/{settle}/dual_comp/positions/{contract}/margin`
 
-_Update position leverage in dual mode_
+_Update position margin in dual mode_
 
 ### Parameters
 
-| Name                 | In    | Type   | Required | Description                                            |
-| -------------------- | ----- | ------ | -------- | ------------------------------------------------------ |
-| settle               | path  | string | true     | Settle currency                                        |
-| contract             | path  | string | true     | Futures contract                                       |
-| leverage             | query | string | true     | New position leverage                                  |
-| cross_leverage_limit | query | string | false    | Cross margin leverage(valid only when `leverage` is 0) |
+| Name      | In    | Type   | Required | Description                                                                |
+| --------- | ----- | ------ | -------- | -------------------------------------------------------------------------- |
+| settle    | path  | string | true     | Settle currency                                                            |
+| contract  | path  | string | true     | Futures contract                                                           |
+| change    | query | string | true     | Margin change amount, positive number increases, negative number decreases |
+| dual_side | query | string | true     | Long or short position                                                     |
 
 #### [#](#enumerated-values-55) Enumerated Values
 
@@ -4083,29 +4108,30 @@ _Update position leverage in dual mode_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema                          |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[[Position](#schemaposition)\] |
+| Status | Meaning                                                                    | Description      | Schema                          |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[[Position](#schemaposition)\] |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#update-position-risk-limit-in-dual-mode) Update position risk limit in dual mode
+## [#](#update-position-leverage-in-dual-mode) Update position leverage in dual mode
 
 > Code samples
 
-`POST /futures/{settle}/dual_comp/positions/{contract}/risk_limit`
+`POST /futures/{settle}/dual_comp/positions/{contract}/leverage`
 
-_Update position risk limit in dual mode_
+_Update position leverage in dual mode_
 
 ### Parameters
 
-| Name       | In    | Type   | Required | Description          |
-| ---------- | ----- | ------ | -------- | -------------------- |
-| settle     | path  | string | true     | Settle currency      |
-| contract   | path  | string | true     | Futures contract     |
-| risk_limit | query | string | true     | New Risk Limit Value |
+| Name                 | In    | Type   | Required | Description                                             |
+| -------------------- | ----- | ------ | -------- | ------------------------------------------------------- |
+| settle               | path  | string | true     | Settle currency                                         |
+| contract             | path  | string | true     | Futures contract                                        |
+| leverage             | query | string | true     | New position leverage                                   |
+| cross_leverage_limit | query | string | false    | Cross margin leverage (valid only when `leverage` is 0) |
 
 #### [#](#enumerated-values-56) Enumerated Values
 
@@ -4161,21 +4187,99 @@ _Update position risk limit in dual mode_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema                          |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[[Position](#schemaposition)\] |
+| Status | Meaning                                                                    | Description      | Schema                          |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[[Position](#schemaposition)\] |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#create-a-futures-order) Create a futures order
+## [#](#update-position-risk-limit-in-dual-mode) Update position risk limit in dual mode
+
+> Code samples
+
+`POST /futures/{settle}/dual_comp/positions/{contract}/risk_limit`
+
+_Update position risk limit in dual mode_
+
+### Parameters
+
+| Name       | In    | Type   | Required | Description          |
+| ---------- | ----- | ------ | -------- | -------------------- |
+| settle     | path  | string | true     | Settle currency      |
+| contract   | path  | string | true     | Futures contract     |
+| risk_limit | query | string | true     | New risk limit value |
+
+#### [#](#enumerated-values-57) Enumerated Values
+
+| Parameter | Value |
+| --------- | ----- |
+| settle    | btc   |
+| settle    | usdt  |
+
+> Example responses
+
+> 200 Response
+
+```
+[
+  {
+    "user": 10000,
+    "contract": "BTC_USDT",
+    "size": -9440,
+    "leverage": "0",
+    "risk_limit": "100",
+    "leverage_max": "100",
+    "maintenance_rate": "0.005",
+    "value": "3568.62",
+    "margin": "4.431548146258",
+    "entry_price": "3779.55",
+    "liq_price": "99999999",
+    "mark_price": "3780.32",
+    "unrealised_pnl": "-0.000507486844",
+    "realised_pnl": "0.045543982432",
+    "pnl_pnl": "0.045543982432",
+    "pnl_fund": "0",
+    "pnl_fee": "0",
+    "history_pnl": "0",
+    "last_close_pnl": "0",
+    "realised_point": "0",
+    "history_point": "0",
+    "adl_ranking": 5,
+    "pending_orders": 16,
+    "close_order": {
+      "id": 232323,
+      "price": "3779",
+      "is_liq": false
+    },
+    "mode": "single",
+    "update_time": 1684994406,
+    "update_id": 1,
+    "cross_leverage_limit": "0",
+    "risk_limit_table": "BIG_HOT_COIN_50X_V2",
+    "average_maintenance_rate": "0.005"
+  }
+]
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description      | Schema                          |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[[Position](#schemaposition)\] |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
+## [#](#place-futures-order) Place futures order
 
 > Code samples
 
 `POST /futures/{settle}/orders`
 
-_Create a futures order_
+_Place futures order_
 
 - When placing an order, the number of contracts is specified `size`, not the
   number of coins. The number of coins corresponding to each contract is
@@ -4189,8 +4293,8 @@ _Create a futures order_
 - In dual warehouse mode,
 - Reduce position: reduce_only=true, size is a positive number that indicates
   short position, negative number that indicates long position
-- Add position: reduce_only=false, size is a positive number that indicates
-  adding long positions, and negative numbers indicate adding short positions
+- Add number that indicates adding long positions, and negative numbers indicate
+  adding short positions
 - Close position: size=0, set the direction of closing position according to
   auto_size, and set `reduce_only` to true at the same time - reduce_only: Make
   sure to only perform position reduction operations to prevent increased
@@ -4214,25 +4318,24 @@ _Create a futures order_
 
 ### Parameters
 
-| Name               | In     | Type                                | Required | Description                                                                                                                                       |
-| ------------------ | ------ | ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| x-gate-exptime     | header | string                              | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected  |
-| body               | body   | [FuturesOrder](#schemafuturesorder) | true     | none                                                                                                                                              |
-| » contract         | body   | string                              | true     | Futures contract                                                                                                                                  |
-| » size             | body   | integer(int64)                      | true     | Order size. Specify positive number to make a bid, and negative number to ask                                                                     |
-| » iceberg          | body   | integer(int64)                      | false    | Display size for iceberg order. 0 for non-iceberg. Note that you will have to pay the taker fee for the hidden size                               |
-| » price            | body   | string                              | false    | Order price. 0 for market order with `tif` set as `ioc`                                                                                           |
-| » close            | body   | boolean                             | false    | Set as `true` to close the position, with `size` set to 0                                                                                         |
-| » reduce_only      | body   | boolean                             | false    | Set as `true` to be reduce-only order                                                                                                             |
-| » tif              | body   | string                              | false    | Time in force                                                                                                                                     |
-| » text             | body   | string                              | false    | Order custom information, users can use this field to set a custom ID, and the user-defined field must meet the following conditions:             |
-| » auto_size        | body   | string                              | false    | Set side to close dual-mode position. `close_long` closes the long side; while `close_short` the short one. Note `size` also needs to be set to 0 |
-| » stp_act          | body   | string                              | false    | Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies                                                   |
-| » bbo              | body   | string                              | false    | Specify the price of the opponent                                                                                                                 |
-| » default_leverage | body   | string                              | false    | Default leverage multiple                                                                                                                         |
-| settle             | path   | string                              | true     | Settle currency                                                                                                                                   |
+| Name           | In     | Type                                | Required | Description                                                                                                                                       |
+| -------------- | ------ | ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| x-gate-exptime | header | string                              | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected  |
+| body           | body   | [FuturesOrder](#schemafuturesorder) | true     | none                                                                                                                                              |
+| » contract     | body   | string                              | true     | Futures contract                                                                                                                                  |
+| » size         | body   | integer(int64)                      | true     | Required. Trading quantity. Positive for buy, negative for sell. Set to 0 for close position orders.                                              |
+| » iceberg      | body   | integer(int64)                      | false    | Display size for iceberg orders. 0 for non-iceberg orders. Note that hidden portions are charged taker fees.                                      |
+| » price        | body   | string                              | false    | Order price. Price of 0 with `tif` set to `ioc` represents a market order.                                                                        |
+| » close        | body   | boolean                             | false    | Set as `true` to close the position, with `size` set to 0                                                                                         |
+| » reduce_only  | body   | boolean                             | false    | Set as `true` to be reduce-only order                                                                                                             |
+| » tif          | body   | string                              | false    | Time in force                                                                                                                                     |
+| » text         | body   | string                              | false    | Custom order information. If not empty, must follow the rules below:                                                                              |
+| » auto_size    | body   | string                              | false    | Set side to close dual-mode position. `close_long` closes the long side; while `close_short` the short one. Note `size` also needs to be set to 0 |
+| » stp_act      | body   | string                              | false    | Self-Trading Prevention Action. Users can use this field to set self-trade prevention strategies                                                  |
 
-#### [#](#detailed-descriptions-28) Detailed descriptions
+|settle|path|string|true|Settle currency|
+
+#### [#](#detailed-descriptions-27) Detailed descriptions
 
 **» tif**: Time in force
 
@@ -4242,50 +4345,51 @@ _Create a futures order_
   fee
 - fok: FillOrKill, fill either completely or none
 
-**» text**: Order custom information, users can use this field to set a custom
-ID, and the user-defined field must meet the following conditions:
+**» text**: Custom order information. If not empty, must follow the rules below:
 
-1.  Must start with `t-`
-2.  If `t-` is not calculated, the length cannot exceed 28 bytes
-3.  The input content can only contain numbers, letters, underscores (\_),
-    midscores (-) or dots (.)
+1.  Prefixed with `t-`
+2.  No longer than 28 bytes without `t-` prefix
+3.  Can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.)
 
 In addition to user-defined information, the following are internal reserved
-fields that identifies the source of the order:
+fields that identify the order source:
 
-- web: web page
+- web: Web
 - api: API call
-- app: mobile terminal
-- auto_deleveraging: Automatic position reduction
-- liquidation: Liquidation under the classic account’s old liquidation mode
-- liq-xxx: a. Liquidation under the classic account’s new liquidation mode
-  (isolated, cross margin one-way mode, non-hedging part of cross margin hedge
-  mode) b. Liquidation under isolated margin in unified account single currency
+- app: Mobile app
+- auto_deleveraging: Automatic deleveraging
+- liquidation: Forced liquidation of positions under the old classic mode
+- liq-xxx: a. Forced liquidation of positions under the new classic mode,
+  including isolated margin, one-way cross margin, and non-hedged positions
+  under two-way cross margin. b. Forced liquidation of isolated positions under
+  the unified account single-currency margin mode
+- hedge-liq-xxx: Forced liquidation of hedged positions under the new classic
+  mode two-way cross margin, i.e., simultaneously closing long and short
+  positions
+- pm_liquidate: Forced liquidation under unified account multi-currency margin
+  mode
+- comb_margin_liquidate: Forced liquidation under unified account portfolio
   margin mode
-- hedge-liq-xxx: Liquidation under the new liquidation mode of the classic
-  account hedge mode, the cross margin hedged part undergoes liquidation,
-  meaning both long and short positions are liquidated simultaneously.
-- pm_liquidate: Unified account multi-currency margin mode liquidation
-- comb_margin_liquidate: Unified account portfolio margin mode liquidation
-- scm_liquidate: Unified account single currency margin mode liquidation
-- insurance: insurance
+- scm_liquidate: Forced liquidation of positions under unified account
+  single-currency margin mode
+- insurance: Insurance
 
 **» stp_act**: Self-Trading Prevention Action. Users can use this field to set
-self-trade prevetion strategies
+self-trade prevention strategies
 
-1.  After users join the `STP Group`, he can pass `stp_act` to limit the user's
-    self-trade prevetion strategy. If `stp_act` is not passed, the default is
-    `cn` strategy。
+1.  After users join the `STP Group`, they can pass `stp_act` to limit the
+    user's self-trade prevention strategy. If `stp_act` is not passed, the
+    default is `cn` strategy.
 2.  When the user does not join the `STP group`, an error will be returned when
-    passing the `stp_act` parameter。
-3.  If the user did not use 'stp_act' when placing the order, 'stp_act' will
+    passing the `stp_act` parameter.
+3.  If the user did not use `stp_act` when placing the order, `stp_act` will
     return '-'
 
-- cn: Cancel newest, Cancel new orders and keep old ones
-- co: Cancel oldest, Cancel old orders and keep new ones
-- cb: Cancel both, Both old and new orders will be cancelled
+- cn: Cancel newest, cancel new orders and keep old ones
+- co: Cancel oldest, cancel old orders and keep new ones
+- cb: Cancel both, both old and new orders will be cancelled
 
-#### [#](#enumerated-values-57) Enumerated Values
+#### [#](#enumerated-values-58) Enumerated Values
 
 | Parameter   | Value       |
 | ----------- | ----------- |
@@ -4344,13 +4448,13 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-futures-orders) List futures orders
+## [#](#query-futures-order-list) Query futures order list
 
 > Code samples
 
 `GET /futures/{settle}/orders`
 
-_List futures orders_
+_Query futures order list_
 
 - Zero-fill order cannot be retrieved for 10 minutes after cancellation
 - Historical orders, by default, only data within the past 6 months is
@@ -4359,91 +4463,14 @@ _List futures orders_
 
 ### Parameters
 
-| Name     | In    | Type    | Required | Description                                                                                     |
-| -------- | ----- | ------- | -------- | ----------------------------------------------------------------------------------------------- |
-| contract | query | string  | false    | Futures contract, return related data only if specified                                         |
-| status   | query | string  | true     | Only list the orders with this status                                                           |
-| limit    | query | integer | false    | Maximum number of records to be returned in a single list                                       |
-| offset   | query | integer | false    | List offset, starting from 0                                                                    |
-| last_id  | query | string  | false    | Specify the currency name to query in batches, and support up to 100 pass parameters at a time. |
-| settle   | path  | string  | true     | Settle currency                                                                                 |
-
-#### [#](#enumerated-values-58) Enumerated Values
-
-| Parameter | Value |
-| --------- | ----- |
-| settle    | btc   |
-| settle    | usdt  |
-
-> Example responses
-
-> 200 Response
-
-```
-[
-  {
-    "id": 15675394,
-    "user": 100000,
-    "contract": "BTC_USDT",
-    "create_time": 1546569968,
-    "size": 6024,
-    "iceberg": 0,
-    "left": 6024,
-    "price": "3765",
-    "fill_price": "0",
-    "mkfr": "-0.00025",
-    "tkfr": "0.00075",
-    "tif": "gtc",
-    "refu": 0,
-    "is_reduce_only": false,
-    "is_close": false,
-    "is_liq": false,
-    "text": "t-my-custom-id",
-    "status": "finished",
-    "finish_time": 1514764900,
-    "finish_as": "cancelled",
-    "stp_id": 0,
-    "stp_act": "-",
-    "amend_text": "-"
-  }
-]
-```
-
-### Responses
-
-| Status | Meaning                                                                    | Description    | Schema                                  |
-| ------ | -------------------------------------------------------------------------- | -------------- | --------------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[[FuturesOrder](#schemafuturesorder)\] |
-
-### [#](#response-headers) Response Headers
-
-| Status | Header              | Type    | Format | Description              |
-| ------ | ------------------- | ------- | ------ | ------------------------ |
-| 200    | X-Pagination-Limit  | integer |        | Request limit specified  |
-| 200    | X-Pagination-Offset | integer |        | Request offset specified |
-
-WARNING
-
-To perform this operation, you must be authenticated by API key and secret
-
-## [#](#cancel-all-open-orders-matched) Cancel all `open` orders matched
-
-> Code samples
-
-`DELETE /futures/{settle}/orders`
-
-_Cancel all `open` orders matched_
-
-Zero-filled order cannot be retrieved 10 minutes after order cancellation
-
-### Parameters
-
-| Name           | In     | Type   | Required | Description                                                                                                                                                                                                                      |
-| -------------- | ------ | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| x-gate-exptime | header | string | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected                                                                                 |
-| contract       | query  | string | true     | Futures contract                                                                                                                                                                                                                 |
-| side           | query  | string | false    | Specify all buy orders or all sell orders, both are included if not specified. Set to bid to cancel all buy orders, set to ask to cancel all sell ordersspecified. Set to bid to cancel all buy orders, set to ask to cancel all |
-| settle         | path   | string | true     | Settle currency                                                                                                                                                                                                                  |
+| Name     | In    | Type    | Required | Description                                                                                    |
+| -------- | ----- | ------- | -------- | ---------------------------------------------------------------------------------------------- |
+| contract | query | string  | false    | Futures contract, return related data only if specified                                        |
+| status   | query | string  | true     | Query order list based on status                                                               |
+| limit    | query | integer | false    | Maximum number of records returned in a single list                                            |
+| offset   | query | integer | false    | List offset, starting from 0                                                                   |
+| last_id  | query | string  | false    | Specify the currency name to query in batches, and support up to 100 pass parameters at a time |
+| settle   | path  | string  | true     | Settle currency                                                                                |
 
 #### [#](#enumerated-values-59) Enumerated Values
 
@@ -4488,44 +4515,39 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
 
 ### Responses
 
-| Status | Meaning                                                                    | Description                  | Schema                                  |
-| ------ | -------------------------------------------------------------------------- | ---------------------------- | --------------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | All orders matched cancelled | \[[FuturesOrder](#schemafuturesorder)\] |
+| Status | Meaning                                                                    | Description                 | Schema                                  |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | --------------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[[FuturesOrder](#schemafuturesorder)\] |
+
+### [#](#response-headers) Response Headers
+
+| Status | Header              | Type    | Format | Description                     |
+| ------ | ------------------- | ------- | ------ | ------------------------------- |
+| 200    | X-Pagination-Limit  | integer |        | Limit specified for pagination  |
+| 200    | X-Pagination-Offset | integer |        | Offset specified for pagination |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-futures-orders-by-time-range) List Futures Orders By Time Range
+## [#](#cancel-all-orders-with-open-status) Cancel all orders with 'open' status
 
 > Code samples
 
-`GET /futures/{settle}/orders_timerange`
+`DELETE /futures/{settle}/orders`
 
-_List Futures Orders By Time Range_
+_Cancel all orders with 'open' status_
+
+Zero-fill orders cannot be retrieved 10 minutes after order cancellation
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                               |
-| -------- | ----- | -------------- | -------- | --------------------------------------------------------- |
-| settle   | path  | string         | true     | Settle currency                                           |
-| contract | query | string         | false    | Futures contract, return related data only if specified   |
-| from     | query | integer(int64) | false    | Start timestamp                                           |
-| to       | query | integer(int64) | false    | Termination Timestamp                                     |
-| limit    | query | integer        | false    | Maximum number of records to be returned in a single list |
-| offset   | query | integer        | false    | List offset, starting from 0                              |
-
-#### [#](#detailed-descriptions-29) Detailed descriptions
-
-**from**: Start timestamp
-
-Specify start time, time format is Unix timestamp. If not specified, it defaults
-to (the data start time of the time range actually returned by to and limit)
-
-**to**: Termination Timestamp
-
-Specify the end time. If not specified, it defaults to the current time, and the
-time format is a Unix timestamp
+| Name           | In     | Type   | Required | Description                                                                                                                                                                                                                                           |
+| -------------- | ------ | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| x-gate-exptime | header | string | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected                                                                                                      |
+| contract       | query  | string | true     | Futures contract                                                                                                                                                                                                                                      |
+| side           | query  | string | false    | Specify all buy orders or all sell orders, both are included if not specified. Set to bid, set to ask to cancel all sell ordersspecified. Set to bid, set to ask to cancel all sell ordersspecified. Set to bid, set to ask to cancel all sell orders |
+| settle         | path   | string | true     | Settle currency                                                                                                                                                                                                                                       |
 
 #### [#](#enumerated-values-60) Enumerated Values
 
@@ -4570,28 +4592,110 @@ time format is a Unix timestamp
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema                                  |
-| ------ | -------------------------------------------------------------------------- | -------------- | --------------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[[FuturesOrder](#schemafuturesorder)\] |
-
-### [#](#response-headers-2) Response Headers
-
-| Status | Header              | Type    | Format | Description              |
-| ------ | ------------------- | ------- | ------ | ------------------------ |
-| 200    | X-Pagination-Limit  | integer |        | Request limit specified  |
-| 200    | X-Pagination-Offset | integer |        | Request offset specified |
+| Status | Meaning                                                                    | Description                   | Schema                                  |
+| ------ | -------------------------------------------------------------------------- | ----------------------------- | --------------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Batch cancellation successful | \[[FuturesOrder](#schemafuturesorder)\] |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#create-a-batch-of-futures-orders) Create a batch of futures orders
+## [#](#query-futures-order-list-by-time-range) Query futures order list by time range
+
+> Code samples
+
+`GET /futures/{settle}/orders_timerange`
+
+_Query futures order list by time range_
+
+### Parameters
+
+| Name     | In    | Type           | Required | Description                                             |
+| -------- | ----- | -------------- | -------- | ------------------------------------------------------- |
+| settle   | path  | string         | true     | Settle currency                                         |
+| contract | query | string         | false    | Futures contract, return related data only if specified |
+| from     | query | integer(int64) | false    | Start timestamp                                         |
+| to       | query | integer(int64) | false    | Termination Timestamp                                   |
+| limit    | query | integer        | false    | Maximum number of records returned in a single list     |
+| offset   | query | integer        | false    | List offset, starting from 0                            |
+
+#### [#](#detailed-descriptions-28) Detailed descriptions
+
+**from**: Start timestamp
+
+Specify start time, time format is Unix timestamp. If not specified, it defaults
+to (the data start time of the time range actually returned by to and limit)
+
+**to**: Termination Timestamp
+
+Specify the end time. If not specified, it defaults to the current time, and the
+time format is a Unix timestamp
+
+#### [#](#enumerated-values-61) Enumerated Values
+
+| Parameter | Value |
+| --------- | ----- |
+| settle    | btc   |
+| settle    | usdt  |
+
+> Example responses
+
+> 200 Response
+
+```
+[
+  {
+    "id": 15675394,
+    "user": 100000,
+    "contract": "BTC_USDT",
+    "create_time": 1546569968,
+    "size": 6024,
+    "iceberg": 0,
+    "left": 6024,
+    "price": "3765",
+    "fill_price": "0",
+    "mkfr": "-0.00025",
+    "tkfr": "0.00075",
+    "tif": "gtc",
+    "refu": 0,
+    "is_reduce_only": false,
+    "is_close": false,
+    "is_liq": false,
+    "text": "t-my-custom-id",
+    "status": "finished",
+    "finish_time": 1514764900,
+    "finish_as": "cancelled",
+    "stp_id": 0,
+    "stp_act": "-",
+    "amend_text": "-"
+  }
+]
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description                 | Schema                                  |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | --------------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[[FuturesOrder](#schemafuturesorder)\] |
+
+### [#](#response-headers-2) Response Headers
+
+| Status | Header              | Type    | Format | Description                     |
+| ------ | ------------------- | ------- | ------ | ------------------------------- |
+| 200    | X-Pagination-Limit  | integer |        | Limit specified for pagination  |
+| 200    | X-Pagination-Offset | integer |        | Offset specified for pagination |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
+## [#](#place-batch-futures-orders) Place batch futures orders
 
 > Code samples
 
 `POST /futures/{settle}/batch_orders`
 
-_Create a batch of futures orders_
+_Place batch futures orders_
 
 - Up to 10 orders per request
 - If any of the order's parameters are missing or in the wrong format, all of
@@ -4633,7 +4737,7 @@ _Create a batch of futures orders_
 | body           | body   | array\[[FuturesOrder](#schemafuturesorder)\] | true     | none                                                                                                                                             |
 | settle         | path   | string                                       | true     | Settle currency                                                                                                                                  |
 
-#### [#](#enumerated-values-61) Enumerated Values
+#### [#](#enumerated-values-62) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -4677,9 +4781,9 @@ _Create a batch of futures orders_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description          | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Request is completed | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Request execution completed | \[Inline\] |
 
 ### Response Schema
 
@@ -4689,14 +4793,14 @@ Status Code **200**
 | -------------- | -------------- | --------------------------------------------------------------------------- |
 | _None_         | array          | \[Futures order details\]                                                   |
 | » _None_       | object         | Futures order details                                                       |
-| »» succeeded   | boolean        | Whether the batch of orders succeeded                                       |
+| »» succeeded   | boolean        | Request execution result                                                    |
 | »» label       | string         | Error label, only exists if execution fails                                 |
 | »» detail      | string         | Error detail, only present if execution failed and details need to be given |
 | »» id          | integer(int64) | Futures order ID                                                            |
 | »» user        | integer        | User ID                                                                     |
 | »» create_time | number(double) | Creation time of order                                                      |
 | »» finish_time | number(double) | Order finished time. Not returned if order is open                          |
-| »» finish_as   | string         | How the order was finished.                                                 |
+| »» finish_as   | string         | How the order was finished:                                                 |
 
 \- filled: all filled  
 \- cancelled: manually cancelled  
@@ -4704,30 +4808,30 @@ Status Code **200**
 \- ioc: time in force is `IOC`, finish immediately  
 \- auto_deleveraged: finished by ADL  
 \- reduce_only: cancelled because of increasing position while `reduce-only`
-set- position_closed: cancelled because of position close  
-\- position_closed: canceled because the position was closed  
+set  
+\- position_closed: cancelled because the position was closed  
 \- reduce_out: only reduce positions by excluding hard-to-fill orders  
 \- stp: cancelled because self trade prevention | | »» status | string | Order
 status
 
-\- `open`: waiting to be traded  
-\- `finished`: finished | | »» contract | string | Futures contract | | »» size
-| integer(int64) | Order size. Specify positive number to make a bid, and
-negative number to ask | | »» iceberg | integer(int64) | Display size for
-iceberg order. 0 for non-iceberg. Note that you will have to pay the taker fee
-for the hidden size | | »» price | string | Order price. 0 for market order with
-`tif` set as `ioc` | | »» is_close | boolean | Is the order to close position |
-| »» is_reduce_only | boolean | Is the order reduce-only | | »» is_liq | boolean
-| Is the order for liquidation | | »» tif | string | Time in force
+\- `open`: Pending  
+\- `finished`: Completed | | »» contract | string | Futures contract | | »» size
+| integer(int64) | Required. Trading quantity. Positive for buy, negative for
+sell. Set to 0 for close position orders. | | »» iceberg | integer(int64) |
+Display size for iceberg orders. 0 for non-iceberg orders. Note that hidden
+portions are charged taker fees. | | »» price | string | Order price. Price of 0
+with `tif` set to `ioc` represents a market order. | | »» is_close | boolean |
+Is the order to close position | | »» is_reduce_only | boolean | Is the order
+reduce-only | | »» is_liq | boolean | Is the order for liquidation | | »» tif |
+string | Time in force
 
 \- gtc: GoodTillCancelled  
 \- ioc: ImmediateOrCancelled, taker only  
 \- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker
 fee  
 \- fok: FillOrKill, fill either completely or none | | »» left | integer(int64)
-| Size left to be traded | | »» fill_price | string | Fill price of the order |
-| »» text | string | User defined information. If not empty, must follow the
-rules below:
+| Unfilled quantity | | »» fill_price | string | Fill price | | »» text | string
+| User defined information. If not empty, must follow the rules below:
 
 1\. prefixed with `t-`  
 2\. no longer than 28 bytes without `t-` prefix  
@@ -4741,21 +4845,21 @@ how the order is created:
 \- auto_deleveraging: from ADL  
 \- liquidation: from liquidation  
 \- insurance: from insurance | | »» tkfr | string | Taker fee | | »» mkfr |
-string | Maker fee | | »» refu | integer | Reference user ID | | »» stp_act |
+string | Maker fee | | »» refu | integer | Referrer user ID | | »» stp_act |
 string | Self-Trading Prevention Action. Users can use this field to set
-self-trade prevetion strategies
+self-trade prevention strategies
 
-1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
-self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy。  
+1\. After users join the `STP Group`, they can pass `stp_act` to limit the
+user's self-trade prevention strategy. If `stp_act` is not passed, the default
+is `cn` strategy.  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter。  
-3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
+passing the `stp_act` parameter.  
+3\. If the user did not use `stp_act` when placing the order, `stp_act` will
 return '-'
 
-\- cn: Cancel newest, Cancel new orders and keep old ones  
-\- co: Cancel oldest, Cancel old orders and keep new ones  
-\- cb: Cancel both, Both old and new orders will be cancelled | | »» stp_id |
+\- cn: Cancel newest, cancel new orders and keep old ones  
+\- co: Cancel oldest, cancel old orders and keep new ones  
+\- cb: Cancel both, both old and new orders will be cancelled | | »» stp_id |
 integer | Orders between users in the same `stp_id` group are not allowed to be
 self-traded
 
@@ -4765,7 +4869,7 @@ the `stp_act` of the taker.
 2\. `stp_id` returns `0` by default for orders that have not been set for
 `STP group` |
 
-#### [#](#enumerated-values-62) Enumerated Values
+#### [#](#enumerated-values-63) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -4793,13 +4897,13 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#get-a-single-order-2) Get a single order
+## [#](#query-single-order-details-2) Query single order details
 
 > Code samples
 
 `GET /futures/{settle}/orders/{order_id}`
 
-_Get a single order_
+_Query single order details_
 
 - Zero-fill order cannot be retrieved for 10 minutes after cancellation
 - Historical orders, by default, only data within the past 6 months is
@@ -4812,84 +4916,12 @@ _Get a single order_
 | settle   | path | string | true     | Settle currency                                           |
 | order_id | path | string | true     | Order ID returned, or user custom ID(i.e., `text` field). |
 
-#### [#](#detailed-descriptions-30) Detailed descriptions
+#### [#](#detailed-descriptions-29) Detailed descriptions
 
 **order_id**: Order ID returned, or user custom ID(i.e., `text` field).
 Operations based on custom ID can only be checked when the order is in
-orderbook. When the order is finished, it can be checked within 60 seconds after
-the end of the order. After that, only order ID is accepted.
-
-#### [#](#enumerated-values-63) Enumerated Values
-
-| Parameter | Value |
-| --------- | ----- |
-| settle    | btc   |
-| settle    | usdt  |
-
-> Example responses
-
-> 200 Response
-
-```
-{
-  "id": 15675394,
-  "user": 100000,
-  "contract": "BTC_USDT",
-  "create_time": 1546569968,
-  "size": 6024,
-  "iceberg": 0,
-  "left": 6024,
-  "price": "3765",
-  "fill_price": "0",
-  "mkfr": "-0.00025",
-  "tkfr": "0.00075",
-  "tif": "gtc",
-  "refu": 0,
-  "is_reduce_only": false,
-  "is_close": false,
-  "is_liq": false,
-  "text": "t-my-custom-id",
-  "status": "finished",
-  "finish_time": 1514764900,
-  "finish_as": "cancelled",
-  "stp_id": 0,
-  "stp_act": "-",
-  "amend_text": "-"
-}
-```
-
-### Responses
-
-| Status | Meaning                                                                    | Description   | Schema                              |
-| ------ | -------------------------------------------------------------------------- | ------------- | ----------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Order details | [FuturesOrder](#schemafuturesorder) |
-
-WARNING
-
-To perform this operation, you must be authenticated by API key and secret
-
-## [#](#cancel-a-single-order-2) Cancel a single order
-
-> Code samples
-
-`DELETE /futures/{settle}/orders/{order_id}`
-
-_Cancel a single order_
-
-### Parameters
-
-| Name           | In     | Type   | Required | Description                                                                                                                                      |
-| -------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| x-gate-exptime | header | string | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected |
-| settle         | path   | string | true     | Settle currency                                                                                                                                  |
-| order_id       | path   | string | true     | Order ID returned, or user custom ID(i.e., `text` field).                                                                                        |
-
-#### [#](#detailed-descriptions-31) Detailed descriptions
-
-**order_id**: Order ID returned, or user custom ID(i.e., `text` field).
-Operations based on custom ID can only be checked when the order is in
-orderbook. When the order is finished, it can be checked within 60 seconds after
-the end of the order. After that, only order ID is accepted.
+orderbook. finished, it can be checked within 60 seconds after the end of the
+order. After that, only order ID is accepted.
 
 #### [#](#enumerated-values-64) Enumerated Values
 
@@ -4940,53 +4972,28 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#amend-an-order-2) Amend an order
+## [#](#cancel-single-order-2) Cancel single order
 
 > Code samples
 
-`PUT /futures/{settle}/orders/{order_id}`
+`DELETE /futures/{settle}/orders/{order_id}`
 
-_Amend an order_
-
-> Body parameter
-
-```
-{
-  "size": 100,
-  "price": "54321"
-}
-```
+_Cancel single order_
 
 ### Parameters
 
-| Name           | In     | Type           | Required | Description                                                                                                                                      |
-| -------------- | ------ | -------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| x-gate-exptime | header | string         | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected |
-| body           | body   | object         | true     | none                                                                                                                                             |
-| » size         | body   | integer(int64) | false    | New order size, including filled part.                                                                                                           |
-| » price        | body   | string         | false    | New order price.                                                                                                                                 |
-| » amend_text   | body   | string         | false    | Custom info during amending order                                                                                                                |
-| » biz_info     | body   | string         | false    | Users can annotate this modification with information.                                                                                           |
-| » bbo          | body   | string         | false    | Users are able to modify the offer price manually.                                                                                               |
-| settle         | path   | string         | true     | Settle currency                                                                                                                                  |
-| order_id       | path   | string         | true     | Order ID returned, or user custom ID(i.e., `text` field).                                                                                        |
+| Name           | In     | Type   | Required | Description                                                                                                                                      |
+| -------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| x-gate-exptime | header | string | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected |
+| settle         | path   | string | true     | Settle currency                                                                                                                                  |
+| order_id       | path   | string | true     | Order ID returned, or user custom ID(i.e., `text` field).                                                                                        |
 
-#### [#](#detailed-descriptions-32) Detailed descriptions
-
-**» size**: New order size, including filled part.
-
-- If new size is less than or equal to filled size, the order will be cancelled.
-- Order side must be identical to the original one.
-- Close order size cannot be changed.
-- For reduce only orders, increasing size may leads to other reduce only orders
-  being cancelled.
-- If price is not changed, decreasing size will not change its precedence in
-  order book, while increasing will move it to the last at current price.
+#### [#](#detailed-descriptions-30) Detailed descriptions
 
 **order_id**: Order ID returned, or user custom ID(i.e., `text` field).
 Operations based on custom ID can only be checked when the order is in
-orderbook. When the order is finished, it can be checked within 60 seconds after
-the end of the order. After that, only order ID is accepted.
+orderbook. finished, it can be checked within 60 seconds after the end of the
+order. After that, only order ID is accepted.
 
 #### [#](#enumerated-values-65) Enumerated Values
 
@@ -5037,13 +5044,108 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-personal-trading-history-2) List personal trading history
+## [#](#amend-single-order-2) Amend single order
+
+> Code samples
+
+`PUT /futures/{settle}/orders/{order_id}`
+
+_Amend single order_
+
+> Body parameter
+
+```
+{
+  "size": 100,
+  "price": "54321"
+}
+```
+
+### Parameters
+
+| Name           | In     | Type           | Required | Description                                                                                                                                      |
+| -------------- | ------ | -------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| x-gate-exptime | header | string         | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected |
+| body           | body   | object         | true     | none                                                                                                                                             |
+| » size         | body   | integer(int64) | false    | New order size, including filled part.                                                                                                           |
+| » price        | body   | string         | false    | New order price                                                                                                                                  |
+| » amend_text   | body   | string         | false    | Custom info during order amendment                                                                                                               |
+| settle         | path   | string         | true     | Settle currency                                                                                                                                  |
+| order_id       | path   | string         | true     | Order ID returned, or user custom ID(i.e., `text` field).                                                                                        |
+
+#### [#](#detailed-descriptions-31) Detailed descriptions
+
+**» size**: New order size, including filled part.
+
+- If new size is less than or equal to filled size, the order will be cancelled.
+- Order side must be identical to the original one.
+- Close order size cannot be changed.
+- For reduce only orders, increasing size may leads to other reduce only orders
+  being cancelled.
+- If price is not changed, decreasing size will not change its precedence in
+  order book, while increasing will move it to the last at current price.
+
+**order_id**: Order ID returned, or user custom ID(i.e., `text` field).
+Operations based on custom ID can only be checked when the order is in
+orderbook. finished, it can be checked within 60 seconds after the end of the
+order. After that, only order ID is accepted.
+
+#### [#](#enumerated-values-66) Enumerated Values
+
+| Parameter | Value |
+| --------- | ----- |
+| settle    | btc   |
+| settle    | usdt  |
+
+> Example responses
+
+> 200 Response
+
+```
+{
+  "id": 15675394,
+  "user": 100000,
+  "contract": "BTC_USDT",
+  "create_time": 1546569968,
+  "size": 6024,
+  "iceberg": 0,
+  "left": 6024,
+  "price": "3765",
+  "fill_price": "0",
+  "mkfr": "-0.00025",
+  "tkfr": "0.00075",
+  "tif": "gtc",
+  "refu": 0,
+  "is_reduce_only": false,
+  "is_close": false,
+  "is_liq": false,
+  "text": "t-my-custom-id",
+  "status": "finished",
+  "finish_time": 1514764900,
+  "finish_as": "cancelled",
+  "stp_id": 0,
+  "stp_act": "-",
+  "amend_text": "-"
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description   | Schema                              |
+| ------ | -------------------------------------------------------------------------- | ------------- | ----------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Order details | [FuturesOrder](#schemafuturesorder) |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
+## [#](#query-personal-trading-records-2) Query personal trading records
 
 > Code samples
 
 `GET /futures/{settle}/my_trades`
 
-_List personal trading history_
+_Query personal trading records_
 
 By default, only data within the past 6 months is supported. If you need to
 query data for a longer period, please use
@@ -5056,11 +5158,11 @@ query data for a longer period, please use
 | settle   | path  | string         | true     | Settle currency                                                             |
 | contract | query | string         | false    | Futures contract, return related data only if specified                     |
 | order    | query | integer(int64) | false    | Futures order ID, return related data only if specified                     |
-| limit    | query | integer        | false    | Maximum number of records to be returned in a single list                   |
+| limit    | query | integer        | false    | Maximum number of records returned in a single list                         |
 | offset   | query | integer        | false    | List offset, starting from 0                                                |
 | last_id  | query | string         | false    | Specify the starting point for this list based on a previously retrieved id |
 
-#### [#](#detailed-descriptions-33) Detailed descriptions
+#### [#](#detailed-descriptions-32) Detailed descriptions
 
 **last_id**: Specify the starting point for this list based on a previously
 retrieved id
@@ -5068,7 +5170,7 @@ retrieved id
 This parameter is deprecated. If you need to iterate through and retrieve more
 records, we recommend using 'GET /futures/{settle}/my_trades_timerange'.
 
-#### [#](#enumerated-values-66) Enumerated Values
+#### [#](#enumerated-values-67) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5099,9 +5201,9 @@ records, we recommend using 'GET /futures/{settle}/my_trades_timerange'.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
@@ -5110,26 +5212,26 @@ Status Code **200**
 | Name          | Type           | Description                 |
 | ------------- | -------------- | --------------------------- |
 | _None_        | array          | none                        |
-| » id          | integer(int64) | Trade ID                    |
-| » create_time | number(double) | Trading time                |
+| » id          | integer(int64) | Fill ID                     |
+| » create_time | number(double) | Fill Time                   |
 | » contract    | string         | Futures contract            |
-| » order_id    | string         | Order ID related            |
+| » order_id    | string         | Related order ID            |
 | » size        | integer(int64) | Trading size                |
 | » close_size  | integer(int64) | Number of closed positions: |
 
 close_size=0 && size＞0 Open long position  
 close_size=0 && size＜0 Open short position  
-close_size>0 && size>0 && size <= close_size Close short postion  
+close_size>0 && size>0 && size <= close_size Close short position  
 close_size>0 && size>0 && size > close_size Close short position and open long
 position  
-close_size<0 && size<0 && size >= close_size Close long postion  
+close_size<0 && size<0 && size >= close_size Close long position  
 close_size<0 && size<0 && size < close_size Close long position and open short
-position | | » price | string | Trading price | | » role | string | Trade role.
-Available values are `taker` and `maker` | | » text | string | User defined
-information | | » fee | string | Fee deducted | | » point_fee | string | Points
-used to deduct fee |
+position | | » price | string | Fill Price | | » role | string | Trade role.
+taker - taker, maker - maker | | » text | string | Order custom information | |
+» fee | string | Trade fee | | » point_fee | string | Points used to deduct
+trade fee |
 
-#### [#](#enumerated-values-67) Enumerated Values
+#### [#](#enumerated-values-68) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -5138,36 +5240,36 @@ used to deduct fee |
 
 ### [#](#response-headers-3) Response Headers
 
-| Status | Header              | Type    | Format | Description              |
-| ------ | ------------------- | ------- | ------ | ------------------------ |
-| 200    | X-Pagination-Limit  | integer |        | Request limit specified  |
-| 200    | X-Pagination-Offset | integer |        | Request offset specified |
+| Status | Header              | Type    | Format | Description                     |
+| ------ | ------------------- | ------- | ------ | ------------------------------- |
+| 200    | X-Pagination-Limit  | integer |        | Limit specified for pagination  |
+| 200    | X-Pagination-Offset | integer |        | Offset specified for pagination |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-personal-trading-history-by-time-range) List personal trading history by time range
+## [#](#query-personal-trading-records-by-time-range) Query personal trading records by time range
 
 > Code samples
 
 `GET /futures/{settle}/my_trades_timerange`
 
-_List personal trading history by time range_
+_Query personal trading records by time range_
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                               |
-| -------- | ----- | -------------- | -------- | --------------------------------------------------------- |
-| settle   | path  | string         | true     | Settle currency                                           |
-| contract | query | string         | false    | Futures contract, return related data only if specified   |
-| from     | query | integer(int64) | false    | Start timestamp                                           |
-| to       | query | integer(int64) | false    | Termination Timestamp                                     |
-| limit    | query | integer        | false    | Maximum number of records to be returned in a single list |
-| offset   | query | integer        | false    | List offset, starting from 0                              |
-| role     | query | string         | false    | Query role, maker or taker.                               |
+| Name     | In    | Type           | Required | Description                                             |
+| -------- | ----- | -------------- | -------- | ------------------------------------------------------- |
+| settle   | path  | string         | true     | Settle currency                                         |
+| contract | query | string         | false    | Futures contract, return related data only if specified |
+| from     | query | integer(int64) | false    | Start timestamp                                         |
+| to       | query | integer(int64) | false    | Termination Timestamp                                   |
+| limit    | query | integer        | false    | Maximum number of records returned in a single list     |
+| offset   | query | integer        | false    | List offset, starting from 0                            |
+| role     | query | string         | false    | Query role, maker or taker                              |
 
-#### [#](#detailed-descriptions-34) Detailed descriptions
+#### [#](#detailed-descriptions-33) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -5179,7 +5281,7 @@ to (the data start time of the time range actually returned by to and limit)
 Specify the end time. If not specified, it defaults to the current time, and the
 time format is a Unix timestamp
 
-#### [#](#enumerated-values-68) Enumerated Values
+#### [#](#enumerated-values-69) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5210,9 +5312,9 @@ time format is a Unix timestamp
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
@@ -5220,26 +5322,26 @@ Status Code **200**
 
 | Name          | Type           | Description                 |
 | ------------- | -------------- | --------------------------- |
-| » trade_id    | string         | Trade ID                    |
-| » create_time | number(double) | Trading time                |
+| » trade_id    | string         | Fill ID                     |
+| » create_time | number(double) | Fill Time                   |
 | » contract    | string         | Futures contract            |
-| » order_id    | string         | Order ID related            |
+| » order_id    | string         | Related order ID            |
 | » size        | integer(int64) | Trading size                |
 | » close_size  | integer(int64) | Number of closed positions: |
 
 close_size=0 && size＞0 Open long position  
 close_size=0 && size＜0 Open short position  
-close_size>0 && size>0 && size <= close_size Close short postion  
+close_size>0 && size>0 && size <= close_size Close short position  
 close_size>0 && size>0 && size > close_size Close short position and open long
 position  
-close_size<0 && size<0 && size >= close_size Close long postion  
+close_size<0 && size<0 && size >= close_size Close long position  
 close_size<0 && size<0 && size < close_size Close long position and open short
-position | | » price | string | Trading price | | » role | string | Trade role.
-Available values are `taker` and `maker` | | » text | string | User defined
-information | | » fee | string | Fee deducted | | » point_fee | string | Points
-used to deduct fee |
+position | | » price | string | Fill Price | | » role | string | Trade role.
+taker - taker, maker - maker | | » text | string | Order custom information | |
+» fee | string | Trade fee | | » point_fee | string | Points used to deduct
+trade fee |
 
-#### [#](#enumerated-values-69) Enumerated Values
+#### [#](#enumerated-values-70) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -5248,37 +5350,37 @@ used to deduct fee |
 
 ### [#](#response-headers-4) Response Headers
 
-| Status | Header              | Type    | Format | Description              |
-| ------ | ------------------- | ------- | ------ | ------------------------ |
-| 200    | X-Pagination-Limit  | integer |        | Request limit specified  |
-| 200    | X-Pagination-Offset | integer |        | Request offset specified |
+| Status | Header              | Type    | Format | Description                     |
+| ------ | ------------------- | ------- | ------ | ------------------------------- |
+| 200    | X-Pagination-Limit  | integer |        | Limit specified for pagination  |
+| 200    | X-Pagination-Offset | integer |        | Offset specified for pagination |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-position-close-history) List position close history
+## [#](#query-position-close-history) Query position close history
 
 > Code samples
 
 `GET /futures/{settle}/position_close`
 
-_List position close history_
+_Query position close history_
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                               |
-| -------- | ----- | -------------- | -------- | --------------------------------------------------------- |
-| settle   | path  | string         | true     | Settle currency                                           |
-| contract | query | string         | false    | Futures contract, return related data only if specified   |
-| limit    | query | integer        | false    | Maximum number of records to be returned in a single list |
-| offset   | query | integer        | false    | List offset, starting from 0                              |
-| from     | query | integer(int64) | false    | Start timestamp                                           |
-| to       | query | integer(int64) | false    | Termination Timestamp                                     |
-| side     | query | string         | false    | Query side. long or shot                                  |
-| pnl      | query | string         | false    | Query profit or loss                                      |
+| Name     | In    | Type           | Required | Description                                             |
+| -------- | ----- | -------------- | -------- | ------------------------------------------------------- |
+| settle   | path  | string         | true     | Settle currency                                         |
+| contract | query | string         | false    | Futures contract, return related data only if specified |
+| limit    | query | integer        | false    | Maximum number of records returned in a single list     |
+| offset   | query | integer        | false    | List offset, starting from 0                            |
+| from     | query | integer(int64) | false    | Start timestamp                                         |
+| to       | query | integer(int64) | false    | Termination Timestamp                                   |
+| side     | query | string         | false    | Query side. long or shot                                |
+| pnl      | query | string         | false    | Query profit or loss                                    |
 
-#### [#](#detailed-descriptions-35) Detailed descriptions
+#### [#](#detailed-descriptions-34) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -5290,7 +5392,7 @@ to (the data start time of the time range actually returned by to and limit)
 Specify the end time. If not specified, it defaults to the current time, and the
 time format is a Unix timestamp
 
-#### [#](#enumerated-values-70) Enumerated Values
+#### [#](#enumerated-values-71) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5323,32 +5425,34 @@ time format is a Unix timestamp
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name              | Type           | Description                                                                                                                    |
-| ----------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| _None_            | array          | none                                                                                                                           |
-| » time            | number(double) | Position close time                                                                                                            |
-| » contract        | string         | Futures contract                                                                                                               |
-| » side            | string         | Position side, long or short                                                                                                   |
-| » pnl             | string         | PNL                                                                                                                            |
-| » pnl_pnl         | string         | PNL - Position P/L                                                                                                             |
-| » pnl_fund        | string         | PNL - Funding Fees                                                                                                             |
-| » pnl_fee         | string         | PNL - Transaction Fees                                                                                                         |
-| » text            | string         | Text of close order                                                                                                            |
-| » max_size        | string         | Max Trade Size                                                                                                                 |
-| » accum_size      | string         | Cumulative closed position volume                                                                                              |
-| » first_open_time | integer(int64) | First Open Time                                                                                                                |
-| » long_price      | string         | When 'side' is 'long,' it indicates the opening average price; when 'side' is 'short,' it indicates the closing average price. |
-| » short_price     | string         | When 'side' is 'long,' it indicates the opening average price; when 'side' is 'short,' it indicates the closing average price  |
+| Name       | Type           | Description         |
+| ---------- | -------------- | ------------------- |
+| _None_     | array          | none                |
+| » time     | number(double) | Position close time |
+| » contract | string         | Futures contract    |
+| » side     | string         | Position side       |
 
-#### [#](#enumerated-values-71) Enumerated Values
+\- `long`: Long position  
+\- `short`: Short position | | » pnl | string | PnL | | » pnl_pnl | string |
+PNL - Position P/L | | » pnl_fund | string | PNL - Funding Fees | | » pnl_fee |
+string | PNL - Transaction Fees | | » text | string | Source of close order. See
+`order.text` field for specific values | | » max_size | string | Max Trade Size
+| | » accum_size | string | Cumulative closed position volume | | »
+first_open_time | integer(int64) | First Open Time | | » long_price | string |
+When side is 'long', it indicates the opening average price; when side is
+'short', it indicates the closing average price | | » short_price | string |
+When side is 'long', it indicates the closing average price; when side is
+'short', it indicates the opening average price |
+
+#### [#](#enumerated-values-72) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -5359,24 +5463,39 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-liquidation-history) List liquidation history
+## [#](#query-liquidation-history) Query liquidation history
 
 > Code samples
 
 `GET /futures/{settle}/liquidates`
 
-_List liquidation history_
+_Query liquidation history_
 
 ### Parameters
 
-| Name     | In    | Type    | Required | Description                                               |
-| -------- | ----- | ------- | -------- | --------------------------------------------------------- |
-| settle   | path  | string  | true     | Settle currency                                           |
-| contract | query | string  | false    | Futures contract, return related data only if specified   |
-| limit    | query | integer | false    | Maximum number of records to be returned in a single list |
-| at       | query | integer | false    | Specify a liquidation timestamp                           |
+| Name     | In    | Type           | Required | Description                                             |
+| -------- | ----- | -------------- | -------- | ------------------------------------------------------- |
+| settle   | path  | string         | true     | Settle currency                                         |
+| contract | query | string         | false    | Futures contract, return related data only if specified |
+| limit    | query | integer        | false    | Maximum number of records returned in a single list     |
+| offset   | query | integer        | false    | List offset, starting from 0                            |
+| from     | query | integer(int64) | false    | Start timestamp                                         |
+| to       | query | integer(int64) | false    | Termination Timestamp                                   |
+| at       | query | integer        | false    | Specify liquidation timestamp                           |
 
-#### [#](#enumerated-values-72) Enumerated Values
+#### [#](#detailed-descriptions-35) Detailed descriptions
+
+**from**: Start timestamp
+
+Specify start time, time format is Unix timestamp. If not specified, it defaults
+to (the data start time of the time range actually returned by to and limit)
+
+**to**: Termination Timestamp
+
+Specify the end time. If not specified, it defaults to the current time, and the
+time format is a Unix timestamp
+
+#### [#](#enumerated-values-73) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5408,52 +5527,67 @@ _List liquidation history_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name          | Type           | Description                                             |
-| ------------- | -------------- | ------------------------------------------------------- |
-| _None_        | array          | none                                                    |
-| » time        | integer(int64) | Liquidation time                                        |
-| » contract    | string         | Futures contract                                        |
-| » leverage    | string         | Position leverage. Not returned in public endpoints.    |
-| » size        | integer(int64) | Position size                                           |
-| » margin      | string         | Position margin. Not returned in public endpoints.      |
-| » entry_price | string         | Average entry price. Not returned in public endpoints.  |
-| » liq_price   | string         | Liquidation price. Not returned in public endpoints.    |
-| » mark_price  | string         | Mark price. Not returned in public endpoints.           |
-| » order_id    | integer(int64) | Liquidation order ID. Not returned in public endpoints. |
-| » order_price | string         | Liquidation order price                                 |
-| » fill_price  | string         | Liquidation order average taker price                   |
-| » left        | integer(int64) | Liquidation order maker size                            |
+| Name          | Type           | Description                                            |
+| ------------- | -------------- | ------------------------------------------------------ |
+| _None_        | array          | none                                                   |
+| » time        | integer(int64) | Liquidation time                                       |
+| » contract    | string         | Futures contract                                       |
+| » leverage    | string         | Position leverage. Not returned in public endpoints    |
+| » size        | integer(int64) | Position size                                          |
+| » margin      | string         | Position margin. Not returned in public endpoints      |
+| » entry_price | string         | Average entry price. Not returned in public endpoints  |
+| » liq_price   | string         | Liquidation price. Not returned in public endpoints    |
+| » mark_price  | string         | Mark price. Not returned in public endpoints           |
+| » order_id    | integer(int64) | Liquidation order ID. Not returned in public endpoints |
+| » order_price | string         | Liquidation order price                                |
+| » fill_price  | string         | Liquidation order average taker price                  |
+| » left        | integer(int64) | Liquidation order maker size                           |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-auto-deleveraging-history) List Auto-Deleveraging History
+## [#](#query-adl-auto-deleveraging-order-information) Query ADL auto-deleveraging order information
 
 > Code samples
 
 `GET /futures/{settle}/auto_deleverages`
 
-_List Auto-Deleveraging History_
+_Query ADL auto-deleveraging order information_
 
 ### Parameters
 
-| Name     | In    | Type    | Required | Description                                               |
-| -------- | ----- | ------- | -------- | --------------------------------------------------------- |
-| settle   | path  | string  | true     | Settle currency                                           |
-| contract | query | string  | false    | Futures contract, return related data only if specified   |
-| limit    | query | integer | false    | Maximum number of records to be returned in a single list |
-| at       | query | integer | false    | Specify an auto-deleveraging timestamp                    |
+| Name     | In    | Type           | Required | Description                                             |
+| -------- | ----- | -------------- | -------- | ------------------------------------------------------- |
+| settle   | path  | string         | true     | Settle currency                                         |
+| contract | query | string         | false    | Futures contract, return related data only if specified |
+| limit    | query | integer        | false    | Maximum number of records returned in a single list     |
+| offset   | query | integer        | false    | List offset, starting from 0                            |
+| from     | query | integer(int64) | false    | Start timestamp                                         |
+| to       | query | integer(int64) | false    | Termination Timestamp                                   |
+| at       | query | integer        | false    | Specify auto-deleveraging timestamp                     |
 
-#### [#](#enumerated-values-73) Enumerated Values
+#### [#](#detailed-descriptions-36) Detailed descriptions
+
+**from**: Start timestamp
+
+Specify start time, time format is Unix timestamp. If not specified, it defaults
+to (the data start time of the time range actually returned by to and limit)
+
+**to**: Termination Timestamp
+
+Specify the end time. If not specified, it defaults to the current time, and the
+time format is a Unix timestamp
+
+#### [#](#enumerated-values-74) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5483,26 +5617,26 @@ _List Auto-Deleveraging History_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                   | Type           | Description                                            |
-| ---------------------- | -------------- | ------------------------------------------------------ |
-| » time                 | integer(int64) | Automatic deleveraging time                            |
-| » user                 | integer(int64) | User ID                                                |
-| » order_id             | integer(int64) | Order ID. Order IDs before 2023-02-20 are null         |
-| » contract             | string         | Futures contract                                       |
-| » leverage             | string         | Position leverage                                      |
-| » cross_leverage_limit | string         | Cross margin leverage(valid only when `leverage` is 0) |
-| » entry_price          | string         | Average entry price                                    |
-| » fill_price           | string         | Average fill price                                     |
-| » trade_size           | integer(int64) | Trading size                                           |
-| » position_size        | integer(int64) | Positions after auto-deleveraging                      |
+| Name                   | Type           | Description                                             |
+| ---------------------- | -------------- | ------------------------------------------------------- |
+| » time                 | integer(int64) | Automatic deleveraging time                             |
+| » user                 | integer(int64) | User ID                                                 |
+| » order_id             | integer(int64) | Order ID. Order IDs before 2023-02-20 are null          |
+| » contract             | string         | Futures contract                                        |
+| » leverage             | string         | Position leverage                                       |
+| » cross_leverage_limit | string         | Cross margin leverage (valid only when `leverage` is 0) |
+| » entry_price          | string         | Average entry price                                     |
+| » fill_price           | string         | Average fill price                                      |
+| » trade_size           | integer(int64) | Trading size                                            |
+| » position_size        | integer(int64) | Positions after auto-deleveraging                       |
 
 WARNING
 
@@ -5519,12 +5653,12 @@ _Countdown cancel orders_
 Heartbeat detection for contract orders: When the user-set `timeout` time is
 reached, if neither the existing countdown is canceled nor a new countdown is
 set, the relevant contract orders will be automatically canceled. This API can
-be called repeatedly to set a new countdown or cancel the countdown. Usage
-example: Repeatedly call this API at 30-second intervals, setting the `timeout`
-to 30 (seconds) each time. If this API is not called again within 30 seconds,
-all open orders on your specified `market` will be automatically canceled. If
-the `timeout` is set to 0 within 30 seconds, the countdown timer will terminate,
-and the automatic order cancellation function will be disabled.
+be called repeatedly to or cancel the countdown. Usage example: Repeatedly call
+this API at 30-second intervals, setting the `timeout` to 30 (seconds) each
+time. If this API is not called again within 30 seconds, all open orders on your
+specified `market` will be automatically canceled. If the `timeout` is set to 0
+within 30 seconds, the countdown timer will terminate, and the automatic order
+cancellation function will be disabled.
 
 > Body parameter
 
@@ -5544,12 +5678,12 @@ and the automatic order cancellation function will be disabled.
 | » contract | body | string         | false    | Futures contract          |
 | settle     | path | string         | true     | Settle currency           |
 
-#### [#](#detailed-descriptions-36) Detailed descriptions
+#### [#](#detailed-descriptions-37) Detailed descriptions
 
 **» timeout**: Countdown time in seconds At least 5 seconds, 0 means cancel
 countdown
 
-#### [#](#enumerated-values-74) Enumerated Values
+#### [#](#enumerated-values-75) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5570,7 +5704,7 @@ countdown
 
 | Status | Meaning                                                                    | Description                | Schema |
 | ------ | -------------------------------------------------------------------------- | -------------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Set countdown successfully | Inline |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Countdown set successfully | Inline |
 
 ### Response Schema
 
@@ -5578,21 +5712,21 @@ Status Code **200**
 
 _triggerTime_
 
-| Name          | Type           | Description                                            |
-| ------------- | -------------- | ------------------------------------------------------ |
-| » triggerTime | integer(int64) | Timestamp of the end of the countdown, in milliseconds |
+| Name          | Type           | Description                                    |
+| ------------- | -------------- | ---------------------------------------------- |
+| » triggerTime | integer(int64) | Timestamp when countdown ends, in milliseconds |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#query-user-trading-fee-rates-2) Query user trading fee rates
+## [#](#query-futures-market-trading-fee-rates) Query futures market trading fee rates
 
 > Code samples
 
 `GET /futures/{settle}/fee`
 
-_Query user trading fee rates_
+_Query futures market trading fee rates_
 
 ### Parameters
 
@@ -5601,7 +5735,7 @@ _Query user trading fee rates_
 | settle   | path  | string | true     | Settle currency                                         |
 | contract | query | string | false    | Futures contract, return related data only if specified |
 
-#### [#](#enumerated-values-75) Enumerated Values
+#### [#](#enumerated-values-76) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5627,9 +5761,9 @@ _Query user trading fee rates_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
@@ -5637,25 +5771,25 @@ Status Code **200**
 
 _FuturesFee_
 
-| Name                       | Type   | Description                                                                                                                    |
-| -------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| » **additionalProperties** | object | The returned result is a map type, where the key represents the market and the value represents the taker and maker fee rates. |
-| »» taker_fee               | string | Taker fee                                                                                                                      |
-| »» maker_fee               | string | maker fee                                                                                                                      |
+| Name                       | Type   | Description                                                                                          |
+| -------------------------- | ------ | ---------------------------------------------------------------------------------------------------- |
+| » **additionalProperties** | object | The returned result is a map type, where the key represents the market and taker and maker fee rates |
+| »» taker_fee               | string | Taker fee                                                                                            |
+| »» maker_fee               | string | maker fee                                                                                            |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#cancel-a-batch-of-orders-with-an-id-list-2) Cancel a batch of orders with an ID list
+## [#](#cancel-batch-orders-by-specified-id-list-2) Cancel batch orders by specified ID list
 
 > Code samples
 
 `POST /futures/{settle}/batch_cancel_orders`
 
-_Cancel a batch of orders with an ID list_
+_Cancel batch orders by specified ID list_
 
-Multiple different order IDs can be specified. A maximum of 20 records
+Multiple different order IDs can be specified, maximum 20 records per request
 
 > Body parameter
 
@@ -5675,7 +5809,7 @@ Multiple different order IDs can be specified. A maximum of 20 records
 | body           | body   | array\[string\] | true     | none                                                                                                                                             |
 | settle         | path   | string          | true     | Settle currency                                                                                                                                  |
 
-#### [#](#enumerated-values-76) Enumerated Values
+#### [#](#enumerated-values-77) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5707,27 +5841,27 @@ Multiple different order IDs can be specified. A maximum of 20 records
 
 Status Code **200**
 
-| Name                      | Type           | Description                                                       |
-| ------------------------- | -------------- | ----------------------------------------------------------------- |
-| » FutureCancelOrderResult | object         | Order cancellation result                                         |
-| »» id                     | string         | Order ID                                                          |
-| »» user_id                | integer(int64) | User ID                                                           |
-| »» succeeded              | boolean        | Whether cancellation succeeded                                    |
-| »» message                | string         | Error message when failed to cancel the order; empty if succeeded |
+| Name                      | Type           | Description                                                    |
+| ------------------------- | -------------- | -------------------------------------------------------------- |
+| » FutureCancelOrderResult | object         | Order cancellation result                                      |
+| »» id                     | string         | Order ID                                                       |
+| »» user_id                | integer(int64) | User ID                                                        |
+| »» succeeded              | boolean        | Whether cancellation succeeded                                 |
+| »» message                | string         | Error description when cancellation fails, empty if successful |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#batch-modify-orders-with-specified-ids) Batch modify orders with specified IDs
+## [#](#batch-modify-orders-by-specified-ids) Batch modify orders by specified IDs
 
 > Code samples
 
 `POST /futures/{settle}/batch_amend_orders`
 
-_Batch modify orders with specified IDs_
+_Batch modify orders by specified IDs_
 
-Multiple different order IDs can be specified. A maximum of 10 orders can
+Multiple different order IDs can be specified, maximum 10 orders per request
 
 > Body parameter
 
@@ -5750,7 +5884,7 @@ Multiple different order IDs can be specified. A maximum of 10 orders can
 | body           | body   | array\[[BatchAmendOrderReq](#schemabatchamendorderreq)\] | true     | none                                                                                                                                             |
 | settle         | path   | string                                                   | true     | Settle currency                                                                                                                                  |
 
-#### [#](#enumerated-values-77) Enumerated Values
+#### [#](#enumerated-values-78) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5794,9 +5928,9 @@ Multiple different order IDs can be specified. A maximum of 10 orders can
 
 ### Responses
 
-| Status | Meaning                                                                    | Description          | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Request is completed | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Request execution completed | \[Inline\] |
 
 ### Response Schema
 
@@ -5806,14 +5940,14 @@ Status Code **200**
 | -------------- | -------------- | --------------------------------------------------------------------------- |
 | _None_         | array          | \[Futures order details\]                                                   |
 | » _None_       | object         | Futures order details                                                       |
-| »» succeeded   | boolean        | Whether the batch of orders succeeded                                       |
+| »» succeeded   | boolean        | Request execution result                                                    |
 | »» label       | string         | Error label, only exists if execution fails                                 |
 | »» detail      | string         | Error detail, only present if execution failed and details need to be given |
 | »» id          | integer(int64) | Futures order ID                                                            |
 | »» user        | integer        | User ID                                                                     |
 | »» create_time | number(double) | Creation time of order                                                      |
 | »» finish_time | number(double) | Order finished time. Not returned if order is open                          |
-| »» finish_as   | string         | How the order was finished.                                                 |
+| »» finish_as   | string         | How the order was finished:                                                 |
 
 \- filled: all filled  
 \- cancelled: manually cancelled  
@@ -5821,30 +5955,30 @@ Status Code **200**
 \- ioc: time in force is `IOC`, finish immediately  
 \- auto_deleveraged: finished by ADL  
 \- reduce_only: cancelled because of increasing position while `reduce-only`
-set- position_closed: cancelled because of position close  
-\- position_closed: canceled because the position was closed  
+set  
+\- position_closed: cancelled because the position was closed  
 \- reduce_out: only reduce positions by excluding hard-to-fill orders  
 \- stp: cancelled because self trade prevention | | »» status | string | Order
 status
 
-\- `open`: waiting to be traded  
-\- `finished`: finished | | »» contract | string | Futures contract | | »» size
-| integer(int64) | Order size. Specify positive number to make a bid, and
-negative number to ask | | »» iceberg | integer(int64) | Display size for
-iceberg order. 0 for non-iceberg. Note that you will have to pay the taker fee
-for the hidden size | | »» price | string | Order price. 0 for market order with
-`tif` set as `ioc` | | »» is_close | boolean | Is the order to close position |
-| »» is_reduce_only | boolean | Is the order reduce-only | | »» is_liq | boolean
-| Is the order for liquidation | | »» tif | string | Time in force
+\- `open`: Pending  
+\- `finished`: Completed | | »» contract | string | Futures contract | | »» size
+| integer(int64) | Required. Trading quantity. Positive for buy, negative for
+sell. Set to 0 for close position orders. | | »» iceberg | integer(int64) |
+Display size for iceberg orders. 0 for non-iceberg orders. Note that hidden
+portions are charged taker fees. | | »» price | string | Order price. Price of 0
+with `tif` set to `ioc` represents a market order. | | »» is_close | boolean |
+Is the order to close position | | »» is_reduce_only | boolean | Is the order
+reduce-only | | »» is_liq | boolean | Is the order for liquidation | | »» tif |
+string | Time in force
 
 \- gtc: GoodTillCancelled  
 \- ioc: ImmediateOrCancelled, taker only  
 \- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker
 fee  
 \- fok: FillOrKill, fill either completely or none | | »» left | integer(int64)
-| Size left to be traded | | »» fill_price | string | Fill price of the order |
-| »» text | string | User defined information. If not empty, must follow the
-rules below:
+| Unfilled quantity | | »» fill_price | string | Fill price | | »» text | string
+| User defined information. If not empty, must follow the rules below:
 
 1\. prefixed with `t-`  
 2\. no longer than 28 bytes without `t-` prefix  
@@ -5858,21 +5992,21 @@ how the order is created:
 \- auto_deleveraging: from ADL  
 \- liquidation: from liquidation  
 \- insurance: from insurance | | »» tkfr | string | Taker fee | | »» mkfr |
-string | Maker fee | | »» refu | integer | Reference user ID | | »» stp_act |
+string | Maker fee | | »» refu | integer | Referrer user ID | | »» stp_act |
 string | Self-Trading Prevention Action. Users can use this field to set
-self-trade prevetion strategies
+self-trade prevention strategies
 
-1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
-self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy。  
+1\. After users join the `STP Group`, they can pass `stp_act` to limit the
+user's self-trade prevention strategy. If `stp_act` is not passed, the default
+is `cn` strategy.  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter。  
-3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
+passing the `stp_act` parameter.  
+3\. If the user did not use `stp_act` when placing the order, `stp_act` will
 return '-'
 
-\- cn: Cancel newest, Cancel new orders and keep old ones  
-\- co: Cancel oldest, Cancel old orders and keep new ones  
-\- cb: Cancel both, Both old and new orders will be cancelled | | »» stp_id |
+\- cn: Cancel newest, cancel new orders and keep old ones  
+\- co: Cancel oldest, cancel old orders and keep new ones  
+\- cb: Cancel both, both old and new orders will be cancelled | | »» stp_id |
 integer | Orders between users in the same `stp_id` group are not allowed to be
 self-traded
 
@@ -5882,7 +6016,7 @@ the `stp_act` of the taker.
 2\. `stp_id` returns `0` by default for orders that have not been set for
 `STP group` |
 
-#### [#](#enumerated-values-78) Enumerated Values
+#### [#](#enumerated-values-79) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -5918,7 +6052,7 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Query risk limit table by table_id_
 
-Just pass table_id.
+Just pass table_id
 
 ### Parameters
 
@@ -5927,7 +6061,7 @@ Just pass table_id.
 | settle   | path  | string | true     | Settle currency     |
 | table_id | query | string | true     | Risk limit table ID |
 
-#### [#](#enumerated-values-79) Enumerated Values
+#### [#](#enumerated-values-80) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -6009,33 +6143,33 @@ Just pass table_id.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                | Type         | Description                                        |
-| ------------------- | ------------ | -------------------------------------------------- |
-| » _None_            | object       | Information for each tier of the risk limit ladder |
-| »» tier             | integer(int) | Tier                                               |
-| »» risk_limit       | string       | Position risk limit                                |
-| »» initial_rate     | string       | Initial margin rate                                |
-| »» maintenance_rate | string       | Maintenance margin rate                            |
-| »» leverage_max     | string       | Maximum leverage                                   |
-| »» deduction        | string       | Maintenance margin quick calculation deduction     |
+| Name                | Type         | Description                                                |
+| ------------------- | ------------ | ---------------------------------------------------------- |
+| » _None_            | object       | Information for each tier of the gradient risk limit table |
+| »» tier             | integer(int) | Tier                                                       |
+| »» risk_limit       | string       | Position risk limit                                        |
+| »» initial_rate     | string       | Initial margin rate                                        |
+| »» maintenance_rate | string       | Maintenance margin rate                                    |
+| »» leverage_max     | string       | Maximum leverage                                           |
+| »» deduction        | string       | Maintenance margin quick calculation deduction amount      |
 
 This operation does not require authentication
 
-## [#](#create-a-price-triggered-order-2) Create a price-triggered order
+## [#](#create-price-triggered-order-2) Create price-triggered order
 
 > Code samples
 
 `POST /futures/{settle}/price_orders`
 
-_Create a price-triggered order_
+_Create price-triggered order_
 
 > Body parameter
 
@@ -6059,88 +6193,66 @@ _Create a price-triggered order_
 
 ### Parameters
 
-| Name             | In   | Type                                                            | Required | Description                                                                                                                                                                        |
-| ---------------- | ---- | --------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| body             | body | [FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder) | true     | none                                                                                                                                                                               |
-| » initial        | body | object                                                          | true     | none                                                                                                                                                                               |
-| »» contract      | body | string                                                          | true     | Futures contract                                                                                                                                                                   |
-| »» size          | body | integer(int64)                                                  | false    | Represents the number of contracts that need to be closed, full closing: size=0                                                                                                    |
-| »» price         | body | string                                                          | true     | Order price. Set to 0 to use market price                                                                                                                                          |
-| »» close         | body | boolean                                                         | false    | When all positions are closed in a single position mode, it must be set to true to perform the closing operation                                                                   |
-| »» tif           | body | string                                                          | false    | Time in force strategy, default is gtc, market order currently only supports ioc mode Market order currently only supports ioc mode                                                |
-| »» text          | body | string                                                          | false    | The source of the order, including:                                                                                                                                                |
-| »» reduce_only   | body | boolean                                                         | false    | When set to true, perform automatic position reduction operation. Set to true to ensure that the order will not open a new position, and is only used to close or reduce positions |
-| »» auto_size     | body | string                                                          | false    | Do not set auto_size                                                                                                                                                               |
-| » trigger        | body | object                                                          | true     | none                                                                                                                                                                               |
-| »» strategy_type | body | integer(int32)                                                  | false    | Trigger Policy                                                                                                                                                                     |
-| »» price_type    | body | integer(int32)                                                  | false    | Price type. 0 - latest deal price, 1 - mark price, 2 - index price                                                                                                                 |
-| »» price         | body | string                                                          | false    | Value of price on price triggered, or price gap on price gap triggered                                                                                                             |
-| »» rule          | body | integer(int32)                                                  | false    | Price Condition Type                                                                                                                                                               |
-| »» expiration    | body | integer                                                         | false    | How long (in seconds) to wait for the condition to be triggered before cancelling the order.                                                                                       |
-| » order_type     | body | string                                                          | false    | Types of stop-profit and stop-loss, including:                                                                                                                                     |
-| settle           | path | string                                                          | true     | Settle currency                                                                                                                                                                    |
+| Name             | In   | Type                                                            | Required | Description                                                                         |
+| ---------------- | ---- | --------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------- |
+| body             | body | [FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder) | true     | none                                                                                |
+| » initial        | body | object                                                          | true     | none                                                                                |
+| »» contract      | body | string                                                          | true     | 合约标识                                                                            |
+| »» size          | body | integer(int64)                                                  | false    | 代表需要平仓的合约张数, 全平仓:size=0                                               |
+| »» price         | body | string                                                          | true     | 交易价, 当价格为 0 时, 表示通过市价方式来下单                                       |
+| »» close         | body | boolean                                                         | false    | 单仓模式全部平仓时,必须设置为true执行平仓操作                                       |
+| »» tif           | body | string                                                          | false    | Time in force 策略,默认为gtc, 市价单当前只支持 ioc 模式市价单当前只支持 ioc 模式    |
+| »» text          | body | string                                                          | false    | 订单的来源, 包括:                                                                   |
+| »» reduce_only   | body | boolean                                                         | false    | 设置为 true 的时候执行自动减仓操作, 设为 true可确保订单不会开新仓, 只用于平仓或减仓 |
+| »» auto_size     | body | string                                                          | false    | 单仓模式不需设置auto_size                                                           |
+| » trigger        | body | object                                                          | true     | none                                                                                |
+| »» strategy_type | body | integer(int32)                                                  | false    | 触发策略                                                                            |
+| »» price_type    | body | integer(int32)                                                  | false    | 参考价格Type. 0 - 最新成交价, 1 - 标记价格, 2 - 指数价格                            |
+| »» price         | body | string                                                          | false    | 价格触发时为价格, 价差触发时为价差                                                  |
+| »» rule          | body | integer(int32)                                                  | false    | 价格条件Type                                                                        |
+| »» expiration    | body | integer                                                         | false    | 最长等待触发时间, 超时则取消该订单, 单位是秒 s                                      |
+| » order_type     | body | string                                                          | false    | Types of take-profit and stop-loss orders, including:                               |
+| settle           | path | string                                                          | true     | Settle currency                                                                     |
 
-#### [#](#detailed-descriptions-37) Detailed descriptions
+#### [#](#detailed-descriptions-38) Detailed descriptions
 
-**»» size**: Represents the number of contracts that need to be closed, full
-closing: size=0 Partial closing: plan-close-short-position size>0 Partial
-closing: plan-close-long-position size<0
-
-**»» close**: When all positions are closed in a single position mode, it must
-be set to true to perform the closing operation When partially closed positions
-in single-store mode/double-store mode, you can not set close, or close=false
-
-**»» tif**: Time in force strategy, default is gtc, market order currently only
-supports ioc mode Market order currently only supports ioc mode
+部分平仓:plan-close-short-position size>0 部分平仓:plan-close-long-position
+size<0
 
 - gtc: GoodTillCancelled
 - ioc: ImmediateOrCancelled
+- web: 网页
+- api: API 调用
+- app: 移动端
 
-**»» text**: The source of the order, including:
+**»» auto_size**: 单仓模式不需设置auto_size
 
-- web: web
-- api: api
-- app: app
+**»» strategy_type**: 触发策略
 
-**»» auto_size**: Do not set auto_size When the dual-position mode is closed all
-positions (size=0), auto_size, close_long, close_short, short When the
-double-storey mode partially closes the position (size ≠ 0), there is no need to
-set auto_size
+**»» rule**: 价格条件Type
 
-**»» strategy_type**: Trigger Policy
+- 1: 表示根据 `strategy_type` 和 `price_type` 算出的价格大于等于 `Trigger.Price`
+  时触发, 同时Trigger.Price must > last_price
+- 2: 表示根据 `strategy_type` 和 `price_type` 算出的价格小于等于 `Trigger.Price`
+  时触发, 同时Trigger.Price must < last_price
 
-- 0: Price trigger, that is, when the price meets the conditions
-- 1: Price spread trigger, i.e. the last price specified in `price_type` minus
-  the second-last price difference At present, only 0 is the latest transaction
-  price
+**» order_type**: Types of take-profit and stop-loss orders, including:
 
-**»» rule**: Price Condition Type
-
-- 1: Indicates that the price calculated based on `strategy_type` and
-  `price_type` is greater than or equal to `Trigger.Price` Trigger, while
-  Trigger.Price must > last_price
-- 2: Indicates that the price calculated based on `strategy_type` and
-  `price_type` is less than or equal to `Trigger.Price` Trigger, and
-  Trigger.Price must < last_price
-
-**» order_type**: Types of stop-profit and stop-loss, including:
-
-- `close-long-order`: Entrusting order stop profit and stop loss, flat long
-  position
-- `close-short-order`: Entrusted order stop profit and stop loss, short position
-- `close-long-position`: Position stop-profit stop loss, used to close long
+- `close-long-order`: Order take-profit/stop-loss, close long position
+- `close-short-order`: Order take-profit/stop-loss, close short position
+- `close-long-position`: Position take-profit/stop-loss, used to close all long
   positions
-- `close-short-position`: Position stop-profit stop loss, used to close all
+- `close-short-position`: Position take-profit/stop-loss, used to close all
   short positions
-- `plan-close-long-position`: Position plan take profit and stop loss, used to
-  close long positions in all or part of long positions
-- `plan-close-short-position`: Position plan stop-profit and stop loss, used to
-  close all short positions or partially close short positions
+- `plan-close-long-position`: Position plan take-profit/stop-loss, used to close
+  all or partial long positions
+- `plan-close-short-position`: Position plan take-profit/stop-loss, used to
+  close all or partial short positions
 
-The two types of entrusted order stop-profit and stop-loss are read-only and
-cannot be passed in through requests
+The two types of order take-profit/stop-loss are read-only and cannot be passed
+in requests
 
-#### [#](#enumerated-values-80) Enumerated Values
+#### [#](#enumerated-values-81) Enumerated Values
 
 | Parameter        | Value |
 | ---------------- | ----- |
@@ -6168,9 +6280,9 @@ cannot be passed in through requests
 
 ### Responses
 
-| Status | Meaning                                                                         | Description   | Schema |
-| ------ | ------------------------------------------------------------------------------- | ------------- | ------ |
-| 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order created | Inline |
+| Status | Meaning                                                                         | Description                | Schema |
+| ------ | ------------------------------------------------------------------------------- | -------------------------- | ------ |
+| 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order created successfully | Inline |
 
 ### Response Schema
 
@@ -6186,25 +6298,25 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-all-price-triggered-orders) List All Price-triggered Orders
+## [#](#query-auto-order-list) Query auto order list
 
 > Code samples
 
 `GET /futures/{settle}/price_orders`
 
-_List All Price-triggered Orders_
+_Query auto order list_
 
 ### Parameters
 
-| Name     | In    | Type    | Required | Description                                               |
-| -------- | ----- | ------- | -------- | --------------------------------------------------------- |
-| status   | query | string  | true     | Only list the orders with this status                     |
-| contract | query | string  | false    | Futures contract, return related data only if specified   |
-| limit    | query | integer | false    | Maximum number of records to be returned in a single list |
-| offset   | query | integer | false    | List offset, starting from 0                              |
-| settle   | path  | string  | true     | Settle currency                                           |
+| Name     | In    | Type    | Required | Description                                             |
+| -------- | ----- | ------- | -------- | ------------------------------------------------------- |
+| status   | query | string  | true     | Query order list based on status                        |
+| contract | query | string  | false    | Futures contract, return related data only if specified |
+| limit    | query | integer | false    | Maximum number of records returned in a single list     |
+| offset   | query | integer | false    | List offset, starting from 0                            |
+| settle   | path  | string  | true     | Settle currency                                         |
 
-#### [#](#enumerated-values-81) Enumerated Values
+#### [#](#enumerated-values-82) Enumerated Values
 
 | Parameter | Value    |
 | --------- | -------- |
@@ -6247,21 +6359,21 @@ _List All Price-triggered Orders_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema                                                              |
-| ------ | -------------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[[FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder)\] |
+| Status | Meaning                                                                    | Description                 | Schema                                                              |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ------------------------------------------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[[FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder)\] |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#cancel-all-price-triggered-orders-2) Cancel All Price-triggered Orders
+## [#](#cancel-all-auto-orders-2) Cancel all auto orders
 
 > Code samples
 
 `DELETE /futures/{settle}/price_orders`
 
-_Cancel All Price-triggered Orders_
+_Cancel all auto orders_
 
 ### Parameters
 
@@ -6270,7 +6382,7 @@ _Cancel All Price-triggered Orders_
 | contract | query | string | false    | Futures contract, return related data only if specified |
 | settle   | path  | string | true     | Settle currency                                         |
 
-#### [#](#enumerated-values-82) Enumerated Values
+#### [#](#enumerated-values-83) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -6311,90 +6423,28 @@ _Cancel All Price-triggered Orders_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description                                                               | Schema                                                              |
-| ------ | -------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Batch cancellation request accepted. Query order status by listing orders | \[[FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder)\] |
+| Status | Meaning                                                                    | Description                                                                         | Schema                                                              |
+| ------ | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Batch cancellation request accepted and processed, success determined by order list | \[[FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder)\] |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#get-a-price-triggered-order-2) Get a price-triggered order
+## [#](#query-single-auto-order-details-2) Query single auto order details
 
 > Code samples
 
 `GET /futures/{settle}/price_orders/{order_id}`
 
-_Get a price-triggered order_
+_Query single auto order details_
 
 ### Parameters
 
-| Name     | In   | Type   | Required | Description                                          |
-| -------- | ---- | ------ | -------- | ---------------------------------------------------- |
-| settle   | path | string | true     | Settle currency                                      |
-| order_id | path | string | true     | Retrieve the data of the order with the specified ID |
-
-#### [#](#enumerated-values-83) Enumerated Values
-
-| Parameter | Value |
-| --------- | ----- |
-| settle    | btc   |
-| settle    | usdt  |
-
-> Example responses
-
-> 200 Response
-
-```
-{
-  "initial": {
-    "contract": "BTC_USDT",
-    "size": 100,
-    "price": "5.03"
-  },
-  "trigger": {
-    "strategy_type": 0,
-    "price_type": 0,
-    "price": "3000",
-    "rule": 1,
-    "expiration": 86400
-  },
-  "id": 1283293,
-  "user": 1234,
-  "create_time": 1514764800,
-  "finish_time": 1514764900,
-  "trade_id": 13566,
-  "status": "finished",
-  "finish_as": "cancelled",
-  "reason": "",
-  "order_type": "close-long-order"
-}
-```
-
-### Responses
-
-| Status | Meaning                                                                    | Description       | Schema                                                          |
-| ------ | -------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Auto order detail | [FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder) |
-
-WARNING
-
-To perform this operation, you must be authenticated by API key and secret
-
-## [#](#cancel-a-price-triggered-order-2) cancel a price-triggered order
-
-> Code samples
-
-`DELETE /futures/{settle}/price_orders/{order_id}`
-
-_cancel a price-triggered order_
-
-### Parameters
-
-| Name     | In   | Type   | Required | Description                                          |
-| -------- | ---- | ------ | -------- | ---------------------------------------------------- |
-| settle   | path | string | true     | Settle currency                                      |
-| order_id | path | string | true     | Retrieve the data of the order with the specified ID |
+| Name     | In   | Type   | Required | Description                                    |
+| -------- | ---- | ------ | -------- | ---------------------------------------------- |
+| settle   | path | string | true     | Settle currency                                |
+| order_id | path | string | true     | ID returned when order is successfully created |
 
 #### [#](#enumerated-values-84) Enumerated Values
 
@@ -6435,9 +6485,71 @@ _cancel a price-triggered order_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description       | Schema                                                          |
-| ------ | -------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Auto order detail | [FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder) |
+| Status | Meaning                                                                    | Description        | Schema                                                          |
+| ------ | -------------------------------------------------------------------------- | ------------------ | --------------------------------------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Auto order details | [FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder) |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
+## [#](#cancel-single-auto-order-2) Cancel single auto order
+
+> Code samples
+
+`DELETE /futures/{settle}/price_orders/{order_id}`
+
+_Cancel single auto order_
+
+### Parameters
+
+| Name     | In   | Type   | Required | Description                                    |
+| -------- | ---- | ------ | -------- | ---------------------------------------------- |
+| settle   | path | string | true     | Settle currency                                |
+| order_id | path | string | true     | ID returned when order is successfully created |
+
+#### [#](#enumerated-values-85) Enumerated Values
+
+| Parameter | Value |
+| --------- | ----- |
+| settle    | btc   |
+| settle    | usdt  |
+
+> Example responses
+
+> 200 Response
+
+```
+{
+  "initial": {
+    "contract": "BTC_USDT",
+    "size": 100,
+    "price": "5.03"
+  },
+  "trigger": {
+    "strategy_type": 0,
+    "price_type": 0,
+    "price": "3000",
+    "rule": 1,
+    "expiration": 86400
+  },
+  "id": 1283293,
+  "user": 1234,
+  "create_time": 1514764800,
+  "finish_time": 1514764900,
+  "trade_id": 13566,
+  "status": "finished",
+  "finish_as": "cancelled",
+  "reason": "",
+  "order_type": "close-long-order"
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description        | Schema                                                          |
+| ------ | -------------------------------------------------------------------------- | ------------------ | --------------------------------------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Auto order details | [FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder) |
 
 WARNING
 

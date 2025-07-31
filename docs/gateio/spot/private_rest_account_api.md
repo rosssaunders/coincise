@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-102-1) Gate API v4.102.1
+# [#](#gate-api-v4-104-0) Gate API v4.104.0
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -127,7 +127,7 @@ has been accidentally leaked, please delete the existing API and rebuild it.
 
 Gate Order matching follows Price Priority > Time priority principle.
 
-Suppose that the order book is as follows：
+Suppose that the order book is as follows:
 
 | Order | Order time | Ask/Selling price |
 | ----- | ---------- | ----------------- |
@@ -177,7 +177,7 @@ endpoint will be deprecated, and the new version of the endpoint can be found in
 the /margin/uni endpoint group. For detailed endpoint migration, please refer to
 the following table:"
 
-Margin account related endpoints：
+Margin account related endpoints:
 
 | Name                                                           | Path                         | Deprecated | New Path |
 | -------------------------------------------------------------- | ---------------------------- | ---------- | -------- |
@@ -189,7 +189,7 @@ Margin account related endpoints：
 | Get the max transferable amount for a specific margin currency | GET /margin/transferable     | No         | `-`      |
 
 The margin lending and borrowing related APIs have been migrated to the
-`/margin/uni` API group：
+`/margin/uni` API group:
 
 | Name                                                          | Old Path                                   | Deprecated | New Path                                       |
 | ------------------------------------------------------------- | ------------------------------------------ | ---------- | ---------------------------------------------- |
@@ -370,7 +370,7 @@ Earning, collateral etc |
 
 **Rate Limit**
 
-Each request to the API response header will contain the following fields:：
+Each request to the API response header will contain the following fields::
 
 - X-Gate-RateLimit-Requests-Remain - your remaining requests for current
   endpoint
@@ -554,7 +554,7 @@ The HTTP status code 2XX will be returned when all operations are successful.
 401 indicates that there is a problem with the certification. Other 4xx status
 codes indicate that the request is invalid. If it is a 5xx error, the server has
 encountered an unknown serious error when processing the request. Please give
-feedback as soon as possible。
+feedback as soon as possible.
 
 **Return Status**
 
@@ -574,12 +574,12 @@ feedback as soon as possible。
 | Type             | Description                                                                                  |
 | ---------------- | -------------------------------------------------------------------------------------------- |
 | `string`         | String type, in double quotation marks. Price and amount are also formatted in string format |
-| `integer`        | 32-bit integer，Mainly related to status codes, size, times, etc.                            |
-| `integer(int64)` | 64-bit integer，Mainly involves ID and higher precision timestamp                            |
+| `integer`        | 32-bit integer, Mainly related to status codes, size, times, etc.                            |
+| `integer(int64)` | 64-bit integer, Mainly involves ID and higher precision timestamp                            |
 | `float`          | Floating point number. Some time and stat fields use float.                                  |
-| `object`         | Object，Contains a child object{}                                                            |
-| `array`          | List，Includes multiple groups of content                                                    |
-| `boolean`        | true is true，false is false                                                                 |
+| `object`         | Object, Contains a child object{}                                                            |
+| `array`          | List, Includes multiple groups of content                                                    |
+| `boolean`        | true is true, false is false                                                                 |
 
 ## [#](#portfolio-margin-account) Portfolio Margin Account
 
@@ -731,9 +731,9 @@ New request body parameter:
 
 New response fields:
 
-| Name    | Type   | Required | Restriction | Description                 |
-| ------- | ------ | -------- | ----------- | --------------------------- |
-| stp_act | string | No       | none        | STP Strategies, including： |
+| Name    | Type   | Required | Restriction | Description                |
+| ------- | ------ | -------- | ----------- | -------------------------- |
+| stp_act | string | No       | none        | STP Strategies, including: |
 
 \- cn  
 \- co  
@@ -1750,7 +1750,7 @@ or with
 
 - Earn related
 
-| `label`                  | 含义                                                                        |
+| `label`                  | Meaning                                                                     |
 | ------------------------ | --------------------------------------------------------------------------- |
 | ERR_BALANCE_NOT_ENOUGH   | balance not enough                                                          |
 | ERR_PRODUCT_SELL_OUT     | Target quota reached                                                        |
@@ -1897,7 +1897,7 @@ Suppose the key we used is `key`, while the secret is `secret`.
 	GET /api/v4/futures/orders?contract=BTC_USD&status=finished&limit=50 HTTP/1.1
 ```
 
-Signature string：
+Signature string:
 
 ```
 	GET\n
@@ -1907,7 +1907,7 @@ Signature string：
 	1541993715
 ```
 
-Explanation：
+Explanation:
 
 - `/api/v4/futures/orders`: request url
 - `contract=BTC_USD&status=finished&limit=50`: keep the query string as it is in
@@ -1927,7 +1927,7 @@ Signature generated
 	{"contract":"BTC_USD","type":"limit","size":100,"price":6800,"time_in_force":"gtc"}
 ```
 
-Signature string：
+Signature string:
 
 ```
 	POST\n
@@ -1937,7 +1937,7 @@ Signature string：
 	1541993715
 ```
 
-Explanation：
+Explanation:
 
 - request query string is empty, use plain empty string
 - use the hashed result of the json-string-formatted request body
@@ -2004,7 +2004,7 @@ Signature generated
 
 # [#](#withdrawal) Withdrawal
 
-Withdrawal operations
+Withdrawal API
 
 ## [#](#withdraw) Withdraw
 
@@ -2014,7 +2014,8 @@ Withdrawal operations
 
 _Withdraw_
 
-Withdrawals to Gate addresses do not incur transaction fees.
+If the recipient's on-chain address is also Gate, no transaction fee will be
+charged
 
 > Body parameter
 
@@ -2031,25 +2032,25 @@ Withdrawals to Gate addresses do not incur transaction fees.
 
 ### Parameters
 
-| Name                | In   | Type   | Required | Description                                                                                                                                                                 |
-| ------------------- | ---- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| body                | body | object | true     | none                                                                                                                                                                        |
-| » withdraw_order_id | body | string | false    | User-defined order number when withdrawing. Default is empty. When not empty, the specified user-defined order number record will be queried                                |
-| » amount            | body | string | true     | Currency amount                                                                                                                                                             |
-| » currency          | body | string | true     | Currency name                                                                                                                                                               |
-| » address           | body | string | false    | Withdrawal address. Required for withdrawals                                                                                                                                |
-| » memo              | body | string | false    | Additional remarks with regards to the withdrawal                                                                                                                           |
-| » withdraw_id       | body | string | false    | The withdrawal record id starts with w, such as: w1879219868. When withdraw_id is not empty, the value querys this withdrawal record and no longer querys according to time |
-| » asset_class       | body | string | false    | The currency type of withdrawal record is empty by default. It supports users to query the withdrawal records in the main and innovation areas on demand.                   |
-| » chain             | body | string | true     | Name of the chain used in withdrawals                                                                                                                                       |
+| Name                | In   | Type   | Required | Description                                                                                                                                                                               |
+| ------------------- | ---- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body                | body | object | true     | none                                                                                                                                                                                      |
+| » withdraw_order_id | body | string | false    | User-defined order number for withdrawal. Default is empty. When not empty, the specified user-defined order number record will be queried                                                |
+| » amount            | body | string | true     | Token amount                                                                                                                                                                              |
+| » currency          | body | string | true     | Currency name                                                                                                                                                                             |
+| » address           | body | string | false    | Withdrawal address. Required for withdrawals                                                                                                                                              |
+| » memo              | body | string | false    | Additional remarks with regards to the withdrawal                                                                                                                                         |
+| » withdraw_id       | body | string | false    | Withdrawal record ID starts with 'w', such as: w1879219868. When withdraw_id is not empty, only this specific withdrawal record will be queried, and time-based querying will be disabled |
+| » asset_class       | body | string | false    | Withdrawal record currency type, empty by default. Supports users to query withdrawal records in main area and innovation area on demand.                                                 |
+| » chain             | body | string | true     | Name of the chain used in withdrawals                                                                                                                                                     |
 
 #### [#](#detailed-descriptions) Detailed descriptions
 
-**» asset_class**: The currency type of withdrawal record is empty by default.
-It supports users to query the withdrawal records in the main and innovation
-areas on demand. Value range: SPOT, PILOT
+**» asset_class**: Withdrawal record currency type, empty by default. Supports
+users to query withdrawal records in main area and innovation area on demand.
+Valid values: SPOT, PILOT
 
-SPOT: Main Zone PILOT: Innovation Zone
+SPOT: Main area PILOT: Innovation area
 
 > Example responses
 
@@ -2072,44 +2073,44 @@ SPOT: Main Zone PILOT: Innovation Zone
 
 ### Responses
 
-| Status | Meaning                                                                    | Description                                                          | Schema |
-| ------ | -------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Withdraw request is accepted. Refer to withdrawal records for status | Inline |
+| Status | Meaning                                                                    | Description                                                                       | Schema |
+| ------ | -------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Withdrawal request accepted. Check withdrawal record status for processing result | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                | Type   | Description                                                                                                                                                                 |
-| ------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| » id                | string | Record ID                                                                                                                                                                   |
-| » txid              | string | Hash record of the withdrawal                                                                                                                                               |
-| » withdraw_order_id | string | User-defined order number when withdrawing. Default is empty. When not empty, the specified user-defined order number record will be queried                                |
-| » timestamp         | string | Operation time                                                                                                                                                              |
-| » amount            | string | Currency amount                                                                                                                                                             |
-| » currency          | string | Currency name                                                                                                                                                               |
-| » address           | string | Withdrawal address. Required for withdrawals                                                                                                                                |
-| » memo              | string | Additional remarks with regards to the withdrawal                                                                                                                           |
-| » withdraw_id       | string | The withdrawal record id starts with w, such as: w1879219868. When withdraw_id is not empty, the value querys this withdrawal record and no longer querys according to time |
-| » asset_class       | string | The currency type of withdrawal record is empty by default. It supports users to query the withdrawal records in the main and innovation areas on demand.                   |
+| Name                | Type   | Description                                                                                                                                                                               |
+| ------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » id                | string | Record ID                                                                                                                                                                                 |
+| » txid              | string | Hash record of the withdrawal                                                                                                                                                             |
+| » withdraw_order_id | string | User-defined order number for withdrawal. Default is empty. When not empty, the specified user-defined order number record will be queried                                                |
+| » timestamp         | string | Operation time                                                                                                                                                                            |
+| » amount            | string | Token amount                                                                                                                                                                              |
+| » currency          | string | Currency name                                                                                                                                                                             |
+| » address           | string | Withdrawal address. Required for withdrawals                                                                                                                                              |
+| » memo              | string | Additional remarks with regards to the withdrawal                                                                                                                                         |
+| » withdraw_id       | string | Withdrawal record ID starts with 'w', such as: w1879219868. When withdraw_id is not empty, only this specific withdrawal record will be queried, and time-based querying will be disabled |
+| » asset_class       | string | Withdrawal record currency type, empty by default. Supports users to query withdrawal records in main area and innovation area on demand.                                                 |
 
-Value range: SPOT, PILOT
+Valid values: SPOT, PILOT
 
-SPOT: Main Zone  
-PILOT: Innovation Zone | | » status | string | Record status.
+SPOT: Main area  
+PILOT: Innovation area | | » status | string | Transaction status
 
-\- DONE: done  
-\- CANCEL: cancelled  
-\- REQUEST: requesting  
-\- MANUAL: pending manual approval  
+\- DONE: Completed  
+\- CANCEL: Cancelled  
+\- REQUEST: Requesting  
+\- MANUAL: Pending manual review  
 \- BCODE: GateCode operation  
-\- EXTPEND: pending confirm after sending  
-\- FAIL: pending confirm when fail  
-\- INVALID: invalid order  
-\- VERIFY: verifying  
-\- PROCES: processing  
-\- PEND: pending  
-\- DMOVE: required manual approval  
+\- EXTPEND: Sent, waiting for confirmation  
+\- FAIL: Failed on chain, waiting for confirmation  
+\- INVALID: Invalid order  
+\- VERIFY: Verifying  
+\- PROCES: Processing  
+\- PEND: Processing  
+\- DMOVE: Pending manual review  
 \- REVIEW: Under review | | » chain | string | Name of the chain used in
 withdrawals |
 
@@ -2125,8 +2126,7 @@ To perform this operation, you must be authenticated by API key and secret
 
 _UID transfer_
 
-Transfers between main spot accounts are allowed; however, both parties cannot
-be sub-accounts
+Transfers between main spot accounts. Both parties cannot be sub-accounts
 
 > Body parameter
 
@@ -2159,9 +2159,9 @@ be sub-accounts
 
 ### Responses
 
-| Status | Meaning                                                                    | Description                                                                                  | Schema |
-| ------ | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | The request has been accepted. Check the withdrawal record status for the processing result. | Inline |
+| Status | Meaning                                                                    | Description                                                            | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Request accepted. Check withdrawal record status for processing result | Inline |
 
 ### Response Schema
 
@@ -2210,44 +2210,44 @@ _Cancel withdrawal with specified ID_
 
 ### Responses
 
-| Status | Meaning                                                                          | Description                                                               | Schema |
-| ------ | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------ |
-| 202    | [Accepted (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.3) | Cancellation accepted. Refer to record status for the cancellation result | Inline |
+| Status | Meaning                                                                          | Description                                                                | Schema |
+| ------ | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------ |
+| 202    | [Accepted (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.3) | Cancellation request accepted. Check record status for cancellation result | Inline |
 
 ### Response Schema
 
 Status Code **202**
 
-| Name                | Type   | Description                                                                                                                                                                 |
-| ------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| » id                | string | Record ID                                                                                                                                                                   |
-| » txid              | string | Hash record of the withdrawal                                                                                                                                               |
-| » withdraw_order_id | string | User-defined order number when withdrawing. Default is empty. When not empty, the specified user-defined order number record will be queried                                |
-| » timestamp         | string | Operation time                                                                                                                                                              |
-| » amount            | string | Currency amount                                                                                                                                                             |
-| » currency          | string | Currency name                                                                                                                                                               |
-| » address           | string | Withdrawal address. Required for withdrawals                                                                                                                                |
-| » memo              | string | Additional remarks with regards to the withdrawal                                                                                                                           |
-| » withdraw_id       | string | The withdrawal record id starts with w, such as: w1879219868. When withdraw_id is not empty, the value querys this withdrawal record and no longer querys according to time |
-| » asset_class       | string | The currency type of withdrawal record is empty by default. It supports users to query the withdrawal records in the main and innovation areas on demand.                   |
+| Name                | Type   | Description                                                                                                                                                                               |
+| ------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » id                | string | Record ID                                                                                                                                                                                 |
+| » txid              | string | Hash record of the withdrawal                                                                                                                                                             |
+| » withdraw_order_id | string | User-defined order number for withdrawal. Default is empty. When not empty, the specified user-defined order number record will be queried                                                |
+| » timestamp         | string | Operation time                                                                                                                                                                            |
+| » amount            | string | Token amount                                                                                                                                                                              |
+| » currency          | string | Currency name                                                                                                                                                                             |
+| » address           | string | Withdrawal address. Required for withdrawals                                                                                                                                              |
+| » memo              | string | Additional remarks with regards to the withdrawal                                                                                                                                         |
+| » withdraw_id       | string | Withdrawal record ID starts with 'w', such as: w1879219868. When withdraw_id is not empty, only this specific withdrawal record will be queried, and time-based querying will be disabled |
+| » asset_class       | string | Withdrawal record currency type, empty by default. Supports users to query withdrawal records in main area and innovation area on demand.                                                 |
 
-Value range: SPOT, PILOT
+Valid values: SPOT, PILOT
 
-SPOT: Main Zone  
-PILOT: Innovation Zone | | » status | string | Record status.
+SPOT: Main area  
+PILOT: Innovation area | | » status | string | Transaction status
 
-\- DONE: done  
-\- CANCEL: cancelled  
-\- REQUEST: requesting  
-\- MANUAL: pending manual approval  
+\- DONE: Completed  
+\- CANCEL: Cancelled  
+\- REQUEST: Requesting  
+\- MANUAL: Pending manual review  
 \- BCODE: GateCode operation  
-\- EXTPEND: pending confirm after sending  
-\- FAIL: pending confirm when fail  
-\- INVALID: invalid order  
-\- VERIFY: verifying  
-\- PROCES: processing  
-\- PEND: pending  
-\- DMOVE: required manual approval  
+\- EXTPEND: Sent, waiting for confirmation  
+\- FAIL: Failed on chain, waiting for confirmation  
+\- INVALID: Invalid order  
+\- VERIFY: Verifying  
+\- PROCES: Processing  
+\- PEND: Processing  
+\- DMOVE: Pending manual review  
 \- REVIEW: Under review | | » chain | string | Name of the chain used in
 withdrawals |
 
@@ -2257,15 +2257,15 @@ To perform this operation, you must be authenticated by API key and secret
 
 # [#](#wallet) Wallet
 
-Wallet
+Wallet API
 
-## [#](#list-chains-supported-for-specified-currency) List chains supported for specified currency
+## [#](#query-chains-supported-for-specified-currency) Query chains supported for specified currency
 
 > Code samples
 
 `GET /wallet/currency_chains`
 
-_List chains supported for specified currency_
+_Query chains supported for specified currency_
 
 ### Parameters
 
@@ -2293,9 +2293,9 @@ _List chains supported for specified currency_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
@@ -2308,8 +2308,8 @@ Status Code **200**
 | » name_en              | string         | Chain name in English                                                                           |
 | » contract_address     | string         | Smart contract address for the currency; if no address is available, it will be an empty string |
 | » is_disabled          | integer(int32) | If it is disabled. 0 means NOT being disabled                                                   |
-| » is_deposit_disabled  | integer(int32) | Is deposit disabled. 0 means not                                                                |
-| » is_withdraw_disabled | integer(int32) | Is withdrawal disabled. 0 means not                                                             |
+| » is_deposit_disabled  | integer(int32) | Is deposit disabled. 0 means not disabled                                                       |
+| » is_withdraw_disabled | integer(int32) | Is withdrawal disabled. 0 means not disabled                                                    |
 | » decimal              | string         | Withdrawal precision                                                                            |
 
 This operation does not require authentication
@@ -2374,34 +2374,34 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#retrieve-withdrawal-records) Retrieve withdrawal records
+## [#](#get-withdrawal-records) Get withdrawal records
 
 > Code samples
 
 `GET /wallet/withdrawals`
 
-_Retrieve withdrawal records_
+_Get withdrawal records_
 
-Record time range cannot exceed 30 days
+Record query time range cannot exceed 30 days
 
 ### Parameters
 
-| Name              | In    | Type           | Required | Description                                                                                                                                                                 |
-| ----------------- | ----- | -------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| currency          | query | string         | false    | Filter by currency. Return all currency records if not specified                                                                                                            |
-| withdraw_id       | query | string         | false    | The withdrawal record id starts with w, such as: w1879219868. When withdraw_id is not empty, the value querys this withdrawal record and no longer querys according to time |
-| asset_class       | query | string         | false    | The currency type of withdrawal record is empty by default. It supports users to query the withdrawal records in the main and innovation areas on demand.                   |
-| withdraw_order_id | query | string         | false    | User-defined order number when withdrawing. Default is empty. When not empty, the specified user-defined order number record will be queried                                |
-| from              | query | integer(int64) | false    | Time range beginning, default to 7 days before current time                                                                                                                 |
-| to                | query | integer(int64) | false    | Time range ending, default to current time                                                                                                                                  |
-| limit             | query | integer        | false    | Maximum number of records to be returned in a single list                                                                                                                   |
-| offset            | query | integer        | false    | List offset, starting from 0                                                                                                                                                |
+| Name              | In    | Type           | Required | Description                                                                                                                                                                               |
+| ----------------- | ----- | -------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| currency          | query | string         | false    | Specify the currency. If not specified, returns all currencies                                                                                                                            |
+| withdraw_id       | query | string         | false    | Withdrawal record ID starts with 'w', such as: w1879219868. When withdraw_id is not empty, only this specific withdrawal record will be queried, and time-based querying will be disabled |
+| asset_class       | query | string         | false    | Currency type of withdrawal record, empty by default. Supports querying withdrawal records in main zone and innovation zone on demand.                                                    |
+| withdraw_order_id | query | string         | false    | User-defined order number for withdrawal. Default is empty. When not empty, the specified user-defined order number record will be queried                                                |
+| from              | query | integer(int64) | false    | Start time for querying records, defaults to 7 days before current time if not specified                                                                                                  |
+| to                | query | integer(int64) | false    | End timestamp for the query, defaults to current time if not specified                                                                                                                    |
+| limit             | query | integer        | false    | Maximum number of records returned in a single list                                                                                                                                       |
+| offset            | query | integer        | false    | List offset, starting from 0                                                                                                                                                              |
 
 #### [#](#detailed-descriptions-2) Detailed descriptions
 
-**asset_class**: The currency type of withdrawal record is empty by default. It
-supports users to query the withdrawal records in the main and innovation areas
-on demand. Value range: SPOT, PILOT
+**asset_class**: Currency type of withdrawal record, empty by default. Supports
+querying withdrawal records in main zone and innovation zone on demand. Value
+range: SPOT, PILOT
 
 SPOT: Main Zone PILOT: Innovation Zone
 
@@ -2435,32 +2435,32 @@ SPOT: Main Zone PILOT: Innovation Zone
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                | Type   | Description                                                                                                         |
-| ------------------- | ------ | ------------------------------------------------------------------------------------------------------------------- |
-| » id                | string | Record ID                                                                                                           |
-| » txid              | string | Hash record of the withdrawal                                                                                       |
-| » block_number      | string | Block Number                                                                                                        |
-| » withdraw_order_id | string | Client order id, up to 32 length and can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.)            |
-| » timestamp         | string | Operation time                                                                                                      |
-| » amount            | string | Currency amount                                                                                                     |
-| » fee               | string | fee                                                                                                                 |
-| » currency          | string | Currency name                                                                                                       |
-| » address           | string | Withdrawal address                                                                                                  |
-| » fail_reason       | string | The reason for withdrawal failure is that there is a value when status = CANCEL, and the rest of the state is empty |
-| » timestamp2        | string | The withdrawal end time, i.e.: withdrawal cancel time or withdrawal success time                                    |
+| Name                | Type   | Description                                                                                              |
+| ------------------- | ------ | -------------------------------------------------------------------------------------------------------- |
+| » id                | string | Record ID                                                                                                |
+| » txid              | string | Hash record of the withdrawal                                                                            |
+| » block_number      | string | Block Number                                                                                             |
+| » withdraw_order_id | string | Client order id, up to 32 length and can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.) |
+| » timestamp         | string | Operation time                                                                                           |
+| » amount            | string | Token amount                                                                                             |
+| » fee               | string | fee                                                                                                      |
+| » currency          | string | Currency name                                                                                            |
+| » address           | string | Withdrawal address                                                                                       |
+| » fail_reason       | string | Reason for withdrawal failure. Has a value when status = CANCEL, empty for all other statuses            |
+| » timestamp2        | string | Withdrawal final time, i.e.: withdrawal cancellation time or withdrawal success time                     |
 
-When status = CANCEL, the corresponding cancel time  
-When status = DONE and block_number > 0, it is the time to withdrawal success |
-| » memo | string | Additional remarks with regards to the withdrawal | | »
-status | string | Transaction status
+When status = CANCEL, corresponds to cancellation time  
+When status = DONE and block_number > 0, it is the withdrawal success time | | »
+memo | string | Additional remarks with regards to the withdrawal | | » status |
+string | Transaction status
 
 \- DONE: Completed (block_number > 0 is considered to be truly completed)  
 \- CANCEL: Canceled  
@@ -2481,25 +2481,25 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#retrieve-deposit-records) Retrieve deposit records
+## [#](#get-deposit-records) Get deposit records
 
 > Code samples
 
 `GET /wallet/deposits`
 
-_Retrieve deposit records_
+_Get deposit records_
 
-Record time range cannot exceed 30 days
+Record query time range cannot exceed 30 days
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                                                        |
-| -------- | ----- | -------------- | -------- | ---------------------------------------------------------------------------------- |
-| currency | query | string         | false    | Filter by currency. Return all currency records if not specified                   |
-| from     | query | integer(int64) | false    | Time range beginning, default to 7 days before current time                        |
-| to       | query | integer(int64) | false    | Time range ending, default to current time                                         |
-| limit    | query | integer        | false    | The maximum number of entries returned in the list is limited to 500 transactions. |
-| offset   | query | integer        | false    | List offset, starting from 0                                                       |
+| Name     | In    | Type           | Required | Description                                                                              |
+| -------- | ----- | -------------- | -------- | ---------------------------------------------------------------------------------------- |
+| currency | query | string         | false    | Specify the currency. If not specified, returns all currencies                           |
+| from     | query | integer(int64) | false    | Start time for querying records, defaults to 7 days before current time if not specified |
+| to       | query | integer(int64) | false    | End timestamp for the query, defaults to current time if not specified                   |
+| limit    | query | integer        | false    | Maximum number of entries returned in the list, limited to 500 transactions              |
+| offset   | query | integer        | false    | List offset, starting from 0                                                             |
 
 > Example responses
 
@@ -2524,9 +2524,9 @@ Record time range cannot exceed 30 days
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
@@ -2538,7 +2538,7 @@ Status Code **200**
 | » txid              | string | Hash record of the withdrawal                                                                            |
 | » withdraw_order_id | string | Client order id, up to 32 length and can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.) |
 | » timestamp         | string | Operation time                                                                                           |
-| » amount            | string | Currency amount                                                                                          |
+| » amount            | string | Token amount                                                                                             |
 | » currency          | string | Currency name                                                                                            |
 | » address           | string | Withdrawal address. Required for withdrawals                                                             |
 | » memo              | string | Additional remarks with regards to the withdrawal                                                        |
@@ -2566,13 +2566,13 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Transfer between trading accounts_
 
-Transfer between different accounts. Currently support transfers between the
-following:
+Balance transfers between personal trading accounts. Currently supports the
+following transfer operations:
 
-1.  spot - margin
-2.  spot - futures(perpetual)
-3.  spot - delivery
-4.  spot - options
+1.  Spot account - Margin account
+2.  Spot account - Perpetual futures account
+3.  Spot account - Delivery futures account
+4.  Spot account - Options account
 
 > Body parameter
 
@@ -2589,15 +2589,15 @@ following:
 
 ### Parameters
 
-| Name            | In   | Type   | Required | Description                                                                                 |
-| --------------- | ---- | ------ | -------- | ------------------------------------------------------------------------------------------- |
-| body            | body | object | true     | none                                                                                        |
-| » currency      | body | string | true     | Transfer currency. For futures account, `currency` can be set to `POINT` or settle currency |
-| » from          | body | string | true     | Account to transfer from                                                                    |
-| » to            | body | string | true     | Account to transfer to                                                                      |
-| » amount        | body | string | true     | Transfer amount                                                                             |
-| » currency_pair | body | string | false    | Margin currency pair. Required if transfer from or to margin account                        |
-| » settle        | body | string | false    | Futures settle currency. Required if transferring from or to futures account                |
+| Name            | In   | Type   | Required | Description                                                                                                                                       |
+| --------------- | ---- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body            | body | object | true     | none                                                                                                                                              |
+| » currency      | body | string | true     | Transfer currency name. For contract accounts, `currency` can be set to `POINT` (points) or supported settlement currencies (e.g., `BTC`, `USDT`) |
+| » from          | body | string | true     | Account to transfer from                                                                                                                          |
+| » to            | body | string | true     | Account to transfer to                                                                                                                            |
+| » amount        | body | string | true     | Transfer amount                                                                                                                                   |
+| » currency_pair | body | string | false    | Margin trading pair. Required when transferring to or from margin account                                                                         |
+| » settle        | body | string | false    | Contract settlement currency. Required when transferring to or from contract account                                                              |
 
 #### [#](#enumerated-values) Enumerated Values
 
@@ -2626,9 +2626,9 @@ following:
 
 ### Responses
 
-| Status | Meaning                                                                    | Description         | Schema |
-| ------ | -------------------------------------------------------------------------- | ------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Balance transferred | Inline |
+| Status | Meaning                                                                    | Description                   | Schema |
+| ------ | -------------------------------------------------------------------------- | ----------------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Transfer operation successful | Inline |
 
 ### Response Schema
 
@@ -2638,7 +2638,7 @@ _TransactionID_
 
 | Name    | Type           | Description |
 | ------- | -------------- | ----------- |
-| » tx_id | integer(int64) | Order id    |
+| » tx_id | integer(int64) | Order ID    |
 
 WARNING
 
@@ -2652,8 +2652,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Transfer between main and sub accounts_
 
-Support transferring with sub user's spot or futures account. Note that only
-main user's spot account is used no matter which sub user's account is operated.
+Supports transfers to/from sub-account's spot or futures accounts. Note that
+regardless of which sub-account is operated, only the main account's spot
+account is used
 
 > Body parameter
 
@@ -2670,15 +2671,15 @@ main user's spot account is used no matter which sub user's account is operated.
 
 ### Parameters
 
-| Name               | In   | Type   | Required | Description                                                                                                                                                                                                                               |
-| ------------------ | ---- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| body               | body | object | true     | none                                                                                                                                                                                                                                      |
-| » sub_account      | body | string | true     | Sub account user ID                                                                                                                                                                                                                       |
-| » sub_account_type | body | string | false    | Target sub user's account. `spot` - spot account, `futures` - perpetual contract account, `delivery` - delivery account                                                                                                                   |
-| » currency         | body | string | true     | Transfer currency name                                                                                                                                                                                                                    |
-| » amount           | body | string | true     | Transfer amount                                                                                                                                                                                                                           |
-| » direction        | body | string | true     | Transfer direction. to - transfer into sub account; from - transfer out from sub account                                                                                                                                                  |
-| » client_order_id  | body | string | false    | The custom ID provided by the customer serves as a safeguard against duplicate transfers. It can be a combination of letters (case-sensitive), numbers, hyphens '-', and underscores '\_', with a length ranging from 1 to 64 characters. |
+| Name               | In   | Type   | Required | Description                                                                                                                                                                                                               |
+| ------------------ | ---- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body               | body | object | true     | none                                                                                                                                                                                                                      |
+| » sub_account      | body | string | true     | Sub account user ID                                                                                                                                                                                                       |
+| » sub_account_type | body | string | false    | Target sub-account trading account: spot - spot account, futures - perpetual contract account, delivery - delivery contract account, options - options account                                                            |
+| » currency         | body | string | true     | Transfer currency name                                                                                                                                                                                                    |
+| » amount           | body | string | true     | Transfer amount                                                                                                                                                                                                           |
+| » direction        | body | string | true     | Transfer direction: to - transfer into sub-account, from - transfer out from sub-account                                                                                                                                  |
+| » client_order_id  | body | string | false    | Customer-defined ID to prevent duplicate transfers. Can be a combination of letters (case-sensitive), numbers, hyphens '-', and underscores '\_'. Can be pure letters or pure numbers with length between 1-64 characters |
 
 > Example responses
 
@@ -2692,9 +2693,9 @@ main user's spot account is used no matter which sub user's account is operated.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description         | Schema |
-| ------ | -------------------------------------------------------------------------- | ------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Balance transferred | Inline |
+| Status | Meaning                                                                    | Description                   | Schema |
+| ------ | -------------------------------------------------------------------------- | ----------------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Transfer operation successful | Inline |
 
 ### Response Schema
 
@@ -2704,33 +2705,33 @@ _TransactionID_
 
 | Name    | Type           | Description |
 | ------- | -------------- | ----------- |
-| » tx_id | integer(int64) | Order id    |
+| » tx_id | integer(int64) | Order ID    |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#retrieve-transfer-records-between-main-and-sub-accounts) Retrieve transfer records between main and sub accounts
+## [#](#get-transfer-records-between-main-and-sub-accounts) Get transfer records between main and sub accounts
 
 > Code samples
 
 `GET /wallet/sub_account_transfers`
 
-_Retrieve transfer records between main and sub accounts_
+_Get transfer records between main and sub accounts_
 
-Record time range cannot exceed 30 days
+Record query time range cannot exceed 30 days
 
-> Note: only records after 20-04-10can be retrieved
+> Note: Only records after 2020-04-10 can be retrieved
 
 ### Parameters
 
-| Name    | In    | Type           | Required | Description                                                                                                                               |
-| ------- | ----- | -------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| sub_uid | query | string         | false    | User ID of sub-account, you can query multiple records separated by `,`. If not specified, it will return the records of all sub accounts |
-| from    | query | integer(int64) | false    | Time range beginning, default to 7 days before current time                                                                               |
-| to      | query | integer(int64) | false    | Time range ending, default to current time                                                                                                |
-| limit   | query | integer        | false    | Maximum number of records to be returned in a single list                                                                                 |
-| offset  | query | integer        | false    | List offset, starting from 0                                                                                                              |
+| Name    | In    | Type           | Required | Description                                                                                                                        |
+| ------- | ----- | -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| sub_uid | query | string         | false    | Sub-account user ID, you can query multiple records separated by `,`. If not specified, it will return records of all sub-accounts |
+| from    | query | integer(int64) | false    | Start time for querying records, defaults to 7 days before current time if not specified                                           |
+| to      | query | integer(int64) | false    | End timestamp for the query, defaults to current time if not specified                                                             |
+| limit   | query | integer        | false    | Maximum number of records returned in a single list                                                                                |
+| offset  | query | integer        | false    | List offset, starting from 0                                                                                                       |
 
 > Example responses
 
@@ -2755,42 +2756,42 @@ Record time range cannot exceed 30 days
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name               | Type   | Description                                                                                                                                                                                                                               |
-| ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| » timest           | string | Transfer timestamp                                                                                                                                                                                                                        |
-| » uid              | string | Main account user ID                                                                                                                                                                                                                      |
-| » sub_account      | string | Sub account user ID                                                                                                                                                                                                                       |
-| » sub_account_type | string | Target sub user's account. `spot` - spot account, `futures` - perpetual contract account, `delivery` - delivery account                                                                                                                   |
-| » currency         | string | Transfer currency name                                                                                                                                                                                                                    |
-| » amount           | string | Transfer amount                                                                                                                                                                                                                           |
-| » direction        | string | Transfer direction. to - transfer into sub account; from - transfer out from sub account                                                                                                                                                  |
-| » source           | string | Where the operation is initiated from                                                                                                                                                                                                     |
-| » client_order_id  | string | The custom ID provided by the customer serves as a safeguard against duplicate transfers. It can be a combination of letters (case-sensitive), numbers, hyphens '-', and underscores '\_', with a length ranging from 1 to 64 characters. |
-| » status           | string | Sub-account transfer record status, currently only success                                                                                                                                                                                |
+| Name               | Type   | Description                                                                                                                                                                                                               |
+| ------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » timest           | string | Transfer timestamp                                                                                                                                                                                                        |
+| » uid              | string | Main account user ID                                                                                                                                                                                                      |
+| » sub_account      | string | Sub account user ID                                                                                                                                                                                                       |
+| » sub_account_type | string | Target sub-account trading account: spot - spot account, futures - perpetual contract account, delivery - delivery contract account, options - options account                                                            |
+| » currency         | string | Transfer currency name                                                                                                                                                                                                    |
+| » amount           | string | Transfer amount                                                                                                                                                                                                           |
+| » direction        | string | Transfer direction: to - transfer into sub-account, from - transfer out from sub-account                                                                                                                                  |
+| » source           | string | Source of the transfer operation                                                                                                                                                                                          |
+| » client_order_id  | string | Customer-defined ID to prevent duplicate transfers. Can be a combination of letters (case-sensitive), numbers, hyphens '-', and underscores '\_'. Can be pure letters or pure numbers with length between 1-64 characters |
+| » status           | string | Sub-account transfer record status, currently only 'success'                                                                                                                                                              |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#sub-account-transfers-to-sub-account) Sub-account transfers to sub-account
+## [#](#transfer-between-sub-accounts) Transfer between sub-accounts
 
 > Code samples
 
 `POST /wallet/sub_account_to_sub_account`
 
-_Sub-account transfers to sub-account_
+_Transfer between sub-accounts_
 
-It is possible to perform balance transfers between two sub-accounts under the
-same main account. You can use either the API Key of the main account or the API
-Key of the sub-account to initiate the transfer.
+Supports balance transfers between two sub-accounts under the same main account.
+You can use either the main account's API Key or the source sub-account's API
+Key to perform the operation
 
 > Body parameter
 
@@ -2807,16 +2808,16 @@ Key of the sub-account to initiate the transfer.
 
 ### Parameters
 
-| Name                    | In   | Type   | Required | Description                                                                                                                                  |
-| ----------------------- | ---- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| body                    | body | object | true     | none                                                                                                                                         |
-| » currency              | body | string | true     | Transfer currency name                                                                                                                       |
-| » sub_account_type      | body | string | false    | Transfer from the account. (deprecate, use `sub_account_from_type` and `sub_account_to_type` instead)                                        |
-| » sub_account_from      | body | string | true     | Transfer from the user id of the sub-account                                                                                                 |
-| » sub_account_from_type | body | string | true     | The sub-account's outgoing trading account, spot - spot account, futures - perpetual contract account, delivery - delivery contract account. |
-| » sub_account_to        | body | string | true     | Transfer to the user id of the sub-account                                                                                                   |
-| » sub_account_to_type   | body | string | true     | Transferred sub-account trading account: spot - spot account, futures - perpetual contract account, delivery - delivery contract account     |
-| » amount                | body | string | true     | Transfer amount                                                                                                                              |
+| Name                    | In   | Type   | Required | Description                                                                                                                         |
+| ----------------------- | ---- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| body                    | body | object | true     | none                                                                                                                                |
+| » currency              | body | string | true     | Transfer currency name                                                                                                              |
+| » sub_account_type      | body | string | false    | Transfer from account (deprecated, use `sub_account_from_type` and `sub_account_to_type` instead)                                   |
+| » sub_account_from      | body | string | true     | Transfer from the user id of the sub-account                                                                                        |
+| » sub_account_from_type | body | string | true     | Source sub-account trading account: spot - spot account, futures - perpetual contract account, delivery - delivery contract account |
+| » sub_account_to        | body | string | true     | Transfer to the user id of the sub-account                                                                                          |
+| » sub_account_to_type   | body | string | true     | Target sub-account trading account: spot - spot account, futures - perpetual contract account, delivery - delivery contract account |
+| » amount                | body | string | true     | Transfer amount                                                                                                                     |
 
 > Example responses
 
@@ -2830,9 +2831,9 @@ Key of the sub-account to initiate the transfer.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description         | Schema |
-| ------ | -------------------------------------------------------------------------- | ------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Balance transferred | Inline |
+| Status | Meaning                                                                    | Description                   | Schema |
+| ------ | -------------------------------------------------------------------------- | ----------------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Transfer operation successful | Inline |
 
 ### Response Schema
 
@@ -2842,7 +2843,7 @@ _TransactionID_
 
 | Name    | Type           | Description |
 | ------- | -------------- | ----------- |
-| » tx_id | integer(int64) | Order id    |
+| » tx_id | integer(int64) | Order ID    |
 
 WARNING
 
@@ -2856,15 +2857,15 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Transfer status query_
 
-Support querying transfer status based on user-defined client_order_id or tx_id
+Supports querying transfer status based on user-defined client_order_id or tx_id
 returned by the transfer interface
 
 ### Parameters
 
-| Name            | In    | Type   | Required | Description                                                                                                                                                                                                                               |
-| --------------- | ----- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| client_order_id | query | string | false    | The custom ID provided by the customer serves as a safeguard against duplicate transfers. It can be a combination of letters (case-sensitive), numbers, hyphens '-', and underscores '\_', with a length ranging from 1 to 64 characters. |
-| tx_id           | query | string | false    | The transfer operation number and client_order_id cannot be empty at the same time                                                                                                                                                        |
+| Name            | In    | Type   | Required | Description                                                                                                                                                                                                               |
+| --------------- | ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| client_order_id | query | string | false    | Customer-defined ID to prevent duplicate transfers. Can be a combination of letters (case-sensitive), numbers, hyphens '-', and underscores '\_'. Can be pure letters or pure numbers with length between 1-64 characters |
+| tx_id           | query | string | false    | Transfer operation number, cannot be empty at the same time as client_order_id                                                                                                                                            |
 
 > Example responses
 
@@ -2879,9 +2880,9 @@ returned by the transfer interface
 
 ### Responses
 
-| Status | Meaning                                                                    | Description                           | Schema |
-| ------ | -------------------------------------------------------------------------- | ------------------------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Transfer status obtained successfully | Inline |
+| Status | Meaning                                                                    | Description                            | Schema |
+| ------ | -------------------------------------------------------------------------- | -------------------------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Transfer status retrieved successfully | Inline |
 
 ### Response Schema
 
@@ -2891,26 +2892,26 @@ _TransferOrderStatus_
 
 | Name     | Type   | Description                                                                                                                                                                                       |
 | -------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| » tx_id  | string | Order id                                                                                                                                                                                          |
-| » status | string | Transfer status, PENDING - in process, SUCCESS - successful transfer, FAIL - failed transfer, PARTIAL_SUCCESS - Partially successful (this status will appear when transferring between sub-subs) |
+| » tx_id  | string | Order ID                                                                                                                                                                                          |
+| » status | string | Transfer status: PENDING - Processing, SUCCESS - Transfer successful, FAIL - Transfer failed, PARTIAL_SUCCESS - Partially successful (this status appears when transferring between sub-accounts) |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#retrieve-withdrawal-status) Retrieve withdrawal status
+## [#](#query-withdrawal-status) Query withdrawal status
 
 > Code samples
 
 `GET /wallet/withdraw_status`
 
-_Retrieve withdrawal status_
+_Query withdrawal status_
 
 ### Parameters
 
-| Name     | In    | Type   | Required | Description                             |
-| -------- | ----- | ------ | -------- | --------------------------------------- |
-| currency | query | string | false    | Retrieve data of the specified currency |
+| Name     | In    | Type   | Required | Description                      |
+| -------- | ----- | ------ | -------- | -------------------------------- |
+| currency | query | string | false    | Query by specified currency name |
 
 > Example responses
 
@@ -2945,9 +2946,9 @@ _Retrieve withdrawal status_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
@@ -2958,7 +2959,7 @@ Status Code **200**
 | » currency                   | string | Currency                                     |
 | » name                       | string | Currency name                                |
 | » name_cn                    | string | Currency Chinese name                        |
-| » deposit                    | string | Deposits fee                                 |
+| » deposit                    | string | Deposit fee                                  |
 | » withdraw_percent           | string | Withdrawal fee rate percentage               |
 | » withdraw_fix               | string | Fixed withdrawal fee                         |
 | » withdraw_day_limit         | string | Daily allowed withdrawal amount              |
@@ -2974,19 +2975,19 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#retrieve-sub-account-balances) Retrieve sub account balances
+## [#](#query-sub-account-balance-information) Query sub-account balance information
 
 > Code samples
 
 `GET /wallet/sub_account_balances`
 
-_Retrieve sub account balances_
+_Query sub-account balance information_
 
 ### Parameters
 
-| Name    | In    | Type   | Required | Description                                                                                                                               |
-| ------- | ----- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| sub_uid | query | string | false    | User ID of sub-account, you can query multiple records separated by `,`. If not specified, it will return the records of all sub accounts |
+| Name    | In    | Type   | Required | Description                                                                                                                        |
+| ------- | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| sub_uid | query | string | false    | Sub-account user ID, you can query multiple records separated by `,`. If not specified, it will return records of all sub-accounts |
 
 > Example responses
 
@@ -3007,9 +3008,9 @@ _Retrieve sub account balances_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
@@ -3025,19 +3026,19 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#query-sub-accounts-margin-balances) Query sub accounts' margin balances
+## [#](#query-sub-account-isolated-margin-account-balance-information) Query sub-account isolated margin account balance information
 
 > Code samples
 
 `GET /wallet/sub_account_margin_balances`
 
-_Query sub accounts' margin balances_
+_Query sub-account isolated margin account balance information_
 
 ### Parameters
 
-| Name    | In    | Type   | Required | Description                                                                                                                               |
-| ------- | ----- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| sub_uid | query | string | false    | User ID of sub-account, you can query multiple records separated by `,`. If not specified, it will return the records of all sub accounts |
+| Name    | In    | Type   | Required | Description                                                                                                                        |
+| ------- | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| sub_uid | query | string | false    | Sub-account user ID, you can query multiple records separated by `,`. If not specified, it will return records of all sub-accounts |
 
 > Example responses
 
@@ -3074,56 +3075,56 @@ _Query sub accounts' margin balances_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name              | Type    | Description                                                                                                        |
-| ----------------- | ------- | ------------------------------------------------------------------------------------------------------------------ |
-| » uid             | string  | User ID                                                                                                            |
-| » available       | array   | Margin account balances                                                                                            |
-| »» _None_         | object  | Margin account detail. `base` refers to base currency, while \`quotes to quote currency                            |
-| »»» currency_pair | string  | Currency pair                                                                                                      |
-| »»» account_type  | string  | Account type, risk - risk rate account, mmr - maintenance margin rate account, inactive - market not activated     |
-| »»» leverage      | string  | User current market leverage multiple                                                                              |
-| »»» locked        | boolean | Whether account is locked                                                                                          |
-| »»» risk          | string  | Leveraged Account Current Risk Rate (Returned when the Account is a Risk Rate Account)                             |
-| »»» mmr           | string  | Leveraged Account Current Maintenance Margin Rate (returned when the Account is a Maintenance Margin Rate Account) |
-| »»» base          | object  | Account currency details                                                                                           |
-| »»»» currency     | string  | Currency name                                                                                                      |
-| »»»» available    | string  | Amount suitable for margin trading.                                                                                |
-| »»»» locked       | string  | Locked amount, used in margin trading                                                                              |
-| »»»» borrowed     | string  | Borrowed amount                                                                                                    |
-| »»»» interest     | string  | Unpaid interests                                                                                                   |
-| »»» quote         | object  | Account currency details                                                                                           |
-| »»»» currency     | string  | Currency name                                                                                                      |
-| »»»» available    | string  | Amount suitable for margin trading.                                                                                |
-| »»»» locked       | string  | Locked amount, used in margin trading                                                                              |
-| »»»» borrowed     | string  | Borrowed amount                                                                                                    |
-| »»»» interest     | string  | Unpaid interests                                                                                                   |
+| Name              | Type    | Description                                                                                                                                                       |
+| ----------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| » uid             | string  | User ID                                                                                                                                                           |
+| » available       | array   | Margin account balances                                                                                                                                           |
+| »» _None_         | object  | Margin account information for a trading pair. `base` corresponds to base currency account information, `quote` corresponds to quote currency account information |
+| »»» currency_pair | string  | Currency pair                                                                                                                                                     |
+| »»» account_type  | string  | Account type: risk - risk rate account, mmr - maintenance margin rate account, inactive - market not activated                                                    |
+| »»» leverage      | string  | User's current market leverage multiplier                                                                                                                         |
+| »»» locked        | boolean | Whether the account is locked                                                                                                                                     |
+| »»» risk          | string  | Current risk rate of the margin account (returned when the account is a risk rate account)                                                                        |
+| »»» mmr           | string  | Leveraged Account Current Maintenance Margin Rate (returned when the Account is Account)                                                                          |
+| »»» base          | object  | 货币账户信息                                                                                                                                                      |
+| »»»» currency     | string  | 货币名称                                                                                                                                                          |
+| »»»» available    | string  | 可用于杠杆交易的额度, available = 保证金 + borrowed                                                                                                               |
+| »»»» locked       | string  | 冻结资金, 如已经放在杠杆市场里挂单交易的数额                                                                                                                      |
+| »»»» borrowed     | string  | 借入资金                                                                                                                                                          |
+| »»»» interest     | string  | 未还利息                                                                                                                                                          |
+| »»» quote         | object  | 货币账户信息                                                                                                                                                      |
+| »»»» currency     | string  | 货币名称                                                                                                                                                          |
+| »»»» available    | string  | 可用于杠杆交易的额度, available = 保证金 + borrowed                                                                                                               |
+| »»»» locked       | string  | 冻结资金, 如已经放在杠杆市场里挂单交易的数额                                                                                                                      |
+| »»»» borrowed     | string  | 借入资金                                                                                                                                                          |
+| »»»» interest     | string  | 未还利息                                                                                                                                                          |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#query-sub-accounts-futures-account-balances) Query sub accounts' futures account balances
+## [#](#query-sub-account-perpetual-futures-account-balance-information) Query sub-account perpetual futures account balance information
 
 > Code samples
 
 `GET /wallet/sub_account_futures_balances`
 
-_Query sub accounts' futures account balances_
+_Query sub-account perpetual futures account balance information_
 
 ### Parameters
 
-| Name    | In    | Type   | Required | Description                                                                                                                               |
-| ------- | ----- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| sub_uid | query | string | false    | User ID of sub-account, you can query multiple records separated by `,`. If not specified, it will return the records of all sub accounts |
-| settle  | query | string | false    | Query only balances of specified settle currency                                                                                          |
+| Name    | In    | Type   | Required | Description                                                                                                                        |
+| ------- | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| sub_uid | query | string | false    | Sub-account user ID, you can query multiple records separated by `,`. If not specified, it will return records of all sub-accounts |
+| settle  | query | string | false    | Query balance of specified settlement currency                                                                                     |
 
 > Example responses
 
@@ -3224,9 +3225,9 @@ _Query sub accounts' futures account balances_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
@@ -3242,24 +3243,24 @@ Status Code **200**
 | »»» unrealised_pnl                                                             | string  | Unrealized PNL                                                                                                                                                                                  |
 | »»» position_margin                                                            | string  | Position margin                                                                                                                                                                                 |
 | »»» order_margin                                                               | string  | Order margin of unfinished orders                                                                                                                                                               |
-| »»» available                                                                  | string  | The available balance for transferring or trading(including bonus. Bonus can't be be withdrawn. The transfer amount needs to deduct the bonus)                                                  |
-| »»» point                                                                      | string  | POINT amount                                                                                                                                                                                    |
-| »»» currency                                                                   | string  | Settle currency                                                                                                                                                                                 |
+| »»» available                                                                  | string  | Available balance for transferring or trading (including bonus. Bonus cannot be withdrawn, so transfer amount needs to deduct bonus)                                                            |
+| »»» point                                                                      | string  | Point card amount                                                                                                                                                                               |
+| »»» currency                                                                   | string  | Settlement currency                                                                                                                                                                             |
 | »»» in_dual_mode                                                               | boolean | Whether dual mode is enabled                                                                                                                                                                    |
 | »»» enable_credit                                                              | boolean | Whether portfolio margin account mode is enabled                                                                                                                                                |
-| »»» position_initial_margin                                                    | string  | Initial margin position, applicable to the portfolio margin account model                                                                                                                       |
-| »»» maintenance_margin                                                         | string  | The maintenance deposit occupied by the position is suitable for the new classic account margin model and unified account model                                                                 |
-| »»» bonus                                                                      | string  | Perpetual Contract Bonus                                                                                                                                                                        |
+| »»» position_initial_margin                                                    | string  | Initial margin occupied by positions, applicable to unified account mode                                                                                                                        |
+| »»» maintenance_margin                                                         | string  | Maintenance margin occupied by positions, applicable to new classic account margin mode and unified account mode                                                                                |
+| »»» bonus                                                                      | string  | Bonus                                                                                                                                                                                           |
 | »»» enable_evolved_classic                                                     | boolean | Classic account margin mode, true-new mode, false-old mode                                                                                                                                      |
-| »»» cross_order_margin                                                         | string  | Full -warehouse hanging order deposit, suitable for the new classic account margin model                                                                                                        |
-| »»» cross_initial_margin                                                       | string  | The initial security deposit of the full warehouse is suitable for the new classic account margin model                                                                                         |
-| »»» cross_maintenance_margin                                                   | string  | Maintain deposit in full warehouse, suitable for new classic account margin models                                                                                                              |
-| »»» cross_unrealised_pnl                                                       | string  | The full warehouse does not achieve profit and loss, suitable for the new classic account margin model                                                                                          |
-| »»» cross_available                                                            | string  | Full warehouse available amount, suitable for the new classic account margin model                                                                                                              |
-| »»» cross_margin_balance                                                       | string  | Full margin balance, suitable for the new classic account margin model                                                                                                                          |
-| »»» cross_mmr                                                                  | string  | Maintain margin ratio for the full position, suitable for the new classic account margin model                                                                                                  |
-| »»» cross_imr                                                                  | string  | The initial margin rate of the full position is suitable for the new classic account margin model                                                                                               |
-| »»» isolated_position_margin                                                   | string  | Ware -position margin, suitable for the new classic account margin model                                                                                                                        |
+| »»» cross_order_margin                                                         | string  | Cross margin order margin, applicable to new classic account margin mode                                                                                                                        |
+| »»» cross_initial_margin                                                       | string  | Cross margin initial margin, applicable to new classic account margin mode                                                                                                                      |
+| »»» cross_maintenance_margin                                                   | string  | Cross margin maintenance margin, applicable to new classic account margin mode                                                                                                                  |
+| »»» cross_unrealised_pnl                                                       | string  | Cross margin unrealized P&L, applicable to new classic account margin mode                                                                                                                      |
+| »»» cross_available                                                            | string  | Cross margin available balance, applicable to new classic account margin mode                                                                                                                   |
+| »»» cross_margin_balance                                                       | string  | Cross margin balance, applicable to new classic account margin mode                                                                                                                             |
+| »»» cross_mmr                                                                  | string  | Cross margin maintenance margin rate, applicable to new classic account margin mode                                                                                                             |
+| »»» cross_imr                                                                  | string  | Cross margin initial margin rate, applicable to new classic account margin mode                                                                                                                 |
+| »»» isolated_position_margin                                                   | string  | Isolated position margin, applicable to new classic account margin mode                                                                                                                         |
 | »»» enable_new_dual_mode                                                       | boolean | Whether to open a new two-way position mode                                                                                                                                                     |
 | »»» margin_mode                                                                | integer | Margin mode, 0-classic margin mode, 1-cross-currency margin mode, 2-combined margin mode                                                                                                        |
 | »»» enable_tiered_mm                                                           | boolean | Whether to enable tiered maintenance margin calculation                                                                                                                                         |
@@ -3280,19 +3281,19 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#query-subaccount-s-cross-margin-account-info) Query subaccount's cross_margin account info
+## [#](#query-sub-account-cross-margin-account-balance-information) Query sub-account cross margin account balance information
 
 > Code samples
 
 `GET /wallet/sub_account_cross_margin_balances`
 
-_Query subaccount's cross_margin account info_
+_Query sub-account cross margin account balance information_
 
 ### Parameters
 
-| Name    | In    | Type   | Required | Description                                                                                                                               |
-| ------- | ----- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| sub_uid | query | string | false    | User ID of sub-account, you can query multiple records separated by `,`. If not specified, it will return the records of all sub accounts |
+| Name    | In    | Type   | Required | Description                                                                                                                        |
+| ------- | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| sub_uid | query | string | false    | Sub-account user ID, you can query multiple records separated by `,`. If not specified, it will return records of all sub-accounts |
 
 > Example responses
 
@@ -3333,60 +3334,60 @@ _Query subaccount's cross_margin account info_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                              | Type           | Description                                                                                                       |
-| --------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------- |
-| » uid                             | string         | User ID                                                                                                           |
-| » available                       | object         | none                                                                                                              |
-| »» user_id                        | integer(int64) | User ID of the cross margin account. 0 means that the subaccount has not yet opened a cross margin account        |
-| »» locked                         | boolean        | Whether account is locked                                                                                         |
-| »» balances                       | object         | none                                                                                                              |
-| »»» CrossMarginBalance            | object         | none                                                                                                              |
-| »»»» available                    | string         | Available amount                                                                                                  |
-| »»»» freeze                       | string         | Locked amount                                                                                                     |
-| »»»» borrowed                     | string         | Borrowed amount                                                                                                   |
-| »»»» interest                     | string         | Unpaid interests                                                                                                  |
-| »»» total                         | string         | Total account value in USDT, i.e., the sum of all currencies' `(available+freeze)*price*discount`                 |
-| »»» borrowed                      | string         | Total borrowed value in USDT, i.e., the sum of all currencies' `borrowed*price*discount`                          |
-| »»» borrowed_net                  | string         | Total borrowed value in USDT \* borrowed factor                                                                   |
-| »»» net                           | string         | Total net assets in USDT                                                                                          |
-| »»» leverage                      | string         | Position leverage                                                                                                 |
-| »»» interest                      | string         | Total unpaid interests in USDT, i.e., the sum of all currencies' `interest*price*discount`                        |
-| »»» risk                          | string         | Risk rate. When it belows 110%, liquidation will be triggered. Calculation formula: `total / (borrowed+interest)` |
-| »»» total_initial_margin          | string         | Total initial margin                                                                                              |
-| »»» total_margin_balance          | string         | Total margin balance                                                                                              |
-| »»» total_maintenance_margin      | string         | Total maintenance margin                                                                                          |
-| »»» total_initial_margin_rate     | string         | Total initial margin rate                                                                                         |
-| »»» total_maintenance_margin_rate | string         | Total maintenance margin rate                                                                                     |
-| »»» total_available_margin        | string         | Total available margin                                                                                            |
+| Name                              | Type           | Description                                                                                 |
+| --------------------------------- | -------------- | ------------------------------------------------------------------------------------------- |
+| » uid                             | string         | User ID                                                                                     |
+| » available                       | object         | none                                                                                        |
+| »» user_id                        | integer(int64) | 全仓帐户用户ID, 如果 0 代表这个子帐号尚未开通全仓帐户                                       |
+| »» locked                         | boolean        | 账户是否被锁定                                                                              |
+| »» balances                       | object         | none                                                                                        |
+| »»» CrossMarginBalance            | object         | none                                                                                        |
+| »»»» available                    | string         | 可用额度                                                                                    |
+| »»»» freeze                       | string         | 被锁定的额度                                                                                |
+| »»»» borrowed                     | string         | 借入额度                                                                                    |
+| »»»» interest                     | string         | 未还利息                                                                                    |
+| »»» total                         | string         | 折算成 USDT 的账户总资产, 即所有币种(不包括点卡)的 `(available+freeze)*price*discount` 之和 |
+| »»» borrowed                      | string         | 折算成 USDT 的账户总借入数量, 即所有币种(不包括点卡)的 `borrowed*price*discount` 之和       |
+| »»» borrowed_net                  | string         | 折算成 USDT 的账户总借入数量 \* 放大系数                                                    |
+| »»» net                           | string         | 折算成 USDT 的净资产                                                                        |
+| »»» leverage                      | string         | Leverage multiplier                                                                         |
+| »»» interest                      | string         | 折算成 USDT 的账户未接利息的总和, 即所有币种(不包括点卡)的 `interest*price*discount` 之和   |
+| »»» risk                          | string         | 风险率, 风险率小于 110% 会被爆仓, 计算方式 `total / (borrowed+interest)`                    |
+| »»» total_initial_margin          | string         | 总初始保证金                                                                                |
+| »»» total_margin_balance          | string         | 总保证金余额                                                                                |
+| »»» total_maintenance_margin      | string         | 总维持保证金                                                                                |
+| »»» total_initial_margin_rate     | string         | 总初始保证金率                                                                              |
+| »»» total_maintenance_margin_rate | string         | 总维持保证金率                                                                              |
+| »»» total_available_margin        | string         | 可用的保证金额度                                                                            |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#query-saved-address) Query saved address
+## [#](#query-withdrawal-address-whitelist) Query withdrawal address whitelist
 
 > Code samples
 
 `GET /wallet/saved_address`
 
-_Query saved address_
+_Query withdrawal address whitelist_
 
 ### Parameters
 
-| Name     | In    | Type    | Required | Description                          |
-| -------- | ----- | ------- | -------- | ------------------------------------ |
-| currency | query | string  | true     | Currency                             |
-| chain    | query | string  | false    | Chain name                           |
-| limit    | query | string  | false    | Maximum number returned, 100 at most |
-| page     | query | integer | false    | Page number                          |
+| Name     | In    | Type    | Required | Description                        |
+| -------- | ----- | ------- | -------- | ---------------------------------- |
+| currency | query | string  | true     | Currency                           |
+| chain    | query | string  | false    | Chain name                         |
+| limit    | query | string  | false    | Maximum number returned, up to 100 |
+| page     | query | integer | false    | Page number                        |
 
 > Example responses
 
@@ -3407,9 +3408,9 @@ _Query saved address_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
@@ -3428,32 +3429,32 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#retrieve-personal-trading-fee) Retrieve personal trading fee
+## [#](#query-personal-trading-fees) Query personal trading fees
 
 > Code samples
 
 `GET /wallet/fee`
 
-_Retrieve personal trading fee_
+_Query personal trading fees_
 
 ### Parameters
 
 | Name          | In    | Type   | Required | Description                                                                        |
 | ------------- | ----- | ------ | -------- | ---------------------------------------------------------------------------------- |
-| currency_pair | query | string | false    | Specify a currency pair to retrieve precise fee rate                               |
-| settle        | query | string | false    | Specify the settlement currency of the contract to get more accurate rate settings |
+| currency_pair | query | string | false    | Specify currency pair to get more accurate fee settings.                           |
+| settle        | query | string | false    | Specify the settlement currency of the contract to get more accurate fee settings. |
 
 #### [#](#detailed-descriptions-3) Detailed descriptions
 
-**currency_pair**: Specify a currency pair to retrieve precise fee rate
+**currency_pair**: Specify currency pair to get more accurate fee settings.
 
-This field is optional. In most cases, the fee rate is identical among all
-currency pairs
+This field is optional. Usually fee settings are the same for all currency
+pairs.
 
 **settle**: Specify the settlement currency of the contract to get more accurate
-rate settings
+fee settings.
 
-This field is optional. Generally, the rate settings for all settlement
+This field is optional. Generally, the fee settings for all settlement
 currencies are the same.
 
 #### [#](#enumerated-values-2) Enumerated Values
@@ -3488,9 +3489,9 @@ currencies are the same.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
@@ -3501,46 +3502,46 @@ Status Code **200**
 | » user_id            | integer(int64) | User ID                                                                              |
 | » taker_fee          | string         | taker fee rate                                                                       |
 | » maker_fee          | string         | maker fee rate                                                                       |
-| » gt_discount        | boolean        | If GT deduction is enabled                                                           |
+| » gt_discount        | boolean        | Whether GT deduction discount is enabled                                             |
 | » gt_taker_fee       | string         | Taker fee rate if using GT deduction. It will be 0 if GT deduction is disabled       |
-| » gt_maker_fee       | string         | Maker fee rate if using GT deduction. It will be 0 if GT deduction is disabled       |
+| » gt_maker_fee       | string         | Maker fee rate with GT deduction. Returns 0 if GT deduction is disabled              |
 | » loan_fee           | string         | Loan fee rate of margin lending                                                      |
-| » point_type         | string         | Point type. 0 - Initial version. 1 - new version since 202009                        |
-| » futures_taker_fee  | string         | Futures trading taker fee                                                            |
-| » futures_maker_fee  | string         | Future trading maker fee                                                             |
-| » delivery_taker_fee | string         | Delivery trading taker fee                                                           |
-| » delivery_maker_fee | string         | Delivery trading maker fee                                                           |
+| » point_type         | string         | Point card type: 0 - Original version, 1 - New version since 202009                  |
+| » futures_taker_fee  | string         | Perpetual contract taker fee rate                                                    |
+| » futures_maker_fee  | string         | Perpetual contract maker fee rate                                                    |
+| » delivery_taker_fee | string         | Delivery contract taker fee rate                                                     |
+| » delivery_maker_fee | string         | Delivery contract maker fee rate                                                     |
 | » debit_fee          | integer        | Deduction types for rates, 1 - GT deduction, 2 - Point card deduction, 3 - VIP rates |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#retrieve-user-s-total-balances) Retrieve user's total balances
+## [#](#query-personal-account-totals) Query personal account totals
 
 > Code samples
 
 `GET /wallet/total_balance`
 
-_Retrieve user's total balances_
+_Query personal account totals_
 
-This endpoint returns an approximate sum of exchanged amount from all currencies
-to input currency for each account.The exchange rate and account balance could
-have been cached for at most 1 minute. It is not recommended to use its result
-for any trading calculation.
+This query endpoint returns the total _estimated value_ of all currencies in
+each account converted to the input currency. Exchange rates and related account
+balance information may be cached for up to 1 minute. It is not recommended to
+use this interface data for real-time calculations.
 
-For trading calculation, use the corresponding account query endpoint for each
-account type. For example:
+For real-time calculations, query the corresponding balance interface based on
+account type, such as:
 
-- `GET /spot/accounts` to query spot account balance
-- `GET /margin/accounts` to query margin account balance
-- `GET /futures/{settle}/accounts` to query futures account balance
+- `GET /spot/accounts` to query spot account
+- `GET /margin/accounts` to query margin account
+- `GET /futures/{settle}/accounts` to query futures account
 
 ### Parameters
 
-| Name     | In    | Type   | Required | Description                                                                                                  |
-| -------- | ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------ |
-| currency | query | string | false    | Currency unit used to calculate the balance amount. BTC, CNY, USD and USDT are allowed. USDT is the default. |
+| Name     | In    | Type   | Required | Description                                                                                                 |
+| -------- | ----- | ------ | -------- | ----------------------------------------------------------------------------------------------------------- |
+| currency | query | string | false    | Target currency type for statistical conversion. Accepts BTC, CNY, USD, and USDT. USDT is the default value |
 
 > Example responses
 
@@ -3600,39 +3601,39 @@ account type. For example:
 
 ### Responses
 
-| Status | Meaning                                                                    | Description                                    | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------------------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Request is valid and is successfully responded | Inline |
+| Status | Meaning                                                                    | Description                                | Schema |
+| ------ | -------------------------------------------------------------------------- | ------------------------------------------ | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Request is valid and successfully returned | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-_User's balance in all accounts_
+_User's total balance information_
 
-| Name              | Type   | Description                                                                                   |
-| ----------------- | ------ | --------------------------------------------------------------------------------------------- |
-| » total           | object | Total balances calculated with specified currency unit                                        |
-| »» amount         | string | Account total balance amount                                                                  |
-| »» currency       | string | Currency                                                                                      |
-| »» unrealised_pnl | string | Unrealised_pnl, this field will only appear in futures, options, delivery, and total accounts |
-| »» borrowed       | string | Borrowed，this field will only appear in margin and cross_margin accounts                     |
-| » details         | object | Total balances in different accounts                                                          |
+| Name              | Type   | Description                                                              |
+| ----------------- | ------ | ------------------------------------------------------------------------ |
+| » total           | object | 换算成目标币种的账户总额                                                 |
+| »» amount         | string | 账户总额数字                                                             |
+| »» currency       | string | 币种                                                                     |
+| »» unrealised_pnl | string | 未实现盈亏总和,这个 field只会在futures,options,delivery,total 账户中出现 |
+| »» borrowed       | string | 杠杆借贷总和,这个 field只会在margin,cross_margin账户中出现               |
+| » details         | object | Total balances in different accounts                                     |
 
 \- cross_margin: cross margin account  
 \- spot: spot account  
 \- finance: finance account  
 \- margin: margin account  
 \- quant: quant account  
-\- futures: futures account  
-\- delivery: delivery account  
+\- futures: perpetual contract account  
+\- delivery: delivery contract account  
 \- warrant: warrant account  
-\- cbbc: cbbc account | | »» **additionalProperties** | object | Total balances
-calculated with specified currency unit | | »»» amount | string | Account total
-balance amount | | »»» currency | string | Currency | | »»» unrealised_pnl |
-string | Unrealised_pnl, this field will only appear in futures, options,
-delivery, and total accounts | | »»» borrowed | string | Borrowed，this field
-will only appear in margin and cross_margin accounts |
+\- cbbc: CBBC account | | »» **additionalProperties** | object
+| 换算成目标币种的账户总额 | | »»» amount | string | 账户总额数字 | | »»»
+currency | string | 币种 | | »»» unrealised_pnl | string
+| 未实现盈亏总和,这个 field只会在futures,options,delivery,total 账户中出现 | |
+»»» borrowed | string
+| 杠杆借贷总和,这个 field只会在margin,cross_margin账户中出现 |
 
 #### [#](#enumerated-values-3) Enumerated Values
 
@@ -3651,13 +3652,13 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-small-balance) List small balance
+## [#](#get-list-of-convertible-small-balance-currencies) Get list of convertible small balance currencies
 
 > Code samples
 
 `GET /wallet/small_balance`
 
-_List small balance_
+_Get list of convertible small balance currencies_
 
 > Example responses
 
@@ -3694,7 +3695,7 @@ Status Code **200**
 
 | Name                 | Type   | Description                |
 | -------------------- | ------ | -------------------------- |
-| » _None_             | object | Convert Small Balance      |
+| » _None_             | object | Small Balance Conversion   |
 | »» currency          | string | Currency                   |
 | »» available_balance | string | Available balance          |
 | »» estimated_as_btc  | string | Estimated as BTC           |
@@ -3704,13 +3705,13 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#convert-small-balance) Convert small balance
+## [#](#convert-small-balance-currency) Convert small balance currency
 
 > Code samples
 
 `POST /wallet/small_balance`
 
-_Convert small balance_
+_Convert small balance currency_
 
 > Body parameter
 
@@ -3726,11 +3727,11 @@ _Convert small balance_
 
 ### Parameters
 
-| Name       | In   | Type    | Required | Description             |
-| ---------- | ---- | ------- | -------- | ----------------------- |
-| body       | body | object  | true     | none                    |
-| » currency | body | array   | false    | Currency                |
-| » is_all   | body | boolean | false    | Whether to exchange all |
+| Name       | In   | Type    | Required | Description              |
+| ---------- | ---- | ------- | -------- | ------------------------ |
+| body       | body | object  | true     | none                     |
+| » currency | body | array   | false    | Currency to be converted |
+| » is_all   | body | boolean | false    | Whether to convert all   |
 
 ### Responses
 
@@ -3742,21 +3743,21 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-small-balance-history) List small balance history
+## [#](#get-convertible-small-balance-currency-history) Get convertible small balance currency history
 
 > Code samples
 
 `GET /wallet/small_balance_history`
 
-_List small balance history_
+_Get convertible small balance currency history_
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                                    |
-| -------- | ----- | -------------- | -------- | -------------------------------------------------------------- |
-| currency | query | string         | false    | Currency                                                       |
-| page     | query | integer(int32) | false    | Page number                                                    |
-| limit    | query | integer(int32) | false    | Maximum response items. Default: 100, minimum: 1, Maximum: 100 |
+| Name     | In    | Type           | Required | Description                                                              |
+| -------- | ----- | -------------- | -------- | ------------------------------------------------------------------------ |
+| currency | query | string         | false    | Currency to convert                                                      |
+| page     | query | integer(int32) | false    | Page number                                                              |
+| limit    | query | integer(int32) | false    | Maximum number of items returned. Default: 100, minimum: 1, maximum: 100 |
 
 > Example responses
 
@@ -3788,10 +3789,10 @@ Status Code **200**
 
 | Name           | Type           | Description                |
 | -------------- | -------------- | -------------------------- |
-| » _None_       | object         | Convert Small Balance      |
+| » _None_       | object         | Small Balance Conversion   |
 | »» id          | string         | Order ID                   |
 | »» currency    | string         | Currency                   |
-| »» amount      | string         | amount                     |
+| »» amount      | string         | Swap Amount                |
 | »» gt_amount   | string         | GT amount                  |
 | »» create_time | integer(int64) | Exchange time (in seconds) |
 
@@ -3799,24 +3800,24 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#retrieve-the-uid-transfer-history) Retrieve the UID transfer history
+## [#](#get-uid-transfer-history) Get UID transfer history
 
 > Code samples
 
 `GET /wallet/push`
 
-_Retrieve the UID transfer history_
+_Get UID transfer history_
 
 ### Parameters
 
-| Name             | In    | Type           | Required | Description                                                                                                                          |
-| ---------------- | ----- | -------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| id               | query | integer(int32) | false    | Order ID                                                                                                                             |
-| from             | query | integer(int32) | false    | The start time of the query record. If not specified, it defaults to 7 days forward from the current time, in seconds Unix timestamp |
-| to               | query | integer(int32) | false    | The end time of the query record. If not specified, the default is the current time, which is a Unix timestamp in seconds.           |
-| limit            | query | integer(int32) | false    | The maximum number of items returned in the list, the default value is 100                                                           |
-| offset           | query | integer(int32) | false    | List offset, starting from 0                                                                                                         |
-| transaction_type | query | string         | false    | The list returns the order type `withdraw`, `deposit`, the default is `withdraw`.                                                    |
+| Name             | In    | Type           | Required | Description                                                                                                              |
+| ---------------- | ----- | -------------- | -------- | ------------------------------------------------------------------------------------------------------------------------ |
+| id               | query | integer(int32) | false    | Order ID                                                                                                                 |
+| from             | query | integer(int32) | false    | Start time for querying records. If not specified, defaults to 7 days before the current time. Unix timestamp in seconds |
+| to               | query | integer(int32) | false    | End time for querying records. If not specified, defaults to the current time. Unix timestamp in seconds                 |
+| limit            | query | integer(int32) | false    | Maximum number of items returned in the list, default value is 100                                                       |
+| offset           | query | integer(int32) | false    | List offset, starting from 0                                                                                             |
+| transaction_type | query | string         | false    | Order type returned in the list: `withdraw`, `deposit`. Default is `withdraw`.                                           |
 
 > Example responses
 
@@ -3848,25 +3849,25 @@ _Retrieve the UID transfer history_
 
 Status Code **200**
 
-| Name          | Type           | Description       |
-| ------------- | -------------- | ----------------- |
-| » id          | integer(int64) | Order ID          |
-| » push_uid    | integer(int64) | Initiator User ID |
-| » receive_uid | integer(int64) | Recipient User ID |
-| » currency    | string         | Currency name     |
-| » amount      | string         | Transfer amount   |
-| » create_time | integer(int64) | Creation time     |
-| » status      | string         | Withdrawal Status |
+| Name          | Type           | Description        |
+| ------------- | -------------- | ------------------ |
+| » id          | integer(int64) | Order ID           |
+| » push_uid    | integer(int64) | Initiator User ID  |
+| » receive_uid | integer(int64) | Recipient User ID  |
+| » currency    | string         | Currency name      |
+| » amount      | string         | Transfer amount    |
+| » create_time | integer(int64) | Created time       |
+| » status      | string         | Withdrawal status: |
 
 \- CREATING: Creating  
-\- PENDING: Waiting for receiving(Please contact the other party to accept the
-transfer on the Gate official website)  
+\- PENDING: Waiting for recipient (Please contact the recipient to accept the
+transfer on Gate official website)  
 \- CANCELLING: Cancelling  
-\- CANCELLED: Revoked  
-\- REFUSING: Rejection  
-\- REFUSED: Rejected  
+\- CANCELLED: Cancelled  
+\- REFUSING: Refusing  
+\- REFUSED: Refused  
 \- RECEIVING: Receiving  
-\- RECEIVED: Success | | » message | string | PENDING Reason Tips | | »
+\- RECEIVED: Success | | » message | string | PENDING reason tips | | »
 transaction_type | string | Order Type |
 
 WARNING
@@ -3875,7 +3876,7 @@ To perform this operation, you must be authenticated by API key and secret
 
 # [#](#subaccount) SubAccount
 
-Sub-accounts management
+Sub-account management
 
 ## [#](#create-a-new-sub-account) Create a new sub-account
 
@@ -3896,13 +3897,13 @@ _Create a new sub-account_
 
 ### Parameters
 
-| Name         | In   | Type   | Required | Description                                                                                                              |
-| ------------ | ---- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------ |
-| body         | body | object | true     | none                                                                                                                     |
-| » remark     | body | string | false    | custom text                                                                                                              |
-| » login_name | body | string | true     | Sub-account login name: Only letters, numbers and underscores are supported, and cannot contain other illegal characters |
-| » password   | body | string | false    | The sub-account's password. (Default: the same as main account's password)                                               |
-| » email      | body | string | false    | The sub-account's email address. (Default: the same as main account's email address)                                     |
+| Name         | In   | Type   | Required | Description                                                                          |
+| ------------ | ---- | ------ | -------- | ------------------------------------------------------------------------------------ |
+| body         | body | object | true     | none                                                                                 |
+| » remark     | body | string | false    | Remark                                                                               |
+| » login_name | body | string | true     | Sub Account登陆名: 仅支持字母、数字、下划线, 不可包含其他非法字符.                   |
+| » password   | body | string | false    | The sub-account's password. (Default: the same as main account's password)           |
+| » email      | body | string | false    | The sub-account's email address. (Default: the same as main account's email address) |
 
 > Example responses
 
@@ -3922,22 +3923,22 @@ _Create a new sub-account_
 
 | Status | Meaning                                                                         | Description          | Schema |
 | ------ | ------------------------------------------------------------------------------- | -------------------- | ------ |
-| 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Created Successfully | Inline |
+| 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Created successfully | Inline |
 
 ### Response Schema
 
 Status Code **201**
 
-| Name          | Type           | Description                                                                                                              |
-| ------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| » remark      | string         | custom text                                                                                                              |
-| » login_name  | string         | Sub-account login name: Only letters, numbers and underscores are supported, and cannot contain other illegal characters |
-| » password    | string         | The sub-account's password. (Default: the same as main account's password)                                               |
-| » email       | string         | The sub-account's email address. (Default: the same as main account's email address)                                     |
-| » state       | integer(int32) | State: 1-normal, 2-locked"                                                                                               |
-| » type        | integer(int32) | "Sub-account type: 1 - sub-account, 3 - cross margin account                                                             |
-| » user_id     | integer(int64) | The user id of the sub-account                                                                                           |
-| » create_time | integer(int64) | Created time                                                                                                             |
+| Name          | Type           | Description                                                                          |
+| ------------- | -------------- | ------------------------------------------------------------------------------------ |
+| » remark      | string         | Remark                                                                               |
+| » login_name  | string         | Sub Account登陆名: 仅支持字母、数字、下划线, 不可包含其他非法字符.                   |
+| » password    | string         | The sub-account's password. (Default: the same as main account's password)           |
+| » email       | string         | The sub-account's email address. (Default: the same as main account's email address) |
+| » state       | integer(int32) | Sub-account status: 1-normal, 2-locked                                               |
+| » type        | integer(int32) | Sub-account type: 1-Regular sub-account, 3-Cross margin sub-account                  |
+| » user_id     | integer(int64) | Sub-account user ID                                                                  |
+| » create_time | integer(int64) | Created time                                                                         |
 
 WARNING
 
@@ -3953,15 +3954,16 @@ _List sub-accounts_
 
 ### Parameters
 
-| Name | In    | Type   | Required | Description                                                                                          |
-| ---- | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------------- |
-| type | query | string | false    | `0` to list all types of sub-accounts (currently supporting cross margin accounts and sub-accounts). |
+| Name | In    | Type   | Required | Description                                                                                                            |
+| ---- | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
+| type | query | string | false    | Enter `0` to list all types of sub-accounts (currently supporting cross-margin sub-accounts and regular sub-accounts). |
 
 #### [#](#detailed-descriptions-4) Detailed descriptions
 
-**type**: `0` to list all types of sub-accounts (currently supporting cross
-margin accounts and sub-accounts). `1` to list sub-accounts only. If no
-parameter is passed, only sub-accounts will be listed by default.
+**type**: Enter `0` to list all types of sub-accounts (currently supporting
+cross-margin sub-accounts and regular sub-accounts). Enter `1` to query regular
+sub-accounts only. If no parameter is passed, only regular sub-accounts will be
+queried by default.
 
 > Example responses
 
@@ -3981,43 +3983,43 @@ parameter is passed, only sub-accounts will be listed by default.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name          | Type           | Description                                                                                                              |
-| ------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| _None_        | array          | none                                                                                                                     |
-| » remark      | string         | custom text                                                                                                              |
-| » login_name  | string         | Sub-account login name: Only letters, numbers and underscores are supported, and cannot contain other illegal characters |
-| » password    | string         | The sub-account's password. (Default: the same as main account's password)                                               |
-| » email       | string         | The sub-account's email address. (Default: the same as main account's email address)                                     |
-| » state       | integer(int32) | State: 1-normal, 2-locked"                                                                                               |
-| » type        | integer(int32) | "Sub-account type: 1 - sub-account, 3 - cross margin account                                                             |
-| » user_id     | integer(int64) | The user id of the sub-account                                                                                           |
-| » create_time | integer(int64) | Created time                                                                                                             |
+| Name          | Type           | Description                                                                          |
+| ------------- | -------------- | ------------------------------------------------------------------------------------ |
+| _None_        | array          | none                                                                                 |
+| » remark      | string         | Remark                                                                               |
+| » login_name  | string         | Sub Account登陆名: 仅支持字母、数字、下划线, 不可包含其他非法字符.                   |
+| » password    | string         | The sub-account's password. (Default: the same as main account's password)           |
+| » email       | string         | The sub-account's email address. (Default: the same as main account's email address) |
+| » state       | integer(int32) | Sub-account status: 1-normal, 2-locked                                               |
+| » type        | integer(int32) | Sub-account type: 1-Regular sub-account, 3-Cross margin sub-account                  |
+| » user_id     | integer(int64) | Sub-account user ID                                                                  |
+| » create_time | integer(int64) | Created time                                                                         |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#get-the-sub-account) Get the sub-account
+## [#](#get-sub-account) Get sub-account
 
 > Code samples
 
 `GET /sub_accounts/{user_id}`
 
-_Get the sub-account_
+_Get sub-account_
 
 ### Parameters
 
 | Name    | In   | Type           | Required | Description         |
 | ------- | ---- | -------------- | -------- | ------------------- |
-| user_id | path | integer(int64) | true     | Sub-account user id |
+| user_id | path | integer(int64) | true     | Sub-account user ID |
 
 > Example responses
 
@@ -4035,36 +4037,36 @@ _Get the sub-account_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description | Schema |
-| ------ | -------------------------------------------------------------------------- | ----------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successful  | Inline |
+| Status | Meaning                                                                    | Description            | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name          | Type           | Description                                                                                                              |
-| ------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| » remark      | string         | custom text                                                                                                              |
-| » login_name  | string         | Sub-account login name: Only letters, numbers and underscores are supported, and cannot contain other illegal characters |
-| » password    | string         | The sub-account's password. (Default: the same as main account's password)                                               |
-| » email       | string         | The sub-account's email address. (Default: the same as main account's email address)                                     |
-| » state       | integer(int32) | State: 1-normal, 2-locked"                                                                                               |
-| » type        | integer(int32) | "Sub-account type: 1 - sub-account, 3 - cross margin account                                                             |
-| » user_id     | integer(int64) | The user id of the sub-account                                                                                           |
-| » create_time | integer(int64) | Created time                                                                                                             |
+| Name          | Type           | Description                                                                          |
+| ------------- | -------------- | ------------------------------------------------------------------------------------ |
+| » remark      | string         | Remark                                                                               |
+| » login_name  | string         | Sub Account登陆名: 仅支持字母、数字、下划线, 不可包含其他非法字符.                   |
+| » password    | string         | The sub-account's password. (Default: the same as main account's password)           |
+| » email       | string         | The sub-account's email address. (Default: the same as main account's email address) |
+| » state       | integer(int32) | Sub-account status: 1-normal, 2-locked                                               |
+| » type        | integer(int32) | Sub-account type: 1-Regular sub-account, 3-Cross margin sub-account                  |
+| » user_id     | integer(int64) | Sub-account user ID                                                                  |
+| » create_time | integer(int64) | Created time                                                                         |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#create-api-key-of-the-sub-account) Create API Key of the sub-account
+## [#](#create-new-sub-account-api-key-pair) Create new sub-account API key pair
 
 > Code samples
 
 `POST /sub_accounts/{user_id}/keys`
 
-_Create API Key of the sub-account_
+_Create new sub-account API key pair_
 
 > Body parameter
 
@@ -4103,33 +4105,33 @@ _Create API Key of the sub-account_
 
 ### Parameters
 
-| Name           | In   | Type                                  | Required | Description                                                |
-| -------------- | ---- | ------------------------------------- | -------- | ---------------------------------------------------------- |
-| user_id        | path | integer(int64)                        | true     | Sub-account user id                                        |
-| body           | body | [SubAccountKey](#schemasubaccountkey) | true     | none                                                       |
-| » mode         | body | integer(int32)                        | false    | Mode: 1 - classic 2 - portfolio account                    |
-| » name         | body | string                                | false    | API key name                                               |
-| » perms        | body | array                                 | false    | none                                                       |
-| »» name        | body | string                                | false    | Permission function name (no value will be cleared)        |
-| »» read_only   | body | boolean                               | false    | read only                                                  |
-| » ip_whitelist | body | array                                 | false    | ip white list (list will be removed if no value is passed) |
+| Name           | In   | Type                                  | Required | Description                                               |
+| -------------- | ---- | ------------------------------------- | -------- | --------------------------------------------------------- |
+| user_id        | path | integer(int64)                        | true     | Sub-account user ID                                       |
+| body           | body | [SubAccountKey](#schemasubaccountkey) | true     | none                                                      |
+| » mode         | body | integer(int32)                        | false    | Mode: 1 - classic 2 - portfolio account                   |
+| » name         | body | string                                | false    | API Key Name                                              |
+| » perms        | body | array                                 | false    | none                                                      |
+| »» name        | body | string                                | false    | Permission function name (no value will be cleared)       |
+| »» read_only   | body | boolean                               | false    | Read Only                                                 |
+| » ip_whitelist | body | array                                 | false    | IP whitelist (list will be cleared if no value is passed) |
 
 #### [#](#detailed-descriptions-5) Detailed descriptions
 
 **»» name**: Permission function name (no value will be cleared)
 
 - wallet: wallet
-- spot: spot/leverage
+- spot: spot/margin
 - futures: perpetual contract
 - delivery: delivery contract
-- earn: financial management
+- earn: earn
 - custody: custody
 - options: options
 - account: account information
-- loan: loan
-- margin: leverage
+- loan: lending
+- margin: margin
 - unified: unified account
-- copy: copy
+- copy: copy trading
 
 > Example responses
 
@@ -4178,25 +4180,25 @@ _Create API Key of the sub-account_
 
 | Status | Meaning                                                                    | Description          | Schema                                |
 | ------ | -------------------------------------------------------------------------- | -------------------- | ------------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Created Successfully | [SubAccountKey](#schemasubaccountkey) |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Created successfully | [SubAccountKey](#schemasubaccountkey) |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-all-api-key-of-the-sub-account) List all API Key of the sub-account
+## [#](#list-all-api-key-pairs-of-the-sub-account) List all API key pairs of the sub-account
 
 > Code samples
 
 `GET /sub_accounts/{user_id}/keys`
 
-_List all API Key of the sub-account_
+_List all API key pairs of the sub-account_
 
 ### Parameters
 
 | Name    | In   | Type    | Required | Description         |
 | ------- | ---- | ------- | -------- | ------------------- |
-| user_id | path | integer | true     | Sub-account user id |
+| user_id | path | integer | true     | Sub-account user ID |
 
 > Example responses
 
@@ -4245,21 +4247,21 @@ _List all API Key of the sub-account_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema                                    |
-| ------ | -------------------------------------------------------------------------- | -------------- | ----------------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[[SubAccountKey](#schemasubaccountkey)\] |
+| Status | Meaning                                                                    | Description                 | Schema                                    |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ----------------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[[SubAccountKey](#schemasubaccountkey)\] |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#update-api-key-of-the-sub-account) Update API key of the sub-account
+## [#](#update-sub-account-api-key-pair) Update sub-account API key pair
 
 > Code samples
 
 `PUT /sub_accounts/{user_id}/keys/{key}`
 
-_Update API key of the sub-account_
+_Update sub-account API key pair_
 
 > Body parameter
 
@@ -4298,84 +4300,84 @@ _Update API key of the sub-account_
 
 ### Parameters
 
-| Name           | In   | Type                                  | Required | Description                                                |
-| -------------- | ---- | ------------------------------------- | -------- | ---------------------------------------------------------- |
-| user_id        | path | integer                               | true     | Sub-account user id                                        |
-| key            | path | string                                | true     | The API Key of the sub-account                             |
-| body           | body | [SubAccountKey](#schemasubaccountkey) | true     | none                                                       |
-| » mode         | body | integer(int32)                        | false    | Mode: 1 - classic 2 - portfolio account                    |
-| » name         | body | string                                | false    | API key name                                               |
-| » perms        | body | array                                 | false    | none                                                       |
-| »» name        | body | string                                | false    | Permission function name (no value will be cleared)        |
-| »» read_only   | body | boolean                               | false    | read only                                                  |
-| » ip_whitelist | body | array                                 | false    | ip white list (list will be removed if no value is passed) |
+| Name           | In   | Type                                  | Required | Description                                               |
+| -------------- | ---- | ------------------------------------- | -------- | --------------------------------------------------------- |
+| user_id        | path | integer                               | true     | Sub-account user ID                                       |
+| key            | path | string                                | true     | Sub-account API key                                       |
+| body           | body | [SubAccountKey](#schemasubaccountkey) | true     | none                                                      |
+| » mode         | body | integer(int32)                        | false    | Mode: 1 - classic 2 - portfolio account                   |
+| » name         | body | string                                | false    | API Key Name                                              |
+| » perms        | body | array                                 | false    | none                                                      |
+| »» name        | body | string                                | false    | Permission function name (no value will be cleared)       |
+| »» read_only   | body | boolean                               | false    | Read Only                                                 |
+| » ip_whitelist | body | array                                 | false    | IP whitelist (list will be cleared if no value is passed) |
 
 #### [#](#detailed-descriptions-6) Detailed descriptions
 
 **»» name**: Permission function name (no value will be cleared)
 
 - wallet: wallet
-- spot: spot/leverage
+- spot: spot/margin
 - futures: perpetual contract
 - delivery: delivery contract
-- earn: financial management
+- earn: earn
 - custody: custody
 - options: options
 - account: account information
-- loan: loan
-- margin: leverage
+- loan: lending
+- margin: margin
 - unified: unified account
-- copy: copy
+- copy: copy trading
 
 ### Responses
 
-| Status | Meaning                                                                            | Description | Schema |
-| ------ | ---------------------------------------------------------------------------------- | ----------- | ------ |
-| 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Updated     | None   |
+| Status | Meaning                                                                            | Description          | Schema |
+| ------ | ---------------------------------------------------------------------------------- | -------------------- | ------ |
+| 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Updated successfully | None   |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#delete-api-key-of-the-sub-account) Delete API key of the sub-account
+## [#](#delete-sub-account-api-key-pair) Delete sub-account API key pair
 
 > Code samples
 
 `DELETE /sub_accounts/{user_id}/keys/{key}`
 
-_Delete API key of the sub-account_
+_Delete sub-account API key pair_
 
 ### Parameters
 
-| Name    | In   | Type    | Required | Description                    |
-| ------- | ---- | ------- | -------- | ------------------------------ |
-| user_id | path | integer | true     | Sub-account user id            |
-| key     | path | string  | true     | The API Key of the sub-account |
+| Name    | In   | Type    | Required | Description         |
+| ------- | ---- | ------- | -------- | ------------------- |
+| user_id | path | integer | true     | Sub-account user ID |
+| key     | path | string  | true     | Sub-account API key |
 
 ### Responses
 
-| Status | Meaning                                                                            | Description         | Schema |
-| ------ | ---------------------------------------------------------------------------------- | ------------------- | ------ |
-| 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Delete successfully | None   |
+| Status | Meaning                                                                            | Description          | Schema |
+| ------ | ---------------------------------------------------------------------------------- | -------------------- | ------ |
+| 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Deleted successfully | None   |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#get-the-api-key-of-the-sub-account) Get the API Key of the sub-account
+## [#](#get-specific-api-key-pair-of-the-sub-account) Get specific API key pair of the sub-account
 
 > Code samples
 
 `GET /sub_accounts/{user_id}/keys/{key}`
 
-_Get the API Key of the sub-account_
+_Get specific API key pair of the sub-account_
 
 ### Parameters
 
-| Name    | In   | Type    | Required | Description                    |
-| ------- | ---- | ------- | -------- | ------------------------------ |
-| user_id | path | integer | true     | Sub-account user id            |
-| key     | path | string  | true     | The API Key of the sub-account |
+| Name    | In   | Type    | Required | Description         |
+| ------- | ---- | ------- | -------- | ------------------- |
+| user_id | path | integer | true     | Sub-account user ID |
+| key     | path | string  | true     | Sub-account API key |
 
 > Example responses
 
@@ -4422,57 +4424,57 @@ _Get the API Key of the sub-account_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description | Schema                                |
-| ------ | -------------------------------------------------------------------------- | ----------- | ------------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successful  | [SubAccountKey](#schemasubaccountkey) |
+| Status | Meaning                                                                    | Description            | Schema                                |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ------------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | [SubAccountKey](#schemasubaccountkey) |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#lock-the-sub-account) Lock the sub-account
+## [#](#lock-sub-account) Lock sub-account
 
 > Code samples
 
 `POST /sub_accounts/{user_id}/lock`
 
-_Lock the sub-account_
+_Lock sub-account_
 
 ### Parameters
 
-| Name    | In   | Type           | Required | Description                    |
-| ------- | ---- | -------------- | -------- | ------------------------------ |
-| user_id | path | integer(int64) | true     | The user id of the sub-account |
-
-### Responses
-
-| Status | Meaning                                                                            | Description       | Schema |
-| ------ | ---------------------------------------------------------------------------------- | ----------------- | ------ |
-| 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Lock successfully | None   |
-
-WARNING
-
-To perform this operation, you must be authenticated by API key and secret
-
-## [#](#unlock-the-sub-account) Unlock the sub-account
-
-> Code samples
-
-`POST /sub_accounts/{user_id}/unlock`
-
-_Unlock the sub-account_
-
-### Parameters
-
-| Name    | In   | Type           | Required | Description                    |
-| ------- | ---- | -------------- | -------- | ------------------------------ |
-| user_id | path | integer(int64) | true     | The user id of the sub-account |
+| Name    | In   | Type           | Required | Description         |
+| ------- | ---- | -------------- | -------- | ------------------- |
+| user_id | path | integer(int64) | true     | Sub-account user ID |
 
 ### Responses
 
 | Status | Meaning                                                                            | Description         | Schema |
 | ------ | ---------------------------------------------------------------------------------- | ------------------- | ------ |
-| 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Unlock successfully | None   |
+| 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Locked successfully | None   |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
+## [#](#unlock-sub-account) Unlock sub-account
+
+> Code samples
+
+`POST /sub_accounts/{user_id}/unlock`
+
+_Unlock sub-account_
+
+### Parameters
+
+| Name    | In   | Type           | Required | Description         |
+| ------- | ---- | -------------- | -------- | ------------------- |
+| user_id | path | integer(int64) | true     | Sub-account user ID |
+
+### Responses
+
+| Status | Meaning                                                                            | Description           | Schema |
+| ------ | ---------------------------------------------------------------------------------- | --------------------- | ------ |
+| 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Unlocked successfully | None   |
 
 WARNING
 
@@ -4486,7 +4488,7 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Get sub-account mode_
 
-Unified account mode：
+Unified account mode:
 
 - `classic`: Classic account mode
 - `multi_currency`: Multi-currency margin mode
@@ -4508,19 +4510,19 @@ Unified account mode：
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name         | Type           | Description              |
-| ------------ | -------------- | ------------------------ |
-| » user_id    | integer(int64) | User ID                  |
-| » is_unified | boolean        | Is it a unified account? |
-| » mode       | string         | Unified account mode：   |
+| Name         | Type           | Description                     |
+| ------------ | -------------- | ------------------------------- |
+| » user_id    | integer(int64) | User ID                         |
+| » is_unified | boolean        | Whether it is a unified account |
+| » mode       | string         | Unified account mode:           |
 
 \- `classic`: Classic account mode  
 \- `multi_currency`: Multi-currency margin mode  
@@ -4532,15 +4534,15 @@ To perform this operation, you must be authenticated by API key and secret
 
 # [#](#account) Account
 
-Get account detail
+Retrieve user account information
 
-## [#](#get-account-detail) Get account detail
+## [#](#retrieve-user-account-information) Retrieve user account information
 
 > Code samples
 
 `GET /account/detail`
 
-_Get account detail_
+_Retrieve user account information_
 
 > Example responses
 
@@ -4565,9 +4567,9 @@ _Get account detail_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description | Schema |
-| ------ | -------------------------------------------------------------------------- | ----------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successful  | Inline |
+| Status | Meaning                                                                    | Description            | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
 
 ### Response Schema
 
@@ -4575,15 +4577,15 @@ Status Code **200**
 
 _AccountDetail_
 
-| Name                | Type           | Description                                                                                               |
-| ------------------- | -------------- | --------------------------------------------------------------------------------------------------------- |
-| » ip_whitelist      | array          | IP whitelist                                                                                              |
-| » currency_pairs    | array          | CurrencyPair whitelisting                                                                                 |
-| » user_id           | integer(int64) | User ID                                                                                                   |
-| » tier              | integer(int64) | User VIP level                                                                                            |
-| » key               | object         | API Key detail                                                                                            |
-| »» mode             | integer(int32) | mode: 1 - classic account 2 - portfolio margin account                                                    |
-| » copy_trading_role | integer(int32) | User role: 0 - Normal user 1 - Copy trading leader 2 - Copy trading follower 3 - Both leader and follower |
+| Name                | Type           | Description                                                                                     |
+| ------------------- | -------------- | ----------------------------------------------------------------------------------------------- |
+| » ip_whitelist      | array          | IP Whitelist                                                                                    |
+| » currency_pairs    | array          | Trading pair whitelist                                                                          |
+| » user_id           | integer(int64) | User ID                                                                                         |
+| » tier              | integer(int64) | User VIP level                                                                                  |
+| » key               | object         | API Key details                                                                                 |
+| »» mode             | integer(int32) | Mode: 1 - Classic mode, 2 - Legacy unified mode                                                 |
+| » copy_trading_role | integer(int32) | User role: 0 - Normal user, 1 - Copy trading leader, 2 - Follower, 3 - Both leader and follower |
 
 WARNING
 
@@ -4622,9 +4624,9 @@ _Get user transaction rate limit information_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description | Schema     |
-| ------ | -------------------------------------------------------------------------- | ----------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successful  | \[Inline\] |
+| Status | Meaning                                                                    | Description            | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
 
 ### Response Schema
 
@@ -4634,23 +4636,23 @@ _AccountRateLimit_
 
 | Name             | Type   | Description                                                                                                                          |
 | ---------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| AccountRateLimit | array  | Account flow limit                                                                                                                   |
+| AccountRateLimit | array  | Account rate limit                                                                                                                   |
 | » tier           | string | Frequency limit level (For detailed frequency limit rules, see [Transaction ratio frequency limit](#rate-limit-based-on-fill-ratio)) |
-| » ratio          | string | Transaction rate                                                                                                                     |
-| » main_ratio     | string | Total transaction ratio of main account                                                                                              |
+| » ratio          | string | Fill rate                                                                                                                            |
+| » main_ratio     | string | Total fill ratio of main account                                                                                                     |
 | » updated_at     | string | Update time                                                                                                                          |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#create-stp-group) Create STP Group
+## [#](#create-stp-user-group) Create STP user group
 
 > Code samples
 
 `POST /account/stp_groups`
 
-_Create STP Group_
+_Create STP user group_
 
 Only the main account is allowed to create a new STP user group
 
@@ -4670,7 +4672,7 @@ Only the main account is allowed to create a new STP user group
 | » id          | body | integer(int64) | false    | STP Group ID   |
 | » name        | body | string         | true     | STP Group name |
 | » creator_id  | body | integer(int64) | false    | Creator ID     |
-| » create_time | body | integer(int64) | false    | Creation time  |
+| » create_time | body | integer(int64) | false    | Created time   |
 
 > Example responses
 
@@ -4687,9 +4689,9 @@ Only the main account is allowed to create a new STP user group
 
 ### Responses
 
-| Status | Meaning                                                                    | Description                                                                | Schema |
-| ------ | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | User added successfully. Returning the current users within the STP group. | Inline |
+| Status | Meaning                                                                    | Description                                                       | Schema |
+| ------ | -------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | User added successfully, returning current users in the STP group | Inline |
 
 ### Response Schema
 
@@ -4700,27 +4702,27 @@ Status Code **200**
 | » id          | integer(int64) | STP Group ID   |
 | » name        | string         | STP Group name |
 | » creator_id  | integer(int64) | Creator ID     |
-| » create_time | integer(int64) | Creation time  |
+| » create_time | integer(int64) | Created time   |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-stp-groups) List STP Groups
+## [#](#query-stp-user-groups-created-by-the-user) Query STP user groups created by the user
 
 > Code samples
 
 `GET /account/stp_groups`
 
-_List STP Groups_
+_Query STP user groups created by the user_
 
-Retrieve the list of STP groups created by the main account user only
+Only query STP user groups created by the current main account
 
 ### Parameters
 
-| Name | In    | Type   | Required | Description                              |
-| ---- | ----- | ------ | -------- | ---------------------------------------- |
-| name | query | string | false    | Perform a fuzzy search based on the name |
+| Name | In    | Type   | Required | Description          |
+| ---- | ----- | ------ | -------- | -------------------- |
+| name | query | string | false    | Fuzzy search by name |
 
 > Example responses
 
@@ -4739,9 +4741,9 @@ Retrieve the list of STP groups created by the main account user only
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
@@ -4753,21 +4755,22 @@ Status Code **200**
 | » id          | integer(int64) | STP Group ID   |
 | » name        | string         | STP Group name |
 | » creator_id  | integer(int64) | Creator ID     |
-| » create_time | integer(int64) | Creation time  |
+| » create_time | integer(int64) | Created time   |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-users-of-the-stp-group) List users of the STP group
+## [#](#query-users-in-the-stp-user-group) Query users in the STP user group
 
 > Code samples
 
 `GET /account/stp_groups/{stp_id}/users`
 
-_List users of the STP group_
+_Query users in the STP user group_
 
-Only the main account that created this STP group can query the account
+Only the main account that created this STP group can query the account ID list
+in the current STP group
 
 ### Parameters
 
@@ -4791,36 +4794,37 @@ Only the main account that created this STP group can query the account
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name          | Type           | Description   |
-| ------------- | -------------- | ------------- |
-| _None_        | array          | none          |
-| » user_id     | integer(int64) | User ID       |
-| » stp_id      | integer(int64) | STP Group ID  |
-| » create_time | integer(int64) | Creation time |
+| Name          | Type           | Description  |
+| ------------- | -------------- | ------------ |
+| _None_        | array          | none         |
+| » user_id     | integer(int64) | User ID      |
+| » stp_id      | integer(int64) | STP Group ID |
+| » create_time | integer(int64) | Created time |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#add-users-to-the-stp-group) Add users to the STP group
+## [#](#add-users-to-the-stp-user-group) Add users to the STP user group
 
 > Code samples
 
 `POST /account/stp_groups/{stp_id}/users`
 
-_Add users to the STP group_
+_Add users to the STP user group_
 
-- Only the master account that created the STP user group is allowed to add
-  users to the STP user group.- Only accounts under the main account are allowed
-  to be added. Cross-account is not permitted
+- Only the main account that created this STP group can add users to the STP
+  user group
+- Only accounts under the current main account are allowed, cross-main account
+  is not permitted
 
 > Body parameter
 
@@ -4855,32 +4859,32 @@ _Add users to the STP group_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description                                                                | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | User added successfully. Returning the current users within the STP group. | \[Inline\] |
+| Status | Meaning                                                                    | Description                                                       | Schema     |
+| ------ | -------------------------------------------------------------------------- | ----------------------------------------------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | User added successfully, returning current users in the STP group | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name          | Type           | Description   |
-| ------------- | -------------- | ------------- |
-| _None_        | array          | none          |
-| » user_id     | integer(int64) | User ID       |
-| » stp_id      | integer(int64) | STP Group ID  |
-| » create_time | integer(int64) | Creation time |
+| Name          | Type           | Description  |
+| ------------- | -------------- | ------------ |
+| _None_        | array          | none         |
+| » user_id     | integer(int64) | User ID      |
+| » stp_id      | integer(int64) | STP Group ID |
+| » create_time | integer(int64) | Created time |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#delete-the-user-in-the-stp-group) Delete the user in the STP group
+## [#](#delete-users-from-the-stp-user-group) Delete users from the STP user group
 
 > Code samples
 
 `DELETE /account/stp_groups/{stp_id}/users`
 
-_Delete the user in the STP group_
+_Delete users from the STP user group_
 
 - Only the main account that created this STP group is allowed to delete users
   from the STP user group
@@ -4889,10 +4893,10 @@ _Delete the user in the STP group_
 
 ### Parameters
 
-| Name    | In    | Type           | Required | Description                                      |
-| ------- | ----- | -------------- | -------- | ------------------------------------------------ |
-| stp_id  | path  | integer(int64) | true     | STP Group ID                                     |
-| user_id | query | integer(int64) | true     | STP user ID, multiple can be separated by commas |
+| Name    | In    | Type           | Required | Description                                           |
+| ------- | ----- | -------------- | -------- | ----------------------------------------------------- |
+| stp_id  | path  | integer(int64) | true     | STP Group ID                                          |
+| user_id | query | integer(int64) | true     | STP user IDs, multiple IDs can be separated by commas |
 
 > Example responses
 
@@ -4910,34 +4914,34 @@ _Delete the user in the STP group_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description | Schema     |
-| ------ | -------------------------------------------------------------------------- | ----------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Success     | \[Inline\] |
+| Status | Meaning                                                                    | Description                                                        | Schema     |
+| ------ | -------------------------------------------------------------------------- | ------------------------------------------------------------------ | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Users deleted successfully, returns current users in the STP group | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name          | Type           | Description   |
-| ------------- | -------------- | ------------- |
-| _None_        | array          | none          |
-| » user_id     | integer(int64) | User ID       |
-| » stp_id      | integer(int64) | STP Group ID  |
-| » create_time | integer(int64) | Creation time |
+| Name          | Type           | Description  |
+| ------------- | -------------- | ------------ |
+| _None_        | array          | none         |
+| » user_id     | integer(int64) | User ID      |
+| » stp_id      | integer(int64) | STP Group ID |
+| » create_time | integer(int64) | Created time |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#set-gt-deduction) Set GT deduction.
+## [#](#configure-gt-fee-deduction) Configure GT fee deduction
 
 > Code samples
 
 `POST /account/debit_fee`
 
-_Set GT deduction._
+_Configure GT fee deduction_
 
-Enable or disable GT deduction for the current account.
+Enable or disable GT fee deduction for the current account
 
 > Body parameter
 
@@ -4949,10 +4953,10 @@ Enable or disable GT deduction for the current account.
 
 ### Parameters
 
-| Name      | In   | Type                        | Required | Description                     |
-| --------- | ---- | --------------------------- | -------- | ------------------------------- |
-| body      | body | [DebitFee](#schemadebitfee) | true     | none                            |
-| » enabled | body | boolean                     | true     | Whether GT fee discount is used |
+| Name      | In   | Type                        | Required | Description                         |
+| --------- | ---- | --------------------------- | -------- | ----------------------------------- |
+| body      | body | [DebitFee](#schemadebitfee) | true     | none                                |
+| » enabled | body | boolean                     | true     | Whether GT fee deduction is enabled |
 
 ### Responses
 
@@ -4964,15 +4968,15 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#query-gt-deduction-configuration) Query GT deduction configuration.
+## [#](#query-gt-fee-deduction-configuration) Query GT fee deduction configuration
 
 > Code samples
 
 `GET /account/debit_fee`
 
-_Query GT deduction configuration._
+_Query GT fee deduction configuration_
 
-Query the current GT deduction configuration for the account.
+Query the GT fee deduction configuration for the current account
 
 > Example responses
 

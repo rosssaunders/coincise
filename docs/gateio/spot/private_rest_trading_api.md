@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-102-1) Gate API v4.102.1
+# [#](#gate-api-v4-104-0) Gate API v4.104.0
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -127,7 +127,7 @@ has been accidentally leaked, please delete the existing API and rebuild it.
 
 Gate Order matching follows Price Priority > Time priority principle.
 
-Suppose that the order book is as follows：
+Suppose that the order book is as follows:
 
 | Order | Order time | Ask/Selling price |
 | ----- | ---------- | ----------------- |
@@ -177,7 +177,7 @@ endpoint will be deprecated, and the new version of the endpoint can be found in
 the /margin/uni endpoint group. For detailed endpoint migration, please refer to
 the following table:"
 
-Margin account related endpoints：
+Margin account related endpoints:
 
 | Name                                                           | Path                         | Deprecated | New Path |
 | -------------------------------------------------------------- | ---------------------------- | ---------- | -------- |
@@ -189,7 +189,7 @@ Margin account related endpoints：
 | Get the max transferable amount for a specific margin currency | GET /margin/transferable     | No         | `-`      |
 
 The margin lending and borrowing related APIs have been migrated to the
-`/margin/uni` API group：
+`/margin/uni` API group:
 
 | Name                                                          | Old Path                                   | Deprecated | New Path                                       |
 | ------------------------------------------------------------- | ------------------------------------------ | ---------- | ---------------------------------------------- |
@@ -370,7 +370,7 @@ Earning, collateral etc |
 
 **Rate Limit**
 
-Each request to the API response header will contain the following fields:：
+Each request to the API response header will contain the following fields::
 
 - X-Gate-RateLimit-Requests-Remain - your remaining requests for current
   endpoint
@@ -554,7 +554,7 @@ The HTTP status code 2XX will be returned when all operations are successful.
 401 indicates that there is a problem with the certification. Other 4xx status
 codes indicate that the request is invalid. If it is a 5xx error, the server has
 encountered an unknown serious error when processing the request. Please give
-feedback as soon as possible。
+feedback as soon as possible.
 
 **Return Status**
 
@@ -574,12 +574,12 @@ feedback as soon as possible。
 | Type             | Description                                                                                  |
 | ---------------- | -------------------------------------------------------------------------------------------- |
 | `string`         | String type, in double quotation marks. Price and amount are also formatted in string format |
-| `integer`        | 32-bit integer，Mainly related to status codes, size, times, etc.                            |
-| `integer(int64)` | 64-bit integer，Mainly involves ID and higher precision timestamp                            |
+| `integer`        | 32-bit integer, Mainly related to status codes, size, times, etc.                            |
+| `integer(int64)` | 64-bit integer, Mainly involves ID and higher precision timestamp                            |
 | `float`          | Floating point number. Some time and stat fields use float.                                  |
-| `object`         | Object，Contains a child object{}                                                            |
-| `array`          | List，Includes multiple groups of content                                                    |
-| `boolean`        | true is true，false is false                                                                 |
+| `object`         | Object, Contains a child object{}                                                            |
+| `array`          | List, Includes multiple groups of content                                                    |
+| `boolean`        | true is true, false is false                                                                 |
 
 ## [#](#portfolio-margin-account) Portfolio Margin Account
 
@@ -731,9 +731,9 @@ New request body parameter:
 
 New response fields:
 
-| Name    | Type   | Required | Restriction | Description                 |
-| ------- | ------ | -------- | ----------- | --------------------------- |
-| stp_act | string | No       | none        | STP Strategies, including： |
+| Name    | Type   | Required | Restriction | Description                |
+| ------- | ------ | -------- | ----------- | -------------------------- |
+| stp_act | string | No       | none        | STP Strategies, including: |
 
 \- cn  
 \- co  
@@ -1750,7 +1750,7 @@ or with
 
 - Earn related
 
-| `label`                  | 含义                                                                        |
+| `label`                  | Meaning                                                                     |
 | ------------------------ | --------------------------------------------------------------------------- |
 | ERR_BALANCE_NOT_ENOUGH   | balance not enough                                                          |
 | ERR_PRODUCT_SELL_OUT     | Target quota reached                                                        |
@@ -1897,7 +1897,7 @@ Suppose the key we used is `key`, while the secret is `secret`.
 	GET /api/v4/futures/orders?contract=BTC_USD&status=finished&limit=50 HTTP/1.1
 ```
 
-Signature string：
+Signature string:
 
 ```
 	GET\n
@@ -1907,7 +1907,7 @@ Signature string：
 	1541993715
 ```
 
-Explanation：
+Explanation:
 
 - `/api/v4/futures/orders`: request url
 - `contract=BTC_USD&status=finished&limit=50`: keep the query string as it is in
@@ -1927,7 +1927,7 @@ Signature generated
 	{"contract":"BTC_USD","type":"limit","size":100,"price":6800,"time_in_force":"gtc"}
 ```
 
-Signature string：
+Signature string:
 
 ```
 	POST\n
@@ -1937,7 +1937,7 @@ Signature string：
 	1541993715
 ```
 
-Explanation：
+Explanation:
 
 - request query string is empty, use plain empty string
 - use the hashed result of the json-string-formatted request body
@@ -2006,17 +2006,17 @@ Signature generated
 
 Spot trading
 
-## [#](#list-all-currencies-details) List all currencies' details
+## [#](#query-all-currency-information) Query all currency information
 
 > Code samples
 
 `GET /spot/currencies`
 
-_List all currencies' details_
+_Query all currency information_
 
 When a currency corresponds to multiple chains, you can query the information of
 multiple chains through the `chains` field, such as the charging and recharge
-status, identification, etc. of the chain.
+status, identification, etc. of the chain
 
 > Example responses
 
@@ -2062,9 +2062,9 @@ status, identification, etc. of the chain.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
@@ -2085,7 +2085,7 @@ Status Code **200**
 | » is_private          | boolean | Is it a privacy currency?                                                       |
 | » chains              | array   | All links corresponding to coins                                                |
 | »» SpotCurrencyChain  | object  | none                                                                            |
-| »»» name              | string  | Chain name                                                                      |
+| »»» name              | string  | Blockchain name                                                                 |
 | »»» addr              | string  | token address                                                                   |
 | »»» withdraw_disabled | boolean | Whether currency's withdrawal is disabled                                       |
 | »»» withdraw_delayed  | boolean | Whether currency's withdrawal is delayed                                        |
@@ -2093,13 +2093,13 @@ Status Code **200**
 
 This operation does not require authentication
 
-## [#](#get-details-of-a-specific-currency) Get details of a specific currency
+## [#](#query-single-currency-information) Query single currency information
 
 > Code samples
 
 `GET /spot/currencies/{currency}`
 
-_Get details of a specific currency_
+_Query single currency information_
 
 ### Parameters
 
@@ -2149,9 +2149,9 @@ _Get details of a specific currency_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
@@ -2171,7 +2171,7 @@ Status Code **200**
 | » is_private          | boolean | Is it a privacy currency?                                                       |
 | » chains              | array   | All links corresponding to coins                                                |
 | »» SpotCurrencyChain  | object  | none                                                                            |
-| »»» name              | string  | Chain name                                                                      |
+| »»» name              | string  | Blockchain name                                                                 |
 | »»» addr              | string  | token address                                                                   |
 | »»» withdraw_disabled | boolean | Whether currency's withdrawal is disabled                                       |
 | »»» withdraw_delayed  | boolean | Whether currency's withdrawal is delayed                                        |
@@ -2179,13 +2179,13 @@ Status Code **200**
 
 This operation does not require authentication
 
-## [#](#list-all-currency-pairs-supported) List all currency pairs supported
+## [#](#query-all-supported-currency-pairs) Query all supported currency pairs
 
 > Code samples
 
 `GET /spot/currency_pairs`
 
-_List all currency pairs supported_
+_Query all supported currency pairs_
 
 > Example responses
 
@@ -2232,22 +2232,22 @@ Status Code **200**
 | » _None_            | object  | Spot currency pair                                               |
 | »» id               | string  | Currency pair                                                    |
 | »» base             | string  | Base currency                                                    |
-| »» base_name        | string  | Transaction currency name                                        |
+| »» base_name        | string  | Base currency name                                               |
 | »» quote            | string  | Quote currency                                                   |
-| »» quote_name       | string  | Name of the denominated currency                                 |
-| »» fee              | string  | Trading fee                                                      |
+| »» quote_name       | string  | Quote currency name                                              |
+| »» fee              | string  | Trading fee rate                                                 |
 | »» min_base_amount  | string  | Minimum amount of base currency to trade, `null` means no limit  |
 | »» min_quote_amount | string  | Minimum amount of quote currency to trade, `null` means no limit |
 | »» max_base_amount  | string  | Maximum amount of base currency to trade, `null` means no limit  |
 | »» max_quote_amount | string  | Maximum amount of quote currency to trade, `null` means no limit |
 | »» amount_precision | integer | Amount scale                                                     |
 | »» precision        | integer | Price scale                                                      |
-| »» trade_status     | string  | How currency pair can be traded                                  |
+| »» trade_status     | string  | Trading status                                                   |
 
-\- untradable: cannot be bought or sold  
+\- untradable: cannot be traded  
 \- buyable: can be bought  
 \- sellable: can be sold  
-\- tradable: can be bought or sold | | »» sell_start | integer(int64) | Sell
+\- tradable: can be bought and sold | | »» sell_start | integer(int64) | Sell
 start unix timestamp in seconds | | »» buy_start | integer(int64) | Buy start
 unix timestamp in seconds | | »» delisting_time | integer(int64) | Expected time
 to remove the shelves, Unix timestamp in seconds | | »» type | string | Trading
@@ -2266,13 +2266,13 @@ risk assessment, false - No, true - Yes |
 
 This operation does not require authentication
 
-## [#](#get-details-of-a-specifc-currency-pair) Get details of a specifc currency pair
+## [#](#query-single-currency-pair-details) Query single currency pair details
 
 > Code samples
 
 `GET /spot/currency_pairs/{currency_pair}`
 
-_Get details of a specifc currency pair_
+_Query single currency pair details_
 
 ### Parameters
 
@@ -2309,9 +2309,9 @@ _Get details of a specifc currency pair_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
@@ -2323,22 +2323,22 @@ _Spot currency pair_
 | ------------------ | ------- | ---------------------------------------------------------------- |
 | » id               | string  | Currency pair                                                    |
 | » base             | string  | Base currency                                                    |
-| » base_name        | string  | Transaction currency name                                        |
+| » base_name        | string  | Base currency name                                               |
 | » quote            | string  | Quote currency                                                   |
-| » quote_name       | string  | Name of the denominated currency                                 |
-| » fee              | string  | Trading fee                                                      |
+| » quote_name       | string  | Quote currency name                                              |
+| » fee              | string  | Trading fee rate                                                 |
 | » min_base_amount  | string  | Minimum amount of base currency to trade, `null` means no limit  |
 | » min_quote_amount | string  | Minimum amount of quote currency to trade, `null` means no limit |
 | » max_base_amount  | string  | Maximum amount of base currency to trade, `null` means no limit  |
 | » max_quote_amount | string  | Maximum amount of quote currency to trade, `null` means no limit |
 | » amount_precision | integer | Amount scale                                                     |
 | » precision        | integer | Price scale                                                      |
-| » trade_status     | string  | How currency pair can be traded                                  |
+| » trade_status     | string  | Trading status                                                   |
 
-\- untradable: cannot be bought or sold  
+\- untradable: cannot be traded  
 \- buyable: can be bought  
 \- sellable: can be sold  
-\- tradable: can be bought or sold | | » sell_start | integer(int64) | Sell
+\- tradable: can be bought and sold | | » sell_start | integer(int64) | Sell
 start unix timestamp in seconds | | » buy_start | integer(int64) | Buy start
 unix timestamp in seconds | | » delisting_time | integer(int64) | Expected time
 to remove the shelves, Unix timestamp in seconds | | » type | string | Trading
@@ -2357,16 +2357,16 @@ assessment, false - No, true - Yes |
 
 This operation does not require authentication
 
-## [#](#retrieve-ticker-information) Retrieve ticker information
+## [#](#get-currency-pair-ticker-information) Get currency pair ticker information
 
 > Code samples
 
 `GET /spot/tickers`
 
-_Retrieve ticker information_
+_Get currency pair ticker information_
 
-Return only related data if `currency_pair` is specified; otherwise return all
-of them
+If `currency_pair` is specified, only query that currency pair; otherwise return
+all information
 
 ### Parameters
 
@@ -2411,55 +2411,55 @@ of them
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                | Type           | Description                                                                                                                          |
-| ------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
-| » currency_pair     | string         | Currency pair                                                                                                                        |
-| » last              | string         | Last trading price                                                                                                                   |
-| » lowest_ask        | string         | Recent lowest ask                                                                                                                    |
-| » lowest_size       | string         | The latest seller's lowest price quantity; does not exist for batch query; exists for single query, and is empty if there is no data |
-| » highest_bid       | string         | Recent highest bid                                                                                                                   |
-| » highest_size      | string         | The latest buyer's highest price quantity; does not exist for batch query; exists for single query, and is empty if there is no data |
-| » change_percentage | string         | Change percentage in the last 24h                                                                                                    |
-| » change_utc0       | string         | utc0 timezone, the percentage change in the last 24 hours                                                                            |
-| » change_utc8       | string         | utc8 timezone, the percentage change in the last 24 hours                                                                            |
-| » base_volume       | string         | Base currency trade volume in the last 24h                                                                                           |
-| » quote_volume      | string         | Quote currency trade volume in the last 24h                                                                                          |
-| » high_24h          | string         | Highest price in 24h                                                                                                                 |
-| » low_24h           | string         | Lowest price in 24h                                                                                                                  |
-| » etf_net_value     | string         | ETF net value                                                                                                                        |
-| » etf_pre_net_value | string         | null                                                                                                                                 | ETF previous net value at re-balancing time |
-| » etf_pre_timestamp | integer(int64) | null                                                                                                                                 | ETF previous re-balancing time              |
-| » etf_leverage      | string         | null                                                                                                                                 | ETF current leverage                        |
+| Name                | Type           | Description                                                                                                            |
+| ------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| » currency_pair     | string         | Currency pair                                                                                                          |
+| » last              | string         | Last trading price                                                                                                     |
+| » lowest_ask        | string         | Recent lowest ask                                                                                                      |
+| » lowest_size       | string         | Latest seller's lowest price quantity; not available for batch queries; available for single queries, empty if no data |
+| » highest_bid       | string         | Recent highest bid                                                                                                     |
+| » highest_size      | string         | Latest buyer's highest price quantity; not available for batch queries; available for single queries, empty if no data |
+| » change_percentage | string         | 24h price change percentage (negative for decrease, e.g., -7.45)                                                       |
+| » change_utc0       | string         | UTC+0 timezone, 24h price change percentage, negative for decline (e.g., -7.45)                                        |
+| » change_utc8       | string         | UTC+8 timezone, 24h price change percentage, negative for decline (e.g., -7.45)                                        |
+| » base_volume       | string         | Base currency trading volume in the last 24h                                                                           |
+| » quote_volume      | string         | Quote currency trading volume in the last 24h                                                                          |
+| » high_24h          | string         | 24h High                                                                                                               |
+| » low_24h           | string         | 24h Low                                                                                                                |
+| » etf_net_value     | string         | ETF net value                                                                                                          |
+| » etf_pre_net_value | string         | null                                                                                                                   | ETF net value at previous rebalancing point |
+| » etf_pre_timestamp | integer(int64) | null                                                                                                                   | ETF previous rebalancing time               |
+| » etf_leverage      | string         | null                                                                                                                   | ETF current leverage                        |
 
 This operation does not require authentication
 
-## [#](#retrieve-order-book) Retrieve order book
+## [#](#get-market-depth-information) Get market depth information
 
 > Code samples
 
 `GET /spot/order_book`
 
-_Retrieve order book_
+_Get market depth information_
 
 Market depth buy orders are sorted by price from high to low, sell orders are
-reversed are reversed
+sorted from low to high
 
 ### Parameters
 
-| Name          | In    | Type    | Required | Description                                                  |
-| ------------- | ----- | ------- | -------- | ------------------------------------------------------------ |
-| currency_pair | query | string  | true     | Currency pair                                                |
-| interval      | query | string  | false    | Order depth. 0 means no aggregation is applied. default to 0 |
-| limit         | query | integer | false    | Maximum number of order depth data in asks or bids           |
-| with_id       | query | boolean | false    | Return order book ID                                         |
+| Name          | In    | Type    | Required | Description                                                                                   |
+| ------------- | ----- | ------- | -------- | --------------------------------------------------------------------------------------------- |
+| currency_pair | query | string  | true     | Currency pair                                                                                 |
+| interval      | query | string  | false    | Price precision for depth aggregation, 0 means no aggregation, defaults to 0 if not specified |
+| limit         | query | integer | false    | Number of depth levels                                                                        |
+| with_id       | query | boolean | false    | Return order book update ID                                                                   |
 
 > Example responses
 
@@ -2495,9 +2495,9 @@ reversed are reversed
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
@@ -2508,51 +2508,50 @@ Status Code **200**
 | » id      | integer(int64) | Order book ID, which is updated whenever the order book is changed. Valid only when `with_id` is set to `true` |
 | » current | integer(int64) | The timestamp of the response data being generated (in milliseconds)                                           |
 | » update  | integer(int64) | The timestamp of when the orderbook last changed (in milliseconds)                                             |
-| » asks    | array          | Asks order depth                                                                                               |
-| »» _None_ | array          | price and amount                                                                                               |
-| » bids    | array          | Bids order depth                                                                                               |
-| »» _None_ | array          | price and amount                                                                                               |
+| » asks    | array          | Ask Depth                                                                                                      |
+| »» _None_ | array          | Price and Quantity Pair                                                                                        |
+| » bids    | array          | Bid Depth                                                                                                      |
+| »» _None_ | array          | Price and Quantity Pair                                                                                        |
 
 This operation does not require authentication
 
-## [#](#retrieve-market-trades) Retrieve market trades
+## [#](#query-market-transaction-records) Query market transaction records
 
 > Code samples
 
 `GET /spot/trades`
 
-_Retrieve market trades_
+_Query market transaction records_
 
-Supports `from` and `to` by time range query or page-turn query based on
-`last_id`. By default, query by time range is the last 30 days.
+Supports querying by time range using `from` and `to` parameters or pagination
+based on `last_id`. By default, queries the last 30 days.
 
-The query method based on `last_id` page turn is no longer recommended. If
-`last_id` is specified, the time range query parameters will be ignored.
+Pagination based on `last_id` is no longer recommended. If `last_id` is
+specified, the time range query parameters will be ignored.
 
-The maximum number of pages when searching data using limit&page paging function
+When using limit&page pagination to retrieve data, the maximum number of pages
 is 100,000, that is, limit \* (page - 1) <= 100,000.
 
 ### Parameters
 
-| Name          | In    | Type           | Required | Description                                                                                            |
-| ------------- | ----- | -------------- | -------- | ------------------------------------------------------------------------------------------------------ |
-| currency_pair | query | string         | true     | Currency pair                                                                                          |
-| limit         | query | integer(int32) | false    | Maximum number of records to be returned in a single list. Default: 100, Minimum: 1, Maximum: 1000     |
-| last_id       | query | string         | false    | Specify the currency name to query in batches, and support up to 100 pass parameters at a time.        |
-| reverse       | query | boolean        | false    | Whether the id of records to be retrieved should be less than the last_id specified. Default to false. |
-| from          | query | integer(int64) | false    | Start timestamp of the query                                                                           |
-| to            | query | integer(int64) | false    | Time range ending, default to current time                                                             |
-| page          | query | integer(int32) | false    | Page number                                                                                            |
+| Name          | In    | Type           | Required | Description                                                                                    |
+| ------------- | ----- | -------------- | -------- | ---------------------------------------------------------------------------------------------- |
+| currency_pair | query | string         | true     | Currency pair                                                                                  |
+| limit         | query | integer(int32) | false    | Maximum number of items returned in list. Default: 100, minimum: 1, maximum: 1000              |
+| last_id       | query | string         | false    | Specify the currency name to query in batches, and support up to 100 pass parameters at a time |
+| reverse       | query | boolean        | false    | Whether to retrieve data less than `last_id`. Default returns records greater than `last_id`.  |
+| from          | query | integer(int64) | false    | Start timestamp for the query                                                                  |
+| to            | query | integer(int64) | false    | End timestamp for the query, defaults to current time if not specified                         |
+| page          | query | integer(int32) | false    | Page number                                                                                    |
 
-#### [#](#detailed-descriptions-11) Detailed descriptions
+#### [#](#detailed-descriptions-10) Detailed descriptions
 
-**reverse**: Whether the id of records to be retrieved should be less than the
-last_id specified. Default to false.
+**reverse**: Whether to retrieve data less than `last_id`. Default returns
+records greater than `last_id`.
 
-When `last_id` is specified. Set `reverse` to `true` to trace back trading
-history; `false` to retrieve latest tradings.
+Set to `true` to trace back market trade records, `false` to get latest trades.
 
-No effect if `last_id` is not specified.
+No effect when `last_id` is not set.
 
 > Example responses
 
@@ -2581,34 +2580,34 @@ No effect if `last_id` is not specified.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                                                           | Type   | Description                                                          |
-| -------------------------------------------------------------- | ------ | -------------------------------------------------------------------- |
-| _None_                                                         | array  | none                                                                 |
-| » id                                                           | string | Trade ID                                                             |
-| » create_time                                                  | string | Trading time                                                         |
-| » create_time_ms                                               | string | Trading time, with millisecond precision                             |
-| » currency_pair                                                | string | Currency pair                                                        |
-| » side                                                         | string | Buy or sell order                                                    |
-| » role                                                         | string | Trade role. No value in public endpoints                             |
-| » amount                                                       | string | Trade amount                                                         |
-| » price                                                        | string | Order price                                                          |
-| » order_id                                                     | string | Related order ID. No value in public endpoints                       |
-| » fee                                                          | string | Fee deducted. No value in public endpoints                           |
-| » fee_currency                                                 | string | Fee currency unit. No value in public endpoints                      |
-| » point_fee                                                    | string | Points used to deduct fee. No value in public endpoints              |
-| » gt_fee                                                       | string | GT used to deduct fee. No value in public endpoints                  |
-| » amend_text                                                   | string | The custom data that the user remarked when amending the order       |
-| » sequence_id                                                  | string | Represents a unique and consecutive trade ID within a single market. |
-| It is used to track and identify trades in the specific market |
-| » text                                                         | string | User defined information. No value in public endpoints               |
+| Name                                                     | Type   | Description                                                    |
+| -------------------------------------------------------- | ------ | -------------------------------------------------------------- |
+| _None_                                                   | array  | none                                                           |
+| » id                                                     | string | Fill ID                                                        |
+| » create_time                                            | string | Fill Time                                                      |
+| » create_time_ms                                         | string | Trading time, with millisecond precision                       |
+| » currency_pair                                          | string | Currency pair                                                  |
+| » side                                                   | string | Buy or sell order                                              |
+| » role                                                   | string | Trade role, not returned in public endpoints                   |
+| » amount                                                 | string | Trade amount                                                   |
+| » price                                                  | string | Order price                                                    |
+| » order_id                                               | string | Related order ID, not returned in public endpoints             |
+| » fee                                                    | string | Fee deducted, not returned in public endpoints                 |
+| » fee_currency                                           | string | Fee currency unit, not returned in public endpoints            |
+| » point_fee                                              | string | Points used to deduct fee, not returned in public endpoints    |
+| » gt_fee                                                 | string | GT used to deduct fee, not returned in public endpoints        |
+| » amend_text                                             | string | The custom data that the user remarked when amending the order |
+| » sequence_id                                            | string | Consecutive trade ID within a single market.                   |
+| Used to track and identify trades in the specific market |
+| » text                                                   | string | User-defined information, not returned in public endpoints     |
 
 #### [#](#enumerated-values-13) Enumerated Values
 
@@ -2621,26 +2620,26 @@ Status Code **200**
 
 This operation does not require authentication
 
-## [#](#market-candlesticks) Market candlesticks
+## [#](#market-k-line-chart) Market K-line chart
 
 > Code samples
 
 `GET /spot/candlesticks`
 
-_Market candlesticks_
+_Market K-line chart_
 
 Maximum of 1000 points can be returned in a query. Be sure not to exceed the
 limit when specifying from, to and interval
 
 ### Parameters
 
-| Name          | In    | Type           | Required | Description                                                                                                                                        |
-| ------------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| currency_pair | query | string         | true     | Currency pair                                                                                                                                      |
-| limit         | query | integer        | false    | Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected. |
-| from          | query | integer(int64) | false    | Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified                               |
-| to            | query | integer(int64) | false    | Specify the end time of the K-line chart, defaults to current time if not specified, note that the time format is Unix timestamp with second       |
-| interval      | query | string         | false    | Interval time between data points. Note that `30d` means 1 natual month, not 30 days                                                               |
+| Name          | In    | Type           | Required | Description                                                                                                                                              |
+| ------------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| currency_pair | query | string         | true     | Currency pair                                                                                                                                            |
+| limit         | query | integer        | false    | Maximum number of recent data points to return. `limit` conflicts with `from` and `to`. If either `from` or `to` is specified, request will be rejected. |
+| from          | query | integer(int64) | false    | Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified                                     |
+| to            | query | integer(int64) | false    | Specify the end time of the K-line chart, defaults to current time if not specified, note that the time format is Unix timestamp with second precision   |
+| interval      | query | string         | false    | Time interval between data points. Note that `30d` represents a calendar month, not aligned to 30 days                                                   |
 
 #### [#](#enumerated-values-14) Enumerated Values
 
@@ -2679,17 +2678,17 @@ limit when specifying from, to and interval
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema         |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | -------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[\[string\]\] |
+| Status | Meaning                                                                    | Description      | Schema         |
+| ------ | -------------------------------------------------------------------------- | ---------------- | -------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[\[string\]\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name     | Type  | Description                                                         |
-| -------- | ----- | ------------------------------------------------------------------- |
-| » _None_ | array | K-line data for each time granularity, arranged from left to right: |
+| Name     | Type  | Description                                                     |
+| -------- | ----- | --------------------------------------------------------------- |
+| » _None_ | array | Candlestick data for each time granularity, from left to right: |
 
 \- Unix timestamp with second precision  
 \- Trading volume in quote currency  
@@ -2698,34 +2697,33 @@ Status Code **200**
 \- Lowest price  
 \- Opening price  
 \- Trading volume in base currency  
-\- Whether the window is closed; true indicates the end of this segment of
-candlestick chart data, false indicates that this segment of candlestick chart
-data is not yet complete |
+\- Whether window is closed; true means this candlestick data segment is
+complete, false means not yet complete |
 
 This operation does not require authentication
 
-## [#](#query-user-trading-fee-rates) Query user trading fee rates
+## [#](#query-account-fee-rates) Query account fee rates
 
 > Code samples
 
 `GET /spot/fee`
 
-_Query user trading fee rates_
+_Query account fee rates_
 
-This API is deprecated in favour of new fee retrieving API `/wallet/fee`.
+This API is deprecated. The new fee query API is `/wallet/fee`
 
 ### Parameters
 
-| Name          | In    | Type   | Required | Description                                          |
-| ------------- | ----- | ------ | -------- | ---------------------------------------------------- |
-| currency_pair | query | string | false    | Specify a currency pair to retrieve precise fee rate |
+| Name          | In    | Type   | Required | Description                                              |
+| ------------- | ----- | ------ | -------- | -------------------------------------------------------- |
+| currency_pair | query | string | false    | Specify currency pair to get more accurate fee settings. |
 
-#### [#](#detailed-descriptions-12) Detailed descriptions
+#### [#](#detailed-descriptions-11) Detailed descriptions
 
-**currency_pair**: Specify a currency pair to retrieve precise fee rate
+**currency_pair**: Specify currency pair to get more accurate fee settings.
 
-This field is optional. In most cases, the fee rate is identical among all
-currency pairs
+This field is optional. Usually fee settings are the same for all currency
+pairs.
 
 > Example responses
 
@@ -2748,9 +2746,9 @@ currency pairs
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
@@ -2761,11 +2759,11 @@ Status Code **200**
 | » user_id       | integer(int64) | User ID                                                                              |
 | » taker_fee     | string         | taker fee rate                                                                       |
 | » maker_fee     | string         | maker fee rate                                                                       |
-| » gt_discount   | boolean        | If GT deduction is enabled                                                           |
+| » gt_discount   | boolean        | Whether GT deduction discount is enabled                                             |
 | » gt_taker_fee  | string         | Taker fee rate if using GT deduction. It will be 0 if GT deduction is disabled       |
-| » gt_maker_fee  | string         | Maker fee rate if using GT deduction. It will be 0 if GT deduction is disabled       |
+| » gt_maker_fee  | string         | Maker fee rate with GT deduction. Returns 0 if GT deduction is disabled              |
 | » loan_fee      | string         | Loan fee rate of margin lending                                                      |
-| » point_type    | string         | Point type. 0 - Initial version. 1 - new version since 202009                        |
+| » point_type    | string         | Point card type: 0 - Original version, 1 - New version since 202009                  |
 | » currency_pair | string         | Currency pair                                                                        |
 | » debit_fee     | integer        | Deduction types for rates, 1 - GT deduction, 2 - Point card deduction, 3 - VIP rates |
 
@@ -2773,19 +2771,19 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#query-a-batch-of-user-trading-fee-rates) Query a batch of user trading fee rates
+## [#](#batch-query-account-fee-rates) Batch query account fee rates
 
 > Code samples
 
 `GET /spot/batch_fee`
 
-_Query a batch of user trading fee rates_
+_Batch query account fee rates_
 
 ### Parameters
 
-| Name           | In    | Type   | Required | Description                                      |
-| -------------- | ----- | ------ | -------- | ------------------------------------------------ |
-| currency_pairs | query | string | true     | A request can only query up to 50 currency pairs |
+| Name           | In    | Type   | Required | Description                           |
+| -------------- | ----- | ------ | -------- | ------------------------------------- |
+| currency_pairs | query | string | true     | Maximum 50 currency pairs per request |
 
 > Example responses
 
@@ -2834,9 +2832,9 @@ _Query a batch of user trading fee rates_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
@@ -2848,11 +2846,11 @@ Status Code **200**
 | »» user_id                 | integer(int64) | User ID                                                                              |
 | »» taker_fee               | string         | taker fee rate                                                                       |
 | »» maker_fee               | string         | maker fee rate                                                                       |
-| »» gt_discount             | boolean        | If GT deduction is enabled                                                           |
+| »» gt_discount             | boolean        | Whether GT deduction discount is enabled                                             |
 | »» gt_taker_fee            | string         | Taker fee rate if using GT deduction. It will be 0 if GT deduction is disabled       |
-| »» gt_maker_fee            | string         | Maker fee rate if using GT deduction. It will be 0 if GT deduction is disabled       |
+| »» gt_maker_fee            | string         | Maker fee rate with GT deduction. Returns 0 if GT deduction is disabled              |
 | »» loan_fee                | string         | Loan fee rate of margin lending                                                      |
-| »» point_type              | string         | Point type. 0 - Initial version. 1 - new version since 202009                        |
+| »» point_type              | string         | Point card type: 0 - Original version, 1 - New version since 202009                  |
 | »» currency_pair           | string         | Currency pair                                                                        |
 | »» debit_fee               | integer        | Deduction types for rates, 1 - GT deduction, 2 - Point card deduction, 3 - VIP rates |
 
@@ -2860,19 +2858,19 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-spot-accounts) List spot accounts
+## [#](#list-spot-trading-accounts) List spot trading accounts
 
 > Code samples
 
 `GET /spot/accounts`
 
-_List spot accounts_
+_List spot trading accounts_
 
 ### Parameters
 
-| Name     | In    | Type   | Required | Description                             |
-| -------- | ----- | ------ | -------- | --------------------------------------- |
-| currency | query | string | false    | Retrieve data of the specified currency |
+| Name     | In    | Type   | Required | Description                      |
+| -------- | ----- | ------ | -------- | -------------------------------- |
+| currency | query | string | false    | Query by specified currency name |
 
 > Example responses
 
@@ -2891,9 +2889,9 @@ _List spot accounts_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
@@ -2910,30 +2908,30 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#query-account-book) Query account book
+## [#](#query-spot-account-transaction-history) Query spot account transaction history
 
 > Code samples
 
 `GET /spot/account_book`
 
-_Query account book_
+_Query spot account transaction history_
 
-Record query time range is not allowed to exceed 30 days.
+Record query time range cannot exceed 30 days.
 
-The maximum number of pages when searching data using limit&page paging function
+When using limit&page pagination to retrieve data, the maximum number of pages
 is 100,000, that is, limit \* (page - 1) <= 100,000.
 
 ### Parameters
 
-| Name     | In    | Type           | Required | Description                                                                                                                |
-| -------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
-| currency | query | string         | false    | Retrieve data of the specified currency                                                                                    |
-| from     | query | integer(int64) | false    | Start timestamp of the query                                                                                               |
-| to       | query | integer(int64) | false    | Time range ending, default to current time                                                                                 |
-| page     | query | integer(int32) | false    | Page number                                                                                                                |
-| limit    | query | integer        | false    | Maximum number of records to be returned in a single list                                                                  |
-| type     | query | string         | false    | Only retrieve changes of the specified type. All types will be returned if not specified.                                  |
-| code     | query | string         | false    | Specify account change code query, if not specified, all change types are included, and the priority is higher than `type` |
+| Name     | In    | Type           | Required | Description                                                                                                                            |
+| -------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| currency | query | string         | false    | Query by specified currency name                                                                                                       |
+| from     | query | integer(int64) | false    | Start timestamp for the query                                                                                                          |
+| to       | query | integer(int64) | false    | End timestamp for the query, defaults to current time if not specified                                                                 |
+| page     | query | integer(int32) | false    | Page number                                                                                                                            |
+| limit    | query | integer        | false    | Maximum number of records returned in a single list                                                                                    |
+| type     | query | string         | false    | Query by specified account change type. If not specified, all change types will be included.                                           |
+| code     | query | string         | false    | Specify account change code for query. If not specified, all change types are included. This parameter has higher priority than `type` |
 
 > Example responses
 
@@ -2955,9 +2953,9 @@ is 100,000, that is, limit \* (page - 1) <= 100,000.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
@@ -2978,18 +2976,18 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#create-a-batch-of-orders) Create a batch of orders
+## [#](#batch-place-orders) Batch place orders
 
 > Code samples
 
 `POST /spot/batch_orders`
 
-_Create a batch of orders_
+_Batch place orders_
 
-Batch orders requirements:
+Batch order requirements:
 
-1.  custom order field `text` is required
-2.  At most 4 currency pairs, maximum 10 orders each, are allowed in one request
+1.  Custom order field `text` is required
+2.  At most 4 trading pairs, maximum 10 orders each, are allowed in one request
 3.  No mixture of spot orders and margin orders, i.e. `account` must be
     identical for all orders
 
@@ -3065,33 +3063,33 @@ Batch orders requirements:
 
 ### Responses
 
-| Status | Meaning                                                                    | Description          | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Request is completed | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Request execution completed | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name          | Type   | Description                                                          |
-| ------------- | ------ | -------------------------------------------------------------------- |
-| _None_        | array  | \[Batch order details\]                                              |
-| » _None_      | object | Batch order details                                                  |
-| »» order_id   | string | Order ID                                                             |
-| »» amend_text | string | The custom data that the user remarked when amending the order       |
-| »» text       | string | User defined information. If not empty, must follow the rules below: |
+| Name          | Type   | Description                                                                                                          |
+| ------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
+| _None_        | array  | \[Batch order details\]                                                                                              |
+| » _None_      | object | Batch order details                                                                                                  |
+| »» order_id   | string | Order ID                                                                                                             |
+| »» amend_text | string | The custom data that the user remarked when amending the order                                                       |
+| »» text       | string | Order custom information. Users can set custom ID with this field. Custom fields must meet the following conditions: |
 
-1\. prefixed with `t-`  
-2\. no longer than 28 bytes without `t-` prefix  
-3\. can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.) | | »»
-succeeded | boolean | Whether the batch of orders succeeded | | »» label |
-string | Error label, if any, otherwise an empty string | | »» message | string
-| Detailed error message, if any, otherwise an empty string | | »» id | string |
-Order ID | | »» create_time | string | Creation time of order | | »» update_time
-| string | Last modification time of order | | »» create_time_ms |
-integer(int64) | Creation time of order (in milliseconds) | | »» update_time_ms
-| integer(int64) | Last modification time of order (in milliseconds) | | »»
-status | string | Order status
+1\. Must start with `t-`  
+2\. Excluding `t-`, length cannot exceed 28 bytes  
+3\. Can only contain numbers, letters, underscore(\_), hyphen(-) or dot(.) | |
+»» succeeded | boolean | Request execution result | | »» label | string | Error
+label, if any, otherwise an empty string | | »» message | string | Detailed
+error message, if any, otherwise an empty string | | »» id | string | Order ID |
+| »» create_time | string | Creation time of order | | »» update_time | string |
+Last modification time of order | | »» create_time_ms | integer(int64) |
+Creation time of order (in milliseconds) | | »» update_time_ms | integer(int64)
+| Last modification time of order (in milliseconds) | | »» status | string |
+Order status
 
 \- `open`: to be filled  
 \- `closed`: filled  
@@ -3110,23 +3108,23 @@ string | Order price | | »» time_in_force | string | Time in force
 fee  
 \- fok: FillOrKill, fill either completely or none | | »» iceberg | string |
 Amount to display for the iceberg order. Null or 0 for normal orders. Hiding all
-amount is not supported. | | »» auto_repay | boolean | Enable or disable
+amount is not supported | | »» auto_repay | boolean | Enable or disable
 automatic repayment for automatic borrow loan generated by cross margin order.
 Default is disabled. Note that:
 
 1\. This field is only effective for cross margin orders. Margin account does
 not support setting auto repayment for orders.  
-2\. `auto_borrow` and `auto_repay` can be both set to true in one order. | | »»
+2\. `auto_borrow` and `auto_repay` can be both set to true in one order | | »»
 left | string | Amount left to fill | | »» filled_amount | string | Amount
-traded to fill | | »» fill_price | string | Total filled in quote currency.
-Deprecated in favor of `filled_total` | | »» filled_total | string | Total
-filled in quote currency | | »» avg_deal_price | string | Average fill price | |
-»» fee | string | Fee deducted | | »» fee_currency | string | Fee currency unit
-| | »» point_fee | string | Points used to deduct fee | | »» gt_fee | string |
-GT used to deduct fee | | »» gt_discount | boolean | Whether GT fee discount is
-used | | »» rebated_fee | string | Rebated fee | | »» rebated_fee_currency |
-string | Rebated fee currency unit | | »» stp_id | integer | Orders between
-users in the same `stp_id` group are not allowed to be self-traded
+filled | | »» fill_price | string | Total filled in quote currency. Deprecated
+in favor of `filled_total` | | »» filled_total | string | Total filled in quote
+currency | | »» avg_deal_price | string | Average fill price | | »» fee | string
+| Fee deducted | | »» fee_currency | string | Fee currency unit | | »» point_fee
+| string | Points used to deduct fee | | »» gt_fee | string | GT used to deduct
+fee | | »» gt_discount | boolean | Whether GT fee deduction is enabled | | »»
+rebated_fee | string | Rebated fee | | »» rebated_fee_currency | string |
+Rebated fee currency unit | | »» stp_id | integer | Orders between users in the
+same `stp_id` group are not allowed to be self-traded
 
 1\. If the `stp_id` of two orders being matched is non-zero and equal, they will
 not be executed. Instead, the corresponding strategy will be executed based on
@@ -3137,14 +3135,14 @@ use this field to set self-trade prevetion strategies
 
 1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
 self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy。  
+strategy.  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter。  
+passing the `stp_act` parameter.  
 3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
 return '-'
 
 \- cn: Cancel newest, Cancel new orders and keep old ones  
-\- co: Cancel oldest, Cancel old orders and keep new ones  
+\- co: Cancel oldest, new ones  
 \- cb: Cancel both, Both old and new orders will be cancelled | | »» finish_as |
 string | How the order was finished.
 
@@ -3197,8 +3195,8 @@ _List all open orders_
 
 Query the current order list of all trading pairs. Please note that the paging
 parameter controls the number of pending orders in each trading pair. There is
-no paging control for the number of trading pairs. All trading pairs with
-pending orders will be returned.
+no paging control trading pairs. All trading pairs with pending orders will be
+returned.
 
 ### Parameters
 
@@ -3206,7 +3204,7 @@ pending orders will be returned.
 | ------- | ----- | -------------- | -------- | -------------------------------------------------------------------- |
 | page    | query | integer(int32) | false    | Page number                                                          |
 | limit   | query | integer        | false    | Maximum number of records returned in one page in each currency pair |
-| account | query | string         | false    | Specify query account.                                               |
+| account | query | string         | false    | Specify query account                                                |
 
 > Example responses
 
@@ -3248,22 +3246,22 @@ pending orders will be returned.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name            | Type    | Description                                                                  |
-| --------------- | ------- | ---------------------------------------------------------------------------- |
-| » currency_pair | string  | Currency pair                                                                |
-| » total         | integer | The total number of pending orders for this trading pair on the current page |
-| » orders        | array   | none                                                                         |
-| »» _None_       | object  | Spot order details                                                           |
-| »»» id          | string  | Order ID                                                                     |
-| »»» text        | string  | User defined information. If not empty, must follow the rules below:         |
+| Name            | Type    | Description                                                           |
+| --------------- | ------- | --------------------------------------------------------------------- |
+| » currency_pair | string  | Currency pair                                                         |
+| » total         | integer | Total number of open orders for this trading pair on the current page |
+| » orders        | array   | none                                                                  |
+| »» _None_       | object  | Spot order details                                                    |
+| »»» id          | string  | Order ID                                                              |
+| »»» text        | string  | User defined information. If not empty, must follow the rules below:  |
 
 1\. prefixed with `t-`  
 2\. no longer than 28 bytes without `t-` prefix  
@@ -3293,12 +3291,13 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | »»» account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | »»» side |
-string | Buy or sell order | | »»» amount | string | When `type` is limit, it
-refers to base currency. For instance, `BTC_USDT` means `BTC`  
-When `type` is `market`, it refers to different currency according to `side`  
-\- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
-\- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | »»» price |
-string | Price can't be empty when `type`\= `limit` | | »»» time_in_force |
+string | Buy or sell order | | »»» amount | string | Trading quantity  
+When `type` is `limit`, it refers to the base currency (the currency being
+traded), such as `BTC` in `BTC_USDT`  
+When `type` is `market`, it refers to different currencies based on the side:  
+\- `side`: `buy` refers to quote currency, `BTC_USDT` means `USDT`  
+\- `side`: `sell` refers to base currency, `BTC_USDT` means `BTC` | | »»» price
+| string | Trading price, required when `type`\=`limit` | | »»» time_in_force |
 string | Time in force
 
 \- gtc: GoodTillCancelled  
@@ -3308,23 +3307,23 @@ fee
 \- fok: FillOrKill, fill either completely or none  
 Only `ioc` and `fok` are supported when `type`\=`market` | | »»» iceberg |
 string | Amount to display for the iceberg order. Null or 0 for normal orders.
-Hiding all amount is not supported. | | »»» auto_repay | boolean | Enable or
+Hiding all amount is not supported | | »»» auto_repay | boolean | Enable or
 disable automatic repayment for automatic borrow loan generated by cross margin
 order. Default is disabled. Note that:
 
 1\. This field is only effective for cross margin orders. Margin account does
 not support setting auto repayment for orders.  
-2\. `auto_borrow` and `auto_repay` can be both set to true in one order. | | »»»
+2\. `auto_borrow` and `auto_repay` can be both set to true in one order | | »»»
 left | string | Amount left to fill | | »»» filled_amount | string | Amount
-traded to fill | | »»» fill_price | string | Total filled in quote currency.
-Deprecated in favor of `filled_total` | | »»» filled_total | string | Total
-filled in quote currency | | »»» avg_deal_price | string | Average fill price |
-| »»» fee | string | Fee deducted | | »»» fee_currency | string | Fee currency
-unit | | »»» point_fee | string | Points used to deduct fee | | »»» gt_fee |
-string | GT used to deduct fee | | »»» gt_maker_fee | string | GT used to deduct
-maker fee | | »»» gt_taker_fee | string | GT used to deduct taker fee | | »»»
-gt_discount | boolean | Whether GT fee discount is used | | »»» rebated_fee |
-string | Rebated fee | | »»» rebated_fee_currency | string | Rebated fee
+filled | | »»» fill_price | string | Total filled in quote currency. Deprecated
+in favor of `filled_total` | | »»» filled_total | string | Total filled in quote
+currency | | »»» avg_deal_price | string | Average fill price | | »»» fee |
+string | Fee deducted | | »»» fee_currency | string | Fee currency unit | | »»»
+point_fee | string | Points used to deduct fee | | »»» gt_fee | string | GT used
+to deduct fee | | »»» gt_maker_fee | string | GT amount used to deduct maker fee
+| | »»» gt_taker_fee | string | GT amount used to deduct taker fee | | »»»
+gt_discount | boolean | Whether GT fee deduction is enabled | | »»» rebated_fee
+| string | Rebated fee | | »»» rebated_fee_currency | string | Rebated fee
 currency unit | | »»» stp_id | integer | Orders between users in the same
 `stp_id` group are not allowed to be self-traded
 
@@ -3333,19 +3332,19 @@ not be executed. Instead, the corresponding strategy will be executed based on
 the `stp_act` of the taker.  
 2\. `stp_id` returns `0` by default for orders that have not been set for
 `STP group` | | »»» stp_act | string | Self-Trading Prevention Action. Users can
-use this field to set self-trade prevetion strategies
+use this field to set self-trade prevention strategies
 
-1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
-self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy。  
+1\. After users join the `STP Group`, they can pass `stp_act` to limit the
+user's self-trade prevention strategy. If `stp_act` is not passed, the default
+is `cn` strategy.  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter。  
-3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
+passing the `stp_act` parameter.  
+3\. If the user did not use `stp_act` when placing the order, `stp_act` will
 return '-'
 
-\- cn: Cancel newest, Cancel new orders and keep old ones  
-\- co: Cancel oldest, Cancel old orders and keep new ones  
-\- cb: Cancel both, Both old and new orders will be cancelled | | »»» finish_as
+\- cn: Cancel newest, cancel new orders and keep old ones  
+\- co: Cancel oldest, cancel old orders and keep new ones  
+\- cb: Cancel both, both old and new orders will be cancelled | | »»» finish_as
 | string | Order completion statuses include:
 
 \- open: Awaiting processing  
@@ -3356,10 +3355,10 @@ return '-'
 \- depth_not_enough: Cancelled due to insufficient market depth  
 \- trader_not_enough: Cancelled due to insufficient counterparty  
 \- ioc: Not immediately filled because tif is set to ioc  
-\- poc: Not met the order strategy because tif is set to poc  
+\- poc: Not met the order poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown | | »»» fee_discount | string | rate discount |
+\- unknown: Unknown | | »»» fee_discount | string | Fee rate discount |
 
 #### [#](#enumerated-values-16) Enumerated Values
 
@@ -3397,17 +3396,17 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#close-position-when-cross-currency-is-disabled) close position when cross-currency is disabled
+## [#](#close-position-when-cross-currency-is-disabled) Close position when cross-currency is disabled
 
 > Code samples
 
 `POST /spot/cross_liquidate_orders`
 
-_close position when cross-currency is disabled_
+_Close position when cross-currency is disabled_
 
-Currently, only cross-margin accounts are supported to close position when cross
-currencies are disabled. Maximum buy quantity = (unpaid principal and interest -
-currency balance - the amount of the currency in the order book) / 0.998
+Currently, only cross-margin accounts are supported to place buy orders for
+disabled currencies. Maximum buy quantity = (unpaid principal and interest -
+currency balance - the amount of the currency in pending orders) / 0.998
 
 > Body parameter
 
@@ -3422,29 +3421,30 @@ currency balance - the amount of the currency in the order book) / 0.998
 
 ### Parameters
 
-| Name            | In   | Type   | Required | Description                                                          |
-| --------------- | ---- | ------ | -------- | -------------------------------------------------------------------- |
-| body            | body | object | true     | none                                                                 |
-| » text          | body | string | false    | User defined information. If not empty, must follow the rules below: |
-| » currency_pair | body | string | true     | Currency pair                                                        |
-| » amount        | body | string | true     | Trade amount                                                         |
-| » price         | body | string | true     | Order price                                                          |
-| » action_mode   | body | string | false    | Processing Mode:                                                     |
+| Name            | In   | Type   | Required | Description                                                                                                          |
+| --------------- | ---- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------- |
+| body            | body | object | true     | none                                                                                                                 |
+| » text          | body | string | false    | Order custom information. Users can set custom ID with this field. Custom fields must meet the following conditions: |
+| » currency_pair | body | string | true     | Currency pair                                                                                                        |
+| » amount        | body | string | true     | Trade amount                                                                                                         |
+| » price         | body | string | true     | Order price                                                                                                          |
+| » action_mode   | body | string | false    | Processing mode:                                                                                                     |
 
-#### [#](#detailed-descriptions-13) Detailed descriptions
+#### [#](#detailed-descriptions-12) Detailed descriptions
 
-**» text**: User defined information. If not empty, must follow the rules below:
+**» text**: Order custom information. Users can set custom ID with this field.
+Custom fields must meet the following conditions:
 
-1.  prefixed with `t-`
-2.  no longer than 28 bytes without `t-` prefix
-3.  can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.)
+1.  Must start with `t-`
+2.  Excluding `t-`, length cannot exceed 28 bytes
+3.  Can only contain numbers, letters, underscore(\_), hyphen(-) or dot(.)
 
-**» action_mode**: Processing Mode:
+**» action_mode**: Processing mode:
 
 Different fields are returned when placing an order based on action_mode. This
-field is only valid during the request, and it is not included in the response
-result ACK: Asynchronous mode, only returns key order fields RESULT: No clearing
-information FULL: Full mode (default)
+field is only valid during the request and is not included in the response
+`ACK`: Asynchronous mode, only returns key order fields `RESULT`: No liquidation
+information `FULL`: Full mode (default)
 
 > Example responses
 
@@ -3488,9 +3488,9 @@ information FULL: Full mode (default)
 
 ### Responses
 
-| Status | Meaning                                                                         | Description   | Schema |
-| ------ | ------------------------------------------------------------------------------- | ------------- | ------ |
-| 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | order created | Inline |
+| Status | Meaning                                                                         | Description                | Schema |
+| ------ | ------------------------------------------------------------------------------- | -------------------------- | ------ |
+| 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order created successfully | Inline |
 
 ### Response Schema
 
@@ -3531,13 +3531,14 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | » account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | » side |
-string | Buy or sell order | | » amount | string | When `type` is limit, it
-refers to base currency. For instance, `BTC_USDT` means `BTC`  
-When `type` is `market`, it refers to different currency according to `side`  
-\- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
-\- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | » price |
-string | Price can't be empty when `type`\= `limit` | | » time_in_force | string
-| Time in force
+string | Buy or sell order | | » amount | string | Trading quantity  
+When `type` is `limit`, it refers to the base currency (the currency being
+traded), such as `BTC` in `BTC_USDT`  
+When `type` is `market`, it refers to different currencies based on the side:  
+\- `side`: `buy` refers to quote currency, `BTC_USDT` means `USDT`  
+\- `side`: `sell` refers to base currency, `BTC_USDT` means `BTC` | | » price |
+string | Trading price, required when `type`\=`limit` | | » time_in_force |
+string | Time in force
 
 \- gtc: GoodTillCancelled  
 \- ioc: ImmediateOrCancelled, taker only  
@@ -3546,44 +3547,44 @@ fee
 \- fok: FillOrKill, fill either completely or none  
 Only `ioc` and `fok` are supported when `type`\=`market` | | » iceberg | string
 | Amount to display for the iceberg order. Null or 0 for normal orders. Hiding
-all amount is not supported. | | » auto_repay | boolean | Enable or disable
+all amount is not supported | | » auto_repay | boolean | Enable or disable
 automatic repayment for automatic borrow loan generated by cross margin order.
 Default is disabled. Note that:
 
 1\. This field is only effective for cross margin orders. Margin account does
 not support setting auto repayment for orders.  
-2\. `auto_borrow` and `auto_repay` can be both set to true in one order. | | »
-left | string | Amount left to fill | | » filled_amount | string | Amount traded
-to fill | | » fill_price | string | Total filled in quote currency. Deprecated
-in favor of `filled_total` | | » filled_total | string | Total filled in quote
-currency | | » avg_deal_price | string | Average fill price | | » fee | string |
-Fee deducted | | » fee_currency | string | Fee currency unit | | » point_fee |
+2\. `auto_borrow` and `auto_repay` can be both set to true in one order | | »
+left | string | Amount left to fill | | » filled_amount | string | Amount filled
+| | » fill_price | string | Total filled in quote currency. Deprecated in favor
+of `filled_total` | | » filled_total | string | Total filled in quote currency |
+| » avg_deal_price | string | Average fill price | | » fee | string | Fee
+deducted | | » fee_currency | string | Fee currency unit | | » point_fee |
 string | Points used to deduct fee | | » gt_fee | string | GT used to deduct fee
-| | » gt_maker_fee | string | GT used to deduct maker fee | | » gt_taker_fee |
-string | GT used to deduct taker fee | | » gt_discount | boolean | Whether GT
-fee discount is used | | » rebated_fee | string | Rebated fee | | »
-rebated_fee_currency | string | Rebated fee currency unit | | » stp_id | integer
-| Orders between users in the same `stp_id` group are not allowed to be
-self-traded
+| | » gt_maker_fee | string | GT amount used to deduct maker fee | | »
+gt_taker_fee | string | GT amount used to deduct taker fee | | » gt_discount |
+boolean | Whether GT fee deduction is enabled | | » rebated_fee | string |
+Rebated fee | | » rebated_fee_currency | string | Rebated fee currency unit | |
+» stp_id | integer | Orders between users in the same `stp_id` group are not
+allowed to be self-traded
 
 1\. If the `stp_id` of two orders being matched is non-zero and equal, they will
 not be executed. Instead, the corresponding strategy will be executed based on
 the `stp_act` of the taker.  
 2\. `stp_id` returns `0` by default for orders that have not been set for
 `STP group` | | » stp_act | string | Self-Trading Prevention Action. Users can
-use this field to set self-trade prevetion strategies
+use this field to set self-trade prevention strategies
 
-1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
-self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy。  
+1\. After users join the `STP Group`, they can pass `stp_act` to limit the
+user's self-trade prevention strategy. If `stp_act` is not passed, the default
+is `cn` strategy.  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter。  
-3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
+passing the `stp_act` parameter.  
+3\. If the user did not use `stp_act` when placing the order, `stp_act` will
 return '-'
 
-\- cn: Cancel newest, Cancel new orders and keep old ones  
-\- co: Cancel oldest, Cancel old orders and keep new ones  
-\- cb: Cancel both, Both old and new orders will be cancelled | | » finish_as |
+\- cn: Cancel newest, cancel new orders and keep old ones  
+\- co: Cancel oldest, cancel old orders and keep new ones  
+\- cb: Cancel both, both old and new orders will be cancelled | | » finish_as |
 string | Order completion statuses include:
 
 \- open: Awaiting processing  
@@ -3594,10 +3595,10 @@ string | Order completion statuses include:
 \- depth_not_enough: Cancelled due to insufficient market depth  
 \- trader_not_enough: Cancelled due to insufficient counterparty  
 \- ioc: Not immediately filled because tif is set to ioc  
-\- poc: Not met the order strategy because tif is set to poc  
+\- poc: Not met the order poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown | | » fee_discount | string | rate discount |
+\- unknown: Unknown | | » fee_discount | string | Fee rate discount |
 
 #### [#](#enumerated-values-17) Enumerated Values
 
@@ -3643,51 +3644,48 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Create an order_
 
-Support spot, margin, leverage, and full-position leverage orders. Use different
-accounts through the `account` field, default is `spot`, that is, use the spot
-account to place an order if the user is `unified` account, default is to place
-an order with a unified account
+Supports spot, margin, leverage, and cross-margin leverage orders. Use different
+accounts through the `account` field. Default is `spot`, which means using the
+spot account to place orders. If the user has a `unified` account, the default
+is to place orders with the unified account.
 
-When using leveraged account trading, that is, when `account` is set to
-`margin`, you can set `auto_borrow` to `true`, In the case of insufficient
-account balance, the system will automatically execute the
-`POST /margin/uni/loans` to borrow the insufficient part. Whether the assets
-obtained after the leveraged order is automatically used to return the borrowing
-orders of the leveraged account in a position-by-store leverage account depends
-on the automatic repayment settings of the user's position-by-store leverage
-account\*\*, The account automatic repayment settings can be queried and set
-through `/margin/auto_repay`.
+When using leveraged account trading (i.e., when `account` is set to `margin`),
+you can set `auto_borrow` to `true`. In case of insufficient account balance,
+the system will automatically execute `POST /margin/uni/loans` to borrow the
+insufficient amount. Whether assets obtained after leveraged order execution are
+automatically used to repay borrowing orders of the isolated margin account
+depends on the automatic repayment settings of the user's isolated margin
+account. Account automatic repayment settings can be queried and set through
+`/margin/auto_repay`.
 
-Use unified account transactions, that is, when `account` is set to `unified`,
-`auto_borrow` " can also be enableTo realize the insufficient part of automatic
-borrowing, but unlike the leverage account, whether the entrustment of a unified
-account is automatically repayable depends on the when placing an
-order`auto_repay` setting, this setting is only effective for the current
-entrustment, that is, only the assets obtained after the entrustment transaction
-will be used to repay the borrowing orders of the full-position leverage
-account. Unified account ordering currently supports `auto_borrow` and
-`auto_repay` at the same time.
+When using unified account trading (i.e., when `account` is set to `unified`),
+`auto_borrow` can also be enabled to realize automatic borrowing of insufficient
+amounts. However, unlike the isolated margin account, whether unified account
+orders are automatically repaid depends on the `auto_repay` setting when placing
+the order. This setting only applies to the current order, meaning only assets
+obtained after order execution will be used to repay borrowing orders of the
+cross-margin account. Unified account ordering currently supports enabling both
+`auto_borrow` and `auto_repay` simultaneously.
 
-Auto repayment will be triggered at the end of the order, i.e. `status` is
-`cancelled` or `closed` .
+Auto repayment will be triggered when the order ends, i.e., when `status` is
+`cancelled` or `closed`.
 
-**Delegation Status**
+**Order Status**
 
-The entrustment status in the pending order is `open`, which remains at `open`
-until all the quantity is traded. If it is eaten, the order ends and the status
-becomes `closed`. If the order is cancelled before all transactions are
-completed, regardless of whether there are partial transactions, the status will
-become `cancelled`
+The order status in pending orders is `open`, which remains `open` until all
+quantity is filled. If fully filled, the order ends and status becomes `closed`.
+If the order is cancelled before all transactions are completed, regardless of
+partial fills, the status will become `cancelled`.
 
-**Iceberg Entrustment**
+**Iceberg Orders**
 
-`iceberg` is used to set the number of iceberg delegations displayed, and does
-not support complete hiding. Note that when hidden part of the transaction is
-charged according to the taker's handling rate.
+`iceberg` is used to set the displayed quantity of iceberg orders and does not
+support complete hiding. Note that hidden portions are charged according to the
+taker's fee rate.
 
-**Restrict user transactions**
+**Self-Trade Prevention**
 
-Set `stp_act` to decide to use strategies that limit user transactions
+Set `stp_act` to determine the self-trade prevention strategy to use
 
 > Body parameter
 
@@ -3716,17 +3714,17 @@ Set `stp_act` to decide to use strategies that limit user transactions
 | » type          | body   | string  | false    | Order Type                                                                                                                                       |
 | » account       | body   | string  | false    | Account type, spot - spot account, margin - leveraged account, unified - unified account                                                         |
 | » side          | body   | string  | true     | Buy or sell order                                                                                                                                |
-| » amount        | body   | string  | true     | When `type` is limit, it refers to base currency. For instance, `BTC_USDT` means `BTC`                                                           |
-| » price         | body   | string  | false    | Price can't be empty when `type`\= `limit`                                                                                                       |
+| » amount        | body   | string  | true     | Trading quantity                                                                                                                                 |
+| » price         | body   | string  | false    | Trading price, required when `type`\=`limit`                                                                                                     |
 | » time_in_force | body   | string  | false    | Time in force                                                                                                                                    |
-| » iceberg       | body   | string  | false    | Amount to display for the iceberg order. Null or 0 for normal orders. Hiding all amount is not supported.                                        |
-| » auto_borrow   | body   | boolean | false    | Used in margin or cross margin trading to allow automatic loan of insufficient amount if balance is not enough.                                  |
+| » iceberg       | body   | string  | false    | Amount to display for the iceberg order. Null or 0 for normal orders. Hiding all amount is not supported                                         |
+| » auto_borrow   | body   | boolean | false    | Used in margin or cross margin trading to allow automatic loan of insufficient amount if balance is not enough                                   |
 | » auto_repay    | body   | boolean | false    | Enable or disable automatic repayment for automatic borrow loan generated by cross margin order. Default is disabled. Note that:                 |
-| » stp_act       | body   | string  | false    | Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies                                                  |
-| » fee_discount  | body   | string  | false    | rate discount                                                                                                                                    |
+| » stp_act       | body   | string  | false    | Self-Trading Prevention Action. Users can use this field to set self-trade prevention strategies                                                 |
+| » fee_discount  | body   | string  | false    | Fee rate discount                                                                                                                                |
 | » action_mode   | body   | string  | false    | Processing Mode:                                                                                                                                 |
 
-#### [#](#detailed-descriptions-14) Detailed descriptions
+#### [#](#detailed-descriptions-13) Detailed descriptions
 
 **» text**: User defined information. If not empty, must follow the rules below:
 
@@ -3750,12 +3748,12 @@ how the order is created:
 - limit : Limit Order
 - market : Market Order
 
-**» amount**: When `type` is limit, it refers to base currency. For instance,
-`BTC_USDT` means `BTC` When `type` is `market`, it refers to different currency
-according to `side`
+**» amount**: Trading quantity When `type` is `limit`, it refers to the base
+currency (the currency being traded), such as `BTC` in `BTC_USDT` When `type` is
+`market`, it refers to different currencies based on the side:
 
-- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`
-- `side` : `sell` means base currency，`BTC_USDT` means `BTC`
+- `side`: `buy` refers to quote currency, `BTC_USDT` means `USDT`
+- `side`: `sell` refers to base currency, `BTC_USDT` means `BTC`
 
 **» time_in_force**: Time in force
 
@@ -3771,22 +3769,22 @@ loan generated by cross margin order. Default is disabled. Note that:
 
 1.  This field is only effective for cross margin orders. Margin account does
     not support setting auto repayment for orders.
-2.  `auto_borrow` and `auto_repay` can be both set to true in one order.
+2.  `auto_borrow` and `auto_repay` can be both set to true in one order
 
 **» stp_act**: Self-Trading Prevention Action. Users can use this field to set
-self-trade prevetion strategies
+self-trade prevention strategies
 
-1.  After users join the `STP Group`, he can pass `stp_act` to limit the user's
-    self-trade prevetion strategy. If `stp_act` is not passed, the default is
-    `cn` strategy。
+1.  After users join the `STP Group`, they can pass `stp_act` to limit the
+    user's self-trade prevention strategy. If `stp_act` is not passed, the
+    default is `cn` strategy.
 2.  When the user does not join the `STP group`, an error will be returned when
-    passing the `stp_act` parameter。
-3.  If the user did not use 'stp_act' when placing the order, 'stp_act' will
+    passing the `stp_act` parameter.
+3.  If the user did not use `stp_act` when placing the order, `stp_act` will
     return '-'
 
-- cn: Cancel newest, Cancel new orders and keep old ones
-- co: Cancel oldest, Cancel old orders and keep new ones
-- cb: Cancel both, Both old and new orders will be cancelled
+- cn: Cancel newest, cancel new orders and keep old ones
+- co: Cancel oldest, cancel old orders and keep new ones
+- cb: Cancel both, both old and new orders will be cancelled
 
 **» action_mode**: Processing Mode: When placing an order, different fields are
 returned based on action_mode. This field is only valid during the request and
@@ -3891,9 +3889,9 @@ order fields RESULT: No clearing information FULL: Full mode (default)
 
 ### Responses
 
-| Status | Meaning                                                                         | Description    | Schema |
-| ------ | ------------------------------------------------------------------------------- | -------------- | ------ |
-| 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order created. | Inline |
+| Status | Meaning                                                                         | Description   | Schema |
+| ------ | ------------------------------------------------------------------------------- | ------------- | ------ |
+| 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order created | Inline |
 
 ### Response Schema
 
@@ -3934,13 +3932,14 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | » account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | » side |
-string | Buy or sell order | | » amount | string | When `type` is limit, it
-refers to base currency. For instance, `BTC_USDT` means `BTC`  
-When `type` is `market`, it refers to different currency according to `side`  
-\- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
-\- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | » price |
-string | Price can't be empty when `type`\= `limit` | | » time_in_force | string
-| Time in force
+string | Buy or sell order | | » amount | string | Trading quantity  
+When `type` is `limit`, it refers to the base currency (the currency being
+traded), such as `BTC` in `BTC_USDT`  
+When `type` is `market`, it refers to different currencies based on the side:  
+\- `side`: `buy` refers to quote currency, `BTC_USDT` means `USDT`  
+\- `side`: `sell` refers to base currency, `BTC_USDT` means `BTC` | | » price |
+string | Trading price, required when `type`\=`limit` | | » time_in_force |
+string | Time in force
 
 \- gtc: GoodTillCancelled  
 \- ioc: ImmediateOrCancelled, taker only  
@@ -3949,46 +3948,46 @@ fee
 \- fok: FillOrKill, fill either completely or none  
 Only `ioc` and `fok` are supported when `type`\=`market` | | » iceberg | string
 | Amount to display for the iceberg order. Null or 0 for normal orders. Hiding
-all amount is not supported. | | » auto_borrow | boolean | Used in margin or
+all amount is not supported | | » auto_borrow | boolean | Used in margin or
 cross margin trading to allow automatic loan of insufficient amount if balance
-is not enough. | | » auto_repay | boolean | Enable or disable automatic
-repayment for automatic borrow loan generated by cross margin order. Default is
-disabled. Note that:
+is not enough | | » auto_repay | boolean | Enable or disable automatic repayment
+for automatic borrow loan generated by cross margin order. Default is disabled.
+Note that:
 
 1\. This field is only effective for cross margin orders. Margin account does
 not support setting auto repayment for orders.  
-2\. `auto_borrow` and `auto_repay` can be both set to true in one order. | | »
-left | string | Amount left to fill | | » filled_amount | string | Amount traded
-to fill | | » fill_price | string | Total filled in quote currency. Deprecated
-in favor of `filled_total` | | » filled_total | string | Total filled in quote
-currency | | » avg_deal_price | string | Average fill price | | » fee | string |
-Fee deducted | | » fee_currency | string | Fee currency unit | | » point_fee |
+2\. `auto_borrow` and `auto_repay` can be both set to true in one order | | »
+left | string | Amount left to fill | | » filled_amount | string | Amount filled
+| | » fill_price | string | Total filled in quote currency. Deprecated in favor
+of `filled_total` | | » filled_total | string | Total filled in quote currency |
+| » avg_deal_price | string | Average fill price | | » fee | string | Fee
+deducted | | » fee_currency | string | Fee currency unit | | » point_fee |
 string | Points used to deduct fee | | » gt_fee | string | GT used to deduct fee
-| | » gt_maker_fee | string | GT used to deduct maker fee | | » gt_taker_fee |
-string | GT used to deduct taker fee | | » gt_discount | boolean | Whether GT
-fee discount is used | | » rebated_fee | string | Rebated fee | | »
-rebated_fee_currency | string | Rebated fee currency unit | | » stp_id | integer
-| Orders between users in the same `stp_id` group are not allowed to be
-self-traded
+| | » gt_maker_fee | string | GT amount used to deduct maker fee | | »
+gt_taker_fee | string | GT amount used to deduct taker fee | | » gt_discount |
+boolean | Whether GT fee deduction is enabled | | » rebated_fee | string |
+Rebated fee | | » rebated_fee_currency | string | Rebated fee currency unit | |
+» stp_id | integer | Orders between users in the same `stp_id` group are not
+allowed to be self-traded
 
 1\. If the `stp_id` of two orders being matched is non-zero and equal, they will
 not be executed. Instead, the corresponding strategy will be executed based on
 the `stp_act` of the taker.  
 2\. `stp_id` returns `0` by default for orders that have not been set for
 `STP group` | | » stp_act | string | Self-Trading Prevention Action. Users can
-use this field to set self-trade prevetion strategies
+use this field to set self-trade prevention strategies
 
-1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
-self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy。  
+1\. After users join the `STP Group`, they can pass `stp_act` to limit the
+user's self-trade prevention strategy. If `stp_act` is not passed, the default
+is `cn` strategy.  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter。  
-3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
+passing the `stp_act` parameter.  
+3\. If the user did not use `stp_act` when placing the order, `stp_act` will
 return '-'
 
-\- cn: Cancel newest, Cancel new orders and keep old ones  
-\- co: Cancel oldest, Cancel old orders and keep new ones  
-\- cb: Cancel both, Both old and new orders will be cancelled | | » finish_as |
+\- cn: Cancel newest, cancel new orders and keep old ones  
+\- co: Cancel oldest, cancel old orders and keep new ones  
+\- cb: Cancel both, both old and new orders will be cancelled | | » finish_as |
 string | Order completion statuses include:
 
 \- open: Awaiting processing  
@@ -3999,10 +3998,10 @@ string | Order completion statuses include:
 \- depth_not_enough: Cancelled due to insufficient market depth  
 \- trader_not_enough: Cancelled due to insufficient counterparty  
 \- ioc: Not immediately filled because tif is set to ioc  
-\- poc: Not met the order strategy because tif is set to poc  
+\- poc: Not met the order poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown | | » fee_discount | string | rate discount | | »
+\- unknown: Unknown | | » fee_discount | string | Fee rate discount | | »
 action_mode | string | Processing Mode:  
 When placing an order, different fields are returned based on action_mode. This
 field is only valid during the request and is not included in the response
@@ -4055,36 +4054,32 @@ To perform this operation, you must be authenticated by API key and secret
 
 _List orders_
 
-Note that the query results are spot order lists for spot, unified account and
-warehouse-by-site leverage accounts by default.
-
 `status` is set to `open`, that is, when querying the pending order list, only
-pagination control of `page` and `limit` is supported. `limit` Maximum setting
-is only allowed to 100 . The `side` and `from`, `to` parameters for time range
-query are not supported.
+`page` and `limit` paging control are supported. `limit` The maximum setting is
+only 100. Does not support `side` and `from`, `to` parameters for querying by
+time range.
 
-`status` is set to `finished`, that is, when querying historical delegations, in
-addition to pagination queries, `from` and `to` are also supported by time range
-queries. In addition, it supports setting the `side` parameter to filter
-one-side history.
+`status` when querying historical orders, in addition to paging query, it also
+supports `from` and `to` query by time range. In addition, it also supports
+setting the `side` parameter to filter unilateral history.
 
-The parameters of the time range filtering are processed according to the order
-end time.
+The parameters for time range filtering are all processed according to the
+**end** time of the order.
 
 ### Parameters
 
-| Name          | In    | Type           | Required | Description                                                                                                    |
-| ------------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------- |
-| currency_pair | query | string         | true     | Retrieve results with specified currency pair. It is required for open orders, but optional for finished ones. |
-| status        | query | string         | true     | List orders based on status                                                                                    |
-| page          | query | integer(int32) | false    | Page number                                                                                                    |
-| limit         | query | integer        | false    | Maximum number of records to be returned. If `status` is `open`, maximum of `limit` is 100                     |
-| account       | query | string         | false    | Specify query account.                                                                                         |
-| from          | query | integer(int64) | false    | Start timestamp of the query                                                                                   |
-| to            | query | integer(int64) | false    | Time range ending, default to current time                                                                     |
-| side          | query | string         | false    | All bids or asks. Both included if not specified                                                               |
+| Name          | In    | Type           | Required | Description                                                                                |
+| ------------- | ----- | -------------- | -------- | ------------------------------------------------------------------------------------------ |
+| currency_pair | query | string         | true     | Query by specified currency pair. Required for open orders, optional for filled orders     |
+| status        | query | string         | true     | List orders based on status                                                                |
+| page          | query | integer(int32) | false    | Page number                                                                                |
+| limit         | query | integer        | false    | Maximum number of records to be returned. If `status` is `open`, maximum of `limit` is 100 |
+| account       | query | string         | false    | Specify query account                                                                      |
+| from          | query | integer(int64) | false    | Start timestamp for the query                                                              |
+| to            | query | integer(int64) | false    | End timestamp for the query, defaults to current time if not specified                     |
+| side          | query | string         | false    | Specify all bids or all asks, both included if not specified                               |
 
-#### [#](#detailed-descriptions-15) Detailed descriptions
+#### [#](#detailed-descriptions-14) Detailed descriptions
 
 **status**: List orders based on status
 
@@ -4135,9 +4130,9 @@ cancelled
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
@@ -4178,12 +4173,13 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | »» account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | »» side |
-string | Buy or sell order | | »» amount | string | When `type` is limit, it
-refers to base currency. For instance, `BTC_USDT` means `BTC`  
-When `type` is `market`, it refers to different currency according to `side`  
-\- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
-\- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | »» price |
-string | Price can't be empty when `type`\= `limit` | | »» time_in_force |
+string | Buy or sell order | | »» amount | string | Trading quantity  
+When `type` is `limit`, it refers to the base currency (the currency being
+traded), such as `BTC` in `BTC_USDT`  
+When `type` is `market`, it refers to different currencies based on the side:  
+\- `side`: `buy` refers to quote currency, `BTC_USDT` means `USDT`  
+\- `side`: `sell` refers to base currency, `BTC_USDT` means `BTC` | | »» price |
+string | Trading price, required when `type`\=`limit` | | »» time_in_force |
 string | Time in force
 
 \- gtc: GoodTillCancelled  
@@ -4193,24 +4189,24 @@ fee
 \- fok: FillOrKill, fill either completely or none  
 Only `ioc` and `fok` are supported when `type`\=`market` | | »» iceberg | string
 | Amount to display for the iceberg order. Null or 0 for normal orders. Hiding
-all amount is not supported. | | »» auto_repay | boolean | Enable or disable
+all amount is not supported | | »» auto_repay | boolean | Enable or disable
 automatic repayment for automatic borrow loan generated by cross margin order.
 Default is disabled. Note that:
 
 1\. This field is only effective for cross margin orders. Margin account does
 not support setting auto repayment for orders.  
-2\. `auto_borrow` and `auto_repay` can be both set to true in one order. | | »»
+2\. `auto_borrow` and `auto_repay` can be both set to true in one order | | »»
 left | string | Amount left to fill | | »» filled_amount | string | Amount
-traded to fill | | »» fill_price | string | Total filled in quote currency.
-Deprecated in favor of `filled_total` | | »» filled_total | string | Total
-filled in quote currency | | »» avg_deal_price | string | Average fill price | |
-»» fee | string | Fee deducted | | »» fee_currency | string | Fee currency unit
-| | »» point_fee | string | Points used to deduct fee | | »» gt_fee | string |
-GT used to deduct fee | | »» gt_maker_fee | string | GT used to deduct maker fee
-| | »» gt_taker_fee | string | GT used to deduct taker fee | | »» gt_discount |
-boolean | Whether GT fee discount is used | | »» rebated_fee | string | Rebated
-fee | | »» rebated_fee_currency | string | Rebated fee currency unit | | »»
-stp_id | integer | Orders between users in the same `stp_id` group are not
+filled | | »» fill_price | string | Total filled in quote currency. Deprecated
+in favor of `filled_total` | | »» filled_total | string | Total filled in quote
+currency | | »» avg_deal_price | string | Average fill price | | »» fee | string
+| Fee deducted | | »» fee_currency | string | Fee currency unit | | »» point_fee
+| string | Points used to deduct fee | | »» gt_fee | string | GT used to deduct
+fee | | »» gt_maker_fee | string | GT amount used to deduct maker fee | | »»
+gt_taker_fee | string | GT amount used to deduct taker fee | | »» gt_discount |
+boolean | Whether GT fee deduction is enabled | | »» rebated_fee | string |
+Rebated fee | | »» rebated_fee_currency | string | Rebated fee currency unit | |
+»» stp_id | integer | Orders between users in the same `stp_id` group are not
 allowed to be self-traded
 
 1\. If the `stp_id` of two orders being matched is non-zero and equal, they will
@@ -4218,19 +4214,19 @@ not be executed. Instead, the corresponding strategy will be executed based on
 the `stp_act` of the taker.  
 2\. `stp_id` returns `0` by default for orders that have not been set for
 `STP group` | | »» stp_act | string | Self-Trading Prevention Action. Users can
-use this field to set self-trade prevetion strategies
+use this field to set self-trade prevention strategies
 
-1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
-self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy。  
+1\. After users join the `STP Group`, they can pass `stp_act` to limit the
+user's self-trade prevention strategy. If `stp_act` is not passed, the default
+is `cn` strategy.  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter。  
-3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
+passing the `stp_act` parameter.  
+3\. If the user did not use `stp_act` when placing the order, `stp_act` will
 return '-'
 
-\- cn: Cancel newest, Cancel new orders and keep old ones  
-\- co: Cancel oldest, Cancel old orders and keep new ones  
-\- cb: Cancel both, Both old and new orders will be cancelled | | »» finish_as |
+\- cn: Cancel newest, cancel new orders and keep old ones  
+\- co: Cancel oldest, cancel old orders and keep new ones  
+\- cb: Cancel both, both old and new orders will be cancelled | | »» finish_as |
 string | Order completion statuses include:
 
 \- open: Awaiting processing  
@@ -4241,10 +4237,10 @@ string | Order completion statuses include:
 \- depth_not_enough: Cancelled due to insufficient market depth  
 \- trader_not_enough: Cancelled due to insufficient counterparty  
 \- ioc: Not immediately filled because tif is set to ioc  
-\- poc: Not met the order strategy because tif is set to poc  
+\- poc: Not met the order poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown | | »» fee_discount | string | rate discount |
+\- unknown: Unknown | | »» fee_discount | string | Fee rate discount |
 
 #### [#](#enumerated-values-20) Enumerated Values
 
@@ -4291,35 +4287,35 @@ To perform this operation, you must be authenticated by API key and secret
 _Cancel all `open` orders in specified currency pair_
 
 When the `account` parameter is not specified, all pending orders including
-spot, unified account, and position-by-position leverage will be cancelled. When
-`currency_pair` is not specified, all transaction pairs are revoked You can
-specify a certain account separately to cancel all orders under the specified
-account
+spot, unified account, and isolated margin will be cancelled. When
+`currency_pair` is not specified, all trading pair pending orders will be
+cancelled. You can specify a particular account to cancel all pending orders
+under that account
 
 ### Parameters
 
 | Name           | In     | Type   | Required | Description                                                                                                                                      |
 | -------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | currency_pair  | query  | string | false    | Currency pair                                                                                                                                    |
-| side           | query  | string | false    | All bids or asks. Both included if not specified                                                                                                 |
+| side           | query  | string | false    | Specify all bids or all asks, both included if not specified                                                                                     |
 | account        | query  | string | false    | Specify account type                                                                                                                             |
 | action_mode    | query  | string | false    | Processing Mode                                                                                                                                  |
 | x-gate-exptime | header | string | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected |
 
-#### [#](#detailed-descriptions-16) Detailed descriptions
+#### [#](#detailed-descriptions-15) Detailed descriptions
 
 **account**: Specify account type
 
 Classic account: All are included if not specified Unified account: Specify
-unified
+`unified`
 
 **action_mode**: Processing Mode
 
 When placing an order, different fields are returned based on the action_mode
 
-- ACK: Asynchronous mode, returns only key order fields
-- RESULT: No clearing information
-- FULL: Full mode (default)
+- `ACK`: Asynchronous mode, returns only key order fields
+- `RESULT`: No clearing information
+- `FULL`: Full mode (default)
 
 > Example responses
 
@@ -4366,9 +4362,9 @@ When placing an order, different fields are returned based on the action_mode
 
 ### Responses
 
-| Status | Meaning                                                                    | Description                                                               | Schema     |
-| ------ | -------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Batch cancellation request accepted. Query order status by listing orders | \[Inline\] |
+| Status | Meaning                                                                    | Description                                                                         | Schema     |
+| ------ | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Batch cancellation request accepted and processed, success determined by order list | \[Inline\] |
 
 ### Response Schema
 
@@ -4394,14 +4390,14 @@ how the order is created:
 \- 3: from web  
 \- 2: from apiv2  
 \- apiv4: from apiv4 | | »» amend_text | string | The custom data that the user
-remarked when amending the order | | »» succeeded | boolean | Whether the batch
-of orders succeeded | | »» label | string | Error label, if any, otherwise an
-empty string | | »» message | string | Detailed error message, if any, otherwise
-an empty string | | »» create_time | string | Creation time of order | | »»
-update_time | string | Last modification time of order | | »» create_time_ms |
-integer(int64) | Creation time of order (in milliseconds) | | »» update_time_ms
-| integer(int64) | Last modification time of order (in milliseconds) | | »»
-status | string | Order status
+remarked when amending the order | | »» succeeded | boolean | Request execution
+result | | »» label | string | Error label, if any, otherwise an empty string |
+| »» message | string | Detailed error message, if any, otherwise an empty
+string | | »» create_time | string | Creation time of order | | »» update_time |
+string | Last modification time of order | | »» create_time_ms | integer(int64)
+| Creation time of order (in milliseconds) | | »» update_time_ms |
+integer(int64) | Last modification time of order (in milliseconds) | | »» status
+| string | Order status
 
 \- `open`: to be filled  
 \- `closed`: filled  
@@ -4411,12 +4407,13 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | »» account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | »» side |
-string | Buy or sell order | | »» amount | string | When `type` is limit, it
-refers to base currency. For instance, `BTC_USDT` means `BTC`  
-When `type` is `market`, it refers to different currency according to `side`  
-\- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
-\- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | »» price |
-string | Price can't be empty when `type`\= `limit` | | »» time_in_force |
+string | Buy or sell order | | »» amount | string | Trading quantity  
+When `type` is `limit`, it refers to the base currency (the currency being
+traded), such as `BTC` in `BTC_USDT`  
+When `type` is `market`, it refers to different currencies based on the side:  
+\- `side`: `buy` refers to quote currency, `BTC_USDT` means `USDT`  
+\- `side`: `sell` refers to base currency, `BTC_USDT` means `BTC` | | »» price |
+string | Trading price, required when `type`\=`limit` | | »» time_in_force |
 string | Time in force
 
 \- gtc: GoodTillCancelled  
@@ -4426,24 +4423,24 @@ fee
 \- fok: FillOrKill, fill either completely or none  
 Only `ioc` and `fok` are supported when `type`\=`market` | | »» iceberg | string
 | Amount to display for the iceberg order. Null or 0 for normal orders. Hiding
-all amount is not supported. | | »» auto_repay | boolean | Enable or disable
+all amount is not supported | | »» auto_repay | boolean | Enable or disable
 automatic repayment for automatic borrow loan generated by cross margin order.
 Default is disabled. Note that:
 
 1\. This field is only effective for cross margin orders. Margin account does
 not support setting auto repayment for orders.  
-2\. `auto_borrow` and `auto_repay` can be both set to true in one order. | | »»
+2\. `auto_borrow` and `auto_repay` can be both set to true in one order | | »»
 left | string | Amount left to fill | | »» filled_amount | string | Amount
-traded to fill | | »» fill_price | string | Total filled in quote currency.
-Deprecated in favor of `filled_total` | | »» filled_total | string | Total
-filled in quote currency | | »» avg_deal_price | string | Average fill price | |
-»» fee | string | Fee deducted | | »» fee_currency | string | Fee currency unit
-| | »» point_fee | string | Points used to deduct fee | | »» gt_fee | string |
-GT used to deduct fee | | »» gt_maker_fee | string | GT used to deduct maker fee
-| | »» gt_taker_fee | string | GT used to deduct taker fee | | »» gt_discount |
-boolean | Whether GT fee discount is used | | »» rebated_fee | string | Rebated
-fee | | »» rebated_fee_currency | string | Rebated fee currency unit | | »»
-stp_id | integer | Orders between users in the same `stp_id` group are not
+filled | | »» fill_price | string | Total filled in quote currency. Deprecated
+in favor of `filled_total` | | »» filled_total | string | Total filled in quote
+currency | | »» avg_deal_price | string | Average fill price | | »» fee | string
+| Fee deducted | | »» fee_currency | string | Fee currency unit | | »» point_fee
+| string | Points used to deduct fee | | »» gt_fee | string | GT used to deduct
+fee | | »» gt_maker_fee | string | GT amount used to deduct maker fee | | »»
+gt_taker_fee | string | GT amount used to deduct taker fee | | »» gt_discount |
+boolean | Whether GT fee deduction is enabled | | »» rebated_fee | string |
+Rebated fee | | »» rebated_fee_currency | string | Rebated fee currency unit | |
+»» stp_id | integer | Orders between users in the same `stp_id` group are not
 allowed to be self-traded
 
 1\. If the `stp_id` of two orders being matched is non-zero and equal, they will
@@ -4451,19 +4448,19 @@ not be executed. Instead, the corresponding strategy will be executed based on
 the `stp_act` of the taker.  
 2\. `stp_id` returns `0` by default for orders that have not been set for
 `STP group` | | »» stp_act | string | Self-Trading Prevention Action. Users can
-use this field to set self-trade prevetion strategies
+use this field to set self-trade prevention strategies
 
-1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
-self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy。  
+1\. After users join the `STP Group`, they can pass `stp_act` to limit the
+user's self-trade prevention strategy. If `stp_act` is not passed, the default
+is `cn` strategy.  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter。  
-3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
+passing the `stp_act` parameter.  
+3\. If the user did not use `stp_act` when placing the order, `stp_act` will
 return '-'
 
-\- cn: Cancel newest, Cancel new orders and keep old ones  
-\- co: Cancel oldest, Cancel old orders and keep new ones  
-\- cb: Cancel both, Both old and new orders will be cancelled | | »» finish_as |
+\- cn: Cancel newest, cancel new orders and keep old ones  
+\- co: Cancel oldest, cancel old orders and keep new ones  
+\- cb: Cancel both, both old and new orders will be cancelled | | »» finish_as |
 string | How the order was finished.
 
 \- open: processing  
@@ -4471,7 +4468,7 @@ string | How the order was finished.
 \- cancelled: manually cancelled  
 \- ioc: time in force is `IOC`, finish immediately  
 \- stp: cancelled because self trade prevention | | »» fee_discount | string |
-rate discount |
+Fee rate discount |
 
 #### [#](#enumerated-values-21) Enumerated Values
 
@@ -4502,13 +4499,13 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#cancel-a-batch-of-orders-with-an-id-list) Cancel a batch of orders with an ID list
+## [#](#cancel-batch-orders-by-specified-id-list) Cancel batch orders by specified ID list
 
 > Code samples
 
 `POST /spot/cancel_batch_orders`
 
-_Cancel a batch of orders with an ID list_
+_Cancel batch orders by specified ID list_
 
 Multiple currency pairs can be specified, but maximum 20 orders are allowed per
 request
@@ -4558,41 +4555,41 @@ request
 
 Status Code **200**
 
-| Name                | Type    | Description                                                       |
-| ------------------- | ------- | ----------------------------------------------------------------- |
-| » CancelOrderResult | object  | Order cancellation result                                         |
-| »» currency_pair    | string  | Order currency pair                                               |
-| »» id               | string  | Order ID                                                          |
-| »» text             | string  | Custom order information                                          |
-| »» succeeded        | boolean | Whether cancellation succeeded                                    |
-| »» label            | string  | Error label when failed to cancel the order; emtpy if succeeded   |
-| »» message          | string  | Error message when failed to cancel the order; empty if succeeded |
-| »» account          | string  | Default is empty (deprecated)                                     |
+| Name                | Type    | Description                                                     |
+| ------------------- | ------- | --------------------------------------------------------------- |
+| » CancelOrderResult | object  | Order cancellation result                                       |
+| »» currency_pair    | string  | Order currency pair                                             |
+| »» id               | string  | Order ID                                                        |
+| »» text             | string  | Custom order information                                        |
+| »» succeeded        | boolean | Whether cancellation succeeded                                  |
+| »» label            | string  | Error label when failed to cancel the order; emtpy if succeeded |
+| »» message          | string  | Error description when cancellation fails, empty if successful  |
+| »» account          | string  | Default is empty (deprecated)                                   |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#get-a-single-order) Get a single order
+## [#](#query-single-order-details) Query single order details
 
 > Code samples
 
 `GET /spot/orders/{order_id}`
 
-_Get a single order_
+_Query single order details_
 
-By default, orders for spot, unified account and warehouse-by-site leverage
-account are checked.
+By default, queries orders for spot, unified account, and isolated margin
+accounts.
 
 ### Parameters
 
-| Name          | In    | Type   | Required | Description                                                                                                                                                                 |
-| ------------- | ----- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| order_id      | path  | string | true     | The order ID returned when the order was successfully created or the custom ID specified by the user's creation (i.e. the `text` field).                                    |
-| currency_pair | query | string | true     | Specify the transaction pair to query. If you are querying pending order records, this field is required. If you are querying traded records, this field can be left blank. |
-| account       | query | string | false    | Specify query account.                                                                                                                                                      |
+| Name          | In    | Type   | Required | Description                                                                                                                                                  |
+| ------------- | ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| order_id      | path  | string | true     | The order ID returned when the order was successfully created or the custom ID specified by the user's creation (i.e. the `text` field).                     |
+| currency_pair | query | string | true     | Specify the trading pair to query. This field is required when querying pending order records. This field can be omitted when querying filled order records. |
+| account       | query | string | false    | Specify query account                                                                                                                                        |
 
-#### [#](#detailed-descriptions-17) Detailed descriptions
+#### [#](#detailed-descriptions-16) Detailed descriptions
 
 **order_id**: The order ID returned when the order was successfully created or
 the custom ID specified by the user's creation (i.e. the `text` field).
@@ -4684,13 +4681,14 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | » account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | » side |
-string | Buy or sell order | | » amount | string | When `type` is limit, it
-refers to base currency. For instance, `BTC_USDT` means `BTC`  
-When `type` is `market`, it refers to different currency according to `side`  
-\- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
-\- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | » price |
-string | Price can't be empty when `type`\= `limit` | | » time_in_force | string
-| Time in force
+string | Buy or sell order | | » amount | string | Trading quantity  
+When `type` is `limit`, it refers to the base currency (the currency being
+traded), such as `BTC` in `BTC_USDT`  
+When `type` is `market`, it refers to different currencies based on the side:  
+\- `side`: `buy` refers to quote currency, `BTC_USDT` means `USDT`  
+\- `side`: `sell` refers to base currency, `BTC_USDT` means `BTC` | | » price |
+string | Trading price, required when `type`\=`limit` | | » time_in_force |
+string | Time in force
 
 \- gtc: GoodTillCancelled  
 \- ioc: ImmediateOrCancelled, taker only  
@@ -4699,44 +4697,44 @@ fee
 \- fok: FillOrKill, fill either completely or none  
 Only `ioc` and `fok` are supported when `type`\=`market` | | » iceberg | string
 | Amount to display for the iceberg order. Null or 0 for normal orders. Hiding
-all amount is not supported. | | » auto_repay | boolean | Enable or disable
+all amount is not supported | | » auto_repay | boolean | Enable or disable
 automatic repayment for automatic borrow loan generated by cross margin order.
 Default is disabled. Note that:
 
 1\. This field is only effective for cross margin orders. Margin account does
 not support setting auto repayment for orders.  
-2\. `auto_borrow` and `auto_repay` can be both set to true in one order. | | »
-left | string | Amount left to fill | | » filled_amount | string | Amount traded
-to fill | | » fill_price | string | Total filled in quote currency. Deprecated
-in favor of `filled_total` | | » filled_total | string | Total filled in quote
-currency | | » avg_deal_price | string | Average fill price | | » fee | string |
-Fee deducted | | » fee_currency | string | Fee currency unit | | » point_fee |
+2\. `auto_borrow` and `auto_repay` can be both set to true in one order | | »
+left | string | Amount left to fill | | » filled_amount | string | Amount filled
+| | » fill_price | string | Total filled in quote currency. Deprecated in favor
+of `filled_total` | | » filled_total | string | Total filled in quote currency |
+| » avg_deal_price | string | Average fill price | | » fee | string | Fee
+deducted | | » fee_currency | string | Fee currency unit | | » point_fee |
 string | Points used to deduct fee | | » gt_fee | string | GT used to deduct fee
-| | » gt_maker_fee | string | GT used to deduct maker fee | | » gt_taker_fee |
-string | GT used to deduct taker fee | | » gt_discount | boolean | Whether GT
-fee discount is used | | » rebated_fee | string | Rebated fee | | »
-rebated_fee_currency | string | Rebated fee currency unit | | » stp_id | integer
-| Orders between users in the same `stp_id` group are not allowed to be
-self-traded
+| | » gt_maker_fee | string | GT amount used to deduct maker fee | | »
+gt_taker_fee | string | GT amount used to deduct taker fee | | » gt_discount |
+boolean | Whether GT fee deduction is enabled | | » rebated_fee | string |
+Rebated fee | | » rebated_fee_currency | string | Rebated fee currency unit | |
+» stp_id | integer | Orders between users in the same `stp_id` group are not
+allowed to be self-traded
 
 1\. If the `stp_id` of two orders being matched is non-zero and equal, they will
 not be executed. Instead, the corresponding strategy will be executed based on
 the `stp_act` of the taker.  
 2\. `stp_id` returns `0` by default for orders that have not been set for
 `STP group` | | » stp_act | string | Self-Trading Prevention Action. Users can
-use this field to set self-trade prevetion strategies
+use this field to set self-trade prevention strategies
 
-1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
-self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy。  
+1\. After users join the `STP Group`, they can pass `stp_act` to limit the
+user's self-trade prevention strategy. If `stp_act` is not passed, the default
+is `cn` strategy.  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter。  
-3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
+passing the `stp_act` parameter.  
+3\. If the user did not use `stp_act` when placing the order, `stp_act` will
 return '-'
 
-\- cn: Cancel newest, Cancel new orders and keep old ones  
-\- co: Cancel oldest, Cancel old orders and keep new ones  
-\- cb: Cancel both, Both old and new orders will be cancelled | | » finish_as |
+\- cn: Cancel newest, cancel new orders and keep old ones  
+\- co: Cancel oldest, cancel old orders and keep new ones  
+\- cb: Cancel both, both old and new orders will be cancelled | | » finish_as |
 string | Order completion statuses include:
 
 \- open: Awaiting processing  
@@ -4747,10 +4745,10 @@ string | Order completion statuses include:
 \- depth_not_enough: Cancelled due to insufficient market depth  
 \- trader_not_enough: Cancelled due to insufficient counterparty  
 \- ioc: Not immediately filled because tif is set to ioc  
-\- poc: Not met the order strategy because tif is set to poc  
+\- poc: Not met the order poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown | | » fee_discount | string | rate discount |
+\- unknown: Unknown | | » fee_discount | string | Fee rate discount |
 
 #### [#](#enumerated-values-22) Enumerated Values
 
@@ -4788,13 +4786,13 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#amend-an-order) Amend an order
+## [#](#amend-single-order) Amend single order
 
 > Code samples
 
 `PATCH /spot/orders/{order_id}`
 
-_Amend an order_
+_Amend single order_
 
 Modify orders in spot, unified account and isolated margin account by default.
 
@@ -4811,8 +4809,7 @@ priority. Modifying the price or increasing the quantity will adjust the
 priority to the end of the new price level.
 
 Note: Modifying the quantity to be less than the filled quantity will trigger a
-cancellation operation.Modify orders in spot, unified account and isolated
-margin account by default.
+cancellation and isolated margin account by default.
 
 Currently both request body and query support currency_pair and account
 parameters, but request body has higher priority.
@@ -4845,17 +4842,17 @@ cancellation operation.
 | --------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | order_id        | path   | string | true     | The order ID returned when the order was successfully created or the custom ID specified by the user's creation (i.e. the `text` field).         |
 | currency_pair   | query  | string | false    | Currency pair                                                                                                                                    |
-| account         | query  | string | false    | Specify query account.                                                                                                                           |
+| account         | query  | string | false    | Specify query account                                                                                                                            |
 | x-gate-exptime  | header | string | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected |
 | body            | body   | object | true     | none                                                                                                                                             |
 | » currency_pair | body   | string | false    | Currency pair                                                                                                                                    |
-| » account       | body   | string | false    | Specify query account.                                                                                                                           |
-| » amount        | body   | string | false    | Trading Quantity. Either amountor pricemust be specified                                                                                         |
-| » price         | body   | string | false    | Trading Price. Either amountor pricemust be specified                                                                                            |
-| » amend_text    | body   | string | false    | Custom info during amending order                                                                                                                |
+| » account       | body   | string | false    | Specify query account                                                                                                                            |
+| » amount        | body   | string | false    | Trading quantity. Either `amount` or `price` must be specified                                                                                   |
+| » price         | body   | string | false    | Trading price. Either `amount` or `price` must be specified                                                                                      |
+| » amend_text    | body   | string | false    | Custom info during order amendment                                                                                                               |
 | » action_mode   | body   | string | false    | Processing Mode:                                                                                                                                 |
 
-#### [#](#detailed-descriptions-18) Detailed descriptions
+#### [#](#detailed-descriptions-17) Detailed descriptions
 
 **order_id**: The order ID returned when the order was successfully created or
 the custom ID specified by the user's creation (i.e. the `text` field).
@@ -4909,9 +4906,9 @@ order fields RESULT: No clearing information FULL: Full mode (default)
 
 ### Responses
 
-| Status | Meaning                                                                    | Description | Schema |
-| ------ | -------------------------------------------------------------------------- | ----------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Updated     | Inline |
+| Status | Meaning                                                                    | Description          | Schema |
+| ------ | -------------------------------------------------------------------------- | -------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Updated successfully | Inline |
 
 ### Response Schema
 
@@ -4952,13 +4949,14 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | » account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | » side |
-string | Buy or sell order | | » amount | string | When `type` is limit, it
-refers to base currency. For instance, `BTC_USDT` means `BTC`  
-When `type` is `market`, it refers to different currency according to `side`  
-\- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
-\- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | » price |
-string | Price can't be empty when `type`\= `limit` | | » time_in_force | string
-| Time in force
+string | Buy or sell order | | » amount | string | Trading quantity  
+When `type` is `limit`, it refers to the base currency (the currency being
+traded), such as `BTC` in `BTC_USDT`  
+When `type` is `market`, it refers to different currencies based on the side:  
+\- `side`: `buy` refers to quote currency, `BTC_USDT` means `USDT`  
+\- `side`: `sell` refers to base currency, `BTC_USDT` means `BTC` | | » price |
+string | Trading price, required when `type`\=`limit` | | » time_in_force |
+string | Time in force
 
 \- gtc: GoodTillCancelled  
 \- ioc: ImmediateOrCancelled, taker only  
@@ -4967,44 +4965,44 @@ fee
 \- fok: FillOrKill, fill either completely or none  
 Only `ioc` and `fok` are supported when `type`\=`market` | | » iceberg | string
 | Amount to display for the iceberg order. Null or 0 for normal orders. Hiding
-all amount is not supported. | | » auto_repay | boolean | Enable or disable
+all amount is not supported | | » auto_repay | boolean | Enable or disable
 automatic repayment for automatic borrow loan generated by cross margin order.
 Default is disabled. Note that:
 
 1\. This field is only effective for cross margin orders. Margin account does
 not support setting auto repayment for orders.  
-2\. `auto_borrow` and `auto_repay` can be both set to true in one order. | | »
-left | string | Amount left to fill | | » filled_amount | string | Amount traded
-to fill | | » fill_price | string | Total filled in quote currency. Deprecated
-in favor of `filled_total` | | » filled_total | string | Total filled in quote
-currency | | » avg_deal_price | string | Average fill price | | » fee | string |
-Fee deducted | | » fee_currency | string | Fee currency unit | | » point_fee |
+2\. `auto_borrow` and `auto_repay` can be both set to true in one order | | »
+left | string | Amount left to fill | | » filled_amount | string | Amount filled
+| | » fill_price | string | Total filled in quote currency. Deprecated in favor
+of `filled_total` | | » filled_total | string | Total filled in quote currency |
+| » avg_deal_price | string | Average fill price | | » fee | string | Fee
+deducted | | » fee_currency | string | Fee currency unit | | » point_fee |
 string | Points used to deduct fee | | » gt_fee | string | GT used to deduct fee
-| | » gt_maker_fee | string | GT used to deduct maker fee | | » gt_taker_fee |
-string | GT used to deduct taker fee | | » gt_discount | boolean | Whether GT
-fee discount is used | | » rebated_fee | string | Rebated fee | | »
-rebated_fee_currency | string | Rebated fee currency unit | | » stp_id | integer
-| Orders between users in the same `stp_id` group are not allowed to be
-self-traded
+| | » gt_maker_fee | string | GT amount used to deduct maker fee | | »
+gt_taker_fee | string | GT amount used to deduct taker fee | | » gt_discount |
+boolean | Whether GT fee deduction is enabled | | » rebated_fee | string |
+Rebated fee | | » rebated_fee_currency | string | Rebated fee currency unit | |
+» stp_id | integer | Orders between users in the same `stp_id` group are not
+allowed to be self-traded
 
 1\. If the `stp_id` of two orders being matched is non-zero and equal, they will
 not be executed. Instead, the corresponding strategy will be executed based on
 the `stp_act` of the taker.  
 2\. `stp_id` returns `0` by default for orders that have not been set for
 `STP group` | | » stp_act | string | Self-Trading Prevention Action. Users can
-use this field to set self-trade prevetion strategies
+use this field to set self-trade prevention strategies
 
-1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
-self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy。  
+1\. After users join the `STP Group`, they can pass `stp_act` to limit the
+user's self-trade prevention strategy. If `stp_act` is not passed, the default
+is `cn` strategy.  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter。  
-3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
+passing the `stp_act` parameter.  
+3\. If the user did not use `stp_act` when placing the order, `stp_act` will
 return '-'
 
-\- cn: Cancel newest, Cancel new orders and keep old ones  
-\- co: Cancel oldest, Cancel old orders and keep new ones  
-\- cb: Cancel both, Both old and new orders will be cancelled | | » finish_as |
+\- cn: Cancel newest, cancel new orders and keep old ones  
+\- co: Cancel oldest, cancel old orders and keep new ones  
+\- cb: Cancel both, both old and new orders will be cancelled | | » finish_as |
 string | Order completion statuses include:
 
 \- open: Awaiting processing  
@@ -5015,10 +5013,10 @@ string | Order completion statuses include:
 \- depth_not_enough: Cancelled due to insufficient market depth  
 \- trader_not_enough: Cancelled due to insufficient counterparty  
 \- ioc: Not immediately filled because tif is set to ioc  
-\- poc: Not met the order strategy because tif is set to poc  
+\- poc: Not met the order poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown | | » fee_discount | string | rate discount |
+\- unknown: Unknown | | » fee_discount | string | Fee rate discount |
 
 #### [#](#enumerated-values-23) Enumerated Values
 
@@ -5056,13 +5054,13 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#cancel-a-single-order) Cancel a single order
+## [#](#cancel-single-order) Cancel single order
 
 > Code samples
 
 `DELETE /spot/orders/{order_id}`
 
-_Cancel a single order_
+_Cancel single order_
 
 By default, orders for spot, unified accounts and leveraged accounts are
 revoked.
@@ -5073,11 +5071,11 @@ revoked.
 | -------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | order_id       | path   | string | true     | The order ID returned when the order was successfully created or the custom ID specified by the user's creation (i.e. the `text` field).         |
 | currency_pair  | query  | string | true     | Currency pair                                                                                                                                    |
-| account        | query  | string | false    | Specify query account.                                                                                                                           |
+| account        | query  | string | false    | Specify query account                                                                                                                            |
 | action_mode    | query  | string | false    | Processing Mode                                                                                                                                  |
 | x-gate-exptime | header | string | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected |
 
-#### [#](#detailed-descriptions-19) Detailed descriptions
+#### [#](#detailed-descriptions-18) Detailed descriptions
 
 **order_id**: The order ID returned when the order was successfully created or
 the custom ID specified by the user's creation (i.e. the `text` field).
@@ -5088,9 +5086,9 @@ ID can be used after the order is finished (transaction/cancel)
 
 When placing an order, different fields are returned based on the action_mode
 
-- ACK: Asynchronous mode, returns only key order fields
-- RESULT: No clearing information
-- FULL: Full mode (default)
+- `ACK`: Asynchronous mode, returns only key order fields
+- `RESULT`: No clearing information
+- `FULL`: Full mode (default)
 
 > Example responses
 
@@ -5177,13 +5175,14 @@ type | string | Order Type
 \- limit : Limit Order  
 \- market : Market Order | | » account | string | Account type, spot - spot
 account, margin - leveraged account, unified - unified account | | » side |
-string | Buy or sell order | | » amount | string | When `type` is limit, it
-refers to base currency. For instance, `BTC_USDT` means `BTC`  
-When `type` is `market`, it refers to different currency according to `side`  
-\- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`  
-\- `side` : `sell` means base currency，`BTC_USDT` means `BTC` | | » price |
-string | Price can't be empty when `type`\= `limit` | | » time_in_force | string
-| Time in force
+string | Buy or sell order | | » amount | string | Trading quantity  
+When `type` is `limit`, it refers to the base currency (the currency being
+traded), such as `BTC` in `BTC_USDT`  
+When `type` is `market`, it refers to different currencies based on the side:  
+\- `side`: `buy` refers to quote currency, `BTC_USDT` means `USDT`  
+\- `side`: `sell` refers to base currency, `BTC_USDT` means `BTC` | | » price |
+string | Trading price, required when `type`\=`limit` | | » time_in_force |
+string | Time in force
 
 \- gtc: GoodTillCancelled  
 \- ioc: ImmediateOrCancelled, taker only  
@@ -5192,44 +5191,44 @@ fee
 \- fok: FillOrKill, fill either completely or none  
 Only `ioc` and `fok` are supported when `type`\=`market` | | » iceberg | string
 | Amount to display for the iceberg order. Null or 0 for normal orders. Hiding
-all amount is not supported. | | » auto_repay | boolean | Enable or disable
+all amount is not supported | | » auto_repay | boolean | Enable or disable
 automatic repayment for automatic borrow loan generated by cross margin order.
 Default is disabled. Note that:
 
 1\. This field is only effective for cross margin orders. Margin account does
 not support setting auto repayment for orders.  
-2\. `auto_borrow` and `auto_repay` can be both set to true in one order. | | »
-left | string | Amount left to fill | | » filled_amount | string | Amount traded
-to fill | | » fill_price | string | Total filled in quote currency. Deprecated
-in favor of `filled_total` | | » filled_total | string | Total filled in quote
-currency | | » avg_deal_price | string | Average fill price | | » fee | string |
-Fee deducted | | » fee_currency | string | Fee currency unit | | » point_fee |
+2\. `auto_borrow` and `auto_repay` can be both set to true in one order | | »
+left | string | Amount left to fill | | » filled_amount | string | Amount filled
+| | » fill_price | string | Total filled in quote currency. Deprecated in favor
+of `filled_total` | | » filled_total | string | Total filled in quote currency |
+| » avg_deal_price | string | Average fill price | | » fee | string | Fee
+deducted | | » fee_currency | string | Fee currency unit | | » point_fee |
 string | Points used to deduct fee | | » gt_fee | string | GT used to deduct fee
-| | » gt_maker_fee | string | GT used to deduct maker fee | | » gt_taker_fee |
-string | GT used to deduct taker fee | | » gt_discount | boolean | Whether GT
-fee discount is used | | » rebated_fee | string | Rebated fee | | »
-rebated_fee_currency | string | Rebated fee currency unit | | » stp_id | integer
-| Orders between users in the same `stp_id` group are not allowed to be
-self-traded
+| | » gt_maker_fee | string | GT amount used to deduct maker fee | | »
+gt_taker_fee | string | GT amount used to deduct taker fee | | » gt_discount |
+boolean | Whether GT fee deduction is enabled | | » rebated_fee | string |
+Rebated fee | | » rebated_fee_currency | string | Rebated fee currency unit | |
+» stp_id | integer | Orders between users in the same `stp_id` group are not
+allowed to be self-traded
 
 1\. If the `stp_id` of two orders being matched is non-zero and equal, they will
 not be executed. Instead, the corresponding strategy will be executed based on
 the `stp_act` of the taker.  
 2\. `stp_id` returns `0` by default for orders that have not been set for
 `STP group` | | » stp_act | string | Self-Trading Prevention Action. Users can
-use this field to set self-trade prevetion strategies
+use this field to set self-trade prevention strategies
 
-1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
-self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy。  
+1\. After users join the `STP Group`, they can pass `stp_act` to limit the
+user's self-trade prevention strategy. If `stp_act` is not passed, the default
+is `cn` strategy.  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter。  
-3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
+passing the `stp_act` parameter.  
+3\. If the user did not use `stp_act` when placing the order, `stp_act` will
 return '-'
 
-\- cn: Cancel newest, Cancel new orders and keep old ones  
-\- co: Cancel oldest, Cancel old orders and keep new ones  
-\- cb: Cancel both, Both old and new orders will be cancelled | | » finish_as |
+\- cn: Cancel newest, cancel new orders and keep old ones  
+\- co: Cancel oldest, cancel old orders and keep new ones  
+\- cb: Cancel both, both old and new orders will be cancelled | | » finish_as |
 string | Order completion statuses include:
 
 \- open: Awaiting processing  
@@ -5240,10 +5239,10 @@ string | Order completion statuses include:
 \- depth_not_enough: Cancelled due to insufficient market depth  
 \- trader_not_enough: Cancelled due to insufficient counterparty  
 \- ioc: Not immediately filled because tif is set to ioc  
-\- poc: Not met the order strategy because tif is set to poc  
+\- poc: Not met the order poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown | | » fee_discount | string | rate discount |
+\- unknown: Unknown | | » fee_discount | string | Fee rate discount |
 
 #### [#](#enumerated-values-24) Enumerated Values
 
@@ -5281,13 +5280,13 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#list-personal-trading-history) List personal trading history
+## [#](#query-personal-trading-records) Query personal trading records
 
 > Code samples
 
 `GET /spot/my_trades`
 
-_List personal trading history_
+_Query personal trading records_
 
 By default query of transaction records for spot, unified account and
 warehouse-by-site leverage accounts.
@@ -5299,25 +5298,25 @@ The history within a specified time range can be queried by specifying `from` or
   obtained.
 - If only any parameter of `from` or `to` is specified, only 7-day data from the
   start (or end) of the specified time is returned.
-- The range of `from` and `to` is not allowed to exceed 30 days.
+- The range not allowed to exceed 30 days.
 
 The parameters of the time range filter are processed according to the order end
 time.
 
 The maximum number of pages when searching data using limit&page paging function
-is 100,000, that is, limit \* (page - 1) <= 100,000.
+is 100,0, that is, limit \* (page - 1) <= 100,0.
 
 ### Parameters
 
-| Name          | In    | Type           | Required | Description                                                                                        |
-| ------------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------- |
-| currency_pair | query | string         | false    | Retrieve results with specified currency pair                                                      |
-| limit         | query | integer        | false    | Maximum number of records to be returned in a single list. Default: 100, Minimum: 1, Maximum: 1000 |
-| page          | query | integer(int32) | false    | Page number                                                                                        |
-| order_id      | query | string         | false    | Filter trades with specified order ID. `currency_pair` is also required if this field is present   |
-| account       | query | string         | false    | Specify query account.                                                                             |
-| from          | query | integer(int64) | false    | Start timestamp of the query                                                                       |
-| to            | query | integer(int64) | false    | Time range ending, default to current time                                                         |
+| Name          | In    | Type           | Required | Description                                                                                      |
+| ------------- | ----- | -------------- | -------- | ------------------------------------------------------------------------------------------------ |
+| currency_pair | query | string         | false    | Retrieve results with specified currency pair                                                    |
+| limit         | query | integer        | false    | Maximum number of items returned in list. Default: 100, minimum: 1, maximum: 1000                |
+| page          | query | integer(int32) | false    | Page number                                                                                      |
+| order_id      | query | string         | false    | Filter trades with specified order ID. `currency_pair` is also required if this field is present |
+| account       | query | string         | false    | Specify query account                                                                            |
+| from          | query | integer(int64) | false    | Start timestamp for the query                                                                    |
+| to            | query | integer(int64) | false    | End timestamp for the query, defaults to current time if not specified                           |
 
 > Example responses
 
@@ -5346,34 +5345,34 @@ is 100,000, that is, limit \* (page - 1) <= 100,000.
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema     |
-| ------ | -------------------------------------------------------------------------- | -------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description                 | Schema     |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-| Name                                                           | Type   | Description                                                          |
-| -------------------------------------------------------------- | ------ | -------------------------------------------------------------------- |
-| _None_                                                         | array  | none                                                                 |
-| » id                                                           | string | Trade ID                                                             |
-| » create_time                                                  | string | Trading time                                                         |
-| » create_time_ms                                               | string | Trading time, with millisecond precision                             |
-| » currency_pair                                                | string | Currency pair                                                        |
-| » side                                                         | string | Buy or sell order                                                    |
-| » role                                                         | string | Trade role. No value in public endpoints                             |
-| » amount                                                       | string | Trade amount                                                         |
-| » price                                                        | string | Order price                                                          |
-| » order_id                                                     | string | Related order ID. No value in public endpoints                       |
-| » fee                                                          | string | Fee deducted. No value in public endpoints                           |
-| » fee_currency                                                 | string | Fee currency unit. No value in public endpoints                      |
-| » point_fee                                                    | string | Points used to deduct fee. No value in public endpoints              |
-| » gt_fee                                                       | string | GT used to deduct fee. No value in public endpoints                  |
-| » amend_text                                                   | string | The custom data that the user remarked when amending the order       |
-| » sequence_id                                                  | string | Represents a unique and consecutive trade ID within a single market. |
-| It is used to track and identify trades in the specific market |
-| » text                                                         | string | User defined information. No value in public endpoints               |
+| Name                                                     | Type   | Description                                                    |
+| -------------------------------------------------------- | ------ | -------------------------------------------------------------- |
+| _None_                                                   | array  | none                                                           |
+| » id                                                     | string | Fill ID                                                        |
+| » create_time                                            | string | Fill Time                                                      |
+| » create_time_ms                                         | string | Trading time, with millisecond precision                       |
+| » currency_pair                                          | string | Currency pair                                                  |
+| » side                                                   | string | Buy or sell order                                              |
+| » role                                                   | string | Trade role, not returned in public endpoints                   |
+| » amount                                                 | string | Trade amount                                                   |
+| » price                                                  | string | Order price                                                    |
+| » order_id                                               | string | Related order ID, not returned in public endpoints             |
+| » fee                                                    | string | Fee deducted, not returned in public endpoints                 |
+| » fee_currency                                           | string | Fee currency unit, not returned in public endpoints            |
+| » point_fee                                              | string | Points used to deduct fee, not returned in public endpoints    |
+| » gt_fee                                                 | string | GT used to deduct fee, not returned in public endpoints        |
+| » amend_text                                             | string | The custom data that the user remarked when amending the order |
+| » sequence_id                                            | string | Consecutive trade ID within a single market.                   |
+| Used to track and identify trades in the specific market |
+| » text                                                   | string | User-defined information, not returned in public endpoints     |
 
 #### [#](#enumerated-values-25) Enumerated Values
 
@@ -5408,9 +5407,9 @@ _Get server current time_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+| Status | Meaning                                                                    | Description      | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
 
@@ -5439,10 +5438,9 @@ called repeatedly to set a new countdown or cancel the countdown. Usage example:
 Repeat this interface at 30s intervals, setting the countdown `timeout` to
 `30 (seconds)` each time. If this interface is not called again within 30
 seconds, all pending orders on the `market` you specified will be automatically
-cancelled. If no `market` is specified, all market pending orders will be
-cancelled. If the `timeout` is set to 0 within 30 seconds, the countdown timer
-will be terminated and the automatic order cancellation function will be
-cancelled.
+cancelled. If no `market` is specified, all market cancelled. If the `timeout`
+is set to 0 within 30 seconds, the countdown timer will be terminated and the
+automatic order cancellation function will be cancelled.
 
 > Body parameter
 
@@ -5461,7 +5459,7 @@ cancelled.
 | » timeout       | body | integer(int32) | true     | Countdown time in seconds |
 | » currency_pair | body | string         | false    | Currency pair             |
 
-#### [#](#detailed-descriptions-20) Detailed descriptions
+#### [#](#detailed-descriptions-19) Detailed descriptions
 
 **» timeout**: Countdown time in seconds At least 5 seconds, 0 means cancel
 countdown
@@ -5480,7 +5478,7 @@ countdown
 
 | Status | Meaning                                                                    | Description                | Schema |
 | ------ | -------------------------------------------------------------------------- | -------------------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Set countdown successfully | Inline |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Countdown set successfully | Inline |
 
 ### Response Schema
 
@@ -5488,9 +5486,9 @@ Status Code **200**
 
 _triggerTime_
 
-| Name          | Type           | Description                                            |
-| ------------- | -------------- | ------------------------------------------------------ |
-| » triggerTime | integer(int64) | Timestamp of the end of the countdown, in milliseconds |
+| Name          | Type           | Description                                    |
+| ------------- | -------------- | ---------------------------------------------- |
+| » triggerTime | integer(int64) | Timestamp when countdown ends, in milliseconds |
 
 WARNING
 
@@ -5589,25 +5587,25 @@ batch modification orders is consistent with the order list order.
 
 Status Code **200**
 
-| Name          | Type   | Description                                                          |
-| ------------- | ------ | -------------------------------------------------------------------- |
-| _None_        | array  | \[Batch order details\]                                              |
-| » _None_      | object | Batch order details                                                  |
-| »» order_id   | string | Order ID                                                             |
-| »» amend_text | string | The custom data that the user remarked when amending the order       |
-| »» text       | string | User defined information. If not empty, must follow the rules below: |
+| Name          | Type   | Description                                                                                                          |
+| ------------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
+| _None_        | array  | \[Batch order details\]                                                                                              |
+| » _None_      | object | Batch order details                                                                                                  |
+| »» order_id   | string | Order ID                                                                                                             |
+| »» amend_text | string | The custom data that the user remarked when amending the order                                                       |
+| »» text       | string | Order custom information. Users can set custom ID with this field. Custom fields must meet the following conditions: |
 
-1\. prefixed with `t-`  
-2\. no longer than 28 bytes without `t-` prefix  
-3\. can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.) | | »»
-succeeded | boolean | Whether the batch of orders succeeded | | »» label |
-string | Error label, if any, otherwise an empty string | | »» message | string
-| Detailed error message, if any, otherwise an empty string | | »» id | string |
-Order ID | | »» create_time | string | Creation time of order | | »» update_time
-| string | Last modification time of order | | »» create_time_ms |
-integer(int64) | Creation time of order (in milliseconds) | | »» update_time_ms
-| integer(int64) | Last modification time of order (in milliseconds) | | »»
-status | string | Order status
+1\. Must start with `t-`  
+2\. Excluding `t-`, length cannot exceed 28 bytes  
+3\. Can only contain numbers, letters, underscore(\_), hyphen(-) or dot(.) | |
+»» succeeded | boolean | Request execution result | | »» label | string | Error
+label, if any, otherwise an empty string | | »» message | string | Detailed
+error message, if any, otherwise an empty string | | »» id | string | Order ID |
+| »» create_time | string | Creation time of order | | »» update_time | string |
+Last modification time of order | | »» create_time_ms | integer(int64) |
+Creation time of order (in milliseconds) | | »» update_time_ms | integer(int64)
+| Last modification time of order (in milliseconds) | | »» status | string |
+Order status
 
 \- `open`: to be filled  
 \- `closed`: filled  
@@ -5626,23 +5624,23 @@ string | Order price | | »» time_in_force | string | Time in force
 fee  
 \- fok: FillOrKill, fill either completely or none | | »» iceberg | string |
 Amount to display for the iceberg order. Null or 0 for normal orders. Hiding all
-amount is not supported. | | »» auto_repay | boolean | Enable or disable
+amount is not supported | | »» auto_repay | boolean | Enable or disable
 automatic repayment for automatic borrow loan generated by cross margin order.
 Default is disabled. Note that:
 
 1\. This field is only effective for cross margin orders. Margin account does
 not support setting auto repayment for orders.  
-2\. `auto_borrow` and `auto_repay` can be both set to true in one order. | | »»
+2\. `auto_borrow` and `auto_repay` can be both set to true in one order | | »»
 left | string | Amount left to fill | | »» filled_amount | string | Amount
-traded to fill | | »» fill_price | string | Total filled in quote currency.
-Deprecated in favor of `filled_total` | | »» filled_total | string | Total
-filled in quote currency | | »» avg_deal_price | string | Average fill price | |
-»» fee | string | Fee deducted | | »» fee_currency | string | Fee currency unit
-| | »» point_fee | string | Points used to deduct fee | | »» gt_fee | string |
-GT used to deduct fee | | »» gt_discount | boolean | Whether GT fee discount is
-used | | »» rebated_fee | string | Rebated fee | | »» rebated_fee_currency |
-string | Rebated fee currency unit | | »» stp_id | integer | Orders between
-users in the same `stp_id` group are not allowed to be self-traded
+filled | | »» fill_price | string | Total filled in quote currency. Deprecated
+in favor of `filled_total` | | »» filled_total | string | Total filled in quote
+currency | | »» avg_deal_price | string | Average fill price | | »» fee | string
+| Fee deducted | | »» fee_currency | string | Fee currency unit | | »» point_fee
+| string | Points used to deduct fee | | »» gt_fee | string | GT used to deduct
+fee | | »» gt_discount | boolean | Whether GT fee deduction is enabled | | »»
+rebated_fee | string | Rebated fee | | »» rebated_fee_currency | string |
+Rebated fee currency unit | | »» stp_id | integer | Orders between users in the
+same `stp_id` group are not allowed to be self-traded
 
 1\. If the `stp_id` of two orders being matched is non-zero and equal, they will
 not be executed. Instead, the corresponding strategy will be executed based on
@@ -5653,14 +5651,14 @@ use this field to set self-trade prevetion strategies
 
 1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
 self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy。  
+strategy.  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter。  
+passing the `stp_act` parameter.  
 3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
 return '-'
 
 \- cn: Cancel newest, Cancel new orders and keep old ones  
-\- co: Cancel oldest, Cancel old orders and keep new ones  
+\- co: Cancel oldest, new ones  
 \- cb: Cancel both, Both old and new orders will be cancelled | | »» finish_as |
 string | How the order was finished.
 
@@ -5719,8 +5717,8 @@ _Query spot insurance fund historical data_
 | currency | query | string         | true     | Currency                                                                    |
 | page     | query | integer(int32) | false    | Page number                                                                 |
 | limit    | query | integer        | false    | The maximum number of items returned in the list, the default value is 30   |
-| from     | query | integer(int64) | true     | Start timestamp, seconds                                                    |
-| to       | query | integer(int64) | true     | End timestamp, in seconds                                                   |
+| from     | query | integer(int64) | true     | Start timestamp in seconds                                                  |
+| to       | query | integer(int64) | true     | End timestamp in seconds                                                    |
 
 > Example responses
 
@@ -5738,9 +5736,9 @@ _Query spot insurance fund historical data_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description            | Schema     |
-| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
@@ -5749,18 +5747,18 @@ Status Code **200**
 | Name       | Type           | Description                            |
 | ---------- | -------------- | -------------------------------------- |
 | » currency | string         | Currency                               |
-| » balance  | string         | balance                                |
+| » balance  | string         | Balance                                |
 | » time     | integer(int64) | Creation time, timestamp, milliseconds |
 
 This operation does not require authentication
 
-## [#](#create-a-price-triggered-order) Create a price-triggered order
+## [#](#create-price-triggered-order) Create price-triggered order
 
 > Code samples
 
 `POST /spot/price_orders`
 
-_Create a price-triggered order_
+_Create price-triggered order_
 
 > Body parameter
 
@@ -5786,33 +5784,33 @@ _Create a price-triggered order_
 
 ### Parameters
 
-| Name             | In   | Type                                                      | Required | Description                                                                                  |
-| ---------------- | ---- | --------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| body             | body | [SpotPriceTriggeredOrder](#schemaspotpricetriggeredorder) | true     | none                                                                                         |
-| » trigger        | body | object                                                    | true     | none                                                                                         |
-| »» price         | body | string                                                    | true     | Trigger price                                                                                |
-| »» rule          | body | string                                                    | true     | Price trigger condition                                                                      |
-| »» expiration    | body | integer                                                   | true     | How long (in seconds) to wait for the condition to be triggered before cancelling the order. |
-| » put            | body | object                                                    | true     | none                                                                                         |
-| »» type          | body | string                                                    | false    | Order type，default to `limit`                                                               |
-| »» side          | body | string                                                    | true     | Order side                                                                                   |
-| »» price         | body | string                                                    | true     | Order price                                                                                  |
-| »» amount        | body | string                                                    | true     | When `type` is limit, it refers to base currency. For instance, `BTC_USDT` means `BTC`       |
-| »» account       | body | string                                                    | true     | Trading account type. Portfolio margin account must set to `unified`                         |
-| »» time_in_force | body | string                                                    | false    | time_in_force                                                                                |
-| »» auto_borrow   | body | boolean                                                   | false    | Whether to borrow coins automatically                                                        |
-| »» auto_repay    | body | boolean                                                   | false    | Whether to repay the loan automatically                                                      |
-| »» text          | body | string                                                    | false    | The source of the order, including:                                                          |
-| » market         | body | string                                                    | true     | Currency pair                                                                                |
+| Name             | In   | Type                                                      | Required | Description                                                                              |
+| ---------------- | ---- | --------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------- |
+| body             | body | [SpotPriceTriggeredOrder](#schemaspotpricetriggeredorder) | true     | none                                                                                     |
+| » trigger        | body | object                                                    | true     | none                                                                                     |
+| »» price         | body | string                                                    | true     | Trigger price                                                                            |
+| »» rule          | body | string                                                    | true     | Price trigger condition                                                                  |
+| »» expiration    | body | integer                                                   | true     | Maximum wait time for trigger condition (in seconds). Order will be cancelled if timeout |
+| » put            | body | object                                                    | true     | none                                                                                     |
+| »» type          | body | string                                                    | false    | Order type, default to `limit`                                                           |
+| »» side          | body | string                                                    | true     | Order side                                                                               |
+| »» price         | body | string                                                    | true     | Order price                                                                              |
+| »» amount        | body | string                                                    | true     | Trading quantity                                                                         |
+| »» account       | body | string                                                    | true     | Trading account type. Unified account must be set to `unified`                           |
+| »» time_in_force | body | string                                                    | false    | time_in_force                                                                            |
+| »» auto_borrow   | body | boolean                                                   | false    | Whether to borrow coins automatically                                                    |
+| »» auto_repay    | body | boolean                                                   | false    | Whether to repay the loan automatically                                                  |
+| »» text          | body | string                                                    | false    | The source of the order, including:                                                      |
+| » market         | body | string                                                    | true     | Market                                                                                   |
 
-#### [#](#detailed-descriptions-21) Detailed descriptions
+#### [#](#detailed-descriptions-20) Detailed descriptions
 
 **»» rule**: Price trigger condition
 
-- `>=`: triggered when market price larger than or equal to `price` field
-- `<=`: triggered when market price less than or equal to `price` field
+- `>=`: triggered when market price is greater than or equal to `price`
+- `<=`: triggered when market price is less than or equal to `price`
 
-**»» type**: Order type，default to `limit`
+**»» type**: Order type, default to `limit`
 
 - limit : Limit Order
 - market : Market Order
@@ -5822,20 +5820,18 @@ _Create a price-triggered order_
 - buy: buy side
 - sell: sell side
 
-**»» amount**: When `type` is limit, it refers to base currency. For instance,
-`BTC_USDT` means `BTC` When `type` is `market`, it refers to different currency
-according to `side`
+**»» amount**: Trading quantity When `type` is `limit`, it refers to the base
+currency (the currency being traded), such as `BTC` in `BTC_USDT` When `type` is
+`market`, it refers to different currencies based on the side:
 
-- `side` : `buy` means quote currency, `BTC_USDT` means `USDT`
-- `side` : `sell` means base currency，`BTC_USDT` means `BTC`
+- `side`: `buy` refers to quote currency, `BTC_USDT` means `USDT`
+- `side`: `sell` refers to base currency, `BTC_USDT` means `BTC`
 
-**»» account**: Trading account type. Portfolio margin account must set to
-`unified`
+**»» account**: Trading account type. Unified account must be set to `unified`
 
-\-normal: spot trading
-
+- normal: spot trading
 - margin: margin trading
-- unified: unified trading
+- unified: unified account
 
 **»» time_in_force**: time_in_force
 
@@ -5844,9 +5840,9 @@ according to `side`
 
 **»» text**: The source of the order, including:
 
-- web: web
-- api: api
-- app: app
+- web: Web
+- api: API call
+- app: Mobile app
 
 #### [#](#enumerated-values-27) Enumerated Values
 
@@ -5876,9 +5872,9 @@ according to `side`
 
 ### Responses
 
-| Status | Meaning                                                                         | Description   | Schema |
-| ------ | ------------------------------------------------------------------------------- | ------------- | ------ |
-| 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order created | Inline |
+| Status | Meaning                                                                         | Description                | Schema |
+| ------ | ------------------------------------------------------------------------------- | -------------------------- | ------ |
+| 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order created successfully | Inline |
 
 ### Response Schema
 
@@ -5894,23 +5890,23 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#retrieve-running-auto-order-list) Retrieve running auto order list
+## [#](#query-running-auto-order-list) Query running auto order list
 
 > Code samples
 
 `GET /spot/price_orders`
 
-_Retrieve running auto order list_
+_Query running auto order list_
 
 ### Parameters
 
-| Name    | In    | Type    | Required | Description                                                          |
-| ------- | ----- | ------- | -------- | -------------------------------------------------------------------- |
-| status  | query | string  | true     | Only list the orders with this status                                |
-| market  | query | string  | false    | Currency pair                                                        |
-| account | query | string  | false    | Trading account type. Portfolio margin account must set to `unified` |
-| limit   | query | integer | false    | Maximum number of records to be returned in a single list            |
-| offset  | query | integer | false    | List offset, starting from 0                                         |
+| Name    | In    | Type    | Required | Description                                                    |
+| ------- | ----- | ------- | -------- | -------------------------------------------------------------- |
+| status  | query | string  | true     | Query order list based on status                               |
+| market  | query | string  | false    | Trading market                                                 |
+| account | query | string  | false    | Trading account type. Unified account must be set to `unified` |
+| limit   | query | integer | false    | Maximum number of records returned in a single list            |
+| offset  | query | integer | false    | List offset, starting from 0                                   |
 
 #### [#](#enumerated-values-28) Enumerated Values
 
@@ -5957,28 +5953,28 @@ _Retrieve running auto order list_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description    | Schema                                                        |
-| ------ | -------------------------------------------------------------------------- | -------------- | ------------------------------------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved | \[[SpotPriceTriggeredOrder](#schemaspotpricetriggeredorder)\] |
+| Status | Meaning                                                                    | Description                 | Schema                                                        |
+| ------ | -------------------------------------------------------------------------- | --------------------------- | ------------------------------------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[[SpotPriceTriggeredOrder](#schemaspotpricetriggeredorder)\] |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#cancel-all-price-triggered-orders) Cancel All Price-triggered Orders
+## [#](#cancel-all-auto-orders) Cancel all auto orders
 
 > Code samples
 
 `DELETE /spot/price_orders`
 
-_Cancel All Price-triggered Orders_
+_Cancel all auto orders_
 
 ### Parameters
 
-| Name    | In    | Type   | Required | Description                                                          |
-| ------- | ----- | ------ | -------- | -------------------------------------------------------------------- |
-| market  | query | string | false    | Currency pair                                                        |
-| account | query | string | false    | Trading account type. Portfolio margin account must set to `unified` |
+| Name    | In    | Type   | Required | Description                                                    |
+| ------- | ----- | ------ | -------- | -------------------------------------------------------------- |
+| market  | query | string | false    | Trading market                                                 |
+| account | query | string | false    | Trading account type. Unified account must be set to `unified` |
 
 #### [#](#enumerated-values-29) Enumerated Values
 
@@ -6023,27 +6019,27 @@ _Cancel All Price-triggered Orders_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description                                                               | Schema                                                        |
-| ------ | -------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Batch cancellation request accepted. Query order status by listing orders | \[[SpotPriceTriggeredOrder](#schemaspotpricetriggeredorder)\] |
+| Status | Meaning                                                                    | Description                                                                         | Schema                                                        |
+| ------ | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Batch cancellation request accepted and processed, success determined by order list | \[[SpotPriceTriggeredOrder](#schemaspotpricetriggeredorder)\] |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#get-a-price-triggered-order) Get a price-triggered order
+## [#](#query-single-auto-order-details) Query single auto order details
 
 > Code samples
 
 `GET /spot/price_orders/{order_id}`
 
-_Get a price-triggered order_
+_Query single auto order details_
 
 ### Parameters
 
-| Name     | In   | Type   | Required | Description                                          |
-| -------- | ---- | ------ | -------- | ---------------------------------------------------- |
-| order_id | path | string | true     | Retrieve the data of the order with the specified ID |
+| Name     | In   | Type   | Required | Description                                    |
+| -------- | ---- | ------ | -------- | ---------------------------------------------- |
+| order_id | path | string | true     | ID returned when order is successfully created |
 
 > Example responses
 
@@ -6078,27 +6074,27 @@ _Get a price-triggered order_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description       | Schema                                                    |
-| ------ | -------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Auto order detail | [SpotPriceTriggeredOrder](#schemaspotpricetriggeredorder) |
+| Status | Meaning                                                                    | Description        | Schema                                                    |
+| ------ | -------------------------------------------------------------------------- | ------------------ | --------------------------------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Auto order details | [SpotPriceTriggeredOrder](#schemaspotpricetriggeredorder) |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#cancel-a-price-triggered-order) cancel a price-triggered order
+## [#](#cancel-single-auto-order) Cancel single auto order
 
 > Code samples
 
 `DELETE /spot/price_orders/{order_id}`
 
-_cancel a price-triggered order_
+_Cancel single auto order_
 
 ### Parameters
 
-| Name     | In   | Type   | Required | Description                                          |
-| -------- | ---- | ------ | -------- | ---------------------------------------------------- |
-| order_id | path | string | true     | Retrieve the data of the order with the specified ID |
+| Name     | In   | Type   | Required | Description                                    |
+| -------- | ---- | ------ | -------- | ---------------------------------------------- |
+| order_id | path | string | true     | ID returned when order is successfully created |
 
 > Example responses
 
@@ -6133,9 +6129,9 @@ _cancel a price-triggered order_
 
 ### Responses
 
-| Status | Meaning                                                                    | Description       | Schema                                                    |
-| ------ | -------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Auto order detail | [SpotPriceTriggeredOrder](#schemaspotpricetriggeredorder) |
+| Status | Meaning                                                                    | Description        | Schema                                                    |
+| ------ | -------------------------------------------------------------------------- | ------------------ | --------------------------------------------------------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Auto order details | [SpotPriceTriggeredOrder](#schemaspotpricetriggeredorder) |
 
 WARNING
 
