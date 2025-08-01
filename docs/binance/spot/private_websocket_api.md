@@ -3252,7 +3252,7 @@ Cancel an active order.
 | Name                   | Type     | Mandatory                         | Description                                                                                                                                                             |
 | ---------------------- | -------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | \-`symbol`             | \-STRING | \-YES                             |                                                                                                                                                                         |
-| \-`orderId`            | \-INT    | \-YES                             | \-Cancel order by `orderId`                                                                                                                                             |
+| \-`orderId`            | \-LONG   | \-YES                             | \-Cancel order by `orderId`                                                                                                                                             |
 | \-`origClientOrderId`  | \-STRING | \-Cancel order by `clientOrderId` |
 | \-`newClientOrderId`   | \-STRING | \-NO                              | \-New ID for the canceled order. Automatically generated if not sent                                                                                                    |
 | \-`cancelRestrictions` | \-ENUM   | \-NO                              | \-Supported values: `ONLY_NEW` - Cancel will succeed if the order status is `NEW`. `ONLY_PARTIALLY_FILLED` - Cancel will succeed if order status is `PARTIALLY_FILLED`. |
@@ -3463,7 +3463,7 @@ will still increase the unfilled order count by 1.
 | --------------------------- | --------- | --------------------------------- | ---------------------------------------------------------------------------- |
 | \-`symbol`                  | \-STRING  | \-YES                             |                                                                              |
 | \-`cancelReplaceMode`       | \-ENUM    | \-YES                             |                                                                              |
-| \-`cancelOrderId`           | \-INT     | \-YES                             | \-Cancel order by `orderId`                                                  |
+| \-`cancelOrderId`           | \-LONG    | \-YES                             | \-Cancel order by `orderId`                                                  |
 | \-`cancelOrigClientOrderId` | \-STRING  | \-Cancel order by `clientOrderId` |
 | \-`cancelNewClientOrderId`  | \-STRING  | \-NO                              | \-New ID for the canceled order. Automatically generated if not sent         |
 | \-`side`                    | \-ENUM    | \-YES                             | \-`BUY` or `SELL`                                                            |
@@ -5537,7 +5537,7 @@ Check execution status of an order.
 | Name                  | Type     | Mandatory                         | Description                              |
 | --------------------- | -------- | --------------------------------- | ---------------------------------------- |
 | \-`symbol`            | \-STRING | \-YES                             |                                          |
-| \-`orderId`           | \-INT    | \-YES                             | \-Lookup order by `orderId`              |
+| \-`orderId`           | \-LONG   | \-YES                             | \-Lookup order by `orderId`              |
 | \-`origClientOrderId` | \-STRING | \-Lookup order by `clientOrderId` |
 | \-`apiKey`            | \-STRING | \-YES                             |                                          |
 | \-`recvWindow`        | \-LONG   | \-NO                              | \-The value cannot be greater than 60000 |
@@ -5732,7 +5732,7 @@ time range.
 | Name           | Type     | Mandatory | Description                                |
 | -------------- | -------- | --------- | ------------------------------------------ |
 | \-`symbol`     | \-STRING | \-YES     |                                            |
-| \-`orderId`    | \-INT    | \-NO      | \-Order ID to begin at                     |
+| \-`orderId`    | \-LONG   | \-NO      | \-Order ID to begin at                     |
 | \-`startTime`  | \-LONG   | \-NO      |                                            |
 | \-`endTime`    | \-LONG   | \-NO      |                                            |
 | \-`limit`      | \-INT    | \-NO      | \-Default: 500; Maximum: 1000              |
@@ -6084,7 +6084,7 @@ Query information about all your trades, filtered by time range.
 | Name           | Type     | Mandatory | Description                                |
 | -------------- | -------- | --------- | ------------------------------------------ |
 | \-`symbol`     | \-STRING | \-YES     |                                            |
-| \-`orderId`    | \-INT    | \-NO      |                                            |
+| \-`orderId`    | \-LONG   | \-NO      |                                            |
 | \-`startTime`  | \-LONG   | \-NO      |                                            |
 | \-`endTime`    | \-LONG   | \-NO      |                                            |
 | \-`fromId`     | \-INT    | \-NO      | \-First trade ID to query                  |
