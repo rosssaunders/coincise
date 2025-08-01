@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-104-0) Gate API v4.104.0
+# [#](#gate-api-v4-104-3) Gate API v4.104.3
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -3383,28 +3383,30 @@ Get user currency leverage. If currency is not specified, query all currencies
 > 200 Response
 
 ```
-{
-  "currency": "BTC",
-  "leverage": "3"
-}
+[
+  {
+    "currency": "BTC",
+    "leverage": "3"
+  }
+]
 ```
 
 ### Responses
 
-| Status | Meaning                                                                    | Description      | Schema |
-| ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
+| Status | Meaning                                                                    | Description      | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
 
 Status Code **200**
 
-_Leverage multiplier for borrowing currency_
-
-| Name       | Type   | Description   |
-| ---------- | ------ | ------------- |
-| » currency | string | Currency name |
-| » leverage | string | Multiplier    |
+| Name        | Type   | Description                                    |
+| ----------- | ------ | ---------------------------------------------- |
+| _None_      | array  | \[Leverage multiplier for borrowing currency\] |
+| » _None_    | object | Leverage multiplier for borrowing currency     |
+| »» currency | string | Currency name                                  |
+| »» leverage | string | Multiplier                                     |
 
 WARNING
 

@@ -2287,10 +2287,10 @@ The above command returns JSON structured like this:
 
 * params
 
-  | parameter  | type   | required | description                                                                    |
-  | ---------- | ------ | -------- | ------------------------------------------------------------------------------ |
-  | `contract` | String | Yes      | Futures contract name                                                          |
-  | `interval` | String | Yes      | Interval : "1s", "10s", "1m", "5m", "15m", "30m", "1h", "4h", "8h", "1d", "7d" |
+  | parameter  | type   | required | description                                                             |
+  | ---------- | ------ | -------- | ----------------------------------------------------------------------- |
+  | `contract` | String | Yes      | Futures contract name                                                   |
+  | `interval` | String | Yes      | Interval : "1m", "5m", "15m", "30m", "1h", "4h", "8h", "1d", "3d", "7d" |
 
 ## [#](#contract-stats-notification) Contract Stats notification
 
@@ -7590,4 +7590,4 @@ Result format:
 | »»`label`        | String  | Denotes error type in string format                                                                              |
 | »»`message`      | String  | Detailed error message                                                                                           |
 
-Last Updated: 7/28/2025, 9:56:28 AM
+Last Updated: 7/31/2025, 2:17:36 AM
