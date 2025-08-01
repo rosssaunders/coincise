@@ -3956,8 +3956,8 @@ see
         "allOf": [
           {
             "type": "string",
-            "example": "EOS",
-            "description": "the network of the native coin or token, e.g. BTC, ETH, EOS"
+            "example": "ETH",
+            "description": "the network of the native coin or token, e.g. BTC, ETH, SOL"
           }
         ]
       },
@@ -4045,7 +4045,7 @@ Status Code **200**
 | » direction            | [CustodyDirection](#schemacustodydirection)                       | false    | none         | direction of transaction from API user's perspective, 'DEPOSIT' or 'WITHDRAWAL'                                                                                                       |
 | » quantity             | [CustodyQuantity](#schemacustodyquantity)                         | false    | none         | total quantity of symbol to withdraw including fee in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) - quantity received will have fee subtracted. |
 | » symbol               | [CustodySymbol](#schemacustodysymbol)                             | false    | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                                                                                          |
-| » network              | [NetworkID](#schemanetworkid)                                     | false    | none         | the network of the native coin or token, e.g. BTC, ETH, EOS                                                                                                                           |
+| » network              | [NetworkID](#schemanetworkid)                                     | false    | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                                                                                           |
 | » fee                  | [CustodyWithdrawalFee](#schemacustodywithdrawalfee)               | false    | none         | withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei)                                                                           |
 | » memo                 | [CustodyDepositMemo](#schemacustodydepositmemo)                   | false    | none         | memo or destination tag used during deposit to help identify account to credit funds to                                                                                               |
 | » createdAtDateTime    | [CustodyCreatedAtDateTime](#schemacustodycreatedatdatetime)       | false    | none         | time of initial transaction                                                                                                                                                           |
@@ -4265,8 +4265,8 @@ see
         "allOf": [
           {
             "type": "string",
-            "example": "EOS",
-            "description": "the network of the native coin or token, e.g. BTC, ETH, EOS"
+            "example": "ETH",
+            "description": "the network of the native coin or token, e.g. BTC, ETH, SOL"
           }
         ]
       },
@@ -4322,7 +4322,7 @@ Status Code **200**
 | Name        | Type                                                                          | Required | Restrictions | Description                                                                             |
 | ----------- | ----------------------------------------------------------------------------- | -------- | ------------ | --------------------------------------------------------------------------------------- |
 | _anonymous_ | [[CustodyCryptoDepositInstructions](#schemacustodycryptodepositinstructions)] | false    | none         | none                                                                                    |
-| » network   | [NetworkID](#schemanetworkid)                                                 | true     | none         | the network of the native coin or token, e.g. BTC, ETH, EOS                             |
+| » network   | [NetworkID](#schemanetworkid)                                                 | true     | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                             |
 | » symbol    | [CustodySymbol](#schemacustodysymbol)                                         | true     | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                            |
 | » memo      | [CustodyDepositMemo](#schemacustodydepositmemo)                               | false    | none         | memo or destination tag used during deposit to help identify account to credit funds to |
 | » address   | [CustodyNetworkAddress](#schemacustodynetworkaddress)                         | true     | none         | an address on the given network                                                         |
@@ -4381,10 +4381,10 @@ print(r.json())
 
 _Get Withdrawal Instructions for Crypto_
 
-Get withdrawal instructions added by the user, requires
+Get crypto withdrawal instructions, requires
 [bearer token](#overview--add-authenticated-request-header) in authorization
-header. Please note that before withdrawal destinations can be used for
-withdrawing to, they must be whitelisted on the Bullish website
+header. Please note that all withdrawal addresses must be whitelisted via the
+Bullish website before any digital asset withdrawals can be processed.
 
 Please note that Custody endpoints utilize a non-multiplied asset format for
 long decimal assets like SHIB and PEPE, ensuring consistency with real-world
@@ -4411,19 +4411,25 @@ see
   "type": "array",
   "items": {
     "type": "object",
+    "required": [
+      "network",
+      "symbol",
+      "address",
+      "fee",
+      "label",
+      "destinationId"
+    ],
     "properties": {
       "network": {
-        "example": "ETH",
         "allOf": [
           {
             "type": "string",
-            "example": "EOS",
-            "description": "the network of the native coin or token, e.g. BTC, ETH, EOS"
+            "example": "ETH",
+            "description": "the network of the native coin or token, e.g. BTC, ETH, SOL"
           }
         ]
       },
       "symbol": {
-        "example": "USDC",
         "allOf": [
           {
             "type": "string",
@@ -4497,13 +4503,13 @@ Status Code **200**
 | Name            | Type                                                                                | Required | Restrictions | Description                                                                                                 |
 | --------------- | ----------------------------------------------------------------------------------- | -------- | ------------ | ----------------------------------------------------------------------------------------------------------- |
 | _anonymous_     | [[CustodyCryptoWithdrawalInstructions](#schemacustodycryptowithdrawalinstructions)] | false    | none         | none                                                                                                        |
-| » network       | [NetworkID](#schemanetworkid)                                                       | false    | none         | the network of the native coin or token, e.g. BTC, ETH, EOS                                                 |
-| » symbol        | [CustodySymbol](#schemacustodysymbol)                                               | false    | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                |
-| » address       | [CustodyNetworkAddress](#schemacustodynetworkaddress)                               | false    | none         | an address on the given network                                                                             |
-| » fee           | [CustodyWithdrawalFee](#schemacustodywithdrawalfee)                                 | false    | none         | withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) |
+| » network       | [NetworkID](#schemanetworkid)                                                       | true     | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                 |
+| » symbol        | [CustodySymbol](#schemacustodysymbol)                                               | true     | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                |
+| » address       | [CustodyNetworkAddress](#schemacustodynetworkaddress)                               | true     | none         | an address on the given network                                                                             |
+| » fee           | [CustodyWithdrawalFee](#schemacustodywithdrawalfee)                                 | true     | none         | withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) |
 | » memo          | [CustodyWithdrawalMemo](#schemacustodywithdrawalmemo)                               | false    | none         | memo or destination tag that will be used as a reference on transaction                                     |
-| » label         | [CustodyWithdrawalLabel](#schemacustodywithdrawallabel)                             | false    | none         | descriptive label of destination provided by user                                                           |
-| » destinationId | [CustodyDestinationID](#schemacustodydestinationid)                                 | false    | none         | destination id provided by bullish that uniquely identifies a whitelisted address or account                |
+| » label         | [CustodyWithdrawalLabel](#schemacustodywithdrawallabel)                             | true     | none         | descriptive label of destination provided by user                                                           |
+| » destinationId | [CustodyDestinationID](#schemacustodydestinationid)                                 | true     | none         | destination id provided by bullish that uniquely identifies a whitelisted address or account                |
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -5022,7 +5028,6 @@ const inputBody = '{
               ]
             },
             "symbol": {
-              "example": "USDC",
               "allOf": [
                 {
                   "type": "string",
@@ -5032,12 +5037,11 @@ const inputBody = '{
               ]
             },
             "network": {
-              "example": "ETH",
               "allOf": [
                 {
                   "type": "string",
-                  "example": "EOS",
-                  "description": "the network of the native coin or token, e.g. BTC, ETH, EOS"
+                  "example": "ETH",
+                  "description": "the network of the native coin or token, e.g. BTC, ETH, SOL"
                 }
               ]
             },
@@ -5148,7 +5152,6 @@ smaller denominations (e.g. BTC not Satoshi, ETH not Wei) :
 | USD    | 2dp                                                   |                                                                                                                                                                          |
 | BTC    | 8dp                                                   |                                                                                                                                                                          |
 | DOGE   | 8dp                                                   |                                                                                                                                                                          |
-| EOS    | 4dp                                                   |                                                                                                                                                                          |
 | ETH    | 8dp                                                   |                                                                                                                                                                          |
 | LTC    | 8dp                                                   |                                                                                                                                                                          |
 | XRP    | 6dp                                                   |                                                                                                                                                                          |
@@ -5228,7 +5231,6 @@ smaller denominations (e.g. BTC not Satoshi, ETH not Wei) :
               ]
             },
             "symbol": {
-              "example": "USDC",
               "allOf": [
                 {
                   "type": "string",
@@ -5238,12 +5240,11 @@ smaller denominations (e.g. BTC not Satoshi, ETH not Wei) :
               ]
             },
             "network": {
-              "example": "ETH",
               "allOf": [
                 {
                   "type": "string",
-                  "example": "EOS",
-                  "description": "the network of the native coin or token, e.g. BTC, ETH, EOS"
+                  "example": "ETH",
+                  "description": "the network of the native coin or token, e.g. BTC, ETH, SOL"
                 }
               ]
             },
@@ -10473,6 +10474,212 @@ address or account
 | ----------- | ------ | -------- | ------------ | -------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | destination id provided by bullish that uniquely identifies a whitelisted address or account |
 
+<h2 id="tocS_CustodyDestinationUserWalletType">CustodyDestinationUserWalletType</h2>
+<!-- backwards compatibility -->
+<a id="schemacustodydestinationuserwallettype"></a>
+<a id="schema_CustodyDestinationUserWalletType"></a>
+<a id="tocScustodydestinationuserwallettype"></a>
+<a id="tocscustodydestinationuserwallettype"></a>
+
+```json
+{
+  "type": "string",
+  "enum": ["HOSTED", "SELF_HOSTED", "UNKNOWN"],
+  "description": "The host type of the wallet. `HOSTED` wallet uses a custodial wallet service, `SELF_HOSTED` wallet is a non-custodial wallet."
+}
+```
+
+The host type of the wallet. `HOSTED` wallet uses a custodial wallet service,
+`SELF_HOSTED` wallet is a non-custodial wallet.
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                                                                   |
+| ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | The host type of the wallet. `HOSTED` wallet uses a custodial wallet service, `SELF_HOSTED` wallet is a non-custodial wallet. |
+
+#### Enumerated Values
+
+| Property    | Value       |
+| ----------- | ----------- |
+| _anonymous_ | HOSTED      |
+| _anonymous_ | SELF_HOSTED |
+| _anonymous_ | UNKNOWN     |
+
+<h2 id="tocS_CustodyDestinationSigned">CustodyDestinationSigned</h2>
+<!-- backwards compatibility -->
+<a id="schemacustodydestinationsigned"></a>
+<a id="schema_CustodyDestinationSigned"></a>
+<a id="tocScustodydestinationsigned"></a>
+<a id="tocscustodydestinationsigned"></a>
+
+```json
+true
+```
+
+Whether this destination has been signed by the user. Some operations such as
+withdrawal requires the destination to be signed.
+
+### Properties
+
+| Name        | Type    | Required | Restrictions | Description                                                                                                                     |
+| ----------- | ------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| _anonymous_ | boolean | false    | none         | Whether this destination has been signed by the user. Some operations such as withdrawal requires the destination to be signed. |
+
+<h2 id="tocS_CustodyDestinationVaspName">CustodyDestinationVaspName</h2>
+<!-- backwards compatibility -->
+<a id="schemacustodydestinationvaspname"></a>
+<a id="schema_CustodyDestinationVaspName"></a>
+<a id="tocScustodydestinationvaspname"></a>
+<a id="tocscustodydestinationvaspname"></a>
+
+```json
+"Bullish"
+```
+
+The name of the hosting VASP of the wallet. This is only applicable for `HOSTED`
+wallets.
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                               |
+| ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | The name of the hosting VASP of the wallet. This is only applicable for `HOSTED` wallets. |
+
+<h2 id="tocS_CustodySelfHostedRequestedDepositAmount">CustodySelfHostedRequestedDepositAmount</h2>
+<!-- backwards compatibility -->
+<a id="schemacustodyselfhostedrequesteddepositamount"></a>
+<a id="schema_CustodySelfHostedRequestedDepositAmount"></a>
+<a id="tocScustodyselfhostedrequesteddepositamount"></a>
+<a id="tocscustodyselfhostedrequesteddepositamount"></a>
+
+```json
+"12.3456"
+```
+
+User-requested amount for the deposit.
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                            |
+| ----------- | ------ | -------- | ------------ | -------------------------------------- |
+| _anonymous_ | string | false    | none         | User-requested amount for the deposit. |
+
+<h2 id="tocS_CustodySelfHostedVerificationAmount">CustodySelfHostedVerificationAmount</h2>
+<!-- backwards compatibility -->
+<a id="schemacustodyselfhostedverificationamount"></a>
+<a id="schema_CustodySelfHostedVerificationAmount"></a>
+<a id="tocScustodyselfhostedverificationamount"></a>
+<a id="tocscustodyselfhostedverificationamount"></a>
+
+```json
+"0.0012"
+```
+
+Bullish specified additional small deposit amount to add to the
+`requestedDepositAmount` for wallet verification.
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                                                       |
+| ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | Bullish specified additional small deposit amount to add to the `requestedDepositAmount` for wallet verification. |
+
+<h2 id="tocS_CustodySelfHostedDepositAddress">CustodySelfHostedDepositAddress</h2>
+<!-- backwards compatibility -->
+<a id="schemacustodyselfhosteddepositaddress"></a>
+<a id="schema_CustodySelfHostedDepositAddress"></a>
+<a id="tocScustodyselfhosteddepositaddress"></a>
+<a id="tocscustodyselfhosteddepositaddress"></a>
+
+```json
+"0xb0a64d976972d87b0783eeb1ff88306cd1891f02"
+```
+
+The address of the Bullish trading account that the user should deposit to
+during a self hosted deposit attempt.
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                                                      |
+| ----------- | ------ | -------- | ------------ | ---------------------------------------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | The address of the Bullish trading account that the user should deposit to during a self hosted deposit attempt. |
+
+<h2 id="tocS_CustodySelfHostedDepositMemo">CustodySelfHostedDepositMemo</h2>
+<!-- backwards compatibility -->
+<a id="schemacustodyselfhosteddepositmemo"></a>
+<a id="schema_CustodySelfHostedDepositMemo"></a>
+<a id="tocScustodyselfhosteddepositmemo"></a>
+<a id="tocscustodyselfhosteddepositmemo"></a>
+
+```json
+"MZAXEMRXA"
+```
+
+The memo or destination tag of the Bullish trading account that the user should
+deposit to during a self hosted deposit attempt.
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                                                                      |
+| ----------- | ------ | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | The memo or destination tag of the Bullish trading account that the user should deposit to during a self hosted deposit attempt. |
+
+<h2 id="tocS_CustodySelfHostedTotalDepositAmount">CustodySelfHostedTotalDepositAmount</h2>
+<!-- backwards compatibility -->
+<a id="schemacustodyselfhostedtotaldepositamount"></a>
+<a id="schema_CustodySelfHostedTotalDepositAmount"></a>
+<a id="tocScustodyselfhostedtotaldepositamount"></a>
+<a id="tocscustodyselfhostedtotaldepositamount"></a>
+
+```json
+"12.3468"
+```
+
+The actual amount that the user should deposit for wallet verification. It is
+the sum of `requestedDepositAmount` and `verificationAmount`.
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                                                                                 |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | The actual amount that the user should deposit for wallet verification. It is the sum of `requestedDepositAmount` and `verificationAmount`. |
+
+<h2 id="tocS_CustodySelfHostedVerificationStatus">CustodySelfHostedVerificationStatus</h2>
+<!-- backwards compatibility -->
+<a id="schemacustodyselfhostedverificationstatus"></a>
+<a id="schema_CustodySelfHostedVerificationStatus"></a>
+<a id="tocScustodyselfhostedverificationstatus"></a>
+<a id="tocscustodyselfhostedverificationstatus"></a>
+
+```json
+{
+  "type": "string",
+  "enum": ["VERIFIED", "PENDING_VERIFICATION", "VERIFICATION_EXPIRED"],
+  "description": "The status for the self-hosted wallet verification attempt.\n- `VERIFIED` - Self-hosted wallet has been verified\n- `PENDING_VERIFICATION` - pending verification via satoshi test\n- `VERIFICATION_EXPIRED` - the verification has expired\n"
+}
+```
+
+The status for the self-hosted wallet verification attempt.
+
+- `VERIFIED` - Self-hosted wallet has been verified
+- `PENDING_VERIFICATION` - pending verification via satoshi test
+- `VERIFICATION_EXPIRED` - the verification has expired
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                                                                                                                                                                                       |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | The status for the self-hosted wallet verification attempt.<br>- `VERIFIED` - Self-hosted wallet has been verified<br>- `PENDING_VERIFICATION` - pending verification via satoshi test<br>- `VERIFICATION_EXPIRED` - the verification has expired |
+
+#### Enumerated Values
+
+| Property    | Value                |
+| ----------- | -------------------- |
+| _anonymous_ | VERIFIED             |
+| _anonymous_ | PENDING_VERIFICATION |
+| _anonymous_ | VERIFICATION_EXPIRED |
+
 <h2 id="tocS_NetworkID">NetworkID</h2>
 <!-- backwards compatibility -->
 <a id="schemanetworkid"></a>
@@ -10481,16 +10688,16 @@ address or account
 <a id="tocsnetworkid"></a>
 
 ```json
-"EOS"
+"ETH"
 ```
 
-the network of the native coin or token, e.g. BTC, ETH, EOS
+the network of the native coin or token, e.g. BTC, ETH, SOL
 
 ### Properties
 
 | Name        | Type   | Required | Restrictions | Description                                                 |
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------- |
-| _anonymous_ | string | false    | none         | the network of the native coin or token, e.g. BTC, ETH, EOS |
+| _anonymous_ | string | false    | none         | the network of the native coin or token, e.g. BTC, ETH, SOL |
 
 <h2 id="tocS_CustodyNetworkAddress">CustodyNetworkAddress</h2>
 <!-- backwards compatibility -->
@@ -14924,7 +15131,6 @@ JWT authorizer you obtain along with the
       ]
     },
     "symbol": {
-      "example": "USDC",
       "allOf": [
         {
           "type": "string",
@@ -14934,12 +15140,11 @@ JWT authorizer you obtain along with the
       ]
     },
     "network": {
-      "example": "ETH",
       "allOf": [
         {
           "type": "string",
-          "example": "EOS",
-          "description": "the network of the native coin or token, e.g. BTC, ETH, EOS"
+          "example": "ETH",
+          "description": "the network of the native coin or token, e.g. BTC, ETH, SOL"
         }
       ]
     },
@@ -14964,7 +15169,7 @@ JWT authorizer you obtain along with the
 | commandType   | string                                              | true     | none         | the command type, it must be 'V1WithdrawalChallenge'                                                                                                                                  |
 | destinationId | [CustodyDestinationID](#schemacustodydestinationid) | true     | none         | destination id provided by bullish that uniquely identifies a whitelisted address or account                                                                                          |
 | symbol        | [CustodySymbol](#schemacustodysymbol)               | true     | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                                                                                          |
-| network       | [NetworkID](#schemanetworkid)                       | true     | none         | the network of the native coin or token, e.g. BTC, ETH, EOS                                                                                                                           |
+| network       | [NetworkID](#schemanetworkid)                       | true     | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                                                                                           |
 | quantity      | [CustodyQuantity](#schemacustodyquantity)           | true     | none         | total quantity of symbol to withdraw including fee in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) - quantity received will have fee subtracted. |
 
 <h2 id="tocS_CustodyApiEcdsaWithdrawalCommand">CustodyApiEcdsaWithdrawalCommand</h2>
@@ -14994,7 +15199,6 @@ JWT authorizer you obtain along with the
       ]
     },
     "symbol": {
-      "example": "USDC",
       "allOf": [
         {
           "type": "string",
@@ -15004,12 +15208,11 @@ JWT authorizer you obtain along with the
       ]
     },
     "network": {
-      "example": "ETH",
       "allOf": [
         {
           "type": "string",
-          "example": "EOS",
-          "description": "the network of the native coin or token, e.g. BTC, ETH, EOS"
+          "example": "ETH",
+          "description": "the network of the native coin or token, e.g. BTC, ETH, SOL"
         }
       ]
     },
@@ -15034,7 +15237,7 @@ JWT authorizer you obtain along with the
 | commandType   | string                                              | true     | none         | the command type, it must be 'V1Withdrawal'                                                                                                                                           |
 | destinationId | [CustodyDestinationID](#schemacustodydestinationid) | true     | none         | destination id provided by bullish that uniquely identifies a whitelisted address or account                                                                                          |
 | symbol        | [CustodySymbol](#schemacustodysymbol)               | true     | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                                                                                          |
-| network       | [NetworkID](#schemanetworkid)                       | true     | none         | the network of the native coin or token, e.g. BTC, ETH, EOS                                                                                                                           |
+| network       | [NetworkID](#schemanetworkid)                       | true     | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                                                                                           |
 | quantity      | [CustodyQuantity](#schemacustodyquantity)           | true     | none         | total quantity of symbol to withdraw including fee in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) - quantity received will have fee subtracted. |
 
 <h2 id="tocS_CustodyApiWithdrawalRequest">CustodyApiWithdrawalRequest</h2>
@@ -15103,7 +15306,6 @@ JWT authorizer you obtain along with the
               ]
             },
             "symbol": {
-              "example": "USDC",
               "allOf": [
                 {
                   "type": "string",
@@ -15113,12 +15315,11 @@ JWT authorizer you obtain along with the
               ]
             },
             "network": {
-              "example": "ETH",
               "allOf": [
                 {
                   "type": "string",
-                  "example": "EOS",
-                  "description": "the network of the native coin or token, e.g. BTC, ETH, EOS"
+                  "example": "ETH",
+                  "description": "the network of the native coin or token, e.g. BTC, ETH, SOL"
                 }
               ]
             },
@@ -15215,7 +15416,6 @@ JWT authorizer you obtain along with the
               ]
             },
             "symbol": {
-              "example": "USDC",
               "allOf": [
                 {
                   "type": "string",
@@ -15225,12 +15425,11 @@ JWT authorizer you obtain along with the
               ]
             },
             "network": {
-              "example": "ETH",
               "allOf": [
                 {
                   "type": "string",
-                  "example": "EOS",
-                  "description": "the network of the native coin or token, e.g. BTC, ETH, EOS"
+                  "example": "ETH",
+                  "description": "the network of the native coin or token, e.g. BTC, ETH, SOL"
                 }
               ]
             },
@@ -15354,8 +15553,8 @@ JWT authorizer you obtain along with the
       "allOf": [
         {
           "type": "string",
-          "example": "EOS",
-          "description": "the network of the native coin or token, e.g. BTC, ETH, EOS"
+          "example": "ETH",
+          "description": "the network of the native coin or token, e.g. BTC, ETH, SOL"
         }
       ]
     },
@@ -15431,7 +15630,7 @@ JWT authorizer you obtain along with the
 | direction            | [CustodyDirection](#schemacustodydirection)                       | false    | none         | direction of transaction from API user's perspective, 'DEPOSIT' or 'WITHDRAWAL'                                                                                                       |
 | quantity             | [CustodyQuantity](#schemacustodyquantity)                         | false    | none         | total quantity of symbol to withdraw including fee in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) - quantity received will have fee subtracted. |
 | symbol               | [CustodySymbol](#schemacustodysymbol)                             | false    | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                                                                                          |
-| network              | [NetworkID](#schemanetworkid)                                     | false    | none         | the network of the native coin or token, e.g. BTC, ETH, EOS                                                                                                                           |
+| network              | [NetworkID](#schemanetworkid)                                     | false    | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                                                                                           |
 | fee                  | [CustodyWithdrawalFee](#schemacustodywithdrawalfee)               | false    | none         | withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei)                                                                           |
 | memo                 | [CustodyDepositMemo](#schemacustodydepositmemo)                   | false    | none         | memo or destination tag used during deposit to help identify account to credit funds to                                                                                               |
 | createdAtDateTime    | [CustodyCreatedAtDateTime](#schemacustodycreatedatdatetime)       | false    | none         | time of initial transaction                                                                                                                                                           |
@@ -15457,7 +15656,7 @@ JWT authorizer you obtain along with the
 
 | Name    | Type                                                  | Required | Restrictions | Description                                                                             |
 | ------- | ----------------------------------------------------- | -------- | ------------ | --------------------------------------------------------------------------------------- |
-| network | [NetworkID](#schemanetworkid)                         | true     | none         | the network of the native coin or token, e.g. BTC, ETH, EOS                             |
+| network | [NetworkID](#schemanetworkid)                         | true     | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                             |
 | symbol  | [CustodySymbol](#schemacustodysymbol)                 | true     | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                            |
 | memo    | [CustodyDepositMemo](#schemacustodydepositmemo)       | false    | none         | memo or destination tag used during deposit to help identify account to credit funds to |
 | address | [CustodyNetworkAddress](#schemacustodynetworkaddress) | true     | none         | an address on the given network                                                         |
@@ -15472,19 +15671,18 @@ JWT authorizer you obtain along with the
 ```json
 {
   "type": "object",
+  "required": ["network", "symbol", "address", "fee", "label", "destinationId"],
   "properties": {
     "network": {
-      "example": "ETH",
       "allOf": [
         {
           "type": "string",
-          "example": "EOS",
-          "description": "the network of the native coin or token, e.g. BTC, ETH, EOS"
+          "example": "ETH",
+          "description": "the network of the native coin or token, e.g. BTC, ETH, SOL"
         }
       ]
     },
     "symbol": {
-      "example": "USDC",
       "allOf": [
         {
           "type": "string",
@@ -15546,13 +15744,111 @@ JWT authorizer you obtain along with the
 
 | Name          | Type                                                    | Required | Restrictions | Description                                                                                                 |
 | ------------- | ------------------------------------------------------- | -------- | ------------ | ----------------------------------------------------------------------------------------------------------- |
-| network       | [NetworkID](#schemanetworkid)                           | false    | none         | the network of the native coin or token, e.g. BTC, ETH, EOS                                                 |
-| symbol        | [CustodySymbol](#schemacustodysymbol)                   | false    | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                |
-| address       | [CustodyNetworkAddress](#schemacustodynetworkaddress)   | false    | none         | an address on the given network                                                                             |
-| fee           | [CustodyWithdrawalFee](#schemacustodywithdrawalfee)     | false    | none         | withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) |
+| network       | [NetworkID](#schemanetworkid)                           | true     | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                 |
+| symbol        | [CustodySymbol](#schemacustodysymbol)                   | true     | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                |
+| address       | [CustodyNetworkAddress](#schemacustodynetworkaddress)   | true     | none         | an address on the given network                                                                             |
+| fee           | [CustodyWithdrawalFee](#schemacustodywithdrawalfee)     | true     | none         | withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) |
 | memo          | [CustodyWithdrawalMemo](#schemacustodywithdrawalmemo)   | false    | none         | memo or destination tag that will be used as a reference on transaction                                     |
-| label         | [CustodyWithdrawalLabel](#schemacustodywithdrawallabel) | false    | none         | descriptive label of destination provided by user                                                           |
-| destinationId | [CustodyDestinationID](#schemacustodydestinationid)     | false    | none         | destination id provided by bullish that uniquely identifies a whitelisted address or account                |
+| label         | [CustodyWithdrawalLabel](#schemacustodywithdrawallabel) | true     | none         | descriptive label of destination provided by user                                                           |
+| destinationId | [CustodyDestinationID](#schemacustodydestinationid)     | true     | none         | destination id provided by bullish that uniquely identifies a whitelisted address or account                |
+
+<h2 id="tocS_CustodySelfHostedInitiateRequest">CustodySelfHostedInitiateRequest</h2>
+<!-- backwards compatibility -->
+<a id="schemacustodyselfhostedinitiaterequest"></a>
+<a id="schema_CustodySelfHostedInitiateRequest"></a>
+<a id="tocScustodyselfhostedinitiaterequest"></a>
+<a id="tocscustodyselfhostedinitiaterequest"></a>
+
+```json
+{
+  "network": "ETH",
+  "symbol": "USDC",
+  "address": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02",
+  "label": "Our cold wallet",
+  "requestedDepositAmount": "12.3456"
+}
+```
+
+### Properties
+
+| Name                   | Type                                                                                      | Required | Restrictions | Description                                                             |
+| ---------------------- | ----------------------------------------------------------------------------------------- | -------- | ------------ | ----------------------------------------------------------------------- |
+| network                | [NetworkID](#schemanetworkid)                                                             | true     | none         | the network of the native coin or token, e.g. BTC, ETH, SOL             |
+| symbol                 | [CustodySymbol](#schemacustodysymbol)                                                     | true     | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB            |
+| address                | [CustodyNetworkAddress](#schemacustodynetworkaddress)                                     | true     | none         | an address on the given network                                         |
+| memo                   | [CustodyWithdrawalMemo](#schemacustodywithdrawalmemo)                                     | false    | none         | memo or destination tag that will be used as a reference on transaction |
+| label                  | [CustodyWithdrawalLabel](#schemacustodywithdrawallabel)                                   | true     | none         | descriptive label of destination provided by user                       |
+| requestedDepositAmount | [CustodySelfHostedRequestedDepositAmount](#schemacustodyselfhostedrequesteddepositamount) | true     | none         | User-requested amount for the deposit.                                  |
+
+<h2 id="tocS_CustodySelfHostedInitiateResponse">CustodySelfHostedInitiateResponse</h2>
+<!-- backwards compatibility -->
+<a id="schemacustodyselfhostedinitiateresponse"></a>
+<a id="schema_CustodySelfHostedInitiateResponse"></a>
+<a id="tocScustodyselfhostedinitiateresponse"></a>
+<a id="tocscustodyselfhostedinitiateresponse"></a>
+
+```json
+{
+  "destinationId": "1560ec0b406c0d909bb9f5f827dd6aa14a1f638884f33a2a3134878102e78038",
+  "network": "ETH",
+  "symbol": "USDC",
+  "depositAddress": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02",
+  "requestedDepositAmount": "12.3456",
+  "verificationAmount": "0.0012",
+  "totalDepositAmount": "12.3468",
+  "verificationExpiryTime": "2025-05-20T01:01:01.000Z"
+}
+```
+
+### Properties
+
+| Name                   | Type                                                                                      | Required | Restrictions | Description                                                                                                                                 |
+| ---------------------- | ----------------------------------------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| destinationId          | [CustodyDestinationID](#schemacustodydestinationid)                                       | false    | none         | destination id provided by bullish that uniquely identifies a whitelisted address or account                                                |
+| network                | [NetworkID](#schemanetworkid)                                                             | false    | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                                                 |
+| symbol                 | [CustodySymbol](#schemacustodysymbol)                                                     | false    | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                                                |
+| depositAddress         | [CustodySelfHostedDepositAddress](#schemacustodyselfhosteddepositaddress)                 | false    | none         | The address of the Bullish trading account that the user should deposit to during a self hosted deposit attempt.                            |
+| depositMemo            | [CustodySelfHostedDepositMemo](#schemacustodyselfhosteddepositmemo)                       | false    | none         | The memo or destination tag of the Bullish trading account that the user should deposit to during a self hosted deposit attempt.            |
+| requestedDepositAmount | [CustodySelfHostedRequestedDepositAmount](#schemacustodyselfhostedrequesteddepositamount) | false    | none         | User-requested amount for the deposit.                                                                                                      |
+| verificationAmount     | [CustodySelfHostedVerificationAmount](#schemacustodyselfhostedverificationamount)         | false    | none         | Bullish specified additional small deposit amount to add to the `requestedDepositAmount` for wallet verification.                           |
+| totalDepositAmount     | [CustodySelfHostedTotalDepositAmount](#schemacustodyselfhostedtotaldepositamount)         | false    | none         | The actual amount that the user should deposit for wallet verification. It is the sum of `requestedDepositAmount` and `verificationAmount`. |
+| verificationExpiryTime | [DateTime](#schemadatetime)                                                               | false    | none         | ISO 8601 with millisecond as string                                                                                                         |
+
+<h2 id="tocS_CustodyGetSelfHostedVerificationResponse">CustodyGetSelfHostedVerificationResponse</h2>
+<!-- backwards compatibility -->
+<a id="schemacustodygetselfhostedverificationresponse"></a>
+<a id="schema_CustodyGetSelfHostedVerificationResponse"></a>
+<a id="tocScustodygetselfhostedverificationresponse"></a>
+<a id="tocscustodygetselfhostedverificationresponse"></a>
+
+```json
+{
+  "destinationId": "1560ec0b406c0d909bb9f5f827dd6aa14a1f638884f33a2a3134878102e78038",
+  "network": "ETH",
+  "symbol": "USDC",
+  "address": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02",
+  "verificationStatus": "VERIFIED",
+  "requestedDepositAmount": "12.3456",
+  "verificationAmount": "0.0012",
+  "totalDepositAmount": "12.3468",
+  "verificationExpiryTime": "2025-05-20T01:01:01.000Z"
+}
+```
+
+### Properties
+
+| Name                   | Type                                                                                      | Required | Restrictions | Description                                                                                                                                                                                                                                       |
+| ---------------------- | ----------------------------------------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| destinationId          | [CustodyDestinationID](#schemacustodydestinationid)                                       | true     | none         | destination id provided by bullish that uniquely identifies a whitelisted address or account                                                                                                                                                      |
+| network                | [NetworkID](#schemanetworkid)                                                             | true     | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                                                                                                                                                       |
+| symbol                 | [CustodySymbol](#schemacustodysymbol)                                                     | true     | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                                                                                                                                                      |
+| address                | [CustodyNetworkAddress](#schemacustodynetworkaddress)                                     | true     | none         | an address on the given network                                                                                                                                                                                                                   |
+| memo                   | [CustodyWithdrawalMemo](#schemacustodywithdrawalmemo)                                     | false    | none         | memo or destination tag that will be used as a reference on transaction                                                                                                                                                                           |
+| verificationStatus     | [CustodySelfHostedVerificationStatus](#schemacustodyselfhostedverificationstatus)         | true     | none         | The status for the self-hosted wallet verification attempt.<br>- `VERIFIED` - Self-hosted wallet has been verified<br>- `PENDING_VERIFICATION` - pending verification via satoshi test<br>- `VERIFICATION_EXPIRED` - the verification has expired |
+| requestedDepositAmount | [CustodySelfHostedRequestedDepositAmount](#schemacustodyselfhostedrequesteddepositamount) | true     | none         | User-requested amount for the deposit.                                                                                                                                                                                                            |
+| verificationAmount     | [CustodySelfHostedVerificationAmount](#schemacustodyselfhostedverificationamount)         | true     | none         | Bullish specified additional small deposit amount to add to the `requestedDepositAmount` for wallet verification.                                                                                                                                 |
+| totalDepositAmount     | [CustodySelfHostedTotalDepositAmount](#schemacustodyselfhostedtotaldepositamount)         | true     | none         | The actual amount that the user should deposit for wallet verification. It is the sum of `requestedDepositAmount` and `verificationAmount`.                                                                                                       |
+| verificationExpiryTime | [DateTime](#schemadatetime)                                                               | true     | none         | ISO 8601 with millisecond as string                                                                                                                                                                                                               |
 
 <h2 id="tocS_CustodyBankDetails">CustodyBankDetails</h2>
 <!-- backwards compatibility -->
