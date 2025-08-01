@@ -4,8 +4,6 @@
 
 - Add `code` field in `GET /spot/account_book` query parameter and response to
   filter account book entries by specific code
-- Add `threshold` parameter to `enable_evolved_classic` configuration for
-  setting position upgrade threshold in classic account margin mode
 - Add `text` parameter to `closeAllPositions` operation for order remarks when
   closing all positions
 - New comprehensive AccountBook code documentation with detailed explanations
@@ -28,13 +26,8 @@
 
 **v4.101.9**
 
-- Add voucher-related fields to futures position model: `voucher_size`,
-  `voucher_margin`, `voucher_id`
-- Introduce voucher timerange functionality for enhanced position management
 - New feature `GET /futures/{settle}/risk_limit_table` endpoint, Query risk
   limit tier table by table_id
-- New feature `GET /futures/{settle}/risk_limit_table/list` endpoint, Query all
-  risk limit tier tables
 - Add `enable_tiered_mm` field in futures account model for tiered maintenance
   margin calculation
 - Add `risk_limit_table` and `average_maintenance_rate` fields in position model
@@ -56,8 +49,7 @@
 
 **v4.99.0**
 
-- Add `refresh_time` field in `GET /spot/accounts`、`GET /spot/real_accounts`
-  endpoint response
+- Add `refresh_time` field in `GET /spot/accounts` endpoint response
 - Remove the `PUT /earn/uni/interest_reinvest` endpoint
 
 **v4.98.0**
@@ -128,19 +120,6 @@
 `2025-04-01` After that, we will remove the following interface, please migrate
 to the new interface as soon as possible
 
-- `GET /margin/cross/borrowable` endpoint, deprecated
-- `GET /margin/cross/estimate_rate` endpoint, deprecated
-- `GET /margin/cross/transferable` endpoint, deprecated
-- `GET /margin/cross/interest_records` endpoint, deprecated
-- `GET /margin/cross/repayments` endpoint, deprecated
-- `POST /margin/cross/repayments` endpoint, deprecated
-- `GET /margin/cross/loans/{loan_id}` endpoint, deprecated
-- `POST /margin/cross/loans` endpoint, deprecated
-- `GET /margin/cross/account_book` endpoint, deprecated
-- `GET /margin/cross/accounts` endpoint, deprecated
-- `GET /margin/cross/currencies/{currency}` endpoint, deprecated
-- `GET /margin/cross/currencies` endpoint, deprecated
-
 **v4.90.0**
 
 2025-01-20
@@ -150,13 +129,6 @@ to the new interface as soon as possible
   specified user is in the system
 - Add `order_size` field in`GET /futures/{settle}/liq_orders` response
 - Add `type` field in `GET /spot/currency_pairs` response
-
-**v4.89.0**
-
-2025-01-08
-
-- Add `text` field in `DELETE /futures/{settle}/close_all_positions` query
-  string
 
 **v4.88.0**
 
@@ -230,7 +202,6 @@ field in `POST /futures/{settle}/dual_mode` response.
 - New feature `POST /options/countdown_cancel_all` endpoint, Countdown to cancel
   order
 - Add `message` field in `GET /wallet/push` response
-- Add `lowest_size`、`highest_size` in `GET /futures/{settle}/tickers` response
 - Add `from`、`to` in `GET /futures/{settle}/funding_rate` query
 - Add `is_max` field in `POST /earn/dual/orders` response
 
@@ -463,7 +434,6 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2023-11-03
 
-- Add `loanable` field in `GET /margin/cross/currencies` response
 - Add `tier` field in `GET /account/detail` response
 - Add `max_base_amount`、`max_quote_amount` field in `GET /spot/currency_pairs`
   response
@@ -492,8 +462,7 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2023-09-25
 
-- Add `repayment_type` field in `GET /margin/cross/repayments` and
-  `GET /portfolio/loan_records` endpoints.
+- Add `repayment_type` field in `GET /portfolio/loan_records` endpoint.
 - Add request parameter `holding` in `GET /futures/{settle}/positions` endpoint
 - Add request parameter `role` in `GET /futures/{settle}/my_trades_timerange`
   endpoint
@@ -566,9 +535,8 @@ field in `POST /futures/{settle}/dual_mode` response.
 2023-05-23
 
 - New feature: add STP group admin api
-- New feature: query estimated interest rates of margin and cross margin in
-  `GET /margin/uni/estimate_rate` and `GET /margin/cross/estimate_rate`
-  endpoints.
+- New feature: query estimated interest rates of margin in
+  `GET /margin/uni/estimate_rate` endpoint.
 - New feature: list futures order by time range in
   `GET /futures/{settle}/orders_timerange` endpoint
 - Add
@@ -582,7 +550,6 @@ field in `POST /futures/{settle}/dual_mode` response.
 - New feature: query spot account book in `GET /spot/account_book` endpoint
 - New feature: query user futures trading fee in `GET /futures/{settle}/fee`
   endpoint
-- Add `is_internal` field in `GET /futures/{settle}/trades` endpoint
 
 **v4.45.0**
 
@@ -591,12 +558,8 @@ field in `POST /futures/{settle}/dual_mode` response.
 - The margin loan has been migrated to the `Lend & Earn`. For more information,
   please refer to the
   [Margin Migration Instructions](#margin-migration-instructions)
-- New feature: Get interest records for the cross margin account in
-  `GET /margin/cross/interest_records` endpoint.
 - New feature: Add `Self-Trade Prevention` feature in the
   `POST /futures/{settle}/batch_orders` endpoint.
-- Add `futures_in`、`futures_out` two fields in `GET /margin/cross/account_book`
-  endpoint.
 
 **v4.44.0**
 
@@ -613,8 +576,6 @@ field in `POST /futures/{settle}/dual_mode` response.
   [STP overview](#self-trade-prevention-stp)
 - New feature: Get API key's ip whitelist in `GET /account/detail` endpoint.
 - Add `amend_text` in `PATCH /spot/orders/{order_id}` endpoint.
-- Add `lowest_ask` and `highest_bid` fields in `GET /futures/{settle}/tickers`
-  endpoint
 
 **v4.42.0**
 
@@ -625,15 +586,10 @@ field in `POST /futures/{settle}/dual_mode` response.
   `POST /futures/{settle}/orders` endpoint. Fore more detail, please refer to
   [STP overview](#self-trade-prevention-stp)
 - Add `delivery` account type in `POST /wallet/sub_account_transfers` endpoint
-- Add `amend_text` field in `PUT /futures/{settle}/orders/{order_id}` endpoint
 
 **v4.41.0**
 
 2023-03-03
-
-Add `negative_liab`, `futures_pos_liab`, `equity`, `total_freeze`, `total_liab`,
-`portfolio_margin_total_liab`, `portfolio_margin_total_equity` fields in
-`GET /margin/cross/accounts` endpoint
 
 **v4.40.0**
 
@@ -679,8 +635,6 @@ Add `negative_liab`, `futures_pos_liab`, `equity`, `total_freeze`, `total_liab`,
 
 - New feature: amend order endpoint `/spot/orders/{order_id}`
 - Add `avg_deal_price` field in `GET /spot/orders` response
-- Add `portfolio_margin_total` field in \`\`GET /margin/cross/accounts\`
-  response
 - Support market order in `POST /spot/batch_orders` endpoint
 
 **v4.34.0**
@@ -739,8 +693,6 @@ Add `negative_liab`, `futures_pos_liab`, `equity`, `total_freeze`, `total_liab`,
 
 2022-07-29
 
-- Add `basis_rate`、`basis_value` fields in `GET /delivery/{settle}/tickers`
-  response
 - Add `X-Client-Request-Id` http header for tracking request
 - new create a batch of futures order endpoint
   `POST /futures/{settle}/batch_orders`
@@ -772,8 +724,6 @@ Add `negative_liab`, `futures_pos_liab`, `equity`, `total_freeze`, `total_liab`,
 - Support portfolio margin account API
 - Cross-margin add more fields. Please refer to endpoint document for more
   details.
-- Add `status` field in `GET /margin/cross/currencies` endpoint, determine
-  whether the cross currency is disabled `0`\-disable `1`\-enable
 - New `POST /spot/cross_liquidate_orders` spot trading endpoint that close
   position when the cross-currency is disabled
 - Add `bouns` and `history` fields in `GET /futures/{settle}/accounts` endpoint
@@ -799,8 +749,6 @@ Add `negative_liab`, `futures_pos_liab`, `equity`, `total_freeze`, `total_liab`,
 
 2022-04-25
 
-- Add `PUT /futures/{settle}/orders/{order_id}` to amend perpetual futures
-  orders
 - Spot candlesticks supports `30d` interval
 
 **v4.23.3**
@@ -891,8 +839,8 @@ Add `negative_liab`, `futures_pos_liab`, `equity`, `total_freeze`, `total_liab`,
   allow empty `currency_pair` if operated against finished orders
 - Add fixed withdrawal fee on multiple chains in `GET /wallet/withdraw_status`
   response
-- Add `GET /margin/transferable` and `GET /margin/cross/transferable` to
-  retrieve maximum transferable amount from margin and cross margin account
+- Add `GET /margin/transferable` to retrieve maximum transferable amount from
+  margin account
 - Add `from` and `to` parameter to specify time range for futures position
   closes history API
 
@@ -900,7 +848,6 @@ Add `negative_liab`, `futures_pos_liab`, `equity`, `total_freeze`, `total_liab`,
 
 2021-06-23
 
-- Add cross margin account change history API `GET /margin/cross/account_book`
 - Add millisecond timestamp in `GET /margin/account_book` response
 
 **v4.21.3**
@@ -1187,11 +1134,9 @@ _Futures_
 - Change `/futures` to `/futures/{settle}` in ALL futures API to support futures
   operations in different settle currency.
 - `currency` field in `/futures/{settle}/accounts` response adds new value:
-  `USDT`
-- Add `volume_24h_base`, `volume_24h_quote` and `volume_24h_settle` in
-  `/futures/{settle}/tickers` response to replace `volume_24h_btc` and
-  `volume_24h_usd`. The latter two are still preserved for compatibility usage,
-  but are NOT recommended for any futures operations.
+  `USDT` response to replace `volume_24h_btc` and `volume_24h_usd`. The latter
+  two are still preserved for compatibility usage, but are NOT recommended for
+  any futures operations.
 
 To use USDT futures, just replace `/futures` with `/futures/usdt`, e.g. use
 `GET /futures/usdt/accounts` to retrieve futures accounts settled in USDT, while
