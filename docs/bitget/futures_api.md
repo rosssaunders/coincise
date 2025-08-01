@@ -2013,13 +2013,10 @@ Response
   close order for 50, it will not report an insufficient position error, nor
   will it cancel the occupying limit order to execute the market order. Instead,
   it will directly close a quantity of 30.
-- When in `hedge Mode`, if a limit close order is occupying a position, and the
-  quantity of the limit close order is equal to the total position size, then
-  any subsequent market close order will report an insufficient position error.
-  It will not cancel the limit order that's occupying the position. For example:
-  If you have a position of 100, a limit order occupies 100, and you then place
-  a market close order for 50, it will report an insufficient position error and
-  will not cancel the occupying limit order to execute the market order.
+- When in `hedge Mode`,if the existing quantity is equal to the limit close
+  position order of the held position, a newly added market price close position
+  order will automatically cancel the limit order that has occupied the
+  position.
 - For elite traders, please strictly adhere to the list of trading pairs
   specified in the
   [Available trading pairs and parameters for elite traders](https://www.bitget.com/zh-CN/support/articles/12560603808895)

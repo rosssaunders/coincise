@@ -2,6 +2,21 @@
 
 ## Changelog
 
+### \[July 31, 2025\] Optimization of the futures order placement interface logic[​](#july-31-2025-optimization-of-the-futures-order-placement-interface-logic "Direct link to july-31-2025-optimization-of-the-futures-order-placement-interface-logic")
+
+Interface： /api/v2/mix/order/place-order
+
+Changes：
+
+- before: In hedge mode, if the existing quantity is equal to the limit close
+  order of the position, a newly added market close order will report an error
+  due to insufficient position and will not automatically cancel the limit order
+  that has occupied the position.
+- after: In hedge mode, if the existing quantity is equal to the limit close
+  order of the position, a newly added market close order will automatically
+  cancel the limit order that has occupied the position (consistent with
+  Web/APP).
+
 ### \[July 29, 2025\] Optimize ADL API ranking logic.[​](#july-29-2025-optimize-adl-api-ranking-logic "Direct link to july-29-2025-optimize-adl-api-ranking-logic")
 
 Interface：/api/v2/mix/position/adlRank Changes：
