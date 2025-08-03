@@ -1,0 +1,6 @@
+5bdfee5c8ad72cb1930dfb656844f14e45dc1320|docs: update Gate.io API documentation (#279)|Ross Saunders|2025-07-31
+425e6b2a89997be7ee47b5523b229f49921d25b7|docs: update Bybit API documentation (#293)|Ross Saunders|2025-07-31
+e4f181c2ccdd001647e764cb574357eb9717917a|docs: update Bitget API documentation (#295)|Ross Saunders|2025-07-31
+6ce4b5196a80d3986e5b4580be2e985841e935ad|docs: update MEXC API documentation (#283)|Ross Saunders|2025-07-28
+bc12d3ea094dbfde2e29d5f58adc957470de4f2e|docs: update OKX API documentation (#284)|Ross Saunders|2025-07-27
+87124dab34479c7d142393f836a14b2a23a8b83e|docs: update Binance Futures API documentation (#286)|Ross Saunders|2025-07-27
