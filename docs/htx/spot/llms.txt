@@ -1,0 +1,9 @@
+# Htx Spot
+> Curated links to Htx Spot API documentation generated from official sources.
+
+## Documentation
+- [Fix Api](./fix_api.md)
+- [Private Rest Api](./private_rest_api.md)
+- [Private Websocket Api](./private_websocket_api.md)
+- [Public Rest Api](./public_rest_api.md)
+- [Public Websocket Api](./public_websocket_api.md)

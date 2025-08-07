@@ -1,0 +1,15 @@
+{
+  "title": "Coinbase International Exchange FIX API",
+  "urls": [
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/fix-api/introduction",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/fix-api/authentication",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/fix-api/admin-messages",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/fix-api/order-entry-messages",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/fix-api/market-data-messages",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/fix-api/drop-copy-messages"
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/coinbase/international",
+    "outputFileName": "fix_api.md"
+  }
+}

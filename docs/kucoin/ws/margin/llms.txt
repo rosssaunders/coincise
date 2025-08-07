@@ -1,0 +1,6 @@
+# Ws Margin
+> Curated links to Ws Margin API documentation generated from official sources.
+
+## Documentation
+- [Margin Private](./margin-private.md)
+- [Margin Public](./margin-public.md)

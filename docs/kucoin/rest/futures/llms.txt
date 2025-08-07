@@ -1,0 +1,8 @@
+# Rest Futures
+> Curated links to Rest Futures API documentation generated from official sources.
+
+## Documentation
+- [Futures Fundingfees](./futures-fundingfees.md)
+- [Futures Market](./futures-market.md)
+- [Futures Order](./futures-order.md)
+- [Futures Positions](./futures-positions.md)

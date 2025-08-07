@@ -1,0 +1,7 @@
+# Mexc Contract
+> Curated links to Mexc Contract API documentation generated from official sources.
+
+## Documentation
+- [Private Rest Api](./private_rest_api.md)
+- [Public Rest Api](./public_rest_api.md)
+- [Websocket Api](./websocket_api.md)

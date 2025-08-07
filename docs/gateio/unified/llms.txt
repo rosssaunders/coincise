@@ -1,0 +1,9 @@
+# Gateio Unified
+> Curated links to Gateio Unified API documentation generated from official sources.
+
+## Documentation
+- [Private Rest Api](./private_rest_api.md)
+- [Websocket Api](./websocket_api.md)
+
+## Changelogs
+- [Websocket Change Log](./websocket_change_log.md)

@@ -1,0 +1,5 @@
+# Kucoin
+> Curated links to Kucoin API documentation generated from official sources.
+
+## Documentation
+- [Rate Limit Docs](./rate_limit_docs.md)

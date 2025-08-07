@@ -1,0 +1,20 @@
+{
+  "title": "Coinbase International Exchange REST API",
+  "urls": [
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/authentication",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/assets",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/fee-rates",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/index",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/instruments",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/orders",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/portfolios",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/position-offsets",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/rankings",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/transfers"
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/coinbase/international",
+    "outputFileName": "rest_api.md"
+  }
+}

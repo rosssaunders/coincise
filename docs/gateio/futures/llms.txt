@@ -1,0 +1,9 @@
+# Gateio Futures
+> Curated links to Gateio Futures API documentation generated from official sources.
+
+## Documentation
+- [Private Rest Trading Api](./private_rest_trading_api.md)
+- [Websocket Api](./websocket_api.md)
+
+## Changelogs
+- [Websocket Change Log](./websocket_change_log.md)

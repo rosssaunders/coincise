@@ -1,0 +1,10 @@
+# Bitget
+> Curated links to Bitget API documentation generated from official sources.
+
+## Documentation
+- [Common Api](./common_api.md)
+- [Futures Api](./futures_api.md)
+- [Spot Api](./spot_api.md)
+
+## Changelogs
+- [Change Log](./change_log.md)

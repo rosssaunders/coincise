@@ -1,0 +1,6 @@
+# Ws Futures
+> Curated links to Ws Futures API documentation generated from official sources.
+
+## Documentation
+- [Futures Private](./futures-private.md)
+- [Futures Public](./futures-public.md)

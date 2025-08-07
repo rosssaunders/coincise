@@ -1,0 +1,13 @@
+{
+  "title": "Coinbase International Exchange WebSocket Feed",
+  "urls": [
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/websocket-feed/introduction",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/websocket-feed/authentication",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/websocket-feed/channels",
+    "https://docs.cdp.coinbase.com/api-reference/international-exchange-api/websocket-feed/error-handling"
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/coinbase/international",
+    "outputFileName": "websocket_api.md"
+  }
+}

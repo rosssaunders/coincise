@@ -1,0 +1,9 @@
+# Rest Margin
+> Curated links to Rest Margin API documentation generated from official sources.
+
+## Documentation
+- [Margin Credit](./margin-credit.md)
+- [Margin Debit](./margin-debit.md)
+- [Margin Market](./margin-market.md)
+- [Margin Order](./margin-order.md)
+- [Margin Risklimit](./margin-risklimit.md)

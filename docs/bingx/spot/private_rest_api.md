@@ -19,7 +19,7 @@ experience.
 
 [Fill in the questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSd0yjx5okwQG1D7tf4pBAcf4WbMW8zE-Ew01ardWGCwoIZoMg/viewform)
 
-> **Source:**
+> **Source:** >
 > [original URL](https://bingx-api.github.io/docs/#/en-us/common/introduce)
 
 ---
@@ -125,7 +125,7 @@ Q: How many channels can be subscribed per IP address on BingX?
 A: Currently, there is no limit, but there is a subscription rate limit. Please
 do not exceed 10/s.
 
-> **Source:**
+> **Source:** >
 > [original URL](https://bingx-api.github.io/docs/#/en-us/swapV2/q&a)
 
 ---
@@ -234,7 +234,7 @@ limits are based on the following grouping rules:
 
 https://open-api.bingx.com/openApi/spot/v1/server/time
 
-> **Source:**
+> **Source:** >
 > [original URL](https://bingx-api.github.io/docs/#/en-us/spot/base-info.html)
 
 ---
@@ -364,7 +364,7 @@ Success
   contain a body. If the response has a body, it will be included under each
   resource below.
 
-> **Source:**
+> **Source:** >
 > [original URL](https://bingx-api.github.io/docs/#/en-us/spot/authentication.html)
 
 ---
@@ -684,7 +684,7 @@ sub-accounts
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-> **Source:**
+> **Source:** >
 > [original URL](https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html)
 
 ---
@@ -1194,7 +1194,7 @@ Content-Type:request body(application/json)
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-> **Source:**
+> **Source:** >
 > [original URL](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html)
 
 ---
@@ -2195,7 +2195,7 @@ Query OCO historical order list
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-> **Source:**
+> **Source:** >
 > [original URL](https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html)
 
 ---
@@ -3134,7 +3134,7 @@ of this API must be main account.
 | 100413     | Incorrect apiKey                                                                                                                                             |
 | 100410     | over 20 error code:100202 requests within 480000 ms for this api, please verify and fix it ,can retry after time: 1727193970155                              |
 
-> **Source:**
+> **Source:** >
 > [original URL](https://bingx-api.github.io/docs/#/en-us/common/sub-account)
 
 ---

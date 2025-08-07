@@ -1,0 +1,7 @@
+# Kucoin Ws
+> Curated links to Kucoin Ws API documentation generated from official sources.
+
+## Documentation
+- [Futures Api](./futures_api.md)
+- [Margin Api](./margin_api.md)
+- [Spot Api](./spot_api.md)

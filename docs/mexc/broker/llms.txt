@@ -1,0 +1,5 @@
+# Mexc Broker
+> Curated links to Mexc Broker API documentation generated from official sources.
+
+## Documentation
+- [Private Rest Api](./private_rest_api.md)

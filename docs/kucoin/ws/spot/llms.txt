@@ -1,0 +1,6 @@
+# Ws Spot
+> Curated links to Ws Spot API documentation generated from official sources.
+
+## Documentation
+- [Spot Private](./spot-private.md)
+- [Spot Public](./spot-public.md)

@@ -1,0 +1,12 @@
+# Gateio Spot
+> Curated links to Gateio Spot API documentation generated from official sources.
+
+## Documentation
+- [Private Rest Account Api](./private_rest_account_api.md)
+- [Private Rest Api](./private_rest_api.md)
+- [Private Rest Trading Api](./private_rest_trading_api.md)
+- [Websocket Api](./websocket_api.md)
+
+## Changelogs
+- [Change Log](./change_log.md)
+- [Websocket Change Log](./websocket_change_log.md)

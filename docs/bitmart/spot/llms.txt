@@ -1,0 +1,17 @@
+# Bitmart Spot
+> Curated links to Bitmart Spot API documentation generated from official sources.
+
+## Documentation
+- [Basic Information](./basic_information.md)
+- [Error Code](./error_code.md)
+- [Funding Account](./funding_account.md)
+- [Introduction](./introduction.md)
+- [Margin Loan](./margin_loan.md)
+- [Public Market Data](./public_market_data.md)
+- [Spot Margin Trading](./spot___margin_trading.md)
+- [Sub Account](./sub-account.md)
+- [System Status](./system_status.md)
+- [Websocket Subscription](./websocket_subscription.md)
+
+## Changelogs
+- [Change Log](./change_log.md)

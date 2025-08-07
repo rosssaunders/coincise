@@ -1,0 +1,6 @@
+# Rest Spot
+> Curated links to Rest Spot API documentation generated from official sources.
+
+## Documentation
+- [Spot Market](./spot-market.md)
+- [Spot Order](./spot-order.md)

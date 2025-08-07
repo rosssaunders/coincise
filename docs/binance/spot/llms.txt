@@ -1,0 +1,13 @@
+# Binance Spot
+> Curated links to Binance Spot API documentation generated from official sources.
+
+## Documentation
+- [Fix Api](./fix_api.md)
+- [Market Data Sbe Api](./market_data_sbe_api.md)
+- [Private Rest Api](./private_rest_api.md)
+- [Private Websocket Api](./private_websocket_api.md)
+- [Public Rest Api](./public_rest_api.md)
+- [Public Websocket Api](./public_websocket_api.md)
+
+## Changelogs
+- [Change Log](./change_log.md)

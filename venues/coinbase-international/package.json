@@ -1,0 +1,17 @@
+{
+  "name": "coinbase-international-extractor",
+  "version": "1.0.0",
+  "description": "Coinbase International API documentation extractor",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "extract:rest": "node src/index.js rest",
+    "extract:fix": "node src/index.js fix",
+    "extract:websocket": "node src/index.js websocket"
+  },
+  "dependencies": {
+    "jsdom": "^26.1.0",
+    "turndown": "^7.1.2",
+    "turndown-plugin-gfm": "^1.0.2"
+  }
+}

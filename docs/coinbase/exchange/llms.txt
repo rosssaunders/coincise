@@ -1,0 +1,25 @@
+# Coinbase Exchange
+> Curated links to Coinbase Exchange API documentation generated from official sources.
+
+## Documentation
+- [Private Accounts](./private_accounts.md)
+- [Private Address Book](./private_address-book.md)
+- [Private Coinbase Accounts](./private_coinbase-accounts.md)
+- [Private Conversions](./private_conversions.md)
+- [Private Currencies](./private_currencies.md)
+- [Private Fees](./private_fees.md)
+- [Private Futures](./private_futures.md)
+- [Private General](./private_general.md)
+- [Private Loan](./private_loan.md)
+- [Private Orders](./private_orders.md)
+- [Private Products](./private_products.md)
+- [Private Profiles](./private_profiles.md)
+- [Private Reports](./private_reports.md)
+- [Private Transfers](./private_transfers.md)
+- [Private Travel Rules](./private_travel-rules.md)
+- [Private Users](./private_users.md)
+- [Private Wrapped Assets](./private_wrapped-assets.md)
+- [Public Currencies](./public_currencies.md)
+- [Public General](./public_general.md)
+- [Public Products](./public_products.md)
+- [Websocket Api](./websocket_api.md)
