@@ -54,9 +54,10 @@ async function generateLlms() {
         outputDir = path.join(DOCS_ROOT, path.dirname(cfg.output_file))
       }
       const title = cfg.title || path.basename(fp, ".json")
-      const firstEndpoint = Array.isArray(cfg.endpoints) && cfg.endpoints.length
-        ? cfg.endpoints[0]
-        : "binance-spot-api-docs"
+      const firstEndpoint =
+        Array.isArray(cfg.endpoints) && cfg.endpoints.length
+          ? cfg.endpoints[0]
+          : "binance-spot-api-docs"
       const url = `${BASE_URL}/${firstEndpoint}`
       const link = makeLink(title, url)
       const lower = title.toLowerCase()
@@ -83,12 +84,15 @@ async function generateLlms() {
   }
 
   const docLinks = dedupe(links).sort((a, b) => a.name.localeCompare(b.name))
-  const changelog = dedupe(changelogLinks).sort((a, b) => a.name.localeCompare(b.name))
+  const changelog = dedupe(changelogLinks).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  )
 
   const title = "Binance Spot"
   const summary = "Curated links to official Binance Spot API documentation."
   const sections = []
-  if (docLinks.length) sections.push({ title: "Documentation", links: docLinks })
+  if (docLinks.length)
+    sections.push({ title: "Documentation", links: docLinks })
   if (changelog.length) sections.push({ title: "Changelogs", links: changelog })
 
   const content = buildLlmsContent(title, summary, sections)
@@ -341,7 +345,9 @@ function adjustHeadingLevels(document) {
 
 async function processAll() {
   if (!CONFIG_PATH) {
-    throw new Error("Config file path must be specified for legacy markdown generation")
+    throw new Error(
+      "Config file path must be specified for legacy markdown generation"
+    )
   }
   const config = readJson(CONFIG_PATH)
   const { endpoints, output_file, title } = config

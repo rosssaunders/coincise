@@ -4,8 +4,7 @@
   "description": "Cryptocurrency exchange API documentation scraper",
   "scripts": {
     "scrape:binance": "cd venues/binance && npm run start",
-    "format": "prettier --write \"**/*.js\"",
-    "extract:llms": "npm run extract:llms --workspace tools/generate-llms"
+    "format": "prettier --write \"**/*.js\""
   },
   "dependencies": {
     "jsdom": "^26.1.0",
@@ -17,7 +16,6 @@
   },
   "type": "module",
   "workspaces": [
-    "tools/*",
     "venues/*"
   ],
   "devDependencies": {

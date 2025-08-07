@@ -28,7 +28,8 @@ async function main() {
       const { title, endpoints } = JSON.parse(
         fs.readFileSync(path.join(configDir, f), "utf8")
       )
-      const endpoint = Array.isArray(endpoints) && endpoints.length ? endpoints[0] : ""
+      const endpoint =
+        Array.isArray(endpoints) && endpoints.length ? endpoints[0] : ""
       const base = "https://bybit-exchange.github.io/docs/v5"
       const url = endpoint ? `${base}/${endpoint}` : base
       links.push(makeLink(title || path.basename(f, ".json"), url))

@@ -1,5 +1,5 @@
-# Backpack
-> Curated links to Backpack API documentation generated from official sources.
+# Backpack Exchange
+> Curated links to official Backpack Exchange API documentation.
 
 ## Documentation
-- [General Documentation](./general_documentation.md)
+- [Backpack Docs](https://docs.backpack.exchange/)

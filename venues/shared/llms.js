@@ -36,5 +36,3 @@ export const writeLlmsTxt = (outputDir, content) => {
 }
 
 export const makeLink = (name, url, notes = "") => ({ name, url, notes })
-
-

@@ -6,6 +6,7 @@ import { gfm } from "turndown-plugin-gfm"
 import fs from "fs/promises"
 import path from "path"
 import { fileURLToPath } from "url"
+import { buildLlmsContent, writeLlmsTxt, makeLink } from "../../shared/llms.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -407,10 +408,22 @@ async function convertOpenAPIToMarkdown(spec) {
 
 async function main() {
   try {
+    if (!process.env.LEGACY_MD) {
+      const docsDir = path.join(__dirname, "..", "..", "..", "docs", "backpack")
+      const title = "Backpack Exchange"
+      const summary = "Curated links to official Backpack Exchange API documentation."
+      const links = [
+        makeLink("Backpack Docs", "https://docs.backpack.exchange/")
+      ]
+      const sections = [{ title: "Documentation", links }]
+      const content = buildLlmsContent(title, summary, sections)
+      writeLlmsTxt(docsDir, content)
+      console.log("\n🎉 llms.txt generated successfully! 🎉\n")
+      return
+    }
+
     await extractOpenAPISpec()
-    console.log(
-      "\n🎉 Backpack Exchange documentation extraction completed! 🎉\n"
-    )
+    console.log("\n🎉 Backpack Exchange documentation extraction completed! 🎉\n")
   } catch (error) {
     console.error("Failed to extract documentation:", error)
     console.error("Stack trace:", error.stack)

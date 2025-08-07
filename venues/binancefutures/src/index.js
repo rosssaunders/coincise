@@ -58,7 +58,10 @@ async function generateLlms() {
       if (cfg.output_file) {
         outDir = path.join(DOCS_ROOT, path.dirname(cfg.output_file))
       }
-      const first = Array.isArray(cfg.endpoints) && cfg.endpoints.length ? cfg.endpoints[0] : "derivatives"
+      const first =
+        Array.isArray(cfg.endpoints) && cfg.endpoints.length
+          ? cfg.endpoints[0]
+          : "derivatives"
       const url = `${BASE_URL}/${first}`
       const name = cfg.title || path.basename(fp, ".json")
       const link = makeLink(name, url)
@@ -92,7 +95,8 @@ async function generateLlms() {
   writeLlmsTxt(outDir, content)
 }
 
-const toTitleCase = s => s.replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase())
+const toTitleCase = s =>
+  s.replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase())
 
 /**
  * Inserts a separator element (e.g., <hr>) between adjacent <table> elements in the document.
@@ -323,7 +327,9 @@ function adjustHeadingLevels(document) {
 
 async function processAll() {
   if (!CONFIG_PATH) {
-    throw new Error("Config file path must be specified for legacy markdown generation")
+    throw new Error(
+      "Config file path must be specified for legacy markdown generation"
+    )
   }
   const config = readJson(CONFIG_PATH)
   const { endpoints, output_file, title } = config
