@@ -1,8 +1,8 @@
 # Bybit V5
-> Curated links to Bybit V5 API documentation generated from official sources.
+> Curated links to official Bybit V5 API documentation.
 
 ## Documentation
-- [Private Rest Api](./private_rest_api.md)
-- [Private Websocket Api](./private_websocket_api.md)
-- [Public Rest Api](./public_rest_api.md)
-- [Public Websocket Api](./public_websocket_api.md)
+- [ByBit V5 Private REST API Documentation](https://bybit-exchange.github.io/docs/v5/rate-limit)
+- [ByBit V5 Private Websocket API Documentation](https://bybit-exchange.github.io/docs/v5/rate-limit)
+- [ByBit V5 Public REST API Documentation](https://bybit-exchange.github.io/docs/v5/rate-limit)
+- [ByBit V5 Public Websocket API Documentation](https://bybit-exchange.github.io/docs/v5/rate-limit)

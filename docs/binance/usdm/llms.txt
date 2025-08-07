@@ -1,8 +1,19 @@
-# Binance Usdm
-> Curated links to Binance Usdm API documentation generated from official sources.
+# Binance USDM Futures
+> Curated links to official Binance USDM Futures API documentation.
+
+## Changelogs
+- [Binance Futures API Change Log](https://developers.binance.com/docs/derivatives/change-log)
 
 ## Documentation
-- [Private Rest Api](./private_rest_api.md)
-- [Private Websocket Api](./private_websocket_api.md)
-- [Public Rest Api](./public_rest_api.md)
-- [Public Websocket Api](./public_websocket_api.md)
+- [Binance COINM Futures Private REST API Documentation](https://developers.binance.com/docs/derivatives/quick-start)
+- [Binance COINM Futures Private Websocket API Documentation](https://developers.binance.com/docs/derivatives/quick-start)
+- [Binance COINM Futures Public REST API Documentation](https://developers.binance.com/docs/derivatives/quick-start)
+- [Binance COINM Futures Public Websocket API Documentation](https://developers.binance.com/docs/derivatives/quick-start)
+- [Binance Options Private REST API Documentation](https://developers.binance.com/docs/derivatives/quick-start)
+- [Binance Options Private Websocket API Documentation](https://developers.binance.com/docs/derivatives/quick-start)
+- [Binance Options Public REST API Documentation](https://developers.binance.com/docs/derivatives/quick-start)
+- [Binance Options Public Websocket API Documentation](https://developers.binance.com/docs/derivatives/quick-start)
+- [Binance USDM Futures Private REST API Documentation](https://developers.binance.com/docs/derivatives/quick-start)
+- [Binance USDM Futures Private Websocket API Documentation](https://developers.binance.com/docs/derivatives/quick-start)
+- [Binance USDM Futures Public REST API Documentation](https://developers.binance.com/docs/derivatives/quick-start)
+- [Binance USDM Futures Public Websocket API Documentation](https://developers.binance.com/docs/derivatives/quick-start)

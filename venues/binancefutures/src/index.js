@@ -9,17 +9,12 @@ import { JSDOM } from "jsdom"
 import { getPage, politeDelay, launchBrowser } from "../../shared/puppeteer.js"
 import { createTurndownBuilder } from "../../shared/turndown.js"
 import { formatMarkdown } from "../../shared/format-markdown.js"
+import { buildLlmsContent, writeLlmsTxt, makeLink } from "../../shared/llms.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-if (!process.argv[2]) {
-  throw new Error(
-    "Config file path must be specified as a command line argument"
-  )
-}
-
-const CONFIG_PATH = path.resolve(process.argv[2])
+const CONFIG_PATH = process.argv[2] ? path.resolve(process.argv[2]) : null
 const DOCS_ROOT = path.resolve(__dirname, "../../../docs")
 const BASE_URL = "https://developers.binance.com/docs"
 
@@ -31,11 +26,73 @@ function configureTurndown() {
   return createTurndownBuilder().withTablesWithoutHeaders().build()
 }
 
-// Load config
-const config = JSON.parse(fs.readFileSync(CONFIG_PATH, "utf8"))
-
 // Setup Turndown
 const turndownService = configureTurndown()
+
+function readJson(filePath) {
+  return JSON.parse(fs.readFileSync(filePath, "utf8"))
+}
+
+function listConfigFiles() {
+  const configDir = path.resolve(__dirname, "../config")
+  return fs
+    .readdirSync(configDir)
+    .filter(f => f.endsWith(".json"))
+    .map(f => path.join(configDir, f))
+}
+
+async function generateLlms() {
+  const files = listConfigFiles()
+  const sectionsMap = new Map()
+  let outDir = path.join(DOCS_ROOT, "binance")
+
+  const titleMap = new Map([
+    ["usdm", "USDM Futures"],
+    ["coinm", "COIN-M Futures"],
+    ["options", "Options"]
+  ])
+
+  for (const fp of files) {
+    try {
+      const cfg = readJson(fp)
+      if (cfg.output_file) {
+        outDir = path.join(DOCS_ROOT, path.dirname(cfg.output_file))
+      }
+      const first = Array.isArray(cfg.endpoints) && cfg.endpoints.length ? cfg.endpoints[0] : "derivatives"
+      const url = `${BASE_URL}/${first}`
+      const name = cfg.title || path.basename(fp, ".json")
+      const link = makeLink(name, url)
+      const lower = (cfg.output_file || "").toLowerCase()
+      let group = "Documentation"
+      if (lower.includes("change_log")) group = "Changelogs"
+
+      if (!sectionsMap.has(group)) sectionsMap.set(group, [])
+      sectionsMap.get(group).push(link)
+    } catch (error) {
+      console.error("Error processing config for llms:", fp)
+      console.error("Error:", error)
+      console.error("Stack trace:", error.stack)
+    }
+  }
+
+  const sections = []
+  for (const [group, links] of sectionsMap.entries()) {
+    links.sort((a, b) => a.name.localeCompare(b.name))
+    sections.push({ title: group, links })
+  }
+
+  // Detect sub-product from output path used above
+  const rel = path.relative(DOCS_ROOT, outDir)
+  const parts = rel.split(path.sep)
+  const sub = parts[1] || ""
+  const product = titleMap.get(sub) || toTitleCase(sub || "Futures")
+  const title = `Binance ${product}`
+  const summary = `Curated links to official Binance ${product} API documentation.`
+  const content = buildLlmsContent(title, summary, sections)
+  writeLlmsTxt(outDir, content)
+}
+
+const toTitleCase = s => s.replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase())
 
 /**
  * Inserts a separator element (e.g., <hr>) between adjacent <table> elements in the document.
@@ -265,6 +322,10 @@ function adjustHeadingLevels(document) {
 }
 
 async function processAll() {
+  if (!CONFIG_PATH) {
+    throw new Error("Config file path must be specified for legacy markdown generation")
+  }
+  const config = readJson(CONFIG_PATH)
   const { endpoints, output_file, title } = config
   let content = `# ${title}\n\n`
   let browser = null
@@ -404,6 +465,10 @@ async function processAll() {
 }
 
 async function main() {
+  if (!process.env.LEGACY_MD) {
+    await generateLlms()
+    return
+  }
   await processAll()
 }
 

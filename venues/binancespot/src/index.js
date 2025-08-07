@@ -9,17 +9,12 @@ import { JSDOM } from "jsdom"
 import { getPage, politeDelay, launchBrowser } from "../../shared/puppeteer.js"
 import { createTurndownBuilder } from "../../shared/turndown.js"
 import { formatMarkdown } from "../../shared/format-markdown.js"
+import { buildLlmsContent, writeLlmsTxt, makeLink } from "../../shared/llms.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-if (!process.argv[2]) {
-  throw new Error(
-    "Config file path must be specified as a command line argument"
-  )
-}
-
-const CONFIG_PATH = path.resolve(process.argv[2])
+const CONFIG_PATH = process.argv[2] ? path.resolve(process.argv[2]) : null
 const DOCS_ROOT = path.resolve(__dirname, "../../../docs")
 const BASE_URL = "https://developers.binance.com/docs"
 
@@ -31,11 +26,74 @@ function configureTurndown() {
   return createTurndownBuilder().withTablesWithoutHeaders().build()
 }
 
-// Load config
-const config = JSON.parse(fs.readFileSync(CONFIG_PATH, "utf8"))
-
-// Setup Turndown
+// Setup Turndown (legacy mode only uses this)
 const turndownService = configureTurndown()
+
+function readJson(filePath) {
+  return JSON.parse(fs.readFileSync(filePath, "utf8"))
+}
+
+function listConfigFiles() {
+  const configDir = path.resolve(__dirname, "../config")
+  return fs
+    .readdirSync(configDir)
+    .filter(f => f.endsWith(".json"))
+    .map(f => path.join(configDir, f))
+}
+
+async function generateLlms() {
+  const files = listConfigFiles()
+  const links = []
+  const changelogLinks = []
+  let outputDir = path.join(DOCS_ROOT, "binance/spot")
+
+  for (const fp of files) {
+    try {
+      const cfg = readJson(fp)
+      if (cfg.output_file) {
+        outputDir = path.join(DOCS_ROOT, path.dirname(cfg.output_file))
+      }
+      const title = cfg.title || path.basename(fp, ".json")
+      const firstEndpoint = Array.isArray(cfg.endpoints) && cfg.endpoints.length
+        ? cfg.endpoints[0]
+        : "binance-spot-api-docs"
+      const url = `${BASE_URL}/${firstEndpoint}`
+      const link = makeLink(title, url)
+      const lower = title.toLowerCase()
+      if (lower.includes("change")) {
+        changelogLinks.push(link)
+      } else {
+        links.push(link)
+      }
+    } catch (error) {
+      console.error("Error processing config for llms:", fp)
+      console.error("Error:", error)
+      console.error("Stack trace:", error.stack)
+    }
+  }
+
+  // Deduplicate by URL
+  const dedupe = arr => {
+    const seen = new Set()
+    return arr.filter(l => {
+      if (seen.has(l.url)) return false
+      seen.add(l.url)
+      return true
+    })
+  }
+
+  const docLinks = dedupe(links).sort((a, b) => a.name.localeCompare(b.name))
+  const changelog = dedupe(changelogLinks).sort((a, b) => a.name.localeCompare(b.name))
+
+  const title = "Binance Spot"
+  const summary = "Curated links to official Binance Spot API documentation."
+  const sections = []
+  if (docLinks.length) sections.push({ title: "Documentation", links: docLinks })
+  if (changelog.length) sections.push({ title: "Changelogs", links: changelog })
+
+  const content = buildLlmsContent(title, summary, sections)
+  writeLlmsTxt(outputDir, content)
+}
 
 /**
  * Inserts a separator element (e.g., <hr>) between adjacent <table> elements in the document.
@@ -282,6 +340,10 @@ function adjustHeadingLevels(document) {
 }
 
 async function processAll() {
+  if (!CONFIG_PATH) {
+    throw new Error("Config file path must be specified for legacy markdown generation")
+  }
+  const config = readJson(CONFIG_PATH)
   const { endpoints, output_file, title } = config
   let content = `# ${title}\n\n`
   let browser = null
@@ -417,6 +479,11 @@ async function processAll() {
 }
 
 async function main() {
+  // Default: links-only llms.txt generation unless LEGACY_MD is set
+  if (!process.env.LEGACY_MD) {
+    await generateLlms()
+    return
+  }
   await processAll()
 }
 

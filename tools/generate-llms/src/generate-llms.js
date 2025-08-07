@@ -64,7 +64,9 @@ const listLeafVenueDirs = baseDir => {
 
   const walk = currentDir => {
     const entries = fs.readdirSync(currentDir, { withFileTypes: true })
-    const subdirs = entries.filter(e => e.isDirectory()).map(e => path.join(currentDir, e.name))
+    const subdirs = entries
+      .filter(e => e.isDirectory())
+      .map(e => path.join(currentDir, e.name))
     const mdFiles = entries.filter(e => e.isFile() && isMarkdownFile(e.name))
 
     if (mdFiles.length > 0) {
@@ -82,7 +84,9 @@ const listLeafVenueDirs = baseDir => {
 
 const generateForDir = dirPath => {
   const entries = fs.readdirSync(dirPath, { withFileTypes: true })
-  const files = entries.filter(e => e.isFile() && isMarkdownFile(e.name)).map(e => e.name)
+  const files = entries
+    .filter(e => e.isFile() && isMarkdownFile(e.name))
+    .map(e => e.name)
 
   const docs = []
   const changelogs = []
@@ -143,5 +147,3 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     process.exit(1)
   })
 }
-
-

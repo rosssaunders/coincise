@@ -1,13 +1,12 @@
 # Binance Spot
-> Curated links to Binance Spot API documentation generated from official sources.
+> Curated links to official Binance Spot API documentation.
 
 ## Documentation
-- [Fix Api](./fix_api.md)
-- [Market Data Sbe Api](./market_data_sbe_api.md)
-- [Private Rest Api](./private_rest_api.md)
-- [Private Websocket Api](./private_websocket_api.md)
-- [Public Rest Api](./public_rest_api.md)
-- [Public Websocket Api](./public_websocket_api.md)
+- [Binance Spot FIX API Documentation](https://developers.binance.com/docs/binance-spot-api-docs/fix-api)
+- [Binance Spot Private REST API Documentation](https://developers.binance.com/docs/binance-spot-api-docs/filters)
+- [Binance Spot Private Websocket API Documentation](https://developers.binance.com/docs/binance-spot-api-docs/user-data-stream)
+- [Binance Spot Public Websocket API Documentation](https://developers.binance.com/docs/binance-spot-api-docs/errors)
+- [Binance Spot SBE API Documentation](https://developers.binance.com/docs/binance-spot-api-docs/sbe-market-data-streams)
 
 ## Changelogs
-- [Change Log](./change_log.md)
+- [Binance Spot API Change Log](https://developers.binance.com/docs/binance-spot-api-docs)
