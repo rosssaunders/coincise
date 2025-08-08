@@ -471,11 +471,7 @@ async function processAll() {
 }
 
 async function main() {
-  if (!process.env.LEGACY_MD) {
-    await generateLlms()
-    return
-  }
-  await processAll()
+  await generateLlms()
 }
 
 // Only run main() if this is the main module

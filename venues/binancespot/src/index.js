@@ -485,12 +485,8 @@ async function processAll() {
 }
 
 async function main() {
-  // Default: links-only llms.txt generation unless LEGACY_MD is set
-  if (!process.env.LEGACY_MD) {
-    await generateLlms()
-    return
-  }
-  await processAll()
+  // Always generate links-only llms.txt
+  await generateLlms()
 }
 
 // Only run main() if this is the main module
