@@ -1,4 +1,4 @@
-IntroductionAuthenticationSigning requestsChangelog2025-06-082025-04-222025-04-082025-03-262025-03-192025-02-282025-02-112025-02-072025-02-032025-01-092024-12-032024-12-022024-11-102024-10-152024-05-142024-05-032024-05-022024-05-012024-03-142024-02-282024-02-242024-01-162024-01-11Public EndpointsAssetsgetGet assets.getGet collateral.Borrow Lend MarketsgetGet borrow lend markets.getGet borrow lend market history.MarketsgetGet markets.getGet market.getGet ticker.getGet tickers.getGet depth.getGet K-lines.getGet all mark prices.getGet open interest.getGet funding interval rates.SystemgetStatus.getPing.getGet system time.getGet wallets.TradesgetGet recent trades.getGet historical trades.Authenticated EndpointsAccountgetGet account.patchUpdate account.postConvert a dust balance on an account.getGet max borrow quantity.getGet max order quantity.getGet max withdrawal quantity.Borrow LendgetGet borrow lend positions.postExecute borrow lend.CapitalgetGet balances.getGet collateral.getGet deposits.getGet deposit address.getGet withdrawals.postRequest withdrawal.FuturesgetGet open positions.HistorygetGet borrow history.getGet interest history.getGet borrow position history.getGet dust conversion history.getGet fill history.getGet funding payments.getGet order history.getGet profit and loss history.getGet rfq history.getGet quote history.getGet settlement history.getGet strategy history.OrdergetGet open order.postExecute order.delCancel open order.postExecute orders.getGet open orders.delCancel open orders.Request For QuotepostSubmit RFQ.postAccept quote.postRefresh RFQ.postCancel RFQ.postSubmit quote.WebsocketStreamsUsageSubscribingTimingKeeping the connection alivePrivateOrder updatePosition updateRFQ UpdatePublicBook tickerDepthK-LineLiquidationMark priceTickerOpen interestTradeAPI docs by RedoclyBackpack Exchange API (1.0)Download OpenAPI specification:DownloadIntroductionWelcome to the Backpack Exchange API. This API is for programmatic trade execution. All of the endpoints require requests to be signed with an ED25519 keypair for authentication.
+IntroductionAuthenticationSigning requestsChangelog2025-08-072025-06-082025-04-222025-04-082025-03-262025-03-192025-02-282025-02-112025-02-072025-02-032025-01-092024-12-032024-12-022024-11-102024-10-152024-05-142024-05-032024-05-022024-05-012024-03-142024-02-282024-02-242024-01-162024-01-11Public EndpointsAssetsgetGet assets.getGet collateral.Borrow Lend MarketsgetGet borrow lend markets.getGet borrow lend market history.MarketsgetGet markets.getGet market.getGet ticker.getGet tickers.getGet depth.getGet K-lines.getGet all mark prices.getGet open interest.getGet funding interval rates.SystemgetStatus.getPing.getGet system time.getGet wallets.TradesgetGet recent trades.getGet historical trades.Authenticated EndpointsAccountgetGet account.patchUpdate account.postConvert a dust balance on an account.getGet max borrow quantity.getGet max order quantity.getGet max withdrawal quantity.Borrow LendgetGet borrow lend positions.postExecute borrow lend.CapitalgetGet balances.getGet collateral.getGet deposits.getGet deposit address.getGet withdrawals.postRequest withdrawal.FuturesgetGet open positions.HistorygetGet borrow history.getGet interest history.getGet borrow position history.getGet dust conversion history.getGet fill history.getGet funding payments.getGet order history.getGet rfq history.getGet quote history.getGet settlement history.getGet strategy history.OrdergetGet open order.postExecute order.delCancel open order.postExecute orders.getGet open orders.delCancel open orders.Request For QuotepostSubmit RFQ.postAccept quote.postRefresh RFQ.postCancel RFQ.postSubmit quote.WebsocketStreamsUsageSubscribingTimingKeeping the connection alivePrivateOrder updatePosition updateRFQ UpdatePublicBook tickerDepthK-LineLiquidationMark priceTickerOpen interestTradeAPI docs by RedoclyBackpack Exchange API (1.0)Download OpenAPI specification:DownloadIntroductionWelcome to the Backpack Exchange API. This API is for programmatic trade execution. All of the endpoints require requests to be signed with an ED25519 keypair for authentication.
 
 The API is hosted at https://api.backpack.exchange/ and the WS API is hosted at wss://ws.backpack.exchange/.
 
@@ -138,7 +138,11 @@ If the API endpoint requires query parameters instead of a request body, the sam
 
 This message should be signed using the private key of the ED25519 keypair that corresponds to the public key in the X-API-Key header. The signature should then be base64 encoded and submitted in the X-Signature header.
 
-## Changelog2025-06-08
+## Changelog2025-08-07
+
+/history/pnl has been removed.
+
+## 2025-06-08
 
 The order id format is changing, it is no longer a byte shifted timestamp. It is no longer possible to derive the
 
@@ -558,7 +562,7 @@ X-TIMESTAMPrequiredinteger <int64>  Timestamp of the request in milliseconds
 
 X-WINDOWinteger <uint64>  Time the request is valid for in milliseconds (default 5000, maximum 60000)
 
-Request Body schema: application/json; charset=utf-8requiredsymbolstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES"  The asset symbol to convert dust for.
+Request Body schema: application/json; charset=utf-8requiredsymbolstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON"  The asset symbol to convert dust for.
 
 If omitted, all dust balances will be converted.
 
@@ -700,7 +704,7 @@ Request Body schema: application/json; charset=utf-8requiredquantityrequiredstri
 
 siderequiredstring Enum: "Borrow" "Lend"  Side of the borrow lend.
 
-symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES"  The asset to repay.
+symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON"  The asset to repay.
 
 Responses200 Success.
 
@@ -786,7 +790,7 @@ on the specified blockchain.
 
 ## Instruction: depositAddressQuery
 
-query Parametersblockchainrequiredstring (Blockchain)  Enum: "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "Hyperliquid" "Litecoin" "Optimism" "Polygon" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain symbol to get a deposit address for.
+query Parametersblockchainrequiredstring (Blockchain)  Enum: "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "Hyperliquid" "Litecoin" "Optimism" "Polygon" "Sei" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain symbol to get a deposit address for.
 
 ## header ParametersX-API-KEYstring API key
 
@@ -802,9 +806,11 @@ Responses200 Success.
 
 401 Unauthorized.
 
+## 409 Conflict
+
 500 Internal server error.
 
-get/wapi/v1/capital/deposit/addresshttps://api.backpack.exchange/wapi/v1/capital/deposit/address Response samples 200400401500Content typeapplication/json; charset=utf-8Copy{"address": "string"}Get withdrawals. Retrieves withdrawal history.
+get/wapi/v1/capital/deposit/addresshttps://api.backpack.exchange/wapi/v1/capital/deposit/address Response samples 200400401409500Content typeapplication/json; charset=utf-8Copy{"address": "string"}Get withdrawals. Retrieves withdrawal history.
 
 ## Instruction: withdrawalQueryAll
 
@@ -852,13 +858,13 @@ X-SIGNATURErequiredstring Signature of the request
 
 Request Body schema: application/json; charset=utf-8requiredaddressrequiredstring Address to withdraw to.
 
-blockchainrequiredstring Enum: "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "Hyperliquid" "Litecoin" "Optimism" "Polygon" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain to withdraw on.
+blockchainrequiredstring Enum: "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "Hyperliquid" "Litecoin" "Optimism" "Polygon" "Sei" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain to withdraw on.
 
 clientIdstring  <= 255 characters  Custom client id.
 
 quantityrequiredstring <decimal>  Quantity to withdraw.
 
-symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES"  Symbol of the asset to withdraw.
+symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON"  Symbol of the asset to withdraw.
 
 twoFactorTokenstring Issued two factor token.
 
@@ -1158,37 +1164,7 @@ Responses200 Success.
 
 500 Internal server error.
 
-get/wapi/v1/history/ordershttps://api.backpack.exchange/wapi/v1/history/orders Response samples 200400401500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"id": "string","createdAt": "string","executedQuantity": "string","executedQuoteQuantity": "string","expiryReason": "AccountTradingSuspended","orderType": "Market","postOnly": true,"price": "string","quantity": "string","quoteQuantity": "string","selfTradePrevention": "RejectTaker","status": "Cancelled","side": "Bid","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","timeInForce": "GTC","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","clientId": 0,"systemOrderType": "CollateralConversion","strategyId": "string"}]Get profit and loss history. History of profit and loss realization for an account.
-
-## Instruction: pnlHistoryQueryAll
-
-query ParameterssubaccountIdinteger <uint16>  Filter for a subaccount.
-
-symbolstring Market symbol to query. If not set, all markets are returned.
-
-limitinteger <uint64>  Maximum number to return. Default 100, maximum 1000.
-
-offsetinteger <uint64>  Offset for pagination. Default 0.
-
-sortDirectionstring (SortDirection)  Enum: "Asc" "Desc"  Sort direction.
-
-## header ParametersX-API-KEYstring API key
-
-## X-SIGNATUREstring Signature of the request
-
-X-TIMESTAMPinteger <int64>  Timestamp of the request in milliseconds
-
-X-WINDOWinteger <uint64>  Time the request is valid for in milliseconds (default 5000, maximum 60000)
-
-Responses200 Success.
-
-400 Bad request.
-
-401 Unauthorized.
-
-500 Internal server error.
-
-get/wapi/v1/history/pnlhttps://api.backpack.exchange/wapi/v1/history/pnl Response samples 200400401500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"pnlRealized": "string","symbol": "string","timestamp": "string"}]Get rfq history. Retrieves the rfq history for the user. This includes RFQs that have
+get/wapi/v1/history/ordershttps://api.backpack.exchange/wapi/v1/history/orders Response samples 200400401500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"id": "string","createdAt": "string","executedQuantity": "string","executedQuoteQuantity": "string","expiryReason": "AccountTradingSuspended","orderType": "Market","postOnly": true,"price": "string","quantity": "string","quoteQuantity": "string","selfTradePrevention": "RejectTaker","status": "Cancelled","side": "Bid","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","timeInForce": "GTC","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","clientId": 0,"systemOrderType": "CollateralConversion","strategyId": "string"}]Get rfq history. Retrieves the rfq history for the user. This includes RFQs that have
 
 been filled or expired.
 
