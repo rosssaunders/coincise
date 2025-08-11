@@ -1,8 +1,0 @@
-# Bullish
-> Curated links to Bullish API documentation generated from official sources.
-
-## Documentation
-- [Private Rest Api](./private_rest_api.md)
-- [Public Rest Api](./public_rest_api.md)
-- [Trading Api](./trading_api.md)
-- [Websocket Api](./websocket_api.md)
