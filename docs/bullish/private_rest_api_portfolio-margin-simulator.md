@@ -1,27 +1,8 @@
----
-title: Bullish Trading API - Private REST API - Portfolio Margin Simulator
-language_tabs:
-  - javascript: JavaScript
-  - python: Python
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
----
+# Bullish Trading API - Private REST API - Portfolio Margin Simulator
 
-<!-- Generator: Widdershins v4.0.1 -->
-
-<h1 id="bullish-trading-api">Bullish Trading API - Private REST API - Portfolio Margin Simulator</h1>
-
-> Scroll down for code samples, example requests and responses. Select a
-> language for code samples from the tabs above or the mobile navigation menu.
-
-<h1 id="bullish-trading-api-portfolio-margin-simulator">portfolio-margin-simulator</h1>
+# portfolio-margin-simulator
 
 ## simulate-portfolio-margin
-
-<a id="opIdsimulate-portfolio-margin"></a>
 
 > Code samples
 
@@ -275,7 +256,7 @@ details on top of your portfolio specifics to see simulated results.
 }
 ```
 
-<h3 id="simulate-portfolio-margin-parameters">Parameters</h3>
+### Parameters
 
 | Name            | In     | Type                                                            | Required | Description                                                                                  |
 | --------------- | ------ | --------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
@@ -341,7 +322,7 @@ details on top of your portfolio specifics to see simulated results.
 }
 ```
 
-<h3 id="simulate-portfolio-margin-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema                                                            |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ----------------------------------------------------------------- |
@@ -352,19 +333,12 @@ details on top of your portfolio specifics to see simulated results.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None                                                              |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None                                                              |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 # Schemas
 
-<h2 id="tocS_ApiResponse">ApiResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemaapiresponse"></a>
-<a id="schema_ApiResponse"></a>
-<a id="tocSapiresponse"></a>
-<a id="tocsapiresponse"></a>
+## ApiResponse
 
 ```json
 {
@@ -392,12 +366,7 @@ jwtTokenAuth
 | type    | string         | false    | none         | none        |
 | message | string         | false    | none         | none        |
 
-<h2 id="tocS_Boolean">Boolean</h2>
-<!-- backwards compatibility -->
-<a id="schemaboolean"></a>
-<a id="schema_Boolean"></a>
-<a id="tocSboolean"></a>
-<a id="tocsboolean"></a>
+## Boolean
 
 ```json
 true
@@ -409,12 +378,7 @@ true
 | ----------- | ---------------------- | -------- | ------------ | ----------- |
 | _anonymous_ | boolean(true or false) | false    | none         | none        |
 
-<h2 id="tocS_MarketTypeAsString">MarketTypeAsString</h2>
-<!-- backwards compatibility -->
-<a id="schemamarkettypeasstring"></a>
-<a id="schema_MarketTypeAsString"></a>
-<a id="tocSmarkettypeasstring"></a>
-<a id="tocsmarkettypeasstring"></a>
+## MarketTypeAsString
 
 ```json
 "SPOT"
@@ -437,12 +401,7 @@ market type can have the following string values `"SPOT"`, `"PERPETUAL"`,
 | _anonymous_ | PERPETUAL    |
 | _anonymous_ | DATED_FUTURE |
 
-<h2 id="tocS_OrderTypeAsString">OrderTypeAsString</h2>
-<!-- backwards compatibility -->
-<a id="schemaordertypeasstring"></a>
-<a id="schema_OrderTypeAsString"></a>
-<a id="tocSordertypeasstring"></a>
-<a id="tocsordertypeasstring"></a>
+## OrderTypeAsString
 
 ```json
 "LMT"
@@ -457,12 +416,7 @@ order type can have the following string values `"LMT"`, `"MKT"`,
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------ |
 | _anonymous_ | string | false    | none         | order type can have the following string values `"LMT"`, `"MKT"`, `"STOP_LIMIT"`, `"POST_ONLY"`. |
 
-<h2 id="tocS_OrderTypeAsStringV2">OrderTypeAsStringV2</h2>
-<!-- backwards compatibility -->
-<a id="schemaordertypeasstringv2"></a>
-<a id="schema_OrderTypeAsStringV2"></a>
-<a id="tocSordertypeasstringv2"></a>
-<a id="tocsordertypeasstringv2"></a>
+## OrderTypeAsStringV2
 
 ```json
 "LIMIT"
@@ -477,12 +431,7 @@ order type can have the following string values `"LIMIT"`, `"MARKET"`,
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | order type can have the following string values `"LIMIT"`, `"MARKET"`, `"STOP_LIMIT"`, `"POST_ONLY"`. |
 
-<h2 id="tocS_OrderTypeAsStringAmend">OrderTypeAsStringAmend</h2>
-<!-- backwards compatibility -->
-<a id="schemaordertypeasstringamend"></a>
-<a id="schema_OrderTypeAsStringAmend"></a>
-<a id="tocSordertypeasstringamend"></a>
-<a id="tocsordertypeasstringamend"></a>
+## OrderTypeAsStringAmend
 
 ```json
 "LIMIT"
@@ -496,12 +445,7 @@ order type can have the following string values `"LIMIT"`, `"POST_ONLY"`
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------ |
 | _anonymous_ | string | false    | none         | order type can have the following string values `"LIMIT"`, `"POST_ONLY"` |
 
-<h2 id="tocS_OrderSideAsString">OrderSideAsString</h2>
-<!-- backwards compatibility -->
-<a id="schemaordersideasstring"></a>
-<a id="schema_OrderSideAsString"></a>
-<a id="tocSordersideasstring"></a>
-<a id="tocsordersideasstring"></a>
+## OrderSideAsString
 
 ```json
 "BUY"
@@ -515,12 +459,7 @@ order side can have the following string values `"BUY"`, `"SELL"`
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | order side can have the following string values `"BUY"`, `"SELL"` |
 
-<h2 id="tocS_OrderTimeInForceAsString">OrderTimeInForceAsString</h2>
-<!-- backwards compatibility -->
-<a id="schemaordertimeinforceasstring"></a>
-<a id="schema_OrderTimeInForceAsString"></a>
-<a id="tocSordertimeinforceasstring"></a>
-<a id="tocsordertimeinforceasstring"></a>
+## OrderTimeInForceAsString
 
 ```json
 {
@@ -538,12 +477,7 @@ see [details](#overview--order-timeinforce)
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | time in force can have the following string values `"GTC"`, `"FOK"`, `"IOC"`, see [details](#overview--order-timeinforce) |
 
-<h2 id="tocS_OrderStatusAsString">OrderStatusAsString</h2>
-<!-- backwards compatibility -->
-<a id="schemaorderstatusasstring"></a>
-<a id="schema_OrderStatusAsString"></a>
-<a id="tocSorderstatusasstring"></a>
-<a id="tocsorderstatusasstring"></a>
+## OrderStatusAsString
 
 ```json
 "OPEN"
@@ -558,12 +492,7 @@ order status can have the following string values `"OPEN"`, `"CLOSED"`,
 | ----------- | ------ | -------- | ------------ | --------------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | order status can have the following string values `"OPEN"`, `"CLOSED"`, `"CANCELLED"`, `"REJECTED"` |
 
-<h2 id="tocS_TimeStampAsString">TimeStampAsString</h2>
-<!-- backwards compatibility -->
-<a id="schematimestampasstring"></a>
-<a id="schema_TimeStampAsString"></a>
-<a id="tocStimestampasstring"></a>
-<a id="tocstimestampasstring"></a>
+## TimeStampAsString
 
 ```json
 "1621490985000"
@@ -578,12 +507,7 @@ expressed as string
 | ----------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------- |
 | _anonymous_ | string(string) | false    | none         | unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string |
 
-<h2 id="tocS_NonceAsString">NonceAsString</h2>
-<!-- backwards compatibility -->
-<a id="schemanonceasstring"></a>
-<a id="schema_NonceAsString"></a>
-<a id="tocSnonceasstring"></a>
-<a id="tocsnonceasstring"></a>
+## NonceAsString
 
 ```json
 "123456789"
@@ -598,12 +522,7 @@ string
 | ----------- | -------------- | -------- | ------------ | ---------------------------------------------------------------------------------- |
 | _anonymous_ | string(string) | false    | none         | the nonce is a client side incremented unsigned 64 bit integer expressed as string |
 
-<h2 id="tocS_SpotAccountID">SpotAccountID</h2>
-<!-- backwards compatibility -->
-<a id="schemaspotaccountid"></a>
-<a id="schema_SpotAccountID"></a>
-<a id="tocSspotaccountid"></a>
-<a id="tocsspotaccountid"></a>
+## SpotAccountID
 
 ```json
 "1"
@@ -615,12 +534,7 @@ string
 | ----------- | ------ | -------- | ------------ | ----------- |
 | _anonymous_ | string | false    | none         | none        |
 
-<h2 id="tocS_OrderID">OrderID</h2>
-<!-- backwards compatibility -->
-<a id="schemaorderid"></a>
-<a id="schema_OrderID"></a>
-<a id="tocSorderid"></a>
-<a id="tocsorderid"></a>
+## OrderID
 
 ```json
 "297735387747975680"
@@ -632,12 +546,7 @@ string
 | ----------- | ------ | -------- | ------------ | ----------- |
 | _anonymous_ | string | false    | none         | none        |
 
-<h2 id="tocS_AMMInstructionID">AMMInstructionID</h2>
-<!-- backwards compatibility -->
-<a id="schemaamminstructionid"></a>
-<a id="schema_AMMInstructionID"></a>
-<a id="tocSamminstructionid"></a>
-<a id="tocsamminstructionid"></a>
+## AMMInstructionID
 
 ```json
 "297735387747975680"
@@ -649,12 +558,7 @@ string
 | ----------- | ------ | -------- | ------------ | ----------- |
 | _anonymous_ | string | false    | none         | none        |
 
-<h2 id="tocS_RequestID">RequestID</h2>
-<!-- backwards compatibility -->
-<a id="schemarequestid"></a>
-<a id="schema_RequestID"></a>
-<a id="tocSrequestid"></a>
-<a id="tocsrequestid"></a>
+## RequestID
 
 ```json
 "197735387747975680"
@@ -666,12 +570,7 @@ string
 | ----------- | ------ | -------- | ------------ | ----------- |
 | _anonymous_ | string | false    | none         | none        |
 
-<h2 id="tocS_OrderHandle">OrderHandle</h2>
-<!-- backwards compatibility -->
-<a id="schemaorderhandle"></a>
-<a id="schema_OrderHandle"></a>
-<a id="tocSorderhandle"></a>
-<a id="tocsorderhandle"></a>
+## OrderHandle
 
 ```json
 "187"
@@ -686,12 +585,7 @@ string value
 | ----------- | ------ | -------- | ------------ | ---------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | Unique numeric (i64) identifier generated on the client side expressed as a string value |
 
-<h2 id="tocS_TradingAccountId">TradingAccountId</h2>
-<!-- backwards compatibility -->
-<a id="schematradingaccountid"></a>
-<a id="schema_TradingAccountId"></a>
-<a id="tocStradingaccountid"></a>
-<a id="tocstradingaccountid"></a>
+## TradingAccountId
 
 ```json
 "111000000000001"
@@ -705,12 +599,7 @@ unique trading account ID
 | ----------- | ------ | -------- | ------------ | ------------------------- |
 | _anonymous_ | string | false    | none         | unique trading account ID |
 
-<h2 id="tocS_TradingAccountIds">TradingAccountIds</h2>
-<!-- backwards compatibility -->
-<a id="schematradingaccountids"></a>
-<a id="schema_TradingAccountIds"></a>
-<a id="tocStradingaccountids"></a>
-<a id="tocstradingaccountids"></a>
+## TradingAccountIds
 
 ```json
 {
@@ -729,12 +618,7 @@ list of trading account ids.
 
 _None_
 
-<h2 id="tocS_MarketID">MarketID</h2>
-<!-- backwards compatibility -->
-<a id="schemamarketid"></a>
-<a id="schema_MarketID"></a>
-<a id="tocSmarketid"></a>
-<a id="tocsmarketid"></a>
+## MarketID
 
 ```json
 "10000"
@@ -746,12 +630,7 @@ _None_
 | ----------- | ------ | -------- | ------------ | ----------- |
 | _anonymous_ | string | false    | none         | none        |
 
-<h2 id="tocS_TradeID">TradeID</h2>
-<!-- backwards compatibility -->
-<a id="schematradeid"></a>
-<a id="schema_TradeID"></a>
-<a id="tocStradeid"></a>
-<a id="tocstradeid"></a>
+## TradeID
 
 ```json
 "100020000000000060"
@@ -763,12 +642,7 @@ _None_
 | ----------- | ------ | -------- | ------------ | ----------- |
 | _anonymous_ | string | false    | none         | none        |
 
-<h2 id="tocS_AssetValue">AssetValue</h2>
-<!-- backwards compatibility -->
-<a id="schemaassetvalue"></a>
-<a id="schema_AssetValue"></a>
-<a id="tocSassetvalue"></a>
-<a id="tocsassetvalue"></a>
+## AssetValue
 
 ```json
 "1.00000000"
@@ -782,12 +656,7 @@ see [asset value](#overview--price-and-quantity-precision) format
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | see [asset value](#overview--price-and-quantity-precision) format |
 
-<h2 id="tocS_UsdcValue">UsdcValue</h2>
-<!-- backwards compatibility -->
-<a id="schemausdcvalue"></a>
-<a id="schema_UsdcValue"></a>
-<a id="tocSusdcvalue"></a>
-<a id="tocsusdcvalue"></a>
+## UsdcValue
 
 ```json
 "1.0000"
@@ -801,12 +670,7 @@ see [asset value](#overview--price-and-quantity-precision) format
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | see [asset value](#overview--price-and-quantity-precision) format |
 
-<h2 id="tocS_UserId">UserId</h2>
-<!-- backwards compatibility -->
-<a id="schemauserid"></a>
-<a id="schema_UserId"></a>
-<a id="tocSuserid"></a>
-<a id="tocsuserid"></a>
+## UserId
 
 ```json
 "12345"
@@ -820,12 +684,7 @@ Bullish user ID
 | ----------- | ------ | -------- | ------------ | --------------- |
 | _anonymous_ | string | false    | none         | Bullish user ID |
 
-<h2 id="tocS_TimeStampInSeconds">TimeStampInSeconds</h2>
-<!-- backwards compatibility -->
-<a id="schematimestampinseconds"></a>
-<a id="schema_TimeStampInSeconds"></a>
-<a id="tocStimestampinseconds"></a>
-<a id="tocstimestampinseconds"></a>
+## TimeStampInSeconds
 
 ```json
 1621490985
@@ -839,12 +698,7 @@ number of seconds since EPOCH as integer
 | ----------- | -------------- | -------- | ------------ | ---------------------------------------- |
 | _anonymous_ | integer(int64) | false    | none         | number of seconds since EPOCH as integer |
 
-<h2 id="tocS_DateTime">DateTime</h2>
-<!-- backwards compatibility -->
-<a id="schemadatetime"></a>
-<a id="schema_DateTime"></a>
-<a id="tocSdatetime"></a>
-<a id="tocsdatetime"></a>
+## DateTime
 
 ```json
 "2025-05-20T01:01:01.000Z"
@@ -858,12 +712,7 @@ ISO 8601 with millisecond as string
 | ----------- | ----------------- | -------- | ------------ | ----------------------------------- |
 | _anonymous_ | string(date-time) | false    | none         | ISO 8601 with millisecond as string |
 
-<h2 id="tocS_TimeStamp">TimeStamp</h2>
-<!-- backwards compatibility -->
-<a id="schematimestamp"></a>
-<a id="schema_TimeStamp"></a>
-<a id="tocStimestamp"></a>
-<a id="tocstimestamp"></a>
+## TimeStamp
 
 ```json
 "1621490985000"
@@ -877,12 +726,7 @@ number of milliseconds since EPOCH as string
 | ----------- | ------------- | -------- | ------------ | -------------------------------------------- |
 | _anonymous_ | string(int64) | false    | none         | number of milliseconds since EPOCH as string |
 
-<h2 id="tocS_CustodyDestinationID">CustodyDestinationID</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodydestinationid"></a>
-<a id="schema_CustodyDestinationID"></a>
-<a id="tocScustodydestinationid"></a>
-<a id="tocscustodydestinationid"></a>
+## CustodyDestinationID
 
 ```json
 "1560ec0b406c0d909bb9f5f827dd6aa14a1f638884f33a2a3134878102e78038"
@@ -897,12 +741,7 @@ address or account
 | ----------- | ------ | -------- | ------------ | -------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | destination id provided by bullish that uniquely identifies a whitelisted address or account |
 
-<h2 id="tocS_CustodyDestinationUserWalletType">CustodyDestinationUserWalletType</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodydestinationuserwallettype"></a>
-<a id="schema_CustodyDestinationUserWalletType"></a>
-<a id="tocScustodydestinationuserwallettype"></a>
-<a id="tocscustodydestinationuserwallettype"></a>
+## CustodyDestinationUserWalletType
 
 ```json
 {
@@ -929,12 +768,7 @@ The host type of the wallet. `HOSTED` wallet uses a custodial wallet service,
 | _anonymous_ | SELF_HOSTED |
 | _anonymous_ | UNKNOWN     |
 
-<h2 id="tocS_CustodyDestinationSigned">CustodyDestinationSigned</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodydestinationsigned"></a>
-<a id="schema_CustodyDestinationSigned"></a>
-<a id="tocScustodydestinationsigned"></a>
-<a id="tocscustodydestinationsigned"></a>
+## CustodyDestinationSigned
 
 ```json
 true
@@ -949,12 +783,7 @@ withdrawal requires the destination to be signed.
 | ----------- | ------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | _anonymous_ | boolean | false    | none         | Whether this destination has been signed by the user. Some operations such as withdrawal requires the destination to be signed. |
 
-<h2 id="tocS_CustodyDestinationVaspName">CustodyDestinationVaspName</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodydestinationvaspname"></a>
-<a id="schema_CustodyDestinationVaspName"></a>
-<a id="tocScustodydestinationvaspname"></a>
-<a id="tocscustodydestinationvaspname"></a>
+## CustodyDestinationVaspName
 
 ```json
 "Bullish"
@@ -969,12 +798,7 @@ wallets.
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | The name of the hosting VASP of the wallet. This is only applicable for `HOSTED` wallets. |
 
-<h2 id="tocS_CustodySelfHostedRequestedDepositAmount">CustodySelfHostedRequestedDepositAmount</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyselfhostedrequesteddepositamount"></a>
-<a id="schema_CustodySelfHostedRequestedDepositAmount"></a>
-<a id="tocScustodyselfhostedrequesteddepositamount"></a>
-<a id="tocscustodyselfhostedrequesteddepositamount"></a>
+## CustodySelfHostedRequestedDepositAmount
 
 ```json
 "12.3456"
@@ -988,12 +812,7 @@ User-requested amount for the deposit.
 | ----------- | ------ | -------- | ------------ | -------------------------------------- |
 | _anonymous_ | string | false    | none         | User-requested amount for the deposit. |
 
-<h2 id="tocS_CustodySelfHostedVerificationAmount">CustodySelfHostedVerificationAmount</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyselfhostedverificationamount"></a>
-<a id="schema_CustodySelfHostedVerificationAmount"></a>
-<a id="tocScustodyselfhostedverificationamount"></a>
-<a id="tocscustodyselfhostedverificationamount"></a>
+## CustodySelfHostedVerificationAmount
 
 ```json
 "0.0012"
@@ -1008,12 +827,7 @@ Bullish specified additional small deposit amount to add to the
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | Bullish specified additional small deposit amount to add to the `requestedDepositAmount` for wallet verification. |
 
-<h2 id="tocS_CustodySelfHostedDepositAddress">CustodySelfHostedDepositAddress</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyselfhosteddepositaddress"></a>
-<a id="schema_CustodySelfHostedDepositAddress"></a>
-<a id="tocScustodyselfhosteddepositaddress"></a>
-<a id="tocscustodyselfhosteddepositaddress"></a>
+## CustodySelfHostedDepositAddress
 
 ```json
 "0xb0a64d976972d87b0783eeb1ff88306cd1891f02"
@@ -1028,12 +842,7 @@ during a self hosted deposit attempt.
 | ----------- | ------ | -------- | ------------ | ---------------------------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | The address of the Bullish trading account that the user should deposit to during a self hosted deposit attempt. |
 
-<h2 id="tocS_CustodySelfHostedDepositMemo">CustodySelfHostedDepositMemo</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyselfhosteddepositmemo"></a>
-<a id="schema_CustodySelfHostedDepositMemo"></a>
-<a id="tocScustodyselfhosteddepositmemo"></a>
-<a id="tocscustodyselfhosteddepositmemo"></a>
+## CustodySelfHostedDepositMemo
 
 ```json
 "MZAXEMRXA"
@@ -1048,12 +857,7 @@ deposit to during a self hosted deposit attempt.
 | ----------- | ------ | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | The memo or destination tag of the Bullish trading account that the user should deposit to during a self hosted deposit attempt. |
 
-<h2 id="tocS_CustodySelfHostedTotalDepositAmount">CustodySelfHostedTotalDepositAmount</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyselfhostedtotaldepositamount"></a>
-<a id="schema_CustodySelfHostedTotalDepositAmount"></a>
-<a id="tocScustodyselfhostedtotaldepositamount"></a>
-<a id="tocscustodyselfhostedtotaldepositamount"></a>
+## CustodySelfHostedTotalDepositAmount
 
 ```json
 "12.3468"
@@ -1068,12 +872,7 @@ the sum of `requestedDepositAmount` and `verificationAmount`.
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | The actual amount that the user should deposit for wallet verification. It is the sum of `requestedDepositAmount` and `verificationAmount`. |
 
-<h2 id="tocS_CustodySelfHostedVerificationStatus">CustodySelfHostedVerificationStatus</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyselfhostedverificationstatus"></a>
-<a id="schema_CustodySelfHostedVerificationStatus"></a>
-<a id="tocScustodyselfhostedverificationstatus"></a>
-<a id="tocscustodyselfhostedverificationstatus"></a>
+## CustodySelfHostedVerificationStatus
 
 ```json
 {
@@ -1091,9 +890,13 @@ The status for the self-hosted wallet verification attempt.
 
 ### Properties
 
-| Name        | Type   | Required | Restrictions | Description                                                                                                                                                                                                                                       |
-| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| _anonymous_ | string | false    | none         | The status for the self-hosted wallet verification attempt.<br>- `VERIFIED` - Self-hosted wallet has been verified<br>- `PENDING_VERIFICATION` - pending verification via satoshi test<br>- `VERIFICATION_EXPIRED` - the verification has expired |
+| Name        | Type   | Required | Restrictions | Description                                                 |
+| ----------- | ------ | -------- | ------------ | ----------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | The status for the self-hosted wallet verification attempt. |
+
+- `VERIFIED` - Self-hosted wallet has been verified
+- `PENDING_VERIFICATION` - pending verification via satoshi test
+- `VERIFICATION_EXPIRED` - the verification has expired|
 
 #### Enumerated Values
 
@@ -1103,12 +906,7 @@ The status for the self-hosted wallet verification attempt.
 | _anonymous_ | PENDING_VERIFICATION |
 | _anonymous_ | VERIFICATION_EXPIRED |
 
-<h2 id="tocS_NetworkID">NetworkID</h2>
-<!-- backwards compatibility -->
-<a id="schemanetworkid"></a>
-<a id="schema_NetworkID"></a>
-<a id="tocSnetworkid"></a>
-<a id="tocsnetworkid"></a>
+## NetworkID
 
 ```json
 "ETH"
@@ -1122,12 +920,7 @@ the network of the native coin or token, e.g. BTC, ETH, SOL
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | the network of the native coin or token, e.g. BTC, ETH, SOL |
 
-<h2 id="tocS_CustodyNetworkAddress">CustodyNetworkAddress</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodynetworkaddress"></a>
-<a id="schema_CustodyNetworkAddress"></a>
-<a id="tocScustodynetworkaddress"></a>
-<a id="tocscustodynetworkaddress"></a>
+## CustodyNetworkAddress
 
 ```json
 "0xb0a64d976972d87b0783eeb1ff88306cd1891f02"
@@ -1141,12 +934,7 @@ an address on the given network
 | ----------- | ------ | -------- | ------------ | ------------------------------- |
 | _anonymous_ | string | false    | none         | an address on the given network |
 
-<h2 id="tocS_CustodySymbol">CustodySymbol</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodysymbol"></a>
-<a id="schema_CustodySymbol"></a>
-<a id="tocScustodysymbol"></a>
-<a id="tocscustodysymbol"></a>
+## CustodySymbol
 
 ```json
 "USDC"
@@ -1160,12 +948,7 @@ symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------------------ |
 | _anonymous_ | string | false    | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB |
 
-<h2 id="tocS_CustodyFiatSymbol">CustodyFiatSymbol</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyfiatsymbol"></a>
-<a id="schema_CustodyFiatSymbol"></a>
-<a id="tocScustodyfiatsymbol"></a>
-<a id="tocscustodyfiatsymbol"></a>
+## CustodyFiatSymbol
 
 ```json
 "USD"
@@ -1179,12 +962,7 @@ symbol representing fiat currency, e.g. USD, EUR
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------ |
 | _anonymous_ | string | false    | none         | symbol representing fiat currency, e.g. USD, EUR |
 
-<h2 id="tocS_CustodyTransactionID">CustodyTransactionID</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodytransactionid"></a>
-<a id="schema_CustodyTransactionID"></a>
-<a id="tocScustodytransactionid"></a>
-<a id="tocscustodytransactionid"></a>
+## CustodyTransactionID
 
 ```json
 "DB:9e6304a08c9cc2a33e6bc6429a088eae2a6b940c8e312aede3a3780257b9b979"
@@ -1198,12 +976,7 @@ unique identifier for tracking a withdrawal during signing and in history
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | unique identifier for tracking a withdrawal during signing and in history |
 
-<h2 id="tocS_CustodyTransactionHistoryID">CustodyTransactionHistoryID</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodytransactionhistoryid"></a>
-<a id="schema_CustodyTransactionHistoryID"></a>
-<a id="tocScustodytransactionhistoryid"></a>
-<a id="tocscustodytransactionhistoryid"></a>
+## CustodyTransactionHistoryID
 
 ```json
 "DB:9e6304a08c9cc2a33e6bc6429a088eae2a6b940c8e312aede3a3780257b9b979"
@@ -1217,12 +990,7 @@ unique identifier for tracking a deposit or withdrawal
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------------ |
 | _anonymous_ | string | false    | none         | unique identifier for tracking a deposit or withdrawal |
 
-<h2 id="tocS_CustodyDirection">CustodyDirection</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodydirection"></a>
-<a id="schema_CustodyDirection"></a>
-<a id="tocScustodydirection"></a>
-<a id="tocscustodydirection"></a>
+## CustodyDirection
 
 ```json
 "DEPOSIT"
@@ -1236,12 +1004,7 @@ direction of transaction from API user's perspective, 'DEPOSIT' or 'WITHDRAWAL'
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | direction of transaction from API user's perspective, 'DEPOSIT' or 'WITHDRAWAL' |
 
-<h2 id="tocS_CustodyWithdrawalChallenge">CustodyWithdrawalChallenge</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodywithdrawalchallenge"></a>
-<a id="schema_CustodyWithdrawalChallenge"></a>
-<a id="tocScustodywithdrawalchallenge"></a>
-<a id="tocscustodywithdrawalchallenge"></a>
+## CustodyWithdrawalChallenge
 
 ```json
 "041f3105d6e20fc84399dece611f4e6dbf8ad59d51b0db7fd6acf518d38401d4"
@@ -1253,12 +1016,7 @@ direction of transaction from API user's perspective, 'DEPOSIT' or 'WITHDRAWAL'
 | ----------- | ------ | -------- | ------------ | ----------- |
 | _anonymous_ | string | false    | none         | none        |
 
-<h2 id="tocS_CustodyBankName">CustodyBankName</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodybankname"></a>
-<a id="schema_CustodyBankName"></a>
-<a id="tocScustodybankname"></a>
-<a id="tocscustodybankname"></a>
+## CustodyBankName
 
 ```json
 "Silvergate Bank"
@@ -1272,12 +1030,7 @@ name of bank
 | ----------- | ------ | -------- | ------------ | ------------ |
 | _anonymous_ | string | false    | none         | name of bank |
 
-<h2 id="tocS_CustodyPhysicalBankAddress">CustodyPhysicalBankAddress</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyphysicalbankaddress"></a>
-<a id="schema_CustodyPhysicalBankAddress"></a>
-<a id="tocScustodyphysicalbankaddress"></a>
-<a id="tocscustodyphysicalbankaddress"></a>
+## CustodyPhysicalBankAddress
 
 ```json
 "4250 Executive Square Suite 300 La Jolla, CA 92037"
@@ -1291,12 +1044,7 @@ physical location of bank
 | ----------- | ------ | -------- | ------------ | ------------------------- |
 | _anonymous_ | string | false    | none         | physical location of bank |
 
-<h2 id="tocS_CustodyBankAccountNumber">CustodyBankAccountNumber</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodybankaccountnumber"></a>
-<a id="schema_CustodyBankAccountNumber"></a>
-<a id="tocScustodybankaccountnumber"></a>
-<a id="tocscustodybankaccountnumber"></a>
+## CustodyBankAccountNumber
 
 ```json
 "9873481227"
@@ -1310,12 +1058,7 @@ bank account number
 | ----------- | ------ | -------- | ------------ | ------------------- |
 | _anonymous_ | string | false    | none         | bank account number |
 
-<h2 id="tocS_CustodyBankNetworkID">CustodyBankNetworkID</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodybanknetworkid"></a>
-<a id="schema_CustodyBankNetworkID"></a>
-<a id="tocScustodybanknetworkid"></a>
-<a id="tocscustodybanknetworkid"></a>
+## CustodyBankNetworkID
 
 ```json
 "SWIFT"
@@ -1329,12 +1072,7 @@ the fiat network, e.g. SWIFT, ABA or SEPA
 | ----------- | ------ | -------- | ------------ | ----------------------------------------- |
 | _anonymous_ | string | false    | none         | the fiat network, e.g. SWIFT, ABA or SEPA |
 
-<h2 id="tocS_CustodyBankRoutingCode">CustodyBankRoutingCode</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodybankroutingcode"></a>
-<a id="schema_CustodyBankRoutingCode"></a>
-<a id="tocScustodybankroutingcode"></a>
-<a id="tocscustodybankroutingcode"></a>
+## CustodyBankRoutingCode
 
 ```json
 "322286803"
@@ -1348,12 +1086,7 @@ routing code of bank
 | ----------- | ------ | -------- | ------------ | -------------------- |
 | _anonymous_ | string | false    | none         | routing code of bank |
 
-<h2 id="tocS_CustodyQuantity">CustodyQuantity</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyquantity"></a>
-<a id="schema_CustodyQuantity"></a>
-<a id="tocScustodyquantity"></a>
-<a id="tocscustodyquantity"></a>
+## CustodyQuantity
 
 ```json
 "100000.00"
@@ -1369,12 +1102,7 @@ will have fee subtracted.
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | total quantity of symbol to withdraw including fee in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) - quantity received will have fee subtracted. |
 
-<h2 id="tocS_CustodyWithdrawalFee">CustodyWithdrawalFee</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodywithdrawalfee"></a>
-<a id="schema_CustodyWithdrawalFee"></a>
-<a id="tocScustodywithdrawalfee"></a>
-<a id="tocscustodywithdrawalfee"></a>
+## CustodyWithdrawalFee
 
 ```json
 "3.00"
@@ -1389,12 +1117,7 @@ BTC not Satoshi, ETH not Wei)
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) |
 
-<h2 id="tocS_CustodyDepositMemo">CustodyDepositMemo</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodydepositmemo"></a>
-<a id="schema_CustodyDepositMemo"></a>
-<a id="tocScustodydepositmemo"></a>
-<a id="tocscustodydepositmemo"></a>
+## CustodyDepositMemo
 
 ```json
 "925891241"
@@ -1409,12 +1132,7 @@ funds to
 | ----------- | ------ | -------- | ------------ | --------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | memo or destination tag used during deposit to help identify account to credit funds to |
 
-<h2 id="tocS_CustodyWithdrawalMemo">CustodyWithdrawalMemo</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodywithdrawalmemo"></a>
-<a id="schema_CustodyWithdrawalMemo"></a>
-<a id="tocScustodywithdrawalmemo"></a>
-<a id="tocscustodywithdrawalmemo"></a>
+## CustodyWithdrawalMemo
 
 ```json
 "MZAXEMRXA"
@@ -1428,12 +1146,7 @@ memo or destination tag that will be used as a reference on transaction
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | memo or destination tag that will be used as a reference on transaction |
 
-<h2 id="tocS_CustodyWithdrawalLabel">CustodyWithdrawalLabel</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodywithdrawallabel"></a>
-<a id="schema_CustodyWithdrawalLabel"></a>
-<a id="tocScustodywithdrawallabel"></a>
-<a id="tocscustodywithdrawallabel"></a>
+## CustodyWithdrawalLabel
 
 ```json
 "Our cold wallet"
@@ -1447,12 +1160,7 @@ descriptive label of destination provided by user
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------- |
 | _anonymous_ | string | false    | none         | descriptive label of destination provided by user |
 
-<h2 id="tocS_CustodyTransactionStatus">CustodyTransactionStatus</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodytransactionstatus"></a>
-<a id="schema_CustodyTransactionStatus"></a>
-<a id="tocScustodytransactionstatus"></a>
-<a id="tocscustodytransactionstatus"></a>
+## CustodyTransactionStatus
 
 ```json
 "COMPLETE"
@@ -1466,12 +1174,7 @@ one of 'PENDING', 'COMPLETE', 'CANCELLED', 'FAILED'
 | ----------- | ------ | -------- | ------------ | --------------------------------------------------- |
 | _anonymous_ | string | false    | none         | one of 'PENDING', 'COMPLETE', 'CANCELLED', 'FAILED' |
 
-<h2 id="tocS_CustodyTransactionDetails">CustodyTransactionDetails</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodytransactiondetails"></a>
-<a id="schema_CustodyTransactionDetails"></a>
-<a id="tocScustodytransactiondetails"></a>
-<a id="tocscustodytransactiondetails"></a>
+## CustodyTransactionDetails
 
 ```json
 {
@@ -1504,12 +1207,7 @@ one of 'PENDING', 'COMPLETE', 'CANCELLED', 'FAILED'
 | blockchainTxId | string | false    | none         | transaction id on chain                                        |
 | swiftUetr      | string | false    | none         | unique end-to-end-transaction reference for swift transactions |
 
-<h2 id="tocS_CustodyAvailableWithdrawalLimit">CustodyAvailableWithdrawalLimit</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyavailablewithdrawallimit"></a>
-<a id="schema_CustodyAvailableWithdrawalLimit"></a>
-<a id="tocScustodyavailablewithdrawallimit"></a>
-<a id="tocscustodyavailablewithdrawallimit"></a>
+## CustodyAvailableWithdrawalLimit
 
 ```json
 "20000.0"
@@ -1525,12 +1223,7 @@ not Wei)
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | remaining limit on amount of coin or token that could be withdrawn now, in units of the symbol itself, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) |
 
-<h2 id="tocS_Custody24HWithdrawalLimit">Custody24HWithdrawalLimit</h2>
-<!-- backwards compatibility -->
-<a id="schemacustody24hwithdrawallimit"></a>
-<a id="schema_Custody24HWithdrawalLimit"></a>
-<a id="tocScustody24hwithdrawallimit"></a>
-<a id="tocscustody24hwithdrawallimit"></a>
+## Custody24HWithdrawalLimit
 
 ```json
 "1000000.00"
@@ -1546,12 +1239,7 @@ ETH not Wei)
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | limit on amount of coin or token that can be withdrawn over a 24 hour period, in units of the symbol itself, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) |
 
-<h2 id="tocS_CustodyCreatedAtDateTime">CustodyCreatedAtDateTime</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodycreatedatdatetime"></a>
-<a id="schema_CustodyCreatedAtDateTime"></a>
-<a id="tocScustodycreatedatdatetime"></a>
-<a id="tocscustodycreatedatdatetime"></a>
+## CustodyCreatedAtDateTime
 
 ```json
 "2022-09-16T07:56:15.000Z"
@@ -1565,12 +1253,7 @@ time of initial transaction
 | ----------- | ------ | -------- | ------------ | --------------------------- |
 | _anonymous_ | string | false    | none         | time of initial transaction |
 
-<h2 id="tocS_CustodyUpdatedAtDateTime">CustodyUpdatedAtDateTime</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyupdatedatdatetime"></a>
-<a id="schema_CustodyUpdatedAtDateTime"></a>
-<a id="tocScustodyupdatedatdatetime"></a>
-<a id="tocscustodyupdatedatdatetime"></a>
+## CustodyUpdatedAtDateTime
 
 ```json
 "2022-09-16T07:59:23.000Z"
@@ -1584,12 +1267,7 @@ last updated time of transaction
 | ----------- | ------ | -------- | ------------ | -------------------------------- |
 | _anonymous_ | string | false    | none         | last updated time of transaction |
 
-<h2 id="tocS_PublicKey">PublicKey</h2>
-<!-- backwards compatibility -->
-<a id="schemapublickey"></a>
-<a id="schema_PublicKey"></a>
-<a id="tocSpublickey"></a>
-<a id="tocspublickey"></a>
+## PublicKey
 
 ```json
 "PUB_R1_6PTdfWbXvXWQduhcCiRooGHTVpriu15xMqfr7EDq6sWLDj7NjS"
@@ -1601,12 +1279,7 @@ last updated time of transaction
 | ----------- | ------ | -------- | ------------ | ----------- |
 | _anonymous_ | string | false    | none         | none        |
 
-<h2 id="tocS_Signature">Signature</h2>
-<!-- backwards compatibility -->
-<a id="schemasignature"></a>
-<a id="schema_Signature"></a>
-<a id="tocSsignature"></a>
-<a id="tocssignature"></a>
+## Signature
 
 ```json
 "SIG_R1_K35d5hSY5FbNoJwrCfmH6QvPG7m9XmhL2mgWYcSB7q2hKJ2mv39Luck9WBJroSB635ZAXhdg36TYG7QJX1fTidbsMvyE8N"
@@ -1618,12 +1291,7 @@ last updated time of transaction
 | ----------- | ------ | -------- | ------------ | ----------- |
 | _anonymous_ | string | false    | none         | none        |
 
-<h2 id="tocS_SpotAccount">SpotAccount</h2>
-<!-- backwards compatibility -->
-<a id="schemaspotaccount"></a>
-<a id="schema_SpotAccount"></a>
-<a id="tocSspotaccount"></a>
-<a id="tocsspotaccount"></a>
+## SpotAccount
 
 ```json
 {
@@ -1737,12 +1405,7 @@ last updated time of transaction
 | updatedAtDatetime  | [DateTime](#schemadatetime)                   | true     | none         | denotes the time the AMM instruction was updated by the exchange, ISO 8601 with millisecond as string                                                      |
 | updatedAtTimestamp | [TimeStampAsString](#schematimestampasstring) | true     | none         | denotes the time the AMM instruction was updated by the exchange                                                                                           |
 
-<h2 id="tocS_AssetAccount">AssetAccount</h2>
-<!-- backwards compatibility -->
-<a id="schemaassetaccount"></a>
-<a id="schema_AssetAccount"></a>
-<a id="tocSassetaccount"></a>
-<a id="tocsassetaccount"></a>
+## AssetAccount
 
 ```json
 {
@@ -1868,12 +1531,7 @@ last updated time of transaction
 | updatedAtDatetime  | [DateTime](#schemadatetime)                   | true     | none         | denotes the time the AMM instruction was updated by the exchange, ISO 8601 with millisecond as string                                              |
 | updatedAtTimestamp | [TimeStampAsString](#schematimestampasstring) | true     | none         | denotes the time the AMM instruction was updated by the exchange                                                                                   |
 
-<h2 id="tocS_AmendOrderRequest">AmendOrderRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemaamendorderrequest"></a>
-<a id="schema_AmendOrderRequest"></a>
-<a id="tocSamendorderrequest"></a>
-<a id="tocsamendorderrequest"></a>
+## AmendOrderRequest
 
 ```json
 {
@@ -1953,12 +1611,7 @@ last updated time of transaction
 | stopPrice | [AssetValue](#schemaassetvalue)     | false    | none         | updated stop price, see [asset value](#overview--price-and-quantity-precision) format    |
 | quantity  | [AssetValue](#schemaassetvalue)     | true     | none         | updated quantity, see [asset value](#overview--price-and-quantity-precision) format      |
 
-<h2 id="tocS_CreateOrderResponse">CreateOrderResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemacreateorderresponse"></a>
-<a id="schema_CreateOrderResponse"></a>
-<a id="tocScreateorderresponse"></a>
-<a id="tocscreateorderresponse"></a>
+## CreateOrderResponse
 
 ```json
 {
@@ -2000,12 +1653,7 @@ last updated time of transaction
 | requestId | [RequestID](#schemarequestid) | true     | none         | unique request ID |
 | orderId   | [OrderID](#schemaorderid)     | true     | none         | unique order ID   |
 
-<h2 id="tocS_CreateOrderCommandResponseV3">CreateOrderCommandResponseV3</h2>
-<!-- backwards compatibility -->
-<a id="schemacreateordercommandresponsev3"></a>
-<a id="schema_CreateOrderCommandResponseV3"></a>
-<a id="tocScreateordercommandresponsev3"></a>
-<a id="tocscreateordercommandresponsev3"></a>
+## CreateOrderCommandResponseV3
 
 ```json
 {
@@ -2026,12 +1674,7 @@ last updated time of transaction
 | orderId       | [OrderID](#schemaorderid)     | true     | none         | unique order ID                                                                    |
 | clientOrderId | string                        | false    | none         | unique numeric identifier generated on the client side expressed as a string value |
 
-<h2 id="tocS_AmendOrderCommandResponseV1">AmendOrderCommandResponseV1</h2>
-<!-- backwards compatibility -->
-<a id="schemaamendordercommandresponsev1"></a>
-<a id="schema_AmendOrderCommandResponseV1"></a>
-<a id="tocSamendordercommandresponsev1"></a>
-<a id="tocsamendordercommandresponsev1"></a>
+## AmendOrderCommandResponseV1
 
 ```json
 {
@@ -2051,12 +1694,7 @@ last updated time of transaction
 | orderId       | [OrderID](#schemaorderid)     | true     | none         | unique order ID                                         |
 | clientOrderId | string                        | false    | none         | Will be updated as part of a successful order amendment |
 
-<h2 id="tocS_CancelOrderCommandResponseV3">CancelOrderCommandResponseV3</h2>
-<!-- backwards compatibility -->
-<a id="schemacancelordercommandresponsev3"></a>
-<a id="schema_CancelOrderCommandResponseV3"></a>
-<a id="tocScancelordercommandresponsev3"></a>
-<a id="tocscancelordercommandresponsev3"></a>
+## CancelOrderCommandResponseV3
 
 ```json
 {
@@ -2075,12 +1713,7 @@ last updated time of transaction
 | orderId       | [OrderID](#schemaorderid)     | false    | none         | unique order ID                                                                    |
 | clientOrderId | string                        | false    | none         | unique numeric identifier generated on the client side expressed as a string value |
 
-<h2 id="tocS_CreateOrderCommand">CreateOrderCommand</h2>
-<!-- backwards compatibility -->
-<a id="schemacreateordercommand"></a>
-<a id="schema_CreateOrderCommand"></a>
-<a id="tocScreateordercommand"></a>
-<a id="tocscreateordercommand"></a>
+## CreateOrderCommand
 
 ```json
 {
@@ -2215,12 +1848,7 @@ last updated time of transaction
 | allowMargin      | boolean                                                     | true     | none         | allows to borrow on the order                                                                                             |
 | tradingAccountId | [TradingAccountId](#schematradingaccountid)                 | true     | none         | unique trading account ID                                                                                                 |
 
-<h2 id="tocS_CreateOrderCommandV3">CreateOrderCommandV3</h2>
-<!-- backwards compatibility -->
-<a id="schemacreateordercommandv3"></a>
-<a id="schema_CreateOrderCommandV3"></a>
-<a id="tocScreateordercommandv3"></a>
-<a id="tocscreateordercommandv3"></a>
+## CreateOrderCommandV3
 
 ```json
 {
@@ -2348,12 +1976,7 @@ last updated time of transaction
 | allowBorrow      | boolean                                                     | false    | none         | allows to borrow on the order                                                                                             |
 | tradingAccountId | [TradingAccountId](#schematradingaccountid)                 | true     | none         | unique trading account ID                                                                                                 |
 
-<h2 id="tocS_AmendOrderV1">AmendOrderV1</h2>
-<!-- backwards compatibility -->
-<a id="schemaamendorderv1"></a>
-<a id="schema_AmendOrderV1"></a>
-<a id="tocSamendorderv1"></a>
-<a id="tocsamendorderv1"></a>
+## AmendOrderV1
 
 ```json
 {
@@ -2441,12 +2064,7 @@ last updated time of transaction
 | quantity         | [AssetValue](#schemaassetvalue)                   | false    | none         | quantity                                                                                              |
 | tradingAccountId | [TradingAccountId](#schematradingaccountid)       | true     | none         | unique trading account ID                                                                             |
 
-<h2 id="tocS_TradingAccountResponse">TradingAccountResponse</h2>
-<!-- backwards compatibility -->
-<a id="schematradingaccountresponse"></a>
-<a id="schema_TradingAccountResponse"></a>
-<a id="tocStradingaccountresponse"></a>
-<a id="tocstradingaccountresponse"></a>
+## TradingAccountResponse
 
 ```json
 {
@@ -2704,12 +2322,7 @@ last updated time of transaction
 | marketRiskUSD              | string                                      | true     | none         | the worst possible loss on the portfolio based on scenario analysis                                                                                     |
 | marginProfile              | [MarginProfile](#schemamarginprofile)       | true     | none         | Contains the market risk multipliers applied to a trading account to derive the five individual Margin Requirement values                               |
 
-<h2 id="tocS_MarginProfile">MarginProfile</h2>
-<!-- backwards compatibility -->
-<a id="schemamarginprofile"></a>
-<a id="schema_MarginProfile"></a>
-<a id="tocSmarginprofile"></a>
-<a id="tocsmarginprofile"></a>
+## MarginProfile
 
 ```json
 {
@@ -2753,12 +2366,7 @@ last updated time of transaction
 | fullLiquidationMarketRiskMultiplierPct | string | false    | none         | market risk multiplier used to calculate full liquidation margin requirement of the account |
 | defaultedMarketRiskMultiplierPct       | string | false    | none         | market risk multiplier used to calculate defaulted margin requirement of the account        |
 
-<h2 id="tocS_CreateAMMInstructionResponse">CreateAMMInstructionResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemacreateamminstructionresponse"></a>
-<a id="schema_CreateAMMInstructionResponse"></a>
-<a id="tocScreateamminstructionresponse"></a>
-<a id="tocscreateamminstructionresponse"></a>
+## CreateAMMInstructionResponse
 
 ```json
 {
@@ -2800,12 +2408,7 @@ last updated time of transaction
 | requestId   | [RequestID](#schemarequestid)               | true     | none         | unique request ID         |
 | liquidityId | [AMMInstructionID](#schemaamminstructionid) | true     | none         | unique AMM instruction ID |
 
-<h2 id="tocS_CreateAMMInstructionCommandResponseV3">CreateAMMInstructionCommandResponseV3</h2>
-<!-- backwards compatibility -->
-<a id="schemacreateamminstructioncommandresponsev3"></a>
-<a id="schema_CreateAMMInstructionCommandResponseV3"></a>
-<a id="tocScreateamminstructioncommandresponsev3"></a>
-<a id="tocscreateamminstructioncommandresponsev3"></a>
+## CreateAMMInstructionCommandResponseV3
 
 ```json
 {
@@ -2823,12 +2426,7 @@ last updated time of transaction
 | requestId     | [RequestID](#schemarequestid)               | true     | none         | unique request ID         |
 | instructionId | [AMMInstructionID](#schemaamminstructionid) | true     | none         | unique AMM instruction ID |
 
-<h2 id="tocS_TerminateAMMInstructionCommandResponseV3">TerminateAMMInstructionCommandResponseV3</h2>
-<!-- backwards compatibility -->
-<a id="schematerminateamminstructioncommandresponsev3"></a>
-<a id="schema_TerminateAMMInstructionCommandResponseV3"></a>
-<a id="tocSterminateamminstructioncommandresponsev3"></a>
-<a id="tocsterminateamminstructioncommandresponsev3"></a>
+## TerminateAMMInstructionCommandResponseV3
 
 ```json
 {
@@ -2846,12 +2444,7 @@ last updated time of transaction
 | requestId     | [RequestID](#schemarequestid)               | true     | none         | unique request ID         |
 | instructionId | [AMMInstructionID](#schemaamminstructionid) | true     | none         | unique AMM instruction ID |
 
-<h2 id="tocS_BadOrderEntryResponse">BadOrderEntryResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemabadorderentryresponse"></a>
-<a id="schema_BadOrderEntryResponse"></a>
-<a id="tocSbadorderentryresponse"></a>
-<a id="tocsbadorderentryresponse"></a>
+## BadOrderEntryResponse
 
 ```json
 {
@@ -2885,12 +2478,7 @@ last updated time of transaction
 | errorCode     | integer | true     | none         | unique error code      |
 | errorCodeName | string  | true     | none         | unique error code name |
 
-<h2 id="tocS_CreateAMMInstructionCommand">CreateAMMInstructionCommand</h2>
-<!-- backwards compatibility -->
-<a id="schemacreateamminstructioncommand"></a>
-<a id="schema_CreateAMMInstructionCommand"></a>
-<a id="tocScreateamminstructioncommand"></a>
-<a id="tocscreateamminstructioncommand"></a>
+## CreateAMMInstructionCommand
 
 ```json
 {
@@ -2985,12 +2573,7 @@ last updated time of transaction
 | feeTierId        | [FeeTierId](#schemafeetierid)               | true     | none         | unique fee tier ID, see [Get Market By Symbol](#get-/v1/markets/-symbol-)         |
 | tradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | unique trading account ID                                                         |
 
-<h2 id="tocS_CreateAMMInstructionCommandV3">CreateAMMInstructionCommandV3</h2>
-<!-- backwards compatibility -->
-<a id="schemacreateamminstructioncommandv3"></a>
-<a id="schema_CreateAMMInstructionCommandV3"></a>
-<a id="tocScreateamminstructioncommandv3"></a>
-<a id="tocscreateamminstructioncommandv3"></a>
+## CreateAMMInstructionCommandV3
 
 ```json
 {
@@ -3019,12 +2602,7 @@ last updated time of transaction
 | feeTierId        | [FeeTierId](#schemafeetierid)               | true     | none         | unique fee tier ID, see [Get Market By Symbol](#get-/v1/markets/-symbol-)     |
 | tradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | unique trading account ID                                                     |
 
-<h2 id="tocS_CancelOrderCommand">CancelOrderCommand</h2>
-<!-- backwards compatibility -->
-<a id="schemacancelordercommand"></a>
-<a id="schema_CancelOrderCommand"></a>
-<a id="tocScancelordercommand"></a>
-<a id="tocscancelordercommand"></a>
+## CancelOrderCommand
 
 ```json
 {
@@ -3092,12 +2670,7 @@ last updated time of transaction
 | symbol           | [MarketSymbol](#schemamarketsymbol)         | true     | none         | market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market            |
 | tradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | unique trading account ID                                                                |
 
-<h2 id="tocS_CancelOrderCommandV3">CancelOrderCommandV3</h2>
-<!-- backwards compatibility -->
-<a id="schemacancelordercommandv3"></a>
-<a id="schema_CancelOrderCommandV3"></a>
-<a id="tocScancelordercommandv3"></a>
-<a id="tocscancelordercommandv3"></a>
+## CancelOrderCommandV3
 
 ```json
 {
@@ -3119,12 +2692,7 @@ last updated time of transaction
 | symbol           | [MarketSymbol](#schemamarketsymbol)         | true     | none         | market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market            |
 | tradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | unique trading account ID                                                                |
 
-<h2 id="tocS_AmendOrderCommandV1">AmendOrderCommandV1</h2>
-<!-- backwards compatibility -->
-<a id="schemaamendordercommandv1"></a>
-<a id="schema_AmendOrderCommandV1"></a>
-<a id="tocSamendordercommandv1"></a>
-<a id="tocsamendordercommandv1"></a>
+## AmendOrderCommandV1
 
 ```json
 {
@@ -3153,12 +2721,7 @@ last updated time of transaction
 | quantity         | [AssetValue](#schemaassetvalue)                         | false    | none         | quantity                                                                           |
 | tradingAccountId | [TradingAccountId](#schematradingaccountid)             | true     | none         | unique trading account ID                                                          |
 
-<h2 id="tocS_TerminateAMMInstructionCommandV3">TerminateAMMInstructionCommandV3</h2>
-<!-- backwards compatibility -->
-<a id="schematerminateamminstructioncommandv3"></a>
-<a id="schema_TerminateAMMInstructionCommandV3"></a>
-<a id="tocSterminateamminstructioncommandv3"></a>
-<a id="tocsterminateamminstructioncommandv3"></a>
+## TerminateAMMInstructionCommandV3
 
 ```json
 {
@@ -3179,12 +2742,7 @@ last updated time of transaction
 | symbol           | [MarketSymbol](#schemamarketsymbol)         | true     | none         | market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market |
 | tradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | unique trading account ID                                                     |
 
-<h2 id="tocS_CancelAllOrdersRequest">CancelAllOrdersRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemacancelallordersrequest"></a>
-<a id="schema_CancelAllOrdersRequest"></a>
-<a id="tocScancelallordersrequest"></a>
-<a id="tocscancelallordersrequest"></a>
+## CancelAllOrdersRequest
 
 ```json
 {
@@ -3264,12 +2822,7 @@ last updated time of transaction
 | authorizer | [Authorizer](#schemaauthorizer)                         | true     | none         | JWT authorizer you obtain along with the [JWT token](#overview--generate-a-jwt-token)             |
 | command    | [CancelAllOrdersCommand](#schemacancelallorderscommand) | true     | none         | the command to be executed which is sent in the request payload                                   |
 
-<h2 id="tocS_CancelAllOrdersCommand">CancelAllOrdersCommand</h2>
-<!-- backwards compatibility -->
-<a id="schemacancelallorderscommand"></a>
-<a id="schema_CancelAllOrdersCommand"></a>
-<a id="tocScancelallorderscommand"></a>
-<a id="tocscancelallorderscommand"></a>
+## CancelAllOrdersCommand
 
 ```json
 {
@@ -3286,12 +2839,7 @@ last updated time of transaction
 | commandType      | string                                      | true     | none         | The command type, it must be 'V1CancelAllOrders' |
 | tradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | unique trading account Id                        |
 
-<h2 id="tocS_CancelAllOrdersResponse">CancelAllOrdersResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemacancelallordersresponse"></a>
-<a id="schema_CancelAllOrdersResponse"></a>
-<a id="tocScancelallordersresponse"></a>
-<a id="tocscancelallordersresponse"></a>
+## CancelAllOrdersResponse
 
 ```json
 {
@@ -3307,12 +2855,7 @@ last updated time of transaction
 | message   | string                        | true     | none         | message           |
 | requestId | [RequestID](#schemarequestid) | true     | none         | unique request ID |
 
-<h2 id="tocS_DelayedCancelAllOrdersRequest">DelayedCancelAllOrdersRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemadelayedcancelallordersrequest"></a>
-<a id="schema_DelayedCancelAllOrdersRequest"></a>
-<a id="tocSdelayedcancelallordersrequest"></a>
-<a id="tocsdelayedcancelallordersrequest"></a>
+## DelayedCancelAllOrdersRequest
 
 ```json
 {
@@ -3413,12 +2956,7 @@ last updated time of transaction
 | authorizer | [Authorizer](#schemaauthorizer)                                       | true     | none         | JWT authorizer you obtain along with the [JWT token](#overview--generate-a-jwt-token)             |
 | command    | [DelayedCancelAllOrdersCommand](#schemadelayedcancelallorderscommand) | true     | none         | the command to be executed which is sent in the request payload                                   |
 
-<h2 id="tocS_DelayedCancelAllOrdersCommand">DelayedCancelAllOrdersCommand</h2>
-<!-- backwards compatibility -->
-<a id="schemadelayedcancelallorderscommand"></a>
-<a id="schema_DelayedCancelAllOrdersCommand"></a>
-<a id="tocSdelayedcancelallorderscommand"></a>
-<a id="tocsdelayedcancelallorderscommand"></a>
+## DelayedCancelAllOrdersCommand
 
 ```json
 {
@@ -3438,12 +2976,7 @@ last updated time of transaction
 | delayBySeconds   | [DelayBySeconds](#schemadelaybyseconds)     | true     | none         | Delay of the cancel-all-order in seconds                                                  |
 | tradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | unique trading account ID                                                                 |
 
-<h2 id="tocS_DelayedCancelAllOrdersResponse">DelayedCancelAllOrdersResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemadelayedcancelallordersresponse"></a>
-<a id="schema_DelayedCancelAllOrdersResponse"></a>
-<a id="tocSdelayedcancelallordersresponse"></a>
-<a id="tocsdelayedcancelallordersresponse"></a>
+## DelayedCancelAllOrdersResponse
 
 ```json
 {
@@ -3459,12 +2992,7 @@ last updated time of transaction
 | message   | string                        | true     | none         | message           |
 | requestId | [RequestID](#schemarequestid) | true     | none         | unique request ID |
 
-<h2 id="tocS_UnsetDelayedCancelAllOrdersRequest">UnsetDelayedCancelAllOrdersRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemaunsetdelayedcancelallordersrequest"></a>
-<a id="schema_UnsetDelayedCancelAllOrdersRequest"></a>
-<a id="tocSunsetdelayedcancelallordersrequest"></a>
-<a id="tocsunsetdelayedcancelallordersrequest"></a>
+## UnsetDelayedCancelAllOrdersRequest
 
 ```json
 {
@@ -3544,12 +3072,7 @@ last updated time of transaction
 | authorizer | [Authorizer](#schemaauthorizer)                                                 | true     | none         | JWT authorizer you obtain along with the [JWT token](#overview--generate-a-jwt-token)             |
 | command    | [UnsetDelayedCancelAllOrdersCommand](#schemaunsetdelayedcancelallorderscommand) | true     | none         | the command to be executed which is sent in the request payload                                   |
 
-<h2 id="tocS_UnsetDelayedCancelAllOrdersCommand">UnsetDelayedCancelAllOrdersCommand</h2>
-<!-- backwards compatibility -->
-<a id="schemaunsetdelayedcancelallorderscommand"></a>
-<a id="schema_UnsetDelayedCancelAllOrdersCommand"></a>
-<a id="tocSunsetdelayedcancelallorderscommand"></a>
-<a id="tocsunsetdelayedcancelallorderscommand"></a>
+## UnsetDelayedCancelAllOrdersCommand
 
 ```json
 {
@@ -3566,12 +3089,7 @@ last updated time of transaction
 | commandType      | string                                      | true     | none         | The command type, it must be 'V1UnsetDelayedCancelAllOrders' |
 | tradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | unique trading account ID                                    |
 
-<h2 id="tocS_UnsetDelayedCancelAllOrdersResponse">UnsetDelayedCancelAllOrdersResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemaunsetdelayedcancelallordersresponse"></a>
-<a id="schema_UnsetDelayedCancelAllOrdersResponse"></a>
-<a id="tocSunsetdelayedcancelallordersresponse"></a>
-<a id="tocsunsetdelayedcancelallordersresponse"></a>
+## UnsetDelayedCancelAllOrdersResponse
 
 ```json
 {
@@ -3587,12 +3105,7 @@ last updated time of transaction
 | message   | string                        | true     | none         | message           |
 | requestId | [RequestID](#schemarequestid) | true     | none         | unique request ID |
 
-<h2 id="tocS_JWT">JWT</h2>
-<!-- backwards compatibility -->
-<a id="schemajwt"></a>
-<a id="schema_JWT"></a>
-<a id="tocSjwt"></a>
-<a id="tocsjwt"></a>
+## JWT
 
 ```json
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2FuZGVlcCByYWtocmEifQ.wyVq6PlKaldWXtu-jz2hJCvkGl1lM2S7HUKCH8LnXp0"
@@ -3606,12 +3119,7 @@ JWT token
 | ----------- | -------------- | -------- | ------------ | ----------- |
 | _anonymous_ | string(string) | false    | none         | JWT token   |
 
-<h2 id="tocS_Authorizer">Authorizer</h2>
-<!-- backwards compatibility -->
-<a id="schemaauthorizer"></a>
-<a id="schema_Authorizer"></a>
-<a id="tocSauthorizer"></a>
-<a id="tocsauthorizer"></a>
+## Authorizer
 
 ```json
 "03E02367E8C900000500000000000000"
@@ -3626,12 +3134,7 @@ JWT authorizer you obtain along with the
 | ----------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------------- |
 | _anonymous_ | string(string) | false    | none         | JWT authorizer you obtain along with the [JWT token](#overview--generate-a-jwt-token) |
 
-<h2 id="tocS_TradingAccountTransferRequest">TradingAccountTransferRequest</h2>
-<!-- backwards compatibility -->
-<a id="schematradingaccounttransferrequest"></a>
-<a id="schema_TradingAccountTransferRequest"></a>
-<a id="tocStradingaccounttransferrequest"></a>
-<a id="tocstradingaccounttransferrequest"></a>
+## TradingAccountTransferRequest
 
 ```json
 {
@@ -3739,12 +3242,7 @@ JWT authorizer you obtain along with the
 | authorizer | [Authorizer](#schemaauthorizer)                     | true     | none         | JWT authorizer you obtain along with the [JWT token](#overview--generate-a-jwt-token)             |
 | command    | [TransferAssetCommand](#schematransferassetcommand) | true     | none         | the command to be executed which is sent in the request payload                                   |
 
-<h2 id="tocS_TradingAccountTransferResponse">TradingAccountTransferResponse</h2>
-<!-- backwards compatibility -->
-<a id="schematradingaccounttransferresponse"></a>
-<a id="schema_TradingAccountTransferResponse"></a>
-<a id="tocStradingaccounttransferresponse"></a>
-<a id="tocstradingaccounttransferresponse"></a>
+## TradingAccountTransferResponse
 
 ```json
 {
@@ -3760,12 +3258,7 @@ JWT authorizer you obtain along with the
 | message   | string                        | true     | none         | message           |
 | requestId | [RequestID](#schemarequestid) | true     | none         | unique request ID |
 
-<h2 id="tocS_TransferAssetCommand">TransferAssetCommand</h2>
-<!-- backwards compatibility -->
-<a id="schematransferassetcommand"></a>
-<a id="schema_TransferAssetCommand"></a>
-<a id="tocStransferassetcommand"></a>
-<a id="tocstransferassetcommand"></a>
+## TransferAssetCommand
 
 ```json
 {
@@ -3832,12 +3325,7 @@ JWT authorizer you obtain along with the
 | fromTradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | Source of the asset transfer             |
 | toTradingAccountId   | [TradingAccountId](#schematradingaccountid) | true     | none         | Destination of the asset transfer        |
 
-<h2 id="tocS_TransferAssetCommandV2">TransferAssetCommandV2</h2>
-<!-- backwards compatibility -->
-<a id="schematransferassetcommandv2"></a>
-<a id="schema_TransferAssetCommandV2"></a>
-<a id="tocStransferassetcommandv2"></a>
-<a id="tocstransferassetcommandv2"></a>
+## TransferAssetCommandV2
 
 ```json
 {
@@ -3852,20 +3340,16 @@ JWT authorizer you obtain along with the
 
 ### Properties
 
-| Name                 | Type                                        | Required | Restrictions | Description                                                                                                                                                                            |
-| -------------------- | ------------------------------------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| commandType          | string                                      | true     | none         | The command type, e.g. 'V2TransferAsset'                                                                                                                                               |
-| assetSymbol          | [AssetSymbol](#schemaassetsymbol)           | true     | none         | Symbol of the asset. i.e. currency                                                                                                                                                     |
-| quantity             | string                                      | true     | none         | Quantity of the asset. Can be representated with any number of trailing zeroes up to asset precision <br>(eg `100.1`, `100.10`, `100.100`, `100.1000` are valid for asset precision 4) |
-| fromTradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | Source of the asset transfer                                                                                                                                                           |
-| toTradingAccountId   | [TradingAccountId](#schematradingaccountid) | true     | none         | Destination of the asset transfer                                                                                                                                                      |
+| Name                                                                          | Type                                        | Required | Restrictions | Description                                                                                          |
+| ----------------------------------------------------------------------------- | ------------------------------------------- | -------- | ------------ | ---------------------------------------------------------------------------------------------------- |
+| commandType                                                                   | string                                      | true     | none         | The command type, e.g. 'V2TransferAsset'                                                             |
+| assetSymbol                                                                   | [AssetSymbol](#schemaassetsymbol)           | true     | none         | Symbol of the asset. i.e. currency                                                                   |
+| quantity                                                                      | string                                      | true     | none         | Quantity of the asset. Can be representated with any number of trailing zeroes up to asset precision |
+| (eg `100.1`, `100.10`, `100.100`, `100.1000` are valid for asset precision 4) |
+| fromTradingAccountId                                                          | [TradingAccountId](#schematradingaccountid) | true     | none         | Source of the asset transfer                                                                         |
+| toTradingAccountId                                                            | [TradingAccountId](#schematradingaccountid) | true     | none         | Destination of the asset transfer                                                                    |
 
-<h2 id="tocS_CancelAllOrdersByMarketRequest">CancelAllOrdersByMarketRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemacancelallordersbymarketrequest"></a>
-<a id="schema_CancelAllOrdersByMarketRequest"></a>
-<a id="tocScancelallordersbymarketrequest"></a>
-<a id="tocscancelallordersbymarketrequest"></a>
+## CancelAllOrdersByMarketRequest
 
 ```json
 {
@@ -3956,12 +3440,7 @@ JWT authorizer you obtain along with the
 | authorizer | [Authorizer](#schemaauthorizer)                                         | true     | none         | JWT authorizer you obtain along with the [JWT token](#overview--generate-a-jwt-token)             |
 | command    | [CancelAllOrdersByMarketCommand](#schemacancelallordersbymarketcommand) | true     | none         | the command to be executed which is sent in the request payload                                   |
 
-<h2 id="tocS_CancelAllOrdersByMarketCommand">CancelAllOrdersByMarketCommand</h2>
-<!-- backwards compatibility -->
-<a id="schemacancelallordersbymarketcommand"></a>
-<a id="schema_CancelAllOrdersByMarketCommand"></a>
-<a id="tocScancelallordersbymarketcommand"></a>
-<a id="tocscancelallordersbymarketcommand"></a>
+## CancelAllOrdersByMarketCommand
 
 ```json
 {
@@ -3980,12 +3459,7 @@ JWT authorizer you obtain along with the
 | symbol           | [MarketSymbol](#schemamarketsymbol)         | true     | none         | market symbol                                            |
 | tradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | unique trading account Id                                |
 
-<h2 id="tocS_CancelAllOrdersByMarketResponse">CancelAllOrdersByMarketResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemacancelallordersbymarketresponse"></a>
-<a id="schema_CancelAllOrdersByMarketResponse"></a>
-<a id="tocScancelallordersbymarketresponse"></a>
-<a id="tocscancelallordersbymarketresponse"></a>
+## CancelAllOrdersByMarketResponse
 
 ```json
 {
@@ -4001,12 +3475,7 @@ JWT authorizer you obtain along with the
 | message   | string                        | true     | none         | message           |
 | requestId | [RequestID](#schemarequestid) | true     | none         | unique request ID |
 
-<h2 id="tocS_LoginRequest">LoginRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemaloginrequest"></a>
-<a id="schema_LoginRequest"></a>
-<a id="tocSloginrequest"></a>
-<a id="tocsloginrequest"></a>
+## LoginRequest
 
 ```json
 {
@@ -4099,12 +3568,7 @@ JWT authorizer you obtain along with the
 | signature    | [Signature](#schemasignature)       | false    | none         | none        |
 | loginPayload | [LoginPayload](#schemaloginpayload) | false    | none         | none        |
 
-<h2 id="tocS_LoginPayload">LoginPayload</h2>
-<!-- backwards compatibility -->
-<a id="schemaloginpayload"></a>
-<a id="schema_LoginPayload"></a>
-<a id="tocSloginpayload"></a>
-<a id="tocsloginpayload"></a>
+## LoginPayload
 
 ```json
 {
@@ -4173,12 +3637,7 @@ JWT authorizer you obtain along with the
 | biometricsUsed | boolean                                         | true     | none         | biometrics flag. always `false`                                                                 |
 | sessionKey     | string                                          | true     | none         | session key. always `null`                                                                      |
 
-<h2 id="tocS_LoginResponse">LoginResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemaloginresponse"></a>
-<a id="schema_LoginResponse"></a>
-<a id="tocSloginresponse"></a>
-<a id="tocsloginresponse"></a>
+## LoginResponse
 
 ```json
 {
@@ -4218,12 +3677,7 @@ JWT authorizer you obtain along with the
 | authorizer | [Authorizer](#schemaauthorizer) | true     | none         | Authorizer  |
 | token      | [JWT](#schemajwt)               | true     | none         | JWT token   |
 
-<h2 id="tocS_CreateOrderRequest">CreateOrderRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemacreateorderrequest"></a>
-<a id="schema_CreateOrderRequest"></a>
-<a id="tocScreateorderrequest"></a>
-<a id="tocscreateorderrequest"></a>
+## CreateOrderRequest
 
 ```json
 {
@@ -4393,12 +3847,7 @@ JWT authorizer you obtain along with the
 | authorizer | [Authorizer](#schemaauthorizer)                 | true     | none         | JWT authorizer you obtain along with the [JWT token](#overview--generate-a-jwt-token)             |
 | command    | [CreateOrderCommand](#schemacreateordercommand) | true     | none         | the command to be executed which is sent in the request payload                                   |
 
-<h2 id="tocS_CreateAMMInstructionRequest">CreateAMMInstructionRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemacreateamminstructionrequest"></a>
-<a id="schema_CreateAMMInstructionRequest"></a>
-<a id="tocScreateamminstructionrequest"></a>
-<a id="tocscreateamminstructionrequest"></a>
+## CreateAMMInstructionRequest
 
 ```json
 {
@@ -4531,12 +3980,7 @@ JWT authorizer you obtain along with the
 | authorizer | [Authorizer](#schemaauthorizer)                                   | true     | none         | JWT authorizer you obtain along with the [JWT token](#overview--generate-a-jwt-token)             |
 | command    | [CreateAMMInstructionCommand](#schemacreateamminstructioncommand) | true     | none         | the command to be executed which is sent in the request payload                                   |
 
-<h2 id="tocS_CancelOrderRequest">CancelOrderRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemacancelorderrequest"></a>
-<a id="schema_CancelOrderRequest"></a>
-<a id="tocScancelorderrequest"></a>
-<a id="tocscancelorderrequest"></a>
+## CancelOrderRequest
 
 ```json
 {
@@ -4661,12 +4105,7 @@ JWT authorizer you obtain along with the
 | tradingAccountId | [TradingAccountId](#schematradingaccountid)     | true     | none         | unique trading account ID                                                                         |
 | command          | [CancelOrderCommand](#schemacancelordercommand) | true     | none         | the command to be executed which is sent in the request payload                                   |
 
-<h2 id="tocS_Order">Order</h2>
-<!-- backwards compatibility -->
-<a id="schemaorder"></a>
-<a id="schema_Order"></a>
-<a id="tocSorder"></a>
-<a id="tocsorder"></a>
+## Order
 
 ```json
 {
@@ -4942,12 +4381,7 @@ JWT authorizer you obtain along with the
 | createdAtDatetime     | [DateTime](#schemadatetime)                                 | true     | none         | denotes the time the order was ACK'd by the exchange, ISO 8601 with millisecond as string                                   |
 | createdAtTimestamp    | [TimeStampAsString](#schematimestampasstring)               | true     | none         | denotes the time the order was ACK'd by the exchange                                                                        |
 
-<h2 id="tocS_AMMInstruction">AMMInstruction</h2>
-<!-- backwards compatibility -->
-<a id="schemaamminstruction"></a>
-<a id="schema_AMMInstruction"></a>
-<a id="tocSamminstruction"></a>
-<a id="tocsamminstruction"></a>
+## AMMInstruction
 
 ```json
 {
@@ -5287,12 +4721,7 @@ JWT authorizer you obtain along with the
 | upperBound            | string                                            | true     | none         | upper bound of price range, in quote currency                                                                                                 |
 | yieldEarn             | string                                            | true     | none         | amount of money earned in USD                                                                                                                 |
 
-<h2 id="tocS_ObfuscatedTradeWithId">ObfuscatedTradeWithId</h2>
-<!-- backwards compatibility -->
-<a id="schemaobfuscatedtradewithid"></a>
-<a id="schema_ObfuscatedTradeWithId"></a>
-<a id="tocSobfuscatedtradewithid"></a>
-<a id="tocsobfuscatedtradewithid"></a>
+## ObfuscatedTradeWithId
 
 ```json
 {
@@ -5407,12 +4836,7 @@ JWT authorizer you obtain along with the
 | createdAtDatetime  | [DateTime](#schemadatetime)                   | true     | none         | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string |
 | createdAtTimestamp | [TimeStampAsString](#schematimestampasstring) | true     | none         | denotes the time the trade was executed by the exchange                                      |
 
-<h2 id="tocS_ObfuscatedTrade">ObfuscatedTrade</h2>
-<!-- backwards compatibility -->
-<a id="schemaobfuscatedtrade"></a>
-<a id="schema_ObfuscatedTrade"></a>
-<a id="tocSobfuscatedtrade"></a>
-<a id="tocsobfuscatedtrade"></a>
+## ObfuscatedTrade
 
 ```json
 {
@@ -5527,12 +4951,7 @@ JWT authorizer you obtain along with the
 | createdAtDatetime  | [DateTime](#schemadatetime)                   | true     | none         | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string |
 | createdAtTimestamp | [TimeStampAsString](#schematimestampasstring) | true     | none         | denotes the time the trade was executed by the exchange                                      |
 
-<h2 id="tocS_CustodyApiWithdrawalCommand">CustodyApiWithdrawalCommand</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyapiwithdrawalcommand"></a>
-<a id="schema_CustodyApiWithdrawalCommand"></a>
-<a id="tocScustodyapiwithdrawalcommand"></a>
-<a id="tocscustodyapiwithdrawalcommand"></a>
+## CustodyApiWithdrawalCommand
 
 ```json
 {
@@ -5595,12 +5014,7 @@ JWT authorizer you obtain along with the
 | network       | [NetworkID](#schemanetworkid)                       | true     | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                                                                                           |
 | quantity      | [CustodyQuantity](#schemacustodyquantity)           | true     | none         | total quantity of symbol to withdraw including fee in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) - quantity received will have fee subtracted. |
 
-<h2 id="tocS_CustodyApiEcdsaWithdrawalCommand">CustodyApiEcdsaWithdrawalCommand</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyapiecdsawithdrawalcommand"></a>
-<a id="schema_CustodyApiEcdsaWithdrawalCommand"></a>
-<a id="tocScustodyapiecdsawithdrawalcommand"></a>
-<a id="tocscustodyapiecdsawithdrawalcommand"></a>
+## CustodyApiEcdsaWithdrawalCommand
 
 ```json
 {
@@ -5663,12 +5077,7 @@ JWT authorizer you obtain along with the
 | network       | [NetworkID](#schemanetworkid)                       | true     | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                                                                                           |
 | quantity      | [CustodyQuantity](#schemacustodyquantity)           | true     | none         | total quantity of symbol to withdraw including fee in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) - quantity received will have fee subtracted. |
 
-<h2 id="tocS_CustodyApiWithdrawalRequest">CustodyApiWithdrawalRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyapiwithdrawalrequest"></a>
-<a id="schema_CustodyApiWithdrawalRequest"></a>
-<a id="tocScustodyapiwithdrawalrequest"></a>
-<a id="tocscustodyapiwithdrawalrequest"></a>
+## CustodyApiWithdrawalRequest
 
 ```json
 {
@@ -5773,12 +5182,7 @@ JWT authorizer you obtain along with the
 | authorizer | [Authorizer](#schemaauthorizer)                                   | true     | none         | JWT authorizer you obtain along with the [JWT token](#overview--generate-a-jwt-token)             |
 | command    | [CustodyApiWithdrawalCommand](#schemacustodyapiwithdrawalcommand) | true     | none         | withdrawal command                                                                                |
 
-<h2 id="tocS_CustodyApiEcdsaWithdrawalRequest">CustodyApiEcdsaWithdrawalRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyapiecdsawithdrawalrequest"></a>
-<a id="schema_CustodyApiEcdsaWithdrawalRequest"></a>
-<a id="tocScustodyapiecdsawithdrawalrequest"></a>
-<a id="tocscustodyapiecdsawithdrawalrequest"></a>
+## CustodyApiEcdsaWithdrawalRequest
 
 ```json
 {
@@ -5883,12 +5287,7 @@ JWT authorizer you obtain along with the
 | authorizer | [Authorizer](#schemaauthorizer)                                             | true     | none         | JWT authorizer you obtain along with the [JWT token](#overview--generate-a-jwt-token)             |
 | command    | [CustodyApiEcdsaWithdrawalCommand](#schemacustodyapiecdsawithdrawalcommand) | true     | none         | withdrawal command                                                                                |
 
-<h2 id="tocS_CustodyApiWithdrawalResponse">CustodyApiWithdrawalResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyapiwithdrawalresponse"></a>
-<a id="schema_CustodyApiWithdrawalResponse"></a>
-<a id="tocScustodyapiwithdrawalresponse"></a>
-<a id="tocscustodyapiwithdrawalresponse"></a>
+## CustodyApiWithdrawalResponse
 
 ```json
 {
@@ -5925,12 +5324,7 @@ JWT authorizer you obtain along with the
 | statusReasonCode     | integer                                             | false    | none         | status reason code, see [details](#overview--error--rejection-codes)      |
 | custodyTransactionId | [CustodyTransactionID](#schemacustodytransactionid) | false    | none         | unique identifier for tracking a withdrawal during signing and in history |
 
-<h2 id="tocS_CustodyHistory">CustodyHistory</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyhistory"></a>
-<a id="schema_CustodyHistory"></a>
-<a id="tocScustodyhistory"></a>
-<a id="tocscustodyhistory"></a>
+## CustodyHistory
 
 ```json
 {
@@ -6060,12 +5454,7 @@ JWT authorizer you obtain along with the
 | status               | [CustodyTransactionStatus](#schemacustodytransactionstatus)       | false    | none         | one of 'PENDING', 'COMPLETE', 'CANCELLED', 'FAILED'                                                                                                                                   |
 | transactionDetails   | [CustodyTransactionDetails](#schemacustodytransactiondetails)     | false    | none         | none                                                                                                                                                                                  |
 
-<h2 id="tocS_CustodyCryptoDepositInstructions">CustodyCryptoDepositInstructions</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodycryptodepositinstructions"></a>
-<a id="schema_CustodyCryptoDepositInstructions"></a>
-<a id="tocScustodycryptodepositinstructions"></a>
-<a id="tocscustodycryptodepositinstructions"></a>
+## CustodyCryptoDepositInstructions
 
 ```json
 {
@@ -6084,12 +5473,7 @@ JWT authorizer you obtain along with the
 | memo    | [CustodyDepositMemo](#schemacustodydepositmemo)       | false    | none         | memo or destination tag used during deposit to help identify account to credit funds to |
 | address | [CustodyNetworkAddress](#schemacustodynetworkaddress) | true     | none         | an address on the given network                                                         |
 
-<h2 id="tocS_CustodyCryptoWithdrawalInstructions">CustodyCryptoWithdrawalInstructions</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodycryptowithdrawalinstructions"></a>
-<a id="schema_CustodyCryptoWithdrawalInstructions"></a>
-<a id="tocScustodycryptowithdrawalinstructions"></a>
-<a id="tocscustodycryptowithdrawalinstructions"></a>
+## CustodyCryptoWithdrawalInstructions
 
 ```json
 {
@@ -6175,12 +5559,7 @@ JWT authorizer you obtain along with the
 | label         | [CustodyWithdrawalLabel](#schemacustodywithdrawallabel) | true     | none         | descriptive label of destination provided by user                                                           |
 | destinationId | [CustodyDestinationID](#schemacustodydestinationid)     | true     | none         | destination id provided by bullish that uniquely identifies a whitelisted address or account                |
 
-<h2 id="tocS_CustodySelfHostedInitiateRequest">CustodySelfHostedInitiateRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyselfhostedinitiaterequest"></a>
-<a id="schema_CustodySelfHostedInitiateRequest"></a>
-<a id="tocScustodyselfhostedinitiaterequest"></a>
-<a id="tocscustodyselfhostedinitiaterequest"></a>
+## CustodySelfHostedInitiateRequest
 
 ```json
 {
@@ -6203,12 +5582,7 @@ JWT authorizer you obtain along with the
 | label                  | [CustodyWithdrawalLabel](#schemacustodywithdrawallabel)                                   | true     | none         | descriptive label of destination provided by user                       |
 | requestedDepositAmount | [CustodySelfHostedRequestedDepositAmount](#schemacustodyselfhostedrequesteddepositamount) | true     | none         | User-requested amount for the deposit.                                  |
 
-<h2 id="tocS_CustodySelfHostedInitiateResponse">CustodySelfHostedInitiateResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyselfhostedinitiateresponse"></a>
-<a id="schema_CustodySelfHostedInitiateResponse"></a>
-<a id="tocScustodyselfhostedinitiateresponse"></a>
-<a id="tocscustodyselfhostedinitiateresponse"></a>
+## CustodySelfHostedInitiateResponse
 
 ```json
 {
@@ -6237,12 +5611,7 @@ JWT authorizer you obtain along with the
 | totalDepositAmount     | [CustodySelfHostedTotalDepositAmount](#schemacustodyselfhostedtotaldepositamount)         | false    | none         | The actual amount that the user should deposit for wallet verification. It is the sum of `requestedDepositAmount` and `verificationAmount`. |
 | verificationExpiryTime | [DateTime](#schemadatetime)                                                               | false    | none         | ISO 8601 with millisecond as string                                                                                                         |
 
-<h2 id="tocS_CustodyGetSelfHostedVerificationResponse">CustodyGetSelfHostedVerificationResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodygetselfhostedverificationresponse"></a>
-<a id="schema_CustodyGetSelfHostedVerificationResponse"></a>
-<a id="tocScustodygetselfhostedverificationresponse"></a>
-<a id="tocscustodygetselfhostedverificationresponse"></a>
+## CustodyGetSelfHostedVerificationResponse
 
 ```json
 {
@@ -6260,25 +5629,30 @@ JWT authorizer you obtain along with the
 
 ### Properties
 
-| Name                   | Type                                                                                      | Required | Restrictions | Description                                                                                                                                                                                                                                       |
-| ---------------------- | ----------------------------------------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| destinationId          | [CustodyDestinationID](#schemacustodydestinationid)                                       | true     | none         | destination id provided by bullish that uniquely identifies a whitelisted address or account                                                                                                                                                      |
-| network                | [NetworkID](#schemanetworkid)                                                             | true     | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                                                                                                                                                       |
-| symbol                 | [CustodySymbol](#schemacustodysymbol)                                                     | true     | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                                                                                                                                                      |
-| address                | [CustodyNetworkAddress](#schemacustodynetworkaddress)                                     | true     | none         | an address on the given network                                                                                                                                                                                                                   |
-| memo                   | [CustodyWithdrawalMemo](#schemacustodywithdrawalmemo)                                     | false    | none         | memo or destination tag that will be used as a reference on transaction                                                                                                                                                                           |
-| verificationStatus     | [CustodySelfHostedVerificationStatus](#schemacustodyselfhostedverificationstatus)         | true     | none         | The status for the self-hosted wallet verification attempt.<br>- `VERIFIED` - Self-hosted wallet has been verified<br>- `PENDING_VERIFICATION` - pending verification via satoshi test<br>- `VERIFICATION_EXPIRED` - the verification has expired |
-| requestedDepositAmount | [CustodySelfHostedRequestedDepositAmount](#schemacustodyselfhostedrequesteddepositamount) | true     | none         | User-requested amount for the deposit.                                                                                                                                                                                                            |
-| verificationAmount     | [CustodySelfHostedVerificationAmount](#schemacustodyselfhostedverificationamount)         | true     | none         | Bullish specified additional small deposit amount to add to the `requestedDepositAmount` for wallet verification.                                                                                                                                 |
-| totalDepositAmount     | [CustodySelfHostedTotalDepositAmount](#schemacustodyselfhostedtotaldepositamount)         | true     | none         | The actual amount that the user should deposit for wallet verification. It is the sum of `requestedDepositAmount` and `verificationAmount`.                                                                                                       |
-| verificationExpiryTime | [DateTime](#schemadatetime)                                                               | true     | none         | ISO 8601 with millisecond as string                                                                                                                                                                                                               |
+| Name               | Type                                                                              | Required | Restrictions | Description                                                                                  |
+| ------------------ | --------------------------------------------------------------------------------- | -------- | ------------ | -------------------------------------------------------------------------------------------- |
+| destinationId      | [CustodyDestinationID](#schemacustodydestinationid)                               | true     | none         | destination id provided by bullish that uniquely identifies a whitelisted address or account |
+| network            | [NetworkID](#schemanetworkid)                                                     | true     | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                  |
+| symbol             | [CustodySymbol](#schemacustodysymbol)                                             | true     | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                 |
+| address            | [CustodyNetworkAddress](#schemacustodynetworkaddress)                             | true     | none         | an address on the given network                                                              |
+| memo               | [CustodyWithdrawalMemo](#schemacustodywithdrawalmemo)                             | false    | none         | memo or destination tag that will be used as a reference on transaction                      |
+| verificationStatus | [CustodySelfHostedVerificationStatus](#schemacustodyselfhostedverificationstatus) | true     | none         | The status for the self-hosted wallet verification attempt.                                  |
 
-<h2 id="tocS_CustodyBankDetails">CustodyBankDetails</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodybankdetails"></a>
-<a id="schema_CustodyBankDetails"></a>
-<a id="tocScustodybankdetails"></a>
-<a id="tocscustodybankdetails"></a>
+- `VERIFIED` - Self-hosted wallet has been verified
+- `PENDING_VERIFICATION` - pending verification via satoshi test
+- `VERIFICATION_EXPIRED` - the verification has expired|
+  |requestedDepositAmount|[CustodySelfHostedRequestedDepositAmount](#schemacustodyselfhostedrequesteddepositamount)|true|none|User-requested
+  amount for the deposit.|
+  |verificationAmount|[CustodySelfHostedVerificationAmount](#schemacustodyselfhostedverificationamount)|true|none|Bullish
+  specified additional small deposit amount to add to the
+  `requestedDepositAmount` for wallet verification.|
+  |totalDepositAmount|[CustodySelfHostedTotalDepositAmount](#schemacustodyselfhostedtotaldepositamount)|true|none|The
+  actual amount that the user should deposit for wallet verification. It is the
+  sum of `requestedDepositAmount` and `verificationAmount`.|
+  |verificationExpiryTime|[DateTime](#schemadatetime)|true|none|ISO 8601 with
+  millisecond as string|
+
+## CustodyBankDetails
 
 ```json
 {
@@ -6323,12 +5697,7 @@ JWT authorizer you obtain along with the
 | physicalAddress | [CustodyPhysicalBankAddress](#schemacustodyphysicalbankaddress) | false    | none         | physical location of bank |
 | routingCode     | [CustodyBankRoutingCode](#schemacustodybankroutingcode)         | false    | none         | routing code of bank      |
 
-<h2 id="tocS_CustodyBankIntermediateDetails">CustodyBankIntermediateDetails</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodybankintermediatedetails"></a>
-<a id="schema_CustodyBankIntermediateDetails"></a>
-<a id="tocScustodybankintermediatedetails"></a>
-<a id="tocscustodybankintermediatedetails"></a>
+## CustodyBankIntermediateDetails
 
 ```json
 {
@@ -6376,12 +5745,7 @@ JWT authorizer you obtain along with the
 | physicalAddress | [CustodyPhysicalBankAddress](#schemacustodyphysicalbankaddress) | false    | none         | physical location of bank |
 | routingCode     | [CustodyBankRoutingCode](#schemacustodybankroutingcode)         | false    | none         | routing code of bank      |
 
-<h2 id="tocS_CustodyFiatDepositInstructions">CustodyFiatDepositInstructions</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyfiatdepositinstructions"></a>
-<a id="schema_CustodyFiatDepositInstructions"></a>
-<a id="tocScustodyfiatdepositinstructions"></a>
-<a id="tocscustodyfiatdepositinstructions"></a>
+## CustodyFiatDepositInstructions
 
 ```json
 {
@@ -6475,12 +5839,7 @@ JWT authorizer you obtain along with the
 | memo            | string                                                      | false    | none         | client specific reference to identify which account desposits should be allocated to on the exhange |
 | bank            | [CustodyBankDetails](#schemacustodybankdetails)             | false    | none         | none                                                                                                |
 
-<h2 id="tocS_CustodyFiatWithdrawalInstructions">CustodyFiatWithdrawalInstructions</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodyfiatwithdrawalinstructions"></a>
-<a id="schema_CustodyFiatWithdrawalInstructions"></a>
-<a id="tocScustodyfiatwithdrawalinstructions"></a>
-<a id="tocscustodyfiatwithdrawalinstructions"></a>
+## CustodyFiatWithdrawalInstructions
 
 ```json
 {
@@ -6652,12 +6011,7 @@ JWT authorizer you obtain along with the
 | bank             | [CustodyBankDetails](#schemacustodybankdetails)                         | false    | none         | none                                                                                                        |
 | intermediaryBank | [CustodyBankIntermediateDetails](#schemacustodybankintermediatedetails) | false    | none         | none                                                                                                        |
 
-<h2 id="tocS_CustodyLimits">CustodyLimits</h2>
-<!-- backwards compatibility -->
-<a id="schemacustodylimits"></a>
-<a id="schema_CustodyLimits"></a>
-<a id="tocScustodylimits"></a>
-<a id="tocscustodylimits"></a>
+## CustodyLimits
 
 ```json
 {
@@ -6702,12 +6056,7 @@ JWT authorizer you obtain along with the
 | available      | [CustodyAvailableWithdrawalLimit](#schemacustodyavailablewithdrawallimit) | false    | none         | remaining limit on amount of coin or token that could be withdrawn now, in units of the symbol itself, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei)       |
 | twentyFourHour | [Custody24HWithdrawalLimit](#schemacustody24hwithdrawallimit)             | false    | none         | limit on amount of coin or token that can be withdrawn over a 24 hour period, in units of the symbol itself, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) |
 
-<h2 id="tocS_Trade">Trade</h2>
-<!-- backwards compatibility -->
-<a id="schematrade"></a>
-<a id="schema_Trade"></a>
-<a id="tocStrade"></a>
-<a id="tocstrade"></a>
+## Trade
 
 ```json
 {
@@ -6893,12 +6242,7 @@ JWT authorizer you obtain along with the
 | createdAtDatetime      | [DateTime](#schemadatetime)                   | true     | none         | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string                  |
 | createdAtTimestamp     | [TimeStampAsString](#schematimestampasstring) | true     | none         | denotes the time the trade was executed by the exchange                                                       |
 
-<h2 id="tocS_Tick">Tick</h2>
-<!-- backwards compatibility -->
-<a id="schematick"></a>
-<a id="schema_Tick"></a>
-<a id="tocStick"></a>
-<a id="tocstick"></a>
+## Tick
 
 ```json
 {
@@ -7248,12 +6592,7 @@ JWT authorizer you obtain along with the
 | lastTradeQuantity  | [AssetValue](#schemaassetvalue)               | true     | none         | quantity of the last trade on this symbol, see [asset value](#overview--price-and-quantity-precision) format                                                                           |
 | ammData            | [allOf]                                       | true     | none         | AMM data of all available fee tiers.                                                                                                                                                   |
 
-<h2 id="tocS_AmmData">AmmData</h2>
-<!-- backwards compatibility -->
-<a id="schemaammdata"></a>
-<a id="schema_AmmData"></a>
-<a id="tocSammdata"></a>
-<a id="tocsammdata"></a>
+## AmmData
 
 ```json
 {
@@ -7319,12 +6658,7 @@ AMM data
 | quoteReservesQuantity | string                        | true     | none         | quote reserves quantity                                                   |
 | currentPrice          | string                        | true     | none         | current AMM price                                                         |
 
-<h2 id="tocS_MarketSymbol">MarketSymbol</h2>
-<!-- backwards compatibility -->
-<a id="schemamarketsymbol"></a>
-<a id="schema_MarketSymbol"></a>
-<a id="tocSmarketsymbol"></a>
-<a id="tocsmarketsymbol"></a>
+## MarketSymbol
 
 ```json
 "BTCUSDC"
@@ -7338,12 +6672,7 @@ market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market |
 
-<h2 id="tocS_DatedFutureMarketSymbol">DatedFutureMarketSymbol</h2>
-<!-- backwards compatibility -->
-<a id="schemadatedfuturemarketsymbol"></a>
-<a id="schema_DatedFutureMarketSymbol"></a>
-<a id="tocSdatedfuturemarketsymbol"></a>
-<a id="tocsdatedfuturemarketsymbol"></a>
+## DatedFutureMarketSymbol
 
 ```json
 "BTC-USDC-20241201"
@@ -7358,12 +6687,7 @@ DATED FUTURE markets.
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | market symbol. Eg `BTC-USDC-PERP` for PERPETUAL and `BTC-USDC-20241201` for DATED FUTURE markets. |
 
-<h2 id="tocS_PerpMarketSymbol">PerpMarketSymbol</h2>
-<!-- backwards compatibility -->
-<a id="schemaperpmarketsymbol"></a>
-<a id="schema_PerpMarketSymbol"></a>
-<a id="tocSperpmarketsymbol"></a>
-<a id="tocsperpmarketsymbol"></a>
+## PerpMarketSymbol
 
 ```json
 "BTC-USDC-PERP"
@@ -7377,12 +6701,7 @@ market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------------ |
 | _anonymous_ | string | false    | none         | market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market |
 
-<h2 id="tocS_FeeTier">FeeTier</h2>
-<!-- backwards compatibility -->
-<a id="schemafeetier"></a>
-<a id="schema_FeeTier"></a>
-<a id="tocSfeetier"></a>
-<a id="tocsfeetier"></a>
+## FeeTier
 
 ```json
 {
@@ -7423,12 +6742,7 @@ unique fee tier
 | staticSpreadFee      | string                        | true     | none         | static spread fee                                                         |
 | isDislocationEnabled | boolean                       | true     | none         | dislocation enabled/disabled                                              |
 
-<h2 id="tocS_FeeTierId">FeeTierId</h2>
-<!-- backwards compatibility -->
-<a id="schemafeetierid"></a>
-<a id="schema_FeeTierId"></a>
-<a id="tocSfeetierid"></a>
-<a id="tocsfeetierid"></a>
+## FeeTierId
 
 ```json
 "1"
@@ -7442,12 +6756,7 @@ unique fee tier ID, see [Get Market By Symbol](#get-/v1/markets/-symbol-)
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | unique fee tier ID, see [Get Market By Symbol](#get-/v1/markets/-symbol-) |
 
-<h2 id="tocS_InstrumentId">InstrumentId</h2>
-<!-- backwards compatibility -->
-<a id="schemainstrumentid"></a>
-<a id="schema_InstrumentId"></a>
-<a id="tocSinstrumentid"></a>
-<a id="tocsinstrumentid"></a>
+## InstrumentId
 
 ```json
 "BTC"
@@ -7461,12 +6770,7 @@ custody identifier for instrument
 | ----------- | ------ | -------- | ------------ | --------------------------------- |
 | _anonymous_ | string | false    | none         | custody identifier for instrument |
 
-<h2 id="tocS_AssetSymbol">AssetSymbol</h2>
-<!-- backwards compatibility -->
-<a id="schemaassetsymbol"></a>
-<a id="schema_AssetSymbol"></a>
-<a id="tocSassetsymbol"></a>
-<a id="tocsassetsymbol"></a>
+## AssetSymbol
 
 ```json
 "BTC"
@@ -7480,12 +6784,7 @@ asset symbol as denoted in the world
 | ----------- | ------ | -------- | ------------ | ------------------------------------ |
 | _anonymous_ | string | false    | none         | asset symbol as denoted in the world |
 
-<h2 id="tocS_UnderlyingAssetSymbol">UnderlyingAssetSymbol</h2>
-<!-- backwards compatibility -->
-<a id="schemaunderlyingassetsymbol"></a>
-<a id="schema_UnderlyingAssetSymbol"></a>
-<a id="tocSunderlyingassetsymbol"></a>
-<a id="tocsunderlyingassetsymbol"></a>
+## UnderlyingAssetSymbol
 
 ```json
 "BTC"
@@ -7500,12 +6799,7 @@ checks
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | the underlying asset symbol of the options contract that is eligible for MMP checks |
 
-<h2 id="tocS_QuoteAssetSymbol">QuoteAssetSymbol</h2>
-<!-- backwards compatibility -->
-<a id="schemaquoteassetsymbol"></a>
-<a id="schema_QuoteAssetSymbol"></a>
-<a id="tocSquoteassetsymbol"></a>
-<a id="tocsquoteassetsymbol"></a>
+## QuoteAssetSymbol
 
 ```json
 "USDC"
@@ -7519,12 +6813,7 @@ asset symbol as denoted in the world
 | ----------- | ------ | -------- | ------------ | ------------------------------------ |
 | _anonymous_ | string | false    | none         | asset symbol as denoted in the world |
 
-<h2 id="tocS_AssetName">AssetName</h2>
-<!-- backwards compatibility -->
-<a id="schemaassetname"></a>
-<a id="schema_AssetName"></a>
-<a id="tocSassetname"></a>
-<a id="tocsassetname"></a>
+## AssetName
 
 ```json
 "Bitcoin"
@@ -7538,12 +6827,7 @@ asset name
 | ----------- | ------ | -------- | ------------ | ----------- |
 | _anonymous_ | string | false    | none         | asset name  |
 
-<h2 id="tocS_AssetID">AssetID</h2>
-<!-- backwards compatibility -->
-<a id="schemaassetid"></a>
-<a id="schema_AssetID"></a>
-<a id="tocSassetid"></a>
-<a id="tocsassetid"></a>
+## AssetID
 
 ```json
 "1"
@@ -7557,12 +6841,7 @@ unique asset ID
 | ----------- | ------ | -------- | ------------ | --------------- |
 | _anonymous_ | string | false    | none         | unique asset ID |
 
-<h2 id="tocS_CollateralBand">CollateralBand</h2>
-<!-- backwards compatibility -->
-<a id="schemacollateralband"></a>
-<a id="schema_CollateralBand"></a>
-<a id="tocScollateralband"></a>
-<a id="tocscollateralband"></a>
+## CollateralBand
 
 ```json
 {
@@ -7589,12 +6868,7 @@ unique asset ID
 | collateralPercentage | string | false    | none         | collateral percentage applied to the asset for this band - a value of 90.00 indicates 90% of the asset is eligible to be used as collateral |
 | bandLimitUSD         | string | false    | none         | upper limit in USD for this band                                                                                                            |
 
-<h2 id="tocS_UnderlyingAsset">UnderlyingAsset</h2>
-<!-- backwards compatibility -->
-<a id="schemaunderlyingasset"></a>
-<a id="schema_UnderlyingAsset"></a>
-<a id="tocSunderlyingasset"></a>
-<a id="tocsunderlyingasset"></a>
+## UnderlyingAsset
 
 ```json
 {
@@ -7669,12 +6943,7 @@ unique asset ID
 | bpmTransitionDateTimeStart | string | false    | none         | the start datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset |
 | bpmTransitionDateTimeEnd   | string | false    | none         | the end datetime which the values linearly transition from `bpmMinReturnStart` to `bpmMinReturnEnd` for an underlying asset   |
 
-<h2 id="tocS_PriceQuantityTuple">PriceQuantityTuple</h2>
-<!-- backwards compatibility -->
-<a id="schemapricequantitytuple"></a>
-<a id="schema_PriceQuantityTuple"></a>
-<a id="tocSpricequantitytuple"></a>
-<a id="tocspricequantitytuple"></a>
+## PriceQuantityTuple
 
 ```json
 {
@@ -7709,12 +6978,7 @@ unique asset ID
 | price              | [AssetValue](#schemaassetvalue) | false    | none         | see [asset value](#overview--price-and-quantity-precision) format |
 | priceLevelQuantity | [AssetValue](#schemaassetvalue) | false    | none         | see [asset value](#overview--price-and-quantity-precision) format |
 
-<h2 id="tocS_OrderBook">OrderBook</h2>
-<!-- backwards compatibility -->
-<a id="schemaorderbook"></a>
-<a id="schema_OrderBook"></a>
-<a id="tocSorderbook"></a>
-<a id="tocsorderbook"></a>
+## OrderBook
 
 ```json
 {
@@ -7828,12 +7092,7 @@ unique asset ID
 | timestamp      | [TimeStampAsString](#schematimestampasstring) | true     | none         | timestamp of order book snapshot                                          |
 | sequenceNumber | integer                                       | true     | none         | an incremented unique identifier of the order book snapshot               |
 
-<h2 id="tocS_IndexPrice">IndexPrice</h2>
-<!-- backwards compatibility -->
-<a id="schemaindexprice"></a>
-<a id="schema_IndexPrice"></a>
-<a id="tocSindexprice"></a>
-<a id="tocsindexprice"></a>
+## IndexPrice
 
 ```json
 {
@@ -7895,12 +7154,7 @@ unique asset ID
 | updatedAtDatetime  | [DateTime](#schemadatetime)       | true     | none         | Date and time when the index price is updated |
 | updatedAtTimestamp | [TimeStamp](#schematimestamp)     | true     | none         | Timestamp when the index price is updated     |
 
-<h2 id="tocS_Market">Market</h2>
-<!-- backwards compatibility -->
-<a id="schemamarket"></a>
-<a id="schema_Market"></a>
-<a id="tocSmarket"></a>
-<a id="tocsmarket"></a>
+## Market
 
 ```json
 {
@@ -8357,12 +7611,7 @@ unique asset ID
 | concentrationRiskPercentage   | string                                          | true     | none         | percentage of the total open interest for a specific derivative contract.                                                                                                                                |
 | expiryDatetime                | string                                          | true     | none         | denotes the time when the market expires in ISO 8601 with millisecond format as string                                                                                                                   |
 
-<h2 id="tocS_Asset">Asset</h2>
-<!-- backwards compatibility -->
-<a id="schemaasset"></a>
-<a id="schema_Asset"></a>
-<a id="tocSasset"></a>
-<a id="tocsasset"></a>
+## Asset
 
 ```json
 {
@@ -8568,12 +7817,7 @@ unique asset ID
 | collateralBands          | [allOf]                                   | true     | none         | list of collateral bands for the asset. A collateral band holds the upper limit of the USD notional and the corresponding collateral percentage which applies to it. An asset's collateral value will be capped by the highest limit of the collateral bands, any remaining amount greater than this limit will have a collateral percentage of 0. If an asset has an empty list of CollateralBands, this signifies that the asset has a collateralValue of 0. |
 | underlyingAsset          | [UnderlyingAsset](#schemaunderlyingasset) | true     | none         | underlying asset for the asset.                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
-<h2 id="tocS_OHLCVCandle">OHLCVCandle</h2>
-<!-- backwards compatibility -->
-<a id="schemaohlcvcandle"></a>
-<a id="schema_OHLCVCandle"></a>
-<a id="tocSohlcvcandle"></a>
-<a id="tocsohlcvcandle"></a>
+## OHLCVCandle
 
 ```json
 {
@@ -8678,12 +7922,7 @@ unique asset ID
 | createdAtDatetime    | [DateTime](#schemadatetime)                   | false    | none         | date and time of the candle, ISO 8601 with millisecond as string                                  |
 | publishedAtTimestamp | [TimeStampAsString](#schematimestampasstring) | false    | none         | date and time of the candle getting published, ISO 8601 with millisecond as string                |
 
-<h2 id="tocS_BorrowInterest">BorrowInterest</h2>
-<!-- backwards compatibility -->
-<a id="schemaborrowinterest"></a>
-<a id="schema_BorrowInterest"></a>
-<a id="tocSborrowinterest"></a>
-<a id="tocsborrowinterest"></a>
+## BorrowInterest
 
 ```json
 {
@@ -8764,12 +8003,7 @@ unique asset ID
 | createdAtDatetime     | string(date-time)                 | true     | none         | denotes the hour in which the principal quantity was borrowed or when the interest was charged, ISO 8601 with millisecond as string |
 | createdAtTimestamp    | string(string)                    | true     | none         | denotes the hour in which the principal quantity was borrowed or when the interest was charged                                      |
 
-<h2 id="tocS_CurrentExchangeTimeResponse">CurrentExchangeTimeResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemacurrentexchangetimeresponse"></a>
-<a id="schema_CurrentExchangeTimeResponse"></a>
-<a id="tocScurrentexchangetimeresponse"></a>
-<a id="tocscurrentexchangetimeresponse"></a>
+## CurrentExchangeTimeResponse
 
 ```json
 {
@@ -8808,12 +8042,7 @@ unique asset ID
 | timestamp | [TimeStampAsString](#schematimestampasstring) | true     | none         | unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string |
 | datetime  | [DateTime](#schemadatetime)                   | true     | none         | ISO 8601 with millisecond as string                                                               |
 
-<h2 id="tocS_Nonce">Nonce</h2>
-<!-- backwards compatibility -->
-<a id="schemanonce"></a>
-<a id="schema_Nonce"></a>
-<a id="tocSnonce"></a>
-<a id="tocsnonce"></a>
+## Nonce
 
 ```json
 {
@@ -8841,12 +8070,7 @@ unique asset ID
 | lowerBound | integer | true     | none         | lower bound of nonce range |
 | upperBound | integer | true     | none         | upper bound of nonce range |
 
-<h2 id="tocS_OrderTimeInForce">OrderTimeInForce</h2>
-<!-- backwards compatibility -->
-<a id="schemaordertimeinforce"></a>
-<a id="schema_OrderTimeInForce"></a>
-<a id="tocSordertimeinforce"></a>
-<a id="tocsordertimeinforce"></a>
+## OrderTimeInForce
 
 ```json
 {
@@ -8872,12 +8096,7 @@ time in force
 | _anonymous_ | FOK   |
 | _anonymous_ | IOC   |
 
-<h2 id="tocS_OrderType">OrderType</h2>
-<!-- backwards compatibility -->
-<a id="schemaordertype"></a>
-<a id="schema_OrderType"></a>
-<a id="tocSordertype"></a>
-<a id="tocsordertype"></a>
+## OrderType
 
 ```json
 {
@@ -8903,12 +8122,7 @@ Order Types supported for the market.
 | _anonymous_ | MKT        |
 | _anonymous_ | STOP_LIMIT |
 
-<h2 id="tocS_OrderSide">OrderSide</h2>
-<!-- backwards compatibility -->
-<a id="schemaorderside"></a>
-<a id="schema_OrderSide"></a>
-<a id="tocSorderside"></a>
-<a id="tocsorderside"></a>
+## OrderSide
 
 ```json
 "BUY"
@@ -8927,12 +8141,7 @@ Order Types supported for the market.
 | _anonymous_ | BUY   |
 | _anonymous_ | SELL  |
 
-<h2 id="tocS_TimeBucket">TimeBucket</h2>
-<!-- backwards compatibility -->
-<a id="schematimebucket"></a>
-<a id="schema_TimeBucket"></a>
-<a id="tocStimebucket"></a>
-<a id="tocstimebucket"></a>
+## TimeBucket
 
 ```json
 "1m"
@@ -8956,12 +8165,7 @@ Order Types supported for the market.
 | _anonymous_ | 12h   |
 | _anonymous_ | 1d    |
 
-<h2 id="tocS_OrderStatus">OrderStatus</h2>
-<!-- backwards compatibility -->
-<a id="schemaorderstatus"></a>
-<a id="schema_OrderStatus"></a>
-<a id="tocSorderstatus"></a>
-<a id="tocsorderstatus"></a>
+## OrderStatus
 
 ```json
 "OPEN"
@@ -8982,12 +8186,7 @@ Order Types supported for the market.
 | _anonymous_ | CANCELLED |
 | _anonymous_ | REJECTED  |
 
-<h2 id="tocS_AMMInstructionStatus">AMMInstructionStatus</h2>
-<!-- backwards compatibility -->
-<a id="schemaamminstructionstatus"></a>
-<a id="schema_AMMInstructionStatus"></a>
-<a id="tocSamminstructionstatus"></a>
-<a id="tocsamminstructionstatus"></a>
+## AMMInstructionStatus
 
 ```json
 "OPEN"
@@ -9006,12 +8205,7 @@ Order Types supported for the market.
 | _anonymous_ | OPEN   |
 | _anonymous_ | CLOSED |
 
-<h2 id="tocS_LiquidationRisk">LiquidationRisk</h2>
-<!-- backwards compatibility -->
-<a id="schemaliquidationrisk"></a>
-<a id="schema_LiquidationRisk"></a>
-<a id="tocSliquidationrisk"></a>
-<a id="tocsliquidationrisk"></a>
+## LiquidationRisk
 
 ```json
 {
@@ -9034,12 +8228,7 @@ Order Types supported for the market.
 | _anonymous_ | MEDIUM |
 | _anonymous_ | HIGH   |
 
-<h2 id="tocS_PositionType">PositionType</h2>
-<!-- backwards compatibility -->
-<a id="schemapositiontype"></a>
-<a id="schema_PositionType"></a>
-<a id="tocSpositiontype"></a>
-<a id="tocspositiontype"></a>
+## PositionType
 
 ```json
 {
@@ -9061,12 +8250,7 @@ Order Types supported for the market.
 | _anonymous_ | LONG  |
 | _anonymous_ | SHORT |
 
-<h2 id="tocS_DelayBySeconds">DelayBySeconds</h2>
-<!-- backwards compatibility -->
-<a id="schemadelaybyseconds"></a>
-<a id="schema_DelayBySeconds"></a>
-<a id="tocSdelaybyseconds"></a>
-<a id="tocsdelaybyseconds"></a>
+## DelayBySeconds
 
 ```json
 "5"
@@ -9094,12 +8278,7 @@ Delay the cancel-all-orders request by (seconds) as a timeout mechanism
 | _anonymous_ | 50    |
 | _anonymous_ | 60    |
 
-<h2 id="tocS_CancelId">CancelId</h2>
-<!-- backwards compatibility -->
-<a id="schemacancelid"></a>
-<a id="schema_CancelId"></a>
-<a id="tocScancelid"></a>
-<a id="tocscancelid"></a>
+## CancelId
 
 ```json
 "123456789"
@@ -9114,12 +8293,7 @@ as string
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | Unique id for this cancel request which is an unsigned 64 bit integer expressed as string |
 
-<h2 id="tocS_DerivativesPositionResponse">DerivativesPositionResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemaderivativespositionresponse"></a>
-<a id="schema_DerivativesPositionResponse"></a>
-<a id="tocSderivativespositionresponse"></a>
-<a id="tocsderivativespositionresponse"></a>
+## DerivativesPositionResponse
 
 ```json
 {
@@ -9300,12 +8474,7 @@ Derivatives Position of one market for the trading account
 | updatedAtDatetime     | [DateTime](#schemadatetime)                   | false    | none         | Denotes the time the position was updated by the exchange, ISO 8601 with millisecond as string                                                                                                            |
 | updatedAtTimestamp    | [TimeStampAsString](#schematimestampasstring) | false    | none         | Denotes the time the position was updated by the exchange, number of milliseconds since EPOCH                                                                                                             |
 
-<h2 id="tocS_DerivativesSettlementResponse">DerivativesSettlementResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemaderivativessettlementresponse"></a>
-<a id="schema_DerivativesSettlementResponse"></a>
-<a id="tocSderivativessettlementresponse"></a>
-<a id="tocsderivativessettlementresponse"></a>
+## DerivativesSettlementResponse
 
 ```json
 {
@@ -9457,12 +8626,7 @@ Derivatives Settlement of one market for the trading account
 | settlementDatetime    | [DateTime](#schemadatetime)                               | false    | none         | Denotes the time the position was settled by the exchange, ISO 8601 with millisecond as string      |
 | settlementTimestamp   | [TimeStampAsString](#schematimestampasstring)             | false    | none         | Denotes the time the position was settled by the exchange, number of milliseconds since EPOCH       |
 
-<h2 id="tocS_SubAccountTransferResponse">SubAccountTransferResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemasubaccounttransferresponse"></a>
-<a id="schema_SubAccountTransferResponse"></a>
-<a id="tocSsubaccounttransferresponse"></a>
-<a id="tocssubaccounttransferresponse"></a>
+## SubAccountTransferResponse
 
 ```json
 {
@@ -9566,12 +8730,7 @@ Get account transfer history
 | createdAtTimestamp   | [TimeStampAsString](#schematimestampasstring) | false    | none         | unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string |
 | createdAtDatetime    | [DateTime](#schemadatetime)                   | false    | none         | ISO 8601 with millisecond as string                                                               |
 
-<h2 id="tocS_SimulationPosition">SimulationPosition</h2>
-<!-- backwards compatibility -->
-<a id="schemasimulationposition"></a>
-<a id="schema_SimulationPosition"></a>
-<a id="tocSsimulationposition"></a>
-<a id="tocssimulationposition"></a>
+## SimulationPosition
 
 ```json
 {
@@ -9600,12 +8759,7 @@ Get account transfer history
 | symbol      | string | true     | none         | asset or market symbol. Eg `USDC` for asset and `BTCUSDC` for market |
 | quantity    | string | true     | none         | size of the position                                                 |
 
-<h2 id="tocS_SimulationOrder">SimulationOrder</h2>
-<!-- backwards compatibility -->
-<a id="schemasimulationorder"></a>
-<a id="schema_SimulationOrder"></a>
-<a id="tocSsimulationorder"></a>
-<a id="tocssimulationorder"></a>
+## SimulationOrder
 
 ```json
 {
@@ -9644,12 +8798,7 @@ Get account transfer history
 | quantity    | string                              | true     | none         | quantity placed for order                                                     |
 | limitPrice  | string                              | false    | none         | limit price for order                                                         |
 
-<h2 id="tocS_ReferencePrice">ReferencePrice</h2>
-<!-- backwards compatibility -->
-<a id="schemareferenceprice"></a>
-<a id="schema_ReferencePrice"></a>
-<a id="tocSreferenceprice"></a>
-<a id="tocsreferenceprice"></a>
+## ReferencePrice
 
 ```json
 {
@@ -9677,12 +8826,7 @@ Get account transfer history
 | symbol      | string | false    | none         | asset or market symbol. Eg `USDC` for asset and `BTCUSDC` for market |
 | price       | string | false    | none         | reference price for asset or market                                  |
 
-<h2 id="tocS_TradeFeeRate">TradeFeeRate</h2>
-<!-- backwards compatibility -->
-<a id="schematradefeerate"></a>
-<a id="schema_TradeFeeRate"></a>
-<a id="tocStradefeerate"></a>
-<a id="tocstradefeerate"></a>
+## TradeFeeRate
 
 ```json
 {
@@ -9716,12 +8860,7 @@ Get account transfer history
 | makerFee   | string  | true     | none         | Maker Fee in basis points (bps)         |
 | takerFee   | string  | true     | none         | Taker Fee in basis points (bps)         |
 
-<h2 id="tocS_PortfolioSimulationRequest">PortfolioSimulationRequest</h2>
-<!-- backwards compatibility -->
-<a id="schemaportfoliosimulationrequest"></a>
-<a id="schema_PortfolioSimulationRequest"></a>
-<a id="tocSportfoliosimulationrequest"></a>
-<a id="tocsportfoliosimulationrequest"></a>
+## PortfolioSimulationRequest
 
 ```json
 {
@@ -9830,12 +8969,7 @@ Get account transfer history
 | orders           | [allOf]                                     | false    | none         | pending orders to be used in simulation     |
 | referencePrices  | [allOf]                                     | false    | none         | reference price to be used in simulation    |
 
-<h2 id="tocS_PortfolioSimulationResponse">PortfolioSimulationResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemaportfoliosimulationresponse"></a>
-<a id="schema_PortfolioSimulationResponse"></a>
-<a id="tocSportfoliosimulationresponse"></a>
-<a id="tocsportfoliosimulationresponse"></a>
+## PortfolioSimulationResponse
 
 ```json
 {
@@ -9908,12 +9042,7 @@ Simulation result
 | liquidityAddonUSD        | string | false    | none         | expected market impact of unwinding the portfolio in the case of a liquidation event               |
 | marketRiskUSD            | string | false    | none         | the worst possible loss on the portfolio based on scenario analysis                                |
 
-<h2 id="tocS_FundingRateHistoryResponse">FundingRateHistoryResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemafundingratehistoryresponse"></a>
-<a id="schema_FundingRateHistoryResponse"></a>
-<a id="tocSfundingratehistoryresponse"></a>
-<a id="tocsfundingratehistoryresponse"></a>
+## FundingRateHistoryResponse
 
 ```json
 {

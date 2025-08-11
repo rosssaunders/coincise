@@ -1,18 +1,6 @@
----
-title: Bullish Trading API - General Information
-language_tabs:
-  - javascript: JavaScript
-  - python: Python
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
----
+# Bullish Trading API - General Information
 
-<!-- Generator: Widdershins v4.0.1 -->
-
-<h1 id="bullish-trading-api">Bullish Trading API v1.0.0</h1>
+# Bullish Trading API v1.0.0
 
 > Scroll down for code samples, example requests and responses. Select a
 > language for code samples from the tabs above or the mobile navigation menu.
@@ -1044,8 +1032,8 @@ The orderbooks of different markets to be subscribed are controlled by the
 parameters in the subscription message listed below: | Parameters | Type |
 Description |
 |:----------------------|:-------|:--------------------------------------------------------------------------------|
-| topic | String | l1 orderbook: l1Orderbook<br />l2 orderbook:
-l2Orderbook<br />heartbeat: heartbeat | | symbol | String | market symbol |
+| topic | String | l1 orderbook: l1Orderbook l2 orderbook: l2Orderbook
+heartbeat: heartbeat | | symbol | String | market symbol |
 
 L1 Subscription Message Sample:
 
@@ -1118,15 +1106,16 @@ Heartbeat Subscription Message Sample:
 
 - l2Snapshot response
 
-| Name                 | Type   | Description                                                                                                                                                                                                           |
-| -------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| symbol               | String | market symbol                                                                                                                                                                                                         |
-| bids                 | Array  | array of size 200 where even indices denote price, odd indices denote absolute quantities                                                                                                                             |
-| asks                 | Array  | array of size 200 where even indices denote price, odd indices denote absolute quantities                                                                                                                             |
-| sequenceNumberRange  | Array  | array of size 2 where first element denotes lower bound, second element denotes upper bound of sequence numbers <br /> lower and upper bound are equal for initial snapshot; this may differ for subsequent snapshots |
-| datetime             | String | denotes the time the update was created by the engine, ISO 8601 with millisecond as string                                                                                                                            |
-| timestamp            | String | denotes the time the update was created by the engine                                                                                                                                                                 |
-| publishedAtTimestamp | String | denotes the time the update was broadcasted to connected websockets                                                                                                                                                   |
+| Name                                                                                           | Type   | Description                                                                                                     |
+| ---------------------------------------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------- |
+| symbol                                                                                         | String | market symbol                                                                                                   |
+| bids                                                                                           | Array  | array of size 200 where even indices denote price, odd indices denote absolute quantities                       |
+| asks                                                                                           | Array  | array of size 200 where even indices denote price, odd indices denote absolute quantities                       |
+| sequenceNumberRange                                                                            | Array  | array of size 2 where first element denotes lower bound, second element denotes upper bound of sequence numbers |
+| lower and upper bound are equal for initial snapshot; this may differ for subsequent snapshots |
+| datetime                                                                                       | String | denotes the time the update was created by the engine, ISO 8601 with millisecond as string                      |
+| timestamp                                                                                      | String | denotes the time the update was created by the engine                                                           |
+| publishedAtTimestamp                                                                           | String | denotes the time the update was broadcasted to connected websockets                                             |
 
 ```json
 {
@@ -1530,8 +1519,8 @@ The index price of different assets to be subscribed are controlled by the
 parameters in the subscription message listed below: | Parameters | Type |
 Description |
 |:----------------------|:-------|:--------------------------------------------------------------------------------|
-| topic | String | Index Price: `indexPrice` <br/> | | assetSymbol | String |
-Asset symbol, such as `BTC` or `USDC` |
+| topic | String | Index Price: `indexPrice` | | assetSymbol | String | Asset
+symbol, such as `BTC` or `USDC` |
 
 Index Price Subscription Sample:
 
@@ -1632,35 +1621,53 @@ Establishing a websocket connection
 
 ### orders response
 
-| Name                  | Type    | Description                                                                                                                                                                                                                                                                       |
-| :-------------------- | :------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ~handle~              | String  | unique numeric (i64) identifier generated on the client side expressed as a string value <br /><br />`Deprecated`_to be remove towards the end of Q3 2024._ <br /> _Replaced by:_ `clientOrderId`                                                                                 |
-| clientOrderId         | String  | unique numeric (i64) identifier generated on the client side expressed as a string value                                                                                                                                                                                          |
-| orderId               | String  | unique order ID                                                                                                                                                                                                                                                                   |
-| symbol                | String  | market symbol                                                                                                                                                                                                                                                                     |
-| price                 | String  | price, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                                                                                          |
-| averageFillPrice      | String  | average fill price, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                                                                             |
-| stopPrice             | String  | stop price, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                                                                                     |
-| ~margin~              | Boolean | indicates if the order was allowed to borrow (does not indicate that borrowing occurred) <br /><br />`Deprecated`_to be remove towards the end of Q3 2024._ <br /> _Replaced by:_ `allowBorrow`                                                                                   |
-| allowBorrow           | Boolean | indicates if the order was allowed to borrow (does not indicate that borrowing occurred)                                                                                                                                                                                          |
-| quantity              | String  | quantity, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                                                                                       |
-| quoteAmount           | String  | quote quantity deducted from asset account, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                                                     |
-| quantityFilled        | String  | quantity filled, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                                                                                |
-| baseFee               | String  | base fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                                        |
-| quoteFee              | String  | quote fee rate that will be charged upon trade execution, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                                       |
-| ~borrowedQuantity~    | String  | quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format - BUY order borrows quote, SELL order borrows base <br /><br />`Deprecated`_to be remove towards the end of Q3 2024._ <br /> _Replaced by:_ `borrowedBaseQuantity` & `borrowedQuoteQuantity` |
-| borrowedBaseQuantity  | String  | base quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                                                                         |
-| borrowedQuoteQuantity | String  | quote quantity borrowed, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                                                                        |
-| isLiquidation         | Boolean | indicates if the order was executed as a liquidation order                                                                                                                                                                                                                        |
-| side                  | String  | order side                                                                                                                                                                                                                                                                        |
-| type                  | String  | order type                                                                                                                                                                                                                                                                        |
-| timeInForce           | String  | time in force                                                                                                                                                                                                                                                                     |
-| status                | String  | order status                                                                                                                                                                                                                                                                      |
-| statusReason          | String  | status reason, describes why the order is in a specific state                                                                                                                                                                                                                     |
-| statusReasonCode      | Integer | status reason code, see [details](https://github.com/bullish-exchange/api-docs/wiki/Error-&-Rejection-Codes#order-statusreasoncode-map)                                                                                                                                           |
-| createdAtDatetime     | String  | denotes the time the order was ACK'd by the exchange, ISO 8601 with millisecond as string                                                                                                                                                                                         |
-| createdAtTimestamp    | String  | denotes the time the order was ACK'd by the exchange                                                                                                                                                                                                                              |
-| publishedAtTimestamp  | String  | denotes the time the update was broadcasted to connected websockets                                                                                                                                                                                                               |
+| Name     | Type   | Description                                                                              |
+| :------- | :----- | :--------------------------------------------------------------------------------------- |
+| ~handle~ | String | unique numeric (i64) identifier generated on the client side expressed as a string value |
+
+`Deprecated`_to be remove towards the end of Q3 2024._ _Replaced by:_
+`clientOrderId` | | clientOrderId | String | unique numeric (i64) identifier
+generated on the client side expressed as a string value | | orderId | String |
+unique order ID | | symbol | String | market symbol | | price | String | price,
+see [asset value](#overview--price-and-quantity-precision) format | |
+averageFillPrice | String | average fill price, see
+[asset value](#overview--price-and-quantity-precision) format | | stopPrice |
+String | stop price, see [asset value](#overview--price-and-quantity-precision)
+format | | ~margin~ | Boolean | indicates if the order was allowed to borrow
+(does not indicate that borrowing occurred)
+
+`Deprecated`_to be remove towards the end of Q3 2024._ _Replaced by:_
+`allowBorrow` | | allowBorrow | Boolean | indicates if the order was allowed to
+borrow (does not indicate that borrowing occurred) | | quantity | String |
+quantity, see [asset value](#overview--price-and-quantity-precision) format | |
+quoteAmount | String | quote quantity deducted from asset account, see
+[asset value](#overview--price-and-quantity-precision) format | | quantityFilled
+| String | quantity filled, see
+[asset value](#overview--price-and-quantity-precision) format | | baseFee |
+String | base fee rate that will be charged upon trade execution, see
+[asset value](#overview--price-and-quantity-precision) format | | quoteFee |
+String | quote fee rate that will be charged upon trade execution, see
+[asset value](#overview--price-and-quantity-precision) format | |
+~borrowedQuantity~ | String | quantity borrowed, see
+[asset value](#overview--price-and-quantity-precision) format - BUY order
+borrows quote, SELL order borrows base
+
+`Deprecated`_to be remove towards the end of Q3 2024._ _Replaced by:_
+`borrowedBaseQuantity` & `borrowedQuoteQuantity` | | borrowedBaseQuantity |
+String | base quantity borrowed, see
+[asset value](#overview--price-and-quantity-precision) format | |
+borrowedQuoteQuantity | String | quote quantity borrowed, see
+[asset value](#overview--price-and-quantity-precision) format | | isLiquidation
+| Boolean | indicates if the order was executed as a liquidation order | | side
+| String | order side | | type | String | order type | | timeInForce | String |
+time in force | | status | String | order status | | statusReason | String |
+status reason, describes why the order is in a specific state | |
+statusReasonCode | Integer | status reason code, see
+[details](https://github.com/bullish-exchange/api-docs/wiki/Error-&-Rejection-Codes#order-statusreasoncode-map)
+| | createdAtDatetime | String | denotes the time the order was ACK'd by the
+exchange, ISO 8601 with millisecond as string | | createdAtTimestamp | String |
+denotes the time the order was ACK'd by the exchange | | publishedAtTimestamp |
+String | denotes the time the update was broadcasted to connected websockets |
 
 ```json
 {
@@ -2142,3 +2149,26 @@ Bullish currently has 2 test assets.
 
 - `DEMOONE`
 - `DEMOTWO`
+
+Base URLs:
+
+- [https://api.exchange.bullish.com/trading-api](https://api.exchange.bullish.com/trading-api)
+
+- [https://registered.api.exchange.bullish.com/trading-api](https://registered.api.exchange.bullish.com/trading-api)
+
+- [https://prod.access.bullish.com/trading-api](https://prod.access.bullish.com/trading-api)
+
+- [https://api.bugbounty.bullish.com/trading-api](https://api.bugbounty.bullish.com/trading-api)
+
+- [https://api.simnext.bullish-test.com/trading-api](https://api.simnext.bullish-test.com/trading-api)
+
+- [https://registered.api.simnext.bullish-test.com/trading-api](https://registered.api.simnext.bullish-test.com/trading-api)
+
+- [https://simnext.access.bullish.com/trading-api](https://simnext.access.bullish.com/trading-api)
+
+Email: [Bullish Help Center](mailto:support@bullish.com) Web:
+[Bullish Help Center](https://support.bullish.com)
+
+# Authentication
+
+- HTTP Authentication, scheme: bearer

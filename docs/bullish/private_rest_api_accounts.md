@@ -1,29 +1,10 @@
----
-title: Bullish Trading API - Private REST API - Accounts
-language_tabs:
-  - javascript: JavaScript
-  - python: Python
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
----
+# Bullish Trading API - Private REST API - Accounts
 
-<!-- Generator: Widdershins v4.0.1 -->
-
-<h1 id="bullish-trading-api">Bullish Trading API - Private REST API - Accounts</h1>
-
-> Scroll down for code samples, example requests and responses. Select a
-> language for code samples from the tabs above or the mobile navigation menu.
-
-<h1 id="bullish-trading-api-accounts">accounts</h1>
+# accounts
 
 Authenticated APIs for reading account data
 
 ## user-get-asset-accounts
-
-<a id="opIduser-get-asset-accounts"></a>
 
 > Code samples
 
@@ -78,7 +59,7 @@ header
 
 **Ratelimited:** `True`
 
-<h3 id="user-get-asset-accounts-parameters">Parameters</h3>
+### Parameters
 
 | Name             | In     | Type                                        | Required | Description                                                                                  |
 | ---------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
@@ -204,7 +185,7 @@ header
 }
 ```
 
-<h3 id="user-get-asset-accounts-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -214,7 +195,7 @@ header
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="user-get-asset-accounts-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -231,14 +212,10 @@ Status Code **200**
 | » updatedAtDatetime  | [DateTime](#schemadatetime)(date-time)                | true     | none         | denotes the time the AMM instruction was updated by the exchange, ISO 8601 with millisecond as string                                              |
 | » updatedAtTimestamp | [TimeStampAsString](#schematimestampasstring)(string) | true     | none         | denotes the time the AMM instruction was updated by the exchange                                                                                   |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## user-get-asset-account-by-symbol
-
-<a id="opIduser-get-asset-account-by-symbol"></a>
 
 > Code samples
 
@@ -293,7 +270,7 @@ header
 
 **Ratelimited:** `True`
 
-<h3 id="user-get-asset-account-by-symbol-parameters">Parameters</h3>
+### Parameters
 
 | Name             | In     | Type                                        | Required | Description                                                                                  |
 | ---------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
@@ -415,7 +392,7 @@ header
 }
 ```
 
-<h3 id="user-get-asset-account-by-symbol-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema                              |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ----------------------------------- |
@@ -426,7 +403,5 @@ header
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None                                |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None                                |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth

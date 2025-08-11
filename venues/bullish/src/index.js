@@ -9,6 +9,72 @@ import { formatMarkdown } from "../../shared/format-markdown.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+/**
+ * Convert HTML tags to Markdown for Bullish venue
+ * @param {string} content - HTML content to convert
+ * @returns {string} - Markdown content
+ */
+function convertHtmlToMarkdown(content) {
+  return (
+    content
+      // Convert h1 tags to # headers
+      .replace(/<h1[^>]*id="[^"]*">([^<]+)<\/h1>/g, "# $1")
+      // Convert h2 tags to ## headers
+      .replace(/<h2[^>]*id="[^"]*">([^<]+)<\/h2>/g, "## $1")
+      // Convert h3 tags to ### headers
+      .replace(/<h3[^>]*id="[^"]*">([^<]+)<\/h3>/g, "### $1")
+      // Convert h4 tags to #### headers
+      .replace(/<h4[^>]*id="[^"]*">([^<]+)<\/h4>/g, "#### $1")
+      // Convert h5 tags to ##### headers
+      .replace(/<h5[^>]*id="[^"]*">([^<]+)<\/h5>/g, "##### $1")
+      // Convert h6 tags to ###### headers
+      .replace(/<h6[^>]*id="[^"]*">([^<]+)<\/h6>/g, "###### $1")
+      // Convert anchor tags to Markdown links
+      .replace(/<a[^>]*href="([^"]*)"[^>]*>([^<]+)<\/a>/g, "[$2]($1)")
+      // Remove anchor tags with only id attributes (not needed in Markdown)
+      .replace(/<a[^>]*id="[^"]*"[^>]*><\/a>/g, "")
+      // Convert strong tags to **bold**
+      .replace(/<strong>([^<]+)<\/strong>/g, "**$1**")
+      // Convert b tags to **bold**
+      .replace(/<b>([^<]+)<\/b>/g, "**$1**")
+      // Convert em tags to *italic*
+      .replace(/<em>([^<]+)<\/em>/g, "*$1*")
+      // Convert i tags to *italic*
+      .replace(/<i>([^<]+)<\/i>/g, "*$1*")
+      // Convert code tags to `code`
+      .replace(/<code>([^<]+)<\/code>/g, "`$1`")
+      // Convert pre tags to ``` code blocks
+      .replace(/<pre>([\s\S]*?)<\/pre>/g, "```\n$1\n```")
+      // Convert br tags to line breaks
+      .replace(/<br\s*\/?>/g, "\n")
+      // Convert p tags to paragraphs (remove tags, keep content)
+      .replace(/<p>([\s\S]*?)<\/p>/g, "$1\n\n")
+      // Convert div tags (remove tags, keep content)
+      .replace(/<div[^>]*>([\s\S]*?)<\/div>/g, "$1")
+      // Convert span tags (remove tags, keep content)
+      .replace(/<span[^>]*>([\s\S]*?)<\/span>/g, "$1")
+      // Convert ul/ol tags (remove tags, keep content)
+      .replace(/<(ul|ol)[^>]*>([\s\S]*?)<\/\1>/g, "$2")
+      // Convert li tags to - list items
+      .replace(/<li>([\s\S]*?)<\/li>/g, "- $1")
+      // Convert table tags to Markdown tables
+      .replace(/<table[^>]*>([\s\S]*?)<\/table>/g, "$1")
+      // Convert tr tags to table rows
+      .replace(/<tr[^>]*>([\s\S]*?)<\/tr>/g, "$1\n")
+      // Convert th tags to table headers
+      .replace(/<th[^>]*>([\s\S]*?)<\/th>/g, "| $1 ")
+      // Convert td tags to table cells
+      .replace(/<td[^>]*>([\s\S]*?)<\/td>/g, "| $1 ")
+      // Convert aside tags to blockquotes
+      .replace(/<aside[^>]*>([\s\S]*?)<\/aside>/g, "\n\n> **Note:** $1\n\n")
+      // Remove HTML comments
+      .replace(/<!--[\s\S]*?-->/g, "")
+      // Clean up extra whitespace and empty lines
+      .replace(/\n\s*\n\s*\n/g, "\n\n")
+      .trim()
+  )
+}
+
 // Configuration for splitting the documentation
 const SPLIT_CONFIG = {
   // Public endpoints (no authentication required)
@@ -46,12 +112,12 @@ const SPLIT_CONFIG = {
   "private-amm-instructions": {
     filename: "private_rest_api_amm-instructions.md",
     title: "Bullish Trading API - Private REST API - AMM Instructions",
-    sections: ["amm instructions"]
+    sections: ["amm-instructions"]
   },
   "private-command-entry": {
     filename: "private_rest_api_command-entry.md",
     title: "Bullish Trading API - Private REST API - Command Entry",
-    sections: ["command entry"]
+    sections: ["command-entry"]
   },
   "private-custody": {
     filename: "private_rest_api_custody.md",
@@ -95,11 +161,23 @@ const SPLIT_CONFIG = {
     sections: ["portfolio-margin-simulator"]
   },
   // WebSocket documentation
-  websocket: {
-    filename: "websocket_api.md",
-    title: "Bullish Trading API - WebSocket API",
+  "websocket-public": {
+    filename: "websocket_public_api.md",
+    title: "Bullish Trading API - WebSocket Public API",
+    startMarker: "## Multi-OrderBook WebSocket (unauthenticated)",
+    endMarker: "## Private Data WebSocket (authenticated)"
+  },
+  "websocket-private": {
+    filename: "websocket_private_api.md",
+    title: "Bullish Trading API - WebSocket Private API",
+    startMarker: "## Private Data WebSocket (authenticated)",
+    endMarker: "# End"
+  },
+  "websocket-general": {
+    filename: "websocket_general.md",
+    title: "Bullish Trading API - WebSocket General Information",
     startMarker: "# WebSockets",
-    endMarker: "# Quickly Try The API"
+    endMarker: "## Multi-OrderBook WebSocket (unauthenticated)"
   }
 }
 
@@ -127,22 +205,72 @@ function splitMarkdownIntoSections(markdown) {
   if (changeLogStartIndex !== -1 && changeLogStartIndex < apiStartIndex) {
     generalInfoEndIndex = changeLogStartIndex
   }
-  const generalInfo =
+  let generalInfo =
     generalInfoEndIndex > 0
       ? lines.slice(0, generalInfoEndIndex).join("\n")
       : ""
 
+  // Remove YAML frontmatter from general info if it exists
+  if (generalInfo) {
+    const generalInfoLines = generalInfo.split("\n")
+    const yamlEndIndex = generalInfoLines.findIndex(
+      line => line.trim() === "---"
+    )
+    if (yamlEndIndex !== -1) {
+      // Find the second occurrence of "---" (end of YAML block)
+      const secondYamlIndex = generalInfoLines.findIndex(
+        (line, index) => index > yamlEndIndex && line.trim() === "---"
+      )
+      if (secondYamlIndex !== -1) {
+        // Remove everything from start to second "---" (inclusive)
+        generalInfo = generalInfoLines.slice(secondYamlIndex + 1).join("\n")
+      }
+    }
+  }
+
   // Extract change log content (if it exists)
   let changeLogContent = ""
+  let changeLogEndIndex = lines.length
   if (changeLogStartIndex !== -1) {
-    // Find the end of the change log (next h1 or end of file)
-    const changeLogEndIndex = lines.findIndex(
-      (line, index) =>
-        index > changeLogStartIndex &&
-        line.match(/^<h1 id="bullish-trading-api-([^"]+)">/)
-    )
-    const endIdx = changeLogEndIndex === -1 ? lines.length : changeLogEndIndex
-    changeLogContent = lines.slice(changeLogStartIndex, endIdx).join("\n")
+    // Find the end of the change log by looking for the "Base URLs:" section
+    // The change log should end when we hit the Base URLs section
+    changeLogEndIndex = lines.length
+
+    // Look for the "Base URLs:" section which indicates the end of change log content
+    for (let i = changeLogStartIndex + 1; i < lines.length; i++) {
+      const line = lines[i]
+
+      // Stop at the "Base URLs:" section (this is not part of change log)
+      if (
+        line.trim() === "Base URLs:" ||
+        line.trim() === "# Authentication" ||
+        line.trim() === "# Rate Limits" ||
+        line.trim() === "# Error Codes" ||
+        line.trim() === "# Additional Links" ||
+        line.trim() === "# Connectivity Options" ||
+        line.trim() === "# FIX API" ||
+        line.trim() === "# Exchange Time" ||
+        line.trim() === "# Pagination Support" ||
+        line.includes('<h1 id="bullish-trading-api-')
+      ) {
+        changeLogEndIndex = i
+        break
+      }
+    }
+
+    changeLogContent = lines
+      .slice(changeLogStartIndex, changeLogEndIndex)
+      .join("\n")
+  }
+
+  // Add content after change log to general info (Base URLs, Authentication, etc.)
+  if (changeLogEndIndex < lines.length) {
+    const additionalGeneralInfo = lines
+      .slice(changeLogEndIndex, apiStartIndex)
+      .join("\n")
+    if (additionalGeneralInfo.trim()) {
+      generalInfo = generalInfo + "\n\n" + additionalGeneralInfo
+    }
   }
 
   // Extract API sections (from API start to end of file, or from change log end to end of file)
@@ -188,16 +316,15 @@ function splitMarkdownIntoSections(markdown) {
 /**
  * Extract WebSocket documentation section
  */
-function extractWebSocketSection(markdown) {
+function extractWebSocketSection(markdown, startMarker, endMarker) {
   const lines = markdown.split("\n")
-  const startIndex = lines.findIndex(line => line.trim() === "# WebSockets")
+  const startIndex = lines.findIndex(line => line.trim() === startMarker)
   const endIndex = lines.findIndex(
-    (line, index) =>
-      index > startIndex && line.trim() === "# Quickly Try The API"
+    (line, index) => index > startIndex && line.trim() === endMarker
   )
 
   if (startIndex === -1) {
-    console.warn("WebSocket section not found")
+    console.warn(`WebSocket section "${startMarker}" not found`)
     return ""
   }
 
@@ -236,9 +363,14 @@ async function generateSplitDocumentation(markdown, outputDir) {
   // Create general information file (overview, rate limits, etc.)
   if (generalInfo) {
     const generalTitle = "Bullish Trading API - General Information"
-    const generalHeader = createDocumentationHeader(generalTitle, generalInfo)
+    // Create minimal header for general info (no YAML frontmatter)
+    const generalHeader = `# ${generalTitle}
+
+`
     const generalPath = path.join(outputDir, "general_information.md")
-    await fs.writeFile(generalPath, generalHeader)
+    const fullGeneralContent =
+      generalHeader + convertHtmlToMarkdown(generalInfo)
+    await fs.writeFile(generalPath, fullGeneralContent)
     await formatMarkdown(generalPath)
     console.log(`Created: ${generalPath}`)
   }
@@ -246,29 +378,13 @@ async function generateSplitDocumentation(markdown, outputDir) {
   // Create change log file
   if (changeLogContent) {
     const changeLogTitle = "Bullish Trading API - Change Log"
-    // Create minimal header for change log (no general info)
-    const changeLogHeader = `---
-title: ${changeLogTitle}
-language_tabs:
-  - javascript: JavaScript
-  - python: Python
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
----
-
-<!-- Generator: Widdershins v4.0.1 -->
-
-<h1 id="bullish-trading-api">${changeLogTitle}</h1>
-
-> Scroll down for code samples, example requests and responses. Select a
-> language for code samples from the tabs above or the mobile navigation menu.
+    // Create minimal header for change log (no YAML frontmatter)
+    const changeLogHeader = `# ${changeLogTitle}
 
 `
     const changeLogPath = path.join(outputDir, "change_log.md")
-    const fullChangeLogContent = changeLogHeader + changeLogContent
+    const fullChangeLogContent =
+      changeLogHeader + convertHtmlToMarkdown(changeLogContent)
     await fs.writeFile(changeLogPath, fullChangeLogContent)
     await formatMarkdown(changeLogPath)
     console.log(`Created: ${changeLogPath}`)
@@ -276,12 +392,55 @@ headingLevel: 2
 
   // Create one file per config object (endpoint content only)
   for (const [configKey, config] of Object.entries(SPLIT_CONFIG)) {
-    if (configKey === "websocket") {
+    if (configKey === "websocket-public") {
       // Handle WebSocket separately since it uses different logic
-      const websocketContent = extractWebSocketSection(markdown)
+      const websocketContent = extractWebSocketSection(
+        markdown,
+        config.startMarker,
+        config.endMarker
+      )
       if (websocketContent) {
-        const wsHeader = createDocumentationHeader(config.title, generalInfo) // Use generalInfo for header
-        const wsFullContent = wsHeader + "\n\n" + websocketContent
+        // Create minimal header for WebSocket (no general info)
+        const wsHeader = `# ${config.title}
+
+`
+        const wsFullContent = wsHeader + convertHtmlToMarkdown(websocketContent)
+        const wsPath = path.join(outputDir, config.filename)
+        await fs.writeFile(wsPath, wsFullContent)
+        await formatMarkdown(wsPath)
+        console.log(`Created: ${wsPath}`)
+      }
+    } else if (configKey === "websocket-private") {
+      // Handle WebSocket separately since it uses different logic
+      const websocketContent = extractWebSocketSection(
+        markdown,
+        config.startMarker,
+        config.endMarker
+      )
+      if (websocketContent) {
+        // Create minimal header for WebSocket (no general info)
+        const wsHeader = `# ${config.title}
+
+`
+        const wsFullContent = wsHeader + convertHtmlToMarkdown(websocketContent)
+        const wsPath = path.join(outputDir, config.filename)
+        await fs.writeFile(wsPath, wsFullContent)
+        await formatMarkdown(wsPath)
+        console.log(`Created: ${wsPath}`)
+      }
+    } else if (configKey === "websocket-general") {
+      // Handle WebSocket separately since it uses different logic
+      const websocketContent = extractWebSocketSection(
+        markdown,
+        config.startMarker,
+        config.endMarker
+      )
+      if (websocketContent) {
+        // Create minimal header for WebSocket (no general info)
+        const wsHeader = `# ${config.title}
+
+`
+        const wsFullContent = wsHeader + convertHtmlToMarkdown(websocketContent)
         const wsPath = path.join(outputDir, config.filename)
         await fs.writeFile(wsPath, wsFullContent)
         await formatMarkdown(wsPath)
@@ -296,27 +455,11 @@ headingLevel: 2
 
       if (sectionContent) {
         // Create minimal header for endpoint files (no general info)
-        const minimalHeader = `---
-title: ${config.title}
-language_tabs:
-  - javascript: JavaScript
-  - python: Python
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
----
-
-<!-- Generator: Widdershins v4.0.1 -->
-
-<h1 id="bullish-trading-api">${config.title}</h1>
-
-> Scroll down for code samples, example requests and responses. Select a
-> language for code samples from the tabs above or the mobile navigation menu.
+        const minimalHeader = `# ${config.title}
 
 `
-        const fullContent = minimalHeader + sectionContent
+        const fullContent =
+          minimalHeader + convertHtmlToMarkdown(sectionContent)
         const filePath = path.join(outputDir, config.filename)
         await fs.writeFile(filePath, fullContent)
         await formatMarkdown(filePath)

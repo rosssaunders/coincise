@@ -1,27 +1,8 @@
----
-title: Bullish Trading API - Private REST API - History
-language_tabs:
-  - javascript: JavaScript
-  - python: Python
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
----
+# Bullish Trading API - Private REST API - History
 
-<!-- Generator: Widdershins v4.0.1 -->
-
-<h1 id="bullish-trading-api">Bullish Trading API - Private REST API - History</h1>
-
-> Scroll down for code samples, example requests and responses. Select a
-> language for code samples from the tabs above or the mobile navigation menu.
-
-<h1 id="bullish-trading-api-history">history</h1>
+# history
 
 ## trade-get-orders-history-v2
-
-<a id="opIdtrade-get-orders-history-v2"></a>
 
 > Code samples
 
@@ -81,7 +62,7 @@ required. For detailed instructions, see the
 [Filtering Support](#overview--filtering-support) section. Additionally, this
 endpoint is subjected to rate limiting.
 
-<h3 id="trade-get-orders-history-v2-parameters">Parameters</h3>
+### Parameters
 
 | Name                   | In     | Type                                        | Required | Description                                                                                  |
 | ---------------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
@@ -361,7 +342,7 @@ endpoint is subjected to rate limiting.
 }
 ```
 
-<h3 id="trade-get-orders-history-v2-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -371,7 +352,7 @@ endpoint is subjected to rate limiting.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="trade-get-orders-history-v2-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -402,14 +383,10 @@ Status Code **200**
 | » createdAtDatetime     | [DateTime](#schemadatetime)(date-time)                      | true     | none         | denotes the time the order was ACK'd by the exchange, ISO 8601 with millisecond as string                                   |
 | » createdAtTimestamp    | [TimeStampAsString](#schematimestampasstring)(string)       | true     | none         | denotes the time the order was ACK'd by the exchange                                                                        |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## trade-get-trades-history
-
-<a id="opIdtrade-get-trades-history"></a>
 
 > Code samples
 
@@ -469,7 +446,7 @@ Get a list of trades based on specified filters.
 
 **Ratelimited:** `True`
 
-<h3 id="trade-get-trades-history-parameters">Parameters</h3>
+### Parameters
 
 | Name                   | In     | Type                                        | Required | Description                                                                                  |
 | ---------------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
@@ -655,7 +632,7 @@ Get a list of trades based on specified filters.
 }
 ```
 
-<h3 id="trade-get-trades-history-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -665,7 +642,7 @@ Get a list of trades based on specified filters.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="trade-get-trades-history-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -687,14 +664,10 @@ Status Code **200**
 | » createdAtDatetime      | [DateTime](#schemadatetime)(date-time)                | true     | none         | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string                  |
 | » createdAtTimestamp     | [TimeStampAsString](#schematimestampasstring)(string) | true     | none         | denotes the time the trade was executed by the exchange                                                       |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## get-derivatives-settlement-history
-
-<a id="opIdget-derivatives-settlement-history"></a>
 
 > Code samples
 
@@ -750,7 +723,7 @@ Get historical derivatives settlement.
   [see filtering support](#overview--filtering-support)
 - Only the last 90 days of data is available for querying
 
-<h3 id="get-derivatives-settlement-history-parameters">Parameters</h3>
+### Parameters
 
 | Name                    | In     | Type                                                      | Required | Description                                                                                                                                                                                                  |
 | ----------------------- | ------ | --------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -898,7 +871,7 @@ Get historical derivatives settlement.
 }
 ```
 
-<h3 id="get-derivatives-settlement-history-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -906,7 +879,7 @@ Get historical derivatives settlement.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="get-derivatives-settlement-history-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -934,14 +907,10 @@ Status Code **200**
 | side     | BUY   |
 | side     | SELL  |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## get-transfer-history
-
-<a id="opIdget-transfer-history"></a>
 
 > Code samples
 
@@ -997,7 +966,7 @@ Get historical transfers.
   keywords, [see filtering support](#overview--filtering-support)
 - Only the last 90 days of data is available for querying
 
-<h3 id="get-transfer-history-parameters">Parameters</h3>
+### Parameters
 
 | Name                   | In     | Type                                        | Required | Description                                                                                                                                                                                                  |
 | ---------------------- | ------ | ------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1102,7 +1071,7 @@ Get historical transfers.
 }
 ```
 
-<h3 id="get-transfer-history-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -1110,7 +1079,7 @@ Get historical transfers.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="get-transfer-history-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -1128,14 +1097,10 @@ Status Code **200**
 | » createdAtTimestamp   | [TimeStampAsString](#schematimestampasstring)(string)             | false    | none         | unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string |
 | » createdAtDatetime    | [DateTime](#schemadatetime)(date-time)                            | false    | none         | ISO 8601 with millisecond as string                                                               |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## market-data-get-historical-anonymous-trades-by-market-symbol
-
-<a id="opIdmarket-data-get-historical-anonymous-trades-by-market-symbol"></a>
 
 > Code samples
 
@@ -1185,7 +1150,7 @@ of data at a time.
 
 - Only the last 90 days of data is available for querying
 
-<h3 id="market-data-get-historical-anonymous-trades-by-market-symbol-parameters">Parameters</h3>
+### Parameters
 
 | Name                   | In    | Type                                | Required | Description                                                    |
 | ---------------------- | ----- | ----------------------------------- | -------- | -------------------------------------------------------------- |
@@ -1302,7 +1267,7 @@ of data at a time.
 }
 ```
 
-<h3 id="market-data-get-historical-anonymous-trades-by-market-symbol-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -1311,7 +1276,7 @@ of data at a time.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="market-data-get-historical-anonymous-trades-by-market-symbol-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -1327,13 +1292,9 @@ Status Code **200**
 | » createdAtDatetime  | [DateTime](#schemadatetime)(date-time)                  | true     | none         | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string |
 | » createdAtTimestamp | [TimeStampAsString](#schematimestampasstring)(string)   | true     | none         | denotes the time the trade was executed by the exchange                                      |
 
-<aside class="success">
-This operation does not require authentication
-</aside>
+> **Note:** This operation does not require authentication
 
 ## market-data-get-funding-rate-history-by-market-symbol
-
-<a id="opIdmarket-data-get-funding-rate-history-by-market-symbol"></a>
 
 > Code samples
 
@@ -1379,7 +1340,7 @@ Get historical hourly funding rate for the requested perpetual market
 - [supports pagination](#overview--pagination-support)
 - Only the last 90 days of data is available for querying
 
-<h3 id="market-data-get-funding-rate-history-by-market-symbol-parameters">Parameters</h3>
+### Parameters
 
 | Name                   | In    | Type                                        | Required | Description                                                    |
 | ---------------------- | ----- | ------------------------------------------- | -------- | -------------------------------------------------------------- |
@@ -1415,7 +1376,7 @@ Get historical hourly funding rate for the requested perpetual market
 }
 ```
 
-<h3 id="market-data-get-funding-rate-history-by-market-symbol-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description             | Schema |
 | ------ | -------------------------------------------------------------------------- | ----------------------- | ------ |
@@ -1425,7 +1386,7 @@ Get historical hourly funding rate for the requested perpetual market
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests       | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error   | None   |
 
-<h3 id="market-data-get-funding-rate-history-by-market-symbol-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -1435,13 +1396,9 @@ Status Code **200**
 | » fundingRate       | string                                                            | false    | none         | funding rate for this hour                             |
 | » updatedAtDatetime | string                                                            | false    | none         | date time of the last funding rate update for the hour |
 
-<aside class="success">
-This operation does not require authentication
-</aside>
+> **Note:** This operation does not require authentication
 
 ## market-data-get-historical-borrow-interest
-
-<a id="opIdmarket-data-get-historical-borrow-interest"></a>
 
 > Code samples
 
@@ -1502,7 +1459,7 @@ charged in the particular hour for the asset.
 
 **Ratelimited:** `True`
 
-<h3 id="market-data-get-historical-borrow-interest-parameters">Parameters</h3>
+### Parameters
 
 | Name                   | In     | Type                                        | Required | Description                                                                                                                                                                                                  |
 | ---------------------- | ------ | ------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1589,7 +1546,7 @@ charged in the particular hour for the asset.
 }
 ```
 
-<h3 id="market-data-get-historical-borrow-interest-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -1598,7 +1555,7 @@ charged in the particular hour for the asset.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="market-data-get-historical-borrow-interest-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -1612,7 +1569,5 @@ Status Code **200**
 | » createdAtDatetime     | string(date-time)                         | true     | none         | denotes the hour in which the principal quantity was borrowed or when the interest was charged, ISO 8601 with millisecond as string |
 | » createdAtTimestamp    | string(string)                            | true     | none         | denotes the hour in which the principal quantity was borrowed or when the interest was charged                                      |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth

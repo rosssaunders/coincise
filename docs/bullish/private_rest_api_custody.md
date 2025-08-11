@@ -1,23 +1,6 @@
----
-title: Bullish Trading API - Private REST API - Custody
-language_tabs:
-  - javascript: JavaScript
-  - python: Python
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
----
+# Bullish Trading API - Private REST API - Custody
 
-<!-- Generator: Widdershins v4.0.1 -->
-
-<h1 id="bullish-trading-api">Bullish Trading API - Private REST API - Custody</h1>
-
-> Scroll down for code samples, example requests and responses. Select a
-> language for code samples from the tabs above or the mobile navigation menu.
-
-<h1 id="bullish-trading-api-custody">custody</h1>
+# custody
 
 Authenticated APIs for custody,
 [Custody Basic Examples](https://github.com/bullish-exchange/api-examples/blob/master/bullish/rest/custody_basics.py)
@@ -26,8 +9,6 @@ Custody APIs have a limit of 40 requests per IP, per minute. This is combined
 across all endpoints of type **/wallets/\***
 
 ## custody-get-history
-
-<a id="opIdcustody-get-history"></a>
 
 > Code samples
 
@@ -86,7 +67,7 @@ see
 
 **Ratelimited:** `True` - see [custody limits](#tag--custody)
 
-<h3 id="custody-get-history-parameters">Parameters</h3>
+### Parameters
 
 | Name                   | In     | Type                        | Required | Description                                                                                  |
 | ---------------------- | ------ | --------------------------- | -------- | -------------------------------------------------------------------------------------------- |
@@ -214,7 +195,7 @@ see
 }
 ```
 
-<h3 id="custody-get-history-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -222,7 +203,7 @@ see
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="custody-get-history-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -243,14 +224,10 @@ Status Code **200**
 | »» blockchainTxId      | string                                                            | false    | none         | transaction id on chain                                                                                                                                                               |
 | »» swiftUetr           | string                                                            | false    | none         | unique end-to-end-transaction reference for swift transactions                                                                                                                        |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## custody-get-limits
-
-<a id="opIdcustody-get-limits"></a>
 
 > Code samples
 
@@ -310,7 +287,7 @@ see
 
 **Ratelimited:** `True` - see [custody limits](#tag--custody)
 
-<h3 id="custody-get-limits-parameters">Parameters</h3>
+### Parameters
 
 | Name          | In     | Type                                  | Required | Description                                                                                  |
 | ------------- | ------ | ------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
@@ -356,7 +333,7 @@ see
 }
 ```
 
-<h3 id="custody-get-limits-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema                                |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------------------------------------- |
@@ -364,14 +341,10 @@ see
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None                                  |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None                                  |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## custody-get-deposit-instructions-crypto
-
-<a id="opIdcustody-get-deposit-instructions-crypto"></a>
 
 > Code samples
 
@@ -431,7 +404,7 @@ see
 
 **Ratelimited:** `True` - see [custody limits](#tag--custody)
 
-<h3 id="custody-get-deposit-instructions-crypto-parameters">Parameters</h3>
+### Parameters
 
 | Name          | In     | Type                                  | Required | Description                                                                                  |
 | ------------- | ------ | ------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
@@ -495,7 +468,7 @@ see
 }
 ```
 
-<h3 id="custody-get-deposit-instructions-crypto-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -503,7 +476,7 @@ see
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="custody-get-deposit-instructions-crypto-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -515,14 +488,10 @@ Status Code **200**
 | » memo      | [CustodyDepositMemo](#schemacustodydepositmemo)                               | false    | none         | memo or destination tag used during deposit to help identify account to credit funds to |
 | » address   | [CustodyNetworkAddress](#schemacustodynetworkaddress)                         | true     | none         | an address on the given network                                                         |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## custody-get-withdrawal-instructions-crypto
-
-<a id="opIdcustody-get-withdrawal-instructions-crypto"></a>
 
 > Code samples
 
@@ -583,7 +552,7 @@ see
 
 **Ratelimited:** `True` - see [custody limits](#tag--custody)
 
-<h3 id="custody-get-withdrawal-instructions-crypto-parameters">Parameters</h3>
+### Parameters
 
 | Name          | In     | Type                                  | Required | Description                                                                                  |
 | ------------- | ------ | ------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
@@ -676,7 +645,7 @@ see
 }
 ```
 
-<h3 id="custody-get-withdrawal-instructions-crypto-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -684,7 +653,7 @@ see
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="custody-get-withdrawal-instructions-crypto-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -699,14 +668,10 @@ Status Code **200**
 | » label         | [CustodyWithdrawalLabel](#schemacustodywithdrawallabel)                             | true     | none         | descriptive label of destination provided by user                                                           |
 | » destinationId | [CustodyDestinationID](#schemacustodydestinationid)                                 | true     | none         | destination id provided by bullish that uniquely identifies a whitelisted address or account                |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## custody-get-deposit-instructions-fiat
-
-<a id="opIdcustody-get-deposit-instructions-fiat"></a>
 
 > Code samples
 
@@ -759,7 +724,7 @@ header
 
 **Ratelimited:** `True` - see [custody limits](#tag--custody)
 
-<h3 id="custody-get-deposit-instructions-fiat-parameters">Parameters</h3>
+### Parameters
 
 | Name          | In     | Type                                | Required | Description                                                                                  |
 | ------------- | ------ | ----------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
@@ -853,7 +818,7 @@ header
 }
 ```
 
-<h3 id="custody-get-deposit-instructions-fiat-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -861,7 +826,7 @@ header
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="custody-get-deposit-instructions-fiat-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -879,14 +844,10 @@ Status Code **200**
 | »» physicalAddress | [CustodyPhysicalBankAddress](#schemacustodyphysicalbankaddress)           | false    | none         | physical location of bank                                                                           |
 | »» routingCode     | [CustodyBankRoutingCode](#schemacustodybankroutingcode)                   | false    | none         | routing code of bank                                                                                |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## custody-get-withdrawal-instructions-fiat
-
-<a id="opIdcustody-get-withdrawal-instructions-fiat"></a>
 
 > Code samples
 
@@ -940,7 +901,7 @@ withdrawing to, they must be whitelisted on the Bullish website.
 
 **Ratelimited:** `True` - see [custody limits](#tag--custody)
 
-<h3 id="custody-get-withdrawal-instructions-fiat-parameters">Parameters</h3>
+### Parameters
 
 | Name          | In     | Type                                          | Required | Description                                                                                  |
 | ------------- | ------ | --------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
@@ -1109,7 +1070,7 @@ withdrawing to, they must be whitelisted on the Bullish website.
 }
 ```
 
-<h3 id="custody-get-withdrawal-instructions-fiat-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -1117,7 +1078,7 @@ withdrawing to, they must be whitelisted on the Bullish website.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="custody-get-withdrawal-instructions-fiat-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -1141,14 +1102,10 @@ Status Code **200**
 | »» physicalAddress | [CustodyPhysicalBankAddress](#schemacustodyphysicalbankaddress)                 | false    | none         | physical location of bank                                                                                   |
 | »» routingCode     | [CustodyBankRoutingCode](#schemacustodybankroutingcode)                         | false    | none         | routing code of bank                                                                                        |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## custody-withdrawal
-
-<a id="opIdcustody-withdrawal"></a>
 
 > Code samples
 
@@ -1454,7 +1411,7 @@ smaller denominations (e.g. BTC not Satoshi, ETH not Wei) :
 }
 ```
 
-<h3 id="custody-withdrawal-parameters">Parameters</h3>
+### Parameters
 
 | Name          | In     | Type                                                                        | Required | Description                                                                                                                |
 | ------------- | ------ | --------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -1493,7 +1450,7 @@ smaller denominations (e.g. BTC not Satoshi, ETH not Wei) :
 }
 ```
 
-<h3 id="custody-withdrawal-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema                                                              |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------------- |
@@ -1501,7 +1458,5 @@ smaller denominations (e.g. BTC not Satoshi, ETH not Wei) :
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None                                                                |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None                                                                |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth

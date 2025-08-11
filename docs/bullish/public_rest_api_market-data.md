@@ -1,29 +1,10 @@
----
-title: Bullish Trading API - Public REST API - Market Data
-language_tabs:
-  - javascript: JavaScript
-  - python: Python
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
----
+# Bullish Trading API - Public REST API - Market Data
 
-<!-- Generator: Widdershins v4.0.1 -->
-
-<h1 id="bullish-trading-api">Bullish Trading API - Public REST API - Market Data</h1>
-
-> Scroll down for code samples, example requests and responses. Select a
-> language for code samples from the tabs above or the mobile navigation menu.
-
-<h1 id="bullish-trading-api-market-data">market-data</h1>
+# market-data
 
 Non-authenticated APIs for accessing general market data information
 
 ## market-data-get-markets
-
-<a id="opIdmarket-data-get-markets"></a>
 
 > Code samples
 
@@ -64,7 +45,7 @@ _Get Markets_
 Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
 "Leverage = Collateral ÷ (Collateral - Debt)"
 
-<h3 id="market-data-get-markets-parameters">Parameters</h3>
+### Parameters
 
 | Name       | In    | Type                                            | Required | Description                            |
 | ---------- | ----- | ----------------------------------------------- | -------- | -------------------------------------- |
@@ -491,7 +472,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
 }
 ```
 
-<h3 id="market-data-get-markets-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -500,7 +481,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="market-data-get-markets-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -565,13 +546,9 @@ Status Code **200**
 | marketType | PERPETUAL    |
 | marketType | DATED_FUTURE |
 
-<aside class="success">
-This operation does not require authentication
-</aside>
+> **Note:** This operation does not require authentication
 
 ## market-data-get-market
-
-<a id="opIdmarket-data-get-market"></a>
 
 > Code samples
 
@@ -611,7 +588,7 @@ _Get Market by Symbol_
 
 Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
 
-<h3 id="market-data-get-market-parameters">Parameters</h3>
+### Parameters
 
 | Name   | In   | Type                                | Required | Description |
 | ------ | ---- | ----------------------------------- | -------- | ----------- |
@@ -1025,7 +1002,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
 }
 ```
 
-<h3 id="market-data-get-market-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema                  |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ----------------------- |
@@ -1034,13 +1011,9 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None                    |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None                    |
 
-<aside class="success">
-This operation does not require authentication
-</aside>
+> **Note:** This operation does not require authentication
 
 ## market-data-get-market-orderbook
-
-<a id="opIdmarket-data-get-market-orderbook"></a>
 
 > Code samples
 
@@ -1085,7 +1058,7 @@ Get Order Book by Market Symbol
 
 **Ratelimited:** `False`
 
-<h3 id="market-data-get-market-orderbook-parameters">Parameters</h3>
+### Parameters
 
 | Name   | In   | Type                                | Required | Description   |
 | ------ | ---- | ----------------------------------- | -------- | ------------- |
@@ -1197,7 +1170,7 @@ Get Order Book by Market Symbol
 }
 ```
 
-<h3 id="market-data-get-market-orderbook-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema                        |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ----------------------------- |
@@ -1206,13 +1179,9 @@ Get Order Book by Market Symbol
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None                          |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None                          |
 
-<aside class="success">
-This operation does not require authentication
-</aside>
+> **Note:** This operation does not require authentication
 
 ## market-data-get-anonymous-trades-by-market-symbol
-
-<a id="opIdmarket-data-get-anonymous-trades-by-market-symbol"></a>
 
 > Code samples
 
@@ -1260,7 +1229,7 @@ Get Market Trades by Market Symbol.
 
 **Ratelimited:** `False`
 
-<h3 id="market-data-get-anonymous-trades-by-market-symbol-parameters">Parameters</h3>
+### Parameters
 
 | Name   | In   | Type                                | Required | Description   |
 | ------ | ---- | ----------------------------------- | -------- | ------------- |
@@ -1375,7 +1344,7 @@ Get Market Trades by Market Symbol.
 }
 ```
 
-<h3 id="market-data-get-anonymous-trades-by-market-symbol-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -1384,7 +1353,7 @@ Get Market Trades by Market Symbol.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="market-data-get-anonymous-trades-by-market-symbol-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -1400,13 +1369,9 @@ Status Code **200**
 | » createdAtDatetime  | [DateTime](#schemadatetime)(date-time)                | true     | none         | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string |
 | » createdAtTimestamp | [TimeStampAsString](#schematimestampasstring)(string) | true     | none         | denotes the time the trade was executed by the exchange                                      |
 
-<aside class="success">
-This operation does not require authentication
-</aside>
+> **Note:** This operation does not require authentication
 
 ## market-data-current-tick-by-market-symbol
-
-<a id="opIdmarket-data-current-tick-by-market-symbol"></a>
 
 > Code samples
 
@@ -1450,7 +1415,7 @@ Get Current Tick by Market Symbol.
 
 **Ratelimited:** `False`
 
-<h3 id="market-data-current-tick-by-market-symbol-parameters">Parameters</h3>
+### Parameters
 
 | Name   | In   | Type                                | Required | Description                                          |
 | ------ | ---- | ----------------------------------- | -------- | ---------------------------------------------------- |
@@ -1778,7 +1743,7 @@ Get Current Tick by Market Symbol.
 }
 ```
 
-<h3 id="market-data-current-tick-by-market-symbol-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema              |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------------------- |
@@ -1787,13 +1752,9 @@ Get Current Tick by Market Symbol.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None                |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None                |
 
-<aside class="success">
-This operation does not require authentication
-</aside>
+> **Note:** This operation does not require authentication
 
 ## market-data-current-candle-by-market-symbol
-
-<a id="opIdmarket-data-current-candle-by-market-symbol"></a>
 
 > Code samples
 
@@ -1844,7 +1805,7 @@ Get Current OHLCV Candle by Market Symbol
 
 **Ratelimited:** `False`
 
-<h3 id="market-data-current-candle-by-market-symbol-parameters">Parameters</h3>
+### Parameters
 
 | Name                   | In    | Type                                | Required | Description                                                    |
 | ---------------------- | ----- | ----------------------------------- | -------- | -------------------------------------------------------------- |
@@ -1964,7 +1925,7 @@ Get Current OHLCV Candle by Market Symbol
 }
 ```
 
-<h3 id="market-data-current-candle-by-market-symbol-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -1973,7 +1934,7 @@ Get Current OHLCV Candle by Market Symbol
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="market-data-current-candle-by-market-symbol-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -1989,6 +1950,4 @@ Status Code **200**
 | » createdAtDatetime    | [DateTime](#schemadatetime)(date-time)                | false    | none         | date and time of the candle, ISO 8601 with millisecond as string                                  |
 | » publishedAtTimestamp | [TimeStampAsString](#schematimestampasstring)(string) | false    | none         | date and time of the candle getting published, ISO 8601 with millisecond as string                |
 
-<aside class="success">
-This operation does not require authentication
-</aside>
+> **Note:** This operation does not require authentication

@@ -1,21 +1,4 @@
----
-title: Bullish Trading API - Change Log
-language_tabs:
-  - javascript: JavaScript
-  - python: Python
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
----
-
-<!-- Generator: Widdershins v4.0.1 -->
-
-<h1 id="bullish-trading-api">Bullish Trading API - Change Log</h1>
-
-> Scroll down for code samples, example requests and responses. Select a
-> language for code samples from the tabs above or the mobile navigation menu.
+# Bullish Trading API - Change Log
 
 # API Change Log
 
@@ -300,26 +283,3 @@ headingLevel: 2
   `GET /history/markets/{symbol}/trades`
 - February - add filter by status=CANCELLED to `GET /orders?status=CANCELLED`
 - January - add pagination support to `GET /markets/{symbol}/candle`
-
-Base URLs:
-
-- <a href="https://api.exchange.bullish.com/trading-api">https://api.exchange.bullish.com/trading-api</a>
-
-- <a href="https://registered.api.exchange.bullish.com/trading-api">https://registered.api.exchange.bullish.com/trading-api</a>
-
-- <a href="https://prod.access.bullish.com/trading-api">https://prod.access.bullish.com/trading-api</a>
-
-- <a href="https://api.bugbounty.bullish.com/trading-api">https://api.bugbounty.bullish.com/trading-api</a>
-
-- <a href="https://api.simnext.bullish-test.com/trading-api">https://api.simnext.bullish-test.com/trading-api</a>
-
-- <a href="https://registered.api.simnext.bullish-test.com/trading-api">https://registered.api.simnext.bullish-test.com/trading-api</a>
-
-- <a href="https://simnext.access.bullish.com/trading-api">https://simnext.access.bullish.com/trading-api</a>
-
-Email: <a href="mailto:support@bullish.com">Bullish Help Center</a> Web:
-<a href="https://support.bullish.com">Bullish Help Center</a>
-
-# Authentication
-
-- HTTP Authentication, scheme: bearer

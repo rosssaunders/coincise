@@ -1,27 +1,8 @@
----
-title: Bullish Trading API - Private REST API - Sessions
-language_tabs:
-  - javascript: JavaScript
-  - python: Python
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
----
+# Bullish Trading API - Private REST API - Sessions
 
-<!-- Generator: Widdershins v4.0.1 -->
-
-<h1 id="bullish-trading-api">Bullish Trading API - Private REST API - Sessions</h1>
-
-> Scroll down for code samples, example requests and responses. Select a
-> language for code samples from the tabs above or the mobile navigation menu.
-
-<h1 id="bullish-trading-api-sessions">sessions</h1>
+# sessions
 
 ## logout
-
-<a id="opIdlogout"></a>
 
 > Code samples
 
@@ -69,13 +50,13 @@ header.
 
 **Ratelimited:** `True`
 
-<h3 id="logout-parameters">Parameters</h3>
+### Parameters
 
 | Name          | In     | Type   | Required | Description                                                                                  |
 | ------------- | ------ | ------ | -------- | -------------------------------------------------------------------------------------------- |
 | Authorization | header | string | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
 
-<h3 id="logout-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -85,14 +66,10 @@ header.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## login
-
-<a id="opIdlogin"></a>
 
 > Code samples
 
@@ -309,7 +286,7 @@ requests.
 }
 ```
 
-<h3 id="login-parameters">Parameters</h3>
+### Parameters
 
 | Name | In   | Type                                | Required | Description        |
 | ---- | ---- | ----------------------------------- | -------- | ------------------ |
@@ -350,7 +327,7 @@ requests.
 }
 ```
 
-<h3 id="login-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description                                           | Schema                                |
 | ------ | -------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------- |
@@ -361,13 +338,9 @@ requests.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests                                     | None                                  |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error                                 | None                                  |
 
-<aside class="success">
-This operation does not require authentication
-</aside>
+> **Note:** This operation does not require authentication
 
 ## hmac-login
-
-<a id="opIdhmac-login"></a>
 
 > Code samples
 
@@ -435,7 +408,7 @@ subsequent requests.
 
 **Ratelimited:** `True`
 
-<h3 id="hmac-login-parameters">Parameters</h3>
+### Parameters
 
 | Name          | In     | Type   | Required | Description                                                                                                                |
 | ------------- | ------ | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -479,7 +452,7 @@ subsequent requests.
 }
 ```
 
-<h3 id="hmac-login-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description                                           | Schema                                |
 | ------ | -------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------- |
@@ -490,6 +463,4 @@ subsequent requests.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests                                     | None                                  |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error                                 | None                                  |
 
-<aside class="success">
-This operation does not require authentication
-</aside>
+> **Note:** This operation does not require authentication
