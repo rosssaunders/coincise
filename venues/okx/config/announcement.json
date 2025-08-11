@@ -1,0 +1,20 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "name": "Announcement",
+  "sections": [
+    {
+      "h1_match": "announcement",
+      "h2_match": "announcement-get-announcements",
+      "h3_matches": ["announcement-get-announcements"],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "announcement",
+      "h2_match": "announcement-get-announcement-types",
+      "h3_matches": ["announcement-get-announcement-types"],
+      "include_h2_html": false
+    }
+  ],
+  "output_file": "../../docs/okx/announcement.md"
+}
+

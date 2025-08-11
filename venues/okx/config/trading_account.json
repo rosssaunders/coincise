@@ -1,0 +1,74 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "name": "Trading Account",
+  "sections": [
+    {
+      "h1_match": "trading-account",
+      "h2_match": "trading-account-rest-api",
+      "h3_matches": [
+        "trading-account-rest-api-get-instruments",
+        "trading-account-rest-api-get-balance",
+        "trading-account-rest-api-get-positions",
+        "trading-account-rest-api-get-positions-history",
+        "trading-account-rest-api-get-account-and-position-risk",
+        "trading-account-rest-api-get-bills-details-last-7-days",
+        "trading-account-rest-api-get-bills-details-last-3-months",
+        "trading-account-rest-api-apply-bills-details-since-2021",
+        "trading-account-rest-api-get-bills-details-since-2021",
+        "trading-account-rest-api-get-account-configuration",
+        "trading-account-rest-api-set-position-mode",
+        "trading-account-rest-api-set-leverage",
+        "trading-account-rest-api-get-maximum-order-quantity",
+        "trading-account-rest-api-get-maximum-available-balance-equity",
+        "trading-account-rest-api-increase-decrease-margin",
+        "trading-account-rest-api-get-leverage",
+        "trading-account-rest-api-get-leverage-estimated-info",
+        "trading-account-rest-api-get-the-maximum-loan-of-instrument",
+        "trading-account-rest-api-get-fee-rates",
+        "trading-account-rest-api-get-interest-accrued-data",
+        "trading-account-rest-api-get-interest-rate",
+        "trading-account-rest-api-set-greeks-pa-bs",
+        "trading-account-rest-api-isolated-margin-trading-settings",
+        "trading-account-rest-api-get-maximum-withdrawals",
+        "trading-account-rest-api-get-account-risk-state",
+        "trading-account-rest-api-get-borrow-interest-and-limit",
+        "trading-account-rest-api-manual-borrow-repay",
+        "trading-account-rest-api-set-auto-repay",
+        "trading-account-rest-api-get-borrow-repay-history",
+        "trading-account-rest-api-position-builder-new",
+        "trading-account-rest-api-position-builder-trend-graph",
+        "trading-account-rest-api-set-risk-offset-amount",
+        "trading-account-rest-api-get-greeks",
+        "trading-account-rest-api-get-pm-position-limitation",
+        "trading-account-rest-api-activate-option",
+        "trading-account-rest-api-set-auto-loan",
+        "trading-account-rest-api-preset-account-mode-switch",
+        "trading-account-rest-api-precheck-account-mode-switch",
+        "trading-account-rest-api-set-account-mode",
+        "trading-account-rest-api-set-collateral-assets",
+        "trading-account-rest-api-get-collateral-assets",
+        "trading-account-rest-api-reset-mmp-status",
+        "trading-account-rest-api-set-mmp",
+        "trading-account-rest-api-get-mmp-config",
+        "trading-account-rest-api-move-positions",
+        "trading-account-rest-api-get-move-positions-history",
+        "trading-account-rest-api-set-auto-earn"
+      ],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "trading-account",
+      "h2_match": "trading-account-websocket",
+      "h3_matches": [
+        "trading-account-websocket-account-channel",
+        "trading-account-websocket-positions-channel",
+        "trading-account-websocket-balance-and-position-channel",
+        "trading-account-websocket-position-risk-warning",
+        "trading-account-websocket-account-greeks-channel"
+      ],
+      "include_h2_html": false
+    }
+  ],
+  "output_file": "../../docs/okx/trading_account.md"
+}
+

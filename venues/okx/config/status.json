@@ -1,0 +1,20 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "name": "Status",
+  "sections": [
+    {
+      "h1_match": "status",
+      "h2_match": "status-get-status",
+      "h3_matches": ["status-get-status"],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "status",
+      "h2_match": "status-ws-status-channel",
+      "h3_matches": ["status-ws-status-channel"],
+      "include_h2_html": false
+    }
+  ],
+  "output_file": "../../docs/okx/status.md"
+}
+

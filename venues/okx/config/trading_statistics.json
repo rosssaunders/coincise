@@ -1,0 +1,30 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "name": "Trading Statistics",
+  "sections": [
+    {
+      "h1_match": "trading-statistics",
+      "h2_match": "trading-statistics-rest-api",
+      "h3_matches": [
+        "trading-statistics-rest-api-get-support-coin",
+        "trading-statistics-rest-api-get-contract-open-interest-history",
+        "trading-statistics-rest-api-get-taker-volume",
+        "trading-statistics-rest-api-get-contract-taker-volume",
+        "trading-statistics-rest-api-get-margin-long-short-ratio",
+        "trading-statistics-rest-api-get-top-traders-contract-long-short-ratio",
+        "trading-statistics-rest-api-get-top-traders-contract-long-short-ratio-by-position",
+        "trading-statistics-rest-api-get-contract-long-short-ratio",
+        "trading-statistics-rest-api-get-long-short-ratio",
+        "trading-statistics-rest-api-get-contracts-open-interest-and-volume",
+        "trading-statistics-rest-api-get-options-open-interest-and-volume",
+        "trading-statistics-rest-api-get-put-call-ratio",
+        "trading-statistics-rest-api-get-open-interest-and-volume-expiry",
+        "trading-statistics-rest-api-get-open-interest-and-volume-strike",
+        "trading-statistics-rest-api-get-taker-flow"
+      ],
+      "include_h2_html": false
+    }
+  ],
+  "output_file": "../../docs/okx/trading_statistics.md"
+}
+

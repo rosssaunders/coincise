@@ -1,0 +1,53 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "name": "Financial Product",
+  "sections": [
+    {
+      "h1_match": "financial-product",
+      "h2_match": "financial-product-on-chain-earn",
+      "h3_matches": [
+        "financial-product-on-chain-earn-get-offers",
+        "financial-product-on-chain-earn-post-purchase",
+        "financial-product-on-chain-earn-post-redeem",
+        "financial-product-on-chain-earn-post-cancel-purchases-redemptions",
+        "financial-product-on-chain-earn-get-active-orders",
+        "financial-product-on-chain-earn-get-order-history"
+      ],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "financial-product",
+      "h2_match": "financial-product-eth-staking",
+      "h3_matches": [
+        "financial-product-eth-staking-get-product-info",
+        "financial-product-eth-staking-post-purchase",
+        "financial-product-eth-staking-post-redeem",
+        "financial-product-eth-staking-get-balance",
+        "financial-product-eth-staking-get-purchase-amp-redeem-history",
+        "financial-product-eth-staking-get-apy-history-public"
+      ],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "financial-product",
+      "h2_match": "financial-product-sol-staking",
+      "h3_matches": [
+        "financial-product-sol-staking-get-product-info",
+        "financial-product-sol-staking-post-purchase",
+        "financial-product-sol-staking-post-redeem",
+        "financial-product-sol-staking-get-balance",
+        "financial-product-sol-staking-get-purchase-amp-redeem-history",
+        "financial-product-sol-staking-get-apy-history-public"
+      ],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "financial-product",
+      "h2_match": "financial-product-simple-earn-flexible",
+      "h3_matches": ["financial-product-simple-earn-flexible"],
+      "include_h2_html": true
+    }
+  ],
+  "output_file": "../../docs/okx/financial_product.md"
+}
+

@@ -19,9 +19,10 @@ import { formatMarkdown } from "../../shared/format-markdown.js"
  * Extracts sections from the document based on the section configuration
  * @param {Document} document - The JSDOM document
  * @param {Section} section - The section configuration
+ * @param {string} baseUrl - The base URL for generating endpoint links
  * @returns {Array<[string, string]>} Array of [id, html] pairs
  */
-function extractSections(document, section) {
+function extractSections(document, section, baseUrl) {
   const extractedSections = []
 
   // Process H1 sections
@@ -41,7 +42,7 @@ function extractSections(document, section) {
           console.log(`Found H2 section: ${h2Id}`)
 
           if (section.include_h2_html) {
-            const sectionHtml = extractSectionContent(sibling)
+            const sectionHtml = extractSectionContent(sibling, baseUrl)
             extractedSections.push([h2Id, sectionHtml])
           }
 
@@ -54,7 +55,7 @@ function extractSections(document, section) {
                 h3Id &&
                 section.h3_matches.some(pattern => h3Id.includes(pattern))
               ) {
-                const sectionHtml = extractSectionContent(h2Sibling)
+                const sectionHtml = extractSectionContent(h2Sibling, baseUrl)
                 extractedSections.push([h3Id, sectionHtml])
                 console.log(`Found H3 section: ${h3Id}`)
               }
@@ -73,9 +74,10 @@ function extractSections(document, section) {
 /**
  * Extracts the content of a section including all siblings until the next heading
  * @param {Element} node - The starting node
+ * @param {string} baseUrl - The base URL for generating endpoint links
  * @returns {string} The HTML content of the section
  */
-function extractSectionContent(node) {
+function extractSectionContent(node, baseUrl) {
   let sectionHtml = node.outerHTML
   let sibling = node.nextElementSibling
 
@@ -89,6 +91,52 @@ function extractSectionContent(node) {
 }
 
 /**
+ * Generates a full URL for an endpoint based on its ID
+ * @param {string} endpointId - The endpoint ID from the heading
+ * @param {string} baseUrl - The base URL from the config
+ * @returns {string} The full URL to the endpoint
+ */
+function generateEndpointUrl(endpointId, baseUrl) {
+  // Remove the base URL hash if present
+  const cleanBaseUrl = baseUrl.split("#")[0]
+  return `${cleanBaseUrl}#${endpointId}`
+}
+
+/**
+ * Adds URL links to headings in the HTML content
+ * @param {string} html - The HTML content to process
+ * @param {string} baseUrl - The base URL for generating links
+ * @returns {string} The HTML content with added URL links
+ */
+function addUrlLinksToHeadings(html, baseUrl) {
+  const dom = new JSDOM(html)
+  const document = dom.window.document
+
+  // Process H1, H2, and H3 headings
+  const headings = document.querySelectorAll("h1, h2, h3")
+
+  headings.forEach(heading => {
+    const id = heading.getAttribute("id")
+    if (id) {
+      const fullUrl = generateEndpointUrl(id, baseUrl)
+
+      // Create a link element
+      const link = document.createElement("a")
+      link.href = fullUrl
+      link.textContent = " 🔗"
+      link.title = `Direct link to: ${fullUrl}`
+      link.style.cssText =
+        "text-decoration: none; margin-left: 8px; font-size: 0.8em;"
+
+      // Add the link to the heading
+      heading.appendChild(link)
+    }
+  })
+
+  return document.documentElement.innerHTML
+}
+
+/**
  * Processes a single configuration file
  * @param {Document} document - The JSDOM document
  * @param {Object} config - The configuration loaded from a file
@@ -99,7 +147,7 @@ async function processConfig(document, config) {
   // Extract sections based on each section configuration
   const allExtractedSections = []
   for (const section of config.sections) {
-    const extracted = extractSections(document, section)
+    const extracted = extractSections(document, section, config.url)
     allExtractedSections.push(...extracted)
   }
 
@@ -128,7 +176,9 @@ async function processConfig(document, config) {
   })
 
   for (const [, html] of allExtractedSections) {
-    const markdown = turndownService.turndown(html)
+    // Add URL links to headings before converting to markdown
+    const htmlWithLinks = addUrlLinksToHeadings(html, config.url)
+    const markdown = turndownService.turndown(htmlWithLinks)
     combinedMarkdown += markdown + "\n\n---\n\n"
   }
 

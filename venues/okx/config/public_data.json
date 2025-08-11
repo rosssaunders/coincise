@@ -1,0 +1,32 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "name": "Public Data",
+  "sections": [
+    {
+      "h1_match": "public-data",
+      "h2_match": "public-data-rest-api",
+      "h3_matches": [
+        "public-data-rest-api-get-instruments",
+        "public-data-rest-api-get-estimated-delivery-exercise-price",
+        "public-data-rest-api-get-delivery-exercise-history",
+        "public-data-rest-api-get-estimated-future-settlement-price",
+        "public-data-rest-api-get-futures-settlement-history",
+        "public-data-rest-api-get-funding-rate",
+        "public-data-rest-api-get-funding-rate-history",
+        "public-data-rest-api-get-open-interest",
+        "public-data-rest-api-get-limit-price",
+        "public-data-rest-api-get-option-market-data",
+        "public-data-rest-api-get-discount-rate-and-interest-free-quota",
+        "public-data-rest-api-get-system-time",
+        "public-data-rest-api-get-mark-price",
+        "public-data-rest-api-get-position-tiers",
+        "public-data-rest-api-get-interest-rate-and-loan-quota",
+        "public-data-rest-api-get-underlying",
+        "public-data-rest-api-get-insurance-fund"
+      ],
+      "include_h2_html": false
+    }
+  ],
+  "output_file": "../../docs/okx/public_data.md"
+}
+

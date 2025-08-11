@@ -1,0 +1,87 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "name": "Spread Trading",
+  "sections": [
+    {
+      "h1_match": "spread-trading",
+      "h2_match": "spread-trading-introduction",
+      "h3_matches": [
+        "spread-trading-introduction-basic-concepts",
+        "spread-trading-introduction-high-level-workflow"
+      ],
+      "include_h2_html": true
+    },
+    {
+      "h1_match": "spread-trading",
+      "h2_match": "spread-trading-comprehensive-api-workflow",
+      "h3_matches": [
+        "spread-trading-comprehensive-api-workflow-obtaining-available-spreads",
+        "spread-trading-comprehensive-api-workflow-retrieving-your-orders",
+        "spread-trading-comprehensive-api-workflow-retrieving-your-trades",
+        "spread-trading-comprehensive-api-workflow-submitting-an-order",
+        "spread-trading-comprehensive-api-workflow-spread-states",
+        "spread-trading-comprehensive-api-workflow-trade-lifecycle",
+        "spread-trading-comprehensive-api-workflow-order-state",
+        "spread-trading-comprehensive-api-workflow-trade-state",
+        "spread-trading-comprehensive-api-workflow-all-trades"
+      ],
+      "include_h2_html": true
+    },
+    {
+      "h1_match": "spread-trading",
+      "h2_match": "spread-trading-rest-api",
+      "h3_matches": [
+        "spread-trading-rest-api-place-order",
+        "spread-trading-rest-api-cancel-order",
+        "spread-trading-rest-api-cancel-all-orders",
+        "spread-trading-rest-api-amend-order",
+        "spread-trading-rest-api-get-order-details",
+        "spread-trading-rest-api-get-active-orders",
+        "spread-trading-rest-api-get-orders-last-21-days",
+        "spread-trading-rest-api-get-orders-history-last-3-months",
+        "spread-trading-rest-api-get-trades-last-7-days",
+        "spread-trading-rest-api-get-spreads-public",
+        "spread-trading-rest-api-get-order-book-public",
+        "spread-trading-rest-api-get-ticker-public",
+        "spread-trading-rest-api-get-public-trades-public",
+        "spread-trading-rest-api-get-candlesticks",
+        "spread-trading-rest-api-get-candlesticks-history",
+        "spread-trading-rest-api-cancel-all-after"
+      ],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "spread-trading",
+      "h2_match": "spread-trading-websocket-trade-api",
+      "h3_matches": [
+        "spread-trading-websocket-trade-api-ws-place-order",
+        "spread-trading-websocket-trade-api-ws-amend-order",
+        "spread-trading-websocket-trade-api-ws-cancel-order",
+        "spread-trading-websocket-trade-api-ws-cancel-all-orders"
+      ],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "spread-trading",
+      "h2_match": "spread-trading-websocket-private-channel",
+      "h3_matches": [
+        "spread-trading-websocket-private-channel-order-channel",
+        "spread-trading-websocket-private-channel-trades-channel"
+      ],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "spread-trading",
+      "h2_match": "spread-trading-websocket-public-channel",
+      "h3_matches": [
+        "spread-trading-websocket-public-channel-order-book-channel",
+        "spread-trading-websocket-public-channel-public-trades-channel",
+        "spread-trading-websocket-public-channel-tickers-channel",
+        "spread-trading-websocket-public-channel-candlesticks-channel"
+      ],
+      "include_h2_html": false
+    }
+  ],
+  "output_file": "../../docs/okx/spread_trading.md"
+}
+

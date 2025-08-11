@@ -1,0 +1,13 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "name": "Affiliate",
+  "sections": [
+    {
+      "h1_match": "affiliate",
+      "h2_match": "affiliate-rest-api",
+      "h3_matches": ["affiliate-rest-api-get-the-invitee-39-s-detail"],
+      "include_h2_html": false
+    }
+  ],
+  "output_file": "../../docs/okx/affiliate.md"
+}

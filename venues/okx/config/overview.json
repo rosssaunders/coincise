@@ -1,0 +1,107 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "name": "Overview",
+  "sections": [
+    {
+      "h1_match": "overview",
+      "h2_match": "overview-api-resources-and-support",
+      "h3_matches": [
+        "overview-api-resources-and-support-tutorials",
+        "overview-api-resources-and-support-python-libraries",
+        "overview-api-resources-and-support-customer-service"
+      ],
+      "include_h2_html": true
+    },
+    {
+      "h1_match": "overview",
+      "h2_match": "overview-api-key-creation",
+      "h3_matches": [
+        "overview-api-key-creation-generating-an-api-key",
+        "overview-api-key-creation-api-key-permissions",
+        "overview-api-key-creation-api-key-security"
+      ],
+      "include_h2_html": true
+    },
+    {
+      "h1_match": "overview",
+      "h2_match": "overview-rest-authentication",
+      "h3_matches": [
+        "overview-rest-authentication-making-requests",
+        "overview-rest-authentication-signature"
+      ],
+      "include_h2_html": true
+    },
+    {
+      "h1_match": "overview",
+      "h2_match": "overview-websocket",
+      "h3_matches": [
+        "overview-websocket-overview",
+        "overview-websocket-connect",
+        "overview-websocket-connection-count-limit",
+        "overview-websocket-login",
+        "overview-websocket-subscribe",
+        "overview-websocket-unsubscribe",
+        "overview-websocket-notification"
+      ],
+      "include_h2_html": true
+    },
+    {
+      "h1_match": "overview",
+      "h2_match": "overview-account-mode",
+      "h3_matches": ["overview-account-mode"],
+      "include_h2_html": true
+    },
+    {
+      "h1_match": "overview",
+      "h2_match": "overview-production-trading-services",
+      "h3_matches": ["overview-production-trading-services"],
+      "include_h2_html": true
+    },
+    {
+      "h1_match": "overview",
+      "h2_match": "overview-demo-trading-services",
+      "h3_matches": ["overview-demo-trading-services-demo-trading-explorer"],
+      "include_h2_html": true
+    },
+    {
+      "h1_match": "overview",
+      "h2_match": "overview-general-info",
+      "h3_matches": ["overview-general-info-"],
+      "include_h2_html": true
+    },
+    {
+      "h1_match": "overview",
+      "h2_match": "overview-transaction-timeouts",
+      "h3_matches": [
+        "overview-transaction-timeouts-rest-api",
+        "overview-transaction-timeouts-websocket"
+      ],
+      "include_h2_html": true
+    },
+    {
+      "h1_match": "overview",
+      "h2_match": "overview-rate-limits",
+      "h3_matches": [
+        "overview-rate-limits-trading-related-apis",
+        "overview-rate-limits-sub-account-rate-limit",
+        "overview-rate-limits-fill-ratio-based-sub-account-rate-limit",
+        "overview-rate-limits-best-practices"
+      ],
+      "include_h2_html": true
+    },
+    {
+      "h1_match": "overview",
+      "h2_match": "overview-market-maker-program",
+      "h3_matches": ["overview-market-maker-program"],
+      "include_h2_html": true
+    },
+    {
+      "h1_match": "overview",
+      "h2_match": "overview-broker-program",
+      "h3_matches": ["overview-broker-program"],
+      "include_h2_html": true
+    }
+  ],
+  "output_file": "../../docs/okx/overview.md"
+}
+

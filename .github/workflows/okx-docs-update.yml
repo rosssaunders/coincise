@@ -1,9 +1,10 @@
-name: OKX Docs Update
+name: OKX Comprehensive API Docs Update
 
 on:
   schedule:
-    # Run every day at 00:00 UTC
-    - cron: "0 0 * * *"
+    # Run every Saturday at 00:00 UTC (midnight Friday night)
+    # Changed from daily to weekly due to comprehensive extraction coverage
+    - cron: "0 0 * * 6"
   workflow_dispatch: # Allow manual triggering
   push:
     paths:
@@ -46,17 +47,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Extract private REST API docs
-        run: npm run extract:private-rest
-
-      - name: Extract private WebSocket API docs
-        run: npm run extract:private-ws
-
-      - name: Extract public REST API docs
-        run: npm run extract:public-rest
-
-      - name: Extract public WebSocket API docs
-        run: npm run extract:public-ws
+      - name: Extract all OKX API sections
+        run: npm start
+        # This extracts all 14 sections:
+        # - Overview, Trading Account, Order Book Trading, Block Trading
+        # - Spread Trading, Public Data, Trading Statistics, Funding Account
+        # - Sub-account, Financial Product, Affiliate, Status, Announcement, Error Code
 
       - name: Check for changes
         id: git-check
@@ -85,8 +81,8 @@ jobs:
         if: steps.git-check.outputs.changes == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
-          commit-message: "docs: update OKX API documentation"
-          title: "OKX API Documentation Update"
+          commit-message: "docs: update OKX comprehensive API documentation"
+          title: "OKX Comprehensive API Documentation Update"
           branch: "okx-docs-update"
           base: "main"
           delete-branch: true

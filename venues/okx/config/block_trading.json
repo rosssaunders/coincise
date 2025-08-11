@@ -1,0 +1,64 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "name": "Block Trading",
+  "sections": [
+    {
+      "h1_match": "block-trading",
+      "h2_match": "block-trading-block-trading-workflow",
+      "h3_matches": ["block-trading-block-trading-workflow"],
+      "include_h2_html": true
+    },
+    {
+      "h1_match": "block-trading",
+      "h2_match": "block-trading-rest-api",
+      "h3_matches": [
+        "block-trading-rest-api-get-counterparties",
+        "block-trading-rest-api-create-rfq",
+        "block-trading-rest-api-cancel-rfq",
+        "block-trading-rest-api-cancel-multiple-rfqs",
+        "block-trading-rest-api-cancel-all-rfqs",
+        "block-trading-rest-api-execute-quote",
+        "block-trading-rest-api-get-quote-products",
+        "block-trading-rest-api-set-quote-products",
+        "block-trading-rest-api-reset-mmp-status",
+        "block-trading-rest-api-set-mmp",
+        "block-trading-rest-api-get-mmp-config",
+        "block-trading-rest-api-create-quote",
+        "block-trading-rest-api-cancel-quote",
+        "block-trading-rest-api-cancel-multiple-quotes",
+        "block-trading-rest-api-cancel-all-quotes",
+        "block-trading-rest-api-cancel-all-after",
+        "block-trading-rest-api-get-rfqs",
+        "block-trading-rest-api-get-quotes",
+        "block-trading-rest-api-get-trades",
+        "block-trading-rest-api-get-block-tickers",
+        "block-trading-rest-api-get-block-ticker",
+        "block-trading-rest-api-get-public-multi-leg-transactions-of-block-trades",
+        "block-trading-rest-api-get-public-single-leg-transactions-of-block-trades"
+      ],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "block-trading",
+      "h2_match": "block-trading-websocket-private-channel",
+      "h3_matches": [
+        "block-trading-websocket-private-channel-rfqs-channel",
+        "block-trading-websocket-private-channel-quotes-channel",
+        "block-trading-websocket-private-channel-structure-block-trades-channel"
+      ],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "block-trading",
+      "h2_match": "block-trading-websocket-public-channel",
+      "h3_matches": [
+        "block-trading-websocket-public-channel-public-structure-block-trades-channel",
+        "block-trading-websocket-public-channel-public-block-trades-channel",
+        "block-trading-websocket-public-channel-block-tickers-channel"
+      ],
+      "include_h2_html": false
+    }
+  ],
+  "output_file": "../../docs/okx/block_trading.md"
+}
+

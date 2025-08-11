@@ -1,0 +1,87 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "name": "Order Book Trading",
+  "sections": [
+    {
+      "h1_match": "order-book-trading",
+      "h2_match": "order-book-trading-trade",
+      "h3_matches": [
+        "order-book-trading-trade-post-place-order",
+        "order-book-trading-trade-post-place-multiple-orders",
+        "order-book-trading-trade-post-cancel-order",
+        "order-book-trading-trade-post-cancel-multiple-orders",
+        "order-book-trading-trade-post-amend-order",
+        "order-book-trading-trade-post-amend-multiple-orders",
+        "order-book-trading-trade-post-close-positions",
+        "order-book-trading-trade-get-order-details",
+        "order-book-trading-trade-get-order-list",
+        "order-book-trading-trade-get-order-history-last-7-days",
+        "order-book-trading-trade-get-order-history-last-3-months",
+        "order-book-trading-trade-get-transaction-details-last-3-days",
+        "order-book-trading-trade-get-transaction-details-last-3-months",
+        "order-book-trading-trade-get-easy-convert-currency-list",
+        "order-book-trading-trade-post-place-easy-convert",
+        "order-book-trading-trade-get-easy-convert-history",
+        "order-book-trading-trade-get-one-click-repay-currency-list",
+        "order-book-trading-trade-post-trade-one-click-repay",
+        "order-book-trading-trade-get-one-click-repay-history",
+        "order-book-trading-trade-get-one-click-repay-currency-list-new",
+        "order-book-trading-trade-post-trade-one-click-repay-new",
+        "order-book-trading-trade-get-one-click-repay-history-new",
+        "order-book-trading-trade-post-mass-cancel-order",
+        "order-book-trading-trade-post-cancel-all-after",
+        "order-book-trading-trade-get-account-rate-limit",
+        "order-book-trading-trade-post-order-precheck"
+      ],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "order-book-trading",
+      "h2_match": "order-book-trading-trade",
+      "h3_matches": [
+        "order-book-trading-trade-ws-order-channel",
+        "order-book-trading-trade-ws-fills-channel",
+        "order-book-trading-trade-ws-place-order",
+        "order-book-trading-trade-ws-place-multiple-orders",
+        "order-book-trading-trade-ws-cancel-order",
+        "order-book-trading-trade-ws-cancel-multiple-orders",
+        "order-book-trading-trade-ws-amend-order",
+        "order-book-trading-trade-ws-amend-multiple-orders",
+        "order-book-trading-trade-ws-mass-cancel-order"
+      ],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "order-book-trading",
+      "h2_match": "order-book-trading-algo-trading",
+      "h3_matches": [
+        "order-book-trading-algo-trading-post-place-algo-order",
+        "order-book-trading-algo-trading-post-cancel-algo-order",
+        "order-book-trading-algo-trading-post-amend-algo-order",
+        "order-book-trading-algo-trading-get-algo-order-details",
+        "order-book-trading-algo-trading-get-algo-order-list"
+      ],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "order-book-trading",
+      "h2_match": "order-book-trading-market-data",
+      "h3_matches": [
+        "order-book-trading-market-data-get-tickers",
+        "order-book-trading-market-data-get-ticker",
+        "order-book-trading-market-data-get-order-book",
+        "order-book-trading-market-data-get-full-order-book",
+        "order-book-trading-market-data-get-candlesticks",
+        "order-book-trading-market-data-get-candlesticks-history",
+        "order-book-trading-market-data-get-trades",
+        "order-book-trading-market-data-get-trades-history",
+        "order-book-trading-market-data-get-option-trades-by-instrument-family",
+        "order-book-trading-market-data-get-option-trades",
+        "order-book-trading-market-data-get-24h-total-volume",
+        "order-book-trading-market-data-get-call-auction-details"
+      ],
+      "include_h2_html": false
+    }
+  ],
+  "output_file": "../../docs/okx/order_book_trading.md"
+}

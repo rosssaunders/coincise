@@ -1,0 +1,32 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "name": "Error Code",
+  "sections": [
+    {
+      "h1_match": "error-code",
+      "h2_match": "error-code-rest-api",
+      "h3_matches": [
+        "error-code-rest-api-public",
+        "error-code-rest-api-finance",
+        "error-code-rest-api-convert",
+        "error-code-rest-api-futures",
+        "error-code-rest-api-swap",
+        "error-code-rest-api-option",
+        "error-code-rest-api-funding",
+        "error-code-rest-api-account",
+        "error-code-rest-api-block-trading-and-spread-orderbook",
+        "error-code-rest-api-copy-trading",
+        "error-code-rest-api-trading-bot"
+      ],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "error-code",
+      "h2_match": "error-code-websocket",
+      "h3_matches": ["error-code-websocket-public"],
+      "include_h2_html": false
+    }
+  ],
+  "output_file": "../../docs/okx/error_code.md"
+}
+

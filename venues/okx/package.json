@@ -6,10 +6,20 @@
   "main": "src/index.js",
   "scripts": {
     "start": "npm-run-all --sequential extract:*",
-    "extract:private-rest": "node src/index.js config/private_order_book_trading_rest_api.json",
-    "extract:private-ws": "node src/index.js config/private_order_book_trading_websocket_api.json",
-    "extract:public-rest": "node src/index.js config/public_market_data_rest_api.json",
-    "extract:public-ws": "node src/index.js config/public_market_data_websocket_api.json"
+    "extract:overview": "node src/index.js config/overview.json",
+    "extract:trading-account": "node src/index.js config/trading_account.json",
+    "extract:order-book-trading": "node src/index.js config/order_book_trading.json",
+    "extract:block-trading": "node src/index.js config/block_trading.json",
+    "extract:spread-trading": "node src/index.js config/spread_trading.json",
+    "extract:public-data": "node src/index.js config/public_data.json",
+    "extract:trading-statistics": "node src/index.js config/trading_statistics.json",
+    "extract:funding-account": "node src/index.js config/funding_account.json",
+    "extract:sub-account": "node src/index.js config/sub_account.json",
+    "extract:financial-product": "node src/index.js config/financial_product.json",
+    "extract:affiliate": "node src/index.js config/affiliate.json",
+    "extract:status": "node src/index.js config/status.json",
+    "extract:announcement": "node src/index.js config/announcement.json",
+    "extract:error-code": "node src/index.js config/error_code.json"
   },
   "dependencies": {
     "puppeteer": "^24.8.0",

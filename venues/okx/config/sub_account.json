@@ -1,0 +1,29 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "name": "Sub-account",
+  "sections": [
+    {
+      "h1_match": "sub-account",
+      "h2_match": "sub-account-rest-api",
+      "h3_matches": [
+        "sub-account-rest-api-get-sub-account-list",
+        "sub-account-rest-api-create-sub-account",
+        "sub-account-rest-api-create-an-api-key-for-a-sub-account",
+        "sub-account-rest-api-query-the-api-key-of-a-sub-account",
+        "sub-account-rest-api-reset-the-api-key-of-a-sub-account",
+        "sub-account-rest-api-delete-the-api-key-of-sub-accounts",
+        "sub-account-rest-api-get-sub-account-trading-balance",
+        "sub-account-rest-api-get-sub-account-funding-balance",
+        "sub-account-rest-api-get-sub-account-maximum-withdrawals",
+        "sub-account-rest-api-get-history-of-sub-account-transfer",
+        "sub-account-rest-api-get-history-of-managed-sub-account-transfer",
+        "sub-account-rest-api-master-accounts-manage-the-transfers-between-sub-accounts",
+        "sub-account-rest-api-set-permission-of-transfer-out",
+        "sub-account-rest-api-get-custody-trading-sub-account-list"
+      ],
+      "include_h2_html": false
+    }
+  ],
+  "output_file": "../../docs/okx/sub_account.md"
+}
+

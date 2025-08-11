@@ -1,0 +1,59 @@
+{
+  "url": "https://www.okx.com/docs-v5/en/#overview",
+  "name": "Funding Account",
+  "sections": [
+    {
+      "h1_match": "funding-account",
+      "h2_match": "funding-account-rest-api",
+      "h3_matches": [
+        "funding-account-rest-api-get-currencies",
+        "funding-account-rest-api-get-balance",
+        "funding-account-rest-api-get-non-tradable-assets",
+        "funding-account-rest-api-get-account-asset-valuation",
+        "funding-account-rest-api-funds-transfer",
+        "funding-account-rest-api-get-funds-transfer-state",
+        "funding-account-rest-api-asset-bills-details",
+        "funding-account-rest-api-asset-bills-history",
+        "funding-account-rest-api-get-deposit-address",
+        "funding-account-rest-api-get-deposit-history",
+        "funding-account-rest-api-withdrawal",
+        "funding-account-rest-api-cancel-withdrawal",
+        "funding-account-rest-api-get-withdrawal-history",
+        "funding-account-rest-api-get-deposit-withdraw-status",
+        "funding-account-rest-api-get-exchange-list-public",
+        "funding-account-rest-api-apply-for-monthly-statement-last-year",
+        "funding-account-rest-api-get-monthly-statement-last-year",
+        "funding-account-rest-api-get-convert-currencies",
+        "funding-account-rest-api-get-convert-currency-pair",
+        "funding-account-rest-api-estimate-quote",
+        "funding-account-rest-api-convert-trade",
+        "funding-account-rest-api-get-convert-history",
+        "funding-account-rest-api-get-deposit-payment-methods",
+        "funding-account-rest-api-get-withdrawal-payment-methods",
+        "funding-account-rest-api-create-withdrawal-order",
+        "funding-account-rest-api-cancel-withdrawal-order",
+        "funding-account-rest-api-get-withdrawal-order-history",
+        "funding-account-rest-api-get-withdrawal-order-detail",
+        "funding-account-rest-api-get-deposit-order-history",
+        "funding-account-rest-api-get-deposit-order-detail",
+        "funding-account-rest-api-get-buy-sell-currencies",
+        "funding-account-rest-api-get-buy-sell-currency-pair",
+        "funding-account-rest-api-get-buy-sell-quote",
+        "funding-account-rest-api-buy-sell-trade",
+        "funding-account-rest-api-get-buy-sell-trade-history"
+      ],
+      "include_h2_html": false
+    },
+    {
+      "h1_match": "funding-account",
+      "h2_match": "funding-account-websocket",
+      "h3_matches": [
+        "funding-account-websocket-deposit-info-channel",
+        "funding-account-websocket-withdrawal-info-channel"
+      ],
+      "include_h2_html": false
+    }
+  ],
+  "output_file": "../../docs/okx/funding_account.md"
+}
+
