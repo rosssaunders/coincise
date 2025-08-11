@@ -1,29 +1,10 @@
----
-title: Bullish Trading API - Private REST API - Trades
-language_tabs:
-  - javascript: JavaScript
-  - python: Python
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
----
+# Bullish Trading API - Private REST API - Trades
 
-<!-- Generator: Widdershins v4.0.1 -->
-
-<h1 id="bullish-trading-api">Bullish Trading API - Private REST API - Trades</h1>
-
-> Scroll down for code samples, example requests and responses. Select a
-> language for code samples from the tabs above or the mobile navigation menu.
-
-<h1 id="bullish-trading-api-trades">trades</h1>
+# trades
 
 Authenticated APIs for reading trade data
 
 ## trade-get-trades
-
-<a id="opIdtrade-get-trades"></a>
 
 > Code samples
 
@@ -83,7 +64,7 @@ Get a list of trades based on specified filters.
 
 **Ratelimited:** `True`
 
-<h3 id="trade-get-trades-parameters">Parameters</h3>
+### Parameters
 
 | Name             | In     | Type                                        | Required | Description                                                                                  |
 | ---------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
@@ -266,7 +247,7 @@ Get a list of trades based on specified filters.
 }
 ```
 
-<h3 id="trade-get-trades-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -276,7 +257,7 @@ Get a list of trades based on specified filters.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="trade-get-trades-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -298,14 +279,10 @@ Status Code **200**
 | » createdAtDatetime      | [DateTime](#schemadatetime)(date-time)                | true     | none         | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string                  |
 | » createdAtTimestamp     | [TimeStampAsString](#schematimestampasstring)(string) | true     | none         | denotes the time the trade was executed by the exchange                                                       |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## trade-get-trade-by-id
-
-<a id="opIdtrade-get-trade-by-id"></a>
 
 > Code samples
 
@@ -360,7 +337,7 @@ header
 
 **Ratelimited:** `True`
 
-<h3 id="trade-get-trade-by-id-parameters">Parameters</h3>
+### Parameters
 
 | Name             | In     | Type                                        | Required | Description                                                                                  |
 | ---------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
@@ -537,7 +514,7 @@ header
 }
 ```
 
-<h3 id="trade-get-trade-by-id-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema                |
 | ------ | -------------------------------------------------------------------------- | --------------------- | --------------------- |
@@ -548,7 +525,5 @@ header
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None                  |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None                  |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth

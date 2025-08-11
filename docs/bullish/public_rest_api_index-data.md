@@ -1,27 +1,8 @@
----
-title: Bullish Trading API - Public REST API - Index Data
-language_tabs:
-  - javascript: JavaScript
-  - python: Python
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
----
+# Bullish Trading API - Public REST API - Index Data
 
-<!-- Generator: Widdershins v4.0.1 -->
-
-<h1 id="bullish-trading-api">Bullish Trading API - Public REST API - Index Data</h1>
-
-> Scroll down for code samples, example requests and responses. Select a
-> language for code samples from the tabs above or the mobile navigation menu.
-
-<h1 id="bullish-trading-api-index-data">index-data</h1>
+# index-data
 
 ## get-index-prices
-
-<a id="opIdget-index-prices"></a>
 
 > Code samples
 
@@ -119,7 +100,7 @@ Retrieves the index price of all supported assets
 }
 ```
 
-<h3 id="get-index-prices-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -127,7 +108,7 @@ Retrieves the index price of all supported assets
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="get-index-prices-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -139,13 +120,9 @@ Status Code **200**
 | » updatedAtDatetime  | [DateTime](#schemadatetime)(date-time) | true     | none         | Date and time when the index price is updated |
 | » updatedAtTimestamp | [TimeStamp](#schematimestamp)(int64)   | true     | none         | Timestamp when the index price is updated     |
 
-<aside class="success">
-This operation does not require authentication
-</aside>
+> **Note:** This operation does not require authentication
 
 ## get-index-price-by-symbol
-
-<a id="opIdget-index-price-by-symbol"></a>
 
 > Code samples
 
@@ -188,7 +165,7 @@ _Get Index Price by Asset Symbol_
 
 Retrieves the index price of a specified asset
 
-<h3 id="get-index-price-by-symbol-parameters">Parameters</h3>
+### Parameters
 
 | Name        | In   | Type                              | Required | Description |
 | ----------- | ---- | --------------------------------- | -------- | ----------- |
@@ -249,7 +226,7 @@ Retrieves the index price of a specified asset
 }
 ```
 
-<h3 id="get-index-price-by-symbol-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema                          |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------------------------------- |
@@ -258,6 +235,4 @@ Retrieves the index price of a specified asset
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None                            |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None                            |
 
-<aside class="success">
-This operation does not require authentication
-</aside>
+> **Note:** This operation does not require authentication

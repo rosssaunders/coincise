@@ -1,29 +1,10 @@
----
-title: Bullish Trading API - Private REST API - Orders
-language_tabs:
-  - javascript: JavaScript
-  - python: Python
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
----
+# Bullish Trading API - Private REST API - Orders
 
-<!-- Generator: Widdershins v4.0.1 -->
-
-<h1 id="bullish-trading-api">Bullish Trading API - Private REST API - Orders</h1>
-
-> Scroll down for code samples, example requests and responses. Select a
-> language for code samples from the tabs above or the mobile navigation menu.
-
-<h1 id="bullish-trading-api-orders">orders</h1>
+# orders
 
 Authenticated APIs for interacting with orders
 
 ## trade-get-orders-v2
-
-<a id="opIdtrade-get-orders-v2"></a>
 
 > Code samples
 
@@ -83,7 +64,7 @@ required. For detailed instructions, see the
 [Filtering Support](#overview--filtering-support) section. Additionally, this
 endpoint is subjected to rate limiting.
 
-<h3 id="trade-get-orders-v2-parameters">Parameters</h3>
+### Parameters
 
 | Name             | In     | Type                                        | Required | Description                                                                                  |
 | ---------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
@@ -360,7 +341,7 @@ endpoint is subjected to rate limiting.
 }
 ```
 
-<h3 id="trade-get-orders-v2-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -370,7 +351,7 @@ endpoint is subjected to rate limiting.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="trade-get-orders-v2-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -401,14 +382,10 @@ Status Code **200**
 | » createdAtDatetime     | [DateTime](#schemadatetime)(date-time)                      | true     | none         | denotes the time the order was ACK'd by the exchange, ISO 8601 with millisecond as string                                   |
 | » createdAtTimestamp    | [TimeStampAsString](#schematimestampasstring)(string)       | true     | none         | denotes the time the order was ACK'd by the exchange                                                                        |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## trade-create-order-v2
-
-<a id="opIdtrade-create-order-v2"></a>
 
 > Code samples
 
@@ -531,7 +508,7 @@ accepted.
 }
 ```
 
-<h3 id="trade-create-order-v2-parameters">Parameters</h3>
+### Parameters
 
 | Name                    | In     | Type                                                | Required | Description                                                                                                                                                         |
 | ----------------------- | ------ | --------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -568,7 +545,7 @@ accepted.
 }
 ```
 
-<h3 id="trade-create-order-v2-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                            | Schema                                                              |
 | ------ | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
@@ -587,14 +564,10 @@ Requests|None|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal
 Server Error|None|
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## trade-get-order-by-id-v2
-
-<a id="opIdtrade-get-order-by-id-v2"></a>
 
 > Code samples
 
@@ -648,7 +621,7 @@ Retrieve a specific order using its unique identifier.
 This endpoint requires [authentication](#overview--generate-a-jwt-token) and is
 subjected to rate limiting.
 
-<h3 id="trade-get-order-by-id-v2-parameters">Parameters</h3>
+### Parameters
 
 | Name             | In     | Type                                        | Required | Description                                                                                  |
 | ---------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
@@ -906,7 +879,7 @@ subjected to rate limiting.
 }
 ```
 
-<h3 id="trade-get-order-by-id-v2-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema                |
 | ------ | -------------------------------------------------------------------------- | --------------------- | --------------------- |
@@ -916,14 +889,10 @@ subjected to rate limiting.
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None                  |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None                  |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## command-entry-cancellations
-
-<a id="opIdcommand-entry-cancellations"></a>
 
 > Code samples
 
@@ -1050,7 +1019,7 @@ Requires
 }
 ```
 
-<h3 id="command-entry-cancellations-parameters">Parameters</h3>
+### Parameters
 
 | Name                    | In     | Type   | Required | Description                                                                                                                                                         |
 | ----------------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1141,7 +1110,7 @@ Requires
 }
 ```
 
-<h3 id="command-entry-cancellations-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                          | Description                                                    | Schema |
 | ------ | ---------------------------------------------------------------- | -------------------------------------------------------------- | ------ |
@@ -1160,16 +1129,12 @@ Requests|None|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal
 Server Error|None|
 
-<h3 id="command-entry-cancellations-responseschema">Response Schema</h3>
+### Response Schema
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
 
 ## command-entry-amend
-
-<a id="opIdcommand-entry-amend"></a>
 
 > Code samples
 
@@ -1299,7 +1264,7 @@ Requires
 }
 ```
 
-<h3 id="command-entry-amend-parameters">Parameters</h3>
+### Parameters
 
 | Name                    | In     | Type   | Required | Description                                                                                                                                                         |
 | ----------------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1361,7 +1326,7 @@ Requires
 }
 ```
 
-<h3 id="command-entry-amend-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                          | Description                                                    | Schema |
 | ------ | ---------------------------------------------------------------- | -------------------------------------------------------------- | ------ |
@@ -1380,7 +1345,7 @@ Requests|None|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal
 Server Error|None|
 
-<h3 id="command-entry-amend-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -1391,7 +1356,5 @@ Status Code **200**
 | » orderId       | [OrderID](#schemaorderid)     | true     | none         | unique order ID                                         |
 | » clientOrderId | string                        | false    | none         | Will be updated as part of a successful order amendment |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth

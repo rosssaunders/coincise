@@ -1,27 +1,8 @@
----
-title: Bullish Trading API - Private REST API - Derivatives
-language_tabs:
-  - javascript: JavaScript
-  - python: Python
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
----
+# Bullish Trading API - Private REST API - Derivatives
 
-<!-- Generator: Widdershins v4.0.1 -->
-
-<h1 id="bullish-trading-api">Bullish Trading API - Private REST API - Derivatives</h1>
-
-> Scroll down for code samples, example requests and responses. Select a
-> language for code samples from the tabs above or the mobile navigation menu.
-
-<h1 id="bullish-trading-api-derivatives">derivatives</h1>
+# derivatives
 
 ## get-derivatives-positions
-
-<a id="opIdget-derivatives-positions"></a>
 
 > Code samples
 
@@ -67,7 +48,7 @@ _Get derivatives positions_
 
 Get derivatives positions
 
-<h3 id="get-derivatives-positions-parameters">Parameters</h3>
+### Parameters
 
 | Name             | In     | Type                                        | Required | Description                                                                                                                                                                                                  |
 | ---------------- | ------ | ------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -238,7 +219,7 @@ Get derivatives positions
 }
 ```
 
-<h3 id="get-derivatives-positions-responses">Responses</h3>
+### Responses
 
 | Status | Meaning                                                                    | Description           | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
@@ -246,7 +227,7 @@ Get derivatives positions
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
 
-<h3 id="get-derivatives-positions-responseschema">Response Schema</h3>
+### Response Schema
 
 Status Code **200**
 
@@ -276,7 +257,5 @@ Status Code **200**
 | side     | BUY   |
 | side     | SELL  |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwtTokenAuth
-</aside>
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
