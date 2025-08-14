@@ -1,7 +1,7 @@
 {
   "url": "https://www.gate.io/docs/developers/apiv4/en/",
   "sections": [
-    "unified"
+    "subaccount"
   ],
-  "outputFile": "unified_private_rest_api.md"
+  "outputFile": "subaccount_private_rest_api.md"
 }

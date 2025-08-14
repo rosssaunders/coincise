@@ -1,7 +1,7 @@
 {
   "url": "https://www.gate.io/docs/developers/apiv4/en/",
   "sections": [
-    "unified"
+    "earn"
   ],
-  "outputFile": "unified_private_rest_api.md"
+  "outputFile": "earn_private_rest_api.md"
 }

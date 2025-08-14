@@ -1,7 +1,7 @@
 {
   "url": "https://www.gate.io/docs/developers/apiv4/en/",
   "sections": [
-    "unified"
+    "isolated-margin"
   ],
-  "outputFile": "unified_private_rest_api.md"
+  "outputFile": "isolated_margin_private_rest_api.md"
 }

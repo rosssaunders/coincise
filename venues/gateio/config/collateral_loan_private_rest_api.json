@@ -1,7 +1,7 @@
 {
   "url": "https://www.gate.io/docs/developers/apiv4/en/",
   "sections": [
-    "unified"
+    "collateral-loan"
   ],
-  "outputFile": "unified_private_rest_api.md"
+  "outputFile": "collateral_loan_private_rest_api.md"
 }

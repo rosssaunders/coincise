@@ -5,8 +5,7 @@
     "general",
     "api",
     "authentication",
-    "faq",
-    "options"
+    "faq"
   ],
-  "outputFile": "options/private_rest_trading_api.md"
+  "outputFile": "general_api.md"
 }

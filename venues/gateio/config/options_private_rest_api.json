@@ -1,7 +1,7 @@
 {
   "url": "https://www.gate.io/docs/developers/apiv4/en/",
   "sections": [
-    "unified"
+    "options"
   ],
-  "outputFile": "unified_private_rest_api.md"
+  "outputFile": "options_private_rest_trading_api.md"
 }

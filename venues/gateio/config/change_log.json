@@ -1,5 +1,5 @@
 {
   "url": "https://www.gate.io/docs/developers/apiv4/en/",
   "sections": ["changelog"],
-  "outputFile": "spot/change_log.md"
+  "outputFile": "change_log.md"
 }
