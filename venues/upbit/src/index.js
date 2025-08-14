@@ -49,6 +49,52 @@ function convertToMarkdown(html) {
 }
 
 /**
+ * Removes relative date references from markdown content to prevent unnecessary PRs
+ * @param {string} markdown - The markdown content to filter
+ * @returns {string} The filtered markdown content without date references
+ */
+function removeDateReferences(markdown) {
+  // Split the markdown into lines
+  const lines = markdown.split("\n")
+
+  // Regular expressions to match various date formats
+  const datePatterns = [
+    /^\d+ days? ago$/, // "20 days ago", "1 day ago"
+    /^about \d+ months? ago$/, // "about 2 months ago", "about 1 month ago"
+    /^\d+ months? ago$/, // "3 months ago", "1 month ago"
+    /^about \d+ weeks? ago$/, // "about 2 weeks ago"
+    /^\d+ weeks? ago$/, // "2 weeks ago"
+    /^about \d+ years? ago$/, // "about 1 year ago"
+    /^\d+ years? ago$/, // "1 year ago"
+    /^about a month ago$/, // "about a month ago"
+    /^about a year ago$/, // "about a year ago"
+    /^a few (days|weeks|months) ago$/ // "a few days ago", etc.
+  ]
+
+  // Filter out lines that match date patterns
+  const filteredLines = lines.filter(line => {
+    const trimmedLine = line.trim()
+
+    // Skip empty lines
+    if (trimmedLine === "") {
+      return true
+    }
+
+    // Check if line matches any date pattern
+    for (const pattern of datePatterns) {
+      if (pattern.test(trimmedLine)) {
+        console.log(`🗑️ Removing date reference: "${trimmedLine}"`)
+        return false
+      }
+    }
+
+    return true
+  })
+
+  return filteredLines.join("\n")
+}
+
+/**
  * Fetch the HTML content of the Upbit changelog page
  * @param {string} url - URL of the Upbit changelog
  * @returns {Promise<string>} - HTML content of the page
@@ -125,7 +171,10 @@ async function main() {
       const dom = new JSDOM(`<div>${html}</div>`)
 
       // Convert HTML to Markdown
-      const markdown = convertToMarkdown(dom.window.document.body.innerHTML)
+      const rawMarkdown = convertToMarkdown(dom.window.document.body.innerHTML)
+
+      // Remove date references to prevent unnecessary PRs
+      const markdown = removeDateReferences(rawMarkdown)
 
       // Add source reference
       combinedMarkdown += `${markdown}\n\n> **Source:** [Upbit Changelog](${url})\n\n`
