@@ -111,6 +111,8 @@ See [Detailed Rate Limit](#rate-limit)
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
 | symbol | String | Yes | Symbol of the contract(like BTCUSDT) 
+| order_id | String | No | Order ID 
+| client_order_id | String | No | Client-defined OrderId 
 | account | String | No | Trading account<br>-<code>futures</code><br>-<code>copy_trading</code> 
 | start_time | Long | No | Start time(Timestamp in Seconds) 
 | end_time | Long | No | End time(Timestamp in Seconds) 
