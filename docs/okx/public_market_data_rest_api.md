@@ -16,12 +16,11 @@ instruments info of current account, please refer to
 
 #### Request Parameters
 
-| Parameter  | Type   | Required    | Description                                                                                                                                                                                             |
-| ---------- | ------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| instType   | String | Yes         | Instrument type<br><code>SPOT</code>: Spot<br><code>MARGIN</code>: Margin<br><code>SWAP</code>: Perpetual Futures<br><code>FUTURES</code>: Expiry Futures<br><code>OPTION</code>: Option                |
-| uly        | String | Conditional | Underlying<br>Only applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>.If instType is <code>OPTION</code>, either <code>uly</code> or <code>instFamily</code> is required.         |
-| instFamily | String | Conditional | Instrument family<br>Only applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>. If instType is <code>OPTION</code>, either <code>uly</code> or <code>instFamily</code> is required. |
-| instId     | String | No          | Instrument ID                                                                                                                                                                                           |
+| Parameter  | Type   | Required    | Description                                                                                                                                                                              |
+| ---------- | ------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| instType   | String | Yes         | Instrument type<br><code>SPOT</code>: Spot<br><code>MARGIN</code>: Margin<br><code>SWAP</code>: Perpetual Futures<br><code>FUTURES</code>: Expiry Futures<br><code>OPTION</code>: Option |
+| instFamily | String | Conditional | Instrument family<br>Only applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>. If instType is <code>OPTION</code>, <code>instFamily</code> is required.             |
+| instId     | String | No          | Instrument ID                                                                                                                                                                            |
 
 #### Response Parameters
 
@@ -63,6 +62,7 @@ instruments info of current account, please refer to
 | maxStopSz         | String           | The maximum order quantity of a single stop market order.<br>If it is a derivatives contract, the value is the number of contracts.<br>If it is <code>SPOT</code>/<code>MARGIN</code>, the value is the quantity in <code>USDT</code>.                                                                                                                                                      |
 | futureSettlement  | Boolean          | Whether daily settlement for expiry feature is enabled<br>Applicable to <code>FUTURES</code> <code>cross</code>                                                                                                                                                                                                                                                                             |
 | tradeQuoteCcyList | Array of strings | List of quote currencies available for trading, e.g. ["USD", "USDC”].                                                                                                                                                                                                                                                                                                                       |
+| instIdCode        | Integer          | Instrument ID code.<br>For simple binary encoding, you must use <code>instIdCode</code> instead of <code>instId</code>.<br>For the same <code>instId</code>, it's value may be different between production and demo trading.                                                                                                                                                               |
 
 When a new contract is going to be listed, the instrument data of the new
 contract will be available with status preopen. When a product is going to be
@@ -133,7 +133,7 @@ Retrieve delivery records of Futures and exercise records of Options in the last
 
 #### Rate Limit: 40 requests per 2 seconds
 
-#### Rate limit rule: IP + (Instrument Type + Uly)
+#### Rate limit rule: IP + (Instrument Type + instFamily)
 
 #### HTTP Request
 
@@ -141,14 +141,13 @@ Retrieve delivery records of Futures and exercise records of Options in the last
 
 #### Request Parameters
 
-| Parameter  | Type   | Required    | Description                                                                                                                                                                                                 |
-| ---------- | ------ | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| instType   | String | Yes         | Instrument type<br><code>FUTURES</code><br><code>OPTION</code>                                                                                                                                              |
-| uly        | String | Conditional | Underlying, only applicable to <code>FUTURES</code>/<code>OPTION</code><br>Either <code>uly</code> or <code>instFamily</code> is required. If both are passed, <code>instFamily</code> will be used.        |
-| instFamily | String | Conditional | Instrument family, only applicable to <code>FUTURES</code>/<code>OPTION</code><br>Either <code>uly</code> or <code>instFamily</code> is required. If both are passed, <code>instFamily</code> will be used. |
-| after      | String | No          | Pagination of data to return records earlier than the requested <code>ts</code>                                                                                                                             |
-| before     | String | No          | Pagination of data to return records newer than the requested <code>ts</code>                                                                                                                               |
-| limit      | String | No          | Number of results per request. The maximum is <code>100</code>; The default is <code>100</code>                                                                                                             |
+| Parameter  | Type   | Required | Description                                                                                     |
+| ---------- | ------ | -------- | ----------------------------------------------------------------------------------------------- |
+| instType   | String | Yes      | Instrument type<br><code>FUTURES</code><br><code>OPTION</code>                                  |
+| instFamily | String | Yes      | Instrument family, only applicable to <code>FUTURES</code>/<code>OPTION</code>                  |
+| after      | String | No       | Pagination of data to return records earlier than the requested <code>ts</code>                 |
+| before     | String | No       | Pagination of data to return records newer than the requested <code>ts</code>                   |
+| limit      | String | No       | Number of results per request. The maximum is <code>100</code>; The default is <code>100</code> |
 
 #### Response Parameters
 
@@ -328,12 +327,11 @@ Retrieve the total open interest for contracts on OKX.
 
 #### Request Parameters
 
-| Parameter  | Type   | Required    | Description                                                                                                                                                                                          |
-| ---------- | ------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| instType   | String | Yes         | Instrument type<br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code>                                                                                                                  |
-| uly        | String | Conditional | Underlying<br>Applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>.<br>If instType is <code>OPTION</code>, either <code>uly</code> or <code>instFamily</code> is required.       |
-| instFamily | String | Conditional | Instrument family<br>Applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code><br>If instType is <code>OPTION</code>, either <code>uly</code> or <code>instFamily</code> is required. |
-| instId     | String | No          | Instrument ID, e.g. <code>BTC-USDT-SWAP</code><br>Applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>                                                                           |
+| Parameter  | Type   | Required    | Description                                                                                                                                                  |
+| ---------- | ------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| instType   | String | Yes         | Instrument type<br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code>                                                                          |
+| instFamily | String | Conditional | Instrument family<br>Applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code><br>If instType is <code>OPTION</code>, instFamily is required. |
+| instId     | String | No          | Instrument ID, e.g. <code>BTC-USDT-SWAP</code><br>Applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>                                   |
 
 #### Response Parameters
 
@@ -385,7 +383,7 @@ Retrieve option market data.
 
 #### Rate Limit: 20 requests per 2 seconds
 
-#### Rate limit rule: IP +uly
+#### Rate limit rule: IP + instFamily
 
 #### HTTP Request
 
@@ -393,11 +391,10 @@ Retrieve option market data.
 
 #### Request Parameters
 
-| Parameter  | Type   | Required    | Description                                                                                                                                                                            |
-| ---------- | ------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| uly        | String | Conditional | Underlying, only applicable to <code>OPTION</code><br>Either <code>uly</code> or <code>instFamily</code> is required. If both are passed, <code>instFamily</code> will be used.        |
-| instFamily | String | Conditional | Instrument family, only applicable to <code>OPTION</code><br>Either <code>uly</code> or <code>instFamily</code> is required. If both are passed, <code>instFamily</code> will be used. |
-| expTime    | String | No          | Contract expiry date, the format is "YYMMDD", e.g. "200527"                                                                                                                            |
+| Parameter  | Type   | Required | Description                                                   |
+| ---------- | ------ | -------- | ------------------------------------------------------------- |
+| instFamily | String | Yes      | Instrument family, only applicable to <code>OPTION</code><br> |
+| expTime    | String | No       | Contract expiry date, the format is "YYMMDD", e.g. "200527"   |
 
 #### Response Parameters
 
@@ -446,20 +443,21 @@ Retrieve discount rate level and interest-free quota.
 
 #### Response Parameters
 
-| **Parameter**       | **Type**         | **Description**                                                                             |
-| ------------------- | ---------------- | ------------------------------------------------------------------------------------------- |
-| ccy                 | String           | Currency                                                                                    |
-| collateralRestrict  | Boolean          | Platform level collateralized borrow restriction<br><code>true</code><br><code>false</code> |
-| amt                 | String           | Interest-free quota                                                                         |
-| discountLv          | String           | <del>Discount rate level.(Deprecated)<del></del></del>                                      |
-| minDiscountRate     | String           | Minimum discount rate when it exceeds the maximum amount of the last tier.                  |
-| details             | Array of objects | New discount details.                                                                       |
-| &gt; discountRate   | String           | Discount rate                                                                               |
-| &gt; maxAmt         | String           | Tier - upper bound.<br>The unit is the currency like BTC. "" means positive infinity        |
-| &gt; minAmt         | String           | Tier - lower bound.<br>The unit is the currency like BTC. The minimum is 0                  |
-| &gt; tier           | String           | Tiers                                                                                       |
-| &gt; liqPenaltyRate | String           | Liquidation penalty rate                                                                    |
-| &gt; disCcyEq       | String           | Discount equity in currency for quick calculation if your equity is the<code>maxAmt</code>  |
+| **Parameter**       | **Type**         | **Description**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ccy                 | String           | Currency                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| colRes              | String           | Platform level collateral restriction status<br><code>0</code>: The restriction is not enabled.<br><code>1</code>: The restriction is not enabled. But the crypto is close to the platform's collateral limit.<br><code>2</code>: The restriction is enabled. This crypto can't be used as margin for your new orders. This may result in failed orders. But it will still be included in the account's adjusted equity and doesn't impact margin ratio.<br>Refer to <a href="https://www.okx.com/help/introduction-to-the-platforms-collateralized-borrowing-limit-mechanism">Introduction to the platform collateralized borrowing limit</a> for more details. |
+| collateralRestrict  | Boolean          | <del>Platform level collateralized borrow restriction<br><code>true</code><br><code>false</code></del>(deprecated, use colRes instead)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| amt                 | String           | Interest-free quota                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| discountLv          | String           | <del>Discount rate level.(Deprecated)<del></del></del>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| minDiscountRate     | String           | Minimum discount rate when it exceeds the maximum amount of the last tier.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| details             | Array of objects | New discount details.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| &gt; discountRate   | String           | Discount rate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| &gt; maxAmt         | String           | Tier - upper bound.<br>The unit is the currency like BTC. "" means positive infinity                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| &gt; minAmt         | String           | Tier - lower bound.<br>The unit is the currency like BTC. The minimum is 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| &gt; tier           | String           | Tiers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| &gt; liqPenaltyRate | String           | Liquidation penalty rate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| &gt; disCcyEq       | String           | Discount equity in currency for quick calculation if your equity is the<code>maxAmt</code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 ---
 
@@ -504,7 +502,6 @@ price to fluctuate.
 | Parameter  | Type   | Required | Description                                                                                                |
 | ---------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------- |
 | instType   | String | Yes      | Instrument type<br><code>MARGIN</code><br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code> |
-| uly        | String | No       | Underlying<br>Applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>                     |
 | instFamily | String | No       | Instrument family<br>Applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>              |
 | instId     | String | No       | Instrument ID, e.g. <code>BTC-USD-SWAP</code>                                                              |
 
@@ -534,15 +531,14 @@ and Maintenance margin ratio.
 
 #### Request Parameters
 
-| Parameter  | Type   | Required    | Description                                                                                                                                                                                                                                                                       |
-| ---------- | ------ | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| instType   | String | Yes         | Instrument type<br><code>MARGIN</code><br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code>                                                                                                                                                                        |
-| tdMode     | String | Yes         | Trade mode<br>Margin mode <code>cross</code> <code>isolated</code>                                                                                                                                                                                                                |
-| uly        | String | Conditional | Single underlying or multiple underlyings (no more than 3) separated with comma.<br>If instType is <code>SWAP/FUTURES/OPTION</code>, either <code>uly</code> or <code>instFamily</code> is required.<br>If both are passed, <code>instFamily</code> will be used.                 |
-| instFamily | String | Conditional | Single instrument familiy or multiple instrument families (no more than 5) separated with comma.<br>If instType is <code>SWAP/FUTURES/OPTION</code>, either <code>uly</code> or <code>instFamily</code> is required.<br>If both are passed, <code>instFamily</code> will be used. |
-| instId     | String | Conditional | Single instrument or multiple instruments (no more than 5) separated with comma.<br>Either instId or ccy is required, if both are passed, instId will be used, ignore when instType is one of <code>SWAP</code>,<code>FUTURES</code>,<code>OPTION</code>                          |
-| ccy        | String | Conditional | Margin currency<br>Only applicable to cross MARGIN. It will return borrowing amount for <code>Multi-currency margin</code> and <code>Portfolio margin</code> when <code>ccy</code> takes effect.                                                                                  |
-| tier       | String | No          | Tiers                                                                                                                                                                                                                                                                             |
+| Parameter  | Type   | Required    | Description                                                                                                                                                                                                                                              |
+| ---------- | ------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| instType   | String | Yes         | Instrument type<br><code>MARGIN</code><br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code>                                                                                                                                               |
+| tdMode     | String | Yes         | Trade mode<br>Margin mode <code>cross</code> <code>isolated</code>                                                                                                                                                                                       |
+| instFamily | String | Conditional | Single instrument familiy or multiple instrument families (no more than 5) separated with comma.<br>If instType is <code>SWAP/FUTURES/OPTION</code>, <code>instFamily</code> is required.                                                                |
+| instId     | String | Conditional | Single instrument or multiple instruments (no more than 5) separated with comma.<br>Either instId or ccy is required, if both are passed, instId will be used, ignore when instType is one of <code>SWAP</code>,<code>FUTURES</code>,<code>OPTION</code> |
+| ccy        | String | Conditional | Margin currency<br>Only applicable to cross MARGIN. It will return borrowing amount for <code>Multi-currency margin</code> and <code>Portfolio margin</code> when <code>ccy</code> takes effect.                                                         |
+| tier       | String | No          | Tiers                                                                                                                                                                                                                                                    |
 
 #### Response Parameters
 
@@ -636,8 +632,7 @@ Get insurance fund balance information
 | ---------- | ------ | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | instType   | String | Yes         | Instrument type<br><code>MARGIN</code><br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code>                                                                                                                        |
 | type       | String | No          | Type<br><code>regular_update</code><br><code>liquidation_balance_deposit</code><br><code>bankruptcy_loss</code><br><code>platform_revenue</code><br><code>adl</code>: ADL historical data<br>The default is <code>all type</code> |
-| uly        | String | Conditional | Underlying<br>Required for <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code><br>Either <code>uly</code> or <code>instFamily</code> is required. If both are passed, <code>instFamily</code> will be used.                |
-| instFamily | String | Conditional | Instrument family<br>Required for <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code><br>Either <code>uly</code> or <code>instFamily</code> is required. If both are passed, <code>instFamily</code> will be used.         |
+| instFamily | String | Conditional | Instrument family<br>Required for <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>                                                                                                                                      |
 | ccy        | String | Conditional | Currency, only applicable to <code>MARGIN</code>                                                                                                                                                                                  |
 | before     | String | No          | Pagination of data to return records newer than the requested <code>ts</code>                                                                                                                                                     |
 | after      | String | No          | Pagination of data to return records earlier than the requested <code>ts</code>                                                                                                                                                   |
@@ -782,10 +777,10 @@ Retrieve index tickers.
 
 #### Request Parameters
 
-| Parameter | Type   | Required    | Description                                                                                                   |
-| --------- | ------ | ----------- | ------------------------------------------------------------------------------------------------------------- |
-| quoteCcy  | String | Conditional | Quote currency<br>Currently there is only an index with <code>USD/USDT/BTC/USDC</code> as the quote currency. |
-| instId    | String | Conditional | Index, e.g. <code>BTC-USD</code><br>Either <code>quoteCcy</code> or <code>instId</code> is required.          |
+| Parameter | Type   | Required    | Description                                                                                                                       |
+| --------- | ------ | ----------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| quoteCcy  | String | Conditional | Quote currency<br>Currently there is only an index with <code>USD/USDT/BTC/USDC</code> as the quote currency.                     |
+| instId    | String | Conditional | Index, e.g. <code>BTC-USD</code><br>Either <code>quoteCcy</code> or <code>instId</code> is required.<br>Same as <code>uly</code>. |
 
 #### Response Parameters
 
@@ -820,7 +815,7 @@ bar.
 
 | Parameter | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | --------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| instId    | String | Yes      | Index, e.g. <code>BTC-USD</code>                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| instId    | String | Yes      | Index, e.g. <code>BTC-USD</code><br>Same as <code>uly</code>.                                                                                                                                                                                                                                                                                                                                                                                                              |
 | after     | String | No       | Pagination of data to return records earlier than the requested <code>ts</code>                                                                                                                                                                                                                                                                                                                                                                                            |
 | before    | String | No       | Pagination of data to return records newer than the requested <code>ts</code>. The latest data will be returned when using <code>before</code> individually                                                                                                                                                                                                                                                                                                                |
 | bar       | String | No       | Bar size, the default is <code>1m</code><br>e.g. [<code>1m</code>/<code>3m</code>/<code>5m</code>/<code>15m</code>/<code>30m</code>/<code>1H</code>/<code>2H</code>/<code>4H</code>]<br>UTC+8 opening price k-line: [<code>6H</code>/<code>12H</code>/<code>1D</code>/<code>1W</code>/<code>1M</code>/<code>3M</code>]<br>UTC+0 opening price k-line: [<code>6Hutc</code>/<code>12Hutc</code>/<code>1Dutc</code>/<code>1Wutc</code>/<code>1Mutc</code>/<code>3Mutc</code>] |
@@ -860,7 +855,7 @@ Retrieve the candlestick charts of the index from recent years.
 
 | Parameter | Type   | Required | Description                                                                                                                                                                                    |
 | --------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| instId    | String | Yes      | Index, e.g. <code>BTC-USD</code>                                                                                                                                                               |
+| instId    | String | Yes      | Index, e.g. <code>BTC-USD</code><br>Same as <code>uly</code>.                                                                                                                                  |
 | after     | String | No       | Pagination of data to return records earlier than the requested <code>ts</code>                                                                                                                |
 | before    | String | No       | Pagination of data to return records newer than the requested <code>ts</code>. The latest data will be returned when using <code>before</code> individually                                    |
 | bar       | String | No       | Bar size, the default is <code>1m</code><br>e.g. [1m/3m/5m/15m/30m/1H/2H/4H]<br>UTC+8 opening price k-line: [6H/12H/1D/1W/1M]<br>UTC+0 opening price k-line: [/6Hutc/12Hutc/1Dutc/1Wutc/1Mutc] |
@@ -994,9 +989,9 @@ Get the index component information data on the market
 
 #### Request Parameters
 
-| Parameter | Type   | Required | Description                      |
-| --------- | ------ | -------- | -------------------------------- |
-| index     | String | Yes      | index, e.g <code>BTC-USDT</code> |
+| Parameter | Type   | Required | Description                                                   |
+| --------- | ------ | -------- | ------------------------------------------------------------- |
+| index     | String | Yes      | index, e.g <code>BTC-USDT</code><br>Same as <code>uly</code>. |
 
 #### Response Parameters
 
