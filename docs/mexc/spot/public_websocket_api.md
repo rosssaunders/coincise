@@ -59,8 +59,8 @@
 - Each connection to **ws://wbs-api.mexc.com/ws** is valid for no more than 24
   hours. Please handle disconnections and reconnections properly.
 - All trading pair names in the symbol must be in **uppercase**. For example:
-  `spot@public.deals.v3.api.pb@<symbol>`  
-  Example: `spot@public.deals.v3.api.pb@BTCUSDT`
+  `spot@public.aggre.deals.v3.api.pb@(100ms|10ms)@<symbol>`  
+  Example: `spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT`
 - If there is no valid subscription on the websocket, the server will actively
   disconnect after **30 seconds**. If the subscription is successful but there
   is no data flow, the server will disconnect after **one minute**. The client
@@ -172,14 +172,14 @@ Use the code generated in the previous step to deserialize the data.
 {
   "id": 0,
   "code": 0,
-  "msg": "spot@public.deals.v3.api.pb@BTCUSDT"
+  "msg": "spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT"
 }
 ```
 
 - **Request**
 
-{ "method": "SUBSCRIPTION", "params": \["spot@public.deals.v3.api.pb@BTCUSDT"\]
-}
+{ "method": "SUBSCRIPTION", "params":
+\["spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT"\] }
 
 ---
 
@@ -198,7 +198,7 @@ Use the code generated in the previous step to deserialize the data.
 - **Request**
 
 { "method": "UNSUBSCRIPTION", "params":
-\["spot@public.deals.v3.api.pb@BTCUSDT"\] }
+\["spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT"\] }
 
 ---
 
