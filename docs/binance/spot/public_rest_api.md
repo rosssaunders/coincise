@@ -287,7 +287,7 @@ the `MAX_POSITION` filter.
 #### TRAILING_DELTA
 
 The `TRAILING_DELTA` filter defines the minimum and maximum value for the
-parameter `trailingDelta`.
+parameter [`trailingDelta`](/docs/binance-spot-api-docs/faqs/trailing-stop-faq).
 
 In order for a trailing stop order to pass this filter, the following must be
 true:
@@ -313,6 +313,37 @@ For `STOP_LOSS SELL`, `STOP_LOSS_LIMIT SELL`, `TAKE_PROFIT BUY`, and
   "maxTrailingAboveDelta": 2000,
   "minTrailingBelowDelta": 10,
   "maxTrailingBelowDelta": 2000
+}
+```
+
+#### MAX_NUM_ORDER_AMENDS
+
+The `MAX_NUM_ORDER_AMENDS` filter defines the maximum number of times an order
+can be amended on the given symbol.
+
+If there are too many order amendments made on a single order, you will receive
+the `-2038` error code.
+
+**/exchangeInfo format:**
+
+```json
+{
+  "filterType": "MAX_NUM_ORDER_AMENDS",
+  "maxNumOrderAmends": 10
+}
+```
+
+#### MAX_NUM_ORDER_LISTS
+
+The `MAX_NUM_ORDER_LISTS` filter defines the maximum number of open order lists
+an account can have on a symbol. Note that OTOCOs count as one order list.
+
+**/exchangeInfo format:**
+
+```json
+{
+  "filterType": "MAX_NUM_ORDER_LISTS",
+  "maxNumOrderLists": 20
 }
 ```
 
@@ -361,6 +392,21 @@ iceberg orders an account is allowed to have open on the exchange.
   "maxNumIcebergOrders": 10000
 }
 ```
+
+#### EXCHANGE_MAX_NUM_ORDER_LISTS
+
+The `EXCHANGE_MAX_NUM_ORDERS` filter defines the maximum number of order lists
+an account is allowed to have open on the exchange. Note that OTOCOs count as
+one order list.
+
+**/exchangeInfo format:**
+
+````json
+   {
+      "filterType": "EXCHANGE_MAX_NUM_ORDER_LISTS",
+      "maxNumOrderLists": 20
+    }```
+````
 
 > Source:
 > [https://developers.binance.com/docs/binance-spot-api-docs/filters](https://developers.binance.com/docs/binance-spot-api-docs/filters)
@@ -539,7 +585,7 @@ to learn more.
 
 ## Error codes for Binance
 
-**Last Updated: 2025-06-11**
+**Last Updated: 2025-08-12**
 
 Errors consist of two parts: an error code and a message. Codes are universal,
 but messages can vary. Here is the error JSON payload:
@@ -615,7 +661,7 @@ but messages can vary. Here is the error JSON payload:
 | \-1174 | \-INVALID_COMPONENT​                     | \-Component '%s' is incorrectly populated on '%s' order. Recommendation: '%s'                                                                                                                                                                                                                                                                 |
 | \-1175 | \-RESET_SEQ_NUM_SUPPORT​                 | \-Continuation of sequence numbers to new session is currently unsupported. Sequence numbers must be reset for each new session.                                                                                                                                                                                                              |
 | \-1176 | \-ALREADY_LOGGED_IN​                     | \-[Logon`<A>`](/docs/binance-spot-api-docs/fix-api#logon-main) should only be sent once.                                                                                                                                                                                                                                                      |
-| \-1177 | \-GARBLED_MESSAGE​                       | \-- `CheckSum(10)` contains an incorrect value. - `BeginString (8)` is not the first tag in a message. - `MsgType (35)` is not the third tag in a message. - `BodyLength (9)` does not contain the correct byte count. - Only printable ASCII characters and SOH (Start of Header) are allowed.                                               |
+| \-1177 | \-GARBLED_MESSAGE​                       | \-- `CheckSum(10)` contains an incorrect value. - `BeginString (8)` is not the first tag in a message. - `MsgType (35)` is not the third tag in a message. - `BodyLength (9)` does not contain the correct byte count. - Only printable ASCII characters and SOH (Start of Header) are allowed. - Tag specified without a value.              |
 | \-1178 | \-BAD_SENDER_COMPID​                     | \-`SenderCompId(49)` contains an incorrect value. The SenderCompID value should not change throughout the lifetime of a session.                                                                                                                                                                                                              |
 | \-1179 | \-BAD_SEQ_NUM​                           | \-`MsgSeqNum(34)` contains an unexpected value. Expected: '%d'.                                                                                                                                                                                                                                                                               |
 | \-1180 | \-EXPECTED_LOGON​                        | \-[Logon`<A>`](/docs/binance-spot-api-docs/fix-api#logon-main) must be the first message in the session.                                                                                                                                                                                                                                      |
@@ -635,6 +681,8 @@ but messages can vary. Here is the error JSON payload:
 | \-1197 | \-SELL_OCO_STOP_LOSS_MUST_BE_BELOW​      | \-A stop loss order in a sell OCO must be below.                                                                                                                                                                                                                                                                                              |
 | \-1198 | \-BUY_OCO_TAKE_PROFIT_MUST_BE_BELOW​     | \-A take profit order in a buy OCO must be below.                                                                                                                                                                                                                                                                                             |
 | \-1199 | \-SELL_OCO_TAKE_PROFIT_MUST_BE_ABOVE​    | \-A take profit order in a sell OCO must be above.                                                                                                                                                                                                                                                                                            |
+| \-1210 | \-INVALID_PEG_PRICE_TYPE​                | \-Invalid pegPriceType.                                                                                                                                                                                                                                                                                                                       |
+| \-1211 | \-INVALID_PEG_OFFSET_TYPE​               | \-Invalid pegOffsetType.                                                                                                                                                                                                                                                                                                                      |
 | \-2010 | \-NEW_ORDER_REJECTED​                    | \-NEW_ORDER_REJECTED                                                                                                                                                                                                                                                                                                                          |
 | \-2011 | \-CANCEL_REJECTED​                       | \-CANCEL_REJECTED                                                                                                                                                                                                                                                                                                                             |
 | \-2013 | \-NO_SUCH_ORDER​                         | \-Order does not exist.                                                                                                                                                                                                                                                                                                                       |
@@ -645,6 +693,7 @@ but messages can vary. Here is the error JSON payload:
 | \-2035 | \-SUBSCRIPTION_ACTIVE​                   | \-User Data Stream subscription already active.                                                                                                                                                                                                                                                                                               |
 | \-2036 | \-SUBSCRIPTION_INACTIVE​                 | \-User Data Stream subscription not active.                                                                                                                                                                                                                                                                                                   |
 | \-2039 | \-CLIENT_ORDER_ID_INVALID​               | \-Client order ID is not correct for this order ID.                                                                                                                                                                                                                                                                                           |
+| \-2042 | \-MAXIMUM_SUBSCRIPTION_IDS​              | \-Maximum subscription ID reached for this connection.                                                                                                                                                                                                                                                                                        |
 | \-2021 | \-Order cancel-replace partially failed​ | \-This code is sent when either the cancellation of the order failed or the new order placement failed but not both.                                                                                                                                                                                                                          |
 | \-2022 | \-Order cancel-replace failed.​          | \-This code is sent when both the cancellation of the order failed and the new order placement failed.                                                                                                                                                                                                                                        |
 
@@ -693,6 +742,10 @@ following messages which will indicate the specific error:
 | \-"Order book liquidity is less than symbol minimum quantity."                   | \-Quote quantity market orders cannot be placed when there are no orders on the book.                                                                                                                             |
 | \-"Order amend (quantity increase) is not supported."                            | \-`newQty` must be less than the order quantity.                                                                                                                                                                  |
 | \-"The requested action would change no state; rejecting".                       | \-The request sent would not have changed the status quo.(e.g. `newQty` cannot equal the order quantity.)                                                                                                         |
+| \-"Pegged orders are not supported for this symbol."                             | \-`pegInstructionsAllowed` has not been enabled.                                                                                                                                                                  |
+| \-"This order type may not use pegged price."                                    | \-You are using parameter `pegPriceType` with an unsupported order type. (e.g. `MARKET`)                                                                                                                          |
+| \-"This price peg cannot be used with this order type."                          | \-You are using `pegPriceType`\=`MARKET_PEG` for a `LIMIT_MAKER` order.                                                                                                                                           |
+| \-"Order book liquidity is too low for this pegged order."                       | \-The order book doesn’t have the best price level to peg the price to.                                                                                                                                           |
 
 ### Errors regarding placing orders via cancelReplace
 
@@ -711,10 +764,13 @@ following messages which will indicate the specific error:
 | \-"Filter failure: MAX_NUM_ORDERS"                  | \-Account has too many open orders on the symbol.                                                                                                                                   |
 | \-"Filter failure: MAX_NUM_ALGO_ORDERS"             | \-Account has too many open stop loss and/or take profit orders on the symbol.                                                                                                      |
 | \-"Filter failure: MAX_NUM_ICEBERG_ORDERS"          | \-Account has too many open iceberg orders on the symbol.                                                                                                                           |
+| \-"Filter failure: MAX_NUM_ORDER_AMENDS"            | \-Account has made too many amendments to a single order on the symbol.                                                                                                             |
+| \-"Filter failure: MAX_NUM_ORDER_LISTS"             | \-Account has too many open order lists on the symbol.                                                                                                                              |
 | \-"Filter failure: TRAILING_DELTA"                  | \-`trailingDelta` is not within the defined range of the filter for that order type.                                                                                                |
 | \-"Filter failure: EXCHANGE_MAX_NUM_ORDERS"         | \-Account has too many open orders on the exchange.                                                                                                                                 |
 | \-"Filter failure: EXCHANGE_MAX_NUM_ALGO_ORDERS"    | \-Account has too many open stop loss and/or take profit orders on the exchange.                                                                                                    |
 | \-"Filter failure: EXCHANGE_MAX_NUM_ICEBERG_ORDERS" | \-Account has too many open iceberg orders on the exchange.                                                                                                                         |
+| \-"Filter failure: EXCHANGE_MAX_NUM_ORDER_LISTS"    | \-Account has too many open order lists on the exchange.                                                                                                                            |
 
 > Source:
 > [https://developers.binance.com/docs/binance-spot-api-docs/errors](https://developers.binance.com/docs/binance-spot-api-docs/errors)
@@ -1331,6 +1387,7 @@ Current exchange trading rules and symbol information
       "allowTrailingStop": false,
       "cancelReplaceAllowed": false,
       "amendAllowed": false,
+      "pegInstructionsAllowed": true,
       "isSpotTradingAllowed": true,
       "isMarginTradingAllowed": true,
       "filters": [
