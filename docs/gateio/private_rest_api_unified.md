@@ -4,6 +4,9 @@ Unified account
 
 ## [#](#get-unified-account-information) Get unified account information
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-unified-account-information](https://www.gate.io/docs/developers/apiv4/en/#get-unified-account-information)
+
 > Code samples
 
 `GET /unified/accounts`
@@ -18,6 +21,9 @@ account.
 For specific formulas, please refer to [Margin Formula](#margin-formula)
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedaccounts-parameters](https://www.gate.io/docs/developers/apiv4/en/#listunifiedaccounts-parameters)
 
 | Name     | In    | Type   | Required | Description                      |
 | -------- | ----- | ------ | -------- | -------------------------------- |
@@ -86,11 +92,17 @@ For specific formulas, please refer to [Margin Formula](#margin-formula)
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedaccounts-responses](https://www.gate.io/docs/developers/apiv4/en/#listunifiedaccounts-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedaccounts-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listunifiedaccounts-responseschema)
 
 Status Code **200**
 
@@ -144,6 +156,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-maximum-borrowable-amount-for-unified-account) Query maximum borrowable amount for unified account
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-maximum-borrowable-amount-for-unified-account](https://www.gate.io/docs/developers/apiv4/en/#query-maximum-borrowable-amount-for-unified-account)
+
 > Code samples
 
 `GET /unified/borrowable`
@@ -151,6 +166,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query maximum borrowable amount for unified account_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowable-parameters](https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowable-parameters)
 
 | Name     | In    | Type   | Required | Description                      |
 | -------- | ----- | ------ | -------- | -------------------------------- |
@@ -169,11 +187,17 @@ _Query maximum borrowable amount for unified account_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowable-responses](https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowable-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowable-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowable-responseschema)
 
 Status Code **200**
 
@@ -190,6 +214,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-maximum-transferable-amount-for-unified-account) Query maximum transferable amount for unified account
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-maximum-transferable-amount-for-unified-account](https://www.gate.io/docs/developers/apiv4/en/#query-maximum-transferable-amount-for-unified-account)
+
 > Code samples
 
 `GET /unified/transferable`
@@ -197,6 +224,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query maximum transferable amount for unified account_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferable-parameters](https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferable-parameters)
 
 | Name     | In    | Type   | Required | Description                      |
 | -------- | ----- | ------ | -------- | -------------------------------- |
@@ -215,11 +245,17 @@ _Query maximum transferable amount for unified account_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferable-responses](https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferable-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferable-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferable-responseschema)
 
 Status Code **200**
 
@@ -236,6 +272,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#batch-query-maximum-transferable-amount-for-unified-accounts-each-currency-shows-the-maximum-value-after-user-withdrawal-the-transferable-amount-for-all-currencies-will-change) Batch query maximum transferable amount for unified accounts. Each currency shows the maximum value. After user withdrawal, the transferable amount for all currencies will change
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#batch-query-maximum-transferable-amount-for-unified-accounts-each-currency-shows-the-maximum-value-after-user-withdrawal-the-transferable-amount-for-all-currencies-will-change](https://www.gate.io/docs/developers/apiv4/en/#batch-query-maximum-transferable-amount-for-unified-accounts-each-currency-shows-the-maximum-value-after-user-withdrawal-the-transferable-amount-for-all-currencies-will-change)
+
 > Code samples
 
 `GET /unified/transferables`
@@ -245,6 +284,9 @@ shows the maximum value. After user withdrawal, the transferable amount for all
 currencies will change_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferables-parameters](https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferables-parameters)
 
 | Name       | In    | Type   | Required | Description                                                                                    |
 | ---------- | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------- |
@@ -265,11 +307,17 @@ currencies will change_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferables-responses](https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferables-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferables-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferables-responseschema)
 
 Status Code **200**
 
@@ -285,6 +333,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#batch-query-unified-account-maximum-borrowable-amount) Batch query unified account maximum borrowable amount
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#batch-query-unified-account-maximum-borrowable-amount](https://www.gate.io/docs/developers/apiv4/en/#batch-query-unified-account-maximum-borrowable-amount)
+
 > Code samples
 
 `GET /unified/batch_borrowable`
@@ -292,6 +343,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Batch query unified account maximum borrowable amount_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowablelist-parameters](https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowablelist-parameters)
 
 | Name       | In    | Type            | Required | Description                                                                                 |
 | ---------- | ----- | --------------- | -------- | ------------------------------------------------------------------------------------------- |
@@ -312,11 +366,17 @@ _Batch query unified account maximum borrowable amount_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowablelist-responses](https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowablelist-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowablelist-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowablelist-responseschema)
 
 Status Code **200**
 
@@ -331,6 +391,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#borrow-or-repay) Borrow or repay
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#borrow-or-repay](https://www.gate.io/docs/developers/apiv4/en/#borrow-or-repay)
 
 > Code samples
 
@@ -361,6 +424,9 @@ For repayment, use `repaid_all=true` to repay all available amounts
 
 ### Parameters
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createunifiedloan-parameters](https://www.gate.io/docs/developers/apiv4/en/#createunifiedloan-parameters)
+
 | Name         | In   | Type    | Required | Description                                                                                                                    |
 | ------------ | ---- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | body         | body | object  | true     | none                                                                                                                           |
@@ -389,11 +455,17 @@ For repayment, use `repaid_all=true` to repay all available amounts
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createunifiedloan-responses](https://www.gate.io/docs/developers/apiv4/en/#createunifiedloan-responses)
+
 | Status | Meaning                                                                    | Description          | Schema |
 | ------ | -------------------------------------------------------------------------- | -------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Operation successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createunifiedloan-responseschema](https://www.gate.io/docs/developers/apiv4/en/#createunifiedloan-responseschema)
 
 Status Code **200**
 
@@ -409,6 +481,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-loans) Query loans
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-loans](https://www.gate.io/docs/developers/apiv4/en/#query-loans)
+
 > Code samples
 
 `GET /unified/loans`
@@ -416,6 +491,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query loans_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedloans-parameters](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloans-parameters)
 
 | Name     | In    | Type           | Required | Description                                                              |
 | -------- | ----- | -------------- | -------- | ------------------------------------------------------------------------ |
@@ -443,11 +521,17 @@ _Query loans_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedloans-responses](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloans-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedloans-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloans-responseschema)
 
 Status Code **200**
 
@@ -468,6 +552,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-loan-records) Query loan records
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-loan-records](https://www.gate.io/docs/developers/apiv4/en/#query-loan-records)
+
 > Code samples
 
 `GET /unified/loan_records`
@@ -475,6 +562,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query loan records_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedloanrecords-parameters](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloanrecords-parameters)
 
 | Name     | In    | Type           | Required | Description                                                              |
 | -------- | ----- | -------------- | -------- | ------------------------------------------------------------------------ |
@@ -504,11 +594,17 @@ _Query loan records_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedloanrecords-responses](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloanrecords-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedloanrecords-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloanrecords-responseschema)
 
 Status Code **200**
 
@@ -530,6 +626,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-interest-deduction-records) Query interest deduction records
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-interest-deduction-records](https://www.gate.io/docs/developers/apiv4/en/#query-interest-deduction-records)
+
 > Code samples
 
 `GET /unified/interest_records`
@@ -537,6 +636,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query interest deduction records_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedloaninterestrecords-parameters](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloaninterestrecords-parameters)
 
 | Name     | In    | Type           | Required | Description                                                                                              |
 | -------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------- |
@@ -567,11 +669,17 @@ _Query interest deduction records_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedloaninterestrecords-responses](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloaninterestrecords-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedloaninterestrecords-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloaninterestrecords-responseschema)
 
 Status Code **200**
 
@@ -592,6 +700,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-user-risk-unit-details) Get user risk unit details
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-user-risk-unit-details](https://www.gate.io/docs/developers/apiv4/en/#get-user-risk-unit-details)
 
 > Code samples
 
@@ -626,11 +737,17 @@ Get user risk unit details, only valid in portfolio margin mode
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedriskunits-responses](https://www.gate.io/docs/developers/apiv4/en/#getunifiedriskunits-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedriskunits-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getunifiedriskunits-responseschema)
 
 Status Code **200**
 
@@ -654,6 +771,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#set-unified-account-mode) Set unified account mode
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#set-unified-account-mode](https://www.gate.io/docs/developers/apiv4/en/#set-unified-account-mode)
 
 > Code samples
 
@@ -709,6 +829,9 @@ PUT /unified/unified_mode { "mode": "single_currency" }
 
 ### Parameters
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#setunifiedmode-parameters](https://www.gate.io/docs/developers/apiv4/en/#setunifiedmode-parameters)
+
 | Name            | In   | Type    | Required | Description                                                                                    |
 | --------------- | ---- | ------- | -------- | ---------------------------------------------------------------------------------------------- |
 | body            | body | object  | true     | none                                                                                           |
@@ -730,6 +853,9 @@ PUT /unified/unified_mode { "mode": "single_currency" }
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#setunifiedmode-responses](https://www.gate.io/docs/developers/apiv4/en/#setunifiedmode-responses)
+
 | Status | Meaning                                                                            | Description      | Schema |
 | ------ | ---------------------------------------------------------------------------------- | ---------------- | ------ |
 | 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Set successfully | None   |
@@ -739,6 +865,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-mode-of-the-unified-account) Query mode of the unified account
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-mode-of-the-unified-account](https://www.gate.io/docs/developers/apiv4/en/#query-mode-of-the-unified-account)
 
 > Code samples
 
@@ -770,11 +899,17 @@ Unified account mode:
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedmode-responses](https://www.gate.io/docs/developers/apiv4/en/#getunifiedmode-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedmode-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getunifiedmode-responseschema)
 
 Status Code **200**
 
@@ -799,6 +934,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-unified-account-estimated-interest-rate) Query unified account estimated interest rate
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-unified-account-estimated-interest-rate](https://www.gate.io/docs/developers/apiv4/en/#query-unified-account-estimated-interest-rate)
+
 > Code samples
 
 `GET /unified/estimate_rate`
@@ -810,6 +948,9 @@ provided. When a currency is not supported, the interest rate returned will be
 an empty string
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedestimaterate-parameters](https://www.gate.io/docs/developers/apiv4/en/#getunifiedestimaterate-parameters)
 
 | Name       | In    | Type            | Required | Description                                                                                 |
 | ---------- | ----- | --------------- | -------- | ------------------------------------------------------------------------------------------- |
@@ -829,11 +970,17 @@ an empty string
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedestimaterate-responses](https://www.gate.io/docs/developers/apiv4/en/#getunifiedestimaterate-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getunifiedestimaterate-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getunifiedestimaterate-responseschema)
 
 Status Code **200**
 
@@ -848,6 +995,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-unified-account-tiered) Query unified account tiered
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-unified-account-tiered](https://www.gate.io/docs/developers/apiv4/en/#query-unified-account-tiered)
 
 > Code samples
 
@@ -993,11 +1143,17 @@ _Query unified account tiered_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listcurrencydiscounttiers-responses](https://www.gate.io/docs/developers/apiv4/en/#listcurrencydiscounttiers-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listcurrencydiscounttiers-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listcurrencydiscounttiers-responseschema)
 
 Status Code **200**
 
@@ -1015,6 +1171,9 @@ Status Code **200**
 This operation does not require authentication
 
 ## [#](#query-unified-account-tiered-loan-margin) Query unified account tiered loan margin
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-unified-account-tiered-loan-margin](https://www.gate.io/docs/developers/apiv4/en/#query-unified-account-tiered-loan-margin)
 
 > Code samples
 
@@ -1045,11 +1204,17 @@ _Query unified account tiered loan margin_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listloanmargintiers-responses](https://www.gate.io/docs/developers/apiv4/en/#listloanmargintiers-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listloanmargintiers-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listloanmargintiers-responseschema)
 
 Status Code **200**
 
@@ -1068,6 +1233,9 @@ Status Code **200**
 This operation does not require authentication
 
 ## [#](#portfolio-margin-calculator) Portfolio margin calculator
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#portfolio-margin-calculator](https://www.gate.io/docs/developers/apiv4/en/#portfolio-margin-calculator)
 
 > Code samples
 
@@ -1135,6 +1303,9 @@ contracts, options, and spot markets. Market orders are not included.
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#calculateportfoliomargin-parameters](https://www.gate.io/docs/developers/apiv4/en/#calculateportfoliomargin-parameters)
 
 | Name                    | In   | Type    | Required | Description                                                                                                                                                               |
 | ----------------------- | ---- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1262,11 +1433,17 @@ contracts, options, and spot markets. Market orders are not included.
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#calculateportfoliomargin-responses](https://www.gate.io/docs/developers/apiv4/en/#calculateportfoliomargin-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#calculateportfoliomargin-responseschema](https://www.gate.io/docs/developers/apiv4/en/#calculateportfoliomargin-responseschema)
 
 Status Code **200**
 
@@ -1308,6 +1485,9 @@ This operation does not require authentication
 
 ## [#](#maximum-and-minimum-currency-leverage-that-can-be-set) Maximum and minimum currency leverage that can be set
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#maximum-and-minimum-currency-leverage-that-can-be-set](https://www.gate.io/docs/developers/apiv4/en/#maximum-and-minimum-currency-leverage-that-can-be-set)
+
 > Code samples
 
 `GET /unified/leverage/user_currency_config`
@@ -1315,6 +1495,9 @@ This operation does not require authentication
 _Maximum and minimum currency leverage that can be set_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencyconfig-parameters](https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencyconfig-parameters)
 
 | Name     | In    | Type   | Required | Description |
 | -------- | ----- | ------ | -------- | ----------- |
@@ -1338,11 +1521,17 @@ _Maximum and minimum currency leverage that can be set_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencyconfig-responses](https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencyconfig-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencyconfig-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencyconfig-responseschema)
 
 Status Code **200**
 
@@ -1362,6 +1551,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-user-currency-leverage) Get user currency leverage
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-user-currency-leverage](https://www.gate.io/docs/developers/apiv4/en/#get-user-currency-leverage)
+
 > Code samples
 
 `GET /unified/leverage/user_currency_setting`
@@ -1371,6 +1563,9 @@ _Get user currency leverage_
 Get user currency leverage. If currency is not specified, query all currencies
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencysetting-parameters](https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencysetting-parameters)
 
 | Name     | In    | Type   | Required | Description |
 | -------- | ----- | ------ | -------- | ----------- |
@@ -1391,11 +1586,17 @@ Get user currency leverage. If currency is not specified, query all currencies
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencysetting-responses](https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencysetting-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencysetting-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencysetting-responseschema)
 
 Status Code **200**
 
@@ -1411,6 +1612,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#set-loan-currency-leverage) Set loan currency leverage
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#set-loan-currency-leverage](https://www.gate.io/docs/developers/apiv4/en/#set-loan-currency-leverage)
 
 > Code samples
 
@@ -1429,6 +1633,9 @@ _Set loan currency leverage_
 
 ### Parameters
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#setuserleveragecurrencysetting-parameters](https://www.gate.io/docs/developers/apiv4/en/#setuserleveragecurrencysetting-parameters)
+
 | Name       | In   | Type   | Required | Description   |
 | ---------- | ---- | ------ | -------- | ------------- |
 | body       | body | object | true     | none          |
@@ -1436,6 +1643,9 @@ _Set loan currency leverage_
 | » leverage | body | string | true     | Multiplier    |
 
 ### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#setuserleveragecurrencysetting-responses](https://www.gate.io/docs/developers/apiv4/en/#setuserleveragecurrencysetting-responses)
 
 | Status | Meaning                                                                            | Description      | Schema |
 | ------ | ---------------------------------------------------------------------------------- | ---------------- | ------ |
@@ -1447,6 +1657,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#list-of-loan-currencies-supported-by-unified-account) List of loan currencies supported by unified account
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#list-of-loan-currencies-supported-by-unified-account](https://www.gate.io/docs/developers/apiv4/en/#list-of-loan-currencies-supported-by-unified-account)
+
 > Code samples
 
 `GET /unified/currencies`
@@ -1454,6 +1667,9 @@ To perform this operation, you must be authenticated by API key and secret
 _List of loan currencies supported by unified account_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedcurrencies-parameters](https://www.gate.io/docs/developers/apiv4/en/#listunifiedcurrencies-parameters)
 
 | Name     | In    | Type   | Required | Description |
 | -------- | ----- | ------ | -------- | ----------- |
@@ -1478,11 +1694,17 @@ _List of loan currencies supported by unified account_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedcurrencies-responses](https://www.gate.io/docs/developers/apiv4/en/#listunifiedcurrencies-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedcurrencies-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listunifiedcurrencies-responseschema)
 
 Status Code **200**
 
@@ -1502,6 +1724,9 @@ This operation does not require authentication
 
 ## [#](#get-historical-lending-rates) Get historical lending rates
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-historical-lending-rates](https://www.gate.io/docs/developers/apiv4/en/#get-historical-lending-rates)
+
 > Code samples
 
 `GET /unified/history_loan_rate`
@@ -1509,6 +1734,9 @@ This operation does not require authentication
 _Get historical lending rates_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#gethistoryloanrate-parameters](https://www.gate.io/docs/developers/apiv4/en/#gethistoryloanrate-parameters)
 
 | Name     | In    | Type           | Required | Description                                                              |
 | -------- | ----- | -------------- | -------- | ------------------------------------------------------------------------ |
@@ -1537,11 +1765,17 @@ _Get historical lending rates_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#gethistoryloanrate-responses](https://www.gate.io/docs/developers/apiv4/en/#gethistoryloanrate-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#gethistoryloanrate-responseschema](https://www.gate.io/docs/developers/apiv4/en/#gethistoryloanrate-responseschema)
 
 Status Code **200**
 
@@ -1557,6 +1791,9 @@ Status Code **200**
 This operation does not require authentication
 
 ## [#](#set-collateral-currency) Set collateral currency
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#set-collateral-currency](https://www.gate.io/docs/developers/apiv4/en/#set-collateral-currency)
 
 > Code samples
 
@@ -1581,6 +1818,9 @@ _Set collateral currency_
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#setunifiedcollateral-parameters](https://www.gate.io/docs/developers/apiv4/en/#setunifiedcollateral-parameters)
 
 | Name              | In   | Type    | Required | Description                                                                                                                                                                                   |
 | ----------------- | ---- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1608,11 +1848,17 @@ _Set collateral currency_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#setunifiedcollateral-responses](https://www.gate.io/docs/developers/apiv4/en/#setunifiedcollateral-responses)
+
 | Status | Meaning                                                                    | Description          | Schema |
 | ------ | -------------------------------------------------------------------------- | -------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Updated successfully | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#setunifiedcollateral-responseschema](https://www.gate.io/docs/developers/apiv4/en/#setunifiedcollateral-responseschema)
 
 Status Code **200**
 

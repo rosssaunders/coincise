@@ -4,6 +4,9 @@ Withdrawal API
 
 ## [#](#withdraw) Withdraw
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#withdraw](https://www.gate.io/docs/developers/apiv4/en/#withdraw)
+
 > Code samples
 
 `POST /withdrawals`
@@ -27,6 +30,9 @@ charged
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#withdraw-parameters](https://www.gate.io/docs/developers/apiv4/en/#withdraw-parameters)
 
 | Name                | In   | Type   | Required | Description                                                                                                                                                                               |
 | ------------------- | ---- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -69,11 +75,17 @@ SPOT: Main area PILOT: Innovation area
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#withdraw-responses](https://www.gate.io/docs/developers/apiv4/en/#withdraw-responses)
+
 | Status | Meaning                                                                    | Description                                                                       | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Withdrawal request accepted. Check withdrawal record status for processing result | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#withdraw-responseschema](https://www.gate.io/docs/developers/apiv4/en/#withdraw-responseschema)
 
 Status Code **200**
 
@@ -116,6 +128,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#uid-transfer) UID transfer
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#uid-transfer](https://www.gate.io/docs/developers/apiv4/en/#uid-transfer)
+
 > Code samples
 
 `POST /withdrawals/push`
@@ -136,6 +151,9 @@ Transfers between main spot accounts. Both parties cannot be sub-accounts
 
 ### Parameters
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#withdrawpushorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#withdrawpushorder-parameters)
+
 | Name          | In   | Type           | Required | Description     |
 | ------------- | ---- | -------------- | -------- | --------------- |
 | body          | body | object         | true     | none            |
@@ -155,11 +173,17 @@ Transfers between main spot accounts. Both parties cannot be sub-accounts
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#withdrawpushorder-responses](https://www.gate.io/docs/developers/apiv4/en/#withdrawpushorder-responses)
+
 | Status | Meaning                                                                    | Description                                                            | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Request accepted. Check withdrawal record status for processing result | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#withdrawpushorder-responseschema](https://www.gate.io/docs/developers/apiv4/en/#withdrawpushorder-responseschema)
 
 Status Code **200**
 
@@ -173,6 +197,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#cancel-withdrawal-with-specified-id) Cancel withdrawal with specified ID
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancel-withdrawal-with-specified-id](https://www.gate.io/docs/developers/apiv4/en/#cancel-withdrawal-with-specified-id)
+
 > Code samples
 
 `DELETE /withdrawals/{withdrawal_id}`
@@ -180,6 +207,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Cancel withdrawal with specified ID_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelwithdrawal-parameters](https://www.gate.io/docs/developers/apiv4/en/#cancelwithdrawal-parameters)
 
 | Name          | In   | Type   | Required | Description |
 | ------------- | ---- | ------ | -------- | ----------- |
@@ -206,11 +236,17 @@ _Cancel withdrawal with specified ID_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelwithdrawal-responses](https://www.gate.io/docs/developers/apiv4/en/#cancelwithdrawal-responses)
+
 | Status | Meaning                                                                          | Description                                                                | Schema |
 | ------ | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------ |
 | 202    | [Accepted (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.3) | Cancellation request accepted. Check record status for cancellation result | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelwithdrawal-responseschema](https://www.gate.io/docs/developers/apiv4/en/#cancelwithdrawal-responseschema)
 
 Status Code **202**
 

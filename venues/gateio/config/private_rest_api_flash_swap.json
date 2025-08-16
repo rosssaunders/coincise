@@ -1,7 +1,7 @@
 {
   "url": "https://www.gate.io/docs/developers/apiv4/en/",
   "sections": [
-    "isolated-margin"
+    "flash-swap"
   ],
-  "outputFile": "isolated_margin_private_rest_api.md"
+  "outputFile": "private_rest_api_flash_swap.md"
 }

@@ -1,7 +1,7 @@
 {
   "url": "https://www.gate.io/docs/developers/apiv4/en/",
   "sections": [
-    "subaccount"
+    "earnuni"
   ],
-  "outputFile": "subaccount_private_rest_api.md"
+  "outputFile": "private_rest_api_earnuni.md"
 }

@@ -9,6 +9,9 @@ authenticated private interfaces for implementing API-based automated trading.
 
 ## [#](#access-url) Access URL
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#access-url](https://www.gate.io/docs/developers/apiv4/en/#access-url)
+
 **REST API BaseURL:**
 
 - Live trading: `https://api.gateio.ws/api/v4`
@@ -17,6 +20,9 @@ authenticated private interfaces for implementing API-based automated trading.
   `https://fx-api.gateio.ws/api/v4`
 
 ## [#](#sdk) SDK
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#sdk](https://www.gate.io/docs/developers/apiv4/en/#sdk)
 
 Available SDK:
 
@@ -40,6 +46,9 @@ details.
 
 ## [#](#about-apiv4-key-improvement) About APIv4 key improvement
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#about-apiv4-key-improvement](https://www.gate.io/docs/developers/apiv4/en/#about-apiv4-key-improvement)
+
 Previously(before April 2020) futures APIv4 key are separated from spot one, but
 this is no longer the case anymore. You can create multiple keys with each key
 having multiple permissions now. e.g. you can create one key with spot
@@ -52,6 +61,9 @@ futures permission enabled. You can reconfigure their permissions after
 migration.
 
 ## [#](#comparison-with-apiv2) Comparison with APIv2
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#comparison-with-apiv2](https://www.gate.io/docs/developers/apiv4/en/#comparison-with-apiv2)
 
 APIv4 is a standalone brand-new HTTP REST API, currently used in parallel with
 APIv2. APIv4 provides complete trading operations, with more highly secured
@@ -75,6 +87,9 @@ Which one to choose:
 
 ## [#](#application-for-marketers) Application for Marketers
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#application-for-marketers](https://www.gate.io/docs/developers/apiv4/en/#application-for-marketers)
+
 In order to further improve the platform's opening depth and trading liquidity,
 we will recruit institutional market makers in an open and transparent way, and
 provide a professional market maker's service rate scheme for professional
@@ -94,6 +109,9 @@ Vip11 and above need to open GT deduction in the personal center to enjoy the
 professional market rate.
 
 ## [#](#technical-support) Technical Support
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#technical-support](https://www.gate.io/docs/developers/apiv4/en/#technical-support)
 
 If you have any questions or suggestions during the use, you can contact us in
 any of the following ways:
@@ -123,7 +141,13 @@ has been accidentally leaked, please delete the existing API and rebuild it.
 
 ## [#](#matching-mechanism) Matching mechanism
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#matching-mechanism](https://www.gate.io/docs/developers/apiv4/en/#matching-mechanism)
+
 ### [#](#matching-priority) Matching priority
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#matching-priority](https://www.gate.io/docs/developers/apiv4/en/#matching-priority)
 
 Gate Order matching follows Price Priority > Time priority principle.
 
@@ -139,6 +163,9 @@ If the current price of 10:02 pays 102, the final transaction order is: A, C, B
 
 ### [#](#order-life-cycle) Order life cycle
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#order-life-cycle](https://www.gate.io/docs/developers/apiv4/en/#order-life-cycle)
+
 A valid order sent to the matching engine is immediately confirmed and executed
 with existing orders, with the executing result sent back to the client.
 
@@ -149,9 +176,15 @@ subsequent filling or being cancelled.
 
 ## [#](#data-center) Data Center
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#data-center](https://www.gate.io/docs/developers/apiv4/en/#data-center)
+
 Gate data center is located in AWS Japan's ap-northeast-1 region.
 
 ## [#](#api-overview) API Overview
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#api-overview](https://www.gate.io/docs/developers/apiv4/en/#api-overview)
 
 | API Classification             | Category Links    | Overview                                                                                      |
 | ------------------------------ | ----------------- | --------------------------------------------------------------------------------------------- |
@@ -161,6 +194,9 @@ Gate data center is located in AWS Japan's ap-northeast-1 region.
 | host + `/api/v4/withdrawals/*` | Withdrawal        | Withdrawal of digital currency                                                                |
 
 ## [#](#margin-migration-instructions) Margin Migration Instructions
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#margin-migration-instructions](https://www.gate.io/docs/developers/apiv4/en/#margin-migration-instructions)
 
 Between 14:00 (UTC+8) on April 13, 2023 and 14:00 (UTC+8) on April 23, 2023, the
 platform will gradually migrate the assets that have not been borrowed in the
@@ -224,6 +260,9 @@ The earn related APIs have been migrated to the `/earn/uni` API group):
 
 ## [#](#http-convention) HTTP convention
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#http-convention](https://www.gate.io/docs/developers/apiv4/en/#http-convention)
+
 - All read endpoints use `GET` method. They accept only request parameters. No
   request body will be read.
 - `DELETE` methods remove resources(like orders), but not all removing operation
@@ -239,6 +278,9 @@ The earn related APIs have been migrated to the `/earn/uni` API group):
   Commit issues if `5xx` is met.
 
 ## [#](#time) Time
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#time](https://www.gate.io/docs/developers/apiv4/en/#time)
 
 All time related fields are unix timestamp in **seconds** if no extra note, but
 they may differ in formats(int64, number or string). Possible values like the
@@ -256,6 +298,9 @@ to handle them
 
 ## [#](#api-gateway-in-out-time) API Gateway in/out time
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#api-gateway-in-out-time](https://www.gate.io/docs/developers/apiv4/en/#api-gateway-in-out-time)
+
 In every API request, the response header will always include the following
 fields:
 
@@ -272,6 +317,9 @@ X-Out-Time: 1695715091551905
 ```
 
 ## [#](#pagination) Pagination
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#pagination](https://www.gate.io/docs/developers/apiv4/en/#pagination)
 
 Pagination is achieved using one of the following method
 
@@ -312,6 +360,9 @@ example, following headers will be returned
 - `X-Pagination-Total`: total record number satisfying the request
 
 ## [#](#frequency-limit-rule) Frequency limit rule
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#frequency-limit-rule](https://www.gate.io/docs/developers/apiv4/en/#frequency-limit-rule)
 
 | Markets              | Endpoints         | Limits                                | Based On | Include                              |
 | -------------------- | ----------------- | ------------------------------------- | -------- | ------------------------------------ |
@@ -390,6 +441,9 @@ WebSocket:
 
 ## [#](#rate-limit-based-on-fill-ratio) Rate Limit Based On Fill Ratio
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#rate-limit-based-on-fill-ratio](https://www.gate.io/docs/developers/apiv4/en/#rate-limit-based-on-fill-ratio)
+
 In order to enhance trading efficiency, we have decided to implement more
 favorable sub-account rate limits for clients with a higher fill ratio. This
 assessment will be based on trading data from the past seven days and will be
@@ -397,6 +451,9 @@ calculated daily at 00:00 UTC. Please note that this rule applies only to
 clients at **VIP level 14 and above**.
 
 ### [#](#_1-introduction-of-terminology) 1. Introduction of Terminology
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#\_1-introduction-of-terminology](https://www.gate.io/docs/developers/apiv4/en/#_1-introduction-of-terminology)
 
 #### [#](#_1-1-symbol-multiplier) 1.1 Symbol Multiplier
 
@@ -454,6 +511,9 @@ that the main account is also considered a "sub-account."
 
 ### [#](#_2-future-rate-limit-rule) 2. Future Rate Limit Rule
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#\_2-future-rate-limit-rule](https://www.gate.io/docs/developers/apiv4/en/#_2-future-rate-limit-rule)
+
 | Contract Frequency Limitation Rules |
 | ----------------------------------- | -------- | ---------------- |
 | Tier                                | Ratio    | Rate Limit (uid) |
@@ -468,6 +528,9 @@ that the main account is also considered a "sub-account."
 > > Please stay tuned for the rate limits for spot trading.
 
 ### [#](#_3-detailed-rules-for-fill-ratio) 3. Detailed Rules for Fill Ratio
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#\_3-detailed-rules-for-fill-ratio](https://www.gate.io/docs/developers/apiv4/en/#_3-detailed-rules-for-fill-ratio)
 
 1.  Target Client Group: VIP ≥ 14
 2.  Calculation Period: 7 days
@@ -490,6 +553,9 @@ that the main account is also considered a "sub-account."
     7.  Both WebSocket and REST APIs are subject to these rules.
 
 ### [#](#_4-example) 4. Example
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#\_4-example](https://www.gate.io/docs/developers/apiv4/en/#_4-example)
 
 Assuming the client has three accounts, with the symbol multipliers for trading
 perpetual contract products BTC-USDT and SOL-USDT being 1 and 0.4, respectively.
@@ -531,6 +597,9 @@ perpetual contract products BTC-USDT and SOL-USDT being 1 and 0.4, respectively.
 
 ### [#](#_5-remarks) 5. Remarks
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#\_5-remarks](https://www.gate.io/docs/developers/apiv4/en/#_5-remarks)
+
 1.  The release date for the rate limit of perpetual contracts based on fill
     ratio will be announced later. Please stay tuned.
 2.  The existing abuse rate limit rules for perpetual contracts will still
@@ -546,6 +615,9 @@ perpetual contract products BTC-USDT and SOL-USDT being 1 and 0.4, respectively.
 3.  Please stay tuned for the fill ratio rate limit for spot trading.
 
 ## [#](#return-format) Return Format
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#return-format](https://www.gate.io/docs/developers/apiv4/en/#return-format)
 
 All API responses are in JSON format, and users need to transform and extract
 data by themselves.
@@ -571,6 +643,9 @@ feedback as soon as possible。
 
 ## [#](#data-type) Data Type
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#data-type](https://www.gate.io/docs/developers/apiv4/en/#data-type)
+
 | Type             | Description                                                                                  |
 | ---------------- | -------------------------------------------------------------------------------------------- |
 | `string`         | String type, in double quotation marks. Price and amount are also formatted in string format |
@@ -582,6 +657,9 @@ feedback as soon as possible。
 | `boolean`        | true is true，false is false                                                                 |
 
 ## [#](#portfolio-margin-account) Portfolio Margin Account
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#portfolio-margin-account](https://www.gate.io/docs/developers/apiv4/en/#portfolio-margin-account)
 
 TIP
 
@@ -608,6 +686,9 @@ contracts trading only.
 
 ### [#](#transfer) Transfer
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#transfer](https://www.gate.io/docs/developers/apiv4/en/#transfer)
+
 The classic account and portfolio margin account are two different capital
 isolation accounts. If you want to achieve multi-currency margin sharing among
 multi-product lines, use the portfolio margin account please.
@@ -632,6 +713,9 @@ cross-margin account first, so that the classic account can perform withdrawals
 from portfolio margin account.
 
 ### [#](#spot-trading) Spot trading
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#spot-trading](https://www.gate.io/docs/developers/apiv4/en/#spot-trading)
 
 The spot trading of the portfolio margin account is almost the same as the
 classic account, except that `cross_margin` must be specified in the `account`
@@ -664,6 +748,9 @@ margin account (note that the futures accounts are separate)
 
 ### [#](#futures-trading) Futures trading
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#futures-trading](https://www.gate.io/docs/developers/apiv4/en/#futures-trading)
+
 The API operation of the perpetual contract of the portfolio margin account is
 exactly the same as that of the classic account, but currently only supports USD
 settlement
@@ -681,12 +768,21 @@ addition, funds under `classic account-spot` cannot share margin with
 
 ## [#](#trace-id) Trace ID
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#trace-id](https://www.gate.io/docs/developers/apiv4/en/#trace-id)
+
 The API response will carry the header: X-Gate-Trace-ID . This header is used
 for tracking.
 
 ## [#](#self-trade-prevention-stp) Self-Trade Prevention (STP)
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#self-trade-prevention-stp](https://www.gate.io/docs/developers/apiv4/en/#self-trade-prevention-stp)
+
 ### [#](#concepts) Concepts
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#concepts](https://www.gate.io/docs/developers/apiv4/en/#concepts)
 
 **Self-Trade Prevention**: STP will prevent any user's orders from being matched
 with each other.
@@ -698,6 +794,9 @@ with each other.
 **CB**: Cancel both, Both old and new orders will be cancelled.
 
 ### [#](#stp-strategies) STP Strategies
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#stp-strategies](https://www.gate.io/docs/developers/apiv4/en/#stp-strategies)
 
 We support three STP strategies, which are `CN` , `CO` and `CB`.
 
@@ -712,6 +811,9 @@ not belong to any STP trading group, and place orders with the `stp_act`
 parameter, the orders will be rejected.
 
 ### [#](#api-parameter-adjustment) API Parameter Adjustment
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#api-parameter-adjustment](https://www.gate.io/docs/developers/apiv4/en/#api-parameter-adjustment)
 
 Take placing futures order as an example:
 
@@ -743,6 +845,9 @@ finish type:
 \- **stp: The order has been canceled due to the `STP`** |
 
 ### [#](#user-case) User case
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#user-case](https://www.gate.io/docs/developers/apiv4/en/#user-case)
 
 There are multiple accounts under `Organization A`, and the IDs of several
 accounts are `101`, `102`, and `103`
@@ -811,7 +916,13 @@ added to account 101’s STP group. The key response fields returned are:
 
 ## [#](#unified-account) Unified Account
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#unified-account](https://www.gate.io/docs/developers/apiv4/en/#unified-account)
+
 ### [#](#description) Description
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#description](https://www.gate.io/docs/developers/apiv4/en/#description)
 
 Once a user upgrades their account to the unified account, they can utilize the
 assets from their spot account as collateral for trading. The assets in the
@@ -840,6 +951,9 @@ please refer to [here](https://www.gate.com/unified-trading-account)
 
 ### [#](#api-integration-process) API Integration Process
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#api-integration-process](https://www.gate.io/docs/developers/apiv4/en/#api-integration-process)
+
 - Create a new `API KEY` or update the permissions of an existing `API KEY`,
   checking the `unified` permission
 - Use the classic account's `API KEY` to call the `PUT /unified/unified_mode`
@@ -852,6 +966,9 @@ please refer to [here](https://www.gate.com/unified-trading-account)
   (account querying, loan querying)
 
 ### [#](#spot-trading-2) SPOT Trading
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#spot-trading-2](https://www.gate.io/docs/developers/apiv4/en/#spot-trading-2)
 
 The spot trading in the Unified Account is consistent with that in the classical
 account. In order operations, specify `account=unified`, or specify
@@ -876,6 +993,9 @@ directly.
 
 ### [#](#formula) Formula
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#formula](https://www.gate.io/docs/developers/apiv4/en/#formula)
+
 | Name                          | Cross Margin                                                                                                                    |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | portfolio_margin_total_equity | Account Equity = ∑(Equity \* Index Price）                                                                                      |
@@ -890,7 +1010,13 @@ directly.
 
 ## [#](#accountbook-type) AccountBook type
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#accountbook-type](https://www.gate.io/docs/developers/apiv4/en/#accountbook-type)
+
 ### [#](#general-2) General
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#general-2](https://www.gate.io/docs/developers/apiv4/en/#general-2)
 
 - unknown: Unknown
 - login: Log In
@@ -907,6 +1033,9 @@ directly.
 
 ### [#](#order) Order
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#order](https://www.gate.io/docs/developers/apiv4/en/#order)
+
 - new_order: Order Placed
 - cancel_order: Order Cancelled
 - order_fill: Order Filled
@@ -915,6 +1044,9 @@ directly.
 - system_fee: Trading Fee System Account
 
 ### [#](#withdraw-deposit) Withdraw-Deposit
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#withdraw-deposit](https://www.gate.io/docs/developers/apiv4/en/#withdraw-deposit)
 
 - withdraw: Withdrawals
 - deposit: Deposits
@@ -934,12 +1066,18 @@ directly.
 
 ### [#](#startup) Startup
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#startup](https://www.gate.io/docs/developers/apiv4/en/#startup)
+
 - startup_prtcp: Startup Sale Participation
 - startup_refund: Startup Sale Refund
 - startup_sale: Startup Sale
 - startup_sale_rb: Startup Sale Rolled Back
 
 ### [#](#rebate) Rebate
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#rebate](https://www.gate.io/docs/developers/apiv4/en/#rebate)
 
 - referral_rebate: Referral Superior Rebate
 - sec_rebate_out: Secondary Rebate Financial Account Transfer Out
@@ -955,6 +1093,9 @@ directly.
 
 ### [#](#convert) Convert
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#convert](https://www.gate.io/docs/developers/apiv4/en/#convert)
+
 - eth_swap: ETH Swap
 - dust_swap_dctd: Dust Swap-Small Balances Deducted
 - dust_swap_gt_add: Dust Swap-GT Added
@@ -963,6 +1104,9 @@ directly.
 - cv_sell: Quick Sell-Sold
 
 ### [#](#c2c) C2C
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#c2c](https://www.gate.io/docs/developers/apiv4/en/#c2c)
 
 - c2c_mop: C2C Merchant Order Placed
 - c2c_moc: C2C Merchant Order Canceled
@@ -974,6 +1118,9 @@ directly.
 
 ### [#](#reward) Reward
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#reward](https://www.gate.io/docs/developers/apiv4/en/#reward)
+
 - deposit_bonus: Deposit Bonus
 - trading_rewards: Trading Rewards
 - purchase_bonus: Purchase Bonus
@@ -982,6 +1129,9 @@ directly.
 - mining_rewards: Mining Rewards
 
 ### [#](#account-transfer-in-out) Account Transfer In-Out
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#account-transfer-in-out](https://www.gate.io/docs/developers/apiv4/en/#account-transfer-in-out)
 
 - margin_in: Isolated Margin-Transferred In
 - margin_out: Isolated Margin- Transferred Out
@@ -1017,12 +1167,18 @@ directly.
 
 ### [#](#points) Points
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#points](https://www.gate.io/docs/developers/apiv4/en/#points)
+
 - points_purchase: Points Purchase
 - points_expiration: Points With Expiration
 - points_trf: Points Transfer
 - points_trf_rej: Points Transfer Rejected
 
 ### [#](#finance) Finance
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#finance](https://www.gate.io/docs/developers/apiv4/en/#finance)
 
 - lending_lent: Lending-Lent
 - collected: Collected
@@ -1041,6 +1197,9 @@ directly.
 
 ### [#](#loan) Loan
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#loan](https://www.gate.io/docs/developers/apiv4/en/#loan)
+
 - borrow: Borrow
 - repay: Repay
 - margin_borrow: Isolated Margin-Transferred In
@@ -1055,6 +1214,9 @@ directly.
 - interest_out: Interest
 
 ### [#](#moments) Moments
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#moments](https://www.gate.io/docs/developers/apiv4/en/#moments)
 
 - donation: Donation
 - rp_sent: Red Packet Sent
@@ -1071,6 +1233,9 @@ directly.
 
 ### [#](#push-trading) PUSH Trading
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#push-trading](https://www.gate.io/docs/developers/apiv4/en/#push-trading)
+
 - push_dctd: Push- Deduction
 - push_rcvd_dctd: Push- Received-Deducted
 - push_canceled: Push Canceled
@@ -1079,6 +1244,9 @@ directly.
 - push_rcvd: Push Received
 
 ### [#](#copy-trading) Copy Trading
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#copy-trading](https://www.gate.io/docs/developers/apiv4/en/#copy-trading)
 
 - quant_return: Quant- Transaction Returned
 - quant_cmn_in: Quant-Commission Transferred In
@@ -1090,6 +1258,9 @@ directly.
 - fct_fee_refund: Futures Copy Trading - Performance Fee Refund
 
 ### [#](#nft) NFT
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#nft](https://www.gate.io/docs/developers/apiv4/en/#nft)
 
 - nft_mp: NFT Auction-Margin Paid
 - nft_bm: NFT Auction-Bid Made
@@ -1118,6 +1289,9 @@ directly.
 - nft_ammd: Nft-Amm Deal
 
 ## [#](#accountbook-code) AccountBook code
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#accountbook-code](https://www.gate.io/docs/developers/apiv4/en/#accountbook-code)
 
 - 1 : Order Placed Old
 - 2 : Order Cancelled old
@@ -1551,6 +1725,9 @@ directly.
 
 ## [#](#error-handling) Error Handling
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#error-handling](https://www.gate.io/docs/developers/apiv4/en/#error-handling)
+
 For all abnormal requests, APIv4 will return non-2xx status code, with a
 response body in JSON format to explain the error.
 
@@ -1582,6 +1759,9 @@ or with
 [Python SDK (opens new window)](https://github.com/gateio/gateapi-python):
 
 ## [#](#label-list) `label` list
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#label-list](https://www.gate.io/docs/developers/apiv4/en/#label-list)
 
 - Request parameter or format related
 
@@ -1778,6 +1958,9 @@ or with
 
 ## [#](#generate-api-key) Generate API key
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#generate-api-key](https://www.gate.io/docs/developers/apiv4/en/#generate-api-key)
+
 Before calling the private API interface, the API key of the account needs to be
 generated to verify the identity. You can log in on the website and generate it
 in \[account management\] - > \[APIv4 keys\], or click
@@ -1816,6 +1999,9 @@ only exceptions are different base URLs and different API keys.
 
 ## [#](#apiv4-permissions) APIv4 Permissions
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#apiv4-permissions](https://www.gate.io/docs/developers/apiv4/en/#apiv4-permissions)
+
 When creating a Key, you can configure whether to enable spot, margin, contract,
 wallet, or withdrawal permissions for the Key, and whether to enable read-write
 or read-only permissions.
@@ -1838,6 +2024,9 @@ stays inside wallet operations( i.e., `GET /wallet/withdrawals`).
 
 ## [#](#apiv4-signed-request-requirements) APIv4 signed request requirements
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#apiv4-signed-request-requirements](https://www.gate.io/docs/developers/apiv4/en/#apiv4-signed-request-requirements)
+
 1.  Generate APIv4 Key pairs in web console, and make sure it has the right
     permissions.
 2.  Set request header `KEY` to the key.
@@ -1853,20 +2042,32 @@ stays inside wallet operations( i.e., `GET /wallet/withdrawals`).
 
 ## [#](#api-signature-string-generation) API Signature string generation
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#api-signature-string-generation](https://www.gate.io/docs/developers/apiv4/en/#api-signature-string-generation)
+
 In APIv4, signature string is concatenated as the following way:
 
 `Request Method + "\n" + Request URL + "\n" + Query String + "\n" + HexEncode(SHA512(Request Payload)) + "\n" + Timestamp`
 
 ### [#](#request-method) Request Method
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#request-method](https://www.gate.io/docs/developers/apiv4/en/#request-method)
+
 Request method in UPPERCASE, e.g. `POST`, `GET`
 
 ### [#](#request-url) Request URL
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#request-url](https://www.gate.io/docs/developers/apiv4/en/#request-url)
 
 Request url. Protocol, host and port are not included, e.g.
 `/api/v4/futures/orders`
 
 ### [#](#query-string) Query String
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-string](https://www.gate.io/docs/developers/apiv4/en/#query-string)
 
 Request query string without URL encode. query parameters order should be the
 same as how they are concatenated in the request URL, e.g.
@@ -1874,11 +2075,17 @@ same as how they are concatenated in the request URL, e.g.
 
 ### [#](#hexencode-sha512-request-payload) HexEncode(SHA512(Request Payload))
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#hexencode-sha512-request-payload](https://www.gate.io/docs/developers/apiv4/en/#hexencode-sha512-request-payload)
+
 Hash the request body with SHA512 and output its Hex encoded form. If no request
 body, use empty string's hashed result, i.e.
 `cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e`
 
 ### [#](#timestamp) Timestamp
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#timestamp](https://www.gate.io/docs/developers/apiv4/en/#timestamp)
 
 `Timestamp` request header value.
 

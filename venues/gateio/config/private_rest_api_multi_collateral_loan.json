@@ -3,5 +3,5 @@
   "sections": [
     "multi-collateral-loan"
   ],
-  "outputFile": "multi_collateral_loan_private_rest_api.md"
+  "outputFile": "private_rest_api_multi_collateral_loan.md"
 }

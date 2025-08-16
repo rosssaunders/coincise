@@ -4,6 +4,9 @@ Wallet API
 
 ## [#](#query-chains-supported-for-specified-currency) Query chains supported for specified currency
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-chains-supported-for-specified-currency](https://www.gate.io/docs/developers/apiv4/en/#query-chains-supported-for-specified-currency)
+
 > Code samples
 
 `GET /wallet/currency_chains`
@@ -11,6 +14,9 @@ Wallet API
 _Query chains supported for specified currency_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listcurrencychains-parameters](https://www.gate.io/docs/developers/apiv4/en/#listcurrencychains-parameters)
 
 | Name     | In    | Type   | Required | Description   |
 | -------- | ----- | ------ | -------- | ------------- |
@@ -36,11 +42,17 @@ _Query chains supported for specified currency_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listcurrencychains-responses](https://www.gate.io/docs/developers/apiv4/en/#listcurrencychains-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listcurrencychains-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listcurrencychains-responseschema)
 
 Status Code **200**
 
@@ -59,6 +71,9 @@ This operation does not require authentication
 
 ## [#](#generate-currency-deposit-address) Generate currency deposit address
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#generate-currency-deposit-address](https://www.gate.io/docs/developers/apiv4/en/#generate-currency-deposit-address)
+
 > Code samples
 
 `GET /wallet/deposit_address`
@@ -66,6 +81,9 @@ This operation does not require authentication
 _Generate currency deposit address_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getdepositaddress-parameters](https://www.gate.io/docs/developers/apiv4/en/#getdepositaddress-parameters)
 
 | Name     | In    | Type   | Required | Description   |
 | -------- | ----- | ------ | -------- | ------------- |
@@ -93,11 +111,17 @@ _Generate currency deposit address_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getdepositaddress-responses](https://www.gate.io/docs/developers/apiv4/en/#getdepositaddress-responses)
+
 | Status | Meaning                                                                    | Description                    | Schema |
 | ------ | -------------------------------------------------------------------------- | ------------------------------ | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Address successfully generated | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getdepositaddress-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getdepositaddress-responseschema)
 
 Status Code **200**
 
@@ -119,6 +143,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-withdrawal-records) Get withdrawal records
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-withdrawal-records](https://www.gate.io/docs/developers/apiv4/en/#get-withdrawal-records)
+
 > Code samples
 
 `GET /wallet/withdrawals`
@@ -128,6 +155,9 @@ _Get withdrawal records_
 Record query time range cannot exceed 30 days
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listwithdrawals-parameters](https://www.gate.io/docs/developers/apiv4/en/#listwithdrawals-parameters)
 
 | Name              | In    | Type           | Required | Description                                                                                                                                                                               |
 | ----------------- | ----- | -------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -178,11 +208,17 @@ SPOT: Main Zone PILOT: Innovation Zone
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listwithdrawals-responses](https://www.gate.io/docs/developers/apiv4/en/#listwithdrawals-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listwithdrawals-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listwithdrawals-responseschema)
 
 Status Code **200**
 
@@ -226,6 +262,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-deposit-records) Get deposit records
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-deposit-records](https://www.gate.io/docs/developers/apiv4/en/#get-deposit-records)
+
 > Code samples
 
 `GET /wallet/deposits`
@@ -235,6 +274,9 @@ _Get deposit records_
 Record query time range cannot exceed 30 days
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeposits-parameters](https://www.gate.io/docs/developers/apiv4/en/#listdeposits-parameters)
 
 | Name     | In    | Type           | Required | Description                                                                              |
 | -------- | ----- | -------------- | -------- | ---------------------------------------------------------------------------------------- |
@@ -267,11 +309,17 @@ Record query time range cannot exceed 30 days
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeposits-responses](https://www.gate.io/docs/developers/apiv4/en/#listdeposits-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeposits-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listdeposits-responseschema)
 
 Status Code **200**
 
@@ -303,6 +351,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#transfer-between-trading-accounts) Transfer between trading accounts
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#transfer-between-trading-accounts](https://www.gate.io/docs/developers/apiv4/en/#transfer-between-trading-accounts)
+
 > Code samples
 
 `POST /wallet/transfers`
@@ -331,6 +382,9 @@ following transfer operations:
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#transfer-parameters](https://www.gate.io/docs/developers/apiv4/en/#transfer-parameters)
 
 | Name            | In   | Type   | Required | Description                                                                                                                                       |
 | --------------- | ---- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -369,11 +423,17 @@ following transfer operations:
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#transfer-responses](https://www.gate.io/docs/developers/apiv4/en/#transfer-responses)
+
 | Status | Meaning                                                                    | Description                   | Schema |
 | ------ | -------------------------------------------------------------------------- | ----------------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Transfer operation successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#transfer-responseschema](https://www.gate.io/docs/developers/apiv4/en/#transfer-responseschema)
 
 Status Code **200**
 
@@ -388,6 +448,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#transfer-between-main-and-sub-accounts) Transfer between main and sub accounts
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#transfer-between-main-and-sub-accounts](https://www.gate.io/docs/developers/apiv4/en/#transfer-between-main-and-sub-accounts)
 
 > Code samples
 
@@ -414,6 +477,9 @@ account is used
 
 ### Parameters
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#transferwithsubaccount-parameters](https://www.gate.io/docs/developers/apiv4/en/#transferwithsubaccount-parameters)
+
 | Name               | In   | Type   | Required | Description                                                                                                                                                                                                               |
 | ------------------ | ---- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | body               | body | object | true     | none                                                                                                                                                                                                                      |
@@ -436,11 +502,17 @@ account is used
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#transferwithsubaccount-responses](https://www.gate.io/docs/developers/apiv4/en/#transferwithsubaccount-responses)
+
 | Status | Meaning                                                                    | Description                   | Schema |
 | ------ | -------------------------------------------------------------------------- | ----------------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Transfer operation successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#transferwithsubaccount-responseschema](https://www.gate.io/docs/developers/apiv4/en/#transferwithsubaccount-responseschema)
 
 Status Code **200**
 
@@ -456,6 +528,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-transfer-records-between-main-and-sub-accounts) Get transfer records between main and sub accounts
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-transfer-records-between-main-and-sub-accounts](https://www.gate.io/docs/developers/apiv4/en/#get-transfer-records-between-main-and-sub-accounts)
+
 > Code samples
 
 `GET /wallet/sub_account_transfers`
@@ -467,6 +542,9 @@ Record query time range cannot exceed 30 days
 > Note: Only records after 2020-04-10 can be retrieved
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccounttransfers-parameters](https://www.gate.io/docs/developers/apiv4/en/#listsubaccounttransfers-parameters)
 
 | Name    | In    | Type           | Required | Description                                                                                                                        |
 | ------- | ----- | -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
@@ -499,11 +577,17 @@ Record query time range cannot exceed 30 days
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccounttransfers-responses](https://www.gate.io/docs/developers/apiv4/en/#listsubaccounttransfers-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccounttransfers-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listsubaccounttransfers-responseschema)
 
 Status Code **200**
 
@@ -525,6 +609,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#transfer-between-sub-accounts) Transfer between sub-accounts
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#transfer-between-sub-accounts](https://www.gate.io/docs/developers/apiv4/en/#transfer-between-sub-accounts)
 
 > Code samples
 
@@ -551,6 +638,9 @@ Key to perform the operation
 
 ### Parameters
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#subaccounttosubaccount-parameters](https://www.gate.io/docs/developers/apiv4/en/#subaccounttosubaccount-parameters)
+
 | Name                    | In   | Type   | Required | Description                                                                                                                         |
 | ----------------------- | ---- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | body                    | body | object | true     | none                                                                                                                                |
@@ -574,11 +664,17 @@ Key to perform the operation
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#subaccounttosubaccount-responses](https://www.gate.io/docs/developers/apiv4/en/#subaccounttosubaccount-responses)
+
 | Status | Meaning                                                                    | Description                   | Schema |
 | ------ | -------------------------------------------------------------------------- | ----------------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Transfer operation successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#subaccounttosubaccount-responseschema](https://www.gate.io/docs/developers/apiv4/en/#subaccounttosubaccount-responseschema)
 
 Status Code **200**
 
@@ -594,6 +690,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#transfer-status-query) Transfer status query
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#transfer-status-query](https://www.gate.io/docs/developers/apiv4/en/#transfer-status-query)
+
 > Code samples
 
 `GET /wallet/order_status`
@@ -604,6 +703,9 @@ Supports querying transfer status based on user-defined client_order_id or tx_id
 returned by the transfer interface
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#gettransferorderstatus-parameters](https://www.gate.io/docs/developers/apiv4/en/#gettransferorderstatus-parameters)
 
 | Name            | In    | Type   | Required | Description                                                                                                                                                                                                               |
 | --------------- | ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -623,11 +725,17 @@ returned by the transfer interface
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#gettransferorderstatus-responses](https://www.gate.io/docs/developers/apiv4/en/#gettransferorderstatus-responses)
+
 | Status | Meaning                                                                    | Description                            | Schema |
 | ------ | -------------------------------------------------------------------------- | -------------------------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Transfer status retrieved successfully | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#gettransferorderstatus-responseschema](https://www.gate.io/docs/developers/apiv4/en/#gettransferorderstatus-responseschema)
 
 Status Code **200**
 
@@ -644,6 +752,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-withdrawal-status) Query withdrawal status
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-withdrawal-status](https://www.gate.io/docs/developers/apiv4/en/#query-withdrawal-status)
+
 > Code samples
 
 `GET /wallet/withdraw_status`
@@ -651,6 +762,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query withdrawal status_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listwithdrawstatus-parameters](https://www.gate.io/docs/developers/apiv4/en/#listwithdrawstatus-parameters)
 
 | Name     | In    | Type   | Required | Description                      |
 | -------- | ----- | ------ | -------- | -------------------------------- |
@@ -689,11 +803,17 @@ _Query withdrawal status_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listwithdrawstatus-responses](https://www.gate.io/docs/developers/apiv4/en/#listwithdrawstatus-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listwithdrawstatus-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listwithdrawstatus-responseschema)
 
 Status Code **200**
 
@@ -720,6 +840,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-sub-account-balance-information) Query sub-account balance information
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-sub-account-balance-information](https://www.gate.io/docs/developers/apiv4/en/#query-sub-account-balance-information)
+
 > Code samples
 
 `GET /wallet/sub_account_balances`
@@ -727,6 +850,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query sub-account balance information_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccountbalances-parameters](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountbalances-parameters)
 
 | Name    | In    | Type   | Required | Description                                                                                                                        |
 | ------- | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
@@ -751,11 +877,17 @@ _Query sub-account balance information_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccountbalances-responses](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountbalances-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccountbalances-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountbalances-responseschema)
 
 Status Code **200**
 
@@ -771,6 +903,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-sub-account-isolated-margin-account-balance-information) Query sub-account isolated margin account balance information
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-sub-account-isolated-margin-account-balance-information](https://www.gate.io/docs/developers/apiv4/en/#query-sub-account-isolated-margin-account-balance-information)
+
 > Code samples
 
 `GET /wallet/sub_account_margin_balances`
@@ -778,6 +913,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query sub-account isolated margin account balance information_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccountmarginbalances-parameters](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountmarginbalances-parameters)
 
 | Name    | In    | Type   | Required | Description                                                                                                                        |
 | ------- | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
@@ -818,11 +956,17 @@ _Query sub-account isolated margin account balance information_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccountmarginbalances-responses](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountmarginbalances-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccountmarginbalances-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountmarginbalances-responseschema)
 
 Status Code **200**
 
@@ -856,6 +1000,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-sub-account-perpetual-futures-account-balance-information) Query sub-account perpetual futures account balance information
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-sub-account-perpetual-futures-account-balance-information](https://www.gate.io/docs/developers/apiv4/en/#query-sub-account-perpetual-futures-account-balance-information)
+
 > Code samples
 
 `GET /wallet/sub_account_futures_balances`
@@ -863,6 +1010,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query sub-account perpetual futures account balance information_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccountfuturesbalances-parameters](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountfuturesbalances-parameters)
 
 | Name    | In    | Type   | Required | Description                                                                                                                        |
 | ------- | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
@@ -968,11 +1118,17 @@ _Query sub-account perpetual futures account balance information_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccountfuturesbalances-responses](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountfuturesbalances-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccountfuturesbalances-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountfuturesbalances-responseschema)
 
 Status Code **200**
 
@@ -1027,6 +1183,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-sub-account-cross-margin-account-balance-information) Query sub-account cross margin account balance information
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-sub-account-cross-margin-account-balance-information](https://www.gate.io/docs/developers/apiv4/en/#query-sub-account-cross-margin-account-balance-information)
+
 > Code samples
 
 `GET /wallet/sub_account_cross_margin_balances`
@@ -1034,6 +1193,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query sub-account cross margin account balance information_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccountcrossmarginbalances-parameters](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountcrossmarginbalances-parameters)
 
 | Name    | In    | Type   | Required | Description                                                                                                                        |
 | ------- | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
@@ -1078,11 +1240,17 @@ _Query sub-account cross margin account balance information_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccountcrossmarginbalances-responses](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountcrossmarginbalances-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccountcrossmarginbalances-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountcrossmarginbalances-responseschema)
 
 Status Code **200**
 
@@ -1118,6 +1286,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-withdrawal-address-whitelist) Query withdrawal address whitelist
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-withdrawal-address-whitelist](https://www.gate.io/docs/developers/apiv4/en/#query-withdrawal-address-whitelist)
+
 > Code samples
 
 `GET /wallet/saved_address`
@@ -1125,6 +1296,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query withdrawal address whitelist_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsavedaddress-parameters](https://www.gate.io/docs/developers/apiv4/en/#listsavedaddress-parameters)
 
 | Name     | In    | Type    | Required | Description                        |
 | -------- | ----- | ------- | -------- | ---------------------------------- |
@@ -1152,11 +1326,17 @@ _Query withdrawal address whitelist_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsavedaddress-responses](https://www.gate.io/docs/developers/apiv4/en/#listsavedaddress-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsavedaddress-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listsavedaddress-responseschema)
 
 Status Code **200**
 
@@ -1175,6 +1355,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-personal-trading-fees) Query personal trading fees
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-personal-trading-fees](https://www.gate.io/docs/developers/apiv4/en/#query-personal-trading-fees)
+
 > Code samples
 
 `GET /wallet/fee`
@@ -1182,6 +1365,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query personal trading fees_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#gettradefee-parameters](https://www.gate.io/docs/developers/apiv4/en/#gettradefee-parameters)
 
 | Name          | In    | Type   | Required | Description                                                                        |
 | ------------- | ----- | ------ | -------- | ---------------------------------------------------------------------------------- |
@@ -1233,11 +1419,17 @@ currencies are the same.
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#gettradefee-responses](https://www.gate.io/docs/developers/apiv4/en/#gettradefee-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#gettradefee-responseschema](https://www.gate.io/docs/developers/apiv4/en/#gettradefee-responseschema)
 
 Status Code **200**
 
@@ -1263,6 +1455,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-personal-account-totals) Query personal account totals
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-personal-account-totals](https://www.gate.io/docs/developers/apiv4/en/#query-personal-account-totals)
+
 > Code samples
 
 `GET /wallet/total_balance`
@@ -1282,6 +1477,9 @@ account type, such as:
 - `GET /futures/{settle}/accounts` to query futures account
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#gettotalbalance-parameters](https://www.gate.io/docs/developers/apiv4/en/#gettotalbalance-parameters)
 
 | Name     | In    | Type   | Required | Description                                                                                                 |
 | -------- | ----- | ------ | -------- | ----------------------------------------------------------------------------------------------------------- |
@@ -1345,11 +1543,17 @@ account type, such as:
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#gettotalbalance-responses](https://www.gate.io/docs/developers/apiv4/en/#gettotalbalance-responses)
+
 | Status | Meaning                                                                    | Description                                | Schema |
 | ------ | -------------------------------------------------------------------------- | ------------------------------------------ | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Request is valid and successfully returned | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#gettotalbalance-responseschema](https://www.gate.io/docs/developers/apiv4/en/#gettotalbalance-responseschema)
 
 Status Code **200**
 
@@ -1398,6 +1602,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-list-of-convertible-small-balance-currencies) Get list of convertible small balance currencies
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-list-of-convertible-small-balance-currencies](https://www.gate.io/docs/developers/apiv4/en/#get-list-of-convertible-small-balance-currencies)
+
 > Code samples
 
 `GET /wallet/small_balance`
@@ -1429,11 +1636,17 @@ _Get list of convertible small balance currencies_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsmallbalance-responses](https://www.gate.io/docs/developers/apiv4/en/#listsmallbalance-responses)
+
 | Status | Meaning                                                                    | Description | Schema     |
 | ------ | -------------------------------------------------------------------------- | ----------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Success     | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsmallbalance-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listsmallbalance-responseschema)
 
 Status Code **200**
 
@@ -1450,6 +1663,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#convert-small-balance-currency) Convert small balance currency
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#convert-small-balance-currency](https://www.gate.io/docs/developers/apiv4/en/#convert-small-balance-currency)
 
 > Code samples
 
@@ -1471,6 +1687,9 @@ _Convert small balance currency_
 
 ### Parameters
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#convertsmallbalance-parameters](https://www.gate.io/docs/developers/apiv4/en/#convertsmallbalance-parameters)
+
 | Name       | In   | Type    | Required | Description              |
 | ---------- | ---- | ------- | -------- | ------------------------ |
 | body       | body | object  | true     | none                     |
@@ -1478,6 +1697,9 @@ _Convert small balance currency_
 | » is_all   | body | boolean | false    | Whether to convert all   |
 
 ### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#convertsmallbalance-responses](https://www.gate.io/docs/developers/apiv4/en/#convertsmallbalance-responses)
 
 | Status | Meaning                                                                    | Description | Schema |
 | ------ | -------------------------------------------------------------------------- | ----------- | ------ |
@@ -1489,6 +1711,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-convertible-small-balance-currency-history) Get convertible small balance currency history
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-convertible-small-balance-currency-history](https://www.gate.io/docs/developers/apiv4/en/#get-convertible-small-balance-currency-history)
+
 > Code samples
 
 `GET /wallet/small_balance_history`
@@ -1496,6 +1721,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Get convertible small balance currency history_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsmallbalancehistory-parameters](https://www.gate.io/docs/developers/apiv4/en/#listsmallbalancehistory-parameters)
 
 | Name     | In    | Type           | Required | Description                                                              |
 | -------- | ----- | -------------- | -------- | ------------------------------------------------------------------------ |
@@ -1523,11 +1751,17 @@ _Get convertible small balance currency history_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsmallbalancehistory-responses](https://www.gate.io/docs/developers/apiv4/en/#listsmallbalancehistory-responses)
+
 | Status | Meaning                                                                    | Description | Schema     |
 | ------ | -------------------------------------------------------------------------- | ----------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Success     | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsmallbalancehistory-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listsmallbalancehistory-responseschema)
 
 Status Code **200**
 
@@ -1546,6 +1780,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-uid-transfer-history) Get UID transfer history
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-uid-transfer-history](https://www.gate.io/docs/developers/apiv4/en/#get-uid-transfer-history)
+
 > Code samples
 
 `GET /wallet/push`
@@ -1553,6 +1790,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Get UID transfer history_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listpushorders-parameters](https://www.gate.io/docs/developers/apiv4/en/#listpushorders-parameters)
 
 | Name             | In    | Type           | Required | Description                                                                                                              |
 | ---------------- | ----- | -------------- | -------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -1585,11 +1825,17 @@ _Get UID transfer history_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listpushorders-responses](https://www.gate.io/docs/developers/apiv4/en/#listpushorders-responses)
+
 | Status | Meaning                                                                    | Description | Schema     |
 | ------ | -------------------------------------------------------------------------- | ----------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Success     | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listpushorders-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listpushorders-responseschema)
 
 Status Code **200**
 

@@ -4,6 +4,9 @@ Spot trading
 
 ## [#](#query-all-currency-information) Query all currency information
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-all-currency-information](https://www.gate.io/docs/developers/apiv4/en/#query-all-currency-information)
+
 > Code samples
 
 `GET /spot/currencies`
@@ -58,11 +61,17 @@ status, identification, etc. of the chain
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listcurrencies-responses](https://www.gate.io/docs/developers/apiv4/en/#listcurrencies-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listcurrencies-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listcurrencies-responseschema)
 
 Status Code **200**
 
@@ -91,6 +100,9 @@ This operation does not require authentication
 
 ## [#](#query-single-currency-information) Query single currency information
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-single-currency-information](https://www.gate.io/docs/developers/apiv4/en/#query-single-currency-information)
+
 > Code samples
 
 `GET /spot/currencies/{currency}`
@@ -98,6 +110,9 @@ This operation does not require authentication
 _Query single currency information_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getcurrency-parameters](https://www.gate.io/docs/developers/apiv4/en/#getcurrency-parameters)
 
 | Name     | In   | Type   | Required | Description   |
 | -------- | ---- | ------ | -------- | ------------- |
@@ -145,11 +160,17 @@ _Query single currency information_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getcurrency-responses](https://www.gate.io/docs/developers/apiv4/en/#getcurrency-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getcurrency-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getcurrency-responseschema)
 
 Status Code **200**
 
@@ -176,6 +197,9 @@ Status Code **200**
 This operation does not require authentication
 
 ## [#](#query-all-supported-currency-pairs) Query all supported currency pairs
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-all-supported-currency-pairs](https://www.gate.io/docs/developers/apiv4/en/#query-all-supported-currency-pairs)
 
 > Code samples
 
@@ -214,11 +238,17 @@ _Query all supported currency pairs_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listcurrencypairs-responses](https://www.gate.io/docs/developers/apiv4/en/#listcurrencypairs-responses)
+
 | Status | Meaning                                                                    | Description                  | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | All currency pairs retrieved | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listcurrencypairs-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listcurrencypairs-responseschema)
 
 Status Code **200**
 
@@ -264,6 +294,9 @@ This operation does not require authentication
 
 ## [#](#query-single-currency-pair-details) Query single currency pair details
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-single-currency-pair-details](https://www.gate.io/docs/developers/apiv4/en/#query-single-currency-pair-details)
+
 > Code samples
 
 `GET /spot/currency_pairs/{currency_pair}`
@@ -271,6 +304,9 @@ This operation does not require authentication
 _Query single currency pair details_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getcurrencypair-parameters](https://www.gate.io/docs/developers/apiv4/en/#getcurrencypair-parameters)
 
 | Name          | In   | Type   | Required | Description  |
 | ------------- | ---- | ------ | -------- | ------------ |
@@ -305,11 +341,17 @@ _Query single currency pair details_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getcurrencypair-responses](https://www.gate.io/docs/developers/apiv4/en/#getcurrencypair-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getcurrencypair-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getcurrencypair-responseschema)
 
 Status Code **200**
 
@@ -355,6 +397,9 @@ This operation does not require authentication
 
 ## [#](#get-currency-pair-ticker-information) Get currency pair ticker information
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-currency-pair-ticker-information](https://www.gate.io/docs/developers/apiv4/en/#get-currency-pair-ticker-information)
+
 > Code samples
 
 `GET /spot/tickers`
@@ -365,6 +410,9 @@ If `currency_pair` is specified, only query that currency pair; otherwise return
 all information
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listtickers-parameters](https://www.gate.io/docs/developers/apiv4/en/#listtickers-parameters)
 
 | Name          | In    | Type   | Required | Description  |
 | ------------- | ----- | ------ | -------- | ------------ |
@@ -407,11 +455,17 @@ all information
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listtickers-responses](https://www.gate.io/docs/developers/apiv4/en/#listtickers-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listtickers-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listtickers-responseschema)
 
 Status Code **200**
 
@@ -439,6 +493,9 @@ This operation does not require authentication
 
 ## [#](#get-market-depth-information) Get market depth information
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-market-depth-information](https://www.gate.io/docs/developers/apiv4/en/#get-market-depth-information)
+
 > Code samples
 
 `GET /spot/order_book`
@@ -449,6 +506,9 @@ Market depth buy orders are sorted by price from high to low, sell orders are
 sorted from low to high
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listorderbook-parameters](https://www.gate.io/docs/developers/apiv4/en/#listorderbook-parameters)
 
 | Name          | In    | Type    | Required | Description                                                                                   |
 | ------------- | ----- | ------- | -------- | --------------------------------------------------------------------------------------------- |
@@ -491,11 +551,17 @@ sorted from low to high
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listorderbook-responses](https://www.gate.io/docs/developers/apiv4/en/#listorderbook-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listorderbook-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listorderbook-responseschema)
 
 Status Code **200**
 
@@ -513,6 +579,9 @@ This operation does not require authentication
 
 ## [#](#query-market-transaction-records) Query market transaction records
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-market-transaction-records](https://www.gate.io/docs/developers/apiv4/en/#query-market-transaction-records)
+
 > Code samples
 
 `GET /spot/trades`
@@ -529,6 +598,9 @@ When using limit&page pagination to retrieve data, the maximum number of pages
 is 100,000, that is, limit \* (page - 1) <= 100,000.
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listtrades-parameters](https://www.gate.io/docs/developers/apiv4/en/#listtrades-parameters)
 
 | Name          | In    | Type           | Required | Description                                                                                    |
 | ------------- | ----- | -------------- | -------- | ---------------------------------------------------------------------------------------------- |
@@ -576,11 +648,17 @@ No effect when `last_id` is not set.
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listtrades-responses](https://www.gate.io/docs/developers/apiv4/en/#listtrades-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listtrades-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listtrades-responseschema)
 
 Status Code **200**
 
@@ -618,6 +696,9 @@ This operation does not require authentication
 
 ## [#](#market-k-line-chart) Market K-line chart
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#market-k-line-chart](https://www.gate.io/docs/developers/apiv4/en/#market-k-line-chart)
+
 > Code samples
 
 `GET /spot/candlesticks`
@@ -628,6 +709,9 @@ Maximum of 1000 points can be returned in a query. Be sure not to exceed the
 limit when specifying from, to and interval
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listcandlesticks-parameters](https://www.gate.io/docs/developers/apiv4/en/#listcandlesticks-parameters)
 
 | Name          | In    | Type           | Required | Description                                                                                                                                              |
 | ------------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -674,11 +758,17 @@ limit when specifying from, to and interval
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listcandlesticks-responses](https://www.gate.io/docs/developers/apiv4/en/#listcandlesticks-responses)
+
 | Status | Meaning                                                                    | Description      | Schema         |
 | ------ | -------------------------------------------------------------------------- | ---------------- | -------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[\[string\]\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listcandlesticks-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listcandlesticks-responseschema)
 
 Status Code **200**
 
@@ -700,6 +790,9 @@ This operation does not require authentication
 
 ## [#](#query-account-fee-rates) Query account fee rates
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-account-fee-rates](https://www.gate.io/docs/developers/apiv4/en/#query-account-fee-rates)
+
 > Code samples
 
 `GET /spot/fee`
@@ -709,6 +802,9 @@ _Query account fee rates_
 This API is deprecated. The new fee query API is `/wallet/fee`
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getfee-parameters](https://www.gate.io/docs/developers/apiv4/en/#getfee-parameters)
 
 | Name          | In    | Type   | Required | Description                                              |
 | ------------- | ----- | ------ | -------- | -------------------------------------------------------- |
@@ -742,11 +838,17 @@ pairs.
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getfee-responses](https://www.gate.io/docs/developers/apiv4/en/#getfee-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getfee-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getfee-responseschema)
 
 Status Code **200**
 
@@ -769,6 +871,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#batch-query-account-fee-rates) Batch query account fee rates
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#batch-query-account-fee-rates](https://www.gate.io/docs/developers/apiv4/en/#batch-query-account-fee-rates)
+
 > Code samples
 
 `GET /spot/batch_fee`
@@ -776,6 +881,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Batch query account fee rates_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getbatchspotfee-parameters](https://www.gate.io/docs/developers/apiv4/en/#getbatchspotfee-parameters)
 
 | Name           | In    | Type   | Required | Description                           |
 | -------------- | ----- | ------ | -------- | ------------------------------------- |
@@ -828,11 +936,17 @@ _Batch query account fee rates_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getbatchspotfee-responses](https://www.gate.io/docs/developers/apiv4/en/#getbatchspotfee-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getbatchspotfee-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getbatchspotfee-responseschema)
 
 Status Code **200**
 
@@ -856,6 +970,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#list-spot-trading-accounts) List spot trading accounts
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#list-spot-trading-accounts](https://www.gate.io/docs/developers/apiv4/en/#list-spot-trading-accounts)
+
 > Code samples
 
 `GET /spot/accounts`
@@ -863,6 +980,9 @@ To perform this operation, you must be authenticated by API key and secret
 _List spot trading accounts_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listspotaccounts-parameters](https://www.gate.io/docs/developers/apiv4/en/#listspotaccounts-parameters)
 
 | Name     | In    | Type   | Required | Description                      |
 | -------- | ----- | ------ | -------- | -------------------------------- |
@@ -885,11 +1005,17 @@ _List spot trading accounts_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listspotaccounts-responses](https://www.gate.io/docs/developers/apiv4/en/#listspotaccounts-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listspotaccounts-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listspotaccounts-responseschema)
 
 Status Code **200**
 
@@ -906,6 +1032,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-spot-account-transaction-history) Query spot account transaction history
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-spot-account-transaction-history](https://www.gate.io/docs/developers/apiv4/en/#query-spot-account-transaction-history)
+
 > Code samples
 
 `GET /spot/account_book`
@@ -918,6 +1047,9 @@ When using limit&page pagination to retrieve data, the maximum number of pages
 is 100,000, that is, limit \* (page - 1) <= 100,000.
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listspotaccountbook-parameters](https://www.gate.io/docs/developers/apiv4/en/#listspotaccountbook-parameters)
 
 | Name     | In    | Type           | Required | Description                                                                                                                            |
 | -------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -949,11 +1081,17 @@ is 100,000, that is, limit \* (page - 1) <= 100,000.
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listspotaccountbook-responses](https://www.gate.io/docs/developers/apiv4/en/#listspotaccountbook-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listspotaccountbook-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listspotaccountbook-responseschema)
 
 Status Code **200**
 
@@ -973,6 +1111,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#batch-place-orders) Batch place orders
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#batch-place-orders](https://www.gate.io/docs/developers/apiv4/en/#batch-place-orders)
 
 > Code samples
 
@@ -1006,6 +1147,9 @@ Batch order requirements:
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createbatchorders-parameters](https://www.gate.io/docs/developers/apiv4/en/#createbatchorders-parameters)
 
 | Name           | In     | Type   | Required | Description                                                                                                                                      |
 | -------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1059,11 +1203,17 @@ Batch order requirements:
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createbatchorders-responses](https://www.gate.io/docs/developers/apiv4/en/#createbatchorders-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Request execution completed | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createbatchorders-responseschema](https://www.gate.io/docs/developers/apiv4/en/#createbatchorders-responseschema)
 
 Status Code **200**
 
@@ -1183,6 +1333,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#list-all-open-orders) List all open orders
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#list-all-open-orders](https://www.gate.io/docs/developers/apiv4/en/#list-all-open-orders)
+
 > Code samples
 
 `GET /spot/open_orders`
@@ -1195,6 +1348,9 @@ no paging control trading pairs. All trading pairs with pending orders will be
 returned.
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listallopenorders-parameters](https://www.gate.io/docs/developers/apiv4/en/#listallopenorders-parameters)
 
 | Name    | In    | Type           | Required | Description                                                          |
 | ------- | ----- | -------------- | -------- | -------------------------------------------------------------------- |
@@ -1242,11 +1398,17 @@ returned.
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listallopenorders-responses](https://www.gate.io/docs/developers/apiv4/en/#listallopenorders-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listallopenorders-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listallopenorders-responseschema)
 
 Status Code **200**
 
@@ -1394,6 +1556,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#close-position-when-cross-currency-is-disabled) Close position when cross-currency is disabled
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#close-position-when-cross-currency-is-disabled](https://www.gate.io/docs/developers/apiv4/en/#close-position-when-cross-currency-is-disabled)
+
 > Code samples
 
 `POST /spot/cross_liquidate_orders`
@@ -1416,6 +1581,9 @@ currency balance - the amount of the currency in pending orders) / 0.998
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createcrossliquidateorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#createcrossliquidateorder-parameters)
 
 | Name            | In   | Type   | Required | Description                                                                                                          |
 | --------------- | ---- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -1484,11 +1652,17 @@ information `FULL`: Full mode (default)
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createcrossliquidateorder-responses](https://www.gate.io/docs/developers/apiv4/en/#createcrossliquidateorder-responses)
+
 | Status | Meaning                                                                         | Description                | Schema |
 | ------ | ------------------------------------------------------------------------------- | -------------------------- | ------ |
 | 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order created successfully | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createcrossliquidateorder-responseschema](https://www.gate.io/docs/developers/apiv4/en/#createcrossliquidateorder-responseschema)
 
 Status Code **201**
 
@@ -1634,6 +1808,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#create-an-order) Create an order
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#create-an-order](https://www.gate.io/docs/developers/apiv4/en/#create-an-order)
+
 > Code samples
 
 `POST /spot/orders`
@@ -1700,6 +1877,9 @@ Set `stp_act` to determine the self-trade prevention strategy to use
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#createorder-parameters)
 
 | Name            | In     | Type    | Required | Description                                                                                                                                      |
 | --------------- | ------ | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1885,11 +2065,17 @@ order fields RESULT: No clearing information FULL: Full mode (default)
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createorder-responses](https://www.gate.io/docs/developers/apiv4/en/#createorder-responses)
+
 | Status | Meaning                                                                         | Description   | Schema |
 | ------ | ------------------------------------------------------------------------------- | ------------- | ------ |
 | 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order created | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createorder-responseschema](https://www.gate.io/docs/developers/apiv4/en/#createorder-responseschema)
 
 Status Code **201**
 
@@ -2044,6 +2230,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#list-orders) List orders
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#list-orders](https://www.gate.io/docs/developers/apiv4/en/#list-orders)
+
 > Code samples
 
 `GET /spot/orders`
@@ -2063,6 +2252,9 @@ The parameters for time range filtering are all processed according to the
 **end** time of the order.
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listorders-parameters](https://www.gate.io/docs/developers/apiv4/en/#listorders-parameters)
 
 | Name          | In    | Type           | Required | Description                                                                                |
 | ------------- | ----- | -------------- | -------- | ------------------------------------------------------------------------------------------ |
@@ -2126,11 +2318,17 @@ cancelled
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listorders-responses](https://www.gate.io/docs/developers/apiv4/en/#listorders-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listorders-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listorders-responseschema)
 
 Status Code **200**
 
@@ -2276,6 +2474,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#cancel-all-open-orders-in-specified-currency-pair) Cancel all `open` orders in specified currency pair
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancel-all-open-orders-in-specified-currency-pair](https://www.gate.io/docs/developers/apiv4/en/#cancel-all-open-orders-in-specified-currency-pair)
+
 > Code samples
 
 `DELETE /spot/orders`
@@ -2289,6 +2490,9 @@ cancelled. You can specify a particular account to cancel all pending orders
 under that account
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelorders-parameters](https://www.gate.io/docs/developers/apiv4/en/#cancelorders-parameters)
 
 | Name           | In     | Type   | Required | Description                                                                                                                                      |
 | -------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2358,11 +2562,17 @@ When placing an order, different fields are returned based on the action_mode
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelorders-responses](https://www.gate.io/docs/developers/apiv4/en/#cancelorders-responses)
+
 | Status | Meaning                                                                    | Description                                                                         | Schema     |
 | ------ | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Batch cancellation request accepted and processed, success determined by order list | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelorders-responseschema](https://www.gate.io/docs/developers/apiv4/en/#cancelorders-responseschema)
 
 Status Code **200**
 
@@ -2497,6 +2707,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#cancel-batch-orders-by-specified-id-list) Cancel batch orders by specified ID list
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancel-batch-orders-by-specified-id-list](https://www.gate.io/docs/developers/apiv4/en/#cancel-batch-orders-by-specified-id-list)
+
 > Code samples
 
 `POST /spot/cancel_batch_orders`
@@ -2518,6 +2731,9 @@ request
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelbatchorders-parameters](https://www.gate.io/docs/developers/apiv4/en/#cancelbatchorders-parameters)
 
 | Name           | In     | Type            | Required | Description                                                                                                                                      |
 | -------------- | ------ | --------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2543,11 +2759,17 @@ request
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelbatchorders-responses](https://www.gate.io/docs/developers/apiv4/en/#cancelbatchorders-responses)
+
 | Status | Meaning                                                                    | Description                  | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Batch cancellation completed | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelbatchorders-responseschema](https://www.gate.io/docs/developers/apiv4/en/#cancelbatchorders-responseschema)
 
 Status Code **200**
 
@@ -2568,6 +2790,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-single-order-details) Query single order details
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-single-order-details](https://www.gate.io/docs/developers/apiv4/en/#query-single-order-details)
+
 > Code samples
 
 `GET /spot/orders/{order_id}`
@@ -2578,6 +2803,9 @@ By default, queries orders for spot, unified account, and isolated margin
 accounts.
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#getorder-parameters)
 
 | Name          | In    | Type   | Required | Description                                                                                                                                                  |
 | ------------- | ----- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2634,11 +2862,17 @@ ID can be used after the order is finished (transaction/cancel)
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getorder-responses](https://www.gate.io/docs/developers/apiv4/en/#getorder-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Detail retrieved | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getorder-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getorder-responseschema)
 
 Status Code **200**
 
@@ -2784,6 +3018,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#amend-single-order) Amend single order
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#amend-single-order](https://www.gate.io/docs/developers/apiv4/en/#amend-single-order)
+
 > Code samples
 
 `PATCH /spot/orders/{order_id}`
@@ -2833,6 +3070,9 @@ cancellation operation.
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#amendorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#amendorder-parameters)
 
 | Name            | In     | Type   | Required | Description                                                                                                                                      |
 | --------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2902,11 +3142,17 @@ order fields RESULT: No clearing information FULL: Full mode (default)
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#amendorder-responses](https://www.gate.io/docs/developers/apiv4/en/#amendorder-responses)
+
 | Status | Meaning                                                                    | Description          | Schema |
 | ------ | -------------------------------------------------------------------------- | -------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Updated successfully | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#amendorder-responseschema](https://www.gate.io/docs/developers/apiv4/en/#amendorder-responseschema)
 
 Status Code **200**
 
@@ -3052,6 +3298,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#cancel-single-order) Cancel single order
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancel-single-order](https://www.gate.io/docs/developers/apiv4/en/#cancel-single-order)
+
 > Code samples
 
 `DELETE /spot/orders/{order_id}`
@@ -3062,6 +3311,9 @@ By default, orders for spot, unified accounts and leveraged accounts are
 revoked.
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#cancelorder-parameters)
 
 | Name           | In     | Type   | Required | Description                                                                                                                                      |
 | -------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -3128,11 +3380,17 @@ When placing an order, different fields are returned based on the action_mode
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelorder-responses](https://www.gate.io/docs/developers/apiv4/en/#cancelorder-responses)
+
 | Status | Meaning                                                                    | Description     | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Order cancelled | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelorder-responseschema](https://www.gate.io/docs/developers/apiv4/en/#cancelorder-responseschema)
 
 Status Code **200**
 
@@ -3278,6 +3536,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-personal-trading-records) Query personal trading records
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-personal-trading-records](https://www.gate.io/docs/developers/apiv4/en/#query-personal-trading-records)
+
 > Code samples
 
 `GET /spot/my_trades`
@@ -3303,6 +3564,9 @@ The maximum number of pages when searching data using limit&page paging function
 is 100,0, that is, limit \* (page - 1) <= 100,0.
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listmytrades-parameters](https://www.gate.io/docs/developers/apiv4/en/#listmytrades-parameters)
 
 | Name          | In    | Type           | Required | Description                                                                                      |
 | ------------- | ----- | -------------- | -------- | ------------------------------------------------------------------------------------------------ |
@@ -3341,11 +3605,17 @@ is 100,0, that is, limit \* (page - 1) <= 100,0.
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listmytrades-responses](https://www.gate.io/docs/developers/apiv4/en/#listmytrades-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listmytrades-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listmytrades-responseschema)
 
 Status Code **200**
 
@@ -3385,6 +3655,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-server-current-time) Get server current time
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-server-current-time](https://www.gate.io/docs/developers/apiv4/en/#get-server-current-time)
+
 > Code samples
 
 `GET /spot/time`
@@ -3403,11 +3676,17 @@ _Get server current time_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getsystemtime-responses](https://www.gate.io/docs/developers/apiv4/en/#getsystemtime-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getsystemtime-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getsystemtime-responseschema)
 
 Status Code **200**
 
@@ -3420,6 +3699,9 @@ _SystemTime_
 This operation does not require authentication
 
 ## [#](#countdown-cancel-orders) Countdown cancel orders
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#countdown-cancel-orders](https://www.gate.io/docs/developers/apiv4/en/#countdown-cancel-orders)
 
 > Code samples
 
@@ -3449,6 +3731,9 @@ automatic order cancellation function will be cancelled.
 
 ### Parameters
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#countdowncancelallspot-parameters](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelallspot-parameters)
+
 | Name            | In   | Type           | Required | Description               |
 | --------------- | ---- | -------------- | -------- | ------------------------- |
 | body            | body | object         | true     | none                      |
@@ -3472,11 +3757,17 @@ countdown
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#countdowncancelallspot-responses](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelallspot-responses)
+
 | Status | Meaning                                                                    | Description                | Schema |
 | ------ | -------------------------------------------------------------------------- | -------------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Countdown set successfully | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#countdowncancelallspot-responseschema](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelallspot-responseschema)
 
 Status Code **200**
 
@@ -3491,6 +3782,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#batch-modification-of-orders) Batch modification of orders
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#batch-modification-of-orders](https://www.gate.io/docs/developers/apiv4/en/#batch-modification-of-orders)
 
 > Code samples
 
@@ -3522,6 +3816,9 @@ batch modification orders is consistent with the order list order.
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#amendbatchorders-parameters](https://www.gate.io/docs/developers/apiv4/en/#amendbatchorders-parameters)
 
 | Name           | In     | Type            | Required | Description                                                                                                                                      |
 | -------------- | ------ | --------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -3575,11 +3872,17 @@ batch modification orders is consistent with the order list order.
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#amendbatchorders-responses](https://www.gate.io/docs/developers/apiv4/en/#amendbatchorders-responses)
+
 | Status | Meaning                                                                    | Description                              | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Order modification executed successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#amendbatchorders-responseschema](https://www.gate.io/docs/developers/apiv4/en/#amendbatchorders-responseschema)
 
 Status Code **200**
 
@@ -3699,6 +4002,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-spot-insurance-fund-historical-data) Query spot insurance fund historical data
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-spot-insurance-fund-historical-data](https://www.gate.io/docs/developers/apiv4/en/#query-spot-insurance-fund-historical-data)
+
 > Code samples
 
 `GET /spot/insurance_history`
@@ -3706,6 +4012,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query spot insurance fund historical data_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getspotinsurancehistory-parameters](https://www.gate.io/docs/developers/apiv4/en/#getspotinsurancehistory-parameters)
 
 | Name     | In    | Type           | Required | Description                                                                 |
 | -------- | ----- | -------------- | -------- | --------------------------------------------------------------------------- |
@@ -3732,11 +4041,17 @@ _Query spot insurance fund historical data_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getspotinsurancehistory-responses](https://www.gate.io/docs/developers/apiv4/en/#getspotinsurancehistory-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getspotinsurancehistory-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getspotinsurancehistory-responseschema)
 
 Status Code **200**
 
@@ -3749,6 +4064,9 @@ Status Code **200**
 This operation does not require authentication
 
 ## [#](#create-price-triggered-order) Create price-triggered order
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#create-price-triggered-order](https://www.gate.io/docs/developers/apiv4/en/#create-price-triggered-order)
 
 > Code samples
 
@@ -3779,6 +4097,9 @@ _Create price-triggered order_
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createspotpricetriggeredorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#createspotpricetriggeredorder-parameters)
 
 | Name             | In   | Type                                                      | Required | Description                                                                              |
 | ---------------- | ---- | --------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------- |
@@ -3868,11 +4189,17 @@ currency (the currency being traded), such as `BTC` in `BTC_USDT` When `type` is
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createspotpricetriggeredorder-responses](https://www.gate.io/docs/developers/apiv4/en/#createspotpricetriggeredorder-responses)
+
 | Status | Meaning                                                                         | Description                | Schema |
 | ------ | ------------------------------------------------------------------------------- | -------------------------- | ------ |
 | 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order created successfully | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createspotpricetriggeredorder-responseschema](https://www.gate.io/docs/developers/apiv4/en/#createspotpricetriggeredorder-responseschema)
 
 Status Code **201**
 
@@ -3888,6 +4215,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-running-auto-order-list) Query running auto order list
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-running-auto-order-list](https://www.gate.io/docs/developers/apiv4/en/#query-running-auto-order-list)
+
 > Code samples
 
 `GET /spot/price_orders`
@@ -3895,6 +4225,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query running auto order list_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listspotpricetriggeredorders-parameters](https://www.gate.io/docs/developers/apiv4/en/#listspotpricetriggeredorders-parameters)
 
 | Name    | In    | Type    | Required | Description                                                    |
 | ------- | ----- | ------- | -------- | -------------------------------------------------------------- |
@@ -3949,6 +4282,9 @@ _Query running auto order list_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listspotpricetriggeredorders-responses](https://www.gate.io/docs/developers/apiv4/en/#listspotpricetriggeredorders-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema                                                        |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ------------------------------------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[[SpotPriceTriggeredOrder](#schemaspotpricetriggeredorder)\] |
@@ -3959,6 +4295,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#cancel-all-auto-orders) Cancel all auto orders
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancel-all-auto-orders](https://www.gate.io/docs/developers/apiv4/en/#cancel-all-auto-orders)
+
 > Code samples
 
 `DELETE /spot/price_orders`
@@ -3966,6 +4305,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Cancel all auto orders_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelspotpricetriggeredorderlist-parameters](https://www.gate.io/docs/developers/apiv4/en/#cancelspotpricetriggeredorderlist-parameters)
 
 | Name    | In    | Type   | Required | Description                                                    |
 | ------- | ----- | ------ | -------- | -------------------------------------------------------------- |
@@ -4015,6 +4357,9 @@ _Cancel all auto orders_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelspotpricetriggeredorderlist-responses](https://www.gate.io/docs/developers/apiv4/en/#cancelspotpricetriggeredorderlist-responses)
+
 | Status | Meaning                                                                    | Description                                                                         | Schema                                                        |
 | ------ | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Batch cancellation request accepted and processed, success determined by order list | \[[SpotPriceTriggeredOrder](#schemaspotpricetriggeredorder)\] |
@@ -4025,6 +4370,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-single-auto-order-details) Query single auto order details
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-single-auto-order-details](https://www.gate.io/docs/developers/apiv4/en/#query-single-auto-order-details)
+
 > Code samples
 
 `GET /spot/price_orders/{order_id}`
@@ -4032,6 +4380,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query single auto order details_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getspotpricetriggeredorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#getspotpricetriggeredorder-parameters)
 
 | Name     | In   | Type   | Required | Description                                    |
 | -------- | ---- | ------ | -------- | ---------------------------------------------- |
@@ -4069,6 +4420,9 @@ _Query single auto order details_
 ```
 
 ### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getspotpricetriggeredorder-responses](https://www.gate.io/docs/developers/apiv4/en/#getspotpricetriggeredorder-responses)
 
 | Status | Meaning                                                                    | Description        | Schema                                                    |
 | ------ | -------------------------------------------------------------------------- | ------------------ | --------------------------------------------------------- |
@@ -4080,6 +4434,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#cancel-single-auto-order) Cancel single auto order
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancel-single-auto-order](https://www.gate.io/docs/developers/apiv4/en/#cancel-single-auto-order)
+
 > Code samples
 
 `DELETE /spot/price_orders/{order_id}`
@@ -4087,6 +4444,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Cancel single auto order_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelspotpricetriggeredorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#cancelspotpricetriggeredorder-parameters)
 
 | Name     | In   | Type   | Required | Description                                    |
 | -------- | ---- | ------ | -------- | ---------------------------------------------- |
@@ -4124,6 +4484,9 @@ _Cancel single auto order_
 ```
 
 ### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelspotpricetriggeredorder-responses](https://www.gate.io/docs/developers/apiv4/en/#cancelspotpricetriggeredorder-responses)
 
 | Status | Meaning                                                                    | Description        | Schema                                                    |
 | ------ | -------------------------------------------------------------------------- | ------------------ | --------------------------------------------------------- |

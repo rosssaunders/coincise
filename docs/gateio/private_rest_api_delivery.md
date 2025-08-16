@@ -4,6 +4,9 @@ Delivery contract
 
 ## [#](#query-all-futures-contracts-2) Query all futures contracts
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-all-futures-contracts-2](https://www.gate.io/docs/developers/apiv4/en/#query-all-futures-contracts-2)
+
 > Code samples
 
 `GET /delivery/{settle}/contracts`
@@ -11,6 +14,9 @@ Delivery contract
 _Query all futures contracts_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverycontracts-parameters](https://www.gate.io/docs/developers/apiv4/en/#listdeliverycontracts-parameters)
 
 | Name   | In   | Type   | Required | Description     |
 | ------ | ---- | ------ | -------- | --------------- |
@@ -74,6 +80,9 @@ _Query all futures contracts_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverycontracts-responses](https://www.gate.io/docs/developers/apiv4/en/#listdeliverycontracts-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema                                          |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ----------------------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[[DeliveryContract](#schemadeliverycontract)\] |
@@ -82,6 +91,9 @@ This operation does not require authentication
 
 ## [#](#query-single-contract-information-2) Query single contract information
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-single-contract-information-2](https://www.gate.io/docs/developers/apiv4/en/#query-single-contract-information-2)
+
 > Code samples
 
 `GET /delivery/{settle}/contracts/{contract}`
@@ -89,6 +101,9 @@ This operation does not require authentication
 _Query single contract information_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getdeliverycontract-parameters](https://www.gate.io/docs/developers/apiv4/en/#getdeliverycontract-parameters)
 
 | Name     | In   | Type   | Required | Description      |
 | -------- | ---- | ------ | -------- | ---------------- |
@@ -151,6 +166,9 @@ _Query single contract information_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getdeliverycontract-responses](https://www.gate.io/docs/developers/apiv4/en/#getdeliverycontract-responses)
+
 | Status | Meaning                                                                    | Description          | Schema                                      |
 | ------ | -------------------------------------------------------------------------- | -------------------- | ------------------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Contract information | [DeliveryContract](#schemadeliverycontract) |
@@ -158,6 +176,9 @@ _Query single contract information_
 This operation does not require authentication
 
 ## [#](#query-futures-market-depth-information-2) Query futures market depth information
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-futures-market-depth-information-2](https://www.gate.io/docs/developers/apiv4/en/#query-futures-market-depth-information-2)
 
 > Code samples
 
@@ -168,6 +189,9 @@ _Query futures market depth information_
 Bids will be sorted by price from high to low, while asks sorted reversely
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryorderbook-parameters](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryorderbook-parameters)
 
 | Name     | In    | Type    | Required | Description                                                                                   |
 | -------- | ----- | ------- | -------- | --------------------------------------------------------------------------------------------- |
@@ -220,11 +244,17 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryorderbook-responses](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryorderbook-responses)
+
 | Status | Meaning                                                                    | Description            | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Depth query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryorderbook-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryorderbook-responseschema)
 
 Status Code **200**
 
@@ -246,6 +276,9 @@ This operation does not require authentication
 
 ## [#](#futures-market-transaction-records-2) Futures market transaction records
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#futures-market-transaction-records-2](https://www.gate.io/docs/developers/apiv4/en/#futures-market-transaction-records-2)
+
 > Code samples
 
 `GET /delivery/{settle}/trades`
@@ -253,6 +286,9 @@ This operation does not require authentication
 _Futures market transaction records_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverytrades-parameters](https://www.gate.io/docs/developers/apiv4/en/#listdeliverytrades-parameters)
 
 | Name     | In    | Type           | Required | Description                                                                                                                                                                                              |
 | -------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -293,11 +329,17 @@ are more than `limit`, only `limit` number will be returned.
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverytrades-responses](https://www.gate.io/docs/developers/apiv4/en/#listdeliverytrades-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverytrades-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listdeliverytrades-responseschema)
 
 Status Code **200**
 
@@ -316,6 +358,9 @@ This operation does not require authentication
 
 ## [#](#futures-market-k-line-chart-2) Futures market K-line chart
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#futures-market-k-line-chart-2](https://www.gate.io/docs/developers/apiv4/en/#futures-market-k-line-chart-2)
+
 > Code samples
 
 `GET /delivery/{settle}/candlesticks`
@@ -330,6 +375,9 @@ Maximum of 2000 points are returned in one query. Be sure not to exceed the
 limit when specifying `from`, `to` and `interval`
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverycandlesticks-parameters](https://www.gate.io/docs/developers/apiv4/en/#listdeliverycandlesticks-parameters)
 
 | Name     | In    | Type           | Required | Description                                                                                                                                              |
 | -------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -381,11 +429,17 @@ limit when specifying `from`, `to` and `interval`
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverycandlesticks-responses](https://www.gate.io/docs/developers/apiv4/en/#listdeliverycandlesticks-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverycandlesticks-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listdeliverycandlesticks-responseschema)
 
 Status Code **200**
 
@@ -403,6 +457,9 @@ This operation does not require authentication
 
 ## [#](#get-all-futures-trading-statistics-2) Get all futures trading statistics
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-all-futures-trading-statistics-2](https://www.gate.io/docs/developers/apiv4/en/#get-all-futures-trading-statistics-2)
+
 > Code samples
 
 `GET /delivery/{settle}/tickers`
@@ -410,6 +467,9 @@ This operation does not require authentication
 _Get all futures trading statistics_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverytickers-parameters](https://www.gate.io/docs/developers/apiv4/en/#listdeliverytickers-parameters)
 
 | Name     | In    | Type   | Required | Description      |
 | -------- | ----- | ------ | -------- | ---------------- |
@@ -455,11 +515,17 @@ _Get all futures trading statistics_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverytickers-responses](https://www.gate.io/docs/developers/apiv4/en/#listdeliverytickers-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverytickers-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listdeliverytickers-responseschema)
 
 Status Code **200**
 
@@ -493,6 +559,9 @@ This operation does not require authentication
 
 ## [#](#futures-market-insurance-fund-history-2) Futures market insurance fund history
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#futures-market-insurance-fund-history-2](https://www.gate.io/docs/developers/apiv4/en/#futures-market-insurance-fund-history-2)
+
 > Code samples
 
 `GET /delivery/{settle}/insurance`
@@ -500,6 +569,9 @@ This operation does not require authentication
 _Futures market insurance fund history_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryinsuranceledger-parameters](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryinsuranceledger-parameters)
 
 | Name   | In    | Type    | Required | Description                                         |
 | ------ | ----- | ------- | -------- | --------------------------------------------------- |
@@ -527,11 +599,17 @@ _Futures market insurance fund history_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryinsuranceledger-responses](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryinsuranceledger-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryinsuranceledger-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryinsuranceledger-responseschema)
 
 Status Code **200**
 
@@ -545,6 +623,9 @@ This operation does not require authentication
 
 ## [#](#get-futures-account-2) Get futures account
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-futures-account-2](https://www.gate.io/docs/developers/apiv4/en/#get-futures-account-2)
+
 > Code samples
 
 `GET /delivery/{settle}/accounts`
@@ -552,6 +633,9 @@ This operation does not require authentication
 _Get futures account_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryaccounts-parameters](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryaccounts-parameters)
 
 | Name   | In   | Type   | Required | Description     |
 | ------ | ---- | ------ | -------- | --------------- |
@@ -607,11 +691,17 @@ _Get futures account_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryaccounts-responses](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryaccounts-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryaccounts-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryaccounts-responseschema)
 
 Status Code **200**
 
@@ -663,6 +753,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-futures-account-change-history-2) Query futures account change history
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-futures-account-change-history-2](https://www.gate.io/docs/developers/apiv4/en/#query-futures-account-change-history-2)
+
 > Code samples
 
 `GET /delivery/{settle}/account_book`
@@ -670,6 +763,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query futures account change history_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryaccountbook-parameters](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryaccountbook-parameters)
 
 | Name   | In    | Type           | Required | Description                                         |
 | ------ | ----- | -------------- | -------- | --------------------------------------------------- |
@@ -736,11 +832,17 @@ time format is a Unix timestamp
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryaccountbook-responses](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryaccountbook-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryaccountbook-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryaccountbook-responseschema)
 
 Status Code **200**
 
@@ -784,6 +886,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-user-position-list-2) Get user position list
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-user-position-list-2](https://www.gate.io/docs/developers/apiv4/en/#get-user-position-list-2)
+
 > Code samples
 
 `GET /delivery/{settle}/positions`
@@ -791,6 +896,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Get user position list_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverypositions-parameters](https://www.gate.io/docs/developers/apiv4/en/#listdeliverypositions-parameters)
 
 | Name   | In   | Type   | Required | Description     |
 | ------ | ---- | ------ | -------- | --------------- |
@@ -849,6 +957,9 @@ _Get user position list_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverypositions-responses](https://www.gate.io/docs/developers/apiv4/en/#listdeliverypositions-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema                          |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[[Position](#schemaposition)\] |
@@ -859,6 +970,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-single-position-information-2) Get single position information
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-single-position-information-2](https://www.gate.io/docs/developers/apiv4/en/#get-single-position-information-2)
+
 > Code samples
 
 `GET /delivery/{settle}/positions/{contract}`
@@ -866,6 +980,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Get single position information_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getdeliveryposition-parameters](https://www.gate.io/docs/developers/apiv4/en/#getdeliveryposition-parameters)
 
 | Name     | In   | Type   | Required | Description      |
 | -------- | ---- | ------ | -------- | ---------------- |
@@ -923,6 +1040,9 @@ _Get single position information_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getdeliveryposition-responses](https://www.gate.io/docs/developers/apiv4/en/#getdeliveryposition-responses)
+
 | Status | Meaning                                                                    | Description          | Schema                      |
 | ------ | -------------------------------------------------------------------------- | -------------------- | --------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Position information | [Position](#schemaposition) |
@@ -933,6 +1053,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#update-position-margin-2) Update position margin
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#update-position-margin-2](https://www.gate.io/docs/developers/apiv4/en/#update-position-margin-2)
+
 > Code samples
 
 `POST /delivery/{settle}/positions/{contract}/margin`
@@ -940,6 +1063,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Update position margin_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#updatedeliverypositionmargin-parameters](https://www.gate.io/docs/developers/apiv4/en/#updatedeliverypositionmargin-parameters)
 
 | Name     | In    | Type   | Required | Description                                                                |
 | -------- | ----- | ------ | -------- | -------------------------------------------------------------------------- |
@@ -998,6 +1124,9 @@ _Update position margin_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#updatedeliverypositionmargin-responses](https://www.gate.io/docs/developers/apiv4/en/#updatedeliverypositionmargin-responses)
+
 | Status | Meaning                                                                    | Description          | Schema                      |
 | ------ | -------------------------------------------------------------------------- | -------------------- | --------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Position information | [Position](#schemaposition) |
@@ -1008,6 +1137,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#update-position-leverage-2) Update position leverage
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#update-position-leverage-2](https://www.gate.io/docs/developers/apiv4/en/#update-position-leverage-2)
+
 > Code samples
 
 `POST /delivery/{settle}/positions/{contract}/leverage`
@@ -1015,6 +1147,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Update position leverage_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#updatedeliverypositionleverage-parameters](https://www.gate.io/docs/developers/apiv4/en/#updatedeliverypositionleverage-parameters)
 
 | Name     | In    | Type   | Required | Description           |
 | -------- | ----- | ------ | -------- | --------------------- |
@@ -1073,6 +1208,9 @@ _Update position leverage_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#updatedeliverypositionleverage-responses](https://www.gate.io/docs/developers/apiv4/en/#updatedeliverypositionleverage-responses)
+
 | Status | Meaning                                                                    | Description          | Schema                      |
 | ------ | -------------------------------------------------------------------------- | -------------------- | --------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Position information | [Position](#schemaposition) |
@@ -1083,6 +1221,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#update-position-risk-limit-2) Update position risk limit
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#update-position-risk-limit-2](https://www.gate.io/docs/developers/apiv4/en/#update-position-risk-limit-2)
+
 > Code samples
 
 `POST /delivery/{settle}/positions/{contract}/risk_limit`
@@ -1090,6 +1231,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Update position risk limit_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#updatedeliverypositionrisklimit-parameters](https://www.gate.io/docs/developers/apiv4/en/#updatedeliverypositionrisklimit-parameters)
 
 | Name       | In    | Type   | Required | Description             |
 | ---------- | ----- | ------ | -------- | ----------------------- |
@@ -1148,6 +1292,9 @@ _Update position risk limit_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#updatedeliverypositionrisklimit-responses](https://www.gate.io/docs/developers/apiv4/en/#updatedeliverypositionrisklimit-responses)
+
 | Status | Meaning                                                                    | Description          | Schema                      |
 | ------ | -------------------------------------------------------------------------- | -------------------- | --------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Position information | [Position](#schemaposition) |
@@ -1157,6 +1304,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#place-futures-order-2) Place futures order
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#place-futures-order-2](https://www.gate.io/docs/developers/apiv4/en/#place-futures-order-2)
 
 > Code samples
 
@@ -1181,6 +1331,9 @@ Zero-fill orders cannot be retrieved 10 minutes after order cancellation
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createdeliveryorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#createdeliveryorder-parameters)
 
 | Name          | In   | Type                                | Required | Description                                                                                                                                       |
 | ------------- | ---- | ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1305,6 +1458,9 @@ self-trade prevention strategies
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createdeliveryorder-responses](https://www.gate.io/docs/developers/apiv4/en/#createdeliveryorder-responses)
+
 | Status | Meaning                                                                         | Description   | Schema                              |
 | ------ | ------------------------------------------------------------------------------- | ------------- | ----------------------------------- |
 | 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order details | [FuturesOrder](#schemafuturesorder) |
@@ -1315,6 +1471,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-futures-order-list-2) Query futures order list
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-futures-order-list-2](https://www.gate.io/docs/developers/apiv4/en/#query-futures-order-list-2)
+
 > Code samples
 
 `GET /delivery/{settle}/orders`
@@ -1324,6 +1483,9 @@ _Query futures order list_
 Zero-fill orders cannot be retrieved 10 minutes after order cancellation
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryorders-parameters](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryorders-parameters)
 
 | Name        | In    | Type    | Required | Description                                                                                    |
 | ----------- | ----- | ------- | -------- | ---------------------------------------------------------------------------------------------- |
@@ -1381,11 +1543,17 @@ Zero-fill orders cannot be retrieved 10 minutes after order cancellation
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryorders-responses](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryorders-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema                                  |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | --------------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[[FuturesOrder](#schemafuturesorder)\] |
 
 ### [#](#response-headers-5) Response Headers
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#response-headers-5](https://www.gate.io/docs/developers/apiv4/en/#response-headers-5)
 
 | Status | Header              | Type    | Format | Description                                                      |
 | ------ | ------------------- | ------- | ------ | ---------------------------------------------------------------- |
@@ -1399,6 +1567,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#cancel-all-orders-with-open-status-2) Cancel all orders with 'open' status
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancel-all-orders-with-open-status-2](https://www.gate.io/docs/developers/apiv4/en/#cancel-all-orders-with-open-status-2)
+
 > Code samples
 
 `DELETE /delivery/{settle}/orders`
@@ -1408,6 +1579,9 @@ _Cancel all orders with 'open' status_
 Zero-fill orders cannot be retrieved 10 minutes after order cancellation
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#canceldeliveryorders-parameters](https://www.gate.io/docs/developers/apiv4/en/#canceldeliveryorders-parameters)
 
 | Name     | In    | Type   | Required | Description                                                  |
 | -------- | ----- | ------ | -------- | ------------------------------------------------------------ |
@@ -1459,6 +1633,9 @@ Zero-fill orders cannot be retrieved 10 minutes after order cancellation
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#canceldeliveryorders-responses](https://www.gate.io/docs/developers/apiv4/en/#canceldeliveryorders-responses)
+
 | Status | Meaning                                                                    | Description                   | Schema                                  |
 | ------ | -------------------------------------------------------------------------- | ----------------------------- | --------------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Batch cancellation successful | \[[FuturesOrder](#schemafuturesorder)\] |
@@ -1469,6 +1646,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-single-order-details-3) Query single order details
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-single-order-details-3](https://www.gate.io/docs/developers/apiv4/en/#query-single-order-details-3)
+
 > Code samples
 
 `GET /delivery/{settle}/orders/{order_id}`
@@ -1478,6 +1658,9 @@ _Query single order details_
 Zero-fill orders cannot be retrieved 10 minutes after order cancellation
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getdeliveryorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#getdeliveryorder-parameters)
 
 | Name     | In   | Type   | Required | Description                                    |
 | -------- | ---- | ------ | -------- | ---------------------------------------------- |
@@ -1524,6 +1707,9 @@ Zero-fill orders cannot be retrieved 10 minutes after order cancellation
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getdeliveryorder-responses](https://www.gate.io/docs/developers/apiv4/en/#getdeliveryorder-responses)
+
 | Status | Meaning                                                                    | Description   | Schema                              |
 | ------ | -------------------------------------------------------------------------- | ------------- | ----------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Order details | [FuturesOrder](#schemafuturesorder) |
@@ -1534,6 +1720,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#cancel-single-order-3) Cancel single order
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancel-single-order-3](https://www.gate.io/docs/developers/apiv4/en/#cancel-single-order-3)
+
 > Code samples
 
 `DELETE /delivery/{settle}/orders/{order_id}`
@@ -1541,6 +1730,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Cancel single order_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#canceldeliveryorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#canceldeliveryorder-parameters)
 
 | Name     | In   | Type   | Required | Description                                    |
 | -------- | ---- | ------ | -------- | ---------------------------------------------- |
@@ -1587,6 +1779,9 @@ _Cancel single order_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#canceldeliveryorder-responses](https://www.gate.io/docs/developers/apiv4/en/#canceldeliveryorder-responses)
+
 | Status | Meaning                                                                    | Description   | Schema                              |
 | ------ | -------------------------------------------------------------------------- | ------------- | ----------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Order details | [FuturesOrder](#schemafuturesorder) |
@@ -1597,6 +1792,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-personal-trading-records-3) Query personal trading records
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-personal-trading-records-3](https://www.gate.io/docs/developers/apiv4/en/#query-personal-trading-records-3)
+
 > Code samples
 
 `GET /delivery/{settle}/my_trades`
@@ -1604,6 +1802,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query personal trading records_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getmydeliverytrades-parameters](https://www.gate.io/docs/developers/apiv4/en/#getmydeliverytrades-parameters)
 
 | Name        | In    | Type           | Required | Description                                                                                    |
 | ----------- | ----- | -------------- | -------- | ---------------------------------------------------------------------------------------------- |
@@ -1647,11 +1848,17 @@ _Query personal trading records_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getmydeliverytrades-responses](https://www.gate.io/docs/developers/apiv4/en/#getmydeliverytrades-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getmydeliverytrades-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getmydeliverytrades-responseschema)
 
 Status Code **200**
 
@@ -1686,6 +1893,9 @@ trade fee |
 
 ### [#](#response-headers-6) Response Headers
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#response-headers-6](https://www.gate.io/docs/developers/apiv4/en/#response-headers-6)
+
 | Status | Header              | Type    | Format | Description                                                      |
 | ------ | ------------------- | ------- | ------ | ---------------------------------------------------------------- |
 | 200    | X-Pagination-Limit  | integer |        | Limit specified for pagination                                   |
@@ -1698,6 +1908,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-position-close-history-2) Query position close history
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-position-close-history-2](https://www.gate.io/docs/developers/apiv4/en/#query-position-close-history-2)
+
 > Code samples
 
 `GET /delivery/{settle}/position_close`
@@ -1705,6 +1918,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query position close history_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverypositionclose-parameters](https://www.gate.io/docs/developers/apiv4/en/#listdeliverypositionclose-parameters)
 
 | Name     | In    | Type    | Required | Description                                         |
 | -------- | ----- | ------- | -------- | --------------------------------------------------- |
@@ -1744,11 +1960,17 @@ _Query position close history_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverypositionclose-responses](https://www.gate.io/docs/developers/apiv4/en/#listdeliverypositionclose-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverypositionclose-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listdeliverypositionclose-responseschema)
 
 Status Code **200**
 
@@ -1784,6 +2006,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-liquidation-history-2) Query liquidation history
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-liquidation-history-2](https://www.gate.io/docs/developers/apiv4/en/#query-liquidation-history-2)
+
 > Code samples
 
 `GET /delivery/{settle}/liquidates`
@@ -1791,6 +2016,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query liquidation history_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryliquidates-parameters](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryliquidates-parameters)
 
 | Name     | In    | Type    | Required | Description                                         |
 | -------- | ----- | ------- | -------- | --------------------------------------------------- |
@@ -1830,11 +2058,17 @@ _Query liquidation history_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryliquidates-responses](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryliquidates-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryliquidates-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryliquidates-responseschema)
 
 Status Code **200**
 
@@ -1860,6 +2094,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-settlement-records) Query settlement records
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-settlement-records](https://www.gate.io/docs/developers/apiv4/en/#query-settlement-records)
+
 > Code samples
 
 `GET /delivery/{settle}/settlements`
@@ -1867,6 +2104,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query settlement records_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverysettlements-parameters](https://www.gate.io/docs/developers/apiv4/en/#listdeliverysettlements-parameters)
 
 | Name     | In    | Type    | Required | Description                                         |
 | -------- | ----- | ------- | -------- | --------------------------------------------------- |
@@ -1903,11 +2143,17 @@ _Query settlement records_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverysettlements-responses](https://www.gate.io/docs/developers/apiv4/en/#listdeliverysettlements-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliverysettlements-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listdeliverysettlements-responseschema)
 
 Status Code **200**
 
@@ -1929,6 +2175,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-risk-limit-tiers-2) Query risk limit tiers
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-risk-limit-tiers-2](https://www.gate.io/docs/developers/apiv4/en/#query-risk-limit-tiers-2)
+
 > Code samples
 
 `GET /delivery/{settle}/risk_limit_tiers`
@@ -1941,6 +2190,9 @@ queries at the market level, not to the length of the returned array. This only
 takes effect empty.
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryrisklimittiers-parameters](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryrisklimittiers-parameters)
 
 | Name     | In    | Type    | Required | Description                                         |
 | -------- | ----- | ------- | -------- | --------------------------------------------------- |
@@ -2011,11 +2263,17 @@ takes effect empty.
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryrisklimittiers-responses](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryrisklimittiers-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listdeliveryrisklimittiers-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryrisklimittiers-responseschema)
 
 Status Code **200**
 
@@ -2034,6 +2292,9 @@ Status Code **200**
 This operation does not require authentication
 
 ## [#](#create-price-triggered-order-3) Create price-triggered order
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#create-price-triggered-order-3](https://www.gate.io/docs/developers/apiv4/en/#create-price-triggered-order-3)
 
 > Code samples
 
@@ -2062,6 +2323,9 @@ _Create price-triggered order_
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createpricetriggereddeliveryorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#createpricetriggereddeliveryorder-parameters)
 
 | Name             | In   | Type                                                            | Required | Description                                                                                                                                                                        |
 | ---------------- | ---- | --------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2169,11 +2433,17 @@ in requests
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createpricetriggereddeliveryorder-responses](https://www.gate.io/docs/developers/apiv4/en/#createpricetriggereddeliveryorder-responses)
+
 | Status | Meaning                                                                         | Description                | Schema |
 | ------ | ------------------------------------------------------------------------------- | -------------------------- | ------ |
 | 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order created successfully | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createpricetriggereddeliveryorder-responseschema](https://www.gate.io/docs/developers/apiv4/en/#createpricetriggereddeliveryorder-responseschema)
 
 Status Code **201**
 
@@ -2189,6 +2459,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-auto-order-list-2) Query auto order list
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-auto-order-list-2](https://www.gate.io/docs/developers/apiv4/en/#query-auto-order-list-2)
+
 > Code samples
 
 `GET /delivery/{settle}/price_orders`
@@ -2196,6 +2469,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query auto order list_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listpricetriggereddeliveryorders-parameters](https://www.gate.io/docs/developers/apiv4/en/#listpricetriggereddeliveryorders-parameters)
 
 | Name     | In    | Type    | Required | Description                                             |
 | -------- | ----- | ------- | -------- | ------------------------------------------------------- |
@@ -2247,6 +2523,9 @@ _Query auto order list_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listpricetriggereddeliveryorders-responses](https://www.gate.io/docs/developers/apiv4/en/#listpricetriggereddeliveryorders-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema                                                              |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ------------------------------------------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[[FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder)\] |
@@ -2257,6 +2536,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#cancel-all-auto-orders-3) Cancel all auto orders
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancel-all-auto-orders-3](https://www.gate.io/docs/developers/apiv4/en/#cancel-all-auto-orders-3)
+
 > Code samples
 
 `DELETE /delivery/{settle}/price_orders`
@@ -2264,6 +2546,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Cancel all auto orders_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelpricetriggereddeliveryorderlist-parameters](https://www.gate.io/docs/developers/apiv4/en/#cancelpricetriggereddeliveryorderlist-parameters)
 
 | Name     | In    | Type   | Required | Description      |
 | -------- | ----- | ------ | -------- | ---------------- |
@@ -2310,6 +2595,9 @@ _Cancel all auto orders_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelpricetriggereddeliveryorderlist-responses](https://www.gate.io/docs/developers/apiv4/en/#cancelpricetriggereddeliveryorderlist-responses)
+
 | Status | Meaning                                                                    | Description                                                                         | Schema                                                              |
 | ------ | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Batch cancellation request accepted and processed, success determined by order list | \[[FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder)\] |
@@ -2320,6 +2608,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-single-auto-order-details-3) Query single auto order details
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-single-auto-order-details-3](https://www.gate.io/docs/developers/apiv4/en/#query-single-auto-order-details-3)
+
 > Code samples
 
 `GET /delivery/{settle}/price_orders/{order_id}`
@@ -2327,6 +2618,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query single auto order details_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getpricetriggereddeliveryorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#getpricetriggereddeliveryorder-parameters)
 
 | Name     | In   | Type   | Required | Description                                    |
 | -------- | ---- | ------ | -------- | ---------------------------------------------- |
@@ -2371,6 +2665,9 @@ _Query single auto order details_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getpricetriggereddeliveryorder-responses](https://www.gate.io/docs/developers/apiv4/en/#getpricetriggereddeliveryorder-responses)
+
 | Status | Meaning                                                                    | Description        | Schema                                                          |
 | ------ | -------------------------------------------------------------------------- | ------------------ | --------------------------------------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Auto order details | [FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder) |
@@ -2381,6 +2678,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#cancel-single-auto-order-3) Cancel single auto order
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancel-single-auto-order-3](https://www.gate.io/docs/developers/apiv4/en/#cancel-single-auto-order-3)
+
 > Code samples
 
 `DELETE /delivery/{settle}/price_orders/{order_id}`
@@ -2388,6 +2688,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Cancel single auto order_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelpricetriggereddeliveryorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#cancelpricetriggereddeliveryorder-parameters)
 
 | Name     | In   | Type   | Required | Description                                    |
 | -------- | ---- | ------ | -------- | ---------------------------------------------- |
@@ -2431,6 +2734,9 @@ _Cancel single auto order_
 ```
 
 ### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancelpricetriggereddeliveryorder-responses](https://www.gate.io/docs/developers/apiv4/en/#cancelpricetriggereddeliveryorder-responses)
 
 | Status | Meaning                                                                    | Description        | Schema                                                          |
 | ------ | -------------------------------------------------------------------------- | ------------------ | --------------------------------------------------------------- |

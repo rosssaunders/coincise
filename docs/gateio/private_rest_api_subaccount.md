@@ -4,6 +4,9 @@ Sub-account management
 
 ## [#](#create-a-new-sub-account) Create a new sub-account
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#create-a-new-sub-account](https://www.gate.io/docs/developers/apiv4/en/#create-a-new-sub-account)
+
 > Code samples
 
 `POST /sub_accounts`
@@ -20,6 +23,9 @@ _Create a new sub-account_
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createsubaccounts-parameters](https://www.gate.io/docs/developers/apiv4/en/#createsubaccounts-parameters)
 
 | Name         | In   | Type   | Required | Description                                                                                                          |
 | ------------ | ---- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -45,11 +51,17 @@ _Create a new sub-account_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createsubaccounts-responses](https://www.gate.io/docs/developers/apiv4/en/#createsubaccounts-responses)
+
 | Status | Meaning                                                                         | Description          | Schema |
 | ------ | ------------------------------------------------------------------------------- | -------------------- | ------ |
 | 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Created successfully | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createsubaccounts-responseschema](https://www.gate.io/docs/developers/apiv4/en/#createsubaccounts-responseschema)
 
 Status Code **201**
 
@@ -70,6 +82,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#list-sub-accounts) List sub-accounts
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#list-sub-accounts](https://www.gate.io/docs/developers/apiv4/en/#list-sub-accounts)
+
 > Code samples
 
 `GET /sub_accounts`
@@ -77,6 +92,9 @@ To perform this operation, you must be authenticated by API key and secret
 _List sub-accounts_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccounts-parameters](https://www.gate.io/docs/developers/apiv4/en/#listsubaccounts-parameters)
 
 | Name | In    | Type   | Required | Description                                                                                                            |
 | ---- | ----- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -107,11 +125,17 @@ queried by default.
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccounts-responses](https://www.gate.io/docs/developers/apiv4/en/#listsubaccounts-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccounts-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listsubaccounts-responseschema)
 
 Status Code **200**
 
@@ -133,6 +157,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-sub-account) Get sub-account
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-sub-account](https://www.gate.io/docs/developers/apiv4/en/#get-sub-account)
+
 > Code samples
 
 `GET /sub_accounts/{user_id}`
@@ -140,6 +167,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Get sub-account_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getsubaccount-parameters](https://www.gate.io/docs/developers/apiv4/en/#getsubaccount-parameters)
 
 | Name    | In   | Type           | Required | Description         |
 | ------- | ---- | -------------- | -------- | ------------------- |
@@ -161,11 +191,17 @@ _Get sub-account_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getsubaccount-responses](https://www.gate.io/docs/developers/apiv4/en/#getsubaccount-responses)
+
 | Status | Meaning                                                                    | Description            | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getsubaccount-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getsubaccount-responseschema)
 
 Status Code **200**
 
@@ -185,6 +221,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#create-new-sub-account-api-key-pair) Create new sub-account API key pair
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#create-new-sub-account-api-key-pair](https://www.gate.io/docs/developers/apiv4/en/#create-new-sub-account-api-key-pair)
 
 > Code samples
 
@@ -228,6 +267,9 @@ _Create new sub-account API key pair_
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createsubaccountkeys-parameters](https://www.gate.io/docs/developers/apiv4/en/#createsubaccountkeys-parameters)
 
 | Name           | In   | Type                                  | Required | Description                                               |
 | -------------- | ---- | ------------------------------------- | -------- | --------------------------------------------------------- |
@@ -302,6 +344,9 @@ _Create new sub-account API key pair_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createsubaccountkeys-responses](https://www.gate.io/docs/developers/apiv4/en/#createsubaccountkeys-responses)
+
 | Status | Meaning                                                                    | Description          | Schema                                |
 | ------ | -------------------------------------------------------------------------- | -------------------- | ------------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Created successfully | [SubAccountKey](#schemasubaccountkey) |
@@ -312,6 +357,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#list-all-api-key-pairs-of-the-sub-account) List all API key pairs of the sub-account
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#list-all-api-key-pairs-of-the-sub-account](https://www.gate.io/docs/developers/apiv4/en/#list-all-api-key-pairs-of-the-sub-account)
+
 > Code samples
 
 `GET /sub_accounts/{user_id}/keys`
@@ -319,6 +367,9 @@ To perform this operation, you must be authenticated by API key and secret
 _List all API key pairs of the sub-account_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccountkeys-parameters](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountkeys-parameters)
 
 | Name    | In   | Type    | Required | Description         |
 | ------- | ---- | ------- | -------- | ------------------- |
@@ -371,6 +422,9 @@ _List all API key pairs of the sub-account_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listsubaccountkeys-responses](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountkeys-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema                                    |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ----------------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[[SubAccountKey](#schemasubaccountkey)\] |
@@ -380,6 +434,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#update-sub-account-api-key-pair) Update sub-account API key pair
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#update-sub-account-api-key-pair](https://www.gate.io/docs/developers/apiv4/en/#update-sub-account-api-key-pair)
 
 > Code samples
 
@@ -424,6 +481,9 @@ _Update sub-account API key pair_
 
 ### Parameters
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#updatesubaccountkeys-parameters](https://www.gate.io/docs/developers/apiv4/en/#updatesubaccountkeys-parameters)
+
 | Name           | In   | Type                                  | Required | Description                                               |
 | -------------- | ---- | ------------------------------------- | -------- | --------------------------------------------------------- |
 | user_id        | path | integer                               | true     | Sub-account user ID                                       |
@@ -455,6 +515,9 @@ _Update sub-account API key pair_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#updatesubaccountkeys-responses](https://www.gate.io/docs/developers/apiv4/en/#updatesubaccountkeys-responses)
+
 | Status | Meaning                                                                            | Description          | Schema |
 | ------ | ---------------------------------------------------------------------------------- | -------------------- | ------ |
 | 204    | [No Content (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.5) | Updated successfully | None   |
@@ -465,6 +528,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#delete-sub-account-api-key-pair) Delete sub-account API key pair
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#delete-sub-account-api-key-pair](https://www.gate.io/docs/developers/apiv4/en/#delete-sub-account-api-key-pair)
+
 > Code samples
 
 `DELETE /sub_accounts/{user_id}/keys/{key}`
@@ -473,12 +539,18 @@ _Delete sub-account API key pair_
 
 ### Parameters
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#deletesubaccountkeys-parameters](https://www.gate.io/docs/developers/apiv4/en/#deletesubaccountkeys-parameters)
+
 | Name    | In   | Type    | Required | Description         |
 | ------- | ---- | ------- | -------- | ------------------- |
 | user_id | path | integer | true     | Sub-account user ID |
 | key     | path | string  | true     | Sub-account API key |
 
 ### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#deletesubaccountkeys-responses](https://www.gate.io/docs/developers/apiv4/en/#deletesubaccountkeys-responses)
 
 | Status | Meaning                                                                            | Description          | Schema |
 | ------ | ---------------------------------------------------------------------------------- | -------------------- | ------ |
@@ -490,6 +562,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-specific-api-key-pair-of-the-sub-account) Get specific API key pair of the sub-account
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-specific-api-key-pair-of-the-sub-account](https://www.gate.io/docs/developers/apiv4/en/#get-specific-api-key-pair-of-the-sub-account)
+
 > Code samples
 
 `GET /sub_accounts/{user_id}/keys/{key}`
@@ -497,6 +572,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Get specific API key pair of the sub-account_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getsubaccountkey-parameters](https://www.gate.io/docs/developers/apiv4/en/#getsubaccountkey-parameters)
 
 | Name    | In   | Type    | Required | Description         |
 | ------- | ---- | ------- | -------- | ------------------- |
@@ -548,6 +626,9 @@ _Get specific API key pair of the sub-account_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getsubaccountkey-responses](https://www.gate.io/docs/developers/apiv4/en/#getsubaccountkey-responses)
+
 | Status | Meaning                                                                    | Description            | Schema                                |
 | ------ | -------------------------------------------------------------------------- | ---------------------- | ------------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | [SubAccountKey](#schemasubaccountkey) |
@@ -558,6 +639,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#lock-sub-account) Lock sub-account
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#lock-sub-account](https://www.gate.io/docs/developers/apiv4/en/#lock-sub-account)
+
 > Code samples
 
 `POST /sub_accounts/{user_id}/lock`
@@ -566,11 +650,17 @@ _Lock sub-account_
 
 ### Parameters
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#locksubaccount-parameters](https://www.gate.io/docs/developers/apiv4/en/#locksubaccount-parameters)
+
 | Name    | In   | Type           | Required | Description         |
 | ------- | ---- | -------------- | -------- | ------------------- |
 | user_id | path | integer(int64) | true     | Sub-account user ID |
 
 ### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#locksubaccount-responses](https://www.gate.io/docs/developers/apiv4/en/#locksubaccount-responses)
 
 | Status | Meaning                                                                            | Description         | Schema |
 | ------ | ---------------------------------------------------------------------------------- | ------------------- | ------ |
@@ -582,6 +672,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#unlock-sub-account) Unlock sub-account
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#unlock-sub-account](https://www.gate.io/docs/developers/apiv4/en/#unlock-sub-account)
+
 > Code samples
 
 `POST /sub_accounts/{user_id}/unlock`
@@ -590,11 +683,17 @@ _Unlock sub-account_
 
 ### Parameters
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#unlocksubaccount-parameters](https://www.gate.io/docs/developers/apiv4/en/#unlocksubaccount-parameters)
+
 | Name    | In   | Type           | Required | Description         |
 | ------- | ---- | -------------- | -------- | ------------------- |
 | user_id | path | integer(int64) | true     | Sub-account user ID |
 
 ### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#unlocksubaccount-responses](https://www.gate.io/docs/developers/apiv4/en/#unlocksubaccount-responses)
 
 | Status | Meaning                                                                            | Description           | Schema |
 | ------ | ---------------------------------------------------------------------------------- | --------------------- | ------ |
@@ -605,6 +704,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-sub-account-mode) Get sub-account mode
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-sub-account-mode](https://www.gate.io/docs/developers/apiv4/en/#get-sub-account-mode)
 
 > Code samples
 
@@ -634,11 +736,17 @@ Unified account mode:
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedmode-responses](https://www.gate.io/docs/developers/apiv4/en/#listunifiedmode-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listunifiedmode-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listunifiedmode-responseschema)
 
 Status Code **200**
 

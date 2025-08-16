@@ -4,6 +4,9 @@ Options API
 
 ## [#](#list-all-underlying-assets) List all underlying assets
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#list-all-underlying-assets](https://www.gate.io/docs/developers/apiv4/en/#list-all-underlying-assets)
+
 > Code samples
 
 `GET /options/underlyings`
@@ -25,11 +28,17 @@ _List all underlying assets_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyings-responses](https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyings-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyings-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyings-responseschema)
 
 Status Code **200**
 
@@ -42,6 +51,9 @@ This operation does not require authentication
 
 ## [#](#list-all-expiration-dates) List all expiration dates
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#list-all-expiration-dates](https://www.gate.io/docs/developers/apiv4/en/#list-all-expiration-dates)
+
 > Code samples
 
 `GET /options/expirations`
@@ -49,6 +61,9 @@ This operation does not require authentication
 _List all expiration dates_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsexpirations-parameters](https://www.gate.io/docs/developers/apiv4/en/#listoptionsexpirations-parameters)
 
 | Name       | In    | Type   | Required | Description                                          |
 | ---------- | ----- | ------ | -------- | ---------------------------------------------------- |
@@ -66,11 +81,17 @@ _List all expiration dates_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsexpirations-responses](https://www.gate.io/docs/developers/apiv4/en/#listoptionsexpirations-responses)
+
 | Status | Meaning                                                                    | Description                                    | Schema      |
 | ------ | -------------------------------------------------------------------------- | ---------------------------------------------- | ----------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List expiration dates for specified underlying | \[integer\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsexpirations-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listoptionsexpirations-responseschema)
 
 Status Code **200**
 
@@ -82,6 +103,9 @@ This operation does not require authentication
 
 ## [#](#list-all-contracts-for-specified-underlying-and-expiration-date) List all contracts for specified underlying and expiration date
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#list-all-contracts-for-specified-underlying-and-expiration-date](https://www.gate.io/docs/developers/apiv4/en/#list-all-contracts-for-specified-underlying-and-expiration-date)
+
 > Code samples
 
 `GET /options/contracts`
@@ -89,6 +113,9 @@ This operation does not require authentication
 _List all contracts for specified underlying and expiration date_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionscontracts-parameters](https://www.gate.io/docs/developers/apiv4/en/#listoptionscontracts-parameters)
 
 | Name       | In    | Type           | Required | Description                                          |
 | ---------- | ----- | -------------- | -------- | ---------------------------------------------------- |
@@ -134,11 +161,17 @@ _List all contracts for specified underlying and expiration date_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionscontracts-responses](https://www.gate.io/docs/developers/apiv4/en/#listoptionscontracts-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionscontracts-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listoptionscontracts-responseschema)
 
 Status Code **200**
 
@@ -178,6 +211,9 @@ This operation does not require authentication
 
 ## [#](#query-specified-contract-details) Query specified contract details
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-specified-contract-details](https://www.gate.io/docs/developers/apiv4/en/#query-specified-contract-details)
+
 > Code samples
 
 `GET /options/contracts/{contract}`
@@ -185,6 +221,9 @@ This operation does not require authentication
 _Query specified contract details_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getoptionscontract-parameters](https://www.gate.io/docs/developers/apiv4/en/#getoptionscontract-parameters)
 
 | Name     | In   | Type   | Required | Description |
 | -------- | ---- | ------ | -------- | ----------- |
@@ -227,11 +266,17 @@ _Query specified contract details_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getoptionscontract-responses](https://www.gate.io/docs/developers/apiv4/en/#getoptionscontract-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getoptionscontract-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getoptionscontract-responseschema)
 
 Status Code **200**
 
@@ -271,6 +316,9 @@ This operation does not require authentication
 
 ## [#](#list-settlement-history) List settlement history
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#list-settlement-history](https://www.gate.io/docs/developers/apiv4/en/#list-settlement-history)
+
 > Code samples
 
 `GET /options/settlements`
@@ -278,6 +326,9 @@ This operation does not require authentication
 _List settlement history_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionssettlements-parameters](https://www.gate.io/docs/developers/apiv4/en/#listoptionssettlements-parameters)
 
 | Name       | In    | Type           | Required | Description                                          |
 | ---------- | ----- | -------------- | -------- | ---------------------------------------------------- |
@@ -318,11 +369,17 @@ time format is a Unix timestamp
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionssettlements-responses](https://www.gate.io/docs/developers/apiv4/en/#listoptionssettlements-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionssettlements-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listoptionssettlements-responseschema)
 
 Status Code **200**
 
@@ -340,6 +397,9 @@ This operation does not require authentication
 
 ## [#](#get-specified-contract-settlement-information) Get specified contract settlement information
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-specified-contract-settlement-information](https://www.gate.io/docs/developers/apiv4/en/#get-specified-contract-settlement-information)
+
 > Code samples
 
 `GET /options/settlements/{contract}`
@@ -347,6 +407,9 @@ This operation does not require authentication
 _Get specified contract settlement information_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getoptionssettlement-parameters](https://www.gate.io/docs/developers/apiv4/en/#getoptionssettlement-parameters)
 
 | Name       | In    | Type           | Required | Description                                          |
 | ---------- | ----- | -------------- | -------- | ---------------------------------------------------- |
@@ -371,11 +434,17 @@ _Get specified contract settlement information_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getoptionssettlement-responses](https://www.gate.io/docs/developers/apiv4/en/#getoptionssettlement-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getoptionssettlement-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getoptionssettlement-responseschema)
 
 Status Code **200**
 
@@ -392,6 +461,9 @@ This operation does not require authentication
 
 ## [#](#query-personal-settlement-records) Query personal settlement records
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-personal-settlement-records](https://www.gate.io/docs/developers/apiv4/en/#query-personal-settlement-records)
+
 > Code samples
 
 `GET /options/my_settlements`
@@ -399,6 +471,9 @@ This operation does not require authentication
 _Query personal settlement records_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listmyoptionssettlements-parameters](https://www.gate.io/docs/developers/apiv4/en/#listmyoptionssettlements-parameters)
 
 | Name       | In    | Type           | Required | Description                                          |
 | ---------- | ----- | -------------- | -------- | ---------------------------------------------------- |
@@ -443,11 +518,17 @@ time format is a Unix timestamp
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listmyoptionssettlements-responses](https://www.gate.io/docs/developers/apiv4/en/#listmyoptionssettlements-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listmyoptionssettlements-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listmyoptionssettlements-responseschema)
 
 Status Code **200**
 
@@ -469,6 +550,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-options-contract-order-book) Query options contract order book
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-options-contract-order-book](https://www.gate.io/docs/developers/apiv4/en/#query-options-contract-order-book)
+
 > Code samples
 
 `GET /options/order_book`
@@ -478,6 +562,9 @@ _Query options contract order book_
 Bids will be sorted by price from high to low, while asks sorted reversely
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsorderbook-parameters](https://www.gate.io/docs/developers/apiv4/en/#listoptionsorderbook-parameters)
 
 | Name     | In    | Type    | Required | Description                                                                                   |
 | -------- | ----- | ------- | -------- | --------------------------------------------------------------------------------------------- |
@@ -528,11 +615,17 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsorderbook-responses](https://www.gate.io/docs/developers/apiv4/en/#listoptionsorderbook-responses)
+
 | Status | Meaning                                                                    | Description            | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Depth query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsorderbook-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listoptionsorderbook-responseschema)
 
 Status Code **200**
 
@@ -554,6 +647,9 @@ This operation does not require authentication
 
 ## [#](#query-options-market-ticker-information) Query options market ticker information
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-options-market-ticker-information](https://www.gate.io/docs/developers/apiv4/en/#query-options-market-ticker-information)
+
 > Code samples
 
 `GET /options/tickers`
@@ -561,6 +657,9 @@ This operation does not require authentication
 _Query options market ticker information_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionstickers-parameters](https://www.gate.io/docs/developers/apiv4/en/#listoptionstickers-parameters)
 
 | Name       | In    | Type   | Required | Description                                          |
 | ---------- | ----- | ------ | -------- | ---------------------------------------------------- |
@@ -596,11 +695,17 @@ _Query options market ticker information_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionstickers-responses](https://www.gate.io/docs/developers/apiv4/en/#listoptionstickers-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionstickers-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listoptionstickers-responseschema)
 
 Status Code **200**
 
@@ -630,6 +735,9 @@ This operation does not require authentication
 
 ## [#](#query-underlying-ticker-information) Query underlying ticker information
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-underlying-ticker-information](https://www.gate.io/docs/developers/apiv4/en/#query-underlying-ticker-information)
+
 > Code samples
 
 `GET /options/underlying/tickers/{underlying}`
@@ -637,6 +745,9 @@ This operation does not require authentication
 _Query underlying ticker information_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyingtickers-parameters](https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyingtickers-parameters)
 
 | Name       | In   | Type   | Required | Description |
 | ---------- | ---- | ------ | -------- | ----------- |
@@ -656,11 +767,17 @@ _Query underlying ticker information_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyingtickers-responses](https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyingtickers-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyingtickers-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyingtickers-responseschema)
 
 Status Code **200**
 
@@ -676,6 +793,9 @@ This operation does not require authentication
 
 ## [#](#options-contract-market-candlestick-chart) Options contract market candlestick chart
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#options-contract-market-candlestick-chart](https://www.gate.io/docs/developers/apiv4/en/#options-contract-market-candlestick-chart)
+
 > Code samples
 
 `GET /options/candlesticks`
@@ -683,6 +803,9 @@ This operation does not require authentication
 _Options contract market candlestick chart_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionscandlesticks-parameters](https://www.gate.io/docs/developers/apiv4/en/#listoptionscandlesticks-parameters)
 
 | Name     | In    | Type           | Required | Description                                         |
 | -------- | ----- | -------------- | -------- | --------------------------------------------------- |
@@ -733,11 +856,17 @@ time format is a Unix timestamp
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionscandlesticks-responses](https://www.gate.io/docs/developers/apiv4/en/#listoptionscandlesticks-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionscandlesticks-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listoptionscandlesticks-responseschema)
 
 Status Code **200**
 
@@ -755,6 +884,9 @@ This operation does not require authentication
 
 ## [#](#underlying-index-price-candlestick-chart) Underlying index price candlestick chart
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#underlying-index-price-candlestick-chart](https://www.gate.io/docs/developers/apiv4/en/#underlying-index-price-candlestick-chart)
+
 > Code samples
 
 `GET /options/underlying/candlesticks`
@@ -762,6 +894,9 @@ This operation does not require authentication
 _Underlying index price candlestick chart_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyingcandlesticks-parameters](https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyingcandlesticks-parameters)
 
 | Name       | In    | Type           | Required | Description                                          |
 | ---------- | ----- | -------------- | -------- | ---------------------------------------------------- |
@@ -813,11 +948,17 @@ time format is a Unix timestamp
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyingcandlesticks-responses](https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyingcandlesticks-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyingcandlesticks-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyingcandlesticks-responseschema)
 
 Status Code **200**
 
@@ -837,6 +978,9 @@ This operation does not require authentication
 
 ## [#](#market-trade-records) Market trade records
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#market-trade-records](https://www.gate.io/docs/developers/apiv4/en/#market-trade-records)
+
 > Code samples
 
 `GET /options/trades`
@@ -844,6 +988,9 @@ This operation does not require authentication
 _Market trade records_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionstrades-parameters](https://www.gate.io/docs/developers/apiv4/en/#listoptionstrades-parameters)
 
 | Name     | In    | Type           | Required | Description                                         |
 | -------- | ----- | -------------- | -------- | --------------------------------------------------- |
@@ -884,11 +1031,17 @@ time format is a Unix timestamp
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionstrades-responses](https://www.gate.io/docs/developers/apiv4/en/#listoptionstrades-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionstrades-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listoptionstrades-responseschema)
 
 Status Code **200**
 
@@ -906,6 +1059,9 @@ Status Code **200**
 This operation does not require authentication
 
 ## [#](#query-account-information) Query account information
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-account-information](https://www.gate.io/docs/developers/apiv4/en/#query-account-information)
 
 > Code samples
 
@@ -943,11 +1099,17 @@ _Query account information_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccount-responses](https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccount-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccount-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccount-responseschema)
 
 Status Code **200**
 
@@ -988,6 +1150,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-account-change-history) Query account change history
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-account-change-history](https://www.gate.io/docs/developers/apiv4/en/#query-account-change-history)
+
 > Code samples
 
 `GET /options/account_book`
@@ -995,6 +1160,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query account change history_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccountbook-parameters](https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccountbook-parameters)
 
 | Name   | In    | Type           | Required | Description                                         |
 | ------ | ----- | -------------- | -------- | --------------------------------------------------- |
@@ -1052,11 +1220,17 @@ time format is a Unix timestamp
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccountbook-responses](https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccountbook-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccountbook-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccountbook-responseschema)
 
 Status Code **200**
 
@@ -1080,6 +1254,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#list-user-s-positions-of-specified-underlying) List user's positions of specified underlying
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#list-user-s-positions-of-specified-underlying](https://www.gate.io/docs/developers/apiv4/en/#list-user-s-positions-of-specified-underlying)
+
 > Code samples
 
 `GET /options/positions`
@@ -1087,6 +1264,9 @@ To perform this operation, you must be authenticated by API key and secret
 _List user's positions of specified underlying_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionspositions-parameters](https://www.gate.io/docs/developers/apiv4/en/#listoptionspositions-parameters)
 
 | Name       | In    | Type   | Required | Description |
 | ---------- | ----- | ------ | -------- | ----------- |
@@ -1125,11 +1305,17 @@ _List user's positions of specified underlying_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionspositions-responses](https://www.gate.io/docs/developers/apiv4/en/#listoptionspositions-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionspositions-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listoptionspositions-responseschema)
 
 Status Code **200**
 
@@ -1163,6 +1349,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-specified-contract-position) Get specified contract position
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-specified-contract-position](https://www.gate.io/docs/developers/apiv4/en/#get-specified-contract-position)
+
 > Code samples
 
 `GET /options/positions/{contract}`
@@ -1170,6 +1359,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Get specified contract position_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getoptionsposition-parameters](https://www.gate.io/docs/developers/apiv4/en/#getoptionsposition-parameters)
 
 | Name     | In   | Type   | Required | Description |
 | -------- | ---- | ------ | -------- | ----------- |
@@ -1206,11 +1398,17 @@ _Get specified contract position_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getoptionsposition-responses](https://www.gate.io/docs/developers/apiv4/en/#getoptionsposition-responses)
+
 | Status | Meaning                                                                    | Description      | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getoptionsposition-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getoptionsposition-responseschema)
 
 Status Code **200**
 
@@ -1244,6 +1442,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#list-user-s-liquidation-history-of-specified-underlying) List user's liquidation history of specified underlying
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#list-user-s-liquidation-history-of-specified-underlying](https://www.gate.io/docs/developers/apiv4/en/#list-user-s-liquidation-history-of-specified-underlying)
+
 > Code samples
 
 `GET /options/position_close`
@@ -1251,6 +1452,9 @@ To perform this operation, you must be authenticated by API key and secret
 _List user's liquidation history of specified underlying_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionspositionclose-parameters](https://www.gate.io/docs/developers/apiv4/en/#listoptionspositionclose-parameters)
 
 | Name       | In    | Type   | Required | Description                                          |
 | ---------- | ----- | ------ | -------- | ---------------------------------------------------- |
@@ -1276,11 +1480,17 @@ _List user's liquidation history of specified underlying_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionspositionclose-responses](https://www.gate.io/docs/developers/apiv4/en/#listoptionspositionclose-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionspositionclose-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listoptionspositionclose-responseschema)
 
 Status Code **200**
 
@@ -1308,6 +1518,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#create-an-options-order) Create an options order
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#create-an-options-order](https://www.gate.io/docs/developers/apiv4/en/#create-an-options-order)
+
 > Code samples
 
 `POST /options/orders`
@@ -1328,6 +1541,9 @@ _Create an options order_
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createoptionsorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#createoptionsorder-parameters)
 
 | Name          | In   | Type           | Required | Description                                                                                                  |
 | ------------- | ---- | -------------- | -------- | ------------------------------------------------------------------------------------------------------------ |
@@ -1401,11 +1617,17 @@ _Create an options order_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createoptionsorder-responses](https://www.gate.io/docs/developers/apiv4/en/#createoptionsorder-responses)
+
 | Status | Meaning                                                                         | Description  | Schema |
 | ------ | ------------------------------------------------------------------------------- | ------------ | ------ |
 | 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order detail | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createoptionsorder-responseschema](https://www.gate.io/docs/developers/apiv4/en/#createoptionsorder-responseschema)
 
 Status Code **201**
 
@@ -1489,6 +1711,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#list-options-orders) List options orders
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#list-options-orders](https://www.gate.io/docs/developers/apiv4/en/#list-options-orders)
+
 > Code samples
 
 `GET /options/orders`
@@ -1496,6 +1721,9 @@ To perform this operation, you must be authenticated by API key and secret
 _List options orders_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsorders-parameters](https://www.gate.io/docs/developers/apiv4/en/#listoptionsorders-parameters)
 
 | Name       | In    | Type           | Required | Description                                         |
 | ---------- | ----- | -------------- | -------- | --------------------------------------------------- |
@@ -1556,11 +1784,17 @@ time format is a Unix timestamp
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsorders-responses](https://www.gate.io/docs/developers/apiv4/en/#listoptionsorders-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listoptionsorders-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listoptionsorders-responseschema)
 
 Status Code **200**
 
@@ -1644,6 +1878,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#cancel-all-orders-with-open-status-3) Cancel all orders with 'open' status
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancel-all-orders-with-open-status-3](https://www.gate.io/docs/developers/apiv4/en/#cancel-all-orders-with-open-status-3)
+
 > Code samples
 
 `DELETE /options/orders`
@@ -1651,6 +1888,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Cancel all orders with 'open' status_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorders-parameters](https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorders-parameters)
 
 | Name       | In    | Type   | Required | Description                                                  |
 | ---------- | ----- | ------ | -------- | ------------------------------------------------------------ |
@@ -1695,11 +1935,17 @@ _Cancel all orders with 'open' status_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorders-responses](https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorders-responses)
+
 | Status | Meaning                                                                    | Description                   | Schema     |
 | ------ | -------------------------------------------------------------------------- | ----------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Batch cancellation successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorders-responseschema](https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorders-responseschema)
 
 Status Code **200**
 
@@ -1783,6 +2029,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-single-order-details-4) Query single order details
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-single-order-details-4](https://www.gate.io/docs/developers/apiv4/en/#query-single-order-details-4)
+
 > Code samples
 
 `GET /options/orders/{order_id}`
@@ -1790,6 +2039,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query single order details_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getoptionsorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#getoptionsorder-parameters)
 
 | Name     | In   | Type           | Required | Description                                          |
 | -------- | ---- | -------------- | -------- | ---------------------------------------------------- |
@@ -1823,11 +2075,17 @@ _Query single order details_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getoptionsorder-responses](https://www.gate.io/docs/developers/apiv4/en/#getoptionsorder-responses)
+
 | Status | Meaning                                                                    | Description  | Schema |
 | ------ | -------------------------------------------------------------------------- | ------------ | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Order detail | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getoptionsorder-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getoptionsorder-responseschema)
 
 Status Code **200**
 
@@ -1911,6 +2169,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#cancel-single-order-4) Cancel single order
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#cancel-single-order-4](https://www.gate.io/docs/developers/apiv4/en/#cancel-single-order-4)
+
 > Code samples
 
 `DELETE /options/orders/{order_id}`
@@ -1918,6 +2179,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Cancel single order_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorder-parameters)
 
 | Name     | In   | Type           | Required | Description                                          |
 | -------- | ---- | -------------- | -------- | ---------------------------------------------------- |
@@ -1951,11 +2215,17 @@ _Cancel single order_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorder-responses](https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorder-responses)
+
 | Status | Meaning                                                                    | Description  | Schema |
 | ------ | -------------------------------------------------------------------------- | ------------ | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Order detail | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorder-responseschema](https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorder-responseschema)
 
 Status Code **200**
 
@@ -2039,6 +2309,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#countdown-cancel-orders-3) Countdown cancel orders
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#countdown-cancel-orders-3](https://www.gate.io/docs/developers/apiv4/en/#countdown-cancel-orders-3)
+
 > Code samples
 
 `POST /options/countdown_cancel_all`
@@ -2069,6 +2342,9 @@ function will be cancelled.
 
 ### Parameters
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#countdowncancelalloptions-parameters](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelalloptions-parameters)
+
 | Name         | In   | Type           | Required | Description               |
 | ------------ | ---- | -------------- | -------- | ------------------------- |
 | body         | body | object         | true     | none                      |
@@ -2093,11 +2369,17 @@ countdown
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#countdowncancelalloptions-responses](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelalloptions-responses)
+
 | Status | Meaning                                                                    | Description                | Schema |
 | ------ | -------------------------------------------------------------------------- | -------------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Countdown set successfully | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#countdowncancelalloptions-responseschema](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelalloptions-responseschema)
 
 Status Code **200**
 
@@ -2113,6 +2395,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-personal-trading-records-4) Query personal trading records
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-personal-trading-records-4](https://www.gate.io/docs/developers/apiv4/en/#query-personal-trading-records-4)
+
 > Code samples
 
 `GET /options/my_trades`
@@ -2120,6 +2405,9 @@ To perform this operation, you must be authenticated by API key and secret
 _Query personal trading records_
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listmyoptionstrades-parameters](https://www.gate.io/docs/developers/apiv4/en/#listmyoptionstrades-parameters)
 
 | Name       | In    | Type           | Required | Description                                          |
 | ---------- | ----- | -------------- | -------- | ---------------------------------------------------- |
@@ -2163,11 +2451,17 @@ time format is a Unix timestamp
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listmyoptionstrades-responses](https://www.gate.io/docs/developers/apiv4/en/#listmyoptionstrades-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#listmyoptionstrades-responseschema](https://www.gate.io/docs/developers/apiv4/en/#listmyoptionstrades-responseschema)
 
 Status Code **200**
 
@@ -2195,6 +2489,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#mmp-settings) MMP Settings
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#mmp-settings](https://www.gate.io/docs/developers/apiv4/en/#mmp-settings)
+
 > Code samples
 
 `POST /options/mmp`
@@ -2214,6 +2511,9 @@ _MMP Settings_
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#setoptionsmmp-parameters](https://www.gate.io/docs/developers/apiv4/en/#setoptionsmmp-parameters)
 
 | Name            | In   | Type           | Required | Description                                                                               |
 | --------------- | ---- | -------------- | -------- | ----------------------------------------------------------------------------------------- |
@@ -2242,11 +2542,17 @@ _MMP Settings_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#setoptionsmmp-responses](https://www.gate.io/docs/developers/apiv4/en/#setoptionsmmp-responses)
+
 | Status | Meaning                                                                    | Description     | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | MMP Information | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#setoptionsmmp-responseschema](https://www.gate.io/docs/developers/apiv4/en/#setoptionsmmp-responseschema)
 
 Status Code **200**
 
@@ -2268,6 +2574,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#mmp-query) MMP Query.
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#mmp-query](https://www.gate.io/docs/developers/apiv4/en/#mmp-query)
+
 > Code samples
 
 `GET /options/mmp`
@@ -2275,6 +2584,9 @@ To perform this operation, you must be authenticated by API key and secret
 _MMP Query._
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getoptionsmmp-parameters](https://www.gate.io/docs/developers/apiv4/en/#getoptionsmmp-parameters)
 
 | Name       | In    | Type   | Required | Description |
 | ---------- | ----- | ------ | -------- | ----------- |
@@ -2300,11 +2612,17 @@ _MMP Query._
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getoptionsmmp-responses](https://www.gate.io/docs/developers/apiv4/en/#getoptionsmmp-responses)
+
 | Status | Meaning                                                                    | Description      | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Query successful | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getoptionsmmp-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getoptionsmmp-responseschema)
 
 Status Code **200**
 
@@ -2326,6 +2644,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#mmp-reset) MMP Reset
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#mmp-reset](https://www.gate.io/docs/developers/apiv4/en/#mmp-reset)
+
 > Code samples
 
 `POST /options/mmp/reset`
@@ -2341,6 +2662,9 @@ _MMP Reset_
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#resetoptionsmmp-parameters](https://www.gate.io/docs/developers/apiv4/en/#resetoptionsmmp-parameters)
 
 | Name         | In   | Type   | Required | Description |
 | ------------ | ---- | ------ | -------- | ----------- |
@@ -2365,11 +2689,17 @@ _MMP Reset_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#resetoptionsmmp-responses](https://www.gate.io/docs/developers/apiv4/en/#resetoptionsmmp-responses)
+
 | Status | Meaning                                                                    | Description     | Schema |
 | ------ | -------------------------------------------------------------------------- | --------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | MMP Information | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#resetoptionsmmp-responseschema](https://www.gate.io/docs/developers/apiv4/en/#resetoptionsmmp-responseschema)
 
 Status Code **200**
 

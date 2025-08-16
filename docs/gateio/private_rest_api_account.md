@@ -4,6 +4,9 @@ Retrieve user account information
 
 ## [#](#retrieve-user-account-information) Retrieve user account information
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#retrieve-user-account-information](https://www.gate.io/docs/developers/apiv4/en/#retrieve-user-account-information)
+
 > Code samples
 
 `GET /account/detail`
@@ -33,11 +36,17 @@ _Retrieve user account information_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getaccountdetail-responses](https://www.gate.io/docs/developers/apiv4/en/#getaccountdetail-responses)
+
 | Status | Meaning                                                                    | Description            | Schema |
 | ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getaccountdetail-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getaccountdetail-responseschema)
 
 Status Code **200**
 
@@ -58,6 +67,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#get-user-transaction-rate-limit-information) Get user transaction rate limit information
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#get-user-transaction-rate-limit-information](https://www.gate.io/docs/developers/apiv4/en/#get-user-transaction-rate-limit-information)
 
 > Code samples
 
@@ -90,11 +102,17 @@ _Get user transaction rate limit information_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getaccountratelimit-responses](https://www.gate.io/docs/developers/apiv4/en/#getaccountratelimit-responses)
+
 | Status | Meaning                                                                    | Description            | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getaccountratelimit-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getaccountratelimit-responseschema)
 
 Status Code **200**
 
@@ -114,6 +132,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#create-stp-user-group) Create STP user group
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#create-stp-user-group](https://www.gate.io/docs/developers/apiv4/en/#create-stp-user-group)
+
 > Code samples
 
 `POST /account/stp_groups`
@@ -131,6 +152,9 @@ Only the main account is allowed to create a new STP user group
 ```
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createstpgroup-parameters](https://www.gate.io/docs/developers/apiv4/en/#createstpgroup-parameters)
 
 | Name          | In   | Type           | Required | Description    |
 | ------------- | ---- | -------------- | -------- | -------------- |
@@ -155,11 +179,17 @@ Only the main account is allowed to create a new STP user group
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createstpgroup-responses](https://www.gate.io/docs/developers/apiv4/en/#createstpgroup-responses)
+
 | Status | Meaning                                                                    | Description                                                       | Schema |
 | ------ | -------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------ |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | User added successfully, returning current users in the STP group | Inline |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createstpgroup-responseschema](https://www.gate.io/docs/developers/apiv4/en/#createstpgroup-responseschema)
 
 Status Code **200**
 
@@ -176,6 +206,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-stp-user-groups-created-by-the-user) Query STP user groups created by the user
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-stp-user-groups-created-by-the-user](https://www.gate.io/docs/developers/apiv4/en/#query-stp-user-groups-created-by-the-user)
+
 > Code samples
 
 `GET /account/stp_groups`
@@ -185,6 +218,9 @@ _Query STP user groups created by the user_
 Only query STP user groups created by the current main account
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#liststpgroups-parameters](https://www.gate.io/docs/developers/apiv4/en/#liststpgroups-parameters)
 
 | Name | In    | Type   | Required | Description          |
 | ---- | ----- | ------ | -------- | -------------------- |
@@ -207,11 +243,17 @@ Only query STP user groups created by the current main account
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#liststpgroups-responses](https://www.gate.io/docs/developers/apiv4/en/#liststpgroups-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#liststpgroups-responseschema](https://www.gate.io/docs/developers/apiv4/en/#liststpgroups-responseschema)
 
 Status Code **200**
 
@@ -229,6 +271,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-users-in-the-stp-user-group) Query users in the STP user group
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-users-in-the-stp-user-group](https://www.gate.io/docs/developers/apiv4/en/#query-users-in-the-stp-user-group)
+
 > Code samples
 
 `GET /account/stp_groups/{stp_id}/users`
@@ -239,6 +284,9 @@ Only the main account that created this STP group can query the account ID list
 in the current STP group
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#liststpgroupsusers-parameters](https://www.gate.io/docs/developers/apiv4/en/#liststpgroupsusers-parameters)
 
 | Name   | In   | Type           | Required | Description  |
 | ------ | ---- | -------------- | -------- | ------------ |
@@ -260,11 +308,17 @@ in the current STP group
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#liststpgroupsusers-responses](https://www.gate.io/docs/developers/apiv4/en/#liststpgroupsusers-responses)
+
 | Status | Meaning                                                                    | Description                 | Schema     |
 | ------ | -------------------------------------------------------------------------- | --------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | List retrieved successfully | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#liststpgroupsusers-responseschema](https://www.gate.io/docs/developers/apiv4/en/#liststpgroupsusers-responseschema)
 
 Status Code **200**
 
@@ -280,6 +334,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#add-users-to-the-stp-user-group) Add users to the STP user group
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#add-users-to-the-stp-user-group](https://www.gate.io/docs/developers/apiv4/en/#add-users-to-the-stp-user-group)
 
 > Code samples
 
@@ -304,6 +361,9 @@ _Add users to the STP user group_
 
 ### Parameters
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#addstpgroupusers-parameters](https://www.gate.io/docs/developers/apiv4/en/#addstpgroupusers-parameters)
+
 | Name   | In   | Type             | Required | Description  |
 | ------ | ---- | ---------------- | -------- | ------------ |
 | stp_id | path | integer(int64)   | true     | STP Group ID |
@@ -325,11 +385,17 @@ _Add users to the STP user group_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#addstpgroupusers-responses](https://www.gate.io/docs/developers/apiv4/en/#addstpgroupusers-responses)
+
 | Status | Meaning                                                                    | Description                                                       | Schema     |
 | ------ | -------------------------------------------------------------------------- | ----------------------------------------------------------------- | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | User added successfully, returning current users in the STP group | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#addstpgroupusers-responseschema](https://www.gate.io/docs/developers/apiv4/en/#addstpgroupusers-responseschema)
 
 Status Code **200**
 
@@ -346,6 +412,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#delete-users-from-the-stp-user-group) Delete users from the STP user group
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#delete-users-from-the-stp-user-group](https://www.gate.io/docs/developers/apiv4/en/#delete-users-from-the-stp-user-group)
+
 > Code samples
 
 `DELETE /account/stp_groups/{stp_id}/users`
@@ -358,6 +427,9 @@ _Delete users from the STP user group_
   deletion is not permitted
 
 ### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#deletestpgroupusers-parameters](https://www.gate.io/docs/developers/apiv4/en/#deletestpgroupusers-parameters)
 
 | Name    | In    | Type           | Required | Description                                           |
 | ------- | ----- | -------------- | -------- | ----------------------------------------------------- |
@@ -380,11 +452,17 @@ _Delete users from the STP user group_
 
 ### Responses
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#deletestpgroupusers-responses](https://www.gate.io/docs/developers/apiv4/en/#deletestpgroupusers-responses)
+
 | Status | Meaning                                                                    | Description                                                        | Schema     |
 | ------ | -------------------------------------------------------------------------- | ------------------------------------------------------------------ | ---------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Users deleted successfully, returns current users in the STP group | \[Inline\] |
 
 ### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#deletestpgroupusers-responseschema](https://www.gate.io/docs/developers/apiv4/en/#deletestpgroupusers-responseschema)
 
 Status Code **200**
 
@@ -400,6 +478,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#configure-gt-fee-deduction) Configure GT fee deduction
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#configure-gt-fee-deduction](https://www.gate.io/docs/developers/apiv4/en/#configure-gt-fee-deduction)
 
 > Code samples
 
@@ -419,12 +500,18 @@ Enable or disable GT fee deduction for the current account
 
 ### Parameters
 
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#setdebitfee-parameters](https://www.gate.io/docs/developers/apiv4/en/#setdebitfee-parameters)
+
 | Name      | In   | Type                        | Required | Description                         |
 | --------- | ---- | --------------------------- | -------- | ----------------------------------- |
 | body      | body | [DebitFee](#schemadebitfee) | true     | none                                |
 | » enabled | body | boolean                     | true     | Whether GT fee deduction is enabled |
 
 ### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#setdebitfee-responses](https://www.gate.io/docs/developers/apiv4/en/#setdebitfee-responses)
 
 | Status | Meaning                                                                    | Description | Schema |
 | ------ | -------------------------------------------------------------------------- | ----------- | ------ |
@@ -435,6 +522,9 @@ WARNING
 To perform this operation, you must be authenticated by API key and secret
 
 ## [#](#query-gt-fee-deduction-configuration) Query GT fee deduction configuration
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-gt-fee-deduction-configuration](https://www.gate.io/docs/developers/apiv4/en/#query-gt-fee-deduction-configuration)
 
 > Code samples
 
@@ -455,6 +545,9 @@ Query the GT fee deduction configuration for the current account
 ```
 
 ### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getdebitfee-responses](https://www.gate.io/docs/developers/apiv4/en/#getdebitfee-responses)
 
 | Status | Meaning                                                                    | Description | Schema                      |
 | ------ | -------------------------------------------------------------------------- | ----------- | --------------------------- |
