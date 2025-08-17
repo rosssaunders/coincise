@@ -1,0 +1,7 @@
+{
+  "sections": [
+    "Authentication"
+  ],
+  "output": "../../docs/deribit/authentication.md",
+  "title": "Deribit Authentication Documentation"
+}

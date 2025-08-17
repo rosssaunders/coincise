@@ -1,0 +1,7 @@
+{
+  "sections": [
+    "Wallet"
+  ],
+  "output": "../../docs/deribit/private_wallet.md",
+  "title": "Deribit Private Wallet Documentation"
+}
