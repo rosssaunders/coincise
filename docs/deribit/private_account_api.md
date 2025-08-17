@@ -58,12 +58,12 @@ limitations: subscriptions are not supported over HTTP).
 According to the JSON-RPC specification the requests must be JSON objects with
 the following fields.
 
-| Name    | Type              | Description                                                                                                                                                                                     |
-| ------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| jsonrpc | string            | The version of the JSON-RPC spec: "2.0"                                                                                                                                                         |
-| id      | integer or string | An identifier of the request. If it is included, then the response will contain the same identifier                                                                                             |
-| method  | string            | The method to be invoked                                                                                                                                                                        |
-| params  | object            | The parameters values for the method. The field names must match with the expected parameter names. The parameters that are expected are described in the documentation for the methods, below. |
+| Name    | Type              | Description                                                                                                                                                                                                                                                       |
+| ------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| jsonrpc | string            | The version of the JSON-RPC spec: "2.0"                                                                                                                                                                                                                           |
+| id      | integer or string | An identifier of the request. If it is included, then the response will contain the same identifier. The identifier must be unique for each request if you want to correctly match responses to requests — especially important when using WebSocket connections. |
+| method  | string            | The method to be invoked                                                                                                                                                                                                                                          |
+| params  | object            | The parameters values for the method. The field names must match with the expected parameter names. The parameters that are expected are described in the documentation for the methods, below.                                                                   |
 
 The JSON-RPC specification describes two features that are currently not
 supported by the API:
@@ -346,6 +346,9 @@ and whether requests are only going to check for some data or also to update
 them. Scopes are required and checked for `private` methods, so if you plan to
 use only `public` information you can stay with values assigned by default.
 
+**📖 Related Support Article:**
+[Connection Management](https://support.deribit.com/hc/en-us/articles/25944603459613-Connection-Management)
+
 | Scope                                                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <em>mainaccount</em>                                             | It is set <strong>automatically</strong> by the server when the currently connecting user (his/her credentials) is the main user, otherwise it's not included in the final scope.                                                                                                                                                                                                                                                                                                                                                                                                                                       |
@@ -574,15 +577,24 @@ _This method takes no parameters_
 
 ## /private/enable_cancel_on_disconnect
 
-Enable Cancel On Disconnect for the connection. After enabling Cancel On
-Disconnect all orders created by the connection will be removed when the
-connection is closed.
+Enable Cancel On Disconnect for the connection. After enabling, all orders
+created via this connection will be automatically cancelled when the connection
+is closed.
 
-**NOTICE** It does not affect orders created by other connections - they will
-remain active !
+Cancel is triggered in the following cases: when the TCP connection is properly
+terminated, when the connection is closed due to 10 minutes of inactivity, or
+when a heartbeat detects a disconnection. To reduce the inactivity timeout,
+consider using
+[public/set_heartbeat](https://docs.deribit.com/#public-set_heartbeat).
 
-When change is applied for the account, then every newly opened connection will
-start with **active** Cancel on Disconnect.
+**Note**: If the connection is gracefully closed using
+[private/logout](https://docs.deribit.com/#private-logout), cancel-on-disconnect
+will **not** be triggered.
+
+**Notice**: Cancel-on-Disconnect does not affect orders created by other
+connections - they will remain active! When change is applied on the `account`
+scope, then every newly opened connection will start with **active** Cancel on
+Disconnect.
 
 **Scope:** `account:read_write`
 
@@ -789,15 +801,15 @@ This is a private method; it can only be used after authentication.
 
 ### Response
 
-| Name                                        | Type            | Description                                                                                                 |
-| ------------------------------------------- | --------------- | ----------------------------------------------------------------------------------------------------------- |
-| id                                          | integer         | The id that was sent in the request                                                                         |
-| jsonrpc                                     | string          | The JSON-RPC version (2.0)                                                                                  |
-| result                                      | <em>object</em> | Object if address is created, null otherwise                                                                |
-| &nbsp;&nbsp;›&nbsp;&nbsp;address            | string          | Address in proper format for currency                                                                       |
-| &nbsp;&nbsp;›&nbsp;&nbsp;creation_timestamp | integer         | The timestamp (milliseconds since the Unix epoch)                                                           |
-| &nbsp;&nbsp;›&nbsp;&nbsp;currency           | string          | Currency, i.e <code>"BTC"</code>, <code>"ETH"</code>, <code>"USDC"</code>                                   |
-| &nbsp;&nbsp;›&nbsp;&nbsp;type               | string          | Address type/purpose, allowed values : <code>deposit</code>, <code>withdrawal</code>, <code>transfer</code> |
+| Name                                        | Type            | Description                                                               |
+| ------------------------------------------- | --------------- | ------------------------------------------------------------------------- |
+| id                                          | integer         | The id that was sent in the request                                       |
+| jsonrpc                                     | string          | The JSON-RPC version (2.0)                                                |
+| result                                      | <em>object</em> | Object if address is created, null otherwise                              |
+| &nbsp;&nbsp;›&nbsp;&nbsp;address            | string          | Address in proper format for currency                                     |
+| &nbsp;&nbsp;›&nbsp;&nbsp;creation_timestamp | integer         | The timestamp (milliseconds since the Unix epoch)                         |
+| &nbsp;&nbsp;›&nbsp;&nbsp;currency           | string          | Currency, i.e <code>"BTC"</code>, <code>"ETH"</code>, <code>"USDC"</code> |
+| &nbsp;&nbsp;›&nbsp;&nbsp;type               | string          | Address type/purpose, allowed values : <code>deposit</code>               |
 
 ## /private/delete_address_beneficiary
 
@@ -920,19 +932,22 @@ This is a private method; it can only be used after authentication.
 
 ### Response
 
-| Name                                        | Type            | Description                                                                                                 |
-| ------------------------------------------- | --------------- | ----------------------------------------------------------------------------------------------------------- |
-| id                                          | integer         | The id that was sent in the request                                                                         |
-| jsonrpc                                     | string          | The JSON-RPC version (2.0)                                                                                  |
-| result                                      | <em>object</em> | Object if address is created, null otherwise                                                                |
-| &nbsp;&nbsp;›&nbsp;&nbsp;address            | string          | Address in proper format for currency                                                                       |
-| &nbsp;&nbsp;›&nbsp;&nbsp;creation_timestamp | integer         | The timestamp (milliseconds since the Unix epoch)                                                           |
-| &nbsp;&nbsp;›&nbsp;&nbsp;currency           | string          | Currency, i.e <code>"BTC"</code>, <code>"ETH"</code>, <code>"USDC"</code>                                   |
-| &nbsp;&nbsp;›&nbsp;&nbsp;type               | string          | Address type/purpose, allowed values : <code>deposit</code>, <code>withdrawal</code>, <code>transfer</code> |
+| Name                                        | Type            | Description                                                               |
+| ------------------------------------------- | --------------- | ------------------------------------------------------------------------- |
+| id                                          | integer         | The id that was sent in the request                                       |
+| jsonrpc                                     | string          | The JSON-RPC version (2.0)                                                |
+| result                                      | <em>object</em> | Object if address is created, null otherwise                              |
+| &nbsp;&nbsp;›&nbsp;&nbsp;address            | string          | Address in proper format for currency                                     |
+| &nbsp;&nbsp;›&nbsp;&nbsp;creation_timestamp | integer         | The timestamp (milliseconds since the Unix epoch)                         |
+| &nbsp;&nbsp;›&nbsp;&nbsp;currency           | string          | Currency, i.e <code>"BTC"</code>, <code>"ETH"</code>, <code>"USDC"</code> |
+| &nbsp;&nbsp;›&nbsp;&nbsp;type               | string          | Address type/purpose, allowed values : <code>deposit</code>               |
 
 ## /private/get_deposits
 
 Retrieve the latest users deposits
+
+**📖 Related Support Article:**
+[Deposits](https://support.deribit.com/hc/en-us/articles/25944616988957-Deposits)
 
 **Scope:** `wallet:read`
 
@@ -1342,6 +1357,9 @@ This is a private method; it can only be used after authentication.
 ## /private/withdraw
 
 Creates a new withdrawal request
+
+**📖 Related Support Article:**
+[Withdrawals](https://support.deribit.com/hc/en-us/articles/25944635205021-Withdrawals)
 
 **Scope:** `wallet:read_write` and mainaccount
 
