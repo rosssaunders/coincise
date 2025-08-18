@@ -743,7 +743,7 @@ curl -X POST "https://api.bitget.com/api/v2/spot/trade/cancel-order" \   -H "ACC
 Response Example
 
 ```
-{    "code": "00000",    "message": "success",    "requestTime": 1234567891234,    "data": {        "orderId": "121211212122",        "clientOid": "xx001"    }}
+{    "code": "00000",    "msg": "success",    "requestTime": 1234567891234,    "data": {        "orderId": "121211212122",        "clientOid": "xx001"    }}
 ```
 
 #### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
@@ -852,7 +852,7 @@ curl -X POST "https://api.bitget.com/api/v2/spot/trade/batch-cancel-order" \   -
 Response Example
 
 ```
-{    "code": "00000",    "message": "success",    "requestTime": 1695808949356,    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "121211212122"            }        ],        "failureList": [            {                "orderId": "121211212122",                "clientOid": "xxx001",                "errorMsg": "duplicate clientOrderId"            }        ]    }}
+{    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "121211212122"            }        ],        "failureList": [            {                "orderId": "121211212122",                "clientOid": "xxx001",                "errorMsg": "duplicate clientOrderId"            }        ]    }}
 ```
 
 #### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

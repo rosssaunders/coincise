@@ -2,6 +2,55 @@
 
 ## Changelog
 
+### \[August 11, 2025\] Agent commission API query supports fee deduction[​](#august-11-2025-agent-commission-api-query-supports-fee-deduction "Direct link to august-11-2025-agent-commission-api-query-supports-fee-deduction")
+
+Interface：/api/broker/v1/agent/commission-distribution;/api/broker/v1/agent/customer-commissions;  
+Changes：
+
+- Agent commission API query supports fee deduction details
+
+### \[August 11, 2025\] API Global rate Limit Adjustment[​](#august-11-2025-api-global-rate-limit-adjustment "Direct link to august-11-2025-api-global-rate-limit-adjustment")
+
+Changes：
+
+- There is an overall rate limit rule of 6,000 times per IP per minute. After
+  the rate limit is triggered, the recovery time is adjusted from 1 minute to 5
+  minutes.
+
+### \[August 6, 2025\] Add unrealizedPL field for sub-account futures asset info[​](#august-6-2025-add-unrealizedpl-field-for-sub-account-futures-asset-info "Direct link to august-6-2025-add-unrealizedpl-field-for-sub-account-futures-asset-info")
+
+Interface：/api/v2/broker/account/subaccount-future-assets  
+Changes：
+
+- Add unrealizedPL field for sub-account futures asset info
+
+### \[August 6, 2025\] Add marginCoin field for historical transaction details[​](#august-6-2025-add-margincoin-field-for-historical-transaction-details "Direct link to august-6-2025-add-margincoin-field-for-historical-transaction-details")
+
+Interface：/api/v2/mix/order/fill-history  
+Changes：
+
+- Add marginCoin field for historical transaction details
+
+### \[August 4, 2025\] Delisting of Futures Demo Pairs[​](#august-4-2025-delisting-of-futures-demo-pairs "Direct link to august-4-2025-delisting-of-futures-demo-pairs")
+
+Futures demo pairs have been delisted. Please use the
+[demo trading](/api-doc/common/demotrading/restapi) for simulated trading.
+
+### \[July 31, 2025\] Optimization of the futures order placement interface logic[​](#july-31-2025-optimization-of-the-futures-order-placement-interface-logic "Direct link to july-31-2025-optimization-of-the-futures-order-placement-interface-logic")
+
+Interface： /api/v2/mix/order/place-order
+
+Changes：
+
+- before: In hedge mode, if the existing quantity is equal to the limit close
+  order of the position, a newly added market close order will report an error
+  due to insufficient position and will not automatically cancel the limit order
+  that has occupied the position.
+- after: In hedge mode, if the existing quantity is equal to the limit close
+  order of the position, a newly added market close order will automatically
+  cancel the limit order that has occupied the position (consistent with
+  Web/APP).
+
 ### \[July 29, 2025\] Optimize ADL API ranking logic.[​](#july-29-2025-optimize-adl-api-ranking-logic "Direct link to july-29-2025-optimize-adl-api-ranking-logic")
 
 Interface：/api/v2/mix/position/adlRank Changes：

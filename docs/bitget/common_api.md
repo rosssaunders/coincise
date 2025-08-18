@@ -144,19 +144,11 @@ Frequency limit rules:
 
 - Q4： Deposit Demo Coins in Demo Trading ?
 
-  - A :First please enter the official site for demo trading  
-    USDT-M Futures Demo
-    [https://www.bitget.com/futures/usdt/BTCUSDT](https://www.bitget.com/futures/usdt/BTCUSDT)
-    COIN-M Futures Demo
-    [https://www.bitget.com/futures/susd/SBTCSUSD](https://www.bitget.com/futures/susd/SBTCSUSD)
-    USDC-M Futures Demo
-    [https://www.bitget.com/zh-CN/futures/susdc/SBTCSPERP](https://www.bitget.com/zh-CN/futures/susdc/SBTCSPERP)
+  - A :First please enter the official site for demo trading
 
   On the right side under your Asset section, click the deposit buttun below
   it.  
-  Notice:You’ll not be able to claim again if your current assets exceed 1000
-  SUSDT(SUSDC). You can get up to 1000 SUSDT(SUSDC) every time. You can only
-  claim again 72 hour(s) after your last claim.
+  Notice:You can only claim again 72 hour(s) after your last claim.
 
 - Q5： What are the differences of Trader's minimum open count from normal users
   ?
@@ -200,7 +192,8 @@ Frequency limit rules:
 
   - A: 1. The rate limit of each API endpoint is marked on the doc page;2. The
     rate limit of each API interface is calculated independently;3. The overall
-    rate limit is 6000/IP/Min
+    rate limit is 6000/IP/Min,After the rate limit is triggered, it takes 5
+    minutes to recover.
 
 - Q11: How can I find out the remaining rate limit per second for the API?
 
