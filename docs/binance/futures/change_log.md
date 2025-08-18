@@ -2,6 +2,19 @@
 
 ## Change Log
 
+### 2025-08-11
+
+- BFUSD will be migrated to Binance Earn on 2025-08-13. The following endpoints
+  will be deprecated after the migration:
+  - `POST sapi/v1/portfolio/mint`
+  - `POST sapi/v1/portfolio/redeem`
+- Error code `-9000` FILTER_UNKNOWN_FAILURE will be encountered.
+- Portfolio Margin and Portfolio Margin Pro users can switch to Binance Earn for
+  BFUSD minting and redeeming. After the migration, the existing BFUSD under the
+  Portfolio Margin wallet can use the aggregate balance
+  function(`POST /sapi/v1/portfolio/asset-collection`) first, and transfer from
+  Portfolio Margin wallet to Spot wallet for redemption.
+
 ### 2025-07-25
 
 - Added new error code in fapi:
