@@ -190,7 +190,7 @@ N | category=spot | 5/s | N | category=option | 5/s | N
 
 #### User[​](#user "Direct link to heading")
 
-<table border="0.8"><tbody><tr><th>Method</th><th>Path</th><th>Limit</th><td>upgradable</td></tr><tr><td rowspan="7">POST</td><td>v5/user/create-sub-member</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/create-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/frozen-sub-member</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/update-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/update-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/delete-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/delete-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td rowspan="3">GET</td><td>/v5/user/query-sub-members</td><td>10 req/s</td><td>N</td></tr><tr><td>/v5/user/query-api</td><td>10 req/s</td><td>N</td></tr><tr><td>/v5/user/aff-customer-info</td><td>10 req/s</td><td>N</td></tr></tbody></table>
+<table border="0.8"><tbody><tr><th>Method</th><th>Path</th><th>Limit</th><td>upgradable</td></tr><tr><td rowspan="7">POST</td><td>v5/user/create-sub-member</td><td>1 req/s</td><td>N</td></tr><tr><td>/v5/user/create-sub-api</td><td>1 req/s</td><td>N</td></tr><tr><td>/v5/user/frozen-sub-member</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/update-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/update-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/delete-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/delete-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td rowspan="3">GET</td><td>/v5/user/query-sub-members</td><td>10 req/s</td><td>N</td></tr><tr><td>/v5/user/query-api</td><td>10 req/s</td><td>N</td></tr><tr><td>/v5/user/aff-customer-info</td><td>10 req/s</td><td>N</td></tr></tbody></table>
 
 #### Spot Leverage Token[​](#spot-leverage-token "Direct link to heading")
 
@@ -243,15 +243,6 @@ orders in one second if I use both endpoints to place orders_
   5 orders will be successfully placed, and the 6-8th orders will report an
   error exceeding the limit, and these orders will fail.
 
-UPCOMING CHANGES FOR PRO ACCOUNT
-
-Starting **August 13, 2025**, Bybit will roll out a new institutional API rate
-limit framework designed to enhance performance for high-frequency trading
-clients. The new system introduces a centralized institution-level rate cap with
-flexible per-UID configurations, enabling greater efficiency and scalability.
-Refer to
-[announcement](https://announcements.bybit.com/en/article/update-bybit-enhances-api-rate-limits-for-institutional-traders-bltbbbf60de757d074e/)
-
 |               | Unified Account |
 | ------------- | :-------------: | ------------- | ----------- |
 | Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
@@ -262,12 +253,118 @@ Refer to
 | VIP 4         |      60/s       | 60/s          | 40/s        |
 | VIP 5         |      60/s       | 60/s          | 40/s        |
 | VIP Supreme   |      60/s       | 60/s          | 40/s        |
-| PRO1          |      150/s      | 150/s         | 150/s       |
-| PRO2          |      200/s      | 200/s         | 200/s       |
-| PRO3          |      250/s      | 250/s         | 250/s       |
-| PRO4          |      300/s      | 300/s         | 300/s       |
-| PRO5          |      300/s      | 300/s         | 300/s       |
-| PRO6          |      300/s      | 300/s         | 300/s       |
+
+## API Rate Limit Rules For PROs[​](#api-rate-limit-rules-for-pros "Direct link to heading")
+
+UPCOMING CHANGES FOR PRO ACCOUNT
+
+Starting **August 13, 2025**, Bybit will roll out a new institutional API rate
+limit framework designed to enhance performance for high-frequency trading
+clients. The new system introduces a centralized institution-level rate cap with
+flexible per-UID configurations, enabling greater efficiency and scalability.
+Refer to
+[announcement](https://announcements.bybit.com/en/article/update-bybit-enhances-api-rate-limits-for-institutional-traders-bltbbbf60de757d074e/)
+
+### UID level:[​](#uid-level "Direct link to heading")
+
+|               | Unified Account |
+| ------------- | :-------------: | ------------- | ----------- |
+| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
+| PRO1          |      200/s      | 200/s         | 200/s       |
+| PRO2          |      400/s      | 400/s         | 400/s       |
+| PRO3          |      600/s      | 600/s         | 600/s       |
+| PRO4          |      800/s      | 800/s         | 800/s       |
+| PRO5          |     1000/s      | 1000/s        | 1000/s      |
+| PRO6          |     1200/s      | 1200/s        | 1200/s      |
+
+### Master and subaccounts level:[​](#master-and-subaccounts-level "Direct link to heading")
+
+|               | Unified Account |
+| ------------- | :-------------: | ------------- | ----------- |
+| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
+| PRO1          |     10000/s     | 10000/s       | 10000/s     |
+| PRO2          |     20000/s     | 20000/s       | 20000/s     |
+| PRO3          |     30000/s     | 30000/s       | 30000/s     |
+| PRO4          |     40000/s     | 40000/s       | 40000/s     |
+| PRO5          |     50000/s     | 50000/s       | 50000/s     |
+| PRO6          |     60000/s     | 60000/s       | 60000/s     |
+
+### Set api rate limit[​](#set-api-rate-limit "Direct link to heading")
+
+> API rate limit: 50 req per second
+
+info
+
+- If UID requesting this endpoint is a master account, uids in the input
+  parameter must be subaccounts of the master account.
+- If UID requesting this endpoint is not a master account, uids in the input
+  parameter must be the UID requesting this endpoint
+- UID requesting this endpoint must be an institutional user.
+- up to 10 uids can be submitted in each request
+
+#### HTTP Request[​](#http-request "Direct link to heading")
+
+POST `/v5/apilimit/set`
+
+#### Request Parameters[​](#request-parameters "Direct link to heading")
+
+| Parameter                                        | Required | Type    | Comments                           |
+| :----------------------------------------------- | :------- | :------ | ---------------------------------- |
+| list                                             | true     | array   | Object                             |
+| &gt; uids                                        | true     | string  | Multiple UIDs, separated by commas |
+| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | true     | string  | Business type                      |
+| &gt; limit                                       | true     | integer | api rate limit per second          |
+
+#### Response Parameters[​](#response-parameters "Direct link to heading")
+
+| Parameter                                        | Type    | Comments                           |
+| :----------------------------------------------- | :------ | ---------------------------------- |
+| list                                             | array   | Object                             |
+| &gt; uids                                        | string  | Multiple UIDs, separated by commas |
+| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
+| &gt; limit                                       | integer | api rate limit per second          |
+| &gt; success                                     | boolean | success or not                     |
+| &gt; <a href="/docs/v5/enum#msg">msg</a>         | string  | result message                     |
+
+#### Request Example[​](#request-example "Direct link to heading")
+
+```
+POST /v5/apilimit/set HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1711420489915X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "retCode": 0,    "retMsg": "success",    "result": {        "result": [            {                "uids": "290118",                "bizType": "SPOT",                "limit": 600,                "success": true,                "msg": "API limit updated successfully"            }        ]    },    "retExtInfo": {},    "time": 1754894296913}
+```
+
+### Query api rate limit[​](#query-api-rate-limit "Direct link to heading")
+
+> API rate limit: 50 req per second
+
+info
+
+- A master account can query api rate limit of its own and subaccounts.
+- A subaccount can only query its own api rate limit.
+
+#### HTTP Request[​](#http-request-1 "Direct link to heading")
+
+GET `/v5/apilimit/query`
+
+#### Request Parameters[​](#request-parameters-1 "Direct link to heading")
+
+| Parameter | Required | Type   | Comments                           |
+| :-------- | :------- | :----- | ---------------------------------- |
+| uids      | true     | string | Multiple UIDs, separated by commas |
+
+#### Response Parameters[​](#response-parameters-1 "Direct link to heading")
+
+| Parameter                                        | Type    | Comments                           |
+| :----------------------------------------------- | :------ | ---------------------------------- |
+| list                                             | array   | Object                             |
+| &gt; uids                                        | string  | Multiple UIDs, separated by commas |
+| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
+| &gt; limit                                       | integer | api rate limit per second          |
+
+#### Request Example[​](#request-example-1 "Direct link to heading")
+
+```
+GET /v5/apilimit/query?uids=290118 HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "uids": "290118",                "bizType": "SPOT",                "limit": 600            },            {                "uids": "290118",                "bizType": "DERIVATIVES",                "limit": 400            }        ]    },    "retExtInfo": {},    "time": 1754894341984}
+```
 
 # Enums Definitions
 
@@ -947,6 +1044,7 @@ _Option_:
 - PRO-3
 - PRO-4
 - PRO-5
+- PRO-6
 
 ### adlRankIndicator[​](#adlrankindicator "Direct link to heading")
 
@@ -1016,6 +1114,21 @@ _Option_:
 
 - `1` Production
 - `2` Production Demo service
+
+### bizType[​](#biztype "Direct link to heading")
+
+- `SPOT`
+- `DERIVATIVES`
+- `OPTIONS`
+
+### msg[​](#msg "Direct link to heading")
+
+- `API limit updated successfully`
+- `Requested limit exceeds maximum allowed per user`
+- `No permission to operate these UIDs`
+- `API cap configuration not found`
+- `API cap configuration not found for bizType`
+- `Requested limit would exceed institutional quota`
 
 ### Spot Fee Currency Instruction[​](#spot-fee-currency-instruction "Direct link to heading")
 
@@ -1206,6 +1319,8 @@ with the example of BTCUSDT:
 |      110117       | The modification of a combo single-leg order can only be done by modifying the combo order                                                                                                 |
 |      110118       | Unable to retrieve a pruce of the market order due to low liquidity                                                                                                                        |
 |      110119       | Order failed. RPI orders are restricted to approved market makers only                                                                                                                     |
+|      110120       | Order price cannot be smaller than xxxx, the price limitation                                                                                                                              |
+|      110121       | Order price cannot be higher than xxxx, the price limitation                                                                                                                               |
 |      170346       | Settle coin is not a collateral coin, cannot trade                                                                                                                                         |
 |      170360       | symbol[XXXX] cannot trade. Used for spread trading in particular when collateral is not turned on                                                                                          |
 |      181017       | OrderStatus must be final status                                                                                                                                                           |
@@ -1664,6 +1779,14 @@ with the example of BTCUSDT:
 | 81007 | Bybit Europe is not supported create API Key |
 | 20096 | need KYC authentication                      |
 
+## Set api rate limit[​](#set-api-rate-limit "Direct link to heading")
+
+|  Code   | Description                                    |
+| :-----: | :--------------------------------------------- |
+| 3500002 | Current user is not an institutional user      |
+| 3500153 | No permission to operate these UIDs            |
+| 3500153 | You do not have permission to query other UIDs |
+
 # Get Bybit Server Time
 
 ### HTTP Request[​](#http-request "Direct link to heading")
@@ -2025,14 +2148,15 @@ Query for the instrument specification of online trading pairs.
 info
 
 - Spot does not support pagination, so `limit`, `cursor` are invalid.
-- When query by `baseCoin`, regardless of category=`linear` or `inverse`, the
-  result will have USDT contract, USDC contract and Inverse contract symbols.
+- When querying by `baseCoin`, regardless of if category=`linear` or `inverse`,
+  the result will contain USDT contract, USDC contract and Inverse contract
+  symbols.
 
 caution
 
-The endpoint returns 500 entries by default, which doesn't represent all
-`linear` symbols on the platform since recently. Use `cursor` for pagination or
-`limit` to get all entries.
+This endpoint returns 500 entries by default. There are now more than 500
+`linear` symbols on the platform. As a result, you will need to use `cursor` for
+pagination or `limit` to get all entries.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -2040,14 +2164,14 @@ GET `/v5/market/instruments-info`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                                     | Required    | Type    | Comments                                                                                                                                                                                                                                           |
-| :-------------------------------------------- | :---------- | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="/docs/v5/enum#category">category</a> | <b>true</b> | string  | Product type. <code>spot</code>,<code>linear</code>,<code>inverse</code>,<code>option</code>                                                                                                                                                       |
-| <a href="/docs/v5/enum#symbol">symbol</a>     | false       | string  | Symbol name, like <code>BTCUSDT</code>, uppercase only                                                                                                                                                                                             |
-| <a href="/docs/v5/enum#status">status</a>     | false       | string  | Symbol status filter<ul><li>By defualt return only <code>Trading</code> symbols</li><li>spot has <code>Trading</code> only</li><li><code>linear</code> &amp; <code>inverse</code>: when status=PreLaunch, it returns pre-market contract</li></ul> |
-| baseCoin                                      | false       | string  | Base coin, uppercase only<li>Apply to<code>linear</code>,<code>inverse</code>,<code>option</code> <strong>only</strong></li><li><code>option</code>: it returns BTC by default</li>                                                                |
-| limit                                         | false       | integer | Limit for data size per page. [<code>1</code>, <code>1000</code>]. Default: <code>500</code>                                                                                                                                                       |
-| cursor                                        | false       | string  | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                                                                                                                                    |
+| Parameter                                     | Required    | Type    | Comments                                                                                                                                                                                                                                                                                                                                                                                    |
+| :-------------------------------------------- | :---------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a href="/docs/v5/enum#category">category</a> | <b>true</b> | string  | Product type. <code>spot</code>,<code>linear</code>,<code>inverse</code>,<code>option</code>                                                                                                                                                                                                                                                                                                |
+| <a href="/docs/v5/enum#symbol">symbol</a>     | false       | string  | Symbol name, like <code>BTCUSDT</code>, uppercase only                                                                                                                                                                                                                                                                                                                                      |
+| <a href="/docs/v5/enum#status">status</a>     | false       | string  | Symbol status filter<ul><li>By default returns only <code>Trading</code> symbols</li><li>Spot has <code>Trading</code> only</li><li><code>linear</code> &amp; <code>inverse</code>: when status=PreLaunch, it returns <a href="https://www.bybit.com/help-center/article/Introduction-to-Pre-Market-Perpetual" target="_blank" rel="noopener noreferrer">Pre-Market contracts</a></li></ul> |
+| baseCoin                                      | false       | string  | Base coin, uppercase only<ul><li>Applies to <code>linear</code>,<code>inverse</code>,<code>option</code> <strong>only</strong></li><li><code>option</code>: returns BTC by default</li></ul>                                                                                                                                                                                                |
+| limit                                         | false       | integer | Limit for data size per page. [<code>1</code>, <code>1000</code>]. Default: <code>500</code>                                                                                                                                                                                                                                                                                                |
+| cursor                                        | false       | string  | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                                                                                                                                                                                                                                                                             |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -2055,56 +2179,56 @@ GET `/v5/market/instruments-info`
 - Option
 - Spot
 
-| Parameter                                                            | Type                | Comments                                                                                                                                                                                                                                             |
-| -------------------------------------------------------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| category                                                             | string              | Product type                                                                                                                                                                                                                                         |
-| nextPageCursor                                                       | string              | Cursor. Used to pagination                                                                                                                                                                                                                           |
-| list                                                                 | array               | Object                                                                                                                                                                                                                                               |
-| &gt; symbol                                                          | string              | Symbol name                                                                                                                                                                                                                                          |
-| &gt; <a href="/docs/v5/enum#contracttype">contractType</a>           | string              | Contract type                                                                                                                                                                                                                                        |
-| &gt; <a href="/docs/v5/enum#status">status</a>                       | string              | Instrument status                                                                                                                                                                                                                                    |
-| &gt; baseCoin                                                        | string              | Base coin                                                                                                                                                                                                                                            |
-| &gt; quoteCoin                                                       | string              | Quote coin                                                                                                                                                                                                                                           |
-| &gt; launchTime                                                      | string              | Launch timestamp (ms)                                                                                                                                                                                                                                |
-| &gt; deliveryTime                                                    | string              | Delivery timestamp (ms)<li>Expired futures delivery time</li><li>Perpetual delisting time</li>                                                                                                                                                       |
-| &gt; deliveryFeeRate                                                 | string              | Delivery fee rate                                                                                                                                                                                                                                    |
-| &gt; priceScale                                                      | string              | Price scale                                                                                                                                                                                                                                          |
-| &gt; leverageFilter                                                  | Object              | Leverage attributes                                                                                                                                                                                                                                  |
-| &gt;&gt; minLeverage                                                 | string              | Minimum leverage                                                                                                                                                                                                                                     |
-| &gt;&gt; maxLeverage                                                 | string              | Maximum leverage                                                                                                                                                                                                                                     |
-| &gt;&gt; leverageStep                                                | string              | The step to increase/reduce leverage                                                                                                                                                                                                                 |
-| &gt; priceFilter                                                     | Object              | Price attributes                                                                                                                                                                                                                                     |
-| &gt;&gt; minPrice                                                    | string              | Minimum order price                                                                                                                                                                                                                                  |
-| &gt;&gt; maxPrice                                                    | string              | Maximum order price                                                                                                                                                                                                                                  |
-| &gt;&gt; tickSize                                                    | string              | The step to increase/reduce order price                                                                                                                                                                                                              |
-| &gt; lotSizeFilter                                                   | Object              | Size attributes                                                                                                                                                                                                                                      |
-| &gt;&gt; minNotionalValue                                            | string              | Minimum notional value                                                                                                                                                                                                                               |
-| &gt;&gt; maxOrderQty                                                 | string              | Maximum quantity for Limit and PostOnly order                                                                                                                                                                                                        |
-| &gt;&gt; maxMktOrderQty                                              | string              | Maximum quantity for Market order                                                                                                                                                                                                                    |
-| &gt;&gt; minOrderQty                                                 | string              | Minimum order quantity                                                                                                                                                                                                                               |
-| &gt;&gt; qtyStep                                                     | string              | The step to increase/reduce order quantity                                                                                                                                                                                                           |
-| &gt;&gt; postOnlyMaxOrderQty                                         | string              | deprecated, please use <code>maxOrderQty</code>                                                                                                                                                                                                      |
-| &gt; unifiedMarginTrade                                              | boolean             | Whether to support unified margin trade                                                                                                                                                                                                              |
-| &gt; fundingInterval                                                 | integer             | Funding interval (minute)                                                                                                                                                                                                                            |
-| &gt; settleCoin                                                      | string              | Settle coin                                                                                                                                                                                                                                          |
-| &gt; <a href="/docs/v5/enum#copytrading">copyTrading</a>             | string              | Copy trade symbol or not                                                                                                                                                                                                                             |
-| &gt; upperFundingRate                                                | string              | Upper limit of funding date                                                                                                                                                                                                                          |
-| &gt; lowerFundingRate                                                | string              | Lower limit of funding date                                                                                                                                                                                                                          |
-| &gt; displayName                                                     | string              | The USDC futures &amp; perpetual name displayed in the Web or App                                                                                                                                                                                    |
-| &gt; riskParameters                                                  | object              | Risk parameters for limit order price, refer to <a href="https://announcements.bybit.com/en/article/adjustments-to-bybit-s-derivative-trading-limit-order-mechanism-blt469228de1902fff6/" target="_blank" rel="noopener noreferrer">announcement</a> |
-| &gt;&gt; priceLimitRatioX                                            | string              | Ratio X                                                                                                                                                                                                                                              |
-| &gt;&gt; priceLimitRatioY                                            | string              | Ratio Y                                                                                                                                                                                                                                              |
-| &gt; isPreListing                                                    | boolean             | <li>Whether the contract is a pre-market contract</li><li>When the pre-market contract is converted to official contract, it will be false</li>                                                                                                      |
-| &gt; preListingInfo                                                  | object              | <li>If isPreListing=false, preListingInfo=null</li><li>If isPreListing=true, preListingInfo is an object</li>                                                                                                                                        |
-| &gt;&gt; <a href="/docs/v5/enum#curauctionphase">curAuctionPhase</a> | string              | The current auction phase                                                                                                                                                                                                                            |
-| &gt;&gt; phases                                                      | array&lt;object&gt; | Each phase time info                                                                                                                                                                                                                                 |
-| &gt;&gt;&gt; <a href="/docs/v5/enum#curauctionphase">phase</a>       | string              | pre-market trading phase                                                                                                                                                                                                                             |
-| &gt;&gt;&gt; startTime                                               | string              | The start time of the phase, timestamp(ms)                                                                                                                                                                                                           |
-| &gt;&gt;&gt; endTime                                                 | string              | The end time of the phase, timestamp(ms)                                                                                                                                                                                                             |
-| &gt;&gt; auctionFeeInfo                                              | object              | Action fee info                                                                                                                                                                                                                                      |
-| &gt;&gt;&gt; auctionFeeRate                                          | string              | The trading fee rate during auction phase<li>There is no trading fee until entering continues trading phase</li>                                                                                                                                     |
-| &gt;&gt;&gt; takerFeeRate                                            | string              | The taker fee rate during continues trading phase                                                                                                                                                                                                    |
-| &gt;&gt;&gt; makerFeeRate                                            | string              | The maker fee rate during continues trading phase                                                                                                                                                                                                    |
+| Parameter                                                            | Type                | Comments                                                                                                                                                                                                                                                                 |
+| -------------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| category                                                             | string              | Product type                                                                                                                                                                                                                                                             |
+| nextPageCursor                                                       | string              | Cursor. Used to pagination                                                                                                                                                                                                                                               |
+| list                                                                 | array               | Object                                                                                                                                                                                                                                                                   |
+| &gt; symbol                                                          | string              | Symbol name                                                                                                                                                                                                                                                              |
+| &gt; <a href="/docs/v5/enum#contracttype">contractType</a>           | string              | Contract type                                                                                                                                                                                                                                                            |
+| &gt; <a href="/docs/v5/enum#status">status</a>                       | string              | Instrument status                                                                                                                                                                                                                                                        |
+| &gt; baseCoin                                                        | string              | Base coin                                                                                                                                                                                                                                                                |
+| &gt; quoteCoin                                                       | string              | Quote coin                                                                                                                                                                                                                                                               |
+| &gt; launchTime                                                      | string              | Launch timestamp (ms)                                                                                                                                                                                                                                                    |
+| &gt; deliveryTime                                                    | string              | Delivery timestamp (ms)<li>Expired futures delivery time</li><li>Perpetual delisting time</li>                                                                                                                                                                           |
+| &gt; deliveryFeeRate                                                 | string              | Delivery fee rate                                                                                                                                                                                                                                                        |
+| &gt; priceScale                                                      | string              | Price scale                                                                                                                                                                                                                                                              |
+| &gt; leverageFilter                                                  | Object              | Leverage attributes                                                                                                                                                                                                                                                      |
+| &gt;&gt; minLeverage                                                 | string              | Minimum leverage                                                                                                                                                                                                                                                         |
+| &gt;&gt; maxLeverage                                                 | string              | Maximum leverage                                                                                                                                                                                                                                                         |
+| &gt;&gt; leverageStep                                                | string              | The step to increase/reduce leverage                                                                                                                                                                                                                                     |
+| &gt; priceFilter                                                     | Object              | Price attributes                                                                                                                                                                                                                                                         |
+| &gt;&gt; minPrice                                                    | string              | Minimum order price                                                                                                                                                                                                                                                      |
+| &gt;&gt; maxPrice                                                    | string              | Maximum order price                                                                                                                                                                                                                                                      |
+| &gt;&gt; tickSize                                                    | string              | The step to increase/reduce order price                                                                                                                                                                                                                                  |
+| &gt; lotSizeFilter                                                   | Object              | Size attributes                                                                                                                                                                                                                                                          |
+| &gt;&gt; minNotionalValue                                            | string              | Minimum notional value                                                                                                                                                                                                                                                   |
+| &gt;&gt; maxOrderQty                                                 | string              | Maximum quantity for Limit and PostOnly order                                                                                                                                                                                                                            |
+| &gt;&gt; maxMktOrderQty                                              | string              | Maximum quantity for Market order                                                                                                                                                                                                                                        |
+| &gt;&gt; minOrderQty                                                 | string              | Minimum order quantity                                                                                                                                                                                                                                                   |
+| &gt;&gt; qtyStep                                                     | string              | The step to increase/reduce order quantity                                                                                                                                                                                                                               |
+| &gt;&gt; postOnlyMaxOrderQty                                         | string              | deprecated, please use <code>maxOrderQty</code>                                                                                                                                                                                                                          |
+| &gt; unifiedMarginTrade                                              | boolean             | Whether to support unified margin trade                                                                                                                                                                                                                                  |
+| &gt; fundingInterval                                                 | integer             | Funding interval (minute)                                                                                                                                                                                                                                                |
+| &gt; settleCoin                                                      | string              | Settle coin                                                                                                                                                                                                                                                              |
+| &gt; <a href="/docs/v5/enum#copytrading">copyTrading</a>             | string              | Copy trade symbol or not                                                                                                                                                                                                                                                 |
+| &gt; upperFundingRate                                                | string              | Upper limit of funding date                                                                                                                                                                                                                                              |
+| &gt; lowerFundingRate                                                | string              | Lower limit of funding date                                                                                                                                                                                                                                              |
+| &gt; displayName                                                     | string              | The USDC futures &amp; perpetual name displayed in the Web or App                                                                                                                                                                                                        |
+| &gt; riskParameters                                                  | object              | Risk parameters for limit order price. Note that the <a href="https://announcements.bybit.com/en/article/adjustments-to-bybit-s-derivative-trading-limit-order-mechanism-blt469228de1902fff6/" target="_blank" rel="noopener noreferrer">formula changed</a> in Jan 2025 |
+| &gt;&gt; priceLimitRatioX                                            | string              | Ratio X                                                                                                                                                                                                                                                                  |
+| &gt;&gt; priceLimitRatioY                                            | string              | Ratio Y                                                                                                                                                                                                                                                                  |
+| &gt; isPreListing                                                    | boolean             | <li>Whether the contract is a pre-market contract</li><li>When the pre-market contract is converted to official contract, it will be false</li>                                                                                                                          |
+| &gt; preListingInfo                                                  | object              | <li>If isPreListing=false, preListingInfo=null</li><li>If isPreListing=true, preListingInfo is an object</li>                                                                                                                                                            |
+| &gt;&gt; <a href="/docs/v5/enum#curauctionphase">curAuctionPhase</a> | string              | The current auction phase                                                                                                                                                                                                                                                |
+| &gt;&gt; phases                                                      | array&lt;object&gt; | Each phase time info                                                                                                                                                                                                                                                     |
+| &gt;&gt;&gt; <a href="/docs/v5/enum#curauctionphase">phase</a>       | string              | pre-market trading phase                                                                                                                                                                                                                                                 |
+| &gt;&gt;&gt; startTime                                               | string              | The start time of the phase, timestamp(ms)                                                                                                                                                                                                                               |
+| &gt;&gt;&gt; endTime                                                 | string              | The end time of the phase, timestamp(ms)                                                                                                                                                                                                                                 |
+| &gt;&gt; auctionFeeInfo                                              | object              | Action fee info                                                                                                                                                                                                                                                          |
+| &gt;&gt;&gt; auctionFeeRate                                          | string              | The trading fee rate during auction phase<li>There is no trading fee until entering continues trading phase</li>                                                                                                                                                         |
+| &gt;&gt;&gt; takerFeeRate                                            | string              | The taker fee rate during continues trading phase                                                                                                                                                                                                                        |
+| &gt;&gt;&gt; makerFeeRate                                            | string              | The maker fee rate during continues trading phase                                                                                                                                                                                                                        |
 
 | Parameter                                      | Type   | Comments                                         |
 | ---------------------------------------------- | ------ | ------------------------------------------------ |
@@ -2679,6 +2803,7 @@ GET `/v5/market/recent-trade`
 | &gt; iP           | string  | Index price, unique field for <code>option</code> |
 | &gt; mIv          | string  | Mark iv, unique field for <code>option</code>     |
 | &gt; iv           | string  | iv, unique field for <code>option</code>          |
+| &gt; seq          | string  | cross sequence                                    |
 
 [RUN >>](/docs/api-explorer/v5/market/recent-trade)
 
@@ -2715,7 +2840,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "OK",    "result": {        "category": "spot",        "list": [            {                "execId": "2100000000007764263",                "symbol": "BTCUSDT",                "price": "16618.49",                "size": "0.00012",                "side": "Buy",                "time": "1672052955758",                "isBlockTrade": false,                "isRPITrade": true            }        ]    },    "retExtInfo": {},    "time": 1672053054358}
+{    "retCode": 0,    "retMsg": "OK",    "result": {        "category": "spot",        "list": [            {                "execId": "2100000000007764263",                "symbol": "BTCUSDT",                "price": "16618.49",                "size": "0.00012",                "side": "Buy",                "time": "1672052955758",                "isBlockTrade": false,                "isRPITrade": true,                "seq":"123456"            }        ]    },    "retExtInfo": {},    "time": 1672053054358}
 ```
 
 # Get Open Interest
