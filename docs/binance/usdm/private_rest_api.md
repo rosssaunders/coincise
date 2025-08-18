@@ -53,14 +53,14 @@ To enable a `OPTION` account for Option Trading, please refer to the
 This is a lightweight library that works as a connector to Binance public API,
 written in Python.
 
-[https://github.com/binance/binance-futures-connector-python](https://github.com/binance/binance-futures-connector-python)
+[https://github.com/binance/binance-connector-python](https://github.com/binance/binance-connector-python)
 
 #### Java connector
 
 This is a lightweight library that works as a connector to Binance public API,
 written for Java users.
 
-[https://github.com/binance/binance-futures-connector-java](https://github.com/binance/binance-futures-connector-java)
+[https://github.com/binance/binance-connector-java](https://github.com/binance/binance-connector-java)
 
 > Source:
 > [https://developers.binance.com/docs/derivatives/quick-start](https://developers.binance.com/docs/derivatives/quick-start)
@@ -90,19 +90,19 @@ written for Java users.
 
 **SDK:** To get the provided SDK for Binance Futures Connector,  
 please visit
-[https://github.com/binance/binance-futures-connector-python](https://github.com/binance/binance-futures-connector-python),  
+[https://github.com/binance/binance-connector-python](https://github.com/binance/binance-connector-python),  
 or
 use the command below:  
-`pip install binance-futures-connector`
+`pip install binance-sdk-derivatives-trading-usds-futures`
 
 #### Java
 
 To get the provided SDK for Binance Futures,  
 please visit
-[https://github.com/binance/binance-futures-connector-java](https://github.com/binance/binance-futures-connector-java),  
+[https://github.com/binance/binance-connector-java](https://github.com/binance/binance-connector-java),  
 or
 use the command below:  
-`git clone https://github.com/binance/binance-futures-connector-java.git`
+`git clone https://github.com/binance/binance-connector-java.git`
 
 ### General API Information
 
@@ -1549,6 +1549,7 @@ Codes are universal,but messages can vary.
 | 4087 | REDUCE_ONLY_ORDER_PERMISSION​                  | User can only place reduce only order                                                                                                                                                                                                                  |
 | 4088 | NO_PLACE_ORDER_PERMISSION​                     | User can not place order currently                                                                                                                                                                                                                     |
 | 4104 | INVALID_CONTRACT_TYPE​                         | Invalid contract type                                                                                                                                                                                                                                  |
+| 4109 | INACTIVE_ACCOUNT​                              | \- Inactive account - Transfer any amount of asset to future wallet to reactive                                                                                                                                                                        |
 | 4114 | INVALID_CLIENT_TRAN_ID_LEN​                    | \- clientTranId is not valid - Client tran id length should be less than 64 chars                                                                                                                                                                      |
 | 4115 | DUPLICATED_CLIENT_TRAN_ID​                     | \- clientTranId is duplicated - Client tran id should be unique within 7 days                                                                                                                                                                          |
 | 4116 | DUPLICATED_CLIENT_ORDER_ID​                    | clientOrderId is duplicated                                                                                                                                                                                                                            |
@@ -1600,7 +1601,7 @@ Codes are universal,but messages can vary.
 | 5039 | INVALID_SELF_TRADE_PREVENTION_MODE​            | Invalid self trade prevention mode                                                                                                                                                                                                                     |
 | 5040 | FUTURE_GOOD_TILL_DATE​                         | The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000 (UTC 9999-12-31 23:59:59)                                                                                                           |
 | 5041 | BBO_ORDER_REJECT​                              | No depth matches this BBO order                                                                                                                                                                                                                        |
-| 5043 | BBO_ORDER_REJECT​                              | A pending modification already exists for this order.                                                                                                                                                                                                  |
+| 5043 | Existing_Pending_Modification​                 | A pending modification already exists for this order.                                                                                                                                                                                                  |
 
 ### 10xx - General Server or Network issues
 

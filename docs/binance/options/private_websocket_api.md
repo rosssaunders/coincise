@@ -53,14 +53,14 @@ To enable a `OPTION` account for Option Trading, please refer to the
 This is a lightweight library that works as a connector to Binance public API,
 written in Python.
 
-[https://github.com/binance/binance-futures-connector-python](https://github.com/binance/binance-futures-connector-python)
+[https://github.com/binance/binance-connector-python](https://github.com/binance/binance-connector-python)
 
 #### Java connector
 
 This is a lightweight library that works as a connector to Binance public API,
 written for Java users.
 
-[https://github.com/binance/binance-futures-connector-java](https://github.com/binance/binance-futures-connector-java)
+[https://github.com/binance/binance-connector-java](https://github.com/binance/binance-connector-java)
 
 > Source:
 > [https://developers.binance.com/docs/derivatives/quick-start](https://developers.binance.com/docs/derivatives/quick-start)
