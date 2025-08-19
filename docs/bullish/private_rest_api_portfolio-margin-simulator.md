@@ -6790,14 +6790,13 @@ asset symbol as denoted in the world
 "BTC"
 ```
 
-the underlying asset symbol of the options contract that is eligible for MMP
-checks
+the underlying asset symbol that is configured for MMP checks
 
 ### Properties
 
-| Name        | Type   | Required | Restrictions | Description                                                                         |
-| ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------- |
-| _anonymous_ | string | false    | none         | the underlying asset symbol of the options contract that is eligible for MMP checks |
+| Name        | Type   | Required | Restrictions | Description                                                   |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | the underlying asset symbol that is configured for MMP checks |
 
 ## QuoteAssetSymbol
 
