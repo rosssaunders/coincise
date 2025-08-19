@@ -336,7 +336,8 @@ Sample:
 This allows simultaneous tick subscriptions to multiple markets.
 
 Upon subscribing to a market, the client will first receive a snapshot of latest
-ticker, followed by updates.
+ticker, followed by updates. See the data model:
+[Get Market Tick](#get-/v1/markets/-symbol-/tick)
 
 ### Unified Anonymous Tick Subscription
 

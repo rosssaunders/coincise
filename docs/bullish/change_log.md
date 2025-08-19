@@ -4,8 +4,9 @@
 
 ## 2025 Changes
 
-- new Websocket API -
-  [Unified tick for multiple markets](#overview--anonymous-unified-tick-websocket-unauthenticated)
+- July
+  - new Websocket API -
+    [Unified tick for multiple markets](#overview--anonymous-unified-tick-websocket-unauthenticated)
 - June
   - new REST API - [Get Historical Trades](#get-/v1/history/trades)
   - new REST API - [Get Historical Orders](#get-/v2/history/orders)

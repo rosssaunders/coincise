@@ -592,8 +592,9 @@ Bullish currently has 2 test assets.
 
 ## 2025 Changes
 
-- new Websocket API -
-  [Unified tick for multiple markets](#overview--anonymous-unified-tick-websocket-unauthenticated)
+- July
+  - new Websocket API -
+    [Unified tick for multiple markets](#overview--anonymous-unified-tick-websocket-unauthenticated)
 - June
   - new REST API - [Get Historical Trades](#get-/v1/history/trades)
   - new REST API - [Get Historical Orders](#get-/v2/history/orders)
@@ -18867,14 +18868,13 @@ asset symbol as denoted in the world
 "BTC"
 ```
 
-the underlying asset symbol of the options contract that is eligible for MMP
-checks
+the underlying asset symbol that is configured for MMP checks
 
 ### Properties
 
-| Name        | Type   | Required | Restrictions | Description                                                                         |
-| ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------- |
-| _anonymous_ | string | false    | none         | the underlying asset symbol of the options contract that is eligible for MMP checks |
+| Name        | Type   | Required | Restrictions | Description                                                   |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | the underlying asset symbol that is configured for MMP checks |
 
 ## QuoteAssetSymbol
 
