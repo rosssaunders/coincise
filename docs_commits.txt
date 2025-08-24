@@ -1,0 +1,1 @@
+3766d355f5e973fb0e057af98d9a6ff90a3f2802|docs: add llms.txt file and generation script for API documentation|Ross Saunders|2025-08-17
