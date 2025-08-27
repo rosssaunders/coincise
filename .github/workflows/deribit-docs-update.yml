@@ -52,20 +52,38 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Deribit Connection Documentation scraper
+      - name: Extract Deribit General Documentation
+        run: npm run extract:general
+
+      - name: Extract Deribit Session Management
+        run: npm run extract:session_management
+
+      - name: Extract Deribit Authentication
+        run: npm run extract:authentication
+
+      - name: Extract Deribit Market Data
+        run: npm run extract:market_data
+
+      - name: Extract Deribit Private Account Management
+        run: npm run extract:private_account_management
+
+      - name: Extract Deribit Private Wallet
+        run: npm run extract:private_wallet
+
+      - name: Extract Deribit Private Trading
+        run: npm run extract:private_trading
+
+      - name: Extract Deribit Private Block Trading
+        run: npm run extract:private_block_trading
+
+      - name: Extract Deribit Private Combo Trading
+        run: npm run extract:private_combo_trading
+
+      - name: Extract Deribit Private Block RFQ
+        run: npm run extract:private_block_rfq
+
+      - name: Extract Deribit Connection
         run: npm run extract:connection
-
-      - name: Run Deribit Public API scraper
-        run: npm run extract:public_api
-
-      - name: Run Deribit Private Trading API scraper
-        run: npm run extract:private_trading_api
-
-      - name: Run Deribit Private Block API scraper
-        run: npm run extract:private_block_api
-
-      - name: Run Deribit Private Account API scraper
-        run: npm run extract:private_account_api
 
       - name: Check for changes
         id: git-check
