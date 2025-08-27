@@ -1,0 +1,56 @@
+{
+  "section": "deposit",
+  "title": "Deposit API",
+  "baseUrl": "https://global-docs.upbit.com/reference",
+  "endpoints": [
+    {
+      "name": "deposit-list-inquiry",
+      "url": "https://global-docs.upbit.com/reference/deposit-list-inquiry",
+      "filename": "deposit_list_inquiry.md"
+    },
+    {
+      "name": "individual-deposit-inquiry",
+      "url": "https://global-docs.upbit.com/reference/individual-deposit-inquiry",
+      "filename": "individual_deposit_inquiry.md"
+    },
+    {
+      "name": "deposit-address-generation",
+      "url": "https://global-docs.upbit.com/reference/deposit-address-generation",
+      "filename": "deposit_address_generation.md"
+    },
+    {
+      "name": "general-deposit-address-inquiry",
+      "url": "https://global-docs.upbit.com/reference/general-deposit-address-inquiry",
+      "filename": "general_deposit_address_inquiry.md"
+    },
+    {
+      "name": "individual-deposit-address-inquiry",
+      "url": "https://global-docs.upbit.com/reference/individual-deposit-address-inquiry",
+      "filename": "individual_deposit_address_inquiry.md"
+    },
+    {
+      "name": "travel-rule-vasp-list",
+      "url": "https://global-docs.upbit.com/reference/travel-rule-vasp-list",
+      "filename": "travel_rule_vasp_list.md"
+    },
+    {
+      "name": "deposit-verification-using-uuid",
+      "url": "https://global-docs.upbit.com/reference/deposit-verification-using-uuid",
+      "filename": "deposit_verification_using_uuid.md"
+    },
+    {
+      "name": "deposit-verification-using-txid",
+      "url": "https://global-docs.upbit.com/reference/deposit-verification-using-txid",
+      "filename": "deposit_verification_using_txid.md"
+    },
+    {
+      "name": "available-deposit-information",
+      "url": "https://global-docs.upbit.com/reference/available-deposit-information",
+      "filename": "available_deposit_information.md"
+    }
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/upbit",
+    "subDir": "deposit"
+  }
+}

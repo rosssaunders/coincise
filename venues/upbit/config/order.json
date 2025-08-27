@@ -1,0 +1,61 @@
+{
+  "section": "order",
+  "title": "Order API", 
+  "baseUrl": "https://global-docs.upbit.com/reference",
+  "endpoints": [
+    {
+      "name": "available-order-information",
+      "url": "https://global-docs.upbit.com/reference/available-order-information",
+      "filename": "available_order_information.md"
+    },
+    {
+      "name": "individual-order-inquiry",
+      "url": "https://global-docs.upbit.com/reference/individual-order-inquiry",
+      "filename": "individual_order_inquiry.md"
+    },
+    {
+      "name": "query-order-list-by-id",
+      "url": "https://global-docs.upbit.com/reference/query-order-list-by-id",
+      "filename": "query_order_list_by_id.md"
+    },
+    {
+      "name": "query-open-orders",
+      "url": "https://global-docs.upbit.com/reference/query-open-orders",
+      "filename": "query_open_orders.md"
+    },
+    {
+      "name": "query-closed-orders",
+      "url": "https://global-docs.upbit.com/reference/query-closed-orders",
+      "filename": "query_closed_orders.md"
+    },
+    {
+      "name": "order-cancel",
+      "url": "https://global-docs.upbit.com/reference/order-cancel",
+      "filename": "order_cancel.md"
+    },
+    {
+      "name": "batch-order-cancel",
+      "url": "https://global-docs.upbit.com/reference/batch-order-cancel",
+      "filename": "batch_order_cancel.md"
+    },
+    {
+      "name": "order-list-cancel",
+      "url": "https://global-docs.upbit.com/reference/order-list-cancel",
+      "filename": "order_list_cancel.md"
+    },
+    {
+      "name": "order",
+      "url": "https://global-docs.upbit.com/reference/order",
+      "filename": "order.md"
+    },
+    {
+      "name": "cancel-and-new-order",
+      "url": "https://global-docs.upbit.com/reference/cancel-and-new-order",
+      "filename": "cancel_and_new_order.md"
+    }
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/upbit",
+    "subDir": "order"
+  }
+}

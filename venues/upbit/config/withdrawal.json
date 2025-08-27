@@ -1,0 +1,41 @@
+{
+  "section": "withdrawal",
+  "title": "Withdrawal API",
+  "baseUrl": "https://global-docs.upbit.com/reference",
+  "endpoints": [
+    {
+      "name": "withdrawal-list-inquiry",
+      "url": "https://global-docs.upbit.com/reference/withdrawal-list-inquiry",
+      "filename": "withdrawal_list_inquiry.md"
+    },
+    {
+      "name": "individual-withdrawal-inquiry",
+      "url": "https://global-docs.upbit.com/reference/individual-withdrawal-inquiry",
+      "filename": "individual_withdrawal_inquiry.md"
+    },
+    {
+      "name": "available-balance-information",
+      "url": "https://global-docs.upbit.com/reference/available-balance-information",
+      "filename": "available_balance_information.md"
+    },
+    {
+      "name": "digital-asset-withdrawal",
+      "url": "https://global-docs.upbit.com/reference/digital-asset-withdrawal",
+      "filename": "digital_asset_withdrawal.md"
+    },
+    {
+      "name": "allowlisted-withdrawal-address",
+      "url": "https://global-docs.upbit.com/reference/allowlisted-withdrawal-address",
+      "filename": "allowlisted_withdrawal_address.md"
+    },
+    {
+      "name": "cancel-digital-asset-withdrawal",
+      "url": "https://global-docs.upbit.com/reference/cancel-digital-asset-withdrawal",
+      "filename": "cancel_digital_asset_withdrawal.md"
+    }
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/upbit",
+    "subDir": "withdrawal"
+  }
+}
