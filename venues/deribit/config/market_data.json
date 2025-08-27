@@ -1,0 +1,10 @@
+{
+  "sections": [
+    "Session management",
+    "Supporting",
+    "Subscription management",
+    "Market data"
+  ],
+  "output": "../../docs/deribit/market_data.md",
+  "title": "Deribit Market Data Documentation"
+}

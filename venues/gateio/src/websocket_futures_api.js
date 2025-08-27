@@ -33,11 +33,11 @@ async function run() {
     )
     const outputFilePath = path.join(
       __dirname,
-      `../../../docs/gateio/futures/websocket_api.md`
+      `../../../docs/gateio/futures_websocket_api.md`
     )
     const changelogFilePath = path.join(
       __dirname,
-      `../../../docs/gateio/futures/websocket_change_log.md`
+      `../../../docs/gateio/futures_websocket_change_log.md`
     )
 
     await downloadHtml(url, htmlFilePath)

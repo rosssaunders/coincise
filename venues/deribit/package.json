@@ -5,12 +5,18 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "extract:private_trading_api": "node src/index.js config/private_trading_api.json",
-    "extract:public_api": "node src/index.js config/public_api.json",
-    "extract:private_block_api": "node src/index.js config/private_block_api.json",
-    "extract:private_account_api": "node src/index.js config/private_account_api.json",
+    "extract:general": "node src/index.js config/general.json",
+    "extract:session_management": "node src/index.js config/session_management.json",
+    "extract:authentication": "node src/index.js config/authentication.json",
+    "extract:market_data": "node src/index.js config/market_data.json",
+    "extract:private_account_management": "node src/index.js config/private_account_management.json",
+    "extract:private_wallet": "node src/index.js config/private_wallet.json",
+    "extract:private_trading": "node src/index.js config/private_trading.json",
+    "extract:private_block_trading": "node src/index.js config/private_block_trading.json",
+    "extract:private_combo_trading": "node src/index.js config/private_combo_trading.json",
+    "extract:private_block_rfq": "node src/index.js config/private_block_rfq.json",
     "extract:connection": "node src/index.js config/connection.json",
-    "all": "npm run extract:public_api && npm run extract:private_trading_api && npm run extract:private_block_api && npm run extract:private_account_api && npm run extract:connection"
+    "all": "npm run extract:general && npm run extract:session_management && npm run extract:authentication && npm run extract:market_data && npm run extract:private_account_management && npm run extract:private_wallet && npm run extract:private_trading && npm run extract:private_block_trading && npm run extract:private_combo_trading && npm run extract:private_block_rfq && npm run extract:connection"
   },
   "dependencies": {
     "puppeteer": "^24.8.0",

@@ -282,7 +282,7 @@ requests.
 - `mass_quote` 
 - `quote_cancel`
 
-# Connection Management
+# Connection Management - Best Practices
 
 Users can connect to the Deribit platform using either a **connection-scoped**
 or **session-scoped** authentication token. Each approach has different

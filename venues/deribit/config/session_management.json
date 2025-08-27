@@ -1,0 +1,7 @@
+{
+  "sections": [
+    "Session management"
+  ],
+  "output": "../../docs/deribit/session_management.md",
+  "title": "Deribit Session Management Documentation"
+}

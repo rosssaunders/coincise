@@ -92,6 +92,34 @@ LLM friendly versions of Crypto Exchange Documentation. Each file is designed to
 | <img src="assets/icons/kucoinfutures.jpg" alt="KuCoin Futures" height="16" style="vertical-align: middle;"> | KuCoin Futures     | [REST API](docs/kucoin/rest/futures_api.md)                                       | 2025-04-26   |
 | <img src="assets/icons/kucoinfutures.jpg" alt="KuCoin Futures" height="16" style="vertical-align: middle;"> | KuCoin Futures     | [WebSocket API](docs/kucoin/ws/futures_api.md)                                    | 2025-04-26   |
 
+## LLMs.txt
+
+This repository includes an `llms.txt` file following the [llms.txt specification](https://llmstxt.org/) to help LLMs understand and navigate the documentation structure effectively. The file provides a structured overview of all available API documentation.
+
+### Generating llms.txt
+
+To regenerate the `llms.txt` file:
+
+```bash
+./tools/llms/generate-llms-txt.sh
+```
+
+Options:
+- `--help`: Show usage information
+- `--dry-run`: Preview output without writing file
+- `--output FILE`: Specify custom output file
+- `--url URL`: Use custom base URL for links
+- `--verbose`: Enable verbose logging
+
+Example:
+```bash
+# Preview what would be generated
+./tools/llms/generate-llms-txt.sh --dry-run
+
+# Generate with custom output location
+./tools/llms/generate-llms-txt.sh --output docs/llms.txt
+```
+
 ## Contributing
 
 Feel free to submit PRs for missing crypto venues or endpoints.

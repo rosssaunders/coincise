@@ -1,0 +1,7 @@
+{
+  "url": "https://www.gate.io/docs/developers/apiv4/en/",
+  "sections": [
+    "withdrawal"
+  ],
+  "outputFile": "private_rest_api_withdrawal.md"
+}

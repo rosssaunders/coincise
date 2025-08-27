@@ -1,0 +1,11 @@
+{
+  "url": "https://www.gate.io/docs/developers/apiv4/en/",
+  "sections": [
+    "gate-api-v4",
+    "general",
+    "api",
+    "authentication",
+    "faq"
+  ],
+  "outputFile": "general_api.md"
+}

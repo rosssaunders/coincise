@@ -33,15 +33,19 @@ const deleteHtmlFile = filePath => {
 }
 
 // Function to process HTML and convert to markdown
-function processSectionHtml(document, section, turndownService) {
+function processSectionHtml(document, section, turndownService, baseUrl) {
   if (!turndownService) {
     throw new Error(`TurndownService is not initialized`)
   }
 
   // Find the section based on the heading id
-  const heading = document.querySelector(
-    `div.content-block h1[id^="${section}"]`
-  )
+  // Match exact id or id that starts with `${section}-` to avoid collisions like
+  // `earn` vs `earnuni`. Fallbacks intentionally avoid broad starts-with.
+  const allHeadings = document.querySelectorAll('div.content-block h1[id]')
+  const heading = Array.from(allHeadings).find(h => {
+    const id = h.getAttribute('id') || ''
+    return id === section || id.startsWith(`${section}-`)
+  })
   if (!heading) {
     throw new Error(`Section not found: ${section}`)
   }
@@ -97,6 +101,24 @@ function processSectionHtml(document, section, turndownService) {
     // Remove the element from its parent node
     codeBlock.parentNode.removeChild(codeBlock)
   })
+
+  // Inject source links after each endpoint heading (h2/h3) that has an id
+  try {
+    const endpointHeadings = collectedContent.querySelectorAll('h2[id], h3[id]')
+    endpointHeadings.forEach(h => {
+      const id = h.getAttribute('id')
+      if (!id) return
+      const safeBase = (baseUrl || '').replace(/#.*$/, '')
+      const fullUrl = `${safeBase}#${id}`
+      const linkP = document.createElement('p')
+      linkP.innerHTML = `<strong>Source:</strong> <a href="${fullUrl}">${fullUrl}</a>`
+      h.insertAdjacentElement('afterend', linkP)
+    })
+  } catch (e) {
+    console.warn(`Failed to inject source links for section: ${section}`)
+    console.error('Error:', e)
+    console.error('Stack trace:', e.stack)
+  }
 
   const content = collectedContent.innerHTML
   console.log(
@@ -165,7 +187,9 @@ const main = async () => {
   let markdown = ""
   for (const section of sections) {
     console.log(`Processing section: ${section}`)
-    markdown += processSectionHtml(document, section, turndownService) + "\n\n"
+    markdown +=
+      processSectionHtml(document, section, turndownService, gateioDocsUrl) +
+      "\n\n"
   }
 
   console.log(`Total markdown length: ${markdown.length}`)

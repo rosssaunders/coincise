@@ -1,0 +1,10 @@
+{
+  "sections": [
+    "Deribit API v2.1.1",
+    "Overview",
+    "JSON-RPC",
+    "RPC Error Codes"
+  ],
+  "output": "../../docs/deribit/general.md",
+  "title": "Deribit General API Documentation"
+}
