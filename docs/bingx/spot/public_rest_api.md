@@ -303,7 +303,7 @@ rate limitation by IP in group Number: 1
 | maxQty         | float64 | Version upgrade, this field is deprecated, please ignore this field,the formula is: maxQty = maxNotional/price                                |
 | minNotional    | float64 | Minimum transaction amount                                                                                                                    |
 | maxNotional    | float64 | Maximum transaction amount                                                                                                                    |
-| status         | int     | 0 offline, 1 online, 5 pre-open, 25 trading suspended                                                                                         |
+| status         | int     | 0 offline, 1 online, 5 pre-open, 10 accessed 25 trading suspended                                                                             |
 | apiStateBuy    | Boolean | available buy via api                                                                                                                         |
 | apiStateSell   | Boolean | available sell via api                                                                                                                        |
 | timeOnline     | long    | online time                                                                                                                                   |
@@ -577,7 +577,7 @@ rate limitation by IP in group Number: 1
 
 | Parameter Name | Type   | Required | Description                                                                           |
 | -------------- | ------ | -------- | ------------------------------------------------------------------------------------- |
-| symbol         | string | Yes      | Trading pair, such as: BTC_USDT                                                       |
+| symbol         | string | Yes      | Trading pair, such as: BTC-USDT                                                       |
 | depth          | int64  | Yes      | Query depth                                                                           |
 | type           | string | Yes      | step0 default precision, step1 to step5 are 10 to 100000 times precision respectively |
 

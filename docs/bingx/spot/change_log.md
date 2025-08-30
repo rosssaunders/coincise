@@ -2,6 +2,22 @@
 
 ## Change Log
 
+2025-08-21
+
+- USDT-M Perp Futures:API and Websocket do not support foreign exchange
+  currencies
+- USDT-M Perp Futures:The positionId field has been added to the response of the
+  query all current open orders API.
+- USDT-M Perp Futures:Fixed the issue where clientOrderId was empty in the TP
+  order cancellation API and order query API.
+- USDT-M Perp Futures:Fixed the incorrect response issue in the set position
+  mode API.
+- USDT-M Perp Futures:Removed the INDEX_PRICE type from the workingType field in
+  the order API.
+- Accounts & Wallets:Optimized the withdrawal API. When the funding account
+  balance is insufficient, the system will automatically replenish funds from
+  the spot account.
+
 2025-07-11
 
 - Accounts & Wallets: Added wallType field to responses for 'Main Account

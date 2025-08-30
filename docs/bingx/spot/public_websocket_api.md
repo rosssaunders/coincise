@@ -455,7 +455,7 @@ Pushes data of 24-hour price change every 1000ms
 
 Subscription Type
 
-dataType is <symbol>@ticker, for example, BTC_USDT@ticker
+dataType is <symbol>@ticker, for example, BTC-USDT@ticker
 
 Subscription Example
 
@@ -484,7 +484,7 @@ Real-time Push
 
 Subscription Type
 
-dataType is <symbol>@lastPrice, for example, BTC_USDT@lastPrice
+dataType is <symbol>@lastPrice, for example, BTC-USDT@lastPrice
 
 Subscription Example
 
@@ -513,7 +513,7 @@ Real-time Push
 
 Subscription Type
 
-dataType is <symbol>@bookTicker, for example, BTC_USDT@bookTicker
+dataType is <symbol>@bookTicker, for example, BTC-USDT@bookTicker
 
 Subscription Example
 

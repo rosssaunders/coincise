@@ -612,7 +612,7 @@ Specify user account to initiate coin withdrawal
 | address            | string  | yes      | Withdrawal address                                                                                                                                                                                               |
 | addressTag         | string  | no       | Tag or memo, some currencies support tag or memo                                                                                                                                                                 |
 | amount             | float64 | yes      | Withdrawal amount                                                                                                                                                                                                |
-| walletType         | int64   | yes      | Account type: 1 fund account, 2 standard account, 3 perpetual account, 15 spot account                                                                                                                           |
+| walletType         | int64   | yes      | Account type: 1 fund account, 2 standard account, 3 perpetual account, 15 spot account.When the funding account balance is insufficient, the system will automatically replenish funds from the spot account.    |
 | withdrawOrderId    | string  | no       | Customer-defined withdrawal ID, a combination of numbers and letters, with a length of less than 100 characters                                                                                                  |
 | vaspEntityId       | string  | no       | Payment platform information, only KYC=KOR (Korean individual users) must pass this field. List values Bithumb, Coinone, Hexlant, Korbit, Upbit, Others, and select Others if there are no corresponding options |
 | recipientLastName  | string  | no       | The recipient's surname is in English, and only KYC=KOR (Korean individual users) must pass this field. No need to fill in when vaspAntityId=Others                                                              |
@@ -1223,6 +1223,7 @@ records. Only available for parent users.
 
 | Parameter Name   | Type   | Required | Description                                                                                                                                               |
 | ---------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id               | string | no       | Internal transfer ID                                                                                                                                      |
 | coin             | string | Yes      | Transfer coin name                                                                                                                                        |
 | transferClientId | string | no       | Client's self-defined internal transfer ID. When both platform ID and transferClientId are provided as input, the query will be based on the platform ID. |
 | startTime        | long   | No       | Start time                                                                                                                                                |
