@@ -1,0 +1,10 @@
+{
+  "title": "BingX Standard Futures API - Contract Interface",
+  "urls": [
+    "https://bingx-api.github.io/docs/#/en-us/standard/contract-interface.html"
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/bingx/standard_futures",
+    "outputFileName": "contract_interface.md"
+  }
+}

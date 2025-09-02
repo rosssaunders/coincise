@@ -49,7 +49,7 @@ async function getPageHTML(pageURL, browser) {
 
   await page.goto(pageURL)
   await page.waitForSelector(".app-content")
-  const html = await page.evaluate(async (sourceUrl) => {
+  const html = await page.evaluate(async sourceUrl => {
     async function processH2(sectionElement) {
       console.log(
         "Processing",
@@ -431,15 +431,17 @@ async function getPageHTML(pageURL, browser) {
       // Add source link at the end of each endpoint section
       // Get the H2 text to create the anchor
       const h2Text = detailDiv.querySelector("h2")?.textContent?.trim() || ""
-      
+
       // Extract the base URL and hash parts
-      const urlParts = sourceUrl.split('#')
+      const urlParts = sourceUrl.split("#")
       const baseUrl = urlParts[0]
-      const hashPath = urlParts[1] || ''
-      
+      const hashPath = urlParts[1] || ""
+
       // Create the full source URL with the endpoint anchor
-      const fullSourceUrl = h2Text ? `${baseUrl}#${hashPath}#${h2Text}` : sourceUrl
-      
+      const fullSourceUrl = h2Text
+        ? `${baseUrl}#${hashPath}#${h2Text}`
+        : sourceUrl
+
       const sourceDiv = document.createElement("div")
       sourceDiv.innerHTML = `<blockquote><p><strong>Source:</strong> <a href="${fullSourceUrl}">${fullSourceUrl}</a></p></blockquote>`
       detailDiv.appendChild(sourceDiv)

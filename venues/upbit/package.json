@@ -6,11 +6,22 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
+    "extract:assets": "node src/index.js config/assets.json",
+    "extract:order": "node src/index.js config/order.json",
+    "extract:withdrawal": "node src/index.js config/withdrawal.json",
+    "extract:deposit": "node src/index.js config/deposit.json",
+    "extract:service": "node src/index.js config/service.json",
+    "extract:quotation": "node src/index.js config/quotation.json",
+    "extract:websocket": "node src/index.js config/websocket.json",
+    "extract:all": "npm run extract:assets && npm run extract:order && npm run extract:withdrawal && npm run extract:deposit && npm run extract:service && npm run extract:quotation && npm run extract:websocket",
+    "extract:changelog": "node src/index.js config/private.json",
     "format": "node -e \"import('../../shared/format-markdown.js').then(({formatMarkdown}) => formatMarkdown('../../docs/upbit/change_log.md'))\""
   },
   "dependencies": {
     "jsdom": "^22.1.0",
     "node-fetch": "^3.3.2",
+    "prettier": "^3.0.0",
+    "puppeteer": "^22.0.0",
     "turndown": "^7.1.2",
     "turndown-plugin-gfm": "^1.0.2"
   }

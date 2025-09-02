@@ -1,0 +1,16 @@
+{
+  "section": "service",
+  "title": "Service API",
+  "baseUrl": "https://global-docs.upbit.com/reference",
+  "endpoints": [
+    {
+      "name": "wallet-status",
+      "url": "https://global-docs.upbit.com/reference/wallet-status",
+      "filename": "wallet_status.md"
+    }
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/upbit",
+    "subDir": "service"
+  }
+}

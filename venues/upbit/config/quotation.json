@@ -1,0 +1,71 @@
+{
+  "section": "quotation",
+  "title": "Quotation API",
+  "baseUrl": "https://global-docs.upbit.com/reference",
+  "endpoints": [
+    {
+      "name": "listing-market-list",
+      "url": "https://global-docs.upbit.com/reference/listing-market-list",
+      "filename": "listing_market_list.md"
+    },
+    {
+      "name": "seconds-candles",
+      "url": "https://global-docs.upbit.com/reference/seconds-candles",
+      "filename": "seconds_candles.md"
+    },
+    {
+      "name": "minutes-candles",
+      "url": "https://global-docs.upbit.com/reference/minutes",
+      "filename": "minutes_candles.md"
+    },
+    {
+      "name": "days-candles",
+      "url": "https://global-docs.upbit.com/reference/days",
+      "filename": "days_candles.md"
+    },
+    {
+      "name": "weeks-candles",
+      "url": "https://global-docs.upbit.com/reference/weeks",
+      "filename": "weeks_candles.md"
+    },
+    {
+      "name": "months-candles",
+      "url": "https://global-docs.upbit.com/reference/months",
+      "filename": "months_candles.md"
+    },
+    {
+      "name": "years-candles",
+      "url": "https://global-docs.upbit.com/reference/years-candles",
+      "filename": "years_candles.md"
+    },
+    {
+      "name": "recent-trades-history",
+      "url": "https://global-docs.upbit.com/reference/today-trades-history",
+      "filename": "recent_trades_history.md"
+    },
+    {
+      "name": "tickers-by-trading-pair",
+      "url": "https://global-docs.upbit.com/reference/tickers",
+      "filename": "tickers_by_trading_pair.md"
+    },
+    {
+      "name": "tickers-by-quote-currencies",
+      "url": "https://global-docs.upbit.com/reference/tickers_by_quote",
+      "filename": "tickers_by_quote_currencies.md"
+    },
+    {
+      "name": "order-book-list",
+      "url": "https://global-docs.upbit.com/reference/order-book-list",
+      "filename": "order_book_list.md"
+    },
+    {
+      "name": "order-book-policy",
+      "url": "https://global-docs.upbit.com/reference/order-book-policy",
+      "filename": "order_book_policy.md"
+    }
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/upbit",
+    "subDir": "quotation"
+  }
+}

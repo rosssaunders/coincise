@@ -1,0 +1,8 @@
+{
+  "title": "BingX Spot API - Authentication",
+  "urls": ["https://bingx-api.github.io/docs/#/en-us/spot/authentication.html"],
+  "outputConfig": {
+    "docsDir": "../../docs/bingx/spot",
+    "outputFileName": "authentication.md"
+  }
+}

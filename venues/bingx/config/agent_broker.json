@@ -1,0 +1,10 @@
+{
+  "title": "BingX Agent Broker Interface",
+  "urls": [
+    "https://bingx-api.github.io/docs/#/en-us/agent/agent-interface.html"
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/bingx",
+    "outputFileName": "agent_broker.md"
+  }
+}

@@ -1,7 +1,5 @@
 {
   "urls": [
-    "https://bingx-api.github.io/docs/#/en-us/common/introduce",
-    "https://bingx-api.github.io/docs/#/en-us/swapV2/q&a",
     "https://bingx-api.github.io/docs/#/en-us/spot/base-info.html",
     "https://bingx-api.github.io/docs/#/en-us/spot/market-api.html"
   ],

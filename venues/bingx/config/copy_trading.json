@@ -1,0 +1,13 @@
+{
+  "title": "BingX Copy Trading API",
+  "urls": [
+    "https://bingx-api.github.io/docs/#/copyTrade/introduce",
+    "https://bingx-api.github.io/docs/#/copyTrade/trader-interface.html",
+    "https://bingx-api.github.io/docs/#/copyTrade/copier-interface.html"
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/bingx/copy_trading",
+    "outputFileName": "rest_api.md"
+  }
+}
+

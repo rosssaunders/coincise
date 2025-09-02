@@ -1,0 +1,11 @@
+{
+  "title": "BingX Coin-Futures Trading API",
+  "urls": [
+    "https://bingx-api.github.io/docs/#/en-us/cswap/trading-api.html",
+    "https://bingx-api.github.io/docs/#/en-us/cswap/order-api.html"
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/bingx/coin_futures",
+    "outputFileName": "trading_api.md"
+  }
+}

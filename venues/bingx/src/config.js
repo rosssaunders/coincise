@@ -29,5 +29,4 @@ export function getConfig(type = "private") {
   return JSON.parse(configData)
 }
 
-// Default export for backward compatibility
-export const { urls, outputConfig } = getConfig("private")
+// Default export for backward compatibility - removed since private.json is now split into multiple files

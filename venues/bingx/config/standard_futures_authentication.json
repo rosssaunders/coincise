@@ -1,0 +1,10 @@
+{
+  "title": "BingX Standard Futures API - Authentication",
+  "urls": [
+    "https://bingx-api.github.io/docs/#/en-us/standard/authentication.html"
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/bingx/standard_futures",
+    "outputFileName": "authentication.md"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "title": "BingX Spot API - Base Information",
+  "urls": ["https://bingx-api.github.io/docs/#/en-us/spot/base-info.html"],
+  "outputConfig": {
+    "docsDir": "../../docs/bingx/spot",
+    "outputFileName": "base_info.md"
+  }
+}

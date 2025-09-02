@@ -1,0 +1,76 @@
+{
+  "section": "websocket",
+  "title": "WebSocket API",
+  "baseUrl": "https://global-docs.upbit.com/docs",
+  "endpoints": [
+    {
+      "name": "general-information",
+      "url": "https://global-docs.upbit.com/docs/general-information",
+      "filename": "general_information.md"
+    },
+    {
+      "name": "authentication",
+      "url": "https://global-docs.upbit.com/docs/authentication",
+      "filename": "authentication.md"
+    },
+    {
+      "name": "test-and-request-examples",
+      "url": "https://global-docs.upbit.com/docs/test-and-request-examples",
+      "filename": "test_and_request_examples.md"
+    },
+    {
+      "name": "request-format",
+      "url": "https://global-docs.upbit.com/docs/request-format",
+      "filename": "request_format.md"
+    },
+    {
+      "name": "ticker",
+      "url": "https://global-docs.upbit.com/docs/ticker",
+      "filename": "ticker.md"
+    },
+    {
+      "name": "trade",
+      "url": "https://global-docs.upbit.com/docs/trade",
+      "filename": "trade.md"
+    },
+    {
+      "name": "orderbook",
+      "url": "https://global-docs.upbit.com/docs/orderbook",
+      "filename": "orderbook.md"
+    },
+    {
+      "name": "candle",
+      "url": "https://global-docs.upbit.com/docs/candle",
+      "filename": "candle.md"
+    },
+    {
+      "name": "myorder",
+      "url": "https://global-docs.upbit.com/docs/myorder-trade-info",
+      "filename": "myorder.md"
+    },
+    {
+      "name": "myasset",
+      "url": "https://global-docs.upbit.com/docs/myasset",
+      "filename": "myasset.md"
+    },
+    {
+      "name": "list-subscriptions",
+      "url": "https://global-docs.upbit.com/docs/list-subscriptions",
+      "filename": "list_subscriptions.md"
+    },
+    {
+      "name": "websocket-error",
+      "url": "https://global-docs.upbit.com/docs/websocket-error",
+      "filename": "websocket_error.md"
+    },
+    {
+      "name": "connection-management-and-compression",
+      "url": "https://global-docs.upbit.com/docs/connection-management-compression",
+      "filename": "connection_management_and_compression.md"
+    }
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/upbit",
+    "subDir": "websocket"
+  }
+}

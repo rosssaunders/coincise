@@ -1,0 +1,8 @@
+{
+  "title": "BingX Spot API - Trading",
+  "urls": ["https://bingx-api.github.io/docs/#/en-us/spot/trade-api.html"],
+  "outputConfig": {
+    "docsDir": "../../docs/bingx/spot",
+    "outputFileName": "trading.md"
+  }
+}

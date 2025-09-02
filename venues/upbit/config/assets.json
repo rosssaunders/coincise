@@ -1,0 +1,16 @@
+{
+  "section": "assets",
+  "title": "Assets API",
+  "baseUrl": "https://global-docs.upbit.com/reference",
+  "endpoints": [
+    {
+      "name": "overall-account-inquiry",
+      "url": "https://global-docs.upbit.com/reference/overall-account-inquiry",
+      "filename": "overall_account_inquiry.md"
+    }
+  ],
+  "outputConfig": {
+    "docsDir": "../../docs/upbit",
+    "subDir": "assets"
+  }
+}

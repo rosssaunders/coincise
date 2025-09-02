@@ -1,0 +1,8 @@
+{
+  "title": "BingX Spot API - Wallet",
+  "urls": ["https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html"],
+  "outputConfig": {
+    "docsDir": "../../docs/bingx/spot",
+    "outputFileName": "wallet.md"
+  }
+}

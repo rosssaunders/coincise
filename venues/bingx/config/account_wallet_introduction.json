@@ -1,0 +1,9 @@
+{
+  "title": "BingX Account & Wallet API - Introduction",
+  "urls": ["https://bingx-api.github.io/docs/#/en-us/common/introduce"],
+  "outputConfig": {
+    "docsDir": "../../docs/bingx/account_wallet",
+    "outputFileName": "introduction.md"
+  }
+}
+
