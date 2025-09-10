@@ -68,7 +68,7 @@ a AWS or GCP private connection:
 
 For more details please refer to the full specification:
 
-- [Bullish FIX Protocol Specification](../../fix-api/Bullish%20FIX%20Protocol%20Specification%20v1.0.12.pdf)
+- [Bullish FIX Protocol Specification](../../fix-api/Bullish%20FIX%20Protocol%20Specification%20v1.0.13.pdf)
 - [Bullish FIX Protocol Dictionary](../../fix-api/fix-dictionary.xml)
 - [Bullish FIX CRT Certificate](../../fix-api/bullish.crt)
 
@@ -316,6 +316,7 @@ To send an authenticated request, you must follow these steps:
 7. [Fetch Trading Account Ids](#overview--fetch-trading-account-ids)
 8. [Send The HTTP Authenticated Request](#overview--send-the-http-authenticated-request)
 9. [How To Ensure The Order Of _Create Order_ or _Cancel Order_ Requests](#overview--how-to-ensure-the-order-of-create-order-or-cancel-order-requests)
+10. [How do EMS/Brokers Flag Their Executions Sent To Bullish](#overview--how-do-emsbrokers-flag-their-executions-sent-to-bullish)
 
 ## Generate An API Key
 
@@ -782,6 +783,21 @@ The `nonce` parameter is required to be both unique and incremental, but setting
 `nonce` is only required to be `unique`. For example, the client is able to send
 `nonce` values from `1...100` in any order and all the values will be valid.
 
+## How do EMS/Brokers Flag Their Executions Sent To Bullish
+
+The header `BX-REFERRER` value is a unique identifier that can be used by
+EMS/brokers to flag their executions sent to Bullish.
+
+This referrer header is applicable to the below mentioned authenticated
+endpoints:
+
+1. [Create Order](#post-/v2/orders)
+2. [Create OTC Trade](#post-/trading-api/v2/otc-trades)
+3. [OTC Trade Cancellation Command](#post-/trading-api/v2/otc-command)
+
+For more details, please reach out to your relationship manager to understand
+which referrer you are assigned.
+
 # WebSockets
 
 Connection request to the web-socket uses
@@ -1081,13 +1097,34 @@ Heartbeat Subscription Message Sample:
 
 ### Multi-Orderbook Response
 
-- L1 Update Response | Name | Type | Description |
-  |:---------------|:-------|:-----------------------------------------------------------------
-  | | sequenceNumber | String | incrementing, unique, unsigned integer that
-  identifies a state of the L1-orderbook | | symbol | String | market symbol | |
-  timestamp | String | denotes the time the update was created | | bid | Array |
-  nested array containing price and quantity of highest bid | | ask | Array |
-  nested array containing price and quantity of lowest ask |
+- L1 Snapshot and Update Response | Name | Type | Description |
+  |:---------------|:-------|:--------------------------------------------------------------------------------------------------------------|
+  | type | String | "snapshot" or "update" - the first message after the
+  subscription is always a snapshot of the L1-orderbook | | sequenceNumber |
+  String | incrementing, unique, unsigned integer that identifies a state of the
+  L1-orderbook | | symbol | String | market symbol | | timestamp | String |
+  denotes the time the update was created | | bid | Array | nested array
+  containing price and quantity of highest bid | | ask | Array | nested array
+  containing price and quantity of lowest ask |
+
+On subscription, the snapshot is received immediately.
+
+```json
+{
+  "type": "snapshot",
+  "dataType": "V1TALevel1",
+  "data": {
+    "symbol": "BTCUSD",
+    "bid": ["5190.5000", "61.94995262"],
+    "ask": ["5191.6000", "96.79626782"],
+    "sequenceNumber": "7",
+    "datetime": "2020-06-29T06:28:55.000Z",
+    "timestamp": "1593412135000"
+  }
+}
+```
+
+Updates follow as and when the orderbook changes.
 
 ```json
 {
@@ -1104,7 +1141,7 @@ Heartbeat Subscription Message Sample:
 }
 ```
 
-- l2Snapshot response
+- L2 Snapshot Response
 
 | Name                                                                                           | Type   | Description                                                                                                     |
 | ---------------------------------------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------- |
@@ -1224,8 +1261,10 @@ price | String | price, see
 [asset value](#overview--price-and-quantity-precision) format | | quantity |
 String | quantity, see [asset value](#overview--price-and-quantity-precision)
 format | | side | String | order side | | isTaker | Boolean | denotes whether
-this is a taker's trade | | createdAtTimestamp | String | denotes the time the
-order was ACK'd by the exchange | | createdAtDatetime | String | denotes the
+this is a taker's trade | | otcMatchId | String | unique OTC match id | |
+otcTradeId | String | unique Bullish OTC trade id | | clientOtcTradeId | String
+| unique client OTC trade id | | createdAtTimestamp | String | denotes the time
+the order was ACK'd by the exchange | | createdAtDatetime | String | denotes the
 time the order was ACK'd by the exchange, ISO 8601 with millisecond as string |
 | publishedAtTimestamp | String | denotes the time the update was broadcasted to
 connected websockets |
@@ -1252,7 +1291,10 @@ Sample:
         "publishedAtTimestamp": "1721879162124",
         "side": "SELL",
         "createdAtDatetime": "2024-07-25T03:46:00.353Z",
-        "symbol": "BTCUSDC"
+        "symbol": "BTCUSDC",
+        "otcMatchId": "1",
+        "otcTradeId": "200069000000063765",
+        "clientOtcTradeId": "300069000000063765"
       },
       {
         "tradeId": "100069000000063764",
@@ -1263,7 +1305,10 @@ Sample:
         "publishedAtTimestamp": "1721879162124",
         "side": "SELL",
         "createdAtDatetime": "2024-07-25T03:45:55.351Z",
-        "symbol": "BTCUSDC"
+        "symbol": "BTCUSDC",
+        "otcMatchId": "2",
+        "otcTradeId": "200069000000063764",
+        "clientOtcTradeId": "300069000000063764"
       },
       ...
       {
@@ -1318,7 +1363,10 @@ Sample:
         "publishedAtTimestamp": "1722408780790",
         "side": "SELL",
         "createdAtDatetime": "2024-07-31T06:53:00.738Z",
-        "symbol": "BTCUSDC"
+        "symbol": "BTCUSDC",
+        "otcMatchId": "10",
+        "otcTradeId": "200028000018887837",
+        "clientOtcTradeId": "300028000018887837"
       },
       ...
       {
@@ -1330,7 +1378,10 @@ Sample:
         "publishedAtTimestamp": "1722408780790",
         "side": "BUY",
         "createdAtDatetime": "2024-07-31T06:53:00.786Z",
-        "symbol": "BTCUSDC"
+        "symbol": "BTCUSDC",
+        "otcMatchId": "11",
+        "otcTradeId": "200028000018887992",
+        "clientOtcTradeId": "300028000018887992"
       }
     ],
     "createdAtTimestamp": "1722408780786",
@@ -1349,7 +1400,8 @@ Sample:
 This allows simultaneous tick subscriptions to multiple markets.
 
 Upon subscribing to a market, the client will first receive a snapshot of latest
-ticker, followed by updates.
+ticker, followed by updates. See the data model:
+[Get Market Tick](#get-/v1/markets/-symbol-/tick)
 
 ### Unified Anonymous Tick Subscription
 
@@ -1587,6 +1639,10 @@ Establishing a websocket connection
 }
 ```
 
+- It is possible to subscribe to multiple topics with a single subscription
+  message. For example, a topic of `assetAccounts+derivativesPositionsV2` would
+  subscribe to both `assetAccounts` and `derivativesPositionsV2`
+
 2. Getting private data from multiple trading accounts.
 
 - Connect to `/trading-api/v1/private-data`
@@ -1618,6 +1674,8 @@ Establishing a websocket connection
 | ~derivativesPositions~ | `Deprecated`[*Replaced by:* `derivativesPositionsV2`] Provides derivative position information on your trading account.               | `V1TAPerpetualPosition`   | By `<TOPIC>`      |
 | derivativesPositionsV2 | Provides derivative position information on your trading account.                                                                     | `V1TADerivativesPosition` | By `<TOPIC>`      |
 | ammInstructions        | Provides amm instructions update on your trading account.                                                                             | `V1TAAmmInstruction`      | By `<TOPIC>`      |
+| mmpTrigger             | Provides snapshot and updates on your market maker protection trigger events.                                                         | `V1TAMMPTrigger`          | By `<TOPIC>`      |
+| mmpRequest             | Provides snapshot and updates on your market maker protection configurations.                                                         | `V1TAMMPConfigRequest`    | By `<TOPIC>`      |
 
 ### orders response
 
@@ -1721,6 +1779,9 @@ String | denotes the time the update was broadcasted to connected websockets |
 | tradeRebateAmount      | String  | amount of rebate that is credited to the user as part of the trade                                           |
 | tradeRebateAssetSymbol | String  | symbol of the asset in which the rebate is paid                                                              |
 | isTaker                | Boolean | denotes whether this is a taker's trade                                                                      |
+| otcMatchId             | String  | unique OTC match id                                                                                          |
+| otcTradeId             | String  | unique Bullish OTC trade id                                                                                  |
+| clientOtcTradeId       | String  | unique client OTC trade id                                                                                   |
 | createdAtDatetime      | String  | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string                 |
 | createdAtTimestamp     | String  | denotes the time the trade was executed by the exchange                                                      |
 | publishedAtTimestamp   | String  | denotes the time the update was broadcasted to connected websockets                                          |
@@ -1745,6 +1806,9 @@ String | denotes the time the update was broadcasted to connected websockets |
       "isTaker": false,
       "tradeRebateAmount": "3.0000",
       "tradeRebateAssetSymbol": "USDC",
+      "otcMatchId": "15",
+      "otcTradeId": "200014000000000118",
+      "clientOtcTradeId": "300014000000000118",
       "createdAtDatetime": "2021-12-30T07:36:35.918Z",
       "createdAtTimestamp": "1640849795918",
       "publishedAtTimestamp": "1640849795920"
@@ -2099,6 +2163,76 @@ String | denotes the time the update was broadcasted to connected websockets |
       "updatedAtTimestamp": "1621490985000",
       "upperBound": "14000.0000",
     }
+}
+```
+
+### mmpTrigger response
+
+| Name                  | Type   | Description                                                                                                        |
+| --------------------- | ------ | ------------------------------------------------------------------------------------------------------------------ |
+| tradingAccountId      | String | id of the trading account                                                                                          |
+| mmpTriggerId          | String | unique MMP trigger ID                                                                                              |
+| underlyingAssetSymbol | String | underlying asset symbol                                                                                            |
+| triggeredBy           | String | trigger reason                                                                                                     |
+| frozenTimeInSecond    | String | duration for which a market maker’s trading activity is temporarily halted after a protective measure is triggered |
+| frozenStartTime       | String | start time of the MMP trigger in epoch milliseconds                                                                |
+| frozenUntil           | String | end time of the MMP trigger in epoch milliseconds                                                                  |
+
+```json
+{
+  "tradingAccountId": "111000000000000",
+  "type": "snapshot",
+  "dataType": "V1TAMMPTrigger",
+  "data": [
+    {
+      "mmpTriggerId": "100000000000000"
+      "tradingAccountId": "111000000000000",
+      "underlyingAssetSymbol": "BTC",
+      "triggeredBy": "Delta Limit",
+      "frozenTimeInSecond": "10",
+      "frozenStartTime": "1611082473000",
+      "frozenUntil": "1611082483000"
+    }
+  ]
+}
+```
+
+### mmpRequest response
+
+| Name               | Type   | Description                                                                                                        |
+| ------------------ | ------ | ------------------------------------------------------------------------------------------------------------------ |
+| tradingAccountId   | String | id of the trading account                                                                                          |
+| requestId          | String | id of the request                                                                                                  |
+| assetSymbol        | String | underlying asset symbol                                                                                            |
+| windowTimeInSecond | String | time window during which the MMP checks are conducted                                                              |
+| frozenTimeInSecond | String | duration for which a market maker’s trading activity is temporarily halted after a protective measure is triggered |
+| quantityLimit      | String | cap on the total number of contracts that a market maker can trade within `windowTimeInSeconds`                    |
+| deltaLimit         | String | net delta exposure that a market maker can accumulate within `windowTimeInSeconds`                                 |
+| status             | String | status of the request                                                                                              |
+| statusReason       | String | status reason, describes why the request is in a specific state                                                    |
+| isReset            | String | boolean value that indicates if it was a set or reset MMP configuration request                                    |
+| createdAt          | String | denotes the time the request was ACK'd by the exchange                                                             |
+
+```json
+{
+  "tradingAccountId": "111000000000000",
+  "type": "snapshot",
+  "dataType": "V1TAMMPConfigRequest",
+  "data": [
+    {
+      "requestId": "1",
+      "tradingAccountId": "111000000000000",
+      "assetSymbol": "BTC",
+      "windowTimeInSecond": "10",
+      "frozenTimeInSecond": "10",
+      "quantityLimit": "1000",
+      "deltaLimit": "500",
+      "status": "CLOSED",
+      "statusReason": "Ok",
+      "isReset": "false",
+      "createdAt": "1611082473000"
+    }
+  ]
 }
 ```
 

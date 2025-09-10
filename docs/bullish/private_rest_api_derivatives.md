@@ -50,11 +50,27 @@ Get derivatives positions
 
 ### Parameters
 
-| Name             | In     | Type                                        | Required | Description                                                                                                                                                                                                  |
-| ---------------- | ------ | ------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Authorization    | header | string                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                                                                 |
-| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid) | false    | Id of the trading account. `tradingAccountId` is mandatory in the query for users with multiple trading accounts. For users with a single trading account, it can be automatically retrieved from the login. |
-| symbol           | query  | [MarketSymbol](#schemamarketsymbol)         | false    | none                                                                                                                                                                                                         |
+| Name             | In     | Type                                                                                | Required | Description                                                                                                                                                                                                  |
+| ---------------- | ------ | ----------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Authorization    | header | string                                                                              | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                                                                 |
+| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid)                                         | false    | Id of the trading account. `tradingAccountId` is mandatory in the query for users with multiple trading accounts. For users with a single trading account, it can be automatically retrieved from the login. |
+| symbol           | query  | [MarketSymbol](#schemamarketsymbol)                                                 | false    | none                                                                                                                                                                                                         |
+| marketType       | query  | [MarketTypeAsString](#schemamarkettypeasstring)                                     | false    | Optional - Filter for results by expiry date                                                                                                                                                                 |
+| optionType       | query  | [OptionTypeAsString](#schemaoptiontypeasstring)                                     | false    | Optional - Filter for results by option type                                                                                                                                                                 |
+| sort             | query  | [MarketTypeOrOptionTypeSortByAsString](#schemamarkettypeoroptiontypesortbyasstring) | false    | Optional - Sort results by Market Type or Option Type                                                                                                                                                        |
+
+#### Enumerated Values
+
+| Parameter  | Value        |
+| ---------- | ------------ |
+| marketType | SPOT         |
+| marketType | PERPETUAL    |
+| marketType | DATED_FUTURE |
+| marketType | OPTION       |
+| optionType | CALL         |
+| optionType | PUT          |
+| sort       | marketType   |
+| sort       | optionType   |
 
 > Example responses
 
