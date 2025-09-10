@@ -232,6 +232,9 @@ Subscribe to one or more channels.
 This is the same method as [/private/subscribe](#private_subscribe), but it can
 only be used for 'public' channels.
 
+**📖 Related Support Article:**
+[Market Data Collection Best Practices](https://support.deribit.com/hc/en-us/articles/29592500256669-Market-Data-Collection-Best-Practices)
+
 ### Parameters
 
 | Parameter | Required | Type  | Enum | Description                         |
@@ -299,6 +302,9 @@ Subscribe to one or more channels.
 The name of the channel determines what information will be provided, and in
 what form.
 
+**📖 Related Support Article:**
+[Market Data Collection Best Practices](https://support.deribit.com/hc/en-us/articles/29592500256669-Market-Data-Collection-Best-Practices)
+
 This is a private method; it can only be used after authentication.
 
 ### Parameters
@@ -363,15 +369,18 @@ _This method takes no parameters_
 ## /public/get_apr_history
 
 Retrieves historical APR data for specified currency. Only applicable to
-yield-generating tokens (`USDE`, `STETH`).
+yield-generating tokens (`USDE`, `STETH`, `USDC`, `BUILD`).
+
+**📖 Related Support Article:**
+[Yield reward-bearing coins](https://support.deribit.com/hc/en-us/articles/26525792475677-Yield-reward-bearing-coins)
 
 ### Parameters
 
-| Parameter | Required | Type    | Enum                                    | Description                                                                     |
-| --------- | -------- | ------- | --------------------------------------- | ------------------------------------------------------------------------------- |
-| currency  | true     | string  | <code>usde</code><br><code>steth</code> | Currency for which to retrieve APR history                                      |
-| limit     | false    | integer |                                         | Number of days to retrieve (default <code>365</code>, maximum <code>365</code>) |
-| before    | false    | integer |                                         | Used to receive APR history before given epoch day                              |
+| Parameter | Required | Type    | Enum                                                                               | Description                                                                     |
+| --------- | -------- | ------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| currency  | true     | string  | <code>usde</code><br><code>steth</code><br><code>usdc</code><br><code>build</code> | Currency for which to retrieve APR history                                      |
+| limit     | false    | integer |                                                                                    | Number of days to retrieve (default <code>365</code>, maximum <code>365</code>) |
+| before    | false    | integer |                                                                                    | Used to receive APR history before given epoch day                              |
 
 ### Response
 
@@ -501,20 +510,20 @@ _This method takes no parameters_
 
 ### Response
 
-| Name                                                    | Type                     | Description                                                                                                                                                                                                                                                      |
-| ------------------------------------------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id                                                      | integer                  | The id that was sent in the request                                                                                                                                                                                                                              |
-| jsonrpc                                                 | string                   | The JSON-RPC version (2.0)                                                                                                                                                                                                                                       |
+| Name                                                    | Type                     | Description                                                                                                                                                                                                                                                                                             |
+| ------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id                                                      | integer                  | The id that was sent in the request                                                                                                                                                                                                                                                                     |
+| jsonrpc                                                 | string                   | The JSON-RPC version (2.0)                                                                                                                                                                                                                                                                              |
 | result                                                  | array of <em>object</em> |
-| &nbsp;&nbsp;›&nbsp;&nbsp;apr                            | number                   | Simple Moving Average (SMA) of the last 7 days of rewards. If fewer than 7 days of reward data are available, the APR is calculated as the average of the available rewards. Only applicable to yield-generating tokens (<code>USDE</code>, <code>STETH</code>). |
-| &nbsp;&nbsp;›&nbsp;&nbsp;coin_type                      | string                   | The type of the currency.                                                                                                                                                                                                                                        |
-| &nbsp;&nbsp;›&nbsp;&nbsp;currency                       | string                   | The abbreviation of the currency. This abbreviation is used elsewhere in the API to identify the currency.                                                                                                                                                       |
-| &nbsp;&nbsp;›&nbsp;&nbsp;currency_long                  | string                   | The full name for the currency.                                                                                                                                                                                                                                  |
-| &nbsp;&nbsp;›&nbsp;&nbsp;fee_precision                  | integer                  | fee precision                                                                                                                                                                                                                                                    |
-| &nbsp;&nbsp;›&nbsp;&nbsp;in_cross_collateral_pool       | boolean                  | <code>true</code> if the currency is part of the cross collateral pool                                                                                                                                                                                           |
-| &nbsp;&nbsp;›&nbsp;&nbsp;min_confirmations              | integer                  | Minimum number of block chain confirmations before deposit is accepted.                                                                                                                                                                                          |
-| &nbsp;&nbsp;›&nbsp;&nbsp;min_withdrawal_fee             | number                   | The minimum transaction fee paid for withdrawals                                                                                                                                                                                                                 |
-| &nbsp;&nbsp;›&nbsp;&nbsp;withdrawal_fee                 | number                   | The total transaction fee paid for withdrawals                                                                                                                                                                                                                   |
+| &nbsp;&nbsp;›&nbsp;&nbsp;apr                            | number                   | Simple Moving Average (SMA) of the last 7 days of rewards. If fewer than 7 days of reward data are available, the APR is calculated as the average of the available rewards. Only applicable to yield-generating tokens (<code>USDE</code>, <code>STETH</code>, <code>USDC</code>, <code>BUILD</code>). |
+| &nbsp;&nbsp;›&nbsp;&nbsp;coin_type                      | string                   | The type of the currency.                                                                                                                                                                                                                                                                               |
+| &nbsp;&nbsp;›&nbsp;&nbsp;currency                       | string                   | The abbreviation of the currency. This abbreviation is used elsewhere in the API to identify the currency.                                                                                                                                                                                              |
+| &nbsp;&nbsp;›&nbsp;&nbsp;currency_long                  | string                   | The full name for the currency.                                                                                                                                                                                                                                                                         |
+| &nbsp;&nbsp;›&nbsp;&nbsp;fee_precision                  | integer                  | fee precision                                                                                                                                                                                                                                                                                           |
+| &nbsp;&nbsp;›&nbsp;&nbsp;in_cross_collateral_pool       | boolean                  | <code>true</code> if the currency is part of the cross collateral pool                                                                                                                                                                                                                                  |
+| &nbsp;&nbsp;›&nbsp;&nbsp;min_confirmations              | integer                  | Minimum number of block chain confirmations before deposit is accepted.                                                                                                                                                                                                                                 |
+| &nbsp;&nbsp;›&nbsp;&nbsp;min_withdrawal_fee             | number                   | The minimum transaction fee paid for withdrawals                                                                                                                                                                                                                                                        |
+| &nbsp;&nbsp;›&nbsp;&nbsp;withdrawal_fee                 | number                   | The total transaction fee paid for withdrawals                                                                                                                                                                                                                                                          |
 | &nbsp;&nbsp;›&nbsp;&nbsp;withdrawal_priorities          | array of <em>object</em> |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;name  | string                   |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;value | number                   |
@@ -1222,6 +1231,10 @@ ID.
 
 ## /public/get_rfqs
 
+⚠️ **DEPRECATED** - This feature will be deprecated after the October release.
+Please use Block RFQ instead. See
+[Deribit Block RFQ API walkthrough](https://support.deribit.com/hc/en-us/articles/25951393746589-Deribit-Block-RFQ-API-walkthrough)
+for more information.  
 Retrieve active RFQs for instruments in given currency.
 
 ### Parameters
@@ -1233,16 +1246,16 @@ Retrieve active RFQs for instruments in given currency.
 
 ### Response
 
-| Name                                        | Type                     | Description                                                                                                                                                                       |
-| ------------------------------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id                                          | integer                  | The id that was sent in the request                                                                                                                                               |
-| jsonrpc                                     | string                   | The JSON-RPC version (2.0)                                                                                                                                                        |
-| result                                      | array of <em>object</em> |
-| &nbsp;&nbsp;›&nbsp;&nbsp;amount             | number                   | It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures and it is the underlying base currency coin. |
-| &nbsp;&nbsp;›&nbsp;&nbsp;instrument_name    | string                   | Unique instrument identifier                                                                                                                                                      |
-| &nbsp;&nbsp;›&nbsp;&nbsp;last_rfq_timestamp | integer                  | The timestamp of last RFQ (milliseconds since the Unix epoch)                                                                                                                     |
-| &nbsp;&nbsp;›&nbsp;&nbsp;side               | string                   | Side - <code>buy</code> or <code>sell</code>                                                                                                                                      |
-| &nbsp;&nbsp;›&nbsp;&nbsp;traded_volume      | number                   | Volume traded since last RFQ                                                                                                                                                      |
+| Name                                        | Type                     | Description                                                                                                                                                                                                                                                                                            |
+| ------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id                                          | integer                  | The id that was sent in the request                                                                                                                                                                                                                                                                    |
+| jsonrpc                                     | string                   | The JSON-RPC version (2.0)                                                                                                                                                                                                                                                                             |
+| result                                      | array of <em>object</em> | ⚠️ <strong>DEPRECATED</strong> - This feature will be deprecated after the October release. Please use Block RFQ instead. See <a href="https://support.deribit.com/hc/en-us/articles/25951393746589-Deribit-Block-RFQ-API-walkthrough">Deribit Block RFQ API walkthrough</a> for more information.<br> |
+| &nbsp;&nbsp;›&nbsp;&nbsp;amount             | number                   | It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures and it is the underlying base currency coin.                                                                                                                      |
+| &nbsp;&nbsp;›&nbsp;&nbsp;instrument_name    | string                   | Unique instrument identifier                                                                                                                                                                                                                                                                           |
+| &nbsp;&nbsp;›&nbsp;&nbsp;last_rfq_timestamp | integer                  | The timestamp of last RFQ (milliseconds since the Unix epoch)                                                                                                                                                                                                                                          |
+| &nbsp;&nbsp;›&nbsp;&nbsp;side               | string                   | Side - <code>buy</code> or <code>sell</code>                                                                                                                                                                                                                                                           |
+| &nbsp;&nbsp;›&nbsp;&nbsp;traded_volume      | number                   | Volume traded since last RFQ                                                                                                                                                                                                                                                                           |
 
 ## /public/get_supported_index_names
 
