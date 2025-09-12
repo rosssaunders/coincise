@@ -53,6 +53,16 @@ _Notes on Exchange Upgrade and API Versions_
 
 ## Change Logs
 
+- 2025-07-17
+
+  - `private/fiat/fiat-deposit-info` was added
+  - `private/fiat/fiat-deposit-history` was added
+  - `private/fiat/fiat-withdraw-history` was added
+  - `private/fiat/fiat-create-withdraw` was added
+  - `private/fiat/fiat-get-bank-accounts` was added
+  - `private/fiat/fiat-transaction-quota` was added
+  - `private/fiat/fiat-transaction-limit` was added
+
 - 2025-07-04
 
   - `private/create-order` exec_inst was added `SMART_POST_ONLY`
