@@ -191,7 +191,6 @@ matching engine, with the following structure:
 #### **Global vs. Per-Currency Limits**
 
 - When `limits_per_currency` **\=** `false`, limits apply globally:
-
   - `trading`: Overall trading operations
   - `maximum_quotes`: Total number of quotes
   - `maximum_mass_quotes`: Mass quoting operations
@@ -199,9 +198,7 @@ matching engine, with the following structure:
 
 - When `limits_per_currency` **\=** `true`, limits are set **per settlement
   currency** under the `matching_engine` object:
-
   - Each currency key includes:
-
     - `trading`: Per-currency trading limits
     - `maximum_quotes`: Per-currency quote limits
     - `maximum_mass_quotes`: Per-currency mass quoting limits
@@ -215,7 +212,6 @@ matching engine, with the following structure:
   Applies the relevant trading or spot limit for the specified currency or
   instrument.
 - [**private/cancel_all_by_kind_or_type**](https://docs.deribit.com/#private-cancel_all_by_kind_or_type):
-
   - No currency specified → uses cancel_all
   - Specific currency → uses per-currency trading limit
   - Spot instrument → uses spot limit
@@ -375,7 +371,6 @@ session is automatically removed**.
 ## Best Practices for Efficient and Reliable Connection Management[](#heading-3)
 
 1.  **Prefer Subscriptions Over REST Polling** 
-
     - Use WebSocket [**subscriptions**](https://docs.deribit.com/#subscriptions)
       (e.g., subscribe) whenever possible instead of continuously polling data
       via REST endpoints.
@@ -383,7 +378,6 @@ session is automatically removed**.
       [rate limits](/hc/en-us/articles/25944617523357#UUID-9325394c-bca6-d0a5-291f-b19978b3ca89 "Rate Limits").
 
 2.  **Do Not Use WebSocket Like REST** 
-
     - Avoid patterns like:
 
       Open session → Read once → Close → Repeat.
@@ -394,7 +388,6 @@ session is automatically removed**.
       batched requests.
 
 3.  **Use Authenticated Requests Whenever Possible** 
-
     - Even for public data, prefer **authenticated WebSocket connections**.
     - Authenticated users benefit from **higher rate limits** and are **less
       likely to be IP rate-limited** or disconnected.
@@ -402,13 +395,11 @@ session is automatically removed**.
       authenticated clients before taking restrictive measures.
 
 4.  **Avoid Overloading Your Connection** 
-
     - Subscribing to **too many channels at once** can cause a
       `connection_too_slow` error. This happens when the client **cannot read
       all incoming events fast enough**, causing a **backlog** of pending
       messages.
     - To avoid disconnection:
-
       - Only subscribe to necessary channels.
       - Make sure your client reads and processes messages efficiently and
         continuously.
@@ -856,13 +847,10 @@ below for more information.
 
     In order to inform Deribit you have created a connection request, please
     send an email to ‘aws-support@sentillia.com’ following the below guidelines:
-
     - Include the following in the mail subject:
-
       - #acceptance request - <your company name> - <UID>
 
     - Include the following in the email body:
-
       - The VPC Endpoint-ID you just created (‘vpce-xxx’)...
       - The AWS region in which you made the connection acceptance request.
       - Your Deribit UID
@@ -894,7 +882,6 @@ below for more information.
     [](https://support.deribit.com/hc/article_attachments/28583330327965)[![aws_endpoint_simple_routing_policy.png](/hc/article_attachments/28583330327965)](/hc/article_attachments/28583330327965)
 
     Click Next and choose ‘Define simple record’. Fill in the record details:
-
     - Record name – choose your own record, in this example we will use ‘test’
       (‘gateway’ if you are using TCP 443);
     - Record type – A ‘Routes traffic to an IPv4 address and some AWS
@@ -962,11 +949,9 @@ resource, please send an email to
 below guidelines:
 
 - Include the following in the mail subject:
-
   - #Multicast acceptance - <your company name> - <UID>
 
 - Include the following in the email body:
-
   - Your AWS account ID (not your VPC Endpoint-ID)
   - the AWS region (eu-west-2 or ap-northeast-1)
 
