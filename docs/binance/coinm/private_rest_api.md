@@ -984,7 +984,6 @@ Additional mandatory parameters based on `type`:
 > - Order with type `TAKE_PROFIT`, parameter `timeInForce` can be sent ( default
 >   `GTC`).
 > - Condition orders will be triggered when:
->
 >   - If parameter`priceProtect`is sent as true:
 >     - when price reaches the `stopPrice` ，the difference rate between
 >       "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than the
@@ -1006,19 +1005,16 @@ Additional mandatory parameters based on `type`:
 > - For `TRAILING_STOP_MARKET`, if you got such error code.  
 >   `{"code": -2021, "msg": "Order would immediately trigger."}`  
 >   means that the parameters you send do not meet the following requirements:
->
 >   - BUY: `activationPrice` should be smaller than latest price.
 >   - SELL: `activationPrice` should be larger than latest price.
 >
 > - If `newOrderRespType` is sent as `RESULT` :
->
 >   - `MARKET` order: the final FILLED result of the order will be return
 >     directly.
 >   - `LIMIT` order with special `timeInForce`: the final status result of the
 >     order(FILLED or EXPIRED) will be returned directly.
 >
 > - `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`\=`true`:
->
 >   - Follow the same rules for condition orders.
 >   - If triggered,**close all** current long position( if `SELL`) or current
 >     short position( if `BUY`).
@@ -2456,7 +2452,6 @@ requests this endpoint.
 - `toSymbol` must be sent when type are MARGIN_ISOLATEDMARGIN and
   ISOLATEDMARGIN_ISOLATEDMARGIN
 - ENUM of transfer types:
-
   - MAIN_UMFUTURE Spot account transfer to USDⓈ-M Futures account
   - MAIN_CMFUTURE Spot account transfer to COIN-M Futures account
   - MAIN_MARGIN Spot account transfer to Margin（cross）account
