@@ -217,6 +217,9 @@ contains data that is specific for the channel.
 
 ## Authentication
 
+**📖 Related Support Article:**
+[API Authentication Guide](https://support.deribit.com/hc/en-us/articles/29748629634205-API-Authentication-Guide)
+
 > An example of a JSON request with token:
 
 The API consists of `public` and `private` methods. The public methods do not
