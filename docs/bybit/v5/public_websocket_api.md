@@ -190,7 +190,7 @@ N | category=spot | 5/s | N | category=option | 5/s | N
 
 #### User[​](#user "Direct link to heading")
 
-<table border="0.8"><tbody><tr><th>Method</th><th>Path</th><th>Limit</th><td>upgradable</td></tr><tr><td rowspan="7">POST</td><td>v5/user/create-sub-member</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/create-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/frozen-sub-member</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/update-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/update-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/delete-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/delete-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td rowspan="3">GET</td><td>/v5/user/query-sub-members</td><td>10 req/s</td><td>N</td></tr><tr><td>/v5/user/query-api</td><td>10 req/s</td><td>N</td></tr><tr><td>/v5/user/aff-customer-info</td><td>10 req/s</td><td>N</td></tr></tbody></table>
+<table border="0.8"><tbody><tr><th>Method</th><th>Path</th><th>Limit</th><td>upgradable</td></tr><tr><td rowspan="7">POST</td><td>v5/user/create-sub-member</td><td>1 req/s</td><td>N</td></tr><tr><td>/v5/user/create-sub-api</td><td>1 req/s</td><td>N</td></tr><tr><td>/v5/user/frozen-sub-member</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/update-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/update-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/delete-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/delete-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td rowspan="3">GET</td><td>/v5/user/query-sub-members</td><td>10 req/s</td><td>N</td></tr><tr><td>/v5/user/query-api</td><td>10 req/s</td><td>N</td></tr><tr><td>/v5/user/aff-customer-info</td><td>10 req/s</td><td>N</td></tr></tbody></table>
 
 #### Spot Leverage Token[​](#spot-leverage-token "Direct link to heading")
 
@@ -215,8 +215,6 @@ N | category=spot | 5/s | N | category=option | 5/s | N
 | GET    |   <a href="/docs/v5/spread/trade/open-order">Get Spread Open Orders</a>    | 50 req/s | N          |
 | GET    | <a href="/docs/v5/spread/trade/order-history">Get Spread Order History</a> | 50 req/s | N          |
 | GET    | <a href="/docs/v5/spread/trade/trade-history">Get Spread Trade History</a> | 50 req/s | N          |
-
-## API Rate Limit Rules For VIPs[​](#api-rate-limit-rules-for-vips "Direct link to heading")
 
 instructions for batch endpoints
 
@@ -243,14 +241,7 @@ orders in one second if I use both endpoints to place orders_
   5 orders will be successfully placed, and the 6-8th orders will report an
   error exceeding the limit, and these orders will fail.
 
-UPCOMING CHANGES FOR PRO ACCOUNT
-
-Starting **August 13, 2025**, Bybit will roll out a new institutional API rate
-limit framework designed to enhance performance for high-frequency trading
-clients. The new system introduces a centralized institution-level rate cap with
-flexible per-UID configurations, enabling greater efficiency and scalability.
-Refer to
-[announcement](https://announcements.bybit.com/en/article/update-bybit-enhances-api-rate-limits-for-institutional-traders-bltbbbf60de757d074e/)
+## API Rate Limit Rules For VIPs[​](#api-rate-limit-rules-for-vips "Direct link to heading")
 
 |               | Unified Account |
 | ------------- | :-------------: | ------------- | ----------- |
@@ -262,12 +253,141 @@ Refer to
 | VIP 4         |      60/s       | 60/s          | 40/s        |
 | VIP 5         |      60/s       | 60/s          | 40/s        |
 | VIP Supreme   |      60/s       | 60/s          | 40/s        |
-| PRO1          |      150/s      | 150/s         | 150/s       |
-| PRO2          |      200/s      | 200/s         | 200/s       |
-| PRO3          |      250/s      | 250/s         | 250/s       |
-| PRO4          |      300/s      | 300/s         | 300/s       |
-| PRO5          |      300/s      | 300/s         | 300/s       |
-| PRO6          |      300/s      | 300/s         | 300/s       |
+
+## API Rate Limit Rules For PROs[​](#api-rate-limit-rules-for-pros "Direct link to heading")
+
+UPCOMING CHANGES FOR PRO ACCOUNT
+
+Starting **August 13, 2025**, Bybit will roll out a new institutional API rate
+limit framework designed to enhance performance for high-frequency trading
+clients. The new system introduces a centralized institution-level rate cap with
+flexible per-UID configurations, enabling greater efficiency and scalability.
+Refer to
+[announcement](https://announcements.bybit.com/en/article/update-bybit-enhances-api-rate-limits-for-institutional-traders-bltbbbf60de757d074e/)
+
+### UID level:[​](#uid-level "Direct link to heading")
+
+|               | Unified Account |
+| ------------- | :-------------: | ------------- | ----------- |
+| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
+| PRO1          |      200/s      | 200/s         | 200/s       |
+| PRO2          |      400/s      | 400/s         | 400/s       |
+| PRO3          |      600/s      | 600/s         | 600/s       |
+| PRO4          |      800/s      | 800/s         | 800/s       |
+| PRO5          |     1000/s      | 1000/s        | 1000/s      |
+| PRO6          |     1200/s      | 1200/s        | 1200/s      |
+
+### Master and subaccounts level (Institutional API rate limit Quota):[​](#master-and-subaccounts-level-institutional-api-rate-limit-quota "Direct link to heading")
+
+|               | Unified Account |
+| ------------- | :-------------: | ------------- | ----------- |
+| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
+| PRO1          |     10000/s     | 10000/s       | 10000/s     |
+| PRO2          |     20000/s     | 20000/s       | 20000/s     |
+| PRO3          |     30000/s     | 30000/s       | 30000/s     |
+| PRO4          |     40000/s     | 40000/s       | 40000/s     |
+| PRO5          |     50000/s     | 50000/s       | 50000/s     |
+| PRO6          |     60000/s     | 60000/s       | 60000/s     |
+
+instructions for API rate limit
+
+- All of the existing subaccounts still have those original API rate limits
+- The default API rate limit for a new sub-account is not counted in the total
+  Institutional API rate limit quota.
+- The default API rate limit for a new sub is: 10/s for futures , 10/s for
+  options, 20/s for spot
+- If the Institutional API rate limit total quota is exceeded, you can only
+  reduce the account's API rate limit first. After the total API rate limit is
+  less than the total Institutional API rate limit quota, you can increase the
+  API rate limit of an account.
+
+### Set api rate limit[​](#set-api-rate-limit "Direct link to heading")
+
+> API rate limit: 50 req per second
+
+info
+
+- If UID requesting this endpoint is a master account, uids in the input
+  parameter must be subaccounts of the master account.
+- If UID requesting this endpoint is not a master account, uids in the input
+  parameter must be the UID requesting this endpoint
+- UID requesting this endpoint must be an institutional user.
+
+#### HTTP Request[​](#http-request "Direct link to heading")
+
+POST `/v5/apilimit/set`
+
+#### Request Parameters[​](#request-parameters "Direct link to heading")
+
+| Parameter                                        | Required | Type    | Comments                           |
+| :----------------------------------------------- | :------- | :------ | ---------------------------------- |
+| list                                             | true     | array   | Object                             |
+| &gt; uids                                        | true     | string  | Multiple UIDs, separated by commas |
+| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | true     | string  | Business type                      |
+| &gt; limit                                       | true     | integer | api rate limit per second          |
+
+#### Response Parameters[​](#response-parameters "Direct link to heading")
+
+| Parameter                                        | Type    | Comments                           |
+| :----------------------------------------------- | :------ | ---------------------------------- |
+| list                                             | array   | Object                             |
+| &gt; uids                                        | string  | Multiple UIDs, separated by commas |
+| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
+| &gt; limit                                       | integer | api rate limit per second          |
+| &gt; success                                     | boolean | success or not                     |
+| &gt; <a href="/docs/v5/enum#msg">msg</a>         | string  | result message                     |
+
+#### Request Example[​](#request-example "Direct link to heading")
+
+```
+POST /v5/apilimit/set HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1711420489915X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "list": [        {            "uids": "106293838",            "bizType": "DERIVATIVES",            "limit": 50        }    ]}
+```
+
+#### Response Example[​](#response-example "Direct link to heading")
+
+```
+{    "retCode": 0,    "retMsg": "success",    "result": {        "result": [            {                "uids": "290118",                "bizType": "SPOT",                "limit": 600,                "success": true,                "msg": "API limit updated successfully"            }        ]    },    "retExtInfo": {},    "time": 1754894296913}
+```
+
+### Query api rate limit[​](#query-api-rate-limit "Direct link to heading")
+
+> API rate limit: 50 req per second
+
+info
+
+- A master account can query api rate limit of its own and subaccounts.
+- A subaccount can only query its own api rate limit.
+
+#### HTTP Request[​](#http-request-1 "Direct link to heading")
+
+GET `/v5/apilimit/query`
+
+#### Request Parameters[​](#request-parameters-1 "Direct link to heading")
+
+| Parameter | Required | Type   | Comments                           |
+| :-------- | :------- | :----- | ---------------------------------- |
+| uids      | true     | string | Multiple UIDs, separated by commas |
+
+#### Response Parameters[​](#response-parameters-1 "Direct link to heading")
+
+| Parameter                                        | Type    | Comments                           |
+| :----------------------------------------------- | :------ | ---------------------------------- |
+| list                                             | array   | Object                             |
+| &gt; uids                                        | string  | Multiple UIDs, separated by commas |
+| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
+| &gt; limit                                       | integer | api rate limit per second          |
+
+#### Request Example[​](#request-example-1 "Direct link to heading")
+
+```
+GET /v5/apilimit/query?uids=290118 HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
+```
+
+#### Response Example[​](#response-example-1 "Direct link to heading")
+
+```
+{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "uids": "290118",                "bizType": "SPOT",                "limit": 600            },            {                "uids": "290118",                "bizType": "DERIVATIVES",                "limit": 400            }        ]    },    "retExtInfo": {},    "time": 1754894341984}
+```
 
 # Enums Definitions
 
@@ -829,6 +949,9 @@ _Options:_
 - `INSTITUTION_LOAN_WITHOUT_WITHDRAW` Transfer out (INS Loan)
 - `INSTITUTION_LOAN_RESERVE_IN` Reserve Fund In (INS Loan)
 - `INSTITUTION_LOAN_RESERVE_OUT` Reserve Fund Out (INS Loan)
+- `SPREAD_FEE_OUT` Spread fee for EU Broker
+- `PLATFORM_TOKEN_MNT_LIQRECALLEDMMNT` Recall MNT
+- `PLATFORM_TOKEN_MNT_LIQRETURNEDMNT` Return MNT
 
 ### type(contract-translog)[​](#typecontract-translog "Direct link to heading")
 
@@ -947,6 +1070,7 @@ _Option_:
 - PRO-3
 - PRO-4
 - PRO-5
+- PRO-6
 
 ### adlRankIndicator[​](#adlrankindicator "Direct link to heading")
 
@@ -1016,6 +1140,21 @@ _Option_:
 
 - `1` Production
 - `2` Production Demo service
+
+### bizType[​](#biztype "Direct link to heading")
+
+- `SPOT`
+- `DERIVATIVES`
+- `OPTIONS`
+
+### msg[​](#msg "Direct link to heading")
+
+- `API limit updated successfully`
+- `Requested limit exceeds maximum allowed per user`
+- `No permission to operate these UIDs`
+- `API cap configuration not found`
+- `API cap configuration not found for bizType`
+- `Requested limit would exceed institutional quota`
 
 ### Spot Fee Currency Instruction[​](#spot-fee-currency-instruction "Direct link to heading")
 
@@ -1089,6 +1228,7 @@ with the example of BTCUSDT:
 |       30134       | OTC loan: The symbol you select for USDC Contract is not allowed by Institutional Lending                                                                                                  |
 |       30135       | The leverage you select for USDT Perpetual trading cannot exceed the maximum leverage allowed by Institutional Lending.                                                                    |
 |       30136       | The leverage you select for USDC Perpetual or Futures trading cannot exceed the maximum leverage allowed by Institutional Lending.                                                         |
+|       30208       | Failed to submit order(s). The order price is higher than the maximum buying price                                                                                                         |
 |       40004       | the order is modified during the process of replacing , please check the order status again                                                                                                |
 |      100028       | The API cannot be accessed by unified account users.                                                                                                                                       |
 |      110001       | Order does not exist                                                                                                                                                                       |
@@ -1206,6 +1346,8 @@ with the example of BTCUSDT:
 |      110117       | The modification of a combo single-leg order can only be done by modifying the combo order                                                                                                 |
 |      110118       | Unable to retrieve a pruce of the market order due to low liquidity                                                                                                                        |
 |      110119       | Order failed. RPI orders are restricted to approved market makers only                                                                                                                     |
+|      110120       | Order price cannot be smaller than xxxx, the price limitation                                                                                                                              |
+|      110121       | Order price cannot be higher than xxxx, the price limitation                                                                                                                               |
 |      170346       | Settle coin is not a collateral coin, cannot trade                                                                                                                                         |
 |      170360       | symbol[XXXX] cannot trade. Used for spread trading in particular when collateral is not turned on                                                                                          |
 |      181017       | OrderStatus must be final status                                                                                                                                                           |
@@ -1566,6 +1708,9 @@ with the example of BTCUSDT:
 | 148037 | Insufficient assets or adjustment amount exceeds the maximum allowed.                          |
 | 148038 | Repayment amount cannot exceed the debt amount of the position.                                |
 | 148039 | Duplicate collateral assets detected. Please review and resubmit.                              |
+| 148040 | Pledge token is error.                                                                         |
+| 148041 | Repay order is exist.                                                                          |
+| 148042 | Exceeds the allowed decimal precision for this currency.                                       |
 
 ## Crypto Loan (legacy)[​](#crypto-loan-legacy "Direct link to heading")
 
@@ -1663,6 +1808,14 @@ with the example of BTCUSDT:
 | :---: | :------------------------------------------- |
 | 81007 | Bybit Europe is not supported create API Key |
 | 20096 | need KYC authentication                      |
+
+## Set api rate limit[​](#set-api-rate-limit "Direct link to heading")
+
+|  Code   | Description                                    |
+| :-----: | :--------------------------------------------- |
+| 3500002 | Current user is not an institutional user      |
+| 3500153 | No permission to operate these UIDs            |
+| 3500153 | You do not have permission to query other UIDs |
 
 # Connect
 
@@ -1890,12 +2043,14 @@ orders will not be included in the messages.
 Level 1 data, push frequency: **10ms**  
 Level 50 data, push frequency: **20ms**  
 Level 200 data, push frequency: **100ms**  
-Level 500 data, push frequency: **100ms**
+Level 500 data, push frequency: **100ms** (2025.09.30 offline)  
+Level 1000 data, push frequency: **300ms** (2025.08.14 online)
 
 **Spot:**  
 Level 1 data, push frequency: **10ms**  
 Level 50 data, push frequency: **20ms**  
-Level 200 data, push frequency: **200ms**
+Level 200 data, push frequency: **200ms**  
+Level 1000 data, push frequency: **300ms** (2025.08.14 online)
 
 **Option:**  
 Level 25 data, push frequency: **20ms**  
@@ -1980,6 +2135,11 @@ Push frequency: **real-time**
 `publicTrade.{symbol}`  
 **Note**: option uses baseCoin, e.g., publicTrade.BTC
 
+note
+
+For Futures and Spot, a single message has up to 1024 trades. So it may have
+mutiple messages for the same cross.
+
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
 | Parameter                                        | Type    | Comments                                                                 |
@@ -1998,6 +2158,7 @@ Push frequency: **real-time**
 | &gt; i                                           | string  | Trade ID                                                                 |
 | &gt; BT                                          | boolean | Whether it is a block trade order or not                                 |
 | &gt; RPI                                         | boolean | Whether it is a RPI trade or not                                         |
+| &gt; seq                                         | integer | cross sequence                                                           |
 | &gt; mP                                          | string  | Mark price, unique field for <code>option</code>                         |
 | &gt; iP                                          | string  | Index price, unique field for <code>option</code>                        |
 | &gt; mIv                                         | string  | Mark iv, unique field for <code>option</code>                            |
@@ -2012,7 +2173,7 @@ from pybit.unified_trading import WebSocketfrom time import sleepws = WebSocket(
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "topic": "publicTrade.BTCUSDT",    "type": "snapshot",    "ts": 1672304486868,    "data": [        {            "T": 1672304486865,            "s": "BTCUSDT",            "S": "Buy",            "v": "0.001",            "p": "16578.50",            "L": "PlusTick",            "i": "20f43950-d8dd-5b31-9112-a178eb6023af",            "BT": false        }    ]}
+{    "topic": "publicTrade.BTCUSDT",    "type": "snapshot",    "ts": 1672304486868,    "data": [        {            "T": 1672304486865,            "s": "BTCUSDT",            "S": "Buy",            "v": "0.001",            "p": "16578.50",            "L": "PlusTick",            "i": "20f43950-d8dd-5b31-9112-a178eb6023af",            "BT": false,            "seq": 1783284617        }    ]}
 ```
 
 # Ticker

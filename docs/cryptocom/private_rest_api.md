@@ -53,6 +53,16 @@ _Notes on Exchange Upgrade and API Versions_
 
 ## Change Logs
 
+- 2025-07-17
+
+  - `private/fiat/fiat-deposit-info` was added
+  - `private/fiat/fiat-deposit-history` was added
+  - `private/fiat/fiat-withdraw-history` was added
+  - `private/fiat/fiat-create-withdraw` was added
+  - `private/fiat/fiat-get-bank-accounts` was added
+  - `private/fiat/fiat-transaction-quota` was added
+  - `private/fiat/fiat-transaction-limit` was added
+
 - 2025-07-04
 
   - `private/create-order` exec_inst was added `SMART_POST_ONLY`
@@ -1767,7 +1777,8 @@ that the request is queued.
       "params": {
         "instrument_name": "BTCUSD-PERP",
         "type": "LIMIT",
-        "price": "30000.0"
+        "price": "30000.0",
+        "quantity": "1000"
       }
     }
 
@@ -1803,11 +1814,15 @@ successfully canceled.
 
 ### Request Params
 
-| Name            | Type   | Required | Description             |
-| --------------- | ------ | -------- | ----------------------- |
-| instrument_name | string | Y        | e.g. BTCUSD-PERP        |
-| type            | string | Y        | `LIMIT` or `MARKET`     |
-| price           | string | Depends  | For `LIMIT` orders only |
+| Name            | Type             | Required | Description             |
+| --------------- | ---------------- | -------- | ----------------------- |
+| instrument_name | string           | Y        | e.g. BTCUSD-PERP        |
+| type            | string           | Y        | `LIMIT` or `MARKET`     |
+| price           | string           | Depends  | For `LIMIT` orders only |
+| quantity        | string of number | N        | Positive Number only    |
+
+Remark:  
+Only provide this field if intending to do partial closing |
 
 ### Applies To
 
@@ -2094,7 +2109,7 @@ POST
       "code": 0
     }
 
-Change the account STP settings.
+Change account level settings regarding STP and other properties.
 
 ### Request Params
 
@@ -2102,10 +2117,15 @@ Change the account STP settings.
 | --------- | ------ | -------- | -------------- |
 | stp_scope | string | N        | Optional Field |
 
-Possible Values  
+Possible Values:  
 M: Matches Master or Sub a/c  
-S: Matches Sub a/c only | | stp_inst | number | N | Mandatory if stp_scope is
-set.  
+S: Matches Sub a/c only  
+D: for resetting all STP fields to original default values.
+
+Remark:  
+Once 'D' is filled to 'stp_scope', inputs in 'stp_inst' and 'stp_id' fields in
+the same request will be ignored. | | stp_inst | number | N | Mandatory if
+stp_scope is set.  
 Possible Values  
 M: Cancel Maker  
 T: Cancel Taker  

@@ -626,7 +626,7 @@ cross-connect is requested.
 - 8022 - WS
 - 8025 - FIX
 
-[](https://support.deribit.com/hc/article_attachments/28669620439453)[![Deribit Global System Structure](/hc/article_attachments/28669620439453)](/hc/article_attachments/28669620439453)
+[](https://support.deribit.com/hc/article_attachments/30171064150557)[![Deribit Global System Structure](/hc/article_attachments/30171064150557)](/hc/article_attachments/30171064150557)
 
 #### Hosting in the Client Rack
 
@@ -640,11 +640,12 @@ Service includes:
 - 50 Mbps ISP
 - Cross-Connect to Deribit
 
-The patch will be done with a Twinax cable. These cables are 5m long and are
-rate limited to 1 Gbit. Deribit offers a primary and a secondary link.
-Therefore, two available ports are needed to cross-connect to our
-infrastructure. Patches to other destinations need to land directly into the
-client's server (no switch). Deribit will not procure clients' servers.
+The patch will be done with a Twinax cable. These cables have the exact same
+length for all of our customers, and are rate limited to 1 Gbit. Deribit offers
+a primary and a secondary link. Therefore, two available ports are needed to
+cross-connect to our infrastructure. Patches to other destinations need to land
+directly into the client's server (no switch). Deribit will not procure clients'
+servers.
 
 Clients are not able to add network equipment (e.g. firewall to terminate the
 internet handoff). This service requires the signing of a hosting agreement.

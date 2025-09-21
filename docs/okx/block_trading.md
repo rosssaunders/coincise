@@ -139,6 +139,14 @@ To learn more, please visit
 | &gt; posSide          | String           | No       | Position side.<br>The default is <code>net</code> in the net mode. It can only be <code>long</code> or <code>short</code> in the long/short mode.<br>If not specified, users in long/short mode always open new positions.<br>Only applicable to <code>FUTURES</code>/<code>SWAP</code>.                                                                                                                                                                                                                                                                                                                                                          |
 | &gt; tgtCcy           | String           | No       | Defines the unit of the “sz” attribute.<br>Only applicable to instType = SPOT.<br>The valid enumerations are <code>base_ccy</code> and <code>quote_ccy</code>. When not specified, this is equal to <code>base_ccy</code> by default.                                                                                                                                                                                                                                                                                                                                                                                                             |
 | &gt; tradeQuoteCcy    | String           | No       | The quote currency used for trading. Only applicable to SPOT.<br>The default value is the quote currency of the instId, for example: for <code>BTC-USD</code>, the default is <code>USD</code>.                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| acctAlloc             | Array of objects | No       | Account level allocation of the RFQ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| &gt; acct             | String           | Yes      | The name of the allocated account of the RFQ.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| &gt; legs             | Array of objects | Yes      | The allocated legs of the account.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| &gt;&gt; sz           | String           | Yes      | The allocated size of each leg                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| &gt;&gt; instId       | String           | Yes      | The Instrument ID of each leg. Example : "BTC-USDT-SWAP"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| &gt;&gt; tdMode       | String           | No       | Trade mode                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| &gt;&gt; ccy          | String           | No       | Margin currency                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| &gt;&gt; posSide      | String           | No       | Position side                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 #### Response Parameters
 
@@ -166,6 +174,54 @@ To learn more, please visit
 | &gt;&gt; posSide           | String           | Position side.<br>The default is <code>net</code> in the net mode. If not specified, return "", which is equivalent to net.<br>It can only be <code>long</code> or <code>short</code> in the long/short mode. If not specified, return "", which corresponds to the direction that opens new positions for the trade (buy =&gt; long, sell =&gt; short).<br>Only applicable to FUTURES/SWAP. |
 | &gt;&gt; tgtCcy            | String           | Defines the unit of the “sz” attribute.<br>Only applicable to instType = SPOT.<br>The valid enumerations are <code>base_ccy</code> and <code>quote_ccy</code>. When not specified this is equal to <code>base_ccy</code> by default.                                                                                                                                                         |
 | &gt;&gt; tradeQuoteCcy     | String           | The quote currency used for trading. Only applicable to SPOT.<br>The default value is the quote currency of the instId, for example: for <code>BTC-USD</code>, the default is <code>USD</code>.                                                                                                                                                                                              |
+| &gt; groupId               | String           | Group RFQ ID<br>Only applicable to group RFQ, return "" for normal RFQ                                                                                                                                                                                                                                                                                                                       |
+| &gt; acctAlloc             | Array of objects | Account level allocation of the RFQ                                                                                                                                                                                                                                                                                                                                                          |
+| &gt;&gt; acct              | String           | The name of the allocated account of the RFQ                                                                                                                                                                                                                                                                                                                                                 |
+| &gt;&gt; sCode             | String           | The code of the event execution result, 0 means success                                                                                                                                                                                                                                                                                                                                      |
+| &gt;&gt; sMsg              | String           | Rejection message if the request is unsuccessful                                                                                                                                                                                                                                                                                                                                             |
+| &gt;&gt; legs              | Array of objects | The allocated legs of the account                                                                                                                                                                                                                                                                                                                                                            |
+| &gt;&gt;&gt; instId        | String           | Instrument ID                                                                                                                                                                                                                                                                                                                                                                                |
+| &gt;&gt;&gt; sz            | String           | The calculated size of each leg of allocated account                                                                                                                                                                                                                                                                                                                                         |
+| &gt;&gt;&gt; tdMode        | String           | Trade mode                                                                                                                                                                                                                                                                                                                                                                                   |
+| &gt;&gt;&gt; ccy           | String           | Margin currency                                                                                                                                                                                                                                                                                                                                                                              |
+| &gt;&gt;&gt; posSide       | String           | Position side                                                                                                                                                                                                                                                                                                                                                                                |
+
+Group RFQ introduction
+
+1\. Only a master account can conduct group RFQ and the available scope of
+allocated subaccounts is its normal and managed subaccounts.  
+2\. Users will pass in acctAlloc request parameter to indicate the details of
+group RFQ account allocation, account name, instrument ID, allocated size, etc.
+master account is also allowed and should be indicated as "0". For tdMode, ccy
+and posSide fields, they will inherit the system default value if you leave them
+empty.  
+3\. Add groupId, acctAlloc as a new response parameter.  
+4\. The upper limit of the number of allocated subaccounts is 10. You will
+receive error code 70516 if you exceed the upper limit.  
+5\. For each symbol, the total size of RFQ legs in all accounts should be equal
+to its combined amount in the group RFQ. If not, you will receive error
+code 70514.  
+6\. For each sub-account, the ratio of a leg's size to the group RFQ must be the
+same across all symbols. If not, you will receive error code 70515. Here is an
+example:  
+    1. Parent RFQ legs  
+        1. Symbol: BTC-USDT, size: 50, symbol: ETH-USDT, size: 100  
+    2. Child RFQ legs, happy case  
+        1. Acct1: symbol: BTC-USDT, size: 30, symbol: ETH-USDT, size: 60 (ratio:
+0.6)  
+        2. Acct2: symbol: BTC-USDT, size: 20, symbol: ETH-USDT, size: 40 (ratio:
+0.4)  
+    3. Child RFQ legs, bad case  
+        1. Acct1: symbol: BTC-USDT, size: 30, symbol: ETH-USDT, size: 50  
+        2. Acct2: symbol: BTC-USDT, size: 20, symbol: ETH-USDT, size: 50  
+        3. The total size is equal. But the ratio is not equal for different
+legs per subaccount.  
+7\. For allowPartialExecution field, it will be ignored even though users pass
+it in. For a group RFQ, allowPartialExecution will always be true, since taker
+can not determine whether the RFQ can be partially or fully filled if any
+subaccount fails. Thus, makers should regard it as a RFQ that can be partially
+filled.  
+8\. Group RFQ will not be created if any subaccount fails.
 
 ---
 
@@ -299,28 +355,49 @@ Executes a Quote. It is only used by the creator of the RFQ
 
 #### Response Parameters
 
-| Parameter        | Type             | Description                                                                                                                                         |
-| ---------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| code             | String           | The result code, <code>0</code> means success.                                                                                                      |
-| msg              | String           | The error message, not empty if the code is not 0.                                                                                                  |
-| data             | Array of objects | Array of objects containing the results                                                                                                             |
-| &gt; cTime       | String           | The execution time for the trade. Unix timestamp in milliseconds.                                                                                   |
-| &gt; rfqId       | String           | RFQ ID.                                                                                                                                             |
-| &gt; clRfqId     | String           | Client-supplied RFQ ID. This attribute is treated as client sensitive information. It will not be exposed to the Maker, only return empty string.   |
-| &gt; quoteId     | String           | Quote ID.                                                                                                                                           |
-| &gt; clQuoteId   | String           | Client-supplied Quote ID. This attribute is treated as client sensitive information. It will not be exposed to the Taker, only return empty string. |
-| &gt; blockTdId   | String           | Block trade ID.                                                                                                                                     |
-| &gt; tag         | String           | RFQ tag.                                                                                                                                            |
-| &gt; tTraderCode | String           | A unique identifier of the taker. Empty if the anonymous parameter of the RFQ is set to be <code>true</code>.                                       |
-| &gt; mTraderCode | String           | A unique identifier of the maker. Empty if the anonymous parameter of the Quote is set to be <code>true</code>.                                     |
-| &gt; legs        | Array of objects | Legs of trade                                                                                                                                       |
-| &gt;&gt; instId  | String           | Instrument ID, e.g. BTC-USDT-SWAP                                                                                                                   |
-| &gt;&gt; px      | String           | The price the leg executed                                                                                                                          |
-| &gt;&gt; sz      | String           | Size of the leg in contracts or spot.                                                                                                               |
-| &gt;&gt; side    | String           | The direction of the leg from the Takers perspective. Valid value can be buy or sell.                                                               |
-| &gt;&gt; fee     | String           | Fee for the individual leg.<br>Negative fee represents the user transaction fee charged by the platform. Positive fee represents rebate.            |
-| &gt;&gt; feeCcy  | String           | Fee currency. To be read in conjunction with fee                                                                                                    |
-| &gt;&gt; tradeId | String           | Last traded ID.                                                                                                                                     |
+| Parameter            | Type             | Description                                                                                                                                         |
+| -------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| code                 | String           | The result code, <code>0</code> means success.                                                                                                      |
+| msg                  | String           | The error message, not empty if the code is not 0.                                                                                                  |
+| data                 | Array of objects | Array of objects containing the results                                                                                                             |
+| &gt; cTime           | String           | The execution time for the trade. Unix timestamp in milliseconds.                                                                                   |
+| &gt; rfqId           | String           | RFQ ID.                                                                                                                                             |
+| &gt; clRfqId         | String           | Client-supplied RFQ ID. This attribute is treated as client sensitive information. It will not be exposed to the Maker, only return empty string.   |
+| &gt; quoteId         | String           | Quote ID.                                                                                                                                           |
+| &gt; clQuoteId       | String           | Client-supplied Quote ID. This attribute is treated as client sensitive information. It will not be exposed to the Taker, only return empty string. |
+| &gt; blockTdId       | String           | Block trade ID.                                                                                                                                     |
+| &gt; tag             | String           | RFQ tag.                                                                                                                                            |
+| &gt; tTraderCode     | String           | A unique identifier of the taker. Empty if the anonymous parameter of the RFQ is set to be <code>true</code>.                                       |
+| &gt; mTraderCode     | String           | A unique identifier of the maker. Empty if the anonymous parameter of the Quote is set to be <code>true</code>.                                     |
+| &gt; legs            | Array of objects | Legs of trade                                                                                                                                       |
+| &gt;&gt; instId      | String           | Instrument ID, e.g. BTC-USDT-SWAP                                                                                                                   |
+| &gt;&gt; px          | String           | The price the leg executed                                                                                                                          |
+| &gt;&gt; sz          | String           | Size of the leg in contracts or spot.                                                                                                               |
+| &gt;&gt; side        | String           | The direction of the leg from the Takers perspective. Valid value can be buy or sell.                                                               |
+| &gt;&gt; fee         | String           | Fee for the individual leg.<br>Negative fee represents the user transaction fee charged by the platform. Positive fee represents rebate.            |
+| &gt;&gt; feeCcy      | String           | Fee currency. To be read in conjunction with fee                                                                                                    |
+| &gt;&gt; tradeId     | String           | Last traded ID.                                                                                                                                     |
+| &gt; acctAlloc       | Array of objects | Account level allocation of the RFQ                                                                                                                 |
+| &gt;&gt; acct        | String           | The name of the allocated account of the RFQ.                                                                                                       |
+| &gt;&gt; blockTdId   | String           | Block trade ID                                                                                                                                      |
+| &gt;&gt; sCode       | String           | The code of the event execution result, 0 means success                                                                                             |
+| &gt;&gt; sMsg        | String           | Rejection message if the request is unsuccessful                                                                                                    |
+| &gt;&gt; legs        | Array of objects | The allocated legs of the account.                                                                                                                  |
+| &gt;&gt;&gt; instId  | String           | The Instrument ID of each leg. Example : "BTC-USDT-SWAP"                                                                                            |
+| &gt;&gt;&gt; sz      | String           | The size of each account leg is filled.                                                                                                             |
+| &gt;&gt;&gt; fee     | String           | The fee of each account level leg                                                                                                                   |
+| &gt;&gt;&gt; feeCcy  | String           | Fee currency. To be read in conjunction with fee                                                                                                    |
+| &gt;&gt;&gt; tradeId | String           | Last traded ID of each account leg                                                                                                                  |
+
+Group RFQ introduction
+
+1\. Takers are not allowed to partially execuate the quote for group RFQ. You
+will receive error code 70507 if you don't pass in the full leg size.  
+2\. Parent RFQ leg size will be the summation of the filled size of each child
+RFQ leg size while fee should also be the summation.  
+3\. The blockTdId of parent RFQ and the tradeId of parent RFQ legs will be
+emoty. But there will be subaccount breakdown attached with blockTdId and
+tradeId populated.
 
 ---
 
@@ -457,6 +534,11 @@ makers
 | timeInterval   | String | Time window (ms). MMP interval where monitoring is done |
 | frozenInterval | String | Frozen period (ms).                                     |
 | countLimit     | String | Limit in number of execution attempts                   |
+
+Group RFQ introduction
+
+For RFQ makers, the execution attempt of group RFQ will only count once towards
+MMP regardless of how many account allocations involved.
 
 ---
 
@@ -753,6 +835,29 @@ creator or the receiver of the RFQ).
 | &gt;&gt; posSide           | String           | Position side.<br>The default is <code>net</code> in the net mode. If not specified, return "", which is equivalent to net.<br>It can only be <code>long</code> or <code>short</code> in the long/short mode. If not specified, return "", which corresponds to the direction that opens new positions for the trade (buy =&gt; long, sell =&gt; short).<br>Only applicable to <code>FUTURES</code>/<code>SWAP</code>. |
 | &gt;&gt; tgtCcy            | String           | Defines the unit of the “sz” attribute.<br>Only applicable to instType = SPOT.<br>The valid enumerations are base_ccy and quote_ccy. When not specified this is equal to base_ccy by default.                                                                                                                                                                                                                          |
 | &gt;&gt; tradeQuoteCcy     | String           | The quote currency used for trading. Only applicable to SPOT.<br>The default value is the quote currency of the instId, for example: for <code>BTC-USD</code>, the default is <code>USD</code>.                                                                                                                                                                                                                        |
+| &gt; groupId               | String           | Group RFQ ID<br>Only applicable to group RFQ, return "" for normal RFQ                                                                                                                                                                                                                                                                                                                                                 |
+| &gt; acctAlloc             | Array of objects | Account level allocation of the RFQ<br>This is only applicable to the taker.                                                                                                                                                                                                                                                                                                                                           |
+| &gt;&gt; acct              | String           | The name of the allocated account of the RFQ.                                                                                                                                                                                                                                                                                                                                                                          |
+| &gt;&gt; legs              | Array of objects | The allocated legs of the account.                                                                                                                                                                                                                                                                                                                                                                                     |
+| &gt;&gt;&gt; instId        | String           | The Instrument ID of each leg. Example : "BTC-USDT-SWAP"                                                                                                                                                                                                                                                                                                                                                               |
+| &gt;&gt;&gt; sz            | String           | The allocated size of each leg.                                                                                                                                                                                                                                                                                                                                                                                        |
+| &gt;&gt;&gt; tdMode        | String           | Trade mode                                                                                                                                                                                                                                                                                                                                                                                                             |
+| &gt;&gt;&gt; ccy           | String           | Margin currency                                                                                                                                                                                                                                                                                                                                                                                                        |
+| &gt;&gt;&gt; posSide       | String           | Position side                                                                                                                                                                                                                                                                                                                                                                                                          |
+
+Group RFQ introduction
+
+1\. allowPartialExecution field is always true for group RFQ for taker and
+maker.  
+2\. Add a new response parameter acctAlloc with all account allocation the same
+as the initial request, but it is only applicable to takers.  
+3\. Add a new response parameter groupId, applicable to both takers and
+makers.  
+4\. For group RFQ state,  
+    1. if any allocated account is pending execution, then pending_fill  
+    2. otherwise,  
+        1. if any allocated account is filled, then filled  
+        2. if all allocated accounts are failed, then failed
 
 ---
 
@@ -874,6 +979,33 @@ creator or the receiver).
 | &gt;&gt; feeCcy        | String           | Fee currency                                                                                                                                                                                    |
 | &gt;&gt; tradeId       | String           | Last traded ID.                                                                                                                                                                                 |
 | &gt;&gt; tradeQuoteCcy | String           | The quote currency used for trading. Only applicable to SPOT.<br>The default value is the quote currency of the instId, for example: for <code>BTC-USD</code>, the default is <code>USD</code>. |
+| &gt; acctAlloc         | Array of objects | Applicable to both taker, maker                                                                                                                                                                 |
+| &gt;&gt; blockTdId     | String           | Block trade ID                                                                                                                                                                                  |
+| &gt;&gt; errorCode     | String           | Error code for unsuccessful trades.<br>It is "0" for successful trade.                                                                                                                          |
+| &gt;&gt; acct          | String           | The name of the allocated account of the RFQ<br>Only applicable to taker, return "" to makers                                                                                                   |
+| &gt;&gt; legs          | Array of objects | The allocated legs of the account.                                                                                                                                                              |
+| &gt;&gt;&gt; instId    | String           | The Instrument ID of each leg. Example : "BTC-USDT-SWAP"                                                                                                                                        |
+| &gt;&gt;&gt; sz        | String           | Filled size                                                                                                                                                                                     |
+| &gt;&gt;&gt; tradeId   | String           | Trade ID                                                                                                                                                                                        |
+| &gt;&gt;&gt; fee       | String           | Fee                                                                                                                                                                                             |
+| &gt;&gt;&gt; feeCcy    | String           | Fee currency                                                                                                                                                                                    |
+
+Group RFQ introduction
+
+1\. This endpoint is at parent RFQ level and contains account allocation. For
+parent RFQ, we should return the actual executed size, i.e. failed execution
+size should not be included in the parent RFQ level.  
+2\. For account allocation, we should include both filled and failed child RFQ
+but add an errorCode to indicate whether a child RFQ is filled.  
+3\. Trade results will only be returned to group RFQ creator. Allocated
+subaccounts and MSAs will not see trade results. Allocated accounts are expected
+to get these trades through trading bills.  
+4\. Trades data will only be returned after all child RFQs are execuated.  
+5\. For parent RFQ isSuccessful field,  
+    1. it will return true if any child RFQs are filled  
+    2. otherwise, if all child RFQ fails, it will return false  
+6\. Parent RFQ blockTdId or legs tradeId will be empty. However, account
+allocation breakdown will be offered and blockTdId/tradeId will be attached.
 
 ---
 
@@ -976,6 +1108,14 @@ the block trade execution.
 | &gt;&gt; side    | String           | The direction of the leg from the Takers perspective. Valid value can be buy or sell.                                                                  |
 | &gt;&gt; tradeId | String           | Last traded ID.                                                                                                                                        |
 
+Group RFQ introduction
+
+1\. Add new response parameter groupId, facilitating clients to map subaccount
+execution to group RFQ. Only applicable to group RFQ, return "" for normal
+RFQ.  
+2\. Data return by this endpoint should be at \*\*parent RFQ level\*\*
+regardless of the subaccounts allocation. blockTdId and tradeId will be empty.
+
 ---
 
 ### Get public single-leg transactions of block trades [🔗](https://www.okx.com/docs-v5/en/#block-trading-rest-api-get-public-single-leg-transactions-of-block-trades "Direct link to: https://www.okx.com/docs-v5/en/#block-trading-rest-api-get-public-single-leg-transactions-of-block-trades")
@@ -1014,6 +1154,14 @@ execution.
 | ts            | String   | Trade time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>.                                                                    |
 
 Up to 500 most recent historical public transaction data can be retrieved.
+
+Group RFQ introduction
+
+1\. Add new response parameter groupId, facilitating clients to map subaccount
+execution to group RFQ. Only applicable to group RFQ, return "" for normal
+RFQ.  
+2\. Data return by this endpoint should be at \*\*child RFQ execution level\*\*
+but split into a single leg. blockTdId and tradeId will be populated.
 
 ---
 
@@ -1075,9 +1223,32 @@ user sends or receives an RFQ.
 | &gt;&gt; posSide           | String           | Position side.<br>The default is <code>net</code> in the net mode. If not specified, return "", which is equivalent to net.<br>It can only be <code>long</code> or <code>short</code> in the long/short mode. If not specified, return "", which corresponds to the direction that opens new positions for the trade (buy =&gt; long, sell =&gt; short).<br>Only applicable to <code>FUTURES</code>/<code>SWAP</code>. |
 | &gt;&gt; tgtCcy            | String           | Defines the unit of the “sz” attribute.<br>Only applicable to instType = SPOT.<br>The valid enumerations are <code>base_ccy</code> and <code>quote_ccy</code>. When not specified this is equal to <code>base_ccy</code> by default.                                                                                                                                                                                   |
 | &gt;&gt; tradeQuoteCcy     | String           | The quote currency used for trading. Only applicable to SPOT.<br>The default value is the quote currency of the instId, for example: for <code>BTC-USD</code>, the default is <code>USD</code>.                                                                                                                                                                                                                        |
+| &gt; groupId               | String           | Group RFQ ID<br>Only applicable to group RFQ, return "" for normal RFQ                                                                                                                                                                                                                                                                                                                                                 |
+| &gt; acctAlloc             | Array of objects | Account level allocation of the RFQ<br>This is only applicable to the taker.                                                                                                                                                                                                                                                                                                                                           |
+| &gt;&gt; acct              | String           | The name of the allocated account of the RFQ.                                                                                                                                                                                                                                                                                                                                                                          |
+| &gt;&gt; legs              | Array of objects | The allocated legs of the account.                                                                                                                                                                                                                                                                                                                                                                                     |
+| &gt;&gt;&gt; instId        | String           | The Instrument ID of each leg. Example : "BTC-USDT-SWAP"                                                                                                                                                                                                                                                                                                                                                               |
+| &gt;&gt;&gt; sz            | String           | The allocated size of each leg.                                                                                                                                                                                                                                                                                                                                                                                        |
+| &gt;&gt;&gt; tdMode        | String           | Trade mode                                                                                                                                                                                                                                                                                                                                                                                                             |
+| &gt;&gt;&gt; ccy           | String           | Margin currency                                                                                                                                                                                                                                                                                                                                                                                                        |
+| &gt;&gt;&gt; posSide       | String           | Position side                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 state: pending_fill is a kind of moment state, and this channel doesn't update
 it.
+
+Group RFQ introduction
+
+1\. allowPartialExecution field is always true for group RFQ for taker and
+maker.  
+2\. Add a new response parameter acctAlloc with all account allocation the same
+as the initial request, but it is only applicable to takers.  
+3\. Add a new response parameter groupId, applicable to both takers and
+makers.  
+4\. For group RFQ state,  
+        1. if any allocated account is pending execution, then pending_fill  
+        2. otherwise,  
+                1. if any allocated account is filled, then filled  
+                2. if all allocated accounts are failed, then failed
 
 ---
 
@@ -1177,32 +1348,59 @@ that the user is a counterparty for.
 
 #### Push data parameters
 
-| **Parameters**    | **Types**        | **Description**                                                                                                                                                                                                                      |
-| ----------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| arg               | Object           | Successfully subscribed channel                                                                                                                                                                                                      |
-| &gt; channel      | String           | Channel name                                                                                                                                                                                                                         |
-| &gt; uid          | String           | User Identifier                                                                                                                                                                                                                      |
-| data              | Array of objects | Subscribed data                                                                                                                                                                                                                      |
-| &gt; cTime        | String           | The time the trade was executed. Unix timestamp in milliseconds.                                                                                                                                                                     |
-| &gt; rfqId        | String           | RFQ ID.                                                                                                                                                                                                                              |
-| &gt; clRfqId      | String           | Client-supplied RFQ ID. This attribute is treated as client sensitive information. It will not be exposed to the Maker, just return empty string "" for Maker.                                                                       |
-| &gt; quoteId      | String           | Quote ID.                                                                                                                                                                                                                            |
-| &gt; clQuoteId    | String           | Client-supplied Quote ID. This attribute is treated as client sensitive information. It will not be exposed to the Taker, just return empty string "" for Taker.                                                                     |
-| &gt; blockTdId    | String           | Block trade ID.                                                                                                                                                                                                                      |
-| &gt; tag          | String           | Trade tag. The block trade will have the tag of the RFQ or Quote it corresponds to.                                                                                                                                                  |
-| &gt; tTraderCode  | String           | A unique identifier of the Taker. Empty If anonymous mode of RFQ is <code>True</code>.                                                                                                                                               |
-| &gt; mTraderCode  | String           | A unique identifier of the Maker. Empty If anonymous mode of Quote is <code>True</code>.                                                                                                                                             |
-| &gt; isSuccessful | Boolean          | Whether the trade is filled successfully                                                                                                                                                                                             |
-| &gt; errorCode    | String           | Error code for unsuccessful trades.<br>It is "" for successful trade.                                                                                                                                                                |
-| &gt; legs         | Array of objects | Legs of trade                                                                                                                                                                                                                        |
-| &gt;&gt; instId   | String           | Instrument ID, e.g. BTC-USDT-SWAP                                                                                                                                                                                                    |
-| &gt;&gt; px       | String           | The price the leg executed                                                                                                                                                                                                           |
-| &gt;&gt; sz       | String           | Size of the leg.                                                                                                                                                                                                                     |
-| &gt;&gt; side     | String           | The direction of the leg. Valid value can be buy or sell.                                                                                                                                                                            |
-| &gt;&gt; tgtCcy   | String           | Defines the unit of the “sz” attribute.<br>Only applicable to instType = SPOT.<br>The valid enumerations are <code>base_ccy</code> and <code>quote_ccy</code>. When not specified this is equal to <code>base_ccy</code> by default. |
-| &gt;&gt; fee      | String           | Fee. Negative number represents the user transaction fee charged by the platform. Positive fee represents rebate.                                                                                                                    |
-| &gt;&gt; feeCcy   | String           | Fee currency                                                                                                                                                                                                                         |
-| &gt;&gt; tradeId  | String           | Last traded ID.                                                                                                                                                                                                                      |
+| **Parameters**       | **Types**        | **Description**                                                                                                                                                                                                                      |
+| -------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| arg                  | Object           | Successfully subscribed channel                                                                                                                                                                                                      |
+| &gt; channel         | String           | Channel name                                                                                                                                                                                                                         |
+| &gt; uid             | String           | User Identifier                                                                                                                                                                                                                      |
+| data                 | Array of objects | Subscribed data                                                                                                                                                                                                                      |
+| &gt; cTime           | String           | The time the trade was executed. Unix timestamp in milliseconds.                                                                                                                                                                     |
+| &gt; rfqId           | String           | RFQ ID.                                                                                                                                                                                                                              |
+| &gt; clRfqId         | String           | Client-supplied RFQ ID. This attribute is treated as client sensitive information. It will not be exposed to the Maker, just return empty string "" for Maker.                                                                       |
+| &gt; quoteId         | String           | Quote ID.                                                                                                                                                                                                                            |
+| &gt; clQuoteId       | String           | Client-supplied Quote ID. This attribute is treated as client sensitive information. It will not be exposed to the Taker, just return empty string "" for Taker.                                                                     |
+| &gt; blockTdId       | String           | Block trade ID.                                                                                                                                                                                                                      |
+| &gt; tag             | String           | Trade tag. The block trade will have the tag of the RFQ or Quote it corresponds to.                                                                                                                                                  |
+| &gt; tTraderCode     | String           | A unique identifier of the Taker. Empty If anonymous mode of RFQ is <code>True</code>.                                                                                                                                               |
+| &gt; mTraderCode     | String           | A unique identifier of the Maker. Empty If anonymous mode of Quote is <code>True</code>.                                                                                                                                             |
+| &gt; isSuccessful    | Boolean          | Whether the trade is filled successfully                                                                                                                                                                                             |
+| &gt; errorCode       | String           | Error code for unsuccessful trades.<br>It is "" for successful trade.                                                                                                                                                                |
+| &gt; legs            | Array of objects | Legs of trade                                                                                                                                                                                                                        |
+| &gt;&gt; instId      | String           | Instrument ID, e.g. BTC-USDT-SWAP                                                                                                                                                                                                    |
+| &gt;&gt; px          | String           | The price the leg executed                                                                                                                                                                                                           |
+| &gt;&gt; sz          | String           | Size of the leg.                                                                                                                                                                                                                     |
+| &gt;&gt; side        | String           | The direction of the leg. Valid value can be buy or sell.                                                                                                                                                                            |
+| &gt;&gt; tgtCcy      | String           | Defines the unit of the “sz” attribute.<br>Only applicable to instType = SPOT.<br>The valid enumerations are <code>base_ccy</code> and <code>quote_ccy</code>. When not specified this is equal to <code>base_ccy</code> by default. |
+| &gt;&gt; fee         | String           | Fee. Negative number represents the user transaction fee charged by the platform. Positive fee represents rebate.                                                                                                                    |
+| &gt;&gt; feeCcy      | String           | Fee currency                                                                                                                                                                                                                         |
+| &gt;&gt; tradeId     | String           | Last traded ID.                                                                                                                                                                                                                      |
+| &gt; acctAlloc       | Array of objects | Applicable to both taker, maker                                                                                                                                                                                                      |
+| &gt;&gt; blockTdId   | String           | Block trade ID                                                                                                                                                                                                                       |
+| &gt;&gt; errorCode   | String           | Error code for unsuccessful trades.It is "0" for successful trade.                                                                                                                                                                   |
+| &gt;&gt; acct        | String           | The name of the allocated account of the RFQOnly applicable to taker, return "" to makers                                                                                                                                            |
+| &gt;&gt; legs        | Array of objects | The allocated legs of the account.                                                                                                                                                                                                   |
+| &gt;&gt;&gt; instId  | String           | The Instrument ID of each leg. Example : "BTC-USDT-SWAP"                                                                                                                                                                             |
+| &gt;&gt;&gt; sz      | String           | Filled size                                                                                                                                                                                                                          |
+| &gt;&gt;&gt; tradeId | String           | Trade ID                                                                                                                                                                                                                             |
+| &gt;&gt;&gt; fee     | String           | Fee                                                                                                                                                                                                                                  |
+| &gt;&gt;&gt; feeCcy  | String           | Fee currency                                                                                                                                                                                                                         |
+
+Group RFQ introduction
+
+1\. This endpoint is at parent RFQ level and contains account allocation. For
+parent RFQ, we should return the actual executed size, i.e. failed execution
+size should not be included in the parent RFQ level.  
+2\. For account allocation, we should include both filled and failed child RFQ
+but add an errorCode to indicate whether a child RFQ is filled.  
+3\. Trade results will only be returned to group RFQ creator. Allocated
+subaccounts and MSAs will not see trade results. Allocated accounts are expected
+to get these trades through trading bills.  
+4\. Trades data will only be returned after all child RFQs are execuated.  
+5\. For parent RFQ isSuccessful field,  
+        1. it will return true if any child RFQs are filled  
+        2. otherwise, if all child RFQ fails, it will return false  
+6\. Parent RFQ blockTdId or legs tradeId will be empty. However, account
+allocation breakdown will be offered and tradeId will be attached.
 
 ---
 
@@ -1252,6 +1450,15 @@ the block trade execution.
 | &gt;&gt; sz      | String           | Trade quantity<br>For spot trading, the unit is base currency<br>For <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>, the unit is contract. |
 | &gt;&gt; side    | String           | The direction of the leg from the Takers perspective. Valid value can be <code>buy</code> or <code>sell</code>.                                        |
 | &gt;&gt; tradeId | String           | Last traded ID.                                                                                                                                        |
+| &gt; groupId     | String           | Group RFQ ID<br>Only applicable to group RFQ, return "" for normal RFQ                                                                                 |
+
+Group RFQ introduction
+
+1\. Add new response parameter groupId, facilitating clients to map subaccount
+execution to group RFQ. Only applicable to group RFQ, return "" for normal
+RFQ.  
+2\. Data return by this endpoint should be at \*\*parent RFQ level\*\*
+regardless of the subaccounts allocation. blockTdId and tradeId will be empty.
 
 ---
 
@@ -1306,6 +1513,14 @@ the block trade execution.
 | &gt; idxPx     | String           | Index price<br>Applicable to <code>FUTURES</code>, <code>SWAP</code>, <code>OPTION</code>                                                              |
 | &gt; markPx    | String           | Mark price<br>Applicable to <code>FUTURES</code>, <code>SWAP</code>, <code>OPTION</code>                                                               |
 | &gt; ts        | String           | Filled time, Unix timestamp format in milliseconds, e.g. 1597026383085.                                                                                |
+
+Group RFQ introduction
+
+1\. Add new response parameter groupId, facilitating clients to map subaccount
+execution to group RFQ. Only applicable to group RFQ, return "" for normal
+RFQ.  
+2\. Data return by this endpoint should be at \*\*child RFQ execution level\*\*
+but split into a single leg. blockTdId and tradeId will be populated.
 
 ---
 

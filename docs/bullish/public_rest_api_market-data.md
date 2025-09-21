@@ -47,9 +47,10 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
 
 ### Parameters
 
-| Name       | In    | Type                                            | Required | Description                            |
-| ---------- | ----- | ----------------------------------------------- | -------- | -------------------------------------- |
-| marketType | query | [MarketTypeAsString](#schemamarkettypeasstring) | false    | Market Types to filter markets against |
+| Name       | In    | Type                                            | Required | Description                                                                                     |
+| ---------- | ----- | ----------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------- |
+| marketType | query | [MarketTypeAsString](#schemamarkettypeasstring) | false    | Market Types to filter markets against                                                          |
+| optionType | query | [OptionTypeAsString](#schemaoptiontypeasstring) | false    | Option Type to filter markets against. If this is present, only Option Markets will be returned |
 
 #### Enumerated Values
 
@@ -58,6 +59,9 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
 | marketType | SPOT         |
 | marketType | PERPETUAL    |
 | marketType | DATED_FUTURE |
+| marketType | OPTION       |
+| optionType | CALL         |
+| optionType | PUT          |
 
 > Example responses
 
@@ -125,8 +129,8 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         "allOf": [
           {
             "type": "string",
-            "description": "market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market",
-            "example": "BTCUSDC"
+            "description": "market symbol. Eg `BTC-USDC-20241004-70000-C` for OPTION markets.",
+            "example": "BTC-USDC-20241004-70000-C"
           }
         ]
       },
@@ -218,7 +222,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         "example": 8
       },
       "priceBuffer": {
-        "description": "buffer range of limit price from the last traded price.",
+        "description": "buffer range of limit price from the last traded price. Not applicable for `Option` markets",
         "type": "string",
         "example": 0.3
       },
@@ -298,12 +302,12 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         ]
       },
       "liquidityTickSize": {
-        "description": "liquidity tick size.",
+        "description": "liquidity tick size. Not applicable for `Option` markets",
         "type": "string",
         "example": "100.0000"
       },
       "liquidityPrecision": {
-        "description": "liquidity precision.",
+        "description": "liquidity precision. Not applicable for `Option` markets",
         "type": "integer",
         "example": 4
       },
@@ -325,7 +329,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         "example": "0.00000001"
       },
       "makerMinLiquidityAddition": {
-        "description": "minimum amount required to invest liquidity to market.",
+        "description": "minimum amount required to invest liquidity to market. Not applicable for `Option` markets",
         "type": "string",
         "example": "5000"
       },
@@ -335,7 +339,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
           "allOf": [
             {
               "type": "string",
-              "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+              "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MKT\"` and `\"STOP_LIMIT\"` are not applicable for Options",
               "example": "LMT"
             }
           ]
@@ -373,12 +377,12 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         "example": true
       },
       "liquidityInvestEnabled": {
-        "description": "able to invest liquidity to market.",
+        "description": "able to invest liquidity to market. Not applicable for `Option` markets",
         "type": "boolean",
         "example": true
       },
       "liquidityWithdrawEnabled": {
-        "description": "able to withdraw liquidity from market.",
+        "description": "able to withdraw liquidity from market. Not applicable for `Option` markets",
         "type": "boolean",
         "example": true
       },
@@ -388,7 +392,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         "example": 1
       },
       "feeTiers": {
-        "description": "all available fee tiers.",
+        "description": "all available fee tiers. Not applicable for `Option` markets",
         "type": "array",
         "minItems": 0,
         "items": {
@@ -431,8 +435,8 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         "allOf": [
           {
             "type": "string",
-            "description": "market type can have the following string values `\"SPOT\"`, `\"PERPETUAL\"`, `\"DATED_FUTURE\"`",
-            "enum": ["SPOT", "PERPETUAL", "DATED_FUTURE"],
+            "description": "market type can have the following string values `\"SPOT\"`, `\"PERPETUAL\"`, `\"DATED_FUTURE\"`, `\"OPTION\"`",
+            "enum": ["SPOT", "PERPETUAL", "DATED_FUTURE", "OPTION"],
             "example": "SPOT"
           }
         ]
@@ -466,6 +470,27 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         "description": "denotes the time when the market expires in ISO 8601 with millisecond format as string",
         "type": "string",
         "example": "2024-10-04T08:00:00.000Z"
+      },
+      "optionStrikePrice": {
+        "description": "The price at which the option can be exercised upon expiry.",
+        "type": "string",
+        "example": "70000.0000"
+      },
+      "optionType": {
+        "description": "Specifies if it’s a call (right to buy) or a put (right to sell)",
+        "allOf": [
+          {
+            "description": "Type of Option market",
+            "example": "CALL",
+            "type": "string",
+            "enum": ["CALL", "PUT"]
+          }
+        ]
+      },
+      "premiumCapRatio": {
+        "description": "A cap that is set on the underlying asset's movement as part of the premium that limits the option buyer's profit.",
+        "type": "string",
+        "example": "0.10"
       }
     }
   }
@@ -489,7 +514,7 @@ Status Code **200**
 | ------------------------------- | ----------------------------------------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | _anonymous_                     | [[Market](#schemamarket)]                       | false    | none         | none                                                                                                                                                                                                     |
 | » marketId                      | [MarketID](#schemamarketid)                     | true     | none         | unique market ID                                                                                                                                                                                         |
-| » symbol                        | [MarketSymbol](#schemamarketsymbol)             | true     | none         | market symbol                                                                                                                                                                                            |
+| » symbol                        | [OptionMarketSymbol](#schemaoptionmarketsymbol) | true     | none         | market symbol                                                                                                                                                                                            |
 | » baseSymbol                    | [AssetSymbol](#schemaassetsymbol)               | true     | none         | base asset symbol (only applies to spot market)                                                                                                                                                          |
 | » underlyingBaseSymbol          | [AssetSymbol](#schemaassetsymbol)               | false    | none         | underlying base asset symbol (only applies to derivative market)                                                                                                                                         |
 | » quoteSymbol                   | [AssetSymbol](#schemaassetsymbol)               | true     | none         | quote asset symbol (only applies to spot market)                                                                                                                                                         |
@@ -501,7 +526,7 @@ Status Code **200**
 | » pricePrecision                | integer                                         | true     | none         | number of decimal digits 'after the dot' for price                                                                                                                                                       |
 | » quantityPrecision             | integer                                         | true     | none         | number of decimal digits 'after the dot' for quantity                                                                                                                                                    |
 | » costPrecision                 | integer                                         | true     | none         | number of decimal digits 'after the dot' for cost, `price * quantity`                                                                                                                                    |
-| » priceBuffer                   | string                                          | true     | none         | buffer range of limit price from the last traded price.                                                                                                                                                  |
+| » priceBuffer                   | string                                          | true     | none         | buffer range of limit price from the last traded price. Not applicable for `Option` markets                                                                                                              |
 | » minQuantityLimit              | [AssetValue](#schemaassetvalue)                 | true     | none         | order quantity should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                                                                        |
 | » maxQuantityLimit              | [AssetValue](#schemaassetvalue)                 | true     | none         | order quantity should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                                                                        |
 | » maxPriceLimit                 | [AssetValue](#schemaassetvalue)                 | true     | none         | order price should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                                                                           |
@@ -510,12 +535,12 @@ Status Code **200**
 | » minCostLimit                  | [AssetValue](#schemaassetvalue)                 | true     | none         | order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                                                        |
 | » timeZone                      | string                                          | true     | none         | time zone                                                                                                                                                                                                |
 | » tickSize                      | [AssetValue](#schemaassetvalue)                 | true     | none         | tick size, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                             |
-| » liquidityTickSize             | string                                          | true     | none         | liquidity tick size.                                                                                                                                                                                     |
-| » liquidityPrecision            | integer                                         | true     | none         | liquidity precision.                                                                                                                                                                                     |
+| » liquidityTickSize             | string                                          | true     | none         | liquidity tick size. Not applicable for `Option` markets                                                                                                                                                 |
+| » liquidityPrecision            | integer                                         | true     | none         | liquidity precision. Not applicable for `Option` markets                                                                                                                                                 |
 | » makerFee                      | integer                                         | false    | none         | Deprecated and no longer accurate. See `feeGroupId`                                                                                                                                                      |
 | » takerFee                      | integer                                         | false    | none         | Deprecated and no longer accurate. See `feeGroupId`                                                                                                                                                      |
 | » roundingCorrectionFactor      | string                                          | true     | none         | rounding correction factor for market                                                                                                                                                                    |
-| » makerMinLiquidityAddition     | string                                          | true     | none         | minimum amount required to invest liquidity to market.                                                                                                                                                   |
+| » makerMinLiquidityAddition     | string                                          | true     | none         | minimum amount required to invest liquidity to market. Not applicable for `Option` markets                                                                                                               |
 | » orderTypes                    | [allOf]                                         | false    | none         | none                                                                                                                                                                                                     |
 | » spotTradingEnabled            | boolean                                         | true     | none         | spot trading enabled (only applies for Spot markets)                                                                                                                                                     |
 | » marginTradingEnabled          | boolean                                         | true     | none         | margin trading enabled (only applies for Spot markets)                                                                                                                                                   |
@@ -523,10 +548,10 @@ Status Code **200**
 | » createOrderEnabled            | boolean                                         | true     | none         | able to create order                                                                                                                                                                                     |
 | » amendOrderEnabled             | boolean                                         | false    | none         | able to amend order                                                                                                                                                                                      |
 | » cancelOrderEnabled            | boolean                                         | true     | none         | able to cancel order                                                                                                                                                                                     |
-| » liquidityInvestEnabled        | boolean                                         | true     | none         | able to invest liquidity to market.                                                                                                                                                                      |
-| » liquidityWithdrawEnabled      | boolean                                         | true     | none         | able to withdraw liquidity from market.                                                                                                                                                                  |
+| » liquidityInvestEnabled        | boolean                                         | true     | none         | able to invest liquidity to market. Not applicable for `Option` markets                                                                                                                                  |
+| » liquidityWithdrawEnabled      | boolean                                         | true     | none         | able to withdraw liquidity from market. Not applicable for `Option` markets                                                                                                                              |
 | » feeGroupId                    | integer                                         | true     | none         | Identifier to the trade fee assigned to this market. Used with `tradeFeeRate` at [Get Trading Account](#get-/v1/accounts/trading-accounts/-tradingAccountId-)                                            |
-| » feeTiers                      | [allOf]                                         | true     | none         | all available fee tiers.                                                                                                                                                                                 |
+| » feeTiers                      | [allOf]                                         | true     | none         | all available fee tiers. Not applicable for `Option` markets                                                                                                                                             |
 | »» feeTierId                    | [FeeTierId](#schemafeetierid)                   | true     | none         | unique fee tier ID, see [Get Market By Symbol](#get-/v1/markets/-symbol-)                                                                                                                                |
 | »» staticSpreadFee              | string                                          | true     | none         | static spread fee                                                                                                                                                                                        |
 | »» isDislocationEnabled         | boolean                                         | true     | none         | dislocation enabled/disabled                                                                                                                                                                             |
@@ -537,6 +562,9 @@ Status Code **200**
 | » concentrationRiskThresholdUSD | string                                          | true     | none         | open interest notional of an account for a specific derivative contract.                                                                                                                                 |
 | » concentrationRiskPercentage   | string                                          | true     | none         | percentage of the total open interest for a specific derivative contract.                                                                                                                                |
 | » expiryDatetime                | string                                          | true     | none         | denotes the time when the market expires in ISO 8601 with millisecond format as string                                                                                                                   |
+| » optionStrikePrice             | string                                          | false    | none         | The price at which the option can be exercised upon expiry.                                                                                                                                              |
+| » optionType                    | [OptionType](#schemaoptiontype)                 | false    | none         | Specifies if it’s a call (right to buy) or a put (right to sell)                                                                                                                                         |
+| » premiumCapRatio               | string                                          | false    | none         | A cap that is set on the underlying asset's movement as part of the premium that limits the option buyer's profit.                                                                                       |
 
 #### Enumerated Values
 
@@ -545,6 +573,9 @@ Status Code **200**
 | marketType | SPOT         |
 | marketType | PERPETUAL    |
 | marketType | DATED_FUTURE |
+| marketType | OPTION       |
+| optionType | CALL         |
+| optionType | PUT          |
 
 > **Note:** This operation does not require authentication
 
@@ -656,8 +687,8 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       "allOf": [
         {
           "type": "string",
-          "description": "market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market",
-          "example": "BTCUSDC"
+          "description": "market symbol. Eg `BTC-USDC-20241004-70000-C` for OPTION markets.",
+          "example": "BTC-USDC-20241004-70000-C"
         }
       ]
     },
@@ -749,7 +780,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       "example": 8
     },
     "priceBuffer": {
-      "description": "buffer range of limit price from the last traded price.",
+      "description": "buffer range of limit price from the last traded price. Not applicable for `Option` markets",
       "type": "string",
       "example": 0.3
     },
@@ -829,12 +860,12 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       ]
     },
     "liquidityTickSize": {
-      "description": "liquidity tick size.",
+      "description": "liquidity tick size. Not applicable for `Option` markets",
       "type": "string",
       "example": "100.0000"
     },
     "liquidityPrecision": {
-      "description": "liquidity precision.",
+      "description": "liquidity precision. Not applicable for `Option` markets",
       "type": "integer",
       "example": 4
     },
@@ -856,7 +887,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       "example": "0.00000001"
     },
     "makerMinLiquidityAddition": {
-      "description": "minimum amount required to invest liquidity to market.",
+      "description": "minimum amount required to invest liquidity to market. Not applicable for `Option` markets",
       "type": "string",
       "example": "5000"
     },
@@ -866,7 +897,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
         "allOf": [
           {
             "type": "string",
-            "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+            "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MKT\"` and `\"STOP_LIMIT\"` are not applicable for Options",
             "example": "LMT"
           }
         ]
@@ -904,12 +935,12 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       "example": true
     },
     "liquidityInvestEnabled": {
-      "description": "able to invest liquidity to market.",
+      "description": "able to invest liquidity to market. Not applicable for `Option` markets",
       "type": "boolean",
       "example": true
     },
     "liquidityWithdrawEnabled": {
-      "description": "able to withdraw liquidity from market.",
+      "description": "able to withdraw liquidity from market. Not applicable for `Option` markets",
       "type": "boolean",
       "example": true
     },
@@ -919,7 +950,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       "example": 1
     },
     "feeTiers": {
-      "description": "all available fee tiers.",
+      "description": "all available fee tiers. Not applicable for `Option` markets",
       "type": "array",
       "minItems": 0,
       "items": {
@@ -962,8 +993,8 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       "allOf": [
         {
           "type": "string",
-          "description": "market type can have the following string values `\"SPOT\"`, `\"PERPETUAL\"`, `\"DATED_FUTURE\"`",
-          "enum": ["SPOT", "PERPETUAL", "DATED_FUTURE"],
+          "description": "market type can have the following string values `\"SPOT\"`, `\"PERPETUAL\"`, `\"DATED_FUTURE\"`, `\"OPTION\"`",
+          "enum": ["SPOT", "PERPETUAL", "DATED_FUTURE", "OPTION"],
           "example": "SPOT"
         }
       ]
@@ -997,6 +1028,518 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       "description": "denotes the time when the market expires in ISO 8601 with millisecond format as string",
       "type": "string",
       "example": "2024-10-04T08:00:00.000Z"
+    },
+    "optionStrikePrice": {
+      "description": "The price at which the option can be exercised upon expiry.",
+      "type": "string",
+      "example": "70000.0000"
+    },
+    "optionType": {
+      "description": "Specifies if it’s a call (right to buy) or a put (right to sell)",
+      "allOf": [
+        {
+          "description": "Type of Option market",
+          "example": "CALL",
+          "type": "string",
+          "enum": ["CALL", "PUT"]
+        }
+      ]
+    },
+    "premiumCapRatio": {
+      "description": "A cap that is set on the underlying asset's movement as part of the premium that limits the option buyer's profit.",
+      "type": "string",
+      "example": "0.10"
+    }
+  }
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description           | Schema                  |
+| ------ | -------------------------------------------------------------------------- | --------------------- | ----------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | OK                    | [Market](#schemamarket) |
+| 404    | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)             | Not Found             | None                    |
+| 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None                    |
+| 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None                    |
+
+> **Note:** This operation does not require authentication
+
+## market-data-get-historical-market
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json"
+}
+
+fetch(
+  "https://api.exchange.bullish.com/trading-api/v1/history/markets/{symbol}",
+  {
+    method: "GET",
+
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.exchange.bullish.com/trading-api/v1/history/markets/{symbol}', headers = headers)
+
+print(r.json())
+
+```
+
+`GET /v1/history/markets/{symbol}`
+
+_Get Historical Market by Symbol_
+
+Get Historical Market by Symbol. This endpoint will return specified market even
+if it is expired. Only applicable for this is applicable only for `DATED_FUTURE`
+and `OPTION` markets.
+
+### Parameters
+
+| Name   | In   | Type                                                                          | Required | Description |
+| ------ | ---- | ----------------------------------------------------------------------------- | -------- | ----------- |
+| symbol | path | [OptionAndDatedFuturesMarketSymbol](#schemaoptionanddatedfuturesmarketsymbol) | true     | none        |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "object",
+  "required": [
+    "marketId",
+    "symbol",
+    "quoteAssetId",
+    "baseAssetId",
+    "quoteSymbol",
+    "baseSymbol",
+    "quotePrecision",
+    "basePrecision",
+    "pricePrecision",
+    "quantityPrecision",
+    "costPrecision",
+    "priceBuffer",
+    "minQuantityLimit",
+    "maxQuantityLimit",
+    "maxPriceLimit",
+    "minPriceLimit",
+    "maxCostLimit",
+    "minCostLimit",
+    "timeZone",
+    "tickSize",
+    "liquidityTickSize",
+    "liquidityPrecision",
+    "feeGroupId",
+    "roundingCorrectionFactor",
+    "makerMinLiquidityAddition",
+    "spotTradingEnabled",
+    "marginTradingEnabled",
+    "marketEnabled",
+    "createOrderEnabled",
+    "cancelOrderEnabled",
+    "liquidityInvestEnabled",
+    "liquidityWithdrawEnabled",
+    "feeTiers",
+    "marketType",
+    "openInterestUSD",
+    "concentrationRiskThresholdUSD",
+    "concentrationRiskPercentage",
+    "expiryDatetime"
+  ],
+  "properties": {
+    "marketId": {
+      "description": "unique market ID",
+      "allOf": [
+        {
+          "type": "string",
+          "example": "10000"
+        }
+      ]
+    },
+    "symbol": {
+      "description": "market symbol",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "market symbol. Eg `BTC-USDC-20241004-70000-C` for OPTION markets.",
+          "example": "BTC-USDC-20241004-70000-C"
+        }
+      ]
+    },
+    "baseSymbol": {
+      "description": "base asset symbol (only applies to spot market)",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "asset symbol as denoted in the world",
+          "example": "BTC"
+        }
+      ]
+    },
+    "underlyingBaseSymbol": {
+      "description": "underlying base asset symbol (only applies to derivative market)",
+      "example": null,
+      "allOf": [
+        {
+          "type": "string",
+          "description": "asset symbol as denoted in the world",
+          "example": "BTC"
+        }
+      ]
+    },
+    "quoteSymbol": {
+      "description": "quote asset symbol (only applies to spot market)",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "asset symbol as denoted in the world",
+          "example": "BTC"
+        }
+      ]
+    },
+    "underlyingQuoteSymbol": {
+      "description": "underlying quote asset symbol (only applies to derivative market)",
+      "example": null,
+      "allOf": [
+        {
+          "type": "string",
+          "description": "asset symbol as denoted in the world",
+          "example": "BTC"
+        }
+      ]
+    },
+    "quoteAssetId": {
+      "description": "quote asset id",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique asset ID",
+          "example": "1"
+        }
+      ]
+    },
+    "baseAssetId": {
+      "description": "base asset id",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique asset ID",
+          "example": "1"
+        }
+      ]
+    },
+    "quotePrecision": {
+      "description": "quote precision",
+      "type": "integer",
+      "example": 4
+    },
+    "basePrecision": {
+      "description": "base precision",
+      "type": "integer",
+      "example": 8
+    },
+    "pricePrecision": {
+      "description": "number of decimal digits 'after the dot' for price",
+      "type": "integer",
+      "example": 8
+    },
+    "quantityPrecision": {
+      "description": "number of decimal digits 'after the dot' for quantity",
+      "type": "integer",
+      "example": 8
+    },
+    "costPrecision": {
+      "description": "number of decimal digits 'after the dot' for cost, `price * quantity`",
+      "type": "integer",
+      "example": 8
+    },
+    "priceBuffer": {
+      "description": "buffer range of limit price from the last traded price. Not applicable for `Option` markets",
+      "type": "string",
+      "example": 0.3
+    },
+    "minQuantityLimit": {
+      "description": "order quantity should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "maxQuantityLimit": {
+      "description": "order quantity should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "maxPriceLimit": {
+      "description": "order price should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "minPriceLimit": {
+      "description": "order price should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "maxCostLimit": {
+      "description": "order cost, `price * quantity` should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "minCostLimit": {
+      "description": "order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "timeZone": {
+      "description": "time zone",
+      "type": "string",
+      "example": "Etc/UTC"
+    },
+    "tickSize": {
+      "description": "tick size, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "liquidityTickSize": {
+      "description": "liquidity tick size. Not applicable for `Option` markets",
+      "type": "string",
+      "example": "100.0000"
+    },
+    "liquidityPrecision": {
+      "description": "liquidity precision. Not applicable for `Option` markets",
+      "type": "integer",
+      "example": 4
+    },
+    "makerFee": {
+      "description": "Deprecated and no longer accurate. See `feeGroupId`",
+      "type": "integer",
+      "example": 0,
+      "deprecated": true
+    },
+    "takerFee": {
+      "description": "Deprecated and no longer accurate. See `feeGroupId`",
+      "type": "integer",
+      "example": 2,
+      "deprecated": true
+    },
+    "roundingCorrectionFactor": {
+      "description": "rounding correction factor for market",
+      "type": "string",
+      "example": "0.00000001"
+    },
+    "makerMinLiquidityAddition": {
+      "description": "minimum amount required to invest liquidity to market. Not applicable for `Option` markets",
+      "type": "string",
+      "example": "5000"
+    },
+    "orderTypes": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "type": "string",
+            "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MKT\"` and `\"STOP_LIMIT\"` are not applicable for Options",
+            "example": "LMT"
+          }
+        ]
+      }
+    },
+    "spotTradingEnabled": {
+      "description": "spot trading enabled (only applies for Spot markets)",
+      "type": "boolean",
+      "example": true
+    },
+    "marginTradingEnabled": {
+      "description": "margin trading enabled (only applies for Spot markets)",
+      "type": "boolean",
+      "example": true
+    },
+    "marketEnabled": {
+      "description": "market enabled",
+      "type": "boolean",
+      "example": true
+    },
+    "createOrderEnabled": {
+      "description": "able to create order",
+      "type": "boolean",
+      "example": true
+    },
+    "amendOrderEnabled": {
+      "description": "able to amend order",
+      "type": "boolean",
+      "example": true,
+      "deprecated": true
+    },
+    "cancelOrderEnabled": {
+      "description": "able to cancel order",
+      "type": "boolean",
+      "example": true
+    },
+    "liquidityInvestEnabled": {
+      "description": "able to invest liquidity to market. Not applicable for `Option` markets",
+      "type": "boolean",
+      "example": true
+    },
+    "liquidityWithdrawEnabled": {
+      "description": "able to withdraw liquidity from market. Not applicable for `Option` markets",
+      "type": "boolean",
+      "example": true
+    },
+    "feeGroupId": {
+      "description": "Identifier to the trade fee assigned to this market. Used with `tradeFeeRate` at [Get Trading Account](#get-/v1/accounts/trading-accounts/-tradingAccountId-)",
+      "type": "integer",
+      "example": 1
+    },
+    "feeTiers": {
+      "description": "all available fee tiers. Not applicable for `Option` markets",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "allOf": [
+          {
+            "type": "object",
+            "description": "unique fee tier",
+            "required": [
+              "feeTierId",
+              "staticSpreadFee",
+              "isDislocationEnabled"
+            ],
+            "properties": {
+              "feeTierId": {
+                "allOf": [
+                  {
+                    "type": "string",
+                    "description": "unique fee tier ID, see [Get Market By Symbol](#get-/v1/markets/-symbol-)",
+                    "example": "1"
+                  }
+                ]
+              },
+              "staticSpreadFee": {
+                "description": "static spread fee",
+                "type": "string",
+                "example": "0.00040000"
+              },
+              "isDislocationEnabled": {
+                "description": "dislocation enabled/disabled",
+                "type": "boolean",
+                "example": true
+              }
+            }
+          }
+        ]
+      }
+    },
+    "marketType": {
+      "description": "market type, e.g. \"SPOT\" for market like \"BTCUSD\", \"PERPETUAL\" for market like \"BTC-USDC-PERP\", \"DATED_FUTURE\" for market like \"BTC-USDC-20250901\", \"OPTION\" for market like \"BTC-USDC-20250901-90000-C\"",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "market type can have the following string values `\"SPOT\"`, `\"PERPETUAL\"`, `\"DATED_FUTURE\"`, `\"OPTION\"`",
+          "enum": ["SPOT", "PERPETUAL", "DATED_FUTURE", "OPTION"],
+          "example": "SPOT"
+        }
+      ]
+    },
+    "contractMultiplier": {
+      "description": "contract multiplier. (only applies to perpetual market)",
+      "type": "integer",
+      "example": null
+    },
+    "settlementAssetSymbol": {
+      "description": "settlement asset symbol. (only applies to perpetual market)",
+      "type": "string",
+      "example": null
+    },
+    "openInterestUSD": {
+      "description": "cumulative notional value of all open interest for a specific derivative contract on the exchange.",
+      "type": "string",
+      "example": null
+    },
+    "concentrationRiskThresholdUSD": {
+      "description": "open interest notional of an account for a specific derivative contract.",
+      "type": "string",
+      "example": null
+    },
+    "concentrationRiskPercentage": {
+      "description": "percentage of the total open interest for a specific derivative contract.",
+      "type": "string",
+      "example": null
+    },
+    "expiryDatetime": {
+      "description": "denotes the time when the market expires in ISO 8601 with millisecond format as string",
+      "type": "string",
+      "example": "2024-10-04T08:00:00.000Z"
+    },
+    "optionStrikePrice": {
+      "description": "The price at which the option can be exercised upon expiry.",
+      "type": "string",
+      "example": "70000.0000"
+    },
+    "optionType": {
+      "description": "Specifies if it’s a call (right to buy) or a put (right to sell)",
+      "allOf": [
+        {
+          "description": "Type of Option market",
+          "example": "CALL",
+          "type": "string",
+          "enum": ["CALL", "PUT"]
+        }
+      ]
+    },
+    "premiumCapRatio": {
+      "description": "A cap that is set on the underlying asset's movement as part of the premium that limits the option buyer's profit.",
+      "type": "string",
+      "example": "0.10"
     }
   }
 }
@@ -1505,6 +2048,11 @@ Get Current Tick by Market Symbol.
         }
       ]
     },
+    "bidIVPercentage": {
+      "description": "Implied volatility of the best bid price",
+      "type": "string",
+      "example": "99.0"
+    },
     "bidVolume": {
       "description": "current best bid (buy) quantity (may be missing or undefined), see [asset value](#overview--price-and-quantity-precision) format",
       "allOf": [
@@ -1524,6 +2072,11 @@ Get Current Tick by Market Symbol.
           "example": "1.00000000"
         }
       ]
+    },
+    "askIVPercentage": {
+      "description": "Implied volatility of the best ask price",
+      "type": "string",
+      "example": "99.0"
     },
     "askVolume": {
       "description": "current best ask (sell) quantity (may be missing or undefined), see [asset value](#overview--price-and-quantity-precision) format",
@@ -1683,7 +2236,7 @@ Get Current Tick by Market Symbol.
       ]
     },
     "ammData": {
-      "description": "AMM data of all available fee tiers.",
+      "description": "AMM data of all available fee tiers. Not applicable for `Option` markets",
       "type": "array",
       "minItems": 0,
       "items": {
@@ -1738,6 +2291,64 @@ Get Current Tick by Market Symbol.
           }
         ]
       }
+    },
+    "optionStrikePrice": {
+      "description": "The price at which the option can be exercised upon expiry.",
+      "type": "string",
+      "example": "70000"
+    },
+    "optionType": {
+      "description": "Type of Option",
+      "allOf": [
+        {
+          "description": "Type of Option market",
+          "example": "CALL",
+          "type": "string",
+          "enum": ["CALL", "PUT"]
+        }
+      ]
+    },
+    "expiryDateTime": {
+      "description": "Expiry Date Time of the instrument",
+      "allOf": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "example": "2025-05-20T01:01:01.000Z",
+          "description": "ISO 8601 with millisecond as string"
+        }
+      ]
+    },
+    "greeks": {
+      "description": "Option greeks",
+      "allOf": [
+        {
+          "description": "Pricing parameters for option instruments",
+          "type": "object",
+          "properties": {
+            "delta": {
+              "description": "Sensitivity of an option’s price to a $1 change in the price of the underlying asset",
+              "type": "string",
+              "example": "0.98"
+            },
+            "gamma": {
+              "description": "Rate of change of Delta with respect to a $1 change in the underlying asset’s price",
+              "type": "string",
+              "example": "0.98"
+            },
+            "theta": {
+              "description": "The rate at which an option’s price decreases as it approaches its expiration date",
+              "type": "string",
+              "example": "-0.17"
+            },
+            "vega": {
+              "description": "Sensitivity of an option’s price to a 1% change in the implied volatility of the underlying asset",
+              "type": "string",
+              "example": "0.05"
+            }
+          }
+        }
+      ]
     }
   }
 }

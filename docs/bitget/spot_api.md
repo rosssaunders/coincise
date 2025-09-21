@@ -22,7 +22,6 @@ Further more, an API to get notification could be found
 If you have any questions or suggestions, you can contact us by the following
 approaches:
 
-- Send an email to [API@bitget.com](mailto:API@bitget.com).
 - [Telegram](https://t.me/bitgetOpenapi)
 
 > **Source:** [original URL](https://www.bitget.com/api-doc/spot/intro)
@@ -69,7 +68,7 @@ Response Example
 | chains                 | Array   | Support chain list                                                                                                                                                           |
 | &gt; chain             | String  | Chain name                                                                                                                                                                   |
 | &gt; needTag           | Boolean | Need tag                                                                                                                                                                     |
-| &gt; withdrawable      | Boolean | Withdrawal supported<br>(The withdrawal status is subject to the official announcement)                                                                                      |
+| &gt; withdrawable      | Boolean | Withdrawal supported                                                                                                                                                         |
 | &gt; rechargeable      | Boolean | Deposit supported                                                                                                                                                            |
 | &gt; withdrawFee       | String  | Withdrawal transaction fee                                                                                                                                                   |
 | &gt; extraWithdrawFee  | String  | Extra charge. On chain destruction: <code>0.1</code> means <code>10%</code>                                                                                                  |
@@ -743,7 +742,7 @@ curl -X POST "https://api.bitget.com/api/v2/spot/trade/cancel-order" \   -H "ACC
 Response Example
 
 ```
-{    "code": "00000",    "message": "success",    "requestTime": 1234567891234,    "data": {        "orderId": "121211212122",        "clientOid": "xx001"    }}
+{    "code": "00000",    "msg": "success",    "requestTime": 1234567891234,    "data": {        "orderId": "121211212122",        "clientOid": "xx001"    }}
 ```
 
 #### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
@@ -852,7 +851,7 @@ curl -X POST "https://api.bitget.com/api/v2/spot/trade/batch-cancel-order" \   -
 Response Example
 
 ```
-{    "code": "00000",    "message": "success",    "requestTime": 1695808949356,    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "121211212122"            }        ],        "failureList": [            {                "orderId": "121211212122",                "clientOid": "xxx001",                "errorMsg": "duplicate clientOrderId"            }        ]    }}
+{    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "121211212122"            }        ],        "failureList": [            {                "orderId": "121211212122",                "clientOid": "xxx001",                "errorMsg": "duplicate clientOrderId"            }        ]    }}
 ```
 
 #### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
@@ -1093,7 +1092,7 @@ curl "https://api.bitget.com/api/v2/spot/trade/history-orders?symbol=BTCUSDT&sta
 Response Example
 
 ```
-{    "code": "00000",    "message": "success",    "requestTime": 1695808949356,    "data": [        {            "userId": "*********",            "symbol": "ETHUSDT",            "orderId": "*****************************",            "clientOid": "*****************************",            "price": "0",            "size": "20.0000000000000000",            "orderType": "market",            "side": "buy",            "status": "filled",            "priceAvg": "1598.1000000000000000",            "baseVolume": "0.0125000000000000",            "quoteVolume": "19.9762500000000000",            "enterPointSource": "WEB",            "feeDetail": "{\"newFees\":{\"c\":0,\"d\":0,\"deduction\":false,\"r\":-0.112079256,\"t\":-0.112079256,\"totalDeductionFee\":0},\"USDT\":{\"deduction\":false,\"feeCoinCode\":\"ETH\",\"totalDeductionFee\":0,\"totalFee\":-0.1120792560000000}}",            "orderSource": "market",            "cTime": "1698736299656",            "uTime": "1698736300363",            "tpslType": "normal",            "cancelReason": "",            "triggerPrice": null        }    ]}
+{    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": [        {            "userId": "*********",            "symbol": "ETHUSDT",            "orderId": "*****************************",            "clientOid": "*****************************",            "price": "0",            "size": "20.0000000000000000",            "orderType": "market",            "side": "buy",            "status": "filled",            "priceAvg": "1598.1000000000000000",            "baseVolume": "0.0125000000000000",            "quoteVolume": "19.9762500000000000",            "enterPointSource": "WEB",            "feeDetail": "{\"newFees\":{\"c\":0,\"d\":0,\"deduction\":false,\"r\":-0.112079256,\"t\":-0.112079256,\"totalDeductionFee\":0},\"USDT\":{\"deduction\":false,\"feeCoinCode\":\"ETH\",\"totalDeductionFee\":0,\"totalFee\":-0.1120792560000000}}",            "orderSource": "market",            "cTime": "1698736299656",            "uTime": "1698736300363",            "tpslType": "normal",            "cancelReason": "",            "triggerPrice": null        }    ]}
 ```
 
 #### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
@@ -1463,12 +1462,13 @@ curl "https://api.bitget.com/api/v2/spot/trade/history-plan-order?symbol=BTCUSDT
 
 #### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type   | Required | Description                                                                                                                                                                                                                                    |
-| :-------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| symbol    | String | Yes      | Trading pair, e.g. BTCUSDT                                                                                                                                                                                                                     |
-| startTime | String | Yes      | The start time of the historical trigger orders, i.e. to get orders after that timestamp<br>Unix millisecond timestamp, e.g. 1690196141868<br>The interval between <code>startTime</code> and <code>endTime</code> must not exceed 90 days     |
-| endTime   | String | Yes      | The end time of the historical trigger orders, i.e., getting orders prior to that timestamp<br>Unix millisecond timestamp, e.g. 1690196141868<br>The interval between <code>startTime</code> and <code>endTime</code> must not exceed 90 days. |
-| limit     | String | No       | Limit<br>Default is 100, max is 100                                                                                                                                                                                                            |
+| Parameter  | Type   | Required | Description                                                                                                                                                                                                                                    |
+| :--------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol     | String | Yes      | Trading pair, e.g. BTCUSDT                                                                                                                                                                                                                     |
+| startTime  | String | Yes      | The start time of the historical trigger orders, i.e. to get orders after that timestamp<br>Unix millisecond timestamp, e.g. 1690196141868<br>The interval between <code>startTime</code> and <code>endTime</code> must not exceed 90 days     |
+| endTime    | String | Yes      | The end time of the historical trigger orders, i.e., getting orders prior to that timestamp<br>Unix millisecond timestamp, e.g. 1690196141868<br>The interval between <code>startTime</code> and <code>endTime</code> must not exceed 90 days. |
+| idLessThan | String | No       | Requests the content on the page before this ID (older data), the value input should be the endld of the corresponding interface.                                                                                                              |
+| limit      | String | No       | Limit<br>Default is 100, max is 100                                                                                                                                                                                                            |
 
 Response Example
 
@@ -1582,17 +1582,17 @@ Response Example
 
 #### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter   | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| :---------- | :----- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| userId      | String | User ID                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| inviterId   | String | Inviter's user ID                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| channelCode | String | Affiliate referral code                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| channel     | String | Affiliate                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| ips         | String | IP whitelist                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| authorities | Array  | Permissions<br>Read only<br>coor: futures orders<br>cpor: futures holdings<br>stor: spot trade<br>smor: margin trade<br>ttor: copy trading<br>wtor: wallet transfer<br>taxr: taxation<br>chor: subaccount<br>p2pr: P2P query<br>Read and Write<br>coow: futures orders<br>cpow: futures holdings<br>stow: spot trade<br>smow: margin trade<br>ttow: copy trading<br>wtow: wallet transfer<br>wwow: wallet withdrawl<br>chow: subaccount manage<br>p2p: P2P |
-| parentId    | Int    | Main account user ID                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| traderType  | String | trader: Is trader, not_trader: not trader                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| regisTime   | String | Register time                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Parameter   | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| :---------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| userId      | String | User ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| inviterId   | String | Inviter's user ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| channelCode | String | Affiliate referral code                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| channel     | String | Affiliate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ips         | String | IP whitelist                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| authorities | Array  | Permissions<br>Read only<br>coor: futures orders<br>cpor: futures holdings<br>stor: spot trade<br>smor: margin trade<br>ttor: copy trading<br>wtor: wallet transfer<br>taxr: taxation<br>chor: subaccount<br>p2pr: P2P query<br>Read and Write<br>coow: futures orders<br>cpow: futures holdings<br>stow: spot trade<br>smow: margin trade<br>ttow: copy trading<br>wtow: wallet transfer<br>wwow: wallet withdrawl<br>chow: subaccount manage<br>p2p: P2P<br>pllw: Pledge Loan Write<br>pllr: Pledge Loan Read<br>taxw: Tax Read and Write |
+| parentId    | Int    | Main account user ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| traderType  | String | trader: Is trader, not_trader: not trader                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| regisTime   | String | Register time                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 > **Source:**
 > [original URL](https://www.bitget.com/api-doc/spot/account/Get-Account-Info)
@@ -1759,15 +1759,15 @@ curl "https://api.bitget.com/api/v2/spot/account/bills" \   -H "ACCESS-KEY:*****
 
 #### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter    | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| :----------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| coin         | String | No       | Token name, e.g. USDT                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| groupType    | String | No       | Billing type<br>deposit Deposit<br>withdraw Withdraw<br>transaction Transaction<br>transfer Transfer<br>loan Pledge loan<br>financial Wealth managemen<br>fait Fiat currency<br>convert Instant swap<br>c2c C2C token trading<br>pre_c2c Pre-market trading<br>on_chain On-chain transaction<br>strategy Trading strategy<br>other Other                                                                                                                     |
-| businessType | String | No       | Business type<br>deposit: Deposit<br>withdraw: Withdraw<br>buy: Buy<br>sell: Sell<br>deduction of handling fee: Deduction of spot trading transaction fee<br>transfer-in: Transfer-in<br>transfer-out: Transfer-out<br>rebate rewards: Rebate<br>airdrop rewards: Airdrop rewards<br>USDT contract rewards: USDT futures promotion rewards<br>mix contract rewards: Mix contract promotion rewards<br>system lock: System lock-up<br>user lock: User lock-up |
-| startTime    | String | No       | The start time of the billing history, i.e., getting the billing history after that timestamp<br>Unix millisecond timestamp, e.g. 1690196141868                                                                                                                                                                                                                                                                                                              |
-| endTime      | String | No       | The end time of the billing history, i.e., getting the billing history before that timestamp<br>Unix millisecond timestamp, e.g. 1690196141868<br>The interval between startTime and endTime must not exceed 90 days.                                                                                                                                                                                                                                        |
-| limit        | String | No       | Number of results returned. Default: 100, maximum 500.                                                                                                                                                                                                                                                                                                                                                                                                       |
-| idLessThan   | String | No       | Requests the content on the page before this ID (older data), the value input should be the billId of the corresponding interface.                                                                                                                                                                                                                                                                                                                           |
+| Parameter    | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| :----------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| coin         | String | No       | Token name, e.g. USDT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| groupType    | String | No       | Billing type<br>deposit Deposit<br>withdraw Withdraw<br>transaction Transaction<br>transfer Transfer<br>loan Pledge loan<br>financial Wealth managemen<br>fait Fiat currency<br>convert Instant swap<br>c2c C2C token trading<br>pre_c2c Pre-market trading<br>on_chain On-chain transaction<br>strategy Trading strategy<br>other Other                                                                                                                                                                           |
+| businessType | String | No       | Business type<br>DEPOSIT: Deposit<br>WITHDRAW: Withdraw<br>BUY: Buy<br>SELL: Sell<br>DEDUCTION_HANDLING_FEE: Deduction of spot trading transaction fee<br>TRANSFER_IN: Transfer-in<br>TRANSFER_OUT: Transfer-out<br>REBATE_REWARDS: Rebate<br>AIRDROP_REWARDS: Airdrop rewards<br>USDT_CONTRACT_REWARDS: USDT futures promotion rewards<br>MIX_CONTRACT_REWARDS: Mix contract promotion rewards<br>SYSTEM_LOCK: System lock-up<br>USER_LOCK: User lock-up<br>STRATEGY_TRANSFER_IN: Strategy Trading Close Position |
+| startTime    | String | No       | The start time of the billing history, i.e., getting the billing history after that timestamp<br>Unix millisecond timestamp, e.g. 1690196141868                                                                                                                                                                                                                                                                                                                                                                    |
+| endTime      | String | No       | The end time of the billing history, i.e., getting the billing history before that timestamp<br>Unix millisecond timestamp, e.g. 1690196141868<br>The interval between startTime and endTime must not exceed 90 days.                                                                                                                                                                                                                                                                                              |
+| limit        | String | No       | Number of results returned. Default: 100, maximum 500.                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| idLessThan   | String | No       | Requests the content on the page before this ID (older data), the value input should be the billId of the corresponding interface.                                                                                                                                                                                                                                                                                                                                                                                 |
 
 Response Example
 
@@ -2042,18 +2042,19 @@ Response Example
 
 #### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter  | Type   | Description                                                                                                                                                                                                                                                                  |
-| :--------- | :----- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| coin       | String | Token name                                                                                                                                                                                                                                                                   |
-| status     | String | Status of transfer<br>Successful: Successful<br>Failed: Failed<br>Processing: Processing                                                                                                                                                                                     |
-| toType     | String | Recipient account type<br>spot: Spot account<br>p2p: P2P account<br>coin_futures: Coin-M futures account<br>usdt_futures: USDT-M futures account<br>usdc_futures: USDC-M futures account<br>crossed_margin: Cross margin account<br>isolated_margin: Isolated margin account |
-| fromType   | String | Sender account type<br>spot: Spot account<br>p2p: P2P account<br>coin_futures: Coin-M futures account<br>usdt_futures: USDT-M futures account<br>usdc_futures: USDC-M futures account<br>crossed_margin: Cross margin account<br>isolated_margin: Isolated margin account    |
-| size       | String | Quantity                                                                                                                                                                                                                                                                     |
-| ts         | String | Transfer time, Unix millisecond timestamp, e.g. 1690196141868                                                                                                                                                                                                                |
-| clientOid  | String | Order ID customized by user                                                                                                                                                                                                                                                  |
-| transferId | String | Transfer order ID                                                                                                                                                                                                                                                            |
-| fromUserId | String | the user ID who initiate the trasnfer ID                                                                                                                                                                                                                                     |
-| toUserId   | String | The user ID who receive the trnasfer                                                                                                                                                                                                                                         |
+| Parameter     | Type   | Description                                                                                                                                                                                                                                                                  |
+| :------------ | :----- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| coin          | String | Token name                                                                                                                                                                                                                                                                   |
+| status        | String | Status of transfer<br>Successful: Successful<br>Failed: Failed<br>Processing: Processing                                                                                                                                                                                     |
+| toType        | String | Recipient account type<br>spot: Spot account<br>p2p: P2P account<br>coin_futures: Coin-M futures account<br>usdt_futures: USDT-M futures account<br>usdc_futures: USDC-M futures account<br>crossed_margin: Cross margin account<br>isolated_margin: Isolated margin account |
+| fromType      | String | Sender account type<br>spot: Spot account<br>p2p: P2P account<br>coin_futures: Coin-M futures account<br>usdt_futures: USDT-M futures account<br>usdc_futures: USDC-M futures account<br>crossed_margin: Cross margin account<br>isolated_margin: Isolated margin account    |
+| size          | String | Quantity                                                                                                                                                                                                                                                                     |
+| ts            | String | Transfer time, Unix millisecond timestamp, e.g. 1690196141868                                                                                                                                                                                                                |
+| clientOid     | String | Order ID customized by user                                                                                                                                                                                                                                                  |
+| transferId    | String | Transfer order ID                                                                                                                                                                                                                                                            |
+| newTransferId | String | Transfer order ID<br>It is the same as the transferId in the main-sub account transfer response.                                                                                                                                                                             |
+| fromUserId    | String | the user ID who initiate the trasnfer ID                                                                                                                                                                                                                                     |
+| toUserId      | String | The user ID who receive the trnasfer                                                                                                                                                                                                                                         |
 
 > **Source:**
 > [original URL](https://www.bitget.com/api-doc/spot/account/Get-SubAccount-TransferRecords)
@@ -2517,7 +2518,7 @@ Response Example
 #### Description[​](#description "Direct link to Description")
 
 Get the product's latest price, bid price, bid price and 24h trading volume
-information. Frequency of data push: 100ms ~ 300ms
+information. Frequency of data push: 200ms ~ 300ms
 
 Request Example
 
@@ -2599,6 +2600,12 @@ Get the candlestick data of the product
 After first subscription, it will push the recent snapshot data and then push
 the update data
 
+When there are transactions in the K-line channel, data is pushed once per
+second.
+
+When there are no transactions, data is pushed once at the specified time
+granularity.
+
 Request Example
 
 ```
@@ -2671,6 +2678,8 @@ Push once if any trade is matched(taker orders)
 
 After first subscription, it will push the recent snapshot data and then push
 the update data
+
+Real-time Push
 
 Request Example
 
@@ -2746,6 +2755,9 @@ Default data push frequency for `books1` is **60ms**
 - `books1`: 1st level of depth. Push `snapshot` each time
 - `books5`: 5 depth levels. Push `snapshot` each time
 - `books15`: 15 depth levels. Push `snapshot` each time
+- The push frequency of the order book channel (books1) is optimized to 20ms.
+  The symbols for this optimization are: BTCUSDT, ETHUSDT, XRPUSDT, SOLUSDT,
+  SUIUSDT, DOGEUSDT, ADAUSDT, PEPEUSDT, LINKUSDT, HBARUSDT
 
 ##### Checksum[​](#checksum "Direct link to Checksum")
 
@@ -2834,20 +2846,20 @@ Push Data
 
 #### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
-| Parameter     | Type               | Description                                                                                                                                      |
-| :------------ | :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| arg           | Object             | Channels with successful subscription                                                                                                            |
-| &gt; instType | String             | Product type                                                                                                                                     |
-| &gt; channel  | String             | Channel name: <code>books/books1/books5/books15</code>                                                                                           |
-| &gt; instId   | String             | Product ID, e.g. ETHUSDT                                                                                                                         |
-| action        | String             | Push data action, <code>snapshot</code> or <code>update</code>                                                                                   |
-| data          | List&lt;Object&gt; | Subscription data                                                                                                                                |
-| &gt; instId   | String             | Product ID, e.g. ETHUSDT                                                                                                                         |
-| &gt; asks     | List&lt;String&gt; | Seller depth                                                                                                                                     |
-| &gt; bids     | List&lt;String&gt; | Buyer depth                                                                                                                                      |
-| &gt; ts       | String             | Matching engine timestamp(ms), e.g. 1597026383085                                                                                                |
-| &gt; checksum | Long               | Checksum                                                                                                                                         |
-| &gt; seq      | Long               | Serial number.<br>It increases when the order book is updated and can be used to determine whether there is packet loss or out-of-order packets. |
+| Parameter     | Type               | Description                                                                                                                       |
+| :------------ | :----------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| arg           | Object             | Channels with successful subscription                                                                                             |
+| &gt; instType | String             | Product type                                                                                                                      |
+| &gt; channel  | String             | Channel name: <code>books/books1/books5/books15</code>                                                                            |
+| &gt; instId   | String             | Product ID, e.g. ETHUSDT                                                                                                          |
+| action        | String             | Push data action, <code>snapshot</code> or <code>update</code>                                                                    |
+| data          | List&lt;Object&gt; | Subscription data                                                                                                                 |
+| &gt; instId   | String             | Product ID, e.g. ETHUSDT                                                                                                          |
+| &gt; asks     | List&lt;String&gt; | Seller depth                                                                                                                      |
+| &gt; bids     | List&lt;String&gt; | Buyer depth                                                                                                                       |
+| &gt; ts       | String             | Matching engine timestamp(ms), e.g. 1597026383085                                                                                 |
+| &gt; checksum | Long               | Checksum                                                                                                                          |
+| &gt; seq      | Long               | Serial number.<br>It increases when the order book is updated and can be used to determine whether there is out-of-order packets. |
 
 > **Source:**
 > [original URL](https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel)
@@ -4118,21 +4130,165 @@ Push Data
 
 ## WebSocket Error Code
 
-| Error Message                       | Error Code |
-| :---------------------------------- | :--------- |
-| Channel does not exist              | 30001      |
-| Illegal request                     | 30002      |
-| Invalid op                          | 30003      |
-| User needs to log in                | 30004      |
-| Login failed                        | 30005      |
-| request too many                    | 30006      |
-| request over limit,connection close | 30007      |
-| Invalid ACCESS_KEY                  | 30011      |
-| Invalid ACCESS_PASSPHRASE           | 30012      |
-| Invalid ACCESS_TIMESTAMP            | 30013      |
-| Request timestamp expired           | 30014      |
-| Invalid signature                   | 30015      |
-| Param error                         | 30016      |
+| Error Code | Description                                                                                                                                                 |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 429        | Too Many Requests                                                                                                                                           |
+| 25000      | System error, please try again later                                                                                                                        |
+| 25001      | Operation timed out                                                                                                                                         |
+| 25002      | Unsupported operation                                                                                                                                       |
+| 25003      | Concurrent operation, please retry                                                                                                                          |
+| 25004      | Operation too frequent, please try again later                                                                                                              |
+| 25005      | User does not exist                                                                                                                                         |
+| 25006      | Abnormal account status                                                                                                                                     |
+| 25007      | Account in an irregular status                                                                                                                              |
+| 25008      | Account is in forced liquidation status                                                                                                                     |
+| 25009      | Unsupported account mode switch                                                                                                                             |
+| 25010      | Unsupported position mode switch                                                                                                                            |
+| 25011      | Transfer failed, account is in forced liquidation status                                                                                                    |
+| 25012      | Account at risk, trading temporarily disabled                                                                                                               |
+| 25013      | {0} not support API trade                                                                                                                                   |
+| 25100      | Trading pair {0} does not exist                                                                                                                             |
+| 25101      | Trading pair not open for trading                                                                                                                           |
+| 25102      | Trading pair temporarily closed for maintenance                                                                                                             |
+| 25103      | Trading pair opening soon                                                                                                                                   |
+| 25104      | Contract delisted                                                                                                                                           |
+| 25105      | This contract does not support opening positions                                                                                                            |
+| 25106      | Trading suspended due to settlement or maintenance                                                                                                          |
+| 25107      | There is currently a position, please close the position                                                                                                    |
+| 25108      | The contract is in the initialization state                                                                                                                 |
+| 25110      | This coin is not supported for deposits into the unified account                                                                                            |
+| 25200      | {0} validation error                                                                                                                                        |
+| 25201      | Currency does not exist                                                                                                                                     |
+| 25202      | Insufficient balance                                                                                                                                        |
+| 25203      | Insufficient margin                                                                                                                                         |
+| 25204      | Order does not exist                                                                                                                                        |
+| 25205      | {0} trading price cannot be below {1}%                                                                                                                      |
+| 25206      | {0} trading price cannot exceed {1}%                                                                                                                        |
+| 25207      | {0} trading quantity cannot be less than {1} units                                                                                                          |
+| 25208      | {0} trading quantity cannot exceed {1} units                                                                                                                |
+| 25209      | Insufficient market liquidity, please try again later                                                                                                       |
+| 25210      | Large price fluctuation, placing the order entails higher risk, please reorder                                                                              |
+| 25211      | Exceeds the limit of {0} maximum orders                                                                                                                     |
+| 25212      | Duplicate clientOid                                                                                                                                         |
+| 25213      | Exceeds {0} permanent net buy limit, you can currently buy up to {1} USD worth of {0}                                                                       |
+| 25214      | Exceeds {0} permanent net sell limit, you can currently sell up to {1} USD worth of {0}                                                                     |
+| 25215      | Exceeds {0} 24-hour net buy limit, you can currently buy up to {1} USD worth of {0}                                                                         |
+| 25216      | Exceeds {0} 24-hour net sell limit, you can currently sell up to {1} USD worth of {0}                                                                       |
+| 25217      | Exceeds maximum repayment limit                                                                                                                             |
+| 25218      | High risk, usage may result in forced liquidation                                                                                                           |
+| 25219      | Increase in IMR exceeds available assets                                                                                                                    |
+| 25220      | 未找到描述                                                                                                                                                  |
+| 25221      | Level gradient does not exist                                                                                                                               |
+| 25222      | Trade or fair mark price does not exist                                                                                                                     |
+| 25223      | Exceeds Max. leverage                                                                                                                                       |
+| 25224      | Take-profit or stop-loss triggered warning, please proceed with cancellation                                                                                |
+| 25225      | Insufficient available quantity in position                                                                                                                 |
+| 25226      | Insufficient total position quantity                                                                                                                        |
+| 25227      | No position available to close                                                                                                                              |
+| 25228      | Unable to update leverage for this position, insufficient margin!                                                                                           |
+| 25229      | Total positions exceed the current limit of {0} positions                                                                                                   |
+| 25230      | Order quantity exceeds the maximum open quantity                                                                                                            |
+| 25231      | Close quantity cannot exceed the held position quantity                                                                                                     |
+| 25232      | Reduce-only orders will only reduce your position; please cancel or modify existing orders before placing a new one                                         |
+| 25233      | Order quantity cannot exceed the maximum for this level                                                                                                     |
+| 25234      | Remaining quantity for regular orders is {0} {1}, and for post-only orders it is {2} {3}.                                                                   |
+| 25235      | Due to risk control, the maximum open position currently allowed is {0} {1}. The risk control limit for a single user includes all primary and sub-accounts |
+| 25236      | Incorrect position open type                                                                                                                                |
+| 25237      | Close orders can only occur in bi-directional mode                                                                                                          |
+| 25238      | {0} do not assign values at the same                                                                                                                        |
+| 25239      | Closing failed, please try again later                                                                                                                      |
+| 25240      | {0} does not support this operation                                                                                                                         |
+| 25241      | Bulk orders cannot exceed the corresponding maximum order value.                                                                                            |
+| 25242      | The maximum reducible amount is {0}{1}.                                                                                                                     |
+| 25243      | You have exceeded the currency holding limit and cannot add more of this currency.                                                                          |
+| 25244      | Price should be a multiple of {0}                                                                                                                           |
+| 25245      | The account is not the unified account mode                                                                                                                 |
+| 25559      | Not loan user                                                                                                                                               |
+| 25560      | Subaccount the same with RiskUnit ID                                                                                                                        |
+| 25561      | SubUid not in risk unit                                                                                                                                     |
+| 25562      | The subacccount is the other's Risk Unit                                                                                                                    |
+| 25563      | The UID you are unbinding has a non-zero balance and has unsettled or pending loan orders in its associated risk unit.                                      |
+| 25564      | The number of sub-accounts under the risk unit has exceeded the limit.                                                                                      |
+| 25565      | The sub-account UID you entered is already bound to another risk unit.                                                                                      |
+| 25566      | The risk unit does not exist.                                                                                                                               |
+| 25567      | Exceeded the maximum quantity of contract orders：{0} {1}                                                                                                   |
+| 25568      | The order does not meet the modification requirements.                                                                                                      |
+| 25569      | Exceeded the maximum limit for modifications.                                                                                                               |
+| 25570      | There are pending orders for contract bidirectional closing or contract unidirectional opening/reducing positions.                                          |
+| 25571      | The modification price and qty is the same as the original value. Please adjust and try again.                                                              |
+| 25572      | Too many pending modification requests. Please try again later                                                                                              |
+| 25573      | Skipped due to prior modification failure                                                                                                                   |
+| 25574      | Reduce-only order protection                                                                                                                                |
+| 25575      | Failed to stop the strategy because the corresponding strategy ID could not be found                                                                        |
+| 25576      | Failed to stop the strategy because it is already stopping                                                                                                  |
+| 25577      | Failed to stop the strategy because the corresponding strategy ID could not be found                                                                        |
+| 25578      | No strategies available to stop                                                                                                                             |
+| 25579      | For long position TP/SL (close long), the take-profit trigger price must be greater than the average entry price                                            |
+| 25580      | For long position TP/SL (close long), the stop-loss trigger price must be less than the average entry price                                                 |
+| 25581      | For short position TP/SL (close short), the take-profit trigger price must be less than the average entry price                                             |
+| 25582      | For short position TP/SL (close short), the stop-loss trigger price must be greater than the average entry price                                            |
+| 25583      | Take-profit price must be greater than 0                                                                                                                    |
+| 25584      | Stop-loss price must be greater than 0                                                                                                                      |
+| 25585      | For long position TP/SL (close long), the take-profit trigger price must be greater than the latest price                                                   |
+| 25586      | For long position TP/SL (close long), the stop-loss trigger price must be less than the latest price                                                        |
+| 25587      | For short position TP/SL (close short), the take-profit trigger price must be less than the latest price                                                    |
+| 25588      | For short position TP/SL (close short), the stop-loss trigger price must be greater than the latest price                                                   |
+| 25589      | For long position TP/SL (close long), the take-profit trigger price must be greater than the mark price                                                     |
+| 25590      | For long position TP/SL (close long), the stop-loss trigger price must be less than the mark price                                                          |
+| 25591      | For short position TP/SL (close short), the take-profit trigger price must be less than the mark price                                                      |
+| 25592      | For short position TP/SL (close short), the stop-loss trigger price must be greater than the mark price                                                     |
+| 25593      | The current trading type does not support TP/SL settings                                                                                                    |
+| 25594      | Only one TP/SL can be set for all positions of the current symbol                                                                                           |
+| 25595      | The total TP/SL quantity for partial positions exceeds the position amount                                                                                  |
+| 25596      | Cannot modify strategy in triggered or error state                                                                                                          |
+| 25597      | Strategy does not exist or has already been stopped                                                                                                         |
+| 25598      | Current strategy status does not support modification                                                                                                       |
+| 25599      | Maximum number of active TP/SL orders for this symbol is {0}; cannot add more                                                                               |
+| 25600      | No changes made to the TP/SL order; please modify before submitting                                                                                         |
+| 25601      | Position does not exist; cannot set TP/SL                                                                                                                   |
+| 25602      | Take-profit trigger price must be greater than 0                                                                                                            |
+| 25603      | Stop-loss trigger price must be greater than 0                                                                                                              |
+| 25604      | Take-profit order price must be greater than 0                                                                                                              |
+| 25605      | Stop-loss order price must be greater than 0                                                                                                                |
+| 25606      | Take-profit trigger price does not meet precision requirements                                                                                              |
+| 25607      | Stop-loss trigger price does not meet precision requirements                                                                                                |
+| 25608      | Take-profit order price does not meet precision requirements                                                                                                |
+| 25609      | Stop-loss order price does not meet precision requirements                                                                                                  |
+| 25610      | Order amount does not meet precision requirements                                                                                                           |
+| 25611      | Order quantity must be greater than the minimum order amount                                                                                                |
+| 25612      | Only opening orders are allowed to have preset take-profit and stop-loss                                                                                    |
+| 25620      | permission denied                                                                                                                                           |
+| 25622      | The collateral setting for institutional loans sub-accounts must be in all-coins mode                                                                       |
+| 25650      | For long positions, the stop-loss price must be lower than the current price: {0}                                                                           |
+| 25651      | For short positions, the take-profit price must be lower than the current price: {0}                                                                        |
+| 25652      | For long positions, the take-profit price must be greater than the current price: {0}                                                                       |
+| 25653      | The order has been changed. Please try again later                                                                                                          |
+| 25654      | {0} trading price cannot be greater than the bankruptcy price of {1} {2}                                                                                    |
+| 25655      | {0} trading price cannot be lower than the bankruptcy price of {1} {2}                                                                                      |
+| 40001      | ACCESS_KEY cannot be empty                                                                                                                                  |
+| 40002      | SECRET_KEY cannot be empty                                                                                                                                  |
+| 40003      | Signature cannot be empty                                                                                                                                   |
+| 40006      | Invalid ACCESS_KEY                                                                                                                                          |
+| 40008      | Request timestamp expired                                                                                                                                   |
+| 40009      | sign signature error                                                                                                                                        |
+| 40017      | Parameter verification failed {0}                                                                                                                           |
+| 40034      | Parameter {0} does not exist                                                                                                                                |
+| 40725      | service return an error                                                                                                                                     |
+| 43117      | Exceeded Max. transferable quantity                                                                                                                         |
+| 95001      | The current user is undergoing forced liquidation.                                                                                                          |
+| 95002      | The sub-account has contract positions and cannot be added.                                                                                                 |
+| 95003      | he sub-account UID you entered does not exist.                                                                                                              |
+| 95004      | The UID you unbound has a non-zero asset balance and is in a risk unit with unsettled or pending loan orders.                                               |
+| 95005      | The LTV for ins loan has exceeded the limit, and opening contracts is prohibited                                                                            |
+| 95006      | The LTV for ins loan has exceeded the limit, and spot buying is prohibited                                                                                  |
+| 95007      | Ins loan is not support this spot trading pair.                                                                                                             |
+| 95008      | Ins loan is not support futures trading.                                                                                                                    |
+| 95009      | Ins loan is not support this margin trading pair.                                                                                                           |
+| 95010      | Your entered subaccount UID is already bound to another risk unit.                                                                                          |
+| 95011      | Parameter validation failed:{0}                                                                                                                             |
+| 95012      | The leverage {1} of the sub-account contract position for {0} exceeds max leverage {2} for ins loan                                                         |
+| 95013      | The leverage {1} of the sub-account contract order trading pair {0} exceeds max leverage {2} for ins loan.",                                                |
+| 95014      | The sub-account has contract orders and cannot be added                                                                                                     |
 
 > **Source:**
 > [original URL](https://www.bitget.com/api-doc/spot/error-code/websocket)

@@ -99,7 +99,8 @@ This is a private method; it can only be used after authentication.
 ## /private/change_scope_in_api_key
 
 Changes scope for key with given id.
-[Important notes](#creating-editing-removing-api-keys).
+[Important notes](#creating-editing-removing-api-keys).  
+**[TFA required](#security-keys)**
 
 **Scope:** `account:read_write`
 
@@ -157,7 +158,11 @@ This is a private method; it can only be used after authentication.
 ## /private/create_api_key
 
 Creates a new api key with a given scope.
-[Important notes](#creating-editing-removing-api-keys)
+[Important notes](#creating-editing-removing-api-keys)  
+**[TFA required](#security-keys)**
+
+**Note:** You can display the created API key using the
+[private/list_api_keys](https://docs.deribit.com/#private-list_api_keys) method.
 
 **📖 Related Support Article:**
 [Creating new API key on Deribit](https://support.deribit.com/hc/en-us/articles/26268257333661-Creating-new-API-key-on-Deribit)
@@ -173,7 +178,6 @@ This is a private method; it can only be used after authentication.
 | max_scope        | true     | string |      | Describes maximal access for tokens generated with given key, possible values: <code>trade:[read, read_write, none]</code>, <code>wallet:[read, read_write, none]</code>, <code>account:[read, read_write, none]</code>, <code>block_trade:[read, read_write, none]</code>. If scope is not provided, its value is set as none.<br><br>Please check details described in <a href="#access-scope">Access scope</a>                                |
 | name             | false    | string |      | Name of key (only letters, numbers and underscores allowed; maximum length - 16 characters)                                                                                                                                                                                                                                                                                                                                                      |
 | public_key       | false    | string |      | ED25519 or RSA PEM Encoded public key that should be used to create asymmetric API Key for signing requests/authentication requests with user's private key.<br><br><strong>📖 Related Support Article:</strong> <a href="https://support.deribit.com/hc/en-us/articles/25944616699165-Asymmetric-API-keys">Asymmetric API keys</a>                                                                                                              |
-|                  |          |        |      |
 | enabled_features | false    | array  |      | List of enabled advanced on-key features. Available options:<br>- <code>restricted_block_trades</code>: Limit the block_trade read the scope of the API key to block trades that have been made using this specific API key<br>- <code>block_trade_approval</code>: Block trades created using this API key require additional user approval. Methods that use <code>block_rfq</code> scope are not affected by Block Trade approval feature<br> |
 
 ### Response
@@ -287,7 +291,8 @@ This is a private method; it can only be used after authentication.
 ## /private/edit_api_key
 
 Edits existing API key. At least one parameter is required.
-[Important notes](#creating-editing-removing-api-keys)
+[Important notes](#creating-editing-removing-api-keys)  
+**[TFA required](#security-keys)**
 
 **Scope:** `account:read_write`
 
@@ -326,6 +331,9 @@ This is a private method; it can only be used after authentication.
 ## /private/enable_affiliate_program
 
 Enables affiliate program for user
+
+**📖 Related Support Article:**
+[Affiliate Program](https://support.deribit.com/hc/en-us/articles/25944777728797-Affiliate-Program)
 
 **Scope:** `account:read_write`
 
@@ -867,13 +875,13 @@ This is a private method; it can only be used after authentication.
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;contracts                | number                   | It represents the order size in contract units. (Optional, may be absent in historical data).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;is_secondary_oto         | boolean                  | <code>true</code> if the order is an order that can be triggered by another order, otherwise not present.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;replaced                 | boolean                  | <code>true</code> if the order was edited (by user or - in case of advanced options orders - by pricing engine), otherwise <code>false</code>.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;mmp_group                | string                   | Name of the MMP group supplied in the <code>private/mass_quote</code> request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;mmp_group                | string                   | Name of the MMP group supplied in the <code>private/mass_quote</code> request. Only present for quote orders.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;mmp                      | boolean                  | <code>true</code> if the order is a MMP order, otherwise <code>false</code>.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;last_update_timestamp    | integer                  | The timestamp (milliseconds since the Unix epoch)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;creation_timestamp       | integer                  | The timestamp (milliseconds since the Unix epoch)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;cancel_reason            | string                   | Enumerated reason behind cancel <code>"user_request"</code>, <code>"autoliquidation"</code>, <code>"cancel_on_disconnect"</code>, <code>"risk_mitigation"</code>, <code>"pme_risk_reduction"</code> (portfolio margining risk reduction), <code>"pme_account_locked"</code> (portfolio margining account locked per currency), <code>"position_locked"</code>, <code>"mmp_trigger"</code> (market maker protection), <code>"mmp_config_curtailment"</code> (market maker configured quantity decreased), <code>"edit_post_only_reject"</code> (cancelled on edit because of <code>reject_post_only</code> setting), <code>"oco_other_closed"</code> (the oco order linked to this order was closed), <code>"oto_primary_closed"</code> (the oto primary order that was going to trigger this order was cancelled), <code>"settlement"</code> (closed because of a settlement) |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;mmp_cancelled            | boolean                  | <code>true</code> if order was cancelled by mmp trigger (optional)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;quote_id                 | string                   | The same QuoteID as supplied in the <code>private/mass_quote</code> request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;quote_id                 | string                   | The same QuoteID as supplied in the <code>private/mass_quote</code> request. Only present for quote orders.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;order_state              | string                   | Order state: <code>"open"</code>, <code>"filled"</code>, <code>"rejected"</code>, <code>"cancelled"</code>, <code>"untriggered"</code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;is_rebalance             | boolean                  | Optional (only for spot). <code>true</code> if order was automatically created during cross-collateral balance restoration                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;reject_post_only         | boolean                  | <code>true</code> if order has <code>reject_post_only</code> flag (field is present only when <code>post_only</code> is <code>true</code>)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
@@ -891,7 +899,7 @@ This is a private method; it can only be used after authentication.
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;trigger_price            | number                   | Trigger price (Only for future trigger orders)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;oco_ref                  | string                   | Unique reference that identifies a one_cancels_others (OCO) pair.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;trigger_offset           | number                   | The maximum deviation from the price peak beyond which the order will be triggered (Only for trailing trigger orders)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;quote_set_id             | string                   | Identifier of the QuoteSet supplied in the <code>private/mass_quote</code> request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;quote_set_id             | string                   | Identifier of the QuoteSet supplied in the <code>private/mass_quote</code> request. Only present for quote orders.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;auto_replaced            | boolean                  | Options, advanced orders only - <code>true</code> if last modification of the order was performed by the pricing engine, otherwise <code>false</code>.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;reduce_only              | boolean                  | Optional (not added for spot). '<code>true</code> for reduce-only orders only'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;amount                   | number                   | It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures and it is the underlying base currency coin.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -1019,7 +1027,8 @@ _This method takes no parameters_
 ## /private/list_api_keys
 
 Retrieves list of api keys.
-[Important notes](#creating-editing-removing-api-keys).
+[Important notes](#creating-editing-removing-api-keys).  
+**[TFA required](#security-keys)**
 
 **Scope:** `account:read`
 
@@ -1051,6 +1060,9 @@ _This method takes no parameters_
 ## /private/list_custody_accounts
 
 Retrieves user custody accounts list.
+
+**📖 Related Support Article:**
+[Custody Options](https://support.deribit.com/hc/en-us/articles/26533163120413-Custody-Options)
 
 This is a private method; it can only be used after authentication.
 
@@ -1128,7 +1140,8 @@ This is a private method; it can only be used after authentication.
 
 ## /private/remove_subaccount
 
-Remove empty subaccount.
+Remove empty subaccount.  
+**[TFA required](#security-keys)**
 
 **Scope:** `account:read_write`
 
@@ -1208,7 +1221,8 @@ This is a private method; it can only be used after authentication.
 ## /private/set_disabled_trading_products
 
 Configure disabled trading products for subaccounts. Only main accounts can
-modify this for subaccounts.
+modify this for subaccounts.  
+**[TFA required](#security-keys)**
 
 **Scope:** `account:read_write`
 
@@ -1233,7 +1247,8 @@ This is a private method; it can only be used after authentication.
 ## /private/set_email_for_subaccount
 
 Assign an email address to a subaccount. User will receive an email with a
-confirmation link.
+confirmation link.  
+**[TFA required](#security-keys)**
 
 **Scope:** `account:read_write`
 
@@ -1331,7 +1346,8 @@ This is a private method; it can only be used after authentication.
 
 ## /private/toggle_notifications_from_subaccount
 
-Enable or disable sending of notifications for the subaccount.
+Enable or disable sending of notifications for the subaccount.  
+**[TFA required](#security-keys)**
 
 **Scope:** `account:read_write`
 
@@ -1355,7 +1371,8 @@ This is a private method; it can only be used after authentication.
 ## /private/toggle_subaccount_login
 
 Enable or disable login for a subaccount. If login is disabled and a session for
-the subaccount exists, this session will be terminated.
+the subaccount exists, this session will be terminated.  
+**[TFA required](#security-keys)**
 
 **Scope:** `account:read_write`
 

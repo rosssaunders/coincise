@@ -25,6 +25,10 @@ Establishing a websocket connection
 }
 ```
 
+- It is possible to subscribe to multiple topics with a single subscription
+  message. For example, a topic of `assetAccounts+derivativesPositionsV2` would
+  subscribe to both `assetAccounts` and `derivativesPositionsV2`
+
 2. Getting private data from multiple trading accounts.
 
 - Connect to `/trading-api/v1/private-data`
@@ -56,6 +60,8 @@ Establishing a websocket connection
 | ~derivativesPositions~ | `Deprecated`[*Replaced by:* `derivativesPositionsV2`] Provides derivative position information on your trading account.               | `V1TAPerpetualPosition`   | By `<TOPIC>`      |
 | derivativesPositionsV2 | Provides derivative position information on your trading account.                                                                     | `V1TADerivativesPosition` | By `<TOPIC>`      |
 | ammInstructions        | Provides amm instructions update on your trading account.                                                                             | `V1TAAmmInstruction`      | By `<TOPIC>`      |
+| mmpTrigger             | Provides snapshot and updates on your market maker protection trigger events.                                                         | `V1TAMMPTrigger`          | By `<TOPIC>`      |
+| mmpRequest             | Provides snapshot and updates on your market maker protection configurations.                                                         | `V1TAMMPConfigRequest`    | By `<TOPIC>`      |
 
 ### orders response
 
@@ -159,6 +165,9 @@ String | denotes the time the update was broadcasted to connected websockets |
 | tradeRebateAmount      | String  | amount of rebate that is credited to the user as part of the trade                                           |
 | tradeRebateAssetSymbol | String  | symbol of the asset in which the rebate is paid                                                              |
 | isTaker                | Boolean | denotes whether this is a taker's trade                                                                      |
+| otcMatchId             | String  | unique OTC match id                                                                                          |
+| otcTradeId             | String  | unique Bullish OTC trade id                                                                                  |
+| clientOtcTradeId       | String  | unique client OTC trade id                                                                                   |
 | createdAtDatetime      | String  | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string                 |
 | createdAtTimestamp     | String  | denotes the time the trade was executed by the exchange                                                      |
 | publishedAtTimestamp   | String  | denotes the time the update was broadcasted to connected websockets                                          |
@@ -183,6 +192,9 @@ String | denotes the time the update was broadcasted to connected websockets |
       "isTaker": false,
       "tradeRebateAmount": "3.0000",
       "tradeRebateAssetSymbol": "USDC",
+      "otcMatchId": "15",
+      "otcTradeId": "200014000000000118",
+      "clientOtcTradeId": "300014000000000118",
       "createdAtDatetime": "2021-12-30T07:36:35.918Z",
       "createdAtTimestamp": "1640849795918",
       "publishedAtTimestamp": "1640849795920"
@@ -540,6 +552,76 @@ String | denotes the time the update was broadcasted to connected websockets |
 }
 ```
 
+### mmpTrigger response
+
+| Name                  | Type   | Description                                                                                                        |
+| --------------------- | ------ | ------------------------------------------------------------------------------------------------------------------ |
+| tradingAccountId      | String | id of the trading account                                                                                          |
+| mmpTriggerId          | String | unique MMP trigger ID                                                                                              |
+| underlyingAssetSymbol | String | underlying asset symbol                                                                                            |
+| triggeredBy           | String | trigger reason                                                                                                     |
+| frozenTimeInSecond    | String | duration for which a market maker’s trading activity is temporarily halted after a protective measure is triggered |
+| frozenStartTime       | String | start time of the MMP trigger in epoch milliseconds                                                                |
+| frozenUntil           | String | end time of the MMP trigger in epoch milliseconds                                                                  |
+
+```json
+{
+  "tradingAccountId": "111000000000000",
+  "type": "snapshot",
+  "dataType": "V1TAMMPTrigger",
+  "data": [
+    {
+      "mmpTriggerId": "100000000000000"
+      "tradingAccountId": "111000000000000",
+      "underlyingAssetSymbol": "BTC",
+      "triggeredBy": "Delta Limit",
+      "frozenTimeInSecond": "10",
+      "frozenStartTime": "1611082473000",
+      "frozenUntil": "1611082483000"
+    }
+  ]
+}
+```
+
+### mmpRequest response
+
+| Name               | Type   | Description                                                                                                        |
+| ------------------ | ------ | ------------------------------------------------------------------------------------------------------------------ |
+| tradingAccountId   | String | id of the trading account                                                                                          |
+| requestId          | String | id of the request                                                                                                  |
+| assetSymbol        | String | underlying asset symbol                                                                                            |
+| windowTimeInSecond | String | time window during which the MMP checks are conducted                                                              |
+| frozenTimeInSecond | String | duration for which a market maker’s trading activity is temporarily halted after a protective measure is triggered |
+| quantityLimit      | String | cap on the total number of contracts that a market maker can trade within `windowTimeInSeconds`                    |
+| deltaLimit         | String | net delta exposure that a market maker can accumulate within `windowTimeInSeconds`                                 |
+| status             | String | status of the request                                                                                              |
+| statusReason       | String | status reason, describes why the request is in a specific state                                                    |
+| isReset            | String | boolean value that indicates if it was a set or reset MMP configuration request                                    |
+| createdAt          | String | denotes the time the request was ACK'd by the exchange                                                             |
+
+```json
+{
+  "tradingAccountId": "111000000000000",
+  "type": "snapshot",
+  "dataType": "V1TAMMPConfigRequest",
+  "data": [
+    {
+      "requestId": "1",
+      "tradingAccountId": "111000000000000",
+      "assetSymbol": "BTC",
+      "windowTimeInSecond": "10",
+      "frozenTimeInSecond": "10",
+      "quantityLimit": "1000",
+      "deltaLimit": "500",
+      "status": "CLOSED",
+      "statusReason": "Ok",
+      "isReset": "false",
+      "createdAt": "1611082473000"
+    }
+  ]
+}
+```
+
 See
 [connect to private data web-socket](https://github.com/bullish-exchange/api-examples/blob/master/websocket/private_data_web_socket.py)
 for a sample Python script.
@@ -592,8 +674,24 @@ Bullish currently has 2 test assets.
 
 ## 2025 Changes
 
-- new Websocket API -
-  [Unified tick for multiple markets](#overview--anonymous-unified-tick-websocket-unauthenticated)
+- August
+  - new REST API - [Get Option Ladder](#tag--option-ladder)
+  - updated REST API - [Get Markets](#get-/v1/markets) NEW fields `strikePrice`
+  - updated REST API - [Get Market Tick](#get-/v1/markets/-symbol-/tick) NEW
+    fields `bidIVPercentage`, `askIVPercentage` and `greeks`
+  - new REST API - [OTC](#tag--OTC)
+  - new fields at [Get Trades](#get-/v1/trades) - `otcMatchId` and `otcTradeId`
+  - new REST API -
+    [Market Maker Protection](<#tag--market-maker-protection(MMP)>)
+  - new WebSocket API - `mmpRequest` topic for
+    [Private Data WebSocket](#overview--private-data-websocket-authenticated)
+  - new WebSocket API - `mmpTrigger` topic for
+    [Private Data WebSocket](#overview--private-data-websocket-authenticated)
+  - new REST API -
+    [Get Market Maker Protection Configuration by Trading Account Id](#get-/v2/mmp-configuration)
+- July
+  - new Websocket API -
+    [Unified tick for multiple markets](#overview--anonymous-unified-tick-websocket-unauthenticated)
 - June
   - new REST API - [Get Historical Trades](#get-/v1/history/trades)
   - new REST API - [Get Historical Orders](#get-/v2/history/orders)
@@ -1255,7 +1353,7 @@ endpoint is subjected to rate limiting.
         "allOf": [
           {
             "type": "string",
-            "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+            "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MKT\"` and `\"STOP_LIMIT\"` are not applicable for Options",
             "example": "LMT"
           }
         ],
@@ -1402,6 +1500,9 @@ const headers = {
     "true"
   ],
   "default": "false"
+},
+  'BX-REFERRER':{
+  "type": "string"
 }
 };
 
@@ -1443,6 +1544,9 @@ headers = {
     "true"
   ],
   "default": "false"
+},
+  'BX-REFERRER': {
+  "type": "string"
 }
 }
 
@@ -1495,6 +1599,7 @@ accepted.
 | BX-TIMESTAMP            | header | string                                              | true     | timestamp is the number of milliseconds since EPOCH                                                                                                                 |
 | BX-NONCE                | header | string                                              | true     | nonce is a client side incremented unsigned 64 bit integer                                                                                                          |
 | BX-NONCE-WINDOW-ENABLED | header | string                                              | false    | string representation of a boolean value, [enables out-of-order order requests to be processed](#overview--how-to-enable-out-of-order-processing-of-order-requests) |
+| BX-REFERRER             | header | string                                              | false    | A numeric referrer id if applicable                                                                                                                                 |
 | body                    | body   | [CreateOrderCommandV3](#schemacreateordercommandv3) | true     | new order request body                                                                                                                                              |
 
 #### Detailed descriptions
@@ -1794,7 +1899,7 @@ subjected to rate limiting.
       "allOf": [
         {
           "type": "string",
-          "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+          "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MKT\"` and `\"STOP_LIMIT\"` are not applicable for Options",
           "example": "LMT"
         }
       ],
@@ -5140,6 +5245,8 @@ Get a list of trades based on specified filters.
 | symbol           | query  | [MarketSymbol](#schemamarketsymbol)         | false    | none                                                                                         |
 | orderId          | query  | [OrderID](#schemaorderid)                   | false    | unique order ID                                                                              |
 | tradingAccountId | query  | [TradingAccountId](#schematradingaccountid) | true     | Id of the trading account                                                                    |
+| otcTradeId       | query  | [OtcTradeId](#schemaotctradeid)             | false    | unique Bullish otc trade id                                                                  |
+| clientOtcTradeId | query  | [ClientOtcTradeId](#schemaclientotctradeid) | false    | unique client otc trade id                                                                   |
 
 > Example responses
 
@@ -5165,6 +5272,9 @@ Get a list of trades based on specified filters.
       "isTaker",
       "tradeRebateAmount",
       "tradeRebateAssetSymbol",
+      "otcMatchId",
+      "otcTradeId",
+      "clientOtcTradeId",
       "createdAtTimestamp",
       "createdAtDatetime"
     ],
@@ -5288,6 +5398,36 @@ Get a list of trades based on specified filters.
           }
         ]
       },
+      "otcMatchId": {
+        "description": "unique OTC match ID.",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+            "example": "15"
+          }
+        ]
+      },
+      "otcTradeId": {
+        "description": "unique Bullish OTC trade ID",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+            "example": "200000000000000098"
+          }
+        ]
+      },
+      "clientOtcTradeId": {
+        "description": "unique Client OTC trade ID",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "unique numeric (i64) identifier generated on the client side expressed as a string value",
+            "example": "20050900225"
+          }
+        ]
+      },
       "createdAtDatetime": {
         "description": "denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string",
         "allOf": [
@@ -5344,6 +5484,9 @@ Status Code **200**
 | » isTaker                | [Boolean](#schemaboolean)(true or false)              | true     | none         | denotes whether this is a taker's trade                                                                       |
 | » tradeRebateAmount      | [AssetValue](#schemaassetvalue)                       | true     | none         | amount of rebate that is credited to the user as part of the trade.                                           |
 | » tradeRebateAssetSymbol | [QuoteAssetSymbol](#schemaquoteassetsymbol)           | true     | none         | the symbol of the asset in which the rebate is paid                                                           |
+| » otcMatchId             | [OtcMatchId](#schemaotcmatchid)                       | true     | none         | unique OTC match ID.                                                                                          |
+| » otcTradeId             | [OtcTradeId](#schemaotctradeid)                       | true     | none         | unique Bullish OTC trade ID                                                                                   |
+| » clientOtcTradeId       | [ClientOtcTradeId](#schemaclientotctradeid)           | true     | none         | unique Client OTC trade ID                                                                                    |
 | » createdAtDatetime      | [DateTime](#schemadatetime)(date-time)                | true     | none         | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string                  |
 | » createdAtTimestamp     | [TimeStampAsString](#schematimestampasstring)(string) | true     | none         | denotes the time the trade was executed by the exchange                                                       |
 
@@ -5433,6 +5576,9 @@ header
     "isTaker",
     "tradeRebateAmount",
     "tradeRebateAssetSymbol",
+    "otcMatchId",
+    "otcTradeId",
+    "clientOtcTradeId",
     "createdAtTimestamp",
     "createdAtDatetime"
   ],
@@ -5553,6 +5699,36 @@ header
           "type": "string",
           "description": "asset symbol as denoted in the world",
           "example": "USDC"
+        }
+      ]
+    },
+    "otcMatchId": {
+      "description": "unique OTC match ID.",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+          "example": "15"
+        }
+      ]
+    },
+    "otcTradeId": {
+      "description": "unique Bullish OTC trade ID",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+          "example": "200000000000000098"
+        }
+      ]
+    },
+    "clientOtcTradeId": {
+      "description": "unique Client OTC trade ID",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique numeric (i64) identifier generated on the client side expressed as a string value",
+          "example": "20050900225"
         }
       ]
     },
@@ -6665,9 +6841,10 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
 
 ### Parameters
 
-| Name       | In    | Type                                            | Required | Description                            |
-| ---------- | ----- | ----------------------------------------------- | -------- | -------------------------------------- |
-| marketType | query | [MarketTypeAsString](#schemamarkettypeasstring) | false    | Market Types to filter markets against |
+| Name       | In    | Type                                            | Required | Description                                                                                     |
+| ---------- | ----- | ----------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------- |
+| marketType | query | [MarketTypeAsString](#schemamarkettypeasstring) | false    | Market Types to filter markets against                                                          |
+| optionType | query | [OptionTypeAsString](#schemaoptiontypeasstring) | false    | Option Type to filter markets against. If this is present, only Option Markets will be returned |
 
 #### Enumerated Values
 
@@ -6676,6 +6853,9 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
 | marketType | SPOT         |
 | marketType | PERPETUAL    |
 | marketType | DATED_FUTURE |
+| marketType | OPTION       |
+| optionType | CALL         |
+| optionType | PUT          |
 
 > Example responses
 
@@ -6743,8 +6923,8 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         "allOf": [
           {
             "type": "string",
-            "description": "market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market",
-            "example": "BTCUSDC"
+            "description": "market symbol. Eg `BTC-USDC-20241004-70000-C` for OPTION markets.",
+            "example": "BTC-USDC-20241004-70000-C"
           }
         ]
       },
@@ -6836,7 +7016,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         "example": 8
       },
       "priceBuffer": {
-        "description": "buffer range of limit price from the last traded price.",
+        "description": "buffer range of limit price from the last traded price. Not applicable for `Option` markets",
         "type": "string",
         "example": 0.3
       },
@@ -6916,12 +7096,12 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         ]
       },
       "liquidityTickSize": {
-        "description": "liquidity tick size.",
+        "description": "liquidity tick size. Not applicable for `Option` markets",
         "type": "string",
         "example": "100.0000"
       },
       "liquidityPrecision": {
-        "description": "liquidity precision.",
+        "description": "liquidity precision. Not applicable for `Option` markets",
         "type": "integer",
         "example": 4
       },
@@ -6943,7 +7123,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         "example": "0.00000001"
       },
       "makerMinLiquidityAddition": {
-        "description": "minimum amount required to invest liquidity to market.",
+        "description": "minimum amount required to invest liquidity to market. Not applicable for `Option` markets",
         "type": "string",
         "example": "5000"
       },
@@ -6953,7 +7133,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
           "allOf": [
             {
               "type": "string",
-              "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+              "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MKT\"` and `\"STOP_LIMIT\"` are not applicable for Options",
               "example": "LMT"
             }
           ]
@@ -6991,12 +7171,12 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         "example": true
       },
       "liquidityInvestEnabled": {
-        "description": "able to invest liquidity to market.",
+        "description": "able to invest liquidity to market. Not applicable for `Option` markets",
         "type": "boolean",
         "example": true
       },
       "liquidityWithdrawEnabled": {
-        "description": "able to withdraw liquidity from market.",
+        "description": "able to withdraw liquidity from market. Not applicable for `Option` markets",
         "type": "boolean",
         "example": true
       },
@@ -7006,7 +7186,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         "example": 1
       },
       "feeTiers": {
-        "description": "all available fee tiers.",
+        "description": "all available fee tiers. Not applicable for `Option` markets",
         "type": "array",
         "minItems": 0,
         "items": {
@@ -7049,8 +7229,8 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         "allOf": [
           {
             "type": "string",
-            "description": "market type can have the following string values `\"SPOT\"`, `\"PERPETUAL\"`, `\"DATED_FUTURE\"`",
-            "enum": ["SPOT", "PERPETUAL", "DATED_FUTURE"],
+            "description": "market type can have the following string values `\"SPOT\"`, `\"PERPETUAL\"`, `\"DATED_FUTURE\"`, `\"OPTION\"`",
+            "enum": ["SPOT", "PERPETUAL", "DATED_FUTURE", "OPTION"],
             "example": "SPOT"
           }
         ]
@@ -7084,6 +7264,27 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
         "description": "denotes the time when the market expires in ISO 8601 with millisecond format as string",
         "type": "string",
         "example": "2024-10-04T08:00:00.000Z"
+      },
+      "optionStrikePrice": {
+        "description": "The price at which the option can be exercised upon expiry.",
+        "type": "string",
+        "example": "70000.0000"
+      },
+      "optionType": {
+        "description": "Specifies if it’s a call (right to buy) or a put (right to sell)",
+        "allOf": [
+          {
+            "description": "Type of Option market",
+            "example": "CALL",
+            "type": "string",
+            "enum": ["CALL", "PUT"]
+          }
+        ]
+      },
+      "premiumCapRatio": {
+        "description": "A cap that is set on the underlying asset's movement as part of the premium that limits the option buyer's profit.",
+        "type": "string",
+        "example": "0.10"
       }
     }
   }
@@ -7107,7 +7308,7 @@ Status Code **200**
 | ------------------------------- | ----------------------------------------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | _anonymous_                     | [[Market](#schemamarket)]                       | false    | none         | none                                                                                                                                                                                                     |
 | » marketId                      | [MarketID](#schemamarketid)                     | true     | none         | unique market ID                                                                                                                                                                                         |
-| » symbol                        | [MarketSymbol](#schemamarketsymbol)             | true     | none         | market symbol                                                                                                                                                                                            |
+| » symbol                        | [OptionMarketSymbol](#schemaoptionmarketsymbol) | true     | none         | market symbol                                                                                                                                                                                            |
 | » baseSymbol                    | [AssetSymbol](#schemaassetsymbol)               | true     | none         | base asset symbol (only applies to spot market)                                                                                                                                                          |
 | » underlyingBaseSymbol          | [AssetSymbol](#schemaassetsymbol)               | false    | none         | underlying base asset symbol (only applies to derivative market)                                                                                                                                         |
 | » quoteSymbol                   | [AssetSymbol](#schemaassetsymbol)               | true     | none         | quote asset symbol (only applies to spot market)                                                                                                                                                         |
@@ -7119,7 +7320,7 @@ Status Code **200**
 | » pricePrecision                | integer                                         | true     | none         | number of decimal digits 'after the dot' for price                                                                                                                                                       |
 | » quantityPrecision             | integer                                         | true     | none         | number of decimal digits 'after the dot' for quantity                                                                                                                                                    |
 | » costPrecision                 | integer                                         | true     | none         | number of decimal digits 'after the dot' for cost, `price * quantity`                                                                                                                                    |
-| » priceBuffer                   | string                                          | true     | none         | buffer range of limit price from the last traded price.                                                                                                                                                  |
+| » priceBuffer                   | string                                          | true     | none         | buffer range of limit price from the last traded price. Not applicable for `Option` markets                                                                                                              |
 | » minQuantityLimit              | [AssetValue](#schemaassetvalue)                 | true     | none         | order quantity should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                                                                        |
 | » maxQuantityLimit              | [AssetValue](#schemaassetvalue)                 | true     | none         | order quantity should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                                                                        |
 | » maxPriceLimit                 | [AssetValue](#schemaassetvalue)                 | true     | none         | order price should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                                                                           |
@@ -7128,12 +7329,12 @@ Status Code **200**
 | » minCostLimit                  | [AssetValue](#schemaassetvalue)                 | true     | none         | order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                                                        |
 | » timeZone                      | string                                          | true     | none         | time zone                                                                                                                                                                                                |
 | » tickSize                      | [AssetValue](#schemaassetvalue)                 | true     | none         | tick size, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                             |
-| » liquidityTickSize             | string                                          | true     | none         | liquidity tick size.                                                                                                                                                                                     |
-| » liquidityPrecision            | integer                                         | true     | none         | liquidity precision.                                                                                                                                                                                     |
+| » liquidityTickSize             | string                                          | true     | none         | liquidity tick size. Not applicable for `Option` markets                                                                                                                                                 |
+| » liquidityPrecision            | integer                                         | true     | none         | liquidity precision. Not applicable for `Option` markets                                                                                                                                                 |
 | » makerFee                      | integer                                         | false    | none         | Deprecated and no longer accurate. See `feeGroupId`                                                                                                                                                      |
 | » takerFee                      | integer                                         | false    | none         | Deprecated and no longer accurate. See `feeGroupId`                                                                                                                                                      |
 | » roundingCorrectionFactor      | string                                          | true     | none         | rounding correction factor for market                                                                                                                                                                    |
-| » makerMinLiquidityAddition     | string                                          | true     | none         | minimum amount required to invest liquidity to market.                                                                                                                                                   |
+| » makerMinLiquidityAddition     | string                                          | true     | none         | minimum amount required to invest liquidity to market. Not applicable for `Option` markets                                                                                                               |
 | » orderTypes                    | [allOf]                                         | false    | none         | none                                                                                                                                                                                                     |
 | » spotTradingEnabled            | boolean                                         | true     | none         | spot trading enabled (only applies for Spot markets)                                                                                                                                                     |
 | » marginTradingEnabled          | boolean                                         | true     | none         | margin trading enabled (only applies for Spot markets)                                                                                                                                                   |
@@ -7141,10 +7342,10 @@ Status Code **200**
 | » createOrderEnabled            | boolean                                         | true     | none         | able to create order                                                                                                                                                                                     |
 | » amendOrderEnabled             | boolean                                         | false    | none         | able to amend order                                                                                                                                                                                      |
 | » cancelOrderEnabled            | boolean                                         | true     | none         | able to cancel order                                                                                                                                                                                     |
-| » liquidityInvestEnabled        | boolean                                         | true     | none         | able to invest liquidity to market.                                                                                                                                                                      |
-| » liquidityWithdrawEnabled      | boolean                                         | true     | none         | able to withdraw liquidity from market.                                                                                                                                                                  |
+| » liquidityInvestEnabled        | boolean                                         | true     | none         | able to invest liquidity to market. Not applicable for `Option` markets                                                                                                                                  |
+| » liquidityWithdrawEnabled      | boolean                                         | true     | none         | able to withdraw liquidity from market. Not applicable for `Option` markets                                                                                                                              |
 | » feeGroupId                    | integer                                         | true     | none         | Identifier to the trade fee assigned to this market. Used with `tradeFeeRate` at [Get Trading Account](#get-/v1/accounts/trading-accounts/-tradingAccountId-)                                            |
-| » feeTiers                      | [allOf]                                         | true     | none         | all available fee tiers.                                                                                                                                                                                 |
+| » feeTiers                      | [allOf]                                         | true     | none         | all available fee tiers. Not applicable for `Option` markets                                                                                                                                             |
 | »» feeTierId                    | [FeeTierId](#schemafeetierid)                   | true     | none         | unique fee tier ID, see [Get Market By Symbol](#get-/v1/markets/-symbol-)                                                                                                                                |
 | »» staticSpreadFee              | string                                          | true     | none         | static spread fee                                                                                                                                                                                        |
 | »» isDislocationEnabled         | boolean                                         | true     | none         | dislocation enabled/disabled                                                                                                                                                                             |
@@ -7155,6 +7356,9 @@ Status Code **200**
 | » concentrationRiskThresholdUSD | string                                          | true     | none         | open interest notional of an account for a specific derivative contract.                                                                                                                                 |
 | » concentrationRiskPercentage   | string                                          | true     | none         | percentage of the total open interest for a specific derivative contract.                                                                                                                                |
 | » expiryDatetime                | string                                          | true     | none         | denotes the time when the market expires in ISO 8601 with millisecond format as string                                                                                                                   |
+| » optionStrikePrice             | string                                          | false    | none         | The price at which the option can be exercised upon expiry.                                                                                                                                              |
+| » optionType                    | [OptionType](#schemaoptiontype)                 | false    | none         | Specifies if it’s a call (right to buy) or a put (right to sell)                                                                                                                                         |
+| » premiumCapRatio               | string                                          | false    | none         | A cap that is set on the underlying asset's movement as part of the premium that limits the option buyer's profit.                                                                                       |
 
 #### Enumerated Values
 
@@ -7163,6 +7367,9 @@ Status Code **200**
 | marketType | SPOT         |
 | marketType | PERPETUAL    |
 | marketType | DATED_FUTURE |
+| marketType | OPTION       |
+| optionType | CALL         |
+| optionType | PUT          |
 
 > **Note:** This operation does not require authentication
 
@@ -7274,8 +7481,8 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       "allOf": [
         {
           "type": "string",
-          "description": "market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market",
-          "example": "BTCUSDC"
+          "description": "market symbol. Eg `BTC-USDC-20241004-70000-C` for OPTION markets.",
+          "example": "BTC-USDC-20241004-70000-C"
         }
       ]
     },
@@ -7367,7 +7574,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       "example": 8
     },
     "priceBuffer": {
-      "description": "buffer range of limit price from the last traded price.",
+      "description": "buffer range of limit price from the last traded price. Not applicable for `Option` markets",
       "type": "string",
       "example": 0.3
     },
@@ -7447,12 +7654,12 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       ]
     },
     "liquidityTickSize": {
-      "description": "liquidity tick size.",
+      "description": "liquidity tick size. Not applicable for `Option` markets",
       "type": "string",
       "example": "100.0000"
     },
     "liquidityPrecision": {
-      "description": "liquidity precision.",
+      "description": "liquidity precision. Not applicable for `Option` markets",
       "type": "integer",
       "example": 4
     },
@@ -7474,7 +7681,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       "example": "0.00000001"
     },
     "makerMinLiquidityAddition": {
-      "description": "minimum amount required to invest liquidity to market.",
+      "description": "minimum amount required to invest liquidity to market. Not applicable for `Option` markets",
       "type": "string",
       "example": "5000"
     },
@@ -7484,7 +7691,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
         "allOf": [
           {
             "type": "string",
-            "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+            "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MKT\"` and `\"STOP_LIMIT\"` are not applicable for Options",
             "example": "LMT"
           }
         ]
@@ -7522,12 +7729,12 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       "example": true
     },
     "liquidityInvestEnabled": {
-      "description": "able to invest liquidity to market.",
+      "description": "able to invest liquidity to market. Not applicable for `Option` markets",
       "type": "boolean",
       "example": true
     },
     "liquidityWithdrawEnabled": {
-      "description": "able to withdraw liquidity from market.",
+      "description": "able to withdraw liquidity from market. Not applicable for `Option` markets",
       "type": "boolean",
       "example": true
     },
@@ -7537,7 +7744,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       "example": 1
     },
     "feeTiers": {
-      "description": "all available fee tiers.",
+      "description": "all available fee tiers. Not applicable for `Option` markets",
       "type": "array",
       "minItems": 0,
       "items": {
@@ -7580,8 +7787,8 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       "allOf": [
         {
           "type": "string",
-          "description": "market type can have the following string values `\"SPOT\"`, `\"PERPETUAL\"`, `\"DATED_FUTURE\"`",
-          "enum": ["SPOT", "PERPETUAL", "DATED_FUTURE"],
+          "description": "market type can have the following string values `\"SPOT\"`, `\"PERPETUAL\"`, `\"DATED_FUTURE\"`, `\"OPTION\"`",
+          "enum": ["SPOT", "PERPETUAL", "DATED_FUTURE", "OPTION"],
           "example": "SPOT"
         }
       ]
@@ -7615,6 +7822,518 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
       "description": "denotes the time when the market expires in ISO 8601 with millisecond format as string",
       "type": "string",
       "example": "2024-10-04T08:00:00.000Z"
+    },
+    "optionStrikePrice": {
+      "description": "The price at which the option can be exercised upon expiry.",
+      "type": "string",
+      "example": "70000.0000"
+    },
+    "optionType": {
+      "description": "Specifies if it’s a call (right to buy) or a put (right to sell)",
+      "allOf": [
+        {
+          "description": "Type of Option market",
+          "example": "CALL",
+          "type": "string",
+          "enum": ["CALL", "PUT"]
+        }
+      ]
+    },
+    "premiumCapRatio": {
+      "description": "A cap that is set on the underlying asset's movement as part of the premium that limits the option buyer's profit.",
+      "type": "string",
+      "example": "0.10"
+    }
+  }
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description           | Schema                  |
+| ------ | -------------------------------------------------------------------------- | --------------------- | ----------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | OK                    | [Market](#schemamarket) |
+| 404    | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)             | Not Found             | None                    |
+| 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None                    |
+| 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None                    |
+
+> **Note:** This operation does not require authentication
+
+## market-data-get-historical-market
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json"
+}
+
+fetch(
+  "https://api.exchange.bullish.com/trading-api/v1/history/markets/{symbol}",
+  {
+    method: "GET",
+
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.exchange.bullish.com/trading-api/v1/history/markets/{symbol}', headers = headers)
+
+print(r.json())
+
+```
+
+`GET /v1/history/markets/{symbol}`
+
+_Get Historical Market by Symbol_
+
+Get Historical Market by Symbol. This endpoint will return specified market even
+if it is expired. Only applicable for this is applicable only for `DATED_FUTURE`
+and `OPTION` markets.
+
+### Parameters
+
+| Name   | In   | Type                                                                          | Required | Description |
+| ------ | ---- | ----------------------------------------------------------------------------- | -------- | ----------- |
+| symbol | path | [OptionAndDatedFuturesMarketSymbol](#schemaoptionanddatedfuturesmarketsymbol) | true     | none        |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "object",
+  "required": [
+    "marketId",
+    "symbol",
+    "quoteAssetId",
+    "baseAssetId",
+    "quoteSymbol",
+    "baseSymbol",
+    "quotePrecision",
+    "basePrecision",
+    "pricePrecision",
+    "quantityPrecision",
+    "costPrecision",
+    "priceBuffer",
+    "minQuantityLimit",
+    "maxQuantityLimit",
+    "maxPriceLimit",
+    "minPriceLimit",
+    "maxCostLimit",
+    "minCostLimit",
+    "timeZone",
+    "tickSize",
+    "liquidityTickSize",
+    "liquidityPrecision",
+    "feeGroupId",
+    "roundingCorrectionFactor",
+    "makerMinLiquidityAddition",
+    "spotTradingEnabled",
+    "marginTradingEnabled",
+    "marketEnabled",
+    "createOrderEnabled",
+    "cancelOrderEnabled",
+    "liquidityInvestEnabled",
+    "liquidityWithdrawEnabled",
+    "feeTiers",
+    "marketType",
+    "openInterestUSD",
+    "concentrationRiskThresholdUSD",
+    "concentrationRiskPercentage",
+    "expiryDatetime"
+  ],
+  "properties": {
+    "marketId": {
+      "description": "unique market ID",
+      "allOf": [
+        {
+          "type": "string",
+          "example": "10000"
+        }
+      ]
+    },
+    "symbol": {
+      "description": "market symbol",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "market symbol. Eg `BTC-USDC-20241004-70000-C` for OPTION markets.",
+          "example": "BTC-USDC-20241004-70000-C"
+        }
+      ]
+    },
+    "baseSymbol": {
+      "description": "base asset symbol (only applies to spot market)",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "asset symbol as denoted in the world",
+          "example": "BTC"
+        }
+      ]
+    },
+    "underlyingBaseSymbol": {
+      "description": "underlying base asset symbol (only applies to derivative market)",
+      "example": null,
+      "allOf": [
+        {
+          "type": "string",
+          "description": "asset symbol as denoted in the world",
+          "example": "BTC"
+        }
+      ]
+    },
+    "quoteSymbol": {
+      "description": "quote asset symbol (only applies to spot market)",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "asset symbol as denoted in the world",
+          "example": "BTC"
+        }
+      ]
+    },
+    "underlyingQuoteSymbol": {
+      "description": "underlying quote asset symbol (only applies to derivative market)",
+      "example": null,
+      "allOf": [
+        {
+          "type": "string",
+          "description": "asset symbol as denoted in the world",
+          "example": "BTC"
+        }
+      ]
+    },
+    "quoteAssetId": {
+      "description": "quote asset id",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique asset ID",
+          "example": "1"
+        }
+      ]
+    },
+    "baseAssetId": {
+      "description": "base asset id",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique asset ID",
+          "example": "1"
+        }
+      ]
+    },
+    "quotePrecision": {
+      "description": "quote precision",
+      "type": "integer",
+      "example": 4
+    },
+    "basePrecision": {
+      "description": "base precision",
+      "type": "integer",
+      "example": 8
+    },
+    "pricePrecision": {
+      "description": "number of decimal digits 'after the dot' for price",
+      "type": "integer",
+      "example": 8
+    },
+    "quantityPrecision": {
+      "description": "number of decimal digits 'after the dot' for quantity",
+      "type": "integer",
+      "example": 8
+    },
+    "costPrecision": {
+      "description": "number of decimal digits 'after the dot' for cost, `price * quantity`",
+      "type": "integer",
+      "example": 8
+    },
+    "priceBuffer": {
+      "description": "buffer range of limit price from the last traded price. Not applicable for `Option` markets",
+      "type": "string",
+      "example": 0.3
+    },
+    "minQuantityLimit": {
+      "description": "order quantity should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "maxQuantityLimit": {
+      "description": "order quantity should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "maxPriceLimit": {
+      "description": "order price should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "minPriceLimit": {
+      "description": "order price should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "maxCostLimit": {
+      "description": "order cost, `price * quantity` should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "minCostLimit": {
+      "description": "order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "timeZone": {
+      "description": "time zone",
+      "type": "string",
+      "example": "Etc/UTC"
+    },
+    "tickSize": {
+      "description": "tick size, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "liquidityTickSize": {
+      "description": "liquidity tick size. Not applicable for `Option` markets",
+      "type": "string",
+      "example": "100.0000"
+    },
+    "liquidityPrecision": {
+      "description": "liquidity precision. Not applicable for `Option` markets",
+      "type": "integer",
+      "example": 4
+    },
+    "makerFee": {
+      "description": "Deprecated and no longer accurate. See `feeGroupId`",
+      "type": "integer",
+      "example": 0,
+      "deprecated": true
+    },
+    "takerFee": {
+      "description": "Deprecated and no longer accurate. See `feeGroupId`",
+      "type": "integer",
+      "example": 2,
+      "deprecated": true
+    },
+    "roundingCorrectionFactor": {
+      "description": "rounding correction factor for market",
+      "type": "string",
+      "example": "0.00000001"
+    },
+    "makerMinLiquidityAddition": {
+      "description": "minimum amount required to invest liquidity to market. Not applicable for `Option` markets",
+      "type": "string",
+      "example": "5000"
+    },
+    "orderTypes": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "type": "string",
+            "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MKT\"` and `\"STOP_LIMIT\"` are not applicable for Options",
+            "example": "LMT"
+          }
+        ]
+      }
+    },
+    "spotTradingEnabled": {
+      "description": "spot trading enabled (only applies for Spot markets)",
+      "type": "boolean",
+      "example": true
+    },
+    "marginTradingEnabled": {
+      "description": "margin trading enabled (only applies for Spot markets)",
+      "type": "boolean",
+      "example": true
+    },
+    "marketEnabled": {
+      "description": "market enabled",
+      "type": "boolean",
+      "example": true
+    },
+    "createOrderEnabled": {
+      "description": "able to create order",
+      "type": "boolean",
+      "example": true
+    },
+    "amendOrderEnabled": {
+      "description": "able to amend order",
+      "type": "boolean",
+      "example": true,
+      "deprecated": true
+    },
+    "cancelOrderEnabled": {
+      "description": "able to cancel order",
+      "type": "boolean",
+      "example": true
+    },
+    "liquidityInvestEnabled": {
+      "description": "able to invest liquidity to market. Not applicable for `Option` markets",
+      "type": "boolean",
+      "example": true
+    },
+    "liquidityWithdrawEnabled": {
+      "description": "able to withdraw liquidity from market. Not applicable for `Option` markets",
+      "type": "boolean",
+      "example": true
+    },
+    "feeGroupId": {
+      "description": "Identifier to the trade fee assigned to this market. Used with `tradeFeeRate` at [Get Trading Account](#get-/v1/accounts/trading-accounts/-tradingAccountId-)",
+      "type": "integer",
+      "example": 1
+    },
+    "feeTiers": {
+      "description": "all available fee tiers. Not applicable for `Option` markets",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "allOf": [
+          {
+            "type": "object",
+            "description": "unique fee tier",
+            "required": [
+              "feeTierId",
+              "staticSpreadFee",
+              "isDislocationEnabled"
+            ],
+            "properties": {
+              "feeTierId": {
+                "allOf": [
+                  {
+                    "type": "string",
+                    "description": "unique fee tier ID, see [Get Market By Symbol](#get-/v1/markets/-symbol-)",
+                    "example": "1"
+                  }
+                ]
+              },
+              "staticSpreadFee": {
+                "description": "static spread fee",
+                "type": "string",
+                "example": "0.00040000"
+              },
+              "isDislocationEnabled": {
+                "description": "dislocation enabled/disabled",
+                "type": "boolean",
+                "example": true
+              }
+            }
+          }
+        ]
+      }
+    },
+    "marketType": {
+      "description": "market type, e.g. \"SPOT\" for market like \"BTCUSD\", \"PERPETUAL\" for market like \"BTC-USDC-PERP\", \"DATED_FUTURE\" for market like \"BTC-USDC-20250901\", \"OPTION\" for market like \"BTC-USDC-20250901-90000-C\"",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "market type can have the following string values `\"SPOT\"`, `\"PERPETUAL\"`, `\"DATED_FUTURE\"`, `\"OPTION\"`",
+          "enum": ["SPOT", "PERPETUAL", "DATED_FUTURE", "OPTION"],
+          "example": "SPOT"
+        }
+      ]
+    },
+    "contractMultiplier": {
+      "description": "contract multiplier. (only applies to perpetual market)",
+      "type": "integer",
+      "example": null
+    },
+    "settlementAssetSymbol": {
+      "description": "settlement asset symbol. (only applies to perpetual market)",
+      "type": "string",
+      "example": null
+    },
+    "openInterestUSD": {
+      "description": "cumulative notional value of all open interest for a specific derivative contract on the exchange.",
+      "type": "string",
+      "example": null
+    },
+    "concentrationRiskThresholdUSD": {
+      "description": "open interest notional of an account for a specific derivative contract.",
+      "type": "string",
+      "example": null
+    },
+    "concentrationRiskPercentage": {
+      "description": "percentage of the total open interest for a specific derivative contract.",
+      "type": "string",
+      "example": null
+    },
+    "expiryDatetime": {
+      "description": "denotes the time when the market expires in ISO 8601 with millisecond format as string",
+      "type": "string",
+      "example": "2024-10-04T08:00:00.000Z"
+    },
+    "optionStrikePrice": {
+      "description": "The price at which the option can be exercised upon expiry.",
+      "type": "string",
+      "example": "70000.0000"
+    },
+    "optionType": {
+      "description": "Specifies if it’s a call (right to buy) or a put (right to sell)",
+      "allOf": [
+        {
+          "description": "Type of Option market",
+          "example": "CALL",
+          "type": "string",
+          "enum": ["CALL", "PUT"]
+        }
+      ]
+    },
+    "premiumCapRatio": {
+      "description": "A cap that is set on the underlying asset's movement as part of the premium that limits the option buyer's profit.",
+      "type": "string",
+      "example": "0.10"
     }
   }
 }
@@ -8123,6 +8842,11 @@ Get Current Tick by Market Symbol.
         }
       ]
     },
+    "bidIVPercentage": {
+      "description": "Implied volatility of the best bid price",
+      "type": "string",
+      "example": "99.0"
+    },
     "bidVolume": {
       "description": "current best bid (buy) quantity (may be missing or undefined), see [asset value](#overview--price-and-quantity-precision) format",
       "allOf": [
@@ -8142,6 +8866,11 @@ Get Current Tick by Market Symbol.
           "example": "1.00000000"
         }
       ]
+    },
+    "askIVPercentage": {
+      "description": "Implied volatility of the best ask price",
+      "type": "string",
+      "example": "99.0"
     },
     "askVolume": {
       "description": "current best ask (sell) quantity (may be missing or undefined), see [asset value](#overview--price-and-quantity-precision) format",
@@ -8301,7 +9030,7 @@ Get Current Tick by Market Symbol.
       ]
     },
     "ammData": {
-      "description": "AMM data of all available fee tiers.",
+      "description": "AMM data of all available fee tiers. Not applicable for `Option` markets",
       "type": "array",
       "minItems": 0,
       "items": {
@@ -8356,6 +9085,64 @@ Get Current Tick by Market Symbol.
           }
         ]
       }
+    },
+    "optionStrikePrice": {
+      "description": "The price at which the option can be exercised upon expiry.",
+      "type": "string",
+      "example": "70000"
+    },
+    "optionType": {
+      "description": "Type of Option",
+      "allOf": [
+        {
+          "description": "Type of Option market",
+          "example": "CALL",
+          "type": "string",
+          "enum": ["CALL", "PUT"]
+        }
+      ]
+    },
+    "expiryDateTime": {
+      "description": "Expiry Date Time of the instrument",
+      "allOf": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "example": "2025-05-20T01:01:01.000Z",
+          "description": "ISO 8601 with millisecond as string"
+        }
+      ]
+    },
+    "greeks": {
+      "description": "Option greeks",
+      "allOf": [
+        {
+          "description": "Pricing parameters for option instruments",
+          "type": "object",
+          "properties": {
+            "delta": {
+              "description": "Sensitivity of an option’s price to a $1 change in the price of the underlying asset",
+              "type": "string",
+              "example": "0.98"
+            },
+            "gamma": {
+              "description": "Rate of change of Delta with respect to a $1 change in the underlying asset’s price",
+              "type": "string",
+              "example": "0.98"
+            },
+            "theta": {
+              "description": "The rate at which an option’s price decreases as it approaches its expiration date",
+              "type": "string",
+              "example": "-0.17"
+            },
+            "vega": {
+              "description": "Sensitivity of an option’s price to a 1% change in the implied volatility of the underlying asset",
+              "type": "string",
+              "example": "0.05"
+            }
+          }
+        }
+      ]
     }
   }
 }
@@ -10058,11 +10845,27 @@ Get derivatives positions
 
 ### Parameters
 
-| Name             | In     | Type                                        | Required | Description                                                                                                                                                                                                  |
-| ---------------- | ------ | ------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Authorization    | header | string                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                                                                 |
-| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid) | false    | Id of the trading account. `tradingAccountId` is mandatory in the query for users with multiple trading accounts. For users with a single trading account, it can be automatically retrieved from the login. |
-| symbol           | query  | [MarketSymbol](#schemamarketsymbol)         | false    | none                                                                                                                                                                                                         |
+| Name             | In     | Type                                                                                | Required | Description                                                                                                                                                                                                  |
+| ---------------- | ------ | ----------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Authorization    | header | string                                                                              | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                                                                 |
+| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid)                                         | false    | Id of the trading account. `tradingAccountId` is mandatory in the query for users with multiple trading accounts. For users with a single trading account, it can be automatically retrieved from the login. |
+| symbol           | query  | [MarketSymbol](#schemamarketsymbol)                                                 | false    | none                                                                                                                                                                                                         |
+| marketType       | query  | [MarketTypeAsString](#schemamarkettypeasstring)                                     | false    | Optional - Filter for results by expiry date                                                                                                                                                                 |
+| optionType       | query  | [OptionTypeAsString](#schemaoptiontypeasstring)                                     | false    | Optional - Filter for results by option type                                                                                                                                                                 |
+| sort             | query  | [MarketTypeOrOptionTypeSortByAsString](#schemamarkettypeoroptiontypesortbyasstring) | false    | Optional - Sort results by Market Type or Option Type                                                                                                                                                        |
+
+#### Enumerated Values
+
+| Parameter  | Value        |
+| ---------- | ------------ |
+| marketType | SPOT         |
+| marketType | PERPETUAL    |
+| marketType | DATED_FUTURE |
+| marketType | OPTION       |
+| optionType | CALL         |
+| optionType | PUT          |
+| sort       | marketType   |
+| sort       | optionType   |
 
 > Example responses
 
@@ -10546,7 +11349,7 @@ endpoint is subjected to rate limiting.
         "allOf": [
           {
             "type": "string",
-            "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+            "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MKT\"` and `\"STOP_LIMIT\"` are not applicable for Options",
             "example": "LMT"
           }
         ],
@@ -10725,6 +11528,8 @@ Get a list of trades based on specified filters.
 | tradingAccountId       | query  | [TradingAccountId](#schematradingaccountid) | true     | Id of the trading account                                                                    |
 | createdAtDatetime[gte] | query  | [DateTime](#schemadatetime)                 | false    | start timestamp of period, ISO 8601 with millisecond as string                               |
 | createdAtDatetime[lte] | query  | [DateTime](#schemadatetime)                 | false    | end timestamp of period, ISO 8601 with millisecond as string                                 |
+| otcTradeId             | query  | [OtcTradeId](#schemaotctradeid)             | false    | unique Bullish otc trade id                                                                  |
+| clientOtcTradeId       | query  | [ClientOtcTradeId](#schemaclientotctradeid) | false    | unique client otc trade id                                                                   |
 
 > Example responses
 
@@ -10750,6 +11555,9 @@ Get a list of trades based on specified filters.
       "isTaker",
       "tradeRebateAmount",
       "tradeRebateAssetSymbol",
+      "otcMatchId",
+      "otcTradeId",
+      "clientOtcTradeId",
       "createdAtTimestamp",
       "createdAtDatetime"
     ],
@@ -10873,6 +11681,36 @@ Get a list of trades based on specified filters.
           }
         ]
       },
+      "otcMatchId": {
+        "description": "unique OTC match ID.",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+            "example": "15"
+          }
+        ]
+      },
+      "otcTradeId": {
+        "description": "unique Bullish OTC trade ID",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+            "example": "200000000000000098"
+          }
+        ]
+      },
+      "clientOtcTradeId": {
+        "description": "unique Client OTC trade ID",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "unique numeric (i64) identifier generated on the client side expressed as a string value",
+            "example": "20050900225"
+          }
+        ]
+      },
       "createdAtDatetime": {
         "description": "denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string",
         "allOf": [
@@ -10929,6 +11767,9 @@ Status Code **200**
 | » isTaker                | [Boolean](#schemaboolean)(true or false)              | true     | none         | denotes whether this is a taker's trade                                                                       |
 | » tradeRebateAmount      | [AssetValue](#schemaassetvalue)                       | true     | none         | amount of rebate that is credited to the user as part of the trade.                                           |
 | » tradeRebateAssetSymbol | [QuoteAssetSymbol](#schemaquoteassetsymbol)           | true     | none         | the symbol of the asset in which the rebate is paid                                                           |
+| » otcMatchId             | [OtcMatchId](#schemaotcmatchid)                       | true     | none         | unique OTC match ID.                                                                                          |
+| » otcTradeId             | [OtcTradeId](#schemaotctradeid)                       | true     | none         | unique Bullish OTC trade ID                                                                                   |
+| » clientOtcTradeId       | [ClientOtcTradeId](#schemaclientotctradeid)           | true     | none         | unique Client OTC trade ID                                                                                    |
 | » createdAtDatetime      | [DateTime](#schemadatetime)(date-time)                | true     | none         | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string                  |
 | » createdAtTimestamp     | [TimeStampAsString](#schematimestampasstring)(string) | true     | none         | denotes the time the trade was executed by the exchange                                                       |
 
@@ -11840,6 +12681,312 @@ Status Code **200**
 > **Note:** To perform this operation, you must be authenticated by means of one
 > of the following methods: jwtTokenAuth
 
+# market-maker-protection(MMP)
+
+## set-mmp-config
+
+> Code samples
+
+```javascript
+const inputBody = '{
+  "commandType": "V1SetMMP",
+  "tradingAccountId": "123567443543",
+  "underlyingAssetSymbol": "BTC",
+  "windowTimeInSeconds": "10",
+  "frozenTimeInSeconds": "5",
+  "quantityLimit": "10",
+  "deltaLimit": "1",
+  "x-widdershins-oldRef": "#/components/schemas/SetMMPCommandV1/example"
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':{
+  "type": "string"
+},
+  'BX-SIGNATURE':{
+  "type": "string"
+},
+  'BX-TIMESTAMP':{
+  "type": "string"
+},
+  'BX-NONCE':{
+  "type": "string"
+}
+};
+
+fetch('https://api.exchange.bullish.com/trading-api/v2/mmp-configuration',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': {
+  "type": "string"
+},
+  'BX-SIGNATURE': {
+  "type": "string"
+},
+  'BX-TIMESTAMP': {
+  "type": "string"
+},
+  'BX-NONCE': {
+  "type": "string"
+}
+}
+
+r = requests.post('https://api.exchange.bullish.com/trading-api/v2/mmp-configuration', headers = headers)
+
+print(r.json())
+
+```
+
+`POST /v2/mmp-configuration`
+
+_Setup Market Maker Protection (MMP)_
+
+MMP configurations are setup per underlying asset symbol for a specific trading
+Account. While setting up MMP configurations you can specify
+`windowTimeInSeconds`, `frozenTimeInSeconds`, `quantityLimit` and `deltaLimit`
+and use it as best suited. Please reach out to your relationship manager to
+understand how to enable MMP for your trading accounts.
+
+- To get updates on the status of your set / reset MMP configs request for an
+  underlying asset symbol over WS ,please subscribe to `mmpRequest` TOPIC within
+  the [Private Data WebSocket](#overview--private-data-websocket-authenticated).
+- To get updates about MMP triggered event over WS ,please subscribe to the
+  `mmpTriggered` TOPIC within the
+  [Private Data WebSocket](#overview--private-data-websocket-authenticated).
+
+To update/amend your MMP configs ,please use the resetMMPCommandV1 to reset the
+MMP configurations , followed by setting up a new MMP config via setMMPCommandV1
+per underlying asset symbol.
+
+Note: MMP is only applicable for Options [Orders created](#post-/v2/orders) with
+the `isMMP` flag set to `true`.
+
+> Body parameter
+
+```json
+{
+  "commandType": "V1SetMMP",
+  "tradingAccountId": "123567443543",
+  "underlyingAssetSymbol": "BTC",
+  "windowTimeInSeconds": "10",
+  "frozenTimeInSeconds": "5",
+  "quantityLimit": "10",
+  "deltaLimit": "1",
+  "x-widdershins-oldRef": "#/components/schemas/SetMMPCommandV1/example"
+}
+```
+
+### Parameters
+
+| Name          | In     | Type   | Required | Description                                                                                                                |
+| ------------- | ------ | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Authorization | header | string | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                               |
+| BX-SIGNATURE  | header | string | true     | signature obtained using the [signing format](#overview--how-to-ensure-the-order-of-create-order-or-cancel-order-requests) |
+| BX-TIMESTAMP  | header | string | true     | timestamp is the number of milliseconds since EPOCH                                                                        |
+| BX-NONCE      | header | string | true     | nonce is a client side incremented unsigned 64 bit integer                                                                 |
+| body          | body   | any    | true     | none                                                                                                                       |
+
+> Example responses
+
+> Status OK. This means a command was successfully acknowledged.
+
+```json
+{
+  "message": "Command acknowledged - SetMMPConfig",
+  "requestId": "633910976353665025"
+}
+```
+
+```json
+{
+  "message": "Command acknowledged - ResetMMPConfig",
+  "requestId": "633910976353665026"
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description                                                    | Schema |
+| ------ | -------------------------------------------------------------------------- | -------------------------------------------------------------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | Status OK. This means a command was successfully acknowledged. | Inline |
+| 400    | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)           | Bad Request                                                    | None   |
+| 401    | [Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)            | Not Authenticated                                              | None   |
+| 403    | [Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)             | Access Forbidden                                               | None   |
+| 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests                                              | None   |
+| 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error                                          | None   |
+
+### Response Schema
+
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
+
+## get-mmp-config-by-trading-account-id
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json",
+  Authorization: {
+    type: "string"
+  }
+}
+
+fetch(
+  "https://api.exchange.bullish.com/trading-api/v2/mmp-configuration?tradingAccountId=111000000000001",
+  {
+    method: "GET",
+
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': {
+  "type": "string"
+}
+}
+
+r = requests.get('https://api.exchange.bullish.com/trading-api/v2/mmp-configuration', params={
+  'tradingAccountId': '111000000000001'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`GET /v2/mmp-configuration`
+
+_Get Market Marker Protection Configuration By Trading Account Id_
+
+Get market maker protection configurations under a trading account id
+
+This endpoint requires [authentication](#overview--generate-a-jwt-token). To
+filter by `symbol`, additional parameters are required. For detailed
+instructions, see the [Filtering Support](#overview--filtering-support) section.
+
+### Parameters
+
+| Name             | In     | Type                                                  | Required | Description                                                                                                                                                                                         |
+| ---------------- | ------ | ----------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authorization    | header | string                                                | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                                                                                                        |
+| symbol           | query  | [UnderlyingAssetSymbol](#schemaunderlyingassetsymbol) | false    | The underlying asset id you filter the configurations against. If symbol is provided, this API will only return the market maker protection configuration for this symbol for this trading account. |
+| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid)           | true     | Id of the trading account                                                                                                                                                                           |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "object",
+  "required": ["tradingAccountId", "message", "mmpConfigurations"],
+  "properties": {
+    "tradingAccountId": {
+      "allOf": [
+        {
+          "description": "unique trading account ID",
+          "type": "string",
+          "example": "111000000000001"
+        }
+      ]
+    },
+    "message": {
+      "description": "If there are no market maker protection configurations setup for this trading account or for the provided optional symbol under the same trading account, this field will be returned as \"No mmp config setup\".",
+      "type": "string",
+      "example": null
+    },
+    "mmpConfigurations": {
+      "description": "A list of market maker protection configurations that the user has setup for each underlying asset symbol under the trading account provided. Supports filtering of symbol.",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "required": [
+          "underlyingAssetSymbol",
+          "windowTimeInSeconds",
+          "frozenTimeInSeconds",
+          "quantityLimit",
+          "deltaLimit",
+          "isActive"
+        ],
+        "properties": {
+          "underlyingAssetSymbol": {
+            "type": "string",
+            "description": "Underlying Asset Symbol",
+            "example": "BTC"
+          },
+          "windowTimeInSeconds": {
+            "type": "integer",
+            "description": "Time window during which the MMP checks are conducted. It helps in determining how frequently the system evaluates the market maker's activity against predefined thresholds. Value needs to be `> 0`. Maximum value is 600 seconds (10 minutes).",
+            "example": 60
+          },
+          "frozenTimeInSeconds": {
+            "type": "integer",
+            "description": "The duration for which a market maker’s trading activity is temporarily halted after a protective measure is triggered. Value needs to be `>= 0`. Maximum value is 3600 seconds (60 minutes).",
+            "example": 120
+          },
+          "quantityLimit": {
+            "type": "string",
+            "description": "Cap on the total number of contracts that a market maker can trade within `windowTimeInSeconds`. This is direction(side) agnostic. Needs to be `> 0` if set.",
+            "example": "100"
+          },
+          "deltaLimit": {
+            "type": "string",
+            "description": "Net delta exposure that a market maker can accumulate within `windowTimeInSeconds`",
+            "example": "10"
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "This boolean indicates if this configuration is in effect or not.",
+            "example": true
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Responses
+
+| Status | Meaning                                                          | Description                                                    | Schema                                                            |
+| ------ | ---------------------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)          | Status OK. This means a command was successfully acknowledged. | [GetMmpConfigurationResponse](#schemagetmmpconfigurationresponse) |
+| 400    | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1) | Bad Request                                                    | None                                                              |
+| 401    | [Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)  | Not Authenticated                                              | None                                                              |
+| 403    | [Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)   | Access Forbidden                                               | None                                                              |
+
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
+
 # index-data
 
 ## get-index-prices
@@ -12074,6 +13221,498 @@ Retrieves the index price of a specified asset
 | 404    | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)             | Not found             | None                            |
 | 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None                            |
 | 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None                            |
+
+> **Note:** This operation does not require authentication
+
+# option-ladder
+
+## get-option-ladder
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json"
+}
+
+fetch(
+  "https://api.exchange.bullish.com/trading-api/v1/option-ladder?baseSymbol=BTC",
+  {
+    method: "GET",
+
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.exchange.bullish.com/trading-api/v1/option-ladder', params={
+  'baseSymbol': 'BTC'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`GET /v1/option-ladder`
+
+_Get Option Ladder_
+
+Returns the available options contracts. This data helps traders quickly assess
+the available options and their respective prices, implied volatilities, and
+Greeks (such as delta, gamma, theta, and vega).
+
+### Parameters
+
+| Name       | In    | Type                                                                                    | Required | Description                                                                |
+| ---------- | ----- | --------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------- |
+| baseSymbol | query | [AssetSymbol](#schemaassetsymbol)                                                       | true     | symbol to get                                                              |
+| expiry     | query | [OptionExpiryDate](#schemaoptionexpirydate)                                             | false    | Optional - Filter results by expiry date of the option markets             |
+| type       | query | [OptionType](#schemaoptiontype)                                                         | false    | Optional - Filter results by type (`CALL` or ` PUT`) of the option markets |
+| sort       | query | [OptionTypeOrExpiryDatetimeSortAsString](#schemaoptiontypeorexpirydatetimesortasstring) | false    | Optional - Sort results by Option Type or Expiry Datetime                  |
+
+#### Enumerated Values
+
+| Parameter | Value          |
+| --------- | -------------- |
+| type      | CALL           |
+| type      | PUT            |
+| sort      | optionType     |
+| sort      | expiryDatetime |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "array",
+  "items": {
+    "description": "Option Ladder Response",
+    "type": "string",
+    "properties": {
+      "symbol": {
+        "description": "Symbol of the option market. For example `BTC-USDC-20241004-70000-C`",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "market symbol. Eg `BTC-USDC-20241004-70000-C` for OPTION markets.",
+            "example": "BTC-USDC-20241004-70000-C"
+          }
+        ]
+      },
+      "baseSymbol": {
+        "description": "Base symbol of the option market. For `BTC-USDC-20241004-70000-C`, it will be `BTC`",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "asset symbol as denoted in the world",
+            "example": "BTC"
+          }
+        ]
+      },
+      "settlementAssetSymbol": {
+        "description": "Asset used for Mark To Market settlement",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "asset symbol as denoted in the world",
+            "example": "USDC"
+          }
+        ]
+      },
+      "bidQuantity": {
+        "description": "Quantity of `bid`",
+        "type": "string",
+        "example": "0.0"
+      },
+      "askQuantity": {
+        "description": "Quantity of `ask`",
+        "type": "string",
+        "example": "0.0"
+      },
+      "bidIVPercentage": {
+        "description": "Implied volatility of the best bid price",
+        "type": "string",
+        "example": "99.0"
+      },
+      "askIVPercentage": {
+        "description": "Implied volatility of the best ask price",
+        "type": "string",
+        "example": "99.0"
+      },
+      "bid": {
+        "description": "Bid price in the order book",
+        "type": "string",
+        "example": "90000.0000"
+      },
+      "ask": {
+        "description": "Ask price in the order book",
+        "type": "string",
+        "example": "90000.0000"
+      },
+      "underlyingPrice": {
+        "description": "Index price of the base asset",
+        "type": "string",
+        "example": "100000.0000"
+      },
+      "optionStrikePrice": {
+        "description": "Strike price of the option market",
+        "type": "string",
+        "example": "90000"
+      },
+      "markPrice": {
+        "description": "Mark Price of the option market",
+        "type": "string",
+        "example": "100.0000"
+      },
+      "quantity": {
+        "description": "Number of contracts outstanding",
+        "type": "string",
+        "example": "1000"
+      },
+      "openInterest": {
+        "description": "Amount of outstanding contracts in the exchange",
+        "type": "string",
+        "example": "0.11442400"
+      },
+      "openInterestUSD": {
+        "description": "USD value of outstanding contracts in the exchange",
+        "type": "string",
+        "example": "1144240.0000"
+      },
+      "optionType": {
+        "description": "Specifies if it’s a call (right to buy) or a put (right to sell)",
+        "allOf": [
+          {
+            "description": "Type of Option market",
+            "example": "CALL",
+            "type": "string",
+            "enum": ["CALL", "PUT"]
+          }
+        ]
+      },
+      "expiryDatetime": {
+        "allOf": [
+          {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-20T01:01:01.000Z",
+            "description": "ISO 8601 with millisecond as string"
+          }
+        ]
+      },
+      "greeks": {
+        "description": "Option greeks",
+        "allOf": [
+          {
+            "description": "Pricing parameters for option instruments",
+            "type": "object",
+            "properties": {
+              "delta": {
+                "description": "Sensitivity of an option’s price to a $1 change in the price of the underlying asset",
+                "type": "string",
+                "example": "0.98"
+              },
+              "gamma": {
+                "description": "Rate of change of Delta with respect to a $1 change in the underlying asset’s price",
+                "type": "string",
+                "example": "0.98"
+              },
+              "theta": {
+                "description": "The rate at which an option’s price decreases as it approaches its expiration date",
+                "type": "string",
+                "example": "-0.17"
+              },
+              "vega": {
+                "description": "Sensitivity of an option’s price to a 1% change in the implied volatility of the underlying asset",
+                "type": "string",
+                "example": "0.05"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description           | Schema |
+| ------ | -------------------------------------------------------------------------- | --------------------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | OK                    | Inline |
+| 400    | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)           | Bad Request           | None   |
+| 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests     | None   |
+| 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error | None   |
+
+### Response Schema
+
+Status Code **200**
+
+| Name                    | Type                                                  | Required | Restrictions | Description                                                                                       |
+| ----------------------- | ----------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------- |
+| _anonymous_             | [[OptionLadderResponse](#schemaoptionladderresponse)] | false    | none         | [Option Ladder Response]                                                                          |
+| » symbol                | [OptionMarketSymbol](#schemaoptionmarketsymbol)       | false    | none         | Symbol of the option market. For example `BTC-USDC-20241004-70000-C`                              |
+| » baseSymbol            | [AssetSymbol](#schemaassetsymbol)                     | false    | none         | Base symbol of the option market. For `BTC-USDC-20241004-70000-C`, it will be `BTC`               |
+| » settlementAssetSymbol | [QuoteAssetSymbol](#schemaquoteassetsymbol)           | false    | none         | Asset used for Mark To Market settlement                                                          |
+| » bidQuantity           | string                                                | false    | none         | Quantity of `bid`                                                                                 |
+| » askQuantity           | string                                                | false    | none         | Quantity of `ask`                                                                                 |
+| » bidIVPercentage       | string                                                | false    | none         | Implied volatility of the best bid price                                                          |
+| » askIVPercentage       | string                                                | false    | none         | Implied volatility of the best ask price                                                          |
+| » bid                   | string                                                | false    | none         | Bid price in the order book                                                                       |
+| » ask                   | string                                                | false    | none         | Ask price in the order book                                                                       |
+| » underlyingPrice       | string                                                | false    | none         | Index price of the base asset                                                                     |
+| » optionStrikePrice     | string                                                | false    | none         | Strike price of the option market                                                                 |
+| » markPrice             | string                                                | false    | none         | Mark Price of the option market                                                                   |
+| » quantity              | string                                                | false    | none         | Number of contracts outstanding                                                                   |
+| » openInterest          | string                                                | false    | none         | Amount of outstanding contracts in the exchange                                                   |
+| » openInterestUSD       | string                                                | false    | none         | USD value of outstanding contracts in the exchange                                                |
+| » optionType            | [OptionType](#schemaoptiontype)                       | false    | none         | Specifies if it’s a call (right to buy) or a put (right to sell)                                  |
+| » expiryDatetime        | [DateTime](#schemadatetime)(date-time)                | false    | none         | ISO 8601 with millisecond as string                                                               |
+| » greeks                | [OptionGreeks](#schemaoptiongreeks)                   | false    | none         | Option greeks                                                                                     |
+| »» delta                | string                                                | false    | none         | Sensitivity of an option’s price to a $1 change in the price of the underlying asset              |
+| »» gamma                | string                                                | false    | none         | Rate of change of Delta with respect to a $1 change in the underlying asset’s price               |
+| »» theta                | string                                                | false    | none         | The rate at which an option’s price decreases as it approaches its expiration date                |
+| »» vega                 | string                                                | false    | none         | Sensitivity of an option’s price to a 1% change in the implied volatility of the underlying asset |
+
+#### Enumerated Values
+
+| Property   | Value |
+| ---------- | ----- |
+| optionType | CALL  |
+| optionType | PUT   |
+
+> **Note:** This operation does not require authentication
+
+## get-option-ladder-symbol
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json"
+}
+
+fetch(
+  "https://api.exchange.bullish.com/trading-api/v1/option-ladder/{symbol}",
+  {
+    method: "GET",
+
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.exchange.bullish.com/trading-api/v1/option-ladder/{symbol}', headers = headers)
+
+print(r.json())
+
+```
+
+`GET /v1/option-ladder/{symbol}`
+
+_Get Option Ladder for market_
+
+Returns the for a given `baseSymbol`, organised by strike prices and expiration
+dates. This data helps traders quickly assess the available options and their
+respective prices, implied volatilities, and Greeks (such as delta, gamma,
+theta, and vega).
+
+### Parameters
+
+| Name   | In   | Type                                            | Required | Description                                       |
+| ------ | ---- | ----------------------------------------------- | -------- | ------------------------------------------------- |
+| symbol | path | [OptionMarketSymbol](#schemaoptionmarketsymbol) | true     | symbol to get. Only option markets are supported. |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "description": "Option Ladder Response",
+  "type": "string",
+  "properties": {
+    "symbol": {
+      "description": "Symbol of the option market. For example `BTC-USDC-20241004-70000-C`",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "market symbol. Eg `BTC-USDC-20241004-70000-C` for OPTION markets.",
+          "example": "BTC-USDC-20241004-70000-C"
+        }
+      ]
+    },
+    "baseSymbol": {
+      "description": "Base symbol of the option market. For `BTC-USDC-20241004-70000-C`, it will be `BTC`",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "asset symbol as denoted in the world",
+          "example": "BTC"
+        }
+      ]
+    },
+    "settlementAssetSymbol": {
+      "description": "Asset used for Mark To Market settlement",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "asset symbol as denoted in the world",
+          "example": "USDC"
+        }
+      ]
+    },
+    "bidQuantity": {
+      "description": "Quantity of `bid`",
+      "type": "string",
+      "example": "0.0"
+    },
+    "askQuantity": {
+      "description": "Quantity of `ask`",
+      "type": "string",
+      "example": "0.0"
+    },
+    "bidIVPercentage": {
+      "description": "Implied volatility of the best bid price",
+      "type": "string",
+      "example": "99.0"
+    },
+    "askIVPercentage": {
+      "description": "Implied volatility of the best ask price",
+      "type": "string",
+      "example": "99.0"
+    },
+    "bid": {
+      "description": "Bid price in the order book",
+      "type": "string",
+      "example": "90000.0000"
+    },
+    "ask": {
+      "description": "Ask price in the order book",
+      "type": "string",
+      "example": "90000.0000"
+    },
+    "underlyingPrice": {
+      "description": "Index price of the base asset",
+      "type": "string",
+      "example": "100000.0000"
+    },
+    "optionStrikePrice": {
+      "description": "Strike price of the option market",
+      "type": "string",
+      "example": "90000"
+    },
+    "markPrice": {
+      "description": "Mark Price of the option market",
+      "type": "string",
+      "example": "100.0000"
+    },
+    "quantity": {
+      "description": "Number of contracts outstanding",
+      "type": "string",
+      "example": "1000"
+    },
+    "openInterest": {
+      "description": "Amount of outstanding contracts in the exchange",
+      "type": "string",
+      "example": "0.11442400"
+    },
+    "openInterestUSD": {
+      "description": "USD value of outstanding contracts in the exchange",
+      "type": "string",
+      "example": "1144240.0000"
+    },
+    "optionType": {
+      "description": "Specifies if it’s a call (right to buy) or a put (right to sell)",
+      "allOf": [
+        {
+          "description": "Type of Option market",
+          "example": "CALL",
+          "type": "string",
+          "enum": ["CALL", "PUT"]
+        }
+      ]
+    },
+    "expiryDatetime": {
+      "allOf": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "example": "2025-05-20T01:01:01.000Z",
+          "description": "ISO 8601 with millisecond as string"
+        }
+      ]
+    },
+    "greeks": {
+      "description": "Option greeks",
+      "allOf": [
+        {
+          "description": "Pricing parameters for option instruments",
+          "type": "object",
+          "properties": {
+            "delta": {
+              "description": "Sensitivity of an option’s price to a $1 change in the price of the underlying asset",
+              "type": "string",
+              "example": "0.98"
+            },
+            "gamma": {
+              "description": "Rate of change of Delta with respect to a $1 change in the underlying asset’s price",
+              "type": "string",
+              "example": "0.98"
+            },
+            "theta": {
+              "description": "The rate at which an option’s price decreases as it approaches its expiration date",
+              "type": "string",
+              "example": "-0.17"
+            },
+            "vega": {
+              "description": "Sensitivity of an option’s price to a 1% change in the implied volatility of the underlying asset",
+              "type": "string",
+              "example": "0.05"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description             | Schema                                              |
+| ------ | -------------------------------------------------------------------------- | ----------------------- | --------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | OK                      | [OptionLadderResponse](#schemaoptionladderresponse) |
+| 400    | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)           | Bad Request             | None                                                |
+| 404    | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)             | Option Market Not Found | None                                                |
+| 429    | [Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)         | Too Many Requests       | None                                                |
+| 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error   | None                                                |
 
 > **Note:** This operation does not require authentication
 
@@ -12413,6 +14052,1116 @@ details on top of your portfolio specifics to see simulated results.
 > **Note:** To perform this operation, you must be authenticated by means of one
 > of the following methods: jwtTokenAuth
 
+# OTC
+
+## create-otc-trade
+
+> Code samples
+
+```javascript
+const inputBody = '{
+  "commandType": "V1CreateOtcTrade",
+  "clientOtcTradeId": "20050900225",
+  "sharedMatchKey": "cfBtcXrpMatch001",
+  "tradingAccountId": "111000000000001",
+  "isTaker": true,
+  "remarks": "first otc trade with xyz client",
+  "trades": [
+    {
+      "symbol": "BTC-USDC-PERP",
+      "side": "BUY",
+      "price": "98213.00000",
+      "quantity": "1.5000"
+    },
+    {
+      "symbol": "XRP-USDC-PERP",
+      "side": "SELL",
+      "price": "2.66000000",
+      "quantity": "50.0000"
+    }
+  ]
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':{
+  "type": "string"
+},
+  'BX-SIGNATURE':{
+  "type": "string"
+},
+  'BX-TIMESTAMP':{
+  "type": "string"
+},
+  'BX-NONCE':{
+  "type": "string"
+},
+  'BX-REFERRER':{
+  "type": "string"
+}
+};
+
+fetch('https://api.exchange.bullish.com/trading-api/v2/otc-trades',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': {
+  "type": "string"
+},
+  'BX-SIGNATURE': {
+  "type": "string"
+},
+  'BX-TIMESTAMP': {
+  "type": "string"
+},
+  'BX-NONCE': {
+  "type": "string"
+},
+  'BX-REFERRER': {
+  "type": "string"
+}
+}
+
+r = requests.post('https://api.exchange.bullish.com/trading-api/v2/otc-trades', headers = headers)
+
+print(r.json())
+
+```
+
+`POST /v2/otc-trades`
+
+_Create OTC Trade_
+
+Creates an OTC trade, requires
+[bearer token](#overview--add-authenticated-request-header) in authorization
+header.
+
+This endpoint uses the [signing format](#overview--signing-format) which does
+not require strict field ordering and addition of null fields in the request
+body. Prices do not require strict precision. Eg. for asset precision of 4 -
+`100`, `100.0`, `100.00`, `100.000` and `100.0000` are all accepted.
+
+> Body parameter
+
+```json
+{
+  "commandType": "V1CreateOtcTrade",
+  "clientOtcTradeId": "20050900225",
+  "sharedMatchKey": "cfBtcXrpMatch001",
+  "tradingAccountId": "111000000000001",
+  "isTaker": true,
+  "remarks": "first otc trade with xyz client",
+  "trades": [
+    {
+      "symbol": "BTC-USDC-PERP",
+      "side": "BUY",
+      "price": "98213.00000",
+      "quantity": "1.5000"
+    },
+    {
+      "symbol": "XRP-USDC-PERP",
+      "side": "SELL",
+      "price": "2.66000000",
+      "quantity": "50.0000"
+    }
+  ]
+}
+```
+
+### Parameters
+
+| Name          | In     | Type                                                  | Required | Description                                                                                                                |
+| ------------- | ------ | ----------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Authorization | header | string                                                | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                               |
+| BX-SIGNATURE  | header | string                                                | true     | signature obtained using the [signing format](#overview--how-to-ensure-the-order-of-create-order-or-cancel-order-requests) |
+| BX-TIMESTAMP  | header | string                                                | true     | timestamp is the number of milliseconds since EPOCH                                                                        |
+| BX-NONCE      | header | string                                                | true     | nonce is a client side incremented unsigned 64 bit integer                                                                 |
+| BX-REFERRER   | header | string                                                | false    | A numeric referrer id if applicable                                                                                        |
+| body          | body   | [CreateOtcTradeCommand](#schemacreateotctradecommand) | true     | none                                                                                                                       |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "description": "A response for an acknowledged OTC trade creation request",
+  "required": ["message", "requestId", "otcTradeId", "sharedMatchKey"],
+  "properties": {
+    "message": {
+      "type": "string",
+      "description": "message indicating the status of the request",
+      "example": "Command acknowledged - CreateOtcTrade"
+    },
+    "requestId": {
+      "type": "string",
+      "example": "197735387747975680"
+    },
+    "otcTradeId": {
+      "type": "string",
+      "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+      "example": "200000000000000098"
+    },
+    "clientOtcTradeId": {
+      "type": "string",
+      "description": "unique numeric (i64) identifier generated on the client side expressed as a string value",
+      "example": "20050900225"
+    },
+    "sharedMatchKey": {
+      "type": "string",
+      "description": "Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value",
+      "example": "cfBtcXrpMatch001"
+    }
+  }
+}
+```
+
+### Responses
+
+| Status                                                                                                                                          | Meaning                                                          | Description                                                                                               | Schema |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------ |
+| 200                                                                                                                                             | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)          | Status OK. The create OTC trade command was successfully acknowledged. To check the current status of the |
+| OTC trade, query [Get Trade by ID](#get-/v2/otc-trades/-otcTradeId-) using `otcTradeId` or `clientOtcTradeId` received in the response payload. | [CreateOtcTradeResponse](#schemacreateotctraderesponse)          |
+| 400                                                                                                                                             | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1) | Bad Request                                                                                               |
+
+For example, sending a request with the `BX-SIGNATURE` header missing will
+result in the following
+response:|[BadOtcTradeEntryResponse](#schemabadotctradeentryresponse)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized.
+Either API details are missing or
+invalid|[BadOtcTradeEntryResponse](#schemabadotctradeentryresponse)|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden-
+You do not have access to the requested
+resource|[BadOtcTradeEntryResponse](#schemabadotctradeentryresponse)|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal
+Server Error|[BadOtcTradeEntryResponse](#schemabadotctradeentryresponse)|
+
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
+
+## get-otc-trades
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json",
+  Authorization: {
+    type: "string"
+  }
+}
+
+fetch(
+  "https://api.exchange.bullish.com/trading-api/v2/otc-trades?tradingAccountId=111000000000001",
+  {
+    method: "GET",
+
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': {
+  "type": "string"
+}
+}
+
+r = requests.get('https://api.exchange.bullish.com/trading-api/v2/otc-trades', params={
+  'tradingAccountId': '111000000000001'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`GET /v2/otc-trades`
+
+_Get OTC Trades_
+
+Get the otc trade list based on specified filters.
+
+- requires [bearer token](#overview--add-authenticated-request-header) in
+  authorization header
+- [supports pagination](#overview--pagination-support)
+- supports filtering on `status`, `tradingAccountId`, `sharedMatchKey`,
+  `clientOtcTradeId`, `createdAtDatetime`, `createdAtTimestamp`
+
+### Parameters
+
+| Name                     | In     | Type                                                    | Required | Description                                                                                  |
+| ------------------------ | ------ | ------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization            | header | string                                                  | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| status                   | query  | [OtcTradeExternalStatus](#schemaotctradeexternalstatus) | false    | OTC trade status                                                                             |
+| tradingAccountId         | query  | [TradingAccountId](#schematradingaccountid)             | true     | none                                                                                         |
+| clientOtcTradeId         | query  | [ClientOtcTradeId](#schemaclientotctradeid)             | false    | none                                                                                         |
+| createdAtDatetime[ gte ] | query  | [DateTime](#schemadatetime)                             | false    | Start timestamp of window, ISO 8601 with millisecond as string                               |
+| createdAtDatetime[ lte ] | query  | [DateTime](#schemadatetime)                             | false    | End timestamp of window, ISO 8601 with millisecond as string                                 |
+
+#### Enumerated Values
+
+| Parameter | Value                |
+| --------- | -------------------- |
+| status    | COUNTERPARTY_PENDING |
+| status    | COUNTERPARTY_PAIRED  |
+| status    | RISK_PENDING         |
+| status    | MATCHED              |
+| status    | CANCELLED            |
+| status    | REJECTED             |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "array",
+  "minItems": 0,
+  "maxItems": 25,
+  "items": {
+    "type": "object",
+    "required": [
+      "otcTradeId",
+      "sharedMatchKey",
+      "status",
+      "statusReason",
+      "statusReasonCode",
+      "expireDatetime",
+      "expireTimestamp",
+      "trades"
+    ],
+    "properties": {
+      "otcTradeId": {
+        "allOf": [
+          {
+            "type": "string",
+            "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+            "example": "200000000000000098"
+          }
+        ]
+      },
+      "clientOtcTradeId": {
+        "allOf": [
+          {
+            "type": "string",
+            "description": "unique numeric (i64) identifier generated on the client side expressed as a string value",
+            "example": "20050900225"
+          }
+        ]
+      },
+      "sharedMatchKey": {
+        "allOf": [
+          {
+            "type": "string",
+            "description": "Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value",
+            "example": "cfBtcXrpMatch001"
+          }
+        ]
+      },
+      "status": {
+        "allOf": [
+          {
+            "type": "string",
+            "description": "otc trade status can have the following string values `\"COUNTERPARTY_PENDING\"`, `\"COUNTERPARTY_PAIRED\"`, `\"RISK_PENDING\"`, `\"MATCHED\"`, `\"CANCELLED\"`, `\"REJECTED\"`",
+            "enum": [
+              "COUNTERPARTY_PENDING",
+              "COUNTERPARTY_PAIRED",
+              "RISK_PENDING",
+              "MATCHED",
+              "CANCELLED",
+              "REJECTED"
+            ],
+            "example": "MATCHED"
+          }
+        ],
+        "example": "MATCHED"
+      },
+      "statusReason": {
+        "description": "status reason, describes why the otc trade is in a specific state",
+        "type": "string",
+        "example": "Ok"
+      },
+      "statusReasonCode": {
+        "description": "status reason code, see [details](#overview--error--rejection-codes)",
+        "type": "string",
+        "example": "1002"
+      },
+      "createdAtDatetime": {
+        "description": "denotes the time the otc trade was ACK'd by the exchange, ISO 8601 with millisecond as string",
+        "allOf": [
+          {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-20T01:01:01.000Z",
+            "description": "ISO 8601 with millisecond as string"
+          }
+        ]
+      },
+      "createdAtTimestamp": {
+        "description": "denotes the time the otc trade was ACK'd by the exchange",
+        "allOf": [
+          {
+            "type": "string",
+            "format": "string",
+            "example": "1621490985000",
+            "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string"
+          }
+        ]
+      },
+      "expireDatetime": {
+        "description": "denotes the time the otc trade would expire",
+        "allOf": [
+          {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-05-20T01:01:01.000Z",
+            "description": "ISO 8601 with millisecond as string"
+          }
+        ]
+      },
+      "expireTimestamp": {
+        "description": "denotes the time the otc trade would expire, ISO 8601 with millisecond as string",
+        "allOf": [
+          {
+            "type": "string",
+            "format": "string",
+            "example": "1621490985000",
+            "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string"
+          }
+        ]
+      },
+      "remarks": {
+        "type": "string",
+        "description": "text field for client’s internal reference to a trade, max length is 255 characters",
+        "example": "first otc trade with xyz client"
+      },
+      "trades": {
+        "type": "array",
+        "minItems": 0,
+        "maxItems": 25,
+        "nullable": false,
+        "description": "all trades for the OTC trade",
+        "items": {
+          "allOf": [
+            {
+              "description": "a trade of an OTC trade",
+              "required": ["symbol", "price", "quantity", "side", "isTaker"],
+              "properties": {
+                "tradeId": {
+                  "description": "unique trade ID",
+                  "allOf": [
+                    {
+                      "type": "string",
+                      "example": "100020000000000060"
+                    }
+                  ]
+                },
+                "symbol": {
+                  "type": "string",
+                  "description": "market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market",
+                  "example": "BTC-USDC-PERP"
+                },
+                "price": {
+                  "description": "price, see [asset value](#overview--price-and-quantity-precision) format",
+                  "allOf": [
+                    {
+                      "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                      "type": "string",
+                      "example": "1.00000000"
+                    }
+                  ]
+                },
+                "quantity": {
+                  "description": "quantity, see [asset value](#overview--price-and-quantity-precision) format",
+                  "allOf": [
+                    {
+                      "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                      "type": "string",
+                      "example": "1.00000000"
+                    }
+                  ]
+                },
+                "quoteAmount": {
+                  "description": "notional value of the trade in quote or settlement asset, see [asset value](#overview--price-and-quantity-precision) format",
+                  "allOf": [
+                    {
+                      "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                      "type": "string",
+                      "example": "1.00000000"
+                    }
+                  ]
+                },
+                "baseFee": {
+                  "description": "base fee, see [asset value](#overview--price-and-quantity-precision) format",
+                  "allOf": [
+                    {
+                      "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                      "type": "string",
+                      "example": "1.00000000"
+                    }
+                  ]
+                },
+                "quoteFee": {
+                  "description": "quote fee, see [asset value](#overview--price-and-quantity-precision) format",
+                  "allOf": [
+                    {
+                      "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                      "type": "string",
+                      "example": "1.00000000"
+                    }
+                  ]
+                },
+                "tradeRebateAssetSymbol": {
+                  "type": "string",
+                  "description": "market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market",
+                  "example": "BTC-USDC-PERP"
+                },
+                "tradeRebateAmount": {
+                  "description": "trade rebate fee, see [ asset value ](#overview--price-and-quantity-precision) format",
+                  "allOf": [
+                    {
+                      "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                      "type": "string",
+                      "example": "1.00000000"
+                    }
+                  ]
+                },
+                "side": {
+                  "type": "string",
+                  "description": "trade side can have the following string values `BUY`, `SELL`",
+                  "example": "BUY"
+                },
+                "isTaker": {
+                  "description": "denotes whether the role of the counterparty is Taker or Maker. The corresponding leg of the opposite side of the trade should have the inverse role to be successfully matched on the OTC Clearing Facility",
+                  "allOf": [
+                    {
+                      "type": "boolean",
+                      "format": "true or false",
+                      "example": true
+                    }
+                  ]
+                },
+                "createdAtDatetime": {
+                  "description": "denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string",
+                  "allOf": [
+                    {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2025-05-20T01:01:01.000Z",
+                      "description": "ISO 8601 with millisecond as string"
+                    }
+                  ]
+                },
+                "createdAtTimestamp": {
+                  "description": "denotes the time the trade was executed by the exchange",
+                  "allOf": [
+                    {
+                      "type": "string",
+                      "format": "string",
+                      "example": "1621490985000",
+                      "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description                                                    | Schema                                                      |
+| ------ | -------------------------------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | OK                                                             | Inline                                                      |
+| 400    | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)           | For example, sending a request with an invalid trading account | [BadOtcTradeEntryResponse](#schemabadotctradeentryresponse) |
+| 401    | [Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)            | Not Authenticated                                              | [BadOtcTradeEntryResponse](#schemabadotctradeentryresponse) |
+| 403    | [Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)             | Access Forbidden                                               | [BadOtcTradeEntryResponse](#schemabadotctradeentryresponse) |
+| 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error                                          | [BadOtcTradeEntryResponse](#schemabadotctradeentryresponse) |
+
+### Response Schema
+
+Status Code **200**
+
+| Name                      | Type                                                    | Required | Restrictions | Description                                                                                                                                                                                                  |
+| ------------------------- | ------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| _anonymous_               | [[OtcTradeView](#schemaotctradeview)]                   | false    | none         | none                                                                                                                                                                                                         |
+| » otcTradeId              | [OtcTradeId](#schemaotctradeid)                         | true     | none         | unique numeric (i64) identifier generated on Bullish side expressed as a string value                                                                                                                        |
+| » clientOtcTradeId        | [ClientOtcTradeId](#schemaclientotctradeid)             | false    | none         | unique numeric (i64) identifier generated on the client side expressed as a string value                                                                                                                     |
+| » sharedMatchKey          | [SharedMatchId](#schemasharedmatchid)                   | true     | none         | Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value                   |
+| » status                  | [OtcTradeExternalStatus](#schemaotctradeexternalstatus) | true     | none         | otc trade status can have the following string values `"COUNTERPARTY_PENDING"`, `"COUNTERPARTY_PAIRED"`, `"RISK_PENDING"`, `"MATCHED"`, `"CANCELLED"`, `"REJECTED"`                                          |
+| » statusReason            | string                                                  | true     | none         | status reason, describes why the otc trade is in a specific state                                                                                                                                            |
+| » statusReasonCode        | string                                                  | true     | none         | status reason code, see [details](#overview--error--rejection-codes)                                                                                                                                         |
+| » createdAtDatetime       | [DateTime](#schemadatetime)(date-time)                  | false    | none         | denotes the time the otc trade was ACK'd by the exchange, ISO 8601 with millisecond as string                                                                                                                |
+| » createdAtTimestamp      | [TimeStampAsString](#schematimestampasstring)(string)   | false    | none         | denotes the time the otc trade was ACK'd by the exchange                                                                                                                                                     |
+| » expireDatetime          | [DateTime](#schemadatetime)(date-time)                  | true     | none         | denotes the time the otc trade would expire                                                                                                                                                                  |
+| » expireTimestamp         | [TimeStampAsString](#schematimestampasstring)(string)   | true     | none         | denotes the time the otc trade would expire, ISO 8601 with millisecond as string                                                                                                                             |
+| » remarks                 | [Remarks](#schemaremarks)                               | false    | none         | text field for client’s internal reference to a trade, max length is 255 characters                                                                                                                          |
+| » trades                  | [allOf]                                                 | true     | none         | all trades for the OTC trade                                                                                                                                                                                 |
+| »» tradeId                | [TradeID](#schematradeid)                               | false    | none         | unique trade ID                                                                                                                                                                                              |
+| »» symbol                 | [OtcMarketSymbol](#schemaotcmarketsymbol)               | true     | none         | market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market                                                         |
+| »» price                  | [AssetValue](#schemaassetvalue)                         | true     | none         | price, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                     |
+| »» quantity               | [AssetValue](#schemaassetvalue)                         | true     | none         | quantity, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                  |
+| »» quoteAmount            | [AssetValue](#schemaassetvalue)                         | false    | none         | notional value of the trade in quote or settlement asset, see [asset value](#overview--price-and-quantity-precision) format                                                                                  |
+| »» baseFee                | [AssetValue](#schemaassetvalue)                         | false    | none         | base fee, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                  |
+| »» quoteFee               | [AssetValue](#schemaassetvalue)                         | false    | none         | quote fee, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                 |
+| »» tradeRebateAssetSymbol | [OtcMarketSymbol](#schemaotcmarketsymbol)               | false    | none         | market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market                                                         |
+| »» tradeRebateAmount      | [AssetValue](#schemaassetvalue)                         | false    | none         | trade rebate fee, see [ asset value ](#overview--price-and-quantity-precision) format                                                                                                                        |
+| »» side                   | [TradeSideAsString](#schematradesideasstring)           | true     | none         | trade side can have the following string values `BUY`, `SELL`                                                                                                                                                |
+| »» isTaker                | [Boolean](#schemaboolean)(true or false)                | true     | none         | denotes whether the role of the counterparty is Taker or Maker. The corresponding leg of the opposite side of the trade should have the inverse role to be successfully matched on the OTC Clearing Facility |
+| »» createdAtDatetime      | [DateTime](#schemadatetime)(date-time)                  | false    | none         | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string                                                                                                                 |
+| »» createdAtTimestamp     | [TimeStampAsString](#schematimestampasstring)(string)   | false    | none         | denotes the time the trade was executed by the exchange                                                                                                                                                      |
+
+#### Enumerated Values
+
+| Property | Value                |
+| -------- | -------------------- |
+| status   | COUNTERPARTY_PENDING |
+| status   | COUNTERPARTY_PAIRED  |
+| status   | RISK_PENDING         |
+| status   | MATCHED              |
+| status   | CANCELLED            |
+| status   | REJECTED             |
+
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
+
+## get-otc-trade--by-id
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json",
+  Authorization: {
+    type: "string"
+  }
+}
+
+fetch(
+  "https://api.exchange.bullish.com/trading-api/v2/otc-trades/{otcTradeId}?tradingAccountId=111000000000001",
+  {
+    method: "GET",
+
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': {
+  "type": "string"
+}
+}
+
+r = requests.get('https://api.exchange.bullish.com/trading-api/v2/otc-trades/{otcTradeId}', params={
+  'tradingAccountId': '111000000000001'
+}, headers = headers)
+
+print(r.json())
+
+```
+
+`GET /v2/otc-trades/{otcTradeId}`
+
+_Get OTC Trade by ID_
+
+Retrieve a specific otc trade using its unique identifier.
+
+### Parameters
+
+| Name             | In     | Type                                        | Required | Description                                                                                  |
+| ---------------- | ------ | ------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization    | header | string                                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| tradingAccountId | query  | [TradingAccountId](#schematradingaccountid) | true     | Id of the trading account                                                                    |
+| otcTradeId       | path   | string                                      | true     | Id of the OTC Trade                                                                          |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "object",
+  "required": [
+    "otcTradeId",
+    "sharedMatchKey",
+    "status",
+    "statusReason",
+    "statusReasonCode",
+    "expireDatetime",
+    "expireTimestamp",
+    "trades"
+  ],
+  "properties": {
+    "otcTradeId": {
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+          "example": "200000000000000098"
+        }
+      ]
+    },
+    "clientOtcTradeId": {
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique numeric (i64) identifier generated on the client side expressed as a string value",
+          "example": "20050900225"
+        }
+      ]
+    },
+    "sharedMatchKey": {
+      "allOf": [
+        {
+          "type": "string",
+          "description": "Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value",
+          "example": "cfBtcXrpMatch001"
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "type": "string",
+          "description": "otc trade status can have the following string values `\"COUNTERPARTY_PENDING\"`, `\"COUNTERPARTY_PAIRED\"`, `\"RISK_PENDING\"`, `\"MATCHED\"`, `\"CANCELLED\"`, `\"REJECTED\"`",
+          "enum": [
+            "COUNTERPARTY_PENDING",
+            "COUNTERPARTY_PAIRED",
+            "RISK_PENDING",
+            "MATCHED",
+            "CANCELLED",
+            "REJECTED"
+          ],
+          "example": "MATCHED"
+        }
+      ],
+      "example": "MATCHED"
+    },
+    "statusReason": {
+      "description": "status reason, describes why the otc trade is in a specific state",
+      "type": "string",
+      "example": "Ok"
+    },
+    "statusReasonCode": {
+      "description": "status reason code, see [details](#overview--error--rejection-codes)",
+      "type": "string",
+      "example": "1002"
+    },
+    "createdAtDatetime": {
+      "description": "denotes the time the otc trade was ACK'd by the exchange, ISO 8601 with millisecond as string",
+      "allOf": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "example": "2025-05-20T01:01:01.000Z",
+          "description": "ISO 8601 with millisecond as string"
+        }
+      ]
+    },
+    "createdAtTimestamp": {
+      "description": "denotes the time the otc trade was ACK'd by the exchange",
+      "allOf": [
+        {
+          "type": "string",
+          "format": "string",
+          "example": "1621490985000",
+          "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string"
+        }
+      ]
+    },
+    "expireDatetime": {
+      "description": "denotes the time the otc trade would expire",
+      "allOf": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "example": "2025-05-20T01:01:01.000Z",
+          "description": "ISO 8601 with millisecond as string"
+        }
+      ]
+    },
+    "expireTimestamp": {
+      "description": "denotes the time the otc trade would expire, ISO 8601 with millisecond as string",
+      "allOf": [
+        {
+          "type": "string",
+          "format": "string",
+          "example": "1621490985000",
+          "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string"
+        }
+      ]
+    },
+    "remarks": {
+      "type": "string",
+      "description": "text field for client’s internal reference to a trade, max length is 255 characters",
+      "example": "first otc trade with xyz client"
+    },
+    "trades": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 25,
+      "nullable": false,
+      "description": "all trades for the OTC trade",
+      "items": {
+        "allOf": [
+          {
+            "description": "a trade of an OTC trade",
+            "required": ["symbol", "price", "quantity", "side", "isTaker"],
+            "properties": {
+              "tradeId": {
+                "description": "unique trade ID",
+                "allOf": [
+                  {
+                    "type": "string",
+                    "example": "100020000000000060"
+                  }
+                ]
+              },
+              "symbol": {
+                "type": "string",
+                "description": "market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market",
+                "example": "BTC-USDC-PERP"
+              },
+              "price": {
+                "description": "price, see [asset value](#overview--price-and-quantity-precision) format",
+                "allOf": [
+                  {
+                    "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                    "type": "string",
+                    "example": "1.00000000"
+                  }
+                ]
+              },
+              "quantity": {
+                "description": "quantity, see [asset value](#overview--price-and-quantity-precision) format",
+                "allOf": [
+                  {
+                    "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                    "type": "string",
+                    "example": "1.00000000"
+                  }
+                ]
+              },
+              "quoteAmount": {
+                "description": "notional value of the trade in quote or settlement asset, see [asset value](#overview--price-and-quantity-precision) format",
+                "allOf": [
+                  {
+                    "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                    "type": "string",
+                    "example": "1.00000000"
+                  }
+                ]
+              },
+              "baseFee": {
+                "description": "base fee, see [asset value](#overview--price-and-quantity-precision) format",
+                "allOf": [
+                  {
+                    "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                    "type": "string",
+                    "example": "1.00000000"
+                  }
+                ]
+              },
+              "quoteFee": {
+                "description": "quote fee, see [asset value](#overview--price-and-quantity-precision) format",
+                "allOf": [
+                  {
+                    "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                    "type": "string",
+                    "example": "1.00000000"
+                  }
+                ]
+              },
+              "tradeRebateAssetSymbol": {
+                "type": "string",
+                "description": "market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market",
+                "example": "BTC-USDC-PERP"
+              },
+              "tradeRebateAmount": {
+                "description": "trade rebate fee, see [ asset value ](#overview--price-and-quantity-precision) format",
+                "allOf": [
+                  {
+                    "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                    "type": "string",
+                    "example": "1.00000000"
+                  }
+                ]
+              },
+              "side": {
+                "type": "string",
+                "description": "trade side can have the following string values `BUY`, `SELL`",
+                "example": "BUY"
+              },
+              "isTaker": {
+                "description": "denotes whether the role of the counterparty is Taker or Maker. The corresponding leg of the opposite side of the trade should have the inverse role to be successfully matched on the OTC Clearing Facility",
+                "allOf": [
+                  {
+                    "type": "boolean",
+                    "format": "true or false",
+                    "example": true
+                  }
+                ]
+              },
+              "createdAtDatetime": {
+                "description": "denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string",
+                "allOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2025-05-20T01:01:01.000Z",
+                    "description": "ISO 8601 with millisecond as string"
+                  }
+                ]
+              },
+              "createdAtTimestamp": {
+                "description": "denotes the time the trade was executed by the exchange",
+                "allOf": [
+                  {
+                    "type": "string",
+                    "format": "string",
+                    "example": "1621490985000",
+                    "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description                                                    | Schema                                                      |
+| ------ | -------------------------------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | OK                                                             | [OtcTradeView](#schemaotctradeview)                         |
+| 400    | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)           | For example, sending a request with an invalid trading account | [BadOtcTradeEntryResponse](#schemabadotctradeentryresponse) |
+| 401    | [Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)            | Not Authenticated                                              | [BadOtcTradeEntryResponse](#schemabadotctradeentryresponse) |
+| 403    | [Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)             | Access Forbidden                                               | [BadOtcTradeEntryResponse](#schemabadotctradeentryresponse) |
+| 404    | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)             | The given otcTradeId does not exist                            | [BadOtcTradeEntryResponse](#schemabadotctradeentryresponse) |
+| 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error                                          | [BadOtcTradeEntryResponse](#schemabadotctradeentryresponse) |
+
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
+
+## otc-command
+
+> Code samples
+
+```javascript
+const inputBody = '{
+  "commandType": "V1CancelOtcTrade",
+  "clientOtcTradeId": "20050900225",
+  "tradingAccountId": "111000000000001",
+  "x-widdershins-oldRef": "#/components/schemas/CancelOtcTradeCommand/example"
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':{
+  "type": "string"
+},
+  'BX-SIGNATURE':{
+  "type": "string"
+},
+  'BX-TIMESTAMP':{
+  "type": "string"
+},
+  'BX-NONCE':{
+  "type": "string"
+}
+};
+
+fetch('https://api.exchange.bullish.com/trading-api/v2/otc-command',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': {
+  "type": "string"
+},
+  'BX-SIGNATURE': {
+  "type": "string"
+},
+  'BX-TIMESTAMP': {
+  "type": "string"
+},
+  'BX-NONCE': {
+  "type": "string"
+}
+}
+
+r = requests.post('https://api.exchange.bullish.com/trading-api/v2/otc-command', headers = headers)
+
+print(r.json())
+
+```
+
+`POST /v2/otc-command`
+
+_OTC Trade Cancellation Command_
+
+Submits a command to the trading engine. A successful response indicates that
+the command entry was acknowledged but does not indicate that the command was
+executed. This endpoint uses the [signing format](#overview--signing-format)
+which does not require strict field ordering and addition of null fields in the
+request body.
+
+Command schemas and examples are provided below. Supported commands:
+
+- V1CancelOtcTrade
+- V1CancelAllOtcTrades
+
+Requires
+
+- [bearer token](#overview--add-authenticated-request-header) in authorization
+  header
+
+> Body parameter
+
+```json
+{
+  "commandType": "V1CancelOtcTrade",
+  "clientOtcTradeId": "20050900225",
+  "tradingAccountId": "111000000000001",
+  "x-widdershins-oldRef": "#/components/schemas/CancelOtcTradeCommand/example"
+}
+```
+
+### Parameters
+
+| Name          | In     | Type   | Required | Description                                                                                                                |
+| ------------- | ------ | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Authorization | header | string | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token)                               |
+| BX-SIGNATURE  | header | string | true     | signature obtained using the [signing format](#overview--how-to-ensure-the-order-of-create-order-or-cancel-order-requests) |
+| BX-TIMESTAMP  | header | string | true     | timestamp is the number of milliseconds since EPOCH                                                                        |
+| BX-NONCE      | header | string | true     | nonce is a client side incremented unsigned 64 bit integer                                                                 |
+| body          | body   | any    | true     | none                                                                                                                       |
+
+> Example responses
+
+> Status OK. This means a command was successfully acknowledged.
+
+```json
+{
+  "message": "Command acknowledged - CancelOtcTrade",
+  "requestId": "100000000000000147",
+  "otcTradeId": "200000000000000098",
+  "tradingAccountId": "111000000000001"
+}
+```
+
+```json
+{
+  "message": "Command acknowledged - CancelAllOtcTrades",
+  "requestId": "100000000000000148",
+  "tradingAccountId": "111000000000001"
+}
+```
+
+> 400 Response
+
+```json
+{
+  "type": "object",
+  "required": ["message", "errorCode", "errorCodeName"],
+  "properties": {
+    "message": {
+      "description": "message",
+      "type": "string"
+    },
+    "errorCode": {
+      "description": "unique error code",
+      "type": "integer"
+    },
+    "errorCodeName": {
+      "description": "unique error code name",
+      "type": "string"
+    }
+  }
+}
+```
+
+### Responses
+
+| Status | Meaning                                                          | Description                                                    | Schema |
+| ------ | ---------------------------------------------------------------- | -------------------------------------------------------------- | ------ |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)          | Status OK. This means a command was successfully acknowledged. | Inline |
+| 400    | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1) | Bad Request                                                    |
+
+For example, sending a request with the `BX-SIGNATURE` header missing will
+result in the following
+response:|[BadOtcTradeEntryResponse](#schemabadotctradeentryresponse)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized.
+Either API details are missing or
+invalid|[BadOtcTradeEntryResponse](#schemabadotctradeentryresponse)|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden-
+You do not have access to the requested
+resource|[BadOtcTradeEntryResponse](#schemabadotctradeentryresponse)|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal
+Server Error|[BadOtcTradeEntryResponse](#schemabadotctradeentryresponse)|
+
+### Response Schema
+
+> **Note:** To perform this operation, you must be authenticated by means of one
+> of the following methods: jwtTokenAuth
+
 # Schemas
 
 ## ApiResponse
@@ -12455,6 +15204,50 @@ true
 | ----------- | ---------------------- | -------- | ------------ | ----------- |
 | _anonymous_ | boolean(true or false) | false    | none         | none        |
 
+## MarketTypeOrOptionTypeSortByAsString
+
+```json
+"optionType"
+```
+
+Sorting parameter that can have the following string values `"marketType"`,
+`"optionType"`
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                                |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------ |
+| _anonymous_ | string | false    | none         | Sorting parameter that can have the following string values `"marketType"`, `"optionType"` |
+
+#### Enumerated Values
+
+| Property    | Value      |
+| ----------- | ---------- |
+| _anonymous_ | marketType |
+| _anonymous_ | optionType |
+
+## OptionTypeOrExpiryDatetimeSortAsString
+
+```json
+"optionType"
+```
+
+Sorting parameter that can have the following string values `"optionType"`,
+`"expiryDatetime"`
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                                    |
+| ----------- | ------ | -------- | ------------ | ---------------------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | Sorting parameter that can have the following string values `"optionType"`, `"expiryDatetime"` |
+
+#### Enumerated Values
+
+| Property    | Value          |
+| ----------- | -------------- |
+| _anonymous_ | optionType     |
+| _anonymous_ | expiryDatetime |
+
 ## MarketTypeAsString
 
 ```json
@@ -12462,13 +15255,13 @@ true
 ```
 
 market type can have the following string values `"SPOT"`, `"PERPETUAL"`,
-`"DATED_FUTURE"`
+`"DATED_FUTURE"`, `"OPTION"`
 
 ### Properties
 
-| Name        | Type   | Required | Restrictions | Description                                                                                |
-| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------ |
-| _anonymous_ | string | false    | none         | market type can have the following string values `"SPOT"`, `"PERPETUAL"`, `"DATED_FUTURE"` |
+| Name        | Type   | Required | Restrictions | Description                                                                                            |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------------ |
+| _anonymous_ | string | false    | none         | market type can have the following string values `"SPOT"`, `"PERPETUAL"`, `"DATED_FUTURE"`, `"OPTION"` |
 
 #### Enumerated Values
 
@@ -12477,6 +15270,28 @@ market type can have the following string values `"SPOT"`, `"PERPETUAL"`,
 | _anonymous_ | SPOT         |
 | _anonymous_ | PERPETUAL    |
 | _anonymous_ | DATED_FUTURE |
+| _anonymous_ | OPTION       |
+
+## OptionTypeAsString
+
+```json
+"CALL"
+```
+
+option type can have the following string values `"CALL"`, `"PUT"`
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                        |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------ |
+| _anonymous_ | string | false    | none         | option type can have the following string values `"CALL"`, `"PUT"` |
+
+#### Enumerated Values
+
+| Property    | Value |
+| ----------- | ----- |
+| _anonymous_ | CALL  |
+| _anonymous_ | PUT   |
 
 ## OrderTypeAsString
 
@@ -12485,13 +15300,14 @@ market type can have the following string values `"SPOT"`, `"PERPETUAL"`,
 ```
 
 order type can have the following string values `"LMT"`, `"MKT"`,
-`"STOP_LIMIT"`, `"POST_ONLY"`.
+`"STOP_LIMIT"`, `"POST_ONLY"`. `"MKT"` and `"STOP_LIMIT"` are not applicable for
+Options
 
 ### Properties
 
-| Name        | Type   | Required | Restrictions | Description                                                                                      |
-| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------ |
-| _anonymous_ | string | false    | none         | order type can have the following string values `"LMT"`, `"MKT"`, `"STOP_LIMIT"`, `"POST_ONLY"`. |
+| Name        | Type   | Required | Restrictions | Description                                                                                                                                                |
+| ----------- | ------ | -------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | order type can have the following string values `"LMT"`, `"MKT"`, `"STOP_LIMIT"`, `"POST_ONLY"`. `"MKT"` and `"STOP_LIMIT"` are not applicable for Options |
 
 ## OrderTypeAsStringV2
 
@@ -12500,13 +15316,14 @@ order type can have the following string values `"LMT"`, `"MKT"`,
 ```
 
 order type can have the following string values `"LIMIT"`, `"MARKET"`,
-`"STOP_LIMIT"`, `"POST_ONLY"`.
+`"STOP_LIMIT"`, `"POST_ONLY"`. `"MARKET"` and `"STOP_LIMIT"` are not applicable
+for Options
 
 ### Properties
 
-| Name        | Type   | Required | Restrictions | Description                                                                                           |
-| ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------------------------- |
-| _anonymous_ | string | false    | none         | order type can have the following string values `"LIMIT"`, `"MARKET"`, `"STOP_LIMIT"`, `"POST_ONLY"`. |
+| Name        | Type   | Required | Restrictions | Description                                                                                                                                                        |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| _anonymous_ | string | false    | none         | order type can have the following string values `"LIMIT"`, `"MARKET"`, `"STOP_LIMIT"`, `"POST_ONLY"`. `"MARKET"` and `"STOP_LIMIT"` are not applicable for Options |
 
 ## OrderTypeAsStringAmend
 
@@ -12788,6 +15605,20 @@ ISO 8601 with millisecond as string
 | Name        | Type              | Required | Restrictions | Description                         |
 | ----------- | ----------------- | -------- | ------------ | ----------------------------------- |
 | _anonymous_ | string(date-time) | false    | none         | ISO 8601 with millisecond as string |
+
+## OptionExpiryDate
+
+```json
+"20250520"
+```
+
+Expiry Date of option, in YYYYMMDD format
+
+### Properties
+
+| Name        | Type         | Required | Restrictions | Description                               |
+| ----------- | ------------ | -------- | ------------ | ----------------------------------------- |
+| _anonymous_ | string(date) | false    | none         | Expiry Date of option, in YYYYMMDD format |
 
 ## TimeStamp
 
@@ -13836,7 +16667,7 @@ last updated time of transaction
       "allOf": [
         {
           "type": "string",
-          "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+          "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MKT\"` and `\"STOP_LIMIT\"` are not applicable for Options",
           "example": "LMT"
         }
       ],
@@ -13896,6 +16727,11 @@ last updated time of transaction
       "type": "boolean",
       "example": false
     },
+    "isMMP": {
+      "description": "Indicate if the order is subject to `Market Maker Protection`. Only applicable to option markets",
+      "type": "boolean",
+      "example": true
+    },
     "tradingAccountId": {
       "allOf": [
         {
@@ -13911,19 +16747,20 @@ last updated time of transaction
 
 ### Properties
 
-| Name             | Type                                                        | Required | Restrictions | Description                                                                                                               |
-| ---------------- | ----------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| commandType      | string                                                      | true     | none         | The command type, it must be 'V2CreateOrder'                                                                              |
-| handle           | [OrderHandle](#schemaorderhandle)                           | true     | none         | Unique numeric (i64) identifier generated on the client side expressed as a string value                                  |
-| symbol           | [MarketSymbol](#schemamarketsymbol)                         | true     | none         | market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market                                             |
-| type             | [OrderTypeAsString](#schemaordertypeasstring)               | true     | none         | order type can have the following string values `"LMT"`, `"MKT"`, `"STOP_LIMIT"`, `"POST_ONLY"`.                          |
-| side             | [OrderSideAsString](#schemaordersideasstring)               | true     | none         | order side can have the following string values `"BUY"`, `"SELL"`                                                         |
-| price            | [AssetValue](#schemaassetvalue)                             | true     | none         | price, see [asset value](#overview--price-and-quantity-precision) format                                                  |
-| stopPrice        | [AssetValue](#schemaassetvalue)                             | true     | none         | stop price, see [asset value](#overview--price-and-quantity-precision) format                                             |
-| quantity         | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity, see [asset value](#overview--price-and-quantity-precision) format                                               |
-| timeInForce      | [OrderTimeInForceAsString](#schemaordertimeinforceasstring) | true     | none         | time in force can have the following string values `"GTC"`, `"FOK"`, `"IOC"`, see [details](#overview--order-timeinforce) |
-| allowMargin      | boolean                                                     | true     | none         | allows to borrow on the order                                                                                             |
-| tradingAccountId | [TradingAccountId](#schematradingaccountid)                 | true     | none         | unique trading account ID                                                                                                 |
+| Name             | Type                                                        | Required | Restrictions | Description                                                                                                                                                |
+| ---------------- | ----------------------------------------------------------- | -------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| commandType      | string                                                      | true     | none         | The command type, it must be 'V2CreateOrder'                                                                                                               |
+| handle           | [OrderHandle](#schemaorderhandle)                           | true     | none         | Unique numeric (i64) identifier generated on the client side expressed as a string value                                                                   |
+| symbol           | [MarketSymbol](#schemamarketsymbol)                         | true     | none         | market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market                                                                              |
+| type             | [OrderTypeAsString](#schemaordertypeasstring)               | true     | none         | order type can have the following string values `"LMT"`, `"MKT"`, `"STOP_LIMIT"`, `"POST_ONLY"`. `"MKT"` and `"STOP_LIMIT"` are not applicable for Options |
+| side             | [OrderSideAsString](#schemaordersideasstring)               | true     | none         | order side can have the following string values `"BUY"`, `"SELL"`                                                                                          |
+| price            | [AssetValue](#schemaassetvalue)                             | true     | none         | price, see [asset value](#overview--price-and-quantity-precision) format                                                                                   |
+| stopPrice        | [AssetValue](#schemaassetvalue)                             | true     | none         | stop price, see [asset value](#overview--price-and-quantity-precision) format                                                                              |
+| quantity         | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity, see [asset value](#overview--price-and-quantity-precision) format                                                                                |
+| timeInForce      | [OrderTimeInForceAsString](#schemaordertimeinforceasstring) | true     | none         | time in force can have the following string values `"GTC"`, `"FOK"`, `"IOC"`, see [details](#overview--order-timeinforce)                                  |
+| allowMargin      | boolean                                                     | true     | none         | allows to borrow on the order                                                                                                                              |
+| isMMP            | boolean                                                     | false    | none         | Indicate if the order is subject to `Market Maker Protection`. Only applicable to option markets                                                           |
+| tradingAccountId | [TradingAccountId](#schematradingaccountid)                 | true     | none         | unique trading account ID                                                                                                                                  |
 
 ## CreateOrderCommandV3
 
@@ -13966,7 +16803,7 @@ last updated time of transaction
       "allOf": [
         {
           "type": "string",
-          "description": "order type can have the following string values `\"LIMIT\"`, `\"MARKET\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+          "description": "order type can have the following string values `\"LIMIT\"`, `\"MARKET\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MARKET\"` and `\"STOP_LIMIT\"` are not applicable for Options",
           "example": "LIMIT"
         }
       ]
@@ -14024,6 +16861,11 @@ last updated time of transaction
       "default": false,
       "example": false
     },
+    "isMMP": {
+      "description": "Indicate if the order is subject to `Market Maker Protection`. Only applicable to option markets",
+      "type": "boolean",
+      "example": true
+    },
     "tradingAccountId": {
       "allOf": [
         {
@@ -14039,19 +16881,20 @@ last updated time of transaction
 
 ### Properties
 
-| Name             | Type                                                        | Required | Restrictions | Description                                                                                                               |
-| ---------------- | ----------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| commandType      | string                                                      | true     | none         | The command type, it must be 'V3CreateOrder'                                                                              |
-| clientOrderId    | [OrderHandle](#schemaorderhandle)                           | false    | none         | Unique numeric (i64) identifier generated on the client side expressed as a string value                                  |
-| symbol           | [MarketSymbol](#schemamarketsymbol)                         | true     | none         | market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market                                             |
-| type             | [OrderTypeAsStringV2](#schemaordertypeasstringv2)           | true     | none         | order type can have the following string values `"LIMIT"`, `"MARKET"`, `"STOP_LIMIT"`, `"POST_ONLY"`.                     |
-| side             | [OrderSideAsString](#schemaordersideasstring)               | true     | none         | order side can have the following string values `"BUY"`, `"SELL"`                                                         |
-| price            | [AssetValue](#schemaassetvalue)                             | false    | none         | price                                                                                                                     |
-| stopPrice        | [AssetValue](#schemaassetvalue)                             | false    | none         | stop price                                                                                                                |
-| quantity         | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity                                                                                                                  |
-| timeInForce      | [OrderTimeInForceAsString](#schemaordertimeinforceasstring) | true     | none         | time in force can have the following string values `"GTC"`, `"FOK"`, `"IOC"`, see [details](#overview--order-timeinforce) |
-| allowBorrow      | boolean                                                     | false    | none         | allows to borrow on the order                                                                                             |
-| tradingAccountId | [TradingAccountId](#schematradingaccountid)                 | true     | none         | unique trading account ID                                                                                                 |
+| Name             | Type                                                        | Required | Restrictions | Description                                                                                                                                                        |
+| ---------------- | ----------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| commandType      | string                                                      | true     | none         | The command type, it must be 'V3CreateOrder'                                                                                                                       |
+| clientOrderId    | [OrderHandle](#schemaorderhandle)                           | false    | none         | Unique numeric (i64) identifier generated on the client side expressed as a string value                                                                           |
+| symbol           | [MarketSymbol](#schemamarketsymbol)                         | true     | none         | market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market                                                                                      |
+| type             | [OrderTypeAsStringV2](#schemaordertypeasstringv2)           | true     | none         | order type can have the following string values `"LIMIT"`, `"MARKET"`, `"STOP_LIMIT"`, `"POST_ONLY"`. `"MARKET"` and `"STOP_LIMIT"` are not applicable for Options |
+| side             | [OrderSideAsString](#schemaordersideasstring)               | true     | none         | order side can have the following string values `"BUY"`, `"SELL"`                                                                                                  |
+| price            | [AssetValue](#schemaassetvalue)                             | false    | none         | price                                                                                                                                                              |
+| stopPrice        | [AssetValue](#schemaassetvalue)                             | false    | none         | stop price                                                                                                                                                         |
+| quantity         | [AssetValue](#schemaassetvalue)                             | true     | none         | quantity                                                                                                                                                           |
+| timeInForce      | [OrderTimeInForceAsString](#schemaordertimeinforceasstring) | true     | none         | time in force can have the following string values `"GTC"`, `"FOK"`, `"IOC"`, see [details](#overview--order-timeinforce)                                          |
+| allowBorrow      | boolean                                                     | false    | none         | allows to borrow on the order                                                                                                                                      |
+| isMMP            | boolean                                                     | false    | none         | Indicate if the order is subject to `Market Maker Protection`. Only applicable to option markets                                                                   |
+| tradingAccountId | [TradingAccountId](#schematradingaccountid)                 | true     | none         | unique trading account ID                                                                                                                                          |
 
 ## AmendOrderV1
 
@@ -14086,7 +16929,7 @@ last updated time of transaction
       "allOf": [
         {
           "type": "string",
-          "description": "order type can have the following string values `\"LIMIT\"`, `\"MARKET\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+          "description": "order type can have the following string values `\"LIMIT\"`, `\"MARKET\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MARKET\"` and `\"STOP_LIMIT\"` are not applicable for Options",
           "example": "LIMIT"
         }
       ]
@@ -14130,16 +16973,16 @@ last updated time of transaction
 
 ### Properties
 
-| Name             | Type                                              | Required | Restrictions | Description                                                                                           |
-| ---------------- | ------------------------------------------------- | -------- | ------------ | ----------------------------------------------------------------------------------------------------- |
-| commandType      | string                                            | true     | none         | The command type, it must be 'V1AmendOrder'                                                           |
-| orderId          | [OrderHandle](#schemaorderhandle)                 | false    | none         | Unique numeric (i64) identifier generated on the client side expressed as a string value              |
-| symbol           | [MarketSymbol](#schemamarketsymbol)               | true     | none         | market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market                         |
-| type             | [OrderTypeAsStringV2](#schemaordertypeasstringv2) | false    | none         | order type can have the following string values `"LIMIT"`, `"MARKET"`, `"STOP_LIMIT"`, `"POST_ONLY"`. |
-| price            | [AssetValue](#schemaassetvalue)                   | false    | none         | price                                                                                                 |
-| clientOrderId    | string                                            | false    | none         | unique numeric identifier generated on the client side expressed as a string value                    |
-| quantity         | [AssetValue](#schemaassetvalue)                   | false    | none         | quantity                                                                                              |
-| tradingAccountId | [TradingAccountId](#schematradingaccountid)       | true     | none         | unique trading account ID                                                                             |
+| Name             | Type                                              | Required | Restrictions | Description                                                                                                                                                        |
+| ---------------- | ------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| commandType      | string                                            | true     | none         | The command type, it must be 'V1AmendOrder'                                                                                                                        |
+| orderId          | [OrderHandle](#schemaorderhandle)                 | false    | none         | Unique numeric (i64) identifier generated on the client side expressed as a string value                                                                           |
+| symbol           | [MarketSymbol](#schemamarketsymbol)               | true     | none         | market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market                                                                                      |
+| type             | [OrderTypeAsStringV2](#schemaordertypeasstringv2) | false    | none         | order type can have the following string values `"LIMIT"`, `"MARKET"`, `"STOP_LIMIT"`, `"POST_ONLY"`. `"MARKET"` and `"STOP_LIMIT"` are not applicable for Options |
+| price            | [AssetValue](#schemaassetvalue)                   | false    | none         | price                                                                                                                                                              |
+| clientOrderId    | string                                            | false    | none         | unique numeric identifier generated on the client side expressed as a string value                                                                                 |
+| quantity         | [AssetValue](#schemaassetvalue)                   | false    | none         | quantity                                                                                                                                                           |
+| tradingAccountId | [TradingAccountId](#schematradingaccountid)       | true     | none         | unique trading account ID                                                                                                                                          |
 
 ## TradingAccountResponse
 
@@ -14818,6 +17661,84 @@ last updated time of transaction
 | instructionId    | [AMMInstructionID](#schemaamminstructionid) | true     | none         | unique AMM instruction ID                                                     |
 | symbol           | [MarketSymbol](#schemamarketsymbol)         | true     | none         | market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market |
 | tradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | unique trading account ID                                                     |
+
+## SetMMPCommandV1
+
+```json
+{
+  "commandType": "V1SetMMP",
+  "tradingAccountId": "123567443543",
+  "underlyingAssetSymbol": "BTC",
+  "windowTimeInSeconds": "10",
+  "frozenTimeInSeconds": "5",
+  "quantityLimit": "10",
+  "deltaLimit": "1",
+  "x-widdershins-oldRef": "#/components/schemas/SetMMPCommandV1/example"
+}
+```
+
+### Properties
+
+| Name                  | Type                                                  | Required | Restrictions | Description                                                                                                                                                                                                                                       |
+| --------------------- | ----------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| commandType           | string                                                | true     | none         | the command type must be provided as 'V1SetMMP'                                                                                                                                                                                                   |
+| tradingAccountId      | [TradingAccountId](#schematradingaccountid)           | true     | none         | unique trading account ID                                                                                                                                                                                                                         |
+| underlyingAssetSymbol | [UnderlyingAssetSymbol](#schemaunderlyingassetsymbol) | true     | none         | the underlying asset symbol that is configured for MMP checks                                                                                                                                                                                     |
+| windowTimeInSeconds   | string                                                | true     | none         | time window during which the MMP checks are conducted. It helps in determining how frequently the system evaluates the market maker's activity against predefined thresholds. Value needs to be `> 0`. Maximum value is 600 seconds (10 minutes). |
+| frozenTimeInSeconds   | string                                                | true     | none         | the duration for which a market maker’s trading activity is temporarily halted after a protective measure is triggered. Value needs to be `>= 0`. Maximum value is 3600 seconds (60 minutes).                                                     |
+| quantityLimit         | string                                                | false    | none         | cap on the total number of contracts that a market maker can trade within `windowTimeInSeconds`. This is direction(side) agnostic. Needs to be `> 0` if set.                                                                                      |
+| deltaLimit            | string                                                | false    | none         | net delta exposure that a market maker can accumulate within `windowTimeInSeconds`                                                                                                                                                                |
+
+## SetMMPCommandResponse
+
+```json
+{
+  "message": "Command acknowledged - SetMMPConfig",
+  "requestId": "633910976353665025"
+}
+```
+
+### Properties
+
+| Name      | Type                          | Required | Restrictions | Description       |
+| --------- | ----------------------------- | -------- | ------------ | ----------------- |
+| message   | string                        | true     | none         | message           |
+| requestId | [RequestID](#schemarequestid) | true     | none         | unique request ID |
+
+## ResetMMPCommandV1
+
+```json
+{
+  "commandType": "V1ResetMMP",
+  "tradingAccountId": "123567443543",
+  "underlyingAssetSymbol": "BTC",
+  "x-widdershins-oldRef": "#/components/schemas/ResetMMPCommandV1/example"
+}
+```
+
+### Properties
+
+| Name                  | Type                                                  | Required | Restrictions | Description                                                   |
+| --------------------- | ----------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------- |
+| commandType           | string                                                | true     | none         | the command type must be provided as 'V1ResetMMP'             |
+| tradingAccountId      | [TradingAccountId](#schematradingaccountid)           | true     | none         | unique trading account ID                                     |
+| underlyingAssetSymbol | [UnderlyingAssetSymbol](#schemaunderlyingassetsymbol) | true     | none         | the underlying asset symbol that is configured for MMP checks |
+
+## ResetMMPCommandResponse
+
+```json
+{
+  "message": "Command acknowledged - ResetMMPConfig",
+  "requestId": "633910976353665026"
+}
+```
+
+### Properties
+
+| Name      | Type                          | Required | Restrictions | Description       |
+| --------- | ----------------------------- | -------- | ------------ | ----------------- |
+| message   | string                        | true     | none         | message           |
+| requestId | [RequestID](#schemarequestid) | true     | none         | unique request ID |
 
 ## CancelAllOrdersRequest
 
@@ -15838,7 +18759,7 @@ JWT authorizer you obtain along with the
               "allOf": [
                 {
                   "type": "string",
-                  "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+                  "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MKT\"` and `\"STOP_LIMIT\"` are not applicable for Options",
                   "example": "LMT"
                 }
               ],
@@ -15897,6 +18818,11 @@ JWT authorizer you obtain along with the
               "description": "allows to borrow on the order",
               "type": "boolean",
               "example": false
+            },
+            "isMMP": {
+              "description": "Indicate if the order is subject to `Market Maker Protection`. Only applicable to option markets",
+              "type": "boolean",
+              "example": true
             },
             "tradingAccountId": {
               "allOf": [
@@ -16367,7 +19293,7 @@ JWT authorizer you obtain along with the
       "allOf": [
         {
           "type": "string",
-          "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+          "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MKT\"` and `\"STOP_LIMIT\"` are not applicable for Options",
           "example": "LMT"
         }
       ],
@@ -18151,6 +21077,9 @@ JWT authorizer you obtain along with the
     "isTaker",
     "tradeRebateAmount",
     "tradeRebateAssetSymbol",
+    "otcMatchId",
+    "otcTradeId",
+    "clientOtcTradeId",
     "createdAtTimestamp",
     "createdAtDatetime"
   ],
@@ -18274,6 +21203,36 @@ JWT authorizer you obtain along with the
         }
       ]
     },
+    "otcMatchId": {
+      "description": "unique OTC match ID.",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+          "example": "15"
+        }
+      ]
+    },
+    "otcTradeId": {
+      "description": "unique Bullish OTC trade ID",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+          "example": "200000000000000098"
+        }
+      ]
+    },
+    "clientOtcTradeId": {
+      "description": "unique Client OTC trade ID",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique numeric (i64) identifier generated on the client side expressed as a string value",
+          "example": "20050900225"
+        }
+      ]
+    },
     "createdAtDatetime": {
       "description": "denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string",
       "allOf": [
@@ -18316,6 +21275,9 @@ JWT authorizer you obtain along with the
 | isTaker                | [Boolean](#schemaboolean)                     | true     | none         | denotes whether this is a taker's trade                                                                       |
 | tradeRebateAmount      | [AssetValue](#schemaassetvalue)               | true     | none         | amount of rebate that is credited to the user as part of the trade.                                           |
 | tradeRebateAssetSymbol | [QuoteAssetSymbol](#schemaquoteassetsymbol)   | true     | none         | the symbol of the asset in which the rebate is paid                                                           |
+| otcMatchId             | [OtcMatchId](#schemaotcmatchid)               | true     | none         | unique OTC match ID.                                                                                          |
+| otcTradeId             | [OtcTradeId](#schemaotctradeid)               | true     | none         | unique Bullish OTC trade ID                                                                                   |
+| clientOtcTradeId       | [ClientOtcTradeId](#schemaclientotctradeid)   | true     | none         | unique Client OTC trade ID                                                                                    |
 | createdAtDatetime      | [DateTime](#schemadatetime)                   | true     | none         | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string                  |
 | createdAtTimestamp     | [TimeStampAsString](#schematimestampasstring) | true     | none         | denotes the time the trade was executed by the exchange                                                       |
 
@@ -18401,6 +21363,11 @@ JWT authorizer you obtain along with the
         }
       ]
     },
+    "bidIVPercentage": {
+      "description": "Implied volatility of the best bid price",
+      "type": "string",
+      "example": "99.0"
+    },
     "bidVolume": {
       "description": "current best bid (buy) quantity (may be missing or undefined), see [asset value](#overview--price-and-quantity-precision) format",
       "allOf": [
@@ -18420,6 +21387,11 @@ JWT authorizer you obtain along with the
           "example": "1.00000000"
         }
       ]
+    },
+    "askIVPercentage": {
+      "description": "Implied volatility of the best ask price",
+      "type": "string",
+      "example": "99.0"
     },
     "askVolume": {
       "description": "current best ask (sell) quantity (may be missing or undefined), see [asset value](#overview--price-and-quantity-precision) format",
@@ -18579,7 +21551,7 @@ JWT authorizer you obtain along with the
       ]
     },
     "ammData": {
-      "description": "AMM data of all available fee tiers.",
+      "description": "AMM data of all available fee tiers. Not applicable for `Option` markets",
       "type": "array",
       "minItems": 0,
       "items": {
@@ -18634,6 +21606,64 @@ JWT authorizer you obtain along with the
           }
         ]
       }
+    },
+    "optionStrikePrice": {
+      "description": "The price at which the option can be exercised upon expiry.",
+      "type": "string",
+      "example": "70000"
+    },
+    "optionType": {
+      "description": "Type of Option",
+      "allOf": [
+        {
+          "description": "Type of Option market",
+          "example": "CALL",
+          "type": "string",
+          "enum": ["CALL", "PUT"]
+        }
+      ]
+    },
+    "expiryDateTime": {
+      "description": "Expiry Date Time of the instrument",
+      "allOf": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "example": "2025-05-20T01:01:01.000Z",
+          "description": "ISO 8601 with millisecond as string"
+        }
+      ]
+    },
+    "greeks": {
+      "description": "Option greeks",
+      "allOf": [
+        {
+          "description": "Pricing parameters for option instruments",
+          "type": "object",
+          "properties": {
+            "delta": {
+              "description": "Sensitivity of an option’s price to a $1 change in the price of the underlying asset",
+              "type": "string",
+              "example": "0.98"
+            },
+            "gamma": {
+              "description": "Rate of change of Delta with respect to a $1 change in the underlying asset’s price",
+              "type": "string",
+              "example": "0.98"
+            },
+            "theta": {
+              "description": "The rate at which an option’s price decreases as it approaches its expiration date",
+              "type": "string",
+              "example": "-0.17"
+            },
+            "vega": {
+              "description": "Sensitivity of an option’s price to a 1% change in the implied volatility of the underlying asset",
+              "type": "string",
+              "example": "0.05"
+            }
+          }
+        }
+      ]
     }
   }
 }
@@ -18648,8 +21678,10 @@ JWT authorizer you obtain along with the
 | high               | [AssetValue](#schemaassetvalue)               | true     | none         | highest price, see [asset value](#overview--price-and-quantity-precision) format                                                                                                       |
 | low                | [AssetValue](#schemaassetvalue)               | true     | none         | lowest price, see [asset value](#overview--price-and-quantity-precision) format                                                                                                        |
 | bestBid            | [AssetValue](#schemaassetvalue)               | true     | none         | current best bid (buy) price, see [asset value](#overview--price-and-quantity-precision) format                                                                                        |
+| bidIVPercentage    | string                                        | false    | none         | Implied volatility of the best bid price                                                                                                                                               |
 | bidVolume          | [AssetValue](#schemaassetvalue)               | true     | none         | current best bid (buy) quantity (may be missing or undefined), see [asset value](#overview--price-and-quantity-precision) format                                                       |
 | bestAsk            | [AssetValue](#schemaassetvalue)               | true     | none         | current best ask (sell) price, see [asset value](#overview--price-and-quantity-precision) format                                                                                       |
+| askIVPercentage    | string                                        | false    | none         | Implied volatility of the best ask price                                                                                                                                               |
 | askVolume          | [AssetValue](#schemaassetvalue)               | true     | none         | current best ask (sell) quantity (may be missing or undefined), see [asset value](#overview--price-and-quantity-precision) format                                                      |
 | vwap               | [AssetValue](#schemaassetvalue)               | true     | none         | volume weighed average price, see [asset value](#overview--price-and-quantity-precision) format                                                                                        |
 | open               | [AssetValue](#schemaassetvalue)               | true     | none         | opening price, see [asset value](#overview--price-and-quantity-precision) format                                                                                                       |
@@ -18667,7 +21699,11 @@ JWT authorizer you obtain along with the
 | lastTradeDatetime  | [DateTime](#schemadatetime)                   | true     | none         | time of the last trade on this symbol, ISO 8601 with millisecond as string                                                                                                             |
 | lastTradeTimestamp | [TimeStampAsString](#schematimestampasstring) | true     | none         | time of the last trade on this symbol                                                                                                                                                  |
 | lastTradeQuantity  | [AssetValue](#schemaassetvalue)               | true     | none         | quantity of the last trade on this symbol, see [asset value](#overview--price-and-quantity-precision) format                                                                           |
-| ammData            | [allOf]                                       | true     | none         | AMM data of all available fee tiers.                                                                                                                                                   |
+| ammData            | [allOf]                                       | true     | none         | AMM data of all available fee tiers. Not applicable for `Option` markets                                                                                                               |
+| optionStrikePrice  | string                                        | false    | none         | The price at which the option can be exercised upon expiry.                                                                                                                            |
+| optionType         | [OptionType](#schemaoptiontype)               | false    | none         | Type of Option                                                                                                                                                                         |
+| expiryDateTime     | [DateTime](#schemadatetime)                   | false    | none         | Expiry Date Time of the instrument                                                                                                                                                     |
+| greeks             | [OptionGreeks](#schemaoptiongreeks)           | false    | none         | Option greeks                                                                                                                                                                          |
 
 ## AmmData
 
@@ -18763,6 +21799,35 @@ DATED FUTURE markets.
 | Name        | Type   | Required | Restrictions | Description                                                                                       |
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | market symbol. Eg `BTC-USDC-PERP` for PERPETUAL and `BTC-USDC-20241201` for DATED FUTURE markets. |
+
+## OptionMarketSymbol
+
+```json
+"BTC-USDC-20241004-70000-C"
+```
+
+market symbol. Eg `BTC-USDC-20241004-70000-C` for OPTION markets.
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                       |
+| ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | market symbol. Eg `BTC-USDC-20241004-70000-C` for OPTION markets. |
+
+## OptionAndDatedFuturesMarketSymbol
+
+```json
+"BTC-USDC-20241004-70000-C"
+```
+
+market symbol. Eg `BTC-USDC-20241004-70000-C` for OPTION markets and
+`BTC-USDC-20241201` for DATED FUTURE markets.
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                                                        |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| _anonymous_ | string | false    | none         | market symbol. Eg `BTC-USDC-20241004-70000-C` for OPTION markets and `BTC-USDC-20241201` for DATED FUTURE markets. |
 
 ## PerpMarketSymbol
 
@@ -18867,14 +21932,13 @@ asset symbol as denoted in the world
 "BTC"
 ```
 
-the underlying asset symbol of the options contract that is eligible for MMP
-checks
+the underlying asset symbol that is configured for MMP checks
 
 ### Properties
 
-| Name        | Type   | Required | Restrictions | Description                                                                         |
-| ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------- |
-| _anonymous_ | string | false    | none         | the underlying asset symbol of the options contract that is eligible for MMP checks |
+| Name        | Type   | Required | Restrictions | Description                                                   |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | the underlying asset symbol that is configured for MMP checks |
 
 ## QuoteAssetSymbol
 
@@ -19291,8 +22355,8 @@ unique asset ID
       "allOf": [
         {
           "type": "string",
-          "description": "market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market",
-          "example": "BTCUSDC"
+          "description": "market symbol. Eg `BTC-USDC-20241004-70000-C` for OPTION markets.",
+          "example": "BTC-USDC-20241004-70000-C"
         }
       ]
     },
@@ -19384,7 +22448,7 @@ unique asset ID
       "example": 8
     },
     "priceBuffer": {
-      "description": "buffer range of limit price from the last traded price.",
+      "description": "buffer range of limit price from the last traded price. Not applicable for `Option` markets",
       "type": "string",
       "example": 0.3
     },
@@ -19464,12 +22528,12 @@ unique asset ID
       ]
     },
     "liquidityTickSize": {
-      "description": "liquidity tick size.",
+      "description": "liquidity tick size. Not applicable for `Option` markets",
       "type": "string",
       "example": "100.0000"
     },
     "liquidityPrecision": {
-      "description": "liquidity precision.",
+      "description": "liquidity precision. Not applicable for `Option` markets",
       "type": "integer",
       "example": 4
     },
@@ -19491,7 +22555,7 @@ unique asset ID
       "example": "0.00000001"
     },
     "makerMinLiquidityAddition": {
-      "description": "minimum amount required to invest liquidity to market.",
+      "description": "minimum amount required to invest liquidity to market. Not applicable for `Option` markets",
       "type": "string",
       "example": "5000"
     },
@@ -19501,7 +22565,7 @@ unique asset ID
         "allOf": [
           {
             "type": "string",
-            "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+            "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MKT\"` and `\"STOP_LIMIT\"` are not applicable for Options",
             "example": "LMT"
           }
         ]
@@ -19539,12 +22603,12 @@ unique asset ID
       "example": true
     },
     "liquidityInvestEnabled": {
-      "description": "able to invest liquidity to market.",
+      "description": "able to invest liquidity to market. Not applicable for `Option` markets",
       "type": "boolean",
       "example": true
     },
     "liquidityWithdrawEnabled": {
-      "description": "able to withdraw liquidity from market.",
+      "description": "able to withdraw liquidity from market. Not applicable for `Option` markets",
       "type": "boolean",
       "example": true
     },
@@ -19554,7 +22618,7 @@ unique asset ID
       "example": 1
     },
     "feeTiers": {
-      "description": "all available fee tiers.",
+      "description": "all available fee tiers. Not applicable for `Option` markets",
       "type": "array",
       "minItems": 0,
       "items": {
@@ -19597,8 +22661,8 @@ unique asset ID
       "allOf": [
         {
           "type": "string",
-          "description": "market type can have the following string values `\"SPOT\"`, `\"PERPETUAL\"`, `\"DATED_FUTURE\"`",
-          "enum": ["SPOT", "PERPETUAL", "DATED_FUTURE"],
+          "description": "market type can have the following string values `\"SPOT\"`, `\"PERPETUAL\"`, `\"DATED_FUTURE\"`, `\"OPTION\"`",
+          "enum": ["SPOT", "PERPETUAL", "DATED_FUTURE", "OPTION"],
           "example": "SPOT"
         }
       ]
@@ -19632,6 +22696,27 @@ unique asset ID
       "description": "denotes the time when the market expires in ISO 8601 with millisecond format as string",
       "type": "string",
       "example": "2024-10-04T08:00:00.000Z"
+    },
+    "optionStrikePrice": {
+      "description": "The price at which the option can be exercised upon expiry.",
+      "type": "string",
+      "example": "70000.0000"
+    },
+    "optionType": {
+      "description": "Specifies if it’s a call (right to buy) or a put (right to sell)",
+      "allOf": [
+        {
+          "description": "Type of Option market",
+          "example": "CALL",
+          "type": "string",
+          "enum": ["CALL", "PUT"]
+        }
+      ]
+    },
+    "premiumCapRatio": {
+      "description": "A cap that is set on the underlying asset's movement as part of the premium that limits the option buyer's profit.",
+      "type": "string",
+      "example": "0.10"
     }
   }
 }
@@ -19642,7 +22727,7 @@ unique asset ID
 | Name                          | Type                                            | Required | Restrictions | Description                                                                                                                                                                                              |
 | ----------------------------- | ----------------------------------------------- | -------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | marketId                      | [MarketID](#schemamarketid)                     | true     | none         | unique market ID                                                                                                                                                                                         |
-| symbol                        | [MarketSymbol](#schemamarketsymbol)             | true     | none         | market symbol                                                                                                                                                                                            |
+| symbol                        | [OptionMarketSymbol](#schemaoptionmarketsymbol) | true     | none         | market symbol                                                                                                                                                                                            |
 | baseSymbol                    | [AssetSymbol](#schemaassetsymbol)               | true     | none         | base asset symbol (only applies to spot market)                                                                                                                                                          |
 | underlyingBaseSymbol          | [AssetSymbol](#schemaassetsymbol)               | false    | none         | underlying base asset symbol (only applies to derivative market)                                                                                                                                         |
 | quoteSymbol                   | [AssetSymbol](#schemaassetsymbol)               | true     | none         | quote asset symbol (only applies to spot market)                                                                                                                                                         |
@@ -19654,7 +22739,7 @@ unique asset ID
 | pricePrecision                | integer                                         | true     | none         | number of decimal digits 'after the dot' for price                                                                                                                                                       |
 | quantityPrecision             | integer                                         | true     | none         | number of decimal digits 'after the dot' for quantity                                                                                                                                                    |
 | costPrecision                 | integer                                         | true     | none         | number of decimal digits 'after the dot' for cost, `price * quantity`                                                                                                                                    |
-| priceBuffer                   | string                                          | true     | none         | buffer range of limit price from the last traded price.                                                                                                                                                  |
+| priceBuffer                   | string                                          | true     | none         | buffer range of limit price from the last traded price. Not applicable for `Option` markets                                                                                                              |
 | minQuantityLimit              | [AssetValue](#schemaassetvalue)                 | true     | none         | order quantity should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                                                                        |
 | maxQuantityLimit              | [AssetValue](#schemaassetvalue)                 | true     | none         | order quantity should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                                                                        |
 | maxPriceLimit                 | [AssetValue](#schemaassetvalue)                 | true     | none         | order price should be < max, see [asset value](#overview--price-and-quantity-precision) format                                                                                                           |
@@ -19663,12 +22748,12 @@ unique asset ID
 | minCostLimit                  | [AssetValue](#schemaassetvalue)                 | true     | none         | order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format                                                                                        |
 | timeZone                      | string                                          | true     | none         | time zone                                                                                                                                                                                                |
 | tickSize                      | [AssetValue](#schemaassetvalue)                 | true     | none         | tick size, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                             |
-| liquidityTickSize             | string                                          | true     | none         | liquidity tick size.                                                                                                                                                                                     |
-| liquidityPrecision            | integer                                         | true     | none         | liquidity precision.                                                                                                                                                                                     |
+| liquidityTickSize             | string                                          | true     | none         | liquidity tick size. Not applicable for `Option` markets                                                                                                                                                 |
+| liquidityPrecision            | integer                                         | true     | none         | liquidity precision. Not applicable for `Option` markets                                                                                                                                                 |
 | makerFee                      | integer                                         | false    | none         | Deprecated and no longer accurate. See `feeGroupId`                                                                                                                                                      |
 | takerFee                      | integer                                         | false    | none         | Deprecated and no longer accurate. See `feeGroupId`                                                                                                                                                      |
 | roundingCorrectionFactor      | string                                          | true     | none         | rounding correction factor for market                                                                                                                                                                    |
-| makerMinLiquidityAddition     | string                                          | true     | none         | minimum amount required to invest liquidity to market.                                                                                                                                                   |
+| makerMinLiquidityAddition     | string                                          | true     | none         | minimum amount required to invest liquidity to market. Not applicable for `Option` markets                                                                                                               |
 | orderTypes                    | [allOf]                                         | false    | none         | none                                                                                                                                                                                                     |
 | spotTradingEnabled            | boolean                                         | true     | none         | spot trading enabled (only applies for Spot markets)                                                                                                                                                     |
 | marginTradingEnabled          | boolean                                         | true     | none         | margin trading enabled (only applies for Spot markets)                                                                                                                                                   |
@@ -19676,10 +22761,10 @@ unique asset ID
 | createOrderEnabled            | boolean                                         | true     | none         | able to create order                                                                                                                                                                                     |
 | amendOrderEnabled             | boolean                                         | false    | none         | able to amend order                                                                                                                                                                                      |
 | cancelOrderEnabled            | boolean                                         | true     | none         | able to cancel order                                                                                                                                                                                     |
-| liquidityInvestEnabled        | boolean                                         | true     | none         | able to invest liquidity to market.                                                                                                                                                                      |
-| liquidityWithdrawEnabled      | boolean                                         | true     | none         | able to withdraw liquidity from market.                                                                                                                                                                  |
+| liquidityInvestEnabled        | boolean                                         | true     | none         | able to invest liquidity to market. Not applicable for `Option` markets                                                                                                                                  |
+| liquidityWithdrawEnabled      | boolean                                         | true     | none         | able to withdraw liquidity from market. Not applicable for `Option` markets                                                                                                                              |
 | feeGroupId                    | integer                                         | true     | none         | Identifier to the trade fee assigned to this market. Used with `tradeFeeRate` at [Get Trading Account](#get-/v1/accounts/trading-accounts/-tradingAccountId-)                                            |
-| feeTiers                      | [allOf]                                         | true     | none         | all available fee tiers.                                                                                                                                                                                 |
+| feeTiers                      | [allOf]                                         | true     | none         | all available fee tiers. Not applicable for `Option` markets                                                                                                                                             |
 | marketType                    | [MarketTypeAsString](#schemamarkettypeasstring) | true     | none         | market type, e.g. "SPOT" for market like "BTCUSD", "PERPETUAL" for market like "BTC-USDC-PERP", "DATED_FUTURE" for market like "BTC-USDC-20250901", "OPTION" for market like "BTC-USDC-20250901-90000-C" |
 | contractMultiplier            | integer                                         | false    | none         | contract multiplier. (only applies to perpetual market)                                                                                                                                                  |
 | settlementAssetSymbol         | string                                          | false    | none         | settlement asset symbol. (only applies to perpetual market)                                                                                                                                              |
@@ -19687,6 +22772,9 @@ unique asset ID
 | concentrationRiskThresholdUSD | string                                          | true     | none         | open interest notional of an account for a specific derivative contract.                                                                                                                                 |
 | concentrationRiskPercentage   | string                                          | true     | none         | percentage of the total open interest for a specific derivative contract.                                                                                                                                |
 | expiryDatetime                | string                                          | true     | none         | denotes the time when the market expires in ISO 8601 with millisecond format as string                                                                                                                   |
+| optionStrikePrice             | string                                          | false    | none         | The price at which the option can be exercised upon expiry.                                                                                                                                              |
+| optionType                    | [OptionType](#schemaoptiontype)                 | false    | none         | Specifies if it’s a call (right to buy) or a put (right to sell)                                                                                                                                         |
+| premiumCapRatio               | string                                          | false    | none         | A cap that is set on the underlying asset's movement as part of the premium that limits the option buyer's profit.                                                                                       |
 
 ## Asset
 
@@ -20172,6 +23260,27 @@ time in force
 | _anonymous_ | GTC   |
 | _anonymous_ | FOK   |
 | _anonymous_ | IOC   |
+
+## OptionType
+
+```json
+"CALL"
+```
+
+Type of Option market
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description           |
+| ----------- | ------ | -------- | ------------ | --------------------- |
+| _anonymous_ | string | false    | none         | Type of Option market |
+
+#### Enumerated Values
+
+| Property    | Value |
+| ----------- | ----- |
+| _anonymous_ | CALL  |
+| _anonymous_ | PUT   |
 
 ## OrderType
 
@@ -21046,6 +24155,227 @@ Get account transfer history
 | orders           | [allOf]                                     | false    | none         | pending orders to be used in simulation     |
 | referencePrices  | [allOf]                                     | false    | none         | reference price to be used in simulation    |
 
+## OptionLadderResponse
+
+```json
+{
+  "description": "Option Ladder Response",
+  "type": "string",
+  "properties": {
+    "symbol": {
+      "description": "Symbol of the option market. For example `BTC-USDC-20241004-70000-C`",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "market symbol. Eg `BTC-USDC-20241004-70000-C` for OPTION markets.",
+          "example": "BTC-USDC-20241004-70000-C"
+        }
+      ]
+    },
+    "baseSymbol": {
+      "description": "Base symbol of the option market. For `BTC-USDC-20241004-70000-C`, it will be `BTC`",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "asset symbol as denoted in the world",
+          "example": "BTC"
+        }
+      ]
+    },
+    "settlementAssetSymbol": {
+      "description": "Asset used for Mark To Market settlement",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "asset symbol as denoted in the world",
+          "example": "USDC"
+        }
+      ]
+    },
+    "bidQuantity": {
+      "description": "Quantity of `bid`",
+      "type": "string",
+      "example": "0.0"
+    },
+    "askQuantity": {
+      "description": "Quantity of `ask`",
+      "type": "string",
+      "example": "0.0"
+    },
+    "bidIVPercentage": {
+      "description": "Implied volatility of the best bid price",
+      "type": "string",
+      "example": "99.0"
+    },
+    "askIVPercentage": {
+      "description": "Implied volatility of the best ask price",
+      "type": "string",
+      "example": "99.0"
+    },
+    "bid": {
+      "description": "Bid price in the order book",
+      "type": "string",
+      "example": "90000.0000"
+    },
+    "ask": {
+      "description": "Ask price in the order book",
+      "type": "string",
+      "example": "90000.0000"
+    },
+    "underlyingPrice": {
+      "description": "Index price of the base asset",
+      "type": "string",
+      "example": "100000.0000"
+    },
+    "optionStrikePrice": {
+      "description": "Strike price of the option market",
+      "type": "string",
+      "example": "90000"
+    },
+    "markPrice": {
+      "description": "Mark Price of the option market",
+      "type": "string",
+      "example": "100.0000"
+    },
+    "quantity": {
+      "description": "Number of contracts outstanding",
+      "type": "string",
+      "example": "1000"
+    },
+    "openInterest": {
+      "description": "Amount of outstanding contracts in the exchange",
+      "type": "string",
+      "example": "0.11442400"
+    },
+    "openInterestUSD": {
+      "description": "USD value of outstanding contracts in the exchange",
+      "type": "string",
+      "example": "1144240.0000"
+    },
+    "optionType": {
+      "description": "Specifies if it’s a call (right to buy) or a put (right to sell)",
+      "allOf": [
+        {
+          "description": "Type of Option market",
+          "example": "CALL",
+          "type": "string",
+          "enum": ["CALL", "PUT"]
+        }
+      ]
+    },
+    "expiryDatetime": {
+      "allOf": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "example": "2025-05-20T01:01:01.000Z",
+          "description": "ISO 8601 with millisecond as string"
+        }
+      ]
+    },
+    "greeks": {
+      "description": "Option greeks",
+      "allOf": [
+        {
+          "description": "Pricing parameters for option instruments",
+          "type": "object",
+          "properties": {
+            "delta": {
+              "description": "Sensitivity of an option’s price to a $1 change in the price of the underlying asset",
+              "type": "string",
+              "example": "0.98"
+            },
+            "gamma": {
+              "description": "Rate of change of Delta with respect to a $1 change in the underlying asset’s price",
+              "type": "string",
+              "example": "0.98"
+            },
+            "theta": {
+              "description": "The rate at which an option’s price decreases as it approaches its expiration date",
+              "type": "string",
+              "example": "-0.17"
+            },
+            "vega": {
+              "description": "Sensitivity of an option’s price to a 1% change in the implied volatility of the underlying asset",
+              "type": "string",
+              "example": "0.05"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+Option Ladder Response
+
+### Properties
+
+| Name                  | Type                                            | Required | Restrictions | Description                                                                         |
+| --------------------- | ----------------------------------------------- | -------- | ------------ | ----------------------------------------------------------------------------------- |
+| _anonymous_           | string                                          | false    | none         | Option Ladder Response                                                              |
+| symbol                | [OptionMarketSymbol](#schemaoptionmarketsymbol) | false    | none         | Symbol of the option market. For example `BTC-USDC-20241004-70000-C`                |
+| baseSymbol            | [AssetSymbol](#schemaassetsymbol)               | false    | none         | Base symbol of the option market. For `BTC-USDC-20241004-70000-C`, it will be `BTC` |
+| settlementAssetSymbol | [QuoteAssetSymbol](#schemaquoteassetsymbol)     | false    | none         | Asset used for Mark To Market settlement                                            |
+| bidQuantity           | string                                          | false    | none         | Quantity of `bid`                                                                   |
+| askQuantity           | string                                          | false    | none         | Quantity of `ask`                                                                   |
+| bidIVPercentage       | string                                          | false    | none         | Implied volatility of the best bid price                                            |
+| askIVPercentage       | string                                          | false    | none         | Implied volatility of the best ask price                                            |
+| bid                   | string                                          | false    | none         | Bid price in the order book                                                         |
+| ask                   | string                                          | false    | none         | Ask price in the order book                                                         |
+| underlyingPrice       | string                                          | false    | none         | Index price of the base asset                                                       |
+| optionStrikePrice     | string                                          | false    | none         | Strike price of the option market                                                   |
+| markPrice             | string                                          | false    | none         | Mark Price of the option market                                                     |
+| quantity              | string                                          | false    | none         | Number of contracts outstanding                                                     |
+| openInterest          | string                                          | false    | none         | Amount of outstanding contracts in the exchange                                     |
+| openInterestUSD       | string                                          | false    | none         | USD value of outstanding contracts in the exchange                                  |
+| optionType            | [OptionType](#schemaoptiontype)                 | false    | none         | Specifies if it’s a call (right to buy) or a put (right to sell)                    |
+| expiryDatetime        | [DateTime](#schemadatetime)                     | false    | none         | ISO 8601 with millisecond as string                                                 |
+| greeks                | [OptionGreeks](#schemaoptiongreeks)             | false    | none         | Option greeks                                                                       |
+
+## OptionGreeks
+
+```json
+{
+  "description": "Pricing parameters for option instruments",
+  "type": "object",
+  "properties": {
+    "delta": {
+      "description": "Sensitivity of an option’s price to a $1 change in the price of the underlying asset",
+      "type": "string",
+      "example": "0.98"
+    },
+    "gamma": {
+      "description": "Rate of change of Delta with respect to a $1 change in the underlying asset’s price",
+      "type": "string",
+      "example": "0.98"
+    },
+    "theta": {
+      "description": "The rate at which an option’s price decreases as it approaches its expiration date",
+      "type": "string",
+      "example": "-0.17"
+    },
+    "vega": {
+      "description": "Sensitivity of an option’s price to a 1% change in the implied volatility of the underlying asset",
+      "type": "string",
+      "example": "0.05"
+    }
+  }
+}
+```
+
+Pricing parameters for option instruments
+
+### Properties
+
+| Name  | Type   | Required | Restrictions | Description                                                                                       |
+| ----- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------- |
+| delta | string | false    | none         | Sensitivity of an option’s price to a $1 change in the price of the underlying asset              |
+| gamma | string | false    | none         | Rate of change of Delta with respect to a $1 change in the underlying asset’s price               |
+| theta | string | false    | none         | The rate at which an option’s price decreases as it approaches its expiration date                |
+| vega  | string | false    | none         | Sensitivity of an option’s price to a 1% change in the implied volatility of the underlying asset |
+
 ## PortfolioSimulationResponse
 
 ```json
@@ -21148,3 +24478,952 @@ Hourly Funding Rate History of one market
 | ----------------- | ------ | -------- | ------------ | ------------------------------------------------------ |
 | fundingRate       | string | false    | none         | funding rate for this hour                             |
 | updatedAtDatetime | string | false    | none         | date time of the last funding rate update for the hour |
+
+## CreateOtcTradeCommand
+
+```json
+{
+  "commandType": "V1CreateOtcTrade",
+  "clientOtcTradeId": "20050900225",
+  "sharedMatchKey": "cfBtcXrpMatch001",
+  "tradingAccountId": "111000000000001",
+  "isTaker": true,
+  "remarks": "first otc trade with xyz client",
+  "trades": [
+    {
+      "symbol": "BTC-USDC-PERP",
+      "side": "BUY",
+      "price": "98213.00000",
+      "quantity": "1.5000"
+    },
+    {
+      "symbol": "XRP-USDC-PERP",
+      "side": "SELL",
+      "price": "2.66000000",
+      "quantity": "50.0000"
+    }
+  ]
+}
+```
+
+A command with details to an OTC trade
+
+### Properties
+
+| Name             | Type                                            | Required | Restrictions | Description                                                                                                                                                                                                  |
+| ---------------- | ----------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| commandType      | string                                          | true     | none         | Specifies the command type and must be ‘V1CreateOtcTrade’ to indicate the submission of an OTC trade.                                                                                                        |
+| clientOtcTradeId | [ClientOtcTradeId](#schemaclientotctradeid)     | false    | none         | unique numeric (i64) identifier generated on the client side expressed as a string value                                                                                                                     |
+| sharedMatchKey   | [SharedMatchId](#schemasharedmatchid)           | true     | none         | Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value                   |
+| tradingAccountId | [TradingAccountId](#schematradingaccountid)     | true     | none         | unique trading account ID                                                                                                                                                                                    |
+| isTaker          | [Boolean](#schemaboolean)                       | true     | none         | denotes whether the role of the counterparty is Taker or Maker. The corresponding leg of the opposite side of the trade should have the inverse role to be successfully matched on the OTC Clearing Facility |
+| remarks          | [Remarks](#schemaremarks)                       | false    | none         | text field for client’s internal reference to a trade, max length is 255 characters                                                                                                                          |
+| trades           | [[TradeInOtcRequest](#schematradeinotcrequest)] | true     | none         | all trades for the OTC trade                                                                                                                                                                                 |
+
+## TradeInOtcRequest
+
+```json
+{
+  "description": "A trade of an OTC trade",
+  "required": ["symbol", "side", "price", "quantity"],
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market",
+      "example": "BTC-USDC-PERP"
+    },
+    "side": {
+      "type": "string",
+      "description": "trade side can have the following string values `BUY`, `SELL`",
+      "example": "BUY"
+    },
+    "price": {
+      "description": "price, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "quantity": {
+      "description": "quantity, see [ asset value ](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    }
+  }
+}
+```
+
+A trade of an OTC trade
+
+### Properties
+
+| Name     | Type                                          | Required | Restrictions | Description                                                                                                                                          |
+| -------- | --------------------------------------------- | -------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol   | [OtcMarketSymbol](#schemaotcmarketsymbol)     | true     | none         | market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market |
+| side     | [TradeSideAsString](#schematradesideasstring) | true     | none         | trade side can have the following string values `BUY`, `SELL`                                                                                        |
+| price    | [AssetValue](#schemaassetvalue)               | true     | none         | price, see [asset value](#overview--price-and-quantity-precision) format                                                                             |
+| quantity | [AssetValue](#schemaassetvalue)               | true     | none         | quantity, see [ asset value ](#overview--price-and-quantity-precision) format                                                                        |
+
+## OtcTradeView
+
+```json
+{
+  "type": "object",
+  "required": [
+    "otcTradeId",
+    "sharedMatchKey",
+    "status",
+    "statusReason",
+    "statusReasonCode",
+    "expireDatetime",
+    "expireTimestamp",
+    "trades"
+  ],
+  "properties": {
+    "otcTradeId": {
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+          "example": "200000000000000098"
+        }
+      ]
+    },
+    "clientOtcTradeId": {
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique numeric (i64) identifier generated on the client side expressed as a string value",
+          "example": "20050900225"
+        }
+      ]
+    },
+    "sharedMatchKey": {
+      "allOf": [
+        {
+          "type": "string",
+          "description": "Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value",
+          "example": "cfBtcXrpMatch001"
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "type": "string",
+          "description": "otc trade status can have the following string values `\"COUNTERPARTY_PENDING\"`, `\"COUNTERPARTY_PAIRED\"`, `\"RISK_PENDING\"`, `\"MATCHED\"`, `\"CANCELLED\"`, `\"REJECTED\"`",
+          "enum": [
+            "COUNTERPARTY_PENDING",
+            "COUNTERPARTY_PAIRED",
+            "RISK_PENDING",
+            "MATCHED",
+            "CANCELLED",
+            "REJECTED"
+          ],
+          "example": "MATCHED"
+        }
+      ],
+      "example": "MATCHED"
+    },
+    "statusReason": {
+      "description": "status reason, describes why the otc trade is in a specific state",
+      "type": "string",
+      "example": "Ok"
+    },
+    "statusReasonCode": {
+      "description": "status reason code, see [details](#overview--error--rejection-codes)",
+      "type": "string",
+      "example": "1002"
+    },
+    "createdAtDatetime": {
+      "description": "denotes the time the otc trade was ACK'd by the exchange, ISO 8601 with millisecond as string",
+      "allOf": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "example": "2025-05-20T01:01:01.000Z",
+          "description": "ISO 8601 with millisecond as string"
+        }
+      ]
+    },
+    "createdAtTimestamp": {
+      "description": "denotes the time the otc trade was ACK'd by the exchange",
+      "allOf": [
+        {
+          "type": "string",
+          "format": "string",
+          "example": "1621490985000",
+          "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string"
+        }
+      ]
+    },
+    "expireDatetime": {
+      "description": "denotes the time the otc trade would expire",
+      "allOf": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "example": "2025-05-20T01:01:01.000Z",
+          "description": "ISO 8601 with millisecond as string"
+        }
+      ]
+    },
+    "expireTimestamp": {
+      "description": "denotes the time the otc trade would expire, ISO 8601 with millisecond as string",
+      "allOf": [
+        {
+          "type": "string",
+          "format": "string",
+          "example": "1621490985000",
+          "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string"
+        }
+      ]
+    },
+    "remarks": {
+      "type": "string",
+      "description": "text field for client’s internal reference to a trade, max length is 255 characters",
+      "example": "first otc trade with xyz client"
+    },
+    "trades": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 25,
+      "nullable": false,
+      "description": "all trades for the OTC trade",
+      "items": {
+        "allOf": [
+          {
+            "description": "a trade of an OTC trade",
+            "required": ["symbol", "price", "quantity", "side", "isTaker"],
+            "properties": {
+              "tradeId": {
+                "description": "unique trade ID",
+                "allOf": [
+                  {
+                    "type": "string",
+                    "example": "100020000000000060"
+                  }
+                ]
+              },
+              "symbol": {
+                "type": "string",
+                "description": "market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market",
+                "example": "BTC-USDC-PERP"
+              },
+              "price": {
+                "description": "price, see [asset value](#overview--price-and-quantity-precision) format",
+                "allOf": [
+                  {
+                    "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                    "type": "string",
+                    "example": "1.00000000"
+                  }
+                ]
+              },
+              "quantity": {
+                "description": "quantity, see [asset value](#overview--price-and-quantity-precision) format",
+                "allOf": [
+                  {
+                    "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                    "type": "string",
+                    "example": "1.00000000"
+                  }
+                ]
+              },
+              "quoteAmount": {
+                "description": "notional value of the trade in quote or settlement asset, see [asset value](#overview--price-and-quantity-precision) format",
+                "allOf": [
+                  {
+                    "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                    "type": "string",
+                    "example": "1.00000000"
+                  }
+                ]
+              },
+              "baseFee": {
+                "description": "base fee, see [asset value](#overview--price-and-quantity-precision) format",
+                "allOf": [
+                  {
+                    "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                    "type": "string",
+                    "example": "1.00000000"
+                  }
+                ]
+              },
+              "quoteFee": {
+                "description": "quote fee, see [asset value](#overview--price-and-quantity-precision) format",
+                "allOf": [
+                  {
+                    "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                    "type": "string",
+                    "example": "1.00000000"
+                  }
+                ]
+              },
+              "tradeRebateAssetSymbol": {
+                "type": "string",
+                "description": "market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market",
+                "example": "BTC-USDC-PERP"
+              },
+              "tradeRebateAmount": {
+                "description": "trade rebate fee, see [ asset value ](#overview--price-and-quantity-precision) format",
+                "allOf": [
+                  {
+                    "description": "see [asset value](#overview--price-and-quantity-precision) format",
+                    "type": "string",
+                    "example": "1.00000000"
+                  }
+                ]
+              },
+              "side": {
+                "type": "string",
+                "description": "trade side can have the following string values `BUY`, `SELL`",
+                "example": "BUY"
+              },
+              "isTaker": {
+                "description": "denotes whether the role of the counterparty is Taker or Maker. The corresponding leg of the opposite side of the trade should have the inverse role to be successfully matched on the OTC Clearing Facility",
+                "allOf": [
+                  {
+                    "type": "boolean",
+                    "format": "true or false",
+                    "example": true
+                  }
+                ]
+              },
+              "createdAtDatetime": {
+                "description": "denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string",
+                "allOf": [
+                  {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2025-05-20T01:01:01.000Z",
+                    "description": "ISO 8601 with millisecond as string"
+                  }
+                ]
+              },
+              "createdAtTimestamp": {
+                "description": "denotes the time the trade was executed by the exchange",
+                "allOf": [
+                  {
+                    "type": "string",
+                    "format": "string",
+                    "example": "1621490985000",
+                    "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+### Properties
+
+| Name               | Type                                                    | Required | Restrictions | Description                                                                                                                                                                                |
+| ------------------ | ------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| otcTradeId         | [OtcTradeId](#schemaotctradeid)                         | true     | none         | unique numeric (i64) identifier generated on Bullish side expressed as a string value                                                                                                      |
+| clientOtcTradeId   | [ClientOtcTradeId](#schemaclientotctradeid)             | false    | none         | unique numeric (i64) identifier generated on the client side expressed as a string value                                                                                                   |
+| sharedMatchKey     | [SharedMatchId](#schemasharedmatchid)                   | true     | none         | Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value |
+| status             | [OtcTradeExternalStatus](#schemaotctradeexternalstatus) | true     | none         | otc trade status can have the following string values `"COUNTERPARTY_PENDING"`, `"COUNTERPARTY_PAIRED"`, `"RISK_PENDING"`, `"MATCHED"`, `"CANCELLED"`, `"REJECTED"`                        |
+| statusReason       | string                                                  | true     | none         | status reason, describes why the otc trade is in a specific state                                                                                                                          |
+| statusReasonCode   | string                                                  | true     | none         | status reason code, see [details](#overview--error--rejection-codes)                                                                                                                       |
+| createdAtDatetime  | [DateTime](#schemadatetime)                             | false    | none         | denotes the time the otc trade was ACK'd by the exchange, ISO 8601 with millisecond as string                                                                                              |
+| createdAtTimestamp | [TimeStampAsString](#schematimestampasstring)           | false    | none         | denotes the time the otc trade was ACK'd by the exchange                                                                                                                                   |
+| expireDatetime     | [DateTime](#schemadatetime)                             | true     | none         | denotes the time the otc trade would expire                                                                                                                                                |
+| expireTimestamp    | [TimeStampAsString](#schematimestampasstring)           | true     | none         | denotes the time the otc trade would expire, ISO 8601 with millisecond as string                                                                                                           |
+| remarks            | [Remarks](#schemaremarks)                               | false    | none         | text field for client’s internal reference to a trade, max length is 255 characters                                                                                                        |
+| trades             | [allOf]                                                 | true     | none         | all trades for the OTC trade                                                                                                                                                               |
+
+## OtcTradeLegView
+
+```json
+{
+  "description": "a trade of an OTC trade",
+  "required": ["symbol", "price", "quantity", "side", "isTaker"],
+  "properties": {
+    "tradeId": {
+      "description": "unique trade ID",
+      "allOf": [
+        {
+          "type": "string",
+          "example": "100020000000000060"
+        }
+      ]
+    },
+    "symbol": {
+      "type": "string",
+      "description": "market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market",
+      "example": "BTC-USDC-PERP"
+    },
+    "price": {
+      "description": "price, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "quantity": {
+      "description": "quantity, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "quoteAmount": {
+      "description": "notional value of the trade in quote or settlement asset, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "baseFee": {
+      "description": "base fee, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "quoteFee": {
+      "description": "quote fee, see [asset value](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "tradeRebateAssetSymbol": {
+      "type": "string",
+      "description": "market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market",
+      "example": "BTC-USDC-PERP"
+    },
+    "tradeRebateAmount": {
+      "description": "trade rebate fee, see [ asset value ](#overview--price-and-quantity-precision) format",
+      "allOf": [
+        {
+          "description": "see [asset value](#overview--price-and-quantity-precision) format",
+          "type": "string",
+          "example": "1.00000000"
+        }
+      ]
+    },
+    "side": {
+      "type": "string",
+      "description": "trade side can have the following string values `BUY`, `SELL`",
+      "example": "BUY"
+    },
+    "isTaker": {
+      "description": "denotes whether the role of the counterparty is Taker or Maker. The corresponding leg of the opposite side of the trade should have the inverse role to be successfully matched on the OTC Clearing Facility",
+      "allOf": [
+        {
+          "type": "boolean",
+          "format": "true or false",
+          "example": true
+        }
+      ]
+    },
+    "createdAtDatetime": {
+      "description": "denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string",
+      "allOf": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "example": "2025-05-20T01:01:01.000Z",
+          "description": "ISO 8601 with millisecond as string"
+        }
+      ]
+    },
+    "createdAtTimestamp": {
+      "description": "denotes the time the trade was executed by the exchange",
+      "allOf": [
+        {
+          "type": "string",
+          "format": "string",
+          "example": "1621490985000",
+          "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string"
+        }
+      ]
+    }
+  }
+}
+```
+
+a trade of an OTC trade
+
+### Properties
+
+| Name                   | Type                                          | Required | Restrictions | Description                                                                                                                                                                                                  |
+| ---------------------- | --------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| tradeId                | [TradeID](#schematradeid)                     | false    | none         | unique trade ID                                                                                                                                                                                              |
+| symbol                 | [OtcMarketSymbol](#schemaotcmarketsymbol)     | true     | none         | market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market                                                         |
+| price                  | [AssetValue](#schemaassetvalue)               | true     | none         | price, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                     |
+| quantity               | [AssetValue](#schemaassetvalue)               | true     | none         | quantity, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                  |
+| quoteAmount            | [AssetValue](#schemaassetvalue)               | false    | none         | notional value of the trade in quote or settlement asset, see [asset value](#overview--price-and-quantity-precision) format                                                                                  |
+| baseFee                | [AssetValue](#schemaassetvalue)               | false    | none         | base fee, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                  |
+| quoteFee               | [AssetValue](#schemaassetvalue)               | false    | none         | quote fee, see [asset value](#overview--price-and-quantity-precision) format                                                                                                                                 |
+| tradeRebateAssetSymbol | [OtcMarketSymbol](#schemaotcmarketsymbol)     | false    | none         | market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market                                                         |
+| tradeRebateAmount      | [AssetValue](#schemaassetvalue)               | false    | none         | trade rebate fee, see [ asset value ](#overview--price-and-quantity-precision) format                                                                                                                        |
+| side                   | [TradeSideAsString](#schematradesideasstring) | true     | none         | trade side can have the following string values `BUY`, `SELL`                                                                                                                                                |
+| isTaker                | [Boolean](#schemaboolean)                     | true     | none         | denotes whether the role of the counterparty is Taker or Maker. The corresponding leg of the opposite side of the trade should have the inverse role to be successfully matched on the OTC Clearing Facility |
+| createdAtDatetime      | [DateTime](#schemadatetime)                   | false    | none         | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string                                                                                                                 |
+| createdAtTimestamp     | [TimeStampAsString](#schematimestampasstring) | false    | none         | denotes the time the trade was executed by the exchange                                                                                                                                                      |
+
+## CreateOtcTradeResponse
+
+```json
+{
+  "description": "A response for an acknowledged OTC trade creation request",
+  "required": ["message", "requestId", "otcTradeId", "sharedMatchKey"],
+  "properties": {
+    "message": {
+      "type": "string",
+      "description": "message indicating the status of the request",
+      "example": "Command acknowledged - CreateOtcTrade"
+    },
+    "requestId": {
+      "type": "string",
+      "example": "197735387747975680"
+    },
+    "otcTradeId": {
+      "type": "string",
+      "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+      "example": "200000000000000098"
+    },
+    "clientOtcTradeId": {
+      "type": "string",
+      "description": "unique numeric (i64) identifier generated on the client side expressed as a string value",
+      "example": "20050900225"
+    },
+    "sharedMatchKey": {
+      "type": "string",
+      "description": "Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value",
+      "example": "cfBtcXrpMatch001"
+    }
+  }
+}
+```
+
+A response for an acknowledged OTC trade creation request
+
+### Properties
+
+| Name             | Type                                        | Required | Restrictions | Description                                                                                                                                                                                |
+| ---------------- | ------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| message          | string                                      | true     | none         | message indicating the status of the request                                                                                                                                               |
+| requestId        | [RequestID](#schemarequestid)               | true     | none         | none                                                                                                                                                                                       |
+| otcTradeId       | [OtcTradeId](#schemaotctradeid)             | true     | none         | unique numeric (i64) identifier generated on Bullish side expressed as a string value                                                                                                      |
+| clientOtcTradeId | [ClientOtcTradeId](#schemaclientotctradeid) | false    | none         | unique numeric (i64) identifier generated on the client side expressed as a string value                                                                                                   |
+| sharedMatchKey   | [SharedMatchId](#schemasharedmatchid)       | true     | none         | Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value |
+
+## CancelOtcTradeCommand
+
+```json
+{
+  "commandType": "V1CancelOtcTrade",
+  "clientOtcTradeId": "20050900225",
+  "tradingAccountId": "111000000000001",
+  "x-widdershins-oldRef": "#/components/schemas/CancelOtcTradeCommand/example"
+}
+```
+
+A command to cancel an OTC trade. Only one of `clientOtcTradeId` or `otcTradeId`
+can be used in the cancel OTC trade command
+
+### Properties
+
+| Name             | Type                                        | Required | Restrictions | Description                                                                                             |
+| ---------------- | ------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------- |
+| commandType      | string                                      | true     | none         | Specifies the command type and must be ‘V1CancelOtcTrade’ to indicate the cancellation of an OTC trade. |
+| otcTradeId       | [OtcTradeId](#schemaotctradeid)             | false    | none         | unique numeric (i64) identifier generated on Bullish side expressed as a string value                   |
+| clientOtcTradeId | [ClientOtcTradeId](#schemaclientotctradeid) | false    | none         | unique numeric (i64) identifier generated on the client side expressed as a string value                |
+| tradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | unique trading account ID                                                                               |
+
+## CancelOtcTradeResponse
+
+```json
+{
+  "message": "Command acknowledged - CancelOtcTrade",
+  "requestId": "100000000000000147",
+  "otcTradeId": "200000000000000098",
+  "tradingAccountId": "111000000000001"
+}
+```
+
+A response for an acknowledged OTC command to cancel an OTC trade
+
+### Properties
+
+| Name             | Type                                        | Required | Restrictions | Description                                                                              |
+| ---------------- | ------------------------------------------- | -------- | ------------ | ---------------------------------------------------------------------------------------- |
+| message          | string                                      | true     | none         | message indicating the status of the request                                             |
+| requestId        | [RequestID](#schemarequestid)               | true     | none         | none                                                                                     |
+| otcTradeId       | [OtcTradeId](#schemaotctradeid)             | true     | none         | unique numeric (i64) identifier generated on Bullish side expressed as a string value    |
+| clientOtcTradeId | [ClientOtcTradeId](#schemaclientotctradeid) | false    | none         | unique numeric (i64) identifier generated on the client side expressed as a string value |
+| tradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | unique trading account ID                                                                |
+
+## CancelAllOtcTradesCommand
+
+```json
+{
+  "commandType": "V1CancelAllOtcTrades",
+  "tradingAccountId": "111000000000001",
+  "x-widdershins-oldRef": "#/components/schemas/CancelAllOtcTradesCommand/example"
+}
+```
+
+A command to cancel all pending OTC trades.
+
+### Properties
+
+| Name             | Type                                        | Required | Restrictions | Description                                                                                                           |
+| ---------------- | ------------------------------------------- | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------- |
+| commandType      | string                                      | true     | none         | Specifies the command type and must be ‘V1CancelAllOtcTrades’ to indicate the cancellation of all pending OTC trades. |
+| tradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | unique trading account ID                                                                                             |
+
+## CancelAllOtcTradesResponse
+
+```json
+{
+  "message": "Command acknowledged - CancelAllOtcTrades",
+  "requestId": "100000000000000148",
+  "tradingAccountId": "111000000000001"
+}
+```
+
+A response for an acknowledged OTC command to cancel all pending OTC trades
+
+### Properties
+
+| Name             | Type                                        | Required | Restrictions | Description                                  |
+| ---------------- | ------------------------------------------- | -------- | ------------ | -------------------------------------------- |
+| message          | string                                      | true     | none         | message indicating the status of the request |
+| requestId        | [RequestID](#schemarequestid)               | true     | none         | none                                         |
+| tradingAccountId | [TradingAccountId](#schematradingaccountid) | true     | none         | unique trading account ID                    |
+
+## BadOtcTradeEntryResponse
+
+```json
+{
+  "type": "object",
+  "required": ["message", "errorCode", "errorCodeName"],
+  "properties": {
+    "message": {
+      "description": "message",
+      "type": "string"
+    },
+    "errorCode": {
+      "description": "unique error code",
+      "type": "integer"
+    },
+    "errorCodeName": {
+      "description": "unique error code name",
+      "type": "string"
+    }
+  }
+}
+```
+
+### Properties
+
+| Name          | Type    | Required | Restrictions | Description            |
+| ------------- | ------- | -------- | ------------ | ---------------------- |
+| message       | string  | true     | none         | message                |
+| errorCode     | integer | true     | none         | unique error code      |
+| errorCodeName | string  | true     | none         | unique error code name |
+
+## OtcMarketSymbol
+
+```json
+"BTC-USDC-PERP"
+```
+
+market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for
+DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                                                                                          |
+| ----------- | ------ | -------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market |
+
+## SharedMatchId
+
+```json
+"cfBtcXrpMatch001"
+```
+
+Unique shared key that is agreed between the two customers to represent their
+OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64
+characters alphanumeric value
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                                                                                                                                |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| _anonymous_ | string | false    | none         | Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value |
+
+## TradeSideAsString
+
+```json
+"BUY"
+```
+
+trade side can have the following string values `BUY`, `SELL`
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                   |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | trade side can have the following string values `BUY`, `SELL` |
+
+## OtcMatchId
+
+```json
+"15"
+```
+
+unique numeric (i64) identifier generated on Bullish side expressed as a string
+value
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                           |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | unique numeric (i64) identifier generated on Bullish side expressed as a string value |
+
+## ClientOtcTradeId
+
+```json
+"20050900225"
+```
+
+unique numeric (i64) identifier generated on the client side expressed as a
+string value
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                              |
+| ----------- | ------ | -------- | ------------ | ---------------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | unique numeric (i64) identifier generated on the client side expressed as a string value |
+
+## OtcTradeId
+
+```json
+"200000000000000098"
+```
+
+unique numeric (i64) identifier generated on Bullish side expressed as a string
+value
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                           |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | unique numeric (i64) identifier generated on Bullish side expressed as a string value |
+
+## OtcTradeExternalStatus
+
+```json
+"MATCHED"
+```
+
+otc trade status can have the following string values `"COUNTERPARTY_PENDING"`,
+`"COUNTERPARTY_PAIRED"`, `"RISK_PENDING"`, `"MATCHED"`, `"CANCELLED"`,
+`"REJECTED"`
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                                                                                                         |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | otc trade status can have the following string values `"COUNTERPARTY_PENDING"`, `"COUNTERPARTY_PAIRED"`, `"RISK_PENDING"`, `"MATCHED"`, `"CANCELLED"`, `"REJECTED"` |
+
+#### Enumerated Values
+
+| Property    | Value                |
+| ----------- | -------------------- |
+| _anonymous_ | COUNTERPARTY_PENDING |
+| _anonymous_ | COUNTERPARTY_PAIRED  |
+| _anonymous_ | RISK_PENDING         |
+| _anonymous_ | MATCHED              |
+| _anonymous_ | CANCELLED            |
+| _anonymous_ | REJECTED             |
+
+## Remarks
+
+```json
+"first otc trade with xyz client"
+```
+
+text field for client’s internal reference to a trade, max length is 255
+characters
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                         |
+| ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | text field for client’s internal reference to a trade, max length is 255 characters |
+
+## GetMmpConfigurationResponse
+
+```json
+{
+  "type": "object",
+  "required": ["tradingAccountId", "message", "mmpConfigurations"],
+  "properties": {
+    "tradingAccountId": {
+      "allOf": [
+        {
+          "description": "unique trading account ID",
+          "type": "string",
+          "example": "111000000000001"
+        }
+      ]
+    },
+    "message": {
+      "description": "If there are no market maker protection configurations setup for this trading account or for the provided optional symbol under the same trading account, this field will be returned as \"No mmp config setup\".",
+      "type": "string",
+      "example": null
+    },
+    "mmpConfigurations": {
+      "description": "A list of market maker protection configurations that the user has setup for each underlying asset symbol under the trading account provided. Supports filtering of symbol.",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "required": [
+          "underlyingAssetSymbol",
+          "windowTimeInSeconds",
+          "frozenTimeInSeconds",
+          "quantityLimit",
+          "deltaLimit",
+          "isActive"
+        ],
+        "properties": {
+          "underlyingAssetSymbol": {
+            "type": "string",
+            "description": "Underlying Asset Symbol",
+            "example": "BTC"
+          },
+          "windowTimeInSeconds": {
+            "type": "integer",
+            "description": "Time window during which the MMP checks are conducted. It helps in determining how frequently the system evaluates the market maker's activity against predefined thresholds. Value needs to be `> 0`. Maximum value is 600 seconds (10 minutes).",
+            "example": 60
+          },
+          "frozenTimeInSeconds": {
+            "type": "integer",
+            "description": "The duration for which a market maker’s trading activity is temporarily halted after a protective measure is triggered. Value needs to be `>= 0`. Maximum value is 3600 seconds (60 minutes).",
+            "example": 120
+          },
+          "quantityLimit": {
+            "type": "string",
+            "description": "Cap on the total number of contracts that a market maker can trade within `windowTimeInSeconds`. This is direction(side) agnostic. Needs to be `> 0` if set.",
+            "example": "100"
+          },
+          "deltaLimit": {
+            "type": "string",
+            "description": "Net delta exposure that a market maker can accumulate within `windowTimeInSeconds`",
+            "example": "10"
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "This boolean indicates if this configuration is in effect or not.",
+            "example": true
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Properties
+
+| Name              | Type                                          | Required | Restrictions | Description                                                                                                                                                                                                     |
+| ----------------- | --------------------------------------------- | -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| tradingAccountId  | [TradingAccountId](#schematradingaccountid)   | true     | none         | unique trading account ID                                                                                                                                                                                       |
+| message           | string                                        | true     | none         | If there are no market maker protection configurations setup for this trading account or for the provided optional symbol under the same trading account, this field will be returned as "No mmp config setup". |
+| mmpConfigurations | [[MmpConfiguration](#schemammpconfiguration)] | true     | none         | A list of market maker protection configurations that the user has setup for each underlying asset symbol under the trading account provided. Supports filtering of symbol.                                     |
+
+## MmpConfiguration
+
+```json
+{
+  "type": "object",
+  "required": [
+    "underlyingAssetSymbol",
+    "windowTimeInSeconds",
+    "frozenTimeInSeconds",
+    "quantityLimit",
+    "deltaLimit",
+    "isActive"
+  ],
+  "properties": {
+    "underlyingAssetSymbol": {
+      "type": "string",
+      "description": "Underlying Asset Symbol",
+      "example": "BTC"
+    },
+    "windowTimeInSeconds": {
+      "type": "integer",
+      "description": "Time window during which the MMP checks are conducted. It helps in determining how frequently the system evaluates the market maker's activity against predefined thresholds. Value needs to be `> 0`. Maximum value is 600 seconds (10 minutes).",
+      "example": 60
+    },
+    "frozenTimeInSeconds": {
+      "type": "integer",
+      "description": "The duration for which a market maker’s trading activity is temporarily halted after a protective measure is triggered. Value needs to be `>= 0`. Maximum value is 3600 seconds (60 minutes).",
+      "example": 120
+    },
+    "quantityLimit": {
+      "type": "string",
+      "description": "Cap on the total number of contracts that a market maker can trade within `windowTimeInSeconds`. This is direction(side) agnostic. Needs to be `> 0` if set.",
+      "example": "100"
+    },
+    "deltaLimit": {
+      "type": "string",
+      "description": "Net delta exposure that a market maker can accumulate within `windowTimeInSeconds`",
+      "example": "10"
+    },
+    "isActive": {
+      "type": "boolean",
+      "description": "This boolean indicates if this configuration is in effect or not.",
+      "example": true
+    }
+  }
+}
+```
+
+### Properties
+
+| Name                  | Type    | Required | Restrictions | Description                                                                                                                                                                                                                                       |
+| --------------------- | ------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| underlyingAssetSymbol | string  | true     | none         | Underlying Asset Symbol                                                                                                                                                                                                                           |
+| windowTimeInSeconds   | integer | true     | none         | Time window during which the MMP checks are conducted. It helps in determining how frequently the system evaluates the market maker's activity against predefined thresholds. Value needs to be `> 0`. Maximum value is 600 seconds (10 minutes). |
+| frozenTimeInSeconds   | integer | true     | none         | The duration for which a market maker’s trading activity is temporarily halted after a protective measure is triggered. Value needs to be `>= 0`. Maximum value is 3600 seconds (60 minutes).                                                     |
+| quantityLimit         | string  | true     | none         | Cap on the total number of contracts that a market maker can trade within `windowTimeInSeconds`. This is direction(side) agnostic. Needs to be `> 0` if set.                                                                                      |
+| deltaLimit            | string  | true     | none         | Net delta exposure that a market maker can accumulate within `windowTimeInSeconds`                                                                                                                                                                |
+| isActive              | boolean | true     | none         | This boolean indicates if this configuration is in effect or not.                                                                                                                                                                                 |

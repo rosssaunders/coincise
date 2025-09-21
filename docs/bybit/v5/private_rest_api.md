@@ -190,7 +190,7 @@ N | category=spot | 5/s | N | category=option | 5/s | N
 
 #### User[​](#user "Direct link to heading")
 
-<table border="0.8"><tbody><tr><th>Method</th><th>Path</th><th>Limit</th><td>upgradable</td></tr><tr><td rowspan="7">POST</td><td>v5/user/create-sub-member</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/create-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/frozen-sub-member</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/update-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/update-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/delete-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/delete-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td rowspan="3">GET</td><td>/v5/user/query-sub-members</td><td>10 req/s</td><td>N</td></tr><tr><td>/v5/user/query-api</td><td>10 req/s</td><td>N</td></tr><tr><td>/v5/user/aff-customer-info</td><td>10 req/s</td><td>N</td></tr></tbody></table>
+<table border="0.8"><tbody><tr><th>Method</th><th>Path</th><th>Limit</th><td>upgradable</td></tr><tr><td rowspan="7">POST</td><td>v5/user/create-sub-member</td><td>1 req/s</td><td>N</td></tr><tr><td>/v5/user/create-sub-api</td><td>1 req/s</td><td>N</td></tr><tr><td>/v5/user/frozen-sub-member</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/update-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/update-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/delete-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/delete-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td rowspan="3">GET</td><td>/v5/user/query-sub-members</td><td>10 req/s</td><td>N</td></tr><tr><td>/v5/user/query-api</td><td>10 req/s</td><td>N</td></tr><tr><td>/v5/user/aff-customer-info</td><td>10 req/s</td><td>N</td></tr></tbody></table>
 
 #### Spot Leverage Token[​](#spot-leverage-token "Direct link to heading")
 
@@ -215,8 +215,6 @@ N | category=spot | 5/s | N | category=option | 5/s | N
 | GET    |   <a href="/docs/v5/spread/trade/open-order">Get Spread Open Orders</a>    | 50 req/s | N          |
 | GET    | <a href="/docs/v5/spread/trade/order-history">Get Spread Order History</a> | 50 req/s | N          |
 | GET    | <a href="/docs/v5/spread/trade/trade-history">Get Spread Trade History</a> | 50 req/s | N          |
-
-## API Rate Limit Rules For VIPs[​](#api-rate-limit-rules-for-vips "Direct link to heading")
 
 instructions for batch endpoints
 
@@ -243,14 +241,7 @@ orders in one second if I use both endpoints to place orders_
   5 orders will be successfully placed, and the 6-8th orders will report an
   error exceeding the limit, and these orders will fail.
 
-UPCOMING CHANGES FOR PRO ACCOUNT
-
-Starting **August 13, 2025**, Bybit will roll out a new institutional API rate
-limit framework designed to enhance performance for high-frequency trading
-clients. The new system introduces a centralized institution-level rate cap with
-flexible per-UID configurations, enabling greater efficiency and scalability.
-Refer to
-[announcement](https://announcements.bybit.com/en/article/update-bybit-enhances-api-rate-limits-for-institutional-traders-bltbbbf60de757d074e/)
+## API Rate Limit Rules For VIPs[​](#api-rate-limit-rules-for-vips "Direct link to heading")
 
 |               | Unified Account |
 | ------------- | :-------------: | ------------- | ----------- |
@@ -262,12 +253,141 @@ Refer to
 | VIP 4         |      60/s       | 60/s          | 40/s        |
 | VIP 5         |      60/s       | 60/s          | 40/s        |
 | VIP Supreme   |      60/s       | 60/s          | 40/s        |
-| PRO1          |      150/s      | 150/s         | 150/s       |
-| PRO2          |      200/s      | 200/s         | 200/s       |
-| PRO3          |      250/s      | 250/s         | 250/s       |
-| PRO4          |      300/s      | 300/s         | 300/s       |
-| PRO5          |      300/s      | 300/s         | 300/s       |
-| PRO6          |      300/s      | 300/s         | 300/s       |
+
+## API Rate Limit Rules For PROs[​](#api-rate-limit-rules-for-pros "Direct link to heading")
+
+UPCOMING CHANGES FOR PRO ACCOUNT
+
+Starting **August 13, 2025**, Bybit will roll out a new institutional API rate
+limit framework designed to enhance performance for high-frequency trading
+clients. The new system introduces a centralized institution-level rate cap with
+flexible per-UID configurations, enabling greater efficiency and scalability.
+Refer to
+[announcement](https://announcements.bybit.com/en/article/update-bybit-enhances-api-rate-limits-for-institutional-traders-bltbbbf60de757d074e/)
+
+### UID level:[​](#uid-level "Direct link to heading")
+
+|               | Unified Account |
+| ------------- | :-------------: | ------------- | ----------- |
+| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
+| PRO1          |      200/s      | 200/s         | 200/s       |
+| PRO2          |      400/s      | 400/s         | 400/s       |
+| PRO3          |      600/s      | 600/s         | 600/s       |
+| PRO4          |      800/s      | 800/s         | 800/s       |
+| PRO5          |     1000/s      | 1000/s        | 1000/s      |
+| PRO6          |     1200/s      | 1200/s        | 1200/s      |
+
+### Master and subaccounts level (Institutional API rate limit Quota):[​](#master-and-subaccounts-level-institutional-api-rate-limit-quota "Direct link to heading")
+
+|               | Unified Account |
+| ------------- | :-------------: | ------------- | ----------- |
+| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
+| PRO1          |     10000/s     | 10000/s       | 10000/s     |
+| PRO2          |     20000/s     | 20000/s       | 20000/s     |
+| PRO3          |     30000/s     | 30000/s       | 30000/s     |
+| PRO4          |     40000/s     | 40000/s       | 40000/s     |
+| PRO5          |     50000/s     | 50000/s       | 50000/s     |
+| PRO6          |     60000/s     | 60000/s       | 60000/s     |
+
+instructions for API rate limit
+
+- All of the existing subaccounts still have those original API rate limits
+- The default API rate limit for a new sub-account is not counted in the total
+  Institutional API rate limit quota.
+- The default API rate limit for a new sub is: 10/s for futures , 10/s for
+  options, 20/s for spot
+- If the Institutional API rate limit total quota is exceeded, you can only
+  reduce the account's API rate limit first. After the total API rate limit is
+  less than the total Institutional API rate limit quota, you can increase the
+  API rate limit of an account.
+
+### Set api rate limit[​](#set-api-rate-limit "Direct link to heading")
+
+> API rate limit: 50 req per second
+
+info
+
+- If UID requesting this endpoint is a master account, uids in the input
+  parameter must be subaccounts of the master account.
+- If UID requesting this endpoint is not a master account, uids in the input
+  parameter must be the UID requesting this endpoint
+- UID requesting this endpoint must be an institutional user.
+
+#### HTTP Request[​](#http-request "Direct link to heading")
+
+POST `/v5/apilimit/set`
+
+#### Request Parameters[​](#request-parameters "Direct link to heading")
+
+| Parameter                                        | Required | Type    | Comments                           |
+| :----------------------------------------------- | :------- | :------ | ---------------------------------- |
+| list                                             | true     | array   | Object                             |
+| &gt; uids                                        | true     | string  | Multiple UIDs, separated by commas |
+| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | true     | string  | Business type                      |
+| &gt; limit                                       | true     | integer | api rate limit per second          |
+
+#### Response Parameters[​](#response-parameters "Direct link to heading")
+
+| Parameter                                        | Type    | Comments                           |
+| :----------------------------------------------- | :------ | ---------------------------------- |
+| list                                             | array   | Object                             |
+| &gt; uids                                        | string  | Multiple UIDs, separated by commas |
+| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
+| &gt; limit                                       | integer | api rate limit per second          |
+| &gt; success                                     | boolean | success or not                     |
+| &gt; <a href="/docs/v5/enum#msg">msg</a>         | string  | result message                     |
+
+#### Request Example[​](#request-example "Direct link to heading")
+
+```
+POST /v5/apilimit/set HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1711420489915X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "list": [        {            "uids": "106293838",            "bizType": "DERIVATIVES",            "limit": 50        }    ]}
+```
+
+#### Response Example[​](#response-example "Direct link to heading")
+
+```
+{    "retCode": 0,    "retMsg": "success",    "result": {        "result": [            {                "uids": "290118",                "bizType": "SPOT",                "limit": 600,                "success": true,                "msg": "API limit updated successfully"            }        ]    },    "retExtInfo": {},    "time": 1754894296913}
+```
+
+### Query api rate limit[​](#query-api-rate-limit "Direct link to heading")
+
+> API rate limit: 50 req per second
+
+info
+
+- A master account can query api rate limit of its own and subaccounts.
+- A subaccount can only query its own api rate limit.
+
+#### HTTP Request[​](#http-request-1 "Direct link to heading")
+
+GET `/v5/apilimit/query`
+
+#### Request Parameters[​](#request-parameters-1 "Direct link to heading")
+
+| Parameter | Required | Type   | Comments                           |
+| :-------- | :------- | :----- | ---------------------------------- |
+| uids      | true     | string | Multiple UIDs, separated by commas |
+
+#### Response Parameters[​](#response-parameters-1 "Direct link to heading")
+
+| Parameter                                        | Type    | Comments                           |
+| :----------------------------------------------- | :------ | ---------------------------------- |
+| list                                             | array   | Object                             |
+| &gt; uids                                        | string  | Multiple UIDs, separated by commas |
+| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
+| &gt; limit                                       | integer | api rate limit per second          |
+
+#### Request Example[​](#request-example-1 "Direct link to heading")
+
+```
+GET /v5/apilimit/query?uids=290118 HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
+```
+
+#### Response Example[​](#response-example-1 "Direct link to heading")
+
+```
+{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "uids": "290118",                "bizType": "SPOT",                "limit": 600            },            {                "uids": "290118",                "bizType": "DERIVATIVES",                "limit": 400            }        ]    },    "retExtInfo": {},    "time": 1754894341984}
+```
 
 # Enums Definitions
 
@@ -829,6 +949,9 @@ _Options:_
 - `INSTITUTION_LOAN_WITHOUT_WITHDRAW` Transfer out (INS Loan)
 - `INSTITUTION_LOAN_RESERVE_IN` Reserve Fund In (INS Loan)
 - `INSTITUTION_LOAN_RESERVE_OUT` Reserve Fund Out (INS Loan)
+- `SPREAD_FEE_OUT` Spread fee for EU Broker
+- `PLATFORM_TOKEN_MNT_LIQRECALLEDMMNT` Recall MNT
+- `PLATFORM_TOKEN_MNT_LIQRETURNEDMNT` Return MNT
 
 ### type(contract-translog)[​](#typecontract-translog "Direct link to heading")
 
@@ -947,6 +1070,7 @@ _Option_:
 - PRO-3
 - PRO-4
 - PRO-5
+- PRO-6
 
 ### adlRankIndicator[​](#adlrankindicator "Direct link to heading")
 
@@ -1016,6 +1140,21 @@ _Option_:
 
 - `1` Production
 - `2` Production Demo service
+
+### bizType[​](#biztype "Direct link to heading")
+
+- `SPOT`
+- `DERIVATIVES`
+- `OPTIONS`
+
+### msg[​](#msg "Direct link to heading")
+
+- `API limit updated successfully`
+- `Requested limit exceeds maximum allowed per user`
+- `No permission to operate these UIDs`
+- `API cap configuration not found`
+- `API cap configuration not found for bizType`
+- `Requested limit would exceed institutional quota`
 
 ### Spot Fee Currency Instruction[​](#spot-fee-currency-instruction "Direct link to heading")
 
@@ -1089,6 +1228,7 @@ with the example of BTCUSDT:
 |       30134       | OTC loan: The symbol you select for USDC Contract is not allowed by Institutional Lending                                                                                                  |
 |       30135       | The leverage you select for USDT Perpetual trading cannot exceed the maximum leverage allowed by Institutional Lending.                                                                    |
 |       30136       | The leverage you select for USDC Perpetual or Futures trading cannot exceed the maximum leverage allowed by Institutional Lending.                                                         |
+|       30208       | Failed to submit order(s). The order price is higher than the maximum buying price                                                                                                         |
 |       40004       | the order is modified during the process of replacing , please check the order status again                                                                                                |
 |      100028       | The API cannot be accessed by unified account users.                                                                                                                                       |
 |      110001       | Order does not exist                                                                                                                                                                       |
@@ -1206,6 +1346,8 @@ with the example of BTCUSDT:
 |      110117       | The modification of a combo single-leg order can only be done by modifying the combo order                                                                                                 |
 |      110118       | Unable to retrieve a pruce of the market order due to low liquidity                                                                                                                        |
 |      110119       | Order failed. RPI orders are restricted to approved market makers only                                                                                                                     |
+|      110120       | Order price cannot be smaller than xxxx, the price limitation                                                                                                                              |
+|      110121       | Order price cannot be higher than xxxx, the price limitation                                                                                                                               |
 |      170346       | Settle coin is not a collateral coin, cannot trade                                                                                                                                         |
 |      170360       | symbol[XXXX] cannot trade. Used for spread trading in particular when collateral is not turned on                                                                                          |
 |      181017       | OrderStatus must be final status                                                                                                                                                           |
@@ -1566,6 +1708,9 @@ with the example of BTCUSDT:
 | 148037 | Insufficient assets or adjustment amount exceeds the maximum allowed.                          |
 | 148038 | Repayment amount cannot exceed the debt amount of the position.                                |
 | 148039 | Duplicate collateral assets detected. Please review and resubmit.                              |
+| 148040 | Pledge token is error.                                                                         |
+| 148041 | Repay order is exist.                                                                          |
+| 148042 | Exceeds the allowed decimal precision for this currency.                                       |
 
 ## Crypto Loan (legacy)[​](#crypto-loan-legacy "Direct link to heading")
 
@@ -1663,6 +1808,14 @@ with the example of BTCUSDT:
 | :---: | :------------------------------------------- |
 | 81007 | Bybit Europe is not supported create API Key |
 | 20096 | need KYC authentication                      |
+
+## Set api rate limit[​](#set-api-rate-limit "Direct link to heading")
+
+|  Code   | Description                                    |
+| :-----: | :--------------------------------------------- |
+| 3500002 | Current user is not an institutional user      |
+| 3500153 | No permission to operate these UIDs            |
+| 3500153 | You do not have permission to query other UIDs |
 
 # Place Order
 
@@ -2077,7 +2230,7 @@ GET `/v5/order/realtime`
 | &gt; leavesValue                                             | string  | The estimated value not executed. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                      |
 | &gt; cumExecQty                                              | string  | Cumulative executed order qty                                                                                                                                                                                                                              |
 | &gt; cumExecValue                                            | string  | Cumulative executed order value. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                       |
-| &gt; cumExecFee                                              | string  | Cumulative executed trading fee. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                       |
+| &gt; cumExecFee                                              | string  | Deprecated. Cumulative executed trading fee. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                           |
 | &gt; <a href="/docs/v5/enum#timeinforce">timeInForce</a>     | string  | Time in force                                                                                                                                                                                                                                              |
 | &gt; <a href="/docs/v5/enum#ordertype">orderType</a>         | string  | Order type. <code>Market</code>,<code>Limit</code>. For TP/SL order, it means the order type after triggered                                                                                                                                               |
 | &gt; <a href="/docs/v5/enum#stopordertype">stopOrderType</a> | string  | Stop order type                                                                                                                                                                                                                                            |
@@ -2104,6 +2257,7 @@ GET `/v5/order/realtime`
 | &gt; smpOrderId                                              | string  | The counterparty's orderID which triggers this SMP execution                                                                                                                                                                                               |
 | &gt; createdTime                                             | string  | Order created timestamp (ms)                                                                                                                                                                                                                               |
 | &gt; updatedTime                                             | string  | Order updated timestamp (ms)                                                                                                                                                                                                                               |
+| &gt; cumFeeDetail                                            | json    | Cumulative trading fee details instead of <code>cumExecFee</code>                                                                                                                                                                                          |
 
 [RUN >>](/docs/api-explorer/v5/trade/open-order)
 
@@ -2135,7 +2289,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "OK",    "result": {        "list": [            {                "orderId": "fd4300ae-7847-404e-b947-b46980a4d140",                "orderLinkId": "test-000005",                "blockTradeId": "",                "symbol": "ETHUSDT",                "price": "1600.00",                "qty": "0.10",                "side": "Buy",                "isLeverage": "",                "positionIdx": 1,                "orderStatus": "New",                "cancelType": "UNKNOWN",                "rejectReason": "EC_NoError",                "avgPrice": "0",                "leavesQty": "0.10",                "leavesValue": "160",                "cumExecQty": "0.00",                "cumExecValue": "0",                "cumExecFee": "0",                "timeInForce": "GTC",                "orderType": "Limit",                "stopOrderType": "UNKNOWN",                "orderIv": "",                "triggerPrice": "0.00",                "takeProfit": "2500.00",                "stopLoss": "1500.00",                "tpTriggerBy": "LastPrice",                "slTriggerBy": "LastPrice",                "triggerDirection": 0,                "triggerBy": "UNKNOWN",                "lastPriceOnCreated": "",                "reduceOnly": false,                "closeOnTrigger": false,                "smpType": "None",                "smpGroup": 0,                "smpOrderId": "",                "tpslMode": "Full",                "tpLimitPrice": "",                "slLimitPrice": "",                "placeType": "",                "createdTime": "1684738540559",                "updatedTime": "1684738540561"            }        ],        "nextPageCursor": "page_args%3Dfd4300ae-7847-404e-b947-b46980a4d140%26symbol%3D6%26",        "category": "linear"    },    "retExtInfo": {},    "time": 1684765770483}
+{    "retCode": 0,    "retMsg": "OK",    "result": {        "list": [            {                "orderId": "fd4300ae-7847-404e-b947-b46980a4d140",                "orderLinkId": "test-000005",                "blockTradeId": "",                "symbol": "ETHUSDT",                "price": "1600.00",                "qty": "0.10",                "side": "Buy",                "isLeverage": "",                "positionIdx": 1,                "orderStatus": "New",                "cancelType": "UNKNOWN",                "rejectReason": "EC_NoError",                "avgPrice": "0",                "leavesQty": "0.10",                "leavesValue": "160",                "cumExecQty": "0.00",                "cumExecValue": "0",                "cumExecFee": "0",                "timeInForce": "GTC",                "orderType": "Limit",                "stopOrderType": "UNKNOWN",                "orderIv": "",                "triggerPrice": "0.00",                "takeProfit": "2500.00",                "stopLoss": "1500.00",                "tpTriggerBy": "LastPrice",                "slTriggerBy": "LastPrice",                "triggerDirection": 0,                "triggerBy": "UNKNOWN",                "lastPriceOnCreated": "",                "reduceOnly": false,                "closeOnTrigger": false,                "smpType": "None",                "smpGroup": 0,                "smpOrderId": "",                "tpslMode": "Full",                "tpLimitPrice": "",                "slLimitPrice": "",                "placeType": "",                "createdTime": "1684738540559",                "updatedTime": "1684738540561",                "cumFeeDetail": {                    "MNT": "0.00242968"                }            }        ],        "nextPageCursor": "page_args%3Dfd4300ae-7847-404e-b947-b46980a4d140%26symbol%3D6%26",        "category": "linear"    },    "retExtInfo": {},    "time": 1684765770483}
 ```
 
 # Cancel All Orders
@@ -2168,14 +2322,14 @@ POST `/v5/order/cancel-all`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                                               | Required              | Type   | Comments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| :------------------------------------------------------ | :-------------------- | :----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="/docs/v5/enum#category">category</a>           | <strong>true</strong> | string | Product type<ul><li><a href="/docs/v5/acct-mode#uta-20">UTA2.0</a>, <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>: <code>linear</code>, <code>inverse</code>, <code>spot</code>, <code>option</code></li><li>classic account: <code>linear</code>, <code>inverse</code>, <code>spot</code></li></ul>                                                                                                                                                                                                                                                                                                                                                      |
-| symbol                                                  | false                 | string | Symbol name, like <code>BTCUSDT</code>, uppercase only<br><code>linear</code>&amp;<code>inverse</code>: <strong>Required</strong> if not passing baseCoin or settleCoin                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| baseCoin                                                | false                 | string | Base coin, uppercase only<ul><li><code>linear</code> &amp; <code>inverse</code>(classic account): If cancel all by baseCoin, it will cancel all linear &amp; inverse orders. <strong>Required</strong> if not passing symbol or settleCoin</li><li><code>linear</code> &amp; <code>inverse</code>(Unified account): If cancel all by baseCoin, it will cancel all corresponding category orders. <strong>Required</strong> if not passing symbol or settleCoin</li><li><code>spot</code>(classic account): invalid</li></ul>                                                                                                                               |
-| settleCoin                                              | false                 | string | Settle coin, uppercase only<ul><li><code>linear</code> &amp; <code>inverse</code>: <strong>Required</strong> if not passing symbol or baseCoin</li><li><code>option</code>: USDT or USDC</li><li>Not support <code>spot</code></li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| orderFilter                                             | false                 | string | <ul><li>category=<code>spot</code>, you can pass <code>Order</code>, <code>tpslOrder</code>, <code>StopOrder</code>, <code>OcoOrder</code>, <code>BidirectionalTpslOrder</code><br>If not passed, <code>Order</code> by default</li><li>category=<code>linear</code> or <code>inverse</code>, you can pass <code>Order</code>, <code>StopOrder</code>,<code>OpenOrder</code><br>If not passed, all kinds of orders will be cancelled, like active order, conditional order, TP/SL order and trailing stop order</li><li>category=<code>option</code>, you can pass <code>Order</code><br>No matter it is passed or not, always cancel all orders</li></ul> |
-| <a href="/docs/v5/enum#stopordertype">stopOrderType</a> | false                 | string | Stop order type <code>Stop</code><li>Only used for category=<code>linear</code> or <code>inverse</code> and orderFilter=<code>StopOrder</code>,you can cancel conditional orders except TP/SL order and Trailing stop orders with this param</li>                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Parameter                                               | Required              | Type   | Comments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| :------------------------------------------------------ | :-------------------- | :----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a href="/docs/v5/enum#category">category</a>           | <strong>true</strong> | string | Product type<ul><li><a href="/docs/v5/acct-mode#uta-20">UTA2.0</a>, <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>: <code>linear</code>, <code>inverse</code>, <code>spot</code>, <code>option</code></li><li>classic account: <code>linear</code>, <code>inverse</code>, <code>spot</code></li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| symbol                                                  | false                 | string | Symbol name, like <code>BTCUSDT</code>, uppercase only<br><code>linear</code>&amp;<code>inverse</code>: <strong>Required</strong> if not passing baseCoin or settleCoin                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| baseCoin                                                | false                 | string | Base coin, uppercase only<ul><li><code>linear</code> &amp; <code>inverse</code>(classic account): If cancel all by baseCoin, it will cancel all linear &amp; inverse orders. <strong>Required</strong> if not passing symbol or settleCoin</li><li><code>linear</code> &amp; <code>inverse</code>(Unified account): If cancel all by baseCoin, it will cancel all corresponding category orders. <strong>Required</strong> if not passing symbol or settleCoin</li><li><code>spot</code>(classic account): invalid</li></ul>                                                                                                                                                                                                                              |
+| settleCoin                                              | false                 | string | Settle coin, uppercase only<ul><li><code>linear</code> &amp; <code>inverse</code>: <strong>Required</strong> if not passing symbol or baseCoin</li><li><code>option</code>: USDT or USDC</li><li>Not support <code>spot</code></li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| orderFilter                                             | false                 | string | <ul><li>category=<code>spot</code>, you can pass <code>Order</code>, <code>tpslOrder</code>, <code>StopOrder</code>, <code>OcoOrder</code>, <code>BidirectionalTpslOrder</code><br>If not passed, <code>Order</code> by default</li><li>category=<code>linear</code> or <code>inverse</code>, you can pass <code>Order</code>, <code>StopOrder</code>,<code>OpenOrder</code><br>If not passed, all kinds of orders will be cancelled, like active order, conditional order, TP/SL order and trailing stop order</li><li>category=<code>option</code>, you can pass <code>Order</code>,<code>StopOrder</code><br>If not passed, all kinds of orders will be cancelled, like active order, conditional order, TP/SL order and trailing stop order</li></ul> |
+| <a href="/docs/v5/enum#stopordertype">stopOrderType</a> | false                 | string | Stop order type <code>Stop</code><li>Only used for category=<code>linear</code> or <code>inverse</code> and orderFilter=<code>StopOrder</code>,you can cancel conditional orders except TP/SL order and Trailing stop orders with this param</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 info
 
@@ -2306,7 +2460,7 @@ GET `/v5/order/history`
 | &gt; leavesValue                                             | string  | The estimated value not executed. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                     |
 | &gt; cumExecQty                                              | string  | Cumulative executed order qty                                                                                                                                                                                                                                                                                                             |
 | &gt; cumExecValue                                            | string  | Cumulative executed order value. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                      |
-| &gt; cumExecFee                                              | string  | Cumulative executed trading fee. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                      |
+| &gt; cumExecFee                                              | string  | Deprecated. Cumulative executed trading fee. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                          |
 | &gt; <a href="/docs/v5/enum#timeinforce">timeInForce</a>     | string  | Time in force                                                                                                                                                                                                                                                                                                                             |
 | &gt; <a href="/docs/v5/enum#ordertype">orderType</a>         | string  | Order type. <code>Market</code>,<code>Limit</code>. For TP/SL order, it means the order type after triggered<li><code>Block trade Roll Back</code>, <code>Block trade-Limit</code>: Unique enum values for Unified account block trades</li>                                                                                              |
 | &gt; <a href="/docs/v5/enum#stopordertype">stopOrderType</a> | string  | Stop order type                                                                                                                                                                                                                                                                                                                           |
@@ -2336,6 +2490,7 @@ GET `/v5/order/history`
 | &gt; createdTime                                             | string  | Order created timestamp (ms)                                                                                                                                                                                                                                                                                                              |
 | &gt; updatedTime                                             | string  | Order updated timestamp (ms)                                                                                                                                                                                                                                                                                                              |
 | &gt; extraFees                                               | string  | Trading fee rate information. Currently, this data is returned only for spot orders placed on the Indonesian site or spot fiat currency orders placed on the EU site. In other cases, an empty string is returned. Enum: <a href="/docs/v5/enum#extrafeesfeetype">feeType</a>, <a href="/docs/v5/enum#extrafeessubfeetype">subFeeType</a> |
+| &gt; cumFeeDetail                                            | json    | Cumulative trading fee details instead of <code>cumExecFee</code>                                                                                                                                                                                                                                                                         |
 | nextPageCursor                                               | string  | Refer to the <code>cursor</code> request parameter                                                                                                                                                                                                                                                                                        |
 
 [RUN >>](/docs/api-explorer/v5/trade/order-list)
@@ -2368,7 +2523,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "OK",    "result": {        "list": [            {                "orderId": "14bad3a1-6454-43d8-bcf2-5345896cf74d",                "orderLinkId": "YLxaWKMiHU",                "blockTradeId": "",                "symbol": "BTCUSDT",                "price": "26864.40",                "qty": "0.003",                "side": "Buy",                "isLeverage": "",                "positionIdx": 1,                "orderStatus": "Cancelled",                "cancelType": "UNKNOWN",                "rejectReason": "EC_PostOnlyWillTakeLiquidity",                "avgPrice": "0",                "leavesQty": "0.000",                "leavesValue": "0",                "cumExecQty": "0.000",                "cumExecValue": "0",                "cumExecFee": "0",                "timeInForce": "PostOnly",                "orderType": "Limit",                "stopOrderType": "UNKNOWN",                "orderIv": "",                "triggerPrice": "0.00",                "takeProfit": "0.00",                "stopLoss": "0.00",                "tpTriggerBy": "UNKNOWN",                "slTriggerBy": "UNKNOWN",                "triggerDirection": 0,                "triggerBy": "UNKNOWN",                "lastPriceOnCreated": "0.00",                "reduceOnly": false,                "closeOnTrigger": false,                "smpType": "None",                "smpGroup": 0,                "smpOrderId": "",                "tpslMode": "",                "tpLimitPrice": "",                "slLimitPrice": "",                "placeType": "",                "slippageToleranceType": "UNKNOWN",                "slippageTolerance": "",                "createdTime": "1684476068369",                "updatedTime": "1684476068372",                "extraFees": ""            }        ],        "nextPageCursor": "page_token%3D39380%26",        "category": "linear"    },    "retExtInfo": {},    "time": 1684766282976}
+{    "retCode": 0,    "retMsg": "OK",    "result": {        "list": [            {                "orderId": "14bad3a1-6454-43d8-bcf2-5345896cf74d",                "orderLinkId": "YLxaWKMiHU",                "blockTradeId": "",                "symbol": "BTCUSDT",                "price": "26864.40",                "qty": "0.003",                "side": "Buy",                "isLeverage": "",                "positionIdx": 1,                "orderStatus": "Cancelled",                "cancelType": "UNKNOWN",                "rejectReason": "EC_PostOnlyWillTakeLiquidity",                "avgPrice": "0",                "leavesQty": "0.000",                "leavesValue": "0",                "cumExecQty": "0.000",                "cumExecValue": "0",                "cumExecFee": "0",                "timeInForce": "PostOnly",                "orderType": "Limit",                "stopOrderType": "UNKNOWN",                "orderIv": "",                "triggerPrice": "0.00",                "takeProfit": "0.00",                "stopLoss": "0.00",                "tpTriggerBy": "UNKNOWN",                "slTriggerBy": "UNKNOWN",                "triggerDirection": 0,                "triggerBy": "UNKNOWN",                "lastPriceOnCreated": "0.00",                "reduceOnly": false,                "closeOnTrigger": false,                "smpType": "None",                "smpGroup": 0,                "smpOrderId": "",                "tpslMode": "",                "tpLimitPrice": "",                "slLimitPrice": "",                "placeType": "",                "slippageToleranceType": "UNKNOWN",                "slippageTolerance": "",                "createdTime": "1684476068369",                "updatedTime": "1684476068372",                "extraFees": "",                "cumFeeDetail": {                    "MNT": "0.00242968"                }            }        ],        "nextPageCursor": "page_token%3D39380%26",        "category": "linear"    },    "retExtInfo": {},    "time": 1684766282976}
 ```
 
 # Get Trade History
@@ -2437,7 +2592,7 @@ GET `/v5/execution/list`
 | &gt; <a href="/docs/v5/enum#exectype">execType</a>           | string  | Executed type. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                                                           |
 | &gt; execValue                                               | string  | Executed order value. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                                                    |
 | &gt; execTime                                                | string  | Executed timestamp (ms)                                                                                                                                                                                                                                                                                                                                      |
-| &gt; feeCurrency                                             | string  | Spot trading fee currency <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                                                |
+| &gt; feeCurrency                                             | string  | Trading fee currency                                                                                                                                                                                                                                                                                                                                         |
 | &gt; isMaker                                                 | boolean | Is maker order. <code>true</code>: maker, <code>false</code>: taker                                                                                                                                                                                                                                                                                          |
 | &gt; feeRate                                                 | string  | Trading fee rate. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                                                        |
 | &gt; tradeIv                                                 | string  | Implied volatility. Valid for <code>option</code>                                                                                                                                                                                                                                                                                                            |
@@ -2997,7 +3152,7 @@ GET `/v5/position/list`
 | &gt; leverage                                                      | string  | Position leverage<br><em>for portfolio margin mode, this field returns "", which means leverage rules are invalid</em>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | &gt; markPrice                                                     | string  | Mark price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | &gt; liqPrice                                                      | string  | Position liquidation price<ul><li><a href="/docs/v5/acct-mode#uta-20">UTA2.0</a>(isolated margin), <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>(isolated margin), <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>(inverse), Classic account:<br>it is the real price for isolated and cross positions, and keeps <code>""</code> when liqPrice &lt;= minPrice or liqPrice &gt;= maxPrice</li><li><a href="/docs/v5/acct-mode#uta-20">UTA2.0</a>(Cross margin), <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>(Cross margin):<br>it is an <b>estimated</b> price for cross positions(because the unified mode controls the risk rate according to the account), and keeps <code>""</code> when liqPrice &lt;= minPrice or liqPrice &gt;= maxPrice</li></ul><em>this field is empty for Portfolio Margin Mode, and no liquidation price will be provided</em> |
-| &gt; bustPrice                                                     | string  | Bankruptcy price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| &gt; bustPrice                                                     | string  | Bankruptcy price: Only applicable to the classic accounts, For Unified account, it will always return empty                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | &gt; positionIM                                                    | string  | Initial margin<li>Classic &amp; <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>(inverse): ignore this field</li><li>UTA portfolio margin mode, it returns ""</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | &gt; positionIMByMp                                                | string  | Initial margin calculated by mark price<li>Classic &amp; <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>(inverse) : ignore this field</li><li>UTA portfolio margin mode, it returns ""</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | &gt; positionMM                                                    | string  | Maintenance margin<li>Classic &amp; <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>(inverse): ignore this field</li><li>UTA portfolio margin mode, it returns ""</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -3582,8 +3737,8 @@ necessary
 
 tip
 
-[UTA2.0](/docs/v5/acct-mode#uta-20) inverse contract move position is not
-supported for now
+[UTA2.0](/docs/v5/acct-mode#uta-20) inverse contract move position is supported
+now
 
 info
 
@@ -3605,16 +3760,16 @@ POST `/v5/position/move-positions`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                                          | Required              | Type   | Comments                                                                                                                                                                                                                                                                           |
-| :------------------------------------------------- | :-------------------- | :----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| fromUid                                            | <strong>true</strong> | string | From UID<ul><li>Must be UTA</li><li>Must be in one-way mode for Futures</li></ul>                                                                                                                                                                                                  |
-| toUid                                              | <strong>true</strong> | string | To UID<ul><li>Must be UTA</li><li>Must be in one-way mode for Futures</li></ul>                                                                                                                                                                                                    |
-| list                                               | <strong>true</strong> | array  | Object. Up to 25 legs per request                                                                                                                                                                                                                                                  |
-| &gt; <a href="/docs/v5/enum#category">category</a> | <strong>true</strong> | string | Product type<li><a href="/docs/v5/acct-mode#uta-20">UTA2.0</a>, <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>: <code>linear</code>, <code>spot</code>, <code>option</code></li>                                                                                                   |
-| &gt; symbol                                        | <strong>true</strong> | string | Symbol name, like <code>BTCUSDT</code>, uppercase only                                                                                                                                                                                                                             |
-| &gt; price                                         | <strong>true</strong> | string | Trade price<ul><li><code>linear</code>: the price needs to be between [95% of mark price, 105% of mark price]</li><li><code>spot</code>&amp;<code>option</code>: the price needs to follow the price rule from <a href="/docs/v5/market/instrument">Instruments Info</a></li></ul> |
-| &gt; side                                          | <strong>true</strong> | string | Trading side of <code>fromUid</code><ul><li>For example, <code>fromUid</code> has a long position, when side=<code>Sell</code>, then once executed, the position of <code>fromUid</code> will be reduced or open a short position depending on <code>qty</code> input</li></ul>    |
-| &gt; qty                                           | <strong>true</strong> | string | Executed qty<ul><li>The value must satisfy the qty rule from <a href="/docs/v5/market/instrument">Instruments Info</a>, in particular, category=<code>linear</code> is able to input <code>maxOrderQty</code> \* 5</li></ul>                                                       |
+| Parameter                                          | Required              | Type   | Comments                                                                                                                                                                                                                                                                                                    |
+| :------------------------------------------------- | :-------------------- | :----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| fromUid                                            | <strong>true</strong> | string | From UID<ul><li>Must be UTA</li><li>Must be in one-way mode for Futures</li></ul>                                                                                                                                                                                                                           |
+| toUid                                              | <strong>true</strong> | string | To UID<ul><li>Must be UTA</li><li>Must be in one-way mode for Futures</li></ul>                                                                                                                                                                                                                             |
+| list                                               | <strong>true</strong> | array  | Object. Up to 25 legs per request                                                                                                                                                                                                                                                                           |
+| &gt; <a href="/docs/v5/enum#category">category</a> | <strong>true</strong> | string | Product type<ul><li><a href="/docs/v5/acct-mode#uta-20">UTA2.0</a>:<code>linear</code>, <code>spot</code>, <code>option</code>,<code>inverse</code></li><li><a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>: <code>linear</code>, <code>spot</code>, <code>option</code></li></ul>                           |
+| &gt; symbol                                        | <strong>true</strong> | string | Symbol name, like <code>BTCUSDT</code>, uppercase only                                                                                                                                                                                                                                                      |
+| &gt; price                                         | <strong>true</strong> | string | Trade price<ul><li><code>linear</code>&amp;<code>inverse</code>: the price needs to be between [95% of mark price, 105% of mark price]</li><li><code>spot</code>&amp;<code>option</code>: the price needs to follow the price rule from <a href="/docs/v5/market/instrument">Instruments Info</a></li></ul> |
+| &gt; side                                          | <strong>true</strong> | string | Trading side of <code>fromUid</code><ul><li>For example, <code>fromUid</code> has a long position, when side=<code>Sell</code>, then once executed, the position of <code>fromUid</code> will be reduced or open a short position depending on <code>qty</code> input</li></ul>                             |
+| &gt; qty                                           | <strong>true</strong> | string | Executed qty<ul><li>The value must satisfy the qty rule from <a href="/docs/v5/market/instrument">Instruments Info</a>, in particular, category=<code>linear</code> is able to input <code>maxOrderQty</code> \* 5</li></ul>                                                                                |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -3972,6 +4127,7 @@ GET `/v5/account/wallet-balance`
 | &gt;&gt; marginCollateral       | boolean | Whether it can be used as a margin collateral currency (platform), <code>true</code>: YES, <code>false</code>: NO<li>When marginCollateral=false, then collateralSwitch is meaningless</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | &gt;&gt; collateralSwitch       | boolean | Whether the collateral is turned on by user (user), <code>true</code>: ON, <code>false</code>: OFF<li>When marginCollateral=true, then collateralSwitch is meaningful</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | &gt;&gt; availableToBorrow      | string  | deprecated field, always return <code>""</code>. Please refer to <code>availableToBorrow</code> in the <a href="/docs/v5/account/collateral-info">Get Collateral Info</a>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| &gt;&gt; spotBorrow             | string  | Borrow amount by spot margin trade (does not include borrow amount by spot margin active order). This business scenario is not yet online, currently returns <code>0</code>.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
 [RUN >>](/docs/api-explorer/v5/account/wallet)
 
@@ -3998,7 +4154,7 @@ const { RestClientV5 } = require('bybit-api');    const client = new RestClientV
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "OK",    "result": {        "list": [            {                "totalEquity": "3.31216591",                "accountIMRate": "0",                "accountIMRateByMp": "0",                "totalMarginBalance": "3.00326056",                "totalInitialMargin": "0",                "totalInitialMarginByMp": "0",                "accountType": "UNIFIED",                "totalAvailableBalance": "3.00326056",                "accountMMRate": "0",                "accountMMRateByMp": "0",                "totalPerpUPL": "0",                "totalWalletBalance": "3.00326056",                "accountLTV": "0",                "totalMaintenanceMargin": "0",                "totalMaintenanceMarginByMp": "0",                "coin": [                    {                        "availableToBorrow": "3",                        "bonus": "0",                        "accruedInterest": "0",                        "availableToWithdraw": "0",                        "totalOrderIM": "0",                        "equity": "0",                        "totalPositionMM": "0",                        "usdValue": "0",                        "spotHedgingQty": "0.01592413",                        "unrealisedPnl": "0",                        "collateralSwitch": true,                        "borrowAmount": "0.0",                        "totalPositionIM": "0",                        "walletBalance": "0",                        "cumRealisedPnl": "0",                        "locked": "0",                        "marginCollateral": true,                        "coin": "BTC"                    }                ]            }        ]    },    "retExtInfo": {},    "time": 1690872862481}
+{    "retCode": 0,    "retMsg": "OK",    "result": {        "list": [            {                "totalEquity": "3.31216591",                "accountIMRate": "0",                "accountIMRateByMp": "0",                "totalMarginBalance": "3.00326056",                "totalInitialMargin": "0",                "totalInitialMarginByMp": "0",                "accountType": "UNIFIED",                "totalAvailableBalance": "3.00326056",                "accountMMRate": "0",                "accountMMRateByMp": "0",                "totalPerpUPL": "0",                "totalWalletBalance": "3.00326056",                "accountLTV": "0",                "totalMaintenanceMargin": "0",                "totalMaintenanceMarginByMp": "0",                "coin": [                    {                        "availableToBorrow": "3",                        "bonus": "0",                        "accruedInterest": "0",                        "availableToWithdraw": "0",                        "totalOrderIM": "0",                        "equity": "0",                        "totalPositionMM": "0",                        "usdValue": "0",                        "spotHedgingQty": "0.01592413",                        "unrealisedPnl": "0",                        "collateralSwitch": true,                        "borrowAmount": "0.0",                        "totalPositionIM": "0",                        "walletBalance": "0",                        "cumRealisedPnl": "0",                        "locked": "0",                        "marginCollateral": true,                        "coin": "BTC",                        "spotBorrow": "0"                    }                ]            }        ]    },    "retExtInfo": {},    "time": 1690872862481}
 ```
 
 # Get Transferable Amount (Unified)
@@ -5672,6 +5828,10 @@ GET `/v5/asset/withdraw/withdrawable-amount`
 | &gt;&gt; coin               | string | Coin name                                                 |
 | &gt;&gt; withdrawableAmount | string | Amount that can be withdrawn                              |
 | &gt;&gt; availableBalance   | string | Available balance                                         |
+| &gt; UTA                    | Object | Unified wallet                                            |
+| &gt;&gt; coin               | string | Coin name                                                 |
+| &gt;&gt; withdrawableAmount | string | Amount that can be withdrawn                              |
+| &gt;&gt; availableBalance   | string | Available balance                                         |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -5694,7 +5854,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "limitAmountUsd": "52853.5551",        "withdrawableAmount": {            "FUND": {                "coin": "USDT",                "withdrawableAmount": "11135.0596",                "availableBalance": "11135.0596"            },            "SPOT": {                "coin": "USDT",                "withdrawableAmount": "0",                "availableBalance": "0"            }        }    },    "retExtInfo": {},    "time": 1677565632151}
+{    "retCode": 0,    "retMsg": "success",    "result": {        "limitAmountUsd": "595051.7",        "withdrawableAmount": {            "FUND": {                "coin": "USDT",                "withdrawableAmount": "155805.847",                "availableBalance": "155805.847"            },            "UTA": {                "coin": "USDT",                "withdrawableAmount": "498751.0882",                "availableBalance": "498751.0882"            }        }    },    "retExtInfo": {},    "time": 1754009688289}
 ```
 
 # Get Transferable Coin
@@ -6604,7 +6764,7 @@ POST `/v5/asset/withdraw/create`
 | amount                             | <strong>true</strong> | string  | Withdraw amount                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | timestamp                          | <strong>true</strong> | integer | Current timestamp (ms). Used for preventing from withdraw replay                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | forceChain                         | false                 | integer | Whether or not to force an on-chain withdrawal<ul><li><code>0</code>(default): If the address is parsed out to be an internal address, then internal transfer (<strong>Bybit main account only</strong>)</li><li><code>1</code>: Force the withdrawal to occur on-chain</li><li><code>2</code>: Use UID to withdraw</li></ul>                                                                                                                                                                                                                                                                                              |
-| accountType                        | false                 | string  | Select the wallet to be withdrawn from<ul><li><code>FUND</code>: Funding wallet</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| accountType                        | <strong>true</strong> | string  | Select the wallet to be withdrawn from<ul><li><code>FUND</code>: Funding wallet</li><li><code>UTA</code>: System transfers the funds to Funding wallet to withdraw</li><li><code>FUND,UTA</code>: For combo withdrawals, funds will be deducted from the Funding wallet first. If the balance is insufficient, the remaining amount will be deducted from the UTA wallet.</li><li><code>SPOT</code>: withdraw from spot wallet (classic account only)</li></ul>                                                                                                                                                            |
 | feeType                            | false                 | integer | Handling fee option<ul><li><code>0</code>(default): input amount is the actual amount received, so you have to calculate handling fee manually</li><li><code>1</code>: input amount is not the actual amount you received, the system will help to deduct the handling fee automatically</li></ul>                                                                                                                                                                                                                                                                                                                         |
 | requestId                          | false                 | string  | Customised ID, globally unique, it is used for idempotent verification<li>A combination of letters (case sensitive) and numbers, which can be pure letters or pure numbers and the length must be between 1 and 32 digits</li>                                                                                                                                                                                                                                                                                                                                                                                             |
 | beneficiary                        | false                 | Object  | Travel rule info. It is <strong>required</strong> for kyc/kyb=KOR (Korean), kyc=IND (India) users, and users who registered in <a href="https://www.bybit-tr.com/en-TR/" target="_blank" rel="noopener noreferrer">Bybit Turkey(TR)</a>, <a href="https://www.bybit.kz/kk-KAZ/" target="_blank" rel="noopener noreferrer">Bybit Kazakhstan(KZ)</a>, Bybit Indonesia (ID)                                                                                                                                                                                                                                                   |
@@ -9492,16 +9652,17 @@ POST `/v5/earn/place-order`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter        | Required              | Type   | Comments                                                                                                                                   |
-| :--------------- | :-------------------- | :----- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| category         | <strong>true</strong> | string | <code>FlexibleSaving</code>,<code>OnChain</code><br><strong>Remarks</strong>: currently, only flexible savings and on chain is supported   |
-| orderType        | <strong>true</strong> | string | <code>Stake</code>, <code>Redeem</code>                                                                                                    |
-| accountType      | <strong>true</strong> | string | <code>FUND</code>, <code>UNIFIED</code>. Onchain only supports FUND                                                                        |
-| amount           | <strong>true</strong> | string | <li>Stake amount needs to satisfy minStake and maxStake</li><li>Both stake and redeem amount need to satify precision requirement</li>     |
-| coin             | <strong>true</strong> | string | Coin name                                                                                                                                  |
-| productId        | <strong>true</strong> | string | Product ID                                                                                                                                 |
-| orderLinkId      | <strong>true</strong> | string | Customised order ID, used to prevent from replay<li>support up to 36 characters</li><li>The same orderLinkId can't be used in 30 mins</li> |
-| redeemPositionId | false                 | string | The position ID that the user needs to redeem. Only is required in Onchain non-LST mode                                                    |
+| Parameter        | Required              | Type   | Comments                                                                                                                                                                                                                                               |
+| :--------------- | :-------------------- | :----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| category         | <strong>true</strong> | string | <code>FlexibleSaving</code>,<code>OnChain</code><br><strong>Remarks</strong>: currently, only flexible savings and on chain is supported                                                                                                               |
+| orderType        | <strong>true</strong> | string | <code>Stake</code>, <code>Redeem</code>                                                                                                                                                                                                                |
+| accountType      | <strong>true</strong> | string | <code>FUND</code>, <code>UNIFIED</code>. Onchain only supports FUND                                                                                                                                                                                    |
+| amount           | <strong>true</strong> | string | <li>Stake amount needs to satisfy minStake and maxStake</li><li>Both stake and redeem amount need to satify precision requirement</li>                                                                                                                 |
+| coin             | <strong>true</strong> | string | Coin name                                                                                                                                                                                                                                              |
+| productId        | <strong>true</strong> | string | Product ID                                                                                                                                                                                                                                             |
+| orderLinkId      | <strong>true</strong> | string | Customised order ID, used to prevent from replay<li>support up to 36 characters</li><li>The same orderLinkId can't be used in 30 mins</li>                                                                                                             |
+| redeemPositionId | false                 | string | The position ID that the user needs to redeem. Only is required in Onchain non-LST mode                                                                                                                                                                |
+| toAccountType    | false                 | string | <code>FUND</code>, <code>UNIFIED</code>. Onchain LST mode supports <code>FUND</code> and <code>UNIFIED</code>(Private wealth management custodial subaccount only supports <code>UNIFIED</code>). Onchain non-LST mode only supports <code>FUND</code> |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 

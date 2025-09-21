@@ -53,14 +53,14 @@ To enable a `OPTION` account for Option Trading, please refer to the
 This is a lightweight library that works as a connector to Binance public API,
 written in Python.
 
-[https://github.com/binance/binance-futures-connector-python](https://github.com/binance/binance-futures-connector-python)
+[https://github.com/binance/binance-connector-python](https://github.com/binance/binance-connector-python)
 
 #### Java connector
 
 This is a lightweight library that works as a connector to Binance public API,
 written for Java users.
 
-[https://github.com/binance/binance-futures-connector-java](https://github.com/binance/binance-futures-connector-java)
+[https://github.com/binance/binance-connector-java](https://github.com/binance/binance-connector-java)
 
 > Source:
 > [https://developers.binance.com/docs/derivatives/quick-start](https://developers.binance.com/docs/derivatives/quick-start)
@@ -889,11 +889,11 @@ POST `/eapi/v1/batchOrders`
 
 ### Request Parameters
 
-| Name       | Type | Mandatory | Description              |
-| ---------- | ---- | --------- | ------------------------ |
-| orders     | LIST | YES       | order list. Max 5 orders |
-| recvWindow | LONG | NO        |                          |
-| timestamp  | LONG | YES       |                          |
+| Name       | Type | Mandatory | Description               |
+| ---------- | ---- | --------- | ------------------------- |
+| orders     | LIST | YES       | order list. Max 10 orders |
+| recvWindow | LONG | NO        |                           |
+| timestamp  | LONG | YES       |                           |
 
 **Where `orders` is the list of order parameters in JSON:**
 
@@ -1102,7 +1102,7 @@ DELETE `/eapi/v1/allOpenOrders`
 
 ### Request Weight
 
-**1**
+**5**
 
 ### Request Parameters
 
@@ -1280,7 +1280,6 @@ GET `/eapi/v1/openOrders`
 | orderId    | LONG   | NO        | Returns the orderId and subsequent orders, the most recent order is returned by default |
 | startTime  | LONG   | NO        | Start Time                                                                              |
 | endTime    | LONG   | NO        | End Time                                                                                |
-| limit      | INT    | NO        | Number of result sets returned Default:100 Max:1000                                     |
 | recvWindow | LONG   | NO        |                                                                                         |
 | timestamp  | LONG   | YES       |                                                                                         |
 

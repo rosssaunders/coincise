@@ -22,6 +22,9 @@ The response will contain an access token, expiration period (number of seconds
 that the token is valid) and a refresh token that can be used to get a new set
 of tokens.
 
+**📖 Related Support Article:**
+[API Authentication Guide](https://support.deribit.com/hc/en-us/articles/29748629634205-API-Authentication-Guide)
+
 ### Parameters
 
 | Parameter     | Required | Type    | Enum                                                                                           | Description                                                                                                                                                                                                                                                                                                                                                                                  |
