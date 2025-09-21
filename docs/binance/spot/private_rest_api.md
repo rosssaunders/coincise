@@ -952,34 +952,45 @@ the value it's looking for it will check the next one.
 > Source:
 > [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/data-sources](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/data-sources)
 
-## Endpoint security type
+## Request Security
 
-- Each endpoint has a security type that determines how you will interact with
-  it. This is stated next to the NAME of the endpoint.
-- If no security type is stated, assume the security type is NONE.
-- API-keys are passed into the REST API via the `X-MBX-APIKEY` header.
-- API-keys and secret-keys **are case sensitive**.
-- API-keys can be configured to only access certain types of secure endpoints.  
-  For example, one API-key could be used for TRADE only,  
-  while another API-key can access everything except for TRADE routes.
-- By default, API-keys can access all secure routes.
+- Each method has a security type indicating required API key permissions, shown
+  next to the method name (e.g.,
+  [New order (TRADE)](/docs/binance-spot-api-docs/rest-api/request-security#new-order-trade)).
+- If unspecified, the security type is `NONE`.
+- Methods with a security type other than `NONE` are considered `SIGNED`
+  requests (i.e. requires parameter `signature`). A few legacy
+  [listenKey management](/docs/binance-spot-api-docs/rest-api/account-endpoints#user-data-stream-requests)
+  endpoints are an exception to this rule.
+- Secure methods require a valid API key to be specified and authenticated.
+  - API keys can be created on the
+    [API Management](https://www.binance.com/en/support/faq/360002502072) page
+    of your Binance account.
+  - **Both API key and secret key are sensitive.** Never share them with anyone.
+    If you notice unusual activity in your account, immediately revoke all the
+    keys and contact Binance support.
+- API keys can be configured to allow access only to certain types of secure
+  methods.
+  - For example, you can have an API key with `TRADE` permission for trading,
+    while using a separate API key with `USER_DATA` permission to monitor your
+    order status.
+  - By default, an API key cannot `TRADE`. You need to enable trading in API
+    Management first.
 
-| Security Type | Description                                                |
-| ------------- | ---------------------------------------------------------- |
-| \-NONE        | \-Endpoint can be accessed freely.                         |
-| \-TRADE       | \-Endpoint requires sending a valid API-Key and signature. |
-| \-USER_DATA   | \-Endpoint requires sending a valid API-Key and signature. |
-| \-USER_STREAM | \-Endpoint requires sending a valid API-Key.               |
+| Security type   | Description                                                                  |
+| --------------- | ---------------------------------------------------------------------------- |
+| \-`NONE`        | \-Public market data                                                         |
+| \-`TRADE`       | \-Trading on the exchange, placing and canceling orders                      |
+| \-`USER_DATA`   | \-Private account information, such as order status and your trading history |
+| \-`USER_STREAM` | \-Managing User Data Stream subscriptions                                    |
 
-- `TRADE` and `USER_DATA` endpoints are `SIGNED` endpoints.
-
-#### SIGNED (TRADE and USER_DATA) Endpoint security
+#### SIGNED Endpoint security
 
 - `SIGNED` endpoints require an additional parameter, `signature`, to be sent in
   the `query string` or `request body`.
 - The `signature` is **not case sensitive**.
 - Please consult the
-  [examples](/docs/binance-spot-api-docs/rest-api/endpoint-security-type#signed-endpoint-examples-for-post-apiv3order)
+  [examples](/docs/binance-spot-api-docs/rest-api/request-security#signed-endpoint-examples-for-post-apiv3order)
   below on how to compute signature, depending on which API key type you are
   using.
 
@@ -987,9 +998,11 @@ the value it's looking for it will check the next one.
 
 - `SIGNED` requests also require a `timestamp` parameter which should be the
   current timestamp either in milliseconds or microseconds. (See
-  [General API Information](/docs/binance-spot-api-docs/rest-api/endpoint-security-type#general-api-information))
+  [General API Information](/docs/binance-spot-api-docs/rest-api/request-security#general-api-information))
 - An additional optional parameter, `recvWindow`, specifies for how long the
   request stays valid and may only be specified in milliseconds.
+  - `recvWindow` supports up to three decimal places of precision (e.g.,
+    6000.346) so that microseconds may be specified.
   - If `recvWindow` is not sent, **it defaults to 5000 milliseconds**.
   - Maximum `recvWindow` is 60000 milliseconds.
 - Request processing logic is as follows:
@@ -1255,7 +1268,7 @@ print(response.json())
 ```
 
 > Source:
-> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/endpoint-security-type](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/endpoint-security-type)
+> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/request-security](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/request-security)
 
 ## General endpoints
 
@@ -1458,7 +1471,7 @@ filter.
 | \-pegPriceType            | \-ENUM    | \-NO      | \-`PRIMARY_PEG` or `MARKET_PEG`. See [Pegged Orders Info](/docs/binance-spot-api-docs/rest-api/trading-endpoints#pegged-orders-info)                                                                      |
 | \-pegOffsetValue          | \-INT     | \-NO      | \-Price level to peg the price to (max: 100). See [Pegged Orders Info](/docs/binance-spot-api-docs/rest-api/trading-endpoints#pegged-orders-info)                                                         |
 | \-pegOffsetType           | \-ENUM    | \-NO      | \-Only `PRICE_LEVEL` is supported. See [Pegged Orders Info](/docs/binance-spot-api-docs/rest-api/trading-endpoints#pegged-orders-info)                                                                    |
-| \-recvWindow              | \-LONG    | \-NO      | \-The value cannot be greater than `60000`                                                                                                                                                                |
+| \-recvWindow              | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.                                                      |
 | \-timestamp               | \-LONG    | \-YES     |                                                                                                                                                                                                           |
 
 Some additional mandatory parameters based on order `type`:
@@ -1700,15 +1713,15 @@ Cancel an active order.
 
 **Parameters:**
 
-| Name                 | Type     | Mandatory | Description                                                                                                                                                              |
-| -------------------- | -------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| \-symbol             | \-STRING | \-YES     |                                                                                                                                                                          |
-| \-orderId            | \-LONG   | \-NO      |                                                                                                                                                                          |
-| \-origClientOrderId  | \-STRING | \-NO      |                                                                                                                                                                          |
-| \-newClientOrderId   | \-STRING | \-NO      | \-Used to uniquely identify this cancel. Automatically generated by default.                                                                                             |
-| \-cancelRestrictions | \-ENUM   | \-NO      | \-Supported values: `ONLY_NEW` - Cancel will succeed if the order status is `NEW`. `ONLY_PARTIALLY_FILLED` \- Cancel will succeed if order status is `PARTIALLY_FILLED`. |
-| \-recvWindow         | \-LONG   | \-NO      | \-The value cannot be greater than `60000`.                                                                                                                              |
-| \-timestamp          | \-LONG   | \-YES     |                                                                                                                                                                          |
+| Name                 | Type      | Mandatory | Description                                                                                                                                                              |
+| -------------------- | --------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| \-symbol             | \-STRING  | \-YES     |                                                                                                                                                                          |
+| \-orderId            | \-LONG    | \-NO      |                                                                                                                                                                          |
+| \-origClientOrderId  | \-STRING  | \-NO      |                                                                                                                                                                          |
+| \-newClientOrderId   | \-STRING  | \-NO      | \-Used to uniquely identify this cancel. Automatically generated by default.                                                                                             |
+| \-cancelRestrictions | \-ENUM    | \-NO      | \-Supported values: `ONLY_NEW` - Cancel will succeed if the order status is `NEW`. `ONLY_PARTIALLY_FILLED` \- Cancel will succeed if order status is `PARTIALLY_FILLED`. |
+| \-recvWindow         | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.                     |
+| \-timestamp          | \-LONG    | \-YES     |                                                                                                                                                                          |
 
 Notes:
 
@@ -1787,11 +1800,11 @@ order list.
 
 **Parameters:**
 
-| Name         | Type     | Mandatory | Description                                |
-| ------------ | -------- | --------- | ------------------------------------------ |
-| \-symbol     | \-STRING | \-YES     |                                            |
-| \-recvWindow | \-LONG   | \-NO      | \-The value cannot be greater than `60000` |
-| \-timestamp  | \-LONG   | \-YES     |                                            |
+| Name         | Type      | Mandatory | Description                                                                                                                                          |
+| ------------ | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol     | \-STRING  | \-YES     |                                                                                                                                                      |
+| \-recvWindow | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp  | \-LONG    | \-YES     |                                                                                                                                                      |
 
 **Data Source:** Matching Engine
 
@@ -1946,7 +1959,7 @@ will still increase the unfilled order count by 1.
 | \-pegPriceType               | \-ENUM    | \-NO      | \-`PRIMARY_PEG` or `MARKET_PEG` See [Pegged Orders](/docs/binance-spot-api-docs/rest-api/trading-endpoints#pegged-orders-info)                                                                                                                                                                                                            |
 | \-pegOffsetValue             | \-INT     | \-NO      | \-Price level to peg the price to (max: 100) See [Pegged Orders](/docs/binance-spot-api-docs/rest-api/trading-endpoints#pegged-orders-info)                                                                                                                                                                                               |
 | \-pegOffsetType              | \-ENUM    | \-NO      | \-Only `PRICE_LEVEL` is supported See [Pegged Orders](/docs/binance-spot-api-docs/rest-api/trading-endpoints#pegged-orders-info)                                                                                                                                                                                                          |
-| \-recvWindow                 | \-LONG    | \-NO      | \-The value cannot be greater than `60000`                                                                                                                                                                                                                                                                                                |
+| \-recvWindow                 | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.                                                                                                                                                                                      |
 | \-timestamp                  | \-LONG    | \-YES     |                                                                                                                                                                                                                                                                                                                                           |
 
 Similar to `POST /api/v3/order`, additional mandatory parameters are determined
@@ -2221,7 +2234,7 @@ to learn more.
 | \-origClientOrderId | \-STRING  | \-NO\*    | \-`orderId` or `origClientOrderId` must be sent                                                                                                                                                      |
 | \-newClientOrderId  | \-STRING  | \-NO\*    | \-The new client order ID for the order after being amended. If not sent, one will be randomly generated. It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`. |
 | \-newQty            | \-DECIMAL | \-YES     | \-`newQty` must be greater than 0 and less than the order's quantity.                                                                                                                                |
-| \-recvWindow        | \-LONG    | \-NO      | \-The value cannot be greater than `60000`.                                                                                                                                                          |
+| \-recvWindow        | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.                                                 |
 | \-timestamp         | \-LONG    | \-YES     |                                                                                                                                                                                                      |
 
 **Data Source**: Matching Engine
@@ -2350,7 +2363,7 @@ Send in a new OCO.
 | \-stopLimitTimeInForce    | \-ENUM    | \-NO      | \-Valid values are `GTC`/`FOK`/`IOC`                                                                                                                              |
 | \-newOrderRespType        | \-ENUM    | \-NO      | \-Set the response JSON.                                                                                                                                          |
 | \-selfTradePreventionMode | \-ENUM    | \-NO      | \-The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes). |
-| \-recvWindow              | \-LONG    | \-NO      | \-The value cannot be greater than `60000`                                                                                                                        |
+| \-recvWindow              | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.              |
 | \-timestamp               | \-LONG    | \-YES     |                                                                                                                                                                   |
 
 **Data Source:** Matching Engine
@@ -2483,7 +2496,7 @@ immediately cancels the other.
 | \-belowPegOffsetValue     | \-INT     | \-NO      |                                                                                                                                                                                                                                                                                                           |
 | \-newOrderRespType        | \-ENUM    | \-No      | \-Select response format: `ACK`, `RESULT`, `FULL`                                                                                                                                                                                                                                                         |
 | \-selfTradePreventionMode | \-ENUM    | \-No      | \-The allowed enums is dependent on what is configured on the symbol. Supported values: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes)                                                                                                                                                           |
-| \-recvWindow              | \-LONG    | \-No      | \-The value cannot be greater than `60000`.                                                                                                                                                                                                                                                               |
+| \-recvWindow              | \-DECIMAL | \-No      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.                                                                                                                                                      |
 | \-timestamp               | \-LONG    | \-Yes     |                                                                                                                                                                                                                                                                                                           |
 
 **Data Source:** Matching Engine
@@ -2620,7 +2633,7 @@ Place an OTO.
 | \-pendingPegPriceType     | \-ENUM    | \-NO      | \-See [Pegged Orders](/docs/binance-spot-api-docs/rest-api/trading-endpoints#pegged-orders-info)                                                                                                                                                                                                            |
 | \-pendingPegOffsetType    | \-ENUM    | \-NO      |                                                                                                                                                                                                                                                                                                             |
 | \-pendingPegOffsetValue   | \-INT     | \-NO      |                                                                                                                                                                                                                                                                                                             |
-| \-recvWindow              | \-LONG    | \-NO      | \-The value cannot be greater than `60000`.                                                                                                                                                                                                                                                                 |
+| \-recvWindow              | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.                                                                                                                                                        |
 | \-timestamp               | \-LONG    | \-YES     |                                                                                                                                                                                                                                                                                                             |
 
 **Mandatory parameters based on `pendingType` or `workingType`**
@@ -2780,7 +2793,7 @@ Place an OTOCO.
 | \-pendingBelowPegPriceType   | \-ENUM    | \-NO      | \-See [Pegged Orders](/docs/binance-spot-api-docs/rest-api/trading-endpoints#pegged-orders-info)                                                                                                                                                                                                                                               |
 | \-pendingBelowPegOffsetType  | \-ENUM    | \-NO      |                                                                                                                                                                                                                                                                                                                                                |
 | \-pendingBelowPegOffsetValue | \-INT     | \-NO      |                                                                                                                                                                                                                                                                                                                                                |
-| \-recvWindow                 | \-LONG    | \-NO      | \-The value cannot be greater than `60000`.                                                                                                                                                                                                                                                                                                    |
+| \-recvWindow                 | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.                                                                                                                                                                                           |
 | \-timestamp                  | \-LONG    | \-YES     |                                                                                                                                                                                                                                                                                                                                                |
 
 **Mandatory parameters based on `pendingAboveType`, `pendingBelowType` or
@@ -2907,14 +2920,14 @@ Cancel an entire Order list
 
 **Parameters:**
 
-| Name                | Type     | Mandatory | Description                                                                 |
-| ------------------- | -------- | --------- | --------------------------------------------------------------------------- |
-| \-symbol            | \-STRING | \-YES     |                                                                             |
-| \-orderListId       | \-LONG   | \-NO      | \-Either `orderListId` or `listClientOrderId` must be provided              |
-| \-listClientOrderId | \-STRING | \-NO      | \-Either `orderListId` or `listClientOrderId` must be provided              |
-| \-newClientOrderId  | \-STRING | \-NO      | \-Used to uniquely identify this cancel. Automatically generated by default |
-| \-recvWindow        | \-LONG   | \-NO      | \-The value cannot be greater than `60000`                                  |
-| \-timestamp         | \-LONG   | \-YES     |                                                                             |
+| Name                | Type      | Mandatory | Description                                                                                                                                          |
+| ------------------- | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol            | \-STRING  | \-YES     |                                                                                                                                                      |
+| \-orderListId       | \-LONG    | \-NO      | \-Either `orderListId` or `listClientOrderId` must be provided                                                                                       |
+| \-listClientOrderId | \-STRING  | \-NO      | \-Either `orderListId` or `listClientOrderId` must be provided                                                                                       |
+| \-newClientOrderId  | \-STRING  | \-NO      | \-Used to uniquely identify this cancel. Automatically generated by default                                                                          |
+| \-recvWindow        | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp         | \-LONG    | \-YES     |                                                                                                                                                      |
 
 **Notes:**
 
@@ -3027,7 +3040,7 @@ Read [SOR FAQ](/docs/binance-spot-api-docs/faqs/sor_faq) to learn more.
 | \-icebergQty              | \-DECIMAL | \-NO      | \-Used with `LIMIT` to create an iceberg order.                                                                                                                                                           |
 | \-newOrderRespType        | \-ENUM    | \-NO      | \-Set the response JSON. `ACK`, `RESULT`, or `FULL`. Default to `FULL`                                                                                                                                    |
 | \-selfTradePreventionMode | \-ENUM    | \-NO      | \-The allowed enums is dependent on what is configured on the symbol. The possible supported values are: [STP Modes](/docs/binance-spot-api-docs/enums#stpmodes).                                         |
-| \-recvWindow              | \-LONG    | \-NO      | \-The value cannot be greater than `60000`                                                                                                                                                                |
+| \-recvWindow              | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified.                                                      |
 | \-timestamp               | \-LONG    | \-YES     |                                                                                                                                                                                                           |
 
 **Note:** `POST /api/v3/sor/order` only supports `LIMIT` and `MARKET` orders.
@@ -3149,11 +3162,11 @@ Get current account information.
 
 **Parameters:**
 
-| Name               | Type      | Mandatory | Description                                                                                  |
-| ------------------ | --------- | --------- | -------------------------------------------------------------------------------------------- |
-| \-omitZeroBalances | \-BOOLEAN | \-NO      | \-When set to `true`, emits only the non-zero balances of an account. Default value: `false` |
-| \-recvWindow       | \-LONG    | \-NO      | \-The value cannot be greater than `60000`                                                   |
-| \-timestamp        | \-LONG    | \-YES     |                                                                                              |
+| Name               | Type      | Mandatory | Description                                                                                                                                          |
+| ------------------ | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-omitZeroBalances | \-BOOLEAN | \-NO      | \-When set to `true`, emits only the non-zero balances of an account. Default value: `false`                                                         |
+| \-recvWindow       | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp        | \-LONG    | \-YES     |                                                                                                                                                      |
 
 **Data Source:** Memory => Database
 
@@ -3208,13 +3221,13 @@ Check an order's status.
 
 **Parameters:**
 
-| Name                | Type     | Mandatory | Description                                |
-| ------------------- | -------- | --------- | ------------------------------------------ |
-| \-symbol            | \-STRING | \-YES     |                                            |
-| \-orderId           | \-LONG   | \-NO      |                                            |
-| \-origClientOrderId | \-STRING | \-NO      |                                            |
-| \-recvWindow        | \-LONG   | \-NO      | \-The value cannot be greater than `60000` |
-| \-timestamp         | \-LONG   | \-YES     |                                            |
+| Name                | Type      | Mandatory | Description                                                                                                                                          |
+| ------------------- | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol            | \-STRING  | \-YES     |                                                                                                                                                      |
+| \-orderId           | \-LONG    | \-NO      |                                                                                                                                                      |
+| \-origClientOrderId | \-STRING  | \-NO      |                                                                                                                                                      |
+| \-recvWindow        | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp         | \-LONG    | \-YES     |                                                                                                                                                      |
 
 **Notes:**
 
@@ -3271,11 +3284,11 @@ Get all open orders on a symbol. **Careful** when accessing this with no symbol.
 
 **Parameters:**
 
-| Name         | Type     | Mandatory | Description                                |
-| ------------ | -------- | --------- | ------------------------------------------ |
-| \-symbol     | \-STRING | \-NO      |                                            |
-| \-recvWindow | \-LONG   | \-NO      | \-The value cannot be greater than `60000` |
-| \-timestamp  | \-LONG   | \-YES     |                                            |
+| Name         | Type      | Mandatory | Description                                                                                                                                          |
+| ------------ | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol     | \-STRING  | \-NO      |                                                                                                                                                      |
+| \-recvWindow | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp  | \-LONG    | \-YES     |                                                                                                                                                      |
 
 - If the symbol is not sent, orders for all symbols will be returned in an
   array.
@@ -3329,15 +3342,15 @@ Get all account orders; active, canceled, or filled.
 
 **Parameters:**
 
-| Name         | Type     | Mandatory | Description                                |
-| ------------ | -------- | --------- | ------------------------------------------ |
-| \-symbol     | \-STRING | \-YES     |                                            |
-| \-orderId    | \-LONG   | \-NO      |                                            |
-| \-startTime  | \-LONG   | \-NO      |                                            |
-| \-endTime    | \-LONG   | \-NO      |                                            |
-| \-limit      | \-INT    | \-NO      | \-Default: 500; Maximum: 1000.             |
-| \-recvWindow | \-LONG   | \-NO      | \-The value cannot be greater than `60000` |
-| \-timestamp  | \-LONG   | \-YES     |                                            |
+| Name         | Type      | Mandatory | Description                                                                                                                                          |
+| ------------ | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol     | \-STRING  | \-YES     |                                                                                                                                                      |
+| \-orderId    | \-LONG    | \-NO      |                                                                                                                                                      |
+| \-startTime  | \-LONG    | \-NO      |                                                                                                                                                      |
+| \-endTime    | \-LONG    | \-NO      |                                                                                                                                                      |
+| \-limit      | \-INT     | \-NO      | \-Default: 500; Maximum: 1000.                                                                                                                       |
+| \-recvWindow | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp  | \-LONG    | \-YES     |                                                                                                                                                      |
 
 **Notes:**
 
@@ -3393,12 +3406,12 @@ Retrieves a specific order list based on provided optional parameters.
 
 **Parameters:**
 
-| Name                | Type     | Mandatory | Description                                                                                       |
-| ------------------- | -------- | --------- | ------------------------------------------------------------------------------------------------- |
-| \-orderListId       | \-LONG   | \-NO\*    | \-Query order list by `orderListId`. `orderListId` or `origClientOrderId` must be provided.       |
-| \-origClientOrderId | \-STRING | \-NO\*    | \-Query order list by `listClientOrderId`. `orderListId` or `origClientOrderId` must be provided. |
-| \-recvWindow        | \-LONG   | \-NO      | \-The value cannot be greater than `60000`                                                        |
-| \-timestamp         | \-LONG   | \-YES     |                                                                                                   |
+| Name                | Type      | Mandatory | Description                                                                                                                                          |
+| ------------------- | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-orderListId       | \-LONG    | \-NO\*    | \-Query order list by `orderListId`. `orderListId` or `origClientOrderId` must be provided.                                                          |
+| \-origClientOrderId | \-STRING  | \-NO\*    | \-Query order list by `listClientOrderId`. `orderListId` or `origClientOrderId` must be provided.                                                    |
+| \-recvWindow        | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp         | \-LONG    | \-YES     |                                                                                                                                                      |
 
 **Data Source:** Database
 
@@ -3443,14 +3456,14 @@ hours.
 
 **Parameters:**
 
-| Name         | Type   | Mandatory | Description                                                     |
-| ------------ | ------ | --------- | --------------------------------------------------------------- |
-| \-fromId     | \-LONG | \-NO      | \-If supplied, neither `startTime` or `endTime` can be provided |
-| \-startTime  | \-LONG | \-NO      |                                                                 |
-| \-endTime    | \-LONG | \-NO      |                                                                 |
-| \-limit      | \-INT  | \-NO      | \-Default: 500; Maximum: 1000                                   |
-| \-recvWindow | \-LONG | \-NO      | \-The value cannot be greater than `60000`                      |
-| \-timestamp  | \-LONG | \-YES     |                                                                 |
+| Name         | Type      | Mandatory | Description                                                                                                                                          |
+| ------------ | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-fromId     | \-LONG    | \-NO      | \-If supplied, neither `startTime` or `endTime` can be provided                                                                                      |
+| \-startTime  | \-LONG    | \-NO      |                                                                                                                                                      |
+| \-endTime    | \-LONG    | \-NO      |                                                                                                                                                      |
+| \-limit      | \-INT     | \-NO      | \-Default: 500; Maximum: 1000                                                                                                                        |
+| \-recvWindow | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp  | \-LONG    | \-YES     |                                                                                                                                                      |
 
 **Data Source:** Database
 
@@ -3513,10 +3526,10 @@ GET /api/v3/openOrderList
 
 **Parameters:**
 
-| Name         | Type   | Mandatory | Description                                |
-| ------------ | ------ | --------- | ------------------------------------------ |
-| \-recvWindow | \-LONG | \-NO      | \-The value cannot be greater than `60000` |
-| \-timestamp  | \-LONG | \-YES     |                                            |
+| Name         | Type      | Mandatory | Description                                                                                                                                          |
+| ------------ | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-recvWindow | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp  | \-LONG    | \-YES     |                                                                                                                                                      |
 
 **Data Source:** Database
 
@@ -3565,16 +3578,16 @@ Get trades for a specific account and symbol.
 
 **Parameters:**
 
-| Name         | Type     | Mandatory | Description                                               |
-| ------------ | -------- | --------- | --------------------------------------------------------- |
-| \-symbol     | \-STRING | \-YES     |                                                           |
-| \-orderId    | \-LONG   | \-NO      | \-This can only be used in combination with `symbol`.     |
-| \-startTime  | \-LONG   | \-NO      |                                                           |
-| \-endTime    | \-LONG   | \-NO      |                                                           |
-| \-fromId     | \-LONG   | \-NO      | \-TradeId to fetch from. Default gets most recent trades. |
-| \-limit      | \-INT    | \-NO      | \-Default: 500; Maximum: 1000.                            |
-| \-recvWindow | \-LONG   | \-NO      | \-The value cannot be greater than `60000`                |
-| \-timestamp  | \-LONG   | \-YES     |                                                           |
+| Name         | Type      | Mandatory | Description                                                                                                                                          |
+| ------------ | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol     | \-STRING  | \-YES     |                                                                                                                                                      |
+| \-orderId    | \-LONG    | \-NO      | \-This can only be used in combination with `symbol`.                                                                                                |
+| \-startTime  | \-LONG    | \-NO      |                                                                                                                                                      |
+| \-endTime    | \-LONG    | \-NO      |                                                                                                                                                      |
+| \-fromId     | \-LONG    | \-NO      | \-TradeId to fetch from. Default gets most recent trades.                                                                                            |
+| \-limit      | \-INT     | \-NO      | \-Default: 500; Maximum: 1000.                                                                                                                       |
+| \-recvWindow | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp  | \-LONG    | \-YES     |                                                                                                                                                      |
 
 **Notes:**
 
@@ -3626,10 +3639,10 @@ Displays the user's unfilled order count for all intervals.
 
 **Parameters:**
 
-| Name         | Type   | Mandatory | Description                                |
-| ------------ | ------ | --------- | ------------------------------------------ |
-| \-recvWindow | \-LONG | \-NO      | \-The value cannot be greater than `60000` |
-| \-timestamp  | \-LONG | \-YES     |                                            |
+| Name         | Type      | Mandatory | Description                                                                                                                                          |
+| ------------ | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-recvWindow | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp  | \-LONG    | \-YES     |                                                                                                                                                      |
 
 **Data Source:** Memory
 
@@ -3671,15 +3684,15 @@ These are the combinations supported:
 
 **Parameters:**
 
-| Name                   | Type     | Mandatory | Description                                |
-| ---------------------- | -------- | --------- | ------------------------------------------ |
-| \-symbol               | \-STRING | \-YES     |                                            |
-| \-preventedMatchId     | \-LONG   | \-NO      |                                            |
-| \-orderId              | \-LONG   | \-NO      |                                            |
-| \-fromPreventedMatchId | \-LONG   | \-NO      |                                            |
-| \-limit                | \-INT    | \-NO      | \-Default: `500`; Maximum: `1000`          |
-| \-recvWindow           | \-LONG   | \-NO      | \-The value cannot be greater than `60000` |
-| \-timestamp            | \-LONG   | \-YES     |                                            |
+| Name                   | Type      | Mandatory | Description                                                                                                                                          |
+| ---------------------- | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol               | \-STRING  | \-YES     |                                                                                                                                                      |
+| \-preventedMatchId     | \-LONG    | \-NO      |                                                                                                                                                      |
+| \-orderId              | \-LONG    | \-NO      |                                                                                                                                                      |
+| \-fromPreventedMatchId | \-LONG    | \-NO      |                                                                                                                                                      |
+| \-limit                | \-INT     | \-NO      | \-Default: `500`; Maximum: `1000`                                                                                                                    |
+| \-recvWindow           | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp            | \-LONG    | \-YES     |                                                                                                                                                      |
 
 **Weight:**
 
@@ -3724,16 +3737,16 @@ Retrieves allocations resulting from SOR order placement.
 
 **Parameters:**
 
-| Name               | Type     | Mandatory | Description                                 |
-| ------------------ | -------- | --------- | ------------------------------------------- |
-| \-symbol           | \-STRING | \-Yes     |                                             |
-| \-startTime        | \-LONG   | \-No      |                                             |
-| \-endTime          | \-LONG   | \-No      |                                             |
-| \-fromAllocationId | \-INT    | \-No      |                                             |
-| \-limit            | \-INT    | \-No      | \-Default: 500; Maximum: 1000               |
-| \-orderId          | \-LONG   | \-No      |                                             |
-| \-recvWindow       | \-LONG   | \-No      | \-The value cannot be greater than `60000`. |
-| \-timestamp        | \-LONG   | \-No      |                                             |
+| Name               | Type      | Mandatory | Description                                                                                                                                          |
+| ------------------ | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol           | \-STRING  | \-Yes     |                                                                                                                                                      |
+| \-startTime        | \-LONG    | \-No      |                                                                                                                                                      |
+| \-endTime          | \-LONG    | \-No      |                                                                                                                                                      |
+| \-fromAllocationId | \-INT     | \-No      |                                                                                                                                                      |
+| \-limit            | \-INT     | \-No      | \-Default: 500; Maximum: 1000                                                                                                                        |
+| \-orderId          | \-LONG    | \-No      |                                                                                                                                                      |
+| \-recvWindow       | \-DECIMAL | \-No      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp        | \-LONG    | \-No      |                                                                                                                                                      |
 
 Supported parameter combinations:
 
@@ -3841,14 +3854,14 @@ Queries all amendments of a single order.
 
 **Parameters:**
 
-| Name              | Type     | Mandatory | Description                                 |
-| ----------------- | -------- | --------- | ------------------------------------------- |
-| \-symbol          | \-STRING | \-YES     |                                             |
-| \-orderId         | \-LONG   | \-YES     |                                             |
-| \-fromExecutionId | \-LONG   | \-NO      |                                             |
-| \-limit           | \-LONG   | \-NO      | \-Default:500; Maximum: 1000                |
-| \-recvWindow      | \-LONG   | \-NO      | \-The value cannot be greater than `60000`. |
-| \-timestamp       | \-LONG   | \-YES     |                                             |
+| Name              | Type      | Mandatory | Description                                                                                                                                          |
+| ----------------- | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol          | \-STRING  | \-YES     |                                                                                                                                                      |
+| \-orderId         | \-LONG    | \-YES     |                                                                                                                                                      |
+| \-fromExecutionId | \-LONG    | \-NO      |                                                                                                                                                      |
+| \-limit           | \-LONG    | \-NO      | \-Default:500; Maximum: 1000                                                                                                                         |
+| \-recvWindow      | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp       | \-LONG    | \-YES     |                                                                                                                                                      |
 
 **Data Source:**
 
