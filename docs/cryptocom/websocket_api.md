@@ -54,7 +54,6 @@ _Notes on Exchange Upgrade and API Versions_
 ## Change Logs
 
 - 2025-07-17
-
   - `private/fiat/fiat-deposit-info` was added
   - `private/fiat/fiat-deposit-history` was added
   - `private/fiat/fiat-withdraw-history` was added
@@ -64,7 +63,6 @@ _Notes on Exchange Upgrade and API Versions_
   - `private/fiat/fiat-transaction-limit` was added
 
 - 2025-07-04
-
   - `private/create-order` exec_inst was added `SMART_POST_ONLY`
   - `private/create-order-list (LIST)` exec_inst was added `SMART_POST_ONLY`
   - `private/get-open-orders` exec_inst was added `SMART_POST_ONLY`
@@ -72,51 +70,41 @@ _Notes on Exchange Upgrade and API Versions_
   - `private/get-order-history` exec_inst was added `SMART_POST_ONLY`
 
 - 2025-06-10
-
   - `private/amend-order` was added
   - `public/get-announcements` was added
 
 - 2025-05-29
-
   - transaction_time_ns field was added into `user.order.{instrument_name}`
     response
 
 - 2025-03-14
-
   - Removed deprecated attributes system_label in `private/get-accounts`
 
 - 2025-03-06
-
   - Removed deprecated `book.{instrument_name}` default book subscription
   - Removed deprecated 100ms internval from full snapshot
     `book.{instrument_name}.{depth}` book subscription
 
 - 2025-03-04
-
   - Remove section: `Unified Wallet and System Label`
 
 - 2025-01-27
-
   - `book.{instrument_name}.{depth}` - The following additional update
     frequencies are now supported:  
     Full snapshot subscription (`book_subscription_type=SNAPSHOT`) `500ms`  
     Delta subscription (`book_subscription_type=SNAPSHOT_AND_UPDATE`) `100ms`
 
 - 2024-12-11
-
   - `private/create-order` fee_instrument_name was added
 
 - 2024-10-02
-
   - `public/get-risk-parameters` was added
 
 - 2024-08-15
-
   - `private/get-fee-rate` was added
   - `private/get-instrument-fee-rate`was added
 
 - 2024-07-12
-
   - Staking API added:  
     `private/staking/stake`  
     `private/staking/unstake`  
@@ -131,12 +119,10 @@ _Notes on Exchange Upgrade and API Versions_
     `public/staking/get-conversion-rate`
 
 - 2024-06-27
-
   - `private/create-order` self-trade prevent (STP) was added
   - `private/create-order-list (LIST)` self-trade prevent (STP) was added
 
 - 2024-02-12
-
   - `public/get-trades`, `trade.{instrument_name}` subscription, clarification
     for the public trade side field
   - Side is the side of the taker order
@@ -144,7 +130,6 @@ _Notes on Exchange Upgrade and API Versions_
     number handling and re-subscription
 
 - 2024-01-04
-
   - Market data websocket subscription enhancements:
   - `book.{instrument_name}` - The `subscription` result value is now explicit  
     e.g. previous `"subscription": "book.BTC_USD"` -> new
@@ -167,18 +152,15 @@ _Notes on Exchange Upgrade and API Versions_
   - Clarified timestamp pagination parameters
 
 - 2023-12-18
-
   - Market Data wildcard ticker subscription removed. Users should use the
     instrument specific subscription.
 
 - 2023-12-11
-
   - Introduced Market Data subscription limiting. Refer to
     [Market Data Websocket Subscription Limits](#market-data-websocket-subscription-limits)
     for more details
 
 - 2023-10-31
-
   - `user.balance`,`private/user-balance` will be updated:  
     1\. Existing field total_margin_balance will represent new margin balance
     calculation without haircut.  
@@ -202,12 +184,10 @@ _Notes on Exchange Upgrade and API Versions_
     for details
 
 - 2023-08-11
-
   - `private/create-order-list (LIST)` for batch order creation added
   - `private/cancel-order-list (LIST)` for batch order cancel added
 
 - 2023-07-31
-
   - Market Data Websocket Subscriptions is effective:
   - `funding.{instrument_name}` - channel will return the fixed hourly rate that
     will settle at the end of the hour.
@@ -217,16 +197,13 @@ _Notes on Exchange Upgrade and API Versions_
     public/get-valuations
 
 - 2023-06-28
-
   - `private/get-deposit-history` added
   - `private/get-withdrawal-history` added
 
 - 2022-11-30
-
   - Support using `client_oid` to query in `private/get-order-detail` REST API
 
 - 2022-11-10
-
   - `USD_Stable_Coin` (aka USD Bundle), will be renamed as `USD`. Customer can
     test the change in UAT from 2022-11-10 before the change is effective in
     PROD. Target date for PROD is TBD.
@@ -236,7 +213,6 @@ _Notes on Exchange Upgrade and API Versions_
     `USD_Stable_Coin`.
 
 - 2022-10-31
-
   - Added `private/create-order-list`, `private/create-subaccount-transfer` REST
     APIs
   - Added `user.account_risk` and `user.position_balance` WebSocket
