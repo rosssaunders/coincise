@@ -30,11 +30,11 @@
   "extract:websocket-unified": "node src/websocket_unified_api.js"
   },
   "dependencies": {
-    "axios": "1.12.0",
-    "cheerio": "^1.0.0",
-    "dotenv": "16.5.0",
-    "jsdom": "26.1.0",
-    "turndown": "^7.1.2",
+    "axios": "1.12.2",
+    "cheerio": "^1.1.2",
+    "dotenv": "17.2.2",
+    "jsdom": "27.0.0",
+    "turndown": "^7.2.1",
     "turndown-plugin-gfm": "^1.0.2"
   },
   "devDependencies": {

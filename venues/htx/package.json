@@ -20,15 +20,15 @@
     "runall": "npm run privaterestspot && npm run publicrestspot && npm run privatewebsocketspot && npm run publicwebsocketspot && npm run fixspot && npm run privaterestusdtm && npm run publicrestusdtm && npm run privatewebsocketusdtm && npm run publicwebsocketusdtm && npm run privaterestcoinm && npm run publicrestcoinm"
   },
   "dependencies": {
-    "jsdom": "26.1.0",
-    "puppeteer": "^24.8.0",
-    "turndown": "^7.1.2",
+    "jsdom": "27.0.0",
+    "puppeteer": "^24.22.0",
+    "turndown": "^7.2.1",
     "turndown-plugin-gfm": "^1.0.2",
-    "prettier": "3.5.3"
+    "prettier": "3.6.2"
   },
   "devDependencies": {
     "nodemon": "3.1.10",
-    "prettier": "3.5.3",
-    "prettier-plugin-java": "2.6.7"
+    "prettier": "3.6.2",
+    "prettier-plugin-java": "2.7.5"
   }
 }

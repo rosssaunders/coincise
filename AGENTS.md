@@ -174,6 +174,73 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 - Ensure scripts handle errors gracefully and provide meaningful error messages
 - Test with various input configurations to ensure robustness
 
+## Documentation Standards
+
+All venue documentation must be structured into the following standardized format to ensure consistent organization and LLM-friendly chunking:
+
+### Required Documentation Files
+
+Each venue must have the following documentation structure:
+
+1. **Signing/Authentication** - `authentication.md`
+   - API key generation and management
+   - Request signing algorithms
+   - Authentication headers and parameters
+   - Signature verification examples
+
+2. **Rate Limiting** - `rate_limits.md`
+   - Rate limit specifications
+   - IP-based and API key-based limits
+   - Rate limit headers and responses
+   - Best practices for handling rate limits
+
+3. **Change Log** - `change_log.md`
+   - API version history
+   - Breaking changes and deprecations
+   - New feature announcements
+   - Migration guides
+
+4. **Public REST API** - Split into separate files by category:
+   - `public_rest_api_market_data.md`
+   - `public_rest_api_trading_pairs.md`
+   - `public_rest_api_order_book.md`
+   - `public_rest_api_trades.md`
+   - `public_rest_api_klines.md`
+   - `public_rest_api_server_time.md`
+   - Additional categories as needed per venue
+
+5. **Private REST API** - Split into separate files by category:
+   - `private_rest_api_account.md`
+   - `private_rest_api_orders.md`
+   - `private_rest_api_trades.md`
+   - `private_rest_api_wallet.md`
+   - `private_rest_api_deposits.md`
+   - `private_rest_api_withdrawals.md`
+   - Additional categories as needed per venue
+
+6. **Public WebSocket API** - Split into separate files by category:
+   - `public_websocket_api_market_data.md`
+   - `public_websocket_api_order_book.md`
+   - `public_websocket_api_trades.md`
+   - `public_websocket_api_klines.md`
+   - Additional categories as needed per venue
+
+7. **Private WebSocket API** - Split into separate files by category:
+   - `private_websocket_api_account.md`
+   - `private_websocket_api_orders.md`
+   - `private_websocket_api_trades.md`
+   - `private_websocket_api_positions.md`
+   - Additional categories as needed per venue
+
+### Documentation Guidelines
+
+- Each file should focus on a single functional area
+- Keep files under 1000 lines for optimal LLM processing
+- Include comprehensive examples for each endpoint/stream
+- Maintain consistent formatting across all venues
+- Use clear, descriptive filenames that indicate the content area
+- Include error codes and responses specific to each category
+
 ## Security Considerations
 
 - Never commit API keys or sensitive credentials to the repository

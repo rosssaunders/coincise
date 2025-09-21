@@ -9,11 +9,11 @@
     "extract:rate-limit": "node src/index.js --rate-limit"
   },
   "dependencies": {
-    "jsdom": "26.1.0",
+    "jsdom": "27.0.0",
     "node-fetch": "^3.3.2",
-    "prettier": "^3.5.3",
-    "puppeteer": "^24.8.0",
-    "turndown": "^7.1.2",
+    "prettier": "^3.6.2",
+    "puppeteer": "^24.22.0",
+    "turndown": "^7.2.1",
     "turndown-plugin-gfm": "^1.0.2",
     "widdershins": "^4.0.1"
   },

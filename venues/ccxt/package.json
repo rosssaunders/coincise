@@ -6,19 +6,19 @@
     "check:monitors": "node src/index.js"
   },
   "dependencies": {
-    "acorn": "^8.14.1",
-    "ccxt": "^4.2.15",
-    "jsdom": "^26.0.0",
+    "acorn": "^8.15.0",
+    "ccxt": "^4.5.5",
+    "jsdom": "^27.0.0",
     "json5": "^2.2.3",
-    "puppeteer": "24.8.2",
-    "turndown": "^7.1.2",
+    "puppeteer": "24.22.0",
+    "turndown": "^7.2.1",
     "turndown-plugin-gfm": "^1.0.2"
   },
   "type": "module",
   "devDependencies": {
-    "@eslint/js": "9.27.0",
-    "eslint": "9.27.0",
-    "globals": "16.1.0",
-    "prettier": "^3.5.3"
+    "@eslint/js": "9.36.0",
+    "eslint": "9.36.0",
+    "globals": "16.4.0",
+    "prettier": "^3.6.2"
   }
 }
