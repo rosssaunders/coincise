@@ -340,7 +340,7 @@ Responses200 Success.
 
 500 Internal server error.
 
-get/api/v1/assetshttps://api.backpack.exchange/api/v1/assets Response samples 200500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"symbol": "BTC","displayName": "string","coingeckoId": "string","tokens": [{"displayName": "string","blockchain": "Aptos","contractAddress": "string","depositEnabled": true,"minimumDeposit": "string","withdrawEnabled": true,"minimumWithdrawal": "string","maximumWithdrawal": "string","withdrawalFee": "string"}]}]Get collateral. Get collateral parameters for assets.
+get/api/v1/assetshttps://api.backpack.exchange/api/v1/assets Response samples 200500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"symbol": "BTC","displayName": "string","coingeckoId": "string","tokens": [{"displayName": "string","blockchain": "0G","contractAddress": "string","depositEnabled": true,"minimumDeposit": "string","withdrawEnabled": true,"minimumWithdrawal": "string","maximumWithdrawal": "string","withdrawalFee": "string"}]}]Get collateral. Get collateral parameters for assets.
 
 Responses200 Success.
 
@@ -578,7 +578,7 @@ X-TIMESTAMPrequiredinteger <int64>  Timestamp of the request in milliseconds
 
 X-WINDOWinteger <uint64>  Time the request is valid for in milliseconds (default 5000, maximum 60000)
 
-Request Body schema: application/json; charset=utf-8requiredsymbolstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON" "HBAR" "XLM" "ZORA" "WLFI" "BPEUR" "SWTCH" "LINEA" "XPL" "BARD" "FLOCK" "AVNT" "PENDLE" "AERO"  The asset symbol to convert dust for.
+Request Body schema: application/json; charset=utf-8requiredsymbolstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON" "HBAR" "XLM" "ZORA" "WLFI" "BPEUR" "SWTCH" "LINEA" "XPL" "BARD" "FLOCK" "AVNT" "PENDLE" "AERO" "ASTER" "GLXY" "0G" "2Z"  The asset symbol to convert dust for.
 
 If omitted, all dust balances will be converted.
 
@@ -720,7 +720,7 @@ Request Body schema: application/json; charset=utf-8requiredquantityrequiredstri
 
 siderequiredstring Enum: "Borrow" "Lend"  Side of the borrow lend.
 
-symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON" "HBAR" "XLM" "ZORA" "WLFI" "BPEUR" "SWTCH" "LINEA" "XPL" "BARD" "FLOCK" "AVNT" "PENDLE" "AERO"  The asset to repay.
+symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON" "HBAR" "XLM" "ZORA" "WLFI" "BPEUR" "SWTCH" "LINEA" "XPL" "BARD" "FLOCK" "AVNT" "PENDLE" "AERO" "ASTER" "GLXY" "0G" "2Z"  The asset to repay.
 
 Responses200 Success.
 
@@ -822,7 +822,7 @@ on the specified blockchain.
 
 ## Instruction: depositAddressQuery
 
-query Parametersblockchainrequiredstring (Blockchain)  Enum: "Aptos" "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "Hyperliquid" "Litecoin" "Optimism" "Polygon" "Sei" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain symbol to get a deposit address for.
+query Parametersblockchainrequiredstring (Blockchain)  Enum: "0G" "Aptos" "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "HyperEVM" "Hyperliquid" "Linea" "Litecoin" "Optimism" "Plasma" "Polygon" "Sei" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain symbol to get a deposit address for.
 
 ## header ParametersX-API-KEYstring API key
 
@@ -870,7 +870,7 @@ Responses200 Success.
 
 500 Internal Server Error.
 
-get/wapi/v1/capital/withdrawalshttps://api.backpack.exchange/wapi/v1/capital/withdrawals Response samples 200400401500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"id": 0,"blockchain": "Aptos","clientId": "string","identifier": "string","quantity": "string","fee": "string","fiatFee": "string","fiatState": "initialized","fiatSymbol": "AED","providerId": "string","symbol": "BTC","status": "confirmed","subaccountId": 0,"toAddress": "string","transactionHash": "string","createdAt": "string","isInternal": true,"bankName": "string","bankIdentifier": "string","accountIdentifier": "string","triggerAt": "string"}]Request withdrawal. Requests a withdrawal from the exchange.
+get/wapi/v1/capital/withdrawalshttps://api.backpack.exchange/wapi/v1/capital/withdrawals Response samples 200400401500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"id": 0,"blockchain": "0G","clientId": "string","identifier": "string","quantity": "string","fee": "string","fiatFee": "string","fiatState": "initialized","fiatSymbol": "AED","providerId": "string","symbol": "BTC","status": "confirmed","subaccountId": 0,"toAddress": "string","transactionHash": "string","createdAt": "string","isInternal": true,"bankName": "string","bankIdentifier": "string","accountIdentifier": "string","triggerAt": "string"}]Request withdrawal. Requests a withdrawal from the exchange.
 
 The twoFactorToken field is required if the withdrawal address is not
 
@@ -890,13 +890,13 @@ X-SIGNATURErequiredstring Signature of the request
 
 Request Body schema: application/json; charset=utf-8requiredaddressrequiredstring Address to withdraw to.
 
-blockchainrequiredstring Enum: "Aptos" "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "Hyperliquid" "Litecoin" "Optimism" "Polygon" "Sei" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain to withdraw on.
+blockchainrequiredstring Enum: "0G" "Aptos" "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "HyperEVM" "Hyperliquid" "Linea" "Litecoin" "Optimism" "Plasma" "Polygon" "Sei" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain to withdraw on.
 
 clientIdstring  <= 255 characters  Custom client id.
 
 quantityrequiredstring <decimal>  Quantity to withdraw.
 
-symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON" "HBAR" "XLM" "ZORA" "WLFI" "BPEUR" "SWTCH" "LINEA" "XPL" "BARD" "FLOCK" "AVNT" "PENDLE" "AERO"  Symbol of the asset to withdraw.
+symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON" "HBAR" "XLM" "ZORA" "WLFI" "BPEUR" "SWTCH" "LINEA" "XPL" "BARD" "FLOCK" "AVNT" "PENDLE" "AERO" "ASTER" "GLXY" "0G" "2Z"  Symbol of the asset to withdraw.
 
 twoFactorTokenstring Issued two factor token.
 
@@ -918,7 +918,7 @@ Responses200 Success.
 
 503 System under maintenance.
 
-post/wapi/v1/capital/withdrawalshttps://api.backpack.exchange/wapi/v1/capital/withdrawals Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"address": "string","blockchain": "Aptos","clientId": "string","quantity": "string","symbol": "BTC","twoFactorToken": "string","autoBorrow": true,"autoLendRedeem": true} Response samples 200400401403429500503Content typeapplication/json; charset=utf-8Copy{"id": 0,"blockchain": "Aptos","clientId": "string","identifier": "string","quantity": "string","fee": "string","fiatFee": "string","fiatState": "initialized","fiatSymbol": "AED","providerId": "string","symbol": "BTC","status": "confirmed","subaccountId": 0,"toAddress": "string","transactionHash": "string","createdAt": "string","isInternal": true,"bankName": "string","bankIdentifier": "string","accountIdentifier": "string","triggerAt": "string"}FuturesFutures data.
+post/wapi/v1/capital/withdrawalshttps://api.backpack.exchange/wapi/v1/capital/withdrawals Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"address": "string","blockchain": "0G","clientId": "string","quantity": "string","symbol": "BTC","twoFactorToken": "string","autoBorrow": true,"autoLendRedeem": true} Response samples 200400401403429500503Content typeapplication/json; charset=utf-8Copy{"id": 0,"blockchain": "0G","clientId": "string","identifier": "string","quantity": "string","fee": "string","fiatFee": "string","fiatState": "initialized","fiatSymbol": "AED","providerId": "string","symbol": "BTC","status": "confirmed","subaccountId": 0,"toAddress": "string","transactionHash": "string","createdAt": "string","isInternal": true,"bankName": "string","bankIdentifier": "string","accountIdentifier": "string","triggerAt": "string"}FuturesFutures data.
 
 Get open positions. Retrieves account position summary.
 
