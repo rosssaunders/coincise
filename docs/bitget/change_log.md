@@ -2,6 +2,95 @@
 
 ## Changelog
 
+### \[September 11, 2025\] Newly Added Interfaces Related to union Margin[​](#september-11-2025-newly-added-interfaces-related-to-union-margin "Direct link to september-11-2025-newly-added-interfaces-related-to-union-margin")
+
+Changes：
+
+1.  Newly Added — Query the USDT amount required for switching from union margin
+    to single-currency margin /api/v2/mix/account/switch-union-usdt
+2.  Newly Added — union Margin Conversion and Repayment API
+    /api/v2/mix/account/union-convert
+3.  Newly Added — union Margin Configuration Parameter API
+    /api/v2/mix/account/union-config
+4.  Newly Added — union Margin Currency Transfer Limit API
+    /api/v2/mix/account/transfer-limits
+5.  Newly Added — New union margin parameters in the WS Account Channel:
+    `unionTotalMargin` (Margin Amount), `unionAvailable` (Available Margin),
+    `unionMm` (Maintenance Margin), `assetMode` (Account Mode)
+6.  Newly Added — New `assetMode` (Account Mode) parameter in the WS Position
+    Channel
+
+### \[September 4, 2025\] Notice: Adjustment to the transferId field in the sub-main account transfer records retrieval function. The transferId will be updated to the one returned during sub-main account transfers.[​](#september-4-2025-notice-adjustment-to-the-transferid-field-in-the-sub-main-account-transfer-records-retrieval-function-the-transferid-will-be-updated-to-the-one-returned-during-sub-main-account-transfers "Direct link to september-4-2025-notice-adjustment-to-the-transferid-field-in-the-sub-main-account-transfer-records-retrieval-function-the-transferid-will-be-updated-to-the-one-returned-during-sub-main-account-transfers")
+
+Interface: /api/v2/spot/account/sub-main-trans-record  
+Changes：
+
+- Previous generation rule: for transferId: Auto-incrementing ID
+- New generation rule: for transferId: Snowflake algorithm
+
+### \[September 2, 2025\] Add reason field for Get Upgrade Status[​](#september-2-2025-add-reason-field-for-get-upgrade-status "Direct link to september-2-2025-add-reason-field-for-get-upgrade-status")
+
+Interface: /api/v2/spot/account/upgrade-status  
+Changes：
+
+- Add reason field for Get Upgrade Status
+
+### \[August 28, 2025\] Notice: Optimization of Push Frequency for Websocket Order Book Channel (books1) in Classic Account (v2)[​](#august-28-2025-notice-optimization-of-push-frequency-for-websocket-order-book-channel-books1--in-classic-account-v2 "Direct link to august-28-2025-notice-optimization-of-push-frequency-for-websocket-order-book-channel-books1--in-classic-account-v2")
+
+Websocket: Order Book Channel  
+Adjustment Content: The push frequency of the order book channel (books1) is
+optimized to 20ms. The symbols for this optimization are: BTCUSDT, ETHUSDT,
+XRPUSDT, SOLUSDT, SUIUSDT, DOGEUSDT, ADAUSDT, PEPEUSDT, LINKUSDT, HBARUSDT
+
+### \[August 11, 2025\] Agent commission API query supports fee deduction[​](#august-11-2025-agent-commission-api-query-supports-fee-deduction "Direct link to august-11-2025-agent-commission-api-query-supports-fee-deduction")
+
+Interface：/api/broker/v1/agent/commission-distribution;/api/broker/v1/agent/customer-commissions;  
+Changes：
+
+- Agent commission API query supports fee deduction details
+
+### \[August 11, 2025\] API Global rate Limit Adjustment[​](#august-11-2025-api-global-rate-limit-adjustment "Direct link to august-11-2025-api-global-rate-limit-adjustment")
+
+Changes：
+
+- There is an overall rate limit rule of 6,000 times per IP per minute. After
+  the rate limit is triggered, the recovery time is adjusted from 1 minute to 5
+  minutes.
+
+### \[August 6, 2025\] Add unrealizedPL field for sub-account futures asset info[​](#august-6-2025-add-unrealizedpl-field-for-sub-account-futures-asset-info "Direct link to august-6-2025-add-unrealizedpl-field-for-sub-account-futures-asset-info")
+
+Interface：/api/v2/broker/account/subaccount-future-assets  
+Changes：
+
+- Add unrealizedPL field for sub-account futures asset info
+
+### \[August 6, 2025\] Add marginCoin field for historical transaction details[​](#august-6-2025-add-margincoin-field-for-historical-transaction-details "Direct link to august-6-2025-add-margincoin-field-for-historical-transaction-details")
+
+Interface：/api/v2/mix/order/fill-history  
+Changes：
+
+- Add marginCoin field for historical transaction details
+
+### \[August 4, 2025\] Delisting of Futures Demo Pairs[​](#august-4-2025-delisting-of-futures-demo-pairs "Direct link to august-4-2025-delisting-of-futures-demo-pairs")
+
+Futures demo pairs have been delisted. Please use the
+[demo trading](/api-doc/common/demotrading/restapi) for simulated trading.
+
+### \[July 31, 2025\] Optimization of the futures order placement interface logic[​](#july-31-2025-optimization-of-the-futures-order-placement-interface-logic "Direct link to july-31-2025-optimization-of-the-futures-order-placement-interface-logic")
+
+Interface： /api/v2/mix/order/place-order
+
+Changes：
+
+- before: In hedge mode, if the existing quantity is equal to the limit close
+  order of the position, a newly added market close order will report an error
+  due to insufficient position and will not automatically cancel the limit order
+  that has occupied the position.
+- after: In hedge mode, if the existing quantity is equal to the limit close
+  order of the position, a newly added market close order will automatically
+  cancel the limit order that has occupied the position (consistent with
+  Web/APP).
+
 ### \[July 29, 2025\] Optimize ADL API ranking logic.[​](#july-29-2025-optimize-adl-api-ranking-logic "Direct link to july-29-2025-optimize-adl-api-ranking-logic")
 
 Interface：/api/v2/mix/position/adlRank Changes：
