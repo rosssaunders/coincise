@@ -468,7 +468,6 @@ Try [demo trading explorer](/demo-trading-explorer/v5/en)
   and taker orders that are being processed): 4,000
 - The maximum number of pending orders per trading symbol is 500, the limit of
   500 pending orders applies to the following **order types**:
-
   - Limit
   - Market
   - Post only
@@ -487,7 +486,6 @@ Try [demo trading explorer](/demo-trading-explorer/v5/en)
 
 - The maximum number of pending spread orders: 500 across all spreads
 - The maximum number of pending algo orders:
-
   - TP/SL order: 100 per instrument
   - Trigger order: 500
   - Trailing order: 50
@@ -495,7 +493,6 @@ Try [demo trading explorer](/demo-trading-explorer/v5/en)
   - TWAP order: 20
 
 - The maximum number of grid trading
-
   - Spot grid: 100
   - Contract grid: 100
 
