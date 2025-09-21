@@ -198,6 +198,12 @@ ${gitDiff}
 
 Generate a detailed PR summary with bullet points that explains the documentation changes clearly and professionally.`
 
+    console.error("About to call OpenAI API with:")
+    console.error("Model: gpt-5-mini")
+    console.error("Service tier: flex")
+    console.error("Prompt length:", prompt.length)
+    console.error("Max tokens: 700")
+
     const completion = await openai.chat.completions.create({
       model: "gpt-5-mini",
       messages: [
@@ -216,6 +222,10 @@ Generate a detailed PR summary with bullet points that explains the documentatio
       service_tier: "flex"
     })
 
+    console.error("OpenAI API call completed successfully")
+    console.error("Response choices count:", completion.choices?.length)
+    console.error("First choice:", completion.choices?.[0])
+
     const summary = completion.choices[0]?.message?.content?.trim()
 
     if (!summary) {
@@ -224,7 +234,13 @@ Generate a detailed PR summary with bullet points that explains the documentatio
 
     return summary
   } catch (error) {
-    console.error("Error generating AI PR summary:", error.message)
+    console.error("Error generating AI PR summary:")
+    console.error("Error message:", error.message)
+    console.error("Error code:", error.code)
+    console.error("Error status:", error.status)
+    console.error("Error type:", error.type)
+    console.error("Full error object:", JSON.stringify(error, null, 2))
+    console.error("Stack trace:", error.stack)
 
     // Fallback to basic summary if AI fails
     try {
