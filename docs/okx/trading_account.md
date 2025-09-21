@@ -2241,13 +2241,13 @@ the "Things to note" part for more details.
     one-way mode; `long`/`short` if it's in hedge mode. If in hedge mode, you
     need to specify `long`/`short` to decide whether to close current positions
     or open reverse positions. Otherwise, it will always open new positions.
-12. Open long: buy and open long (side: buy; posSide: long)
-13. Open short: sell and open short (side: sell; posSide: short)
-14. Close long: sell and close long (side: sell; posSide: long)
-15. Close short: buy and close short (side: buy; posSide: short)
-16. Historical records of move positions can be fetched from the _Get move
+    1.  Open long: buy and open long (side: buy; posSide: long)
+    2.  Open short: sell and open short (side: sell; posSide: short)
+    3.  Close long: sell and close long (side: sell; posSide: long)
+    4.  Close short: buy and close short (side: buy; posSide: short)
+12. Historical records of move positions can be fetched from the _Get move
     positions history_ endpoint but only for pending or successful requests.
-17. Move positions operation counting example.
+13. Move positions operation counting example.
 
 | Transfer done within the day | Account A count (total) | Account B count (total) | Account C count (total) | Account D count (total) |
 | ---------------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- |
