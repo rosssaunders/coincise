@@ -1060,7 +1060,6 @@ Notes:
 - Doing a `POST` on an account with an active `listenKey` will return the
   currently active `listenKey` and extend its validity for 60 minutes.
 - The connection method for Websocket：
-
   - Base Url: **wss://fstream.binance.com**
   - User Data Streams are accessed at **/ws/<listenKey>**
   - Example:
@@ -1367,7 +1366,6 @@ will be pushed.
 Event type is `ACCOUNT_UPDATE`.
 
 - When balance or position get updated, this event will be pushed.
-
   - `ACCOUNT_UPDATE` will be pushed only when update happens on user's account,
     including changes on balances, positions, or margin type.
   - Unfilled orders or cancelled orders will not make the event `ACCOUNT_UPDATE`
@@ -1377,7 +1375,6 @@ Event type is `ACCOUNT_UPDATE`.
 
 - When "FUNDING FEE" changes to the user's balance, the event will be pushed
   with the brief message:
-
   - When "FUNDING FEE" occurs in a **crossed position**, `ACCOUNT_UPDATE` will
     be pushed with only the balance `B`(including the "FUNDING FEE" asset only),
     without any position `P` message.
@@ -1388,7 +1385,6 @@ Event type is `ACCOUNT_UPDATE`.
 
 - The field "m" represents the reason type for the event and may shows the
   following possible types:
-
   - DEPOSIT
   - WITHDRAW
   - ORDER
@@ -1576,11 +1572,9 @@ When new order created, order status changed will push such event. event type is
 **Liquidation and ADL:**
 
 - If user gets liquidated due to insufficient margin balance:
-
   - `c` shows as "autoclose-XXX"，`X` shows as "NEW"
 
 - If user has enough margin balance but gets ADL:
-
   - `c` shows as “adl_autoclose”，`X` shows as “NEW”
 
 ### Event Name

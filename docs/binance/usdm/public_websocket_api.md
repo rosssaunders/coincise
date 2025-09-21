@@ -1324,7 +1324,6 @@ Best price/qty on the order book for a symbol or symbols.
 ## Websocket Market Streams
 
 - The connection method for Websocket is：
-
   - Base Url: **wss://fstream.binance.com**
   - Streams can be access either in a single raw stream or a combined stream
   - Raw streams are accessed at **/ws/<streamName>**

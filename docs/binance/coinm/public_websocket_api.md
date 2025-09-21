@@ -989,7 +989,6 @@ Codes are universal,but messages can vary.
 ## Websocket Market Streams
 
 - There are two connection methods for Websocket：
-
   - Base Url 1: **wss://dstream.binance.com**
   - Streams can be access either in a single raw stream or a combined stream
   - Raw streams are accessed at **/ws/<streamName>**
