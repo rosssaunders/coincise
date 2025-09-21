@@ -142,7 +142,6 @@ Frequency limit rules:
   [Get Contract Config](/api-doc/contract/market/Get-All-Symbols-Contracts)
 
 - Q4： Deposit Demo Coins in Demo Trading ?
-
   - A :First please enter the official site for demo trading
 
   On the right side under your Asset section, click the deposit buttun below
@@ -151,7 +150,6 @@ Frequency limit rules:
 
 - Q5： What are the differences of Trader's minimum open count from normal users
   ?
-
   - A :  
     Future Trader's minimum open count Please refer to the response param
     minOpenCount of this endpoint
@@ -162,19 +160,16 @@ Frequency limit rules:
     [Get Copytrade Configuration](/api-doc/copytrading/spot-copytrade/trader/Config-Query-Settings).
 
 - Q6： How to get future's maximum order numbers and position numbers ?
-
   - A : Please refer to the response params maxProductOrderNum maxPositionNum of
     this endpoint
     [Get Contract Config](/api-doc/contract/market/Get-All-Symbols-Contracts).
 
 - Q7： How to know that you are a trader ？
-
   - A : Please refer to the response param traderType of this endpoint GET
     /api/v2/spot/account/info.[Get Account Information](/api-doc/spot/account/Get-Account-Info)
 
 - Q8: I am using a third party server/codes and it is not working. How can I get
   help?
-
   - A: Unfortunately, we do not provide troubleshooting support for third party
     servers or tools, please contact the third party customer service for
     further assistance. In addition, providing your API keys/keys to any other
@@ -183,12 +178,10 @@ Frequency limit rules:
     related help.
 
 - Q9: If I forget the passphrase of API key, What should I do?
-
   - A: The passphrase of API Key can not be modified, please recreate your API
     Key.
 
 - Q10: What is the rate limit of API?
-
   - A: 1. The rate limit of each API endpoint is marked on the doc page;2. The
     rate limit of each API interface is calculated independently;3. The overall
     rate limit is 6000/IP/Min,After the rate limit is triggered, it takes 5
@@ -201,18 +194,15 @@ header.
 
 - Q12: Is there any currency with a different name in the spot market and the
   future market?
-
   - A: Yes, currently there are three currencies with this situation.
     1.Luna2(Future) — Luna(Spot) 2.ALT(Future) — $ALT(Spot) 3.MEME(Future) —
     MEMECOIN(Spot)
 
 - Q13: Which characters are supported for clientOid?
-
   - A: clientOid supports \[0-9\], \[a-z\],\[A-Z\] and \[-,+,\_,#\], length less
     than 50
 
 - Q14: Is there a fixed regular release data for backend?
-
   - A: Yes.The current fixed regular release date for backend is **every
     Tuesday, Wednesday, and Thursday from 14:00 PM to 17:00 PM (UTC +8)**(Except
     for emergency upgrade). During the regular release time window, the RestAPI
