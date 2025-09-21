@@ -2533,7 +2533,6 @@ Notes:
 - Only one of `symbol`, `symbols`, `permissions` parameters can be specified.
 - Without parameters, `exchangeInfo` displays all symbols with
   `["SPOT, "MARGIN", "LEVERAGED"]` permissions.
-
   - In order to list _all_ active symbols on the exchange, you need to
     explicitly request all permissions.
 
@@ -3019,7 +3018,6 @@ Notes:
   An order with an `icebergQty` must have `timeInForce` set to `GTC`.
 
 - Trigger order price rules for `STOP_LOSS`/`TAKE_PROFIT` orders:
-
   - `stopPrice` must be above market price: `STOP_LOSS BUY`, `TAKE_PROFIT SELL`
   - `stopPrice` must be below market price: `STOP_LOSS SELL`, `TAKE_PROFIT BUY`
 
