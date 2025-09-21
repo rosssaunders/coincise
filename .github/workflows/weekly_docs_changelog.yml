@@ -61,3 +61,4 @@ jobs:
             ## Included Commits
             $(awk -F '|' '{print "- ["$2"](https://github.com/${{ github.repository }}/commit/"$1") by "$3" on "$4}' docs_commits.txt)
           labels: documentation, automated-pr
+          reviewers: "@rosssaunders"

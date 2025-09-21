@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Create an issue in the ccxt repository when a PR with autodoc label is merged
+# Create an issue in the ccrxt repository when a PR with autodoc label is merged
 
 # Get PR information from environment variables
 PR_TITLE="$1"

@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  create-ccxt-issue:
+  create-ccrxt-issue:
     if:
       github.event.pull_request.merged == true &&
       contains(github.event.pull_request.labels.*.name, 'auto-docs-update')
@@ -20,10 +20,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Create Issue in CCXT Repository
+      - name: Create Issue in CCRXT Repository
         run: |
-          chmod +x .github/scripts/create-ccxt-issue.sh
-          .github/scripts/create-ccxt-issue.sh \
+          chmod +x .github/scripts/create-ccrxt-issue.sh
+          .github/scripts/create-ccrxt-issue.sh \
             "${{ github.event.pull_request.title }}" \
             "${{ github.event.pull_request.number }}" \
             "${{ github.event.pull_request.html_url }}" \

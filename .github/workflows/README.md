@@ -1,6 +1,6 @@
 # AutoDoc Issue Creator Workflow
 
-This workflow automatically creates issues in the ccxt repository when PRs with
+This workflow automatically creates issues in the ccrxt repository when PRs with
 the "auto-docs-update" label are merged.
 
 ## Trigger
@@ -15,7 +15,7 @@ The workflow is triggered when:
 
 1. **Collects PR Information**: Gathers all relevant information about the
    merged PR
-2. **Creates CCXT Issue**: Automatically creates an issue in the ccxt/ccxt
+2. **Creates CCRXT Issue**: Automatically creates an issue in the rosssaunders/ccrxt
    repository with:
    - PR title, number, and URL
    - Who merged it and when
@@ -25,7 +25,7 @@ The workflow is triggered when:
 ## Required Secrets
 
 - `PAT_GITHUB`: Personal Access Token with permissions to create issues in
-  ccxt/ccxt repository
+  rosssaunders/ccrxt repository
 
 ## Issue Format
 
@@ -76,5 +76,5 @@ the PR.
 ## Files
 
 - `.github/workflows/autodoc-issue-creator.yml`: Main workflow file
-- `.github/scripts/create-ccxt-issue.sh`: Shell script for creating issues in
-  ccxt repository
+- `.github/scripts/create-ccrxt-issue.sh`: Shell script for creating issues in
+  ccrxt repository
