@@ -72,6 +72,8 @@ Get a list of trades based on specified filters.
 | symbol           | query  | [MarketSymbol](#schemamarketsymbol)         | false    | none                                                                                         |
 | orderId          | query  | [OrderID](#schemaorderid)                   | false    | unique order ID                                                                              |
 | tradingAccountId | query  | [TradingAccountId](#schematradingaccountid) | true     | Id of the trading account                                                                    |
+| otcTradeId       | query  | [OtcTradeId](#schemaotctradeid)             | false    | unique Bullish otc trade id                                                                  |
+| clientOtcTradeId | query  | [ClientOtcTradeId](#schemaclientotctradeid) | false    | unique client otc trade id                                                                   |
 
 > Example responses
 
@@ -97,6 +99,9 @@ Get a list of trades based on specified filters.
       "isTaker",
       "tradeRebateAmount",
       "tradeRebateAssetSymbol",
+      "otcMatchId",
+      "otcTradeId",
+      "clientOtcTradeId",
       "createdAtTimestamp",
       "createdAtDatetime"
     ],
@@ -220,6 +225,36 @@ Get a list of trades based on specified filters.
           }
         ]
       },
+      "otcMatchId": {
+        "description": "unique OTC match ID.",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+            "example": "15"
+          }
+        ]
+      },
+      "otcTradeId": {
+        "description": "unique Bullish OTC trade ID",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+            "example": "200000000000000098"
+          }
+        ]
+      },
+      "clientOtcTradeId": {
+        "description": "unique Client OTC trade ID",
+        "allOf": [
+          {
+            "type": "string",
+            "description": "unique numeric (i64) identifier generated on the client side expressed as a string value",
+            "example": "20050900225"
+          }
+        ]
+      },
       "createdAtDatetime": {
         "description": "denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string",
         "allOf": [
@@ -276,6 +311,9 @@ Status Code **200**
 | » isTaker                | [Boolean](#schemaboolean)(true or false)              | true     | none         | denotes whether this is a taker's trade                                                                       |
 | » tradeRebateAmount      | [AssetValue](#schemaassetvalue)                       | true     | none         | amount of rebate that is credited to the user as part of the trade.                                           |
 | » tradeRebateAssetSymbol | [QuoteAssetSymbol](#schemaquoteassetsymbol)           | true     | none         | the symbol of the asset in which the rebate is paid                                                           |
+| » otcMatchId             | [OtcMatchId](#schemaotcmatchid)                       | true     | none         | unique OTC match ID.                                                                                          |
+| » otcTradeId             | [OtcTradeId](#schemaotctradeid)                       | true     | none         | unique Bullish OTC trade ID                                                                                   |
+| » clientOtcTradeId       | [ClientOtcTradeId](#schemaclientotctradeid)           | true     | none         | unique Client OTC trade ID                                                                                    |
 | » createdAtDatetime      | [DateTime](#schemadatetime)(date-time)                | true     | none         | denotes the time the trade was executed by the exchange, ISO 8601 with millisecond as string                  |
 | » createdAtTimestamp     | [TimeStampAsString](#schematimestampasstring)(string) | true     | none         | denotes the time the trade was executed by the exchange                                                       |
 
@@ -365,6 +403,9 @@ header
     "isTaker",
     "tradeRebateAmount",
     "tradeRebateAssetSymbol",
+    "otcMatchId",
+    "otcTradeId",
+    "clientOtcTradeId",
     "createdAtTimestamp",
     "createdAtDatetime"
   ],
@@ -485,6 +526,36 @@ header
           "type": "string",
           "description": "asset symbol as denoted in the world",
           "example": "USDC"
+        }
+      ]
+    },
+    "otcMatchId": {
+      "description": "unique OTC match ID.",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+          "example": "15"
+        }
+      ]
+    },
+    "otcTradeId": {
+      "description": "unique Bullish OTC trade ID",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique numeric (i64) identifier generated on Bullish side expressed as a string value",
+          "example": "200000000000000098"
+        }
+      ]
+    },
+    "clientOtcTradeId": {
+      "description": "unique Client OTC trade ID",
+      "allOf": [
+        {
+          "type": "string",
+          "description": "unique numeric (i64) identifier generated on the client side expressed as a string value",
+          "example": "20050900225"
         }
       ]
     },

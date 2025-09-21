@@ -4,8 +4,24 @@
 
 ## 2025 Changes
 
-- new Websocket API -
-  [Unified tick for multiple markets](#overview--anonymous-unified-tick-websocket-unauthenticated)
+- August
+  - new REST API - [Get Option Ladder](#tag--option-ladder)
+  - updated REST API - [Get Markets](#get-/v1/markets) NEW fields `strikePrice`
+  - updated REST API - [Get Market Tick](#get-/v1/markets/-symbol-/tick) NEW
+    fields `bidIVPercentage`, `askIVPercentage` and `greeks`
+  - new REST API - [OTC](#tag--OTC)
+  - new fields at [Get Trades](#get-/v1/trades) - `otcMatchId` and `otcTradeId`
+  - new REST API -
+    [Market Maker Protection](<#tag--market-maker-protection(MMP)>)
+  - new WebSocket API - `mmpRequest` topic for
+    [Private Data WebSocket](#overview--private-data-websocket-authenticated)
+  - new WebSocket API - `mmpTrigger` topic for
+    [Private Data WebSocket](#overview--private-data-websocket-authenticated)
+  - new REST API -
+    [Get Market Maker Protection Configuration by Trading Account Id](#get-/v2/mmp-configuration)
+- July
+  - new Websocket API -
+    [Unified tick for multiple markets](#overview--anonymous-unified-tick-websocket-unauthenticated)
 - June
   - new REST API - [Get Historical Trades](#get-/v1/history/trades)
   - new REST API - [Get Historical Orders](#get-/v2/history/orders)

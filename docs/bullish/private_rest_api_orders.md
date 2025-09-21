@@ -277,7 +277,7 @@ endpoint is subjected to rate limiting.
         "allOf": [
           {
             "type": "string",
-            "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+            "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MKT\"` and `\"STOP_LIMIT\"` are not applicable for Options",
             "example": "LMT"
           }
         ],
@@ -424,6 +424,9 @@ const headers = {
     "true"
   ],
   "default": "false"
+},
+  'BX-REFERRER':{
+  "type": "string"
 }
 };
 
@@ -465,6 +468,9 @@ headers = {
     "true"
   ],
   "default": "false"
+},
+  'BX-REFERRER': {
+  "type": "string"
 }
 }
 
@@ -517,6 +523,7 @@ accepted.
 | BX-TIMESTAMP            | header | string                                              | true     | timestamp is the number of milliseconds since EPOCH                                                                                                                 |
 | BX-NONCE                | header | string                                              | true     | nonce is a client side incremented unsigned 64 bit integer                                                                                                          |
 | BX-NONCE-WINDOW-ENABLED | header | string                                              | false    | string representation of a boolean value, [enables out-of-order order requests to be processed](#overview--how-to-enable-out-of-order-processing-of-order-requests) |
+| BX-REFERRER             | header | string                                              | false    | A numeric referrer id if applicable                                                                                                                                 |
 | body                    | body   | [CreateOrderCommandV3](#schemacreateordercommandv3) | true     | new order request body                                                                                                                                              |
 
 #### Detailed descriptions
@@ -816,7 +823,7 @@ subjected to rate limiting.
       "allOf": [
         {
           "type": "string",
-          "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`.",
+          "description": "order type can have the following string values `\"LMT\"`, `\"MKT\"`, `\"STOP_LIMIT\"`, `\"POST_ONLY\"`. `\"MKT\"` and `\"STOP_LIMIT\"` are not applicable for Options",
           "example": "LMT"
         }
       ],

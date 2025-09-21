@@ -68,13 +68,34 @@ Heartbeat Subscription Message Sample:
 
 ### Multi-Orderbook Response
 
-- L1 Update Response | Name | Type | Description |
-  |:---------------|:-------|:-----------------------------------------------------------------
-  | | sequenceNumber | String | incrementing, unique, unsigned integer that
-  identifies a state of the L1-orderbook | | symbol | String | market symbol | |
-  timestamp | String | denotes the time the update was created | | bid | Array |
-  nested array containing price and quantity of highest bid | | ask | Array |
-  nested array containing price and quantity of lowest ask |
+- L1 Snapshot and Update Response | Name | Type | Description |
+  |:---------------|:-------|:--------------------------------------------------------------------------------------------------------------|
+  | type | String | "snapshot" or "update" - the first message after the
+  subscription is always a snapshot of the L1-orderbook | | sequenceNumber |
+  String | incrementing, unique, unsigned integer that identifies a state of the
+  L1-orderbook | | symbol | String | market symbol | | timestamp | String |
+  denotes the time the update was created | | bid | Array | nested array
+  containing price and quantity of highest bid | | ask | Array | nested array
+  containing price and quantity of lowest ask |
+
+On subscription, the snapshot is received immediately.
+
+```json
+{
+  "type": "snapshot",
+  "dataType": "V1TALevel1",
+  "data": {
+    "symbol": "BTCUSD",
+    "bid": ["5190.5000", "61.94995262"],
+    "ask": ["5191.6000", "96.79626782"],
+    "sequenceNumber": "7",
+    "datetime": "2020-06-29T06:28:55.000Z",
+    "timestamp": "1593412135000"
+  }
+}
+```
+
+Updates follow as and when the orderbook changes.
 
 ```json
 {
@@ -91,7 +112,7 @@ Heartbeat Subscription Message Sample:
 }
 ```
 
-- l2Snapshot response
+- L2 Snapshot Response
 
 | Name                                                                                           | Type   | Description                                                                                                     |
 | ---------------------------------------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------- |
@@ -211,8 +232,10 @@ price | String | price, see
 [asset value](#overview--price-and-quantity-precision) format | | quantity |
 String | quantity, see [asset value](#overview--price-and-quantity-precision)
 format | | side | String | order side | | isTaker | Boolean | denotes whether
-this is a taker's trade | | createdAtTimestamp | String | denotes the time the
-order was ACK'd by the exchange | | createdAtDatetime | String | denotes the
+this is a taker's trade | | otcMatchId | String | unique OTC match id | |
+otcTradeId | String | unique Bullish OTC trade id | | clientOtcTradeId | String
+| unique client OTC trade id | | createdAtTimestamp | String | denotes the time
+the order was ACK'd by the exchange | | createdAtDatetime | String | denotes the
 time the order was ACK'd by the exchange, ISO 8601 with millisecond as string |
 | publishedAtTimestamp | String | denotes the time the update was broadcasted to
 connected websockets |
@@ -239,7 +262,10 @@ Sample:
         "publishedAtTimestamp": "1721879162124",
         "side": "SELL",
         "createdAtDatetime": "2024-07-25T03:46:00.353Z",
-        "symbol": "BTCUSDC"
+        "symbol": "BTCUSDC",
+        "otcMatchId": "1",
+        "otcTradeId": "200069000000063765",
+        "clientOtcTradeId": "300069000000063765"
       },
       {
         "tradeId": "100069000000063764",
@@ -250,7 +276,10 @@ Sample:
         "publishedAtTimestamp": "1721879162124",
         "side": "SELL",
         "createdAtDatetime": "2024-07-25T03:45:55.351Z",
-        "symbol": "BTCUSDC"
+        "symbol": "BTCUSDC",
+        "otcMatchId": "2",
+        "otcTradeId": "200069000000063764",
+        "clientOtcTradeId": "300069000000063764"
       },
       ...
       {
@@ -305,7 +334,10 @@ Sample:
         "publishedAtTimestamp": "1722408780790",
         "side": "SELL",
         "createdAtDatetime": "2024-07-31T06:53:00.738Z",
-        "symbol": "BTCUSDC"
+        "symbol": "BTCUSDC",
+        "otcMatchId": "10",
+        "otcTradeId": "200028000018887837",
+        "clientOtcTradeId": "300028000018887837"
       },
       ...
       {
@@ -317,7 +349,10 @@ Sample:
         "publishedAtTimestamp": "1722408780790",
         "side": "BUY",
         "createdAtDatetime": "2024-07-31T06:53:00.786Z",
-        "symbol": "BTCUSDC"
+        "symbol": "BTCUSDC",
+        "otcMatchId": "11",
+        "otcTradeId": "200028000018887992",
+        "clientOtcTradeId": "300028000018887992"
       }
     ],
     "createdAtTimestamp": "1722408780786",
@@ -336,7 +371,8 @@ Sample:
 This allows simultaneous tick subscriptions to multiple markets.
 
 Upon subscribing to a market, the client will first receive a snapshot of latest
-ticker, followed by updates.
+ticker, followed by updates. See the data model:
+[Get Market Tick](#get-/v1/markets/-symbol-/tick)
 
 ### Unified Anonymous Tick Subscription
 
