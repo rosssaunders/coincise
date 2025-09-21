@@ -9,7 +9,7 @@
     "binance-spot-api-docs/rest-api/general-information-on-endpoints",
     "binance-spot-api-docs/rest-api/limits",
     "binance-spot-api-docs/rest-api/data-sources",
-    "binance-spot-api-docs/rest-api/endpoint-security-type",
+    "binance-spot-api-docs/rest-api/request-security",
     "binance-spot-api-docs/rest-api/general-endpoints",
     "binance-spot-api-docs/rest-api/trading-endpoints",
     "binance-spot-api-docs/rest-api/account-endpoints"
