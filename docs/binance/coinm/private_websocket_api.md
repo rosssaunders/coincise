@@ -999,7 +999,6 @@ Codes are universal,but messages can vary.
 - Doing a `POST` on an account with an active `listenKey` will return the
   currently active `listenKey` and extend its validity for 60 minutes.
 - There are two connection methods for Websocket：
-
   - Base Url 1: **wss://dstream.binance.com**
   - User Data Streams are accessed at **/ws/<listenKey>**
   - Example:
@@ -1357,7 +1356,6 @@ will be pushed.
 Event type is `ACCOUNT_UPDATE`.
 
 - When balance or position get updated, this event will be pushed.
-
   - `ACCOUNT_UPDATE` will be pushed only when update happens on user's account,
     including changes on balances, positions, or margin type.
   - Unfilled orders or cancelled orders will not make the event `ACCOUNT_UPDATE`
@@ -1366,7 +1364,6 @@ Event type is `ACCOUNT_UPDATE`.
 
 - The field "m" represents the reason type for the event and may shows the
   following possible types:
-
   - DEPOSIT
   - WITHDRAW
   - ORDER
@@ -1508,11 +1505,9 @@ event type is `ORDER_TRADE_UPDATE`.
 **Liquidation and ADL:**
 
 - If user gets liquidated due to insufficient margin balance:
-
   - `c` shows as "autoclose-XXX"，`X` shows as "NEW"
 
 - If user has enough margin balance but gets ADL:
-
   - `c` shows as “adl_autoclose”，`X` shows as “NEW”
 
 ### Event Name
