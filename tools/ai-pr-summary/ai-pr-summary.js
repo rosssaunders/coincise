@@ -77,8 +77,7 @@ Generate only the Twitter/X update text (no additional formatting or sections).`
           content: prompt
         }
       ],
-      max_tokens: 150,
-      temperature: 0.5,
+      max_completion_tokens: 150,
       service_tier: "flex"
     })
 
@@ -202,7 +201,7 @@ Generate a detailed PR summary with bullet points that explains the documentatio
     console.error("Model: gpt-5-mini")
     console.error("Service tier: flex")
     console.error("Prompt length:", prompt.length)
-    console.error("Max tokens: 700")
+    console.error("Max completion tokens: 3000")
 
     const completion = await openai.chat.completions.create({
       model: "gpt-5-mini",
@@ -217,8 +216,7 @@ Generate a detailed PR summary with bullet points that explains the documentatio
           content: prompt
         }
       ],
-      max_tokens: 700,
-      temperature: 0.3,
+      max_completion_tokens: 3000,
       service_tier: "flex"
     })
 
