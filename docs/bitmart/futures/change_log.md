@@ -1,11 +1,21 @@
 # Change Log
 
+#### 2025-08-11
+
+###### REST API
+
+*   \[Update\] `/contract/private/order-history` Get Order History
+    *   Feat：Add new request field **order\_id**,**client\_order\_id**,support order\_id and client\_order\_id queries
+
+* * *
+
 #### 2025-07-04
 
 ###### REST API
 
 *   \[Update\] `/contract/private/order-history` Get Order History
     *   Feat：Response field **type** add new value **planorder**
+    *   Feat：Add new response field： **trigger\_price**,**execution\_price**,returned at plan order only
 *   \[Update\] `/contract/private/position-v2` Get Current Position V2
     *   Feat：Add new response field： **position\_amount**
 
