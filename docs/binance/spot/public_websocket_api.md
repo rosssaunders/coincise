@@ -1983,18 +1983,13 @@ Successful response indicating that you have placed 12 orders in 10 seconds, and
 
 ## Request security
 
-- Every method has a security type which determines how to call it.
-  - Security type is stated next to the method name. For example,
-    [Place new order (TRADE)](/docs/binance-spot-api-docs/websocket-api/request-security#place-new-order-trade).
-  - If no security type is stated, the security type is NONE.
-
-| Security type   | API key    | Signature  | Description                                                                  |
-| --------------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
-| \-`NONE`        |            |            | \-Public market data                                                         |
-| \-`TRADE`       | \-required | \-required | \-Trading on the exchange, placing and canceling orders                      |
-| \-`USER_DATA`   | \-required | \-required | \-Private account information, such as order status and your trading history |
-| \-`USER_STREAM` | \-required |            | \-Managing User Data Stream subscriptions                                    |
-
+- Each method has a security type indicating required API key permissions, shown
+  next to the method name (e.g.,
+  [Place new order (TRADE)](/docs/binance-spot-api-docs/websocket-api/request-security#place-new-order-trade)).
+- If unspecified, the security type is `NONE`.
+- Except for `NONE`, all methods with a security type are considered `SIGNED`
+  requests (i.e. including a `signature`), except for
+  [listenKey management](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-requests).
 - Secure methods require a valid API key to be specified and authenticated.
   - API keys can be created on the
     [API Management](https://www.binance.com/en/support/faq/360002502072) page
@@ -2009,9 +2004,15 @@ Successful response indicating that you have placed 12 orders in 10 seconds, and
     order status.
   - By default, an API key cannot `TRADE`. You need to enable trading in API
     Management first.
-- `TRADE` and `USER_DATA` requests are also known as `SIGNED` requests.
 
-#### SIGNED (TRADE and USER_DATA) request security
+| Security type   | Description                                                                  |
+| --------------- | ---------------------------------------------------------------------------- |
+| \-`NONE`        | \-Public market data                                                         |
+| \-`TRADE`       | \-Trading on the exchange, placing and canceling orders                      |
+| \-`USER_DATA`   | \-Private account information, such as order status and your trading history |
+| \-`USER_STREAM` | \-Managing User Data Stream subscriptions                                    |
+
+#### SIGNED request security
 
 - `SIGNED` requests require an additional parameter: `signature`, authorizing
   the request.
@@ -2029,6 +2030,8 @@ Successful response indicating that you have placed 12 orders in 10 seconds, and
   [General API Information](/docs/binance-spot-api-docs/websocket-api/request-security#general-api-information))
 - An additional optional parameter, `recvWindow`, specifies for how long the
   request stays valid and may only be specified in milliseconds.
+  - `recvWindow` supports up to three decimal places of precision (e.g.,
+    6000.346) so that microseconds may be specified.
   - If `recvWindow` is not sent, **it defaults to 5000 milliseconds**.
   - Maximum `recvWindow` is 60000 milliseconds.
 - Request processing logic is as follows:
