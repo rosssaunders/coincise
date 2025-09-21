@@ -15,7 +15,8 @@ export async function generateTwitterSummary(
 ) {
   try {
     const openai = new OpenAI({
-      apiKey: apiKey || process.env.OPENAI_API_KEY
+      apiKey: apiKey || process.env.OPENAI_API_KEY,
+      timeout: 15 * 60 * 1000 // 15 minutes timeout for Flex processing
     })
 
     // Get git diff for changes (use committed changes instead of staged)
@@ -64,7 +65,7 @@ ${gitDiff}
 Generate only the Twitter/X update text (no additional formatting or sections).`
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4.1",
+      model: "gpt-5-mini",
       messages: [
         {
           role: "system",
@@ -77,7 +78,8 @@ Generate only the Twitter/X update text (no additional formatting or sections).`
         }
       ],
       max_tokens: 150,
-      temperature: 0.5
+      temperature: 0.5,
+      service_tier: "flex"
     })
 
     const twitterSummary = completion.choices[0]?.message?.content?.trim()
@@ -149,7 +151,8 @@ export async function generatePrSummary(
 ) {
   try {
     const openai = new OpenAI({
-      apiKey: apiKey || process.env.OPENAI_API_KEY
+      apiKey: apiKey || process.env.OPENAI_API_KEY,
+      timeout: 15 * 60 * 1000 // 15 minutes timeout for Flex processing
     })
 
     // Get git diff for staged changes
@@ -196,7 +199,7 @@ ${gitDiff}
 Generate a detailed PR summary with bullet points that explains the documentation changes clearly and professionally.`
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4.1",
+      model: "gpt-5-mini",
       messages: [
         {
           role: "system",
@@ -209,7 +212,8 @@ Generate a detailed PR summary with bullet points that explains the documentatio
         }
       ],
       max_tokens: 700,
-      temperature: 0.3
+      temperature: 0.3,
+      service_tier: "flex"
     })
 
     const summary = completion.choices[0]?.message?.content?.trim()
