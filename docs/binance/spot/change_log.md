@@ -2,7 +2,63 @@
 
 ## CHANGELOG for Binance's API
 
-**Last Updated: 2025-08-19**
+**Last Updated: 2025-09-18**
+
+#### 2025-09-18
+
+- Updated documentation for `recvWindow` to reflect microsecond support
+  announced on [2025-08-12](/docs/binance-spot-api-docs#2025-08-12).
+  - REST API:
+    [Timing Security](/docs/binance-spot-api-docs/rest-api/request-security#timingsecurity)
+  - WebSocket API:
+    [Timing Security](/docs/binance-spot-api-docs/websocket-api/request-security#timingsecurity)
+
+---
+
+#### 2025-09-12
+
+- The
+  [QuickFix schema for FIX Order Entry](https://github.com/binance/binance-spot-api-docs/blob/master/fix/schemas/spot-fix-oe.xml)
+  has been updated to support Pegged Orders.
+- Updated FIX API Documentation for `RecvWindow` in
+  - [Message Components](/docs/binance-spot-api-docs/fix-api#header)
+  - [Timing Security](/docs/binance-spot-api-docs/fix-api#timing-security)
+
+---
+
+#### 2025-08-28
+
+- Updated SBE FAQ section
+  [regarding legacy support](/docs/binance-spot-api-docs/faqs/sbe_faq#regarding-legacy-support)
+  to include more details on schema compatibility and explain `NonRepresentable`
+  and `NonRepresentableMessage`.
+
+---
+
+#### 2025-08-26
+
+- Updated "Request Security" documentation for
+  [REST API](/docs/binance-spot-api-docs/rest-api/request-security) and
+  [WebSocket API](/docs/binance-spot-api-docs/websocket-api/request-security)
+  with no functional changes.
+
+---
+
+#### 2025-08-25
+
+- **SBE: schema 3:1
+  ([spot_3_1.xml](https://github.com/binance/binance-spot-api-docs/blob/master/sbe/schemas/spot_3_1.xml))**
+  will be updated on **2025-08-25 at 05:00 UTC**
+  - The following fields have been renamed because the
+    [SbeTool](/docs/binance-spot-api-docs/faqs/sbe_faq#generate-sbe-decoders)
+    code generator has been found to generate Java code that does not compile.
+    - Although only users impacted by this issue need to update the schema, we
+      advise all users to upgrade to the latest version to maintain consistency.
+    - Message `MaxAssetFilter`
+      - field `limitExponent` renamed to `qtyExponent`
+      - field `limit` renamed to `maxQty`
+
+---
 
 #### 2025-08-19
 
@@ -252,7 +308,7 @@ REST and WebSocket API:
       and Unfilled Order Count (order placement endpoints of all APIs).
   - The documentation for Timing security has been updated to reflect the
     additional check.
-    - [REST API](/docs/binance-spot-api-docs/rest-api/endpoint-security-type#timing-security)
+    - [REST API](/docs/binance-spot-api-docs/rest-api/request-security#timing-security)
     - [WebSocket API](/docs/binance-spot-api-docs/websocket-api/request-security#timing-security)
     - [FIX API](/docs/binance-spot-api-docs/fix-api#timing-security)
 - Fixed a bug in FIX Market Data message InstrumentList `<y>`. Previously, the
