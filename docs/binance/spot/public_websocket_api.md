@@ -2543,7 +2543,6 @@ Notes:
 - Only one of `symbol`, `symbols`, `permissions` parameters can be specified.
 - Without parameters, `exchangeInfo` displays all symbols with
   `["SPOT, "MARGIN", "LEVERAGED"]` permissions.
-
   - In order to list _all_ active symbols on the exchange, you need to
     explicitly request all permissions.
 

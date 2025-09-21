@@ -1489,7 +1489,6 @@ timeinForce=IOC or FOK on a trading phase that does not support it. | -Limit
 orders require GTC for this phase. |
 
 - Fixed error message for querying archived orders:
-
   - Previously, if an archived order (i.e. order with status `CANCELED` or
     `EXPIRED` where `executedQty` == 0 that occurred more than 90 days in the
     past.) is queried, the error message would be:
@@ -1547,7 +1546,6 @@ changes:
 REST API
 
 - Changes to `DELETE /api/v3/order` and `POST /api/v3/order/cancelReplace`:
-
   - A new optional parameter `cancelRestrictions` that determines whether the
     cancel will succeed if the order status is `NEW` or `PARTIALLY_FILLED`.
   - If the order cancellation fails due to `cancelRestrictions`, the error will
@@ -1563,7 +1561,6 @@ REST API
 WEBSOCKET API
 
 - Changes to `order.cancel` and `order.cancelReplace`:
-
   - A new optional parameter `cancelRestrictions` that determines whether the
     cancel will succeed if the order status is `NEW` or `PARTIALLY_FILLED`.
   - If the order cancellation fails due to `cancelRestrictions`, the error will
@@ -1840,13 +1837,11 @@ REST API
   - The following combinations of parameters were previously supported but no
     longer accepted, as these combinations were only taking `fromId` into
     consideration, ignoring `startTime` and `endTime`:
-
     - `symbol` + `fromId` + `startTime`
     - `symbol` + `fromId` + `endTime`
     - `symbol` + `fromId` + `startTime` + `endTime`
 
   - Thus, these are the supported combinations of parameters:
-
     - `symbol`
     - `symbol` + `orderId`
     - `symbol` + `startTime`
@@ -2008,7 +2003,6 @@ Changes to `GET /api/v3/ticker`
 
 - Weight has been reduced from 5 to 2 per symbol, regardless of `windowSize`.
 - The max number of symbols that can be processed in a request is 100.
-
   - If the number of `symbols` sent is more than 100, the error will be as
     follows:
 
@@ -2061,7 +2055,6 @@ SPOT API
 #### 2022-05-23
 
 - Changes to Order Book Depth Levels
-
   - Quantities in the Depth levels were returning negative values in situations
     where they were exceeding the max value, resulting in an overflow.
   - Going forward depth levels will not overflow, but will be capped at the max
@@ -2073,7 +2066,6 @@ SPOT API
     price level is required for the changes to be visible.
 
 - What does this affect?
-
   - SPOT API
     - `GET /api/v3/depth`
   - Websocket Streams
@@ -2083,7 +2075,6 @@ SPOT API
     - `<symbol>@depth<levels>@100ms`
 
 - Updates to `MAX_POSITION`
-
   - If an order's `quantity` can cause the position to overflow, this will now
     fail the `MAX_POSITION` filter.
 
@@ -2371,7 +2362,6 @@ WEB SOCKET STREAM
   - This filter defines the allowed maximum position an account can have on the
     base asset of a symbol. An account's position defined as the sum of the
     account's:
-
     - free balance of the base asset
     - locked balance of the base asset
     - sum of the qty of all open BUY orders
@@ -2413,7 +2403,6 @@ REST API
 - All order query endpoints will return a new field `origQuoteOrderQty` in the
   JSON payload. (e.g. GET api/v3/allOrders)
 - Updated error messages for -1128
-
   - Sending an `OCO` with a `stopLimitPrice` but without a
     `stopLimitTimeInForce` will return the error:
 
@@ -2454,13 +2443,11 @@ api/v1/ticker/allBookTickers | -GET api/v3/ticker/bookTicker |
 USER DATA STREAM
 
 - Changes to`executionReport` event
-
   - If the C field is empty, it will now properly return `null`, instead of
     `"null"`.
   - New field Q which represents the `quoteOrderQty`.
 
 - `balanceUpdate` event type added
-
   - This event occurs when funds are deposited or withdrawn from your account.
 
 WEB SOCKET STREAMS
@@ -2503,7 +2490,6 @@ WEB SOCKET STREAMS
 - In Q4 2017, the following endpoints were deprecated and removed from the API
   documentation. They have been permanently removed from the API as of this
   version. We apologize for the omission from the original changelog:
-
   - GET api/v1/order
   - GET api/v1/openOrders
   - POST api/v1/order
@@ -2524,14 +2510,11 @@ WEB SOCKET STREAMS
 REST API
 
 - New order type: OCO ("One Cancels the Other")
-
   - An OCO has 2 orders: (also known as legs in financial terms)
-
     - `STOP_LOSS` or `STOP_LOSS_LIMIT` leg
     - `LIMIT_MAKER` leg
 
   - Price Restrictions:
-
     - `SELL Orders` : Limit Price > Last Price > Stop Price
     - `BUY Orders` : Limit Price < Last Price < Stop Price
     - As stated, the prices must "straddle" the last traded price on the symbol.
@@ -2542,12 +2525,10 @@ REST API
         greater than 10.
 
   - Quantity Restrictions:
-
     - Both legs must have the **same quantity**.
     - `ICEBERG` quantities however, do not have to be the same.
 
   - Execution Order:
-
     - If the `LIMIT_MAKER` is touched, the limit maker leg will be executed
       first BEFORE canceling the Stop Loss Leg.
     - if the Market Price moves such that the `STOP_LOSS` or `STOP_LOSS_LIMIT`
@@ -2555,13 +2536,11 @@ REST API
       `STOP_LOSS` Leg.
 
   - Canceling an OCO
-
     - Canceling either order leg will cancel the entire OCO.
     - The entire OCO can be canceled via the `orderListId` or the
       `listClientOrderId`.
 
   - New Enums for OCO:
-
     1.  `ListStatusType`
         - `RESPONSE` - used when ListStatus is responding to a failed action.
           (either order list placement or cancellation)
@@ -2580,14 +2559,12 @@ REST API
         - `OCO` - specifies the type of order list.
 
   - New Endpoints:
-
     - POST api/v3/order/oco
     - DELETE api/v3/orderList
     - GET api/v3/orderList
 
 - `recvWindow` cannot exceed 60000.
 - New `intervalLetter` values for headers:
-
   - SECOND => S
   - MINUTE => M
   - HOUR => H
@@ -2603,7 +2580,6 @@ REST API
   any valid order placement and tracks your current order count for the
   interval; rejected/unsuccessful orders are not guaranteed to have
   `X-MBX-ORDER-COUNT-**` headers in the response.
-
   - Eg. `X-MBX-ORDER-COUNT-1S` for "orders per 1 second" and
     `X-MBX-ORDER-COUNT-1D` for orders per "one day"
 
