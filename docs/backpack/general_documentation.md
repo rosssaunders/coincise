@@ -1,4 +1,4 @@
-IntroductionAuthenticationSigning requestsChangelog2025-06-082025-04-222025-04-082025-03-262025-03-192025-02-282025-02-112025-02-072025-02-032025-01-092024-12-032024-12-022024-11-102024-10-152024-05-142024-05-032024-05-022024-05-012024-03-142024-02-282024-02-242024-01-162024-01-11Public EndpointsAssetsgetGet assets.getGet collateral.Borrow Lend MarketsgetGet borrow lend markets.getGet borrow lend market history.MarketsgetGet markets.getGet market.getGet ticker.getGet tickers.getGet depth.getGet K-lines.getGet all mark prices.getGet open interest.getGet funding interval rates.SystemgetStatus.getPing.getGet system time.getGet wallets.TradesgetGet recent trades.getGet historical trades.Authenticated EndpointsAccountgetGet account.patchUpdate account.postConvert a dust balance on an account.getGet max borrow quantity.getGet max order quantity.getGet max withdrawal quantity.Borrow LendgetGet borrow lend positions.postExecute borrow lend.CapitalgetGet balances.getGet collateral.getGet deposits.getGet deposit address.getGet withdrawals.postRequest withdrawal.FuturesgetGet open positions.HistorygetGet borrow history.getGet interest history.getGet borrow position history.getGet dust conversion history.getGet fill history.getGet funding payments.getGet order history.getGet profit and loss history.getGet rfq history.getGet quote history.getGet settlement history.getGet strategy history.OrdergetGet open order.postExecute order.delCancel open order.postExecute orders.getGet open orders.delCancel open orders.Request For QuotepostSubmit RFQ.postAccept quote.postRefresh RFQ.postCancel RFQ.postSubmit quote.WebsocketStreamsUsageSubscribingTimingKeeping the connection alivePrivateOrder updatePosition updateRFQ UpdatePublicBook tickerDepthK-LineLiquidationMark priceTickerOpen interestTradeAPI docs by RedoclyBackpack Exchange API (1.0)Download OpenAPI specification:DownloadIntroductionWelcome to the Backpack Exchange API. This API is for programmatic trade execution. All of the endpoints require requests to be signed with an ED25519 keypair for authentication.
+IntroductionAuthenticationSigning requestsChangelog2025-09-022025-09-012025-08-072025-06-082025-04-222025-04-082025-03-262025-03-192025-02-282025-02-112025-02-072025-02-032025-01-092024-12-032024-12-022024-11-102024-10-152024-05-142024-05-032024-05-022024-05-012024-03-142024-02-282024-02-242024-01-162024-01-11Public EndpointsAssetsgetGet assets.getGet collateral.Borrow Lend MarketsgetGet borrow lend markets.getGet borrow lend market history.MarketsgetGet markets.getGet market.getGet ticker.getGet tickers.getGet depth.getGet K-lines.getGet all mark prices.getGet open interest.getGet funding interval rates.SystemgetStatus.getPing.getGet system time.getGet wallets.TradesgetGet recent trades.getGet historical trades.Authenticated EndpointsAccountgetGet account.patchUpdate account.postConvert a dust balance on an account.getGet max borrow quantity.getGet max order quantity.getGet max withdrawal quantity.Borrow LendgetGet borrow lend positions.postExecute borrow lend.getGet an estimated liquidation price for potential borrow lend position.CapitalgetGet balances.getGet collateral.getGet deposits.getGet deposit address.getGet withdrawals.postRequest withdrawal.FuturesgetGet open positions.HistorygetGet borrow history.getGet interest history.getGet borrow position history.getGet dust conversion history.getGet fill history.getGet funding payments.getGet order history.getGet rfq history.getGet quote history.getGet settlement history.getGet strategy history.OrdergetGet open order.postExecute order.delCancel open order.postExecute orders.getGet open orders.delCancel open orders.Request For QuotepostSubmit RFQ.postAccept quote.postRefresh RFQ.postCancel RFQ.postSubmit quote.WebsocketStreamsUsageSubscribingTimingKeeping the connection alivePrivateOrder updatePosition updateRFQ UpdatePublicBook tickerDepthK-LineLiquidationMark priceTickerOpen interestTradeAPI docs by RedoclyBackpack Exchange API (1.0)Download OpenAPI specification:DownloadIntroductionWelcome to the Backpack Exchange API. This API is for programmatic trade execution. All of the endpoints require requests to be signed with an ED25519 keypair for authentication.
 
 The API is hosted at https://api.backpack.exchange/ and the WS API is hosted at wss://ws.backpack.exchange/.
 
@@ -138,7 +138,27 @@ If the API endpoint requires query parameters instead of a request body, the sam
 
 This message should be signed using the private key of the ED25519 keypair that corresponds to the public key in the X-API-Key header. The signature should then be base64 encoded and submitted in the X-Signature header.
 
-## Changelog2025-06-08
+## Changelog2025-09-02
+
+The /depth endpoint now returns a limit of 5,000 price levels on each side of the book.
+
+## 2025-09-01
+
+The cumulativeInterest response field is being removed from the /positionendpoint.
+
+Estimated liquidation price or l is being removed from the position update stream. It will remain as a placeholder
+
+and be set to 0. It will be removed in the future, so client's should not rely on its presence.
+
+Liquidation price can be queried for a single position using the Positions API /position for example
+
+/position?symbol=BTC_USDC_PERP.
+
+## 2025-08-07
+
+/history/pnl has been removed.
+
+## 2025-06-08
 
 The order id format is changing, it is no longer a byte shifted timestamp. It is no longer possible to derive the
 
@@ -320,7 +340,7 @@ Responses200 Success.
 
 500 Internal server error.
 
-get/api/v1/assetshttps://api.backpack.exchange/api/v1/assets Response samples 200500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"symbol": "BTC","displayName": "string","coingeckoId": "string","tokens": [{"displayName": "string","blockchain": "Arbitrum","contractAddress": "string","depositEnabled": true,"minimumDeposit": "string","withdrawEnabled": true,"minimumWithdrawal": "string","maximumWithdrawal": "string","withdrawalFee": "string"}]}]Get collateral. Get collateral parameters for assets.
+get/api/v1/assetshttps://api.backpack.exchange/api/v1/assets Response samples 200500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"symbol": "BTC","displayName": "string","coingeckoId": "string","tokens": [{"displayName": "string","blockchain": "Aptos","contractAddress": "string","depositEnabled": true,"minimumDeposit": "string","withdrawEnabled": true,"minimumWithdrawal": "string","maximumWithdrawal": "string","withdrawalFee": "string"}]}]Get collateral. Get collateral parameters for assets.
 
 Responses200 Success.
 
@@ -348,7 +368,7 @@ Responses200 Success.
 
 500 Internal server error.
 
-get/api/v1/marketshttps://api.backpack.exchange/api/v1/markets Response samples 200500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"symbol": "string","baseSymbol": "BTC","quoteSymbol": "BTC","marketType": "SPOT","filters": {"price": {"minPrice": "string","maxPrice": "string","tickSize": "string","maxMultiplier": "string","minMultiplier": "string","maxImpactMultiplier": "string","minImpactMultiplier": "string","meanMarkPriceBand": {"maxMultiplier": "string","minMultiplier": "string"},"meanPremiumBand": {"tolerancePct": "string"},"borrowEntryFeeMaxMultiplier": "string","borrowEntryFeeMinMultiplier": "string"},"quantity": {"minQuantity": "string","maxQuantity": "string","stepSize": "string"}},"imfFunction": {"type": "sqrt","base": "string","factor": "string"},"mmfFunction": {"type": "sqrt","base": "string","factor": "string"},"fundingInterval": 0,"fundingRateUpperBound": "string","fundingRateLowerBound": "string","openInterestLimit": "string","orderBookState": "Open","createdAt": "string"}]Get market. Retrieves a market supported by the exchange.
+get/api/v1/marketshttps://api.backpack.exchange/api/v1/markets Response samples 200500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"symbol": "string","baseSymbol": "BTC","quoteSymbol": "BTC","marketType": "SPOT","filters": {"price": {"minPrice": "string","maxPrice": "string","tickSize": "string","maxMultiplier": "string","minMultiplier": "string","maxImpactMultiplier": "string","minImpactMultiplier": "string","meanMarkPriceBand": {"maxMultiplier": "string","minMultiplier": "string"},"meanPremiumBand": {"tolerancePct": "string"},"borrowEntryFeeMaxMultiplier": "string","borrowEntryFeeMinMultiplier": "string"},"quantity": {"minQuantity": "string","maxQuantity": "string","stepSize": "string"}},"imfFunction": {"type": "sqrt","base": "string","factor": "string"},"mmfFunction": {"type": "sqrt","base": "string","factor": "string"},"fundingInterval": 0,"fundingRateUpperBound": "string","fundingRateLowerBound": "string","openInterestLimit": "string","orderBookState": "Open","createdAt": "string","visible": true}]Get market. Retrieves a market supported by the exchange.
 
 query Parameterssymbolrequiredstring Responses200 Success.
 
@@ -356,7 +376,7 @@ query Parameterssymbolrequiredstring Responses200 Success.
 
 500 Internal server error.
 
-get/api/v1/markethttps://api.backpack.exchange/api/v1/market Response samples 200400500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all {"symbol": "string","baseSymbol": "BTC","quoteSymbol": "BTC","marketType": "SPOT","filters": {"price": {"minPrice": "string","maxPrice": "string","tickSize": "string","maxMultiplier": "string","minMultiplier": "string","maxImpactMultiplier": "string","minImpactMultiplier": "string","meanMarkPriceBand": {"maxMultiplier": "string","minMultiplier": "string"},"meanPremiumBand": {"tolerancePct": "string"},"borrowEntryFeeMaxMultiplier": "string","borrowEntryFeeMinMultiplier": "string"},"quantity": {"minQuantity": "string","maxQuantity": "string","stepSize": "string"}},"imfFunction": {"type": "sqrt","base": "string","factor": "string"},"mmfFunction": {"type": "sqrt","base": "string","factor": "string"},"fundingInterval": 0,"fundingRateUpperBound": "string","fundingRateLowerBound": "string","openInterestLimit": "string","orderBookState": "Open","createdAt": "string"}Get ticker. Retrieves summarised statistics for the last 24 hours for the given
+get/api/v1/markethttps://api.backpack.exchange/api/v1/market Response samples 200400500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all {"symbol": "string","baseSymbol": "BTC","quoteSymbol": "BTC","marketType": "SPOT","filters": {"price": {"minPrice": "string","maxPrice": "string","tickSize": "string","maxMultiplier": "string","minMultiplier": "string","maxImpactMultiplier": "string","minImpactMultiplier": "string","meanMarkPriceBand": {"maxMultiplier": "string","minMultiplier": "string"},"meanPremiumBand": {"tolerancePct": "string"},"borrowEntryFeeMaxMultiplier": "string","borrowEntryFeeMinMultiplier": "string"},"quantity": {"minQuantity": "string","maxQuantity": "string","stepSize": "string"}},"imfFunction": {"type": "sqrt","base": "string","factor": "string"},"mmfFunction": {"type": "sqrt","base": "string","factor": "string"},"fundingInterval": 0,"fundingRateUpperBound": "string","fundingRateLowerBound": "string","openInterestLimit": "string","orderBookState": "Open","createdAt": "string","visible": true}Get ticker. Retrieves summarised statistics for the last 24 hours for the given
 
 market symbol.
 
@@ -430,7 +450,7 @@ get/api/v1/openInteresthttps://api.backpack.exchange/api/v1/openInterest Respons
 
 query Parameterssymbolrequiredstring Market symbol to query
 
-limitinteger <uint64>  Maximum number to return. Default 100, maximum 1000.
+limitinteger <uint64>  Maximum number to return. Default 100, maximum 10000.
 
 offsetinteger <uint64>  Offset for pagination. Default 0.
 
@@ -558,7 +578,7 @@ X-TIMESTAMPrequiredinteger <int64>  Timestamp of the request in milliseconds
 
 X-WINDOWinteger <uint64>  Time the request is valid for in milliseconds (default 5000, maximum 60000)
 
-Request Body schema: application/json; charset=utf-8requiredsymbolstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES"  The asset symbol to convert dust for.
+Request Body schema: application/json; charset=utf-8requiredsymbolstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON" "HBAR" "XLM" "ZORA" "WLFI" "BPEUR" "SWTCH" "LINEA" "XPL" "BARD" "FLOCK" "AVNT" "PENDLE" "AERO"  The asset symbol to convert dust for.
 
 If omitted, all dust balances will be converted.
 
@@ -700,7 +720,7 @@ Request Body schema: application/json; charset=utf-8requiredquantityrequiredstri
 
 siderequiredstring Enum: "Borrow" "Lend"  Side of the borrow lend.
 
-symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES"  The asset to repay.
+symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON" "HBAR" "XLM" "ZORA" "WLFI" "BPEUR" "SWTCH" "LINEA" "XPL" "BARD" "FLOCK" "AVNT" "PENDLE" "AERO"  The asset to repay.
 
 Responses200 Success.
 
@@ -710,7 +730,23 @@ Responses200 Success.
 
 503 System under maintenance.
 
-post/api/v1/borrowLendhttps://api.backpack.exchange/api/v1/borrowLend Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"quantity": "string","side": "Borrow","symbol": "BTC"} Response samples 400500503Content typeapplication/json; charset=utf-8Copy{"code": "ACCOUNT_LIQUIDATING","message": "string"}CapitalCapital management.
+post/api/v1/borrowLendhttps://api.backpack.exchange/api/v1/borrowLend Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"quantity": "string","side": "Borrow","symbol": "BTC"} Response samples 400500503Content typeapplication/json; charset=utf-8Copy{"code": "ACCOUNT_LIQUIDATING","message": "string"}Get an estimated liquidation price for potential borrow lend position. Retrieves the estimated liquidation price for a potential borrow lend
+
+position.
+
+query ParameterssubaccountIdinteger <uint16>  Optional subaccount.
+
+borrowrequiredstring Standard base64 encoded json of [BorrowLendExecutePayload]
+
+Responses200 Success.
+
+400 Bad request.
+
+401 Unauthorized.
+
+500 Internal server error.
+
+get/api/v1/borrowLend/position/liquidationPricehttps://api.backpack.exchange/api/v1/borrowLend/position/liquidationPrice Response samples 200400401500Content typeapplication/json; charset=utf-8Copy{"liquidationPrice": "string","markPrice": "string"}CapitalCapital management.
 
 Get balances. Retrieves account balances and the state of the balances (locked or
 
@@ -786,7 +822,7 @@ on the specified blockchain.
 
 ## Instruction: depositAddressQuery
 
-query Parametersblockchainrequiredstring (Blockchain)  Enum: "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "Hyperliquid" "Litecoin" "Optimism" "Polygon" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain symbol to get a deposit address for.
+query Parametersblockchainrequiredstring (Blockchain)  Enum: "Aptos" "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "Hyperliquid" "Litecoin" "Optimism" "Polygon" "Sei" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain symbol to get a deposit address for.
 
 ## header ParametersX-API-KEYstring API key
 
@@ -802,9 +838,11 @@ Responses200 Success.
 
 401 Unauthorized.
 
+## 409 Conflict
+
 500 Internal server error.
 
-get/wapi/v1/capital/deposit/addresshttps://api.backpack.exchange/wapi/v1/capital/deposit/address Response samples 200400401500Content typeapplication/json; charset=utf-8Copy{"address": "string"}Get withdrawals. Retrieves withdrawal history.
+get/wapi/v1/capital/deposit/addresshttps://api.backpack.exchange/wapi/v1/capital/deposit/address Response samples 200400401409500Content typeapplication/json; charset=utf-8Copy{"address": "string"}Get withdrawals. Retrieves withdrawal history.
 
 ## Instruction: withdrawalQueryAll
 
@@ -832,7 +870,7 @@ Responses200 Success.
 
 500 Internal Server Error.
 
-get/wapi/v1/capital/withdrawalshttps://api.backpack.exchange/wapi/v1/capital/withdrawals Response samples 200400401500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"id": 0,"blockchain": "Arbitrum","clientId": "string","identifier": "string","quantity": "string","fee": "string","fiatFee": "string","fiatState": "initialized","fiatSymbol": "AED","providerId": "string","symbol": "BTC","status": "confirmed","subaccountId": 0,"toAddress": "string","transactionHash": "string","createdAt": "string","isInternal": true,"bankName": "string","bankIdentifier": "string","accountIdentifier": "string","triggerAt": "string"}]Request withdrawal. Requests a withdrawal from the exchange.
+get/wapi/v1/capital/withdrawalshttps://api.backpack.exchange/wapi/v1/capital/withdrawals Response samples 200400401500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"id": 0,"blockchain": "Aptos","clientId": "string","identifier": "string","quantity": "string","fee": "string","fiatFee": "string","fiatState": "initialized","fiatSymbol": "AED","providerId": "string","symbol": "BTC","status": "confirmed","subaccountId": 0,"toAddress": "string","transactionHash": "string","createdAt": "string","isInternal": true,"bankName": "string","bankIdentifier": "string","accountIdentifier": "string","triggerAt": "string"}]Request withdrawal. Requests a withdrawal from the exchange.
 
 The twoFactorToken field is required if the withdrawal address is not
 
@@ -852,13 +890,13 @@ X-SIGNATURErequiredstring Signature of the request
 
 Request Body schema: application/json; charset=utf-8requiredaddressrequiredstring Address to withdraw to.
 
-blockchainrequiredstring Enum: "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "Hyperliquid" "Litecoin" "Optimism" "Polygon" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain to withdraw on.
+blockchainrequiredstring Enum: "Aptos" "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "Hyperliquid" "Litecoin" "Optimism" "Polygon" "Sei" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain to withdraw on.
 
 clientIdstring  <= 255 characters  Custom client id.
 
 quantityrequiredstring <decimal>  Quantity to withdraw.
 
-symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES"  Symbol of the asset to withdraw.
+symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON" "HBAR" "XLM" "ZORA" "WLFI" "BPEUR" "SWTCH" "LINEA" "XPL" "BARD" "FLOCK" "AVNT" "PENDLE" "AERO"  Symbol of the asset to withdraw.
 
 twoFactorTokenstring Issued two factor token.
 
@@ -880,11 +918,13 @@ Responses200 Success.
 
 503 System under maintenance.
 
-post/wapi/v1/capital/withdrawalshttps://api.backpack.exchange/wapi/v1/capital/withdrawals Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"address": "string","blockchain": "Arbitrum","clientId": "string","quantity": "string","symbol": "BTC","twoFactorToken": "string","autoBorrow": true,"autoLendRedeem": true} Response samples 200400401403429500503Content typeapplication/json; charset=utf-8Copy{"id": 0,"blockchain": "Arbitrum","clientId": "string","identifier": "string","quantity": "string","fee": "string","fiatFee": "string","fiatState": "initialized","fiatSymbol": "AED","providerId": "string","symbol": "BTC","status": "confirmed","subaccountId": 0,"toAddress": "string","transactionHash": "string","createdAt": "string","isInternal": true,"bankName": "string","bankIdentifier": "string","accountIdentifier": "string","triggerAt": "string"}FuturesFutures data.
+post/wapi/v1/capital/withdrawalshttps://api.backpack.exchange/wapi/v1/capital/withdrawals Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"address": "string","blockchain": "Aptos","clientId": "string","quantity": "string","symbol": "BTC","twoFactorToken": "string","autoBorrow": true,"autoLendRedeem": true} Response samples 200400401403429500503Content typeapplication/json; charset=utf-8Copy{"id": 0,"blockchain": "Aptos","clientId": "string","identifier": "string","quantity": "string","fee": "string","fiatFee": "string","fiatState": "initialized","fiatSymbol": "AED","providerId": "string","symbol": "BTC","status": "confirmed","subaccountId": 0,"toAddress": "string","transactionHash": "string","createdAt": "string","isInternal": true,"bankName": "string","bankIdentifier": "string","accountIdentifier": "string","triggerAt": "string"}FuturesFutures data.
 
 Get open positions. Retrieves account position summary.
 
 ## Instruction: positionQuery
+
+query Parameterssymbolstring Filter for a single position by symbol.
 
 ## header ParametersX-API-KEYstring API key
 
@@ -900,9 +940,11 @@ Responses200 Success.
 
 401 Unauthorized.
 
+404 Position not found.
+
 500 Internal server error.
 
-get/api/v1/positionhttps://api.backpack.exchange/api/v1/position Response samples 200400401500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"breakEvenPrice": "string","entryPrice": "string","estLiquidationPrice": "string","imf": "string","imfFunction": {"type": "sqrt","base": "string","factor": "string"},"markPrice": "string","mmf": "string","mmfFunction": {"type": "sqrt","base": "string","factor": "string"},"netCost": "string","netQuantity": "string","netExposureQuantity": "string","netExposureNotional": "string","pnlRealized": "string","pnlUnrealized": "string","cumulativeFundingPayment": "string","subaccountId": 0,"symbol": "string","userId": 0,"positionId": "string","cumulativeInterest": "string"}]HistoryHistorical account data.
+get/api/v1/positionhttps://api.backpack.exchange/api/v1/position Response samples 200400401404500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"breakEvenPrice": "string","entryPrice": "string","estLiquidationPrice": "string","imf": "string","imfFunction": {"type": "sqrt","base": "string","factor": "string"},"markPrice": "string","mmf": "string","mmfFunction": {"type": "sqrt","base": "string","factor": "string"},"netCost": "string","netQuantity": "string","netExposureQuantity": "string","netExposureNotional": "string","pnlRealized": "string","pnlUnrealized": "string","cumulativeFundingPayment": "string","subaccountId": 0,"symbol": "string","userId": 0,"positionId": "string","cumulativeInterest": "string"}]HistoryHistorical account data.
 
 Get borrow history. History of borrow and lend operations for the account.
 
@@ -1158,37 +1200,7 @@ Responses200 Success.
 
 500 Internal server error.
 
-get/wapi/v1/history/ordershttps://api.backpack.exchange/wapi/v1/history/orders Response samples 200400401500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"id": "string","createdAt": "string","executedQuantity": "string","executedQuoteQuantity": "string","expiryReason": "AccountTradingSuspended","orderType": "Market","postOnly": true,"price": "string","quantity": "string","quoteQuantity": "string","selfTradePrevention": "RejectTaker","status": "Cancelled","side": "Bid","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","timeInForce": "GTC","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","clientId": 0,"systemOrderType": "CollateralConversion","strategyId": "string"}]Get profit and loss history. History of profit and loss realization for an account.
-
-## Instruction: pnlHistoryQueryAll
-
-query ParameterssubaccountIdinteger <uint16>  Filter for a subaccount.
-
-symbolstring Market symbol to query. If not set, all markets are returned.
-
-limitinteger <uint64>  Maximum number to return. Default 100, maximum 1000.
-
-offsetinteger <uint64>  Offset for pagination. Default 0.
-
-sortDirectionstring (SortDirection)  Enum: "Asc" "Desc"  Sort direction.
-
-## header ParametersX-API-KEYstring API key
-
-## X-SIGNATUREstring Signature of the request
-
-X-TIMESTAMPinteger <int64>  Timestamp of the request in milliseconds
-
-X-WINDOWinteger <uint64>  Time the request is valid for in milliseconds (default 5000, maximum 60000)
-
-Responses200 Success.
-
-400 Bad request.
-
-401 Unauthorized.
-
-500 Internal server error.
-
-get/wapi/v1/history/pnlhttps://api.backpack.exchange/wapi/v1/history/pnl Response samples 200400401500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"pnlRealized": "string","symbol": "string","timestamp": "string"}]Get rfq history. Retrieves the rfq history for the user. This includes RFQs that have
+get/wapi/v1/history/ordershttps://api.backpack.exchange/wapi/v1/history/orders Response samples 200400401500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"id": "string","createdAt": "string","executedQuantity": "string","executedQuoteQuantity": "string","expiryReason": "AccountTradingSuspended","orderType": "Market","postOnly": true,"price": "string","quantity": "string","quoteQuantity": "string","selfTradePrevention": "RejectTaker","status": "Cancelled","side": "Bid","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","timeInForce": "GTC","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","clientId": 0,"systemOrderType": "CollateralConversion","strategyId": "string","slippageTolerance": "string","slippageToleranceType": "TickSize"}]Get rfq history. Retrieves the rfq history for the user. This includes RFQs that have
 
 been filled or expired.
 
@@ -1320,7 +1332,7 @@ Responses200 Success.
 
 500 Internal server error.
 
-get/wapi/v1/history/strategieshttps://api.backpack.exchange/wapi/v1/history/strategies Response samples 200400401500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"id": "string","createdAt": "string","executedQuantity": "string","executedQuoteQuantity": "string","cancelReason": "Expired","strategyType": "Scheduled","quantity": "string","selfTradePrevention": "RejectTaker","status": "Running","side": "Bid","symbol": "string","timeInForce": "GTC","clientStrategyId": 0,"duration": 0,"interval": 0,"randomizedIntervalQuantity": true}]OrderOrder management.
+get/wapi/v1/history/strategieshttps://api.backpack.exchange/wapi/v1/history/strategies Response samples 200400401500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"id": "string","createdAt": "string","executedQuantity": "string","executedQuoteQuantity": "string","cancelReason": "Expired","strategyType": "Scheduled","quantity": "string","selfTradePrevention": "RejectTaker","status": "Running","side": "Bid","symbol": "string","timeInForce": "GTC","clientStrategyId": 0,"duration": 0,"interval": 0,"randomizedIntervalQuantity": true,"slippageTolerance": "string","slippageToleranceType": "TickSize"}]OrderOrder management.
 
 Get open order. Retrieves an open order from the order book. This only returns the order
 
@@ -1356,7 +1368,7 @@ Responses200 Success.
 
 ## 500 Internal server error
 
-get/api/v1/orderhttps://api.backpack.exchange/api/v1/order Response samples 200400404500Content typeapplication/json; charset=utf-8ExampleMarketLimitBatchCommandOrderResult_OrderTypeMarketCopy{"orderType": "Market","id": "string","clientId": 0,"createdAt": 0,"executedQuantity": "string","executedQuoteQuantity": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"timeInForce": "GTC","selfTradePrevention": "RejectTaker","side": "Bid","status": "Cancelled","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","triggeredAt": 0,"relatedOrderId": "string","strategyId": "string"}Execute order. Submits an order to the matching engine for execution.
+get/api/v1/orderhttps://api.backpack.exchange/api/v1/order Response samples 200400404500Content typeapplication/json; charset=utf-8ExampleMarketLimitBatchCommandOrderResult_OrderTypeMarketCopy{"orderType": "Market","id": "string","clientId": 0,"createdAt": 0,"executedQuantity": "string","executedQuoteQuantity": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"timeInForce": "GTC","selfTradePrevention": "RejectTaker","side": "Bid","status": "Cancelled","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","triggeredAt": 0,"relatedOrderId": "string","strategyId": "string","slippageTolerance": "string","slippageToleranceType": "TickSize"}Execute order. Submits an order to the matching engine for execution.
 
 ## Instruction: orderExecute
 
@@ -1368,13 +1380,17 @@ X-TIMESTAMPrequiredinteger <int64>  Timestamp of the request in milliseconds
 
 X-WINDOWinteger <uint64>  Time the request is valid for in milliseconds (default 5000, maximum 60000)
 
-Request Body schema: application/json; charset=utf-8requiredautoLendboolean If true then the order can lend. Spot margin only.
+X-BROKER-IDinteger <uint16>  Broker ID of the order
+
+X-Broker-Idinteger <uint16>  Request Body schema: application/json; charset=utf-8requiredautoLendboolean If true then the order can lend. Spot margin only.
 
 autoLendRedeemboolean If true then the order can redeem a lend if required. Spot margin only.
 
 autoBorrowboolean If true then the order can borrow. Spot margin only.
 
 autoBorrowRepayboolean If true then the order can repay a borrow. Spot margin only.
+
+brokerIdinteger <uint16>  Broker ID of the order.
 
 clientIdinteger <uint32>  Custom order id.
 
@@ -1426,6 +1442,10 @@ triggerPricestring Trigger price if this is a conditional order.
 
 triggerQuantitystring Trigger quantity type if this is a trigger order.
 
+slippageTolerancestring <decimal>  Slippage tolerance allowed for the order.
+
+slippageToleranceTypestring Enum: "TickSize" "Percent"  Slippage tolerance type.
+
 Responses200 Order executed.
 
 400 Bad request.
@@ -1434,7 +1454,7 @@ Responses200 Order executed.
 
 503 System under maintenance.
 
-post/api/v1/orderhttps://api.backpack.exchange/api/v1/order Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"autoLend": true,"autoLendRedeem": true,"autoBorrow": true,"autoBorrowRepay": true,"clientId": 0,"orderType": "Market","postOnly": true,"price": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"selfTradePrevention": "RejectTaker","side": "Bid","stopLossLimitPrice": "string","stopLossTriggerBy": "string","stopLossTriggerPrice": "string","symbol": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","takeProfitTriggerPrice": "string","timeInForce": "GTC","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string"} Response samples 200400500503Content typeapplication/json; charset=utf-8ExampleMarketLimitBatchCommandOrderResult_OrderTypeMarketCopy{"orderType": "Market","id": "string","clientId": 0,"createdAt": 0,"executedQuantity": "string","executedQuoteQuantity": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"timeInForce": "GTC","selfTradePrevention": "RejectTaker","side": "Bid","status": "Cancelled","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","triggeredAt": 0,"relatedOrderId": "string","strategyId": "string"}Cancel open order. Cancels an open order from the order book.
+post/api/v1/orderhttps://api.backpack.exchange/api/v1/order Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"autoLend": true,"autoLendRedeem": true,"autoBorrow": true,"autoBorrowRepay": true,"brokerId": 0,"clientId": 0,"orderType": "Market","postOnly": true,"price": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"selfTradePrevention": "RejectTaker","side": "Bid","stopLossLimitPrice": "string","stopLossTriggerBy": "string","stopLossTriggerPrice": "string","symbol": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","takeProfitTriggerPrice": "string","timeInForce": "GTC","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","slippageTolerance": "string","slippageToleranceType": "TickSize"} Response samples 200400500503Content typeapplication/json; charset=utf-8ExampleMarketLimitBatchCommandOrderResult_OrderTypeMarketCopy{"orderType": "Market","id": "string","clientId": 0,"createdAt": 0,"executedQuantity": "string","executedQuoteQuantity": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"timeInForce": "GTC","selfTradePrevention": "RejectTaker","side": "Bid","status": "Cancelled","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","triggeredAt": 0,"relatedOrderId": "string","strategyId": "string","slippageTolerance": "string","slippageToleranceType": "TickSize"}Cancel open order. Cancels an open order from the order book.
 
 One of orderId or clientId must be specified. If both are specified
 
@@ -1466,7 +1486,7 @@ Responses200 Order cancelled.
 
 503 System under maintenance.
 
-delete/api/v1/orderhttps://api.backpack.exchange/api/v1/order Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"clientId": 0,"orderId": "string","symbol": "string"} Response samples 200400500503Content typeapplication/json; charset=utf-8ExampleMarketLimitBatchCommandOrderResult_OrderTypeMarketCopy{"orderType": "Market","id": "string","clientId": 0,"createdAt": 0,"executedQuantity": "string","executedQuoteQuantity": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"timeInForce": "GTC","selfTradePrevention": "RejectTaker","side": "Bid","status": "Cancelled","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","triggeredAt": 0,"relatedOrderId": "string","strategyId": "string"}Execute orders. Submits a set of orders to the matching engine for execution in a batch.
+delete/api/v1/orderhttps://api.backpack.exchange/api/v1/order Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"clientId": 0,"orderId": "string","symbol": "string"} Response samples 200400500503Content typeapplication/json; charset=utf-8ExampleMarketLimitBatchCommandOrderResult_OrderTypeMarketCopy{"orderType": "Market","id": "string","clientId": 0,"createdAt": 0,"executedQuantity": "string","executedQuoteQuantity": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"timeInForce": "GTC","selfTradePrevention": "RejectTaker","side": "Bid","status": "Cancelled","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","triggeredAt": 0,"relatedOrderId": "string","strategyId": "string","slippageTolerance": "string","slippageToleranceType": "TickSize"}Execute orders. Submits a set of orders to the matching engine for execution in a batch.
 
 ## Batch commands instruction: orderExecute
 
@@ -1478,13 +1498,15 @@ X-TIMESTAMPrequiredinteger <int64>  Timestamp of the request in milliseconds
 
 X-WINDOWinteger <uint64>  Time the request is valid for in milliseconds (default 5000, maximum 60000)
 
-Request Body schema: application/json; charset=utf-8required Array autoLendboolean If true then the order can lend. Spot margin only.
+X-Broker-Idinteger <uint16>  Request Body schema: application/json; charset=utf-8required Array autoLendboolean If true then the order can lend. Spot margin only.
 
 autoLendRedeemboolean If true then the order can redeem a lend if required. Spot margin only.
 
 autoBorrowboolean If true then the order can borrow. Spot margin only.
 
 autoBorrowRepayboolean If true then the order can repay a borrow. Spot margin only.
+
+brokerIdinteger <uint16>  Broker ID of the order.
 
 clientIdinteger <uint32>  Custom order id.
 
@@ -1536,6 +1558,10 @@ triggerPricestring Trigger price if this is a conditional order.
 
 triggerQuantitystring Trigger quantity type if this is a trigger order.
 
+slippageTolerancestring <decimal>  Slippage tolerance allowed for the order.
+
+slippageToleranceTypestring Enum: "TickSize" "Percent"  Slippage tolerance type.
+
 Responses200 Batch orders executed.
 
 400 Bad request.
@@ -1544,7 +1570,7 @@ Responses200 Batch orders executed.
 
 503 System under maintenance.
 
-post/api/v1/ordershttps://api.backpack.exchange/api/v1/orders Request samples PayloadContent typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"autoLend": true,"autoLendRedeem": true,"autoBorrow": true,"autoBorrowRepay": true,"clientId": 0,"orderType": "Market","postOnly": true,"price": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"selfTradePrevention": "RejectTaker","side": "Bid","stopLossLimitPrice": "string","stopLossTriggerBy": "string","stopLossTriggerPrice": "string","symbol": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","takeProfitTriggerPrice": "string","timeInForce": "GTC","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string"}] Response samples 200400500503Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"operation": "Ok","orderType": "Market","id": "string","clientId": 0,"createdAt": 0,"executedQuantity": "string","executedQuoteQuantity": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"timeInForce": "GTC","selfTradePrevention": "RejectTaker","side": "Bid","status": "Cancelled","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","triggeredAt": 0,"relatedOrderId": "string","strategyId": "string"}]Get open orders. Retrieves all open orders. If a symbol is provided, only open orders for
+post/api/v1/ordershttps://api.backpack.exchange/api/v1/orders Request samples PayloadContent typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"autoLend": true,"autoLendRedeem": true,"autoBorrow": true,"autoBorrowRepay": true,"brokerId": 0,"clientId": 0,"orderType": "Market","postOnly": true,"price": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"selfTradePrevention": "RejectTaker","side": "Bid","stopLossLimitPrice": "string","stopLossTriggerBy": "string","stopLossTriggerPrice": "string","symbol": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","takeProfitTriggerPrice": "string","timeInForce": "GTC","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","slippageTolerance": "string","slippageToleranceType": "TickSize"}] Response samples 200400500503Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"operation": "Ok","orderType": "Market","id": "string","clientId": 0,"createdAt": 0,"executedQuantity": "string","executedQuoteQuantity": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"timeInForce": "GTC","selfTradePrevention": "RejectTaker","side": "Bid","status": "Cancelled","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","triggeredAt": 0,"relatedOrderId": "string","strategyId": "string","slippageTolerance": "string","slippageToleranceType": "TickSize"}]Get open orders. Retrieves all open orders. If a symbol is provided, only open orders for
 
 that market will be returned, otherwise all open orders are
 
@@ -1570,7 +1596,7 @@ Responses200 Success.
 
 500 Internal Server Error.
 
-get/api/v1/ordershttps://api.backpack.exchange/api/v1/orders Response samples 200400500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"orderType": "Market","id": "string","clientId": 0,"createdAt": 0,"executedQuantity": "string","executedQuoteQuantity": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"timeInForce": "GTC","selfTradePrevention": "RejectTaker","side": "Bid","status": "Cancelled","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","triggeredAt": 0,"relatedOrderId": "string","strategyId": "string"}]Cancel open orders. Cancels all open orders on the specified market.
+get/api/v1/ordershttps://api.backpack.exchange/api/v1/orders Response samples 200400500Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"orderType": "Market","id": "string","clientId": 0,"createdAt": 0,"executedQuantity": "string","executedQuoteQuantity": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"timeInForce": "GTC","selfTradePrevention": "RejectTaker","side": "Bid","status": "Cancelled","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","triggeredAt": 0,"relatedOrderId": "string","strategyId": "string","slippageTolerance": "string","slippageToleranceType": "TickSize"}]Cancel open orders. Cancels all open orders on the specified market.
 
 ## Instruction: orderCancelAll
 
@@ -1596,7 +1622,7 @@ Responses200 Success.
 
 503 System under maintenance.
 
-delete/api/v1/ordershttps://api.backpack.exchange/api/v1/orders Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"symbol": "string","orderType": "RestingLimitOrder"} Response samples 200400500503Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"orderType": "Market","id": "string","clientId": 0,"createdAt": 0,"executedQuantity": "string","executedQuoteQuantity": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"timeInForce": "GTC","selfTradePrevention": "RejectTaker","side": "Bid","status": "Cancelled","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","triggeredAt": 0,"relatedOrderId": "string","strategyId": "string"}]Request For QuoteRequest For Quote.
+delete/api/v1/ordershttps://api.backpack.exchange/api/v1/orders Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"symbol": "string","orderType": "RestingLimitOrder"} Response samples 200400500503Content typeapplication/json; charset=utf-8Copy Expand all  Collapse all [{"orderType": "Market","id": "string","clientId": 0,"createdAt": 0,"executedQuantity": "string","executedQuoteQuantity": "string","quantity": "string","quoteQuantity": "string","reduceOnly": true,"timeInForce": "GTC","selfTradePrevention": "RejectTaker","side": "Bid","status": "Cancelled","stopLossTriggerPrice": "string","stopLossLimitPrice": "string","stopLossTriggerBy": "string","symbol": "string","takeProfitTriggerPrice": "string","takeProfitLimitPrice": "string","takeProfitTriggerBy": "string","triggerBy": "string","triggerPrice": "string","triggerQuantity": "string","triggeredAt": 0,"relatedOrderId": "string","strategyId": "string","slippageTolerance": "string","slippageToleranceType": "TickSize"}]Request For QuoteRequest For Quote.
 
 Submit RFQ. Submit a Request for Quote (RFQ). The RFQ will be available for
 
@@ -1634,7 +1660,7 @@ Responses200 Accepted.
 
 503 System under maintenance.
 
-post/api/v1/rfqhttps://api.backpack.exchange/api/v1/rfq Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"clientId": 0,"quantity": "string","quoteQuantity": "string","price": "string","symbol": "string","side": "Bid","executionMode": "AwaitAccept"} Response samples 200400500503Content typeapplication/json; charset=utf-8Copy{"rfqId": "string","clientId": 0,"symbol": "string","side": "Bid","price": "string","quantity": "string","quoteQuantity": "string","submissionTime": 0,"expiryTime": 0,"status": "Cancelled","executionMode": "AwaitAccept","createdAt": 0}Accept quote. Accept a specific quote from a maker in response to an RFQ.
+post/api/v1/rfqhttps://api.backpack.exchange/api/v1/rfq Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"clientId": 0,"quantity": "string","quoteQuantity": "string","price": "string","symbol": "string","side": "Bid","executionMode": "AwaitAccept"} Response samples 200400500503Content typeapplication/json; charset=utf-8Copy{"rfqId": "string","clientId": 0,"symbol": "string","side": "Bid","price": "string","quantity": "string","quoteQuantity": "string","submissionTime": 0,"systemOrderType": "CollateralConversion","expiryTime": 0,"status": "Cancelled","executionMode": "AwaitAccept","createdAt": 0}Accept quote. Accept a specific quote from a maker in response to an RFQ.
 
 ## Instruction: quoteAccept
 
@@ -1660,7 +1686,7 @@ Responses200 Accepted.
 
 503 System under maintenance.
 
-post/api/v1/rfq/accepthttps://api.backpack.exchange/api/v1/rfq/accept Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"rfqId": "string","clientId": 0,"quoteId": "string"} Response samples 200400500503Content typeapplication/json; charset=utf-8Copy{"rfqId": "string","clientId": 0,"symbol": "string","side": "Bid","price": "string","quantity": "string","quoteQuantity": "string","submissionTime": 0,"expiryTime": 0,"status": "Cancelled","executionMode": "AwaitAccept","createdAt": 0}Refresh RFQ. Refresh a RFQ, extending the time window it is available for.
+post/api/v1/rfq/accepthttps://api.backpack.exchange/api/v1/rfq/accept Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"rfqId": "string","clientId": 0,"quoteId": "string"} Response samples 200400500503Content typeapplication/json; charset=utf-8Copy{"rfqId": "string","clientId": 0,"symbol": "string","side": "Bid","price": "string","quantity": "string","quoteQuantity": "string","submissionTime": 0,"systemOrderType": "CollateralConversion","expiryTime": 0,"status": "Cancelled","executionMode": "AwaitAccept","createdAt": 0}Refresh RFQ. Refresh a RFQ, extending the time window it is available for.
 
 ## Instruction: rfqRefresh
 
@@ -1682,7 +1708,7 @@ Responses200 Accepted.
 
 503 System under maintenance.
 
-post/api/v1/rfq/refreshhttps://api.backpack.exchange/api/v1/rfq/refresh Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"rfqId": "string"} Response samples 200400500503Content typeapplication/json; charset=utf-8Copy{"rfqId": "string","clientId": 0,"symbol": "string","side": "Bid","price": "string","quantity": "string","quoteQuantity": "string","submissionTime": 0,"expiryTime": 0,"status": "Cancelled","executionMode": "AwaitAccept","createdAt": 0}Cancel RFQ. Instruction: rfqCancel
+post/api/v1/rfq/refreshhttps://api.backpack.exchange/api/v1/rfq/refresh Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"rfqId": "string"} Response samples 200400500503Content typeapplication/json; charset=utf-8Copy{"rfqId": "string","clientId": 0,"symbol": "string","side": "Bid","price": "string","quantity": "string","quoteQuantity": "string","submissionTime": 0,"systemOrderType": "CollateralConversion","expiryTime": 0,"status": "Cancelled","executionMode": "AwaitAccept","createdAt": 0}Cancel RFQ. Instruction: rfqCancel
 
 ## header ParametersX-API-KEYrequiredstring API key
 
@@ -1704,7 +1730,7 @@ Responses200 Accepted.
 
 503 System under maintenance.
 
-post/api/v1/rfq/cancelhttps://api.backpack.exchange/api/v1/rfq/cancel Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"rfqId": "string","clientId": 0} Response samples 200400500503Content typeapplication/json; charset=utf-8Copy{"rfqId": "string","clientId": 0,"symbol": "string","side": "Bid","price": "string","quantity": "string","quoteQuantity": "string","submissionTime": 0,"expiryTime": 0,"status": "Cancelled","executionMode": "AwaitAccept","createdAt": 0}Submit quote. Submit a quote in response to an RFQ. If valid, the quote may be
+post/api/v1/rfq/cancelhttps://api.backpack.exchange/api/v1/rfq/cancel Request samples PayloadContent typeapplication/json; charset=utf-8Copy{"rfqId": "string","clientId": 0} Response samples 200400500503Content typeapplication/json; charset=utf-8Copy{"rfqId": "string","clientId": 0,"symbol": "string","side": "Bid","price": "string","quantity": "string","quoteQuantity": "string","submissionTime": 0,"systemOrderType": "CollateralConversion","expiryTime": 0,"status": "Cancelled","executionMode": "AwaitAccept","createdAt": 0}Submit quote. Submit a quote in response to an RFQ. If valid, the quote may be
 
 accepted within the specified time window.
 
@@ -1940,6 +1966,10 @@ For single market: account.orderUpdate.<symbol>
 
 ## "I": "1111343026156135" // Related order ID
 
+## "H": 6023471188         // Strategy ID
+
+## "y": true               // Post only
+
 ## }
 
 There are several possible values for the O field (origin of the
@@ -2041,8 +2071,6 @@ For single market: account.positionUpdate.<symbol>
 "b": 123,               // Break event price
 
 "B": 122,               // Entry price
-
-"l": 50,                // Estimated liquidation price
 
 "f": 0.5,               // Initial margin fraction
 
@@ -2466,9 +2494,9 @@ update ID in the event.
 
 There are alternative depth streams that aggregates updates into a
 
-single message over a 200ms or 1000ms period instead of pushing updates
+single message over a 200ms, 600ms or 1000ms period instead of pushing
 
-in realtime. This is useful for reducing network traffic.
+updates in realtime. This is useful for reducing network traffic.
 
 Updates are sequential, so U will always be u + 1 from the previous
 
@@ -2479,6 +2507,8 @@ depth has been invalidated and requery the REST API.
 Stream name format: depth.<symbol> (realtime)
 
 Stream name format: depth.200ms.<symbol> (aggregated)
+
+Stream name format: depth.600ms.<symbol> (aggregated)
 
 Stream name format: depth.1000ms.<symbol> (aggregated)
 
