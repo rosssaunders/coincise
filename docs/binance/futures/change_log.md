@@ -86,12 +86,10 @@ Portfolio Margin
 USDⓈ-M Futures & COIN-M Futures
 
 - The following endpoints will be updated at 2024-01-14:
-
   - `GET /fapi/v1/historicalTrades`
   - `GET /dapi/v1/historicalTrades`
 
   Changes to the request parameter `limit`:
-
   - Maximum value changed from 1000 to 500
   - Default value changed from 500 to 100
 
@@ -238,14 +236,12 @@ COIN-M Futures
   [FAQ](https://www.binance.com/zh-CN/support/faq/what-is-self-trade-prevention-0941126f6413485b9a3df964a9aa2306)
 - User can set `selfTradePreventionMode` when placing new orders. All symbols
   support the following STP mode:
-
   - NONE: No Self-Trade Prevention
   - EXPIRE_TAKER: expire taker order when STP trigger
   - EXPIRE_BOTH: expire taker and maker order when STP trigger
   - EXPIRE_MAKER: expire maker order when STP trigger
 
 - REST Update:
-
   - New order status `EXPIRED_IN_MATCH` - This means that the order expired due
     to STP being triggered.
   - Add optional parameter `selfTradePreventionMode` in the endpoints below to
@@ -265,7 +261,6 @@ COIN-M Futures
     - `DELETE /dapi/v1/batchOrders`
 
 - WEBSOCKET User Data Stream:
-
   - Add new field `V` in `ORDER_TRADE_UPDATE` to order STP mode.
 
 - **Price Match**
@@ -274,7 +269,6 @@ COIN-M Futures
   The price match function will automatically determine the order price in
   real-time based on the price match mode and the order book.
 - The following priceMatch modes are supported on order level:
-
   - NONE: no price match
   - OPPONENT: counterparty best price
   - OPPONENT_5: counterparty 5th best price
@@ -286,7 +280,6 @@ COIN-M Futures
   - QUEUE_20: the 20th best price on the same side of the order book
 
 - Example:
-
   - User places buy order and set priceMatch as QUEUE_5, the order price will be
     5th best bid price of the orderbook
   - User places buy order and set priceMatch as OPPONENT, the order price will
@@ -295,13 +288,11 @@ COIN-M Futures
 - REST Update:
 - Add optional parameter priceMatch in the endpoints below to set order's
   priceMatch mode:
-
   - `POST /dapi/v1/order`
   - `POST /dapi/v1/batchOrders`
 
 - Add new field priceMatch in response of the endpoints below to show order's
   priceMatch mode:
-
   - `POST /dapi/v1/order`
   - `POST /dapi/v1/batchOrders`
   - `GET /dapi/v1/order`
@@ -313,7 +304,6 @@ COIN-M Futures
   - `DELETE /dapi/v1/batchOrders`
 
 - WEBSOCKET User Data Stream:
-
   - Add new field `pm` in `ORDER_TRADE_UPDATE` to show price match mode.
 
 ### 2024-10-10
@@ -323,14 +313,12 @@ USDⓈ-M Futures
 - Binance will update the following endpoints, estimated to be in force on
   2024-10-17 03:00 (UTC). After 2024-10-17 03:00 (UTC), the endpoints will
   support querying futures trade histories that are not older than one year:
-
   - `GET /fapi/v1/aggTrades`
   - `GET /dapi/v1/aggTrades`
 
 - Binance will update the following endpoints, estimated to be in force on
   2024-10-16 03:00 (UTC). After 2024-10-16 03:00 (UTC), the endpoint will
   support querying future histories that are not older than 30 days:
-
   - `GET /fapi/v1/positionMargin/history`
 
 ### 2024-10-08
@@ -340,12 +328,10 @@ COIN-M Futures
 - The most recent 7-days data is returned by default when requesting the
   following endpoints. The query time period for these endpoints must be less
   than 7 days:
-
   - `GET /dapi/v1/allOrders`
   - `GET /dapi/v1/userTrades`
 
 - The following endpoints will be adjusted to keep only recent three month data:
-
   - `GET /dapi/v1/order`
   - `GET /dapi/v1/allOrders`
 
@@ -377,7 +363,6 @@ Portfolio Margin
 Portfolio Margin
 
 - Update endpoint for Portfolio Margin/Trade(Release date 2024-09-06):
-
   - `POST /papi/v1/um/order`: add parameter `priceMatch` to support priceMatch
     for place order
   - `POST/papi/v1/um/conditional/order`: add parameter `priceMatch` to support
@@ -387,7 +372,6 @@ Portfolio Margin
 
 - Add new field `priceMatch` in response of the endpoints below to show order's
   priceMatch:
-
   - `POST /papi/v1/um/order`
   - `POST/papi/v1/um/conditional/order`
   - `PUT /papi/v1/um/order`
@@ -404,7 +388,6 @@ Portfolio Margin
   - `DELETE /papi/v1/um/conditional/order`
 
 - WEBSOCKET
-
   - Add new field `pm` in `ORDER_TRADE_UPDATE` and
     `CONDITIONAL_ORDER_TRADE_UPDATE`, which represents priceMatch .
 
@@ -457,7 +440,6 @@ Portfolio Margin
 USDⓈ-M Futures
 
 - The following endpoints IP weight limit will be adjusted from 2024-09-03:
-
   - REST API:
     - `GET /fapi/v2/balance`: 5->10
     - `GET /fapi/v2/account`: 5->10
@@ -468,7 +450,6 @@ USDⓈ-M Futures
     - `account.position`: 5->10
 
 - The following WebSocket User Data Requests will be deprecated from 2024-09-03
-
   - <listenKey>@account
   - <listenKey>@balance
   - <listenKey>@position
@@ -491,7 +472,6 @@ USDⓈ-M Futures
 ##### REST API
 
 - New Endpoints to Query Account Information:
-
   - `GET /fapi/v1/symbolConfig`: Query user symbol configuration.
   - `GET /fapi/v1/accountConfig`: Query user account configuration.
   - `GET /fapi/v3/account`: Compared to `GET /fapi/v2/account`, this endpoint
@@ -502,7 +482,6 @@ USDⓈ-M Futures
   - `GET /fapi/v3/balance`: Query user account balance.
 
 - New Endpoints to Query Trade Information:
-
   - `GET /fapi/v3/positionRisk`: Compared to `GET /fapi/v2/positionRisk`, this
     endpoint only returns symbols that the user has positions or open orders in.
     Configuration-related fields have been removed and can now be queried from
@@ -641,14 +620,12 @@ Binance Future is doing Websocket Service upgrade and the upgrade impacts the
 following：
 
 - Before upgrade:
-
   - The websocket server will send a ping frame every 3 minutes. If the
     websocket server does not receive a pong frame back from the connection
     within a 10 minute period, the connection will be disconnected. Unsolicited
     pong frames are allowed.
 
 - After upgrade:
-
   - Websocket server will send a `ping frame` every 3 minutes.
     - If the websocket server does not receive a `pong frame` back from the
       connection within a 10 minute period, the connection will be disconnected.
@@ -675,7 +652,6 @@ Testnet WEBSOCKET
 Portfolio Margin
 
 - REST
-
   - New endpoints `PUT /papi/v1/um/order` and `PUT /papi/v1/cm/order` to support
     UM/CM limit order modify
   - New endpoints `GET /papi/v1/um/orderAmendment` and
@@ -694,21 +670,18 @@ Portfolio Margin
   [FAQ](https://www.binance.com/en/support/faq/what-is-self-trade-prevention-stp-0941126f6413485b9a3df964a9aa2306)
 - User can set `selfTradePreventionMode` when placing new orders. All symbols
   support the following STP mode:
-
   - NONE: No Self-Trade Prevention
   - EXPIRE_TAKER: expire taker order when STP trigger
   - EXPIRE_BOTH: expire taker and maker order when STP trigger
   - EXPIRE_MAKER: expire maker order when STP trigger
 
 - REST Update:
-
   - New order status `EXPIRED_IN_MATCH` - This means that the order expired due
     to STP being triggered.
   - GET /papi/v1/um/account: Add new field `tradeGroupId` in response to show
     user's tradeGroupId
   - Add optional parameter `selfTradePreventionMode` in the endpoints below to
     set order's STP mode:
-
     - POST /papi/v1/um/order
     - POST/papi/v1/um/conditional/order
     - POST /papi/v1/margin/order
@@ -716,7 +689,6 @@ Portfolio Margin
 
   - Add new field `selfTradePreventionMode` in response of the endpoints below
     to show order's STP mode:
-
     - POST /papi/v1/um/order
     - POST/papi/v1/um/conditional/order
     - GET /papi/v1/um/order
@@ -739,7 +711,6 @@ Portfolio Margin
     - GET /papi/v1/margin/openOrderList
 
 - WEBSOCKET User Data Stream:
-
   - Add new field `V` in `ORDER_TRADE_UPDATE` and
     `CONDITIONAL_ORDER_TRADE_UPDATE` to order STP mode.
   - New fields for `executionReport` (These fields will only appear if the order
@@ -754,16 +725,13 @@ Portfolio Margin
 - USDⓈ margin future will support Good To Date TIF. Orders with the TIF set to
   GTD will be automatically canceled by the `goodTillDate` time.
 - REST Update:
-
   - Add optional parameter `goodTillDate` in the endpoints below to set order's
     `goodTillDate` :
-
     - POST /papi/v1/um/order
     - POST/papi/v1/um/conditional/order
 
   - Add new field `goodTillDate` in response of the endpoints below to show
     order's `goodTillDate`:
-
     - POST /papi/v1/um/order
     - POST/papi/v1/um/conditional/order
     - GET /papi/v1/um/order
@@ -778,13 +746,11 @@ Portfolio Margin
     - DELETE /papi/v1/um/conditional/order
 
 - WEBSOCKET User Data Stream:
-
   - Add new field `gtd` in `ORDER_TRADE_UPDATE` and
     `CONDITIONAL_ORDER_TRADE_UPDATE` to order good till date.
 
 - **Breakeven Price(Released)**
 - REST Update
-
   - Add new field `breakEvenPrice` in The following endpoint
     - GET /papi/v1/um/account
     - GET /papi/v1/um/positionRisk
@@ -792,7 +758,6 @@ Portfolio Margin
     - GET /papi/v1/cm/positionRisk
 
 - WEBSOCKET
-
   - New field `bep` represents Break-Even Price in position `P` of payload to
     event: Balance and Position Update – "e": "ACCOUNT_UPDATE"
 
@@ -870,11 +835,9 @@ USDⓈ-M Futures
 REST
 
 - Add new Market Data Endpoints:
-
   - `GET /futures/data/basis`: query basis data
 
 - Update on `GET /fapi/v1/fundingRate`:
-
   - add response field `markPrice` to display mark price associated with a
     particular funding fee charge
 
@@ -906,7 +869,6 @@ Binance Option is doing Websocket Service upgrade and the upgrade impacts the
 following：
 
 - Before upgrade:
-
   - The websocket server will send a ping frame every 5 minutes. If the
     websocket server does not receive a pong frame back from the connection
     within a 15 minute period, the connection will be disconnected. Unsolicited
@@ -918,7 +880,6 @@ following：
     - `wss://nbstream.binance.com/eoptions/stream/`
 
 - After upgrade:
-
   - The websocket server will send a ping frame every 3 minutes. If the
     websocket server does not receive a pong frame back from the connection
     within a 10 minute period, the connection will be disconnected. Unsolicited
@@ -1022,14 +983,12 @@ REST
 Portfolio Margin
 
 - Update on endpoints:
-
   - `GET /papi/v1/um/positionRisk`: add response field `liquidationPrice`
   - `GET /papi/v1/cm/positionRisk`: add response field `liquidationPrice`
   - `GET /papi/v1/um/leverageBracket`: add response field `notionalCoef`
   - `GET /papi/v1/cm/leverageBracket`: add response field `notionalCoef`
 
 - Websocket User Data Streams Update:
-
   - `outboundAccountPosition` event add new field updateId `U`
   - `balanceUpdate` event add new field updateId `U`
 
@@ -1042,11 +1001,9 @@ COIN-M Futures
 REST
 
 - Update on `GET /dapi/v1/ticker/bookTicker`:
-
   - add response field `lastUpdateId`
 
 - Update on `GET /dapi/v1/account`:
-
   - add response field `updateTime` in `assets`
 
 ---
@@ -1137,14 +1094,12 @@ Binance Future is doing Websocket Service upgrade and the upgrade impacts the
 following：
 
 - Before upgrade:
-
   - The websocket server will send a ping frame every 5 minutes. If the
     websocket server does not receive a pong frame back from the connection
     within a 15 minute period, the connection will be disconnected. Unsolicited
     pong frames are allowed.
 
 - After upgrade:
-
   - The websocket server will send a ping frame every 3 minutes. If the
     websocket server does not receive a pong frame back from the connection
     within a 10 minute period, the connection will be disconnected. Unsolicited
@@ -1160,14 +1115,12 @@ Binance Future is doing Websocket Service upgrade and the upgrade impacts the
 following：
 
 - Before upgrade:
-
   - The websocket server will send a ping frame every 5 minutes. If the
     websocket server does not receive a pong frame back from the connection
     within a 15 minute period, the connection will be disconnected. Unsolicited
     pong frames are allowed.
 
 - After upgrade:
-
   - The websocket server will send a ping frame every 3 minutes. If the
     websocket server does not receive a pong frame back from the connection
     within a 10 minute period, the connection will be disconnected. Unsolicited
@@ -1202,14 +1155,12 @@ USDⓈ-M Futures
   [FAQ](https://www.binance.com/zh-CN/support/faq/what-is-self-trade-prevention-0941126f6413485b9a3df964a9aa2306)
 - User can set `selfTradePreventionMode` when placing new orders. All symbols
   support the following STP mode:
-
   - NONE: No Self-Trade Prevention
   - EXPIRE_TAKER: expire taker order when STP trigger
   - EXPIRE_BOTH: expire taker and maker order when STP trigger
   - EXPIRE_MAKER: expire maker order when STP trigger
 
 - REST Update:
-
   - New order status `EXPIRED_IN_MATCH` - This means that the order expired due
     to STP being triggered.
   - `GET /fapi/v2/account`: Add new field `tradeGroupId` in response to show
@@ -1233,7 +1184,6 @@ USDⓈ-M Futures
     - `DELETE /fapi/v1/batchOrders`
 
 - WEBSOCKET User Data Stream:
-
   - Add new field `V` in `ORDER_TRADE_UPDATE` to order STP mode.
 
 ---
@@ -1530,7 +1480,6 @@ USDⓈ-M Futures
 - It is recommended to use standard HTTP request formats, non-standard request
   formats will not be supported in fapi, below are some examples for correct
   code practice:
-
   - Escaping (") with '\\x22' is no longer supported, please use the standard
     '%22' instead. It is necessary to URL encode the square brackets \[\] and
     the double quotes（"）inside the square brackets.
@@ -1740,7 +1689,6 @@ The `recvWindow` will be checked more precisely on order placing endpoints.
 - Add new recwWindow check: the order placing requests are valid if
   `recvWindow` + `timestamp` => matching engine `timestamp`
 - Impacted Endpoints:
-
   - POST /dapi/v1/order (HMAC SHA256)
   - PUT /dapi/v1/order (HMAC SHA256)
   - POST /dapi/v1/batchOrders (HMAC SHA256)
@@ -1774,7 +1722,6 @@ The `recvWindow` will be checked more precisely on order placing endpoints.
 - Add new recwWindow check: the order placing requests are valid if
   `recvWindow` + `timestamp` => matching engine `timestamp`
 - Impacted Endpoints:
-
   - POST /fapi/v1/order
   - PUT /fapi/v1/order
   - POST /fapi/v1/batchOrders
@@ -2358,12 +2305,10 @@ WEBSOCKET
 REST
 
 - New endpoints:
-
   - `POST /fapi/v1/multiAssetsMargin` to change Multi-Assets margin mode
   - `GET /fapi/v1/multiAssetsMargin` to check Multi-Assets margin mode
 
 - Update endpoints:
-
   - New object `assets` as asset information in response of
     `GET /fapi/v1/exchangeInfo`.
   - New field `marginAvailable` in response of `GET /fapi/v2/balance` and
@@ -2532,12 +2477,10 @@ REST RATE LIMIT WEIGHT
 
 - Following endpoints will use new weight rule based on the paremeter "LIMIT" in
   the request:
-
   - `GET /fapi/v1/klines`
   - `GET /fapi/v1/continuousKlines`
 
 - Following endpoints' weights will be updated to 20:
-
   - `GET /fapi/v1/historicalTrades`
   - `GET /fapi/v1/allForceOrders`
   - `GET /fapi/v1/forceOrders`
@@ -2553,14 +2496,12 @@ REST
 
 - Following DAPI endpoints will use new weight rule based on the parameter
   "LIMIT" in the request:
-
   - `GET /dapi/v1/klines`
   - `GET /dapi/v1/continuousKlines`
   - `GET /dapi/v1/indexPriceKlines`
   - `GET /dapi/v1/markPriceKlines`
 
 - Following DAPI endpoints' weights will be updated to 20:
-
   - `GET /dapi/v1/historicalTrades`
   - `GET /dapi/v1/allForceOrders`
   - `GET /dapi/v1/forceOrders`
@@ -2586,7 +2527,6 @@ REST API
 
 - New field "estimatedSettlePrice" in response to `GET /fapi/v1/premiumIndex`
 - New fields in response to `GET /fapi/v1/exchangeInfo`:
-
   - "pair"
   - "contractType"
   - "deliveryDate"
@@ -2656,7 +2596,6 @@ Please notice: new streamlined and optimized push rules on event
 `ACCOUNT_UPDATE` in USER-DATA-STREAM
 
 - When an asset of a user is changed:
-
   - Only this asset and its balance information will be pushed
   - Other assets and information will no longer be pushed even the balances may
     not be 0
@@ -2664,7 +2603,6 @@ Please notice: new streamlined and optimized push rules on event
     empty `[]`
 
 - When a position or the margin type of a symbol is changed:
-
   - "P" will push the details in the "BOTH" position of this symbol
   - If the change happens in "LONG" or "SHORT" position, the changed "LONG" or
     "SHORT" position of this symbol will be pushed
@@ -2812,7 +2750,6 @@ COIN MARGINED PERPETUAL FUTURES
 - New contract type ("contractType") `PERPETUAL` for coin margined perpetual
   futures countract.
 - New fields in the reponse to endpoint `GET /dapi/v1/premiumIndex`:
-
   - `lastFundingRate` for the lasted funding rate of the perpetual futures
     contract
   - `nextFundingTime` for the next funding time of the perpetual futures
@@ -2822,7 +2759,6 @@ COIN MARGINED PERPETUAL FUTURES
   perpetual futures
 - New fields in the payload of WSS `<symbol>@markPrice`,
   `<symbol>@markPrice@1s`, `<pair>@markPrice`, and `<pair>@markPrice@1s`:
-
   - `r` for the lasted funding rate of the perpetual futures contract
   - `T` for the next funding time of the perpetual futures contract
 
@@ -3001,7 +2937,6 @@ WEB SOCKET USER DATA STREAM
 USDⓈ-M Futures
 
 - New fields in USER DATA STREAM event `ORDER_TRADE_UPDATE` :
-
   - `cp` stands for Close-All conditional order
   - `AP` for Activation Price with `TRAILING_STOP_MARKET` order
   - `cr` for Callback Rate with `TRAILING_STOP_MARKET` order
@@ -3063,7 +2998,6 @@ USDⓈ-M Futures
 
 - Please notice: event `ACCOUNT_UPDATE` in USER-DATA-STREAM will not be pushed
   without update of account balances or positions.
-
   - `ACCOUNT_UPDATE` will be pushed only when update happens on user's account,
     including changes on balances, positions, or margin type.
   - Unfilled orders or cancelled orders will not make the event `ACCOUNT_UPDATE`
@@ -3074,12 +3008,10 @@ USDⓈ-M Futures
 - New endpoint `POST /fapi/v1/positionSide/dual` to change position mode: Hedge
   Mode or One-way Mode.
 - New parameter `positionSide` in the following endpoints：
-
   - `POST /fapi/v1/order`
   - `POST /fapi/v1/positionMargin`
 
 - New field `positionSide` in the responses to the following endpoints：
-
   - `POST /fapi/v1/order`
   - `GET /fapi/v1/order`
   - `DELETE /fapi/v1/order`
@@ -3186,21 +3118,18 @@ USDⓈ-M Futures
 USDⓈ-M Futures
 
 - New endpoints related to isolated position：
-
   - `POST /fapi/v1/marginType`
   - `POST /fapi/v1/positionMargin`
   - `GET /fapi/v1/positionMargin/history`
 
 - New field in response to `GET /fapi/v1/positionRisk` related to isolated
   position:
-
   - `marginType`
   - `isolatedMargin`
 
 - New field in response to `GET /fapi/v1/account`related to isolated position:
   `isolated`
 - New field in event `ACCOUNT_UPDATE`:
-
   - "cw" for cross wallet
   - "mt" for margin type
   - "iw" for isolated wallet (if isolated)
