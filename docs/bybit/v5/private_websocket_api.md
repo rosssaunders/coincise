@@ -151,7 +151,8 @@ response header shown in the code panel:
 /v5/account/borrow-history | | 50/s | N | /v5/account/collateral-info | | 50/s |
 N | /v5/asset/coin-greeks | | 50/s | N | /v5/account/transaction-log |
 accountType=UNIFIED | 50/s | N | /v5/account/fee-rate | category=linear | 10/s |
-N | category=spot | 5/s | N | category=option | 5/s | N
+N | category=spot | 5/s | N | category=option | 5/s | N | category=inverse |
+10/s | N
 
 | Method                      | Path                       |                     | Limit | upgradable |
 | --------------------------- | -------------------------- | ------------------- | ----- | ---------- |
@@ -164,6 +165,7 @@ N | category=spot | 5/s | N | category=option | 5/s | N
 | /v5/account/fee-rate        | category=linear            | 10/s                | N     |
 | category=spot               | 5/s                        | N                   |
 | category=option             | 5/s                        | N                   |
+| category=inverse            | 10/s                       | N                   |
 
 #### Asset[​](#asset "Direct link to heading")
 
@@ -814,6 +816,12 @@ _Options:_
 - `Delivering`
 - `Closed`
 
+### symbolType[​](#symboltype "Direct link to heading")
+
+- `innovation`
+- `adventure`
+- `xstocks`
+
 ### curAuctionPhase[​](#curauctionphase "Direct link to heading")
 
 - `NotStarted` Pre-market trading is not started
@@ -1155,6 +1163,26 @@ _Option_:
 - `API cap configuration not found`
 - `API cap configuration not found for bizType`
 - `Requested limit would exceed institutional quota`
+
+### groupId[​](#groupid "Direct link to heading")
+
+- `1` Major Coins
+- `2` High Growth
+- `3` Mid-Tier Liquidity
+- `4` Mid-Tier Activation
+- `5` Long Tail
+- `6` Innovation Zone
+- `7` Pre-Listing
+
+### groupName[​](#groupname "Direct link to heading")
+
+- `G1(Major Coins)` Major Coins
+- `G2(High Growth)` High Growth
+- `G3(Mid-Tier Liquidity)` Mid-Tier Liquidity
+- `G4(Mid-Tier Activation)` Mid-Tier Activation
+- `G5(Long Tail)` Long Tail
+- `Innovation-Zone` Innovation Zone
+- `Pre-listing` Pre-listing
 
 ### Spot Fee Currency Instruction[​](#spot-fee-currency-instruction "Direct link to heading")
 
@@ -2299,7 +2327,7 @@ rejected due to order is executed.
 | &gt; closedPnl                                               | string  | Closed profit and loss for each close position order. The figure is the same as "closedPnl" from <a href="/docs/v5/position/close-pnl">Get Closed PnL</a>                                                                                                                                              |
 | &gt; feeCurrency                                             | string  | Deprecated. Trading fee currency for Spot only. Please understand Spot trading fee currency <a href="/docs/v5/enum#spot-fee-currency-instruction">here</a>                                                                                                                                             |
 | &gt; <a href="/docs/v5/enum#timeinforce">timeInForce</a>     | string  | Time in force                                                                                                                                                                                                                                                                                          |
-| &gt; <a href="/docs/v5/enum#ordertype">orderType</a>         | string  | Order type. <code>Market</code>,<code>Limit</code>. For TP/SL order, it means the order type after triggered                                                                                                                                                                                           |
+| &gt; <a href="/docs/v5/enum#ordertype">orderType</a>         | string  | Order type. <code>Market</code>,<code>Limit</code>. For TP/SL orders, is the order type after the order was triggered                                                                                                                                                                                  |
 | &gt; <a href="/docs/v5/enum#stopordertype">stopOrderType</a> | string  | Stop order type                                                                                                                                                                                                                                                                                        |
 | &gt; ocoTriggerBy                                            | string  | The trigger type of Spot OCO order.<code>OcoTriggerByUnknown</code>, <code>OcoTriggerByTp</code>, <code>OcoTriggerBySl</code>. <em>Classic <code>spot</code> is not supported</em>                                                                                                                     |
 | &gt; orderIv                                                 | string  | Implied volatility                                                                                                                                                                                                                                                                                     |

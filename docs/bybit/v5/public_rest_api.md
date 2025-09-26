@@ -151,7 +151,8 @@ response header shown in the code panel:
 /v5/account/borrow-history | | 50/s | N | /v5/account/collateral-info | | 50/s |
 N | /v5/asset/coin-greeks | | 50/s | N | /v5/account/transaction-log |
 accountType=UNIFIED | 50/s | N | /v5/account/fee-rate | category=linear | 10/s |
-N | category=spot | 5/s | N | category=option | 5/s | N
+N | category=spot | 5/s | N | category=option | 5/s | N | category=inverse |
+10/s | N
 
 | Method                      | Path                       |                     | Limit | upgradable |
 | --------------------------- | -------------------------- | ------------------- | ----- | ---------- |
@@ -164,6 +165,7 @@ N | category=spot | 5/s | N | category=option | 5/s | N
 | /v5/account/fee-rate        | category=linear            | 10/s                | N     |
 | category=spot               | 5/s                        | N                   |
 | category=option             | 5/s                        | N                   |
+| category=inverse            | 10/s                       | N                   |
 
 #### Asset[​](#asset "Direct link to heading")
 
@@ -814,6 +816,12 @@ _Options:_
 - `Delivering`
 - `Closed`
 
+### symbolType[​](#symboltype "Direct link to heading")
+
+- `innovation`
+- `adventure`
+- `xstocks`
+
 ### curAuctionPhase[​](#curauctionphase "Direct link to heading")
 
 - `NotStarted` Pre-market trading is not started
@@ -1155,6 +1163,26 @@ _Option_:
 - `API cap configuration not found`
 - `API cap configuration not found for bizType`
 - `Requested limit would exceed institutional quota`
+
+### groupId[​](#groupid "Direct link to heading")
+
+- `1` Major Coins
+- `2` High Growth
+- `3` Mid-Tier Liquidity
+- `4` Mid-Tier Activation
+- `5` Long Tail
+- `6` Innovation Zone
+- `7` Pre-Listing
+
+### groupName[​](#groupname "Direct link to heading")
+
+- `G1(Major Coins)` Major Coins
+- `G2(High Growth)` High Growth
+- `G3(Mid-Tier Liquidity)` Mid-Tier Liquidity
+- `G4(Mid-Tier Activation)` Mid-Tier Activation
+- `G5(Long Tail)` Long Tail
+- `Innovation-Zone` Innovation Zone
+- `Pre-listing` Pre-listing
 
 ### Spot Fee Currency Instruction[​](#spot-fee-currency-instruction "Direct link to heading")
 
@@ -2219,6 +2247,7 @@ GET `/v5/market/instruments-info`
 | &gt; <a href="/docs/v5/enum#status">status</a>                       | string              | Instrument status                                                                                                                                                                                                                                                        |
 | &gt; baseCoin                                                        | string              | Base coin                                                                                                                                                                                                                                                                |
 | &gt; quoteCoin                                                       | string              | Quote coin                                                                                                                                                                                                                                                               |
+| &gt; <a href="/docs/v5/enum#symboltype">symbolType</a>               | string              | the region to which the trading pair belongs                                                                                                                                                                                                                             |
 | &gt; launchTime                                                      | string              | Launch timestamp (ms)                                                                                                                                                                                                                                                    |
 | &gt; deliveryTime                                                    | string              | Delivery timestamp (ms)<li>Expired futures delivery time</li><li>Perpetual delisting time</li>                                                                                                                                                                           |
 | &gt; deliveryFeeRate                                                 | string              | Delivery fee rate                                                                                                                                                                                                                                                        |
@@ -2291,7 +2320,8 @@ GET `/v5/market/instruments-info`
 | &gt; symbol                                                  | string | Symbol name                                                                                                                                                                                                                                                                                                                                           |
 | &gt; baseCoin                                                | string | Base coin                                                                                                                                                                                                                                                                                                                                             |
 | &gt; quoteCoin                                               | string | Quote coin                                                                                                                                                                                                                                                                                                                                            |
-| &gt; innovation                                              | string | Whether or not this is an <a href="https://blog.bybit.com/en-us/post/bybit-innovation-zone-blt055db8d22a445fa6/" target="_blank" rel="noopener noreferrer">innovation zone token</a>. <code>0</code>: false, <code>1</code>: true                                                                                                                     |
+| &gt; innovation                                              | string | deprecated, please use <code>symbolType</code>                                                                                                                                                                                                                                                                                                        |
+| &gt; <a href="/docs/v5/enum#symboltype">symbolType</a>       | string | the region to which the trading pair belongs                                                                                                                                                                                                                                                                                                          |
 | &gt; <a href="/docs/v5/enum#status">status</a>               | string | Instrument status                                                                                                                                                                                                                                                                                                                                     |
 | &gt; <a href="/docs/v5/enum#margintrading">marginTrading</a> | string | Margin trade symbol or not<ul class=""><li>This is to identify if the symbol support margin trading under different account modes</li><li>You may find some symbols not supporting margin buy or margin sell, so you need to go to <a href="/docs/v5/account/collateral-info">Collateral Info (UTA)</a> to check if that coin is borrowable</li></ul> |
 | &gt; stTag                                                   | string | Whether or not it has an <a href="https://www.bybit.com/en/help-center/article/Bybit-Special-Treatment-ST-Label-Management-Rules" target="_blank" rel="noopener noreferrer">special treatment label</a>. <code>0</code>: false, <code>1</code>: true                                                                                                  |
@@ -3100,7 +3130,9 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 # Get Risk Limit
 
 Query for the
-[risk limit](https://www.bybit.com/en/help-center/article/Risk-Limit-Perpetual-and-Futures).
+[risk limit](https://www.bybit.com/en/help-center/article/Risk-Limit-Perpetual-and-Futures)
+margin parameters. This information is also displayed on the website
+[here](https://www.bybit.com/en/announcement-info/margin-parameters/).
 
 > **Covers: USDT contract / USDC contract / Inverse contract**
 
