@@ -151,7 +151,8 @@ response header shown in the code panel:
 /v5/account/borrow-history | | 50/s | N | /v5/account/collateral-info | | 50/s |
 N | /v5/asset/coin-greeks | | 50/s | N | /v5/account/transaction-log |
 accountType=UNIFIED | 50/s | N | /v5/account/fee-rate | category=linear | 10/s |
-N | category=spot | 5/s | N | category=option | 5/s | N
+N | category=spot | 5/s | N | category=option | 5/s | N | category=inverse |
+10/s | N
 
 | Method                      | Path                       |                     | Limit | upgradable |
 | --------------------------- | -------------------------- | ------------------- | ----- | ---------- |
@@ -164,6 +165,7 @@ N | category=spot | 5/s | N | category=option | 5/s | N
 | /v5/account/fee-rate        | category=linear            | 10/s                | N     |
 | category=spot               | 5/s                        | N                   |
 | category=option             | 5/s                        | N                   |
+| category=inverse            | 10/s                       | N                   |
 
 #### Asset[​](#asset "Direct link to heading")
 
@@ -814,6 +816,12 @@ _Options:_
 - `Delivering`
 - `Closed`
 
+### symbolType[​](#symboltype "Direct link to heading")
+
+- `innovation`
+- `adventure`
+- `xstocks`
+
 ### curAuctionPhase[​](#curauctionphase "Direct link to heading")
 
 - `NotStarted` Pre-market trading is not started
@@ -1155,6 +1163,26 @@ _Option_:
 - `API cap configuration not found`
 - `API cap configuration not found for bizType`
 - `Requested limit would exceed institutional quota`
+
+### groupId[​](#groupid "Direct link to heading")
+
+- `1` Major Coins
+- `2` High Growth
+- `3` Mid-Tier Liquidity
+- `4` Mid-Tier Activation
+- `5` Long Tail
+- `6` Innovation Zone
+- `7` Pre-Listing
+
+### groupName[​](#groupname "Direct link to heading")
+
+- `G1(Major Coins)` Major Coins
+- `G2(High Growth)` High Growth
+- `G3(Mid-Tier Liquidity)` Mid-Tier Liquidity
+- `G4(Mid-Tier Activation)` Mid-Tier Activation
+- `G5(Long Tail)` Long Tail
+- `Innovation-Zone` Innovation Zone
+- `Pre-listing` Pre-listing
 
 ### Spot Fee Currency Instruction[​](#spot-fee-currency-instruction "Direct link to heading")
 
@@ -2137,8 +2165,8 @@ Push frequency: **real-time**
 
 note
 
-For Futures and Spot, a single message has up to 1024 trades. So it may have
-mutiple messages for the same cross.
+For Futures and Spot, a single message may have up to 1024 trades. As such,
+multiple messages may be sent for the same `seq`.
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
