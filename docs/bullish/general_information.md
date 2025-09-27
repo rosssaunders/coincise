@@ -792,8 +792,7 @@ This referrer header is applicable to the below mentioned authenticated
 endpoints:
 
 1. [Create Order](#post-/v2/orders)
-2. [Create OTC Trade](#post-/trading-api/v2/otc-trades)
-3. [OTC Trade Cancellation Command](#post-/trading-api/v2/otc-command)
+2. [Create OTC Trade](#post-/v2/otc-trades)
 
 For more details, please reach out to your relationship manager to understand
 which referrer you are assigned.
