@@ -151,7 +151,8 @@ response header shown in the code panel:
 /v5/account/borrow-history | | 50/s | N | /v5/account/collateral-info | | 50/s |
 N | /v5/asset/coin-greeks | | 50/s | N | /v5/account/transaction-log |
 accountType=UNIFIED | 50/s | N | /v5/account/fee-rate | category=linear | 10/s |
-N | category=spot | 5/s | N | category=option | 5/s | N
+N | category=spot | 5/s | N | category=option | 5/s | N | category=inverse |
+10/s | N
 
 | Method                      | Path                       |                     | Limit | upgradable |
 | --------------------------- | -------------------------- | ------------------- | ----- | ---------- |
@@ -164,6 +165,7 @@ N | category=spot | 5/s | N | category=option | 5/s | N
 | /v5/account/fee-rate        | category=linear            | 10/s                | N     |
 | category=spot               | 5/s                        | N                   |
 | category=option             | 5/s                        | N                   |
+| category=inverse            | 10/s                       | N                   |
 
 #### Asset[​](#asset "Direct link to heading")
 
@@ -324,7 +326,7 @@ POST `/v5/apilimit/set`
 | list                                             | true     | array   | Object                             |
 | &gt; uids                                        | true     | string  | Multiple UIDs, separated by commas |
 | &gt; <a href="/docs/v5/enum#biztype">bizType</a> | true     | string  | Business type                      |
-| &gt; limit                                       | true     | integer | api rate limit per second          |
+| &gt; rate                                        | true     | integer | api rate limit per second          |
 
 #### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -333,20 +335,20 @@ POST `/v5/apilimit/set`
 | list                                             | array   | Object                             |
 | &gt; uids                                        | string  | Multiple UIDs, separated by commas |
 | &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
-| &gt; limit                                       | integer | api rate limit per second          |
+| &gt; rate                                        | integer | api rate limit per second          |
 | &gt; success                                     | boolean | success or not                     |
 | &gt; <a href="/docs/v5/enum#msg">msg</a>         | string  | result message                     |
 
 #### Request Example[​](#request-example "Direct link to heading")
 
 ```
-POST /v5/apilimit/set HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1711420489915X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "list": [        {            "uids": "106293838",            "bizType": "DERIVATIVES",            "limit": 50        }    ]}
+POST /v5/apilimit/set HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1711420489915X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "list": [        {            "uids": "106293838",            "bizType": "DERIVATIVES",            "rate": 50        }    ]}
 ```
 
 #### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "result": [            {                "uids": "290118",                "bizType": "SPOT",                "limit": 600,                "success": true,                "msg": "API limit updated successfully"            }        ]    },    "retExtInfo": {},    "time": 1754894296913}
+{    "retCode": 0,    "retMsg": "success",    "result": {        "result": [            {                "uids": "290118",                "bizType": "SPOT",                "rate": 600,                "success": true,                "msg": "API limit updated successfully"            }        ]    },    "retExtInfo": {},    "time": 1754894296913}
 ```
 
 ### Query api rate limit[​](#query-api-rate-limit "Direct link to heading")
@@ -375,7 +377,7 @@ GET `/v5/apilimit/query`
 | list                                             | array   | Object                             |
 | &gt; uids                                        | string  | Multiple UIDs, separated by commas |
 | &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
-| &gt; limit                                       | integer | api rate limit per second          |
+| &gt; rate                                        | integer | api rate limit per second          |
 
 #### Request Example[​](#request-example-1 "Direct link to heading")
 
@@ -386,7 +388,92 @@ GET /v5/apilimit/query?uids=290118 HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXX
 #### Response Example[​](#response-example-1 "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "uids": "290118",                "bizType": "SPOT",                "limit": 600            },            {                "uids": "290118",                "bizType": "DERIVATIVES",                "limit": 400            }        ]    },    "retExtInfo": {},    "time": 1754894341984}
+{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "uids": "290118",                "bizType": "SPOT",                "rate": 600            },            {                "uids": "290118",                "bizType": "DERIVATIVES",                "rate": 400            }        ]    },    "retExtInfo": {},    "time": 1754894341984}
+```
+
+### Query api rate limit usage and cap[​](#query-api-rate-limit-usage-and-cap "Direct link to heading")
+
+> API rate limit: 50 req per second
+
+info
+
+- Query ins level full picture rate limit usage and cap
+- Only queries from one of the main UIDs or a subaccount UID from sub-INS API
+  key are allowed.
+
+#### HTTP Request[​](#http-request-2 "Direct link to heading")
+
+GET `/v5/apilimit/query-cap`
+
+#### Request Parameters[​](#request-parameters-2 "Direct link to heading")
+
+None
+
+#### Response Parameters[​](#response-parameters-2 "Direct link to heading")
+
+| Parameter                                        | Type    | Comments                                                              |
+| :----------------------------------------------- | :------ | --------------------------------------------------------------------- |
+| list                                             | array   | Object                                                                |
+| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                                                         |
+| &gt; totalRate                                   | integer | Total api rate limit usage accross all subaccounts and master account |
+| &gt; insCap                                      | integer | Ins level api rate limit per second,depends on your ins level         |
+| &gt; uidCap                                      | integer | Uid level api rate limit per second,depends on your uid level         |
+
+#### Request Example[​](#request-example-2 "Direct link to heading")
+
+```
+GET /v5/apilimit/query-cap HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
+```
+
+#### Response Example[​](#response-example-2 "Direct link to heading")
+
+```
+{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "insCap": "30000",                "uidCap": "600",                "totalRate": "29882",                "bizType": "SPOT"            },            {                "insCap": "30000",                "uidCap": "600",                "totalRate": "29882",                "bizType": "OPTIONS"            },            {                "insCap": "40000",                "uidCap": "800",                "totalRate": "39932",                "bizType": "DERIVATIVES"            }        ]    },    "retExtInfo": {},    "time": 1758857589872}
+```
+
+### Query all api rate limit[​](#query-all-api-rate-limit "Direct link to heading")
+
+> API rate limit: 50 req per second
+
+info
+
+- Query all of uid level rate limits including all master account and
+  subaccounts
+- Only queries from one of the main UIDs or a subaccount UID from sub-INS API
+  key are allowed.
+
+#### HTTP Request[​](#http-request-3 "Direct link to heading")
+
+GET `/v5/apilimit/query-all`
+
+#### Request Parameters[​](#request-parameters-3 "Direct link to heading")
+
+| Parameter | Required | Type   | Comments                                                                                                                              |
+| :-------- | :------- | :----- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| limit     | false    | string | Limit for data size per page. [<code>1</code>, <code>1000</code>]. Default: <code>1000</code>                                         |
+| cursor    | false    | string | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                       |
+| uids      | false    | string | Multiple UIDs accross different master account, separated by commas. Returns all master accounts and subaccounts ratelimit by default |
+
+#### Response Parameters[​](#response-parameters-3 "Direct link to heading")
+
+| Parameter                                        | Type    | Comments                             |
+| :----------------------------------------------- | :------ | ------------------------------------ |
+| nextPageCursor                                   | string  | Used to get the next page data       |
+| list                                             | array   | Object                               |
+| &gt; uids                                        | string  | Multiple UIDs , separated by commas. |
+| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                        |
+| &gt; rate                                        | integer | Api rate limit per second            |
+
+#### Request Example[​](#request-example-3 "Direct link to heading")
+
+```
+GET /v5/apilimit/query-all HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
+```
+
+#### Response Example[​](#response-example-3 "Direct link to heading")
+
+```
+{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "uids": "104270393,1674166,1190923,101446030",                "bizType": "SPOT",                "rate": 223            },            {                "uids": "104074050,104394193,104126066",                "bizType": "OPTIONS",                "rate": 223            },            {                "uids": "104154966,103803484,103995540,100445068",                "bizType": "DERIVATIVES",                "rate": 298            }        ],        "nextPageCursor": ""    },    "retExtInfo": {},    "time": 1758857701702}
 ```
 
 # Enums Definitions
@@ -814,6 +901,12 @@ _Options:_
 - `Delivering`
 - `Closed`
 
+### symbolType[​](#symboltype "Direct link to heading")
+
+- `innovation`
+- `adventure`
+- `xstocks`
+
 ### curAuctionPhase[​](#curauctionphase "Direct link to heading")
 
 - `NotStarted` Pre-market trading is not started
@@ -1155,6 +1248,26 @@ _Option_:
 - `API cap configuration not found`
 - `API cap configuration not found for bizType`
 - `Requested limit would exceed institutional quota`
+
+### groupId[​](#groupid "Direct link to heading")
+
+- `1` Major Coins
+- `2` High Growth
+- `3` Mid-Tier Liquidity
+- `4` Mid-Tier Activation
+- `5` Long Tail
+- `6` Innovation Zone
+- `7` Pre-Listing
+
+### groupName[​](#groupname "Direct link to heading")
+
+- `G1(Major Coins)` Major Coins
+- `G2(High Growth)` High Growth
+- `G3(Mid-Tier Liquidity)` Mid-Tier Liquidity
+- `G4(Mid-Tier Activation)` Mid-Tier Activation
+- `G5(Long Tail)` Long Tail
+- `Innovation-Zone` Innovation Zone
+- `Pre-listing` Pre-listing
 
 ### Spot Fee Currency Instruction[​](#spot-fee-currency-instruction "Direct link to heading")
 
@@ -2219,6 +2332,7 @@ GET `/v5/market/instruments-info`
 | &gt; <a href="/docs/v5/enum#status">status</a>                       | string              | Instrument status                                                                                                                                                                                                                                                        |
 | &gt; baseCoin                                                        | string              | Base coin                                                                                                                                                                                                                                                                |
 | &gt; quoteCoin                                                       | string              | Quote coin                                                                                                                                                                                                                                                               |
+| &gt; <a href="/docs/v5/enum#symboltype">symbolType</a>               | string              | the region to which the trading pair belongs                                                                                                                                                                                                                             |
 | &gt; launchTime                                                      | string              | Launch timestamp (ms)                                                                                                                                                                                                                                                    |
 | &gt; deliveryTime                                                    | string              | Delivery timestamp (ms)<li>Expired futures delivery time</li><li>Perpetual delisting time</li>                                                                                                                                                                           |
 | &gt; deliveryFeeRate                                                 | string              | Delivery fee rate                                                                                                                                                                                                                                                        |
@@ -2291,7 +2405,8 @@ GET `/v5/market/instruments-info`
 | &gt; symbol                                                  | string | Symbol name                                                                                                                                                                                                                                                                                                                                           |
 | &gt; baseCoin                                                | string | Base coin                                                                                                                                                                                                                                                                                                                                             |
 | &gt; quoteCoin                                               | string | Quote coin                                                                                                                                                                                                                                                                                                                                            |
-| &gt; innovation                                              | string | Whether or not this is an <a href="https://blog.bybit.com/en-us/post/bybit-innovation-zone-blt055db8d22a445fa6/" target="_blank" rel="noopener noreferrer">innovation zone token</a>. <code>0</code>: false, <code>1</code>: true                                                                                                                     |
+| &gt; innovation                                              | string | deprecated, please use <code>symbolType</code>                                                                                                                                                                                                                                                                                                        |
+| &gt; <a href="/docs/v5/enum#symboltype">symbolType</a>       | string | the region to which the trading pair belongs                                                                                                                                                                                                                                                                                                          |
 | &gt; <a href="/docs/v5/enum#status">status</a>               | string | Instrument status                                                                                                                                                                                                                                                                                                                                     |
 | &gt; <a href="/docs/v5/enum#margintrading">marginTrading</a> | string | Margin trade symbol or not<ul class=""><li>This is to identify if the symbol support margin trading under different account modes</li><li>You may find some symbols not supporting margin buy or margin sell, so you need to go to <a href="/docs/v5/account/collateral-info">Collateral Info (UTA)</a> to check if that coin is borrowable</li></ul> |
 | &gt; stTag                                                   | string | Whether or not it has an <a href="https://www.bybit.com/en/help-center/article/Bybit-Special-Treatment-ST-Label-Management-Rules" target="_blank" rel="noopener noreferrer">special treatment label</a>. <code>0</code>: false, <code>1</code>: true                                                                                                  |
@@ -3100,7 +3215,9 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 # Get Risk Limit
 
 Query for the
-[risk limit](https://www.bybit.com/en/help-center/article/Risk-Limit-Perpetual-and-Futures).
+[risk limit](https://www.bybit.com/en/help-center/article/Risk-Limit-Perpetual-and-Futures)
+margin parameters. This information is also displayed on the website
+[here](https://www.bybit.com/en/announcement-info/margin-parameters/).
 
 > **Covers: USDT contract / USDC contract / Inverse contract**
 
