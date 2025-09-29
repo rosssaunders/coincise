@@ -23,14 +23,14 @@ jobs:
       - name: Create Issue in CCRXT Repository
         run: |
           chmod +x .github/scripts/create-ccrxt-issue.sh
-          .github/scripts/create-ccrxt-issue.sh \
-            "${{ github.event.pull_request.title }}" \
-            "${{ github.event.pull_request.number }}" \
-            "${{ github.event.pull_request.html_url }}" \
-            "${{ github.event.pull_request.body }}" \
-            "${{ github.event.pull_request.merged_by.login }}" \
-            "${{ github.event.pull_request.merged_at }}" \
-            "${{ github.repository_owner }}" \
-            "${{ github.event.repository.name }}"
+          .github/scripts/create-ccrxt-issue.sh
         env:
           GH_TOKEN: ${{ secrets.PAT_GITHUB }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          MERGED_BY: ${{ github.event.pull_request.merged_by.login }}
+          MERGED_AT: ${{ github.event.pull_request.merged_at }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}

@@ -3,14 +3,7 @@
 # Create an issue in the ccrxt repository when a PR with autodoc label is merged
 
 # Get PR information from environment variables
-PR_TITLE="$1"
-PR_NUMBER="$2"
-PR_URL="$3"
-PR_BODY="$4"
-MERGED_BY="$5"
-MERGED_AT="$6"
-REPO_OWNER="$7"
-REPO_NAME="$8"
+# No longer using command line arguments to avoid shell escaping issues
 
 # Construct the issue body - use a here document to avoid escaping issues
 read -r -d '' ISSUE_BODY << 'EOF'
