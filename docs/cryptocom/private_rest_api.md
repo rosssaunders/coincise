@@ -1513,7 +1513,9 @@ If a client would like to BUY/SELL BTCUSD-PERP, the default fee token is USD,
 valid tokens are USD/USDT/EUR.
 
 If a client has an insufficient balance in their preferred fee token, the system
-will switch to the default fee token. |
+will switch to the default fee token.  
+If a client has a sufficient fee credit balance from campaigns, the system will
+automatically switch to use that balance. No opt-in is required. |
 
 ### Applies To
 
