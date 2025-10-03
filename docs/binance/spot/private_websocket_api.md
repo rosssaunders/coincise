@@ -460,8 +460,8 @@ following messages which will indicate the specific error:
 
 ## Filters
 
-Filters define trading rules on a symbol or an exchange. Filters come in two
-forms: `symbol filters` and `exchange filters`.
+Filters define trading rules on a symbol or an exchange. Filters come in three
+forms: `symbol filters`, `exchange filters` and `asset filters`.
 
 ### Symbol filters
 
@@ -859,12 +859,38 @@ one order list.
 
 **/exchangeInfo format:**
 
-````json
-   {
-      "filterType": "EXCHANGE_MAX_NUM_ORDER_LISTS",
-      "maxNumOrderLists": 20
-    }```
-````
+```json
+{
+  "filterType": "EXCHANGE_MAX_NUM_ORDER_LISTS",
+  "maxNumOrderLists": 20
+}
+```
+
+### Asset Filters
+
+#### MAX_ASSET
+
+The `MAX_ASSET` filter defines the maximum quantity of an asset that an account
+is allowed to transact in a single order.
+
+- When the asset is a symbol's base asset, the limit applies to the order's
+  quantity.
+- When the asset is a symbol's quote asset, the limit applies to the order's
+  notional value.
+- For example, a MAX_ASSET filter for USDC applies to all symbols that have USDC
+  as either a base or quote asset, such as:
+  - USDCBNB
+  - BNBUSDC
+
+**/myFilters format:**
+
+```json
+{
+  "filterType": "MAX_ASSET",
+  "asset": "USDC",
+  "limit": "42.00000000"
+}
+```
 
 > Source:
 > [https://developers.binance.com/docs/binance-spot-api-docs/filters](https://developers.binance.com/docs/binance-spot-api-docs/filters)
@@ -1942,6 +1968,7 @@ Example of an event:
 
 ```json
 {
+  "subscriptionId": 0,
   "event": {
     "e": "outboundAccountPosition",
     "E": 1728972148778,
@@ -1964,9 +1991,10 @@ Example of an event:
 
 Event fields:
 
-| Name      | Type     | Mandatory | Description                                                                            |
-| --------- | -------- | --------- | -------------------------------------------------------------------------------------- |
-| \-`event` | \-OBJECT | \-YES     | \-Event payload. See [User Data Streams](/docs/binance-spot-api-docs/user-data-stream) |
+| Name               | Type     | Mandatory | Description                                                                                                                                                                                        |
+| ------------------ | -------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-`event`          | \-OBJECT | \-YES     | \-Event payload. See [User Data Streams](/docs/binance-spot-api-docs/user-data-stream)                                                                                                             |
+| \-`subscriptionId` | \-INT    | \-NO      | \-Identifies which subscription the event is coming from. See [User Data Stream subscriptions](/docs/binance-spot-api-docs/websocket-api/event-format#general_info_user_data_stream_subscriptions) |
 
 > Source:
 > [https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/event-format](https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/event-format)
@@ -4665,7 +4693,7 @@ immediately cancels the other.
 | \-`abovePrice`              | \-DECIMAL | \-NO      | \-Can be used if `aboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.                                                                                                                                                                                     |
 | \-`aboveStopPrice`          | \-DECIMAL | \-NO      | \-Can be used if `aboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`. Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified.                                                                                                                           |
 | \-`aboveTrailingDelta`      | \-LONG    | \-NO      | \-See [Trailing Stop order FAQ](/docs/binance-spot-api-docs/faqs/trailing-stop-faq).                                                                                                                                                                                                                      |
-| \-`aboveTimeInForce`        | \-DECIMAL | \-NO      | \-Required if `aboveType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.                                                                                                                                                                                                                                    |
+| \-`aboveTimeInForce`        | \-ENUM    | \-NO      | \-Required if `aboveType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.                                                                                                                                                                                                                                    |
 | \-`aboveStrategyId`         | \-LONG    | \-NO      | \-Arbitrary numeric value identifying the above order within an order strategy.                                                                                                                                                                                                                           |
 | \-`aboveStrategyType`       | \-INT     | \-NO      | \-Arbitrary numeric value identifying the above order strategy. Values smaller than 1000000 are reserved and cannot be used.                                                                                                                                                                              |
 | \-`abovePegPriceType`       | \-ENUM    | \-NO      | \-See [Pegged Orders](/docs/binance-spot-api-docs/websocket-api/trading-requests#pegged-orders-info)                                                                                                                                                                                                      |
@@ -6656,6 +6684,69 @@ Queries all amendments of a single order.
       "count": 4
     }
   ]
+}
+```
+
+#### Query Relevant Filters (USER_DATA)
+
+```json
+{
+  "id": "74R4febb-d142-46a2-977d-90533eb4d97g",
+  "method": "myFilters",
+  "params": {
+    "recvWindow": 5000,
+    "symbol": "BTCUSDT",
+    "timestamp": 1758008841149,
+    "apiKey": "nQ6kG5gDExDd5MZSO0MfOOWEVZmdkRllpNMfm1FjMjkMnmw1NUd3zPDfvcnDJlil",
+    "signature": "7edc54dd0493dd5bc47adbab9b17bfc9b378d55c20511ae5a168456d3d37aa3a"
+  }
+}
+```
+
+Retrieves the list of [filters](/docs/binance-spot-api-docs/filters) relevant to
+an account on a given symbol. This is the only endpoint that shows if an account
+has [`MAX_ASSET`](/docs/binance-spot-api-docs/filters#max_asset) filters applied
+to it.
+
+**Weight:** 40
+
+**Parameters:**
+
+| Name         | Type      | Mandatory | Description                                                                                                                                          |
+| ------------ | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol     | \-STRING  | \-YES     |                                                                                                                                                      |
+| \-recvWindow | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp  | \-LONG    | \-YES     |                                                                                                                                                      |
+
+**Data Source:** Memory
+
+**Response:**
+
+```json
+{
+  "id": "1758009606869",
+  "status": 200,
+  "result": {
+    "exchangeFilters": [
+      {
+        "filterType": "EXCHANGE_MAX_NUM_ORDERS",
+        "maxNumOrders": 1000
+      }
+    ],
+    "symbolFilters": [
+      {
+        "filterType": "MAX_NUM_ORDER_LISTS",
+        "maxNumOrderLists": 20
+      }
+    ],
+    "assetFilters": [
+      {
+        "filterType": "MAX_ASSET",
+        "asset": "JPY",
+        "limit": "1000000.00000000"
+      }
+    ]
+  }
 }
 ```
 
