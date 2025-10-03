@@ -2059,8 +2059,13 @@ milliseconds
     **[https://dapi.binance.com/dapi/v1/depth?symbol=BTCUSD_200925&limit=1000](https://dapi.binance.com/dapi/v1/depth?symbol=BTCUSD_200925&limit=1000)**
     .
 4.  Drop any event where `u` is < `lastUpdateId` in the snapshot
-5.  The first processed event should have `U` `<=` lastUpdateId`**AND**`u `>`\=
-    `lastUpdateId`
+5.  The first processed event should have `U` `<= ``lastUpdateId` **AND**
+    `u` >`= ``lastUpdateId`
+
+- U = firstUpdateId (the first update ID) from the WebSocket stream.
+- u = finalUpdateId (the last update ID) from the WebSocket stream.
+- lastUpdateId = the update ID you got from the REST depth snapshot.
+
 6.  While listening to the stream, each new event's `pu` should be equal to the
     previous event's `u`, otherwise initialize the process from step 3.
 7.  The data in each event is the **absolute** quantity for a price level
