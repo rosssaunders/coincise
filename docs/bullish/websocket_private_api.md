@@ -699,7 +699,7 @@ Bullish currently has 2 test assets.
   - Deprecated Features to be removed June 2025:
     - Hybrid OrderBook WebSocket (unauthenticated)
     - Market Data WebSocket (authenticated)
-    - Anonymous Trades WebSocket (unauthenticated) true
+    - Anonymous Trades WebSocket (unauthenticated)
   - Support for fee rebates - [Get Trades](#get-/v1/trades) new fields
     `tradeRebateAmount` and `tradeRebateAssetSymbol`
 - March
@@ -3775,17 +3775,25 @@ multiplied asset format, such as SHIB1M and PEPE1M. For more information, please
 see
 [help centre](https://bullishexchange.atlassian.net/wiki/spaces/BHC/pages/20807684/Understanding+Multiplied+Assets+PEPE1M+and+SHIB1M)
 
+Note on Source Address for Token Transfers (ERC-20, SPL, TRC-20): The source
+address for tokens following standards like ERC-20, SPL and TRC-20 may not be
+the originator wallet that broadcasts a transaction. If the transfer is executed
+by a smart contract or program, the visible source address may represent the
+account executing the token logic, not the external user who initiated the
+transfer (Externally Owned Account).
+
 - [supports pagination](#overview--pagination-support)
 
 **Ratelimited:** `True` - see [custody limits](#tag--custody)
 
 ### Parameters
 
-| Name                   | In     | Type                        | Required | Description                                                                                  |
-| ---------------------- | ------ | --------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| Authorization          | header | string                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
-| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime) | false    | start timestamp of period, ISO 8601 with millisecond as string                               |
-| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime) | false    | end timestamp of period, ISO 8601 with millisecond as string                                 |
+| Name                   | In     | Type                                                | Required | Description                                                                                  |
+| ---------------------- | ------ | --------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization          | header | string                                              | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime)                         | false    | start timestamp of period, ISO 8601 with millisecond as string                               |
+| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime)                         | false    | end timestamp of period, ISO 8601 with millisecond as string                                 |
+| custodyTransactionId   | query  | [CustodyTransactionID](#schemacustodytransactionid) | false    | Custody transaction Id                                                                       |
 
 > Example responses
 
@@ -3878,6 +3886,15 @@ see
           }
         ]
       },
+      "statusReason": {
+        "allOf": [
+          {
+            "type": "string",
+            "example": "OK",
+            "description": "Reason explaining why the custody transaction is in a particular state. one of 'OK', 'INTERNAL_ERROR', 'INSUFFICIENT_BALANCE'"
+          }
+        ]
+      },
       "transactionDetails": {
         "allOf": [
           {
@@ -3897,6 +3914,25 @@ see
                 "type": "string",
                 "description": "unique end-to-end-transaction reference for swift transactions",
                 "example": "b55aa5cd-baa2-4122-8c17-ae9b856ae36a"
+              },
+              "sources": {
+                "type": "array",
+                "example": [
+                  {
+                    "address": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02"
+                  }
+                ],
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "address": {
+                      "type": "string",
+                      "description": "source network address on chain",
+                      "example": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02"
+                    }
+                  }
+                },
+                "description": "originator details for crypto deposits. This field is only present for deposits."
               }
             }
           }
@@ -3919,22 +3955,25 @@ see
 
 Status Code **200**
 
-| Name                   | Type                                                              | Required | Restrictions | Description                                                                                                                                                                           |
-| ---------------------- | ----------------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| _anonymous_            | [[CustodyHistory](#schemacustodyhistory)]                         | false    | none         | none                                                                                                                                                                                  |
-| » custodyTransactionId | [CustodyTransactionHistoryID](#schemacustodytransactionhistoryid) | false    | none         | unique identifier for tracking a deposit or withdrawal                                                                                                                                |
-| » direction            | [CustodyDirection](#schemacustodydirection)                       | false    | none         | direction of transaction from API user's perspective, 'DEPOSIT' or 'WITHDRAWAL'                                                                                                       |
-| » quantity             | [CustodyQuantity](#schemacustodyquantity)                         | false    | none         | total quantity of symbol to withdraw including fee in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) - quantity received will have fee subtracted. |
-| » symbol               | [CustodySymbol](#schemacustodysymbol)                             | false    | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                                                                                          |
-| » network              | [NetworkID](#schemanetworkid)                                     | false    | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                                                                                           |
-| » fee                  | [CustodyWithdrawalFee](#schemacustodywithdrawalfee)               | false    | none         | withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei)                                                                           |
-| » memo                 | [CustodyDepositMemo](#schemacustodydepositmemo)                   | false    | none         | memo or destination tag used during deposit to help identify account to credit funds to                                                                                               |
-| » createdAtDateTime    | [CustodyCreatedAtDateTime](#schemacustodycreatedatdatetime)       | false    | none         | time of initial transaction                                                                                                                                                           |
-| » status               | [CustodyTransactionStatus](#schemacustodytransactionstatus)       | false    | none         | one of 'PENDING', 'COMPLETE', 'CANCELLED', 'FAILED'                                                                                                                                   |
-| » transactionDetails   | [CustodyTransactionDetails](#schemacustodytransactiondetails)     | false    | none         | none                                                                                                                                                                                  |
-| »» address             | string                                                            | false    | none         | crypto network address                                                                                                                                                                |
-| »» blockchainTxId      | string                                                            | false    | none         | transaction id on chain                                                                                                                                                               |
-| »» swiftUetr           | string                                                            | false    | none         | unique end-to-end-transaction reference for swift transactions                                                                                                                        |
+| Name                   | Type                                                                    | Required | Restrictions | Description                                                                                                                                                                           |
+| ---------------------- | ----------------------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| _anonymous_            | [[CustodyHistory](#schemacustodyhistory)]                               | false    | none         | none                                                                                                                                                                                  |
+| » custodyTransactionId | [CustodyTransactionHistoryID](#schemacustodytransactionhistoryid)       | false    | none         | unique identifier for tracking a deposit or withdrawal                                                                                                                                |
+| » direction            | [CustodyDirection](#schemacustodydirection)                             | false    | none         | direction of transaction from API user's perspective, 'DEPOSIT' or 'WITHDRAWAL'                                                                                                       |
+| » quantity             | [CustodyQuantity](#schemacustodyquantity)                               | false    | none         | total quantity of symbol to withdraw including fee in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) - quantity received will have fee subtracted. |
+| » symbol               | [CustodySymbol](#schemacustodysymbol)                                   | false    | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                                                                                          |
+| » network              | [NetworkID](#schemanetworkid)                                           | false    | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                                                                                           |
+| » fee                  | [CustodyWithdrawalFee](#schemacustodywithdrawalfee)                     | false    | none         | withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei)                                                                           |
+| » memo                 | [CustodyDepositMemo](#schemacustodydepositmemo)                         | false    | none         | memo or destination tag used during deposit to help identify account to credit funds to                                                                                               |
+| » createdAtDateTime    | [CustodyCreatedAtDateTime](#schemacustodycreatedatdatetime)             | false    | none         | time of initial transaction                                                                                                                                                           |
+| » status               | [CustodyTransactionStatus](#schemacustodytransactionstatus)             | false    | none         | one of 'PENDING', 'COMPLETE', 'CANCELLED', 'FAILED'                                                                                                                                   |
+| » statusReason         | [CustodyTransactionStatusReason](#schemacustodytransactionstatusreason) | false    | none         | Reason explaining why the custody transaction is in a particular state. one of 'OK', 'INTERNAL_ERROR', 'INSUFFICIENT_BALANCE'                                                         |
+| » transactionDetails   | [CustodyTransactionDetails](#schemacustodytransactiondetails)           | false    | none         | none                                                                                                                                                                                  |
+| »» address             | string                                                                  | false    | none         | crypto network address                                                                                                                                                                |
+| »» blockchainTxId      | string                                                                  | false    | none         | transaction id on chain                                                                                                                                                               |
+| »» swiftUetr           | string                                                                  | false    | none         | unique end-to-end-transaction reference for swift transactions                                                                                                                        |
+| »» sources             | [[CustodyOriginatorDetails](#schemacustodyoriginatordetails)]           | false    | none         | originator details for crypto deposits. This field is only present for deposits.                                                                                                      |
+| »»» address            | string                                                                  | false    | none         | source network address on chain                                                                                                                                                       |
 
 > **Note:** To perform this operation, you must be authenticated by means of one
 > of the following methods: jwtTokenAuth
@@ -6836,8 +6875,7 @@ print(r.json())
 
 _Get Markets_
 
-Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
-"Leverage = Collateral ÷ (Collateral - Debt)"
+Get Markets. Clients can ignore [test markets](#overview--test-markets).
 
 ### Parameters
 
@@ -7042,6 +7080,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
       },
       "maxPriceLimit": {
         "description": "order price should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+        "deprecated": true,
         "allOf": [
           {
             "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -7052,6 +7091,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
       },
       "minPriceLimit": {
         "description": "order price should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+        "deprecated": true,
         "allOf": [
           {
             "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -7062,6 +7102,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
       },
       "maxCostLimit": {
         "description": "order cost, `price * quantity` should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+        "deprecated": true,
         "allOf": [
           {
             "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -7072,6 +7113,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
       },
       "minCostLimit": {
         "description": "order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+        "deprecated": true,
         "allOf": [
           {
             "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -7411,7 +7453,7 @@ print(r.json())
 
 _Get Market by Symbol_
 
-Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
+Get Market by Symbol.
 
 ### Parameters
 
@@ -7600,6 +7642,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
     },
     "maxPriceLimit": {
       "description": "order price should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -7610,6 +7653,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
     },
     "minPriceLimit": {
       "description": "order price should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -7620,6 +7664,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
     },
     "maxCostLimit": {
       "description": "order cost, `price * quantity` should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -7630,6 +7675,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
     },
     "minCostLimit": {
       "description": "order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -8091,6 +8137,7 @@ and `OPTION` markets.
     },
     "maxPriceLimit": {
       "description": "order price should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -8101,6 +8148,7 @@ and `OPTION` markets.
     },
     "minPriceLimit": {
       "description": "order price should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -8111,6 +8159,7 @@ and `OPTION` markets.
     },
     "maxCostLimit": {
       "description": "order cost, `price * quantity` should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -8121,6 +8170,7 @@ and `OPTION` markets.
     },
     "minCostLimit": {
       "description": "order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -9044,7 +9094,8 @@ Get Current Tick by Market Symbol.
               "askSpreadFee",
               "baseReservesQuantity",
               "quoteReservesQuantity",
-              "currentPrice"
+              "currentPrice",
+              "tierPrice"
             ],
             "properties": {
               "feeTierId": {
@@ -9080,6 +9131,11 @@ Get Current Tick by Market Symbol.
                 "description": "current AMM price",
                 "type": "string",
                 "example": "16856.0000"
+              },
+              "tierPrice": {
+                "description": "current tier price, up to 12 decimal places",
+                "type": "string",
+                "example": "16856.000100200031"
               }
             }
           }
@@ -11071,6 +11127,111 @@ Status Code **200**
 > **Note:** To perform this operation, you must be authenticated by means of one
 > of the following methods: jwtTokenAuth
 
+## get-expiry-prices--symbol
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json"
+}
+
+fetch(
+  "https://api.exchange.bullish.com/trading-api/v1/expiry-prices/{symbol}",
+  {
+    method: "GET",
+
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.exchange.bullish.com/trading-api/v1/expiry-prices/{symbol}', headers = headers)
+
+print(r.json())
+
+```
+
+`GET /v1/expiry-prices/{symbol}`
+
+_Get Expiry Prices_
+
+Retrieves Expiry Price and Expiry Notional for respective Options and Dated
+Futures markets.
+
+### Parameters
+
+| Name   | In   | Type                                                    | Required | Description |
+| ------ | ---- | ------------------------------------------------------- | -------- | ----------- |
+| symbol | path | [DerivativeMarketSymbol](#schemaderivativemarketsymbol) | true     | none        |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "object",
+  "required": [
+    "symbol",
+    "expiryPrice",
+    "expiryNotional",
+    "expiryDatetime",
+    "expiryTimestamp"
+  ],
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "Market Symbol",
+      "example": "BTC-USDC-20250912-95000-C"
+    },
+    "expiryPrice": {
+      "type": "string",
+      "description": "Price used upon Expiry for an Options/Dated Futures contract",
+      "example": "115123.2512"
+    },
+    "expiryNotional": {
+      "type": "string",
+      "description": "Difference between strike price and expiry price for an Options contract expressed in notional per unit contract",
+      "example": "20123.3033"
+    },
+    "expiryDatetime": {
+      "type": "string",
+      "description": "Datetime by which the market expires at",
+      "example": "2018-11-18T00:00:00.000Z"
+    },
+    "expiryTimestamp": {
+      "type": "string",
+      "description": "Timestamp by which the market expires at",
+      "example": "1672041600000"
+    }
+  }
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description                                                             | Schema                                                        |
+| ------ | -------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | Retrieve expiry price and expiry notional for options and dated future. | [MarketExpiryPriceResponse](#schemamarketexpirypriceresponse) |
+| 400    | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)           | Expiry price for market is not (yet) available                          | None                                                          |
+| 404    | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)             | Invalid symbol provided                                                 | None                                                          |
+| 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error                                                   | None                                                          |
+
+> **Note:** This operation does not require authentication
+
 # history
 
 ## trade-get-orders-history-v2
@@ -11124,7 +11285,8 @@ _Get Historical Orders_
 
 Retrieve a list of orders placed by a trading account with specified filters.
 
-- Only the last 90 days of data is available for querying
+- On a single query request you can retrieve data over a 7 day window, with the
+  data available for the last 90 days
 
 This endpoint requires [authentication](#overview--generate-a-jwt-token) and
 supports [pagination](#overview--pagination-support). To filter by
@@ -11510,7 +11672,8 @@ Get a list of trades based on specified filters.
 
 - requires [bearer token](#overview--add-authenticated-request-header) in
   authorization header
-- Only the last 90 days of data is available for querying
+- On a single query request you can retrieve data over a 7 day window, with the
+  data available for the last 90 days
 - [supports pagination](#overview--pagination-support)
 - filtering on `createdAtDatetime`, `createdAtTimestamp` requires additional
   keywords, [see filtering support](#overview--filtering-support)
@@ -11830,7 +11993,8 @@ Get historical derivatives settlement.
 - [supports pagination](#overview--pagination-support)
 - filtering on `settlementDatetime` requires additional keywords,
   [see filtering support](#overview--filtering-support)
-- Only the last 90 days of data is available for querying
+- On a single query request you can retrieve data over a 7 day window, with the
+  data available for the last 90 days
 
 ### Parameters
 
@@ -12073,7 +12237,8 @@ Get historical transfers.
 - [supports pagination](#overview--pagination-support)
 - filtering on `createdAtDatetime` and `createdAtTimestamp` requires additional
   keywords, [see filtering support](#overview--filtering-support)
-- Only the last 90 days of data is available for querying
+- On a single query request you can retrieve data over a 7 day window, with the
+  data available for the last 90 days
 
 ### Parameters
 
@@ -12257,7 +12422,8 @@ of data at a time.
 
 **Ratelimited:** `False`
 
-- Only the last 90 days of data is available for querying
+- On a single query request you can retrieve data over a 7 day window, with the
+  data available for the last 90 days
 
 ### Parameters
 
@@ -12447,7 +12613,8 @@ _Get Historical Funding Rate_
 Get historical hourly funding rate for the requested perpetual market
 
 - [supports pagination](#overview--pagination-support)
-- Only the last 90 days of data is available for querying
+- On a single query request you can retrieve data over a 7 day window, with the
+  data available for the last 90 days
 
 ### Parameters
 
@@ -12564,7 +12731,8 @@ charged in the particular hour for the asset.
 - [supports pagination](#overview--pagination-support)
 - filtering `createdAtDatetime`, `createdAtTimestamp` requires additional
   keywords, [see filtering support](#overview--filtering-support)
-- Only the last 90 days of data is available for querying
+- On a single query request you can retrieve data over a 7 day window, with the
+  data available for the last 90 days
 
 **Ratelimited:** `True`
 
@@ -14318,6 +14486,7 @@ Get the otc trade list based on specified filters.
 | Authorization            | header | string                                                  | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
 | status                   | query  | [OtcTradeExternalStatus](#schemaotctradeexternalstatus) | false    | OTC trade status                                                                             |
 | tradingAccountId         | query  | [TradingAccountId](#schematradingaccountid)             | true     | none                                                                                         |
+| sharedMatchKey           | query  | [SharedMatchKey](#schemasharedmatchkey)                 | false    | none                                                                                         |
 | clientOtcTradeId         | query  | [ClientOtcTradeId](#schemaclientotctradeid)             | false    | none                                                                                         |
 | createdAtDatetime[ gte ] | query  | [DateTime](#schemadatetime)                             | false    | Start timestamp of window, ISO 8601 with millisecond as string                               |
 | createdAtDatetime[ lte ] | query  | [DateTime](#schemadatetime)                             | false    | End timestamp of window, ISO 8601 with millisecond as string                                 |
@@ -14616,7 +14785,7 @@ Status Code **200**
 | _anonymous_               | [[OtcTradeView](#schemaotctradeview)]                   | false    | none         | none                                                                                                                                                                                                         |
 | » otcTradeId              | [OtcTradeId](#schemaotctradeid)                         | true     | none         | unique numeric (i64) identifier generated on Bullish side expressed as a string value                                                                                                                        |
 | » clientOtcTradeId        | [ClientOtcTradeId](#schemaclientotctradeid)             | false    | none         | unique numeric (i64) identifier generated on the client side expressed as a string value                                                                                                                     |
-| » sharedMatchKey          | [SharedMatchId](#schemasharedmatchid)                   | true     | none         | Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value                   |
+| » sharedMatchKey          | [SharedMatchKey](#schemasharedmatchkey)                 | true     | none         | Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value                   |
 | » status                  | [OtcTradeExternalStatus](#schemaotctradeexternalstatus) | true     | none         | otc trade status can have the following string values `"COUNTERPARTY_PENDING"`, `"COUNTERPARTY_PAIRED"`, `"RISK_PENDING"`, `"MATCHED"`, `"CANCELLED"`, `"REJECTED"`                                          |
 | » statusReason            | string                                                  | true     | none         | status reason, describes why the otc trade is in a specific state                                                                                                                                            |
 | » statusReasonCode        | string                                                  | true     | none         | status reason code, see [details](#overview--error--rejection-codes)                                                                                                                                         |
@@ -16068,6 +16237,21 @@ descriptive label of destination provided by user
 | ----------- | ------ | -------- | ------------ | ------------------------------------------------- |
 | _anonymous_ | string | false    | none         | descriptive label of destination provided by user |
 
+## CustodyTransactionStatusReason
+
+```json
+"OK"
+```
+
+Reason explaining why the custody transaction is in a particular state. one of
+'OK', 'INTERNAL_ERROR', 'INSUFFICIENT_BALANCE'
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                                                                   |
+| ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| _anonymous_ | string | false    | none         | Reason explaining why the custody transaction is in a particular state. one of 'OK', 'INTERNAL_ERROR', 'INSUFFICIENT_BALANCE' |
+
 ## CustodyTransactionStatus
 
 ```json
@@ -16081,6 +16265,27 @@ one of 'PENDING', 'COMPLETE', 'CANCELLED', 'FAILED'
 | Name        | Type   | Required | Restrictions | Description                                         |
 | ----------- | ------ | -------- | ------------ | --------------------------------------------------- |
 | _anonymous_ | string | false    | none         | one of 'PENDING', 'COMPLETE', 'CANCELLED', 'FAILED' |
+
+## CustodyOriginatorDetails
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "address": {
+      "type": "string",
+      "description": "source network address on chain",
+      "example": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02"
+    }
+  }
+}
+```
+
+### Properties
+
+| Name    | Type   | Required | Restrictions | Description                     |
+| ------- | ------ | -------- | ------------ | ------------------------------- |
+| address | string | false    | none         | source network address on chain |
 
 ## CustodyTransactionDetails
 
@@ -16102,6 +16307,25 @@ one of 'PENDING', 'COMPLETE', 'CANCELLED', 'FAILED'
       "type": "string",
       "description": "unique end-to-end-transaction reference for swift transactions",
       "example": "b55aa5cd-baa2-4122-8c17-ae9b856ae36a"
+    },
+    "sources": {
+      "type": "array",
+      "example": [
+        {
+          "address": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02"
+        }
+      ],
+      "items": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "source network address on chain",
+            "example": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02"
+          }
+        }
+      },
+      "description": "originator details for crypto deposits. This field is only present for deposits."
     }
   }
 }
@@ -16109,11 +16333,12 @@ one of 'PENDING', 'COMPLETE', 'CANCELLED', 'FAILED'
 
 ### Properties
 
-| Name           | Type   | Required | Restrictions | Description                                                    |
-| -------------- | ------ | -------- | ------------ | -------------------------------------------------------------- |
-| address        | string | false    | none         | crypto network address                                         |
-| blockchainTxId | string | false    | none         | transaction id on chain                                        |
-| swiftUetr      | string | false    | none         | unique end-to-end-transaction reference for swift transactions |
+| Name           | Type                                                          | Required | Restrictions | Description                                                                      |
+| -------------- | ------------------------------------------------------------- | -------- | ------------ | -------------------------------------------------------------------------------- |
+| address        | string                                                        | false    | none         | crypto network address                                                           |
+| blockchainTxId | string                                                        | false    | none         | transaction id on chain                                                          |
+| swiftUetr      | string                                                        | false    | none         | unique end-to-end-transaction reference for swift transactions                   |
+| sources        | [[CustodyOriginatorDetails](#schemacustodyoriginatordetails)] | false    | none         | originator details for crypto deposits. This field is only present for deposits. |
 
 ## CustodyAvailableWithdrawalLimit
 
@@ -20414,6 +20639,15 @@ JWT authorizer you obtain along with the
         }
       ]
     },
+    "statusReason": {
+      "allOf": [
+        {
+          "type": "string",
+          "example": "OK",
+          "description": "Reason explaining why the custody transaction is in a particular state. one of 'OK', 'INTERNAL_ERROR', 'INSUFFICIENT_BALANCE'"
+        }
+      ]
+    },
     "transactionDetails": {
       "allOf": [
         {
@@ -20433,6 +20667,25 @@ JWT authorizer you obtain along with the
               "type": "string",
               "description": "unique end-to-end-transaction reference for swift transactions",
               "example": "b55aa5cd-baa2-4122-8c17-ae9b856ae36a"
+            },
+            "sources": {
+              "type": "array",
+              "example": [
+                {
+                  "address": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02"
+                }
+              ],
+              "items": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "description": "source network address on chain",
+                    "example": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02"
+                  }
+                }
+              },
+              "description": "originator details for crypto deposits. This field is only present for deposits."
             }
           }
         }
@@ -20444,18 +20697,19 @@ JWT authorizer you obtain along with the
 
 ### Properties
 
-| Name                 | Type                                                              | Required | Restrictions | Description                                                                                                                                                                           |
-| -------------------- | ----------------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| custodyTransactionId | [CustodyTransactionHistoryID](#schemacustodytransactionhistoryid) | false    | none         | unique identifier for tracking a deposit or withdrawal                                                                                                                                |
-| direction            | [CustodyDirection](#schemacustodydirection)                       | false    | none         | direction of transaction from API user's perspective, 'DEPOSIT' or 'WITHDRAWAL'                                                                                                       |
-| quantity             | [CustodyQuantity](#schemacustodyquantity)                         | false    | none         | total quantity of symbol to withdraw including fee in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) - quantity received will have fee subtracted. |
-| symbol               | [CustodySymbol](#schemacustodysymbol)                             | false    | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                                                                                          |
-| network              | [NetworkID](#schemanetworkid)                                     | false    | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                                                                                           |
-| fee                  | [CustodyWithdrawalFee](#schemacustodywithdrawalfee)               | false    | none         | withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei)                                                                           |
-| memo                 | [CustodyDepositMemo](#schemacustodydepositmemo)                   | false    | none         | memo or destination tag used during deposit to help identify account to credit funds to                                                                                               |
-| createdAtDateTime    | [CustodyCreatedAtDateTime](#schemacustodycreatedatdatetime)       | false    | none         | time of initial transaction                                                                                                                                                           |
-| status               | [CustodyTransactionStatus](#schemacustodytransactionstatus)       | false    | none         | one of 'PENDING', 'COMPLETE', 'CANCELLED', 'FAILED'                                                                                                                                   |
-| transactionDetails   | [CustodyTransactionDetails](#schemacustodytransactiondetails)     | false    | none         | none                                                                                                                                                                                  |
+| Name                 | Type                                                                    | Required | Restrictions | Description                                                                                                                                                                           |
+| -------------------- | ----------------------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| custodyTransactionId | [CustodyTransactionHistoryID](#schemacustodytransactionhistoryid)       | false    | none         | unique identifier for tracking a deposit or withdrawal                                                                                                                                |
+| direction            | [CustodyDirection](#schemacustodydirection)                             | false    | none         | direction of transaction from API user's perspective, 'DEPOSIT' or 'WITHDRAWAL'                                                                                                       |
+| quantity             | [CustodyQuantity](#schemacustodyquantity)                               | false    | none         | total quantity of symbol to withdraw including fee in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) - quantity received will have fee subtracted. |
+| symbol               | [CustodySymbol](#schemacustodysymbol)                                   | false    | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                                                                                          |
+| network              | [NetworkID](#schemanetworkid)                                           | false    | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                                                                                           |
+| fee                  | [CustodyWithdrawalFee](#schemacustodywithdrawalfee)                     | false    | none         | withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei)                                                                           |
+| memo                 | [CustodyDepositMemo](#schemacustodydepositmemo)                         | false    | none         | memo or destination tag used during deposit to help identify account to credit funds to                                                                                               |
+| createdAtDateTime    | [CustodyCreatedAtDateTime](#schemacustodycreatedatdatetime)             | false    | none         | time of initial transaction                                                                                                                                                           |
+| status               | [CustodyTransactionStatus](#schemacustodytransactionstatus)             | false    | none         | one of 'PENDING', 'COMPLETE', 'CANCELLED', 'FAILED'                                                                                                                                   |
+| statusReason         | [CustodyTransactionStatusReason](#schemacustodytransactionstatusreason) | false    | none         | Reason explaining why the custody transaction is in a particular state. one of 'OK', 'INTERNAL_ERROR', 'INSUFFICIENT_BALANCE'                                                         |
+| transactionDetails   | [CustodyTransactionDetails](#schemacustodytransactiondetails)           | false    | none         | none                                                                                                                                                                                  |
 
 ## CustodyCryptoDepositInstructions
 
@@ -21565,7 +21819,8 @@ JWT authorizer you obtain along with the
               "askSpreadFee",
               "baseReservesQuantity",
               "quoteReservesQuantity",
-              "currentPrice"
+              "currentPrice",
+              "tierPrice"
             ],
             "properties": {
               "feeTierId": {
@@ -21601,6 +21856,11 @@ JWT authorizer you obtain along with the
                 "description": "current AMM price",
                 "type": "string",
                 "example": "16856.0000"
+              },
+              "tierPrice": {
+                "description": "current tier price, up to 12 decimal places",
+                "type": "string",
+                "example": "16856.000100200031"
               }
             }
           }
@@ -21717,7 +21977,8 @@ JWT authorizer you obtain along with the
     "askSpreadFee",
     "baseReservesQuantity",
     "quoteReservesQuantity",
-    "currentPrice"
+    "currentPrice",
+    "tierPrice"
   ],
   "properties": {
     "feeTierId": {
@@ -21753,6 +22014,11 @@ JWT authorizer you obtain along with the
       "description": "current AMM price",
       "type": "string",
       "example": "16856.0000"
+    },
+    "tierPrice": {
+      "description": "current tier price, up to 12 decimal places",
+      "type": "string",
+      "example": "16856.000100200031"
     }
   }
 }
@@ -21770,6 +22036,7 @@ AMM data
 | baseReservesQuantity  | string                        | true     | none         | base reserves quantity                                                    |
 | quoteReservesQuantity | string                        | true     | none         | quote reserves quantity                                                   |
 | currentPrice          | string                        | true     | none         | current AMM price                                                         |
+| tierPrice             | string                        | true     | none         | current tier price, up to 12 decimal places                               |
 
 ## MarketSymbol
 
@@ -21784,6 +22051,21 @@ market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market
 | Name        | Type   | Required | Restrictions | Description                                                                   |
 | ----------- | ------ | -------- | ------------ | ----------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market |
+
+## DerivativeMarketSymbol
+
+```json
+"BTC-USDC-20250919-90000-C"
+```
+
+market symbol. Eg `BTC-USDC-20250919-90000-C` for OPTION markets and
+`BTC-USDC-20250919` for DATED FUTURE markets.
+
+### Properties
+
+| Name        | Type   | Required | Restrictions | Description                                                                                                        |
+| ----------- | ------ | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| _anonymous_ | string | false    | none         | market symbol. Eg `BTC-USDC-20250919-90000-C` for OPTION markets and `BTC-USDC-20250919` for DATED FUTURE markets. |
 
 ## DatedFutureMarketSymbol
 
@@ -22474,6 +22756,7 @@ unique asset ID
     },
     "maxPriceLimit": {
       "description": "order price should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -22484,6 +22767,7 @@ unique asset ID
     },
     "minPriceLimit": {
       "description": "order price should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -22494,6 +22778,7 @@ unique asset ID
     },
     "maxCostLimit": {
       "description": "order cost, `price * quantity` should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -22504,6 +22789,7 @@ unique asset ID
     },
     "minCostLimit": {
       "description": "order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -24514,7 +24800,7 @@ A command with details to an OTC trade
 | ---------------- | ----------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | commandType      | string                                          | true     | none         | Specifies the command type and must be ‘V1CreateOtcTrade’ to indicate the submission of an OTC trade.                                                                                                        |
 | clientOtcTradeId | [ClientOtcTradeId](#schemaclientotctradeid)     | false    | none         | unique numeric (i64) identifier generated on the client side expressed as a string value                                                                                                                     |
-| sharedMatchKey   | [SharedMatchId](#schemasharedmatchid)           | true     | none         | Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value                   |
+| sharedMatchKey   | [SharedMatchKey](#schemasharedmatchkey)         | true     | none         | Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value                   |
 | tradingAccountId | [TradingAccountId](#schematradingaccountid)     | true     | none         | unique trading account ID                                                                                                                                                                                    |
 | isTaker          | [Boolean](#schemaboolean)                       | true     | none         | denotes whether the role of the counterparty is Taker or Maker. The corresponding leg of the opposite side of the trade should have the inverse role to be successfully matched on the OTC Clearing Facility |
 | remarks          | [Remarks](#schemaremarks)                       | false    | none         | text field for client’s internal reference to a trade, max length is 255 characters                                                                                                                          |
@@ -24835,7 +25121,7 @@ A trade of an OTC trade
 | ------------------ | ------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | otcTradeId         | [OtcTradeId](#schemaotctradeid)                         | true     | none         | unique numeric (i64) identifier generated on Bullish side expressed as a string value                                                                                                      |
 | clientOtcTradeId   | [ClientOtcTradeId](#schemaclientotctradeid)             | false    | none         | unique numeric (i64) identifier generated on the client side expressed as a string value                                                                                                   |
-| sharedMatchKey     | [SharedMatchId](#schemasharedmatchid)                   | true     | none         | Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value |
+| sharedMatchKey     | [SharedMatchKey](#schemasharedmatchkey)                 | true     | none         | Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value |
 | status             | [OtcTradeExternalStatus](#schemaotctradeexternalstatus) | true     | none         | otc trade status can have the following string values `"COUNTERPARTY_PENDING"`, `"COUNTERPARTY_PAIRED"`, `"RISK_PENDING"`, `"MATCHED"`, `"CANCELLED"`, `"REJECTED"`                        |
 | statusReason       | string                                                  | true     | none         | status reason, describes why the otc trade is in a specific state                                                                                                                          |
 | statusReasonCode   | string                                                  | true     | none         | status reason code, see [details](#overview--error--rejection-codes)                                                                                                                       |
@@ -25038,7 +25324,7 @@ A response for an acknowledged OTC trade creation request
 | requestId        | [RequestID](#schemarequestid)               | true     | none         | none                                                                                                                                                                                       |
 | otcTradeId       | [OtcTradeId](#schemaotctradeid)             | true     | none         | unique numeric (i64) identifier generated on Bullish side expressed as a string value                                                                                                      |
 | clientOtcTradeId | [ClientOtcTradeId](#schemaclientotctradeid) | false    | none         | unique numeric (i64) identifier generated on the client side expressed as a string value                                                                                                   |
-| sharedMatchKey   | [SharedMatchId](#schemasharedmatchid)       | true     | none         | Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value |
+| sharedMatchKey   | [SharedMatchKey](#schemasharedmatchkey)     | true     | none         | Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value |
 
 ## CancelOtcTradeCommand
 
@@ -25171,7 +25457,7 @@ DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market
 | ----------- | ------ | -------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | _anonymous_ | string | false    | none         | market symbol. Eg `BTC-USDC-PERP` for PERPETUAL market `BTC-USDC-20250613` for DATEDFUTURE market and `BTC-USDC-20250613-100000-C` for OPTION market |
 
-## SharedMatchId
+## SharedMatchKey
 
 ```json
 "cfBtcXrpMatch001"
@@ -25427,3 +25713,55 @@ characters
 | quantityLimit         | string  | true     | none         | Cap on the total number of contracts that a market maker can trade within `windowTimeInSeconds`. This is direction(side) agnostic. Needs to be `> 0` if set.                                                                                      |
 | deltaLimit            | string  | true     | none         | Net delta exposure that a market maker can accumulate within `windowTimeInSeconds`                                                                                                                                                                |
 | isActive              | boolean | true     | none         | This boolean indicates if this configuration is in effect or not.                                                                                                                                                                                 |
+
+## MarketExpiryPriceResponse
+
+```json
+{
+  "type": "object",
+  "required": [
+    "symbol",
+    "expiryPrice",
+    "expiryNotional",
+    "expiryDatetime",
+    "expiryTimestamp"
+  ],
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "Market Symbol",
+      "example": "BTC-USDC-20250912-95000-C"
+    },
+    "expiryPrice": {
+      "type": "string",
+      "description": "Price used upon Expiry for an Options/Dated Futures contract",
+      "example": "115123.2512"
+    },
+    "expiryNotional": {
+      "type": "string",
+      "description": "Difference between strike price and expiry price for an Options contract expressed in notional per unit contract",
+      "example": "20123.3033"
+    },
+    "expiryDatetime": {
+      "type": "string",
+      "description": "Datetime by which the market expires at",
+      "example": "2018-11-18T00:00:00.000Z"
+    },
+    "expiryTimestamp": {
+      "type": "string",
+      "description": "Timestamp by which the market expires at",
+      "example": "1672041600000"
+    }
+  }
+}
+```
+
+### Properties
+
+| Name            | Type   | Required | Restrictions | Description                                                                                                      |
+| --------------- | ------ | -------- | ------------ | ---------------------------------------------------------------------------------------------------------------- |
+| symbol          | string | true     | none         | Market Symbol                                                                                                    |
+| expiryPrice     | string | true     | none         | Price used upon Expiry for an Options/Dated Futures contract                                                     |
+| expiryNotional  | string | true     | none         | Difference between strike price and expiry price for an Options contract expressed in notional per unit contract |
+| expiryDatetime  | string | true     | none         | Datetime by which the market expires at                                                                          |
+| expiryTimestamp | string | true     | none         | Timestamp by which the market expires at                                                                         |

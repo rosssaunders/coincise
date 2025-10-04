@@ -29,7 +29,7 @@
   - Deprecated Features to be removed June 2025:
     - Hybrid OrderBook WebSocket (unauthenticated)
     - Market Data WebSocket (authenticated)
-    - Anonymous Trades WebSocket (unauthenticated) true
+    - Anonymous Trades WebSocket (unauthenticated)
   - Support for fee rebates - [Get Trades](#get-/v1/trades) new fields
     `tradeRebateAmount` and `tradeRebateAssetSymbol`
 - March
