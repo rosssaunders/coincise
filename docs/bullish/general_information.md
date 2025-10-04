@@ -792,8 +792,7 @@ This referrer header is applicable to the below mentioned authenticated
 endpoints:
 
 1. [Create Order](#post-/v2/orders)
-2. [Create OTC Trade](#post-/trading-api/v2/otc-trades)
-3. [OTC Trade Cancellation Command](#post-/trading-api/v2/otc-command)
+2. [Create OTC Trade](#post-/v2/otc-trades)
 
 For more details, please reach out to your relationship manager to understand
 which referrer you are assigned.
@@ -1471,6 +1470,7 @@ the subscription message listed below: | Parameters | Type | Description |
       {
         "feeTierId": "1",
         "currentPrice": "0.0007",
+        "tierPrice": "0.000703038503",
         "baseReservesQuantity": "96153.00000000",
         "quoteReservesQuantity": "500005200.0400",
         "bidSpreadFee": "0.00000005",
@@ -1479,6 +1479,7 @@ the subscription message listed below: | Parameters | Type | Description |
       {
         "feeTierId": "2",
         "currentPrice": "0.0017",
+        "tierPrice": "0.001703038503",
         "baseReservesQuantity": "96153.00000000",
         "quoteReservesQuantity": "500005200.0400",
         "bidSpreadFee": "0.00000015",
@@ -1537,6 +1538,7 @@ model: [Get Market Tick](#get-/v1/markets/-symbol-/tick)
       {
         "feeTierId": "1",
         "currentPrice": "0.0007",
+        "tierPrice": "0.001703038503",
         "baseReservesQuantity": "96153.00000000",
         "quoteReservesQuantity": "500005200.0400",
         "bidSpreadFee": "0.00000005",
@@ -1545,6 +1547,7 @@ model: [Get Market Tick](#get-/v1/markets/-symbol-/tick)
       {
         "feeTierId": "2",
         "currentPrice": "0.0017",
+        "tierPrice": "0.001703038503",
         "baseReservesQuantity": "96153.00000000",
         "quoteReservesQuantity": "500005200.0400",
         "bidSpreadFee": "0.00000015",

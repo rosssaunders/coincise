@@ -63,17 +63,25 @@ multiplied asset format, such as SHIB1M and PEPE1M. For more information, please
 see
 [help centre](https://bullishexchange.atlassian.net/wiki/spaces/BHC/pages/20807684/Understanding+Multiplied+Assets+PEPE1M+and+SHIB1M)
 
+Note on Source Address for Token Transfers (ERC-20, SPL, TRC-20): The source
+address for tokens following standards like ERC-20, SPL and TRC-20 may not be
+the originator wallet that broadcasts a transaction. If the transfer is executed
+by a smart contract or program, the visible source address may represent the
+account executing the token logic, not the external user who initiated the
+transfer (Externally Owned Account).
+
 - [supports pagination](#overview--pagination-support)
 
 **Ratelimited:** `True` - see [custody limits](#tag--custody)
 
 ### Parameters
 
-| Name                   | In     | Type                        | Required | Description                                                                                  |
-| ---------------------- | ------ | --------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| Authorization          | header | string                      | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
-| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime) | false    | start timestamp of period, ISO 8601 with millisecond as string                               |
-| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime) | false    | end timestamp of period, ISO 8601 with millisecond as string                                 |
+| Name                   | In     | Type                                                | Required | Description                                                                                  |
+| ---------------------- | ------ | --------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| Authorization          | header | string                                              | true     | authorization header, its value must be 'Bearer ' + [token](#overview--generate-a-jwt-token) |
+| createdAtDatetime[gte] | query  | [DateTime](#schemadatetime)                         | false    | start timestamp of period, ISO 8601 with millisecond as string                               |
+| createdAtDatetime[lte] | query  | [DateTime](#schemadatetime)                         | false    | end timestamp of period, ISO 8601 with millisecond as string                                 |
+| custodyTransactionId   | query  | [CustodyTransactionID](#schemacustodytransactionid) | false    | Custody transaction Id                                                                       |
 
 > Example responses
 
@@ -166,6 +174,15 @@ see
           }
         ]
       },
+      "statusReason": {
+        "allOf": [
+          {
+            "type": "string",
+            "example": "OK",
+            "description": "Reason explaining why the custody transaction is in a particular state. one of 'OK', 'INTERNAL_ERROR', 'INSUFFICIENT_BALANCE'"
+          }
+        ]
+      },
       "transactionDetails": {
         "allOf": [
           {
@@ -185,6 +202,25 @@ see
                 "type": "string",
                 "description": "unique end-to-end-transaction reference for swift transactions",
                 "example": "b55aa5cd-baa2-4122-8c17-ae9b856ae36a"
+              },
+              "sources": {
+                "type": "array",
+                "example": [
+                  {
+                    "address": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02"
+                  }
+                ],
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "address": {
+                      "type": "string",
+                      "description": "source network address on chain",
+                      "example": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02"
+                    }
+                  }
+                },
+                "description": "originator details for crypto deposits. This field is only present for deposits."
               }
             }
           }
@@ -207,22 +243,25 @@ see
 
 Status Code **200**
 
-| Name                   | Type                                                              | Required | Restrictions | Description                                                                                                                                                                           |
-| ---------------------- | ----------------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| _anonymous_            | [[CustodyHistory](#schemacustodyhistory)]                         | false    | none         | none                                                                                                                                                                                  |
-| » custodyTransactionId | [CustodyTransactionHistoryID](#schemacustodytransactionhistoryid) | false    | none         | unique identifier for tracking a deposit or withdrawal                                                                                                                                |
-| » direction            | [CustodyDirection](#schemacustodydirection)                       | false    | none         | direction of transaction from API user's perspective, 'DEPOSIT' or 'WITHDRAWAL'                                                                                                       |
-| » quantity             | [CustodyQuantity](#schemacustodyquantity)                         | false    | none         | total quantity of symbol to withdraw including fee in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) - quantity received will have fee subtracted. |
-| » symbol               | [CustodySymbol](#schemacustodysymbol)                             | false    | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                                                                                          |
-| » network              | [NetworkID](#schemanetworkid)                                     | false    | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                                                                                           |
-| » fee                  | [CustodyWithdrawalFee](#schemacustodywithdrawalfee)               | false    | none         | withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei)                                                                           |
-| » memo                 | [CustodyDepositMemo](#schemacustodydepositmemo)                   | false    | none         | memo or destination tag used during deposit to help identify account to credit funds to                                                                                               |
-| » createdAtDateTime    | [CustodyCreatedAtDateTime](#schemacustodycreatedatdatetime)       | false    | none         | time of initial transaction                                                                                                                                                           |
-| » status               | [CustodyTransactionStatus](#schemacustodytransactionstatus)       | false    | none         | one of 'PENDING', 'COMPLETE', 'CANCELLED', 'FAILED'                                                                                                                                   |
-| » transactionDetails   | [CustodyTransactionDetails](#schemacustodytransactiondetails)     | false    | none         | none                                                                                                                                                                                  |
-| »» address             | string                                                            | false    | none         | crypto network address                                                                                                                                                                |
-| »» blockchainTxId      | string                                                            | false    | none         | transaction id on chain                                                                                                                                                               |
-| »» swiftUetr           | string                                                            | false    | none         | unique end-to-end-transaction reference for swift transactions                                                                                                                        |
+| Name                   | Type                                                                    | Required | Restrictions | Description                                                                                                                                                                           |
+| ---------------------- | ----------------------------------------------------------------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| _anonymous_            | [[CustodyHistory](#schemacustodyhistory)]                               | false    | none         | none                                                                                                                                                                                  |
+| » custodyTransactionId | [CustodyTransactionHistoryID](#schemacustodytransactionhistoryid)       | false    | none         | unique identifier for tracking a deposit or withdrawal                                                                                                                                |
+| » direction            | [CustodyDirection](#schemacustodydirection)                             | false    | none         | direction of transaction from API user's perspective, 'DEPOSIT' or 'WITHDRAWAL'                                                                                                       |
+| » quantity             | [CustodyQuantity](#schemacustodyquantity)                               | false    | none         | total quantity of symbol to withdraw including fee in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei) - quantity received will have fee subtracted. |
+| » symbol               | [CustodySymbol](#schemacustodysymbol)                                   | false    | none         | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB                                                                                                                          |
+| » network              | [NetworkID](#schemanetworkid)                                           | false    | none         | the network of the native coin or token, e.g. BTC, ETH, SOL                                                                                                                           |
+| » fee                  | [CustodyWithdrawalFee](#schemacustodywithdrawalfee)                     | false    | none         | withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei)                                                                           |
+| » memo                 | [CustodyDepositMemo](#schemacustodydepositmemo)                         | false    | none         | memo or destination tag used during deposit to help identify account to credit funds to                                                                                               |
+| » createdAtDateTime    | [CustodyCreatedAtDateTime](#schemacustodycreatedatdatetime)             | false    | none         | time of initial transaction                                                                                                                                                           |
+| » status               | [CustodyTransactionStatus](#schemacustodytransactionstatus)             | false    | none         | one of 'PENDING', 'COMPLETE', 'CANCELLED', 'FAILED'                                                                                                                                   |
+| » statusReason         | [CustodyTransactionStatusReason](#schemacustodytransactionstatusreason) | false    | none         | Reason explaining why the custody transaction is in a particular state. one of 'OK', 'INTERNAL_ERROR', 'INSUFFICIENT_BALANCE'                                                         |
+| » transactionDetails   | [CustodyTransactionDetails](#schemacustodytransactiondetails)           | false    | none         | none                                                                                                                                                                                  |
+| »» address             | string                                                                  | false    | none         | crypto network address                                                                                                                                                                |
+| »» blockchainTxId      | string                                                                  | false    | none         | transaction id on chain                                                                                                                                                               |
+| »» swiftUetr           | string                                                                  | false    | none         | unique end-to-end-transaction reference for swift transactions                                                                                                                        |
+| »» sources             | [[CustodyOriginatorDetails](#schemacustodyoriginatordetails)]           | false    | none         | originator details for crypto deposits. This field is only present for deposits.                                                                                                      |
+| »»» address            | string                                                                  | false    | none         | source network address on chain                                                                                                                                                       |
 
 > **Note:** To perform this operation, you must be authenticated by means of one
 > of the following methods: jwtTokenAuth
