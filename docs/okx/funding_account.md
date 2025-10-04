@@ -1623,7 +1623,7 @@ This feature is only available to Bahamas institutional users at the moment.
 
 ### Buy/sell trade [🔗](https://www.okx.com/docs-v5/en/#funding-account-rest-api-buy-sell-trade "Direct link to: https://www.okx.com/docs-v5/en/#funding-account-rest-api-buy-sell-trade")
 
-#### Rate Limit: 1 request per second
+#### Rate Limit: 1 request per 5 seconds
 
 #### Rate limit rule: User ID
 
