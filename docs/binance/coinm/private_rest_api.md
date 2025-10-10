@@ -1672,6 +1672,7 @@ GET `/dapi/v1/order`
   "price": "0",
   "reduceOnly": false,
   "side": "BUY",
+  "positionSide": "SHORT",
   "status": "NEW",
   "stopPrice": "9300", // please ignore when order type is TRAILING_STOP_MARKET
   "closePosition": false, // if Close-All
