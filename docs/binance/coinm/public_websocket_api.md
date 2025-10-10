@@ -989,7 +989,7 @@ Codes are universal,but messages can vary.
 ## Websocket Market Streams
 
 - There are two connection methods for Websocket：
-  - Base Url 1: **wss://dstream.binance.com**
+  - Base Url: **wss://dstream.binance.com**
   - Streams can be access either in a single raw stream or a combined stream
   - Raw streams are accessed at **/ws/<streamName>**
   - Combined streams are accessed at
@@ -997,17 +997,6 @@ Codes are universal,but messages can vary.
   - Example:
   - `wss://dstream.binance.com/ws/bnbusdt@aggTrade`
   - `wss://dstream.binance.com/stream?streams=bnbusdt@aggTrade/btcusdt@markPrice`
-  - Base Url 2: **wss://dstream-auth.binance.com**
-  - Streams can be access either in a single raw stream or a combined stream
-  - Raw streams are accessed at
-    **/ws/<streamName>?listenKey=<validateListenKey>**
-  - Combined streams are accessed at
-    **/stream?streams=<streamName1>/<streamName2>/<streamName3>&listenKey=<validateListenKey>**
-  - **<validateListenKey> must be a valid listenKey when you establish a
-    connection**
-  - Example:
-  - `wss://dstream-auth.binance.com/ws/btcusdt@markPrice?listenKey=XaEAKTsQSRLZAGH9tuIu37plSRsdjmlAVBoNYPUITlTAko1WI22PgmBMpI1rS8Yh`
-  - `wss://dstream-auth.binance.com/stream?streams=btcusdt@markPrice@1s/bnbusdt@markPrice&listenKey=XaEAKTsQSRLZAGH9tuIu37plSRsdjmlAVBoNYPUITlTAko1WI22PgmBMpI1rS8Yh`
 
 - Combined stream events are wrapped as follows:
   **{"stream":"<streamName>","data":<rawPayload>}**
@@ -2059,8 +2048,13 @@ milliseconds
     **[https://dapi.binance.com/dapi/v1/depth?symbol=BTCUSD_200925&limit=1000](https://dapi.binance.com/dapi/v1/depth?symbol=BTCUSD_200925&limit=1000)**
     .
 4.  Drop any event where `u` is < `lastUpdateId` in the snapshot
-5.  The first processed event should have `U` `<=` lastUpdateId`**AND**`u `>`\=
-    `lastUpdateId`
+5.  The first processed event should have `U` `<= ``lastUpdateId` **AND**
+    `u` >`= ``lastUpdateId`
+
+- U = firstUpdateId (the first update ID) from the WebSocket stream.
+- u = finalUpdateId (the last update ID) from the WebSocket stream.
+- lastUpdateId = the update ID you got from the REST depth snapshot.
+
 6.  While listening to the stream, each new event's `pu` should be equal to the
     previous event's `u`, otherwise initialize the process from step 3.
 7.  The data in each event is the **absolute** quantity for a price level
