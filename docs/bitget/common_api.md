@@ -930,7 +930,7 @@ curl "https://api.bitget.com/api/v2/tax/spot-record?startTime=1686128558000&endT
 Response example
 
 ```
-{    "code": "00000",    "msg": "success",    "requestTime": 1687257612262,    "data": [        {            "id": "1",            "coin": "AIBB",            "spotTaxType": "Interest",            "amount": "6018333.33333333",            "fee": "0",            "balance": "468575833.33333306",            "ts": "1686128884851"        }    ]}
+{    "code": "00000",    "msg": "success",    "requestTime": 1687257612262,    "data": [        {            "id": "1",            "coin": "AIBB",            "spotTaxType": "Interest",            "amount": "6018333.33333333",            "fee": "0",            "balance": "468575833.33333306",            "bizOrderId": "1333333333333333333",            "ts": "1686128884851"        }    ]}
 ```
 
 #### Response parameters[​](#response-parameters "Direct link to Response parameters")
@@ -944,6 +944,7 @@ Response example
 | fee         | String | Transaction fee                          |
 | balance     | String | Total accounts                           |
 | ts          | String | When this record was generated Timestamp |
+| bizOrderId  | String | Business order number                    |
 
 #### spotTaxType[​](#spottaxtype "Direct link to spotTaxType")
 
@@ -1953,13 +1954,13 @@ Response Example
 
 ---
 
-## Get Spot Whale Net Flow Data
+## Get Spot 24H Net Capital Inflow Info
 
 Rate limit: 1 req/s (IP)
 
 #### Description[​](#description "Direct link to Description")
 
-Get spot fund flow
+Get Spot 24H Net Capital Inflow Info
 
 #### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
