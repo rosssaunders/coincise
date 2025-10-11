@@ -1,6 +1,6 @@
 # ByBit V5 Private REST API Documentation
 
-# Rate Limit
+# Rate Limit Rules
 
 ## IP Limit[​](#ip-limit "Direct link to heading")
 
@@ -242,239 +242,6 @@ orders in one second if I use both endpoints to place orders_
   but a batch request containing 8 orders is placed at this time, then the first
   5 orders will be successfully placed, and the 6-8th orders will report an
   error exceeding the limit, and these orders will fail.
-
-## API Rate Limit Rules For VIPs[​](#api-rate-limit-rules-for-vips "Direct link to heading")
-
-|               | Unified Account |
-| ------------- | :-------------: | ------------- | ----------- |
-| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
-| Default       |      10/s       | 10/s          | 20/s        |
-| VIP 1         |      20/s       | 20/s          | 25/s        |
-| VIP 2         |      40/s       | 40/s          | 30/s        |
-| VIP 3         |      60/s       | 60/s          | 40/s        |
-| VIP 4         |      60/s       | 60/s          | 40/s        |
-| VIP 5         |      60/s       | 60/s          | 40/s        |
-| VIP Supreme   |      60/s       | 60/s          | 40/s        |
-
-## API Rate Limit Rules For PROs[​](#api-rate-limit-rules-for-pros "Direct link to heading")
-
-UPCOMING CHANGES FOR PRO ACCOUNT
-
-Starting **August 13, 2025**, Bybit will roll out a new institutional API rate
-limit framework designed to enhance performance for high-frequency trading
-clients. The new system introduces a centralized institution-level rate cap with
-flexible per-UID configurations, enabling greater efficiency and scalability.
-Refer to
-[announcement](https://announcements.bybit.com/en/article/update-bybit-enhances-api-rate-limits-for-institutional-traders-bltbbbf60de757d074e/)
-
-### UID level:[​](#uid-level "Direct link to heading")
-
-|               | Unified Account |
-| ------------- | :-------------: | ------------- | ----------- |
-| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
-| PRO1          |      200/s      | 200/s         | 200/s       |
-| PRO2          |      400/s      | 400/s         | 400/s       |
-| PRO3          |      600/s      | 600/s         | 600/s       |
-| PRO4          |      800/s      | 800/s         | 800/s       |
-| PRO5          |     1000/s      | 1000/s        | 1000/s      |
-| PRO6          |     1200/s      | 1200/s        | 1200/s      |
-
-### Master and subaccounts level (Institutional API rate limit Quota):[​](#master-and-subaccounts-level-institutional-api-rate-limit-quota "Direct link to heading")
-
-|               | Unified Account |
-| ------------- | :-------------: | ------------- | ----------- |
-| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
-| PRO1          |     10000/s     | 10000/s       | 10000/s     |
-| PRO2          |     20000/s     | 20000/s       | 20000/s     |
-| PRO3          |     30000/s     | 30000/s       | 30000/s     |
-| PRO4          |     40000/s     | 40000/s       | 40000/s     |
-| PRO5          |     50000/s     | 50000/s       | 50000/s     |
-| PRO6          |     60000/s     | 60000/s       | 60000/s     |
-
-instructions for API rate limit
-
-- All of the existing subaccounts still have those original API rate limits
-- The default API rate limit for a new sub-account is not counted in the total
-  Institutional API rate limit quota.
-- The default API rate limit for a new sub is: 10/s for futures , 10/s for
-  options, 20/s for spot
-- If the Institutional API rate limit total quota is exceeded, you can only
-  reduce the account's API rate limit first. After the total API rate limit is
-  less than the total Institutional API rate limit quota, you can increase the
-  API rate limit of an account.
-
-### Set api rate limit[​](#set-api-rate-limit "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- If UID requesting this endpoint is a master account, uids in the input
-  parameter must be subaccounts of the master account.
-- If UID requesting this endpoint is not a master account, uids in the input
-  parameter must be the UID requesting this endpoint
-- UID requesting this endpoint must be an institutional user.
-
-#### HTTP Request[​](#http-request "Direct link to heading")
-
-POST `/v5/apilimit/set`
-
-#### Request Parameters[​](#request-parameters "Direct link to heading")
-
-| Parameter                                        | Required | Type    | Comments                           |
-| :----------------------------------------------- | :------- | :------ | ---------------------------------- |
-| list                                             | true     | array   | Object                             |
-| &gt; uids                                        | true     | string  | Multiple UIDs, separated by commas |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | true     | string  | Business type                      |
-| &gt; rate                                        | true     | integer | api rate limit per second          |
-
-#### Response Parameters[​](#response-parameters "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                           |
-| :----------------------------------------------- | :------ | ---------------------------------- |
-| list                                             | array   | Object                             |
-| &gt; uids                                        | string  | Multiple UIDs, separated by commas |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
-| &gt; rate                                        | integer | api rate limit per second          |
-| &gt; success                                     | boolean | success or not                     |
-| &gt; <a href="/docs/v5/enum#msg">msg</a>         | string  | result message                     |
-
-#### Request Example[​](#request-example "Direct link to heading")
-
-```
-POST /v5/apilimit/set HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1711420489915X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "list": [        {            "uids": "106293838",            "bizType": "DERIVATIVES",            "rate": 50        }    ]}
-```
-
-#### Response Example[​](#response-example "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "result": [            {                "uids": "290118",                "bizType": "SPOT",                "rate": 600,                "success": true,                "msg": "API limit updated successfully"            }        ]    },    "retExtInfo": {},    "time": 1754894296913}
-```
-
-### Query api rate limit[​](#query-api-rate-limit "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- A master account can query api rate limit of its own and subaccounts.
-- A subaccount can only query its own api rate limit.
-
-#### HTTP Request[​](#http-request-1 "Direct link to heading")
-
-GET `/v5/apilimit/query`
-
-#### Request Parameters[​](#request-parameters-1 "Direct link to heading")
-
-| Parameter | Required | Type   | Comments                           |
-| :-------- | :------- | :----- | ---------------------------------- |
-| uids      | true     | string | Multiple UIDs, separated by commas |
-
-#### Response Parameters[​](#response-parameters-1 "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                           |
-| :----------------------------------------------- | :------ | ---------------------------------- |
-| list                                             | array   | Object                             |
-| &gt; uids                                        | string  | Multiple UIDs, separated by commas |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
-| &gt; rate                                        | integer | api rate limit per second          |
-
-#### Request Example[​](#request-example-1 "Direct link to heading")
-
-```
-GET /v5/apilimit/query?uids=290118 HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
-```
-
-#### Response Example[​](#response-example-1 "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "uids": "290118",                "bizType": "SPOT",                "rate": 600            },            {                "uids": "290118",                "bizType": "DERIVATIVES",                "rate": 400            }        ]    },    "retExtInfo": {},    "time": 1754894341984}
-```
-
-### Query api rate limit usage and cap[​](#query-api-rate-limit-usage-and-cap "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- Query ins level full picture rate limit usage and cap
-- Only queries from one of the main UIDs or a subaccount UID from sub-INS API
-  key are allowed.
-
-#### HTTP Request[​](#http-request-2 "Direct link to heading")
-
-GET `/v5/apilimit/query-cap`
-
-#### Request Parameters[​](#request-parameters-2 "Direct link to heading")
-
-None
-
-#### Response Parameters[​](#response-parameters-2 "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                                                              |
-| :----------------------------------------------- | :------ | --------------------------------------------------------------------- |
-| list                                             | array   | Object                                                                |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                                                         |
-| &gt; totalRate                                   | integer | Total api rate limit usage accross all subaccounts and master account |
-| &gt; insCap                                      | integer | Ins level api rate limit per second,depends on your ins level         |
-| &gt; uidCap                                      | integer | Uid level api rate limit per second,depends on your uid level         |
-
-#### Request Example[​](#request-example-2 "Direct link to heading")
-
-```
-GET /v5/apilimit/query-cap HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
-```
-
-#### Response Example[​](#response-example-2 "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "insCap": "30000",                "uidCap": "600",                "totalRate": "29882",                "bizType": "SPOT"            },            {                "insCap": "30000",                "uidCap": "600",                "totalRate": "29882",                "bizType": "OPTIONS"            },            {                "insCap": "40000",                "uidCap": "800",                "totalRate": "39932",                "bizType": "DERIVATIVES"            }        ]    },    "retExtInfo": {},    "time": 1758857589872}
-```
-
-### Query all api rate limit[​](#query-all-api-rate-limit "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- Query all of uid level rate limits including all master account and
-  subaccounts
-- Only queries from one of the main UIDs or a subaccount UID from sub-INS API
-  key are allowed.
-
-#### HTTP Request[​](#http-request-3 "Direct link to heading")
-
-GET `/v5/apilimit/query-all`
-
-#### Request Parameters[​](#request-parameters-3 "Direct link to heading")
-
-| Parameter | Required | Type   | Comments                                                                                                                              |
-| :-------- | :------- | :----- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| limit     | false    | string | Limit for data size per page. [<code>1</code>, <code>1000</code>]. Default: <code>1000</code>                                         |
-| cursor    | false    | string | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                       |
-| uids      | false    | string | Multiple UIDs accross different master account, separated by commas. Returns all master accounts and subaccounts ratelimit by default |
-
-#### Response Parameters[​](#response-parameters-3 "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                             |
-| :----------------------------------------------- | :------ | ------------------------------------ |
-| nextPageCursor                                   | string  | Used to get the next page data       |
-| list                                             | array   | Object                               |
-| &gt; uids                                        | string  | Multiple UIDs , separated by commas. |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                        |
-| &gt; rate                                        | integer | Api rate limit per second            |
-
-#### Request Example[​](#request-example-3 "Direct link to heading")
-
-```
-GET /v5/apilimit/query-all HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
-```
-
-#### Response Example[​](#response-example-3 "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "uids": "104270393,1674166,1190923,101446030",                "bizType": "SPOT",                "rate": 223            },            {                "uids": "104074050,104394193,104126066",                "bizType": "OPTIONS",                "rate": 223            },            {                "uids": "104154966,103803484,103995540,100445068",                "bizType": "DERIVATIVES",                "rate": 298            }        ],        "nextPageCursor": ""    },    "retExtInfo": {},    "time": 1758857701702}
-```
 
 # Enums Definitions
 
@@ -1525,7 +1292,8 @@ with the example of BTCUSDT:
 | 170132 | Order price too high.                                                                                                                                                                                     |
 | 170133 | Order price lower than the minimum.                                                                                                                                                                       |
 | 170134 | Order price decimal too long.                                                                                                                                                                             |
-| 170135 | Order quantity too large.                                                                                                                                                                                 |
+| 170381 | Order quantity too large.                                                                                                                                                                                 |
+| 170382 | Order quantity too large.                                                                                                                                                                                 |
 | 170136 | Order quantity lower than the minimum.                                                                                                                                                                    |
 | 170137 | Order volume decimal too long                                                                                                                                                                             |
 | 170139 | Order has been filled.                                                                                                                                                                                    |
@@ -1930,6 +1698,33 @@ with the example of BTCUSDT:
 | 3500153 | No permission to operate these UIDs            |
 | 3500153 | You do not have permission to query other UIDs |
 
+## RFQ[​](#rfq "Direct link to heading")
+
+| Code   | Description                                                 |
+| :----- | :---------------------------------------------------------- |
+| 110300 | The RFQ order does not exist                                |
+| 110301 | The Quote order does not exist                              |
+| 110302 | Demo user is prohibited                                     |
+| 110303 | RFQ value is less than the min limit                        |
+| 110304 | Cannot be self-executed                                     |
+| 110305 | Quote UID is not in counterparties                          |
+| 110306 | Quote legs do not match                                     |
+| 110307 | Quote order already exists for this RFQ                     |
+| 110308 | RFQ strategy legs size is not correct                       |
+| 110309 | RFQ strategy side is not correct                            |
+| 110310 | RFQ strategy qty is not correct                             |
+| 110311 | RFQ strategy symbol is not correct                          |
+| 110312 | No permission to execute quote                              |
+| 110313 | RFQ only supports one-way position mode                     |
+| 110314 | Order amount is less than min trade amount                  |
+| 110315 | Order qty exceeds the upper limit                           |
+| 110316 | RFQ is not available for Copy Trading                       |
+| 110317 | Counterparty cannot be self                                 |
+| 110318 | There are too many counterparties to choose from            |
+| 110319 | Order amount is greater than max trade amount               |
+| 110320 | Symbols that have not enabled manual loan are not supported |
+| 110321 | Symbol is not supported                                     |
+
 # Place Order
 
 This endpoint supports to create the order for Spot, Margin trading, USDT
@@ -2009,6 +1804,9 @@ info
   platform will reserve the right to remind, warn, and impose necessary
   restrictions. Customers who use API default to acceptance of these terms and
   have the obligation to cooperate with adjustments.
+- **Reduce Only order:**  
+  If reduceOnly=true, order qty > max order qty, it will automatically be split
+  to multiple orders
 
 Spot Stop Order
 
@@ -4329,7 +4127,11 @@ Check your current account status by calling this
   [UTA2.0](/docs/v5/acct-mode#uta-20) Pro.
 - if unifiedMarginStatus=3, then it is [UTA1.0](/docs/v5/acct-mode#uta-10), you
   have to head to website to click "upgrade" to
-  [UTA2.0](/docs/v5/acct-mode#uta-20) first.
+  [UTA2.0](/docs/v5/acct-mode#uta-20) first, or you can call below upgrade
+  endpoint to [UTA2.0](/docs/v5/acct-mode#uta-20). Check
+  [Get Account Info](/docs/v5/account/account-info) after a while and if
+  unifiedMarginStatus=5, then it is successfully upgraded to
+  [UTA2.0](/docs/v5/acct-mode#uta-20).
 - if unifiedMarginStatus=4, then it is [UTA1.0](/docs/v5/acct-mode#uta-10) Pro,
   you can call below upgrade endpoint to [UTA2.0](/docs/v5/acct-mode#uta-20)
   Pro. Check [Get Account Info](/docs/v5/account/account-info) after a while and
@@ -9824,16 +9626,22 @@ GET `/v5/earn/order`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter   | Required              | Type   | Comments                                                                                                                                                            |
-| :---------- | :-------------------- | :----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| category    | <strong>true</strong> | string | <code>FlexibleSaving</code>,<code>OnChain</code><br><strong>Remarks</strong>: currently, only flexible savings and OnChain is supported                             |
-| orderId     | false                 | string | Order ID<li>either orderId or orderLinkId is <strong>required</strong></li><li>if both are passed, make sure they're matched, otherwise returning empty result</li> |
-| orderLinkId | false                 | string | Order link ID<br><strong>Remarks</strong>: Always return the latest one if order link id is ever reused when querying by orderLinkId only                           |
+| Parameter   | Required              | Type    | Comments                                                                                                                                                                                                                                   |
+| :---------- | :-------------------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| category    | <strong>true</strong> | string  | <code>FlexibleSaving</code>,<code>OnChain</code><br><strong>Remarks</strong>: currently, only flexible savings and OnChain is supported                                                                                                    |
+| orderId     | false                 | string  | Order ID<li>either orderId or orderLinkId is <strong>required</strong></li><li>if both are passed, make sure they're matched, otherwise returning empty result</li>                                                                        |
+| orderLinkId | false                 | string  | Order link ID<br><strong>Remarks</strong>: Always return the latest one if order link id is ever reused when querying by orderLinkId only                                                                                                  |
+| productId   | false                 | string  | Product ID                                                                                                                                                                                                                                 |
+| startTime   | false                 | integer | The start timestamp (ms).<li>1. If both are not provided, the default is to return data from the last 7 days.</li><li>2. If both are provided, the difference between the endTime and startTime must be less than or equal to 7 days.</li> |
+| endTime     | false                 | integer | The endTime timestamp (ms)                                                                                                                                                                                                                 |
+| limit       | false                 | integer | Limit for data size per page. Range: [1, 100]. Default: 50                                                                                                                                                                                 |
+| cursor      | false                 | string  | Cursor, use the returned <code>nextPageCursor</code> to query data for the next page.                                                                                                                                                      |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
 | Parameter               | Type   | Comments                                                                   |
 | :---------------------- | :----- | -------------------------------------------------------------------------- |
+| nextPageCursor          | string | Refer to the <code>cursor</code> request parameter                         |
 | list                    | array  | Object                                                                     |
 | &gt; coin               | string | Coin name                                                                  |
 | &gt; orderValue         | string | amount                                                                     |
@@ -9869,7 +9677,7 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "",    "result": {        "list": [            {                "coin": "BTC",                "orderValue": "1",                "orderType": "Stake",                "orderId": "9640dc23-df1a-448a-ad24-e1a48028a51f",                "orderLinkId": "cjm2",                "status": "Success",                "createdAt": "1744166831000",                "productId": "8",                "updatedAt": "1744166832000",                "swapOrderValue": "",                "estimateRedeemTime": "",                "estimateStakeTime": ""            }        ]    },    "retExtInfo": {},    "time": 1739937045520}
+{    "retCode": 0,    "retMsg": "",    "result": {        "list": [            {                "coin": "USDT",                "orderValue": "1000",                "orderType": "Stake",                "orderId": "ad98d473-4e17-46da-ab30-5563f62a97fa",                "orderLinkId": "",                "status": "Success",                "createdAt": "1759983689000",                "productId": "428",                "updatedAt": "1759983689000",                "swapOrderValue": "",                "estimateRedeemTime": "",                "estimateStakeTime": ""            }        ],        "nextPageCursor": ""    },    "retExtInfo": {},    "time": 1759983699446}
 ```
 
 # Get Staked Position
