@@ -2,11 +2,27 @@
 
 # Changelog
 
+improved
+
+## [\[Notice\] Upbit Global Developer Center Redesign](/changelog/upbit_developer_center_redesign)
+
+13 days ago
+
+Hello, this is the Upbit Global Developer Center.
+
+added
+
+## [\[Notice\] Support for llms.txt Feature](/changelog/notice-support-for-llmstxt-feature)
+
+13 days ago
+
+Hello, this is the Upbit Global Developer Center.
+
 added
 
 ## [\[Notice\] Addition of "Order Book Policy" API (7/31)](/changelog/orderbook-instruments)
 
-about 2 months ago
+2 months ago
 
 `new` `feature` `orderbookpolicy`
 
@@ -14,7 +30,7 @@ added
 
 ## [\[Notice\] Addition of "Wallet Status" API (7/28 KST)](/changelog/wallet-status)
 
-about 2 months ago
+3 months ago
 
 `new` `feature` `walletstatus`
 
@@ -38,7 +54,7 @@ improved
 
 ## [\[Notice\] New Response Fields Added to Allowlisted Withdrawal Address API (7/7 estimated)](/changelog/allowlisted_withdrawal_address_update)
 
-3 months ago
+4 months ago
 
 `improved` `allowlisted withdrawal address`
 
@@ -63,20 +79,6 @@ added
 4 months ago
 
 `#NEW` `#post only`
-
-## [\[Notice\] Update to WebSocket API Orderbook Unit Options on July 2](/changelog/notice-update-to-websocket-api-orderbook-unit-option)
-
-4 months ago
-
-`WEBSOCKET` `orderbook`
-
-added
-
-## [\[Notice\] Addition of 'Candle Data' Minute Intervals to WebSocket](/changelog/websocket_candles_miniutes)
-
-4 months ago
-
-`WEBSOCKET` `CANDLE` `Minute Interval`
 
 1 of 6[
 
