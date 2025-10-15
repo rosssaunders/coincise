@@ -1787,16 +1787,12 @@ POST `eapi/v1/block/order/create`
 
 ### Request Parameters
 
-| Name       | Type    | Mandatory | Description                                                                                                                                                                                                       |
-| ---------- | ------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| liquidity  | STRING  | YES       | Taker or Maker                                                                                                                                                                                                    |
-| legs       | LIST    | YES       | Max 1 (only single leg supported), list of legs parameters in JSON; example: eapi/v1/block/order/create?orders=\[{"symbol":"BTC-210115-35000-C", "price":"100","quantity":"0.0002","side":"BUY","type":"LIMIT"}\] |
-| symbol     | STRING  | YES       | Option trading pair, e.g BTC-200730-9000-C                                                                                                                                                                        |
-| side       | ENUM    | YES       | BUY or SELL                                                                                                                                                                                                       |
-| price      | DECIMAL | YES       | Order Price                                                                                                                                                                                                       |
-| quantity   | DECIMAL | YES       | Order Quantity                                                                                                                                                                                                    |
-| recvWindow | INT     | NO        | The value cannot be greater than 60000                                                                                                                                                                            |
-| timestamp  | INT     | YES       |                                                                                                                                                                                                                   |
+| Name       | Type   | Mandatory | Description                                                                                                                                                                                                       |
+| ---------- | ------ | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| liquidity  | STRING | YES       | Taker or Maker                                                                                                                                                                                                    |
+| legs       | LIST   | YES       | Max 1 (only single leg supported), list of legs parameters in JSON; example: eapi/v1/block/order/create?orders=\[{"symbol":"BTC-210115-35000-C", "price":"100","quantity":"0.0002","side":"BUY","type":"LIMIT"}\] |
+| recvWindow | INT    | NO        | The value cannot be greater than 60000                                                                                                                                                                            |
+| timestamp  | INT    | YES       |                                                                                                                                                                                                                   |
 
 ### Response Example
 

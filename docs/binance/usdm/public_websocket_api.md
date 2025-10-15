@@ -850,7 +850,7 @@ Codes are universal,but messages can vary.
 | 1005 | NO_SUCH_IP​                                    | No such IP has been white listed                                                                                                                                                                                                                       |
 | 1006 | UNEXPECTED_RESP​                               | An unexpected response was received from the message bus. Execution status unknown.                                                                                                                                                                    |
 | 1007 | TIMEOUT​                                       | Timeout waiting for response from backend server. Send status unknown; execution status unknown.                                                                                                                                                       |
-| 1008 | Service Unavailable​                           | Server is currently overloaded with other requests. Please try again in a few minutes.                                                                                                                                                                 |
+| 1008 | Service Unavailable​                           | \- Server is currently overloaded with other requests. Please try again in a few minutes. - Request throttled by system-level protection. Reduce-only/close-position orders are exempt. Please try again.                                              |
 | 1010 | ERROR_MSG_RECEIVED​                            | ERROR_MSG_RECEIVED.                                                                                                                                                                                                                                    |
 | 1011 | NON_WHITE_LIST​                                | This IP cannot access this route.                                                                                                                                                                                                                      |
 | 1013 | INVALID_MESSAGE​                               | INVALID_MESSAGE.                                                                                                                                                                                                                                       |
@@ -2157,10 +2157,15 @@ Bids and asks, pushed every 250 milliseconds, 500 milliseconds, 100 milliseconds
     **[https://fapi.binance.com/fapi/v1/depth?symbol=BTCUSDT&limit=1000](https://fapi.binance.com/fapi/v1/depth?symbol=BTCUSDT&limit=1000)**
     .
 4.  Drop any event where `u` is < `lastUpdateId` in the snapshot.
-5.  The first processed event should have `U` `<=` lastUpdateId`**AND**`u `>`\=
-    `lastUpdateId`
+5.  The first processed event should have `U` `<= ``lastUpdateId` **AND**
+    `u` >`= ``lastUpdateId`
+
+- U = firstUpdateId (the first update ID) from the WebSocket stream.
+- u = finalUpdateId (the last update ID) from the WebSocket stream.
+- lastUpdateId = the update ID you got from the REST depth snapshot.
+
 6.  While listening to the stream, each new event's `pu` should be equal to the
-    previous event's `u`, otherwise initialize the process from step 3.
+    previous event's `u`, otherwise initialize the process from step 3.ß
 7.  The data in each event is the **absolute** quantity for a price level.
 8.  If the quantity is 0, **remove** the price level.
 9.  Receiving an event that removes a price level that is not in your local
