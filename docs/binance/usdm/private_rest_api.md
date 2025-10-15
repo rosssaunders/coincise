@@ -141,6 +141,54 @@ use the command below:
   3.  If there is an error message **"Internal error; unable to process your
       request. Please try again."** returned in the response, it means this is a
       failure API operation and you can resend your request if you need.
+  4.  If the response contains the error message **"Server is currently
+      overloaded with other requests. Please try again in a few minutes."
+      (1008)**, This indicates the node has exceeded its maximum concurrency and
+      is temporarily throttled. Close-position, reduce-only, and cancel orders
+      are exempt and will not receive this error.
+
+#### HTTP 503 Status: Message Variants & Handling
+
+---
+
+##### A. “Unknown error, please check your request or try again later.” (Execution status **unknown**)
+
+- **Meaning**: Request accepted but no response before timeout; **execution may
+  have succeeded**.
+- **Handling**:
+  - **Do not treat as immediate failure**; first verify via **WebSocket
+    updates** or **orderId queries** to avoid duplicates.
+  - During peaks, prefer **single orders** over batch to reduce uncertainty.
+- **Rate-limit counting**: **May or may not** count, check header to verify rate
+  limit info
+
+---
+
+##### B. “Service Unavailable.” (Failure)
+
+- **Meaning**: Service temporarily unavailable; **100% failure**.
+- **Handling**: **Retry with exponential backoff** (e.g., 200ms → 400ms → 800ms,
+  max 3–5 attempts).
+- **Rate-limit counting**: **not counted**
+
+---
+
+###### C. “Server is currently overloaded with other requests. Please try again in a few minutes.” (**1008**, Failure)
+
+- **Meaning**: System overload; **100% failure**.
+- **Handling**: **Retry with backoff** and **reduce concurrency**;
+- **Applicable endpoints**:
+  - `POST /fapi/v1/order`, `PUT /fapi/v1/order`
+  - `POST /fapi/v1/batchOrders`, `PUT /fapi/v1/batchOrders`
+  - `POST /fapi/v1/order/test`
+- **Rate-limit counting**: **Not counted** (overload protection).
+- **Exception integrated here**: When a request **reduces exposure**
+  (Reduce-only / Close-position: `closePosition = true`, or
+  `positionSide = BOTH` with `reduceOnly = true`, or `LONG+SELL`, or
+  `SHORT+BUY`), it is **not affected or prioritized under 1008** to ensure risk
+  reduction.
+  - Covered endpoints: `POST /fapi/v1/order`, `PUT /fapi/v1/batchOrders` (when
+    parameters satisfy the condition)
 
 #### Error Codes and Messages
 
@@ -1410,7 +1458,7 @@ Codes are universal,but messages can vary.
 | 1005 | NO_SUCH_IP​                                    | No such IP has been white listed                                                                                                                                                                                                                       |
 | 1006 | UNEXPECTED_RESP​                               | An unexpected response was received from the message bus. Execution status unknown.                                                                                                                                                                    |
 | 1007 | TIMEOUT​                                       | Timeout waiting for response from backend server. Send status unknown; execution status unknown.                                                                                                                                                       |
-| 1008 | Service Unavailable​                           | Server is currently overloaded with other requests. Please try again in a few minutes.                                                                                                                                                                 |
+| 1008 | Service Unavailable​                           | \- Server is currently overloaded with other requests. Please try again in a few minutes. - Request throttled by system-level protection. Reduce-only/close-position orders are exempt. Please try again.                                              |
 | 1010 | ERROR_MSG_RECEIVED​                            | ERROR_MSG_RECEIVED.                                                                                                                                                                                                                                    |
 | 1011 | NON_WHITE_LIST​                                | This IP cannot access this route.                                                                                                                                                                                                                      |
 | 1013 | INVALID_MESSAGE​                               | INVALID_MESSAGE.                                                                                                                                                                                                                                       |
@@ -1863,7 +1911,7 @@ PUT `/fapi/v1/order`
 ### Request Weight
 
 1 on 10s order rate limit(X-MBX-ORDER-COUNT-10S); 1 on 1min order rate
-limit(X-MBX-ORDER-COUNT-1M); 1 on IP rate limit(x-mbx-used-weight-1m)
+limit(X-MBX-ORDER-COUNT-1M); 0 on IP rate limit(x-mbx-used-weight-1m)
 
 ### Request Parameters
 
