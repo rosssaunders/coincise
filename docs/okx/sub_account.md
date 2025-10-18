@@ -4,7 +4,7 @@
 
 Applies to master accounts only
 
-#### Rate limit：2 requests per 2 seconds
+#### Rate limit：20 requests per 2 seconds
 
 #### Rate limit rule: User ID
 
