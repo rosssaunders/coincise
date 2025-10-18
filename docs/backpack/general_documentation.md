@@ -578,7 +578,7 @@ X-TIMESTAMPrequiredinteger <int64>  Timestamp of the request in milliseconds
 
 X-WINDOWinteger <uint64>  Time the request is valid for in milliseconds (default 5000, maximum 60000)
 
-Request Body schema: application/json; charset=utf-8requiredsymbolstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON" "HBAR" "XLM" "ZORA" "WLFI" "BPEUR" "SWTCH" "LINEA" "XPL" "BARD" "FLOCK" "AVNT" "PENDLE" "AERO" "ASTER" "GLXY" "0G" "2Z"  The asset symbol to convert dust for.
+Request Body schema: application/json; charset=utf-8requiredsymbolstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON" "HBAR" "XLM" "ZORA" "WLFI" "BPEUR" "SWTCH" "LINEA" "XPL" "BARD" "FLOCK" "AVNT" "PENDLE" "AERO" "ASTER" "GLXY" "0G" "2Z" "FORD" "ZEUS" "APEX" "EDEN" "FF" "ORDER" "MNT" "ZEC" "PAXG" "MORPHO" "ATH" "KGEN" "XAUT" "FOGO" "SPX" "ETHFI" "APR" "PIPE" "MET"  The asset symbol to convert dust for.
 
 If omitted, all dust balances will be converted.
 
@@ -720,7 +720,7 @@ Request Body schema: application/json; charset=utf-8requiredquantityrequiredstri
 
 siderequiredstring Enum: "Borrow" "Lend"  Side of the borrow lend.
 
-symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON" "HBAR" "XLM" "ZORA" "WLFI" "BPEUR" "SWTCH" "LINEA" "XPL" "BARD" "FLOCK" "AVNT" "PENDLE" "AERO" "ASTER" "GLXY" "0G" "2Z"  The asset to repay.
+symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON" "HBAR" "XLM" "ZORA" "WLFI" "BPEUR" "SWTCH" "LINEA" "XPL" "BARD" "FLOCK" "AVNT" "PENDLE" "AERO" "ASTER" "GLXY" "0G" "2Z" "FORD" "ZEUS" "APEX" "EDEN" "FF" "ORDER" "MNT" "ZEC" "PAXG" "MORPHO" "ATH" "KGEN" "XAUT" "FOGO" "SPX" "ETHFI" "APR" "PIPE" "MET"  The asset to repay.
 
 Responses200 Success.
 
@@ -822,7 +822,7 @@ on the specified blockchain.
 
 ## Instruction: depositAddressQuery
 
-query Parametersblockchainrequiredstring (Blockchain)  Enum: "0G" "Aptos" "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "HyperEVM" "Hyperliquid" "Linea" "Litecoin" "Optimism" "Plasma" "Polygon" "Sei" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain symbol to get a deposit address for.
+query Parametersblockchainrequiredstring (Blockchain)  Enum: "0G" "Aptos" "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "HyperEVM" "Hyperliquid" "Linea" "Litecoin" "Optimism" "Plasma" "Polygon" "Sei" "Sui" "Solana" "Story" "Tron" "XRP" "Zcash"  Blockchain symbol to get a deposit address for.
 
 ## header ParametersX-API-KEYstring API key
 
@@ -890,13 +890,13 @@ X-SIGNATURErequiredstring Signature of the request
 
 Request Body schema: application/json; charset=utf-8requiredaddressrequiredstring Address to withdraw to.
 
-blockchainrequiredstring Enum: "0G" "Aptos" "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "HyperEVM" "Hyperliquid" "Linea" "Litecoin" "Optimism" "Plasma" "Polygon" "Sei" "Sui" "Solana" "Story" "Tron" "XRP"  Blockchain to withdraw on.
+blockchainrequiredstring Enum: "0G" "Aptos" "Arbitrum" "Avalanche" "Base" "Berachain" "Bitcoin" "BitcoinCash" "Bsc" "Cardano" "Dogecoin" "Eclipse" "EqualsMoney" "Ethereum" "HyperEVM" "Hyperliquid" "Linea" "Litecoin" "Optimism" "Plasma" "Polygon" "Sei" "Sui" "Solana" "Story" "Tron" "XRP" "Zcash"  Blockchain to withdraw on.
 
 clientIdstring  <= 255 characters  Custom client id.
 
 quantityrequiredstring <decimal>  Quantity to withdraw.
 
-symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON" "HBAR" "XLM" "ZORA" "WLFI" "BPEUR" "SWTCH" "LINEA" "XPL" "BARD" "FLOCK" "AVNT" "PENDLE" "AERO" "ASTER" "GLXY" "0G" "2Z"  Symbol of the asset to withdraw.
+symbolrequiredstring Enum: "BTC" "ETH" "SOL" "USDC" "USDT" "PYTH" "JTO" "BONK" "HNT" "MOBILE" "WIF" "JUP" "RENDER" "WEN" "W" "TNSR" "PRCL" "SHARK" "KMNO" "MEW" "BOME" "RAY" "HONEY" "SHFL" "BODEN" "IO" "DRIFT" "PEPE" "SHIB" "LINK" "UNI" "ONDO" "FTM" "MATIC" "STRK" "BLUR" "WLD" "GALA" "NYAN" "HLG" "MON" "ZKJ" "MANEKI" "HABIBI" "UNA" "ZRO" "ZEX" "AAVE" "LDO" "MOTHER" "CLOUD" "MAX" "POL" "TRUMPWIN" "HARRISWIN" "MOODENG" "DBR" "GOAT" "ACT" "DOGE" "BCH" "LTC" "APE" "ENA" "ME" "EIGEN" "CHILLGUY" "PENGU" "EUR" "SONIC" "J" "TRUMP" "MELANIA" "ANIME" "XRP" "SUI" "VINE" "ADA" "MOVE" "BERA" "IP" "HYPE" "BNB" "KAITO" "kPEPE" "kBONK" "kSHIB" "AVAX" "S" "POINTS" "ROAM" "AI16Z" "LAYER" "FARTCOIN" "NEAR" "PNUT" "ARB" "DOT" "APT" "OP" "PYUSD" "HUMA" "WAL" "DEEP" "CETUS" "SEND" "BLUE" "NS" "HAEDAL" "JPY" "TAO" "VIRTUAL" "TIA" "TRX" "FRAG" "PUMP" "WCT" "ES" "SEI" "CRV" "TON" "HBAR" "XLM" "ZORA" "WLFI" "BPEUR" "SWTCH" "LINEA" "XPL" "BARD" "FLOCK" "AVNT" "PENDLE" "AERO" "ASTER" "GLXY" "0G" "2Z" "FORD" "ZEUS" "APEX" "EDEN" "FF" "ORDER" "MNT" "ZEC" "PAXG" "MORPHO" "ATH" "KGEN" "XAUT" "FOGO" "SPX" "ETHFI" "APR" "PIPE" "MET"  Symbol of the asset to withdraw.
 
 twoFactorTokenstring Issued two factor token.
 
@@ -2564,29 +2564,29 @@ K-LineStream name format: kline.<interval>.<symbol>
 
 ## {
 
-"e": "kline",           // Event type
+"e": "kline",                   // Event type
 
-"E": 1694687692980000,  // Event time in microseconds
+"E": 1694687692980000,          // Event time in microseconds
 
-"s": "SOL_USD",         // Symbol
+"s": "SOL_USD",                 // Symbol
 
-"t": 123400000,         // K-Line start time in seconds
+"t": "2024-09-11T12:00:00",     // K-Line start time (ISO 8601 format)
 
-"T": 123460000,         // K-Line close time in seconds
+"T": "2024-09-11T12:01:00",     // K-Line close time (ISO 8601 format)
 
-"o": "18.75",           // Open price
+"o": "18.75",                   // Open price
 
-"c": "19.25",           // Close price
+"c": "19.25",                   // Close price
 
-"h": "19.80",           // High price
+"h": "19.80",                   // High price
 
-"l": "18.50",           // Low price
+"l": "18.50",                   // Low price
 
-"v": "32123",           // Base asset volume
+"v": "32123",                   // Base asset volume
 
-"n": 93828,             // Number of trades
+"n": 93828,                     // Number of trades
 
-## "X": false              // Is this k-line closed?
+"X": false                      // Is this k-line closed?
 
 ## }
 
@@ -2628,7 +2628,9 @@ Mark priceStream name format: markPrice.<symbol>
 
 "i": "19.70",               // Index price
 
-"n": 1694687965941000,      // Next funding timestamp in microseconds
+"n": 1694687965941,         // Next funding timestamp in milliseconds
+
+"T": 1694687965940999       // Engine timestamp in microseconds
 
 ## }
 
