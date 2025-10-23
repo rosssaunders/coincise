@@ -1,0 +1,9 @@
+[package]
+name = "twap-agent"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+orderbook = { path = "../orderbook" }
+agent-support = { path = "../agent-support" }
+tokio = { version = "1.32", features = ["macros", "rt-multi-thread", "time"] }

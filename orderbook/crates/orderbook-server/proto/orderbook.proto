@@ -1,0 +1,206 @@
+syntax = "proto3";
+
+package orderbook.v1;
+
+enum Side {
+  SIDE_UNSPECIFIED = 0;
+  SIDE_BID = 1;
+  SIDE_ASK = 2;
+}
+
+enum OrderType {
+  ORDER_TYPE_UNSPECIFIED = 0;
+  ORDER_TYPE_MARKET = 1;
+  ORDER_TYPE_LIMIT = 2;
+  ORDER_TYPE_IMMEDIATE_OR_CANCEL = 3;
+  ORDER_TYPE_FILL_OR_KILL = 4;
+  ORDER_TYPE_POST_ONLY = 5;
+}
+
+message CommandStatus {
+  bool ok = 1;
+  string error_message = 2;
+}
+
+message NewOrderRequest {
+  uint64 account_id = 6;
+  uint64 order_id = 1;
+  Side side = 2;
+  optional uint64 price = 3;
+  uint64 quantity = 4;
+  OrderType order_type = 5;
+}
+
+message NewOrderResponse {
+  CommandStatus status = 1;
+  repeated Fill fills = 2;
+  optional RestingOrder resting = 3;
+  uint64 unfilled_quantity = 4;
+}
+
+message ModifyOrderRequest {
+  uint64 order_id = 1;
+  uint64 quantity = 2;
+  uint64 account_id = 3;
+}
+
+message ModifyOrderResponse {
+  CommandStatus status = 1;
+}
+
+message CancelOrderRequest {
+  uint64 order_id = 1;
+  uint64 account_id = 2;
+}
+
+message CancelOrderResponse {
+  CommandStatus status = 1;
+  uint64 canceled_quantity = 2;
+}
+
+message SnapshotRequest {}
+
+message StreamEventsRequest {}
+
+message BookOrder {
+  uint64 order_id = 1;
+  Side side = 2;
+  uint64 price = 3;
+  uint64 quantity = 4;
+}
+
+message Fill {
+  uint64 maker_id = 1;
+  uint64 price = 2;
+  uint64 quantity = 3;
+}
+
+message RestingOrder {
+  uint64 order_id = 1;
+  Side side = 2;
+  uint64 price = 3;
+  uint64 quantity = 4;
+}
+
+enum BookRemoveReason {
+  BOOK_REMOVE_REASON_UNSPECIFIED = 0;
+  BOOK_REMOVE_REASON_FILLED = 1;
+  BOOK_REMOVE_REASON_CANCELED = 2;
+}
+
+message BookAdded {
+  uint64 order_id = 1;
+  Side side = 2;
+  uint64 price = 3;
+  uint64 quantity = 4;
+}
+
+message BookUpdated {
+  uint64 order_id = 1;
+  Side side = 2;
+  uint64 price = 3;
+  uint64 quantity = 4;
+}
+
+message BookRemoved {
+  uint64 order_id = 1;
+  Side side = 2;
+  uint64 price = 3;
+  uint64 quantity = 4;
+  BookRemoveReason reason = 5;
+}
+
+message BookEvent {
+  oneof kind {
+    BookAdded added = 1;
+    BookUpdated updated = 2;
+    BookRemoved removed = 3;
+  }
+}
+
+enum RejectionReason {
+  REJECTION_REASON_UNSPECIFIED = 0;
+  REJECTION_REASON_DUPLICATE = 1;
+  REJECTION_REASON_CROSSED = 2;
+  REJECTION_REASON_INVALID_QUANTITY = 3;
+  REJECTION_REASON_MISSING_PRICE = 4;
+  REJECTION_REASON_INSUFFICIENT_LIQUIDITY = 5;
+}
+
+message RejectionEvent {
+  uint64 order_id = 1;
+  Side side = 2;
+  OrderType order_type = 3;
+  optional uint64 price = 4;
+  uint64 quantity = 5;
+  RejectionReason reason = 6;
+}
+
+message TradeEvent {
+  uint64 taker_order_id = 1;
+  uint64 maker_order_id = 2;
+  Side taker_side = 3;
+  OrderType order_type = 4;
+  uint64 price = 5;
+  uint64 quantity = 6;
+}
+
+message EngineEvent {
+  uint64 sequence = 1;
+  oneof payload {
+    BookEvent book = 2;
+    TradeEvent trade = 3;
+    RejectionEvent rejection = 4;
+  }
+}
+
+message BookLevel {
+  Side side = 1;
+  uint64 price = 2;
+  uint64 total_quantity = 3;
+  repeated BookOrder orders = 4;
+}
+
+message SnapshotResponse {
+  CommandStatus status = 1;
+  repeated BookLevel bids = 2;
+  repeated BookLevel asks = 3;
+}
+
+message CreditAccountRequest {
+  uint64 account_id = 1;
+  uint64 base = 2;
+  uint64 quote = 3;
+}
+
+message AccountBalance {
+  uint64 account_id = 1;
+  uint64 available_base = 2;
+  uint64 reserved_base = 3;
+  uint64 available_quote = 4;
+  uint64 reserved_quote = 5;
+}
+
+message CreditAccountResponse {
+  CommandStatus status = 1;
+  AccountBalance balance = 2;
+}
+
+message GetBalanceRequest {
+  uint64 account_id = 1;
+}
+
+message GetBalanceResponse {
+  CommandStatus status = 1;
+  AccountBalance balance = 2;
+}
+
+service OrderBookService {
+  rpc NewOrder(NewOrderRequest) returns (NewOrderResponse);
+  rpc ModifyOrder(ModifyOrderRequest) returns (ModifyOrderResponse);
+  rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse);
+  rpc Snapshot(SnapshotRequest) returns (SnapshotResponse);
+  rpc StreamEvents(StreamEventsRequest) returns (stream EngineEvent);
+  rpc CreditAccount(CreditAccountRequest) returns (CreditAccountResponse);
+  rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse);
+}

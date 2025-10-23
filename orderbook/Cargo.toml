@@ -1,0 +1,10 @@
+[workspace]
+members = [
+  "crates/orderbook",
+  "crates/orderbook-server",
+  "crates/agent-support",
+  "crates/market-maker-agent",
+  "crates/twap-agent",
+  "crates/pension-passive-buyer",
+]
+resolver = "2"

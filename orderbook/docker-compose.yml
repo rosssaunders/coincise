@@ -1,0 +1,66 @@
+version: "3.9"
+
+services:
+  orderbook-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    image: orderbook-stack
+    command: ["orderbook-server", "0.0.0.0:9000", "0.0.0.0:50051"]
+    ports:
+      - "9000:9000"
+      - "50051:50051"
+      - "9100:9100"
+    restart: unless-stopped
+
+  market-maker:
+    image: orderbook-stack
+    command: ["market-maker-agent"]
+    environment:
+      GRPC_ENDPOINT: http://orderbook-server:50051
+      MID_PRICE: "100000"
+      SPREAD: "200"
+      QUANTITY: "50"
+      ORDER_ID_START: "1000"
+      TICK_MILLIS: "750"
+      ACCOUNT_ID: "1"
+      BASE_DEPOSIT: "100000"
+      QUOTE_DEPOSIT: "10000000"
+    depends_on:
+      - orderbook-server
+    restart: unless-stopped
+
+  twap-agent:
+    image: orderbook-stack
+    command: ["twap-agent"]
+    environment:
+      GRPC_ENDPOINT: http://orderbook-server:50051
+      SIDE: Bid
+      ORDER_TYPE: Limit
+      PRICE: "100050"
+      TOTAL_QUANTITY: "1000"
+      SLICES: "10"
+      SLICE_INTERVAL_MILLIS: "1000"
+      CYCLE_PAUSE_MILLIS: "5000"
+      ORDER_ID_START: "2000"
+      ACCOUNT_ID: "2"
+      QUOTE_DEPOSIT: "5000000"
+    depends_on:
+      - orderbook-server
+    restart: unless-stopped
+
+  passive-buyer:
+    image: orderbook-stack
+    command: ["pension-passive-buyer"]
+    environment:
+      GRPC_ENDPOINT: http://orderbook-server:50051
+      TARGET_PRICE: "99900"
+      QUANTITY: "250"
+      ORDER_ID_START: "3000"
+      TICK_MILLIS: "1500"
+      ACCOUNT_ID: "3"
+      QUOTE_DEPOSIT: "2500000"
+    depends_on:
+      - orderbook-server
+    restart: unless-stopped

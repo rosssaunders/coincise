@@ -1,0 +1,23 @@
+[package]
+name = "orderbook-server"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+orderbook = { path = "../orderbook" }
+itoa = "1.0"
+memchr = "2.5"
+mio = { version = "0.8", features = ["os-poll", "net"] }
+rustc-hash = "1.1"
+parking_lot = "0.12"
+prost = "0.12"
+tokio = { version = "1.32", features = ["rt-multi-thread", "macros", "sync"] }
+tokio-stream = { version = "0.1", features = ["sync"] }
+tonic = { version = "0.10", features = ["transport"] }
+metrics = "0.21"
+metrics-exporter-prometheus = "0.13"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["fmt", "env-filter"] }
+
+[build-dependencies]
+tonic-build = "0.10"
