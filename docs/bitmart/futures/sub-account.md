@@ -18,7 +18,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`` curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{     "requestNo":"4e2adcff-2122-1ce7-2557-4f65d2ce1ca2",     "amount":"1",     "currency":"USDT",     "subAccount":"subAccountName@xxx.com" }' https://api-cloud-v2.bitmart.com/account/contract/sub-account/main/v1/sub-to-main` ``
+`` curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{     "requestNo":"4e2adcff-2122-1ce7-2557-4f65d2ce1ca2",     "amount":"1",     "currency":"USDT",     "subAccount":"subAccountName@xxx.com" }' https://api-cloud-v2.bitmart.com/account/contract/sub-account/main/v1/sub-to-main` ``
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -51,7 +51,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`` curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{     "requestNo":"4e2adcff-2122-1ce7-2557-4f65d2ce1ca2",     "amount":"1",     "currency":"BTC",     "subAccount":"subAccountName@xxx.com" }' https://api-cloud-v2.bitmart.com/account/contract/sub-account/main/v1/main-to-sub` ``
+`` curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{     "requestNo":"4e2adcff-2122-1ce7-2557-4f65d2ce1ca2",     "amount":"1",     "currency":"BTC",     "subAccount":"subAccountName@xxx.com" }' https://api-cloud-v2.bitmart.com/account/contract/sub-account/main/v1/main-to-sub` ``
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -84,7 +84,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`` curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{     "requestNo":"4e2adcff-2122-1ce7-2557-4f65d2ce1ca2",     "amount":"1",     "currency":"USDT" }' https://api-cloud-v2.bitmart.com/account/contract/sub-account/sub/v1/sub-to-main` ``
+`` curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{     "requestNo":"4e2adcff-2122-1ce7-2557-4f65d2ce1ca2",     "amount":"1",     "currency":"USDT" }' https://api-cloud-v2.bitmart.com/account/contract/sub-account/sub/v1/sub-to-main` ``
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |

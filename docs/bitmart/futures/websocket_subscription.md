@@ -220,7 +220,7 @@ Return funding Rate data
 
 > Funding rate data Request
 
-`{    "action": "request",    "args":["futures/fundingRate:BTCUSDT"] }`
+`{   "action": "request",   "args":["futures/fundingRate:BTCUSDT"] }`
 
 Message Format:
 
@@ -383,7 +383,7 @@ Return depth data, support the creation of a local full depth cache data
 
 > Full depth snapshot data Request
 
-`{    "action": "request",    "args":["futures/depthIncrease20:BTCUSDT@200ms"] }`
+`{   "action": "request",   "args":["futures/depthIncrease20:BTCUSDT@200ms"] }`
 
 Message Format:
 

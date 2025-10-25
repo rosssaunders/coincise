@@ -1,5 +1,14 @@
 # Change Log
 
+#### 2025-09-23
+
+###### REST API
+
+*   \[Update\] `/contract/private/trades` Get Order Trade
+    *   Request field **symbol** changed to optional
+
+* * *
+
 #### 2025-08-11
 
 ###### REST API
