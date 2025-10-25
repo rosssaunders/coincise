@@ -2,8 +2,8 @@
 
 ## Filters
 
-Filters define trading rules on a symbol or an exchange. Filters come in two
-forms: `symbol filters` and `exchange filters`.
+Filters define trading rules on a symbol or an exchange. Filters come in three
+forms: `symbol filters`, `exchange filters` and `asset filters`.
 
 ### Symbol filters
 
@@ -401,12 +401,38 @@ one order list.
 
 **/exchangeInfo format:**
 
-````json
-   {
-      "filterType": "EXCHANGE_MAX_NUM_ORDER_LISTS",
-      "maxNumOrderLists": 20
-    }```
-````
+```json
+{
+  "filterType": "EXCHANGE_MAX_NUM_ORDER_LISTS",
+  "maxNumOrderLists": 20
+}
+```
+
+### Asset Filters
+
+#### MAX_ASSET
+
+The `MAX_ASSET` filter defines the maximum quantity of an asset that an account
+is allowed to transact in a single order.
+
+- When the asset is a symbol's base asset, the limit applies to the order's
+  quantity.
+- When the asset is a symbol's quote asset, the limit applies to the order's
+  notional value.
+- For example, a MAX_ASSET filter for USDC applies to all symbols that have USDC
+  as either a base or quote asset, such as:
+  - USDCBNB
+  - BNBUSDC
+
+**/myFilters format:**
+
+```json
+{
+  "filterType": "MAX_ASSET",
+  "asset": "USDC",
+  "limit": "42.00000000"
+}
+```
 
 > Source:
 > [https://developers.binance.com/docs/binance-spot-api-docs/filters](https://developers.binance.com/docs/binance-spot-api-docs/filters)
@@ -960,7 +986,7 @@ the value it's looking for it will check the next one.
 - If unspecified, the security type is `NONE`.
 - Methods with a security type other than `NONE` are considered `SIGNED`
   requests (i.e. requires parameter `signature`). A few legacy
-  [listenKey management](/docs/binance-spot-api-docs/rest-api/account-endpoints#user-data-stream-requests)
+  [listenKey management](/docs/binance-spot-api-docs/rest-api/request-security#user-data-stream-requests)
   endpoints are an exception to this rule.
 - Secure methods require a valid API key to be specified and authenticated.
   - API keys can be created on the
