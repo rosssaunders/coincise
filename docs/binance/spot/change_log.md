@@ -2,7 +2,98 @@
 
 ## CHANGELOG for Binance's API
 
-**Last Updated: 2025-09-18**
+**Last Updated: 2025-10-24**
+
+#### 2025-10-24
+
+##### SBE
+
+- SBE: schema 3:1
+  ([spot_3_1.xml](https://github.com/binance/binance-spot-api-docs/blob/master/sbe/schemas/spot_3_1.xml))
+  has been updated to support
+  [listenToken Subscription Methods](https://developers.binance.com/docs/margin_trading/trade-data-stream/Listen-Token-Websocket-API)
+  for Margin Trading.
+
+##### REST and WebSocket API
+
+Following the announcement from
+[2025-04-07](/docs/binance-spot-api-docs#2025-04-07), all documentation related
+with `listenKey` for use on `wss://stream.binance.com` has been removed.
+
+Please refer to the list of requests and methods below for more information.
+
+The features will remain available until a future retirement announcement is
+made.
+
+- REST API
+  - `POST /api/v3/userDataStream`
+  - `PUT /api/v3/userDataStream`
+  - `DELETE /api/v3/userDataStream`
+
+- WebSocket API
+  - `userDataStream.start`
+  - `userDataStream.ping`
+  - `userDataStream.stop`
+
+---
+
+#### 2025-10-21
+
+REST and WebSocket API:
+
+- Reminder that SBE 2:1 schema will be retired on 2025-10-24,
+  [6 months after being deprecated](/docs/binance-spot-api-docs/faqs/sbe_faq#sbe-schema).
+- The
+  [SBE lifecycle for Production](https://github.com/binance/binance-spot-api-docs/blob/master/sbe/schemas/sbe_schema_lifecycle_prod.json)
+  has been updated to reflect this change.
+
+---
+
+#### 2025-10-08
+
+##### FIX API
+
+- Updated
+  [QuickFIX Schema](https://github.com/binance/binance-spot-api-docs/blob/master/fix/schemas/spot-fix-md.xml)
+  for FIX Market Data:
+  - Updated `RecvWindow(25000)` to reflect microsecond support announced on
+    [2025-08-12](/docs/binance-spot-api-docs#2025-08-12).
+  - Updated
+    [InstrumentList `<y>`](/docs/binance-spot-api-docs/fix-api#instrumentlist)
+    message:
+    - Added fields: `StartPriceRange`, `EndPriceRange`.
+    - Made the following fields optional: `MinTradeVol(562)`,
+      `MaxTradeVol(1140)`, `MinQtyIncrement(25039)`, `MarketMinTradeVol(25040)`,
+      `MarketMaxTradeVol(25041)`, `MarketMinQtyIncrement(25042)`,
+      `MinPriceIncrement(969)`.
+  - **The changes to InstrumentList are breaking changes, and will roll out at
+    around 2025-10-23 07:00 UTC. Please update to the new schema before then.**
+  - [SPOT Testnet](https://testnet.binance.vision/) has the breaking changes
+    already enabled.
+
+---
+
+#### 2025-09-29
+
+**Notice: The following changes will be deployed on 2025-09-29, starting at
+10:00 UTC and may take several hours to complete.**
+
+- Added an endpoint to retrieve the list of filters relevant to an account on a
+  given symbol. This is the only endpoint that shows if an account has
+  `MAX_ASSET` filters applied to it.
+  - REST API:
+    [`GET /api/v3/myFilters`](/docs/binance-spot-api-docs/rest-api/account-endpoints#myFilters)
+  - WebSocket API:
+    [`myFilters`](/docs/binance-spot-api-docs/websocket-api/account-requests#myFilters)
+- Comments in **SBE: schema 3:1
+  ([spot_3_1.xml](https://github.com/binance/binance-spot-api-docs/blob/master/sbe/schemas/spot_3_1.xml))**
+  have been added, modified, and removed. Although there is no need for users of
+  `3:1` to update to this version of the file, we advise updating to maintain
+  consistency.
+- Added documentation for filter
+  [`MAX_ASSET`](/docs/binance-spot-api-docs/filters#max_asset).
+
+---
 
 #### 2025-09-18
 
@@ -149,8 +240,8 @@ take approximately up to two weeks to complete.
   - The authorization for this request has been changed to `NONE`.
 - Field `subscriptionId` has been added to the User Data Stream events payload
   when listening through the
-  [WebSocket API](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user_data_stream_subscribe).
-  This will identify which subscription the event is coming from.
+  [WebSocket API](/docs/web-socket-api.md#user_data_stream_subscribe). This will
+  identify which subscription the event is coming from.
 
 ##### FIX API
 
