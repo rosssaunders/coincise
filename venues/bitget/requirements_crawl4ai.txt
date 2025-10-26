@@ -1,0 +1,14 @@
+# Python dependencies for Crawl4AI proof-of-concept
+#
+# Install with: pip install -r requirements_crawl4ai.txt
+
+# Main dependency - LLM-friendly web crawler
+crawl4ai>=0.7.6
+
+# Note: Crawl4AI will automatically install its dependencies including:
+# - playwright (browser automation)
+# - beautifulsoup4 (HTML parsing)
+# - markdown (markdown utilities)
+#
+# If you encounter Playwright installation issues, run:
+#   playwright install chromium
