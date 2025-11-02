@@ -46,8 +46,9 @@ jobs:
 
       - name: Install AI PR summary tool dependencies
         run: |
-          cd ../../tools/ai-pr-summary
+          pushd ../../tools/ai-pr-summary
           npm install
+          popd
 
       - name: Install dependencies
         run: npm ci
