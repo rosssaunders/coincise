@@ -13,7 +13,8 @@
     "extract:fix": "node src/index.js ./config/fix.json",
     "extract:sbe": "node src/index.js ./config/sbe.json",
     "extract:change_log": "node src/index.js ./config/change_log.json",
-    "extract:all": "npm run extract:public_rest && npm run extract:private_rest && npm run extract:public_websocket && npm run extract:private_websocket && npm run extract:fix && npm run extract:sbe && npm run extract:change_log"
+    "consolidate": "node src/consolidate-core-docs.js",
+    "extract:all": "npm run extract:public_rest && npm run extract:private_rest && npm run extract:public_websocket && npm run extract:private_websocket && npm run extract:fix && npm run extract:sbe && npm run extract:change_log && npm run consolidate"
   },
   "author": "",
   "license": "ISC",

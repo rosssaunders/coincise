@@ -38,6 +38,39 @@ const config = JSON.parse(fs.readFileSync(CONFIG_PATH, "utf8"))
 const turndownService = configureTurndown()
 
 /**
+ * Determine output category based on config file name
+ * @param {string} configPath - Path to the config file
+ * @returns {object} Category information
+ */
+function determineCategory(configPath) {
+  const filename = path.basename(configPath).toLowerCase()
+
+  if (filename.includes("public")) {
+    return { type: "endpoints", subdir: "public" }
+  } else if (filename.includes("private")) {
+    return { type: "endpoints", subdir: "private" }
+  } else {
+    // change_log, fix, sbe, etc. go to core
+    return { type: "core", subdir: null }
+  }
+}
+
+/**
+ * Generate filename from section title
+ * @param {string} title - Section title
+ * @returns {string} Sanitized filename
+ */
+function generateFilename(title) {
+  return (
+    title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "")
+      .substring(0, 100) + ".md"
+  )
+}
+
+/**
  * Inserts a separator element (e.g., <hr>) between adjacent <table> elements in the document.
  * @param {Document} document - The JSDOM document object.
  */
@@ -281,10 +314,54 @@ function adjustHeadingLevels(document) {
   }
 }
 
+/**
+ * Extract individual H2 sections from the document
+ * @param {Document} document - JSDOM document
+ * @returns {Array} Array of section objects
+ */
+function extractSections(document) {
+  const sections = []
+  const h2Elements = document.querySelectorAll("h2")
+
+  for (const h2 of h2Elements) {
+    const title = h2.textContent.trim()
+    const sectionContent = [h2.outerHTML]
+    let currentElement = h2.nextElementSibling
+
+    // Collect all elements until the next h2
+    while (currentElement && currentElement.tagName !== "H2") {
+      sectionContent.push(currentElement.outerHTML)
+      currentElement = currentElement.nextElementSibling
+    }
+
+    sections.push({
+      title,
+      html: sectionContent.join("\n")
+    })
+  }
+
+  return sections
+}
+
 async function processAll() {
   const { endpoints, output_file, title } = config
-  let content = `# ${title}\n\n`
+  const category = determineCategory(CONFIG_PATH)
+
+  // Determine output directory
+  const baseOutputDir = path.join(DOCS_ROOT, path.dirname(output_file))
+  let outputDir
+
+  if (category.type === "endpoints") {
+    outputDir = path.join(baseOutputDir, "endpoints", category.subdir)
+  } else {
+    outputDir = path.join(baseOutputDir, "core")
+  }
+
+  fs.mkdirSync(outputDir, { recursive: true })
+
   let browser = null
+  let totalSections = 0
+  const allSections = []
 
   try {
     browser = await launchBrowser()
@@ -385,32 +462,53 @@ async function processAll() {
       // uses the JSDOM to detect when table elements are next to each other and add a seperator
       insertTableSeparators(document)
 
-      // Adjust heading levels down by one
+      // Adjust heading levels down by one (H1 -> H2, H2 -> H3, etc.)
       adjustHeadingLevels(document)
 
       removeBRFromTDsAndReplaceWithDash(document)
 
-      const cleanedHtml = dom.serialize()
+      // Extract individual H2 sections
+      const sections = extractSections(document)
 
-      // Convert to markdown
-      const md = turndownService.turndown(cleanedHtml)
+      for (const section of sections) {
+        allSections.push({
+          title: section.title,
+          html: section.html,
+          sourceUrl: url
+        })
+      }
 
-      // Add source URL link at the beginning of the section
-      const sourceLink = `> Source: [${url}](${url})\n\n`
-
-      if (md) content += md + "\n\n" + sourceLink
       await politeDelay(1000) // polite delay
     }
 
-    const outPath = path.join(DOCS_ROOT, output_file)
-    fs.mkdirSync(path.dirname(outPath), { recursive: true })
-    fs.writeFileSync(outPath, content)
-    formatMarkdown(outPath)
-    console.log(`Wrote: ${outPath}`)
+    // Process and save all sections
+    console.log(`\nProcessing ${allSections.length} sections...`)
 
-    // Format the output file
-    await formatMarkdown(outPath)
-    console.log(`Formatted: ${outPath}`)
+    for (const section of allSections) {
+      const markdown = turndownService.turndown(section.html)
+      const sourceLink = `\n\n> Source: [${section.sourceUrl}](${section.sourceUrl})\n`
+      const fullMarkdown = markdown + sourceLink
+
+      const filename = generateFilename(section.title)
+      const outputPath = path.join(outputDir, filename)
+
+      fs.writeFileSync(outputPath, fullMarkdown)
+      await formatMarkdown(outputPath)
+      totalSections++
+
+      const typeLabel =
+        category.type === "endpoints"
+          ? category.subdir === "public"
+            ? "📄 Public: "
+            : "🔒 Private:"
+          : "📚 Core:   "
+      console.log(`  ${typeLabel} ${section.title} → ${filename}`)
+    }
+
+    console.log("\x1b[32m%s\x1b[0m", `\n✅ Extraction complete!`)
+    console.log(`  Total sections: ${totalSections}`)
+    console.log(`  Type: ${category.type}${category.subdir ? `/${category.subdir}` : ""}`)
+    console.log(`📁 Output directory: ${outputDir}`)
   } finally {
     if (browser) await browser.close().catch(console.error)
   }

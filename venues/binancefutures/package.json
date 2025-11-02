@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "npm run process:usdm:public:rest && npm run process:usdm:private:rest && npm run process:usdm:public:ws && npm run process:usdm:private:ws && npm run process:coinm:public:rest && npm run process:coinm:private:rest && npm run process:coinm:public:ws && npm run process:coinm:private:ws && npm run process:options:public:rest && npm run process:options:private:rest && npm run process:options:public:ws && npm run process:options:private:ws && npm run process:change_log",
+    "start": "npm run process:usdm:public:rest && npm run process:usdm:private:rest && npm run process:usdm:public:ws && npm run process:usdm:private:ws && npm run process:coinm:public:rest && npm run process:coinm:private:rest && npm run process:coinm:public:ws && npm run process:coinm:private:ws && npm run process:options:public:rest && npm run process:options:private:rest && npm run process:options:public:ws && npm run process:options:private:ws && npm run process:change_log && npm run consolidate",
     "process:usdm:public:rest": "node src/index.js config/usdm_public_rest.json",
     "process:usdm:private:rest": "node src/index.js config/usdm_private_rest.json",
     "process:usdm:public:ws": "node src/index.js config/usdm_public_websocket.json",
@@ -18,7 +18,8 @@
     "process:options:private:rest": "node src/index.js config/options_private_rest.json",
     "process:options:public:ws": "node src/index.js config/options_public_websocket.json",
     "process:options:private:ws": "node src/index.js config/options_private_websocket.json",
-    "process:change_log": "node src/index.js config/change_log.json"
+    "process:change_log": "node src/index.js config/change_log.json",
+    "consolidate": "node src/consolidate-core-docs.js"
   },
   "dependencies": {
     "puppeteer": "^24.22.0",
