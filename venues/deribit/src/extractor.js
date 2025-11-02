@@ -81,11 +81,26 @@ class DeribitDocExtractor {
         )
       }
 
-      // Convert to markdown
-      return this.turndownService.turndown(content.content)
+      return content
     } finally {
       await page.close()
     }
+  }
+
+  /**
+   * Generate filename from endpoint path
+   * @param {string} endpointPath - The endpoint path (e.g., /public/auth)
+   * @returns {string} - Sanitized filename
+   */
+  generateFilename(endpointPath) {
+    // Remove leading slash and replace remaining slashes with underscores
+    return (
+      endpointPath
+        .replace(/^\//, "")
+        .replace(/\//g, "_")
+        .replace(/[^a-z0-9_]/gi, "_")
+        .toLowerCase() + ".md"
+    )
   }
 
   /**
@@ -141,7 +156,7 @@ class DeribitDocExtractor {
 
     // Extract the main API documentation
     console.log("Extracting selected API documentation sections...")
-    const mainContent = await this.extractApiDocumentation()
+    const extractedData = await this.extractApiDocumentation()
     console.log("API documentation extraction complete")
 
     // Extract support articles if specified
@@ -149,31 +164,86 @@ class DeribitDocExtractor {
     const supportContent = await this.extractSupportArticles()
     console.log("Support articles extraction complete")
 
-    // Combine the content
-    console.log("Creating documentation file...")
-    let combinedMarkdown = `# ${this.config.title || "Deribit API Documentation"}\n\n`
+    // Determine output directory structure
+    const baseOutputDir = path.dirname(this.config.output)
+    const publicDir = path.join(baseOutputDir, "endpoints/public")
+    const privateDir = path.join(baseOutputDir, "endpoints/private")
+    const coreDir = path.join(baseOutputDir, "core")
 
-    // Add the main API documentation
-    combinedMarkdown += `${mainContent}\n\n`
+    // Create directories
+    await fs.mkdir(publicDir, { recursive: true })
+    await fs.mkdir(privateDir, { recursive: true })
+    await fs.mkdir(coreDir, { recursive: true })
 
-    // Add support articles if any were extracted
-    if (supportContent.trim()) {
-      combinedMarkdown += supportContent
+    let publicCount = 0
+    let privateCount = 0
+    let coreCount = 0
+
+    // Process and save individual endpoints
+    console.log(
+      `\nProcessing ${extractedData.endpoints.length} endpoints...`
+    )
+
+    for (const endpoint of extractedData.endpoints) {
+      const markdown = this.turndownService.turndown(endpoint.content)
+      const filename = this.generateFilename(endpoint.title)
+
+      let outputPath
+      if (endpoint.isPublic) {
+        outputPath = path.join(publicDir, filename)
+        publicCount++
+        console.log(`  📄 Public:  ${endpoint.title} → ${filename}`)
+      } else if (endpoint.isPrivate) {
+        outputPath = path.join(privateDir, filename)
+        privateCount++
+        console.log(`  🔒 Private: ${endpoint.title} → ${filename}`)
+      } else {
+        // Fallback to private if not clearly marked
+        outputPath = path.join(privateDir, filename)
+        privateCount++
+        console.log(`  🔒 Private: ${endpoint.title} → ${filename} (default)`)
+      }
+
+      await fs.writeFile(outputPath, markdown)
+      await formatMarkdown(outputPath)
     }
 
-    // Ensure output directory exists
-    const outputDir = path.dirname(this.config.output)
-    await fs.mkdir(outputDir, { recursive: true })
+    // Process and save core content
+    if (extractedData.coreContent.length > 0) {
+      console.log(`\nProcessing ${extractedData.coreContent.length} core sections...`)
 
-    // Write the combined markdown to the output file
-    await fs.writeFile(this.config.output, combinedMarkdown)
-    console.log(`Documentation written to: ${this.config.output}`)
+      for (const coreItem of extractedData.coreContent) {
+        const markdown = this.turndownService.turndown(coreItem.content)
+        const sanitizedTitle = coreItem.sectionTitle
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "_")
+          .replace(/^_+|_+$/g, "")
+        const filename = `${sanitizedTitle}.md`
+        const outputPath = path.join(coreDir, filename)
 
-    // Format the markdown file
-    await formatMarkdown(this.config.output)
-    console.log(`Formatted: ${this.config.output}`)
+        await fs.writeFile(outputPath, markdown)
+        await formatMarkdown(outputPath)
+        coreCount++
+        console.log(`  📚 Core:    ${coreItem.sectionTitle} → ${filename}`)
+      }
+    }
 
-    console.log("Documentation extraction complete!")
+    // Process support articles as core content
+    if (supportContent.trim() && supportContent !== "## Support Articles\n\n") {
+      const filename = "support_articles.md"
+      const outputPath = path.join(coreDir, filename)
+      await fs.writeFile(outputPath, supportContent)
+      await formatMarkdown(outputPath)
+      coreCount++
+      console.log(`  📚 Core:    Support Articles → ${filename}`)
+    }
+
+    // Print summary
+    console.log("\x1b[32m%s\x1b[0m", `\n✅ Extraction complete!`)
+    console.log(`  📄 Public endpoints:  ${publicCount}`)
+    console.log(`  🔒 Private endpoints: ${privateCount}`)
+    console.log(`  📚 Core documentation: ${coreCount}`)
+    console.log(`📁 Output directory: ${baseOutputDir}`)
   }
 }
 

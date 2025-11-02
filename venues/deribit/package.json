@@ -16,7 +16,8 @@
     "extract:private_combo_trading": "node src/index.js config/private_combo_trading.json",
     "extract:private_block_rfq": "node src/index.js config/private_block_rfq.json",
     "extract:connection": "node src/index.js config/connection.json",
-    "all": "npm run extract:general && npm run extract:session_management && npm run extract:authentication && npm run extract:market_data && npm run extract:private_account_management && npm run extract:private_wallet && npm run extract:private_trading && npm run extract:private_block_trading && npm run extract:private_combo_trading && npm run extract:private_block_rfq && npm run extract:connection"
+    "consolidate": "node src/consolidate-core-docs.js",
+    "all": "npm run extract:general && npm run extract:session_management && npm run extract:authentication && npm run extract:market_data && npm run extract:private_account_management && npm run extract:private_wallet && npm run extract:private_trading && npm run extract:private_block_trading && npm run extract:private_combo_trading && npm run extract:private_block_rfq && npm run extract:connection && npm run consolidate"
   },
   "dependencies": {
     "puppeteer": "^24.22.0",

@@ -8,10 +8,10 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
  */
 class ExtractionUtils {
   /**
-   * Extract specified sections from the main documentation
+   * Extract individual endpoints from the main documentation
    * @param {Page} page - Puppeteer page instance
    * @param {string[]} targetSections - Array of section names to extract
-   * @returns {Promise<Object>} - The extracted content and matched section names
+   * @returns {Promise<Object>} - The extracted endpoints and metadata
    */
   static async extractSelectedSections(page, targetSections) {
     return await page.evaluate(sections => {
@@ -46,7 +46,8 @@ class ExtractionUtils {
 
       // Get all h1 sections
       const h1Sections = document.querySelectorAll("h1")
-      const selectedContent = []
+      const endpoints = []
+      const coreContent = []
       const matchedSections = []
 
       h1Sections.forEach(h1Section => {
@@ -54,7 +55,6 @@ class ExtractionUtils {
 
         // Check if this section should be included
         const shouldInclude = sections.some(targetSection => {
-          // Check for direct match or if the section title contains the target section name
           return (
             sectionTitle === targetSection ||
             sectionTitle.includes(targetSection) ||
@@ -64,24 +64,79 @@ class ExtractionUtils {
 
         if (shouldInclude) {
           matchedSections.push(sectionTitle)
-          const sectionContent = [h1Section.outerHTML]
-          let currentElement = h1Section
 
-          // Get all elements until the next h1
-          while (
-            (currentElement = currentElement.nextElementSibling) !== null
-          ) {
-            if (currentElement.tagName === "H1") break
-            sectionContent.push(currentElement.outerHTML)
+          // Get all H2 elements (endpoints) within this H1 section
+          let currentElement = h1Section.nextElementSibling
+          const h2Endpoints = []
+          const nonEndpointContent = []
+
+          // Collect content before the first H2 (intro/description)
+          const preH2Content = []
+          while (currentElement && currentElement.tagName !== "H1") {
+            if (currentElement.tagName === "H2") {
+              break
+            }
+            preH2Content.push(currentElement.outerHTML)
+            currentElement = currentElement.nextElementSibling
           }
 
-          selectedContent.push(sectionContent.join("\n"))
+          // If there's pre-H2 content, save it as core documentation
+          if (preH2Content.length > 0) {
+            nonEndpointContent.push({
+              sectionTitle: sectionTitle,
+              content: preH2Content.join("\n")
+            })
+          }
+
+          // Now process H2 endpoints
+          currentElement = h1Section.nextElementSibling
+          while (currentElement && currentElement.tagName !== "H1") {
+            if (currentElement.tagName === "H2") {
+              const h2Title = currentElement.textContent.trim()
+
+              // Check if this is an endpoint (starts with /)
+              const isEndpoint = h2Title.startsWith("/")
+
+              if (isEndpoint) {
+                // Extract this endpoint and all content until the next H2 or H1
+                const endpointContent = [currentElement.outerHTML]
+                let nextElement = currentElement.nextElementSibling
+
+                while (
+                  nextElement &&
+                  nextElement.tagName !== "H1" &&
+                  nextElement.tagName !== "H2"
+                ) {
+                  endpointContent.push(nextElement.outerHTML)
+                  nextElement = nextElement.nextElementSibling
+                }
+
+                h2Endpoints.push({
+                  title: h2Title,
+                  content: endpointContent.join("\n"),
+                  parentSection: sectionTitle,
+                  isPublic: h2Title.includes("/public/"),
+                  isPrivate: h2Title.includes("/private/")
+                })
+
+                currentElement = nextElement
+                continue
+              }
+            }
+
+            if (currentElement) {
+              currentElement = currentElement.nextElementSibling
+            }
+          }
+
+          endpoints.push(...h2Endpoints)
+          coreContent.push(...nonEndpointContent)
         }
       })
 
-      // For debugging - return both content and matched section names
       return {
-        content: selectedContent.join("\n\n"),
+        endpoints: endpoints,
+        coreContent: coreContent,
         matchedSections: matchedSections
       }
     }, targetSections)
