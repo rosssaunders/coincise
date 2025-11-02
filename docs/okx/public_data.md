@@ -615,57 +615,6 @@ Retrieve interest rate
 
 ---
 
-### Get insurance fund [🔗](https://www.okx.com/docs-v5/en/#public-data-rest-api-get-insurance-fund "Direct link to: https://www.okx.com/docs-v5/en/#public-data-rest-api-get-insurance-fund")
-
-Get insurance fund balance information
-
-#### Rate Limit: 10 requests per 2 seconds
-
-#### Rate limit rule: IP
-
-#### HTTP Request
-
-`GET /api/v5/public/insurance-fund`
-
-#### Request Parameters
-
-| Parameter  | Type   | Required    | Description                                                                                                                                                                                                                       |
-| ---------- | ------ | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| instType   | String | Yes         | Instrument type<br><code>MARGIN</code><br><code>SWAP</code><br><code>FUTURES</code><br><code>OPTION</code>                                                                                                                        |
-| type       | String | No          | Type<br><code>regular_update</code><br><code>liquidation_balance_deposit</code><br><code>bankruptcy_loss</code><br><code>platform_revenue</code><br><code>adl</code>: ADL historical data<br>The default is <code>all type</code> |
-| instFamily | String | Conditional | Instrument family<br>Required for <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>                                                                                                                                      |
-| ccy        | String | Conditional | Currency, only applicable to <code>MARGIN</code>                                                                                                                                                                                  |
-| before     | String | No          | Pagination of data to return records newer than the requested <code>ts</code>                                                                                                                                                     |
-| after      | String | No          | Pagination of data to return records earlier than the requested <code>ts</code>                                                                                                                                                   |
-| limit      | String | No          | Number of results per request. The maximum is <code>100</code>; The default is <code>100</code>                                                                                                                                   |
-
-#### Response Parameters
-
-| Parameter     | Type             | Description                                                                                                                                                                                                                                                                                                                                                                                                                |
-| ------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| total         | String           | The total balance of insurance fund, in <code>USD</code>                                                                                                                                                                                                                                                                                                                                                                   |
-| instFamily    | String           | Instrument family<br>Applicable to <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>                                                                                                                                                                                                                                                                                                                              |
-| instType      | String           | Instrument type                                                                                                                                                                                                                                                                                                                                                                                                            |
-| details       | Array of objects | Insurance fund data                                                                                                                                                                                                                                                                                                                                                                                                        |
-| &gt; balance  | String           | The balance of insurance fund                                                                                                                                                                                                                                                                                                                                                                                              |
-| &gt; amt      | String           | The change in the balance of insurance fund<br>Applicable when type is <code>liquidation_balance_deposit</code>, <code>bankruptcy_loss</code> or <code>platform_revenue</code>                                                                                                                                                                                                                                             |
-| &gt; ccy      | String           | The currency of insurance fund                                                                                                                                                                                                                                                                                                                                                                                             |
-| &gt; type     | String           | The type of insurance fund                                                                                                                                                                                                                                                                                                                                                                                                 |
-| &gt; maxBal   | String           | Maximum insurance fund balance in the past eight hours<br>Only applicable when type is <code>adl</code>                                                                                                                                                                                                                                                                                                                    |
-| &gt; maxBalTs | String           | Timestamp when insurance fund balance reached maximum in the past eight hours, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code><br>Only applicable when type is <code>adl</code>                                                                                                                                                                                                                     |
-| &gt; decRate  | String           | <del>Real-time insurance fund decline rate (compare balance and maxBal)<br>Only applicable when type is <code>adl</code></del>(Deprecated)                                                                                                                                                                                                                                                                                 |
-| &gt; adlType  | String           | ADL related events<br><code>rate_adl_start</code>: ADL begins due to high insurance fund decline rate<br><code>bal_adl_start</code>: ADL begins due to insurance fund balance falling<br><code>pos_adl_start</code>：ADL begins due to the volume of liquidation orders falls to a certain level (only applicable to premarket symbols)<br><code>adl_end</code>: ADL ends<br>Only applicable when type is <code>adl</code> |
-| &gt; ts       | String           | The update timestamp of insurance fund. Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>                                                                                                                                                                                                                                                                                                             |
-
-The enumeration value \`regular_update\` of type field is used to present
-up-to-minute insurance fund change. The amt field will be used to present the
-difference of insurance fund balance when the type field is
-\`liquidation_balance_deposit\`, \`bankruptcy_loss\` or \`platform_revenue\`,
-which is generated once per day around 08:00 am (UTC). When type is
-\`regular_update\`, the amt field will be returned as "".
-
----
-
 ### Get mark price candlesticks [🔗](https://www.okx.com/docs-v5/en/#public-data-rest-api-get-mark-price-candlesticks "Direct link to: https://www.okx.com/docs-v5/en/#public-data-rest-api-get-mark-price-candlesticks")
 
 Retrieve the candlestick charts of mark price. This endpoint can retrieve the

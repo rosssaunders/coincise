@@ -511,17 +511,30 @@ Try [demo trading explorer](/demo-trading-explorer/v5/en)
 - It is `sCode` and `sMsg` that represent the request result or error reason
   when the return data has `sCode` rather than `code` and `msg`.
 
-**The introduction of `instFamily`:**
+**`instFamily` and `uly` parameter explanation:**
 
-- There are no difference between `uly` and `instFamily`:
-  - For BTC-USD-SWAP, `uly` and `instFamily` are both BTC-USD. For
-    BTC-USDC-SWAP, `uly` and `instFamily` are both BTC-USDC.
-  - If you set the request parameter "uly" as BTC-USD, you will get the data for
-    BTC-USD (coin-margined) contracts.
-  - If you set the request parameter "instFamily" as BTC-USD, then you also will
-    get data for BTC-USD (coin-margined) contracts.
-- You can look up the corresponding instFamily of each instrument from the "Get
-  instruments" endpoint.
+- The following explanation is based on the `BTC` contract, other contracts are
+  similar.
+- `uly` is the index, like "BTC-USD", and there is a one-to-many relationship
+  with the settlement and margin currency (`settleCcy`).
+- `instFamily` is the trading instrument family, like `BTC-USD_UM`, and there is
+  a one-to-one relationship with the settlement and margin currency
+  (`settleCcy`).
+- The following table shows the corresponding relationship of `uly`,
+  `instFamily`, `settleCcy` and `instId`.
+
+| **Contract Type**      | **uly**  | **instFamily**              | **settleCcy**         | **Delivery contract instId**       | **Swap contract instId**         |
+| ---------------------- | -------- | --------------------------- | --------------------- | ---------------------------------- | -------------------------------- |
+| USDT-margined contract | BTC-USDT | BTC-USDT                    | USDT                  | BTC-USDT-250808                    | BTC-USDT-SWAP                    |
+| USDC-margined contract | BTC-USDC | BTC-USDC                    | USDC                  | BTC-USDC-250808                    | BTC-USDC-SWAP                    |
+| USD-margined contract  | BTC-USD  | <strong>BTC-USD_UM</strong> | <strong>USDⓈ</strong> | <strong>BTC-USD_UM-250808</strong> | <strong>BTC-USD_UM-SWAP</strong> |
+| Coin-margined contract | BTC-USD  | <strong>BTC-USD</strong>    | <strong>BTC</strong>  | <strong>BTC-USD-250808</strong>    | <strong>BTC-USD-SWAP</strong>    |
+
+Note:  
+1\. USDⓈ represents USD and multiple USD stable coins, like USDC, USDG.  
+2\. The settlement and margin currency refers to the `settleCcy` field returned
+by the [Get instruments](/docs-v5/en/#trading-account-rest-api-get-instruments)
+endpoint.
 
 ---
 
