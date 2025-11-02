@@ -13,42 +13,103 @@ async function loadBrowser() {
   return browser
 }
 
-async function getPageHTML(pageURL, browser) {
-  const page = await browser.newPage()
-  await configurePage(page)
+// Retry utility for handling transient network errors
+async function retryOperation(operation, options = {}) {
+  const {
+    maxRetries = 3,
+    initialDelay = 1000,
+    maxDelay = 10000,
+    backoffMultiplier = 2,
+    retryableErrors = [
+      "ERR_CERT_VERIFIER_CHANGED",
+      "ERR_CONNECTION_RESET",
+      "ERR_CONNECTION_REFUSED",
+      "ERR_NETWORK_CHANGED",
+      "ERR_INTERNET_DISCONNECTED",
+      "TimeoutError",
+      "net::ERR"
+    ]
+  } = options
 
-  // Set a normal browser user-agent
-  await page.setUserAgent(
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
-  )
+  let lastError
+  let delay = initialDelay
 
-  // Bypass CORS issues by intercepting requests that might fail
-  await page.setRequestInterception(true)
-  page.on("request", request => {
-    // Add origin and referer headers to make requests look legitimate
-    const headers = request.headers()
-    headers["Origin"] = new URL(pageURL).origin
-    headers["Referer"] = pageURL
+  for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
+    try {
+      return await operation()
+    } catch (error) {
+      lastError = error
 
-    request.continue({ headers })
-  })
+      // Check if this is a retryable error
+      const isRetryable = retryableErrors.some(errType =>
+        error.message?.includes(errType)
+      )
 
-  // Add console event listener
-  page.on("console", msg => {
-    if (
-      msg.text() !== "JSHandle@object" &&
-      !msg.text().startsWith("A preload for ") &&
-      !msg.text().startsWith("The resource ")
-    ) {
-      console.log("Browser Console:", msg.text())
+      // If this is the last attempt or not a retryable error, throw
+      if (attempt > maxRetries || !isRetryable) {
+        throw error
+      }
+
+      console.warn(
+        `\x1b[33m%s\x1b[0m`,
+        `⚠️  Attempt ${attempt} failed: ${error.message}`
+      )
+      console.log(
+        `\x1b[36m%s\x1b[0m`,
+        `🔄 Retrying in ${delay}ms... (${attempt}/${maxRetries})`
+      )
+
+      // Wait before retrying with exponential backoff
+      await new Promise(resolve => setTimeout(resolve, delay))
+      delay = Math.min(delay * backoffMultiplier, maxDelay)
     }
-  })
+  }
 
-  // Set viewport to browser window size
-  await page.setViewport({ width: 1400, height: 1200 })
+  throw lastError
+}
 
-  await page.goto(pageURL)
-  await page.waitForSelector(".app-content")
+async function getPageHTML(pageURL, browser) {
+  let page = null
+
+  try {
+    page = await browser.newPage()
+    await configurePage(page)
+
+    // Set a normal browser user-agent
+    await page.setUserAgent(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+    )
+
+    // Bypass CORS issues by intercepting requests that might fail
+    await page.setRequestInterception(true)
+    page.on("request", request => {
+      // Add origin and referer headers to make requests look legitimate
+      const headers = request.headers()
+      headers["Origin"] = new URL(pageURL).origin
+      headers["Referer"] = pageURL
+
+      request.continue({ headers })
+    })
+
+    // Add console event listener
+    page.on("console", msg => {
+      if (
+        msg.text() !== "JSHandle@object" &&
+        !msg.text().startsWith("A preload for ") &&
+        !msg.text().startsWith("The resource ")
+      ) {
+        console.log("Browser Console:", msg.text())
+      }
+    })
+
+    // Set viewport to browser window size
+    await page.setViewport({ width: 1400, height: 1200 })
+
+    // Use retry logic for page navigation and waiting for content
+    await retryOperation(async () => {
+      await page.goto(pageURL, { waitUntil: "networkidle2" })
+      await page.waitForSelector(".app-content")
+    })
   const html = await page.evaluate(async sourceUrl => {
     async function processH2(sectionElement) {
       console.log(
@@ -156,7 +217,7 @@ async function getPageHTML(pageURL, browser) {
 
       sectionElement.querySelectorAll("div.item-normal p").forEach(p => {
         if (p && p.textContent.trim() === "Key steps for using the API") {
-          p.parentElement.nextSibling.remove()
+          p.parentElement.nextElementSibling?.remove()
           p.parentElement.remove()
         }
       })
@@ -422,6 +483,19 @@ async function getPageHTML(pageURL, browser) {
         .querySelectorAll("div.item-demo-content")
         .forEach(el => el.remove())
 
+      // Remove any remaining content-item divs that contain the "Key steps" numbered list
+      sectionElement.querySelectorAll("div.content-item").forEach(div => {
+        const text = div.textContent
+        if (
+          text.includes("1. Create Account") &&
+          text.includes("2. Pass KYC/KYB") &&
+          text.includes("3. Create API KEY")
+        ) {
+          console.log("Removing Key steps content-item from catch-all")
+          div.remove()
+        }
+      })
+
       // Copy any remaining content to the empty placeholder div
       sectionElement.querySelectorAll("div.content-item").forEach(div => {
         console.log("Moving all remaining content to the catch all div")
@@ -429,21 +503,8 @@ async function getPageHTML(pageURL, browser) {
       })
 
       // Add source link at the end of each endpoint section
-      // Get the H2 text to create the anchor
-      const h2Text = detailDiv.querySelector("h2")?.textContent?.trim() || ""
-
-      // Extract the base URL and hash parts
-      const urlParts = sourceUrl.split("#")
-      const baseUrl = urlParts[0]
-      const hashPath = urlParts[1] || ""
-
-      // Create the full source URL with the endpoint anchor
-      const fullSourceUrl = h2Text
-        ? `${baseUrl}#${hashPath}#${h2Text}`
-        : sourceUrl
-
       const sourceDiv = document.createElement("div")
-      sourceDiv.innerHTML = `<blockquote><p><strong>Source:</strong> <a href="${fullSourceUrl}">${fullSourceUrl}</a></p></blockquote>`
+      sourceDiv.innerHTML = `<blockquote><p><strong>Source:</strong> <a href="${sourceUrl}">${sourceUrl}</a></p></blockquote>`
       detailDiv.appendChild(sourceDiv)
     }
 
@@ -486,8 +547,12 @@ async function getPageHTML(pageURL, browser) {
     return body.innerHTML
   }, pageURL)
 
-  await page.close()
-  return html
+    return html
+  } finally {
+    if (page) {
+      await page.close()
+    }
+  }
 }
 
 function convertToMarkdown(html) {
@@ -553,11 +618,14 @@ async function main() {
       console.log("\x1b[34m%s\x1b[0m", `🌐 Processing URL: ${url}`)
       const startTime = Date.now()
 
-      const html = await getPageHTML(url, browser)
-
-      if (!html || html.trim() === "") {
-        throw new Error(`Failed to get HTML content from ${url}`)
-      }
+      // Wrap the entire page processing with retry logic
+      const html = await retryOperation(async () => {
+        const content = await getPageHTML(url, browser)
+        if (!content || content.trim() === "") {
+          throw new Error(`Failed to get HTML content from ${url}`)
+        }
+        return content
+      })
 
       const endTime = Date.now()
       console.log(
@@ -568,47 +636,90 @@ async function main() {
       result.push(html)
     }
 
-    // Create docs directory if it doesn't exist
+    // Create docs directory structure
     const { docsDir, outputFileName } = outputConfig
-    if (!fs.existsSync(docsDir)) {
-      fs.mkdirSync(docsDir, { recursive: true })
+
+    // Create a folder from the outputFileName (remove .md extension)
+    const folderName = outputFileName.replace(/\.md$/, "")
+    const endpointsDir = `${docsDir}/${folderName}`
+
+    if (!fs.existsSync(endpointsDir)) {
+      fs.mkdirSync(endpointsDir, { recursive: true })
     }
 
-    // Convert all the html to markdown and combine into a single file
-    let combinedMarkdown = ""
-
-    if (title) {
-      console.log(`\x1b[34m%s\x1b[0m`, `📄 Adding title: ${title}`)
-      combinedMarkdown += `# ${title}\n\n`
+    // Helper function to sanitize filenames
+    const sanitizeFilename = text => {
+      return text
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "")
+        .substring(0, 100) // Limit length to 100 chars
     }
+
+    // Process each URL's HTML and extract individual endpoints
+    let totalFilesCreated = 0
+    let totalSize = 0
 
     for (let i = 0; i < result.length; i++) {
       const html = result[i]
       const url = urls[i]
-      // Demote all headings by one level using JSDOM
+
+      // Parse the HTML to find all H2 sections (endpoints)
       const dom = new JSDOM(html)
-      demoteHeadings(dom)
-      const markdown = await convertToMarkdown(
-        dom.window.document.body.innerHTML
+      const convertDivs = dom.window.document.querySelectorAll(
+        ".convert-to-markdown"
       )
-      combinedMarkdown += `${markdown}\n\n---\n\n`
+
+      console.log(
+        `\x1b[34m%s\x1b[0m`,
+        `📝 Found ${convertDivs.length} endpoints in ${url}`
+      )
+
+      // Process each endpoint section
+      for (const div of convertDivs) {
+        // Get the H2 heading for this endpoint
+        const h2 = div.querySelector("h2")
+        if (!h2) continue
+
+        const endpointName = h2.textContent.trim()
+        console.log(
+          `\x1b[36m%s\x1b[0m`,
+          `  📄 Processing endpoint: ${endpointName}`
+        )
+
+        // Create a filename from the endpoint name
+        const filename = sanitizeFilename(endpointName) + ".md"
+
+        // Create a temporary DOM with just this endpoint's content
+        const endpointDom = new JSDOM(`<div>${div.innerHTML}</div>`)
+
+        // Don't demote headings - keep H2 as the top level for each endpoint file
+        // Convert this endpoint's HTML to markdown
+        const markdown = await convertToMarkdown(
+          endpointDom.window.document.body.innerHTML
+        )
+
+        // Save this endpoint to its own file in the endpoints folder
+        const outputPath = `${endpointsDir}/${filename}`
+        fs.writeFileSync(outputPath, markdown)
+
+        // Format the markdown file
+        await formatMarkdown(outputPath)
+
+        totalFilesCreated++
+        totalSize += markdown.length
+
+        console.log(`  ✅ Saved: ${folderName}/${filename}`)
+      }
     }
-
-    // Save the combined markdown to a single file
-    const outputPath = `${docsDir}/${outputFileName}`
-    fs.writeFileSync(outputPath, combinedMarkdown)
-
-    // Format the markdown file
-    await formatMarkdown(outputPath)
-    console.log(`Formatted: ${outputPath}`)
 
     // Print a visually appealing success message
     console.log(
       "\x1b[32m%s\x1b[0m",
-      "✅ Success: Combined markdown file created successfully!"
+      `\n✅ Success: Created ${totalFilesCreated} endpoint files!`
     )
-    console.log(`📄 File: ${outputPath}`)
-    console.log(`📦 Size: ${(combinedMarkdown.length / 1024).toFixed(2)} KB`)
+    console.log(`📁 Directory: ${endpointsDir}`)
+    console.log(`📦 Total Size: ${(totalSize / 1024).toFixed(2)} KB`)
   } finally {
     if (browser) {
       await browser.close()
