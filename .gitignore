@@ -169,3 +169,6 @@ Thumbs.db
 
 # Keep yarn.lock if using yarn
 # !yarn.lock
+.playwright-mcp/bingx-cswap-page.png
+.playwright-mcp/bingx-page.png
+.playwright-mcp/bingx-account-api.png
