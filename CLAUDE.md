@@ -11,6 +11,16 @@ crypto exchanges. Each exchange (called a "venue") has its own scraper project
 that extracts documentation and converts it to markdown format optimized for AI
 consumption.
 
+## CRITICAL RULE: Documentation Files
+
+**NEVER DIRECTLY MODIFY DOCUMENTATION FILES IN `docs/`**
+
+- Documentation files (`docs/**/*.md`) must ONLY be modified by extraction scripts
+- You may READ these files but you are FORBIDDEN from using Write or Edit tools on them
+- All documentation changes must come from running the extraction scripts in `venues/`
+- A hook is configured to block direct modifications to enforce this rule
+- If documentation needs to be changed, update the extraction scripts instead
+
 ## Common Commands
 
 ### Installation
