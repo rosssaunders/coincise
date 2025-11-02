@@ -103,6 +103,55 @@ GitHub Actions workflows in `.github/workflows/` automatically:
 - Create PRs when documentation changes are detected
 - Workflow naming pattern: `{venue}-docs-update.yml`
 
+### Testing GitHub Actions Locally
+
+**Using act to test workflows before pushing**
+
+[act](https://github.com/nektos/act) is a tool that allows you to run GitHub Actions locally using Docker. This enables testing workflow changes without committing and pushing to GitHub.
+
+**Installation (macOS):**
+```bash
+brew install act
+```
+
+**Basic Usage:**
+
+```bash
+# List all workflows
+act -l
+
+# List workflows for a specific file
+act -W .github/workflows/bullish-docs-update.yml -l
+
+# Dry run a specific workflow
+act -W .github/workflows/bullish-docs-update.yml -j update-docs --dryrun
+
+# Run a specific workflow (on Apple Silicon, use --container-architecture flag)
+act -W .github/workflows/bullish-docs-update.yml -j update-docs --container-architecture linux/amd64
+```
+
+**Configuration:**
+
+Create `~/Library/Application Support/act/actrc` to configure default settings:
+```
+-P ubuntu-latest=catthehacker/ubuntu:act-latest
+```
+
+**Important Notes:**
+- act uses Docker to simulate GitHub Actions runners
+- Choose the medium image (~500MB) for most workflows - it includes necessary tools and is compatible with most actions
+- On Apple Silicon Macs, use `--container-architecture linux/amd64` flag to ensure compatibility
+- Git operations in worktrees may have limitations when run via act
+- The main value of act is testing the core workflow logic (dependency installation, script execution) before pushing
+
+**Testing Workflow Changes:**
+
+Before committing workflow changes:
+1. Make your changes to `.github/workflows/{workflow}.yml`
+2. Test with act: `act -W .github/workflows/{workflow}.yml -j {job-name} --container-architecture linux/amd64`
+3. Verify all steps complete successfully (git operations may fail in act but work in GitHub)
+4. Commit and push once the core logic is validated
+
 ## Important Development Notes
 
 ### Code Style Requirements
