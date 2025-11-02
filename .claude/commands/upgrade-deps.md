@@ -1,5 +1,6 @@
 ---
-description: Upgrade all npm dependencies across the entire monorepo (root + all venues)
+description:
+  Upgrade all npm dependencies across the entire monorepo (root + all venues)
 ---
 
 You are tasked with upgrading all npm dependencies across the Coincise monorepo.
@@ -9,7 +10,8 @@ You are tasked with upgrading all npm dependencies across the Coincise monorepo.
 1. **Upgrade root dependencies:**
    - Run `npm update` in the root directory
    - Run `npm outdated` to show any remaining outdated packages
-   - If there are major version updates available, ask the user if they want to upgrade those too
+   - If there are major version updates available, ask the user if they want to
+     upgrade those too
 
 2. **Find all venue package.json files:**
    - Use the Glob tool to find all `venues/*/package.json` files
@@ -32,14 +34,17 @@ You are tasked with upgrading all npm dependencies across the Coincise monorepo.
      - Any potential breaking changes to be aware of
 
 6. **Ask for confirmation on major updates:**
-   - If there are packages with major version updates available, ask the user if they want to:
+   - If there are packages with major version updates available, ask the user if
+     they want to:
      - Upgrade to latest major versions (potentially breaking)
      - Keep current versions
      - Review changes individually
 
 ## Important notes:
+
 - Use `npm update` for patch and minor updates (respects semver)
-- Use `npm install <package>@latest` for major version updates (only with user confirmation)
+- Use `npm install <package>@latest` for major version updates (only with user
+  confirmation)
 - After all updates, recommend running the test suite or build scripts
 - Be cautious with major version updates and mention potential breaking changes
 

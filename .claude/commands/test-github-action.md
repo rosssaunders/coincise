@@ -1,8 +1,10 @@
 ---
-description: Test GitHub Actions workflows locally using act before pushing changes
+description:
+  Test GitHub Actions workflows locally using act before pushing changes
 ---
 
-You are tasked with testing GitHub Actions workflows locally using the `act` tool to validate changes before pushing to GitHub.
+You are tasked with testing GitHub Actions workflows locally using the `act`
+tool to validate changes before pushing to GitHub.
 
 ## Prerequisites Check:
 
@@ -24,10 +26,12 @@ You are tasked with testing GitHub Actions workflows locally using the `act` too
      act -l
      ```
    - Show the workflow names and ask the user which one to test
-   - Alternatively, scan recent file changes to suggest which workflow might be affected
+   - Alternatively, scan recent file changes to suggest which workflow might be
+     affected
 
 2. **Run dry-run first (recommended):**
-   - Before running the full workflow, do a dry-run to validate the workflow syntax:
+   - Before running the full workflow, do a dry-run to validate the workflow
+     syntax:
      ```bash
      act -W .github/workflows/{workflow-file}.yml -j {job-name} --dryrun
      ```
@@ -48,7 +52,8 @@ You are tasked with testing GitHub Actions workflows locally using the `act` too
      - Dependency installation steps
      - Build/test execution steps
      - Script execution steps
-   - Note: Git operations (commits, PRs) may fail in act but work correctly in GitHub - this is expected
+   - Note: Git operations (commits, PRs) may fail in act but work correctly in
+     GitHub - this is expected
 
 5. **Report findings:**
    - Provide a clear summary of:
@@ -66,10 +71,13 @@ You are tasked with testing GitHub Actions workflows locally using the `act` too
 
 ## Important Notes:
 
-- **act Configuration:** Ensure `~/Library/Application Support/act/actrc` exists with:
+- **act Configuration:** Ensure `~/Library/Application Support/act/actrc` exists
+  with:
+
   ```
   -P ubuntu-latest=catthehacker/ubuntu:act-latest
   ```
+
   Create it if missing.
 
 - **Known Limitations:**
@@ -88,9 +96,11 @@ You are tasked with testing GitHub Actions workflows locally using the `act` too
 ## Example Usage:
 
 When the user runs `/test-github-action bullish-docs-update.yml`, execute:
+
 1. Dry-run to validate syntax
 2. Full execution to test the workflow
 3. Provide detailed feedback on results
 4. Recommend whether it's safe to push
 
-Start by checking prerequisites and asking the user which workflow they want to test (if not specified).
+Start by checking prerequisites and asking the user which workflow they want to
+test (if not specified).
