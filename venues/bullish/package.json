@@ -9,7 +9,6 @@
     "extract:config": "node src/index.js"
   },
   "dependencies": {
-    "widdershins": "^4.0.1",
     "prettier": "^3.6.2"
   }
 }
