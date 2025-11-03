@@ -979,7 +979,7 @@ GET `/eapi/v1/blockTrades`
 > Source:
 > [https://developers.binance.com/docs/derivatives/option/market-data/Recent-Block-Trade-List](https://developers.binance.com/docs/derivatives/option/market-data/Recent-Block-Trade-List)
 
-## Symbol Price Ticker
+## Index Price Ticker
 
 ### API Description
 
