@@ -2,30 +2,17 @@
 
 ## User Data Streams for Binance
 
-**Last Updated: 2025-08-12**
+**Last Updated: 2025-10-24**
 
-- There are currently two ways to subscribe to the User Data Stream:
-  - **\[Preferred\]** Subscribing directly through the
-    [WebSocket API](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user_data_stream_subscribe)
-    using an API Key.
-  - **\[Deprecated\]** Generating a **listen key** using
-    [the REST API](/docs/binance-spot-api-docs/rest-api/account-endpoints#user-data-stream-requests)
-    or
-    [the WebSocket API](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-requests)
-    and using it to listen on **stream.binance.com**
-- Both sources will push all events related to your account **in real-time**.
-- How to use a listen key on **stream.binance.com**:
-  - The base endpoint is: **wss://stream.binance.com:9443** or
-    **wss://stream.binance.com:443**.
-  - A single connection to **stream.binance.com** is only valid for 24 hours;
-    expect to be disconnected at the 24 hour mark.
-  - User Data Streams are accessed at **/ws/<listenKey>** or
-    **/stream?streams=<listenKey>**
-  - All time and timestamp related fields in the JSON payload are **milliseconds
-    by default**. To receive the information in microseconds, please add the
-    parameter `timeUnit=MICROSECOND` or `timeUnit=microsecond` in the connection
-    URL.
-    - For example `/ws/<listenKey>?timeUnit=MICROSECOND`
+### General information
+
+- Subscribe via the
+  [WebSocket API](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-subscribe)
+  using an API Key.
+- Both [SBE](/docs/binance-spot-api-docs/faqs/sbe_faq) and JSON output are
+  supported.
+- Account events are pushed in **real-time**.
+- All timestamps in JSON payloads are in **milliseconds by default**.
 
 ### User Data Stream Events
 
@@ -37,17 +24,20 @@ balance change.
 
 ```json
 {
-  "e": "outboundAccountPosition", // Event type
-  "E": 1564034571105, // Event Time
-  "u": 1564034571073, // Time of last account update
-  "B": [
+  "subscriptionId": 0,
+  "event": {
+    "e": "outboundAccountPosition", // Event type
+    "E": 1564034571105, // Event Time
+    "u": 1564034571073, // Time of last account update
     // Balances Array
-    {
-      "a": "ETH", // Asset
-      "f": "10000.000000", // Free
-      "l": "0.000000" // Locked
-    }
-  ]
+    "B": [
+      {
+        "a": "ETH", // Asset
+        "f": "10000.000000", // Free
+        "l": "0.000000" // Locked
+      }
+    ]
+  }
 }
 ```
 
@@ -62,11 +52,14 @@ Balance Update occurs during the following:
 
 ```json
 {
-  "e": "balanceUpdate", // Event Type
-  "E": 1573200697110, // Event Time
-  "a": "BTC", // Asset
-  "d": "100.00000000", // Balance Delta
-  "T": 1573200697068 // Clear Time
+  "subscriptionId": 0,
+  "event": {
+    "e": "balanceUpdate", // Event Type
+    "E": 1573200697110, // Event Time
+    "a": "BTC", // Asset
+    "d": "100.00000000", // Balance Delta
+    "T": 1573200697068 // Clear Time
+  }
 }
 ```
 
@@ -78,41 +71,44 @@ Orders are updated with the `executionReport` event.
 
 ```json
 {
-  "e": "executionReport", // Event type
-  "E": 1499405658658, // Event time
-  "s": "ETHBTC", // Symbol
-  "c": "mUvoqJxFIILMdfAW5iGSOW", // Client order ID
-  "S": "BUY", // Side
-  "o": "LIMIT", // Order type
-  "f": "GTC", // Time in force
-  "q": "1.00000000", // Order quantity
-  "p": "0.10264410", // Order price
-  "P": "0.00000000", // Stop price
-  "F": "0.00000000", // Iceberg quantity
-  "g": -1, // OrderListId
-  "C": "", // Original client order ID; This is the ID of the order being canceled
-  "x": "NEW", // Current execution type
-  "X": "NEW", // Current order status
-  "r": "NONE", // Order reject reason; Please see Order Reject Reason (below) for more information.
-  "i": 4293153, // Order ID
-  "l": "0.00000000", // Last executed quantity
-  "z": "0.00000000", // Cumulative filled quantity
-  "L": "0.00000000", // Last executed price
-  "n": "0", // Commission amount
-  "N": null, // Commission asset
-  "T": 1499405658657, // Transaction time
-  "t": -1, // Trade ID
-  "v": 3, // Prevented Match Id; This is only visible if the order expired due to STP
-  "I": 8641984, // Execution Id
-  "w": true, // Is the order on the book?
-  "m": false, // Is this trade the maker side?
-  "M": false, // Ignore
-  "O": 1499405658657, // Order creation time
-  "Z": "0.00000000", // Cumulative quote asset transacted quantity
-  "Y": "0.00000000", // Last quote asset transacted quantity (i.e. lastPrice * lastQty)
-  "Q": "0.00000000", // Quote Order Quantity
-  "W": 1499405658657, // Working Time; This is only visible if the order has been placed on the book.
-  "V": "NONE" // SelfTradePreventionMode
+  "subscriptionId": 0,
+  "event": {
+    "e": "executionReport", // Event type
+    "E": 1499405658658, // Event time
+    "s": "ETHBTC", // Symbol
+    "c": "mUvoqJxFIILMdfAW5iGSOW", // Client order ID
+    "S": "BUY", // Side
+    "o": "LIMIT", // Order type
+    "f": "GTC", // Time in force
+    "q": "1.00000000", // Order quantity
+    "p": "0.10264410", // Order price
+    "P": "0.00000000", // Stop price
+    "F": "0.00000000", // Iceberg quantity
+    "g": -1, // OrderListId
+    "C": "", // Original client order ID; This is the ID of the order being canceled
+    "x": "NEW", // Current execution type
+    "X": "NEW", // Current order status
+    "r": "NONE", // Order reject reason; Please see Order Reject Reason (below) for more information.
+    "i": 4293153, // Order ID
+    "l": "0.00000000", // Last executed quantity
+    "z": "0.00000000", // Cumulative filled quantity
+    "L": "0.00000000", // Last executed price
+    "n": "0", // Commission amount
+    "N": null, // Commission asset
+    "T": 1499405658657, // Transaction time
+    "t": -1, // Trade ID
+    "v": 3, // Prevented Match Id; This is only visible if the order expired due to STP
+    "I": 8641984, // Execution Id
+    "w": true, // Is the order on the book?
+    "m": false, // Is this trade the maker side?
+    "M": false, // Ignore
+    "O": 1499405658657, // Order creation time
+    "Z": "0.00000000", // Cumulative quote asset transacted quantity
+    "Y": "0.00000000", // Last quote asset transacted quantity (i.e. lastPrice * lastQty)
+    "Q": "0.00000000", // Quote Order Quantity
+    "W": 1499405658657, // Working Time; This is only visible if the order has been placed on the book.
+    "V": "NONE" // SelfTradePreventionMode
+  }
 }
 ```
 
@@ -164,29 +160,32 @@ addition to the `executionReport` event.
 
 ```json
 {
-  "e": "listStatus", // Event Type
-  "E": 1564035303637, // Event Time
-  "s": "ETHBTC", // Symbol
-  "g": 2, // OrderListId
-  "c": "OCO", // Contingency Type
-  "l": "EXEC_STARTED", // List Status Type
-  "L": "EXECUTING", // List Order Status
-  "r": "NONE", // List Reject Reason
-  "C": "F4QN4G8DlFATFlIUQ0cjdD", // List Client Order ID
-  "T": 1564035303625, // Transaction Time
-  "O": [
+  "subscriptionId": 0,
+  "event": {
+    "e": "listStatus", // Event Type
+    "E": 1564035303637, // Event Time
+    "s": "ETHBTC", // Symbol
+    "g": 2, // OrderListId
+    "c": "OCO", // Contingency Type
+    "l": "EXEC_STARTED", // List Status Type
+    "L": "EXECUTING", // List Order Status
+    "r": "NONE", // List Reject Reason
+    "C": "F4QN4G8DlFATFlIUQ0cjdD", // List Client Order ID
+    "T": 1564035303625, // Transaction Time
     // An array of objects
-    {
-      "s": "ETHBTC", // Symbol
-      "i": 17, // OrderId
-      "c": "AJYsMjErWJesZvqlJCTUgL" // ClientOrderId
-    },
-    {
-      "s": "ETHBTC",
-      "i": 18,
-      "c": "bfYPSQdLoqAJeNrOr9adzq"
-    }
-  ]
+    "O": [
+      {
+        "s": "ETHBTC", // Symbol
+        "i": 17, // OrderId
+        "c": "AJYsMjErWJesZvqlJCTUgL" // ClientOrderId
+      },
+      {
+        "s": "ETHBTC",
+        "i": 18,
+        "c": "bfYPSQdLoqAJeNrOr9adzq"
+      }
+    ]
+  }
 }
 ```
 
@@ -208,27 +207,7 @@ addition to the `executionReport` event.
 Check the [Enums page](/docs/binance-spot-api-docs/enums) for more relevant enum
 definitions.
 
-#### Listen Key Expired
-
-This event is sent when the listen key expires.
-
-No more events will be sent after this until a new `listenKey` is created.
-
-This event will not be pushed when the stream is closed normally.
-
-**Payload:**
-
-```json
-{
-  "e": "listenKeyExpired", // Event type
-  "E": 1699596037418, // Event time
-  "listenKey": "OfYGbUzi3PraNagEkdKuFwUHn48brFsItTdsuiIXrucEvD0rhRXZ7I6URWfE8YE8"
-}
-```
-
 ### Event Stream Terminated
-
-This event appears only when subscribed on the WebSocket API.
 
 `eventStreamTerminated` is sent when the User Data Stream is stopped. For
 example, after you send a `userDataStream.unsubscribe` request, or a
@@ -238,6 +217,7 @@ example, after you send a `userDataStream.unsubscribe` request, or a
 
 ```json
 {
+  "subscriptionId": 0,
   "event": {
     "e": "eventStreamTerminated", // Event Type
     "E": 1728973001334 // Event Time
@@ -255,11 +235,14 @@ collateral.
 
 ```json
 {
-  "e": "externalLockUpdate", // Event Type
-  "E": 1581557507324, // Event Time
-  "a": "NEO", // Asset
-  "d": "10.00000000", // Delta
-  "T": 1581557507268 // Transaction Time
+  "subscriptionId": 0,
+  "event": {
+    "e": "externalLockUpdate", // Event Type
+    "E": 1581557507324, // Event Time
+    "a": "NEO", // Asset
+    "d": "10.00000000", // Delta
+    "T": 1581557507268 // Transaction Time
+  }
 }
 ```
 
@@ -268,7 +251,7 @@ collateral.
 
 ## Error codes for Binance
 
-**Last Updated: 2025-08-12**
+**Last Updated: 2025-10-28**
 
 Errors consist of two parts: an error code and a message. Codes are universal,
 but messages can vary. Here is the error JSON payload:
@@ -366,6 +349,7 @@ but messages can vary. Here is the error JSON payload:
 | \-1199 | \-SELL_OCO_TAKE_PROFIT_MUST_BE_ABOVE​    | \-A take profit order in a sell OCO must be above.                                                                                                                                                                                                                                                                                            |
 | \-1210 | \-INVALID_PEG_PRICE_TYPE​                | \-Invalid pegPriceType.                                                                                                                                                                                                                                                                                                                       |
 | \-1211 | \-INVALID_PEG_OFFSET_TYPE​               | \-Invalid pegOffsetType.                                                                                                                                                                                                                                                                                                                      |
+| \-1220 | \-SYMBOL_DOES_NOT_MATCH_STATUS​          | \-The symbol's status does not match the requested symbolStatus.                                                                                                                                                                                                                                                                              |
 | \-2010 | \-NEW_ORDER_REJECTED​                    | \-NEW_ORDER_REJECTED                                                                                                                                                                                                                                                                                                                          |
 | \-2011 | \-CANCEL_REJECTED​                       | \-CANCEL_REJECTED                                                                                                                                                                                                                                                                                                                             |
 | \-2013 | \-NO_SUCH_ORDER​                         | \-Order does not exist.                                                                                                                                                                                                                                                                                                                       |
@@ -460,8 +444,8 @@ following messages which will indicate the specific error:
 
 ## Filters
 
-Filters define trading rules on a symbol or an exchange. Filters come in two
-forms: `symbol filters` and `exchange filters`.
+Filters define trading rules on a symbol or an exchange. Filters come in three
+forms: `symbol filters`, `exchange filters` and `asset filters`.
 
 ### Symbol filters
 
@@ -859,12 +843,38 @@ one order list.
 
 **/exchangeInfo format:**
 
-````json
-   {
-      "filterType": "EXCHANGE_MAX_NUM_ORDER_LISTS",
-      "maxNumOrderLists": 20
-    }```
-````
+```json
+{
+  "filterType": "EXCHANGE_MAX_NUM_ORDER_LISTS",
+  "maxNumOrderLists": 20
+}
+```
+
+### Asset Filters
+
+#### MAX_ASSET
+
+The `MAX_ASSET` filter defines the maximum quantity of an asset that an account
+is allowed to transact in a single order.
+
+- When the asset is a symbol's base asset, the limit applies to the order's
+  quantity.
+- When the asset is a symbol's quote asset, the limit applies to the order's
+  notional value.
+- For example, a MAX_ASSET filter for USDC applies to all symbols that have USDC
+  as either a base or quote asset, such as:
+  - USDCBNB
+  - BNBUSDC
+
+**/myFilters format:**
+
+```json
+{
+  "filterType": "MAX_ASSET",
+  "asset": "USDC",
+  "limit": "42.00000000"
+}
+```
 
 > Source:
 > [https://developers.binance.com/docs/binance-spot-api-docs/filters](https://developers.binance.com/docs/binance-spot-api-docs/filters)
@@ -1929,31 +1939,33 @@ error codes and messages.
 
 ## Event format
 
-User Data Stream events for non-SBE sessions are sent as JSON in **text
-frames**, one event per frame.
+[User Data Stream](/docs/binance-spot-api-docs/user-data-stream) events for
+non-SBE sessions are sent as JSON in **text frames**, one event per frame
 
-Events in SBE sessions will be sent as **binary frames**.
+Events in [SBE sessions](/docs/binance-spot-api-docs/faqs/sbe_faq) will be sent
+as **binary frames**.
 
 Please refer to
-[`userDataStream.subscribe`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user_data_stream_subscribe)
+[`userDataStream.subscribe`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-subscribe)
 for details on how to subscribe to User Data Stream in WebSocket API.
 
 Example of an event:
 
 ```json
 {
+  "subscriptionId": 0,
   "event": {
     "e": "outboundAccountPosition",
     "E": 1728972148778,
     "u": 1728972148778,
     "B": [
       {
-        "a": "ABC",
+        "a": "BTC",
         "f": "11818.00000000",
         "l": "182.00000000"
       },
       {
-        "a": "DEF",
+        "a": "USDT",
         "f": "10580.00000000",
         "l": "70.00000000"
       }
@@ -1964,9 +1976,10 @@ Example of an event:
 
 Event fields:
 
-| Name      | Type     | Mandatory | Description                                                                            |
-| --------- | -------- | --------- | -------------------------------------------------------------------------------------- |
-| \-`event` | \-OBJECT | \-YES     | \-Event payload. See [User Data Streams](/docs/binance-spot-api-docs/user-data-stream) |
+| Name               | Type     | Mandatory | Description                                                                                                                                                                                        |
+| ------------------ | -------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-`event`          | \-OBJECT | \-YES     | \-Event payload. See [User Data Streams](/docs/binance-spot-api-docs/user-data-stream)                                                                                                             |
+| \-`subscriptionId` | \-INT    | \-NO      | \-Identifies which subscription the event is coming from. See [User Data Stream subscriptions](/docs/binance-spot-api-docs/websocket-api/event-format#general_info_user_data_stream_subscriptions) |
 
 > Source:
 > [https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/event-format](https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/event-format)
@@ -1979,7 +1992,7 @@ Event fields:
 - If unspecified, the security type is `NONE`.
 - Except for `NONE`, all methods with a security type are considered `SIGNED`
   requests (i.e. including a `signature`), except for
-  [listenKey management](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-requests).
+  [listenKey management](/docs/binance-spot-api-docs/websocket-api/request-security#user-data-stream-requests).
 - Secure methods require a valid API key to be specified and authenticated.
   - API keys can be created on the
     [API Management](https://www.binance.com/en/support/faq/360002502072) page
@@ -2520,13 +2533,13 @@ Query current exchange trading rules, rate limits, and symbol information.
 
 **Parameters:**
 
-| Name                   | Type              | Mandatory                                                                                                                                           | Description                |
-| ---------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| \-`symbol`             | \-STRING          | \-NO                                                                                                                                                | \-Describe a single symbol |
-| \-`symbols`            | \-ARRAY of STRING | \-Describe multiple symbols                                                                                                                         |
-| \-`permissions`        | \-ARRAY of STRING | \-Filter symbols by permissions                                                                                                                     |
-| \-`showPermissionSets` | \-BOOLEAN         | \-Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true`.                                               |
-| \-`symbolStatus`       | \-ENUM            | \-Filters symbols that have this `tradingStatus`. Valid values: `TRADING`, `HALT`, `BREAK` Cannot be used in combination with `symbol` or `symbols` |
+| Name                   | Type              | Mandatory                                                                                                                                               | Description                |
+| ---------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| \-`symbol`             | \-STRING          | \-NO                                                                                                                                                    | \-Describe a single symbol |
+| \-`symbols`            | \-ARRAY of STRING | \-Describe multiple symbols                                                                                                                             |
+| \-`permissions`        | \-ARRAY of STRING | \-Filter symbols by permissions                                                                                                                         |
+| \-`showPermissionSets` | \-BOOLEAN         | \-Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true`.                                                   |
+| \-`symbolStatus`       | \-ENUM            | \-Filters for symbols that have this `tradingStatus`. Valid values: `TRADING`, `HALT`, `BREAK` Cannot be used in combination with `symbol` or `symbols` |
 
 Notes:
 
@@ -4665,7 +4678,7 @@ immediately cancels the other.
 | \-`abovePrice`              | \-DECIMAL | \-NO      | \-Can be used if `aboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.                                                                                                                                                                                     |
 | \-`aboveStopPrice`          | \-DECIMAL | \-NO      | \-Can be used if `aboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`. Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified.                                                                                                                           |
 | \-`aboveTrailingDelta`      | \-LONG    | \-NO      | \-See [Trailing Stop order FAQ](/docs/binance-spot-api-docs/faqs/trailing-stop-faq).                                                                                                                                                                                                                      |
-| \-`aboveTimeInForce`        | \-DECIMAL | \-NO      | \-Required if `aboveType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.                                                                                                                                                                                                                                    |
+| \-`aboveTimeInForce`        | \-ENUM    | \-NO      | \-Required if `aboveType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.                                                                                                                                                                                                                                    |
 | \-`aboveStrategyId`         | \-LONG    | \-NO      | \-Arbitrary numeric value identifying the above order within an order strategy.                                                                                                                                                                                                                           |
 | \-`aboveStrategyType`       | \-INT     | \-NO      | \-Arbitrary numeric value identifying the above order strategy. Values smaller than 1000000 are reserved and cannot be used.                                                                                                                                                                              |
 | \-`abovePegPriceType`       | \-ENUM    | \-NO      | \-See [Pegged Orders](/docs/binance-spot-api-docs/websocket-api/trading-requests#pegged-orders-info)                                                                                                                                                                                                      |
@@ -4884,9 +4897,7 @@ become mandatory.
 | \-`pendingType` = `STOP_LOSS` or `TAKE_PROFIT`            | \-`pendingStopPrice` and/or `pendingTrailingDelta`                                       |                        |
 | \-`pendingType` =`STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT` | \-`pendingPrice`, `pendingStopPrice` and/or `pendingTrailingDelta`, `pendingTimeInForce` |                        |
 
-**Data Source:**
-
-Matching Engine
+**Data Source:** Matching Engine
 
 **Response:**
 
@@ -5753,7 +5764,7 @@ Query execution status of all open orders.
 If you need to continuously monitor order status updates, please consider using
 WebSocket Streams:
 
-- [`userDataStream.start`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-requests)
+- [`userDataStream.start`](/docs/binance-spot-api-docs/websocket-api/account-requests#user-data-stream-requests)
   request
 - [`executionReport`](/docs/binance-spot-api-docs/user-data-stream#order-update)
   user data stream event
@@ -6031,7 +6042,7 @@ Query execution status of all open order lists.
 If you need to continuously monitor order status updates, please consider using
 WebSocket Streams:
 
-- [`userDataStream.start`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-requests)
+- [`userDataStream.start`](/docs/binance-spot-api-docs/websocket-api/account-requests#user-data-stream-requests)
   request
 - [`executionReport`](/docs/binance-spot-api-docs/user-data-stream#order-update)
   user data stream event
@@ -6397,9 +6408,7 @@ These are the combinations supported:
 | \-Querying by `preventedMatchId` | \-2    |
 | \-Querying by `orderId`          | \-20   |
 
-**Data Source:**
-
-Database
+**Data Source:** Database
 
 **Response:**
 
@@ -6659,6 +6668,69 @@ Queries all amendments of a single order.
 }
 ```
 
+#### Query Relevant Filters (USER_DATA)
+
+```json
+{
+  "id": "74R4febb-d142-46a2-977d-90533eb4d97g",
+  "method": "myFilters",
+  "params": {
+    "recvWindow": 5000,
+    "symbol": "BTCUSDT",
+    "timestamp": 1758008841149,
+    "apiKey": "nQ6kG5gDExDd5MZSO0MfOOWEVZmdkRllpNMfm1FjMjkMnmw1NUd3zPDfvcnDJlil",
+    "signature": "7edc54dd0493dd5bc47adbab9b17bfc9b378d55c20511ae5a168456d3d37aa3a"
+  }
+}
+```
+
+Retrieves the list of [filters](/docs/binance-spot-api-docs/filters) relevant to
+an account on a given symbol. This is the only endpoint that shows if an account
+has [`MAX_ASSET`](/docs/binance-spot-api-docs/filters#max_asset) filters applied
+to it.
+
+**Weight:** 40
+
+**Parameters:**
+
+| Name         | Type      | Mandatory | Description                                                                                                                                          |
+| ------------ | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol     | \-STRING  | \-YES     |                                                                                                                                                      |
+| \-recvWindow | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp  | \-LONG    | \-YES     |                                                                                                                                                      |
+
+**Data Source:** Memory
+
+**Response:**
+
+```json
+{
+  "id": "1758009606869",
+  "status": 200,
+  "result": {
+    "exchangeFilters": [
+      {
+        "filterType": "EXCHANGE_MAX_NUM_ORDERS",
+        "maxNumOrders": 1000
+      }
+    ],
+    "symbolFilters": [
+      {
+        "filterType": "MAX_NUM_ORDER_LISTS",
+        "maxNumOrderLists": 20
+      }
+    ],
+    "assetFilters": [
+      {
+        "filterType": "MAX_ASSET",
+        "asset": "JPY",
+        "limit": "1000000.00000000"
+      }
+    ]
+  }
+}
+```
+
 > Source:
 > [https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests](https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests)
 
@@ -6673,9 +6745,9 @@ Queries all amendments of a single order.
 - There are 2 ways to start a subscription:
   - If you have an authenticated session, then you can subscribe to events for
     that authenticated account using
-    [`userDataStream.subscribe`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user_data_stream_subscribe).
-  - You can additionally open extra subscriptions for any account for which you
-    have an API Key, using
+    [`userDataStream.subscribe`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-subscribe).
+  - In any session, authenticated or not, you can subscribe to events for one or
+    more accounts for which you can provide an API Key signature, using
     [`userdataStream.subscribe.signature`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-signature).
   - You can have only one active subscription for a given account on a given
     connection.
@@ -6814,7 +6886,7 @@ Note that `session.logout` will only close the subscription created with
 }
 ```
 
-##### Subscribe to User Data Stream through signature subscription (USER_DATA)
+##### Subscribe to User Data Stream through signature subscription (USER_STREAM)
 
 ```json
 {
@@ -6849,164 +6921,6 @@ Note that `session.logout` will only close the subscription created with
   "result": {
     "subscriptionId": 0
   }
-}
-```
-
-#### Listen Key Management (Deprecated)
-
-> \[!IMPORTANT\] These requests have been deprecated, which means we will remove
-> them in the future. Please subscribe to the User Data Stream through the
-> [WebSocket API](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user_data_stream_subscribe)
-> instead.
-
-The following requests manage
-[User Data Stream](/docs/binance-spot-api-docs/user-data-stream) subscriptions.
-
-##### Start user data stream (USER_STREAM) (Deprecated)
-
-```json
-{
-  "id": "d3df8a61-98ea-4fe0-8f4e-0fcea5d418b0",
-  "method": "userDataStream.start",
-  "params": {
-    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A"
-  }
-}
-```
-
-Start a new user data stream. Note the stream will close in 60 minutes unless
-[`userDataStream.ping`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#ping-user-data-stream-user_stream)
-requests are sent regularly. This request does not require `signature`.
-
-**Weight:** 2
-
-**Parameters:**
-
-| Name       | Type     | Mandatory | Description |
-| ---------- | -------- | --------- | ----------- |
-| \-`apiKey` | \-STRING | \-YES     |             |
-
-**Data Source:** Memory
-
-**Response:**
-
-Subscribe to the received listen key on WebSocket Stream afterwards.
-
-```json
-{
-  "id": "d3df8a61-98ea-4fe0-8f4e-0fcea5d418b0",
-  "status": 200,
-  "result": {
-    "listenKey": "xs0mRXdAKlIPDRFrlPcw0qI41Eh3ixNntmymGyhrhgqo7L6FuLaWArTD7RLP"
-  },
-  "rateLimits": [
-    {
-      "rateLimitType": "REQUEST_WEIGHT",
-      "interval": "MINUTE",
-      "intervalNum": 1,
-      "limit": 6000,
-      "count": 2
-    }
-  ]
-}
-```
-
-##### Ping user data stream (USER_STREAM) (Deprecated)
-
-```json
-{
-  "id": "815d5fce-0880-4287-a567-80badf004c74",
-  "method": "userDataStream.ping",
-  "params": {
-    "listenKey": "xs0mRXdAKlIPDRFrlPcw0qI41Eh3ixNntmymGyhrhgqo7L6FuLaWArTD7RLP",
-    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A"
-  }
-}
-```
-
-Ping a user data stream to keep it alive.
-
-User data streams close automatically after 60 minutes, even if you're listening
-to them on WebSocket Streams. In order to keep the stream open, you have to
-regularly send pings using the `userDataStream.ping` request.
-
-It is recommended to send a ping once every 30 minutes.
-
-This request does not require `signature`.
-
-**Weight:** 2
-
-**Parameters:**
-
-| Name          | Type     | Mandatory | Description |
-| ------------- | -------- | --------- | ----------- |
-| \-`listenKey` | \-STRING | \-YES     |             |
-| \-`apiKey`    | \-STRING | \-YES     |             |
-
-**Data Source:** Memory
-
-**Response:**
-
-```json
-{
-  "id": "815d5fce-0880-4287-a567-80badf004c74",
-  "status": 200,
-  "response": {},
-  "rateLimits": [
-    {
-      "rateLimitType": "REQUEST_WEIGHT",
-      "interval": "MINUTE",
-      "intervalNum": 1,
-      "limit": 6000,
-      "count": 2
-    }
-  ]
-}
-```
-
-##### Stop user data stream (USER_STREAM) (Deprecated)
-
-```json
-{
-  "id": "819e1b1b-8c06-485b-a13e-131326c69599",
-  "method": "userDataStream.stop",
-  "params": {
-    "listenKey": "xs0mRXdAKlIPDRFrlPcw0qI41Eh3ixNntmymGyhrhgqo7L6FuLaWArTD7RLP",
-    "apiKey": "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A"
-  }
-}
-```
-
-Explicitly stop and close the user data stream. This request does not require
-`signature`.
-
-**Weight:** 2
-
-**Parameters:**
-
-| Name          | Type     | Mandatory | Description |
-| ------------- | -------- | --------- | ----------- |
-| \-`listenKey` | \-STRING | \-YES     |             |
-| \-`apiKey`    | \-STRING | \-YES     |             |
-
-**Data Source:** Memory
-
-**Response:**
-
-```json
-{
-  "id": "819e1b1b-8c06-485b-a13e-131326c69599",
-  "status": 200,
-  "response": {},
-  "rateLimits": [
-    {
-      "rateLimitType": "REQUEST_WEIGHT",
-      "interval": "MINUTE",
-      "intervalNum": 1,
-      "limit": 6000,
-      "count": 2
-    }
-  ]
 }
 ```
 

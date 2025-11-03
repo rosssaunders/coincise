@@ -2,7 +2,7 @@
 
 ## Error codes for Binance
 
-**Last Updated: 2025-08-12**
+**Last Updated: 2025-10-28**
 
 Errors consist of two parts: an error code and a message. Codes are universal,
 but messages can vary. Here is the error JSON payload:
@@ -100,6 +100,7 @@ but messages can vary. Here is the error JSON payload:
 | \-1199 | \-SELL_OCO_TAKE_PROFIT_MUST_BE_ABOVE​    | \-A take profit order in a sell OCO must be above.                                                                                                                                                                                                                                                                                            |
 | \-1210 | \-INVALID_PEG_PRICE_TYPE​                | \-Invalid pegPriceType.                                                                                                                                                                                                                                                                                                                       |
 | \-1211 | \-INVALID_PEG_OFFSET_TYPE​               | \-Invalid pegOffsetType.                                                                                                                                                                                                                                                                                                                      |
+| \-1220 | \-SYMBOL_DOES_NOT_MATCH_STATUS​          | \-The symbol's status does not match the requested symbolStatus.                                                                                                                                                                                                                                                                              |
 | \-2010 | \-NEW_ORDER_REJECTED​                    | \-NEW_ORDER_REJECTED                                                                                                                                                                                                                                                                                                                          |
 | \-2011 | \-CANCEL_REJECTED​                       | \-CANCEL_REJECTED                                                                                                                                                                                                                                                                                                                             |
 | \-2013 | \-NO_SUCH_ORDER​                         | \-Order does not exist.                                                                                                                                                                                                                                                                                                                       |
@@ -194,8 +195,8 @@ following messages which will indicate the specific error:
 
 ## Filters
 
-Filters define trading rules on a symbol or an exchange. Filters come in two
-forms: `symbol filters` and `exchange filters`.
+Filters define trading rules on a symbol or an exchange. Filters come in three
+forms: `symbol filters`, `exchange filters` and `asset filters`.
 
 ### Symbol filters
 
@@ -593,12 +594,38 @@ one order list.
 
 **/exchangeInfo format:**
 
-````json
-   {
-      "filterType": "EXCHANGE_MAX_NUM_ORDER_LISTS",
-      "maxNumOrderLists": 20
-    }```
-````
+```json
+{
+  "filterType": "EXCHANGE_MAX_NUM_ORDER_LISTS",
+  "maxNumOrderLists": 20
+}
+```
+
+### Asset Filters
+
+#### MAX_ASSET
+
+The `MAX_ASSET` filter defines the maximum quantity of an asset that an account
+is allowed to transact in a single order.
+
+- When the asset is a symbol's base asset, the limit applies to the order's
+  quantity.
+- When the asset is a symbol's quote asset, the limit applies to the order's
+  notional value.
+- For example, a MAX_ASSET filter for USDC applies to all symbols that have USDC
+  as either a base or quote asset, such as:
+  - USDCBNB
+  - BNBUSDC
+
+**/myFilters format:**
+
+```json
+{
+  "filterType": "MAX_ASSET",
+  "asset": "USDC",
+  "limit": "42.00000000"
+}
+```
 
 > Source:
 > [https://developers.binance.com/docs/binance-spot-api-docs/filters](https://developers.binance.com/docs/binance-spot-api-docs/filters)
@@ -1663,31 +1690,33 @@ error codes and messages.
 
 ## Event format
 
-User Data Stream events for non-SBE sessions are sent as JSON in **text
-frames**, one event per frame.
+[User Data Stream](/docs/binance-spot-api-docs/user-data-stream) events for
+non-SBE sessions are sent as JSON in **text frames**, one event per frame
 
-Events in SBE sessions will be sent as **binary frames**.
+Events in [SBE sessions](/docs/binance-spot-api-docs/faqs/sbe_faq) will be sent
+as **binary frames**.
 
 Please refer to
-[`userDataStream.subscribe`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user_data_stream_subscribe)
+[`userDataStream.subscribe`](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-subscribe)
 for details on how to subscribe to User Data Stream in WebSocket API.
 
 Example of an event:
 
 ```json
 {
+  "subscriptionId": 0,
   "event": {
     "e": "outboundAccountPosition",
     "E": 1728972148778,
     "u": 1728972148778,
     "B": [
       {
-        "a": "ABC",
+        "a": "BTC",
         "f": "11818.00000000",
         "l": "182.00000000"
       },
       {
-        "a": "DEF",
+        "a": "USDT",
         "f": "10580.00000000",
         "l": "70.00000000"
       }
@@ -1698,9 +1727,10 @@ Example of an event:
 
 Event fields:
 
-| Name      | Type     | Mandatory | Description                                                                            |
-| --------- | -------- | --------- | -------------------------------------------------------------------------------------- |
-| \-`event` | \-OBJECT | \-YES     | \-Event payload. See [User Data Streams](/docs/binance-spot-api-docs/user-data-stream) |
+| Name               | Type     | Mandatory | Description                                                                                                                                                                                        |
+| ------------------ | -------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-`event`          | \-OBJECT | \-YES     | \-Event payload. See [User Data Streams](/docs/binance-spot-api-docs/user-data-stream)                                                                                                             |
+| \-`subscriptionId` | \-INT    | \-NO      | \-Identifies which subscription the event is coming from. See [User Data Stream subscriptions](/docs/binance-spot-api-docs/websocket-api/event-format#general_info_user_data_stream_subscriptions) |
 
 > Source:
 > [https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/event-format](https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/event-format)
@@ -1989,7 +2019,7 @@ Successful response indicating that you have placed 12 orders in 10 seconds, and
 - If unspecified, the security type is `NONE`.
 - Except for `NONE`, all methods with a security type are considered `SIGNED`
   requests (i.e. including a `signature`), except for
-  [listenKey management](/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#user-data-stream-requests).
+  [listenKey management](/docs/binance-spot-api-docs/websocket-api/request-security#user-data-stream-requests).
 - Secure methods require a valid API key to be specified and authenticated.
   - API keys can be created on the
     [API Management](https://www.binance.com/en/support/faq/360002502072) page
@@ -2530,13 +2560,13 @@ Query current exchange trading rules, rate limits, and symbol information.
 
 **Parameters:**
 
-| Name                   | Type              | Mandatory                                                                                                                                           | Description                |
-| ---------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| \-`symbol`             | \-STRING          | \-NO                                                                                                                                                | \-Describe a single symbol |
-| \-`symbols`            | \-ARRAY of STRING | \-Describe multiple symbols                                                                                                                         |
-| \-`permissions`        | \-ARRAY of STRING | \-Filter symbols by permissions                                                                                                                     |
-| \-`showPermissionSets` | \-BOOLEAN         | \-Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true`.                                               |
-| \-`symbolStatus`       | \-ENUM            | \-Filters symbols that have this `tradingStatus`. Valid values: `TRADING`, `HALT`, `BREAK` Cannot be used in combination with `symbol` or `symbols` |
+| Name                   | Type              | Mandatory                                                                                                                                               | Description                |
+| ---------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| \-`symbol`             | \-STRING          | \-NO                                                                                                                                                    | \-Describe a single symbol |
+| \-`symbols`            | \-ARRAY of STRING | \-Describe multiple symbols                                                                                                                             |
+| \-`permissions`        | \-ARRAY of STRING | \-Filter symbols by permissions                                                                                                                         |
+| \-`showPermissionSets` | \-BOOLEAN         | \-Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true`.                                                   |
+| \-`symbolStatus`       | \-ENUM            | \-Filters for symbols that have this `tradingStatus`. Valid values: `TRADING`, `HALT`, `BREAK` Cannot be used in combination with `symbol` or `symbols` |
 
 Notes:
 
@@ -2717,10 +2747,11 @@ You can use `depth` request together with `<symbol>@depth` streams to
 
 **Parameters:**
 
-| Name       | Type     | Mandatory | Description                   |
-| ---------- | -------- | --------- | ----------------------------- |
-| \-`symbol` | \-STRING | \-YES     |                               |
-| \-`limit`  | \-INT    | \-NO      | \-Default: 100; Maximum: 5000 |
+| Name             | Type     | Mandatory | Description                                                                                                                                                       |
+| ---------------- | -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-`symbol`       | \-STRING | \-YES     |                                                                                                                                                                   |
+| \-`limit`        | \-INT    | \-NO      | \-Default: 100; Maximum: 5000                                                                                                                                     |
+| \-`symbolStatus` | \-ENUM   | \-NO      | \-Filters for symbols that have this `tradingStatus`.A status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`Valid values: `TRADING`, `HALT`, `BREAK` |
 
 **Data Source:** Memory
 
@@ -3242,11 +3273,12 @@ request.
 
 **Parameters:**
 
-| Name        | Type              | Mandatory                           | Description                               |
-| ----------- | ----------------- | ----------------------------------- | ----------------------------------------- |
-| \-`symbol`  | \-STRING          | \-NO                                | \-Query ticker for a single symbol        |
-| \-`symbols` | \-ARRAY of STRING | \-Query ticker for multiple symbols |
-| \-`type`    | \-ENUM            | \-NO                                | \-Ticker type: `FULL` (default) or `MINI` |
+| Name           | Type              | Mandatory                           | Description                                                                                                                                                                                                                                                                  |
+| -------------- | ----------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-`symbol`     | \-STRING          | \-NO                                | \-Query ticker for a single symbol                                                                                                                                                                                                                                           |
+| \-`symbols`    | \-ARRAY of STRING | \-Query ticker for multiple symbols |
+| \-`type`       | \-ENUM            | \-NO                                | \-Ticker type: `FULL` (default) or `MINI`                                                                                                                                                                                                                                    |
+| \-symbolStatus | \-ENUM            | \-NO                                | \-Filters for symbols that have this `tradingStatus`.For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.For multiple or all symbols, non-matching ones are simply excluded from the response.Valid values: `TRADING`, `HALT`, `BREAK` |
 
 Notes:
 
@@ -3424,7 +3456,11 @@ request is more than 50.
 | | | -symbol | -STRING | -YES | -Query ticker of a single symbol -symbols |
 -ARRAY of STRING | -Query ticker for multiple symbols -timeZone | -STRING | -NO
 | -Default: 0 (UTC) -type | -ENUM | -NO | -Supported values: FULL or MINI. If
-none provided, the default is FULL |
+none provided, the default is FULL -symbolStatus | -ENUM | -NO | -Filters for
+symbols that have this tradingStatus.For a single symbol, a status mismatch
+returns error -1220 SYMBOL_DOES_NOT_MATCH_STATUS. For multiple symbols,
+non-matching ones are simply excluded from the response. Valid values: TRADING,
+HALT, BREAK |
 
 **Notes:**
 
@@ -3663,12 +3699,13 @@ WebSocket Streams:
 
 **Parameters:**
 
-| Name           | Type              | Mandatory                           | Description                               |
-| -------------- | ----------------- | ----------------------------------- | ----------------------------------------- |
-| \-`symbol`     | \-STRING          | \-YES                               | \-Query ticker of a single symbol         |
+| Name           | Type              | Mandatory                           | Description                                                                                                                                                                                                                                                            |
+| -------------- | ----------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-`symbol`     | \-STRING          | \-YES                               | \-Query ticker of a single symbol                                                                                                                                                                                                                                      |
 | \-`symbols`    | \-ARRAY of STRING | \-Query ticker for multiple symbols |
-| \-`type`       | \-ENUM            | \-NO                                | \-Ticker type: `FULL` (default) or `MINI` |
-| \-`windowSize` | \-ENUM            | \-NO                                | \-Default `1d`                            |
+| \-`type`       | \-ENUM            | \-NO                                | \-Ticker type: `FULL` (default) or `MINI`                                                                                                                                                                                                                              |
+| \-`windowSize` | \-ENUM            | \-NO                                | \-Default `1d`                                                                                                                                                                                                                                                         |
+| \-symbolStatus | \-ENUM            | \-NO                                | \-Filters for symbols that have this `tradingStatus`.For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`. For multiple symbols, non-matching ones are simply excluded from the response.Valid values: `TRADING`, `HALT`, `BREAK` |
 
 Supported window sizes:
 
@@ -3839,10 +3876,11 @@ Streams:
 
 **Parameters:**
 
-| Name        | Type              | Mandatory                          | Description                       |
-| ----------- | ----------------- | ---------------------------------- | --------------------------------- |
-| \-`symbol`  | \-STRING          | \-NO                               | \-Query price for a single symbol |
-| \-`symbols` | \-ARRAY of STRING | \-Query price for multiple symbols |
+| Name           | Type              | Mandatory                          | Description                                                                                                                                                                                                                                                                  |
+| -------------- | ----------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-`symbol`     | \-STRING          | \-NO                               | \-Query price for a single symbol                                                                                                                                                                                                                                            |
+| \-`symbols`    | \-ARRAY of STRING | \-Query price for multiple symbols |
+| \-symbolStatus | \-ENUM            | \-NO                               | \-Filters for symbols that have this `tradingStatus`.For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.For multiple or all symbols, non-matching ones are simply excluded from the response.Valid values: `TRADING`, `HALT`, `BREAK` |
 
 Notes:
 
@@ -3935,10 +3973,11 @@ WebSocket Streams:
 
 **Parameters:**
 
-| Name        | Type              | Mandatory                           | Description                        |
-| ----------- | ----------------- | ----------------------------------- | ---------------------------------- |
-| \-`symbol`  | \-STRING          | \-NO                                | \-Query ticker for a single symbol |
-| \-`symbols` | \-ARRAY of STRING | \-Query ticker for multiple symbols |
+| Name           | Type              | Mandatory                           | Description                                                                                                                                                                                                                                                                   |
+| -------------- | ----------------- | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-`symbol`     | \-STRING          | \-NO                                | \-Query ticker for a single symbol                                                                                                                                                                                                                                            |
+| \-`symbols`    | \-ARRAY of STRING | \-Query ticker for multiple symbols |
+| \-symbolStatus | \-ENUM            | \-NO                                | \-Filters for symbols that have this `tradingStatus`.For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`. For multiple or all symbols, non-matching ones are simply excluded from the response.Valid values: `TRADING`, `HALT`, `BREAK` |
 
 Notes:
 
