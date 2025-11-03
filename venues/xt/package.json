@@ -1,0 +1,16 @@
+{
+  "name": "@coincise/xt",
+  "version": "1.0.0",
+  "description": "Documentation extraction for XT.com Spot API",
+  "type": "module",
+  "scripts": {
+    "extract:general": "node src/extractGeneral.js",
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "npm run extract:general && npm run extract:endpoints"
+  },
+  "dependencies": {
+    "turndown": "^7.1.2",
+    "turndown-plugin-gfm": "^1.0.2",
+    "puppeteer": "^21.0.0"
+  }
+}
