@@ -275,3 +275,108 @@ Status Code **200**
 
 > **Note:** To perform this operation, you must be authenticated by means of one
 > of the following methods: jwtTokenAuth
+
+## get-expiry-prices--symbol
+
+> Code samples
+
+```javascript
+const headers = {
+  Accept: "application/json"
+}
+
+fetch(
+  "https://api.exchange.bullish.com/trading-api/v1/expiry-prices/{symbol}",
+  {
+    method: "GET",
+
+    headers: headers
+  }
+)
+  .then(function (res) {
+    return res.json()
+  })
+  .then(function (body) {
+    console.log(body)
+  })
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://api.exchange.bullish.com/trading-api/v1/expiry-prices/{symbol}', headers = headers)
+
+print(r.json())
+
+```
+
+`GET /v1/expiry-prices/{symbol}`
+
+_Get Expiry Prices_
+
+Retrieves Expiry Price and Expiry Notional for respective Options and Dated
+Futures markets.
+
+### Parameters
+
+| Name   | In   | Type                                                    | Required | Description |
+| ------ | ---- | ------------------------------------------------------- | -------- | ----------- |
+| symbol | path | [DerivativeMarketSymbol](#schemaderivativemarketsymbol) | true     | none        |
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "object",
+  "required": [
+    "symbol",
+    "expiryPrice",
+    "expiryNotional",
+    "expiryDatetime",
+    "expiryTimestamp"
+  ],
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "Market Symbol",
+      "example": "BTC-USDC-20250912-95000-C"
+    },
+    "expiryPrice": {
+      "type": "string",
+      "description": "Price used upon Expiry for an Options/Dated Futures contract",
+      "example": "115123.2512"
+    },
+    "expiryNotional": {
+      "type": "string",
+      "description": "Difference between strike price and expiry price for an Options contract expressed in notional per unit contract",
+      "example": "20123.3033"
+    },
+    "expiryDatetime": {
+      "type": "string",
+      "description": "Datetime by which the market expires at",
+      "example": "2018-11-18T00:00:00.000Z"
+    },
+    "expiryTimestamp": {
+      "type": "string",
+      "description": "Timestamp by which the market expires at",
+      "example": "1672041600000"
+    }
+  }
+}
+```
+
+### Responses
+
+| Status | Meaning                                                                    | Description                                                             | Schema                                                        |
+| ------ | -------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------- |
+| 200    | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)                    | Retrieve expiry price and expiry notional for options and dated future. | [MarketExpiryPriceResponse](#schemamarketexpirypriceresponse) |
+| 400    | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)           | Expiry price for market is not (yet) available                          | None                                                          |
+| 404    | [Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)             | Invalid symbol provided                                                 | None                                                          |
+| 500    | [Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1) | Internal Server Error                                                   | None                                                          |
+
+> **Note:** This operation does not require authentication

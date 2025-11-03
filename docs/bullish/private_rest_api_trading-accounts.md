@@ -193,7 +193,7 @@ API
         }
       },
       "riskLimitUSD": {
-        "description": "The maximum allowed borrowing for this trading account (in USD currency)",
+        "description": "The maximum allowed initial margin requirement for this trading account(in USD currency)",
         "type": "string",
         "example": "10000.0000"
       },
@@ -328,7 +328,7 @@ Status Code **200**
 | »» feeGroupId                             | integer                                                   | true     | none         | Identifier for this particular fee tier                                                                                                                 |
 | »» makerFee                               | string                                                    | true     | none         | Maker Fee in basis points (bps)                                                                                                                         |
 | »» takerFee                               | string                                                    | true     | none         | Taker Fee in basis points (bps)                                                                                                                         |
-| » riskLimitUSD                            | string                                                    | true     | none         | The maximum allowed borrowing for this trading account (in USD currency)                                                                                |
+| » riskLimitUSD                            | string                                                    | true     | none         | The maximum allowed initial margin requirement for this trading account(in USD currency)                                                                |
 | » totalLiabilitiesUSD                     | string                                                    | true     | none         | The The total liabilities for this trading account (in USD currency)                                                                                    |
 | » totalBorrowedUSD                        | string                                                    | true     | none         | total borrowed across all assets in this trading account displayed in the reference asset in USD                                                        |
 | » totalCollateralUSD                      | string                                                    | true     | none         | total collateral across all assets in this trading account displayed in the reference asset in USD                                                      |
@@ -539,7 +539,7 @@ header.
       }
     },
     "riskLimitUSD": {
-      "description": "The maximum allowed borrowing for this trading account (in USD currency)",
+      "description": "The maximum allowed initial margin requirement for this trading account(in USD currency)",
       "type": "string",
       "example": "10000.0000"
     },

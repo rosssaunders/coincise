@@ -442,6 +442,7 @@ the subscription message listed below: | Parameters | Type | Description |
       {
         "feeTierId": "1",
         "currentPrice": "0.0007",
+        "tierPrice": "0.000703038503",
         "baseReservesQuantity": "96153.00000000",
         "quoteReservesQuantity": "500005200.0400",
         "bidSpreadFee": "0.00000005",
@@ -450,6 +451,7 @@ the subscription message listed below: | Parameters | Type | Description |
       {
         "feeTierId": "2",
         "currentPrice": "0.0017",
+        "tierPrice": "0.001703038503",
         "baseReservesQuantity": "96153.00000000",
         "quoteReservesQuantity": "500005200.0400",
         "bidSpreadFee": "0.00000015",
@@ -508,6 +510,7 @@ model: [Get Market Tick](#get-/v1/markets/-symbol-/tick)
       {
         "feeTierId": "1",
         "currentPrice": "0.0007",
+        "tierPrice": "0.001703038503",
         "baseReservesQuantity": "96153.00000000",
         "quoteReservesQuantity": "500005200.0400",
         "bidSpreadFee": "0.00000005",
@@ -516,6 +519,7 @@ model: [Get Market Tick](#get-/v1/markets/-symbol-/tick)
       {
         "feeTierId": "2",
         "currentPrice": "0.0017",
+        "tierPrice": "0.001703038503",
         "baseReservesQuantity": "96153.00000000",
         "quoteReservesQuantity": "500005200.0400",
         "bidSpreadFee": "0.00000015",
