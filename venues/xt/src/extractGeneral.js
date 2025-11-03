@@ -16,6 +16,17 @@ const __dirname = path.dirname(__filename);
 const BASE_URL = 'https://doc.xt.com/docs/spot';
 const OUTPUT_DIR = path.resolve(__dirname, '../../../docs/xt');
 
+// URL paths for documentation sections
+const SECTION_PATHS = {
+  rateLimits: 'Access%20Description/FrequencyLimitingRules',
+  signatureInstructions: 'Access%20Description/SignatureInstructions',
+  signatureGeneration: 'Access%20Description/SignatureGeneration',
+  apiKey: 'Access%20Description/ApiKeyApplicationSteps',
+  basicInfo: 'Access%20Description/BasicInformationOfTheInterface',
+  responseCode: 'Access%20Description/ResponseCode',
+  responseFormat: 'Access%20Description/ResponseFormat'
+};
+
 /**
  * Ensure directory exists
  */
@@ -68,7 +79,7 @@ const extractPageContent = async (page, url, turndownService) => {
  */
 const extractRateLimits = async (page, turndownService) => {
   console.log('Extracting rate limits information...');
-  const url = `${BASE_URL}/Access%20Description/FrequencyLimitingRules`;
+  const url = `${BASE_URL}/${SECTION_PATHS.rateLimits}`;
   return await extractPageContent(page, url, turndownService);
 };
 
@@ -79,9 +90,9 @@ const extractAuthentication = async (page, turndownService) => {
   console.log('Extracting authentication information...');
   
   // Combine multiple pages for authentication
-  const signatureUrl = `${BASE_URL}/Access%20Description/SignatureInstructions`;
-  const signatureGenUrl = `${BASE_URL}/Access%20Description/SignatureGeneration`;
-  const apiKeyUrl = `${BASE_URL}/Access%20Description/ApiKeyApplicationSteps`;
+  const signatureUrl = `${BASE_URL}/${SECTION_PATHS.signatureInstructions}`;
+  const signatureGenUrl = `${BASE_URL}/${SECTION_PATHS.signatureGeneration}`;
+  const apiKeyUrl = `${BASE_URL}/${SECTION_PATHS.apiKey}`;
   
   const signatureContent = await extractPageContent(page, signatureUrl, turndownService);
   const signatureGenContent = await extractPageContent(page, signatureGenUrl, turndownService);
@@ -95,7 +106,7 @@ const extractAuthentication = async (page, turndownService) => {
  */
 const extractNetworkConnectivity = async (page, turndownService) => {
   console.log('Extracting network connectivity information...');
-  const url = `${BASE_URL}/Access%20Description/BasicInformationOfTheInterface`;
+  const url = `${BASE_URL}/${SECTION_PATHS.basicInfo}`;
   return await extractPageContent(page, url, turndownService);
 };
 
@@ -104,7 +115,7 @@ const extractNetworkConnectivity = async (page, turndownService) => {
  */
 const extractErrorCodes = async (page, turndownService) => {
   console.log('Extracting error codes information...');
-  const url = `${BASE_URL}/Access%20Description/ResponseCode`;
+  const url = `${BASE_URL}/${SECTION_PATHS.responseCode}`;
   return await extractPageContent(page, url, turndownService);
 };
 
@@ -113,7 +124,7 @@ const extractErrorCodes = async (page, turndownService) => {
  */
 const extractResponseFormats = async (page, turndownService) => {
   console.log('Extracting response formats information...');
-  const url = `${BASE_URL}/Access%20Description/ResponseFormat`;
+  const url = `${BASE_URL}/${SECTION_PATHS.responseFormat}`;
   return await extractPageContent(page, url, turndownService);
 };
 

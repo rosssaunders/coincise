@@ -16,6 +16,9 @@ const __dirname = path.dirname(__filename);
 const BASE_URL = 'https://doc.xt.com/docs/spot';
 const OUTPUT_DIR = path.resolve(__dirname, '../../../docs/xt/endpoints');
 
+// Delay between requests to avoid overwhelming the server (in milliseconds)
+const REQUEST_DELAY_MS = 500;
+
 /**
  * Ensure directory exists
  */
@@ -215,7 +218,7 @@ const extractEndpoints = async (page, turndownService) => {
       }
       
       // Polite delay between requests
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, REQUEST_DELAY_MS));
     } catch (error) {
       console.error(`  Error extracting ${link.text}:`, error.message);
     }
