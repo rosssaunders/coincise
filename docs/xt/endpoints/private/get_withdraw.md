@@ -1,4 +1,4 @@
-# POST Withdraw
+# GET Withdraw
 
 Source: [https://doc.xt.com/docs/spot/Deposit&Withdrawal/Withdraw](https://doc.xt.com/docs/spot/Deposit&Withdrawal/Withdraw)
 

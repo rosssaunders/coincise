@@ -1,4 +1,4 @@
-# DELETE Get batch
+# GET Get batch
 
 Source: [https://doc.xt.com/docs/spot/Order/GetBatch](https://doc.xt.com/docs/spot/Order/GetBatch)
 

@@ -1,4 +1,4 @@
-# PUT Get supported currencies
+# GET Get supported currencies
 
 Source: [https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetSupportedCurrencies](https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetSupportedCurrencies)
 

@@ -186,10 +186,15 @@ const extractEndpoints = async (page, turndownService) => {
         const content = clone.innerHTML;
         let method = 'GET'; // Default
         
-        // Look for HTTP method indicators in the content
-        if (content.includes('POST') || content.includes('post')) method = 'POST';
-        else if (content.includes('PUT') || content.includes('put')) method = 'PUT';
-        else if (content.includes('DELETE') || content.includes('delete')) method = 'DELETE';
+        // Look for the Type field which contains the actual HTTP method
+        // Two formats:
+        // 1. <p><strong>Type:</strong> post <strong>Description:</strong> /v4/order</p>
+        // 2. <p><strong>Type</strong> POST</p>
+        const textContent = clone.textContent;
+        const typeMatch = textContent.match(/Type:?\s+(get|post|put|delete)/i);
+        if (typeMatch) {
+          method = typeMatch[1].toUpperCase();
+        }
         
         return {
           content: content,

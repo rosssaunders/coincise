@@ -1,4 +1,4 @@
-# POST Get symbol information
+# GET Get symbol information
 
 Source: [https://doc.xt.com/docs/spot/Market/GetSymbolInformation](https://doc.xt.com/docs/spot/Market/GetSymbolInformation)
 
