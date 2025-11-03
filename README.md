@@ -92,6 +92,7 @@ LLM friendly versions of Crypto Exchange Documentation. Each file is designed to
 | <img src="assets/icons/kucoin.jpg" alt="KuCoin" height="16" style="vertical-align: middle;">                | KuCoin Margin      | [WebSocket API](docs/kucoin/ws/margin_api.md)                                     | 2025-04-26   |
 | <img src="assets/icons/kucoinfutures.jpg" alt="KuCoin Futures" height="16" style="vertical-align: middle;"> | KuCoin Futures     | [REST API](docs/kucoin/rest/futures_api.md)                                       | 2025-04-26   |
 | <img src="assets/icons/kucoinfutures.jpg" alt="KuCoin Futures" height="16" style="vertical-align: middle;"> | KuCoin Futures     | [WebSocket API](docs/kucoin/ws/futures_api.md)                                    | 2025-04-26   |
+| <img src="assets/icons/xt.jpg" alt="XT.com" height="16" style="vertical-align: middle;">                    | XT.com Spot        | [API Documentation](docs/xt/)                                                     | 2025-11-03   |
 
 ## LLMs.txt
 
