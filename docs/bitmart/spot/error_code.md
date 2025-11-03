@@ -156,7 +156,7 @@ Example: httpStatus:200, body:{"code": 1000,"trace":"886fb6ae-456b-4654-b4e0-d68
 | The parameters do not match | 50029 | 400 
 | Order is already canceled | 50030 | 400 
 | Order is already completed | 50031 | 400 
-| The order was matched or cancelled | 50032 | 400 
+| Order does not exist (completed or cancelled) | 50032 | 400 
 | The order quantity should be greater than 0 and less than or equal to 10 | 50033 | 400 
 | The price is high and there is no matching depth | 50034 | 400 
 | The price is low and there is no matching depth | 50035 | 400 

@@ -24,10 +24,10 @@ See [Detailed Rate Limit](#rate-limit)
 | page | Int | Yes | Page number 
 | size | Int | Yes | Number of records per page 
 | currency | String | Yes | query currency 
-| rebate_start_time | Long | No | Query rebate start timestamp 
-| rebate_end_time | Long | No | Query rebate end timestamp 
-| register_start_time | Long | No | Query register start timestamp 
-| register_end_time | Long | No | Query register end timestamp 
+| rebate_start_time | Long | No | Query rebate start timestamp(in second) 
+| rebate_end_time | Long | No | Query rebate end timestamp(in second) 
+| register_start_time | Long | No | Query register start timestamp(in second) 
+| register_end_time | Long | No | Query register end timestamp(in second) 
 
 #### Response Data
 
@@ -70,8 +70,8 @@ See [Detailed Rate Limit](#rate-limit)
 | type | Int | Yes | Query type:<br>-<code>1</code>=U-based<br>-<code>2</code>=Coin-based 
 | page | Int | Yes | Page number 
 | size | Int | Yes | Number of records per page 
-| start_time | Long | No | Query start timestamp 
-| end_time | Long | No | Query end timestamp 
+| start_time | Long | No | Query start timestamp(in second) 
+| end_time | Long | No | Query end timestamp(in second) 
 
 #### Response Data
 
