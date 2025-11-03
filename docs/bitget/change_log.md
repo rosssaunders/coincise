@@ -2,6 +2,32 @@
 
 ## Changelog
 
+### \[October 21, 2025\] Add an endpoint for querying symbol with isolated margin mode in futures.[​](#october-21-2025-add-an-endpoint-for-querying-symbol-with-isolated-margin-mode-in-futures "Direct link to october-21-2025-add-an-endpoint-for-querying-symbol-with-isolated-margin-mode-in-futures")
+
+Interface: /api/v2/mix/account/isolated-symbols  
+Changes：
+
+- Add an endpoint for querying symbol with isolated margin mode in futures.
+
+### \[October 21, 2025\] Optimization of the spot historical plan order endpoint[​](#october-21-2025-optimization-of-the-spot-historical-plan-order-endpoint "Direct link to october-21-2025-optimization-of-the-spot-historical-plan-order-endpoint")
+
+Interface: /api/v2/spot/trade/history-plan-order  
+Changes： -The request parameters `symbol`, `startTime`, and `endTime` are
+changed to optional.
+
+### \[October 14, 2025\] Notice: Classic Account Error Code Optimization[​](#october-14-2025-notice-classic-account-error-code-optimization "Direct link to october-14-2025-notice-classic-account-error-code-optimization")
+
+Scope of Impact:  
+Classic Account v2-related APIs  
+Optimization Content:
+
+- Unified error code mapping: Resolves the issue where "different error codes
+  correspond to the same error message", ensuring one code maps to one message
+  and reducing recognition confusion.
+- Standardized error message matching: Fixes the problem where "different error
+  messages correspond to the same error code", enabling accurate matching
+  between messages and codes and improving troubleshooting efficiency.
+
 ### \[September 11, 2025\] Newly Added Interfaces Related to union Margin[​](#september-11-2025-newly-added-interfaces-related-to-union-margin "Direct link to september-11-2025-newly-added-interfaces-related-to-union-margin")
 
 Changes：

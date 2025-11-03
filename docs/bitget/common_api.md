@@ -505,22 +505,20 @@ connection.
 
 To keep the connection stable:
 
-1.  **Websocket will be forcibly disconnected every 24 hours, please add the
-    reconnection mechanism in your code**
-2.  Users set a 30 seconds timer to a send string "ping", and expect a string
+1.  Users set a 30 seconds timer to a send string "ping", and expect a string
     "pong" as response. If no string "pong" received, please reconnect
-3.  Websocket server will disconnect the connection if there is no string "ping"
+2.  Websocket server will disconnect the connection if there is no string "ping"
     received for 2 min
-4.  The Websocket server accepts up to 10 messages per second. The message
+3.  The Websocket server accepts up to 10 messages per second. The message
     includes:
 
 - String "ping"
 - JSON message, such as subscribe, unsubscribe.
 
-5.  If the user sends more messages than the limit, the connection will be
+4.  If the user sends more messages than the limit, the connection will be
     disconnected. The IP which is repeatedly disconnected may be blocked by the
     server
-6.  We highly recommend you to subscribe **less than 50 channels in one
+5.  We highly recommend you to subscribe **less than 50 channels in one
     connection**. The connections with less channel subscriptions will be more
     stable.
 
@@ -930,7 +928,7 @@ curl "https://api.bitget.com/api/v2/tax/spot-record?startTime=1686128558000&endT
 Response example
 
 ```
-{    "code": "00000",    "msg": "success",    "requestTime": 1687257612262,    "data": [        {            "id": "1",            "coin": "AIBB",            "spotTaxType": "Interest",            "amount": "6018333.33333333",            "fee": "0",            "balance": "468575833.33333306",            "ts": "1686128884851"        }    ]}
+{    "code": "00000",    "msg": "success",    "requestTime": 1687257612262,    "data": [        {            "id": "1",            "coin": "AIBB",            "spotTaxType": "Interest",            "amount": "6018333.33333333",            "fee": "0",            "balance": "468575833.33333306",            "bizOrderId": "1333333333333333333",            "ts": "1686128884851"        }    ]}
 ```
 
 #### Response parameters[​](#response-parameters "Direct link to Response parameters")
@@ -944,6 +942,7 @@ Response example
 | fee         | String | Transaction fee                          |
 | balance     | String | Total accounts                           |
 | ts          | String | When this record was generated Timestamp |
+| bizOrderId  | String | Business order number                    |
 
 #### spotTaxType[​](#spottaxtype "Direct link to spotTaxType")
 
@@ -1953,13 +1952,13 @@ Response Example
 
 ---
 
-## Get Spot Whale Net Flow Data
+## Get Spot 24H Net Capital Inflow Info
 
 Rate limit: 1 req/s (IP)
 
 #### Description[​](#description "Direct link to Description")
 
-Get spot fund flow
+Get Spot 24H Net Capital Inflow Info
 
 #### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
