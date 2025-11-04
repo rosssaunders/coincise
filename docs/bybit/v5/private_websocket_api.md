@@ -1,6 +1,6 @@
 # ByBit V5 Private Websocket API Documentation
 
-# Rate Limit
+# Rate Limit Rules
 
 ## IP Limit[​](#ip-limit "Direct link to heading")
 
@@ -243,239 +243,6 @@ orders in one second if I use both endpoints to place orders_
   5 orders will be successfully placed, and the 6-8th orders will report an
   error exceeding the limit, and these orders will fail.
 
-## API Rate Limit Rules For VIPs[​](#api-rate-limit-rules-for-vips "Direct link to heading")
-
-|               | Unified Account |
-| ------------- | :-------------: | ------------- | ----------- |
-| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
-| Default       |      10/s       | 10/s          | 20/s        |
-| VIP 1         |      20/s       | 20/s          | 25/s        |
-| VIP 2         |      40/s       | 40/s          | 30/s        |
-| VIP 3         |      60/s       | 60/s          | 40/s        |
-| VIP 4         |      60/s       | 60/s          | 40/s        |
-| VIP 5         |      60/s       | 60/s          | 40/s        |
-| VIP Supreme   |      60/s       | 60/s          | 40/s        |
-
-## API Rate Limit Rules For PROs[​](#api-rate-limit-rules-for-pros "Direct link to heading")
-
-UPCOMING CHANGES FOR PRO ACCOUNT
-
-Starting **August 13, 2025**, Bybit will roll out a new institutional API rate
-limit framework designed to enhance performance for high-frequency trading
-clients. The new system introduces a centralized institution-level rate cap with
-flexible per-UID configurations, enabling greater efficiency and scalability.
-Refer to
-[announcement](https://announcements.bybit.com/en/article/update-bybit-enhances-api-rate-limits-for-institutional-traders-bltbbbf60de757d074e/)
-
-### UID level:[​](#uid-level "Direct link to heading")
-
-|               | Unified Account |
-| ------------- | :-------------: | ------------- | ----------- |
-| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
-| PRO1          |      200/s      | 200/s         | 200/s       |
-| PRO2          |      400/s      | 400/s         | 400/s       |
-| PRO3          |      600/s      | 600/s         | 600/s       |
-| PRO4          |      800/s      | 800/s         | 800/s       |
-| PRO5          |     1000/s      | 1000/s        | 1000/s      |
-| PRO6          |     1200/s      | 1200/s        | 1200/s      |
-
-### Master and subaccounts level (Institutional API rate limit Quota):[​](#master-and-subaccounts-level-institutional-api-rate-limit-quota "Direct link to heading")
-
-|               | Unified Account |
-| ------------- | :-------------: | ------------- | ----------- |
-| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
-| PRO1          |     10000/s     | 10000/s       | 10000/s     |
-| PRO2          |     20000/s     | 20000/s       | 20000/s     |
-| PRO3          |     30000/s     | 30000/s       | 30000/s     |
-| PRO4          |     40000/s     | 40000/s       | 40000/s     |
-| PRO5          |     50000/s     | 50000/s       | 50000/s     |
-| PRO6          |     60000/s     | 60000/s       | 60000/s     |
-
-instructions for API rate limit
-
-- All of the existing subaccounts still have those original API rate limits
-- The default API rate limit for a new sub-account is not counted in the total
-  Institutional API rate limit quota.
-- The default API rate limit for a new sub is: 10/s for futures , 10/s for
-  options, 20/s for spot
-- If the Institutional API rate limit total quota is exceeded, you can only
-  reduce the account's API rate limit first. After the total API rate limit is
-  less than the total Institutional API rate limit quota, you can increase the
-  API rate limit of an account.
-
-### Set api rate limit[​](#set-api-rate-limit "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- If UID requesting this endpoint is a master account, uids in the input
-  parameter must be subaccounts of the master account.
-- If UID requesting this endpoint is not a master account, uids in the input
-  parameter must be the UID requesting this endpoint
-- UID requesting this endpoint must be an institutional user.
-
-#### HTTP Request[​](#http-request "Direct link to heading")
-
-POST `/v5/apilimit/set`
-
-#### Request Parameters[​](#request-parameters "Direct link to heading")
-
-| Parameter                                        | Required | Type    | Comments                           |
-| :----------------------------------------------- | :------- | :------ | ---------------------------------- |
-| list                                             | true     | array   | Object                             |
-| &gt; uids                                        | true     | string  | Multiple UIDs, separated by commas |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | true     | string  | Business type                      |
-| &gt; rate                                        | true     | integer | api rate limit per second          |
-
-#### Response Parameters[​](#response-parameters "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                           |
-| :----------------------------------------------- | :------ | ---------------------------------- |
-| list                                             | array   | Object                             |
-| &gt; uids                                        | string  | Multiple UIDs, separated by commas |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
-| &gt; rate                                        | integer | api rate limit per second          |
-| &gt; success                                     | boolean | success or not                     |
-| &gt; <a href="/docs/v5/enum#msg">msg</a>         | string  | result message                     |
-
-#### Request Example[​](#request-example "Direct link to heading")
-
-```
-POST /v5/apilimit/set HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1711420489915X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "list": [        {            "uids": "106293838",            "bizType": "DERIVATIVES",            "rate": 50        }    ]}
-```
-
-#### Response Example[​](#response-example "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "result": [            {                "uids": "290118",                "bizType": "SPOT",                "rate": 600,                "success": true,                "msg": "API limit updated successfully"            }        ]    },    "retExtInfo": {},    "time": 1754894296913}
-```
-
-### Query api rate limit[​](#query-api-rate-limit "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- A master account can query api rate limit of its own and subaccounts.
-- A subaccount can only query its own api rate limit.
-
-#### HTTP Request[​](#http-request-1 "Direct link to heading")
-
-GET `/v5/apilimit/query`
-
-#### Request Parameters[​](#request-parameters-1 "Direct link to heading")
-
-| Parameter | Required | Type   | Comments                           |
-| :-------- | :------- | :----- | ---------------------------------- |
-| uids      | true     | string | Multiple UIDs, separated by commas |
-
-#### Response Parameters[​](#response-parameters-1 "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                           |
-| :----------------------------------------------- | :------ | ---------------------------------- |
-| list                                             | array   | Object                             |
-| &gt; uids                                        | string  | Multiple UIDs, separated by commas |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
-| &gt; rate                                        | integer | api rate limit per second          |
-
-#### Request Example[​](#request-example-1 "Direct link to heading")
-
-```
-GET /v5/apilimit/query?uids=290118 HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
-```
-
-#### Response Example[​](#response-example-1 "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "uids": "290118",                "bizType": "SPOT",                "rate": 600            },            {                "uids": "290118",                "bizType": "DERIVATIVES",                "rate": 400            }        ]    },    "retExtInfo": {},    "time": 1754894341984}
-```
-
-### Query api rate limit usage and cap[​](#query-api-rate-limit-usage-and-cap "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- Query ins level full picture rate limit usage and cap
-- Only queries from one of the main UIDs or a subaccount UID from sub-INS API
-  key are allowed.
-
-#### HTTP Request[​](#http-request-2 "Direct link to heading")
-
-GET `/v5/apilimit/query-cap`
-
-#### Request Parameters[​](#request-parameters-2 "Direct link to heading")
-
-None
-
-#### Response Parameters[​](#response-parameters-2 "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                                                              |
-| :----------------------------------------------- | :------ | --------------------------------------------------------------------- |
-| list                                             | array   | Object                                                                |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                                                         |
-| &gt; totalRate                                   | integer | Total api rate limit usage accross all subaccounts and master account |
-| &gt; insCap                                      | integer | Ins level api rate limit per second,depends on your ins level         |
-| &gt; uidCap                                      | integer | Uid level api rate limit per second,depends on your uid level         |
-
-#### Request Example[​](#request-example-2 "Direct link to heading")
-
-```
-GET /v5/apilimit/query-cap HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
-```
-
-#### Response Example[​](#response-example-2 "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "insCap": "30000",                "uidCap": "600",                "totalRate": "29882",                "bizType": "SPOT"            },            {                "insCap": "30000",                "uidCap": "600",                "totalRate": "29882",                "bizType": "OPTIONS"            },            {                "insCap": "40000",                "uidCap": "800",                "totalRate": "39932",                "bizType": "DERIVATIVES"            }        ]    },    "retExtInfo": {},    "time": 1758857589872}
-```
-
-### Query all api rate limit[​](#query-all-api-rate-limit "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- Query all of uid level rate limits including all master account and
-  subaccounts
-- Only queries from one of the main UIDs or a subaccount UID from sub-INS API
-  key are allowed.
-
-#### HTTP Request[​](#http-request-3 "Direct link to heading")
-
-GET `/v5/apilimit/query-all`
-
-#### Request Parameters[​](#request-parameters-3 "Direct link to heading")
-
-| Parameter | Required | Type   | Comments                                                                                                                              |
-| :-------- | :------- | :----- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| limit     | false    | string | Limit for data size per page. [<code>1</code>, <code>1000</code>]. Default: <code>1000</code>                                         |
-| cursor    | false    | string | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                       |
-| uids      | false    | string | Multiple UIDs accross different master account, separated by commas. Returns all master accounts and subaccounts ratelimit by default |
-
-#### Response Parameters[​](#response-parameters-3 "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                             |
-| :----------------------------------------------- | :------ | ------------------------------------ |
-| nextPageCursor                                   | string  | Used to get the next page data       |
-| list                                             | array   | Object                               |
-| &gt; uids                                        | string  | Multiple UIDs , separated by commas. |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                        |
-| &gt; rate                                        | integer | Api rate limit per second            |
-
-#### Request Example[​](#request-example-3 "Direct link to heading")
-
-```
-GET /v5/apilimit/query-all HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
-```
-
-#### Response Example[​](#response-example-3 "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "uids": "104270393,1674166,1190923,101446030",                "bizType": "SPOT",                "rate": 223            },            {                "uids": "104074050,104394193,104126066",                "bizType": "OPTIONS",                "rate": 223            },            {                "uids": "104154966,103803484,103995540,100445068",                "bizType": "DERIVATIVES",                "rate": 298            }        ],        "nextPageCursor": ""    },    "retExtInfo": {},    "time": 1758857701702}
-```
-
 # Enums Definitions
 
 ### locale[​](#locale "Direct link to heading")
@@ -642,6 +409,7 @@ _closed status_
 - `CreateByStopLoss` Futures stop loss order
 - `CreateByPartialStopLoss` Futures partial stop loss order
 - `CreateByTrailingStop` Futures trailing stop order
+- `CreateByTrailingProfit` Futures trailing take profit order
 - `CreateByLiq` Laddered liquidation to reduce the required maintenance margin
 - `CreateByTakeOver_PassThrough`If the position is still subject to liquidation
   (i.e., does not meet the required maintenance margin level), the position
@@ -662,6 +430,7 @@ _closed status_
 - `CreateByIceBerg` Order created by Ice berg strategy - web/app
 - `CreateByArbitrage` Order created by arbitrage - web/app
 - `CreateByDdh` Option dynamic delta hedge order - web/app
+- `CreateByBboOrder` BBO order
 
 ### execType[​](#exectype "Direct link to heading")
 
@@ -857,6 +626,10 @@ Also known as the "standard account".
 - `CancelByDCP` cancelled by DCP triggering
 - `CancelByRebalance` Spread trading: the order price of a single leg order is
   outside the limit price range.
+- `CancelByOCOTpCanceledBySlTriggered` The take profit order was canceled due to
+  the triggering of the stop loss
+- `CancelByOCOSlCanceledByTpTriggered` The stop loss order was canceled due to
+  the triggering of the take profit
 
 _Options:_
 
@@ -1045,6 +818,10 @@ _Options:_
 - `SPREAD_FEE_OUT` Spread fee for EU Broker
 - `PLATFORM_TOKEN_MNT_LIQRECALLEDMMNT` Recall MNT
 - `PLATFORM_TOKEN_MNT_LIQRETURNEDMNT` Return MNT
+- `MANUAL_LOANS_BORROW` Manual Borrow
+- `MANUAL_LOANS_REPAY` Manual Repay
+- `AUTO_LOANS_BORROW` Auto Borrow
+- `AUTO_LOANS_REPAY` Auto Repay
 
 ### type(contract-translog)[​](#typecontract-translog "Direct link to heading")
 
@@ -1525,7 +1302,8 @@ with the example of BTCUSDT:
 | 170132 | Order price too high.                                                                                                                                                                                     |
 | 170133 | Order price lower than the minimum.                                                                                                                                                                       |
 | 170134 | Order price decimal too long.                                                                                                                                                                             |
-| 170135 | Order quantity too large.                                                                                                                                                                                 |
+| 170381 | Order quantity too large.                                                                                                                                                                                 |
+| 170382 | Order quantity too large.                                                                                                                                                                                 |
 | 170136 | Order quantity lower than the minimum.                                                                                                                                                                    |
 | 170137 | Order volume decimal too long                                                                                                                                                                             |
 | 170139 | Order has been filled.                                                                                                                                                                                    |
@@ -1929,6 +1707,62 @@ with the example of BTCUSDT:
 | 3500002 | Current user is not an institutional user      |
 | 3500153 | No permission to operate these UIDs            |
 | 3500153 | You do not have permission to query other UIDs |
+
+## RFQ[​](#rfq "Direct link to heading")
+
+| Code   | Description                                                 |
+| :----- | :---------------------------------------------------------- |
+| 110300 | The RFQ order does not exist                                |
+| 110301 | The Quote order does not exist                              |
+| 110302 | Demo user is prohibited                                     |
+| 110303 | RFQ value is less than the min limit                        |
+| 110304 | Cannot be self-executed                                     |
+| 110305 | Quote UID is not in counterparties                          |
+| 110306 | Quote legs do not match                                     |
+| 110307 | Quote order already exists for this RFQ                     |
+| 110308 | RFQ strategy legs size is not correct                       |
+| 110309 | RFQ strategy side is not correct                            |
+| 110310 | RFQ strategy qty is not correct                             |
+| 110311 | RFQ strategy symbol is not correct                          |
+| 110312 | No permission to execute quote                              |
+| 110313 | RFQ only supports one-way position mode                     |
+| 110314 | Order amount is less than min trade amount                  |
+| 110315 | Order qty exceeds the upper limit                           |
+| 110316 | RFQ is not available for Copy Trading                       |
+| 110317 | Counterparty cannot be self                                 |
+| 110318 | There are too many counterparties to choose from            |
+| 110319 | Order amount is greater than max trade amount               |
+| 110320 | Symbols that have not enabled manual loan are not supported |
+| 110321 | Symbol is not supported                                     |
+
+## Manual Loan[​](#manual-loan "Direct link to heading")
+
+| Code     | Description                                                                                                              |
+| :------- | :----------------------------------------------------------------------------------------------------------------------- |
+| 34022001 | System error. Please try again later.                                                                                    |
+| 34022003 | System error. Please try again later.                                                                                    |
+| 34022027 | Invalid request parameters.                                                                                              |
+| 34022030 | Borrowing demand is high, and the fund pool is currently low. Please wait a moment.                                      |
+| 34022031 | Risk rate limit exceeded. Please reduce your borrow amount in the Unified Trading Account.                               |
+| 34022033 | Borrowing precision must be an integer multiple.                                                                         |
+| 34022034 | The minimum repayment amount must be an integer multiple.                                                                |
+| 34022035 | You cannot repay while interest is being calculated.                                                                     |
+| 34022036 | Please enable Margin Trading to continue.                                                                                |
+| 34022038 | Repayment is in progress. Please do not repeat the operation.                                                            |
+| 34022010 | The borrowed asset does not exist.                                                                                       |
+| 34022041 | Currently, your account has no borrowed coins. No repayments are needed.                                                 |
+| 34022044 | Repayment unsuccessful.                                                                                                  |
+| 34022045 | Borrowing unsuccessful.                                                                                                  |
+| 34022011 | Amount must be at least.                                                                                                 |
+| 34022014 | Decimal precision cannot exceed 18 digits.                                                                               |
+| 34022047 | CopyTrade not supported.                                                                                                 |
+| 34022048 | Borrowing is not allowed during liquidation.                                                                             |
+| 34022049 | Insufficient collateral balance.                                                                                         |
+| 34022050 | Repayment failed. You currently have spot hedging liabilities. Please close your derivatives positions before repayment. |
+| 34022051 | Institutional loan in progress.                                                                                          |
+| 34022052 | Institutional loan transactions banned.                                                                                  |
+| 35000011 | You have existing pending loan orders. Please try again later.                                                           |
+| 34022053 | Please contact the sales to enable the manual borrowing feature.                                                         |
 
 # Connect
 
@@ -2382,63 +2216,63 @@ rejected due to order is executed.
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter                                                    | Type    | Comments                                                                                                                                                                                                                                                                                               |
-| :----------------------------------------------------------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| id                                                           | string  | Message ID                                                                                                                                                                                                                                                                                             |
-| topic                                                        | string  | Topic name                                                                                                                                                                                                                                                                                             |
-| creationTime                                                 | number  | Data created timestamp (ms)                                                                                                                                                                                                                                                                            |
-| data                                                         | array   | Object                                                                                                                                                                                                                                                                                                 |
-| &gt; category                                                | string  | Product type<ul><li><a href="/docs/v5/acct-mode#uta-20">UTA2.0</a>, <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>: <code>spot</code>, <code>linear</code>, <code>inverse</code>, <code>option</code></li><li>Classic account: <code>spot</code>, <code>linear</code>, <code>inverse</code>.</li></ul> |
-| &gt; orderId                                                 | string  | Order ID                                                                                                                                                                                                                                                                                               |
-| &gt; orderLinkId                                             | string  | User customised order ID                                                                                                                                                                                                                                                                               |
-| &gt; isLeverage                                              | string  | Whether to borrow. <strong>Unified <code>spot</code></strong> only. <code>0</code>: false, <code>1</code>: true<br><em>Classic <code>spot</code> is not supported, always <code>0</code></em>                                                                                                          |
-| &gt; blockTradeId                                            | string  | Block trade ID                                                                                                                                                                                                                                                                                         |
-| &gt; symbol                                                  | string  | Symbol name                                                                                                                                                                                                                                                                                            |
-| &gt; price                                                   | string  | Order price                                                                                                                                                                                                                                                                                            |
-| &gt; brokerOrderPrice                                        | string  | Dedicated field for EU liquidity provider                                                                                                                                                                                                                                                              |
-| &gt; qty                                                     | string  | Order qty                                                                                                                                                                                                                                                                                              |
-| &gt; side                                                    | string  | Side. <code>Buy</code>,<code>Sell</code>                                                                                                                                                                                                                                                               |
-| &gt; <a href="/docs/v5/enum#positionidx">positionIdx</a>     | integer | Position index. Used to identify positions in different position modes                                                                                                                                                                                                                                 |
-| &gt; <a href="/docs/v5/enum#orderstatus">orderStatus</a>     | string  | Order status                                                                                                                                                                                                                                                                                           |
-| &gt; <a href="/docs/v5/enum#createtype">createType</a>       | string  | Order create type<li>Only for category=linear or inverse</li><li>Spot, Option do not have this key</li>                                                                                                                                                                                                |
-| &gt; <a href="/docs/v5/enum#canceltype">cancelType</a>       | string  | Cancel type                                                                                                                                                                                                                                                                                            |
-| &gt; <a href="/docs/v5/enum#rejectreason">rejectReason</a>   | string  | Reject reason. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                     |
-| &gt; avgPrice                                                | string  | Average filled price<li>returns <code>""</code> for those orders without avg price, and also for those classic account orders have partilly filled but cancelled at the end</li><li>Classic Spot: not supported, always <code>""</code></li>                                                           |
-| &gt; leavesQty                                               | string  | The remaining qty not executed. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                    |
-| &gt; leavesValue                                             | string  | The remaining value not executed. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                  |
-| &gt; cumExecQty                                              | string  | Cumulative executed order qty                                                                                                                                                                                                                                                                          |
-| &gt; cumExecValue                                            | string  | Cumulative executed order value                                                                                                                                                                                                                                                                        |
-| &gt; cumExecFee                                              | string  | Deprecated. Cumulative executed trading fee.<ul><li>Classic <code>spot</code>: it is the latest execution fee for order.</li><li>After upgraded to the Unified account, you can use <code>execFee</code> for each fill in <a href="/docs/v5/websocket/private/execution">Execution</a> topic</li></ul> |
-| &gt; closedPnl                                               | string  | Closed profit and loss for each close position order. The figure is the same as "closedPnl" from <a href="/docs/v5/position/close-pnl">Get Closed PnL</a>                                                                                                                                              |
-| &gt; feeCurrency                                             | string  | Deprecated. Trading fee currency for Spot only. Please understand Spot trading fee currency <a href="/docs/v5/enum#spot-fee-currency-instruction">here</a>                                                                                                                                             |
-| &gt; <a href="/docs/v5/enum#timeinforce">timeInForce</a>     | string  | Time in force                                                                                                                                                                                                                                                                                          |
-| &gt; <a href="/docs/v5/enum#ordertype">orderType</a>         | string  | Order type. <code>Market</code>,<code>Limit</code>. For TP/SL orders, is the order type after the order was triggered                                                                                                                                                                                  |
-| &gt; <a href="/docs/v5/enum#stopordertype">stopOrderType</a> | string  | Stop order type                                                                                                                                                                                                                                                                                        |
-| &gt; ocoTriggerBy                                            | string  | The trigger type of Spot OCO order.<code>OcoTriggerByUnknown</code>, <code>OcoTriggerByTp</code>, <code>OcoTriggerBySl</code>. <em>Classic <code>spot</code> is not supported</em>                                                                                                                     |
-| &gt; orderIv                                                 | string  | Implied volatility                                                                                                                                                                                                                                                                                     |
-| &gt; marketUnit                                              | string  | The unit for <code>qty</code> when create <strong>Spot market</strong> orders for <strong>UTA account</strong>. <code>baseCoin</code>, <code>quoteCoin</code>                                                                                                                                          |
-| &gt; slippageToleranceType                                   | string  | Spot and Futures market order slippage tolerance type <code>TickSize</code>, <code>Percent</code>, <code>UNKNOWN</code>(default)                                                                                                                                                                       |
-| &gt; slippageTolerance                                       | string  | Slippage tolerance value                                                                                                                                                                                                                                                                               |
-| &gt; triggerPrice                                            | string  | Trigger price. If <code>stopOrderType</code>=<em>TrailingStop</em>, it is activate price. Otherwise, it is trigger price                                                                                                                                                                               |
-| &gt; takeProfit                                              | string  | Take profit price                                                                                                                                                                                                                                                                                      |
-| &gt; stopLoss                                                | string  | Stop loss price                                                                                                                                                                                                                                                                                        |
-| &gt; tpslMode                                                | string  | TP/SL mode, <code>Full</code>: entire position for TP/SL. <code>Partial</code>: partial position tp/sl. Spot does not have this field, and Option returns always ""                                                                                                                                    |
-| &gt; tpLimitPrice                                            | string  | The limit order price when take profit price is triggered                                                                                                                                                                                                                                              |
-| &gt; slLimitPrice                                            | string  | The limit order price when stop loss price is triggered                                                                                                                                                                                                                                                |
-| &gt; <a href="/docs/v5/enum#triggerby">tpTriggerBy</a>       | string  | The price type to trigger take profit                                                                                                                                                                                                                                                                  |
-| &gt; <a href="/docs/v5/enum#triggerby">slTriggerBy</a>       | string  | The price type to trigger stop loss                                                                                                                                                                                                                                                                    |
-| &gt; triggerDirection                                        | integer | Trigger direction. <code>1</code>: rise, <code>2</code>: fall                                                                                                                                                                                                                                          |
-| &gt; <a href="/docs/v5/enum#triggerby">triggerBy</a>         | string  | The price type of trigger price                                                                                                                                                                                                                                                                        |
-| &gt; lastPriceOnCreated                                      | string  | Last price when place the order                                                                                                                                                                                                                                                                        |
-| &gt; reduceOnly                                              | boolean | Reduce only. <code>true</code> means reduce position size                                                                                                                                                                                                                                              |
-| &gt; closeOnTrigger                                          | boolean | Close on trigger. <a href="https://www.bybit.com/en/help-center/article/Close-On-Trigger-Order" target="_blank" rel="noopener noreferrer">What is a close on trigger order?</a>                                                                                                                        |
-| &gt; placeType                                               | string  | Place type, <code>option</code> used. <code>iv</code>, <code>price</code>                                                                                                                                                                                                                              |
-| &gt; <a href="/docs/v5/enum#smptype">smpType</a>             | string  | SMP execution type                                                                                                                                                                                                                                                                                     |
-| &gt; smpGroup                                                | integer | Smp group ID. If the UID has no group, it is <code>0</code> by default                                                                                                                                                                                                                                 |
-| &gt; smpOrderId                                              | string  | The counterparty's orderID which triggers this SMP execution                                                                                                                                                                                                                                           |
-| &gt; createdTime                                             | string  | Order created timestamp (ms)                                                                                                                                                                                                                                                                           |
-| &gt; updatedTime                                             | string  | Order updated timestamp (ms)                                                                                                                                                                                                                                                                           |
-| &gt; cumFeeDetail                                            | json    | Cumulative trading fee details instead of <code>cumExecFee</code> and <code>feeCurrency</code>                                                                                                                                                                                                         |
+| Parameter                                                    | Type    | Comments                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| :----------------------------------------------------------- | :------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id                                                           | string  | Message ID                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| topic                                                        | string  | Topic name                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| creationTime                                                 | number  | Data created timestamp (ms)                                                                                                                                                                                                                                                                                                                                                                                                              |
+| data                                                         | array   | Object                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| &gt; category                                                | string  | Product type<ul><li><a href="/docs/v5/acct-mode#uta-20">UTA2.0</a>, <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>: <code>spot</code>, <code>linear</code>, <code>inverse</code>, <code>option</code></li><li>Classic account: <code>spot</code>, <code>linear</code>, <code>inverse</code>.</li></ul>                                                                                                                                   |
+| &gt; orderId                                                 | string  | Order ID                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| &gt; orderLinkId                                             | string  | User customised order ID                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| &gt; isLeverage                                              | string  | Whether to borrow. <strong>Unified <code>spot</code></strong> only. <code>0</code>: false, <code>1</code>: true<br><em>Classic <code>spot</code> is not supported, always <code>0</code></em>                                                                                                                                                                                                                                            |
+| &gt; blockTradeId                                            | string  | Block trade ID                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| &gt; symbol                                                  | string  | Symbol name                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| &gt; price                                                   | string  | Order price                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| &gt; brokerOrderPrice                                        | string  | Dedicated field for EU liquidity provider                                                                                                                                                                                                                                                                                                                                                                                                |
+| &gt; qty                                                     | string  | Order qty                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| &gt; side                                                    | string  | Side. <code>Buy</code>,<code>Sell</code>                                                                                                                                                                                                                                                                                                                                                                                                 |
+| &gt; <a href="/docs/v5/enum#positionidx">positionIdx</a>     | integer | Position index. Used to identify positions in different position modes                                                                                                                                                                                                                                                                                                                                                                   |
+| &gt; <a href="/docs/v5/enum#orderstatus">orderStatus</a>     | string  | Order status                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| &gt; <a href="/docs/v5/enum#createtype">createType</a>       | string  | Order create type<li>Only for category=linear or inverse</li><li>Spot, Option do not have this key</li>                                                                                                                                                                                                                                                                                                                                  |
+| &gt; <a href="/docs/v5/enum#canceltype">cancelType</a>       | string  | Cancel type                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| &gt; <a href="/docs/v5/enum#rejectreason">rejectReason</a>   | string  | Reject reason. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                                                                                                                                       |
+| &gt; avgPrice                                                | string  | Average filled price<li>returns <code>""</code> for those orders without avg price, and also for those classic account orders have partilly filled but cancelled at the end</li><li>Classic Spot: not supported, always <code>""</code></li>                                                                                                                                                                                             |
+| &gt; leavesQty                                               | string  | The remaining qty not executed. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                                                                                                                      |
+| &gt; leavesValue                                             | string  | The remaining value not executed. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                                                                                                                    |
+| &gt; cumExecQty                                              | string  | Cumulative executed order qty                                                                                                                                                                                                                                                                                                                                                                                                            |
+| &gt; cumExecValue                                            | string  | Cumulative executed order value                                                                                                                                                                                                                                                                                                                                                                                                          |
+| &gt; cumExecFee                                              | string  | <li><code>inverse</code>, <code>option</code>: Cumulative executed trading fee.</li><li><code>linear</code>, <code>spot</code>: Deprecated. Use <code>cumFeeDetail</code> instead.</li><li>Classic <code>spot</code>: it is the latest execution fee for order.</li><li>After upgraded to the Unified account, you can use <code>execFee</code> for each fill in <a href="/docs/v5/websocket/private/execution">Execution</a> topic</li> |
+| &gt; closedPnl                                               | string  | Closed profit and loss for each close position order. The figure is the same as "closedPnl" from <a href="/docs/v5/position/close-pnl">Get Closed PnL</a>                                                                                                                                                                                                                                                                                |
+| &gt; feeCurrency                                             | string  | Deprecated. Trading fee currency for Spot only. Please understand Spot trading fee currency <a href="/docs/v5/enum#spot-fee-currency-instruction">here</a>                                                                                                                                                                                                                                                                               |
+| &gt; <a href="/docs/v5/enum#timeinforce">timeInForce</a>     | string  | Time in force                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| &gt; <a href="/docs/v5/enum#ordertype">orderType</a>         | string  | Order type. <code>Market</code>,<code>Limit</code>. For TP/SL orders, is the order type after the order was triggered                                                                                                                                                                                                                                                                                                                    |
+| &gt; <a href="/docs/v5/enum#stopordertype">stopOrderType</a> | string  | Stop order type                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| &gt; ocoTriggerBy                                            | string  | The trigger type of Spot OCO order.<code>OcoTriggerByUnknown</code>, <code>OcoTriggerByTp</code>, <code>OcoTriggerBySl</code>. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                       |
+| &gt; orderIv                                                 | string  | Implied volatility                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| &gt; marketUnit                                              | string  | The unit for <code>qty</code> when create <strong>Spot market</strong> orders for <strong>UTA account</strong>. <code>baseCoin</code>, <code>quoteCoin</code>                                                                                                                                                                                                                                                                            |
+| &gt; slippageToleranceType                                   | string  | Spot and Futures market order slippage tolerance type <code>TickSize</code>, <code>Percent</code>, <code>UNKNOWN</code>(default)                                                                                                                                                                                                                                                                                                         |
+| &gt; slippageTolerance                                       | string  | Slippage tolerance value                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| &gt; triggerPrice                                            | string  | Trigger price. If <code>stopOrderType</code>=<em>TrailingStop</em>, it is activate price. Otherwise, it is trigger price                                                                                                                                                                                                                                                                                                                 |
+| &gt; takeProfit                                              | string  | Take profit price                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| &gt; stopLoss                                                | string  | Stop loss price                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| &gt; tpslMode                                                | string  | TP/SL mode, <code>Full</code>: entire position for TP/SL. <code>Partial</code>: partial position tp/sl. Spot does not have this field, and Option returns always ""                                                                                                                                                                                                                                                                      |
+| &gt; tpLimitPrice                                            | string  | The limit order price when take profit price is triggered                                                                                                                                                                                                                                                                                                                                                                                |
+| &gt; slLimitPrice                                            | string  | The limit order price when stop loss price is triggered                                                                                                                                                                                                                                                                                                                                                                                  |
+| &gt; <a href="/docs/v5/enum#triggerby">tpTriggerBy</a>       | string  | The price type to trigger take profit                                                                                                                                                                                                                                                                                                                                                                                                    |
+| &gt; <a href="/docs/v5/enum#triggerby">slTriggerBy</a>       | string  | The price type to trigger stop loss                                                                                                                                                                                                                                                                                                                                                                                                      |
+| &gt; triggerDirection                                        | integer | Trigger direction. <code>1</code>: rise, <code>2</code>: fall                                                                                                                                                                                                                                                                                                                                                                            |
+| &gt; <a href="/docs/v5/enum#triggerby">triggerBy</a>         | string  | The price type of trigger price                                                                                                                                                                                                                                                                                                                                                                                                          |
+| &gt; lastPriceOnCreated                                      | string  | Last price when place the order                                                                                                                                                                                                                                                                                                                                                                                                          |
+| &gt; reduceOnly                                              | boolean | Reduce only. <code>true</code> means reduce position size                                                                                                                                                                                                                                                                                                                                                                                |
+| &gt; closeOnTrigger                                          | boolean | Close on trigger. <a href="https://www.bybit.com/en/help-center/article/Close-On-Trigger-Order" target="_blank" rel="noopener noreferrer">What is a close on trigger order?</a>                                                                                                                                                                                                                                                          |
+| &gt; placeType                                               | string  | Place type, <code>option</code> used. <code>iv</code>, <code>price</code>                                                                                                                                                                                                                                                                                                                                                                |
+| &gt; <a href="/docs/v5/enum#smptype">smpType</a>             | string  | SMP execution type                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| &gt; smpGroup                                                | integer | Smp group ID. If the UID has no group, it is <code>0</code> by default                                                                                                                                                                                                                                                                                                                                                                   |
+| &gt; smpOrderId                                              | string  | The counterparty's orderID which triggers this SMP execution                                                                                                                                                                                                                                                                                                                                                                             |
+| &gt; createdTime                                             | string  | Order created timestamp (ms)                                                                                                                                                                                                                                                                                                                                                                                                             |
+| &gt; updatedTime                                             | string  | Order updated timestamp (ms)                                                                                                                                                                                                                                                                                                                                                                                                             |
+| &gt; cumFeeDetail                                            | json    | <li><code>linear</code>, <code>spot</code>: Cumulative trading fee details instead of <code>cumExecFee</code></li>                                                                                                                                                                                                                                                                                                                       |
 
 ### Subscribe Example[​](#subscribe-example "Direct link to heading")
 
@@ -2511,7 +2345,7 @@ info
 | &gt;&gt; bonus                  | string  | Bonus. <em>This is a unique field for UNIFIED account</em>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | &gt;&gt; collateralSwitch       | boolean | Whether it can be used as a margin collateral currency (platform)<ul><li>When marginCollateral=false, then collateralSwitch is meaningless</li><li>This is a unique field for UNIFIED account</li></ul>                                                                                                                                                                                                                                                                                                                                                                               |
 | &gt;&gt; marginCollateral       | boolean | Whether the collateral is turned on by user (user)<ul><li>When marginCollateral=true, then collateralSwitch is meaningful</li><li>This is a unique field for UNIFIED account</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                |
-| &gt;&gt; spotBorrow             | string  | Borrow amount by spot margin trade (does not include borrow amount by spot margin active order). This business scenario is not yet online, currently returns <code>0</code>.                                                                                                                                                                                                                                                                                                                                                                                                          |
+| &gt;&gt; spotBorrow             | string  | Borrow amount by spot margin trade and manual borrow amount(does not include borrow amount by spot margin active order). <code>spotBorrow</code> field corresponding to spot liabilities is detailed in the <a href="https://announcements.bybit.com/en/article/bybit-uta-function-optimization-manual-coin-borrowing-will-be-launched-soon-blt5d858199bd12e849/" target="_blank" rel="noopener noreferrer">announcement</a>.                                                                                                                                                         |
 
 ### Subscribe Example[​](#subscribe-example "Direct link to heading")
 
