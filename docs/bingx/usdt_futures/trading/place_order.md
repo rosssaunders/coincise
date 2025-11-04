@@ -2,7 +2,7 @@
 
 POST /openApi/swap/v2/trade/order
 
-rate limitation by UID: 5/s & rate limitation by IP in group Number: 3
+rate limitation by UID: 10/s & rate limitation by IP in group Number: 3
 
 API KEY permission: Perpetual Futures Trading
 
