@@ -22,9 +22,9 @@ GET /api/v3/selfSymbols?timestamp={{timestamp}}&signature={{signature}}
 }
 ```
 
-- **GET** `/api/v3/selfSymbols`
+-   **GET** `/api/v3/selfSymbols`
 
-**Permission:** SPOT_ACCOUNT_R
+**Permission:** SPOT\_ACCOUNT\_R
 
 **Weight(IP):** 1
 
@@ -34,11 +34,10 @@ NONE
 
 **Response**
 
-| Name   | Type   | Description      |
-| ------ | ------ | ---------------- |
+| Name | Type | Description |
+| --- | --- | --- |
 | symbol | string | api trade symbol |
 
 ---
 
-**Source:**
-https://mexcdevelop.github.io/apidocs/spot_v3_en#user-api-default-symbol
+**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#user-api-default-symbol

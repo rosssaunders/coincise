@@ -16,30 +16,30 @@ post /api/v3/capital/transfer?fromAccountType=FUTURES&toAccountType=SPOT&asset=U
 ]
 ```
 
-- **POST** `/api/v3/capital/transfer`
+-   **POST** `/api/v3/capital/transfer`  
+    
 
-**Permission:** SPOT_TRANSFER_WRITE
+**Permission:** SPOT\_TRANSFER\_WRITE
 
 **Weight(IP):** 1
 
 Parameters:
 
-| Name            | Type   | Mandatory | Description                      |
-| --------------- | ------ | --------- | -------------------------------- |
-| fromAccountType | string | YES       | fromAccountType:"SPOT","FUTURES" |
-| toAccountType   | string | YES       | toAccountType:"SPOT","FUTURES"   |
-| asset           | string | YES       | asset                            |
-| amount          | string | YES       | amount                           |
-| timestamp       | string | YES       | timestamp                        |
-| signature       | string | YES       | signature                        |
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| fromAccountType | string | YES | fromAccountType:"SPOT","FUTURES" |
+| toAccountType | string | YES | toAccountType:"SPOT","FUTURES" |
+| asset | string | YES | asset |
+| amount | string | YES | amount |
+| timestamp | string | YES | timestamp |
+| signature | string | YES | signature |
 
 Response:
 
-| Name   | Description |
-| ------ | ----------- |
-| tranId | tranId      |
+| Name | Description |
+| --- | --- |
+| tranId | tranId |
 
 ---
 
-**Source:**
-https://mexcdevelop.github.io/apidocs/spot_v3_en#user-universal-transfer
+**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#user-universal-transfer

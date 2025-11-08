@@ -31,31 +31,31 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
 ]
 ```
 
-- **GET** `/api/v3/capital/deposit/address`
+-   **GET** `/api/v3/capital/deposit/address`  
+    
 
-**Permission:** SPOT_WITHDRAW_READ
+**Permission:** SPOT\_WITHDRAW\_READ
 
 **Weight(IP):** 10
 
 Parameters:
 
-| Name      | Type   | Mandatory | Description     |
-| --------- | ------ | --------- | --------------- |
-| coin      | string | YES       | coin            |
-| network   | string | NO        | deposit network |
-| timestamp | string | YES       | timestamp       |
-| signature | string | YES       | signature       |
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| coin | string | YES | coin |
+| network | string | NO | deposit network |
+| timestamp | string | YES | timestamp |
+| signature | string | YES | signature |
 
 Response:
 
-| Name    | Description     |
-| ------- | --------------- |
+| Name | Description |
+| --- | --- |
 | address | deposit address |
-| coin    | coin            |
-| memo    | memo            |
-| network | network         |
+| coin | coin |
+| memo | memo |
+| network | network |
 
 ---
 
-**Source:**
-https://mexcdevelop.github.io/apidocs/spot_v3_en#deposit-address-supporting-network
+**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#deposit-address-supporting-network

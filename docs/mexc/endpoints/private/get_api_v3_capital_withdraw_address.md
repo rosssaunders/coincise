@@ -32,36 +32,36 @@ get /api/v3/capital/withdraw/address?coin=USDT&timestamp={{timestamp}}&signature
 }
 ```
 
-- **GET** `/api/v3/capital/withdraw/address`
+-   **GET** `/api/v3/capital/withdraw/address`  
+    
 
-**Permission:** SPOT_WITHDRAW_R
+**Permission:** SPOT\_WITHDRAW\_R
 
 **Weight(IP):** 10
 
 **Request**
 
-| Name      | Type   | Mandatory | Description        |
-| --------- | ------ | --------- | ------------------ |
-| coin      | string | No        | coin               |
-| page      | number | No        | page,default 1     |
-| limit     | number | No        | limit for per page |
-| timestamp | string | Yes       | timestamp          |
-| signature | string | Yes       | signature          |
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| coin | string | No | coin |
+| page | number | No | page,default 1 |
+| limit | number | No | limit for per page |
+| timestamp | string | Yes | timestamp |
+| signature | string | Yes | signature |
 
 **Response**
 
-| Name         | Description  |
-| ------------ | ------------ |
-| coin         | coin         |
-| network      | network      |
-| address      | address      |
-| addressTag   | addressTag   |
-| memo         | memo         |
+| Name | Description |
+| --- | --- |
+| coin | coin |
+| network | network |
+| address | address |
+| addressTag | addressTag |
+| memo | memo |
 | totalRecords | totalRecords |
 | totalPageNum | totalPageNum |
-| page         | page         |
+| page | page |
 
 ---
 
-**Source:**
-https://mexcdevelop.github.io/apidocs/spot_v3_en#withdraw-address-supporting-network
+**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#withdraw-address-supporting-network

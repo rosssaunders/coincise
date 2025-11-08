@@ -16,25 +16,26 @@ get /api/v3/rebate/referCode?timestamp={{timestamp}}&signature={{signature}}
 
 **HTTP Request**
 
-- **GET** `/api/v3/rebate/referCode`
+-   **GET** `/api/v3/rebate/referCode`  
+    
 
-**Permission:** SPOT_ACCOUNT_READ
+**Permission:** SPOT\_ACCOUNT\_READ
 
 **Weight(IP):** 1
 
 **Request**
 
-| Name       | Type   | Mandatory | Description |
-| ---------- | ------ | --------- | ----------- |
-| recvWindow | long   | NO        |             |
-| timestamp  | long   | YES       |             |
-| signature  | string | YES       |             |
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| recvWindow | long | NO |  |
+| timestamp | long | YES |  |
+| signature | string | YES |  |
 
 **Response**
 
-| Name      | Type   | Description |
-| --------- | ------ | ----------- |
-| referCode | string | referCode   |
+| Name | Type | Description |
+| --- | --- | --- |
+| referCode | string | referCode |
 
 ---
 

@@ -32,55 +32,53 @@ get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature
 ]
 ```
 
-- **GET** `/api/v3/capital/withdraw/history`
+-   **GET** `/api/v3/capital/withdraw/history`  
+    
 
-**Permission:** SPOT_WITHDRAW_READ
+**Permission:** SPOT\_WITHDRAW\_READ
 
 **Weight(IP):** 1
 
 Parameters:
 
-| Name      | Type   | Mandatory | Description                           |
-| --------- | ------ | --------- | ------------------------------------- |
-| coin      | string | NO        | coin                                  |
-| status    | string | NO        | withdraw status                       |
-| limit     | string | NO        | default:1000, max:1000                |
-| startTime | string | NO        | default: 7 days ago from current time |
-| endTime   | string | NO        | default:current time                  |
-| timestamp | string | YES       | timestamp                             |
-| signature | string | YES       | signature                             |
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| coin | string | NO | coin |
+| status | string | NO | withdraw status |
+| limit | string | NO | default:1000, max:1000 |
+| startTime | string | NO | default: 7 days ago from current time |
+| endTime | string | NO | default:current time |
+| timestamp | string | YES | timestamp |
+| signature | string | YES | signature |
 
 1.  default return the records of the last 7 days.
-2.  Ensure that the default timestamp of 'startTime' and 'endTime' does not
-    exceed 7 days.
+2.  Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 7 days.
 3.  can query 90 days data at most.
-4.  Supported multiple network coins's withdraw history may not return the
-    'network' field.
+4.  Supported multiple network coins's withdraw history may not return the 'network' field.
 
 Response:
 
-| Name                                                 | Description                                                              |
-| ---------------------------------------------------- | ------------------------------------------------------------------------ |
-| address                                              | withdraw address                                                         |
-| amount                                               | withdraw amount                                                          |
-| applyTime                                            | apply time                                                               |
-| coin                                                 | coin                                                                     |
-| id                                                   | withdraw id                                                              |
-| withdrawOrderId                                      | withdrawOrderId                                                          |
-| network                                              | withdraw network                                                         |
-| transferType                                         | transferType, 0: outside transfer,1: inside transfer                     |
-| status                                               | withdraw status,1:APPLY,2:AUDITING,3:WAIT,4:PROCESSING,5:WAIT_PACKAGING, |
-| 6:WAIT_CONFIRM,7:SUCCESS,8:FAILED,9:CANCEL,10:MANUAL |
-| transactionFee                                       | transactionFee                                                           |
-| confirmNo                                            | confirmNo                                                                |
-| txId                                                 | txId                                                                     |
-| remark                                               | remark                                                                   |
-| memo                                                 | memo                                                                     |
-| transHash                                            | transaction Hash                                                         |
-| coinId                                               | asset id                                                                 |
-| vcoinId                                              | currency id                                                              |
+| Name | Description |
+| --- | --- |
+| address | withdraw address |
+| amount | withdraw amount |
+| applyTime | apply time |
+| coin | coin |
+| id | withdraw id |
+| withdrawOrderId | withdrawOrderId |
+| network | withdraw network |
+| transferType | transferType, 0: outside transfer,1: inside transfer |
+| status | withdraw status,1:APPLY,2:AUDITING,3:WAIT,4:PROCESSING,5:WAIT\_PACKAGING,  
+6:WAIT\_CONFIRM,7:SUCCESS,8:FAILED,9:CANCEL,10:MANUAL |
+| transactionFee | transactionFee |
+| confirmNo | confirmNo |
+| txId | txId |
+| remark | remark |
+| memo | memo |
+| transHash | transaction Hash |
+| coinId | asset id |
+| vcoinId | currency id |
 
 ---
 
-**Source:**
-https://mexcdevelop.github.io/apidocs/spot_v3_en#withdraw-history-supporting-network
+**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#withdraw-history-supporting-network

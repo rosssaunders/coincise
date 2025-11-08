@@ -19,27 +19,27 @@ get api/v3/mxDeduct/enable
 }
 ```
 
-- **GET** `api/v3/mxDeduct/enable`
+-   **GET** `api/v3/mxDeduct/enable`  
+    
 
-**Permission:** SPOT_DEAL_READ
+**Permission:** SPOT\_DEAL\_READ
 
 **Weight(IP):** 1
 
 **Parameters:**
 
-| Name       | Type   | Mandatory | Description |
-| ---------- | ------ | --------- | ----------- |
-| recvWindow | long   | no        | recvWindow  |
-| timestamp  | long   | yes       | timestamp   |
-| signature  | string | yes       | signature   |
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| recvWindow | long | no | recvWindow |
+| timestamp | long | yes | timestamp |
+| signature | string | yes | signature |
 
 **Response:**
 
-| Name           | Type    | Description               |
-| -------------- | ------- | ------------------------- |
+| Name | Type | Description |
+| --- | --- | --- |
 | mxDeductEnable | boolean | true:enable,false:disable |
 
 ---
 
-**Source:**
-https://mexcdevelop.github.io/apidocs/spot_v3_en#query-mx-deduct-status
+**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#query-mx-deduct-status

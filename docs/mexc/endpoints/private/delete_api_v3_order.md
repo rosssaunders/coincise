@@ -19,9 +19,10 @@
 }
 ```
 
-- **DELETE** `/api/v3/order`
+-   **DELETE** `/api/v3/order`  
+    
 
-**Permission:** SPOT_DEAL_WRITE
+**Permission:** SPOT\_DEAL\_WRITE
 
 **Weight(IP):** 1
 
@@ -29,33 +30,33 @@ Cancel an active order.
 
 Parameters:
 
-| Name              | Type   | Mandatory | Description |
-| ----------------- | ------ | --------- | ----------- |
-| symbol            | string | YES       |             |
-| orderId           | string | NO        | Order id    |
-| origClientOrderId | string | NO        |             |
-| newClientOrderId  | string | NO        |             |
-| recvWindow        | long   | NO        |             |
-| timestamp         | long   | YES       |             |
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | string | YES |  |
+| orderId | string | NO | Order id |
+| origClientOrderId | string | NO |  |
+| newClientOrderId | string | NO |  |
+| recvWindow | long | NO |  |
+| timestamp | long | YES |  |
 
 Either `orderId` or `origClientOrderId` must be sent.
 
 Response:
 
-| Name                | Description                   |
-| ------------------- | ----------------------------- |
-| symbol              | Symbol                        |
-| origClientOrderId   | Original client order id      |
-| orderId             | order id                      |
-| clientOrderId       | client order id               |
-| price               | Price                         |
-| origOty             | Original order quantity       |
-| executedQty         | Executed order quantity       |
-| cummulativeQuoteQty | Cummulative quote quantity    |
-| status              | [order status](#order_status) |
-| timeInForce         |                               |
-| type                | [Order type](#order_type)     |
-| side                | [order side](#order_side)     |
+| Name | Description |
+| --- | --- |
+| symbol | Symbol |
+| origClientOrderId | Original client order id |
+| orderId | order id |
+| clientOrderId | client order id |
+| price | Price |
+| origOty | Original order quantity |
+| executedQty | Executed order quantity |
+| cummulativeQuoteQty | Cummulative quote quantity |
+| status | [order status](#order_status) |
+| timeInForce |  |
+| type | [Order type](#order_type) |
+| side | [order side](#order_side) |
 
 ---
 

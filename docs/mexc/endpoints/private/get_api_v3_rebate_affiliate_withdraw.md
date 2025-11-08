@@ -38,35 +38,34 @@ get /api/v3/rebate/affiliate/withdraw?timestamp={{timestamp}}&signature={{signat
 
 **HTTP Request**
 
-- **GET** `/api/v3/rebate/affiliate/withdraw`
+-   **GET** `/api/v3/rebate/affiliate/withdraw`  
+    
 
-**Permission:** SPOT_ACCOUNT_READ
+**Permission:** SPOT\_ACCOUNT\_READ
 
 **Weight(IP):** 1
 
 **Request**
 
-| Name      | Type   | Mandatory | Description          |
-| --------- | ------ | --------- | -------------------- |
-| startTime | long   | No        | startTime            |
-| endTime   | long   | No        | endTime              |
-| page      | int    | No        | page                 |
-| pageSize  | int    | No        | pageSize,default: 10 |
-| timestamp | long   | Yes       | timestamp            |
-| signature | string | Yes       | signature            |
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| startTime | long | No | startTime |
+| endTime | long | No | endTime |
+| page | int | No | page |
+| pageSize | int | No | pageSize,default: 10 |
+| timestamp | long | Yes | timestamp |
+| signature | string | Yes | signature |
 
 **Response**
 
-| Name         | Type   | Description     |
-| ------------ | ------ | --------------- |
-| withdrawTime | long   | withdrawTime    |
-| asset        | string | withdraw asset  |
-| amount       | string | withdraw amount |
+| Name | Type | Description |
+| --- | --- | --- |
+| withdrawTime | long | withdrawTime |
+| asset | string | withdraw asset |
+| amount | string | withdraw amount |
 
-If startTime and endTime are not sent, the data of the last six months is
-returned.
+If startTime and endTime are not sent, the data of the last six months is returned.
 
 ---
 
-**Source:**
-https://mexcdevelop.github.io/apidocs/spot_v3_en#get-affiliate-withdraw-record-affiliate-only
+**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#get-affiliate-withdraw-record-affiliate-only

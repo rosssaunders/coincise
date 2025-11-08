@@ -29,31 +29,31 @@ get {{api_url}}/api/v3/capital/convert/list?timestamp={{timestamp}}&signature={{
 ]
 ```
 
-- **GET** `/api/v3/capital/convert/list`
+-   **GET** `/api/v3/capital/convert/list`  
+    
 
-**Permission:** SPOT_ACCOUNT_READ
+**Permission:** SPOT\_ACCOUNT\_READ
 
 **Weight(IP):** 1
 
 Parameters:
 
-| Name      | Type   | Mandatory | Description |
-| --------- | ------ | --------- | ----------- |
-| timestamp | string | YES       | timestamp   |
-| signature | string | YES       | signature   |
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| timestamp | string | YES | timestamp |
+| signature | string | YES | signature |
 
 Response:
 
-| Name        | Description                          |
-| ----------- | ------------------------------------ |
-| convertMx   | MX amount（Deducted commission fee） |
-| convertUsdt | usdt amount                          |
-| balance     | Convertible balance                  |
-| asset       | asset                                |
-| code        | code                                 |
-| message     | message                              |
+| Name | Description |
+| --- | --- |
+| convertMx | MX amount（Deducted commission fee） |
+| convertUsdt | usdt amount |
+| balance | Convertible balance |
+| asset | asset |
+| code | code |
+| message | message |
 
 ---
 
-**Source:**
-https://mexcdevelop.github.io/apidocs/spot_v3_en#get-assets-that-can-be-converted-into-mx
+**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#get-assets-that-can-be-converted-into-mx

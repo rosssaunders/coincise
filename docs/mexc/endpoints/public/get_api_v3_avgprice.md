@@ -9,24 +9,23 @@
 }
 ```
 
-- **GET** `/api/v3/avgPrice`
+-   **GET** `/api/v3/avgPrice`
 
 **Weight(IP):** 1
 
 Parameters:
 
-| Name   | Type   | Mandatory | Description |
-| ------ | ------ | --------- | ----------- |
-| symbol | string | YES       |             |
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | string | YES |  |
 
 Response:
 
-| Name  | Description              |
-| ----- | ------------------------ |
-| mins  | Average price time frame |
-| price | Price                    |
+| Name | Description |
+| --- | --- |
+| mins | Average price time frame |
+| price | Price |
 
 ---
 
-**Source:**
-https://mexcdevelop.github.io/apidocs/spot_v3_en#current-average-price
+**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#current-average-price

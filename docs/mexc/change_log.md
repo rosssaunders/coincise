@@ -2,189 +2,164 @@
 
 ## **2025-02-24**
 
-- Update Protocol Buffers websocket channels
+-   Update Protocol Buffers websocket channels
 
 ## **2024-10-17**
 
-- Add Query Kyc status endpoint
+-   Add Query Kyc status endpoint
 
 ## **2024-08-16**
 
-- Exchange Information endpoint update params:status and tradeSideType.
+-   Exchange Information endpoint update params:status and tradeSideType.
 
 ## **2024-06-09**
 
-- Query The Currency Information endpoint add params:netWork,network will
-  offline soon.
-- Add new withdraw endpoint,previous withdraw endpoint will offline soon.
+-   Query The Currency Information endpoint add params:netWork,network will offline soon.
+-   Add new withdraw endpoint,previous withdraw endpoint will offline soon.
 
 ## **2024-05-15**
 
-- Add query commission endpoint
+-   Add query commission endpoint
 
 ## **2024-04-08**
 
-- Update response params of Get Withdraw History endpoint
+-   Update response params of Get Withdraw History endpoint
 
 ## **2024-01-12**
 
-- Add query sub-account asset endpoint
+-   Add query sub-account asset endpoint
 
 ## **2024-01-01**
 
-- Kline support interval: week
-- Deposit and withdraw history endpoint update the query timestamp range
+-   Kline support interval: week
+-   Deposit and withdraw history endpoint update the query timestamp range
 
 ## **2023-12-11**
 
-- Query Sub-account List endpoint add response params:uid
+-   Query Sub-account List endpoint add response params:uid
 
 ## **2023-11-10**
 
-- Add user internal transfer endpoint and query internal transfer history
-  endpoint.
-- Add ws miniTicker and miniTickers channels.
+-   Add user internal transfer endpoint and query internal transfer history endpoint.
+-   Add ws miniTicker and miniTickers channels.
 
 ## **2023-10-17**
 
-- Add Get Affiliate Referral Data endpoint and Get Subaffiliates Data endpoint
+-   Add Get Affiliate Referral Data endpoint and Get Subaffiliates Data endpoint
 
 ## **2023-09-27**
 
-- Add Get Affiliate Withdraw Record endpoint and Get Affiliate Commission Detail
-  Record endpoint
+-   Add Get Affiliate Withdraw Record endpoint and Get Affiliate Commission Detail Record endpoint
 
 ## **2023-08-15**
 
-- Add Get Affiliate Commission Record endpoint
+-   Add Get Affiliate Commission Record endpoint
 
 ## **2023-06-13**
 
-- Add query all listenKey endpoint
+-   Add query all listenKey endpoint
 
 ## **2023-05-21**
 
-- Add Download Historical Market Data
+-   Add Download Historical Market Data
 
 ## **2023-03-16**
 
-- Add:Query User Universal Transfer History (by tranId) endpoint
-- ws spot@private.deals.v3.api channel add
-  params:"commission","commissionAsset"and"deals amount"
+-   Add:Query User Universal Transfer History (by tranId) endpoint
+    
+-   ws spot@private.deals.v3.api channel add params:"commission","commissionAsset"and"deals amount"
+    
 
 ## **2023-03-12**
 
-- Add:API default symbol,User API default symbol,cancel withdraw,Deposit Address
-  endpoints.
+-   Add:API default symbol,User API default symbol,cancel withdraw,Deposit Address endpoints.
 
 ## **2023-03-07**
 
-- ws add channel:Account Update
+-   ws add channel:Account Update
 
 ## **2023-02-13**
 
-- Add:Get Assets That Can Be Converted Into MX,Dust Transfer,Dust Log endpoints
+-   Add:Get Assets That Can Be Converted Into MX,Dust Transfer,Dust Log endpoints
 
 ## **2023-02-07**
 
-- ws add channel:Individual Symbol Book Ticker Streams
+-   ws add channel:Individual Symbol Book Ticker Streams
 
 ## **2023-01-06**
 
-- [Update Limits Info](https://mexcdevelop.github.io/apidocs/spot_v3_en/#limits)
+-   [Update Limits Info](https://mexcdevelop.github.io/apidocs/spot_v3_en/#limits)
 
 ## **2022-12-29**
 
-- [ETF](https://mexcdevelop.github.io/apidocs/spot_v3_en/#etf) remove some
-  response params:
+-   [ETF](https://mexcdevelop.github.io/apidocs/spot_v3_en/#etf) remove some response params:
 
-| Name        | type   | Description |
-| ----------- | ------ | ----------- |
-| preBasket   | string | preBasket   |
+| Name | type | Description |
+| --- | --- | --- |
+| preBasket | string | preBasket |
 | preLeverage | string | preLeverage |
 
 ## **2022-12-28**
 
-- websocket add Partial Book Depth Streams
+-   websocket add Partial Book Depth Streams
 
 ## **2022-12-13**
 
-- Add params: avgPrice,cumulativeQuantity,cumulativeAmount for
-  `spot@private.orders.v3.api` channel
-- Add Query ReferCode Endpoint
+-   Add params: avgPrice,cumulativeQuantity,cumulativeAmount for `spot@private.orders.v3.api` channel
+-   Add Query ReferCode Endpoint
 
 ## **2022-11-24**
 
-- Add MEXC Broker Introduction
-- Add "Enable MX Deduct" and "Query MX Deduct Status" Endpoints
+-   Add MEXC Broker Introduction
+-   Add "Enable MX Deduct" and "Query MX Deduct Status" Endpoints
 
 ## **2022-10-14**
 
-- Update Endpoints
-  [Wallet Endpoints](https://mexcdevelop.github.io/apidocs/spot_v3_en/#wallet-endpoints):
+-   Update Endpoints [Wallet Endpoints](https://mexcdevelop.github.io/apidocs/spot_v3_en/#wallet-endpoints):
 
-1.[Withdraw](https://mexcdevelop.github.io/apidocs/spot_v3_en/#withdraw): When
-do a withdraw, `address` and `memo` should be passed separate (The previous
-version the memo is joined with a ":" after address).
+1.[Withdraw](https://mexcdevelop.github.io/apidocs/spot_v3_en/#withdraw): When do a withdraw, `address` and `memo` should be passed separate (The previous version the memo is joined with a ":" after address).
 
-2.[Withdraw History](https://mexcdevelop.github.io/apidocs/spot_v3_en/#withdraw-history-supporting-network):
-Parameters `address` and `memo` should be returned separate (The previous
-version the memo is joined with a ":" after address).
+2.[Withdraw History](https://mexcdevelop.github.io/apidocs/spot_v3_en/#withdraw-history-supporting-network): Parameters `address` and `memo` should be returned separate (The previous version the memo is joined with a ":" after address).
 
-3.[Deposit Address](https://mexcdevelop.github.io/apidocs/spot_v3_en/#deposit-history-supporting-network):
-The return parameter `tag` is changed to `memo`, and the memo required for
-deposite is returned in the `memo` parameter.
+3.[Deposit Address](https://mexcdevelop.github.io/apidocs/spot_v3_en/#deposit-history-supporting-network): The return parameter `tag` is changed to `memo`, and the memo required for deposite is returned in the `memo` parameter.
 
-4.[Deposit History](https://mexcdevelop.github.io/apidocs/spot_v3_en/#deposit-history-supporting-network):
-The return parameter `addressTag` is changed to `memo`, and the memo required
-for deposite is returned in the `memo` parameter.
+4.[Deposit History](https://mexcdevelop.github.io/apidocs/spot_v3_en/#deposit-history-supporting-network): The return parameter `addressTag` is changed to `memo`, and the memo required for deposite is returned in the `memo` parameter.
 
-5.Add
-[Generate deposit address](https://mexcdevelop.github.io/apidocs/spot_v3_en/#withdraw-history-supporting-network)
+5.Add [Generate deposit address](https://mexcdevelop.github.io/apidocs/spot_v3_en/#withdraw-history-supporting-network)
 
-6.[Query the currency information](https://mexcdevelop.github.io/apidocs/spot_v3_en/#query-the-currency-information):
-add `withdrawTips` and `depositTips` params。
+6.[Query the currency information](https://mexcdevelop.github.io/apidocs/spot_v3_en/#query-the-currency-information): add `withdrawTips` and `depositTips` params。
 
 ## **2022-09-06**
 
-- Add
-  [Rebate Endpoints](https://mexcdevelop.github.io/apidocs/spot_v3_en/#rebate-endpoints):
+-   Add [Rebate Endpoints](https://mexcdevelop.github.io/apidocs/spot_v3_en/#rebate-endpoints):
 
-1.[Get Rebate History Records](https://mexcdevelop.github.io/apidocs/spot_v3_en/#get-rebate-history-records):Get
-the rebates from friends you invited and the transactions they make.
+1.[Get Rebate History Records](https://mexcdevelop.github.io/apidocs/spot_v3_en/#get-rebate-history-records):Get the rebates from friends you invited and the transactions they make.
 
-2.[Get Rebate Records Detail](https://mexcdevelop.github.io/apidocs/spot_v3_en/#get-rebate-records-detail):You
-can query the records of each rebate generated by contracts and spot
-(non-leveraged) transactions made by your friends and their sub-accounts.
+2.[Get Rebate Records Detail](https://mexcdevelop.github.io/apidocs/spot_v3_en/#get-rebate-records-detail):You can query the records of each rebate generated by contracts and spot (non-leveraged) transactions made by your friends and their sub-accounts.
 
-3.[Get Self Rebate Records Detail](https://mexcdevelop.github.io/apidocs/spot_v3_en/#get-self-rebate-records-detail):You
-can query the each contract and spot (no margin) your invited friend made as the
-self-commission record generated from it.
+3.[Get Self Rebate Records Detail](https://mexcdevelop.github.io/apidocs/spot_v3_en/#get-self-rebate-records-detail):You can query the each contract and spot (no margin) your invited friend made as the self-commission record generated from it.
 
 ## **2022-09-02**
 
-- Add v3 websocket:
+-   Add v3 websocket:
 
-1.Websocket Market
-Streams:[Trade Streams](https://mexcdevelop.github.io/apidocs/spot_v3_en/#trade-streams),[Kline Streams](https://mexcdevelop.github.io/apidocs/spot_v3_en/#kline-streams),[Diff.Depth Stream](https://mexcdevelop.github.io/apidocs/spot_v3_en/#diff-depth-stream);
+1.Websocket Market Streams:[Trade Streams](https://mexcdevelop.github.io/apidocs/spot_v3_en/#trade-streams),[Kline Streams](https://mexcdevelop.github.io/apidocs/spot_v3_en/#kline-streams),[Diff.Depth Stream](https://mexcdevelop.github.io/apidocs/spot_v3_en/#diff-depth-stream);
 
-2.Websocket User Data
-Streams:[Account Deals](https://mexcdevelop.github.io/apidocs/spot_v3_en/#account-deals),[Account Orders](https://mexcdevelop.github.io/apidocs/spot_v3_en/#account-orders).
+2.Websocket User Data Streams:[Account Deals](https://mexcdevelop.github.io/apidocs/spot_v3_en/#account-deals),[Account Orders](https://mexcdevelop.github.io/apidocs/spot_v3_en/#account-orders).
 
 ## **2022-08-26**
 
-- [ETF](https://mexcdevelop.github.io/apidocs/spot_v3_en/#etf) add some response
-  params:
+-   [ETF](https://mexcdevelop.github.io/apidocs/spot_v3_en/#etf) add some response params:
 
-| Name        | type   | Description |
-| ----------- | ------ | ----------- |
-| preBasket   | string | preBasket   |
+| Name | type | Description |
+| --- | --- | --- |
+| preBasket | string | preBasket |
 | preLeverage | string | preLeverage |
-| basket      | string | basket      |
+| basket | string | basket |
 
 ## **2022-08-15**
 
-- Update for Sub-account endpoints:
+-   Update for Sub-account endpoints:
 
 1.[Universal Transfer](https://mexcdevelop.github.io/apidocs/spot_v3_en/#universal-transfer-for-master-account)
 
@@ -192,8 +167,7 @@ Streams:[Account Deals](https://mexcdevelop.github.io/apidocs/spot_v3_en/#accoun
 
 ## **2022-08-03**
 
-- Add
-  [Wallet Endpoints](https://mexcdevelop.github.io/apidocs/spot_v3_en/#wallet-endpoints):
+-   Add [Wallet Endpoints](https://mexcdevelop.github.io/apidocs/spot_v3_en/#wallet-endpoints):
 
 1.[Query the currency information](https://mexcdevelop.github.io/apidocs/spot_v3_en/#query-the-currency-information)
 
@@ -211,53 +185,43 @@ Streams:[Account Deals](https://mexcdevelop.github.io/apidocs/spot_v3_en/#accoun
 
 ## **2022-07-27**
 
-- Spot [New Order](https://mexcdevelop.github.io/apidocs/spot_v3_en/#new-order)
-  Order type add: IOC and FOK
+-   Spot [New Order](https://mexcdevelop.github.io/apidocs/spot_v3_en/#new-order) Order type add: IOC and FOK
 
 ## **2022-07-15**
 
-- [Account Trade List](https://mexcdevelop.github.io/apidocs/spot_v3_en/#account-trade-list)
-  add params: isSelfTrade
+-   [Account Trade List](https://mexcdevelop.github.io/apidocs/spot_v3_en/#account-trade-list) add params: isSelfTrade
 
-| Name        | Description |
-| ----------- | ----------- |
+| Name | Description |
+| --- | --- |
 | isSelfTrade | isSelfTrade |
 
 ## **2022-07-08**
 
-- Add
-  [Batch Orders](https://mexcdevelop.github.io/apidocs/spot_v3_en/#batch-orders)
-  Supports 20 orders in a batch,rate limit: 2 times/s.
+-   Add [Batch Orders](https://mexcdevelop.github.io/apidocs/spot_v3_en/#batch-orders) Supports 20 orders in a batch,rate limit: 2 times/s.
 
 ## **2022-07-03**
 
-- Add
-  [Query the currency information](https://mexcdevelop.github.io/apidocs/spot_v3_en/#query-the-currency-information),Query
-  currency details and the smart contract address.
+-   Add [Query the currency information](https://mexcdevelop.github.io/apidocs/spot_v3_en/#query-the-currency-information),Query currency details and the smart contract address.
 
 ## **2022-05-22**
 
-- Optimize exchangeInfo Endpoints
-- Optimize order Endpoints,add parameter: order id
+-   Optimize exchangeInfo Endpoints
+-   Optimize order Endpoints,add parameter: order id
 
 ## **2022-04-25**
 
-- [Exchange Info](https://mexcdevelop.github.io/apidocs/spot_v3_en/#exchange-information)
-  add parameters:
+-   [Exchange Info](https://mexcdevelop.github.io/apidocs/spot_v3_en/#exchange-information) add parameters:
 
-| Name                   | type    | Description            |
-| ---------------------- | ------- | ---------------------- |
-| isSpotTradingAllowed   | Boolean | isSpotTradingAllowed   |
+| Name | type | Description |
+| --- | --- | --- |
+| isSpotTradingAllowed | Boolean | isSpotTradingAllowed |
 | isMarginTradingAllowed | Boolean | isMarginTradingAllowed |
 
-- [Current Open Orders](https://mexcdevelop.github.io/apidocs/spot_v3_en/#current-open-orders)
-  Optimize: Get all open orders on multiple symbols,maximun support 5 symbols
-  for one request.
+-   [Current Open Orders](https://mexcdevelop.github.io/apidocs/spot_v3_en/#current-open-orders) Optimize: Get all open orders on multiple symbols,maximun support 5 symbols for one request.
 
 ## **2022-03-29**
 
-- Add
-  [Sub-Account Endpoints](https://mexcdevelop.github.io/apidocs/spot_v3_en/#sub-account-endpoints):
+-   Add [Sub-Account Endpoints](https://mexcdevelop.github.io/apidocs/spot_v3_en/#sub-account-endpoints):
 
 1.[Create a Sub-account](https://mexcdevelop.github.io/apidocs/spot_v3_en/#create-a-sub-account-for-master-account)
 
@@ -275,30 +239,29 @@ Streams:[Account Deals](https://mexcdevelop.github.io/apidocs/spot_v3_en/#accoun
 
 ## **2022-03-25**
 
-- Add
-  [Postman collection](https://mexcdevelop.github.io/apidocs/spot_v3_en/#api-library)
+-   Add [Postman collection](https://mexcdevelop.github.io/apidocs/spot_v3_en/#api-library)
 
 ## **2022-03-24**
 
-- Add information of market order
+-   Add information of market order
 
 ## **2022-03-21**
 
-- Add order status
+-   Add order status
 
 ## **2022-03-18**
 
-- Add new [Order Type](#order_type): Market
-- Add time page info: startTime and endTime need to the same time
+-   Add new [Order Type](#order_type): Market
+-   Add time page info: startTime and endTime need to the same time
 
 ## **2022-03-09**
 
-- Add [kline interval](#kline_interval)
+-   Add [kline interval](#kline_interval)
 
 ## **2022-02-19**
 
-- Add [ETF](https://mexcdevelop.github.io/apidocs/spot_v3_en/#etf)
+-   Add [ETF](https://mexcdevelop.github.io/apidocs/spot_v3_en/#etf)
 
 ## **2022-02-11**
 
-- New version API
+-   New version API

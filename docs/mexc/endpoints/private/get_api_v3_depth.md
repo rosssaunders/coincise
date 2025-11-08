@@ -14,24 +14,24 @@
 }
 ```
 
-- **GET** `/api/v3/depth`
+-   **GET** `/api/v3/depth`
 
 **Weight(IP):** 1
 
 Parameter:
 
-| Name   | Type    | Mandatory | Description    | Scope                 |
-| ------ | ------- | --------- | -------------- | --------------------- |
-| symbol | string  | YES       | Symbol         |                       |
-| limit  | integer | NO        | Returen number | default 100; max 5000 |
+| Name | Type | Mandatory | Description | Scope |
+| --- | --- | --- | --- | --- |
+| symbol | string | YES | Symbol |  |
+| limit | integer | NO | Returen number | default 100; max 5000 |
 
 Response:
 
-| Name         | Type | Description              |
-| ------------ | ---- | ------------------------ |
-| lastUpdateId | long | Last Update Id           |
-| bids         | list | Bid \[Price, Quantity \] |
-| asks         | list | Ask \[Price, Quantity \] |
+| Name | Type | Description |
+| --- | --- | --- |
+| lastUpdateId | long | Last Update Id |
+| bids | list | Bid \[Price, Quantity \] |
+| asks | list | Ask \[Price, Quantity \] |
 
 ---
 

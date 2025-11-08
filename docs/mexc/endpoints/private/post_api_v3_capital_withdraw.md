@@ -14,35 +14,35 @@ post /api/v3/capital/withdraw?coin=EOS&address=zzqqqqqqqqqq&amount=10&network=EO
 }
 ```
 
-- **POST** `/api/v3/capital/withdraw`
+-   **POST** `/api/v3/capital/withdraw`  
+    
 
-**Permission:** SPOT_WITHDRAW_WRITE
+**Permission:** SPOT\_WITHDRAW\_WRITE
 
 **Weight(IP):** 1
 
 Parameters:
 
-| Name            | Type   | Mandatory | Description                                                    |
-| --------------- | ------ | --------- | -------------------------------------------------------------- |
-| coin            | string | YES       | coin                                                           |
-| withdrawOrderId | string | NO        | withdrawOrderId                                                |
-| netWork         | string | NO        | withdraw network                                               |
-| contractAddress | string | NO        | coin contract address                                          |
-| address         | string | YES       | withdraw address                                               |
-| memo            | string | NO        | memo(If memo is required in the address, it must be passed in) |
-| amount          | string | YES       | withdraw amount                                                |
-| remark          | string | NO        | remark                                                         |
-| timestamp       | string | YES       | timestamp                                                      |
-| signature       | string | YES       | signature                                                      |
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| coin | string | YES | coin |
+| withdrawOrderId | string | NO | withdrawOrderId |
+| netWork | string | NO | withdraw network |
+| contractAddress | string | NO | coin contract address |
+| address | string | YES | withdraw address |
+| memo | string | NO | memo(If memo is required in the address, it must be passed in) |
+| amount | string | YES | withdraw amount |
+| remark | string | NO | remark |
+| timestamp | string | YES | timestamp |
+| signature | string | YES | signature |
 
-Can get `netWork` via endpoints `Get /api/v3/capital/config/getall`'s response
-params `networkList`.
+Can get `netWork` via endpoints `Get /api/v3/capital/config/getall`'s response params `networkList`.
 
 Response:
 
 | Name | Description |
-| ---- | ----------- |
-| id   | withdraw ID |
+| --- | --- |
+| id | withdraw ID |
 
 ---
 

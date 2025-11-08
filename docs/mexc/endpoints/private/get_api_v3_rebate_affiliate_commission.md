@@ -55,43 +55,42 @@ get /api/v3/rebate/affiliate/commission?timestamp={{timestamp}}&signature={{sign
 
 **HTTP Request**
 
-- **GET** `/api/v3/rebate/affiliate/commission`
+-   **GET** `/api/v3/rebate/affiliate/commission`  
+    
 
-**Permission:** SPOT_ACCOUNT_READ
+**Permission:** SPOT\_ACCOUNT\_READ
 
 **Weight(IP):** 1
 
 **Request**
 
-| Name       | Type   | Mandatory | Description          |
-| ---------- | ------ | --------- | -------------------- |
-| startTime  | long   | No        | startTime            |
-| endTime    | long   | No        | endTime              |
-| inviteCode | string | No        | invite Code          |
-| page       | int    | No        | page                 |
-| pageSize   | int    | No        | pageSize，default:10 |
-| timestamp  | long   | Yes       | timestamp            |
-| signature  | string | Yes       | signature            |
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| startTime | long | No | startTime |
+| endTime | long | No | endTime |
+| inviteCode | string | No | invite Code |
+| page | int | No | page |
+| pageSize | int | No | pageSize，default:10 |
+| timestamp | long | Yes | timestamp |
+| signature | string | Yes | signature |
 
 **Response**
 
-| Name             | Type   | Description              |
-| ---------------- | ------ | ------------------------ |
-| uid              | string | user uid                 |
-| account          | string | account                  |
-| inviteCode       | string | inviteCode               |
-| inviteTime       | long   | inviteTime               |
-| spot             | string | spot commission(usdt)    |
-| etf              | string | ETF commission(usdt)     |
-| futures          | string | futures commission(usdt) |
-| total            | string | total commission(usdt)   |
-| deposit          | string | deposit amount(usdt)     |
-| firstDepositTime | string | first Deposit Time       |
+| Name | Type | Description |
+| --- | --- | --- |
+| uid | string | user uid |
+| account | string | account |
+| inviteCode | string | inviteCode |
+| inviteTime | long | inviteTime |
+| spot | string | spot commission(usdt) |
+| etf | string | ETF commission(usdt) |
+| futures | string | futures commission(usdt) |
+| total | string | total commission(usdt) |
+| deposit | string | deposit amount(usdt) |
+| firstDepositTime | string | first Deposit Time |
 
-If startTime and endTime are not sent, default return the data of the last six
-months .
+If startTime and endTime are not sent, default return the data of the last six months .
 
 ---
 
-**Source:**
-https://mexcdevelop.github.io/apidocs/spot_v3_en#get-affiliate-commission-record-affiliate-only
+**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#get-affiliate-commission-record-affiliate-only

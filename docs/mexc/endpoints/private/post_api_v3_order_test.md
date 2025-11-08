@@ -6,9 +6,10 @@
 {}
 ```
 
-- **POST** `/api/v3/order/test`
+-   **POST** `/api/v3/order/test`  
+    
 
-**Permission:** SPOT_DEAL_WRITE
+**Permission:** SPOT\_DEAL\_WRITE
 
 **Weight(IP):** 1
 
