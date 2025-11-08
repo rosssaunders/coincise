@@ -10,9 +10,9 @@ get /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{signa
 
 ```
   {
-    "page": 1,  
-    "totalRecords": 1,  
-    "totalPageNum": 1,  
+    "page": 1,
+    "totalRecords": 1,
+    "totalPageNum": 1,
     "data": [
              {
       "tranId":"11945860693",
@@ -39,42 +39,43 @@ get /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{signa
 
 ```
 
--   **GET** `/api/v3/capital/transfer/internal`  
-    
+- **GET** `/api/v3/capital/transfer/internal`
 
-**Permission:** SPOT\_WITHDRAW\_READ
+**Permission:** SPOT_WITHDRAW_READ
 
 **Weight(IP):** 1
 
 **Parameters**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| startTime | long | No |  |
-| endTime | long | No |  |
-| page | int | No | default 1 |
-| limit | int | No | default 10 |
-| tranId | string | No | tranid |
-| timestamp | string | Yes | timestamp |
-| signature | string | Yes | signature |
+| Name      | Type   | Mandatory | Description |
+| --------- | ------ | --------- | ----------- |
+| startTime | long   | No        |             |
+| endTime   | long   | No        |             |
+| page      | int    | No        | default 1   |
+| limit     | int    | No        | default 10  |
+| tranId    | string | No        | tranid      |
+| timestamp | string | Yes       | timestamp   |
+| signature | string | Yes       | signature   |
 
-If startTime and endTime are not provided, will default to returning data from the last 7 days.
+If startTime and endTime are not provided, will default to returning data from
+the last 7 days.
 
 **Response**
 
-| Name | Description |
-| --- | --- |
-| page | page |
-| totalRecords | totalRecords |
-| totalPage | totalPage |
-| tranId | tranId |
-| asset | asset |
-| amount | amount |
-| fromAccountType | fromAccountType |
-| toAccountType | toAccountType |
-| status | status:"SUCCESS","FAILED","WAIT" |
-| timestamp | timestamp |
+| Name            | Description                      |
+| --------------- | -------------------------------- |
+| page            | page                             |
+| totalRecords    | totalRecords                     |
+| totalPage       | totalPage                        |
+| tranId          | tranId                           |
+| asset           | asset                            |
+| amount          | amount                           |
+| fromAccountType | fromAccountType                  |
+| toAccountType   | toAccountType                    |
+| status          | status:"SUCCESS","FAILED","WAIT" |
+| timestamp       | timestamp                        |
 
 ---
 
-**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#query-internal-transfer-history
+**Source:**
+https://mexcdevelop.github.io/apidocs/spot_v3_en#query-internal-transfer-history

@@ -45,48 +45,48 @@ get /api/v3/rebate/affiliate/referral?timestamp={{timestamp}}&signature={{signat
 
 **HTTP Request**
 
--   **GET** `/api/v3/rebate/affiliate/referral`  
-    
+- **GET** `/api/v3/rebate/affiliate/referral`
 
-**Permission:** SPOT\_ACCOUNT\_READ
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
 **Request**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| startTime | long | No | startTime |
-| endTime | long | No | endTime |
-| uid | string | No | uid |
-| inviteCode | string | No | invite code |
-| page | int | No | page |
-| pageSize | int | No | pageSize,default: 10 |
-| timestamp | long | Yes | timestamp |
-| signature | string | Yes | signature |
+| Name       | Type   | Mandatory | Description          |
+| ---------- | ------ | --------- | -------------------- |
+| startTime  | long   | No        | startTime            |
+| endTime    | long   | No        | endTime              |
+| uid        | string | No        | uid                  |
+| inviteCode | string | No        | invite code          |
+| page       | int    | No        | page                 |
+| pageSize   | int    | No        | pageSize,default: 10 |
+| timestamp  | long   | Yes       | timestamp            |
+| signature  | string | Yes       | signature            |
 
 **Response**
 
-| Name | Type | Description |
-| --- | --- | --- |
-| uid | int | uid |
-| account | string | account email |
-| inviteCode | string | invite code |
-| inviteTime | long | invite time |
-| nickName | string | nickName |
-| firstDeposit | long | first deposit date |
-| firstTrade | long | first trade date |
-| lastDeposit | long | last deposit date |
-| lastTrade | long | last trade date |
-| depositAmount | string | deposit amount(USDT) |
-| tradingAmount | string | trading amount(USDT) |
-| amount | string | commission amount(USDT) |
-| asset | string | 0 USDT、1-1,000 USDT、1,000 - 10,000 USDT、 10,000 - 50,000 USDT、50,000 - 100,000 USDT、 100,000 - 500,000 USDT、500,000 - 1,000,000 USDT、 1,000,000 - 5,000,000 USDT、>5,000,000 USDT |
-| withdrawalAmount | string | withdrawal amount(USDT) |
-| identification | int | identification,1: Uncertified, 2: primary, 3: Advanced, 4: Institutional |
+| Name             | Type   | Description                                                                                                                                                                              |
+| ---------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| uid              | int    | uid                                                                                                                                                                                      |
+| account          | string | account email                                                                                                                                                                            |
+| inviteCode       | string | invite code                                                                                                                                                                              |
+| inviteTime       | long   | invite time                                                                                                                                                                              |
+| nickName         | string | nickName                                                                                                                                                                                 |
+| firstDeposit     | long   | first deposit date                                                                                                                                                                       |
+| firstTrade       | long   | first trade date                                                                                                                                                                         |
+| lastDeposit      | long   | last deposit date                                                                                                                                                                        |
+| lastTrade        | long   | last trade date                                                                                                                                                                          |
+| depositAmount    | string | deposit amount(USDT)                                                                                                                                                                     |
+| tradingAmount    | string | trading amount(USDT)                                                                                                                                                                     |
+| amount           | string | commission amount(USDT)                                                                                                                                                                  |
+| asset            | string | 0 USDT、1-1,000 USDT、1,000 - 10,000 USDT、 10,000 - 50,000 USDT、50,000 - 100,000 USDT、 100,000 - 500,000 USDT、500,000 - 1,000,000 USDT、 1,000,000 - 5,000,000 USDT、>5,000,000 USDT |
+| withdrawalAmount | string | withdrawal amount(USDT)                                                                                                                                                                  |
+| identification   | int    | identification,1: Uncertified, 2: primary, 3: Advanced, 4: Institutional                                                                                                                 |
 
 If startTime and endTime are not sent, the data from T-7 to T is returned.
 
 ---
 
-**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#get-affiliate-referral-data-affiliate-only
+**Source:**
+https://mexcdevelop.github.io/apidocs/spot_v3_en#get-affiliate-referral-data-affiliate-only

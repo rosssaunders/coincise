@@ -22,29 +22,29 @@ get api/v3/tradeFee?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature}
 
 **HTTP请求**
 
--   **GET** `api/v3/tradeFee`  
-    
+- **GET** `api/v3/tradeFee`
 
-**Permission:** SPOT\_ACCOUNT\_READ
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 20
 
 **request**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | string | yes | symbol |
-| recvWindow | long | no | recvWindow |
-| timestamp | long | yes | timestamp |
-| signature | string | yes | signature |
+| Name       | Type   | Mandatory | Description |
+| ---------- | ------ | --------- | ----------- |
+| symbol     | string | yes       | symbol      |
+| recvWindow | long   | no        | recvWindow  |
+| timestamp  | long   | yes       | timestamp   |
+| signature  | string | yes       | signature   |
 
 **return**
 
-| Name | Type | Description |
-| --- | --- | --- |
+| Name            | Type | Description           |
+| --------------- | ---- | --------------------- |
 | makerCommission | long | User Maker Commission |
 | takerCommission | long | User Taker Commission |
 
 ---
 
-**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#query-symbol-commission
+**Source:**
+https://mexcdevelop.github.io/apidocs/spot_v3_en#query-symbol-commission
