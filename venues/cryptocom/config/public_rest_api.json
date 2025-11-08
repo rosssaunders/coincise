@@ -1,9 +1,0 @@
-{
-  "sections": [
-    "Introduction",
-    "Common API Reference",
-    "Reference and Market Data API"
-  ],
-  "outputFilename": "public_rest_api.md",
-  "baseUrl": "https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#introduction"
-}
