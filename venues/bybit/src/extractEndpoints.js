@@ -69,22 +69,29 @@ const getAllEndpoints = () => {
     fs.readFileSync(path.join(configDir, "private_rest.json"), "utf8")
   )
 
+  // Filter out non-endpoint documentation pages
+  const nonEndpointPages = ["rate-limit", "enum", "error"]
+
   // Add public endpoints
   publicRest.endpoints.forEach(endpoint => {
-    endpoints.push({
-      endpoint,
-      url: `${BASE_URL}/${endpoint}`,
-      category: "public"
-    })
+    if (!nonEndpointPages.includes(endpoint)) {
+      endpoints.push({
+        endpoint,
+        url: `${BASE_URL}/${endpoint}`,
+        category: "public"
+      })
+    }
   })
 
   // Add private endpoints
   privateRest.endpoints.forEach(endpoint => {
-    endpoints.push({
-      endpoint,
-      url: `${BASE_URL}/${endpoint}`,
-      category: "private"
-    })
+    if (!nonEndpointPages.includes(endpoint)) {
+      endpoints.push({
+        endpoint,
+        url: `${BASE_URL}/${endpoint}`,
+        category: "private"
+      })
+    }
   })
 
   return endpoints

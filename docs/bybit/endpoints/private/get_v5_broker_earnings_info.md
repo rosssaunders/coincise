@@ -1,0 +1,123 @@
+# GET /v5/broker/earnings-info
+
+**Source:**
+[Get Earning](https://bybit-exchange.github.io/docs/v5/broker/exchange-earning)
+
+## Authentication
+
+Required (Private Endpoint)
+
+- [](/docs/)
+- Exchange Broker
+- Get Earning
+
+On this page
+
+# Get Earning
+
+info
+
+- Use exchange broker master account to query
+- The data can support up to past 1 months until T-1. To extract data from over
+  a month ago, please contact your Relationship Manager
+- `begin` & `end` are either entered at the same time or not entered, and latest
+  7 days data are returned by default
+
+> API rate limit: 10 req / sec
+
+### HTTP Request[​](#http-request "Direct link to heading")
+
+GET `/v5/broker/earnings-info`
+
+### Request Parameters[​](#request-parameters "Direct link to heading")
+
+| Parameter | Required | Type   | Comments                                                                                                       |
+| :-------- | :------- | :----- | -------------------------------------------------------------------------------------------------------------- |
+| bizType   | false    | string | Business type. `SPOT`, `DERIVATIVES`, `OPTIONS`, `CONVERT`                                                     |
+| begin     | false    | string | Begin date, in the format of YYYYMMDD, e.g, 20231201, search the data from 1st Dec 2023 00:00:00 UTC (include) |
+| end       | false    | string | End date, in the format of YYYYMMDD, e.g, 20231201, search the data before 2nd Dec 2023 00:00:00 UTC (exclude) |
+| uid       | false    | string |
+
+- To get results for a specific subaccount: Enter the subaccount UID
+- To get results for all subaccounts: Leave the field empty
+
+| | limit | false | integer | Limit for data size per page. \[`1`, `1000`\].
+Default: `1000` | | cursor | false | string | Cursor. Use the `nextPageCursor`
+token from the response to retrieve the next page of the result set |
+
+### Response Parameters[​](#response-parameters "Direct link to heading")
+
+| Parameter         | Type   | Comments                                                                             |
+| :---------------- | :----- | ------------------------------------------------------------------------------------ |
+| totalEarningCat   | Object | Category statistics for total earning data                                           |
+| \> spot           | array  | Object. Earning for Spot trading. If do not have any rebate, keep empty array        |
+| \>> coin          | string | Rebate coin name                                                                     |
+| \>> earning       | string | Rebate amount of the coin                                                            |
+| \> derivatives    | array  | Object. Earning for Derivatives trading. If do not have any rebate, keep empty array |
+| \>> coin          | string | Rebate coin name                                                                     |
+| \>> earning       | string | Rebate amount of the coin                                                            |
+| \> options        | array  | Object. Earning for Option trading. If do not have any rebate, keep empty array      |
+| \>> coin          | string | Rebate coin name                                                                     |
+| \>> earning       | string | Rebate amount of the coin                                                            |
+| \> convert        | array  | Object. Earning for Convert trading. If do not have any rebate, keep empty array     |
+| \>> coin          | string | Rebate coin name                                                                     |
+| \>> earning       | string | Rebate amount of the coin                                                            |
+| \> total          | array  | Object. Sum earnings of all categories. If do not have any rebate, keep empty array  |
+| \>> coin          | string | Rebate coin name                                                                     |
+| \>> earning       | string | Rebate amount of the coin                                                            |
+| details           | array  | Object. Detailed trading information for each sub UID and each category              |
+| \> userId         | string | Sub UID                                                                              |
+| \> bizType        | string | Business type. `SPOT`, `DERIVATIVES`, `OPTIONS`, `CONVERT`                           |
+| \> symbol         | string | Symbol name                                                                          |
+| \> coin           | string | Rebate coin name                                                                     |
+| \> earning        | string | Rebate amount                                                                        |
+| \> markupEarning  | string | Earning generated from markup fee rate                                               |
+| \> baseFeeEarning | string | Earning generated from base fee rate                                                 |
+| \> orderId        | string | Order ID                                                                             |
+| \> execId         | string | Trade ID                                                                             |
+| \> execTime       | string | Order execution timestamp (ms)                                                       |
+| nextPageCursor    | string | Refer to the `cursor` request parameter                                              |
+
+### Request Example[​](#request-example "Direct link to heading")
+
+- HTTP
+- Python
+- Node.js
+
+```
+GET /v5/broker/earnings-info?begin=20231129&end=20231129&uid=117894077 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1701399431920X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: 32d2aa1bc205ddfb89849b85e2a8b7e23b1f8f69fe95d6f2cb9c87562f9086a6Content-Type: application/json
+```
+
+```
+
+```
+
+```
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getExchangeBrokerEarnings({    bizType: 'SPOT',    begin: '20231201',    end: '20231207',    limit: 1000,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+```
+
+### Response Example[​](#response-example "Direct link to heading")
+
+```
+{    "retCode": 0,    "retMsg": "success",    "result": {        "totalEarningCat": {            "spot": [],            "derivatives": [                {                    "coin": "USDT",                    "earning": "0.00027844"                }            ],            "options": [],            "total": [                {                    "coin": "USDT",                    "earning": "0.00027844"                }            ]        },        "details": [            {                "userId": "117894077",                "bizType": "DERIVATIVES",                "symbol": "DOGEUSDT",                "coin": "USDT",                "earning": "0.00016166",                "markupEarning": "0.000032332",                "baseFeeEarning": "0.000129328",                "orderId": "ec2132f2-a7e0-4a0c-9219-9f3cbcd8e878",                "execId": "c8f418a0-2ccc-594f-ae72-effedf24d0c4",                "execTime": "1701275846033"            },            {                "userId": "117894077",                "bizType": "DERIVATIVES",                "symbol": "TRXUSDT",                "coin": "USDT",                "earning": "0.00011678",                "markupEarning": "0.000023356",                "baseFeeEarning": "0.000093424",                "orderId": "28b29c2b-ba14-450e-9ce7-3cee0c1fa6da",                "execId": "632c7705-7f3a-5350-b69c-d41a8b3d0697",                "execTime": "1701245285017"            }        ],        "nextPageCursor": ""    },    "retExtInfo": {},    "time": 1701398193964}
+```
+
+[
+
+Previous
+
+Bind Or Unbind UID
+
+](/docs/v5/otc/bind-uid)[
+
+Next
+
+Get Account Info
+
+](/docs/v5/broker/account-info)
+
+- [HTTP Request](#http-request)
+- [Request Parameters](#request-parameters)
+- [Response Parameters](#response-parameters)
+- [Request Example](#request-example)
+- [Response Example](#response-example)
