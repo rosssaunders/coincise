@@ -1,19 +1,28 @@
 {
-  "name": "bybit-api-doc-generator",
-  "version": "1.0.0",
-  "description": "Bybit API Documentation Generator",
+  "name": "@coincise/bybit",
+  "version": "2.0.0",
+  "description": "Documentation extraction for Bybit V5 API",
   "type": "module",
-  "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "extract:general": "node src/extractGeneral.js",
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "npm run extract:general && npm run extract:endpoints"
   },
+  "keywords": [
+    "bybit",
+    "cryptocurrency",
+    "exchange",
+    "api",
+    "documentation"
+  ],
+  "author": "Coincise",
+  "license": "MIT",
   "dependencies": {
     "puppeteer": "^24.22.0",
     "turndown": "^7.2.1",
-    "turndown-plugin-gfm": "^1.0.2",
-    "jsdom": "27.0.0"
+    "turndown-plugin-gfm": "^1.0.2"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=20.0.0"
   }
 }
