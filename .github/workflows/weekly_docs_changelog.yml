@@ -2,28 +2,39 @@ name: Weekly Docs Changelog
 
 on:
   schedule:
-    - cron: "0 0 * * 0" # Every Sunday at midnight
+    - cron: '0 0 * * 0' # weekly on Sunday 00:00 UTC
   workflow_dispatch:
 
+# Grant the GITHUB_TOKEN the minimum permissions needed to push & create PRs
 permissions:
-  contents: write
+  contents: write        # allow pushing commits/branches
+  pull-requests: write   # allow creating/updating pull requests
 
 jobs:
-  changelog:
+  update-changelog:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # allow the job to use the workflow token for pushing
+          persist-credentials: true
+          fetch-depth: 0
 
-      - name: "Get docs: commits from past week"
-        id: get_commits
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate docs changelog
+        # Generate changelog from git commits with "docs:" prefix
         run: |
-          git fetch --prune --unshallow || true
           since=$(date -d '7 days ago' --iso-8601)
           git log --since="$since" --pretty=format:'%H|%s|%an|%ad' --date=short | grep '^.*|docs:' > docs_commits.txt || true
-
-      - name: Generate markdown changelog
-        run: |
+          
           echo "# Docs Changelog (Past Week)" > docs-changelog.md
           echo "" >> docs-changelog.md
           while IFS='|' read -r hash subject author date; do
@@ -36,29 +47,45 @@ jobs:
             git show --stat --oneline $hash >> docs-changelog.md
             echo '```' >> docs-changelog.md
             echo "" >> docs-changelog.md
-          done < docs_commits.txt
+          done < docs_commits.txt || true
+        id: generate
 
-      - name: Commit changelog to branch
+      - name: Create branch and commit changes (if any)
+        id: commit
         run: |
-          BRANCH="docs-changelog/update-$(date +'%Y-%m-%d')"
-          echo "DOCS_CHANGELOG_BRANCH=$BRANCH" >> "$GITHUB_ENV"
-          git checkout -b "$BRANCH" || git checkout "$BRANCH"
+          set -eo pipefail
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs-changelog.md
-          git diff --cached --quiet || git commit -m "chore: update docs changelog"
-          git push --force-with-lease --set-upstream origin "$BRANCH"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
+          BRANCH="docs-changelog/update-${{ github.run_id }}"
+          git checkout -b "$BRANCH"
+
+          # Only commit if there are changes
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "chore: update docs changelog"
+            # Push branch so create-pull-request (below) can operate
+            git push --set-upstream origin "$BRANCH"
+            echo "changed=true" > $GITHUB_OUTPUT
+            echo "branch=$BRANCH" > $GITHUB_OUTPUT
+          else
+            echo "changed=false" > $GITHUB_OUTPUT
+            echo "branch=$BRANCH" > $GITHUB_OUTPUT
+          fi
+        shell: bash
+
+      - name: Create or update pull request (draft)
+        if: steps.commit.outputs.changed == 'true'
+        uses: actions/create-pull-request@v5
         with:
-          commit-message: "chore: update docs changelog"
-          branch: ${{ env.DOCS_CHANGELOG_BRANCH }}
-          title: "Weekly Docs Changelog Update"
-          body: |
-            This PR updates the docs changelog with all `docs:` commits from the past week.
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore: update docs changelog'
+          title: 'Update docs changelog'
+          body: 'Automated changelog update'
+          branch: ${{ steps.commit.outputs.branch }}
+          base: main
+          draft: true
 
-            ## Included Commits
-            $(awk -F '|' '{print "- ["$2"](https://github.com/${{ github.repository }}/commit/"$1") by "$3" on "$4}' docs_commits.txt)
-          labels: documentation, automated-pr
-          reviewers: "@rosssaunders"
+      - name: No changes - exit
+        if: steps.commit.outputs.changed == 'false'
+        run: echo "No documentation changes detected; nothing to do."
