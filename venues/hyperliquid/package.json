@@ -1,0 +1,24 @@
+{
+  "name": "@coincise/hyperliquid",
+  "version": "1.0.0",
+  "description": "Documentation extraction for Hyperliquid Exchange API",
+  "type": "module",
+  "scripts": {
+    "extract:general": "node src/extractGeneral.js",
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "npm run extract:general && npm run extract:endpoints"
+  },
+  "keywords": [
+    "hyperliquid",
+    "cryptocurrency",
+    "exchange",
+    "api",
+    "documentation"
+  ],
+  "author": "Coincise",
+  "license": "MIT",
+  "dependencies": {
+    "turndown": "^7.1.2",
+    "turndown-plugin-gfm": "^1.0.2"
+  }
+}
