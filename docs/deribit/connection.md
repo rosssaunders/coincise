@@ -24,8 +24,8 @@ accommodating different trading volumes.
 #### **Credit-Based System**
 
 Each API request consumes a certain number of credits. The refill rate and
-maximum credit pool for your account depend on your trading activity and tier.
-**If a request arrives when no credits remain, we immediately send a**
+maximum credit pool for your sub-account depend on your trading activity and
+tier. **If a request arrives when no credits remain, we immediately send a**
 `too_many_requests` **(**`code 10028`**) or similar error and terminate the
 session.** After a disconnect, you must wait for credits to replenish and then
 re-establish a new connection before sending additional requests.
@@ -35,9 +35,15 @@ Key elements of this system include:
 #### **Credit Refill**
 
 Credits are **replenished continuously at a fixed rate**, depending on your
-account’s tier. This refill acts like a **leaky bucket**: each second, a certain
-number of credits “drip” back into your account’s credit pool. You can think of
-this as a “credits per second” (CPS) refill rate.
+sub-account’s tier. This refill acts like a **leaky bucket**: each second, a
+certain number of credits “drip” back into your sub-account’s credit pool. You
+can think of this as a “credits per second” (CPS) refill rate.
+
+### Note
+
+Rate limits are applied
+**[per sub-account](/hc/en-us/articles/25944616386973#UUID-038b9516-2490-c84d-c77a-c8e627bd7b18 "Subaccounts")**.
+Each sub-account has its own independent rate limit.
 
 - **Example**: If your refill rate is 20 credits/second, and each request costs
   1 credit, you can sustainably send 20 requests per second without depleting
@@ -124,21 +130,22 @@ Users can check their current rate limits via the
 [**/private/get_account_summary**](https://docs.deribit.com/#private-get_account_summary)
 method.
 
-<table><tbody><tr><td><p><span class="bold"><strong>Tier Level</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>7-Day Trading Volume</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>Sustained Rate Limit (Requests/Second)</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>Burst Rate Limit</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>Description</strong></span>&nbsp;</p></td></tr><tr><td><p><span class="bold"><strong>Tier 1</strong></span>&nbsp;</p></td><td><p>Over USD 25 million</p></td><td><p>30 requests/second</p></td><td><p>100 requests (burst)</p></td><td><p>Suitable for high-volume traders, allowing up to 100 requests in a rapid burst or a steady rate of 30 requests per second.</p></td></tr><tr><td><p><span class="bold"><strong>Tier 2</strong></span>&nbsp;</p></td><td><p>Over USD 5 million</p></td><td><p>20 requests/second</p></td><td><p>50 requests (burst)</p></td><td><p>Designed for medium-volume traders, permitting up to 50 requests in a burst or 20 requests per second.</p></td></tr><tr><td><p><span class="bold"><strong>Tier 3</strong></span>&nbsp;</p></td><td><p>Over USD 1 million</p></td><td><p>10 requests/second</p></td><td><p>30 requests (burst)</p></td><td><p>Appropriate for active traders, enabling up to 30 requests in a burst or 10 requests per second.</p></td></tr><tr><td><p><span class="bold"><strong>Tier 4</strong></span>&nbsp;</p></td><td><p>Up to USD 1 million</p></td><td><p>5 requests/second</p></td><td><p>20 requests (burst)</p></td><td><p>For regular traders, allowing up to 20 requests in a burst or a steady rate of 5 requests per second.</p></td></tr></tbody></table>
+<table style="mask-image: none;"><tbody><tr><td><p><span class="bold"><strong>Tier Level</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>7-Day Trading Volume</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>Sustained Rate Limit (Requests/Second)</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>Burst Rate Limit</strong></span>&nbsp;</p></td><td><p><span class="bold"><strong>Description</strong></span>&nbsp;</p></td></tr><tr><td><p><span class="bold"><strong>Tier 1</strong></span>&nbsp;</p></td><td><p>Over USD 25 million</p></td><td><p>30 requests/second</p></td><td><p>100 requests (burst)</p></td><td><p>Suitable for high-volume traders, allowing up to 100 requests in a rapid burst or a steady rate of 30 requests per second.</p></td></tr><tr><td><p><span class="bold"><strong>Tier 2</strong></span>&nbsp;</p></td><td><p>Over USD 5 million</p></td><td><p>20 requests/second</p></td><td><p>50 requests (burst)</p></td><td><p>Designed for medium-volume traders, permitting up to 50 requests in a burst or 20 requests per second.</p></td></tr><tr><td><p><span class="bold"><strong>Tier 3</strong></span>&nbsp;</p></td><td><p>Over USD 1 million</p></td><td><p>10 requests/second</p></td><td><p>30 requests (burst)</p></td><td><p>Appropriate for active traders, enabling up to 30 requests in a burst or 10 requests per second.</p></td></tr><tr><td><p><span class="bold"><strong>Tier 4</strong></span>&nbsp;</p></td><td><p>Up to USD 1 million</p></td><td><p>5 requests/second</p></td><td><p>20 requests (burst)</p></td><td><p>For regular traders, allowing up to 20 requests in a burst or a steady rate of 5 requests per second.</p></td></tr></tbody></table>
 
 ### Important
 
 #### **Public Access Limitations**
 
 Public, **non-authorized** API requests are rate-limited on a **per-IP
-basis**—they do not draw from the account-level credit pool. If an IP exceeds
-its public request allowance, subsequent calls may be **temporarily rejected**
-or the connection **disconnected** to protect platform stability.
+basis**—they do not draw from the sub-account-level credit pool. If an IP
+exceeds its public request allowance, subsequent calls may be **temporarily
+rejected** or the connection **disconnected** to protect platform stability.
 
 Whenever possible, use **authorized requests tied to your API key**.
 Authenticated traffic benefits from:
 
-- **Higher and more transparent limits** that scale with your account’s tier.
+- **Higher and more transparent limits** that scale with your sub-account’s
+  tier.
 - **Client-ID visibility**, letting us distinguish heavy legitimate usage from
   abusive traffic—so rather than an immediate block, we can apply graduated
   safeguards if your limit is exceeded.
@@ -149,7 +156,7 @@ sustained or high-frequency access.
 ### Important
 
 Production and
-[Testnet environment](/hc/en-us/articles/#UUID-fff4d97c-2873-59b1-b9d0-df2e24468be3 "Register at Testnet Deribit")
+[Testnet environment](/document/preview/12390#UUID-f5f86659-ba8b-6f75-5208-2f751bee1531)
 operate **on separate, independently-tracked rate-limit pools**. **Limits are
 not shared** between environments—exceeding Testnet limits will not affect your
 Production credits, and vice-versa.

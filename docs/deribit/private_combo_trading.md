@@ -25,7 +25,7 @@ Retrieves information about a combo
 | &nbsp;&nbsp;›&nbsp;&nbsp;legs                                     | array of <em>object</em> |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;amount          | integer                  | Size multiplier of a leg. A negative value indicates that the trades on given leg are in opposite direction to the combo trades they originate from |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;instrument_name | string                   | Unique instrument identifier                                                                                                                        |
-| &nbsp;&nbsp;›&nbsp;&nbsp;state                                    | string                   | Combo state: <code>"rfq"</code>, <code>"active"</code>, "<code>inactive</code>"                                                                     |
+| &nbsp;&nbsp;›&nbsp;&nbsp;state                                    | string                   | Combo state: <code>"active"</code>, "<code>inactive</code>"                                                                                         |
 | &nbsp;&nbsp;›&nbsp;&nbsp;state_timestamp                          | integer                  | The timestamp (milliseconds since the Unix epoch)                                                                                                   |
 
 ## /public/get_combo_ids
@@ -38,7 +38,7 @@ combos, or only the list of combos in the given state.
 | Parameter | Required | Type   | Enum                                                                                                | Description                                                      |
 | --------- | -------- | ------ | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
 | currency  | true     | string | <code>BTC</code><br><code>ETH</code><br><code>USDC</code><br><code>USDT</code><br><code>EURR</code> | The currency symbol                                              |
-| state     | false    | string | <code>rfq</code><br><code>active</code><br><code>inactive</code>                                    | Combo state, if not provided combos of all states are considered |
+| state     | false    | string | <code>active</code><br><code>inactive</code>                                                        | Combo state, if not provided combos of all states are considered |
 
 ### Response
 
@@ -71,7 +71,7 @@ Retrieves information about active combos
 | &nbsp;&nbsp;›&nbsp;&nbsp;legs                                     | array of <em>object</em> |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;amount          | integer                  | Size multiplier of a leg. A negative value indicates that the trades on given leg are in opposite direction to the combo trades they originate from |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;instrument_name | string                   | Unique instrument identifier                                                                                                                        |
-| &nbsp;&nbsp;›&nbsp;&nbsp;state                                    | string                   | Combo state: <code>"rfq"</code>, <code>"active"</code>, "<code>inactive</code>"                                                                     |
+| &nbsp;&nbsp;›&nbsp;&nbsp;state                                    | string                   | Combo state: <code>"active"</code>, "<code>inactive</code>"                                                                                         |
 | &nbsp;&nbsp;›&nbsp;&nbsp;state_timestamp                          | integer                  | The timestamp (milliseconds since the Unix epoch)                                                                                                   |
 
 ## /private/create_combo
@@ -107,7 +107,7 @@ This is a matching engine method.
 | &nbsp;&nbsp;›&nbsp;&nbsp;legs                                     | array of <em>object</em> |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;amount          | integer                  | Size multiplier of a leg. A negative value indicates that the trades on given leg are in opposite direction to the combo trades they originate from |
 | &nbsp;&nbsp;›&nbsp;&nbsp;&nbsp;&nbsp;›&nbsp;&nbsp;instrument_name | string                   | Unique instrument identifier                                                                                                                        |
-| &nbsp;&nbsp;›&nbsp;&nbsp;state                                    | string                   | Combo state: <code>"rfq"</code>, <code>"active"</code>, "<code>inactive</code>"                                                                     |
+| &nbsp;&nbsp;›&nbsp;&nbsp;state                                    | string                   | Combo state: <code>"active"</code>, "<code>inactive</code>"                                                                                         |
 | &nbsp;&nbsp;›&nbsp;&nbsp;state_timestamp                          | integer                  | The timestamp (milliseconds since the Unix epoch)                                                                                                   |
 
 ## /private/get_leg_prices
