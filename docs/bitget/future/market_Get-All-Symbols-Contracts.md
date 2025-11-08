@@ -1,0 +1,72 @@
+# Get Contract Config
+
+Rate Limit: 20 req/sec/IP
+
+### Description[​](#description "Direct link to Description")
+
+Interface is used to get future contract details.
+
+### HTTP Request[​](#http-request "Direct link to HTTP Request")
+
+*   GET /api/v2/mix/market/contracts
+
+Request Example
+
+```
+curl "https://api.bitget.com/api/v2/mix/market/contracts?productType=usdt-futures&symbol=BTCUSDT"
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| symbol | String | No | Trading pair, based on the symbolName, i.e. BTCUSDT 
+| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures 
+
+Response Example
+
+```
+{    "code": "00000",    "msg": "success",    "requestTime": 1695793701269,    "data": [        {            "symbol": "BTCUSDT",            "baseCoin": "BTC",            "quoteCoin": "USDT",            "buyLimitPriceRatio": "0.9",            "sellLimitPriceRatio": "0.9",            "feeRateUpRatio": "0.1",            "makerFeeRate": "0.0004",            "takerFeeRate": "0.0006",            "openCostUpRatio": "0.1",            "supportMarginCoins": [                "USDT"            ],            "minTradeNum": "0.01",            "priceEndStep": "1",            "volumePlace": "2",            "pricePlace": "1",            "sizeMultiplier": "0.01",            "symbolType": "perpetual",            "minTradeUSDT": "5",            "maxSymbolOrderNum": "999999",            "maxProductOrderNum": "999999",            "maxPositionNum": "150",            "symbolStatus": "normal",            "offTime": "-1",            "limitOpenTime": "-1",            "deliveryTime": "",            "deliveryStartTime": "",            "launchTime": "",            "fundInterval": "8",            "minLever": "1",            "maxLever": "125",            "posLimit": "0.05",            "maintainTime": "1680165535278",            "maxMarketOrderQty": "220",            "maxOrderQty": "1200"        }    ]}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| &gt; symbol | String | Product name 
+| &gt; baseCoin | String | Base currency<br>Specifically refers to ETH as in ETHUSDT 
+| &gt; quoteCoin | String | Quote currency<br>Specifically refers to USDT as in ETHUSDT 
+| &gt; buyLimitPriceRatio | String | Ratio of bid price to limit price 
+| &gt; sellLimitPriceRatio | String | Ratio of ask price to limit price 
+| &gt; feeRateUpRatio | String | Transaction fee increase ratio 
+| &gt; makerFeeRate | String | Maker rate 
+| &gt; takerFeeRate | String | Taker rate 
+| &gt; openCostUpRatio | String | Opening cost increase ratio 
+| &gt; &gt;supportMarginCoins | List&lt;String&gt; | Supported margin coins 
+| &gt; minTradeNum | String | Minimum opening amount (base currency) 
+| &gt; priceEndStep | String | price step length 
+| &gt; volumePlace | String | Decimal places of the quantity 
+| &gt; pricePlace | String | Decimal places of the price 
+| &gt; sizeMultiplier | String | Quantity multiplier, the quantity of the order must be greater than minTradeNum and is a multiple of sizeMulti. 
+| &gt; symbolType | String | Futures types: perpetual; delivery 
+| &gt; minTradeUSDT | String | Minimum USDT transaction amount 
+| &gt; maxSymbolOrderNum | String | Maximum number of orders held-symbol dimension 
+| &gt; maxProductOrderNum | String | Maximum number of held orders-product type dimension 
+| &gt; maxPositionNum | String | Maximum number of positions held 
+| &gt; symbolStatus | String | Trading pair status<br><code>listed</code> Listing symbol<br><code>normal</code> trade normal<br><code>maintain</code> can't open/close position<br><code>limit_open</code>: can't place orders(can close position)<br><code>restrictedAPI</code>:can't place orders with API<br><code>off</code>: offline 
+| &gt; offTime | String | Removal time, '-1' means normal 
+| &gt; limitOpenTime | String | Time to open positions, '-1' means normal; other values indicate that the symbol is under maintenance or to be maintained and trading is prohibited after the specified time. 
+| &gt; deliveryTime | String | Delivery time 
+| &gt; deliveryStartTime | String | Delivery start time 
+| &gt; deliveryPeriod | String | Delivery period<br><code>this_quarter</code> current quarter<br><code>next_quarter</code> second quarter 
+| &gt; launchTime | String | Listing time 
+| &gt; fundInterval | String | Funding fee settlement cycle, hourly/every 8 hours 
+| &gt; minLever | String | minimum leverage 
+| &gt; maxLever | String | Maximum leverage 
+| &gt; posLimit | String | Position limits 
+| &gt; maintainTime | String | Maintenance time (there will be a value when the status is under maintenance/upcoming maintenance) 
+| &gt; maxMarketOrderQty | String | Maximum order quantity for a single market order<br>This refers to the maximum allowed quantity when placing an order using the base coin 
+| &gt; maxOrderQty | String | Maximum order quantity for a single limit order<br>This refers to the maximum allowed quantity when placing an order using the base coin 
+| &gt; openTime | String | This field has been deprecated
+
+> **Source:** https://www.bitget.com/api-doc/contract/market/Get-All-Symbols-Contracts

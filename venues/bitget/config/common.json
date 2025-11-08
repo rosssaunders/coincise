@@ -1,6 +1,5 @@
 {
   "title": "Bitget Common API Documentation",
-  "output_file": "common_api.md",
   "base_url": "https://www.bitget.com/api-doc",
   "urls": [
     "/common/intro",
@@ -54,5 +53,6 @@
     "/common/bgb-convert/Get-BGB-Convert-Coins",
     "/common/bgb-convert/",
     "/common/bgb-convert/Get-BGB-Convert-Record"
-  ]
+  ],
+  "output_dir": "../../docs/bitget/common"
 }

@@ -1,6 +1,5 @@
 {
   "title": "Bitget Spot API Documentation",
-  "output_file": "spot_api.md",
   "base_url": "https://www.bitget.com/api-doc",
   "urls": [
     "/spot/intro",
@@ -61,5 +60,6 @@
     "/spot/websocket/private/Account-Channel",
     "/spot/error-code/restapi",
     "/spot/error-code/websocket"
-  ]
+  ],
+  "output_dir": "../../docs/bitget/spot"
 }

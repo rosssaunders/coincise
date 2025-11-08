@@ -1,225 +1,240 @@
-import * as fs from "fs"
-import puppeteer from "puppeteer"
-import * as cheerio from "cheerio"
-import path from "path"
-import TurndownService from "turndown"
-import { gfm, tables } from "turndown-plugin-gfm"
-import { argv } from "process"
-import process from "process"
-import { formatMarkdown } from "../../shared/format-markdown.js"
-import { JSDOM } from "jsdom"
+'use strict';
+
+import * as fs from 'fs';
+import { existsSync, mkdirSync, writeFileSync } from 'fs';
+import puppeteer from 'puppeteer';
+import * as cheerio from 'cheerio';
+import path, { join, dirname } from 'path';
+import TurndownService from 'turndown';
+import { gfm, tables } from 'turndown-plugin-gfm';
+import { argv } from 'process';
+import process from 'process';
 
 // Add delay between requests
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Initialize Turndown service with GFM plugin
 const turndownService = new TurndownService({
-  headingStyle: "atx",
-  codeBlockStyle: "fenced"
-})
-turndownService.use(gfm)
-turndownService.use(tables)
+  headingStyle: 'atx',
+  codeBlockStyle: 'fenced',
+});
+turndownService.use(gfm);
+turndownService.use(tables);
 
 // Add a custom rule to handle <td> elements and preserve <br> tags
-turndownService.addRule("tableCellWithBr", {
-  filter: "td",
+turndownService.addRule('tableCellWithBr', {
+  filter: 'td',
   replacement: function (content, node) {
-    const cellContent = node.innerHTML.replace(/<br\s*\/?>/gi, "<br>")
-    return `| ${cellContent} `
-  }
-})
+    const cellContent = node.innerHTML.replace(/<br\s*\/?>/gi, '<br>');
+    return `| ${cellContent} `;
+  },
+});
 
 // Retry function with exponential backoff
 async function retryWithBackoff(fn, maxRetries = 3, initialDelay = 5000) {
-  let lastError
+  let lastError;
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
-      return await fn()
+      return await fn();
     } catch (error) {
-      lastError = error
+      lastError = error;
       if (attempt === maxRetries) {
-        throw error
+        throw error;
       }
 
-      const delayTime = initialDelay * Math.pow(2, attempt - 1)
+      const delayTime = initialDelay * Math.pow(2, attempt - 1);
       console.log(
         `Attempt ${attempt} failed. Retrying in ${delayTime / 1000} seconds...`
-      )
-      await delay(delayTime)
+      );
+      await delay(delayTime);
     }
   }
 
-  throw lastError
+  throw lastError;
 }
 
-async function processPage(page, fullUrl) {
-  // Navigate to the page and wait for content to load
-  await page.goto(fullUrl, {
-    waitUntil: "networkidle0",
-    timeout: 30000
-  })
+async function scrapePageContent(browser, url) {
+  return retryWithBackoff(
+    async () => {
+      const page = await browser.newPage();
 
-  // Get the page content
-  const content = await page.content()
-  const $ = cheerio.load(content)
+      try {
+        // Set a standard user agent to avoid blocking
+        await page.setUserAgent(
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        );
 
-  // Extract the markdown content div
-  const markdownDiv = $(".theme-doc-markdown.markdown").first()
+        console.log(`Navigating to: ${url}`);
 
-  if (markdownDiv.length === 0) {
-    console.log(`No markdown content found for ${fullUrl}`)
-    return null
-  }
+        await page.goto(url, {
+          waitUntil: 'networkidle2',
+          timeout: 30000,
+        });
 
-  // Get the outer HTML of the markdown content
-  const outerHtml = markdownDiv.html()
+        // Wait for content to load
+        await page.waitForSelector('body', { timeout: 15000 });
 
-  return outerHtml
-}
+        // Extract the main content
+        const content = await page.evaluate(() => {
+          // Try to find the main documentation content
+          const selectors = [
+            '.theme-doc-markdown.markdown',
+            'main',
+            '.content',
+            '.documentation',
+            '.doc-content',
+            '.main-content',
+            '#content',
+            'article',
+            '.article-content',
+            'body',
+          ];
 
-function dropHeadingsOneLevel(html) {
-  const dom = new JSDOM(html)
-  const { document } = dom.window
-  for (let i = 5; i >= 1; i--) {
-    const oldHeading = `h${i}`
-    const newHeading = `h${i + 1}`
-    document.querySelectorAll(oldHeading).forEach(node => {
-      const newNode = document.createElement(newHeading)
-      newNode.innerHTML = node.innerHTML
-      // Copy attributes if any
-      for (const attr of node.attributes) {
-        newNode.setAttribute(attr.name, attr.value)
-      }
-      node.replaceWith(newNode)
-    })
-  }
-  return document.body.innerHTML
-}
+          for (const selector of selectors) {
+            const element = document.querySelector(selector);
+            if (element && element.innerHTML.trim()) {
+              return element.innerHTML;
+            }
+          }
 
-async function convertToMarkdown(configPath) {
-  let browser
-  try {
-    // Read the config file
-    const config = JSON.parse(await fs.promises.readFile(configPath, "utf8"))
+          // Fallback to body if nothing else found
+          return document.body.innerHTML;
+        });
 
-    const outputDir = "../../docs/bitget"
-
-    // Create output directory if it doesn't exist
-    await fs.promises.mkdir(outputDir, { recursive: true })
-
-    // Initialize markdown content with a header
-    let markdownContent = `# ${config.title}\n\n`
-
-    // Launch browser once for all requests
-    browser = await puppeteer.launch({
-      headless: "new",
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-        "--disable-gpu",
-        "--single-process",
-        "--no-first-run",
-        "--no-zygote",
-        "--disable-extensions",
-        "--disable-component-extensions-with-background-pages",
-        "--disable-background-timer-throttling",
-        "--disable-backgrounding-occluded-windows",
-        "--disable-web-security",
-        "--disable-features=IsolateOrigins,site-per-process",
-        "--password-store=basic"
-      ],
-      timeout: 30000, // Browser launch timeout
-      ignoreHTTPSErrors: true
-    })
-
-    // Process each link
-    for (const relativePath of config.urls) {
-      if (!relativePath || typeof relativePath !== "string") {
-        continue
-      }
-
-      // Construct the full URL
-      const fullUrl = `${config.base_url}${relativePath}`
-
-      console.log(`Processing: ${fullUrl}`)
-
-      // Add delay between requests
-      await delay(1000)
-
-      // Create a new page for each request
-      const page = await browser.newPage()
-
-      // Set viewport, timeout, and request interception
-      await page.setViewport({ width: 1920, height: 1080 })
-      page.setDefaultTimeout(30000) // For operations like waitForSelector, evaluate
-
-      await page.setRequestInterception(true)
-      page.on("request", req => {
-        const resourceType = req.resourceType()
-        if (["document", "script", "xhr", "fetch"].includes(resourceType)) {
-          req.continue()
-        } else {
-          req.abort()
+        if (!content || content.trim() === '') {
+          throw new Error(`No content found on ${url}`);
         }
-      })
 
-      // Set user agent
-      await page.setUserAgent(
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-      )
-
-      // Process the page with retry logic
-      let sectionHTMLContent = await retryWithBackoff(
-        () => processPage(page, fullUrl),
-        3, // max retries
-        5000 // initial delay in ms
-      )
-
-      sectionHTMLContent = dropHeadingsOneLevel(sectionHTMLContent)
-
-      // Convert to markdown using Turndown with the HTML string
-      const sectionMDContent = turndownService.turndown(sectionHTMLContent)
-
-      if (sectionMDContent) {
-        // Add a newline before each section to ensure proper separation
-        markdownContent += "\n\n" + sectionMDContent
-        markdownContent += `\n\n> **Source:** [original URL](${fullUrl})\n\n---\n\n`
+        console.log(`Successfully scraped content from: ${url}`);
+        return content;
+      } finally {
+        await page.close();
       }
+    },
+    3,
+    5000
+  );
+}
 
-      // Close the page after processing
-      await page.close()
+/**
+ * Generate filename from URL path
+ * @param {string} urlPath - URL path like "/common/intro"
+ * @returns {string} - Filename like "intro.md"
+ */
+function urlToFilename(urlPath) {
+  // Remove leading/trailing slashes and split
+  const parts = urlPath.replace(/^\/+|\/+$/g, '').split('/');
+  // Remove the first part (e.g., "common", "spot", "future") and use the rest
+  const nameParts = parts.slice(1);
+  if (nameParts.length === 0) {
+    return parts[0].replace(/\//g, '_') + '.md';
+  }
+  return nameParts.join('_').replace(/\//g, '_') + '.md';
+}
+
+async function processConfig(configFile) {
+  console.log(`Processing config file: ${configFile}`);
+  const configPath = path.resolve(configFile);
+  if (!fs.existsSync(configPath)) {
+    console.error(`Config file not found: ${configPath}`);
+    process.exit(1);
+  }
+  const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  console.log(`Starting Bitget documentation extraction for: ${config.title}`);
+  console.log(`Number of URLs to process: ${config.urls.length}`);
+
+  const browser = await puppeteer.launch({
+    headless: 'new',
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--single-process',
+      '--no-first-run',
+      '--no-zygote',
+      '--disable-extensions',
+    ],
+  });
+
+  let processedUrls = 0;
+
+  // Ensure output directory exists
+  const outputDir = config.output_dir;
+  if (!existsSync(outputDir)) {
+    mkdirSync(outputDir, { recursive: true });
+    console.info(`Created output directory: ${outputDir}`);
+  }
+
+  try {
+    // Process each URL separately and create individual markdown files
+    for (const urlPath of config.urls) {
+      const fullUrl = `${config.base_url}${urlPath}`;
+      try {
+        console.log(`\nProcessing: ${fullUrl}`);
+        const html = await scrapePageContent(browser, fullUrl);
+
+        // Extract the main content and convert to markdown
+        const $ = cheerio.load(html);
+        
+        // Get the first H1 as the title
+        const h1 = $('h1').first();
+        const title = h1.text().trim() || urlPath.split('/').pop();
+        
+        // Remove 'Copy Success' and 'Copy to Clipboard' text
+        let cleanHtml = html.replace(/(Copy Success|Copy to Clipboard)/gi, '');
+        
+        // Convert to markdown
+        let markdown = turndownService.turndown(cleanHtml);
+        
+        // Ensure the document starts with an H1 if it doesn't have one
+        if (!markdown.startsWith('# ')) {
+          markdown = `# ${title}\n\n${markdown}`;
+        }
+        
+        // Add source URL at the end
+        markdown += `\n\n> **Source:** ${fullUrl}\n`;
+
+        // Generate filename from URL
+        const fileName = urlToFilename(urlPath);
+        const filePath = join(outputDir, fileName);
+
+        // Write file
+        writeFileSync(filePath, markdown, 'utf8');
+        console.info(`✓ Wrote: ${filePath}`);
+        
+        processedUrls++;
+        await delay(2000);
+      } catch (error) {
+        console.error(`✗ Error scraping ${fullUrl}:`, error.message);
+      }
     }
-
-    // Save the markdown content
-    const outputPath = path.join(outputDir, config.output_file)
-    await fs.promises.writeFile(outputPath, markdownContent) // Changed to use fs.promises.writeFile
-    console.log(`Markdown file has been created successfully at ${outputPath}!`)
-
-    // Format the markdown file
-    await formatMarkdown(outputPath)
-    console.log(`Formatted: ${outputPath}`)
   } finally {
-    // Close the browser
-    if (browser) {
-      await browser.close()
-    }
+    await browser.close();
+  }
+
+  console.log(`\n${'='.repeat(60)}`);
+  console.log(`Extraction completed!`);
+  console.log(`Processed URLs: ${processedUrls}/${config.urls.length}`);
+  console.log(`Output directory: ${outputDir}`);
+  console.log(`${'='.repeat(60)}`);
+  return outputDir;
+}
+
+// Main execution
+async function main() {
+  const configFile = argv[2] || 'config/spot.json';
+
+  try {
+    await processConfig(configFile);
+  } catch (error) {
+    console.error('Extraction failed:', error);
+    console.error('Stack trace:', error.stack);
+    process.exit(1);
   }
 }
 
-// Check if config file path is provided
-if (argv.length < 3) {
-  console.error("Please provide the path to the links config file")
-  console.error("Usage: node index.js <path_to_links_file>")
-  process.exit(1)
-}
-
-// Only run main() if this is the main module
 if (import.meta.url === `file://${process.argv[1]}`) {
-  convertToMarkdown(argv[2]).catch(error => {
-    console.error("Unhandled error in main:", error)
-    console.error("Stack trace:", error.stack)
-    process.exit(1)
-  })
+  main();
 }

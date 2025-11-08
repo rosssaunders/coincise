@@ -1,0 +1,87 @@
+# Trigger Order Channel
+
+### Description[​](#description "Direct link to Description")
+
+Subscribe trigger order channel
+
+Data will be pushed when the trigger plans are opened,cancelled,modified,triggered.
+
+Request Example
+
+```
+{    "op": "subscribe",    "args": [        {            "instType": "USDT-FUTURES",            "channel": "orders-algo",            "instId": "default"        }    ]}
+```
+
+### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
+
+| Parameter | Type | Required | Description |
+| :-- | :-- | :-- | :-- |
+| op | String | Yes | Operation, subscribe unsubscribe 
+| args | List&lt;Object&gt; | Yes | List of channels to request subscription 
+| &gt; channel | String | Yes | Channel name:<code>orders-algo</code> 
+| &gt; instType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures 
+| &gt; instId | String | No | Trading pair 
+
+Response Example
+
+```
+{    "event": "subscribe",    "arg": {        "instType": "USDT-FUTURES",        "channel": "orders-algo",        "instId": "default"    }}
+```
+
+### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| event | String | Event 
+| arg | Object | Subscribed channels 
+| &gt; channel | String | Channel name: orders-algo 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures 
+| &gt; instId | String | Product ID 
+| code | String | Error code 
+| msg | String | Error message 
+
+Push Data
+
+```
+{    "action": "snapshot",    "arg": {        "instType": "USDT-FUTURES",        "channel": "orders-algo",        "instId": "default"    },    "data": [        {            "instId": "BTCUSDT",            "orderId": "1",            "clientOid": "1",            "triggerPrice": "27000.000000000",            "triggerType": "fill_price",            "triggerTime": "1695719197612",            "planType": "pl",            "price": "27000.000000000",            "executePrice": "27000.000000000",            "size": "0.020000000",            "actualSize": "0.000000000",            "orderType": "market",            "side": "buy",            "tradeSide": "open",            "posSide": "long",            "marginCoin": "USDT",            "status": "live",            "posMode": "hedge_mode",            "enterPointSource": "web",            "stopSurplusTriggerType": "fill_price",            "stopLossTriggerType": "fill_price",            "stpMode": "cancel_taker",            "cTime": "1695719197612",            "uTime": "1695719197612"        }    ],    "ts": 1695719197733}
+```
+
+### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
+
+| Parameter | Type | Description |
+| :-- | :-- | :-- |
+| action | String | Push action 
+| arg | Object | Channels with successful subscription 
+| &gt; channel | String | Channel name: orders-algo 
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures 
+| &gt; instId | String | Product ID<br>delivery contract reference：<a href="https://www.bitget.com/api-doc/common/release-note" target="_blank" rel="noopener noreferrer">https://www.bitget.com/api-doc/common/release-note</a> 
+| data | List&lt;Object&gt; | Subscription data 
+| &gt; instId | String | Product ID<br>delivery contract reference：<a href="https://www.bitget.com/api-doc/common/release-note" target="_blank" rel="noopener noreferrer">https://www.bitget.com/api-doc/common/release-note</a> 
+| &gt; orderId | String | Bot order ID 
+| &gt; clientOid | String | Customized bot order ID 
+| &gt; triggerPrice | String | Trigger price 
+| &gt; triggerType | String | Trigger type<br>fill_price: filled price<br>mark_price: mark price 
+| &gt; triggerTime | String | Trigger time, ms 
+| &gt; planType | String | Websocket trigger order type. Data will be pushed when modify,cancel,open,triggered the plan types below<br><code>pl</code>:Default value, trigger order<br><code>tp</code>:Partial take profit<br><code>sl</code>:Partial stop loss<br><code>ptp</code>:Position take profit<br><code>psl</code>:Position stop loss<br><code>track</code>:Trailing stop<br><code>mtpsl</code>:Trailing TP/SL 
+| &gt; price | String | Order price 
+| &gt; executePrice | String | Execute price 
+| &gt; size | String | Original order amount in coin 
+| &gt; actualSize | String | Actual number of orders in coin 
+| &gt; orderType | String | Order type<br>limit: limit order<br>market 
+| &gt; side | String | Order direction, 
+| &gt; tradeSide | String | Trade Side trading direction 
+| &gt; posSide | String | Position direction; 
+| &gt; marginCoin | String | Margin coin 
+| &gt; status | String | Order status<br><code>live</code>: plan order created<br><code>executed</code>: executed<br><code>fail_execute</code>: execute failed<br><code>cancelled</code>: cancelled<br><code>executing</code>: executing 
+| &gt; posMode | String | Position mode<br><code>one_way_mode</code>: one-way position mode<br><code>hedge_mode</code>: hedge postion mode 
+| &gt; enterPointSource | String | Order source<br>WEB: Orders created on the website<br>API: Orders created on API<br>SYS: System managed orders, usually generated by forced liquidation logic<br>ANDROID: Orders created on the Android app<br>IOS: Orders created on the iOS app 
+| &gt; stopSurplusPrice | String | Preset/Partial/Position position take-profit execution price;<br>1. When planType is pl, it represents the preset take-profit execution price.<br>2. When planType is tp, it represents the partial take-profit execution price.<br>3. When planType is ptp, it represents the position take-profit execution price. 
+| &gt; stopSurplusTriggerPrice | String | Preset/Partial/Position take-profit trigger price;<br>1. When planType is pl, it represents the preset take-profit trigger price.<br>2. When planType is tp, it represents the partial take-profit trigger price.<br>3. When planType is ptp, it represents the position take-profit trigger price.<br>It is empty when there is nothing. 
+| &gt; stopSurplusTriggerType | String | Preset/Partial/Position take-profit trigger type;<br>1. When planType is pl, it represents the preset take-profit trigger type.<br>2. When planType is tp, it represents the partial take-profit trigger type.<br>3. When planType is ptp, it represents the position take-profit trigger type.<br>It is empty when there is nothing. 
+| &gt; stopLossPrice | String | Preset/Partial/Position stop-loss execution price;<br>1. When planType is pl, it represents the preset stop-loss execution price.<br>2. When planType is sl, it represents the partial stop-loss execution price.<br>3. When planType is psl, it represents the position stop-loss execution price.<br>It is empty when there is nothing. 
+| &gt; stopLossTriggerPrice | String | Preset/Partial/Position stop-loss trigger price;<br>1. When planType is pl, it represents the preset stop-loss trigger price.<br>2. When planType is sl, it represents the partial stop-loss trigger price.<br>3. When planType is psl, it represents the position stop-loss trigger price. 
+| &gt; stopLossTriggerType | String | Preset/Partial/Position stop-loss trigger type;<br>1. When planType is pl, it represents the preset stop-loss trigger type.<br>2. When planType is sl, it represents the partial stop-loss trigger type.<br>3. When planType is psl, it represents the position stop-loss trigger type.<br>It is empty when there is nothing. 
+| &gt; uTime | String | Order update time, Milliseconds format of updated data timestamp Unix, e.g. 1597026383085 
+| &gt; stpMode | String | STP Mode<br><code>none</code> not setting STP<br><code>cancel_taker</code> cancel taker order<br><code>cancel_maker</code> cancel maker order<br><code>cancel_both</code> cancel both of taker and maker orders
+
+> **Source:** https://www.bitget.com/api-doc/contract/websocket/private/Plan-Order-Channel
