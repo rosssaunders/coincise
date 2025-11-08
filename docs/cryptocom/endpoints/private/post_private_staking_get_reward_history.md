@@ -1,7 +1,6 @@
 # POST private/staking/get-reward-history
 
-**Source:**
-[private/staking/get-reward-history](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-staking-get-reward-history)
+**Source:** [private/staking/get-reward-history](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-staking-get-reward-history)
 
 ## Authentication
 
@@ -50,16 +49,15 @@ Get stake/unstake request history
 
 ### Request Params
 
-| Name            | Type             | Required | Description                                  |
-| --------------- | ---------------- | -------- | -------------------------------------------- |
-| instrument_name | string           | N        | Staking instrument name, e.g. SOL.staked     |
-| start_time      | number or string | N        | Start time in Unix time format (`inclusive`) |
-
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| instrument\_name | string | N | Staking instrument name, e.g. SOL.staked |
+| start\_time | number or string | N | Start time in Unix time format (`inclusive`)  
 Default: `end_time - 30 days`  
-Min: `end_time - 180 days` | | end_time | number or string | N | End time in
-Unix time format (`inclusive`)  
-Default: current system timestamp | | limit | number or string | N | The maximum
-number of requests returned  
+Min: `end_time - 180 days` |
+| end\_time | number or string | N | End time in Unix time format (`inclusive`)  
+Default: current system timestamp |
+| limit | number or string | N | The maximum number of requests returned  
 Default: 20  
 Max: 500 |
 
@@ -75,11 +73,11 @@ POST
 
 An array, consisting of:
 
-| Name                 | Type   | Description                                         |
-| -------------------- | ------ | --------------------------------------------------- |
-| staking_inst_name    | string | Staking instrument name, e.g. SOL.staked            |
-| underlying_inst_name | string | Underlying instrument name, e.g. SOL                |
-| reward_inst_name     | string | Reward instrument name, e.g. SOL.staked             |
-| reward_quantity      | string | Reward quantity                                     |
-| staked_balance       | string | Staked balance                                      |
-| event_timestamp_ms   | string | Event timestamp in milliseconds in Unix time format |
+| Name | Type | Description |
+| --- | --- | --- |
+| staking\_inst\_name | string | Staking instrument name, e.g. SOL.staked |
+| underlying\_inst\_name | string | Underlying instrument name, e.g. SOL |
+| reward\_inst\_name | string | Reward instrument name, e.g. SOL.staked |
+| reward\_quantity | string | Reward quantity |
+| staked\_balance | string | Staked balance |
+| event\_timestamp\_ms | string | Event timestamp in milliseconds in Unix time format |

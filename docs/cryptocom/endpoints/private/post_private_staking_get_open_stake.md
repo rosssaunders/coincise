@@ -1,7 +1,6 @@
 # POST private/staking/get-open-stake
 
-**Source:**
-[private/staking/get-open-stake](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-staking-get-open-stake)
+**Source:** [private/staking/get-open-stake](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-staking-get-open-stake)
 
 ## Authentication
 
@@ -64,16 +63,15 @@ Get stake/unstake requests that status is not in final state.
 
 ### Request Params
 
-| Name            | Type             | Required | Description                                  |
-| --------------- | ---------------- | -------- | -------------------------------------------- |
-| instrument_name | string           | N        | Staking instrument name, e.g. SOL.staked     |
-| start_time      | number or string | N        | Start time in Unix time format (`inclusive`) |
-
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| instrument\_name | string | N | Staking instrument name, e.g. SOL.staked |
+| start\_time | number or string | N | Start time in Unix time format (`inclusive`)  
 Default: `end_time - 30 days`  
-Min: `end_time - 180 days` | | end_time | number or string | N | End time in
-Unix time format (`inclusive`)  
-Default: current system timestamp | | limit | number or string | N | The maximum
-number of requests returned  
+Min: `end_time - 180 days` |
+| end\_time | number or string | N | End time in Unix time format (`inclusive`)  
+Default: current system timestamp |
+| limit | number or string | N | The maximum number of requests returned  
 Default: 20  
 Max: 500 |
 
@@ -89,27 +87,24 @@ POST
 
 An array, consisting of:
 
-| Name                 | Type   | Description                              |
-| -------------------- | ------ | ---------------------------------------- |
-| instrument_name      | string | Staking instrument name, e.g. SOL.staked |
-| underlying_inst_name | string | Underlying instrument name, e.g. SOL     |
-| cycle_id             | string | Cycle id                                 |
-| staking_id           | string | Request id                               |
-| status               | string | Request status:                          |
-
+| Name | Type | Description |
+| --- | --- | --- |
+| instrument\_name | string | Staking instrument name, e.g. SOL.staked |
+| underlying\_inst\_name | string | Underlying instrument name, e.g. SOL |
+| cycle\_id | string | Cycle id |
+| staking\_id | string | Request id |
+| status | string | Request status:  
 \- `NEW`  
 \- `PENDING`  
 \- `PENDING_WITHDRAWAL`  
 \- `PENDING_UNSTAKING`  
-\- `STAKED` | | account | string | Account id | | quantity | string |
-Stake/unstake quantity
-
-For yield-bearing instruments (learn more from
-[FAQs](https://help.crypto.com/en/articles/6800043-on-chain-staking-guide)),
-this field displays the quantity in terms of the original staked token.
-
+\- `STAKED` |
+| account | string | Account id |
+| quantity | string | Stake/unstake quantity  
+  
+For yield-bearing instruments (learn more from [FAQs](https://help.crypto.com/en/articles/6800043-on-chain-staking-guide)), this field displays the quantity in terms of the original staked token.  
+  
 Example:  
-When unstaking a TSTON.staked position, this field will specify the quantity
-which is pending an unstaking action, denominated in TON. | | side | string |
-Stake or Unstake | | create_timestamp_ms | string | Request creation timestamp
-in milliseconds in Unix time format |
+When unstaking a TSTON.staked position, this field will specify the quantity which is pending an unstaking action, denominated in TON. |
+| side | string | Stake or Unstake |
+| create\_timestamp\_ms | string | Request creation timestamp in milliseconds in Unix time format |

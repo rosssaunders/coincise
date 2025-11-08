@@ -1,7 +1,6 @@
 # POST private/get-currency-networks
 
-**Source:**
-[private/get-currency-networks](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-currency-networks)
+**Source:** [private/get-currency-networks](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-currency-networks)
 
 ## Authentication
 
@@ -83,14 +82,13 @@ Get the symbol network mapping.
 
 ### Request Params
 
-| Name              | Type | Required | Description |
-| ----------------- | ---- | -------- | ----------- |
-| no param required | N/A  |          |             |
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| no param required | N/A |  |  |
 
 **Note**:  
-i. You still need to pass in an empty `params` block like `params: {}` for API
-request consistency  
-ii. It works for master account only, not for sub-accounts.
+i. You still need to pass in an empty `params` block like `params: {}` for API request consistency  
+ii. It works for master account only, not for sub-accounts.  
 
 ### Applies To
 
@@ -104,19 +102,19 @@ POST
 
 An Map of `currency`, consisting of:
 
-| Name            | Type   | Description                                                                                                                     |
-| --------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| full_name       | string | e.g. SHIBA INU                                                                                                                  |
-| default_network | string | If network is not provided in create-withdrawal, it will search for default_network, if there is more than 1 network available. |
-| network_list    | string | A list of networks                                                                                                              |
+| Name | Type | Description |
+| --- | --- | --- |
+| full\_name | string | e.g. SHIBA INU |
+| default\_network | string | If network is not provided in create-withdrawal, it will search for default\_network, if there is more than 1 network available. |
+| network\_list | string | A list of networks |
 
-network_list:
+network\_list:
 
-| Name                  | Type    | Description                                      |
-| --------------------- | ------- | ------------------------------------------------ |
-| network_id            | string  | the network id, can be used in create-withdrawal |
-| withdraw_enabled      | boolean |                                                  |
-| deposit_enabled       | boolean |                                                  |
-| withdrawal_fee        | decimal |                                                  |
-| min_withdrawal_amount | decimal |                                                  |
-| confirmation_required | int     | confirmation blocks count                        |
+| Name | Type | Description |
+| --- | --- | --- |
+| network\_id | string | the network id, can be used in create-withdrawal |
+| withdraw\_enabled | boolean |  |
+| deposit\_enabled | boolean |  |
+| withdrawal\_fee | decimal |  |
+| min\_withdrawal\_amount | decimal |  |
+| confirmation\_required | int | confirmation blocks count |

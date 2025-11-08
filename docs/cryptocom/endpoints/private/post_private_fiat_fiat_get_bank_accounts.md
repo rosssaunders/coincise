@@ -1,7 +1,6 @@
 # POST private/fiat/fiat-get-bank-accounts
 
-**Source:**
-[private/fiat/fiat-get-bank-accounts](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-fiat-fiat-get-bank-accounts)
+**Source:** [private/fiat/fiat-get-bank-accounts](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-fiat-fiat-get-bank-accounts)
 
 ## Authentication
 
@@ -79,76 +78,80 @@ Retrieves user's bank accounts with optional payment network filtering.
 
 ### Request Params
 
-| Field  | Type   | Required | Description                           |
-| ------ | ------ | -------- | ------------------------------------- |
-| id     | string | Y        | Unique request identifier             |
-| method | string | Y        | "private/fiat/fiat-get-bank-accounts" |
-| params | object | N        | Request parameters                    |
-| nonce  | number | Y        | Unix timestamp in milliseconds        |
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| id | string | Y | Unique request identifier |
+| method | string | Y | "private/fiat/fiat-get-bank-accounts" |
+| params | object | N | Request parameters |
+| nonce | number | Y | Unix timestamp in milliseconds |
 
-\***\*params\*\*** consists of:
+  
+****params**** consists of:  
 
-| Field            | Type   | Required | Description                                           |
-| ---------------- | ------ | -------- | ----------------------------------------------------- |
-| payment_networks | string | N        | Comma-separated list of payment networks to filter by |
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| payment\_networks | string | N | Comma-separated list of payment networks to filter by |
 
 ### Response Params
 
-| Field  | Type   | Required | Description                                                |
-| ------ | ------ | -------- | ---------------------------------------------------------- |
-| id     | string | N        | Echo back the request identifier from the original request |
-| method | string | Y        | Method invoked                                             |
-| code   | number | Y        | 0 for success; otherwise, see error details                |
-| msg    | string | N        | Response message                                           |
-| result | object | Y        | See below                                                  |
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| id | string | N | Echo back the request identifier from the original request |
+| method | string | Y | Method invoked |
+| code | number | Y | 0 for success; otherwise, see error details |
+| msg | string | N | Response message |
+| result | object | Y | See below |
 
-\***\*result\*\*** consists of:
+  
+****result**** consists of:  
 
-| Field              | Type                | Required | Description                  |
-| ------------------ | ------------------- | -------- | ---------------------------- |
-| bank_accounts_list | bank accounts array | Y        | List of user's bank accounts |
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| bank\_accounts\_list | bank accounts array | Y | List of user's bank accounts |
 
-\***\*bank_accounts_list\*\*** consists of:
+  
+****bank\_accounts\_list**** consists of:  
 
-| Field                            | Type   | Required | Description                                                                   |
-| -------------------------------- | ------ | -------- | ----------------------------------------------------------------------------- |
-| ok                               | string | N        | Status indicator (null in most cases)                                         |
-| code                             | string | N        | Response code (null in most cases)                                            |
-| message                          | string | N        | Response message (null in most cases)                                         |
-| id                               | string | Y        | Unique bank account ID (use this for withdrawals)                             |
-| account_id                       | string | Y        | Account ID (cannot be used for withdrawal)                                    |
-| user_uuid                        | string | Y        | User UUID                                                                     |
-| status                           | string | Y        | Account status (completed, pending, rejected, etc.)                           |
-| bank_name                        | string | Y        | Bank name                                                                     |
-| bank_city                        | string | N        | Bank city                                                                     |
-| bank_country                     | string | Y        | Bank country code                                                             |
-| bank_identifier_type             | string | Y        | Type of bank identifier (e.g., cubix_account_number_last_4_digits, bic_swift) |
-| bank_identifier_value            | string | Y        | Masked bank identifier value                                                  |
-| bank_account_holder_name         | string | N        | Bank account holder name                                                      |
-| account_identifier_type          | string | Y        | Type of account identifier (e.g., cubix_account_id, iban)                     |
-| account_identifier_value         | string | Y        | Masked account identifier value                                               |
-| account_holder_name              | string | Y        | Account holder name                                                           |
-| account_type                     | string | N        | Account type (null in most cases)                                             |
-| currency                         | string | Y        | Currency code (e.g., USD)                                                     |
-| verified_by                      | string | Y        | Verification method (e.g., Cubix, Deposit)                                    |
-| reason                           | string | N        | Reason or additional information                                              |
-| supported_payment_networks       | array  | Y        | Array of supported payment network identifiers                                |
-| withdrawal_payment_networks      | array  | N        | Array of withdrawal payment networks (null if not applicable)                 |
-| payment_network_identifier_value | string | N        | Payment network identifier value                                              |
-| bank_details                     | object | Y        | Bank details object (see below)                                               |
-| created_at                       | string | Y        | Account creation timestamp                                                    |
-| updated_at                       | string | Y        | Account last update timestamp                                                 |
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| ok | string | N | Status indicator (null in most cases) |
+| code | string | N | Response code (null in most cases) |
+| message | string | N | Response message (null in most cases) |
+| id | string | Y | Unique bank account ID (use this for withdrawals) |
+| account\_id | string | Y | Account ID (cannot be used for withdrawal) |
+| user\_uuid | string | Y | User UUID |
+| status | string | Y | Account status (completed, pending, rejected, etc.) |
+| bank\_name | string | Y | Bank name |
+| bank\_city | string | N | Bank city |
+| bank\_country | string | Y | Bank country code |
+| bank\_identifier\_type | string | Y | Type of bank identifier (e.g., cubix\_account\_number\_last\_4\_digits, bic\_swift) |
+| bank\_identifier\_value | string | Y | Masked bank identifier value |
+| bank\_account\_holder\_name | string | N | Bank account holder name |
+| account\_identifier\_type | string | Y | Type of account identifier (e.g., cubix\_account\_id, iban) |
+| account\_identifier\_value | string | Y | Masked account identifier value |
+| account\_holder\_name | string | Y | Account holder name |
+| account\_type | string | N | Account type (null in most cases) |
+| currency | string | Y | Currency code (e.g., USD) |
+| verified\_by | string | Y | Verification method (e.g., Cubix, Deposit) |
+| reason | string | N | Reason or additional information |
+| supported\_payment\_networks | array | Y | Array of supported payment network identifiers |
+| withdrawal\_payment\_networks | array | N | Array of withdrawal payment networks (null if not applicable) |
+| payment\_network\_identifier\_value | string | N | Payment network identifier value |
+| bank\_details | object | Y | Bank details object (see below) |
+| created\_at | string | Y | Account creation timestamp |
+| updated\_at | string | Y | Account last update timestamp |
 
-\***\*bank_details\*\*** consists of:
+  
+****bank\_details**** consists of:  
 
-| Field                        | Type   | Required | Description                        |
-| ---------------------------- | ------ | -------- | ---------------------------------- |
-| institutional_street_address | string | N        | Institutional street address       |
-| bank_street_address          | string | N        | Bank street address                |
-| account_holder_address       | string | N        | Account holder address             |
-| bank_account_address         | object | N        | Bank account address object        |
-| intermediate_bank            | object | N        | Intermediate bank information      |
-| intermediate_bank_options    | array  | N        | Array of intermediate bank options |
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| institutional\_street\_address | string | N | Institutional street address |
+| bank\_street\_address | string | N | Bank street address |
+| account\_holder\_address | string | N | Account holder address |
+| bank\_account\_address | object | N | Bank account address object |
+| intermediate\_bank | object | N | Intermediate bank information |
+| intermediate\_bank\_options | array | N | Array of intermediate bank options |
 
 ### Applies To
 

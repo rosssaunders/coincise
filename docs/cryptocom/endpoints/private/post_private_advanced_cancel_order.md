@@ -1,7 +1,6 @@
 # POST private/advanced/cancel-order
 
-**Source:**
-[private/advanced/cancel-order](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-advanced-cancel-order)
+**Source:** [private/advanced/cancel-order](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-advanced-cancel-order)
 
 ## Authentication
 
@@ -38,20 +37,16 @@ Required (Private Endpoint)
 
 ```
 
-Cancel an individual order of a OTO/OTOCO order on the Exchange (asynchronous).
-This call is asynchronous, so the response is simply a confirmation of the
-request. The `user.advanced.order` subscription can be used to check when the
-order is successfully canceled.
+Cancel an individual order of a OTO/OTOCO order on the Exchange (asynchronous). This call is asynchronous, so the response is simply a confirmation of the request. The `user.advanced.order` subscription can be used to check when the order is successfully canceled.
 
 ### Request Params
 
-| Name     | Type                       | Required | Description       |
-| -------- | -------------------------- | -------- | ----------------- |
-| order_id | number or string of number | Depends  | Optional Order ID |
-
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| order\_id | number or string of number | Depends | Optional Order ID  
 Either `order_id` or `client_oid` must be present  
-`string` format is highly recommended. | | client_oid | string | Depends |
-Optional Client Order ID  
+`string` format is highly recommended. |
+| client\_oid | string | Depends | Optional Client Order ID  
 Either `order_id` or `client_oid` must be present |
 
 ### Applies To
@@ -64,7 +59,7 @@ POST
 
 ### Response Attributes
 
-| Name       | Type             | Description     |
-| ---------- | ---------------- | --------------- |
-| order_id   | string of number | Order ID        |
-| client_oid | string           | Client Order ID |
+| Name | Type | Description |
+| --- | --- | --- |
+| order\_id | string of number | Order ID |
+| client\_oid | string | Client Order ID |

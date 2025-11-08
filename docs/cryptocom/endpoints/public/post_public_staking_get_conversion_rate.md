@@ -1,7 +1,6 @@
 # POST public/staking/get-conversion-rate
 
-**Source:**
-[public/staking/get-conversion-rate](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-staking-get-conversion-rate)
+**Source:** [public/staking/get-conversion-rate](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-staking-get-conversion-rate)
 
 ## Authentication
 
@@ -39,10 +38,10 @@ Get conversion rate between staked token and liquid staking token
 
 ### Request Params
 
-| Name            | Type   | Required | Description                           |
-| --------------- | ------ | -------- | ------------------------------------- |
-| instrument_name | string | Y        | liquid staking token instrument name: |
-| \- CDCETH       |
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| instrument\_name | string | Y | liquid staking token instrument name:  
+\- CDCETH |
 
 ### Applies To
 
@@ -54,7 +53,7 @@ POST
 
 ### Response Attributes
 
-| Name            | Type   | Description                                                                         |
-| --------------- | ------ | ----------------------------------------------------------------------------------- |
-| instrument_name | string | CDCETH                                                                              |
-| conversion_rate | string | conversion rate between staked token (ETH.staked) and liquid staking token (CDCETH) |
+| Name | Type | Description |
+| --- | --- | --- |
+| instrument\_name | string | CDCETH |
+| conversion\_rate | string | conversion rate between staked token (ETH.staked) and liquid staking token (CDCETH) |

@@ -1,7 +1,6 @@
 # POST private/close-position
 
-**Source:**
-[private/close-position](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-close-position)
+**Source:** [private/close-position](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-close-position)
 
 ## Authentication
 
@@ -51,21 +50,19 @@ Required (Private Endpoint)
 
 Cancels position for a particular instrument/pair (asynchronous).
 
-This call is asynchronous, so the response is simply a confirmation of the
-request.
+This call is asynchronous, so the response is simply a confirmation of the request.
 
-The `user.order` subscription can be used to check when the order is
-successfully canceled.
+The `user.order` subscription can be used to check when the order is successfully canceled.
 
 ### Request Params
 
-| Name            | Type             | Required | Description             |
-| --------------- | ---------------- | -------- | ----------------------- |
-| instrument_name | string           | Y        | e.g. BTCUSD-PERP        |
-| type            | string           | Y        | `LIMIT` or `MARKET`     |
-| price           | string           | Depends  | For `LIMIT` orders only |
-| quantity        | string of number | N        | Positive Number only    |
-
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| instrument\_name | string | Y | e.g. BTCUSD-PERP |
+| type | string | Y | `LIMIT` or `MARKET` |
+| price | string | Depends | For `LIMIT` orders only |
+| quantity | string of number | N | Positive Number only  
+  
 Remark:  
 Only provide this field if intending to do partial closing |
 
@@ -81,7 +78,7 @@ POST
 
 The code (0 = success) is the primary indicator that the request is queued.
 
-| Name       | Type             | Description     |
-| ---------- | ---------------- | --------------- |
-| order_id   | string of number | Order ID        |
-| client_oid | string           | Client Order ID |
+| Name | Type | Description |
+| --- | --- | --- |
+| order\_id | string of number | Order ID |
+| client\_oid | string | Client Order ID |

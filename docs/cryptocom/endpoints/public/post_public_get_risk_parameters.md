@@ -1,7 +1,6 @@
 # POST public/get-risk-parameters
 
-**Source:**
-[public/get-risk-parameters](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-get-risk-parameters)
+**Source:** [public/get-risk-parameters](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-get-risk-parameters)
 
 ## Authentication
 
@@ -87,8 +86,7 @@ https://{URL}/public/get-risk-parameters
 }
 ```
 
-Provides information on risk parameter settings for
-[Smart Cross Margin](https://crypto.com/exchange/document/margin-rules).
+Provides information on risk parameter settings for [Smart Cross Margin](https://crypto.com/exchange/document/margin-rules).
 
 ### Applies To
 
@@ -102,30 +100,29 @@ GET
 
 An array, consisting of:
 
-| Name                                     | Type            | Description                                                                                                                                 |
-| ---------------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| default_max_product_leverage_for_spot    | number          | default max product leverage for margin trading unless specified in base_currency_config array                                              |
-| default_max_product_leverage_for_perps   | number          | default max product leverage for perpetuals unless specified in base_currency_config array                                                  |
-| default_max_product_leverage_for_futures | number          | default max product leverage for futures unless specified in base_currency_config array                                                     |
-| default_unit_margin_rate                 | number          | default additional margin rate / haircut rate for holding 1 unit of positions unless specified in base_currency_config array                |
-| default_collateral_cap                   | number          | refer to specified collateral cap for each token in base_currency_config array. Field is omitted if the token is not eligible as collateral |
-| update_timestamp_ms                      | number          | Last update time                                                                                                                            |
-| **_base_currency_config_**               | array of string | specific risk parameters as shown below                                                                                                     |
+| Name | Type | Description |
+| --- | --- | --- |
+| default\_max\_product\_leverage\_for\_spot | number | default max product leverage for margin trading unless specified in base\_currency\_config array |
+| default\_max\_product\_leverage\_for\_perps | number | default max product leverage for perpetuals unless specified in base\_currency\_config array |
+| default\_max\_product\_leverage\_for\_futures | number | default max product leverage for futures unless specified in base\_currency\_config array |
+| default\_unit\_margin\_rate | number | default additional margin rate / haircut rate for holding 1 unit of positions unless specified in base\_currency\_config array |
+| default\_collateral\_cap | number | refer to specified collateral cap for each token in base\_currency\_config array. Field is omitted if the token is not eligible as collateral |
+| update\_timestamp\_ms | number | Last update time |
+| ***base\_currency\_config*** | array of string | specific risk parameters as shown below |
 
-**_base_currency_config_** is an array consisting of below fields for specific
-base tokens.
+***base\_currency\_config*** is an array consisting of below fields for specific base tokens.
 
-| Name                                                                                                                                 | Type   | Description                                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------- |
-| collateral_cap_notional                                                                                                              | number | the maximum $notional that is counted towards the margin balance.                                                                  |
-| Any additional token balance would not contribute to the margin balance. Field is omitted if the token is not eligible as collateral |
-| minimum_haircut                                                                                                                      | number | Minimum haircut rate. Field is omitted if the token is not eligible as collateral                                                  |
-| max_product_leverage_for_spot                                                                                                        | number | the max product leverage for margin trading on this token.                                                                         |
-| max_product_leverage_for_perps                                                                                                       | number | the max product leverage for perpetuals on this base token                                                                         |
-| max_product_leverage_for_futures                                                                                                     | number | the max product leverage for futures on this base token                                                                            |
-| unit_margin_rate                                                                                                                     | number | the additional margin rate / haircut rate for holding 1 unit of positions with this base token                                     |
-| max_short_sell_limit                                                                                                                 | number | max negative asset balance user can hold on the base token. If field is omitted means no short sell permitted on the token         |
-| daily_notional_limit                                                                                                                 | number | max spot order notional user can place in rolling 24-hour window. If field is omitted, user can trade unlimited on this base token |
-| order_limit                                                                                                                          | number | max $notional per spot order on this base token                                                                                    |
-| max_order_notional_usd                                                                                                               | number | max $notional per spot order on this base token                                                                                    |
-| min_order_notional_usd                                                                                                               | number | min $notional per spot order on this base token                                                                                    |
+| Name | Type | Description |
+| --- | --- | --- |
+| collateral\_cap\_notional | number | the maximum $notional that is counted towards the margin balance.  
+Any additional token balance would not contribute to the margin balance. Field is omitted if the token is not eligible as collateral |
+| minimum\_haircut | number | Minimum haircut rate. Field is omitted if the token is not eligible as collateral |
+| max\_product\_leverage\_for\_spot | number | the max product leverage for margin trading on this token. |
+| max\_product\_leverage\_for\_perps | number | the max product leverage for perpetuals on this base token |
+| max\_product\_leverage\_for\_futures | number | the max product leverage for futures on this base token |
+| unit\_margin\_rate | number | the additional margin rate / haircut rate for holding 1 unit of positions with this base token |
+| max\_short\_sell\_limit | number | max negative asset balance user can hold on the base token. If field is omitted means no short sell permitted on the token |
+| daily\_notional\_limit | number | max spot order notional user can place in rolling 24-hour window. If field is omitted, user can trade unlimited on this base token |
+| order\_limit | number | max $notional per spot order on this base token |
+| max\_order\_notional\_usd | number | max $notional per spot order on this base token |
+| min\_order\_notional\_usd | number | min $notional per spot order on this base token |

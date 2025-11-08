@@ -1,7 +1,6 @@
 # POST private/user-balance-history
 
-**Source:**
-[private/user-balance-history](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-user-balance-history)
+**Source:** [private/user-balance-history](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-user-balance-history)
 
 ## Authentication
 
@@ -38,19 +37,17 @@ Required (Private Endpoint)
 }
 ```
 
-Returns the user's balance history. This call may temporarily have discrepancies
-with that shown on the GUI.
+Returns the user's balance history. This call may temporarily have discrepancies with that shown on the GUI.
 
 ### Request Params
 
-| Name      | Type   | Required | Description                                                                                                 |
-| --------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------- |
-| timeframe | string | N        | `H1` means every hour, `D1` means every day. Omit for 'D1'                                                  |
-| end_time  | number | N        | Can be millisecond or nanosecond. Exclusive. If not provided, will be current time.                         |
-| limit     | int    | N        | If timeframe is `D1`, max `limit` will be 30 (days). If timeframe is `H1`, max `limit` will be 120 (hours). |
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| timeframe | string | N | `H1` means every hour, `D1` means every day. Omit for 'D1' |
+| end\_time | number | N | Can be millisecond or nanosecond. Exclusive. If not provided, will be current time. |
+| limit | int | N | If timeframe is `D1`, max `limit` will be 30 (days). If timeframe is `H1`, max `limit` will be 120 (hours). |
 
-**Note**: If you omit all parameters, you still need to pass in an empty
-`params` block like `params: {}` for API request consistency
+**Note**: If you omit all parameters, you still need to pass in an empty `params` block like `params: {}` for API request consistency
 
 ### Applies To
 
@@ -64,8 +61,8 @@ POST
 
 An array consisting of:
 
-| Name            | Type   | Description                             |
-| --------------- | ------ | --------------------------------------- |
-| instrument_name | string | instrument name of the balance e.g. USD |
-| t               | number | timestamp                               |
-| c               | string | total cash balance                      |
+| Name | Type | Description |
+| --- | --- | --- |
+| instrument\_name | string | instrument name of the balance e.g. USD |
+| t | number | timestamp |
+| c | string | total cash balance |

@@ -1,7 +1,6 @@
 # POST public/auth
 
-**Source:**
-[public/auth](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-auth)
+**Source:** [public/auth](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-auth)
 
 ## Authentication
 
@@ -127,27 +126,22 @@ Not Required (Public Endpoint)
 }
 ```
 
-To access user-specific websocket methods, `public/auth` has to be invoked with
-a valid API key and Digital Signature (refer to the **Digital Signature**
-section).
+To access user-specific websocket methods, `public/auth` has to be invoked with a valid API key and Digital Signature (refer to the **Digital Signature** section).
 
 REST API calls do NOT need to do this.
 
-**Important Note**
-
-We recommend adding a 1-second sleep after establishing the websocket
-connection, and before requests are sent.
-
-This will avoid occurrences of rate-limit (\`TOO_MANY_REQUESTS\`) errors, as the
-websocket rate limits are pro-rated based on the calendar-second that the
-websocket connection was opened.
+**Important Note**  
+  
+We recommend adding a 1-second sleep after establishing the websocket connection, and before requests are sent.  
+  
+This will avoid occurrences of rate-limit (\`TOO\_MANY\_REQUESTS\`) errors, as the websocket rate limits are pro-rated based on the calendar-second that the websocket connection was opened.
 
 ### Request Params
 
-| Name    | Type   | Description                                           |
-| ------- | ------ | ----------------------------------------------------- |
-| api_key | string | API key                                               |
-| sig     | string | Digital Signature (see **Digital Signature** section) |
+| Name | Type | Description |
+| --- | --- | --- |
+| api\_key | string | API key |
+| sig | string | Digital Signature (see **Digital Signature** section) |
 
 ### Applies To:
 
