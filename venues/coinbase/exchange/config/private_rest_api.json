@@ -3,76 +3,56 @@
   "combined_filename": "private_rest_api.md",
   "urls": [
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/welcome",
+      "url": "https://docs.cdp.coinbase.com/exchange/introduction/welcome",
       "filename": "welcome.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/getting-started",
-      "filename": "getting-started.md"
+      "url": "https://docs.cdp.coinbase.com/exchange/introduction/rest-quickstart",
+      "filename": "rest-quickstart.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/sandbox",
+      "url": "https://docs.cdp.coinbase.com/exchange/introduction/sandbox",
       "filename": "sandbox.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/matching-engine",
-      "filename": "matching-engine.md"
+      "url": "https://docs.cdp.coinbase.com/exchange/introduction/systems-operations",
+      "filename": "systems-operations.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/rate-limits",
-      "filename": "rate-limits.md"
-    },
-    {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/runbook",
-      "filename": "runbook.md"
-    },
-    {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/rest-requests",
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/requests",
       "filename": "rest-requests.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/rest-auth",
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/authentication",
       "filename": "rest-auth.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/rest-rate-limits",
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/rate-limits",
       "filename": "rest-rate-limits.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/rest-pagination",
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/pagination",
       "filename": "rest-pagination.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/profiles",
-      "filename": "profiles.md"
-    },
-    {
-      "url": "https://docs.cdp.coinbase.com/exchange/docs/types",
+      "url": "https://docs.cdp.coinbase.com/exchange/rest-api/types",
       "filename": "types.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postorders",
-      "filename": "post-orders.md"
+      "url": "https://docs.cdp.coinbase.com/exchange/concepts/overview",
+      "filename": "concepts-overview.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getfills",
-      "filename": "get-fills.md"
+      "url": "https://docs.cdp.coinbase.com/exchange/concepts/matching-engine",
+      "filename": "matching-engine.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getorders",
-      "filename": "get-orders.md"
+      "url": "https://docs.cdp.coinbase.com/exchange/concepts/trading",
+      "filename": "trading.md"
     },
     {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_deleteorders",
-      "filename": "delete-orders.md"
-    },
-    {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getorder",
-      "filename": "get-order.md"
-    },
-    {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_deleteorder",
-      "filename": "delete-order.md"
+      "url": "https://docs.cdp.coinbase.com/exchange/concepts/structure",
+      "filename": "structure.md"
     }
   ]
 }

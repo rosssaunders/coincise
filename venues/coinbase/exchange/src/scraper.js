@@ -178,6 +178,15 @@ const scrapeApiDocumentation = async (url, outputPath) => {
     const articleHtml = await extractArticleContent(page, { html: true })
     const articleContent = convertHtmlToMarkdown(articleHtml)
     console.log("Article content converted to markdown")
+    
+    // Check if we got a 404 page (be more specific to avoid false positives)
+    const is404 = articleContent.includes('# Page Not Found') && 
+                  articleContent.includes("We couldn't find the page");
+    if (is404) {
+      console.warn(`⚠️  Warning: Page appears to be a 404 Not Found page`)
+      console.warn(`   URL may need to be updated in the configuration`)
+      throw new Error(`404 Page Not Found: ${url}`)
+    }
 
     // Extract authentication section if it exists
     console.log("Extracting authentication section...")
