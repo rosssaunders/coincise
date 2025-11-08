@@ -1,6 +1,6 @@
 # ByBit V5 Public REST API Documentation
 
-# Rate Limit
+# Rate Limit Rules
 
 ## IP Limit[​](#ip-limit "Direct link to heading")
 
@@ -243,239 +243,6 @@ orders in one second if I use both endpoints to place orders_
   5 orders will be successfully placed, and the 6-8th orders will report an
   error exceeding the limit, and these orders will fail.
 
-## API Rate Limit Rules For VIPs[​](#api-rate-limit-rules-for-vips "Direct link to heading")
-
-|               | Unified Account |
-| ------------- | :-------------: | ------------- | ----------- |
-| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
-| Default       |      10/s       | 10/s          | 20/s        |
-| VIP 1         |      20/s       | 20/s          | 25/s        |
-| VIP 2         |      40/s       | 40/s          | 30/s        |
-| VIP 3         |      60/s       | 60/s          | 40/s        |
-| VIP 4         |      60/s       | 60/s          | 40/s        |
-| VIP 5         |      60/s       | 60/s          | 40/s        |
-| VIP Supreme   |      60/s       | 60/s          | 40/s        |
-
-## API Rate Limit Rules For PROs[​](#api-rate-limit-rules-for-pros "Direct link to heading")
-
-UPCOMING CHANGES FOR PRO ACCOUNT
-
-Starting **August 13, 2025**, Bybit will roll out a new institutional API rate
-limit framework designed to enhance performance for high-frequency trading
-clients. The new system introduces a centralized institution-level rate cap with
-flexible per-UID configurations, enabling greater efficiency and scalability.
-Refer to
-[announcement](https://announcements.bybit.com/en/article/update-bybit-enhances-api-rate-limits-for-institutional-traders-bltbbbf60de757d074e/)
-
-### UID level:[​](#uid-level "Direct link to heading")
-
-|               | Unified Account |
-| ------------- | :-------------: | ------------- | ----------- |
-| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
-| PRO1          |      200/s      | 200/s         | 200/s       |
-| PRO2          |      400/s      | 400/s         | 400/s       |
-| PRO3          |      600/s      | 600/s         | 600/s       |
-| PRO4          |      800/s      | 800/s         | 800/s       |
-| PRO5          |     1000/s      | 1000/s        | 1000/s      |
-| PRO6          |     1200/s      | 1200/s        | 1200/s      |
-
-### Master and subaccounts level (Institutional API rate limit Quota):[​](#master-and-subaccounts-level-institutional-api-rate-limit-quota "Direct link to heading")
-
-|               | Unified Account |
-| ------------- | :-------------: | ------------- | ----------- |
-| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
-| PRO1          |     10000/s     | 10000/s       | 10000/s     |
-| PRO2          |     20000/s     | 20000/s       | 20000/s     |
-| PRO3          |     30000/s     | 30000/s       | 30000/s     |
-| PRO4          |     40000/s     | 40000/s       | 40000/s     |
-| PRO5          |     50000/s     | 50000/s       | 50000/s     |
-| PRO6          |     60000/s     | 60000/s       | 60000/s     |
-
-instructions for API rate limit
-
-- All of the existing subaccounts still have those original API rate limits
-- The default API rate limit for a new sub-account is not counted in the total
-  Institutional API rate limit quota.
-- The default API rate limit for a new sub is: 10/s for futures , 10/s for
-  options, 20/s for spot
-- If the Institutional API rate limit total quota is exceeded, you can only
-  reduce the account's API rate limit first. After the total API rate limit is
-  less than the total Institutional API rate limit quota, you can increase the
-  API rate limit of an account.
-
-### Set api rate limit[​](#set-api-rate-limit "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- If UID requesting this endpoint is a master account, uids in the input
-  parameter must be subaccounts of the master account.
-- If UID requesting this endpoint is not a master account, uids in the input
-  parameter must be the UID requesting this endpoint
-- UID requesting this endpoint must be an institutional user.
-
-#### HTTP Request[​](#http-request "Direct link to heading")
-
-POST `/v5/apilimit/set`
-
-#### Request Parameters[​](#request-parameters "Direct link to heading")
-
-| Parameter                                        | Required | Type    | Comments                           |
-| :----------------------------------------------- | :------- | :------ | ---------------------------------- |
-| list                                             | true     | array   | Object                             |
-| &gt; uids                                        | true     | string  | Multiple UIDs, separated by commas |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | true     | string  | Business type                      |
-| &gt; rate                                        | true     | integer | api rate limit per second          |
-
-#### Response Parameters[​](#response-parameters "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                           |
-| :----------------------------------------------- | :------ | ---------------------------------- |
-| list                                             | array   | Object                             |
-| &gt; uids                                        | string  | Multiple UIDs, separated by commas |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
-| &gt; rate                                        | integer | api rate limit per second          |
-| &gt; success                                     | boolean | success or not                     |
-| &gt; <a href="/docs/v5/enum#msg">msg</a>         | string  | result message                     |
-
-#### Request Example[​](#request-example "Direct link to heading")
-
-```
-POST /v5/apilimit/set HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1711420489915X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "list": [        {            "uids": "106293838",            "bizType": "DERIVATIVES",            "rate": 50        }    ]}
-```
-
-#### Response Example[​](#response-example "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "result": [            {                "uids": "290118",                "bizType": "SPOT",                "rate": 600,                "success": true,                "msg": "API limit updated successfully"            }        ]    },    "retExtInfo": {},    "time": 1754894296913}
-```
-
-### Query api rate limit[​](#query-api-rate-limit "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- A master account can query api rate limit of its own and subaccounts.
-- A subaccount can only query its own api rate limit.
-
-#### HTTP Request[​](#http-request-1 "Direct link to heading")
-
-GET `/v5/apilimit/query`
-
-#### Request Parameters[​](#request-parameters-1 "Direct link to heading")
-
-| Parameter | Required | Type   | Comments                           |
-| :-------- | :------- | :----- | ---------------------------------- |
-| uids      | true     | string | Multiple UIDs, separated by commas |
-
-#### Response Parameters[​](#response-parameters-1 "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                           |
-| :----------------------------------------------- | :------ | ---------------------------------- |
-| list                                             | array   | Object                             |
-| &gt; uids                                        | string  | Multiple UIDs, separated by commas |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
-| &gt; rate                                        | integer | api rate limit per second          |
-
-#### Request Example[​](#request-example-1 "Direct link to heading")
-
-```
-GET /v5/apilimit/query?uids=290118 HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
-```
-
-#### Response Example[​](#response-example-1 "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "uids": "290118",                "bizType": "SPOT",                "rate": 600            },            {                "uids": "290118",                "bizType": "DERIVATIVES",                "rate": 400            }        ]    },    "retExtInfo": {},    "time": 1754894341984}
-```
-
-### Query api rate limit usage and cap[​](#query-api-rate-limit-usage-and-cap "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- Query ins level full picture rate limit usage and cap
-- Only queries from one of the main UIDs or a subaccount UID from sub-INS API
-  key are allowed.
-
-#### HTTP Request[​](#http-request-2 "Direct link to heading")
-
-GET `/v5/apilimit/query-cap`
-
-#### Request Parameters[​](#request-parameters-2 "Direct link to heading")
-
-None
-
-#### Response Parameters[​](#response-parameters-2 "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                                                              |
-| :----------------------------------------------- | :------ | --------------------------------------------------------------------- |
-| list                                             | array   | Object                                                                |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                                                         |
-| &gt; totalRate                                   | integer | Total api rate limit usage accross all subaccounts and master account |
-| &gt; insCap                                      | integer | Ins level api rate limit per second,depends on your ins level         |
-| &gt; uidCap                                      | integer | Uid level api rate limit per second,depends on your uid level         |
-
-#### Request Example[​](#request-example-2 "Direct link to heading")
-
-```
-GET /v5/apilimit/query-cap HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
-```
-
-#### Response Example[​](#response-example-2 "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "insCap": "30000",                "uidCap": "600",                "totalRate": "29882",                "bizType": "SPOT"            },            {                "insCap": "30000",                "uidCap": "600",                "totalRate": "29882",                "bizType": "OPTIONS"            },            {                "insCap": "40000",                "uidCap": "800",                "totalRate": "39932",                "bizType": "DERIVATIVES"            }        ]    },    "retExtInfo": {},    "time": 1758857589872}
-```
-
-### Query all api rate limit[​](#query-all-api-rate-limit "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- Query all of uid level rate limits including all master account and
-  subaccounts
-- Only queries from one of the main UIDs or a subaccount UID from sub-INS API
-  key are allowed.
-
-#### HTTP Request[​](#http-request-3 "Direct link to heading")
-
-GET `/v5/apilimit/query-all`
-
-#### Request Parameters[​](#request-parameters-3 "Direct link to heading")
-
-| Parameter | Required | Type   | Comments                                                                                                                              |
-| :-------- | :------- | :----- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| limit     | false    | string | Limit for data size per page. [<code>1</code>, <code>1000</code>]. Default: <code>1000</code>                                         |
-| cursor    | false    | string | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                       |
-| uids      | false    | string | Multiple UIDs accross different master account, separated by commas. Returns all master accounts and subaccounts ratelimit by default |
-
-#### Response Parameters[​](#response-parameters-3 "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                             |
-| :----------------------------------------------- | :------ | ------------------------------------ |
-| nextPageCursor                                   | string  | Used to get the next page data       |
-| list                                             | array   | Object                               |
-| &gt; uids                                        | string  | Multiple UIDs , separated by commas. |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                        |
-| &gt; rate                                        | integer | Api rate limit per second            |
-
-#### Request Example[​](#request-example-3 "Direct link to heading")
-
-```
-GET /v5/apilimit/query-all HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
-```
-
-#### Response Example[​](#response-example-3 "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "uids": "104270393,1674166,1190923,101446030",                "bizType": "SPOT",                "rate": 223            },            {                "uids": "104074050,104394193,104126066",                "bizType": "OPTIONS",                "rate": 223            },            {                "uids": "104154966,103803484,103995540,100445068",                "bizType": "DERIVATIVES",                "rate": 298            }        ],        "nextPageCursor": ""    },    "retExtInfo": {},    "time": 1758857701702}
-```
-
 # Enums Definitions
 
 ### locale[​](#locale "Direct link to heading")
@@ -642,6 +409,7 @@ _closed status_
 - `CreateByStopLoss` Futures stop loss order
 - `CreateByPartialStopLoss` Futures partial stop loss order
 - `CreateByTrailingStop` Futures trailing stop order
+- `CreateByTrailingProfit` Futures trailing take profit order
 - `CreateByLiq` Laddered liquidation to reduce the required maintenance margin
 - `CreateByTakeOver_PassThrough`If the position is still subject to liquidation
   (i.e., does not meet the required maintenance margin level), the position
@@ -662,6 +430,7 @@ _closed status_
 - `CreateByIceBerg` Order created by Ice berg strategy - web/app
 - `CreateByArbitrage` Order created by arbitrage - web/app
 - `CreateByDdh` Option dynamic delta hedge order - web/app
+- `CreateByBboOrder` BBO order
 
 ### execType[​](#exectype "Direct link to heading")
 
@@ -748,7 +517,7 @@ _closed status_
 - `EC_MarketOrderPriceIsNotZero`
 - `EC_LimitOrderInvalidPrice`
 - `EC_NoEnoughQtyToFill`
-- `EC_NoImmediateQtyToFill`
+- `EC_NoImmediateQtyToFill` a maker could be found to fill your order
 - `EC_PerCancelRequest`
 - `EC_MarketOrderCannotBePostOnly`
 - `EC_PostOnlyWillTakeLiquidity`
@@ -781,8 +550,9 @@ _closed status_
 - `EC_SecurityStatusFail`
 - `EC_ReachRiskPriceLimit`
 - `EC_OrderNotExist`
-- `EC_CancelByOrderValueZero`
-- `EC_CancelByMatchValueZero`
+- `EC_CancelByOrderValueZero` order cancelled as its remaining value is zero
+- `EC_CancelByMatchValueZero` order cancelled as the order it matched with has a
+  remaining value of zero
 - `EC_ReachMarketPriceLimit`
 
 ### accountType[​](#accounttype "Direct link to heading")
@@ -857,6 +627,10 @@ Also known as the "standard account".
 - `CancelByDCP` cancelled by DCP triggering
 - `CancelByRebalance` Spread trading: the order price of a single leg order is
   outside the limit price range.
+- `CancelByOCOTpCanceledBySlTriggered` The take profit order was canceled due to
+  the triggering of the stop loss
+- `CancelByOCOSlCanceledByTpTriggered` The stop loss order was canceled due to
+  the triggering of the take profit
 
 _Options:_
 
@@ -1031,20 +805,24 @@ _Options:_
 - `DEFI_INVESTMENT_REFUND` transfer in for DEFI refund
 - `DEFI_INVESTMENT_REDEMPTION` tranfer in for DEFI redemption
 - `INSTITUTION_LOAN_IN` Borrowed Amount (INS Loan)
-- `INSTITUTION_PAYBACK_PRINCIPAL_OUT` Principal Repayment (INS Loan)
-- `INSTITUTION_PAYBACK_INTEREST_OUT` Interest Repayment (INS Loan)
-- `INSTITUTION_EXCHANGE_SELL` Auto Sold Collateral (INS Loan)
-- `INSTITUTION_EXCHANGE_BUY` Auto Buy Liability (INS Loan)
-- `INSTITUTION_LIQ_PRINCIPAL_OUT` Auto Principal Repayment (INS Loan)
-- `INSTITUTION_LIQ_INTEREST_OUT` Auto Interest Repayment (INS Loan)
+- `INSTITUTION_PAYBACK_PRINCIPAL_OUT` Principal repayment (INS Loan)
+- `INSTITUTION_PAYBACK_INTEREST_OUT` Interest repayment (INS Loan)
+- `INSTITUTION_EXCHANGE_SELL` Auto sold collateral (INS Loan)
+- `INSTITUTION_EXCHANGE_BUY` Auto buy liability (INS Loan)
+- `INSTITUTION_LIQ_PRINCIPAL_OUT` Auto principal repayment (INS Loan)
+- `INSTITUTION_LIQ_INTEREST_OUT` Auto interest repayment (INS Loan)
 - `INSTITUTION_LOAN_TRANSFER_IN` Transfer in (INS Loan)
 - `INSTITUTION_LOAN_TRANSFER_OUT` Transfer out (INS Loan)
 - `INSTITUTION_LOAN_WITHOUT_WITHDRAW` Transfer out (INS Loan)
-- `INSTITUTION_LOAN_RESERVE_IN` Reserve Fund In (INS Loan)
-- `INSTITUTION_LOAN_RESERVE_OUT` Reserve Fund Out (INS Loan)
+- `INSTITUTION_LOAN_RESERVE_IN` Reserve fund in (INS Loan)
+- `INSTITUTION_LOAN_RESERVE_OUT` Reserve fund out (INS Loan)
 - `SPREAD_FEE_OUT` Spread fee for EU Broker
 - `PLATFORM_TOKEN_MNT_LIQRECALLEDMMNT` Recall MNT
 - `PLATFORM_TOKEN_MNT_LIQRETURNEDMNT` Return MNT
+- `MANUAL_LOANS_BORROW` Manual borrow
+- `MANUAL_LOANS_REPAY` Manual repay
+- `AUTO_LOANS_BORROW` Auto borrow
+- `AUTO_LOANS_REPAY` Auto repay
 
 ### type(contract-translog)[​](#typecontract-translog "Direct link to heading")
 
@@ -1525,7 +1303,10 @@ with the example of BTCUSDT:
 | 170132 | Order price too high.                                                                                                                                                                                     |
 | 170133 | Order price lower than the minimum.                                                                                                                                                                       |
 | 170134 | Order price decimal too long.                                                                                                                                                                             |
-| 170135 | Order quantity too large.                                                                                                                                                                                 |
+| 170371 | Order price cannot be lower than {}, the price limitation                                                                                                                                                 |
+| 170372 | Order price cannot be higher than 0, the price limitation                                                                                                                                                 |
+| 170381 | Order quantity too large.                                                                                                                                                                                 |
+| 170382 | Order quantity too large.                                                                                                                                                                                 |
 | 170136 | Order quantity lower than the minimum.                                                                                                                                                                    |
 | 170137 | Order volume decimal too long                                                                                                                                                                             |
 | 170139 | Order has been filled.                                                                                                                                                                                    |
@@ -1592,29 +1373,6 @@ with the example of BTCUSDT:
 | 170359 | TThe current site does not support leveraged trading                                                                                                                                                      |
 | 170709 | OTC loan: The select trading pair is not in the whitelist pair                                                                                                                                            |
 | 170810 | Cannot exceed maximum of 500 conditional, TP/SL and active orders.                                                                                                                                        |
-
-## Spot Leverage Token[​](#spot-leverage-token "Direct link to heading")
-
-|  Code  | Description                                                                                                            |
-| :----: | :--------------------------------------------------------------------------------------------------------------------- |
-| 175000 | The serialNum is already in use.                                                                                       |
-| 175001 | Daily purchase limit has been exceeded. Please try again later.                                                        |
-| 175002 | There's a large number of purchase orders. Please try again later.                                                     |
-| 175003 | Insufficient available balance. Please make a deposit and try again.                                                   |
-| 175004 | Daily redemption limit has been exceeded. Please try again later.                                                      |
-| 175005 | There's a large number of redemption orders. Please try again later.                                                   |
-| 175006 | Insufficient available balance. Please make a deposit and try again.                                                   |
-| 175007 | Order not found.                                                                                                       |
-| 175008 | Purchase period hasn't started yet.                                                                                    |
-| 175009 | Purchase amount has exceeded the upper limit.                                                                          |
-| 175010 | You haven't passed the quiz yet! To purchase and/or redeem an LT, please complete the quiz first.                      |
-| 175012 | Redemption period hasn't started yet.                                                                                  |
-| 175013 | Redemption amount has exceeded the upper limit.                                                                        |
-| 175014 | Purchase of the LT has been temporarily suspended.                                                                     |
-| 175015 | Redemption of the LT has been temporarily suspended.                                                                   |
-| 175016 | Invalid format. Please check the length and numeric precision.                                                         |
-| 175017 | Failed to place order：Exceed the maximum position limit of leveraged tokens, the current available limit is XXXX USDT |
-| 175027 | Subscriptions and redemptions are temporarily unavailable while account upgrade is in progress                         |
 
 ## Spot Margin Trade[​](#spot-margin-trade "Direct link to heading")
 
@@ -1929,6 +1687,62 @@ with the example of BTCUSDT:
 | 3500002 | Current user is not an institutional user      |
 | 3500153 | No permission to operate these UIDs            |
 | 3500153 | You do not have permission to query other UIDs |
+
+## RFQ[​](#rfq "Direct link to heading")
+
+| Code   | Description                                                 |
+| :----- | :---------------------------------------------------------- |
+| 110300 | The RFQ order does not exist                                |
+| 110301 | The Quote order does not exist                              |
+| 110302 | Demo user is prohibited                                     |
+| 110303 | RFQ value is less than the min limit                        |
+| 110304 | Cannot be self-executed                                     |
+| 110305 | Quote UID is not in counterparties                          |
+| 110306 | Quote legs do not match                                     |
+| 110307 | Quote order already exists for this RFQ                     |
+| 110308 | RFQ strategy legs size is not correct                       |
+| 110309 | RFQ strategy side is not correct                            |
+| 110310 | RFQ strategy qty is not correct                             |
+| 110311 | RFQ strategy symbol is not correct                          |
+| 110312 | No permission to execute quote                              |
+| 110313 | RFQ only supports one-way position mode                     |
+| 110314 | Order amount is less than min trade amount                  |
+| 110315 | Order qty exceeds the upper limit                           |
+| 110316 | RFQ is not available for Copy Trading                       |
+| 110317 | Counterparty cannot be self                                 |
+| 110318 | There are too many counterparties to choose from            |
+| 110319 | Order amount is greater than max trade amount               |
+| 110320 | Symbols that have not enabled manual loan are not supported |
+| 110321 | Symbol is not supported                                     |
+
+## Manual Loan[​](#manual-loan "Direct link to heading")
+
+| Code     | Description                                                                                                              |
+| :------- | :----------------------------------------------------------------------------------------------------------------------- |
+| 34022001 | System error. Please try again later.                                                                                    |
+| 34022003 | System error. Please try again later.                                                                                    |
+| 34022027 | Invalid request parameters.                                                                                              |
+| 34022030 | Borrowing demand is high, and the fund pool is currently low. Please wait a moment.                                      |
+| 34022031 | Risk rate limit exceeded. Please reduce your borrow amount in the Unified Trading Account.                               |
+| 34022033 | Borrowing precision must be an integer multiple.                                                                         |
+| 34022034 | The minimum repayment amount must be an integer multiple.                                                                |
+| 34022035 | You cannot repay while interest is being calculated.                                                                     |
+| 34022036 | Please enable Margin Trading to continue.                                                                                |
+| 34022038 | Repayment is in progress. Please do not repeat the operation.                                                            |
+| 34022010 | The borrowed asset does not exist.                                                                                       |
+| 34022041 | Currently, your account has no borrowed coins. No repayments are needed.                                                 |
+| 34022044 | Repayment unsuccessful.                                                                                                  |
+| 34022045 | Borrowing unsuccessful.                                                                                                  |
+| 34022011 | Amount must be at least.                                                                                                 |
+| 34022014 | Decimal precision cannot exceed 18 digits.                                                                               |
+| 34022047 | CopyTrade not supported.                                                                                                 |
+| 34022048 | Borrowing is not allowed during liquidation.                                                                             |
+| 34022049 | Insufficient collateral balance.                                                                                         |
+| 34022050 | Repayment failed. You currently have spot hedging liabilities. Please close your derivatives positions before repayment. |
+| 34022051 | Institutional loan in progress.                                                                                          |
+| 34022052 | Institutional loan transactions banned.                                                                                  |
+| 35000011 | You have existing pending loan orders. Please try again later.                                                           |
+| 34022053 | Please contact the sales to enable the manual borrowing feature.                                                         |
 
 # Get Bybit Server Time
 
@@ -2307,14 +2121,15 @@ GET `/v5/market/instruments-info`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                                     | Required    | Type    | Comments                                                                                                                                                                                                                                                                                                                                                                                    |
-| :-------------------------------------------- | :---------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="/docs/v5/enum#category">category</a> | <b>true</b> | string  | Product type. <code>spot</code>,<code>linear</code>,<code>inverse</code>,<code>option</code>                                                                                                                                                                                                                                                                                                |
-| <a href="/docs/v5/enum#symbol">symbol</a>     | false       | string  | Symbol name, like <code>BTCUSDT</code>, uppercase only                                                                                                                                                                                                                                                                                                                                      |
-| <a href="/docs/v5/enum#status">status</a>     | false       | string  | Symbol status filter<ul><li>By default returns only <code>Trading</code> symbols</li><li>Spot has <code>Trading</code> only</li><li><code>linear</code> &amp; <code>inverse</code>: when status=PreLaunch, it returns <a href="https://www.bybit.com/help-center/article/Introduction-to-Pre-Market-Perpetual" target="_blank" rel="noopener noreferrer">Pre-Market contracts</a></li></ul> |
-| baseCoin                                      | false       | string  | Base coin, uppercase only<ul><li>Applies to <code>linear</code>,<code>inverse</code>,<code>option</code> <strong>only</strong></li><li><code>option</code>: returns BTC by default</li></ul>                                                                                                                                                                                                |
-| limit                                         | false       | integer | Limit for data size per page. [<code>1</code>, <code>1000</code>]. Default: <code>500</code>                                                                                                                                                                                                                                                                                                |
-| cursor                                        | false       | string  | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                                                                                                                                                                                                                                                                             |
+| Parameter                                         | Required    | Type    | Comments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| :------------------------------------------------ | :---------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a href="/docs/v5/enum#category">category</a>     | <b>true</b> | string  | Product type. <code>spot</code>,<code>linear</code>,<code>inverse</code>,<code>option</code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| <a href="/docs/v5/enum#symbol">symbol</a>         | false       | string  | Symbol name, like <code>BTCUSDT</code>, uppercase only                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| <a href="/docs/v5/enum#symboltype">symbolType</a> | false       | string  | SymbolType:The region to which the trading pair belongs,only for<code>linear</code>,<code>inverse</code>,<code>spot</code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| <a href="/docs/v5/enum#status">status</a>         | false       | string  | Symbol status filter<ul><li><code>linear</code> &amp; <code>inverse</code> &amp; <code>spot </code>By default returns only <code>Trading</code> symbols</li><li><code>option</code> By default returns <code>PreLaunch</code>, <code>Trading</code>, and <code>Delivering</code></li><li>Spot has <code>Trading</code> only</li><li><code>linear</code> &amp; <code>inverse</code>: when status=PreLaunch, it returns <a href="https://www.bybit.com/help-center/article/Introduction-to-Pre-Market-Perpetual" target="_blank" rel="noopener noreferrer">Pre-Market contracts</a></li></ul> |
+| baseCoin                                          | false       | string  | Base coin, uppercase only<ul><li>Applies to <code>linear</code>,<code>inverse</code>,<code>option</code> <strong>only</strong></li><li><code>option</code>: returns BTC by default</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                |
+| limit                                             | false       | integer | Limit for data size per page. [<code>1</code>, <code>1000</code>]. Default: <code>500</code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| cursor                                            | false       | string  | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -2359,6 +2174,7 @@ GET `/v5/market/instruments-info`
 | &gt; upperFundingRate                                                | string              | Upper limit of funding date                                                                                                                                                                                                                                              |
 | &gt; lowerFundingRate                                                | string              | Lower limit of funding date                                                                                                                                                                                                                                              |
 | &gt; displayName                                                     | string              | The USDC futures &amp; perpetual name displayed in the Web or App                                                                                                                                                                                                        |
+| &gt; forbidUplWithdrawal                                             | boolean             | Whether to prohibit unrealised profit withdrawal                                                                                                                                                                                                                         |
 | &gt; riskParameters                                                  | object              | Risk parameters for limit order price. Note that the <a href="https://announcements.bybit.com/en/article/adjustments-to-bybit-s-derivative-trading-limit-order-mechanism-blt469228de1902fff6/" target="_blank" rel="noopener noreferrer">formula changed</a> in Jan 2025 |
 | &gt;&gt; priceLimitRatioX                                            | string              | Ratio X                                                                                                                                                                                                                                                                  |
 | &gt;&gt; priceLimitRatioY                                            | string              | Ratio Y                                                                                                                                                                                                                                                                  |
@@ -2398,30 +2214,32 @@ GET `/v5/market/instruments-info`
 | &gt;&gt; qtyStep                               | string | The step to increase/reduce order quantity       |
 | &gt; displayName                               | string | The option name displayed in the Web or App      |
 
-| Parameter                                                    | Type   | Comments                                                                                                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| category                                                     | string | Product type                                                                                                                                                                                                                                                                                                                                          |
-| list                                                         | array  | Object                                                                                                                                                                                                                                                                                                                                                |
-| &gt; symbol                                                  | string | Symbol name                                                                                                                                                                                                                                                                                                                                           |
-| &gt; baseCoin                                                | string | Base coin                                                                                                                                                                                                                                                                                                                                             |
-| &gt; quoteCoin                                               | string | Quote coin                                                                                                                                                                                                                                                                                                                                            |
-| &gt; innovation                                              | string | deprecated, please use <code>symbolType</code>                                                                                                                                                                                                                                                                                                        |
-| &gt; <a href="/docs/v5/enum#symboltype">symbolType</a>       | string | the region to which the trading pair belongs                                                                                                                                                                                                                                                                                                          |
-| &gt; <a href="/docs/v5/enum#status">status</a>               | string | Instrument status                                                                                                                                                                                                                                                                                                                                     |
-| &gt; <a href="/docs/v5/enum#margintrading">marginTrading</a> | string | Margin trade symbol or not<ul class=""><li>This is to identify if the symbol support margin trading under different account modes</li><li>You may find some symbols not supporting margin buy or margin sell, so you need to go to <a href="/docs/v5/account/collateral-info">Collateral Info (UTA)</a> to check if that coin is borrowable</li></ul> |
-| &gt; stTag                                                   | string | Whether or not it has an <a href="https://www.bybit.com/en/help-center/article/Bybit-Special-Treatment-ST-Label-Management-Rules" target="_blank" rel="noopener noreferrer">special treatment label</a>. <code>0</code>: false, <code>1</code>: true                                                                                                  |
-| &gt; lotSizeFilter                                           | Object | Size attributes                                                                                                                                                                                                                                                                                                                                       |
-| &gt;&gt; basePrecision                                       | string | The precision of base coin                                                                                                                                                                                                                                                                                                                            |
-| &gt;&gt; quotePrecision                                      | string | The precision of quote coin                                                                                                                                                                                                                                                                                                                           |
-| &gt;&gt; minOrderQty                                         | string | Minimum order quantity                                                                                                                                                                                                                                                                                                                                |
-| &gt;&gt; maxOrderQty                                         | string | Maximum order quantity                                                                                                                                                                                                                                                                                                                                |
-| &gt;&gt; minOrderAmt                                         | string | Minimum order amount                                                                                                                                                                                                                                                                                                                                  |
-| &gt;&gt; maxOrderAmt                                         | string | Maximum order amount                                                                                                                                                                                                                                                                                                                                  |
-| &gt; priceFilter                                             | Object | Price attributes                                                                                                                                                                                                                                                                                                                                      |
-| &gt;&gt; tickSize                                            | string | The step to increase/reduce order price                                                                                                                                                                                                                                                                                                               |
-| &gt; riskParameters                                          | Object | Risk parameters for limit order price, refer to <a href="https://announcements.bybit.com/en/article/title-adjustments-to-bybit-s-spot-trading-limit-order-mechanism-blt786c0c5abf865983/" target="_blank" rel="noopener noreferrer">announcement</a>                                                                                                  |
-| &gt;&gt; priceLimitRatioX                                    | string | Ratio X                                                                                                                                                                                                                                                                                                                                               |
-| &gt;&gt; priceLimitRatioY                                    | string | Ratio Y                                                                                                                                                                                                                                                                                                                                               |
+| Parameter                                                    | Type   | Comments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| category                                                     | string | Product type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| list                                                         | array  | Object                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| &gt; symbol                                                  | string | Symbol name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| &gt; baseCoin                                                | string | Base coin                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| &gt; quoteCoin                                               | string | Quote coin                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| &gt; innovation                                              | string | deprecated, please use <code>symbolType</code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| &gt; <a href="/docs/v5/enum#symboltype">symbolType</a>       | string | the region to which the trading pair belongs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| &gt; <a href="/docs/v5/enum#status">status</a>               | string | Instrument status                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| &gt; <a href="/docs/v5/enum#margintrading">marginTrading</a> | string | Whether or not this symbol supports margin trading<ul class=""><li>This is to identify if the symbol supports margin trading under different account modes</li><li>You may find some symbols do not support margin buy or margin sell, so you need to go to <a href="/docs/v5/account/collateral-info">Collateral Info (UTA)</a> to check if that coin is borrowable</li><li>When the lending pool has insufficient balance to lend out funds (can happen during big market movements) then this will switch to <code>none</code> until there is sufficient balance to re-enable margin trading</li></ul> |
+| &gt; stTag                                                   | string | Whether or not it has an <a href="https://www.bybit.com/en/help-center/article/Bybit-Special-Treatment-ST-Label-Management-Rules" target="_blank" rel="noopener noreferrer">special treatment label</a>. <code>0</code>: false, <code>1</code>: true                                                                                                                                                                                                                                                                                                                                                      |
+| &gt; lotSizeFilter                                           | Object | Size attributes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| &gt;&gt; basePrecision                                       | string | The precision of base coin                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| &gt;&gt; quotePrecision                                      | string | The precision of quote coin                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| &gt;&gt; minOrderQty                                         | string | Minimum order quantity, deprecated, no longer check <code>minOrderQty</code>, check <code>minOrderAmt</code> instead                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| &gt;&gt; maxOrderQty                                         | string | Maximum order quantity, deprecated, please refer to <code>maxLimitOrderQty</code>, <code>maxMarketOrderQty</code> based on order type                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| &gt;&gt; minOrderAmt                                         | string | Minimum order amount                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| &gt;&gt; maxOrderAmt                                         | string | Maximum order amount, deprecated, no longer check <code>maxOrderAmt</code>, check <code>maxLimitOrderQty</code> and <code>maxMarketOrderQty</code> instead                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| &gt;&gt; maxLimitOrderQty                                    | string | Maximum Limit order quantity<ul class=""><li>For post-only and retail price improvement (RPI) orders, the maximum limit order quantity is 5x <code>maxLimitOrderQty</code></li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| <nobr>&gt;&gt; maxMarketOrderQty</nobr>                      | string | Maximum Market order quantity                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| &gt; priceFilter                                             | Object | Price attributes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| &gt;&gt; tickSize                                            | string | The step to increase/reduce order price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| &gt; riskParameters                                          | Object | Risk parameters for limit order price, refer to <a href="https://announcements.bybit.com/en/article/title-adjustments-to-bybit-s-spot-trading-limit-order-mechanism-blt786c0c5abf865983/" target="_blank" rel="noopener noreferrer">announcement</a>                                                                                                                                                                                                                                                                                                                                                      |
+| &gt;&gt; priceLimitRatioX                                    | string | Ratio X                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| &gt;&gt; priceLimitRatioY                                    | string | Ratio Y                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 [RUN >>](/docs/api-explorer/v5/market/instrument)
 
@@ -2518,7 +2336,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 - Spot
 
 ```
-// official USDT Perpetual instrument structure{    "retCode": 0,    "retMsg": "OK",    "result": {        "category": "linear",        "list": [            {                "symbol": "BTCUSDT",                "contractType": "LinearPerpetual",                "status": "Trading",                "baseCoin": "BTC",                "quoteCoin": "USDT",                "launchTime": "1585526400000",                "deliveryTime": "0",                "deliveryFeeRate": "",                "priceScale": "2",                "leverageFilter": {                    "minLeverage": "1",                    "maxLeverage": "100.00",                    "leverageStep": "0.01"                },                "priceFilter": {                    "minPrice": "0.10",                    "maxPrice": "1999999.80",                    "tickSize": "0.10"                },                "lotSizeFilter": {                    "maxOrderQty": "1190.000",                    "minOrderQty": "0.001",                    "qtyStep": "0.001",                    "postOnlyMaxOrderQty": "1190.000",                    "maxMktOrderQty": "500.000",                    "minNotionalValue": "5"                },                "unifiedMarginTrade": true,                "fundingInterval": 480,                "settleCoin": "USDT",                "copyTrading": "both",                "upperFundingRate": "0.00375",                "lowerFundingRate": "-0.00375",                "isPreListing": false,                "preListingInfo": null,                "riskParameters": {                    "priceLimitRatioX": "0.01",                    "priceLimitRatioY": "0.02"                }            }        ],        "nextPageCursor": ""    },    "retExtInfo": {},    "time": 1735809771618}// Pre-market Perpetual instrument structure{    "retCode": 0,    "retMsg": "OK",    "result": {        "category": "linear",        "list": [            {                "symbol": "BIOUSDT",                "contractType": "LinearPerpetual",                "status": "PreLaunch",                "baseCoin": "BIO",                "quoteCoin": "USDT",                "launchTime": "1735032510000",                "deliveryTime": "0",                "deliveryFeeRate": "",                "priceScale": "4",                "leverageFilter": {                    "minLeverage": "1",                    "maxLeverage": "5.00",                    "leverageStep": "0.01"                },                "priceFilter": {                    "minPrice": "0.0001",                    "maxPrice": "1999.9998",                    "tickSize": "0.0001"                },                "lotSizeFilter": {                    "maxOrderQty": "70000",                    "minOrderQty": "1",                    "qtyStep": "1",                    "postOnlyMaxOrderQty": "70000",                    "maxMktOrderQty": "14000",                    "minNotionalValue": "5"                },                "unifiedMarginTrade": true,                "fundingInterval": 480,                "settleCoin": "USDT",                "copyTrading": "none",                "upperFundingRate": "0.05",                "lowerFundingRate": "-0.05",                "isPreListing": true,                "preListingInfo": {                    "curAuctionPhase": "ContinuousTrading",                    "phases": [                        {                            "phase": "CallAuction",                            "startTime": "1735113600000",                            "endTime": "1735116600000"                        },                        {                            "phase": "CallAuctionNoCancel",                            "startTime": "1735116600000",                            "endTime": "1735116900000"                        },                        {                            "phase": "CrossMatching",                            "startTime": "1735116900000",                            "endTime": "1735117200000"                        },                        {                            "phase": "ContinuousTrading",                            "startTime": "1735117200000",                            "endTime": ""                        }                    ],                    "auctionFeeInfo": {                        "auctionFeeRate": "0",                        "takerFeeRate": "0.001",                        "makerFeeRate": "0.0004"                    }                },                "riskParameters": {                    "priceLimitRatioX": "0.05",                    "priceLimitRatioY": "0.1"                }            }        ],        "nextPageCursor": "first%3DBIOUSDT%26last%3DBIOUSDT"    },    "retExtInfo": {},    "time": 1735810114435}
+// official USDT Perpetual instrument structure{    "retCode": 0,    "retMsg": "OK",    "result": {        "category": "linear",        "list": [            {                "symbol": "BTCUSDT",                "contractType": "LinearPerpetual",                "status": "Trading",                "baseCoin": "BTC",                "quoteCoin": "USDT",                "launchTime": "1585526400000",                "deliveryTime": "0",                "deliveryFeeRate": "",                "priceScale": "2",                "leverageFilter": {                    "minLeverage": "1",                    "maxLeverage": "100.00",                    "leverageStep": "0.01"                },                "priceFilter": {                    "minPrice": "0.10",                    "maxPrice": "1999999.80",                    "tickSize": "0.10"                },                "lotSizeFilter": {                    "maxOrderQty": "1190.000",                    "minOrderQty": "0.001",                    "qtyStep": "0.001",                    "postOnlyMaxOrderQty": "1190.000",                    "maxMktOrderQty": "500.000",                    "minNotionalValue": "5"                },                "unifiedMarginTrade": true,                "fundingInterval": 480,                "settleCoin": "USDT",                "copyTrading": "both",                "upperFundingRate": "0.00375",                "lowerFundingRate": "-0.00375",                "isPreListing": false,                "preListingInfo": null,                "riskParameters": {                    "priceLimitRatioX": "0.01",                    "priceLimitRatioY": "0.02"                },                "symbolType": ""            }        ],        "nextPageCursor": ""    },    "retExtInfo": {},    "time": 1735809771618}// Pre-market Perpetual instrument structure{    "retCode": 0,    "retMsg": "OK",    "result": {        "category": "linear",        "list": [            {                "symbol": "BIOUSDT",                "contractType": "LinearPerpetual",                "status": "PreLaunch",                "baseCoin": "BIO",                "quoteCoin": "USDT",                "launchTime": "1735032510000",                "deliveryTime": "0",                "deliveryFeeRate": "",                "priceScale": "4",                "leverageFilter": {                    "minLeverage": "1",                    "maxLeverage": "5.00",                    "leverageStep": "0.01"                },                "priceFilter": {                    "minPrice": "0.0001",                    "maxPrice": "1999.9998",                    "tickSize": "0.0001"                },                "lotSizeFilter": {                    "maxOrderQty": "70000",                    "minOrderQty": "1",                    "qtyStep": "1",                    "postOnlyMaxOrderQty": "70000",                    "maxMktOrderQty": "14000",                    "minNotionalValue": "5"                },                "unifiedMarginTrade": true,                "fundingInterval": 480,                "settleCoin": "USDT",                "copyTrading": "none",                "upperFundingRate": "0.05",                "lowerFundingRate": "-0.05",                "isPreListing": true,                "preListingInfo": {                    "curAuctionPhase": "ContinuousTrading",                    "phases": [                        {                            "phase": "CallAuction",                            "startTime": "1735113600000",                            "endTime": "1735116600000"                        },                        {                            "phase": "CallAuctionNoCancel",                            "startTime": "1735116600000",                            "endTime": "1735116900000"                        },                        {                            "phase": "CrossMatching",                            "startTime": "1735116900000",                            "endTime": "1735117200000"                        },                        {                            "phase": "ContinuousTrading",                            "startTime": "1735117200000",                            "endTime": ""                        }                    ],                    "auctionFeeInfo": {                        "auctionFeeRate": "0",                        "takerFeeRate": "0.001",                        "makerFeeRate": "0.0004"                    }                },                "riskParameters": {                    "priceLimitRatioX": "0.05",                    "priceLimitRatioY": "0.1"                },                "symbolType": ""            }        ],        "nextPageCursor": "first%3DBIOUSDT%26last%3DBIOUSDT"    },    "retExtInfo": {},    "time": 1735810114435}
 ```
 
 ```
@@ -2526,7 +2344,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 ```
 
 ```
-{    "retCode": 0,    "retMsg": "OK",    "result": {        "category": "spot",        "list": [            {                "symbol": "BTCUSDT",                "baseCoin": "BTC",                "quoteCoin": "USDT",                "innovation": "0",                "status": "Trading",                "marginTrading": "utaOnly",                "stTag": "0",                "lotSizeFilter": {                    "basePrecision": "0.000001",                    "quotePrecision": "0.00000001",                    "minOrderQty": "0.000048",                    "maxOrderQty": "71.73956243",                    "minOrderAmt": "1",                    "maxOrderAmt": "2000000"                },                "priceFilter": {                    "tickSize": "0.01"                }                "riskParameters": {                    "priceLimitRatioX": "0.01",                    "priceLimitRatioY": "0.02"                }            }        ]    },    "retExtInfo": {},    "time": 1672712468011}
+{    "retCode": 0,    "retMsg": "OK",    "result": {        "category": "spot",        "list": [            {                "symbol": "BTCUSDT",                "baseCoin": "BTC",                "quoteCoin": "USDT",                "innovation": "0",                "status": "Trading",                "marginTrading": "utaOnly",                "stTag": "0",                "lotSizeFilter": {                    "basePrecision": "0.000001",                    "quotePrecision": "0.0000001",                    "minOrderQty": "0.000011",                    "maxOrderQty": "83",                    "minOrderAmt": "5",                    "maxOrderAmt": "8000000",                    "maxLimitOrderQty": "83",                    "maxMarketOrderQty": "41.5"                },                "priceFilter": {                    "tickSize": "0.1"                },                "riskParameters": {                    "priceLimitRatioX": "0.005",                    "priceLimitRatioY": "0.01"                },                "symbolType": ""            }        ]    },    "retExtInfo": {},    "time": 1760027412300}
 ```
 
 # Get Orderbook
@@ -2673,6 +2491,9 @@ GET `/v5/market/tickers`
 | &gt; preOpenPrice                                                   | string | Estimated pre-market contract open price<ul class=""><li>Meaningless once the market opens</li></ul> |
 | &gt; preQty                                                         | string | Estimated pre-market contract open qty<li>The value is meaningless once the market opens</li>        |
 | &gt; <a href="/docs/v5/enum#curauctionphase">curPreListingPhase</a> | string | The current pre-market contract phase                                                                |
+| &gt; fundingIntervalHour                                            | string | Funding interval hour<li>This value currently only supports whole hours</li>                         |
+| &gt; fundingCap                                                     | string | Funding rate upper and lower limits                                                                  |
+| &gt; basisRateYear                                                  | string | Annual basis rate<li>Only for Futures,For Perpetual,it will return ""</li>                           |
 
 | Parameter                   | Type   | Comments                                                          |
 | --------------------------- | ------ | ----------------------------------------------------------------- |
@@ -2817,7 +2638,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 - Spot
 
 ```
-{    "retCode": 0,    "retMsg": "OK",    "result": {        "category": "inverse",        "list": [            {                "symbol": "BTCUSD",                "lastPrice": "16597.00",                "indexPrice": "16598.54",                "markPrice": "16596.00",                "prevPrice24h": "16464.50",                "price24hPcnt": "0.008047",                "highPrice24h": "30912.50",                "lowPrice24h": "15700.00",                "prevPrice1h": "16595.50",                "openInterest": "373504107",                "openInterestValue": "22505.67",                "turnover24h": "2352.94950046",                "volume24h": "49337318",                "fundingRate": "-0.001034",                "nextFundingTime": "1672387200000",                "predictedDeliveryPrice": "",                "basisRate": "",                "deliveryFeeRate": "",                "deliveryTime": "0",                "ask1Size": "1",                "bid1Price": "16596.00",                "ask1Price": "16597.50",                "bid1Size": "1",                "basis": ""            }        ]    },    "retExtInfo": {},    "time": 1672376496682}
+{    "retCode": 0,    "retMsg": "OK",    "result": {        "category": "inverse",        "list": [            {                "symbol": "BTCUSD",                "lastPrice": "120635.50",                "indexPrice": "114890.92",                "markPrice": "114898.43",                "prevPrice24h": "105595.90",                "price24hPcnt": "0.142425",                "highPrice24h": "131309.30",                "lowPrice24h": "102007.60",                "prevPrice1h": "119806.10",                "openInterest": "240113967",                "openInterestValue": "2089.79",                "turnover24h": "115.6907",                "volume24h": "13713832.0000",                "fundingRate": "0.0001",                "nextFundingTime": "1760371200000",                "predictedDeliveryPrice": "",                "basisRate": "",                "deliveryFeeRate": "",                "deliveryTime": "0",                "ask1Size": "9854",                "bid1Price": "103401.00",                "ask1Price": "109152.80",                "bid1Size": "1063",                "basis": "",                "preOpenPrice": "",                "preQty": "",                "curPreListingPhase": "",                "fundingIntervalHour": "8",                "basisRateYear": "",                "fundingCap": "0.005"            }        ]    },    "retExtInfo": {},    "time": 1760352369814}
 ```
 
 ```
@@ -3371,6 +3192,14 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 ```
 
 # Get Long Short Ratio
+
+This refers to the net long and short positions as percentages of all position
+holders during the selected time.  
+Long account ratio = Number of holders with long positions / Total number of
+holders  
+Short account ratio = Number of holders with short positions / Total number of
+holders  
+Long-short account ratio = Long account ratio / Short account ratio
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
