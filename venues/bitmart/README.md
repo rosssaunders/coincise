@@ -1,39 +1,43 @@
 # Bitmart API Documentation Extractor
 
-This project extracts API documentation from Bitmart and converts it to markdown format.
+This project extracts API documentation from Bitmart and converts it to markdown format following the Coincise standardized extraction pattern.
 
 ## Features
 
-- Extracts REST API endpoints from HTML documentation
-- Organizes endpoints by section
+- Extracts core documentation sections (authentication, rate limits, network connectivity, error codes, changelog, response formats)
+- Extracts individual REST API endpoints into separate files
+- Organizes endpoints by public/private classification
 - Converts HTML to Markdown with proper formatting
-- Preserves code blocks with syntax highlighting
-- Handles multiple API versions (v1, v2, v3, v4)
+- Handles both Spot and Futures API documentation
 
 ## Project Structure
 
 ```
 bitmart/
 ├── config/
-│   ├── spot.json            # Configuration for spot trading endpoints
-│   ├── contract.json        # Configuration for contract trading endpoints
-│   └── futures.json         # Configuration for futures trading endpoints
+│   ├── spot.json            # Legacy configuration for spot trading
+│   └── futures.json         # Legacy configuration for futures trading
 ├── src/
-│   └── index.js             # Main extraction script
+│   ├── extractGeneral.js    # Extract core documentation sections
+│   ├── extractEndpoints.js  # Extract individual endpoint documentation
+│   └── index.js             # Legacy extraction script
 ├── package.json
 └── README.md
 ```
 
 ## Dependencies
 
-- turndown: ^7.2.0 - For HTML to Markdown conversion
+- turndown: ^7.1.2 - For HTML to Markdown conversion
 - turndown-plugin-gfm: ^1.0.2 - GitHub Flavored Markdown support
-- jsdom: 26.1.0 - For HTML parsing
-- puppeteer: ^24.8.0 - For web scraping and dynamic content extraction
-- cheerio: ^1.0.0 - Server-side jQuery implementation for HTML parsing
-- axios: ^1.9.0 - HTTP client for making requests
+
+Uses shared utilities from `venues/shared/`:
+- puppeteer.js - Browser automation
+- turndown.js - Markdown conversion
+- utils.js - File system utilities
 
 ## Usage
+
+### New Extraction Method (Recommended)
 
 1. Install dependencies:
 
@@ -41,46 +45,71 @@ bitmart/
 npm install
 ```
 
-2. Run all extractors:
+2. Extract all documentation:
 
 ```bash
-npm start
+npm run extract:all
 ```
 
 3. Or run specific extractors:
 
 ```bash
-# Extract Spot API endpoints
-npm run extract:spot
+# Extract core documentation (authentication, rate limits, etc.)
+npm run extract:general
 
-# Extract Contract API endpoints  
-npm run extract:contract
-
-# Extract Futures API endpoints
-npm run extract:futures
+# Extract individual endpoint documentation
+npm run extract:endpoints
 ```
 
-## Output Files
+### Legacy Extraction Method
 
-The extracted markdown will be saved to the following locations:
+The old extraction method is still available for reference:
 
-- Spot API: `../../docs/bitmart/spot_api.md`
-- Contract API: `../../docs/bitmart/contract_api.md`
-- Futures API: `../../docs/bitmart/futures_api.md`
+```bash
+# Extract Spot API endpoints (legacy)
+npm run extract:legacy:spot
 
-## Configuration
+# Extract Futures API endpoints (legacy)
+npm run extract:legacy:futures
+```
 
-Extraction settings can be modified in the respective configuration files in the `config/` directory. Each configuration file includes:
+## Output Structure
 
-- `title`: Title for the markdown document
-- `output_file`: Path where the markdown file will be saved (relative to docs/bitmart/)
-- `base_url`: Base URL of the Bitmart API documentation
-- `urls`: Array of URL paths to process for the documentation
+The new extraction method generates the following structure:
+
+```
+docs/bitmart/
+├── authentication.md          # API key setup and authentication
+├── rate_limits.md            # Rate limiting information
+├── network_connectivity.md   # Base URLs and connectivity info
+├── error_codes.md            # Error code definitions
+├── change_log.md             # API changelog
+├── response_formats.md       # Standard response structures
+└── endpoints/
+    ├── public/               # Public endpoints (no auth required)
+    │   ├── GET_endpoint1.md
+    │   └── GET_endpoint2.md
+    └── private/              # Private endpoints (auth required)
+        ├── POST_endpoint3.md
+        └── POST_endpoint4.md
+```
+
+## Endpoint Classification
+
+Endpoints are automatically classified as public or private based on authentication requirements:
+
+- **Public endpoints**: No authentication headers required (X-BM-KEY, X-BM-SIGN, X-BM-TIMESTAMP)
+- **Private endpoints**: Require KEYED or SIGNED authentication
 
 ## API Documentation Source
 
 The scraper targets the official Bitmart API documentation at:
-- Base URL: https://developer-pro.bitmart.com/en/
+- Spot API: https://developer-pro.bitmart.com/en/spot/
+- Futures API: https://developer-pro.bitmart.com/en/futuresv2/
+
+## Last Updated
+
+Extraction scripts updated to follow Coincise standardized pattern - November 2024
 
 ## Contributing
 

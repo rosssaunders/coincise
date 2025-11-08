@@ -41,9 +41,9 @@ function processSectionHtml(document, section, turndownService, baseUrl) {
   // Find the section based on the heading id
   // Match exact id or id that starts with `${section}-` to avoid collisions like
   // `earn` vs `earnuni`. Fallbacks intentionally avoid broad starts-with.
-  const allHeadings = document.querySelectorAll('div.content-block h1[id]')
+  const allHeadings = document.querySelectorAll("div.content-block h1[id]")
   const heading = Array.from(allHeadings).find(h => {
-    const id = h.getAttribute('id') || ''
+    const id = h.getAttribute("id") || ""
     return id === section || id.startsWith(`${section}-`)
   })
   if (!heading) {
@@ -104,20 +104,20 @@ function processSectionHtml(document, section, turndownService, baseUrl) {
 
   // Inject source links after each endpoint heading (h2/h3) that has an id
   try {
-    const endpointHeadings = collectedContent.querySelectorAll('h2[id], h3[id]')
+    const endpointHeadings = collectedContent.querySelectorAll("h2[id], h3[id]")
     endpointHeadings.forEach(h => {
-      const id = h.getAttribute('id')
+      const id = h.getAttribute("id")
       if (!id) return
-      const safeBase = (baseUrl || '').replace(/#.*$/, '')
+      const safeBase = (baseUrl || "").replace(/#.*$/, "")
       const fullUrl = `${safeBase}#${id}`
-      const linkP = document.createElement('p')
+      const linkP = document.createElement("p")
       linkP.innerHTML = `<strong>Source:</strong> <a href="${fullUrl}">${fullUrl}</a>`
-      h.insertAdjacentElement('afterend', linkP)
+      h.insertAdjacentElement("afterend", linkP)
     })
   } catch (e) {
     console.warn(`Failed to inject source links for section: ${section}`)
-    console.error('Error:', e)
-    console.error('Stack trace:', e.stack)
+    console.error("Error:", e)
+    console.error("Stack trace:", e.stack)
   }
 
   const content = collectedContent.innerHTML
