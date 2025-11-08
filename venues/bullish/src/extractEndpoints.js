@@ -112,7 +112,10 @@ const formatParameters = (parameters) => {
     const inLocation = param.in || '';
     const type = param.schema?.type || param.type || 'string';
     const required = param.required ? 'Yes' : 'No';
-    const description = (param.description || '').replace(/\n/g, ' ').replace(/\|/g, '\\|');
+    const description = (param.description || '')
+      .replace(/\\/g, '\\\\') // Escape backslashes first
+      .replace(/\n/g, ' ')
+      .replace(/\|/g, '\\|');
     
     markdown += `| ${name} | ${inLocation} | ${type} | ${required} | ${description} |\n`;
   });
