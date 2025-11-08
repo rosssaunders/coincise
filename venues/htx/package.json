@@ -5,6 +5,9 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
+    "extract:general": "node src/extractGeneral.js",
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "npm run extract:general && npm run extract:endpoints",
     "start": "node src/index.js",
     "privaterestspot": "node src/index.js config/spot/private_rest_api.json",
     "publicrestspot": "node src/index.js config/spot/public_rest_api.json",
