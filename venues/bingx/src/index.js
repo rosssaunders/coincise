@@ -2,6 +2,7 @@ import { launchBrowser, configurePage } from "../../shared/puppeteer.js"
 import TurndownService from "turndown"
 import { gfm, tables, strikethrough } from "turndown-plugin-gfm"
 import fs from "fs"
+import path from "path"
 import { getConfig } from "./config.js"
 import process from "process"
 import { formatMarkdown } from "../../shared/format-markdown.js"
@@ -636,29 +637,91 @@ async function main() {
       result.push(html)
     }
 
-    // Create docs directory structure
-    const { docsDir, outputFileName } = outputConfig
+    // Create docs directory structure using new layout
+    const { docsDir } = outputConfig
 
-    // Create a folder from the outputFileName (remove .md extension)
-    const folderName = outputFileName.replace(/\.md$/, "")
-    const endpointsDir = `${docsDir}/${folderName}`
+    // Create endpoints directories for public and private
+    const publicDir = `${docsDir}/endpoints/public`
+    const privateDir = `${docsDir}/endpoints/private`
+    const coreDir = `${docsDir}/core`
 
-    if (!fs.existsSync(endpointsDir)) {
-      fs.mkdirSync(endpointsDir, { recursive: true })
+    if (!fs.existsSync(publicDir)) {
+      fs.mkdirSync(publicDir, { recursive: true })
+    }
+    if (!fs.existsSync(privateDir)) {
+      fs.mkdirSync(privateDir, { recursive: true })
+    }
+    if (!fs.existsSync(coreDir)) {
+      fs.mkdirSync(coreDir, { recursive: true })
     }
 
-    // Helper function to sanitize filenames
-    const sanitizeFilename = text => {
-      return text
+    // Helper function to extract endpoint info from content
+    const extractEndpointInfo = content => {
+      const lines = content.split("\n")
+      let method = null
+      let path = null
+      let isPublic = false
+
+      for (const line of lines) {
+        const trimmed = line.trim()
+
+        // Extract HTTP method and path
+        if (
+          !method &&
+          (trimmed.startsWith("GET ") ||
+            trimmed.startsWith("POST ") ||
+            trimmed.startsWith("PUT ") ||
+            trimmed.startsWith("DELETE "))
+        ) {
+          const parts = trimmed.split(" ")
+          method = parts[0]
+          path = parts[1] || ""
+        }
+
+        // Check if endpoint is public
+        if (
+          trimmed.includes("API KEY permission") &&
+          trimmed.includes("No API KEY signature required")
+        ) {
+          isPublic = true
+        }
+      }
+
+      return { method, path, isPublic }
+    }
+
+    // Helper function to generate filename from endpoint path
+    const generateFilename = (method, path) => {
+      if (!method || !path) return null
+
+      // Remove query parameters and extract path segments
+      const cleanPath = path.split("?")[0]
+      const segments = cleanPath.split("/").filter(s => s.length > 0)
+
+      // Take the last 3-4 meaningful segments
+      const relevantSegments = segments.slice(-4)
+
+      // Convert to snake_case filename
+      let filename = relevantSegments
+        .join("_")
+        .replace(/[^a-zA-Z0-9_]/g, "_")
+        .replace(/_+/g, "_")
         .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "_")
-        .replace(/^_+|_+$/g, "")
-        .substring(0, 100) // Limit length to 100 chars
+
+      // Prepend method
+      filename = `${method.toLowerCase()}_${filename}.md`
+
+      return filename
     }
 
     // Process each URL's HTML and extract individual endpoints
     let totalFilesCreated = 0
+    let publicCount = 0
+    let privateCount = 0
+    let coreCount = 0
     let totalSize = 0
+
+    const filenameConflicts = new Map()
 
     for (let i = 0; i < result.length; i++) {
       const html = result[i]
@@ -672,35 +735,95 @@ async function main() {
 
       console.log(
         `\x1b[34m%s\x1b[0m`,
-        `📝 Found ${convertDivs.length} endpoints in ${url}`
+        `📝 Found ${convertDivs.length} sections in ${url}`
       )
 
       // Process each endpoint section
       for (const div of convertDivs) {
-        // Get the H2 heading for this endpoint
+        // Get the H2 heading for this section
         const h2 = div.querySelector("h2")
         if (!h2) continue
 
-        const endpointName = h2.textContent.trim()
-        console.log(
-          `\x1b[36m%s\x1b[0m`,
-          `  📄 Processing endpoint: ${endpointName}`
-        )
+        const sectionName = h2.textContent.trim()
 
-        // Create a filename from the endpoint name
-        const filename = sanitizeFilename(endpointName) + ".md"
-
-        // Create a temporary DOM with just this endpoint's content
+        // Create a temporary DOM with just this section's content
         const endpointDom = new JSDOM(`<div>${div.innerHTML}</div>`)
 
-        // Don't demote headings - keep H2 as the top level for each endpoint file
-        // Convert this endpoint's HTML to markdown
-        const markdown = await convertToMarkdown(
+        // Convert this section's HTML to markdown
+        const markdown = convertToMarkdown(
           endpointDom.window.document.body.innerHTML
         )
 
-        // Save this endpoint to its own file in the endpoints folder
-        const outputPath = `${endpointsDir}/${filename}`
+        // Extract endpoint info to determine where to save it
+        const { method, path, isPublic } = extractEndpointInfo(markdown)
+
+        let outputPath
+        let displayPath
+
+        // Check if this is an endpoint or core documentation
+        if (method && path) {
+          // This is an endpoint - save to public or private folder
+          const filename = generateFilename(method, path)
+
+          if (!filename) {
+            console.log(
+              `\x1b[33m%s\x1b[0m`,
+              `  ⚠️  Skipping ${sectionName} (couldn't generate filename)`
+            )
+            continue
+          }
+
+          // Handle filename conflicts
+          const targetDir = isPublic ? publicDir : privateDir
+          let finalFilename = filename
+          let counter = 1
+
+          const conflictKey = `${isPublic ? "public" : "private"}:${filename}`
+          if (filenameConflicts.has(conflictKey)) {
+            const baseName = filename.replace(/\.md$/, "")
+            finalFilename = `${baseName}_${counter}.md`
+            while (
+              fs.existsSync(path.join(targetDir, finalFilename)) ||
+              filenameConflicts.has(
+                `${isPublic ? "public" : "private"}:${finalFilename}`
+              )
+            ) {
+              counter++
+              finalFilename = `${baseName}_${counter}.md`
+            }
+          }
+
+          filenameConflicts.set(
+            `${isPublic ? "public" : "private"}:${finalFilename}`,
+            true
+          )
+
+          outputPath = `${targetDir}/${finalFilename}`
+          displayPath = `endpoints/${isPublic ? "public" : "private"}/${finalFilename}`
+
+          if (isPublic) {
+            publicCount++
+            console.log(`  📄 Public:  ${sectionName} → ${finalFilename}`)
+          } else {
+            privateCount++
+            console.log(`  🔒 Private: ${sectionName} → ${finalFilename}`)
+          }
+        } else {
+          // This is core documentation - save to core folder
+          const sanitizedName = sectionName
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "_")
+            .replace(/^_+|_+$/g, "")
+          const filename = `${sanitizedName}.md`
+
+          outputPath = `${coreDir}/${filename}`
+          displayPath = `core/${filename}`
+          coreCount++
+
+          console.log(`  📚 Core:    ${sectionName} → ${filename}`)
+        }
+
+        // Save the file
         fs.writeFileSync(outputPath, markdown)
 
         // Format the markdown file
@@ -708,17 +831,18 @@ async function main() {
 
         totalFilesCreated++
         totalSize += markdown.length
-
-        console.log(`  ✅ Saved: ${folderName}/${filename}`)
       }
     }
 
     // Print a visually appealing success message
     console.log(
       "\x1b[32m%s\x1b[0m",
-      `\n✅ Success: Created ${totalFilesCreated} endpoint files!`
+      `\n✅ Success: Created ${totalFilesCreated} files!`
     )
-    console.log(`📁 Directory: ${endpointsDir}`)
+    console.log(`  📄 Public endpoints:  ${publicCount}`)
+    console.log(`  🔒 Private endpoints: ${privateCount}`)
+    console.log(`  📚 Core documentation: ${coreCount}`)
+    console.log(`📁 Directory: ${docsDir}`)
     console.log(`📦 Total Size: ${(totalSize / 1024).toFixed(2)} KB`)
   } finally {
     if (browser) {
