@@ -5,33 +5,17 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "start": "npm-run-all --sequential extract:*",
-    "extract:overview": "node src/index.js config/overview.json",
-    "extract:trading-account": "node src/index.js config/trading_account.json",
-    "extract:order-book-trading": "node src/index.js config/order_book_trading.json",
-    "extract:block-trading": "node src/index.js config/block_trading.json",
-    "extract:spread-trading": "node src/index.js config/spread_trading.json",
-    "extract:public-data": "node src/index.js config/public_data.json",
-    "extract:trading-statistics": "node src/index.js config/trading_statistics.json",
-    "extract:funding-account": "node src/index.js config/funding_account.json",
-    "extract:sub-account": "node src/index.js config/sub_account.json",
-    "extract:financial-product": "node src/index.js config/financial_product.json",
-    "extract:affiliate": "node src/index.js config/affiliate.json",
-    "extract:status": "node src/index.js config/status.json",
-    "extract:announcement": "node src/index.js config/announcement.json",
-    "extract:error-code": "node src/index.js config/error_code.json"
+    "extract:general": "node src/extractGeneral.js",
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "npm run extract:general && npm run extract:endpoints"
   },
   "dependencies": {
     "puppeteer": "^24.22.0",
     "turndown": "^7.2.1",
     "turndown-plugin-gfm": "^1.0.2",
-    "jsdom": "27.0.0",
-    "npm-run-all": "^4.1.5"
+    "jsdom": "27.0.0"
   },
   "engines": {
     "node": ">=22.0.0"
-  },
-  "devDependencies": {
-    "npm-run-all": "^4.1.5"
   }
 }

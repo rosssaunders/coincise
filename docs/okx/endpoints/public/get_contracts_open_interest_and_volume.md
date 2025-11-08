@@ -1,0 +1,37 @@
+# GET contracts open interest and volume
+
+Source: [https://www.okx.com/docs-v5/en/#trading-statistics-rest-api-get-contracts-open-interest-and-volume](https://www.okx.com/docs-v5/en/#trading-statistics-rest-api-get-contracts-open-interest-and-volume)
+
+### Get contracts open interest and volume
+
+Retrieve the open interest and trading volume for Expiry Futures and Perpetual Futures.
+
+#### Rate Limit: 5 requests per 2 seconds
+
+#### Rate limit rule: IP
+
+#### HTTP Request
+
+`GET /api/v5/rubik/stat/contracts/open-interest-volume`
+
+#### Request Parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| ccy | String | Yes | Currency |
+| begin | String | No | Begin time, e.g. `1597026383085` |
+| end | String | No | End time, e.g. `1597026383011` |
+| period | String | No | Period, the default is `5m`, e.g. \[`5m/1H/1D`\]  
+`5m` granularity can only query data within two days at most  
+`1H` granularity can only query data within 30 days at most  
+`1D` granularity can only query data within 180 days at most |
+
+#### Response Parameters
+
+| **Parameter** | **Type** | **Description** |
+| --- | --- | --- |
+| ts | String | Timestamp |
+| oi | String | Total open interest（USD） |
+| vol | String | Total trading volume（USD） |
+
+The return value array order is: \[ts,oi,vol\]
