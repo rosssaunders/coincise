@@ -1,11 +1,10 @@
 # Place a TWAP order
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
 `POST` `https://api.hyperliquid.xyz/exchange`
 
-####
+#### 
 
 [](#headers-15)
 
@@ -23,7 +22,7 @@ String
 
 "application/json"
 
-####
+#### 
 
 [](#request-body-11)
 
@@ -75,8 +74,7 @@ vaultAddress
 
 String
 
-If trading on behalf of a vault or subaccount, its Onchain address in
-42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
+If trading on behalf of a vault or subaccount, its Onchain address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
 
 expiresAfter
 

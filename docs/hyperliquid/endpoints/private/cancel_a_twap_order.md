@@ -1,11 +1,10 @@
 # Cancel a TWAP order
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
 `POST` `https://api.hyperliquid.xyz/exchange`
 
-####
+#### 
 
 [](#headers-16)
 
@@ -23,7 +22,7 @@ String
 
 "application/json"
 
-####
+#### 
 
 [](#request-body-12)
 
@@ -47,7 +46,7 @@ Object
 
 "t": Number
 
-} Meaning of keys: a is asset t is twap_id
+} Meaning of keys: a is asset t is twap\_id
 
 nonce\*
 
@@ -63,8 +62,7 @@ vaultAddress
 
 String
 
-If trading on behalf of a vault or subaccount, its address in 42-character
-hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
+If trading on behalf of a vault or subaccount, its address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
 
 expiresAfter
 

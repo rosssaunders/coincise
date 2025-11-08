@@ -1,13 +1,12 @@
 # Retrieve a user's historical orders
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
 `POST` `https://api.hyperliquid.xyz/info`
 
 Returns at most 2000 most recent historical orders
 
-####
+#### 
 
 [](#headers-5)
 
@@ -25,7 +24,7 @@ String
 
 "application/json"
 
-####
+#### 
 
 [](#request-body-7)
 
@@ -47,8 +46,7 @@ user\*
 
 String
 
-Address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000.
+Address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.
 
 200: OK
 

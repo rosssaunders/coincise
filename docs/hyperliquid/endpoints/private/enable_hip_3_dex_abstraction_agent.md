@@ -1,12 +1,10 @@
 # Enable HIP-3 DEX abstraction (agent)
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
-Same effect as UserDexAbstraction above, but only works if setting the value
-from `null` to `true`.
+Same effect as UserDexAbstraction above, but only works if setting the value from `null` to `true`.
 
-####
+#### 
 
 [](#headers-20)
 
@@ -24,7 +22,7 @@ String
 
 "application/json"
 
-####
+#### 
 
 [](#request-body-16)
 

@@ -1,11 +1,10 @@
 # Query order status by oid or cloid
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
 `POST` `https://api.hyperliquid.xyz/info`
 
-####
+#### 
 
 [](#request-body-6)
 
@@ -21,8 +20,7 @@ user\*
 
 String
 
-Address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000.
+Address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.
 
 type\*
 
@@ -34,8 +32,7 @@ oid\*
 
 uint64 or string
 
-Either u64 representing the order id or 16-byte hex string representing the
-client order id
+Either u64 representing the order id or 16-byte hex string representing the client order id
 
 The <status> string returned has the following possible values:
 
@@ -97,8 +94,7 @@ Canceled due to liquidation
 
 scheduledCancel
 
-API only. Canceled due to exceeding scheduled cancel deadline (dead man's
-switch)
+API only. Canceled due to exceeding scheduled cancel deadline (dead man's switch)
 
 tickRejected
 
