@@ -1,6 +1,6 @@
 # ByBit V5 Private REST API Documentation
 
-# Rate Limit
+# Rate Limit Rules
 
 ## IP Limit[​](#ip-limit "Direct link to heading")
 
@@ -243,239 +243,6 @@ orders in one second if I use both endpoints to place orders_
   5 orders will be successfully placed, and the 6-8th orders will report an
   error exceeding the limit, and these orders will fail.
 
-## API Rate Limit Rules For VIPs[​](#api-rate-limit-rules-for-vips "Direct link to heading")
-
-|               | Unified Account |
-| ------------- | :-------------: | ------------- | ----------- |
-| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
-| Default       |      10/s       | 10/s          | 20/s        |
-| VIP 1         |      20/s       | 20/s          | 25/s        |
-| VIP 2         |      40/s       | 40/s          | 30/s        |
-| VIP 3         |      60/s       | 60/s          | 40/s        |
-| VIP 4         |      60/s       | 60/s          | 40/s        |
-| VIP 5         |      60/s       | 60/s          | 40/s        |
-| VIP Supreme   |      60/s       | 60/s          | 40/s        |
-
-## API Rate Limit Rules For PROs[​](#api-rate-limit-rules-for-pros "Direct link to heading")
-
-UPCOMING CHANGES FOR PRO ACCOUNT
-
-Starting **August 13, 2025**, Bybit will roll out a new institutional API rate
-limit framework designed to enhance performance for high-frequency trading
-clients. The new system introduces a centralized institution-level rate cap with
-flexible per-UID configurations, enabling greater efficiency and scalability.
-Refer to
-[announcement](https://announcements.bybit.com/en/article/update-bybit-enhances-api-rate-limits-for-institutional-traders-bltbbbf60de757d074e/)
-
-### UID level:[​](#uid-level "Direct link to heading")
-
-|               | Unified Account |
-| ------------- | :-------------: | ------------- | ----------- |
-| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
-| PRO1          |      200/s      | 200/s         | 200/s       |
-| PRO2          |      400/s      | 400/s         | 400/s       |
-| PRO3          |      600/s      | 600/s         | 600/s       |
-| PRO4          |      800/s      | 800/s         | 800/s       |
-| PRO5          |     1000/s      | 1000/s        | 1000/s      |
-| PRO6          |     1200/s      | 1200/s        | 1200/s      |
-
-### Master and subaccounts level (Institutional API rate limit Quota):[​](#master-and-subaccounts-level-institutional-api-rate-limit-quota "Direct link to heading")
-
-|               | Unified Account |
-| ------------- | :-------------: | ------------- | ----------- |
-| Level\Product | <b>Futures</b>  | <b>Option</b> | <b>Spot</b> |
-| PRO1          |     10000/s     | 10000/s       | 10000/s     |
-| PRO2          |     20000/s     | 20000/s       | 20000/s     |
-| PRO3          |     30000/s     | 30000/s       | 30000/s     |
-| PRO4          |     40000/s     | 40000/s       | 40000/s     |
-| PRO5          |     50000/s     | 50000/s       | 50000/s     |
-| PRO6          |     60000/s     | 60000/s       | 60000/s     |
-
-instructions for API rate limit
-
-- All of the existing subaccounts still have those original API rate limits
-- The default API rate limit for a new sub-account is not counted in the total
-  Institutional API rate limit quota.
-- The default API rate limit for a new sub is: 10/s for futures , 10/s for
-  options, 20/s for spot
-- If the Institutional API rate limit total quota is exceeded, you can only
-  reduce the account's API rate limit first. After the total API rate limit is
-  less than the total Institutional API rate limit quota, you can increase the
-  API rate limit of an account.
-
-### Set api rate limit[​](#set-api-rate-limit "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- If UID requesting this endpoint is a master account, uids in the input
-  parameter must be subaccounts of the master account.
-- If UID requesting this endpoint is not a master account, uids in the input
-  parameter must be the UID requesting this endpoint
-- UID requesting this endpoint must be an institutional user.
-
-#### HTTP Request[​](#http-request "Direct link to heading")
-
-POST `/v5/apilimit/set`
-
-#### Request Parameters[​](#request-parameters "Direct link to heading")
-
-| Parameter                                        | Required | Type    | Comments                           |
-| :----------------------------------------------- | :------- | :------ | ---------------------------------- |
-| list                                             | true     | array   | Object                             |
-| &gt; uids                                        | true     | string  | Multiple UIDs, separated by commas |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | true     | string  | Business type                      |
-| &gt; rate                                        | true     | integer | api rate limit per second          |
-
-#### Response Parameters[​](#response-parameters "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                           |
-| :----------------------------------------------- | :------ | ---------------------------------- |
-| list                                             | array   | Object                             |
-| &gt; uids                                        | string  | Multiple UIDs, separated by commas |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
-| &gt; rate                                        | integer | api rate limit per second          |
-| &gt; success                                     | boolean | success or not                     |
-| &gt; <a href="/docs/v5/enum#msg">msg</a>         | string  | result message                     |
-
-#### Request Example[​](#request-example "Direct link to heading")
-
-```
-POST /v5/apilimit/set HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1711420489915X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "list": [        {            "uids": "106293838",            "bizType": "DERIVATIVES",            "rate": 50        }    ]}
-```
-
-#### Response Example[​](#response-example "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "result": [            {                "uids": "290118",                "bizType": "SPOT",                "rate": 600,                "success": true,                "msg": "API limit updated successfully"            }        ]    },    "retExtInfo": {},    "time": 1754894296913}
-```
-
-### Query api rate limit[​](#query-api-rate-limit "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- A master account can query api rate limit of its own and subaccounts.
-- A subaccount can only query its own api rate limit.
-
-#### HTTP Request[​](#http-request-1 "Direct link to heading")
-
-GET `/v5/apilimit/query`
-
-#### Request Parameters[​](#request-parameters-1 "Direct link to heading")
-
-| Parameter | Required | Type   | Comments                           |
-| :-------- | :------- | :----- | ---------------------------------- |
-| uids      | true     | string | Multiple UIDs, separated by commas |
-
-#### Response Parameters[​](#response-parameters-1 "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                           |
-| :----------------------------------------------- | :------ | ---------------------------------- |
-| list                                             | array   | Object                             |
-| &gt; uids                                        | string  | Multiple UIDs, separated by commas |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                      |
-| &gt; rate                                        | integer | api rate limit per second          |
-
-#### Request Example[​](#request-example-1 "Direct link to heading")
-
-```
-GET /v5/apilimit/query?uids=290118 HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
-```
-
-#### Response Example[​](#response-example-1 "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "uids": "290118",                "bizType": "SPOT",                "rate": 600            },            {                "uids": "290118",                "bizType": "DERIVATIVES",                "rate": 400            }        ]    },    "retExtInfo": {},    "time": 1754894341984}
-```
-
-### Query api rate limit usage and cap[​](#query-api-rate-limit-usage-and-cap "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- Query ins level full picture rate limit usage and cap
-- Only queries from one of the main UIDs or a subaccount UID from sub-INS API
-  key are allowed.
-
-#### HTTP Request[​](#http-request-2 "Direct link to heading")
-
-GET `/v5/apilimit/query-cap`
-
-#### Request Parameters[​](#request-parameters-2 "Direct link to heading")
-
-None
-
-#### Response Parameters[​](#response-parameters-2 "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                                                              |
-| :----------------------------------------------- | :------ | --------------------------------------------------------------------- |
-| list                                             | array   | Object                                                                |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                                                         |
-| &gt; totalRate                                   | integer | Total api rate limit usage accross all subaccounts and master account |
-| &gt; insCap                                      | integer | Ins level api rate limit per second,depends on your ins level         |
-| &gt; uidCap                                      | integer | Uid level api rate limit per second,depends on your uid level         |
-
-#### Request Example[​](#request-example-2 "Direct link to heading")
-
-```
-GET /v5/apilimit/query-cap HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
-```
-
-#### Response Example[​](#response-example-2 "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "insCap": "30000",                "uidCap": "600",                "totalRate": "29882",                "bizType": "SPOT"            },            {                "insCap": "30000",                "uidCap": "600",                "totalRate": "29882",                "bizType": "OPTIONS"            },            {                "insCap": "40000",                "uidCap": "800",                "totalRate": "39932",                "bizType": "DERIVATIVES"            }        ]    },    "retExtInfo": {},    "time": 1758857589872}
-```
-
-### Query all api rate limit[​](#query-all-api-rate-limit "Direct link to heading")
-
-> API rate limit: 50 req per second
-
-info
-
-- Query all of uid level rate limits including all master account and
-  subaccounts
-- Only queries from one of the main UIDs or a subaccount UID from sub-INS API
-  key are allowed.
-
-#### HTTP Request[​](#http-request-3 "Direct link to heading")
-
-GET `/v5/apilimit/query-all`
-
-#### Request Parameters[​](#request-parameters-3 "Direct link to heading")
-
-| Parameter | Required | Type   | Comments                                                                                                                              |
-| :-------- | :------- | :----- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| limit     | false    | string | Limit for data size per page. [<code>1</code>, <code>1000</code>]. Default: <code>1000</code>                                         |
-| cursor    | false    | string | Cursor. Use the <code>nextPageCursor</code> token from the response to retrieve the next page of the result set                       |
-| uids      | false    | string | Multiple UIDs accross different master account, separated by commas. Returns all master accounts and subaccounts ratelimit by default |
-
-#### Response Parameters[​](#response-parameters-3 "Direct link to heading")
-
-| Parameter                                        | Type    | Comments                             |
-| :----------------------------------------------- | :------ | ------------------------------------ |
-| nextPageCursor                                   | string  | Used to get the next page data       |
-| list                                             | array   | Object                               |
-| &gt; uids                                        | string  | Multiple UIDs , separated by commas. |
-| &gt; <a href="/docs/v5/enum#biztype">bizType</a> | string  | Business type                        |
-| &gt; rate                                        | integer | Api rate limit per second            |
-
-#### Request Example[​](#request-example-3 "Direct link to heading")
-
-```
-GET /v5/apilimit/query-all HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728460942776X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 2
-```
-
-#### Response Example[​](#response-example-3 "Direct link to heading")
-
-```
-{    "retCode": 0,    "retMsg": "success",    "result": {        "list": [            {                "uids": "104270393,1674166,1190923,101446030",                "bizType": "SPOT",                "rate": 223            },            {                "uids": "104074050,104394193,104126066",                "bizType": "OPTIONS",                "rate": 223            },            {                "uids": "104154966,103803484,103995540,100445068",                "bizType": "DERIVATIVES",                "rate": 298            }        ],        "nextPageCursor": ""    },    "retExtInfo": {},    "time": 1758857701702}
-```
-
 # Enums Definitions
 
 ### locale[​](#locale "Direct link to heading")
@@ -642,6 +409,7 @@ _closed status_
 - `CreateByStopLoss` Futures stop loss order
 - `CreateByPartialStopLoss` Futures partial stop loss order
 - `CreateByTrailingStop` Futures trailing stop order
+- `CreateByTrailingProfit` Futures trailing take profit order
 - `CreateByLiq` Laddered liquidation to reduce the required maintenance margin
 - `CreateByTakeOver_PassThrough`If the position is still subject to liquidation
   (i.e., does not meet the required maintenance margin level), the position
@@ -662,6 +430,7 @@ _closed status_
 - `CreateByIceBerg` Order created by Ice berg strategy - web/app
 - `CreateByArbitrage` Order created by arbitrage - web/app
 - `CreateByDdh` Option dynamic delta hedge order - web/app
+- `CreateByBboOrder` BBO order
 
 ### execType[​](#exectype "Direct link to heading")
 
@@ -748,7 +517,7 @@ _closed status_
 - `EC_MarketOrderPriceIsNotZero`
 - `EC_LimitOrderInvalidPrice`
 - `EC_NoEnoughQtyToFill`
-- `EC_NoImmediateQtyToFill`
+- `EC_NoImmediateQtyToFill` a maker could be found to fill your order
 - `EC_PerCancelRequest`
 - `EC_MarketOrderCannotBePostOnly`
 - `EC_PostOnlyWillTakeLiquidity`
@@ -781,8 +550,9 @@ _closed status_
 - `EC_SecurityStatusFail`
 - `EC_ReachRiskPriceLimit`
 - `EC_OrderNotExist`
-- `EC_CancelByOrderValueZero`
-- `EC_CancelByMatchValueZero`
+- `EC_CancelByOrderValueZero` order cancelled as its remaining value is zero
+- `EC_CancelByMatchValueZero` order cancelled as the order it matched with has a
+  remaining value of zero
 - `EC_ReachMarketPriceLimit`
 
 ### accountType[​](#accounttype "Direct link to heading")
@@ -857,6 +627,10 @@ Also known as the "standard account".
 - `CancelByDCP` cancelled by DCP triggering
 - `CancelByRebalance` Spread trading: the order price of a single leg order is
   outside the limit price range.
+- `CancelByOCOTpCanceledBySlTriggered` The take profit order was canceled due to
+  the triggering of the stop loss
+- `CancelByOCOSlCanceledByTpTriggered` The stop loss order was canceled due to
+  the triggering of the take profit
 
 _Options:_
 
@@ -1031,20 +805,24 @@ _Options:_
 - `DEFI_INVESTMENT_REFUND` transfer in for DEFI refund
 - `DEFI_INVESTMENT_REDEMPTION` tranfer in for DEFI redemption
 - `INSTITUTION_LOAN_IN` Borrowed Amount (INS Loan)
-- `INSTITUTION_PAYBACK_PRINCIPAL_OUT` Principal Repayment (INS Loan)
-- `INSTITUTION_PAYBACK_INTEREST_OUT` Interest Repayment (INS Loan)
-- `INSTITUTION_EXCHANGE_SELL` Auto Sold Collateral (INS Loan)
-- `INSTITUTION_EXCHANGE_BUY` Auto Buy Liability (INS Loan)
-- `INSTITUTION_LIQ_PRINCIPAL_OUT` Auto Principal Repayment (INS Loan)
-- `INSTITUTION_LIQ_INTEREST_OUT` Auto Interest Repayment (INS Loan)
+- `INSTITUTION_PAYBACK_PRINCIPAL_OUT` Principal repayment (INS Loan)
+- `INSTITUTION_PAYBACK_INTEREST_OUT` Interest repayment (INS Loan)
+- `INSTITUTION_EXCHANGE_SELL` Auto sold collateral (INS Loan)
+- `INSTITUTION_EXCHANGE_BUY` Auto buy liability (INS Loan)
+- `INSTITUTION_LIQ_PRINCIPAL_OUT` Auto principal repayment (INS Loan)
+- `INSTITUTION_LIQ_INTEREST_OUT` Auto interest repayment (INS Loan)
 - `INSTITUTION_LOAN_TRANSFER_IN` Transfer in (INS Loan)
 - `INSTITUTION_LOAN_TRANSFER_OUT` Transfer out (INS Loan)
 - `INSTITUTION_LOAN_WITHOUT_WITHDRAW` Transfer out (INS Loan)
-- `INSTITUTION_LOAN_RESERVE_IN` Reserve Fund In (INS Loan)
-- `INSTITUTION_LOAN_RESERVE_OUT` Reserve Fund Out (INS Loan)
+- `INSTITUTION_LOAN_RESERVE_IN` Reserve fund in (INS Loan)
+- `INSTITUTION_LOAN_RESERVE_OUT` Reserve fund out (INS Loan)
 - `SPREAD_FEE_OUT` Spread fee for EU Broker
 - `PLATFORM_TOKEN_MNT_LIQRECALLEDMMNT` Recall MNT
 - `PLATFORM_TOKEN_MNT_LIQRETURNEDMNT` Return MNT
+- `MANUAL_LOANS_BORROW` Manual borrow
+- `MANUAL_LOANS_REPAY` Manual repay
+- `AUTO_LOANS_BORROW` Auto borrow
+- `AUTO_LOANS_REPAY` Auto repay
 
 ### type(contract-translog)[​](#typecontract-translog "Direct link to heading")
 
@@ -1525,7 +1303,10 @@ with the example of BTCUSDT:
 | 170132 | Order price too high.                                                                                                                                                                                     |
 | 170133 | Order price lower than the minimum.                                                                                                                                                                       |
 | 170134 | Order price decimal too long.                                                                                                                                                                             |
-| 170135 | Order quantity too large.                                                                                                                                                                                 |
+| 170371 | Order price cannot be lower than {}, the price limitation                                                                                                                                                 |
+| 170372 | Order price cannot be higher than 0, the price limitation                                                                                                                                                 |
+| 170381 | Order quantity too large.                                                                                                                                                                                 |
+| 170382 | Order quantity too large.                                                                                                                                                                                 |
 | 170136 | Order quantity lower than the minimum.                                                                                                                                                                    |
 | 170137 | Order volume decimal too long                                                                                                                                                                             |
 | 170139 | Order has been filled.                                                                                                                                                                                    |
@@ -1592,29 +1373,6 @@ with the example of BTCUSDT:
 | 170359 | TThe current site does not support leveraged trading                                                                                                                                                      |
 | 170709 | OTC loan: The select trading pair is not in the whitelist pair                                                                                                                                            |
 | 170810 | Cannot exceed maximum of 500 conditional, TP/SL and active orders.                                                                                                                                        |
-
-## Spot Leverage Token[​](#spot-leverage-token "Direct link to heading")
-
-|  Code  | Description                                                                                                            |
-| :----: | :--------------------------------------------------------------------------------------------------------------------- |
-| 175000 | The serialNum is already in use.                                                                                       |
-| 175001 | Daily purchase limit has been exceeded. Please try again later.                                                        |
-| 175002 | There's a large number of purchase orders. Please try again later.                                                     |
-| 175003 | Insufficient available balance. Please make a deposit and try again.                                                   |
-| 175004 | Daily redemption limit has been exceeded. Please try again later.                                                      |
-| 175005 | There's a large number of redemption orders. Please try again later.                                                   |
-| 175006 | Insufficient available balance. Please make a deposit and try again.                                                   |
-| 175007 | Order not found.                                                                                                       |
-| 175008 | Purchase period hasn't started yet.                                                                                    |
-| 175009 | Purchase amount has exceeded the upper limit.                                                                          |
-| 175010 | You haven't passed the quiz yet! To purchase and/or redeem an LT, please complete the quiz first.                      |
-| 175012 | Redemption period hasn't started yet.                                                                                  |
-| 175013 | Redemption amount has exceeded the upper limit.                                                                        |
-| 175014 | Purchase of the LT has been temporarily suspended.                                                                     |
-| 175015 | Redemption of the LT has been temporarily suspended.                                                                   |
-| 175016 | Invalid format. Please check the length and numeric precision.                                                         |
-| 175017 | Failed to place order：Exceed the maximum position limit of leveraged tokens, the current available limit is XXXX USDT |
-| 175027 | Subscriptions and redemptions are temporarily unavailable while account upgrade is in progress                         |
 
 ## Spot Margin Trade[​](#spot-margin-trade "Direct link to heading")
 
@@ -1930,6 +1688,62 @@ with the example of BTCUSDT:
 | 3500153 | No permission to operate these UIDs            |
 | 3500153 | You do not have permission to query other UIDs |
 
+## RFQ[​](#rfq "Direct link to heading")
+
+| Code   | Description                                                 |
+| :----- | :---------------------------------------------------------- |
+| 110300 | The RFQ order does not exist                                |
+| 110301 | The Quote order does not exist                              |
+| 110302 | Demo user is prohibited                                     |
+| 110303 | RFQ value is less than the min limit                        |
+| 110304 | Cannot be self-executed                                     |
+| 110305 | Quote UID is not in counterparties                          |
+| 110306 | Quote legs do not match                                     |
+| 110307 | Quote order already exists for this RFQ                     |
+| 110308 | RFQ strategy legs size is not correct                       |
+| 110309 | RFQ strategy side is not correct                            |
+| 110310 | RFQ strategy qty is not correct                             |
+| 110311 | RFQ strategy symbol is not correct                          |
+| 110312 | No permission to execute quote                              |
+| 110313 | RFQ only supports one-way position mode                     |
+| 110314 | Order amount is less than min trade amount                  |
+| 110315 | Order qty exceeds the upper limit                           |
+| 110316 | RFQ is not available for Copy Trading                       |
+| 110317 | Counterparty cannot be self                                 |
+| 110318 | There are too many counterparties to choose from            |
+| 110319 | Order amount is greater than max trade amount               |
+| 110320 | Symbols that have not enabled manual loan are not supported |
+| 110321 | Symbol is not supported                                     |
+
+## Manual Loan[​](#manual-loan "Direct link to heading")
+
+| Code     | Description                                                                                                              |
+| :------- | :----------------------------------------------------------------------------------------------------------------------- |
+| 34022001 | System error. Please try again later.                                                                                    |
+| 34022003 | System error. Please try again later.                                                                                    |
+| 34022027 | Invalid request parameters.                                                                                              |
+| 34022030 | Borrowing demand is high, and the fund pool is currently low. Please wait a moment.                                      |
+| 34022031 | Risk rate limit exceeded. Please reduce your borrow amount in the Unified Trading Account.                               |
+| 34022033 | Borrowing precision must be an integer multiple.                                                                         |
+| 34022034 | The minimum repayment amount must be an integer multiple.                                                                |
+| 34022035 | You cannot repay while interest is being calculated.                                                                     |
+| 34022036 | Please enable Margin Trading to continue.                                                                                |
+| 34022038 | Repayment is in progress. Please do not repeat the operation.                                                            |
+| 34022010 | The borrowed asset does not exist.                                                                                       |
+| 34022041 | Currently, your account has no borrowed coins. No repayments are needed.                                                 |
+| 34022044 | Repayment unsuccessful.                                                                                                  |
+| 34022045 | Borrowing unsuccessful.                                                                                                  |
+| 34022011 | Amount must be at least.                                                                                                 |
+| 34022014 | Decimal precision cannot exceed 18 digits.                                                                               |
+| 34022047 | CopyTrade not supported.                                                                                                 |
+| 34022048 | Borrowing is not allowed during liquidation.                                                                             |
+| 34022049 | Insufficient collateral balance.                                                                                         |
+| 34022050 | Repayment failed. You currently have spot hedging liabilities. Please close your derivatives positions before repayment. |
+| 34022051 | Institutional loan in progress.                                                                                          |
+| 34022052 | Institutional loan transactions banned.                                                                                  |
+| 35000011 | You have existing pending loan orders. Please try again later.                                                           |
+| 34022053 | Please contact the sales to enable the manual borrowing feature.                                                         |
+
 # Place Order
 
 This endpoint supports to create the order for Spot, Margin trading, USDT
@@ -2009,6 +1823,9 @@ info
   platform will reserve the right to remind, warn, and impose necessary
   restrictions. Customers who use API default to acceptance of these terms and
   have the obligation to cooperate with adjustments.
+- **Reduce only orders:**  
+  If reduceOnly=true and order qty > max order qty, the order will automatically
+  be split up into multiple orders.
 
 Spot Stop Order
 
@@ -2034,8 +1851,8 @@ POST `/v5/order/create`
 | <a href="/docs/v5/enum#ordertype">orderType</a>     | <strong>true</strong> | string  | <code>Market</code>, <code>Limit</code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | qty                                                 | <strong>true</strong> | string  | Order quantity<ul><li>UTA account<ul><li>Spot: Market Buy order by value by default, you can set <code>marketUnit</code> field to choose order by value or qty for market orders</li><li>Perps, Futures &amp; Option: always order by qty</li></ul></li><li>classic account<ul><li>Spot: Market Buy order by value by default</li><li>Perps, Futures: always order by qty</li></ul></li><li>Perps &amp; Futures: if you pass <code>qty</code>="0" and specify <code>reduceOnly</code>=true&amp;<code>closeOnTrigger</code>=true, you can close the position up to <code>maxMktOrderQty</code> or <code>maxOrderQty</code> shown on <a href="/docs/v5/market/instrument">Get Instruments Info</a> of current symbol</li></ul> |
 | marketUnit                                          | false                 | string  | Select the unit for <code>qty</code> when create <strong>Spot market</strong> orders for <strong>UTA account</strong><li><code>baseCoin</code>: for example, buy BTCUSDT, then "qty" unit is BTC</li><li><code>quoteCoin</code>: for example, sell BTCUSDT, then "qty" unit is USDT</li>                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| slippageToleranceType                               | false                 | string  | Slippage tolerance Type for <strong>market order</strong>, <code>TickSize</code>, <code>Percent</code><ul><li>Support linear, inverse, spot trading, but take profit, stoploss, conditional orders are not supported</li><li><b>TickSize</b>:<br>the highest price of Buy order = ask1 + <code>slippageTolerance</code> x tickSize;<br>the lowest price of Sell order = bid1 - <code>slippageTolerance</code> x tickSize</li><li><b>Percent</b>:<br>the highest price of Buy order = ask1 x (1 + <code>slippageTolerance</code> x 0.01);<br>the lowest price of Sell order = bid1 x (1 - <code>slippageTolerance</code> x 0.01)</li></ul>                                                                                    |
-| slippageTolerance                                   | false                 | string  | Slippage tolerance value<li><code>TickSize</code>: range is [1, 10000], integer only</li><li><code>Percent</code>: range is [0.01%, 10%], up to 2 decimals</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| slippageToleranceType                               | false                 | string  | Slippage tolerance Type for <strong>market order</strong>, <code>TickSize</code>, <code>Percent</code><ul><li>take profit, stoploss, conditional orders are not supported</li><li><b>TickSize</b>:<br>the highest price of Buy order = ask1 + <code>slippageTolerance</code> x tickSize;<br>the lowest price of Sell order = bid1 - <code>slippageTolerance</code> x tickSize</li><li><b>Percent</b>:<br>the highest price of Buy order = ask1 x (1 + <code>slippageTolerance</code> x 0.01);<br>the lowest price of Sell order = bid1 x (1 - <code>slippageTolerance</code> x 0.01)</li></ul>                                                                                                                               |
+| slippageTolerance                                   | false                 | string  | Slippage tolerance value<li><code>TickSize</code>: range is [1, 10000], integer only</li><li><code>Percent</code>: range is [0.01, 10], up to 2 decimals</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | price                                               | false                 | string  | Order price<ul><li>Market order will ignore this field</li><li>Please check the min price and price precision from <a href="/docs/v5/market/instrument#response-parameters">instrument info</a> endpoint</li><li>If you have position, price needs to be better than liquidation price</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | triggerDirection                                    | false                 | integer | Conditional order param. Used to identify the expected direction of the conditional order.<ul><li><code>1</code>: triggered when market price rises to <code>triggerPrice</code></li><li><code>2</code>: triggered when market price falls to <code>triggerPrice</code></li></ul>Valid for <code>linear</code> &amp; <code>inverse</code>                                                                                                                                                                                                                                                                                                                                                                                    |
 | orderFilter                                         | false                 | string  | If it is not passed, <code>Order</code> by default.<ul><li><code>Order</code></li><li><code>tpslOrder</code>: Spot TP/SL order, the assets are occupied even before the order is triggered</li><li><code>StopOrder</code>: Spot conditional order, the assets will not be occupied until the price of the underlying asset reaches the trigger price, and the required assets will be occupied after the Conditional order is triggered</li></ul>Valid for <code>spot</code> <strong>only</strong>                                                                                                                                                                                                                           |
@@ -2058,6 +1875,8 @@ POST `/v5/order/create`
 | slLimitPrice                                        | false                 | string  | The limit order price when stop loss price is triggered<ul><li><code>linear</code> &amp; <code>inverse</code>: only works when tpslMode=Partial and slOrderType=Limit</li><li>Spot(UTA): it is required when the order has <code>stopLoss</code> and "slOrderType"=<code>Limit</code></li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | tpOrderType                                         | false                 | string  | The order type when take profit is triggered<ul><li><code>linear</code> &amp; <code>inverse</code>: <code>Market</code>(default), <code>Limit</code>. For tpslMode=Full, it only supports tpOrderType=Market</li><li>Spot(UTA):<br><code>Market</code>: when you set "takeProfit",<br><code>Limit</code>: when you set "takeProfit" and "tpLimitPrice"</li></ul>                                                                                                                                                                                                                                                                                                                                                             |
 | slOrderType                                         | false                 | string  | The order type when stop loss is triggered<ul><li><code>linear</code> &amp; <code>inverse</code>: <code>Market</code>(default), <code>Limit</code>. For tpslMode=Full, it only supports slOrderType=Market</li><li>Spot(UTA):<br><code>Market</code>: when you set "stopLoss",<br><code>Limit</code>: when you set "stopLoss" and "slLimitPrice"</li></ul>                                                                                                                                                                                                                                                                                                                                                                   |
+| bboSideType                                         | false                 | string  | <ul><li><code>Queue</code>: use the order price on the orderbook in the same direction as the <code>side</code></li><li><code>Counterparty</code>: use the order price on the orderbook in the opposite direction as the <code>side</code></li></ul>Valid for <code>linear</code> &amp; <code>inverse</code>                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| bboLevel                                            | false                 | string  | <code>1</code>,<code>2</code>,<code>3</code>,<code>4</code>,<code>5</code> Valid for <code>linear</code> &amp; <code>inverse</code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -2343,7 +2162,7 @@ GET `/v5/order/realtime`
 | &gt; leavesValue                                             | string  | The estimated value not executed. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                      |
 | &gt; cumExecQty                                              | string  | Cumulative executed order qty                                                                                                                                                                                                                              |
 | &gt; cumExecValue                                            | string  | Cumulative executed order value. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                       |
-| &gt; cumExecFee                                              | string  | Deprecated. Cumulative executed trading fee. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                           |
+| &gt; cumExecFee                                              | string  | <li><code>inverse</code>, <code>option</code>: Cumulative executed trading fee.</li><li><code>linear</code>, <code>spot</code>: Deprecated. Use <code>cumFeeDetail</code> instead.</li><em>Classic <code>spot</code> is not supported</em>                 |
 | &gt; <a href="/docs/v5/enum#timeinforce">timeInForce</a>     | string  | Time in force                                                                                                                                                                                                                                              |
 | &gt; <a href="/docs/v5/enum#ordertype">orderType</a>         | string  | Order type. <code>Market</code>,<code>Limit</code>. For TP/SL orders, is the order type after the order was triggered                                                                                                                                      |
 | &gt; <a href="/docs/v5/enum#stopordertype">stopOrderType</a> | string  | Stop order type                                                                                                                                                                                                                                            |
@@ -2370,7 +2189,7 @@ GET `/v5/order/realtime`
 | &gt; smpOrderId                                              | string  | The counterparty's orderID which triggers this SMP execution                                                                                                                                                                                               |
 | &gt; createdTime                                             | string  | Order created timestamp (ms)                                                                                                                                                                                                                               |
 | &gt; updatedTime                                             | string  | Order updated timestamp (ms)                                                                                                                                                                                                                               |
-| &gt; cumFeeDetail                                            | json    | Cumulative trading fee details instead of <code>cumExecFee</code>                                                                                                                                                                                          |
+| &gt; cumFeeDetail                                            | json    | <li><code>linear</code>, <code>spot</code>: Cumulative trading fee details instead of <code>cumExecFee</code></li>                                                                                                                                         |
 
 [RUN >>](/docs/api-explorer/v5/trade/open-order)
 
@@ -2573,7 +2392,7 @@ GET `/v5/order/history`
 | &gt; leavesValue                                             | string  | The estimated value not executed. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                     |
 | &gt; cumExecQty                                              | string  | Cumulative executed order qty                                                                                                                                                                                                                                                                                                             |
 | &gt; cumExecValue                                            | string  | Cumulative executed order value. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                                      |
-| &gt; cumExecFee                                              | string  | Deprecated. Cumulative executed trading fee. <em>Classic <code>spot</code> is not supported</em>                                                                                                                                                                                                                                          |
+| &gt; cumExecFee                                              | string  | <li><code>inverse</code>, <code>option</code>: Cumulative executed trading fee.</li><li><code>linear</code>, <code>spot</code>: Deprecated. Use <code>cumFeeDetail</code> instead.</li><em>Classic <code>spot</code> is not supported</em>                                                                                                |
 | &gt; <a href="/docs/v5/enum#timeinforce">timeInForce</a>     | string  | Time in force                                                                                                                                                                                                                                                                                                                             |
 | &gt; <a href="/docs/v5/enum#ordertype">orderType</a>         | string  | Order type. <code>Market</code>,<code>Limit</code>. For TP/SL orders, is the order type after the order was triggered<li><code>Block trade Roll Back</code>, <code>Block trade-Limit</code>: Unique enum values for Unified account block trades</li>                                                                                     |
 | &gt; <a href="/docs/v5/enum#stopordertype">stopOrderType</a> | string  | Stop order type                                                                                                                                                                                                                                                                                                                           |
@@ -2603,7 +2422,7 @@ GET `/v5/order/history`
 | &gt; createdTime                                             | string  | Order created timestamp (ms)                                                                                                                                                                                                                                                                                                              |
 | &gt; updatedTime                                             | string  | Order updated timestamp (ms)                                                                                                                                                                                                                                                                                                              |
 | &gt; extraFees                                               | string  | Trading fee rate information. Currently, this data is returned only for spot orders placed on the Indonesian site or spot fiat currency orders placed on the EU site. In other cases, an empty string is returned. Enum: <a href="/docs/v5/enum#extrafeesfeetype">feeType</a>, <a href="/docs/v5/enum#extrafeessubfeetype">subFeeType</a> |
-| &gt; cumFeeDetail                                            | json    | Cumulative trading fee details instead of <code>cumExecFee</code>                                                                                                                                                                                                                                                                         |
+| &gt; cumFeeDetail                                            | json    | <li><code>linear</code>, <code>spot</code>: Cumulative trading fee details instead of <code>cumExecFee</code></li>                                                                                                                                                                                                                        |
 | nextPageCursor                                               | string  | Refer to the <code>cursor</code> request parameter                                                                                                                                                                                                                                                                                        |
 
 [RUN >>](/docs/api-explorer/v5/trade/order-list)
@@ -3265,7 +3084,7 @@ GET `/v5/position/list`
 | &gt; leverage                                                      | string  | Position leverage<br><em>for portfolio margin mode, this field returns "", which means leverage rules are invalid</em>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | &gt; markPrice                                                     | string  | Mark price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | &gt; liqPrice                                                      | string  | Position liquidation price<ul><li><a href="/docs/v5/acct-mode#uta-20">UTA2.0</a>(isolated margin), <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>(isolated margin), <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>(inverse), Classic account:<br>it is the real price for isolated and cross positions, and keeps <code>""</code> when liqPrice &lt;= minPrice or liqPrice &gt;= maxPrice</li><li><a href="/docs/v5/acct-mode#uta-20">UTA2.0</a>(Cross margin), <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>(Cross margin):<br>it is an <b>estimated</b> price for cross positions(because the unified mode controls the risk rate according to the account), and keeps <code>""</code> when liqPrice &lt;= minPrice or liqPrice &gt;= maxPrice</li></ul><em>this field is empty for Portfolio Margin Mode, and no liquidation price will be provided</em> |
-| &gt; bustPrice                                                     | string  | Bankruptcy price: Only applicable to the classic accounts, For Unified account, it will always return empty                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| &gt; bustPrice                                                     | string  | Bankruptcy price: Only applicable to the classic account                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | &gt; positionIM                                                    | string  | Initial margin<li>Classic &amp; <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>(inverse): ignore this field</li><li>UTA portfolio margin mode, it returns ""</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | &gt; positionIMByMp                                                | string  | Initial margin calculated by mark price<li>Classic &amp; <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>(inverse) : ignore this field</li><li>UTA portfolio margin mode, it returns ""</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | &gt; positionMM                                                    | string  | Maintenance margin<li>Classic &amp; <a href="/docs/v5/acct-mode#uta-10">UTA1.0</a>(inverse): ignore this field</li><li>UTA portfolio margin mode, it returns ""</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -4189,6 +4008,14 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 Obtain wallet balance, query asset information of each currency. By default,
 currency information with assets or liabilities of 0 is not returned.
 
+info
+
+Under the new logic of UTA manual borrow, `spotBorrow` field corresponding to
+spot liabilities is detailed in the
+[announcement](https://announcements.bybit.com/en/article/bybit-uta-function-optimization-manual-coin-borrowing-will-be-launched-soon-blt5d858199bd12e849/).
+
+Old `walletBalance` = New `walletBalance` - `spotBorrow`
+
 ### HTTP Request[​](#http-request "Direct link to heading")
 
 GET `/v5/account/wallet-balance`
@@ -4240,7 +4067,7 @@ GET `/v5/account/wallet-balance`
 | &gt;&gt; marginCollateral       | boolean | Whether it can be used as a margin collateral currency (platform), <code>true</code>: YES, <code>false</code>: NO<li>When marginCollateral=false, then collateralSwitch is meaningless</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | &gt;&gt; collateralSwitch       | boolean | Whether the collateral is turned on by user (user), <code>true</code>: ON, <code>false</code>: OFF<li>When marginCollateral=true, then collateralSwitch is meaningful</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | &gt;&gt; availableToBorrow      | string  | deprecated field, always return <code>""</code>. Please refer to <code>availableToBorrow</code> in the <a href="/docs/v5/account/collateral-info">Get Collateral Info</a>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| &gt;&gt; spotBorrow             | string  | Borrow amount by spot margin trade (does not include borrow amount by spot margin active order). This business scenario is not yet online, currently returns <code>0</code>.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| &gt;&gt; spotBorrow             | string  | Borrow amount by spot margin trade and manual borrow amount (does not include borrow amount by spot margin active order). <code>spotBorrow</code> field corresponding to spot liabilities is detailed in the <a href="https://announcements.bybit.com/en/article/bybit-uta-function-optimization-manual-coin-borrowing-will-be-launched-soon-blt5d858199bd12e849/" target="_blank" rel="noopener noreferrer">announcement</a>.                                                                                                                                                                                                                                                                                                                                                          |
 
 [RUN >>](/docs/api-explorer/v5/account/wallet)
 
@@ -4325,20 +4152,25 @@ Check your current account status by calling this
 - if unifiedMarginStatus=1, then it is Classic account, you can call below
   upgrade endpoint to [UTA2.0](/docs/v5/acct-mode#uta-20) Pro. Check
   [Get Account Info](/docs/v5/account/account-info) after a while and if
-  unifiedMarginStatus=6, then it is successfully upgraded to
+  unifiedMarginStatus=6, then the account has successfully upgraded to
   [UTA2.0](/docs/v5/acct-mode#uta-20) Pro.
-- if unifiedMarginStatus=3, then it is [UTA1.0](/docs/v5/acct-mode#uta-10), you
-  have to head to website to click "upgrade" to
-  [UTA2.0](/docs/v5/acct-mode#uta-20) first.
+- if unifiedMarginStatus=3, then it is [UTA1.0](/docs/v5/acct-mode#uta-10), and
+  you have to head to the website to click "upgrade" to upgrade to
+  [UTA2.0](/docs/v5/acct-mode#uta-20) first, or you can call the below endpoint
+  to upgrade to [UTA2.0](/docs/v5/acct-mode#uta-20). Check
+  [Get Account Info](/docs/v5/account/account-info) after a while and if
+  unifiedMarginStatus=5, then the account has successfully upgraded to
+  [UTA2.0](/docs/v5/acct-mode#uta-20).
 - if unifiedMarginStatus=4, then it is [UTA1.0](/docs/v5/acct-mode#uta-10) Pro,
-  you can call below upgrade endpoint to [UTA2.0](/docs/v5/acct-mode#uta-20)
-  Pro. Check [Get Account Info](/docs/v5/account/account-info) after a while and
-  if unifiedMarginStatus=6, then it is successfully upgraded to
+  and you can call the below endpoint to upgrade to
+  [UTA2.0](/docs/v5/acct-mode#uta-20) Pro. Check
+  [Get Account Info](/docs/v5/account/account-info) after a while and if
+  unifiedMarginStatus=6, then the account has successfully upgraded to
   [UTA2.0](/docs/v5/acct-mode#uta-20) Pro.
 - if unifiedMarginStatus=5, then it is [UTA2.0](/docs/v5/acct-mode#uta-20), you
   can call below upgrade endpoint to [UTA2.0](/docs/v5/acct-mode#uta-20) Pro.
   Check [Get Account Info](/docs/v5/account/account-info) after a while and if
-  unifiedMarginStatus=6, then it is successfully upgraded to
+  unifiedMarginStatus=6, then the account has successfully upgraded to
   [UTA2.0](/docs/v5/acct-mode#uta-20) Pro.
 
 important
@@ -7497,15 +7329,15 @@ None
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter        | Type    | Comments                                                                                                                                   |
-| :--------------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| subMembers       | array   | Object                                                                                                                                     |
-| &gt; uid         | string  | Sub user Id                                                                                                                                |
-| &gt; username    | string  | Username                                                                                                                                   |
-| &gt; memberType  | integer | <code>1</code>: normal sub account, <code>6</code>: custodial sub account                                                                  |
-| &gt; status      | integer | The status of the user account<ul><li><code>1</code>: normal</li><li><code>2</code>: login banned</li><li><code>4</code>: frozen</li></ul> |
-| &gt; accountMode | integer | The account mode of the user account<ul><li><code>1</code>: classic account</li><li><code>3</code>: UTA</li></ul>                          |
-| &gt; remark      | string  | The remark                                                                                                                                 |
+| Parameter        | Type    | Comments                                                                                                                                                                                                                  |
+| :--------------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| subMembers       | array   | Object                                                                                                                                                                                                                    |
+| &gt; uid         | string  | Sub user Id                                                                                                                                                                                                               |
+| &gt; username    | string  | Username                                                                                                                                                                                                                  |
+| &gt; memberType  | integer | <code>1</code>: normal sub account, <code>6</code>: custodial sub account                                                                                                                                                 |
+| &gt; status      | integer | The status of the user account<ul><li><code>1</code>: normal</li><li><code>2</code>: login banned</li><li><code>4</code>: frozen</li></ul>                                                                                |
+| &gt; accountMode | integer | The account mode of the user account<ul><li><code>1</code>: Classic Account</li><li><code>3</code>: UTA1.0</li><li><code>4</code>: UTA1.0 Pro</li><li><code>5</code>: UTA2.0</li><li><code>6</code>: UTA2.0 Pro</li></ul> |
+| &gt; remark      | string  | The remark                                                                                                                                                                                                                |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -7528,7 +7360,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "",    "result": {        "subMembers": [            {                "uid": "53888001",                "username": "xxx001",                "memberType": 1,                "status": 1,                "remark": "test",                "accountMode": 3            },            {                "uid": "53888002",                "username": "xxx002",                "memberType": 6,                "status": 1,                "remark": "",                "accountMode": 1            }        ]    },    "retExtInfo": {},    "time": 1676430319452}
+{    "retCode": 0,    "retMsg": "",    "result": {        "subMembers": [            {                "uid": "106314365",                "username": "xxxx02",                "memberType": 1,                "status": 1,                "remark": "",                "accountMode": 5            },            {                "uid": "106279879",                "username": "xxxx01",                "memberType": 1,                "status": 1,                "remark": "",                "accountMode": 6            }        ]    },    "retExtInfo": {},    "time": 1760388036728}
 ```
 
 # Get Sub UID List (Unlimited)
@@ -7556,16 +7388,16 @@ GET `/v5/user/submembers`
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter        | Type    | Comments                                                                                                                                   |
-| :--------------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| subMembers       | array   | Object                                                                                                                                     |
-| &gt; uid         | string  | Sub user Id                                                                                                                                |
-| &gt; username    | string  | Username                                                                                                                                   |
-| &gt; memberType  | integer | <code>1</code>: standard sub account, <code>6</code>: custodial sub account                                                                |
-| &gt; status      | integer | The status of the user account<ul><li><code>1</code>: normal</li><li><code>2</code>: login banned</li><li><code>4</code>: frozen</li></ul> |
-| &gt; accountMode | integer | The account mode of the user account<ul><li><code>1</code>: Classic Account</li><li><code>3</code>: Unified Trading Account</li></ul>      |
-| &gt; remark      | string  | The remark                                                                                                                                 |
-| nextCursor       | string  | The next page cursor value. "0" means no more pages                                                                                        |
+| Parameter        | Type    | Comments                                                                                                                                                                                                                  |
+| :--------------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| subMembers       | array   | Object                                                                                                                                                                                                                    |
+| &gt; uid         | string  | Sub user Id                                                                                                                                                                                                               |
+| &gt; username    | string  | Username                                                                                                                                                                                                                  |
+| &gt; memberType  | integer | <code>1</code>: standard sub account, <code>6</code>: custodial sub account                                                                                                                                               |
+| &gt; status      | integer | The status of the user account<ul><li><code>1</code>: normal</li><li><code>2</code>: login banned</li><li><code>4</code>: frozen</li></ul>                                                                                |
+| &gt; accountMode | integer | The account mode of the user account<ul><li><code>1</code>: Classic Account</li><li><code>3</code>: UTA1.0</li><li><code>4</code>: UTA1.0 Pro</li><li><code>5</code>: UTA2.0</li><li><code>6</code>: UTA2.0 Pro</li></ul> |
+| &gt; remark      | string  | The remark                                                                                                                                                                                                                |
+| nextCursor       | string  | The next page cursor value. "0" means no more pages                                                                                                                                                                       |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -7583,7 +7415,7 @@ GET /v5/user/submembers?pageSize=1 HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXX
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "",    "result": {        "subMembers": [            {                "uid": "100475023",                "username": "BybitmcYERjAPmMU",                "memberType": 1,                "status": 1,                "remark": "",                "accountMode": 1            }        ],        "nextCursor": "126671"    },    "retExtInfo": {},    "time": 1711695552772}
+{    "retCode": 0,    "retMsg": "",    "result": {        "subMembers": [            {                "uid": "106314365",                "username": "xxxx02",                "memberType": 1,                "status": 1,                "remark": "",                "accountMode": 5            },            {                "uid": "106279879",                "username": "xxxx01",                "memberType": 1,                "status": 1,                "remark": "",                "accountMode": 6            }        ],        "nextCursor": "0"    },    "retExtInfo": {},    "time": 1760388041006}
 ```
 
 # Get Fund Custodial Sub Acct
@@ -8369,7 +8201,9 @@ Set the user's maximum leverage in spot cross margin
 caution
 
 Your account needs to activate spot margin first; i.e., you must have finished
-the quiz on web / app.
+the quiz on web / app.  
+The updated leverage must be less than or equal to the maximum leverage of the
+currency
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -8380,6 +8214,7 @@ POST `/v5/spot-margin-trade/set-leverage`
 | Parameter | Required              | Type   | Comments                                     |
 | :-------- | :-------------------- | :----- | -------------------------------------------- |
 | leverage  | <strong>true</strong> | string | Leverage. [<code>2</code>, <code>10</code>]. |
+| currency  | false                 | string | Coin name, uppercase only                    |
 
 [RUN >>](/docs/api-explorer/v5/spot-margin-uta/set-leverage)
 
@@ -9824,16 +9659,22 @@ GET `/v5/earn/order`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter   | Required              | Type   | Comments                                                                                                                                                            |
-| :---------- | :-------------------- | :----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| category    | <strong>true</strong> | string | <code>FlexibleSaving</code>,<code>OnChain</code><br><strong>Remarks</strong>: currently, only flexible savings and OnChain is supported                             |
-| orderId     | false                 | string | Order ID<li>either orderId or orderLinkId is <strong>required</strong></li><li>if both are passed, make sure they're matched, otherwise returning empty result</li> |
-| orderLinkId | false                 | string | Order link ID<br><strong>Remarks</strong>: Always return the latest one if order link id is ever reused when querying by orderLinkId only                           |
+| Parameter   | Required              | Type    | Comments                                                                                                                                                                                                                                   |
+| :---------- | :-------------------- | :------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| category    | <strong>true</strong> | string  | <code>FlexibleSaving</code>,<code>OnChain</code><br><strong>Remarks</strong>: currently, only flexible savings and OnChain is supported                                                                                                    |
+| orderId     | false                 | string  | Order ID.<li>For category = <code>OnChain</code>, either orderId or orderLinkId is <strong>required</strong></li><li>if both are passed, make sure they're matched, otherwise returning empty result</li>                                  |
+| orderLinkId | false                 | string  | Order link ID<br><strong>Remarks</strong>: Always return the latest one if order link id is ever reused when querying by orderLinkId only                                                                                                  |
+| productId   | false                 | string  | Product ID                                                                                                                                                                                                                                 |
+| startTime   | false                 | integer | The start timestamp (ms).<li>1. If both are not provided, the default is to return data from the last 7 days.</li><li>2. If both are provided, the difference between the endTime and startTime must be less than or equal to 7 days.</li> |
+| endTime     | false                 | integer | The endTime timestamp (ms)                                                                                                                                                                                                                 |
+| limit       | false                 | integer | Limit for data size per page. Range: [1, 100]. Default: 50                                                                                                                                                                                 |
+| cursor      | false                 | string  | Cursor, use the returned <code>nextPageCursor</code> to query data for the next page.                                                                                                                                                      |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
 | Parameter               | Type   | Comments                                                                   |
 | :---------------------- | :----- | -------------------------------------------------------------------------- |
+| nextPageCursor          | string | Refer to the <code>cursor</code> request parameter                         |
 | list                    | array  | Object                                                                     |
 | &gt; coin               | string | Coin name                                                                  |
 | &gt; orderValue         | string | amount                                                                     |
@@ -9869,7 +9710,7 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ### Response Example[​](#response-example "Direct link to heading")
 
 ```
-{    "retCode": 0,    "retMsg": "",    "result": {        "list": [            {                "coin": "BTC",                "orderValue": "1",                "orderType": "Stake",                "orderId": "9640dc23-df1a-448a-ad24-e1a48028a51f",                "orderLinkId": "cjm2",                "status": "Success",                "createdAt": "1744166831000",                "productId": "8",                "updatedAt": "1744166832000",                "swapOrderValue": "",                "estimateRedeemTime": "",                "estimateStakeTime": ""            }        ]    },    "retExtInfo": {},    "time": 1739937045520}
+{    "retCode": 0,    "retMsg": "",    "result": {        "list": [            {                "coin": "USDT",                "orderValue": "1000",                "orderType": "Stake",                "orderId": "ad98d473-4e17-46da-ab30-5563f62a97fa",                "orderLinkId": "",                "status": "Success",                "createdAt": "1759983689000",                "productId": "428",                "updatedAt": "1759983689000",                "swapOrderValue": "",                "estimateRedeemTime": "",                "estimateStakeTime": ""            }        ],        "nextPageCursor": ""    },    "retExtInfo": {},    "time": 1759983699446}
 ```
 
 # Get Staked Position
