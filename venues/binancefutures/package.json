@@ -1,25 +1,24 @@
 {
-  "name": "binancefutures",
+  "name": "@coincise/binancefutures",
   "version": "1.0.0",
-  "description": "Binance Futures API Documentation Extractor",
+  "description": "Documentation extraction for Binance Futures API (USD-M, COIN-M, Options)",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "npm run process:usdm:public:rest && npm run process:usdm:private:rest && npm run process:usdm:public:ws && npm run process:usdm:private:ws && npm run process:coinm:public:rest && npm run process:coinm:private:rest && npm run process:coinm:public:ws && npm run process:coinm:private:ws && npm run process:options:public:rest && npm run process:options:private:rest && npm run process:options:public:ws && npm run process:options:private:ws && npm run process:change_log",
-    "process:usdm:public:rest": "node src/index.js config/usdm_public_rest.json",
-    "process:usdm:private:rest": "node src/index.js config/usdm_private_rest.json",
-    "process:usdm:public:ws": "node src/index.js config/usdm_public_websocket.json",
-    "process:usdm:private:ws": "node src/index.js config/usdm_private_websocket.json",
-    "process:coinm:public:rest": "node src/index.js config/coinm_public_rest.json",
-    "process:coinm:private:rest": "node src/index.js config/coinm_private_rest.json",
-    "process:coinm:public:ws": "node src/index.js config/coinm_public_websocket.json",
-    "process:coinm:private:ws": "node src/index.js config/coinm_private_websocket.json",
-    "process:options:public:rest": "node src/index.js config/options_public_rest.json",
-    "process:options:private:rest": "node src/index.js config/options_private_rest.json",
-    "process:options:public:ws": "node src/index.js config/options_public_websocket.json",
-    "process:options:private:ws": "node src/index.js config/options_private_websocket.json",
-    "process:change_log": "node src/index.js config/change_log.json"
+    "extract:general": "node src/extractGeneral.js",
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "npm run extract:general && npm run extract:endpoints"
   },
+  "keywords": [
+    "binance",
+    "futures",
+    "cryptocurrency",
+    "exchange",
+    "api",
+    "documentation"
+  ],
+  "author": "Coincise",
+  "license": "MIT",
   "dependencies": {
     "puppeteer": "^24.22.0",
     "turndown": "^7.2.1",

@@ -1,5 +1,0 @@
-{
-  "endpoints": ["binance-spot-api-docs/sbe-market-data-streams"],
-  "output_file": "binance/spot/market_data_sbe_api.md",
-  "title": "Binance Spot SBE API Documentation"
-}

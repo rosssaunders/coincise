@@ -1,5 +1,0 @@
-{
-  "endpoints": ["derivatives/change-log"],
-  "output_file": "binance/futures/change_log.md",
-  "title": "Binance Futures API Change Log"
-}

@@ -1,22 +1,23 @@
 {
-  "name": "binance-spot-extractor",
+  "name": "@coincise/binancespot",
   "version": "1.0.0",
-  "description": "CLI to extract and process Binance Spot API documentation",
+  "description": "Documentation extraction for Binance Spot API",
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js process binancespot",
-    "extract:public_rest": "node src/index.js ./config/public_rest.json",
-    "extract:private_rest": "node src/index.js ./config/private_rest.json",
-    "extract:public_websocket": "node src/index.js ./config/public_websocket.json",
-    "extract:private_websocket": "node src/index.js ./config/private_websocket.json",
-    "extract:fix": "node src/index.js ./config/fix.json",
-    "extract:sbe": "node src/index.js ./config/sbe.json",
-    "extract:change_log": "node src/index.js ./config/change_log.json",
-    "extract:all": "npm run extract:public_rest && npm run extract:private_rest && npm run extract:public_websocket && npm run extract:private_websocket && npm run extract:fix && npm run extract:sbe && npm run extract:change_log"
+    "extract:general": "node src/extractGeneral.js",
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "npm run extract:general && npm run extract:endpoints"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "binance",
+    "cryptocurrency",
+    "exchange",
+    "api",
+    "documentation"
+  ],
+  "author": "Coincise",
+  "license": "MIT",
   "dependencies": {
     "puppeteer": "24.22.0",
     "turndown": "7.2.1",
