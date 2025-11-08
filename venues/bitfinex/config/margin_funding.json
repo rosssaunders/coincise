@@ -1,8 +1,0 @@
-{
-  "docUrl": "https://docs.bitfinex.com/docs/rest-auth",
-  "output": "../../../docs/bitfinex/private_rest_margin_funding_api.md",
-  "title": "Bitfinex Margin Funding",
-  "selector": "body",
-  "baseUrl": "https://docs.bitfinex.com",
-  "section": "Margin Funding"
-}
