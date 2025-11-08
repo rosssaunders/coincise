@@ -1,7 +1,0 @@
-{
-  "sections": [
-    "Account management"
-  ],
-  "output": "../../docs/deribit/private_account_management.md",
-  "title": "Deribit Private Account Management Documentation"
-}

@@ -1,7 +1,0 @@
-{
-  "sections": [
-    "Block Trade"
-  ],
-  "output": "../../docs/deribit/private_block_trading.md",
-  "title": "Deribit Private Block Trading Documentation"
-}
