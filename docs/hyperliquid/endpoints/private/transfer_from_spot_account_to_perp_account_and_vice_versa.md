@@ -1,0 +1,71 @@
+# Transfer from Spot account to Perp account (and vice versa)
+
+**Source:**
+https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+
+`POST` `https://api.hyperliquid.xyz/exchange`
+
+This method is used to transfer USDC from the user's spot wallet to perp wallet
+and vice versa.
+
+**Headers**
+
+Name
+
+Value
+
+Content-Type\*
+
+"application/json"
+
+**Body**
+
+Name
+
+Type
+
+Description
+
+action\*
+
+Object
+
+{
+
+"type": "usdClassTransfer",
+
+"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead),
+"signatureChainId": the id of the chain used when signing in hexadecimal format;
+e.g. "0xa4b1" for Arbitrum,
+
+"amount": amount of usd to transfer as a string, e.g. "1" for 1 usd. If you want
+to use this action for a subaccount, you can include subaccount: address after
+the amount, e.g. "1" subaccount:0x0000000000000000000000000000000000000000,
+
+"toPerp": true if (spot -> perp) else false,
+
+"nonce": current timestamp in milliseconds as a Number, must match nonce in
+outer request body
+
+}
+
+nonce\*
+
+Number
+
+Recommended to use the current timestamp in milliseconds, must match the nonce
+in the action Object above
+
+signature\*
+
+Object
+
+**Response**
+
+200: OK
+
+Copy
+
+```
+{'status': 'ok', 'response': {'type': 'default'}}
+```
