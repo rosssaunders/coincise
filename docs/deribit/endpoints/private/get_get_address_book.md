@@ -1,0 +1,56 @@
+## /private/get_address_book
+
+Retrieves address book of given type
+
+**Scope:** `wallet:read`
+
+This is a private method; it can only be used after authentication.
+
+### Parameters
+
+| Parameter | Required | Type   | Enum  | Description |
+| --------- | -------- | ------ | ----- | ----------- |
+| currency  | true     | string | `BTC` |
+
+`ETH`  
+`STETH`  
+`ETHW`  
+`USDC`  
+`USDT`  
+`EURR`  
+`MATIC`  
+`SOL`  
+`XRP`  
+`USYC`  
+`PAXG`  
+`BNB`  
+`USDE` | The currency symbol | | type | true | string | `transfer`  
+`withdrawal`  
+`deposit_source` | Address book type |
+
+### Response
+
+| Name                              | Type              | Description                                                                                                        |
+| --------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------ |
+| id                                | integer           | The id that was sent in the request                                                                                |
+| jsonrpc                           | string            | The JSON-RPC version (2.0)                                                                                         |
+| result                            | array of _object_ |                                                                                                                    |
+|   ›  address                      | string            | Address in proper format for currency                                                                              |
+|   ›  agreed                       | boolean           | Indicates that the user agreed to shared provided information with 3rd parties                                     |
+|   ›  beneficiary_address          | string            | Geographical address of the beneficiary                                                                            |
+|   ›  beneficiary_company_name     | string            | Company name of the beneficiary (if beneficiary is a company)                                                      |
+|   ›  beneficiary_first_name       | string            | First name of the beneficiary (if beneficiary is a person)                                                         |
+|   ›  beneficiary_last_name        | string            | Last name of the beneficiary (if beneficiary is a person)                                                          |
+|   ›  beneficiary_vasp_did         | string            | DID of beneficiary VASP                                                                                            |
+|   ›  beneficiary_vasp_name        | string            | Name of beneficiary VASP                                                                                           |
+|   ›  beneficiary_vasp_website     | string            | Website of the beneficiary VASP                                                                                    |
+|   ›  creation_timestamp           | integer           | The timestamp (milliseconds since the Unix epoch)                                                                  |
+|   ›  currency                     | string            | Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`                                                                           |
+|   ›  info_required                | boolean           | Signalises that addition information regarding the beneficiary of the address is required                          |
+|   ›  label                        | string            | Label of the address book entry                                                                                    |
+|   ›  personal                     | boolean           | The user confirms that he provided address belongs to him and he has access to it via an un-hosted wallet software |
+|   ›  requires_confirmation        | boolean           | If address requires email confirmation for withdrawals                                                             |
+|   ›  requires_confirmation_change | boolean           | If email confirmation change is in progress                                                                        |
+|   ›  status                       | string            | Wallet address status, values: \[`admin_locked`, `waiting`, `confirmed`, `ready`\]                                 |
+|   ›  type                         | string            | Address book type                                                                                                  |
+|   ›  waiting_timestamp            | boolean           | Timestamp when the address will be ready                                                                           |

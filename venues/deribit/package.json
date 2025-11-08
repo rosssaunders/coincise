@@ -1,26 +1,16 @@
 {
-  "name": "deribit-api-docs-extractor",
-  "version": "1.0.0",
-  "description": "Extract and convert Deribit API documentation to Markdown with configurable sections",
+  "name": "@coincise/deribit",
+  "version": "2.0.0",
+  "description": "Documentation extraction for Deribit API",
   "type": "module",
-  "main": "src/index.js",
   "scripts": {
-    "extract:general": "node src/index.js config/general.json",
-    "extract:session_management": "node src/index.js config/session_management.json",
-    "extract:authentication": "node src/index.js config/authentication.json",
-    "extract:market_data": "node src/index.js config/market_data.json",
-    "extract:private_account_management": "node src/index.js config/private_account_management.json",
-    "extract:private_wallet": "node src/index.js config/private_wallet.json",
-    "extract:private_trading": "node src/index.js config/private_trading.json",
-    "extract:private_block_trading": "node src/index.js config/private_block_trading.json",
-    "extract:private_combo_trading": "node src/index.js config/private_combo_trading.json",
-    "extract:private_block_rfq": "node src/index.js config/private_block_rfq.json",
-    "extract:connection": "node src/index.js config/connection.json",
-    "all": "npm run extract:general && npm run extract:session_management && npm run extract:authentication && npm run extract:market_data && npm run extract:private_account_management && npm run extract:private_wallet && npm run extract:private_trading && npm run extract:private_block_trading && npm run extract:private_combo_trading && npm run extract:private_block_rfq && npm run extract:connection"
+    "extract:general": "node src/extractGeneral.js",
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "npm run extract:general && npm run extract:endpoints"
   },
   "dependencies": {
-    "puppeteer": "^24.22.0",
-    "turndown": "^7.2.1",
-    "turndown-plugin-gfm": "^1.0.2"
+    "turndown": "^7.1.2",
+    "turndown-plugin-gfm": "^1.0.2",
+    "puppeteer": "^21.0.0"
   }
 }
