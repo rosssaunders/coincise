@@ -50,23 +50,56 @@ jobs:
       - name: Run extract:change-log
         run: npm run extract:change-log
 
-      - name: Run extract:spot-unified
-        run: npm run extract:spot-unified
+      - name: Run extract:general
+        run: npm run extract:general
 
-      - name: Run extract:spot-trading
-        run: npm run extract:spot-trading
+      - name: Run extract:account
+        run: npm run extract:account
 
-      - name: Run extract:spot-account
-        run: npm run extract:spot-account
+      - name: Run extract:subaccount
+        run: npm run extract:subaccount
 
-      - name: Run extract:options-trading
-        run: npm run extract:options-trading
+      - name: Run extract:collateral-loan
+        run: npm run extract:collateral-loan
 
-      - name: Run extract:futures-trading
-        run: npm run extract:futures-trading
+      - name: Run extract:multi-collateral-loan
+        run: npm run extract:multi-collateral-loan
 
-      - name: Run extract:delivery-trading
-        run: npm run extract:delivery-trading
+      - name: Run extract:isolated-margin
+        run: npm run extract:isolated-margin
+
+      - name: Run extract:earn
+        run: npm run extract:earn
+
+      - name: Run extract:earnuni
+        run: npm run extract:earnuni
+
+      - name: Run extract:flash-swap
+        run: npm run extract:flash-swap
+
+      - name: Run extract:rebate
+        run: npm run extract:rebate
+
+      - name: Run extract:wallet
+        run: npm run extract:wallet
+
+      - name: Run extract:withdrawal
+        run: npm run extract:withdrawal
+
+      - name: Run extract:unified
+        run: npm run extract:unified
+
+      - name: Run extract:spot
+        run: npm run extract:spot
+
+      - name: Run extract:options
+        run: npm run extract:options
+
+      - name: Run extract:futures
+        run: npm run extract:futures
+
+      - name: Run extract:delivery
+        run: npm run extract:delivery
 
       - name: Run extract:websocket-spot
         run: npm run extract:websocket-spot
