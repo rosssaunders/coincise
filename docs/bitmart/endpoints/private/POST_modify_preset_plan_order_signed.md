@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "order_id":"220609666322019",   "preset_take_profit_price":"2000",   "preset_stop_loss_price":"1900",   "preset_take_profit_price_type":1,   "preset_stop_loss_price_type":1 }' https://api-cloud-v2.bitmart.com/contract/private/modify-preset-plan-order`
 
 | Field | Type | Required? | Description |
@@ -46,10 +42,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": {     "order_id": "220609666322019"   },   "trace": "13f7fda9-9543-4e11-a0ba-cbe117989988" }`
 

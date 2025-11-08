@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl https://api-cloud.bitmart.com/spot/v1/symbols/details`
 
 None
@@ -35,10 +31,6 @@ None
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "trace":"886fb6ae-456b-4654-b4e0-d681ac05cea1",   "message": "OK",   "data": {     "symbols": [         {             "symbol":"GXC_BTC",              "symbol_id":1024,              "base_currency":"GXC",              "quote_currency":"BTC",              "quote_increment":"1.00000000",              "base_min_size":"1.00000000",              "price_min_precision":6,              "price_max_precision":8,              "expiration":"NA",              "min_buy_amount":"0.00010000",              "min_sell_amount":"0.00010000",              "trade_status":"trading"         }     ]   } }`
 

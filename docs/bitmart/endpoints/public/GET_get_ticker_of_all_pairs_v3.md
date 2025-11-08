@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `` curl https://api-cloud.bitmart.com/spot/quotation/v3/tickers` ``
 
 None
@@ -35,10 +31,6 @@ None
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "trace":"886fb6ae-456b-4654-b4e0-1231",   "message": "success",   "data": [     [       "BTC_USDT",  // symbol       "30000.00",  // last       "582.08066", // v_24h       "4793098.48", // qv_24h       "28596.30", // open_24h       "31012.44", // high_24h       "12.44", // low_24h       "0.04909", // fluctuation       "30000", // bid_px       "1",  // bid_sz       "31012.44",  // ask_px       "69994.75267", // ask_sz       "1691671091933" // ts     ],     [       "ETH_USDT",       "1840.00",       "2.00000",       "3680.00",       "1842.18",       "1842.18",       "1840.00",       "-0.00118",       "1812.35",       "4.61989",       "1859.34",       "4.07793",       "1691671094213"     ]   ] }`
 

@@ -22,10 +22,6 @@ Get Position Data
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `{     "action": "subscribe",     "args":["futures/position"] }`
 
 Message Format:
@@ -38,10 +34,6 @@ Message Format:
 ### Response
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "group": "futures/position",   "data": [     {       "symbol": "BTCUSDT",       "hold_volume": "2000",       "position_type": 1,       "open_type": 1,       "frozen_volume": "0",       "close_volume": "0",       "hold_avg_price": "19406.2092",       "close_avg_price": "0",       "open_avg_price": "19406.2092",       "liquidate_price": "15621.998406",       "create_time": 1662692862255,       "update_time": 1662692862255,       "position_mode": "hedge_mode"     }   ] }`
 

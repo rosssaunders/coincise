@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/contract/private/position-risk?symbol=BTCUSDT`
 
 | Field | Type | Required? | Description |
@@ -40,10 +36,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": [     {       "symbol":"BTCUSDT",       "position_amt":"1",       "mark_price":"67957.7",       "unrealized_profit":"969.6",       "liquidation_price":"64245",       "leverage":"20",       "max_notional_value":"3000000",       "margin_type":"Isolated",       "isolated_margin":"3078.51948691",       "position_side":"Long",       "notional":"66988.1",       "update_time":1712390438,       "account": "futures"     }   ],   "trace": "ae96cae5-1f09-4ea5-971e-4474a6724bc8" }`
 

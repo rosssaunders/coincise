@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/contract/private/trade-fee-rate?symbol=BTCUSDT`
 
 | Field | Type | Required? | Description |
@@ -37,10 +33,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": {     "symbol": "BTCUSDT",     "taker_fee_rate": "0.0006",     "maker_fee_rate": "0.0002"   },   "trace": "638d5048-ad21-4a4b-1234-d0756fbfc7ba" }`
 

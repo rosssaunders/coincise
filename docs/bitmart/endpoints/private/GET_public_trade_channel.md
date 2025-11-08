@@ -22,10 +22,6 @@ Get the latest real-time transaction data
 
 > Subscribe Request
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "op": "subscribe",    "args": ["spot/trade:BTC_USDT"] }`
 
 Message Format:
@@ -38,10 +34,6 @@ Message Format:
 
 > Subscription successful
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "event":  "subscribe",   "topic":  "spot/trade:BTC_USDT" }`
 
 `{"event":"subscribe","topic":"spot/trade:<symbol>"}`
@@ -49,10 +41,6 @@ Copy to Clipboard
 ### After successful subscription, push data
 
 > Push data
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "table": "spot/trade",     "data": [{         "symbol": "ETH_USDT",         "price": "162.12",         "side": "buy",         "size": "11.085",         "s_t": 1542337219,         "ms_t": 1542337219120     }] }`
 

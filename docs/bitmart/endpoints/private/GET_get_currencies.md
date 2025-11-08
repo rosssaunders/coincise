@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl https://api-cloud.bitmart.com/account/v1/currencies?currencies=BTC,ETH,BMX`
 
 | Field | Type | Required? | Description |
@@ -37,10 +33,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "trace":"886fb6ae-456b-4654-b4e0-d681ac05cea1",   "message": "OK",   "data": {     "currencies": [       {         "currency": "USDT",         "name": "Tether USD",         "contract_address": null,         "network": "OMNI",         "withdraw_enabled": false,         "deposit_enabled": false,         "withdraw_minsize": null,         "withdraw_minfee": null,         "withdraw_fee": "10",         "withdraw_fee_estimate": "10.3"       },       {         "currency": "USDT-TRC20",         "name": "USDT-TRC20",         "contract_address": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",         "network": "TRC20",         "withdraw_enabled": true,         "deposit_enabled": true,         "withdraw_minsize": "10",         "withdraw_minfee": null,         "withdraw_fee": "10",         "withdraw_fee_estimate": "10.3"       },       {         "currency": "USDT-ERC20",         "name": "USDT-ERC20",         "contract_address": "0xdac17f958d2ee523a2206206994597c13d831ec7",         "network": "ERC20",         "withdraw_enabled": true,         "deposit_enabled": true,         "withdraw_minsize": "26",         "withdraw_minfee": null,         "withdraw_fee": "26",         "withdraw_fee_estimate": "26.3"       }     ]   } }`
 

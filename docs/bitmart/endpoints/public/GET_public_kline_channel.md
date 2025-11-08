@@ -22,10 +22,6 @@ Get the spot K-line data
 
 > Subscribe Request
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "op": "subscribe",    "args": ["spot/kline1m:BTC_USDT"] }`
 
 Message Format:
@@ -54,10 +50,6 @@ Message Format:
 
 > Subscription successful
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "topic":  "spot/kline1m:BTC_USDT",   "event":  "subscribe" }`
 
 `{"event":"subscribe","topic":"<channel>:<symbol>"}`
@@ -65,10 +57,6 @@ Copy to Clipboard
 ### After successful subscription, push data
 
 > Push data
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "data":  [     {       "candle":  [         1709025360,         "162.01",         "162.02",         "162.03",         "162.04",         "336.452694"       ],       "symbol":  "BTC_USDT"     }   ],   "table":  "spot/kline1m" }`
 

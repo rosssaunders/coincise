@@ -33,10 +33,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > 1.Request: Withdraw to the blockchain
 
-Copy Success
-
-Copy to Clipboard
-
 `curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{ {     "currency": "USDT-TRC20",     "amount": "100.000",     "destination": "To Digital Address",     "address": "0x1EE6FA5A3803608fc22a1f3F76********",     "address_memo": "" }' https://api-cloud.bitmart.com/account/v1/withdraw/apply`
 
 | Field | Type | Required? | Description |
@@ -48,10 +44,6 @@ Copy to Clipboard
 #### Parameters for Withdraw to BitMart account
 
 > 2.Request: Withdraw to BitMart account
-
-Copy Success
-
-Copy to Clipboard
 
 `curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{ {     "currency": "USDT-TRC20",     "amount": "100.000",     "type": 1,     "value": "876940329",     "areaCode": "" }' https://api-cloud.bitmart.com/account/v1/withdraw/apply`
 
@@ -80,10 +72,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "trace":"886fb6ae-456b-4654-b4e0-d681ac05cea1",   "message": "OK",   "data": {     "withdraw_id": "121212"   } }`
 

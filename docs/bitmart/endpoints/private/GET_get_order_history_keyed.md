@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/contract/private/order-history?symbol=BTCUSDT&start_time=1662368173&end_time=1662368179`
 
 | Field | Type | Required? | Description |
@@ -50,10 +46,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": [     {       "order_id": "3000101684062644",       "client_order_id": "PLAN_3000097492004577",       "price": "0",       "trigger_price": "0",       "execution_price": "0",       "size": "1",       "symbol": "BTCUSDT",       "state": 4,       "side": 2,       "type": "market",       "account": "futures",       "position_mode": "hedge_mode",       "leverage": "20",       "open_type": "cross",       "deal_avg_price": "84802",       "deal_size": "1",       "create_time": 1743160485193,       "update_time": 1743160485258,       "activation_price_type": 1,       "activation_price": "0",       "callback_rate": "0",       "preset_take_profit_price_type": 0,       "preset_stop_loss_price_type": 0,       "preset_take_profit_price": "",       "preset_stop_loss_price": ""     }   ],   "trace": "b15f261868b540889e57f826e0420621.80.17434162457898722" }`
 

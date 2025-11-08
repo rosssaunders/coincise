@@ -22,10 +22,6 @@ Get the latest transaction price, bid one price, ask for one price, and 24 tradi
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "action":"subscribe",   "args":["futures/ticker:BTCUSDT"] }`
 
 Message Format:
@@ -39,10 +35,6 @@ Message Format:
 ### Response
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "data": {         "symbol": "BTCUSDT",         "last_price": "97153.6",         "volume_24": "25502894",         "range": "0.0016599204475393",         "mark_price": "97153.7",         "index_price": "97185.614",         "ask_price": "97153.9",         "ask_vol": "28",         "bid_price": "97153.4",         "bid_vol": "428"     },     "group": "futures/ticker:BTCUSDT" }`
 

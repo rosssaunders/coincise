@@ -21,10 +21,6 @@ Return depth data, each push is the full data
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "action":"subscribe",   "args":["futures/depthAll20:BTCUSDT@200ms"] }`
 
 Message Format:
@@ -46,10 +42,6 @@ Parameters Channel Name List
 ### Response
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "data": {         "symbol": "BTCUSDT",         "asks": [             {                 "price": "70294.4",                 "vol": "455"             }         ],         "bids": [             {                 "price": "70293.9",                 "vol": "1856"             }         ],         "ms_t": 1730399750402     },     "group": "futures/depthAll20:BTCUSDT@200ms" }`
 

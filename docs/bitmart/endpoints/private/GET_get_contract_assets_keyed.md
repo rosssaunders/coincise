@@ -24,19 +24,11 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request None
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/contract/private/assets-detail`
 
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": [     {       "currency": "USDT",       "position_deposit": "100",       "frozen_balance": "100",       "available_balance": "100",       "equity": "100",       "unrealized": "100"     },     {       "currency": "BTC",       "available_balance": "0",       "frozen_balance": "0",       "unrealized": "0",       "equity": "0",       "position_deposit": "0"     },     {       "currency": "ETH",       "available_balance": "0",       "frozen_balance": "0",       "unrealized": "0",       "equity": "0",       "position_deposit": "0"     }   ],   "trace": "13f7fda9-9543-4e11-a0ba-cbe117989988" }`
 

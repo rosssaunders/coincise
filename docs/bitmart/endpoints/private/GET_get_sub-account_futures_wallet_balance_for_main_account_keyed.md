@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/account/contract/sub-account/main/v1/wallet?subAccount=subAccount1@xxx.com&currency=USDT`
 
 | Field | Type | Required? | Description |
@@ -38,10 +34,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "message": "OK",   "code": 1000,   "trace": "87db8cd43374470f96aacb0e3fcaf34c.77.16872314088656435",   "data": {     "wallet": [       {         "currency": "USDT",         "name": "USDT",         "available": "204.15216696",         "frozen": "0.00000000"       }     ]   } }`
 

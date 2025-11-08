@@ -77,10 +77,6 @@ Each call to the interface will return 3 Response Headers with limit tags, as sh
 
 > Example:
 
-Copy Success
-
-Copy to Clipboard
-
 `X-BM-RateLimit-Remaining: 10 X-BM-RateLimit-Limit: 600 X-BM-RateLimit-Reset: 60 The above setting means that it can be called 600 times within 60 seconds, and currently has been called 10 times`
 
 | Response Header | Description |

@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl https://api-cloud.bitmart.com/spot/v1/currencies`
 
 None
@@ -35,10 +31,6 @@ None
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "trace":"886fb6ae-456b-4654-b4e0-d681ac05cea1",   "message": "OK",   "data": {     "currencies": [       {         "id": "BTC",         "name": "Bitcoin",         "withdraw_enabled": true,         "deposit_enabled": true       },       {         "id": "ETH",         "name": "Ethereum",         "withdraw_enabled": true,         "deposit_enabled": true       }     ]   } }`
 

@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{     "symbol":"BTC_USDT",     "orderParams":[{           "clientOrderId":"123456789",           "size":"0.1",           "price":"8800",           "side":"buy",           "type":"limit"           "stpMode":"none"     }],     "recvWindow":5000 }' https://api-cloud.bitmart.com/spot/v4/batch_orders`
 
 | Field | Type | Required? | Description |
@@ -114,10 +110,6 @@ There are three STP modes.
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "message": "OK",   "code": 1000,   "trace": "5fc697fb817a4b5396284786a9b2609a.263.17022620476480263",   "data": {     "code": 0,     "msg": "success",     "data": {       "orderIds": [         "212751308355553320"       ]     }   } }`
 

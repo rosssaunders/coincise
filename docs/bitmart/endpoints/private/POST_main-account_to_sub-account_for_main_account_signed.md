@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `` curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{     "requestNo":"4e2adcff-2122-1ce7-2557-4f65d2ce1ca2",     "amount":"1",     "currency":"BTC",     "subAccount":"subAccountName@xxx.com" }' https://api-cloud-v2.bitmart.com/account/contract/sub-account/main/v1/main-to-sub` ``
 
 | Field | Type | Required? | Description |
@@ -40,10 +36,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "message": "OK",   "code": 1000,   "trace": "c1e4e99ff0ec452f8b8bc5f1eb38d733.76.16861963186213159",   "data": {} }`
 

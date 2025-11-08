@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl https://api-cloud.bitmart.com/spot/quotation/v3/books?symbol=BTC_USDT&limit=1`
 
 | Field | Type | Required? | Description |
@@ -38,10 +34,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "trace":"886fb6ae-456b-4654-b4e0-1231",   "message": "success",   "data": {     "ts": "1691672864874",     "symbol": "BTC_USDT",     "asks": [       [         "31012.44",  // price         "69994.75267"  // amount       ]     ],     "bids": [       [         "30000.00", // price         "1.00000"  // amount       ]     ]   } }`
 

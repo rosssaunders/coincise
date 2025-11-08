@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/contract/private/position?symbol=BTCUSDT`
 
 | Field | Type | Required? | Description |
@@ -40,10 +36,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": [     {       "symbol": "BTCUSDT",       "leverage": "5",       "timestamp": 1663814313531,       "current_fee": "5.00409471",       "open_timestamp": 1662714817820,       "current_value": "16680.3157",       "mark_value": "16673.27053207877",       "mark_price": "93000.50",       "position_value": "18584.272343943943943944339",       "position_cross": "3798.397624451826977945",       "maintenance_margin": "4798.397624451826977945",       "margin_type":"Isolated",       "position_mode": "hedge_mode",       "close_vol": "100",       "close_avg_price": "20700.7",       "open_avg_price": "20200",       "entry_price": "20201",       "current_amount": "899",       "unrealized_value": "1903.956643943943943944339",       "realized_value": "55.049173071454605573",       "position_type": 2,       "account": "futures"     }   ],   "trace": "ae96cae5-1f09-4ea5-971e-4474a6724bc8" }`
 

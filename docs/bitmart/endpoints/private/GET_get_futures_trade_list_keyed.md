@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl https://api-cloud-v2.bitmart.com/contract/private/affiliate/trade-list?user_id=123456&type=1&page=1&size=10`
 
 | Field | Type | Required | Description |
@@ -44,10 +40,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "total": 60,   "size": 10,   "page": 1,   "list": [{     "leverage": 20.000000000000000000,     "symbol": "BTCUSDT",     "create_time": 1689933471000,     "open_type": 2,     "fee": 0.57162048,     "deal_price": 29771.900000000000000000,     "realised_profit": 0,     "way": 1,     "deal_vol": 32.000000000000000000,     "select_copy_trade": 1,     "user_type": 1,     "user_id": 10048829,     "category": 2   }] }`
 

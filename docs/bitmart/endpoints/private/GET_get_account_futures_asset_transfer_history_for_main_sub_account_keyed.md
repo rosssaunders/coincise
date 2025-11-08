@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/account/contract/sub-account/v1/transfer-history?limit=10`
 
 | Field | Type | Required? | Description |
@@ -37,10 +33,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "message": "OK",   "code": 1000,   "trace": "ba950ec2bd114fd7bc069cb812b0129f.62.16887215218140681",   "data": [     {       "fromAccount": "masterAccount@xxx.com",       "toAccount": "subAccount@xxx.com",       "toWalletType": "future",       "fromWalletType": "future",       "currency": "USDT",       "amount": "1",       "submissionTime": 1686207254     }   ] }`
 

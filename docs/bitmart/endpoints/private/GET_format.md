@@ -39,10 +39,6 @@ Return `success` field is `ture`
 
 > Successful Response Format
 
-Copy Success
-
-Copy to Clipboard
-
 `When action=access ： {"action":"access","success":true}  When action=unsubscribe ： {"action":"unsubscribe","group":"Depth:1","success":true,"request":{"action":"unsubscribe","args":["Depth:1"]}}  When action=subscribe ： {"action":"subscribe","group":"Depth:1","success":true,"request":{"action":"subscribe","args":["Depth:1"]}}`
 
 **Example**:
@@ -65,10 +61,6 @@ The format of the failed message returned by the BitMart server to the client.
 Return `success` field is `false`
 
 > Failed Response Format
-
-Copy Success
-
-Copy to Clipboard
 
 `{"action":"subscribe","group":"Depth:1","success":false,"error":"authentication is temporarily unavailable"}`
 

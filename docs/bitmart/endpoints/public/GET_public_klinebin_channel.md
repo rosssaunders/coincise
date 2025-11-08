@@ -21,10 +21,6 @@ Get individual contract K-line data
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `{"action":"subscribe","args":["futures/klineBin1m:BTCUSDT"]}`
 
 Message Format:
@@ -51,10 +47,6 @@ Message Format:
 ### Response
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "group":"futures/klineBin1m:BTCUSDT",     "data":{             "symbol":"BTCUSDT",             "o":"146.24",             "h":"146.24",             "l":"146.24",             "c":"146.24",             "v":"146",             "ts":1700533801         } }`
 

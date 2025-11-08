@@ -24,10 +24,6 @@ Refer to [Rate Limitation Details](#cad33537ae)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "symbol":"BTC_USDT",   "orderMode":"spot",   "startTime":1682239502394,   "endTime":1682239507394,   "limit":10,   "recvWindow":5000 }' https://api-cloud.bitmart.com/spot/v4/query/history-orders`
 
 | Field | Type | Required? | Description |
@@ -54,10 +50,6 @@ Copy to Clipboard
 #### Response Details
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code" : 1000,   "message" : "success",   "data" : [ {     "orderId" : "118100034543076010",     "clientOrderId" : "118100034543076010",     "symbol" : "BTC_USDT",     "side" : "buy",     "orderMode" : "spot",     "type" : "limit",     "state" : "filled",     "cancelSource" : "",     "stpMode": "cancel_maker",     "price" : "48800.00",     "priceAvg" : "39999.00",     "size" : "0.10000",     "filledSize" : "0.10000",     "notional" : "4880.00000000",     "filledNotional" : "3999.90000000",     "createTime" : 1681701557927,     "updateTime" : 1681701559408   } ],   "trace" : "acc282ba9e434cc1a90bf6326de9e119.64.16818913787390001" }`
 

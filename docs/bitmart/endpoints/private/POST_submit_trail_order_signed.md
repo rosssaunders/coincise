@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "side":4,   "leverage":"1",   "open_type":"isolated",   "size":10,   "activation_price":"2000",   "callback_rate":"1",   "activation_price_type":1 }' https://api-cloud-v2.bitmart.com/contract/private/submit-trail-order`
 
 | Field | Type | Required? | Description |
@@ -58,10 +54,6 @@ oneway mode
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": {     "order_id": 220609666322019   },   "trace": "13f7fda9-9543-4e11-a0ba-cbe117989988" }`
 

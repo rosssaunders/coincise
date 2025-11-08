@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{     "currency":"USDT",     "time_start":1684391137804,     "time_end":1684392577804,     "page":1,     "limit":10,     "recvWindow":5000 }' https://api-cloud-v2.bitmart.com/account/v1/transfer-contract-list`
 
 | Field | Type | Required? | Description |
@@ -49,10 +45,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "message":"OK",     "code":1000,     "trace":"82abff12-b9d9-4f66-89ea-3b604c6d84",     "data":{         "records":[{             "transfer_id":"664651258694168576",             "currency":"USDT",             "amount":"0.1",             "type":"contract_to_spot",             "state":"FINISHED",             "timestamp":1638631674326         }]     } }`
 

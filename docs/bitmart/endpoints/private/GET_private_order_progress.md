@@ -22,17 +22,9 @@ Subscribe to the order execution progress of a single trading pair, or you can s
 
 > Order transaction progress subscription request for a single trading pair
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "op": "subscribe",    "args": ["spot/user/order:BTC_USDT"] }`
 
 > Order transaction progress subscription request for all trading pairs
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "op": "subscribe",    "args": ["spot/user/orders:ALL_SYMBOLS"] }`
 
@@ -56,10 +48,6 @@ Message Format:
 
 > Single trading pair subscription successful
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "event":  "subscribe",   "topic":  "spot/user/order:BTC_USDT" }`
 
 1.The order transaction progress subscription of a single trading pair was successfully subscribed.
@@ -67,10 +55,6 @@ Copy to Clipboard
 `{"event":"subscribe","topic":"spot/user/order:<symbol>"}`
 
 > All trading pairs subscription successful
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "event":  "subscribe",   "topic":  "spot/user/orders:ALL_SYMBOLS" }`
 
@@ -81,10 +65,6 @@ Copy to Clipboard
 ### After successful subscription, push data
 
 > Push data
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "data":[         {             "symbol":"BTC_USDT",             "side":"buy",             "type":"market",             "notional":"",             "size":"1.0000000000",             "ms_t":"1609926028000",             "price":"46100.0000000000",             "filled_notional":"46100.0000000000",             "filled_size":"1.0000000000",             "margin_trading":"0",             "state":"4",             "order_id":"2147857398",             "order_type":"0",             "last_fill_time":"1609926039226",             "last_fill_price":"46100.00000",             "last_fill_count":"1.00000",             "exec_type":"M",             "detail_id":"256348632",             "client_order_id":"order4872191",             "create_time":"1609926028000",             "update_time":"1609926044000",             "order_mode":"0",             "entrust_type":"normal",             "order_state":"partially_filled",             "dealFee":"10.00",             "deal_fee_coin_name":"BMX"         }     ],     "table":"spot/user/order" }`
 

@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl https://api-cloud-v2.bitmart.com/contract/public/open-interest?symbol=BTCUSDT`
 
 | Field | Type | Required? | Description |
@@ -37,10 +33,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "trace": "0cc6f4c4-8b8c-4253-8e90-8d3195aa109c",   "message": "Ok",   "data": {     "timestamp": 1661239541734,     "symbol": "BTCUSDT",     "open_interest": "4134180870",     "open_interest_value": "94100888927.0433258"   } }`
 

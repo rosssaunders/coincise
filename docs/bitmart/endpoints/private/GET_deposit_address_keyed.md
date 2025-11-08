@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud.bitmart.com/account/v1/deposit/address?currency=USDT-TRC20`
 
 | Field | Type | Required? | Description |
@@ -46,10 +42,6 @@ USDT has multiple recharge addresses, please select them correctly. For example:
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "message":"OK",     "code":1000,     "trace":"0e6edd79-f77f-4251-abe5-83ba75d06c1a",     "data":{         "currency":"USDT-TRC20",         "chain":"USDT-TRC20",         "address":"TGR3ghy2b5VLbyAYrmiE15jasR6aPHTvC5",         "address_memo":""     } }`
 

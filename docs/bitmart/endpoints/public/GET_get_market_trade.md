@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl https://api-cloud-v2.bitmart.com/contract/public/market-trade?symbol=BTCUSDT&limit=100`
 
 | Field | Type | Required? | Description |
@@ -38,10 +34,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": [     {       "symbol": "BTCUSDT",       "price": "104146.5",       "qty": "0.037",       "quote_qty": "3853.4205",       "time": 1750347973,       "is_buyer_maker": true     },     {       "symbol": "BTCUSDT",       "price": "104146.6",       "qty": "0.023",       "quote_qty": "2395.3718",       "time": 1750347972,       "is_buyer_maker": true     }   ],   "trace": "26f999a04cfa11f09ce9d6002fd59247.4375416.39621015744567440" }`
 

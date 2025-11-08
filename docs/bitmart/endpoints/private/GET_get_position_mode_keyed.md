@@ -26,19 +26,11 @@ See [Detailed Rate Limit](#rate-limit)
 
 None
 
-Copy Success
-
-Copy to Clipboard
-
 `curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}' https://api-cloud-v2.bitmart.com/contract/private/get-position-mode`
 
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "trace": "0cc6f4c4-8b8c-4253-8e90-8d3195aa109c",   "message": "Ok",   "data": {     "position_mode":"one_way_mode"   } }`
 

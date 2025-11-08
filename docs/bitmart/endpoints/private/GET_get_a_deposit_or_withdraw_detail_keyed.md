@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud.bitmart.com/account/v1/deposit-withdraw/detail?id=1679952`
 
 | Field | Type | Required? | Description |
@@ -37,10 +33,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "message":"OK",     "code":1000,     "trace":"f7f74924-14da-42a6-b7f2-d3799dd9a612",     "data":{         "record":{             "withdraw_id":"1679952",             "deposit_id":"",             "operation_type":"withdraw",             "currency":"BMX",             "apply_time":1588867374000,             "arrival_amount":"59.000000000000",             "fee":"1.000000000000",             "status":0,             "address":"0xe57b69a8776b37860407965B73cdFFBDFe668Bb5",             "address_memo":"",             "tx_id":""         }     } }`
 

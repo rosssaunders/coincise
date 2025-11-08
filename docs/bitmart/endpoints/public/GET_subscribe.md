@@ -14,10 +14,6 @@ Users can subscribe to one or more channels, and the total length of multiple ch
 
 > subscribe
 
-Copy Success
-
-Copy to Clipboard
-
 `{"op": "subscribe", "args": ["<topic>"]}`
 
 ### Parameter Instructions
@@ -32,24 +28,12 @@ Copy to Clipboard
 
 > Subscribe Request
 
-Copy Success
-
-Copy to Clipboard
-
 `{"op": "subscribe", "args": ["spot/ticker:BTC_USDT"]}`
 
 > Subscription successful
 
-Copy Success
-
-Copy to Clipboard
-
 `{"event": "subscribe","topic": "spot/ticker:BTC_USDT"}`
 
 > After successful subscription, push data
-
-Copy Success
-
-Copy to Clipboard
 
 `{"table":"spot/ticker:BTC_USDT","data":[]}`

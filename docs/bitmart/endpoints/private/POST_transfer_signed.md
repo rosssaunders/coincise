@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "currency":"USDT",   "amount":"10",   "type":"spot_to_contract",   "recvWindow":5000 }' https://api-cloud-v2.bitmart.com/account/v1/transfer-contract`
 
 | Field | Type | Required? | Description |
@@ -42,10 +38,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "message":"OK",   "code":1000,   "trace":"34018ca3-fe24-446a-9e1d-f82edfb3e3",   "data":{     "currency":"USDT",     "amount":"10"   } }`
 

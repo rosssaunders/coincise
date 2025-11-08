@@ -22,10 +22,6 @@ Balance change push
 
 > Subscribe Request
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "op": "subscribe",   "args": ["spot/user/balance:BALANCE_UPDATE"] }`
 
 Message Format:
@@ -38,10 +34,6 @@ Message Format:
 
 > Subscription successful
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "event":  "subscribe",   "topic":  "spot/user/balance:BALANCE_UPDATE" }`
 
 `{"event": "subscribe","topic": "spot/user/balance:BALANCE_UPDATE"}`
@@ -49,10 +41,6 @@ Copy to Clipboard
 ### After successful subscription, push data
 
 > Push data
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "data":[     {       "event_type":"TRANSACTION_COMPLETED  ",       "event_time":"1693364237000",       "balance_details":[{         "ccy": "BTC",         "av_bal": "123.22",         "fz_bal": "12.56"       }]     }   ],   "table":"spot/user/balance" }`
 

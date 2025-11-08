@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/contract/private/position-v2?symbol=BTCUSDT`
 
 | Field | Type | Required? | Description |
@@ -46,17 +42,9 @@ Copy to Clipboard
 
 > For One-way position mode:
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "code": 1000,   "message": "Ok",   "data": [     {       "symbol": "BTCUSDT",       "leverage": "51",       "timestamp": 1746687390815,       "current_fee": "0.0000397",       "open_timestamp": 0,       "current_value": "0",       "mark_price": "98952",       "position_value": "0",       "position_cross": "0",       "maintenance_margin": "0",       "close_vol": "0",       "close_avg_price": "0",       "open_avg_price": "0",       "entry_price": "0",       "current_amount": "0",       "position_amount": "5",       "realized_value": "0",       "mark_value": "0",       "account": "futures",       "open_type": "isolated",       "position_side": "both",       "unrealized_pnl": "0",       "liquidation_price": "0",       "max_notional_value": "500000",       "initial_margin": "0"     }   ],   "trace": "37ffeecd-3a6f-494a-8337-5c3a6012abfa" }`
 
 > For Hedge position mode：
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": [     {       "symbol": "BTCUSDT",       "leverage": "51",       "timestamp": 1746687096451,       "current_fee": "0.0000397",       "open_timestamp": 0,       "current_value": "0",       "mark_price": "98911.62032609",       "position_value": "0",       "position_cross": "0",       "maintenance_margin": "0",       "close_vol": "0",       "close_avg_price": "0",       "open_avg_price": "0",       "entry_price": "0",       "current_amount": "0",       "position_amount": "5",       "realized_value": "0",       "mark_value": "0",       "account": "futures",       "open_type": "isolated",       "position_side": "long",       "unrealized_pnl": "0",       "liquidation_price": "0",       "max_notional_value": "500000",       "initial_margin": "0"     },     {       "symbol": "BTCUSDT",       "leverage": "51",       "timestamp": 1746687096451,       "current_fee": "0.0000397",       "open_timestamp": 0,       "current_value": "0",       "mark_price": "98911.62032609",       "position_value": "0",       "position_cross": "0",       "maintenance_margin": "0",       "close_vol": "0",       "close_avg_price": "0",       "open_avg_price": "0",       "entry_price": "0",       "current_amount": "0",       "position_amount": "5",       "realized_value": "0",       "mark_value": "0",       "account": "futures",       "open_type": "isolated",       "position_side": "short",       "unrealized_pnl": "0",       "liquidation_price": "0",       "max_notional_value": "500000",       "initial_margin": "0"     }   ],   "trace": "ab2131db-5827-45ca-a1be-94522510e107" }`
 

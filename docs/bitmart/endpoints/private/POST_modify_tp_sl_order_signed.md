@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "trigger_price":"2100",   "executive_price":"2100",   "price_type":2,   "order_id":"37758000001",   "client_order_id":"",   "plan_category":2,   "category": "limit" }' https://api-cloud-v2.bitmart.com/contract/private/modify-tp-sl-order`
 
 | Field | Type | Required? | Description |
@@ -50,10 +46,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": {     "order_id": "220609666322019"   },   "trace": "13f7fda9-9543-4e11-a0ba-cbe117989988" }`
 

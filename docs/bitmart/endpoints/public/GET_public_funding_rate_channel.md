@@ -21,17 +21,9 @@ Return funding Rate data
 
 > Subscribe Request
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "action":"subscribe",   "args":["futures/fundingRate:BTCUSDT"] }`
 
 > Funding rate data Request
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "action": "request",   "args":["futures/fundingRate:BTCUSDT"] }`
 
@@ -46,10 +38,6 @@ Message Format:
 ### Response
 
 > Funding rate data
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "data": {         "symbol": "BTCUSDT",         "fundingRate": "0.000098800809",         "fundingTime": 1732525864000,         "nextFundingRate": "0.0000947",         "nextFundingTime": 1732550400000,         "funding_upper_limit": "0.0375",         "funding_lower_limit": "-0.0375",         "ts": 1732525864601     },     "group": "futures/fundingRate:BTCUSDT" }`
 

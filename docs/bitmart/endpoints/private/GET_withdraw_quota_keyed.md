@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}'  https://api-cloud.bitmart.com/account/v1/withdraw/charge?currency=BTC`
 
 | Field | Type | Required? | Description |
@@ -37,10 +33,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "message":"OK",     "code":1000,     "trace":"62a80bde-0cb4-4bf1-b8e5-5ad2c71463e7",     "data":{         "today_available_withdraw_BTC":"100.0000",         "min_withdraw":"0.00000000",         "withdraw_precision":8,         "withdraw_fee":"0.00000000",         "withdraw_Precision_GeTen": 10     } }`
 

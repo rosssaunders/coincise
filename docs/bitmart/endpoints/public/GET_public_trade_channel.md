@@ -21,10 +21,6 @@ Get trade data
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "action":"subscribe",   "args":["futures/trade:BTCUSDT"] }`
 
 Message Format:
@@ -38,10 +34,6 @@ Message Format:
 ### Response
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "group":"futures/trade:BTCUSDT",   "data":[{     "trade_id":1409495322,     "symbol":"BTCUSDT",     "deal_price":"117387.58",     "deal_vol":"1445",     "m":true,     "created_at":"2023-02-24T07:54:11.124940968Z"   }] }`
 

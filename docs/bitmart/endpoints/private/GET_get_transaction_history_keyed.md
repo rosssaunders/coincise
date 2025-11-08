@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/contract/private/transaction-history?symbol=BTCUSDT&start_time=1662368173000&end_time=1662368179000`
 
 | Field | Type | Required? | Description |
@@ -53,10 +49,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": [     {       "symbol": "",       "type": "Transfer",       "amount": "-0.37500000",       "asset": "USDT",       "account": "futures",       "time": "1570608000000",       "tran_id": "9689322392"     },     {       "symbol": "BTCUSDT",       "type": "Commission Fee",       "amount": "-0.01000000",       "asset": "USDT",       "account": "futures",       "time": "1570636800000",       "tran_id": "9689322392"     }   ],   "trace": "80ba1f07-1b6f-46ad-81dd-78ac7e9bbccd" }`
 

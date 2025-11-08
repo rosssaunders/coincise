@@ -22,10 +22,6 @@ Pushes any update to the best bid or ask's price or quantity in real-time for a 
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "action":"subscribe",   "args":["futures/bookticker:BTCUSDT"] }`
 
 Message Format:
@@ -39,10 +35,6 @@ Message Format:
 ### Response
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "data": {         "symbol": "BTCUSDT",         "best_bid_price": "97315",         "best_bid_vol": "156",         "best_ask_price": "97315.4",         "best_ask_vol": "333",         "ms_t": 1733891542244     },     "group": "futures/bookticker:BTCUSDT" }`
 

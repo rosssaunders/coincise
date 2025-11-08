@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl https://api-cloud-v2.bitmart.com/contract/private/affiliate/rebate-list?page=1&size=10&currency=USDT`
 
 | Field | Type | Required | Description |
@@ -44,10 +40,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "total": 2,   "btc_rebate_sum": 0,   "size": 10,   "usdt_rebate_sum": 448.9697507148,   "page": 1,   "eth_rebate_sum": 0,   "rebate_detail_page_data": [{     "rebate_coin": "USDT",     "trade_user_id": 4225149,     "total_rebate_amount": 427.1825970576,     "user_type":1   }, {     "rebate_coin": "USDT",     "trade_user_id": 4225148,     "total_rebate_amount": 21.7871536572,     "user_type":1   }] }`
 

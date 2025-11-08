@@ -14,10 +14,6 @@ Required (Private Endpoint)
 
 > Request Format
 
-Copy Success
-
-Copy to Clipboard
-
 `{"action":"access","args":["<API_KEY>","<timestamp>","<sign>","<dev>"]}`
 
 Please note that the following parameters are all of type `String`
@@ -31,17 +27,9 @@ Please note that the following parameters are all of type `String`
 
 > Login Example
 
-Copy Success
-
-Copy to Clipboard
-
 `{"action": "access", "args": ["80618e45710812162b04892c7ee5ead4a3cc3e56", "1589267764859", "3ceeb7e1b8cb165a975e28a2e2dfaca4d30b358873c0351c1a071d8c83314556","web"]}`
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{"action":"access","success":true}`
 

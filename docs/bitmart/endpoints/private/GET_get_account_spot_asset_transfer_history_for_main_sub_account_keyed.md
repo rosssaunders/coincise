@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud.bitmart.com/account/sub-account/v1/transfer-history?moveType=spot to spot`
 
 | Field | Type | Required? | Description |
@@ -39,10 +35,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "message": "OK",   "code": 1000,   "trace": "282fd16e-73ee-464f-adb7-7241345929f6",   "data": {     "total": 2,     "historyList": [       {         "fromAccount": "SubAccount1@xxx.com",         "fromWalletType": "spot",         "toAccount": "SubAccount2@xxx.com",         "toWalletType": "spot",         "currency": "BTC",         "amount": "1",         "submissionTime": 1648471522       },       {         "fromAccount": "SubAccount1@xxx.com",         "fromWalletType": "spot",         "toAccount": "SubAccount2@xxx.com",         "toWalletType": "spot",         "currency": "BTC",         "amount": "30",         "submissionTime": 1648466178       }     ]   } }`
 

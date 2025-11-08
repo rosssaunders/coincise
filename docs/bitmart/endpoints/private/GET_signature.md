@@ -24,10 +24,6 @@ The authentication type of each API endpoint will be indicated. If it is marked 
 
 > Create X-BM-TIMESTAMP
 
-Copy Success
-
-Copy to Clipboard
-
 `// Java System.currentTimeMillis();  // Python int(time.time() * 1000)  // Golang time.Now().UnixNano() / int64(time.Millisecond)  // Nodejs & TypeScript Date.now();  // Javascript Date.now();  // PHP round(microtime(true) * 1000)  // C# DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()`
 
 -   `X-BM-KEY` (Your created API Access KEY)
@@ -42,10 +38,6 @@ Copy to Clipboard
 ### 2\. Example
 
 > Shell Example
-
-Copy Success
-
-Copy to Clipboard
 
 `echo -n '1589793796145#test001#{"symbol":"BTC_USDT","price":"8600","count":"100"}' | openssl dgst -sha256 -hmac "6c6c98544461bbe71db2bca4c6d7fd0021e0ba9efc215f9c6ad41852df9d9df9"     (stdin)= c31dc326bf87f38bfb49a3f8494961abfa291bd549d0d98d9578e87516cee46d      curl --location --request POST 'localhost:8080/spot/v1/test-post'     --header 'Content-Type: application/json'     --header 'X-BM-KEY: 80618e45710812162b04892c7ee5ead4a3cc3e56'     --header 'X-BM-SIGN: c31dc326bf87f38bfb49a3f8494961abfa291bd549d0d98d9578e87516cee46d'     --header 'X-BM-TIMESTAMP: 1589793796145'     --d '{"symbol":"BTC_USDT","price":"8600","count":"100"}'`
 

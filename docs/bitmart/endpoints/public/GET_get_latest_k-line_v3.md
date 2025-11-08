@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl https://api-cloud.bitmart.com/spot/quotation/v3/lite-klines?symbol=BMX_ETH&step=15&limit=10`
 
 | Field | Type | Required? | Description |
@@ -48,10 +44,6 @@ A total of four query modes are supported:
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code":1000,   "trace":"886fb6ae-456b-4654-b4e0-1231",   "message": "success",   "data":[     [       "1689736680",  // t       "3.721",  // o       "3.743",  // h       "3.677",  // l       "3.708",  // c       "22698348.04828491",  // v       "12698348.04828491"  // qv     ],     [       "1689736620",       "3.731",       "3.799",       "3.494",       "3.72",       "67632347.24399722",       "37632347.24399722"     ]   ] }`
 

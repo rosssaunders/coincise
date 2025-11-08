@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud.bitmart.com/spot/v1/margin/isolated/repay_record?symbol=BTC_USDT`
 
 | Field | Type | Required? | Description |
@@ -42,10 +38,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "message":"OK",     "code":1000,     "trace":"f7f74924-14da-42a6-b7f2-d3799dd9a612",     "data":{       "records":[         {           "repay_id":"118723",           "repay_time":1655345808,           "symbol":"BTC_USDT",           "currency":"BTC",           "repaid_amount":"1.1",           "repaid_principal":"1",           "repaid_interest":"0.1"         },         ...       ]     } }`
 

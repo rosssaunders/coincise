@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}'  https://api-cloud.bitmart.com/spot/v1/margin/isolated/borrow_record?symbol=BTC_USDT`
 
 | Field | Type | Required? | Description |
@@ -41,10 +37,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "message":"OK",     "code":1000,     "trace":"f7f74924-14da-42a6-b7f2-d3799dd9a612",     "data":{       "records":[         {           "borrow_id": "133425",           "symbol": "BTC_USDT",           "currency": "BTC",           "borrow_amount": "1.23854339",           "daily_interest": "0.05",           "hourly_interest": "0.00208334",           "interest_amount": "0.02398474",           "create_time": 1655345808         },         ...       ]     } }`
 

@@ -24,10 +24,6 @@ Refer to [Rate Limitation Details](#cad33537ae)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
  `curl    -H 'X-BM-KEY:{{AccessKey}}'   -H 'X-BM-TIMESTAMP:{{currentTime}}'   -H 'X-BM-SIGN:{{SIGN}}'    -X POST -d '{   "symbol":"BTC_USDT",   "orderMode":"spot",   "startTime":1682239845952,   "endTime":1682239850952,   "limit":10,   "recvWindow":5000 }' https://api-cloud.bitmart.com/spot/v4/query/trades`
 
 | Field | Type | Required? | Description |
@@ -54,10 +50,6 @@ Copy to Clipboard
 #### Response Details
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code" : 1000,   "message" : "success",   "data" : [ {     "tradeId" : "125277182593091639",     "orderId" : "125213058731346053",     "clientOrderId" : "125213058731346053",     "symbol" : "BTC_USDT",     "side" : "buy",     "orderMode" : "spot",     "type" : "limit",     "stpMode": "cancel_maker",     "price" : "39999.00",     "size" : "0.10000",     "notional" : "3999.90000000",     "fee" : "9.99975000",     "feeCoinName" : "USDT",     "tradeRole" : "taker",     "createTime" : 1681891896569,     "updateTime" : 1681891896569   } ],   "trace" : "5e1c9f98d761443ea559c7af71ca57fa.61.16819603026240455" }`
 

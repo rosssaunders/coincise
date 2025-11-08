@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}'  https://api-cloud.bitmart.com/spot/v1/user_fee`
 
 None
@@ -35,10 +31,6 @@ None
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "message":"OK",   "code":1000,   "trace":"0187ba0c876e4236ac191d9848a0f719.94.16778301620100121",   "data":{     "user_rate_type":0,     "level":"LV1",     "taker_fee_rate_A":"0.001",     "maker_fee_rate_A":"0.001",     "taker_fee_rate_B":"0.0025",     "maker_fee_rate_B":"0.0025",     "taker_fee_rate_C":"0.004",     "maker_fee_rate_C":"0.004",     "taker_fee_rate_D":"0.006",     "maker_fee_rate_D":"0.006"   } }`
 

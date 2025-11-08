@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "leverage":"5",   "open_type":"isolated" }' https://api-cloud-v2.bitmart.com/contract/private/submit-leverage`
 
 | Field | Type | Required? | Description |
@@ -41,10 +37,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": {     "symbol":"ETHUSDT",     "leverage":"5",     "open_type":"isolated",     "max_value":"100"   },   "trace": "13f7fda9-9543-4e11-a0ba-cbe117989988" }`
 

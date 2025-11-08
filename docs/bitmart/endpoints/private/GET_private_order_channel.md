@@ -21,10 +21,6 @@ Order Channel, which pushes immediately when the order status, transaction amoun
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "action": "subscribe",   "args": ["futures/order"] }`
 
 Message Format:
@@ -37,10 +33,6 @@ Message Format:
 ### Response
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "group": "futures/order",   "data": [     {       "action": 3,       "order": {         "order_id": "220906179895578",         "client_order_id": "BM1234",         "price": "1",         "size": "1000",         "symbol": "BTCUSDT",         "state": 2,         "side": 1,         "type": "limit",         "leverage": "5",         "open_type": "isolated",         "deal_avg_price": "0",         "deal_size": "0",         "create_time": 1662368173000,         "update_time": 1662368173000,         "plan_order_id": "220901412155341",         "last_trade": {           "lastTradeID": 1247592391,           "fillQty": "1",           "fillPrice": "25667.2",           "fee": "-0.00027",           "feeCcy": "USDT"         },         "trigger_price": "-",         "trigger_price_type": "-",         "execution_price": "-",         "activation_price_type": "-",         "activation_price": "-",         "callback_rate": "-",         "position_mode": "hedge_mode"       }     }   ] }`
 

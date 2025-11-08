@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/contract/private/trades?symbol=BTCUSDT&start_time=1662368173&end_time=1662368179`
 
 | Field | Type | Required? | Description |
@@ -49,10 +45,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": [{     "order_id": "220921197409432",     "trade_id": "1141853921",     "symbol": "BTCUSDT",     "side": 1,     "price": "19313.3",     "vol": "108",     "exec_type": "Maker",     "profit": false,     "realised_profit": "-0.00832",     "paid_fees": "0",     "account": "futures",     "create_time": 1663663818589   }],   "trace": "638d5048-ad21-4a4b-9365-d0756fbfc7ba" }`
 

@@ -18,10 +18,6 @@ Signed interfaces require the timestamp parameter to be passed, whose value shou
 
 The pseudo code for this logic is as follows:
 
-Copy Success
-
-Copy to Clipboard
-
   `if (timestamp < (serverTime + 1000) && (serverTime - timestamp) <= recvWindow)   {     // process request   }    else    {     // reject request   }`
 
 ### About trade timeliness

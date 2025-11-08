@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl https://api-cloud-v2.bitmart.com/contract/public/markprice-kline?symbol=BTCUSDT&step=5&start_time=1662518172&end_time=1662518172`
 
 | Field | Type | Required? | Description |
@@ -40,10 +36,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "trace": "0cc6f4c4-8b8c-4253-8e90-8d3195aa109c",   "message": "Ok",   "data": [{     "timestamp": 1662518160,     "open_price": "100",     "close_price": "120",     "high_price": "130",     "low_price": "90",     "volume": "941008"     },     {       "timestamp": 1662518161,       "open_price": "100",       "close_price": "120",       "high_price": "130",       "low_price": "90",       "volume": "941008"     }   ] }`
 

@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "side":2,   "type":"take_profit",   "size":10,   "trigger_price":"2000",   "executive_price":"1450",   "price_type":1,   "plan_category":1,   "client_order_id":"123456789",   "category":"limit" }' https://api-cloud-v2.bitmart.com/contract/private/submit-plan-order`
 
 | Field | Type | Required? | Description |
@@ -60,10 +56,6 @@ oneway mode
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": {     "order_id": "220609666322019",     "client_order_id": "123456789"   },   "trace": "13f7fda9-9543-4e11-a0ba-cbe117989988" }`
 

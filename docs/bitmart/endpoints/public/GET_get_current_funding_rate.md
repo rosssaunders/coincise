@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl https://api-cloud-v2.bitmart.com/contract/public/funding-rate?symbol=BTCUSDT`
 
 | Field | Type | Required? | Description |
@@ -37,10 +33,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": {     "timestamp": 1662518172178,     "symbol": "BTCUSDT",     "rate_value": "0.000164",     "expected_rate": "0.000164",     "funding_time": 1709971200000,     "funding_upper_limit": "0.0375",     "funding_lower_limit": "-0.0375"   },   "trace": "13f7fda9-9543-4e11-a0ba-cbe117989988" }`
 

@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl https://api-cloud-v2.bitmart.com/contract/public/depth?symbol=BTCUSDT`
 
 | Field | Type | Required? | Description |
@@ -37,10 +33,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "trace": "b9bff62d-9ac8-4815-8808-8f745673c096",   "data": {     "asks": [       [         "23935.4",         "65",         "65"       ]     ],     "bids": [       [         "23935.4",         "65",         "65"       ]     ],     "timestamp": 1660285421287,     "symbol": "BTCUSDT"   } }`
 

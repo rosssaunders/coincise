@@ -24,19 +24,11 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud.bitmart.com/account/sub-account/main/v1/subaccount-list`
 
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "message": "OK",   "code": 1000,   "trace": "c03c22c3-75db-4aaa-9500-6dcd63dd9ccf",   "data": {     "subAccountList": [       {         "accountName": "subAccount1@xxx.com",         "status": 1       },       {         "accountName": "subAccount2@xxx.com",         "status": 1       }     ]   } }`
 

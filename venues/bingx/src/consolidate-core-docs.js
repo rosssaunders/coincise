@@ -33,16 +33,16 @@ function findFiles(dir, fileList = []) {
 
 // Extract error codes from all endpoint files
 function extractErrorCodes() {
-  console.log("\x1b[34m%s\x1b[0m", "📊 Extracting error codes from all endpoints...")
+  console.log(
+    "\x1b[34m%s\x1b[0m",
+    "📊 Extracting error codes from all endpoints..."
+  )
 
   const errorCodes = new Map()
   const publicDir = path.join(DOCS_DIR, "endpoints/public")
   const privateDir = path.join(DOCS_DIR, "endpoints/private")
 
-  const allEndpoints = [
-    ...findFiles(publicDir),
-    ...findFiles(privateDir)
-  ]
+  const allEndpoints = [...findFiles(publicDir), ...findFiles(privateDir)]
 
   allEndpoints.forEach(file => {
     const content = fs.readFileSync(file, "utf8")
@@ -73,7 +73,10 @@ function extractErrorCodes() {
 
 // Consolidate core documentation by category
 function consolidateCoreByCategory() {
-  console.log("\x1b[34m%s\x1b[0m", "📚 Consolidating core documentation by category...")
+  console.log(
+    "\x1b[34m%s\x1b[0m",
+    "📚 Consolidating core documentation by category..."
+  )
 
   const coreDir = path.join(DOCS_DIR, "core")
   if (!fs.existsSync(coreDir)) {
@@ -114,7 +117,9 @@ function consolidateCoreByCategory() {
 
   console.log(`  ✅ Rate limits: ${categories.rate_limits.length} files`)
   console.log(`  ✅ Authentication: ${categories.authentication.length} files`)
-  console.log(`  ✅ Network connectivity: ${categories.network_connectivity.length} files`)
+  console.log(
+    `  ✅ Network connectivity: ${categories.network_connectivity.length} files`
+  )
 
   return categories
 }
@@ -124,12 +129,14 @@ function createRateLimitsDoc(rateLimitDocs) {
   console.log("\x1b[34m%s\x1b[0m", "📝 Creating rate_limits.md...")
 
   let content = "# Rate Limits\n\n"
-  content += "BingX API implements rate limiting across different products and endpoints.\n\n"
+  content +=
+    "BingX API implements rate limiting across different products and endpoints.\n\n"
   content += "## Overview\n\n"
   content += "- Rate limits are enforced per UID (user ID) and per IP address\n"
   content += "- Different API groups have different rate limits\n"
   content += "- You can check rate limit usage via response headers:\n"
-  content += "  - `X-RateLimit-Requests-Remain`: Remaining requests in the current window\n"
+  content +=
+    "  - `X-RateLimit-Requests-Remain`: Remaining requests in the current window\n"
   content += "  - `X-RateLimit-Requests-Expire`: Window expiration time\n\n"
 
   // Group by product
@@ -208,7 +215,8 @@ function createNetworkConnectivityDoc(networkDocs) {
   console.log("\x1b[34m%s\x1b[0m", "📝 Creating network_connectivity.md...")
 
   let content = "# Network Connectivity\n\n"
-  content += "This document describes the base URLs and connectivity information for BingX APIs.\n\n"
+  content +=
+    "This document describes the base URLs and connectivity information for BingX APIs.\n\n"
   content += "## Base URLs\n\n"
   content += "- Production API: `https://open-api.bingx.com`\n"
   content += "- WebSocket: `wss://open-api-ws.bingx.com`\n\n"
@@ -246,7 +254,8 @@ function createErrorCodesDoc(errorCodes) {
   console.log("\x1b[34m%s\x1b[0m", "📝 Creating error_codes.md...")
 
   let content = "# Error Codes\n\n"
-  content += "This document lists all error codes that may be returned by BingX APIs.\n\n"
+  content +=
+    "This document lists all error codes that may be returned by BingX APIs.\n\n"
   content += "| Error Code | Description |\n"
   content += "| ---------- | ----------- |\n"
 
@@ -274,7 +283,8 @@ function createResponseFormatsDoc() {
   let content = "# Response Formats\n\n"
   content += "BingX APIs return responses in JSON format.\n\n"
   content += "## Common Response Structure\n\n"
-  content += "Most BingX API endpoints return responses with the following structure:\n\n"
+  content +=
+    "Most BingX API endpoints return responses with the following structure:\n\n"
   content += "```json\n"
   content += "{\n"
   content += '  "code": 0,\n'
@@ -284,20 +294,24 @@ function createResponseFormatsDoc() {
   content += "```\n\n"
   content += "### Success Response\n\n"
   content += "- `code`: `0` for success\n"
-  content += "- `msg`: Success message, typically `\"success\"`\n"
+  content += '- `msg`: Success message, typically `"success"`\n'
   content += "- `data`: Response data (structure varies by endpoint)\n\n"
   content += "### Error Response\n\n"
   content += "- `code`: Non-zero error code\n"
   content += "- `msg`: Error message describing what went wrong\n\n"
   content += "## Data Types\n\n"
   content += "### Timestamps\n\n"
-  content += "- All timestamps are in milliseconds (Unix epoch time in milliseconds)\n"
+  content +=
+    "- All timestamps are in milliseconds (Unix epoch time in milliseconds)\n"
   content += "- Example: `1640000000000` represents 2021-12-20 13:46:40 UTC\n\n"
   content += "### Numbers\n\n"
-  content += "- Prices and quantities are often returned as strings to preserve precision\n"
-  content += "- Always parse these as decimal/float types in your application\n\n"
+  content +=
+    "- Prices and quantities are often returned as strings to preserve precision\n"
+  content +=
+    "- Always parse these as decimal/float types in your application\n\n"
   content += "## Pagination\n\n"
-  content += "Some endpoints support pagination using the following parameters:\n\n"
+  content +=
+    "Some endpoints support pagination using the following parameters:\n\n"
   content += "- `limit`: Maximum number of results to return\n"
   content += "- `orderId` or `timestamp`: Cursor for pagination\n\n"
 
@@ -329,7 +343,7 @@ function copyChangeLog() {
 
 async function main() {
   console.log("\x1b[36m%s\x1b[0m", "🚀 BingX Core Documentation Consolidation")
-  console.log("\x1b[36m%s\x1b[0m", "=" .repeat(50))
+  console.log("\x1b[36m%s\x1b[0m", "=".repeat(50))
 
   // Step 1: Extract error codes from all endpoints
   const errorCodes = extractErrorCodes()
@@ -379,7 +393,10 @@ async function main() {
     }
   }
 
-  console.log("\x1b[32m%s\x1b[0m", "\n✅ Core documentation consolidation complete!")
+  console.log(
+    "\x1b[32m%s\x1b[0m",
+    "\n✅ Core documentation consolidation complete!"
+  )
   console.log(`📁 Output directory: ${DOCS_DIR}`)
 }
 

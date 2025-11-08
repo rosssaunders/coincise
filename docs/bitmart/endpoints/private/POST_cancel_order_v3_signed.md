@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{     "symbol": "BTC_USDT",     "order_id": "112121212" }' https://api-cloud.bitmart.com/spot/v3/cancel_order`
 
 | Field | Type | Required? | Description |
@@ -41,10 +37,6 @@ In each request, you must select one of the parameters order\_id and client\_ord
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "trace":"886fb6ae-456b-4654-b4e0-d681ac05cea1",   "message": "OK",   "data": {     "result": true   } }`
 

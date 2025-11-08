@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl https://api-cloud.bitmart.com/system/service`
 
 None
@@ -35,10 +31,6 @@ None
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "trace":"886fb6ae-456b-4654-b4e0-d681ac05cea1",   "message": "OK",   "data": {     "service":[       {          "title": "Spot API Stop",          "service_type": "spot",          "status": "2",          "start_time": 1527777538000,          "end_time": 1527777538000      },      {         "title": "Contract API Stop",         "service_type": "contract",         "status": "2",         "start_time": 1527777538000,         "end_time": 1527777538000     }    ]   } }`
 

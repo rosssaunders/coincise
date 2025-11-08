@@ -21,10 +21,6 @@ Get asset balance change
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `{     "action": "subscribe",     "args":["futures/asset:USDT", "futures/asset:BTC", "futures/asset:ETH"] }`
 
 Message Format:
@@ -38,10 +34,6 @@ Message Format:
 ### Response
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "group": "futures/asset:BTC",   "data": {     "currency": "BTC",     "available_balance": "1000",     "position_deposit": "1000",     "frozen_balance": "1000"   } }`
 

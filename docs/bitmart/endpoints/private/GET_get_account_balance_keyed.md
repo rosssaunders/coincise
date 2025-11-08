@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud.bitmart.com/account/v1/wallet?currency=USDT&needUsdValuation=true`
 
 | Field | Type | Required? | Description |
@@ -38,10 +34,6 @@ Copy to Clipboard
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "message":"OK",     "code":1000,     "trace":"ef834248-51d3-4223-9481-f862aa9dd39f",     "data":{         "wallet":[             {                 "currency":"USDT",                 "name":"Tether USD",                 "available":"1000.00000000",                 "available_usd_valuation":"1002.00000000",                 "frozen":"0.00000000",                 "unAvailable":"0.00000000"             }         ]     } }`
 

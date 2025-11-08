@@ -24,10 +24,6 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/contract/private/current-plan-order?symbol=BTCUSDT&type=market&limit=10`
 
 | Field | Type | Required? | Description |
@@ -45,10 +41,6 @@ default all |
 #### Response Data
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "code": 1000,   "message": "Ok",   "data": [     {       "order_id": "220908185908509",       "client_order_id": "BM123",       "executive_price": "14277",       "trigger_price": "14277",       "size": "7216",       "symbol": "BTCUSDT",       "state": 4,       "side": 3,       "mode": 1,       "position_mode": "hedge_mode",       "price_way": 2,       "price_type": 1,       "plan_category": 2,       "type": "stop_loss",       "leverage": "0",       "open_type": "isolated",       "create_time": 1662368173000,       "update_time": 1662368173000     }   ],   "trace": "80ba1f07-1b6f-46ad-81dd-78ac7e9bbccd" }`
 

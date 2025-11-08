@@ -21,10 +21,6 @@ Get depth data
 
 > Request
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "action":"subscribe",   "args":["futures/depth20:BTCUSDT@200ms"] }`
 
 Message Format:
@@ -47,10 +43,6 @@ Message Format:
 ### Response
 
 > Response
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "group":"futures/depth20:BTCUSDT@200ms",     "data":{             "symbol":"BTCUSDT",             "way":1,             "depths":[               {"price":"5","vol":"97"}             ],             "ms_t": 1542337219120         } }`
 

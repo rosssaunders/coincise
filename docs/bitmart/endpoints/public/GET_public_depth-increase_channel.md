@@ -21,17 +21,9 @@ Return depth data, support the creation of a local full depth cache data
 
 > Subscribe Request
 
-Copy Success
-
-Copy to Clipboard
-
 `{   "action":"subscribe",   "args":["futures/depthIncrease20:BTCUSDT@200ms"] }`
 
 > Full depth snapshot data Request
-
-Copy Success
-
-Copy to Clipboard
 
 `{   "action": "request",   "args":["futures/depthIncrease20:BTCUSDT@200ms"] }`
 
@@ -56,17 +48,9 @@ Parameters Channel Name List
 
 > Full depth snapshot data
 
-Copy Success
-
-Copy to Clipboard
-
 `{     "data": {         "symbol": "BTCUSDT",         "asks": [             {                 "price": "70391.6",                 "vol": "3550"             }         ],         "bids": [             {                 "price": "70391.2",                 "vol": "1335"             }         ],         "ms_t": 1730400086184,         "version": 980361,         "type": "snapshot"     },     "group": "futures/depthIncrease20:BTCUSDT@200ms" }`
 
 > Incremental depth data
-
-Copy Success
-
-Copy to Clipboard
 
 `{     "data": {         "symbol": "BTCUSDT",         "asks": [             {                 "price": "70395.3",                 "vol": "341"             },             {                 "price": "70395.4",                 "vol": "323"             }         ],         "bids": [             {                 "price": "70391.2",                 "vol": "0"             },             {                 "price": "70353.4",                 "vol": "11435"             }         ],         "ms_t": 1730400086194,         "version": 980362,         "type": "update"     },     "group": "futures/depthIncrease20:BTCUSDT@200ms" }`
 
