@@ -1,7 +1,6 @@
 # POST public/get-announcements
 
-**Source:**
-[public/get-announcements](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-get-announcements)
+**Source:** [public/get-announcements](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-get-announcements)
 
 ## Authentication
 
@@ -60,25 +59,25 @@ This api fetches all announcements in [Crypto.com](https://crypto.com/) Exchange
 
 ### Request Params
 
-| Name         | Type   | Required | Description                                                                   |
-| ------------ | ------ | -------- | ----------------------------------------------------------------------------- |
-| category     | string | N        | filter by category: list, delist, event, product, system                      |
-| product_type | string | N        | filter by product type. e.g. Spot, Derivative, OTC, Staking, TradingArena etc |
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| category | string | N | filter by category: list, delist, event, product, system |
+| product\_type | string | N | filter by product type. e.g. Spot, Derivative, OTC, Staking, TradingArena etc |
 
 ### Response Attributes
 
-| Name            | Type   | Description                        |
-| --------------- | ------ | ---------------------------------- |
-| id              | string | announcement id                    |
-| category        | string | type of announcement               |
-| product_type    | string | type of product                    |
-| announced_at    | string | announced timestamps               |
-| title           | string | title of announcement              |
-| content         | string | content of announcement            |
-| instrument_name | string | instrument name                    |
-| impacted_params | map    | impacted params                    |
-| start_time      | long   | announcements start time timestamp |
-| end_time        | long   | announcements end time timestamp   |
+| Name | Type | Description |
+| --- | --- | --- |
+| id | string | announcement id |
+| category | string | type of announcement |
+| product\_type | string | type of product |
+| announced\_at | string | announced timestamps |
+| title | string | title of announcement |
+| content | string | content of announcement |
+| instrument\_name | string | instrument name |
+| impacted\_params | map | impacted params |
+| start\_time | long | announcements start time timestamp |
+| end\_time | long | announcements end time timestamp |
 
 ### Applies To
 

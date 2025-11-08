@@ -1,7 +1,6 @@
 # POST public/get-insurance
 
-**Source:**
-[public/get-insurance](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-get-insurance)
+**Source:** [public/get-insurance](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-get-insurance)
 
 ## Authentication
 
@@ -36,12 +35,12 @@ Fetches balance of Insurance Fund for a particular currency.
 
 ### Request Params
 
-| Name            | Type   | Required | Description                                        |
-| --------------- | ------ | -------- | -------------------------------------------------- |
-| instrument_name | string | Y        | e.g. USD                                           |
-| count           | number | N        | Default is 25                                      |
-| start_ts        | number | N        | Default timestamp is 1 day ago (Unix timestamp)    |
-| end_ts          | number | N        | Default timestamp is current time (Unix timestamp) |
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| instrument\_name | string | Y | e.g. USD |
+| count | number | N | Default is 25 |
+| start\_ts | number | N | Default timestamp is 1 day ago (Unix timestamp) |
+| end\_ts | number | N | Default timestamp is current time (Unix timestamp) |
 
 ### Applies To
 
@@ -53,14 +52,14 @@ GET
 
 ### Response Attributes
 
-| Name            | Type   | Description |
-| --------------- | ------ | ----------- |
-| instrument_name | string | e.g. USD    |
-| data            | array  | See below   |
+| Name | Type | Description |
+| --- | --- | --- |
+| instrument\_name | string | e.g. USD |
+| data | array | See below |
 
 `data` consists of:
 
-| Name | Type   | Description |
-| ---- | ------ | ----------- |
-| v    | string | Value       |
-| t    | long   | Timestamp   |
+| Name | Type | Description |
+| --- | --- | --- |
+| v | string | Value |
+| t | long | Timestamp |

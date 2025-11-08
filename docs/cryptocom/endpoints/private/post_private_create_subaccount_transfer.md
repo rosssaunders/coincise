@@ -1,7 +1,6 @@
 # POST private/create-subaccount-transfer
 
-**Source:**
-[private/create-subaccount-transfer](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-create-subaccount-transfer)
+**Source:** [private/create-subaccount-transfer](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-create-subaccount-transfer)
 
 ## Authentication
 
@@ -39,12 +38,12 @@ Transfer between subaccounts (and master account).
 
 ### Request params
 
-| Name     | Type   | Required | Description                                    |
-| -------- | ------ | -------- | ---------------------------------------------- |
-| from     | string | Y        | Account UUID to be debited                     |
-| to       | string | Y        | Account UUID to be credit                      |
-| currency | string | Y        | Currency symbol                                |
-| amount   | string | Y        | Amount to transfer - must a be positive number |
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| from | string | Y | Account UUID to be debited |
+| to | string | Y | Account UUID to be credit |
+| currency | string | Y | Currency symbol |
+| amount | string | Y | Amount to transfer - must a be positive number |
 
 ### Applies To
 
@@ -52,6 +51,6 @@ REST
 
 ### Response attributes
 
-| Name | Type   | Description                                              |
-| ---- | ------ | -------------------------------------------------------- |
-| code | number | 0 for successful transfer (NO_ERROR) else the error code |
+| Name | Type | Description |
+| --- | --- | --- |
+| code | number | 0 for successful transfer (NO\_ERROR) else the error code |

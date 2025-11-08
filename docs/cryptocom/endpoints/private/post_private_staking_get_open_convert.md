@@ -1,7 +1,6 @@
 # POST private/staking/get-open-convert
 
-**Source:**
-[private/staking/get-open-convert](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-staking-get-open-convert)
+**Source:** [private/staking/get-open-convert](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-staking-get-open-convert)
 
 ## Authentication
 
@@ -53,15 +52,14 @@ Get convert request that status is not in final state.
 
 ### Request Params
 
-| Name       | Type             | Required | Description                                  |
-| ---------- | ---------------- | -------- | -------------------------------------------- |
-| start_time | number or string | N        | Start time in Unix time format (`inclusive`) |
-
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| start\_time | number or string | N | Start time in Unix time format (`inclusive`)  
 Default: `end_time - 30 day`  
-Min: `end_time - 180 days` | | end_time | number or string | N | End time in
-Unix time format (`inclusive`)  
-Default: current system timestamp | | limit | number or string | N | The maximum
-number of requests returned  
+Min: `end_time - 180 days` |
+| end\_time | number or string | N | End time in Unix time format (`inclusive`)  
+Default: current system timestamp |
+| limit | number or string | N | The maximum number of requests returned  
 Default: 20  
 Max: 500 |
 
@@ -77,17 +75,18 @@ POST
 
 An array, consisting of:
 
-| Name                 | Type   | Description                      |
-| -------------------- | ------ | -------------------------------- |
-| from_instrument_name | string | Instrument name to convert from: |
-
+| Name | Type | Description |
+| --- | --- | --- |
+| from\_instrument\_name | string | Instrument name to convert from:  
 \- ETH.staked  
-\- CDCETH | | to_instrument_name | string | Instrument name to convert to, e.g.
-CDCETH | | expected_rate | string | Expected conversion rate | | from_quantity |
-string | Quantity to be converted in from_instrument_name | |
-slippage_tolerance_bps | string | Maximum slippage allowed in basis point | |
-actual_rate | string | Actual conversion rate | | to_quantity | string |
-Quantity converted to to_instrument_name | | convert_id | string | Convert
-request id | | status | string | Request status:  
-\- `NEW` | | create_timestamp_ms | string | Request creation timestamp in
-milliseconds in Unix time format |
+\- CDCETH |
+| to\_instrument\_name | string | Instrument name to convert to, e.g. CDCETH |
+| expected\_rate | string | Expected conversion rate |
+| from\_quantity | string | Quantity to be converted in from\_instrument\_name |
+| slippage\_tolerance\_bps | string | Maximum slippage allowed in basis point |
+| actual\_rate | string | Actual conversion rate |
+| to\_quantity | string | Quantity converted to to\_instrument\_name |
+| convert\_id | string | Convert request id |
+| status | string | Request status:  
+\- `NEW` |
+| create\_timestamp\_ms | string | Request creation timestamp in milliseconds in Unix time format |

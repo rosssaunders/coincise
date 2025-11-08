@@ -1,7 +1,6 @@
 # POST private/get-fee-rate
 
-**Source:**
-[private/get-fee-rate](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-fee-rate)
+**Source:** [private/get-fee-rate](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-fee-rate)
 
 ## Authentication
 
@@ -46,14 +45,14 @@ N/A
 
 ### Response Attributes
 
-| Name                           | Type   | Required | Description                     |
-| ------------------------------ | ------ | -------- | ------------------------------- |
-| spot_tier                      | string | Y        | 30day spot trading volume tier  |
-| deriv_tier                     | string | Y        | 30day deriv trading volume tier |
-| effective_spot_maker_rate_bps  | string | Y        | 30day spot maker rate in bps    |
-| effective_spot_taker_rate_bps  | string | Y        | 30day spot taker rate in bps    |
-| effective_deriv_maker_rate_bps | string | Y        | 30day deriv maker rate in bps   |
-| effective_deriv_taker_rate_bps | string | Y        | 30day deriv taker rate in bps   |
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| spot\_tier | string | Y | 30day spot trading volume tier |
+| deriv\_tier | string | Y | 30day deriv trading volume tier |
+| effective\_spot\_maker\_rate\_bps | string | Y | 30day spot maker rate in bps |
+| effective\_spot\_taker\_rate\_bps | string | Y | 30day spot taker rate in bps |
+| effective\_deriv\_maker\_rate\_bps | string | Y | 30day deriv maker rate in bps |
+| effective\_deriv\_taker\_rate\_bps | string | Y | 30day deriv taker rate in bps |
 
 ### Applies To
 

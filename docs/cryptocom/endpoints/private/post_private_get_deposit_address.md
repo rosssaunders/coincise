@@ -1,7 +1,6 @@
 # POST private/get-deposit-address
 
-**Source:**
-[private/get-deposit-address](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-deposit-address)
+**Source:** [private/get-deposit-address](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-deposit-address)
 
 ## Authentication
 
@@ -52,15 +51,13 @@ Required (Private Endpoint)
 }
 ```
 
-Fetches deposit address. Withdrawal setting must be enabled for your API Key. If
-you do not see the option when viewing your API Keys, this feature is not yet
-available for you.
+Fetches deposit address. Withdrawal setting must be enabled for your API Key. If you do not see the option when viewing your API Keys, this feature is not yet available for you.
 
 ### Request Params
 
-| Name     | Type   | Required | Description   |
-| -------- | ------ | -------- | ------------- |
-| currency | string | Y        | E.g. BTC, CRO |
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| currency | string | Y | E.g. BTC, CRO |
 
 ### Applies To
 
@@ -74,16 +71,17 @@ POST
 
 An array of `deposit_address_list`, consisting of:
 
-| Name     | Type   | Description              |
-| -------- | ------ | ------------------------ |
-| id       | long   | Newly created deposit ID |
-| currency | string | E.g. BTC, CRO            |
-| network  | string | E.g. ETH, CRO            |
-
+| Name | Type | Description |
+| --- | --- | --- |
+| id | long | Newly created deposit ID |
+| currency | string | E.g. BTC, CRO |
+| network | string | E.g. ETH, CRO  
+  
 When currency = CRO, network = CRO, it is a main net address.  
-When currency = CRO, network = ETH, it is an ERC20 address. | | address | string
-| Address with Address Tag (if any) | | create_time | long | | | status | string
-| "0"
-
+When currency = CRO, network = ETH, it is an ERC20 address. |
+| address | string | Address with Address Tag (if any) |
+| create\_time | long |  |
+| status | string | "0"  
+  
 0 - Inactive  
 1 - Active |

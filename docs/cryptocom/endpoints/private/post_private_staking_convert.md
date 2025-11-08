@@ -1,7 +1,6 @@
 # POST private/staking/convert
 
-**Source:**
-[private/staking/convert](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-staking-convert)
+**Source:** [private/staking/convert](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-staking-convert)
 
 ## Authentication
 
@@ -48,18 +47,17 @@ Create a request to convert between staked token with liquid staking token.
 
 ### Request Params
 
-| Name                 | Type   | Required | Description                      |
-| -------------------- | ------ | -------- | -------------------------------- |
-| from_instrument_name | string | Y        | Instrument name to convert from: |
-
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| from\_instrument\_name | string | Y | Instrument name to convert from:  
 \- ETH.staked  
-\- CDCETH | | to_instrument_name | string | Y | Instrument name to convert to:  
+\- CDCETH |
+| to\_instrument\_name | string | Y | Instrument name to convert to:  
 \- CDCETH if `from_instrument_name` is ETH.staked  
-\- ETH.staked if `from_instrument_name` is CDCETH | | expected_rate | string | Y
-| Expected conversion rate, received from `public/staking/get-conversion-rate` |
-| from_quantity | string | Y | Quantity to be converted in from_instrument_name
-| | slippage_tolerance_bps | string | Y | Maximum slippage allowed in basis
-point |
+\- ETH.staked if `from_instrument_name` is CDCETH |
+| expected\_rate | string | Y | Expected conversion rate, received from `public/staking/get-conversion-rate` |
+| from\_quantity | string | Y | Quantity to be converted in from\_instrument\_name |
+| slippage\_tolerance\_bps | string | Y | Maximum slippage allowed in basis point |
 
 ### Applies To
 
@@ -71,12 +69,12 @@ POST
 
 ### Response Attributes
 
-| Name                   | Type   | Description                                       |
-| ---------------------- | ------ | ------------------------------------------------- |
-| from_instrument_name   | string | Instrument name to convert from , e.g. ETH.staked |
-| to_instrument_name     | string | Instrument name to convert to, e.g. CDCETH        |
-| expected_rate          | string | Expected conversion rate                          |
-| from_quantity          | string | Quantity to be converted in from_instrument_name  |
-| slippage_tolerance_bps | string | Maximum slippage allowed in basis point           |
-| convert_id             | string | Convert request id                                |
-| reason                 | string | Reason for the status, e.g. "NO_ERROR"            |
+| Name | Type | Description |
+| --- | --- | --- |
+| from\_instrument\_name | string | Instrument name to convert from , e.g. ETH.staked |
+| to\_instrument\_name | string | Instrument name to convert to, e.g. CDCETH |
+| expected\_rate | string | Expected conversion rate |
+| from\_quantity | string | Quantity to be converted in from\_instrument\_name |
+| slippage\_tolerance\_bps | string | Maximum slippage allowed in basis point |
+| convert\_id | string | Convert request id |
+| reason | string | Reason for the status, e.g. "NO\_ERROR" |

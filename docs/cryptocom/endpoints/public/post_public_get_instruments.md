@@ -1,7 +1,6 @@
 # POST public/get-instruments
 
-**Source:**
-[public/get-instruments](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-get-instruments)
+**Source:** [public/get-instruments](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-get-instruments)
 
 ## Authentication
 
@@ -56,18 +55,18 @@ GET
 
 An array, consisting of:
 
-| Name                | Type    | Description                           |
-| ------------------- | ------- | ------------------------------------- |
-| symbol              | string  | e.g. BTCUSD-PERP                      |
-| inst_type           | string  | e.g. PERPETUAL_SWAP                   |
-| display_name        | string  | e.g. BTCUSD Perpetual                 |
-| base_ccy            | string  | Base currency, e.g. BTC               |
-| quote_ccy           | string  | Quote currency, e.g. USD              |
-| quote_decimals      | number  | Minimum decimal place for price field |
-| quantity_decimals   | number  | Minimum decimal place for qty field   |
-| price_tick_size     | string  | Minimum price tick size               |
-| qty_tick_size       | string  | Minimum trading quantity / tick size  |
-| max_leverage        | string  | Max leverage of the product           |
-| tradable            | boolean | True or false                         |
-| expiry_timestamp_ms | number  | Expiry timestamp in millisecond       |
-| underlying_symbol   | string  | Underlying symbol                     |
+| Name | Type | Description |
+| --- | --- | --- |
+| symbol | string | e.g. BTCUSD-PERP |
+| inst\_type | string | e.g. PERPETUAL\_SWAP |
+| display\_name | string | e.g. BTCUSD Perpetual |
+| base\_ccy | string | Base currency, e.g. BTC |
+| quote\_ccy | string | Quote currency, e.g. USD |
+| quote\_decimals | number | Minimum decimal place for price field |
+| quantity\_decimals | number | Minimum decimal place for qty field |
+| price\_tick\_size | string | Minimum price tick size |
+| qty\_tick\_size | string | Minimum trading quantity / tick size |
+| max\_leverage | string | Max leverage of the product |
+| tradable | boolean | True or false |
+| expiry\_timestamp\_ms | number | Expiry timestamp in millisecond |
+| underlying\_symbol | string | Underlying symbol |

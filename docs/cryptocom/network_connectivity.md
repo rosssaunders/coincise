@@ -16,8 +16,7 @@ Note: REST API requests need to be sent as "Content Type: application/json"
 
 ## Websocket Root Endpoints
 
-The Websocket is available across two servers -- the User API Websocket (for
-authenticated requests and subscriptions), and Market Data Websocket:
+The Websocket is available across two servers -- the User API Websocket (for authenticated requests and subscriptions), and Market Data Websocket:
 
 ### UAT Sandbox
 
