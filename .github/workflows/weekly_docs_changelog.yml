@@ -40,20 +40,20 @@ jobs:
 
       - name: Commit changelog to branch
         run: |
-          BRANCH=docs-changelog/update-$(date +'%Y-%m-%d')
-          git checkout -b $BRANCH || git checkout $BRANCH
+          BRANCH="docs-changelog/update-$(date +'%Y-%m-%d')"
+          echo "DOCS_CHANGELOG_BRANCH=$BRANCH" >> "$GITHUB_ENV"
+          git checkout -b "$BRANCH" || git checkout "$BRANCH"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs-changelog.md
           git diff --cached --quiet || git commit -m "chore: update docs changelog"
-          git push --set-upstream origin $BRANCH
+          git push --force-with-lease --set-upstream origin "$BRANCH"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
           commit-message: "chore: update docs changelog"
-          branch:
-            ${{ github.head_ref || format('docs-changelog/update-{0}', github.run_id) }}
+          branch: ${{ env.DOCS_CHANGELOG_BRANCH }}
           title: "Weekly Docs Changelog Update"
           body: |
             This PR updates the docs changelog with all `docs:` commits from the past week.
