@@ -462,7 +462,9 @@ const main = async () => {
 
     const totalEndpoints = publicCount + privateCount
 
-    console.log(`\n✅ Endpoint documentation extraction completed successfully!`)
+    console.log(
+      `\n✅ Endpoint documentation extraction completed successfully!`
+    )
     console.log(`📁 Files written to: ${OUTPUT_DIR}`)
     console.log(`   - Public endpoints: ${publicCount}`)
     console.log(`   - Private endpoints: ${privateCount}`)

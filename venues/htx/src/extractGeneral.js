@@ -143,8 +143,7 @@ const extractAuthentication = async (page, turndownService) => {
 
   const markdown = turndownService.turndown(html)
   return (
-    markdown ||
-    "# Authentication\n\nNo authentication information available.\n"
+    markdown || "# Authentication\n\nNo authentication information available.\n"
   )
 }
 
@@ -200,7 +199,8 @@ const extractResponseFormats = async (page, turndownService) => {
 
   const markdown = turndownService.turndown(html)
   return (
-    markdown || "# Response Formats\n\nNo response format information available.\n"
+    markdown ||
+    "# Response Formats\n\nNo response format information available.\n"
   )
 }
 

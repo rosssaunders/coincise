@@ -64,26 +64,26 @@ const extractEndpointsFromPage = async (page, pageUrl) => {
 
   return await page.evaluate(() => {
     const endpoints = []
-    
+
     // Method 1: Look for endpoint sections with strong tags
     const sections = document.querySelectorAll("p > strong")
-    
+
     sections.forEach(section => {
       const sectionName = section.textContent.trim()
-      
+
       // Find the list after this section
       let listElement = section.parentElement.nextElementSibling
       while (listElement && listElement.tagName !== "UL") {
         listElement = listElement.nextElementSibling
       }
-      
+
       if (listElement) {
         const links = Array.from(listElement.querySelectorAll("a"))
-        
+
         links.forEach(link => {
           const title = link.textContent.trim()
           const url = link.getAttribute("href")
-          
+
           if (url && url.includes("/reference/")) {
             endpoints.push({
               title,
@@ -94,17 +94,21 @@ const extractEndpointsFromPage = async (page, pageUrl) => {
         })
       }
     })
-    
+
     // Method 2: Look for all reference links in the main content (for pages without strong sections)
     if (endpoints.length === 0) {
-      const main = document.querySelector("main, article, .content-body, [role=\"main\"]")
+      const main = document.querySelector(
+        'main, article, .content-body, [role="main"]'
+      )
       if (main) {
-        const links = Array.from(main.querySelectorAll("a[href*=\"/reference/\"]"))
-        
+        const links = Array.from(
+          main.querySelectorAll('a[href*="/reference/"]')
+        )
+
         links.forEach(link => {
           const title = link.textContent.trim()
           const url = link.getAttribute("href")
-          
+
           if (url && title) {
             endpoints.push({
               title,
@@ -115,7 +119,7 @@ const extractEndpointsFromPage = async (page, pageUrl) => {
         })
       }
     }
-    
+
     return endpoints
   })
 }
@@ -124,17 +128,19 @@ const extractEndpointsFromPage = async (page, pageUrl) => {
  * Extract content from an endpoint page
  */
 const extractEndpointContent = async (page, endpointUrl, turndownService) => {
-  const fullUrl = endpointUrl.startsWith("http") 
-    ? endpointUrl 
+  const fullUrl = endpointUrl.startsWith("http")
+    ? endpointUrl
     : `${BASE_URL}${endpointUrl}`
-  
+
   await page.goto(fullUrl, {
     waitUntil: "networkidle2",
     timeout: 30000
   })
 
   const { html, httpMethod, apiPath } = await page.evaluate(() => {
-    const main = document.querySelector("main, article, .content-body, [role=\"main\"]")
+    const main = document.querySelector(
+      'main, article, .content-body, [role="main"]'
+    )
     if (!main) return { html: "", httpMethod: null, apiPath: null }
 
     // Clone to avoid modifying original
@@ -142,30 +148,30 @@ const extractEndpointContent = async (page, endpointUrl, turndownService) => {
 
     // Remove navigation elements
     const elementsToRemove = clone.querySelectorAll(
-      "nav, aside, .sidebar, .table-of-contents, .pagination, .jump-to, [class*=\"Navigation\"]"
+      'nav, aside, .sidebar, .table-of-contents, .pagination, .jump-to, [class*="Navigation"]'
     )
     elementsToRemove.forEach(el => el.remove())
 
     // Try to extract HTTP method and path from code blocks
     let method = null
     let path = null
-    
+
     const codeBlocks = clone.querySelectorAll("pre, code")
     for (const code of codeBlocks) {
       const text = code.textContent
-      
+
       // Look for HTTP method
       const methodMatch = text.match(/\b(GET|POST|PUT|DELETE|PATCH)\b/)
       if (methodMatch && !method) {
         method = methodMatch[1]
       }
-      
+
       // Look for API path
       const pathMatch = text.match(/\/v\d+\/[^\s\n"']+/)
       if (pathMatch && !path) {
         path = pathMatch[0]
       }
-      
+
       if (method && path) break
     }
 
@@ -177,7 +183,7 @@ const extractEndpointContent = async (page, endpointUrl, turndownService) => {
   })
 
   const markdown = turndownService.turndown(html)
-  
+
   return {
     markdown,
     httpMethod,
@@ -195,24 +201,26 @@ const isPublicEndpoint = (endpointUrl, content, apiPath) => {
       return false
     }
   }
-  
+
   // Check URL pattern
   if (endpointUrl.includes("rest-public") || endpointUrl.includes("public")) {
     return true
   }
-  
+
   if (endpointUrl.includes("rest-auth") || endpointUrl.includes("auth")) {
     return false
   }
-  
+
   // Check content for authentication requirements
   const contentLower = content.toLowerCase()
-  if (contentLower.includes("authentication") || 
-      contentLower.includes("api-key") ||
-      contentLower.includes("api-secret")) {
+  if (
+    contentLower.includes("authentication") ||
+    contentLower.includes("api-key") ||
+    contentLower.includes("api-secret")
+  ) {
     return false
   }
-  
+
   // Default to public if unclear
   return true
 }
@@ -240,7 +248,7 @@ const processEndpoints = async (page, endpoints, turndownService) => {
       const isPublic = isPublicEndpoint(endpoint.url, markdown, apiPath)
       const method = httpMethod || "get"
       const filename = generateFilename(method, endpoint.title)
-      
+
       const fullMarkdown = `# ${endpoint.title}
 
 ${markdown}
@@ -326,7 +334,9 @@ const extractEndpoints = async () => {
       writeFile(filePath, endpoint.content)
     })
 
-    console.log("\n✅ Endpoint documentation extraction completed successfully!")
+    console.log(
+      "\n✅ Endpoint documentation extraction completed successfully!"
+    )
     console.log(`   Public endpoints: ${results.public.length}`)
     console.log(`   Private endpoints: ${results.private.length}`)
   } finally {
