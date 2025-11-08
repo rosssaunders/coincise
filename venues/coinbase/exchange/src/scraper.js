@@ -142,16 +142,20 @@ const scrapeApiDocumentation = async (url, outputPath) => {
     browser = await launchBrowser()
 
     const page = await browser.newPage()
+    
+    // Set longer timeouts for Coinbase's slower-loading pages
+    await page.setDefaultNavigationTimeout(90000)
+    await page.setDefaultTimeout(90000)
 
     // Navigate to the Coinbase Exchange API documentation page
     console.log(`Navigating to ${url}...`)
     await page.goto(url, {
-      waitUntil: "networkidle0",
-      timeout: 60000
+      waitUntil: "networkidle2",
+      timeout: 90000
     })
 
-    // Wait for article element
-    await page.waitForSelector("article", { timeout: 60000 })
+    // Wait for content element (updated selector for new site structure)
+    await page.waitForSelector("#content, article", { timeout: 90000 })
     console.log("Page loaded successfully")
 
     page.evaluate(() => {
