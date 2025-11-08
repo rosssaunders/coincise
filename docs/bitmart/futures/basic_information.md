@@ -43,7 +43,7 @@ The authentication type of each API endpoint will be indicated. If it is marked 
 
 > Create X-BM-TIMESTAMP
 
-`// Java System.currentTimeMillis();  // Python int(time.time() * 1000)   // Golang time.Now().UnixNano() / int64(time.Millisecond)  // Nodejs & TypeScript Date.now();  // Javascript Date.now();  // PHP round(microtime(true) * 1000)  // C# DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()`
+`// Java System.currentTimeMillis();  // Python int(time.time() * 1000)  // Golang time.Now().UnixNano() / int64(time.Millisecond)  // Nodejs & TypeScript Date.now();  // Javascript Date.now();  // PHP round(microtime(true) * 1000)  // C# DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()`
 
 *   `X-BM-KEY` (Your created API Access KEY)
 *   `X-BM-SIGN` (Signature using Sha-256)

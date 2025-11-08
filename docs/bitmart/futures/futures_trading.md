@@ -455,7 +455,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
-| symbol | String | Yes | Symbol of the contract(like BTCUSDT) 
+| symbol | String | No | Symbol of the contract(like BTCUSDT) 
 | account | String | No | Trading account<br>-<code>futures</code><br>-<code>copy_trading</code> 
 | start_time | Long | No | Start time(Timestamp in Seconds) 
 | end_time | Long | No | End time(Timestamp in Seconds) 
@@ -551,7 +551,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{     "currency":"USDT",     "time_start":1684391137804,     "time_end":1684392577804,     "page":1,     "limit":10,     "recvWindow":5000 }' https://api-cloud-v2.bitmart.com/account/v1/transfer-contract-list`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{     "currency":"USDT",     "time_start":1684391137804,     "time_end":1684392577804,     "page":1,     "limit":10,     "recvWindow":5000 }' https://api-cloud-v2.bitmart.com/account/v1/transfer-contract-list`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -600,7 +600,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "symbol":"ETHUSDT",   "client_order_id":"BM1234",   "side":4,   "mode":1,   "type":"limit",   "leverage":"1",   "open_type":"isolated",   "size":10,   "price":"2000" }' https://api-cloud-v2.bitmart.com/contract/private/submit-order`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "client_order_id":"BM1234",   "side":4,   "mode":1,   "type":"limit",   "leverage":"1",   "open_type":"isolated",   "size":10,   "price":"2000" }' https://api-cloud-v2.bitmart.com/contract/private/submit-order`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -646,7 +646,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "symbol":"ETHUSDT",   "order_id":220906179559421,   "client_order_id":"123456",   "price":"1450",   "size":1 }' https://api-cloud-v2.bitmart.com/contract/private/modify-limit-order`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "order_id":220906179559421,   "client_order_id":"123456",   "price":"1450",   "size":1 }' https://api-cloud-v2.bitmart.com/contract/private/modify-limit-order`
 
 | 参数 | 类型 | 是否必填 | 描述 |
 | --- | --- | --- | --- |
@@ -654,7 +654,7 @@ See [Detailed Rate Limit](#rate-limit)
 | order_id | Int | No | Order ID(order_id or client_order_id must give one) 
 | client_order_id | String | No | Client-defined OrderId(A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters) 
 | price | String | No | Order Price（price or size must give one） 
-| size | String | No | Order Size（size or price must give one） 
+| size | Int | No | Order Size（size or price must give one） 
 
 #### Response Data
 
@@ -683,7 +683,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "symbol":"ETHUSDT",   "order_id": "220906179559421" }' https://api-cloud-v2.bitmart.com/contract/private/cancel-order`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "order_id": "220906179559421" }' https://api-cloud-v2.bitmart.com/contract/private/cancel-order`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -715,7 +715,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "symbol":"ETHUSDT" }' https://api-cloud-v2.bitmart.com/contract/private/cancel-orders`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT" }' https://api-cloud-v2.bitmart.com/contract/private/cancel-orders`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -745,7 +745,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{    "timeout":10,    "symbol":"BTCUSDT" }' https://api-cloud-v2.bitmart.com/contract/private/cancel-all-after`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{    "timeout":10,    "symbol":"BTCUSDT" }' https://api-cloud-v2.bitmart.com/contract/private/cancel-all-after`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -782,7 +782,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "symbol":"ETHUSDT",   "side":4,   "mode":1,   "type":"limit",   "leverage":"1",   "open_type":"isolated",   "size":10,   "trigger_price":"2000",   "executive_price":"1450",   "price_type":1,   "price_way":1 }' https://api-cloud-v2.bitmart.com/contract/private/submit-plan-order`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "side":4,   "mode":1,   "type":"limit",   "leverage":"1",   "open_type":"isolated",   "size":10,   "trigger_price":"2000",   "executive_price":"1450",   "price_type":1,   "price_way":1 }' https://api-cloud-v2.bitmart.com/contract/private/submit-plan-order`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -829,7 +829,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "symbol":"ETHUSDT",   "order_id": "220906179559421",   "client_order_id": "123456789" }' https://api-cloud-v2.bitmart.com/contract/private/cancel-plan-order`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "order_id": "220906179559421",   "client_order_id": "123456789" }' https://api-cloud-v2.bitmart.com/contract/private/cancel-plan-order`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -861,7 +861,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "currency":"USDT",   "amount":"10",   "type":"spot_to_contract",   "recvWindow":5000 }' https://api-cloud-v2.bitmart.com/account/v1/transfer-contract`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "currency":"USDT",   "amount":"10",   "type":"spot_to_contract",   "recvWindow":5000 }' https://api-cloud-v2.bitmart.com/account/v1/transfer-contract`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -899,7 +899,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "symbol":"ETHUSDT",   "leverage":"5",   "open_type":"isolated" }' https://api-cloud-v2.bitmart.com/contract/private/submit-leverage`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "leverage":"5",   "open_type":"isolated" }' https://api-cloud-v2.bitmart.com/contract/private/submit-leverage`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -936,7 +936,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "symbol":"ETHUSDT",   "side":2,   "type":"take_profit",   "size":10,   "trigger_price":"2000",   "executive_price":"1450",   "price_type":1,   "plan_category":1,   "client_order_id":"123456789",   "category":"limit" }' https://api-cloud-v2.bitmart.com/contract/private/submit-plan-order`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "side":2,   "type":"take_profit",   "size":10,   "trigger_price":"2000",   "executive_price":"1450",   "price_type":1,   "plan_category":1,   "client_order_id":"123456789",   "category":"limit" }' https://api-cloud-v2.bitmart.com/contract/private/submit-plan-order`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -978,7 +978,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "symbol":"ETHUSDT",   "order_id":"220906179559421",   "trigger_price":"2000",   "executive_price":"1450",   "price_type":1,   "type":"limit" }' https://api-cloud-v2.bitmart.com/contract/private/modify-plan-order`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "order_id":"220906179559421",   "trigger_price":"2000",   "executive_price":"1450",   "price_type":1,   "type":"limit" }' https://api-cloud-v2.bitmart.com/contract/private/modify-plan-order`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -1015,7 +1015,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "symbol":"ETHUSDT",   "order_id":"220609666322019",   "preset_take_profit_price":"2000",   "preset_stop_loss_price":"1900",   "preset_take_profit_price_type":1,   "preset_stop_loss_price_type":1 }' https://api-cloud-v2.bitmart.com/contract/private/modify-preset-plan-order`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "order_id":"220609666322019",   "preset_take_profit_price":"2000",   "preset_stop_loss_price":"1900",   "preset_take_profit_price_type":1,   "preset_stop_loss_price_type":1 }' https://api-cloud-v2.bitmart.com/contract/private/modify-preset-plan-order`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -1052,7 +1052,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "symbol":"ETHUSDT",   "trigger_price":"2100",   "executive_price":"2100",   "price_type":2,   "order_id":"37758000001",   "client_order_id":"",   "plan_category":2,   "category": "limit" }' https://api-cloud-v2.bitmart.com/contract/private/modify-tp-sl-order`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "trigger_price":"2100",   "executive_price":"2100",   "price_type":2,   "order_id":"37758000001",   "client_order_id":"",   "plan_category":2,   "category": "limit" }' https://api-cloud-v2.bitmart.com/contract/private/modify-tp-sl-order`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -1091,7 +1091,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "symbol":"ETHUSDT",   "side":4,   "leverage":"1",   "open_type":"isolated",   "size":10,   "activation_price":"2000",   "callback_rate":"1",   "activation_price_type":1 }' https://api-cloud-v2.bitmart.com/contract/private/submit-trail-order`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "side":4,   "leverage":"1",   "open_type":"isolated",   "size":10,   "activation_price":"2000",   "callback_rate":"1",   "activation_price_type":1 }' https://api-cloud-v2.bitmart.com/contract/private/submit-trail-order`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -1130,7 +1130,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "symbol":"ETHUSDT",   "order_id": "220906179559421" }' https://api-cloud-v2.bitmart.com/contract/private/cancel-trail-order`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "order_id": "220906179559421" }' https://api-cloud-v2.bitmart.com/contract/private/cancel-trail-order`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -1161,7 +1161,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "position_mode":"one_way_mode" }' https://api-cloud-v2.bitmart.com/contract/private/set-position-mode`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "position_mode":"one_way_mode" }' https://api-cloud-v2.bitmart.com/contract/private/set-position-mode`
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -1195,7 +1195,7 @@ See [Detailed Rate Limit](#rate-limit)
 
 None
 
-`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  https://api-cloud-v2.bitmart.com/contract/private/get-position-mode`
+`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}' https://api-cloud-v2.bitmart.com/contract/private/get-position-mode`
 
 #### Response Data
 
