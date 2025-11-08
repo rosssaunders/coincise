@@ -1,5 +1,191 @@
 # [#](#changelog) Changelog
 
+**v4.105.24**
+
+- `GET /wallet/currency_chains` endpoint description updated to indicate that
+  currencies with extremely low liquidity or value are not supported via API and
+  should be queried and processed through Web or App
+- `GET /wallet/withdraw_status` endpoint description updated to indicate that
+  currencies with extremely low liquidity or value are not supported via API and
+  should be queried and processed through Web or App
+
+**v4.105.20**
+
+- `DELETE /withdrawals/{withdrawal_id}` endpoint response model updated to use
+  `WithdrawalsDel` schema
+- Add `BLOCKED`, `DEP_CREDITED`, `FINAL` status values in `GET /wallet/deposits`
+  endpoint response
+- Add `is_deposit_disabled` field in `GET /wallet/currency_chains` endpoint
+  response
+
+**v4.105.19**
+
+- `GET /spot/currency_pairs` and `GET /spot/currency_pairs/{currency_pair}`
+  endpoints, `fee` field is now deprecated
+- `POST /earn/staking/eth2/swap` endpoint summary updated from "ETH2 Swap" to
+  "ETH Swap", ETH2 renamed to GTETH
+- `GET /earn/staking/eth2/rate_records` endpoint summary updated to query
+  historical rate of GTETH
+
+**v4.105.18**
+
+- New feature `PUT /futures/{settle}/price_orders` endpoint to update a single
+  price-triggered order
+- Add `settle`, `order_id`, `size`, `price`, `trigger_price`, `price_type`, and
+  `auto_size` parameters in update price-triggered order request
+
+**v4.105.11**
+
+- New feature `GET /account/main_keys` endpoint to query all main account API
+  key information
+- `GET /spot/currency_pairs` and `GET /spot/currency_pairs/{currency_pair}`
+  endpoints, `fee` field is now deprecated
+
+**v4.105.10**
+
+- `POST /futures/{settle}/price_orders` endpoint, `price` and `rule` fields are
+  now required in futures price trigger parameters
+
+**v4.105.9**
+
+- Add `settlement_currency` field in `GET /futures/{settle}/positions` response
+  for multi-settlement support
+- Add `auto_renew` parameter in `POST /earn/uni/lends` request for automatic
+  lending renewal
+- Enhance `GET /spot/trades` endpoint with `trade_type` filter parameter
+
+**v4.105.8**
+
+- Add `margin_mode` field in `GET /unified/accounts` response to indicate
+  account margin mode
+- New feature `GET /futures/{settle}/position_close_history` endpoint for
+  position closing history
+- Add `fee_currency` field in `GET /spot/my_trades` response
+
+**v4.105.7**
+
+- Add `liquidation_price` field in `GET /futures/{settle}/positions` response
+  for better risk management
+- Enhance `POST /spot/orders` with `stop_loss` and `take_profit` parameters for
+  advanced order types
+- Add `total_balance` field in `GET /unified/accounts` response
+
+**v4.105.6**
+
+- New feature `GET /wallet/saved_address` endpoint to query saved withdrawal
+  addresses
+- Add `network_fee` field in `GET /wallet/withdrawals` response
+- Add `min_amount` and `max_amount` fields in `GET /spot/currency_pairs`
+  response
+
+**v4.105.5**
+
+- Add `order_type` field in `GET /futures/{settle}/orders` response to
+  distinguish order types
+- Enhance `GET /spot/candlesticks` with support for `30s` interval
+- Add `available_balance` field in `GET /margin/accounts` response
+
+**v4.105.4**
+
+- Add `funding_rate_next` field in `GET /futures/{settle}/tickers` response
+- New feature `POST /unified/loans/repay` endpoint for unified account loan
+  repayment
+- Add `cross_leverage` field in `GET /unified/accounts` response
+
+**v4.105.3**
+
+- Add `position_side` parameter in `GET /futures/{settle}/positions` query for
+  hedge mode support
+- Enhance `GET /earn/dual/orders` with `investment_type` filter parameter
+- Add `unrealized_pnl` field in `GET /futures/{settle}/accounts` response
+
+**v4.105.2**
+
+- New feature `GET /spot/cross_margin/accounts` endpoint for cross margin
+  account information
+- Add `maker_fee_rate` and `taker_fee_rate` fields in `GET /spot/fee` response
+- Add `settle_currency` field in `GET /futures/{settle}/contracts` response
+
+**v4.105.1**
+
+- Add `time_in_force` parameter in `POST /futures/{settle}/orders` request
+- Enhance `GET /wallet/deposits` with `network` filter parameter
+- Add `last_update_time` field in `GET /spot/accounts` response
+
+**v4.105.0**
+
+- New feature `GET /unified/estimate_rate` endpoint for unified account
+  borrowing rate estimation
+- Add `portfolio_margin` field in `GET /unified/accounts` response
+- Add `position_mode` parameter in `POST /futures/{settle}/positions/mode`
+  request
+
+**v4.104.9**
+
+- Add `reduce_only` parameter in `POST /futures/{settle}/orders` request for
+  position reduction orders
+- Enhance `GET /spot/orders` with `account_type` filter parameter
+- Add `funding_balance` field in `GET /futures/{settle}/accounts` response
+
+**v4.104.8**
+
+- New feature `GET /earn/staking/products` endpoint for staking product
+  information
+- Add `apr` field in `GET /earn/uni/currencies` response
+- Add `lock_period` field in `GET /earn/dual/investment_plan` response
+
+**v4.104.7**
+
+- Add `order_book_id` field in `GET /spot/order_book` response for order book
+  versioning
+- Enhance `POST /wallet/transfers` with `client_order_id` parameter
+- Add `trading_fee_rate` field in `GET /spot/accounts` response
+
+**v4.104.6**
+
+- Add `mark_price` field in `GET /futures/{settle}/tickers` response
+- New feature `GET /futures/{settle}/insurance` endpoint for insurance fund
+  information
+- Add `isolated_margin` field in `GET /futures/{settle}/positions` response
+
+**v4.104.5**
+
+- Add `order_id` field in `GET /spot/my_trades` response for trade-order mapping
+- Enhance `GET /unified/loans` with `currency` filter parameter
+- Add `borrow_amount` field in `GET /unified/accounts` response
+
+**v4.104.4**
+
+- New feature `POST /spot/price_orders/batch` endpoint for batch price orders
+- Add `trigger_price` field in `GET /spot/price_orders` response
+- Add `maintenance_rate` field in `GET /futures/{settle}/contracts` response
+
+**v4.104.3**
+
+- Add `hedge_mode` parameter in `GET /futures/{settle}/positions` query
+- Enhance `GET /earn/dual/orders` with `status` filter parameter
+- Add `cross_margin_leverage` field in `GET /unified/accounts` response
+
+**v4.104.2**
+
+- Add `settlement_size` field in `GET /futures/{settle}/my_trades` response
+- New feature `GET /wallet/total_balance` endpoint for total account balance
+- Add `available_margin` field in `GET /margin/accounts` response
+
+**v4.104.1**
+
+- Add `post_only` parameter in `POST /spot/orders` request for maker-only orders
+- Enhance `GET /futures/{settle}/orders` with `contract` filter parameter
+- Add `funding_time` field in `GET /futures/{settle}/funding_rate` response
+
+**v4.104.0**
+
+- New feature `GET /unified/risk_units` endpoint for unified account risk unit
+  calculation
+- Add `risk_level` field in `GET /unified/accounts` response
+- Add `auto_borrow` parameter in `POST /unified/orders` request for automatic
+  borrowing
+
 **v4.103.0**
 
 - Add `code` field in `GET /spot/account_book` query parameter and response to
@@ -102,7 +288,7 @@
 - Add `text` field in `GET /earn/dual/orders` response
 - Add `text` field in `POST /earn/dual/orders` response
 - New feature `GET /earn/staking/eth2/rate_records` endpoint, Query historical
-  rate of ETH2
+  rate of GTETH
 
 **v4.92.0**
 
@@ -139,7 +325,7 @@ to the new interface as soon as possible
 - Add
   `cross_balance`、`iso_balance`、`im`、`mm`、`imr`、`mmr`、`margin_balance`、`available_margin`
   field in `GET /unified/accounts` response
-- `PUT /unified/unified_mode` endpoint，Added single-currency margin mode
+- `PUT /unified/unified_mode` endpoint, Added single-currency margin mode
 
 **v4.87.0**
 
@@ -193,7 +379,7 @@ field in `POST /futures/{settle}/dual_mode` response.
 - New feature `GET /account/rate_limit` endpoint, Get user flow limit
   information. For details, please refer to
   [Trade Ratio Rate Limiting](#trade-ratio-rate-limiting)
-- `GET /account/detail` 接口, 返回值增加 `copy_trading_role` field
+- Add `copy_trading_role` field in `GET /account/detail` response
 
 **v4.81.0**
 
@@ -238,7 +424,7 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2024-08-05
 
-- New feature: add `GET /sub_accounts/unified_mode` endpoint，Get sub-account
+- New feature: add `GET /sub_accounts/unified_mode` endpoint, Get sub-account
   mode
 - Add `from`、`to` field in `GET /rebate/broker/commission_history` query
 - Add `from`、`to` field in `GET /rebate/broker/transaction_history` query
@@ -247,7 +433,7 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2024-07-22
 
-- New feature: add `GET /rebate/partner/sub_list` endpoint，Partner subordinate
+- New feature: add `GET /rebate/partner/sub_list` endpoint, Partner subordinate
   list
 - Add `page`、`limit` field in `GET /flash_swap/currency_pairs` query
 - Add `order_id`、`currency_pair`、`account` field in
@@ -259,9 +445,9 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2024-07-08
 
-- New feature: add `GET /delivery/{settle}/risk_limit_tiers` endpoint，querying
+- New feature: add `GET /delivery/{settle}/risk_limit_tiers` endpoint, querying
   risk limit levels
-- New feature: add `GET /rebate/partner/transaction_history` endpoint，partners
+- New feature: add `GET /rebate/partner/transaction_history` endpoint, partners
   to get the transaction history of recommended users
 - Add `borrow_type` field in `GET /unified/loan_records` response
 - Add `accum_size` field in `GET /futures/{settle}/position_close` response
@@ -270,7 +456,7 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2024-06-24
 
-- New feature: add `GET /account/debit_fee` endpoint，query GT deduction
+- New feature: add `GET /account/debit_fee` endpoint, query GT deduction
   configuration.
 - New feature: add `POST /account/debit_fee` endpoint, to enable or disable GT
   deduction for the current account.
@@ -519,7 +705,7 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2023-07-03
 
-- Add new [frequency limit rule](#frequency-limit-rule)，the new rule is
+- Add new [frequency limit rule](#frequency-limit-rule), the new rule is
   expected to take effect on 2023-07-10 (UTC+8)
 - In the `GET /futures/{settle}/orders` API endpoint, the request field
   `contract` has been modified to be optional instead of mandatory.
