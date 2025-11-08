@@ -1,6 +1,6 @@
 # Binance Futures API Documentation Extractor
 
-Extracts and processes Binance Futures API documentation for USD-M Futures, COIN-M Futures, and Options from the official Binance developer documentation.
+Extracts and processes Binance Futures API documentation (USD-M, COIN-M, Options) from the official Binance developer documentation, following the standardized documentation structure.
 
 ## Documentation Sources
 
@@ -23,16 +23,18 @@ npm install
 npm run extract:all
 ```
 
-This extracts documentation for all three futures types (USD-M, COIN-M, Options).
+This will:
+1. Extract core documentation (rate limits, authentication, error codes, etc.) via `extract:general`
+2. Extract individual endpoint documentation files via `extract:endpoints`
 
 ### Extract Specific Sections
 
-**General Documentation (all futures types):**
+**General Documentation:**
 ```bash
 npm run extract:general
 ```
 
-This extracts core documentation sections for USD-M, COIN-M, and Options:
+This extracts core documentation sections for all three futures types:
 - `rate_limits.md` - Rate limiting rules and policies
 - `authentication.md` - API authentication and request signing
 - `network_connectivity.md` - API endpoints and connectivity info
@@ -40,74 +42,68 @@ This extracts core documentation sections for USD-M, COIN-M, and Options:
 - `response_formats.md` - Common definitions and response formats
 - `change_log.md` - API changelog (shared across all futures types)
 
-**USD-M Futures Endpoint Documentation:**
+**Endpoint Documentation:**
 ```bash
-npm run extract:endpoints:usdm:public:rest
-npm run extract:endpoints:usdm:private:rest
-npm run extract:endpoints:usdm:public:ws
-npm run extract:endpoints:usdm:private:ws
+npm run extract:endpoints
 ```
 
-**COIN-M Futures Endpoint Documentation:**
-```bash
-npm run extract:endpoints:coinm:public:rest
-npm run extract:endpoints:coinm:private:rest
-npm run extract:endpoints:coinm:public:ws
-npm run extract:endpoints:coinm:private:ws
-```
-
-**Options Endpoint Documentation:**
-```bash
-npm run extract:endpoints:options:public:rest
-npm run extract:endpoints:options:private:rest
-npm run extract:endpoints:options:public:ws
-npm run extract:endpoints:options:private:ws
-```
+This splits existing monolithic documentation into individual REST endpoint files for all three types.
 
 ## Output Structure
 
-Documentation is saved to `docs/binance/`:
+Documentation is saved to `docs/binance/{usdm,coinm,options}/` following the standardized structure:
 
 ```
 docs/binance/
 ├── futures/
-│   └── change_log.md
+│   └── change_log.md         # Shared changelog
 ├── usdm/
 │   ├── rate_limits.md
 │   ├── authentication.md
 │   ├── network_connectivity.md
 │   ├── error_codes.md
 │   ├── response_formats.md
-│   ├── public_rest_api.md
-│   ├── private_rest_api.md
-│   ├── public_websocket_api.md
-│   └── private_websocket_api.md
+│   └── endpoints/
+│       ├── public/           # 30 public REST endpoints
+│       │   ├── get_fapi_v1_ping.md
+│       │   ├── get_fapi_v1_time.md
+│       │   └── ...
+│       └── private/          # 53 private REST endpoints
+│           ├── post_fapi_v1_order.md
+│           ├── delete_fapi_v1_order.md
+│           └── ...
 ├── coinm/
 │   ├── rate_limits.md
 │   ├── authentication.md
 │   ├── network_connectivity.md
 │   ├── error_codes.md
 │   ├── response_formats.md
-│   ├── public_rest_api.md
-│   ├── private_rest_api.md
-│   ├── public_websocket_api.md
-│   └── private_websocket_api.md
+│   └── endpoints/
+│       ├── public/           # 29 public REST endpoints
+│       └── private/          # 37 private REST endpoints
 └── options/
     ├── rate_limits.md
     ├── authentication.md
     ├── network_connectivity.md
     ├── error_codes.md
     ├── response_formats.md
-    ├── public_rest_api.md
-    ├── private_rest_api.md
-    ├── public_websocket_api.md
-    └── private_websocket_api.md
+    └── endpoints/
+        ├── public/           # 13 public REST endpoints
+        └── private/          # 17 private REST endpoints
 ```
+
+## Architecture
+
+- **extractGeneral.js** - Extracts core documentation sections (authentication, rate limits, etc.)
+- **extractEndpoints.js** - Parses existing monolithic markdown files and splits them into individual endpoint files
 
 ## Notes
 
 - Binance uses Docusaurus for documentation with multi-page structure
-- The extractor combines related endpoint pages into comprehensive API documents
-- Due to Binance's documentation structure, endpoints are aggregated into category files rather than individual endpoint files
-- Extraction respects rate limits with polite delays between requests
-- General documentation is shared where applicable (e.g., change log)
+- Each REST endpoint is extracted into its own markdown file for better organization and LLM consumption
+- The extractor parses pre-generated monolithic files rather than scraping individual pages
+- Change Log is shared across all futures types and stored in `docs/binance/futures/change_log.md`
+- Total endpoints extracted: 179 (across USD-M, COIN-M, and Options)
+  - USD-M: 83 endpoints (30 public + 53 private)
+  - COIN-M: 66 endpoints (29 public + 37 private)
+  - Options: 30 endpoints (13 public + 17 private)

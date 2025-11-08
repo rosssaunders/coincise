@@ -1,5 +1,0 @@
-{
-  "endpoints": ["binance-spot-api-docs"],
-  "output_file": "binance/spot/change_log.md",
-  "title": "Binance Spot API Change Log"
-}

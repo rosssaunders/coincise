@@ -38,37 +38,47 @@ This extracts core documentation sections into separate files:
 
 **Endpoint Documentation:**
 ```bash
-npm run extract:endpoints:public_rest      # Public REST API endpoints
-npm run extract:endpoints:private_rest     # Private REST API endpoints
-npm run extract:endpoints:public_websocket # Public WebSocket streams
-npm run extract:endpoints:private_websocket # Private WebSocket streams
-npm run extract:endpoints:fix              # FIX API documentation
-npm run extract:endpoints:sbe              # SBE Market Data documentation
+npm run extract:endpoints  # Extract individual REST endpoint files
 ```
+
+This extracts each REST API endpoint into its own markdown file in the `endpoints/` directory, organized into `public/` and `private/` subdirectories.
 
 ## Output Structure
 
-Documentation is saved to `docs/binance/spot/`:
+Documentation is saved to `docs/binance/spot/` following the standardized structure:
 
 ```
 docs/binance/spot/
-├── rate_limits.md
-├── authentication.md
-├── network_connectivity.md
-├── error_codes.md
-├── response_formats.md
-├── change_log.md
-├── public_rest_api.md
-├── private_rest_api.md
-├── public_websocket_api.md
-├── private_websocket_api.md
-├── fix_api.md
-└── market_data_sbe_api.md
+├── rate_limits.md              # Rate limiting rules and policies
+├── authentication.md           # API key generation and request signing
+├── network_connectivity.md     # Connection info and endpoints
+├── error_codes.md             # Error code definitions
+├── response_formats.md        # Standard response structures
+├── change_log.md              # API version history
+└── endpoints/
+    ├── public/                 # Public REST API endpoints (15 endpoints)
+    │   ├── get_api_v3_ping.md
+    │   ├── get_api_v3_time.md
+    │   ├── get_api_v3_exchangeinfo.md
+    │   ├── get_api_v3_depth.md
+    │   ├── get_api_v3_ticker_24hr.md
+    │   └── ...
+    └── private/                # Private REST API endpoints (22 endpoints)
+        ├── post_api_v3_order.md
+        ├── delete_api_v3_order.md
+        ├── get_api_v3_account.md
+        ├── get_api_v3_mytrades.md
+        └── ...
 ```
+
+## Architecture
+
+- **extractGeneral.js** - Extracts core documentation sections (authentication, rate limits, etc.)
+- **extractEndpoints.js** - Extracts individual REST endpoints from documentation pages and saves each to a separate file
 
 ## Notes
 
 - Binance uses Docusaurus for documentation with multi-page structure
-- The extractor combines related endpoint pages into comprehensive API documents
-- Due to Binance's documentation structure, endpoints are aggregated into category files rather than individual endpoint files
+- Each REST endpoint is extracted into its own markdown file for better organization and LLM consumption
+- WebSocket endpoints are excluded as they don't follow the REST endpoint pattern
 - Extraction respects rate limits with polite delays between requests

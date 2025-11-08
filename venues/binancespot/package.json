@@ -6,13 +6,8 @@
   "main": "src/index.js",
   "scripts": {
     "extract:general": "node src/extractGeneral.js",
-    "extract:endpoints:public_rest": "node src/index.js ./config/public_rest.json",
-    "extract:endpoints:private_rest": "node src/index.js ./config/private_rest.json",
-    "extract:endpoints:public_websocket": "node src/index.js ./config/public_websocket.json",
-    "extract:endpoints:private_websocket": "node src/index.js ./config/private_websocket.json",
-    "extract:endpoints:fix": "node src/index.js ./config/fix.json",
-    "extract:endpoints:sbe": "node src/index.js ./config/sbe.json",
-    "extract:all": "npm run extract:general && npm run extract:endpoints:public_rest && npm run extract:endpoints:private_rest && npm run extract:endpoints:public_websocket && npm run extract:endpoints:private_websocket && npm run extract:endpoints:fix && npm run extract:endpoints:sbe"
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "npm run extract:general && npm run extract:endpoints"
   },
   "keywords": [
     "binance",

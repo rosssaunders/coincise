@@ -6,19 +6,8 @@
   "type": "module",
   "scripts": {
     "extract:general": "node src/extractGeneral.js",
-    "extract:endpoints:usdm:public:rest": "node src/index.js config/usdm_public_rest.json",
-    "extract:endpoints:usdm:private:rest": "node src/index.js config/usdm_private_rest.json",
-    "extract:endpoints:usdm:public:ws": "node src/index.js config/usdm_public_websocket.json",
-    "extract:endpoints:usdm:private:ws": "node src/index.js config/usdm_private_websocket.json",
-    "extract:endpoints:coinm:public:rest": "node src/index.js config/coinm_public_rest.json",
-    "extract:endpoints:coinm:private:rest": "node src/index.js config/coinm_private_rest.json",
-    "extract:endpoints:coinm:public:ws": "node src/index.js config/coinm_public_websocket.json",
-    "extract:endpoints:coinm:private:ws": "node src/index.js config/coinm_private_websocket.json",
-    "extract:endpoints:options:public:rest": "node src/index.js config/options_public_rest.json",
-    "extract:endpoints:options:private:rest": "node src/index.js config/options_private_rest.json",
-    "extract:endpoints:options:public:ws": "node src/index.js config/options_public_websocket.json",
-    "extract:endpoints:options:private:ws": "node src/index.js config/options_private_websocket.json",
-    "extract:all": "npm run extract:general && npm run extract:endpoints:usdm:public:rest && npm run extract:endpoints:usdm:private:rest && npm run extract:endpoints:usdm:public:ws && npm run extract:endpoints:usdm:private:ws && npm run extract:endpoints:coinm:public:rest && npm run extract:endpoints:coinm:private:rest && npm run extract:endpoints:coinm:public:ws && npm run extract:endpoints:coinm:private:ws && npm run extract:endpoints:options:public:rest && npm run extract:endpoints:options:private:rest && npm run extract:endpoints:options:public:ws && npm run extract:endpoints:options:private:ws"
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "npm run extract:general && npm run extract:endpoints"
   },
   "keywords": [
     "binance",
