@@ -1,0 +1,59 @@
+# GET Get Basic Fee Rate (KEYED)
+
+**Source:** [Get Basic Fee Rate (KEYED)](https://developer-pro.bitmart.com/en/spot/)
+
+**API Type:** Spot
+
+## Authentication
+
+Required (Private Endpoint)
+
+## Get Basic Fee Rate (KEYED)
+
+`For querying the base rate of the current user`
+
+#### Request URL
+
+`GET https://api-cloud.bitmart.com/spot/v1/user_fee`
+
+#### Request Limit
+
+See [Detailed Rate Limit](#rate-limit)
+
+#### Request Parameter
+
+> Request
+
+Copy Success
+
+Copy to Clipboard
+
+`curl -H 'X-BM-KEY:{{AccessKey}}'  https://api-cloud.bitmart.com/spot/v1/user_fee`
+
+None
+
+#### Response Data
+
+> Response
+
+Copy Success
+
+Copy to Clipboard
+
+`{   "message":"OK",   "code":1000,   "trace":"0187ba0c876e4236ac191d9848a0f719.94.16778301620100121",   "data":{     "user_rate_type":0,     "level":"LV1",     "taker_fee_rate_A":"0.001",     "maker_fee_rate_A":"0.001",     "taker_fee_rate_B":"0.0025",     "maker_fee_rate_B":"0.0025",     "taker_fee_rate_C":"0.004",     "maker_fee_rate_C":"0.004",     "taker_fee_rate_D":"0.006",     "maker_fee_rate_D":"0.006"   } }`
+
+| Field | Type | Description |
+| --- | --- | --- |
+| user\_rate\_type | Long | Rate type：  
+\- `0`\=Normal Users  
+\- `1`\=VIP Users  
+\- `2`\=Special VIP Users |
+| level | String | User Level |
+| taker\_fee\_rate\_A | String | Taker fee rate for Class-A pairs |
+| maker\_fee\_rate\_A | String | Maker fee rate for Class-A pairs |
+| taker\_fee\_rate\_B | String | Taker fee rate for Class-B pairs |
+| maker\_fee\_rate\_B | String | Maker fee rate for Class-B pairs |
+| taker\_fee\_rate\_C | String | Taker fee rate for Class-C pairs |
+| maker\_fee\_rate\_C | String | Maker fee rate for Class-C pairs |
+| taker\_fee\_rate\_D | String | Taker fee rate for Class-D pairs |
+| maker\_fee\_rate\_D | String | Maker fee rate for Class-D pairs |
