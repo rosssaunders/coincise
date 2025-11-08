@@ -42,8 +42,7 @@ print(r.json())
 
 _Get Markets_
 
-Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
-"Leverage = Collateral ÷ (Collateral - Debt)"
+Get Markets. Clients can ignore [test markets](#overview--test-markets).
 
 ### Parameters
 
@@ -248,6 +247,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
       },
       "maxPriceLimit": {
         "description": "order price should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+        "deprecated": true,
         "allOf": [
           {
             "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -258,6 +258,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
       },
       "minPriceLimit": {
         "description": "order price should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+        "deprecated": true,
         "allOf": [
           {
             "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -268,6 +269,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
       },
       "maxCostLimit": {
         "description": "order cost, `price * quantity` should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+        "deprecated": true,
         "allOf": [
           {
             "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -278,6 +280,7 @@ Get Markets. Clients can ignore [test markets](#overview--test-markets). Note ->
       },
       "minCostLimit": {
         "description": "order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+        "deprecated": true,
         "allOf": [
           {
             "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -617,7 +620,7 @@ print(r.json())
 
 _Get Market by Symbol_
 
-Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
+Get Market by Symbol.
 
 ### Parameters
 
@@ -806,6 +809,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
     },
     "maxPriceLimit": {
       "description": "order price should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -816,6 +820,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
     },
     "minPriceLimit": {
       "description": "order price should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -826,6 +831,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
     },
     "maxCostLimit": {
       "description": "order cost, `price * quantity` should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -836,6 +842,7 @@ Get Market by Symbol. Note -> "Leverage = Collateral ÷ (Collateral - Debt)"
     },
     "minCostLimit": {
       "description": "order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -1297,6 +1304,7 @@ and `OPTION` markets.
     },
     "maxPriceLimit": {
       "description": "order price should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -1307,6 +1315,7 @@ and `OPTION` markets.
     },
     "minPriceLimit": {
       "description": "order price should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -1317,6 +1326,7 @@ and `OPTION` markets.
     },
     "maxCostLimit": {
       "description": "order cost, `price * quantity` should be < max, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -1327,6 +1337,7 @@ and `OPTION` markets.
     },
     "minCostLimit": {
       "description": "order cost, `price * quantity` should be > min, see [asset value](#overview--price-and-quantity-precision) format",
+      "deprecated": true,
       "allOf": [
         {
           "description": "see [asset value](#overview--price-and-quantity-precision) format",
@@ -2250,7 +2261,8 @@ Get Current Tick by Market Symbol.
               "askSpreadFee",
               "baseReservesQuantity",
               "quoteReservesQuantity",
-              "currentPrice"
+              "currentPrice",
+              "tierPrice"
             ],
             "properties": {
               "feeTierId": {
@@ -2286,6 +2298,11 @@ Get Current Tick by Market Symbol.
                 "description": "current AMM price",
                 "type": "string",
                 "example": "16856.0000"
+              },
+              "tierPrice": {
+                "description": "current tier price, up to 12 decimal places",
+                "type": "string",
+                "example": "16856.000100200031"
               }
             }
           }

@@ -53,7 +53,8 @@ _Get Historical Orders_
 
 Retrieve a list of orders placed by a trading account with specified filters.
 
-- Only the last 90 days of data is available for querying
+- On a single query request you can retrieve data over a 7 day window, with the
+  data available for the last 90 days
 
 This endpoint requires [authentication](#overview--generate-a-jwt-token) and
 supports [pagination](#overview--pagination-support). To filter by
@@ -439,7 +440,8 @@ Get a list of trades based on specified filters.
 
 - requires [bearer token](#overview--add-authenticated-request-header) in
   authorization header
-- Only the last 90 days of data is available for querying
+- On a single query request you can retrieve data over a 7 day window, with the
+  data available for the last 90 days
 - [supports pagination](#overview--pagination-support)
 - filtering on `createdAtDatetime`, `createdAtTimestamp` requires additional
   keywords, [see filtering support](#overview--filtering-support)
@@ -759,7 +761,8 @@ Get historical derivatives settlement.
 - [supports pagination](#overview--pagination-support)
 - filtering on `settlementDatetime` requires additional keywords,
   [see filtering support](#overview--filtering-support)
-- Only the last 90 days of data is available for querying
+- On a single query request you can retrieve data over a 7 day window, with the
+  data available for the last 90 days
 
 ### Parameters
 
@@ -1002,7 +1005,8 @@ Get historical transfers.
 - [supports pagination](#overview--pagination-support)
 - filtering on `createdAtDatetime` and `createdAtTimestamp` requires additional
   keywords, [see filtering support](#overview--filtering-support)
-- Only the last 90 days of data is available for querying
+- On a single query request you can retrieve data over a 7 day window, with the
+  data available for the last 90 days
 
 ### Parameters
 
@@ -1186,7 +1190,8 @@ of data at a time.
 
 **Ratelimited:** `False`
 
-- Only the last 90 days of data is available for querying
+- On a single query request you can retrieve data over a 7 day window, with the
+  data available for the last 90 days
 
 ### Parameters
 
@@ -1376,7 +1381,8 @@ _Get Historical Funding Rate_
 Get historical hourly funding rate for the requested perpetual market
 
 - [supports pagination](#overview--pagination-support)
-- Only the last 90 days of data is available for querying
+- On a single query request you can retrieve data over a 7 day window, with the
+  data available for the last 90 days
 
 ### Parameters
 
@@ -1398,16 +1404,19 @@ Get historical hourly funding rate for the requested perpetual market
   "items": {
     "description": "Hourly Funding Rate History of one market",
     "type": "array",
-    "properties": {
-      "fundingRate": {
-        "description": "funding rate for this hour",
-        "type": "string",
-        "example": "0.1"
-      },
-      "updatedAtDatetime": {
-        "description": "date time of the last funding rate update for the hour",
-        "type": "string",
-        "example": "2024-09-16T12:59:59.000Z"
+    "items": {
+      "type": "object",
+      "properties": {
+        "fundingRate": {
+          "description": "funding rate for this hour",
+          "type": "string",
+          "example": "0.1"
+        },
+        "updatedAtDatetime": {
+          "description": "date time of the last funding rate update for the hour",
+          "type": "string",
+          "example": "2024-09-16T12:59:59.000Z"
+        }
       }
     }
   }
@@ -1493,7 +1502,8 @@ charged in the particular hour for the asset.
 - [supports pagination](#overview--pagination-support)
 - filtering `createdAtDatetime`, `createdAtTimestamp` requires additional
   keywords, [see filtering support](#overview--filtering-support)
-- Only the last 90 days of data is available for querying
+- On a single query request you can retrieve data over a 7 day window, with the
+  data available for the last 90 days
 
 **Ratelimited:** `True`
 

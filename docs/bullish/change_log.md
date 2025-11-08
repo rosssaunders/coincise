@@ -4,6 +4,11 @@
 
 ## 2025 Changes
 
+- October
+  - new fields in V1CancelAllOrders -
+    [V1CancelAllOrders](#post-/v2/command-cancellations)
+- September
+  - new REST API - [Get Expiry Prices](#get-/v1/expiry-prices/-symbol-)
 - August
   - new REST API - [Get Option Ladder](#tag--option-ladder)
   - updated REST API - [Get Markets](#get-/v1/markets) NEW fields `strikePrice`
@@ -29,7 +34,7 @@
   - Deprecated Features to be removed June 2025:
     - Hybrid OrderBook WebSocket (unauthenticated)
     - Market Data WebSocket (authenticated)
-    - Anonymous Trades WebSocket (unauthenticated) true
+    - Anonymous Trades WebSocket (unauthenticated)
   - Support for fee rebates - [Get Trades](#get-/v1/trades) new fields
     `tradeRebateAmount` and `tradeRebateAssetSymbol`
 - March

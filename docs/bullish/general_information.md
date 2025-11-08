@@ -68,7 +68,7 @@ a AWS or GCP private connection:
 
 For more details please refer to the full specification:
 
-- [Bullish FIX Protocol Specification](../../fix-api/Bullish%20FIX%20Protocol%20Specification%20v1.0.13.pdf)
+- [Bullish FIX Protocol Specification](../../fix-api/Bullish%20FIX%20Protocol%20Specification%20v1.0.15.pdf)
 - [Bullish FIX Protocol Dictionary](../../fix-api/fix-dictionary.xml)
 - [Bullish FIX CRT Certificate](../../fix-api/bullish.crt)
 
@@ -792,8 +792,7 @@ This referrer header is applicable to the below mentioned authenticated
 endpoints:
 
 1. [Create Order](#post-/v2/orders)
-2. [Create OTC Trade](#post-/trading-api/v2/otc-trades)
-3. [OTC Trade Cancellation Command](#post-/trading-api/v2/otc-command)
+2. [Create OTC Trade](#post-/v2/otc-trades)
 
 For more details, please reach out to your relationship manager to understand
 which referrer you are assigned.
@@ -1471,6 +1470,7 @@ the subscription message listed below: | Parameters | Type | Description |
       {
         "feeTierId": "1",
         "currentPrice": "0.0007",
+        "tierPrice": "0.000703038503",
         "baseReservesQuantity": "96153.00000000",
         "quoteReservesQuantity": "500005200.0400",
         "bidSpreadFee": "0.00000005",
@@ -1479,6 +1479,7 @@ the subscription message listed below: | Parameters | Type | Description |
       {
         "feeTierId": "2",
         "currentPrice": "0.0017",
+        "tierPrice": "0.001703038503",
         "baseReservesQuantity": "96153.00000000",
         "quoteReservesQuantity": "500005200.0400",
         "bidSpreadFee": "0.00000015",
@@ -1537,6 +1538,7 @@ model: [Get Market Tick](#get-/v1/markets/-symbol-/tick)
       {
         "feeTierId": "1",
         "currentPrice": "0.0007",
+        "tierPrice": "0.001703038503",
         "baseReservesQuantity": "96153.00000000",
         "quoteReservesQuantity": "500005200.0400",
         "bidSpreadFee": "0.00000005",
@@ -1545,6 +1547,7 @@ model: [Get Market Tick](#get-/v1/markets/-symbol-/tick)
       {
         "feeTierId": "2",
         "currentPrice": "0.0017",
+        "tierPrice": "0.001703038503",
         "baseReservesQuantity": "96153.00000000",
         "quoteReservesQuantity": "500005200.0400",
         "bidSpreadFee": "0.00000015",
@@ -1892,7 +1895,7 @@ String | denotes the time the update was broadcasted to connected websockets |
 | fullLiquidationMarginUSD               | String | The value of margin when full liquidation occurs                                                                                              |
 | endCustomerId                          | String | The end customer id used for self trade prevention (default is institution id, max 32 characters)                                             |
 | defaultedMarginUSD                     | String | The value of margin when this trading account will be moved into a Defaulted state                                                            |
-| riskLimitUSD                           | String | The maximum allowed borrowing for this trading account displayed in USD                                                                       |
+| riskLimitUSD                           | String | The maximum allowed initial margin requirement for this trading account displayed in USD                                                      |
 | totalLiabilitiesUSD                    | String | The total liabilities for this trading account displayed in USD                                                                               |
 | maxInitialLeverage                     | String | The maximum initial leverage                                                                                                                  |
 | isPrimaryAccount                       | String | Whether this trading account is the primary account                                                                                           |
