@@ -1,6 +1,5 @@
 {
   "title": "Bitget Futures API Documentation",
-  "output_file": "futures_api.md",
   "base_url": "https://www.bitget.com/api-doc",
   "urls": [
     "/contract/intro",
@@ -74,5 +73,6 @@
     "/contract/websocket/private/History-Positions-Channel",
     "/contract/error-code/restapi",
     "/contract/error-code/websocket"
-  ]
+  ],
+  "output_dir": "../../docs/bitget/future"
 }
