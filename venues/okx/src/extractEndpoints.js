@@ -6,6 +6,7 @@
 
 import fs from "fs";
 import path from "path";
+import process from "process";
 import { fileURLToPath } from "url";
 import { launchBrowser, configurePage } from "../../shared/puppeteer.js";
 import { createTurndownBuilder } from "../../shared/turndown.js";
@@ -55,7 +56,7 @@ const generateFilename = (method, path) => {
 /**
  * Extract all endpoints from the documentation
  */
-const extractEndpoints = async (page, turndownService) => {
+const extractEndpoints = async page => {
   console.log("Extracting endpoint information...");
 
   const endpoints = await page.evaluate(() => {
@@ -183,7 +184,7 @@ const main = async () => {
     const turndownService = createTurndownBuilder().build();
 
     // Extract endpoints
-    const endpoints = await extractEndpoints(page, turndownService);
+    const endpoints = await extractEndpoints(page);
 
     console.log(
       `\nFound ${endpoints.public.length} public and ${endpoints.private.length} private endpoints`
