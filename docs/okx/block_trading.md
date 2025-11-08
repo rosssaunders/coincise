@@ -1101,6 +1101,7 @@ the block trade execution.
 | &gt; strategy    | String           | Option strategy, e.g. CALL_CALENDAR_SPREAD                                                                                                             |
 | &gt; cTime       | String           | The time the trade was executed. Unix timestamp in milliseconds.                                                                                       |
 | &gt; blockTdId   | String           | Block trade ID.                                                                                                                                        |
+| &gt; groupId     | String           | Group RFQ ID<br>Only applicable to group RFQ, return "" for normal RFQ                                                                                 |
 | &gt; legs        | Array of objects | Legs of trade                                                                                                                                          |
 | &gt;&gt; instId  | String           | Instrument ID, e.g. BTC-USDT-SWAP                                                                                                                      |
 | &gt;&gt; px      | String           | The price the leg executed                                                                                                                             |
@@ -1151,6 +1152,7 @@ execution.
 | fwdPx         | String   | Forward price<br>Only applicable to <code>OPTION</code>                                                                                                |
 | idxPx         | String   | Index price<br>Applicable to <code>FUTURES</code>, <code>SWAP</code>, <code>OPTION</code>                                                              |
 | markPx        | String   | Mark price<br>Applicable to <code>FUTURES</code>, <code>SWAP</code>, <code>OPTION</code>                                                               |
+| groupId       | String   | Group RFQ ID<br>Only applicable to group RFQ, return "" for normal RFQ                                                                                 |
 | ts            | String   | Trade time, Unix timestamp format in milliseconds, e.g. <code>1597026383085</code>.                                                                    |
 
 Up to 500 most recent historical public transaction data can be retrieved.
@@ -1161,7 +1163,7 @@ Group RFQ introduction
 execution to group RFQ. Only applicable to group RFQ, return "" for normal
 RFQ.  
 2\. Data return by this endpoint should be at \*\*child RFQ execution level\*\*
-but split into a single leg. blockTdId and tradeId will be populated.
+but split into a single leg. tradeId will be populated.
 
 ---
 
@@ -1444,13 +1446,13 @@ the block trade execution.
 | data             | Array of objects | Subscribed data                                                                                                                                        |
 | &gt; cTime       | String           | The time the trade was executed. Unix timestamp in milliseconds.                                                                                       |
 | &gt; blockTdId   | String           | Block trade ID.                                                                                                                                        |
+| &gt; groupId     | String           | Group RFQ ID<br>Only applicable to group RFQ, return "" for normal RFQ                                                                                 |
 | &gt; legs        | Array of objects | Legs of trade                                                                                                                                          |
 | &gt;&gt; instId  | String           | Instrument ID, e.g. BTC-USDT-SWAP                                                                                                                      |
 | &gt;&gt; px      | String           | The price the leg executed                                                                                                                             |
 | &gt;&gt; sz      | String           | Trade quantity<br>For spot trading, the unit is base currency<br>For <code>FUTURES</code>/<code>SWAP</code>/<code>OPTION</code>, the unit is contract. |
 | &gt;&gt; side    | String           | The direction of the leg from the Takers perspective. Valid value can be <code>buy</code> or <code>sell</code>.                                        |
 | &gt;&gt; tradeId | String           | Last traded ID.                                                                                                                                        |
-| &gt; groupId     | String           | Group RFQ ID<br>Only applicable to group RFQ, return "" for normal RFQ                                                                                 |
 
 Group RFQ introduction
 
@@ -1512,6 +1514,7 @@ the block trade execution.
 | &gt; fwdPx     | String           | Forward price<br>Only applicable to options                                                                                                            |
 | &gt; idxPx     | String           | Index price<br>Applicable to <code>FUTURES</code>, <code>SWAP</code>, <code>OPTION</code>                                                              |
 | &gt; markPx    | String           | Mark price<br>Applicable to <code>FUTURES</code>, <code>SWAP</code>, <code>OPTION</code>                                                               |
+| &gt; groupId   | String           | Group RFQ ID<br>Only applicable to group RFQ, return "" for normal RFQ                                                                                 |
 | &gt; ts        | String           | Filled time, Unix timestamp format in milliseconds, e.g. 1597026383085.                                                                                |
 
 Group RFQ introduction
@@ -1520,7 +1523,7 @@ Group RFQ introduction
 execution to group RFQ. Only applicable to group RFQ, return "" for normal
 RFQ.  
 2\. Data return by this endpoint should be at \*\*child RFQ execution level\*\*
-but split into a single leg. blockTdId and tradeId will be populated.
+but split into a single leg. tradeId will be populated.
 
 ---
 
