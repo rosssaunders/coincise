@@ -1,18 +1,24 @@
 {
-  "name": "crypto-com",
+  "name": "@coincise/cryptocom",
   "version": "1.0.0",
-  "description": "Crypto.com API documentation extraction project",
-  "main": "src/main.js",
+  "description": "Documentation extraction for Crypto.com Exchange API",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "extract:general": "node src/extractGeneral.js",
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "npm run extract:general && npm run extract:endpoints"
   },
+  "keywords": [
+    "cryptocom",
+    "cryptocurrency",
+    "exchange",
+    "api",
+    "documentation"
+  ],
+  "author": "Coincise",
+  "license": "MIT",
   "dependencies": {
-    "puppeteer": "^24.22.0",
-    "turndown": "^7.2.1",
+    "turndown": "^7.1.2",
     "turndown-plugin-gfm": "^1.0.2"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }
