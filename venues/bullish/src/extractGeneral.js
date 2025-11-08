@@ -8,6 +8,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import https from 'https';
+import process from 'process';
 import { formatMarkdown } from '../../shared/format-markdown.js';
 
 const __filename = fileURLToPath(import.meta.url);

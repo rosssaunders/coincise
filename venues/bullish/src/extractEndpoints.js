@@ -8,6 +8,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import https from 'https';
+import process from 'process';
 import { formatMarkdown } from '../../shared/format-markdown.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -200,7 +201,7 @@ const formatResponses = (responses) => {
 /**
  * Extract endpoint documentation
  */
-const extractEndpoint = (endpointPath, method, operation, baseUrl) => {
+const extractEndpoint = (endpointPath, method, operation) => {
   const methodUpper = method.toUpperCase();
   const summary = operation.summary || '';
   const description = operation.description || '';
@@ -261,7 +262,6 @@ const extractEndpoint = (endpointPath, method, operation, baseUrl) => {
 const processEndpoints = async (spec) => {
   console.log('Processing endpoints...');
 
-  const baseUrl = spec.servers && spec.servers[0] ? spec.servers[0].url : '';
   let publicCount = 0;
   let privateCount = 0;
 
@@ -272,7 +272,7 @@ const processEndpoints = async (spec) => {
     for (const method of methods) {
       if (pathItem[method]) {
         const operation = pathItem[method];
-        const endpoint = extractEndpoint(endpointPath, method, operation, baseUrl);
+        const endpoint = extractEndpoint(endpointPath, method, operation);
         
         // Determine output directory
         const outputDir = endpoint.isPublic ? PUBLIC_DIR : PRIVATE_DIR;
