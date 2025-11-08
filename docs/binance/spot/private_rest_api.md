@@ -2,8 +2,8 @@
 
 ## Filters
 
-Filters define trading rules on a symbol or an exchange. Filters come in two
-forms: `symbol filters` and `exchange filters`.
+Filters define trading rules on a symbol or an exchange. Filters come in three
+forms: `symbol filters`, `exchange filters` and `asset filters`.
 
 ### Symbol filters
 
@@ -401,12 +401,38 @@ one order list.
 
 **/exchangeInfo format:**
 
-````json
-   {
-      "filterType": "EXCHANGE_MAX_NUM_ORDER_LISTS",
-      "maxNumOrderLists": 20
-    }```
-````
+```json
+{
+  "filterType": "EXCHANGE_MAX_NUM_ORDER_LISTS",
+  "maxNumOrderLists": 20
+}
+```
+
+### Asset Filters
+
+#### MAX_ASSET
+
+The `MAX_ASSET` filter defines the maximum quantity of an asset that an account
+is allowed to transact in a single order.
+
+- When the asset is a symbol's base asset, the limit applies to the order's
+  quantity.
+- When the asset is a symbol's quote asset, the limit applies to the order's
+  notional value.
+- For example, a MAX_ASSET filter for USDC applies to all symbols that have USDC
+  as either a base or quote asset, such as:
+  - USDCBNB
+  - BNBUSDC
+
+**/myFilters format:**
+
+```json
+{
+  "filterType": "MAX_ASSET",
+  "asset": "USDC",
+  "limit": "42.00000000"
+}
+```
 
 > Source:
 > [https://developers.binance.com/docs/binance-spot-api-docs/filters](https://developers.binance.com/docs/binance-spot-api-docs/filters)
@@ -585,7 +611,7 @@ to learn more.
 
 ## Error codes for Binance
 
-**Last Updated: 2025-08-12**
+**Last Updated: 2025-10-28**
 
 Errors consist of two parts: an error code and a message. Codes are universal,
 but messages can vary. Here is the error JSON payload:
@@ -683,6 +709,7 @@ but messages can vary. Here is the error JSON payload:
 | \-1199 | \-SELL_OCO_TAKE_PROFIT_MUST_BE_ABOVE​    | \-A take profit order in a sell OCO must be above.                                                                                                                                                                                                                                                                                            |
 | \-1210 | \-INVALID_PEG_PRICE_TYPE​                | \-Invalid pegPriceType.                                                                                                                                                                                                                                                                                                                       |
 | \-1211 | \-INVALID_PEG_OFFSET_TYPE​               | \-Invalid pegOffsetType.                                                                                                                                                                                                                                                                                                                      |
+| \-1220 | \-SYMBOL_DOES_NOT_MATCH_STATUS​          | \-The symbol's status does not match the requested symbolStatus.                                                                                                                                                                                                                                                                              |
 | \-2010 | \-NEW_ORDER_REJECTED​                    | \-NEW_ORDER_REJECTED                                                                                                                                                                                                                                                                                                                          |
 | \-2011 | \-CANCEL_REJECTED​                       | \-CANCEL_REJECTED                                                                                                                                                                                                                                                                                                                             |
 | \-2013 | \-NO_SUCH_ORDER​                         | \-Order does not exist.                                                                                                                                                                                                                                                                                                                       |
@@ -960,7 +987,7 @@ the value it's looking for it will check the next one.
 - If unspecified, the security type is `NONE`.
 - Methods with a security type other than `NONE` are considered `SIGNED`
   requests (i.e. requires parameter `signature`). A few legacy
-  [listenKey management](/docs/binance-spot-api-docs/rest-api/account-endpoints#user-data-stream-requests)
+  [listenKey management](/docs/binance-spot-api-docs/rest-api/request-security#user-data-stream-requests)
   endpoints are an exception to this rule.
 - Secure methods require a valid API key to be specified and authenticated.
   - API keys can be created on the
@@ -1332,7 +1359,7 @@ Current exchange trading rules and symbol information
 | \-symbols            | \-ARRAY OF STRING | \-No      | \-Examples: curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BNBBTC%22,%22BTCUSDT%22%5D](https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BNBBTC%22,%22BTCUSDT%22%5D)" or curl -g -X GET '[https://api.binance.com/api/v3/exchangeInfo?symbols=\["BTCUSDT","BNBBTC](https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BTCUSDT%22,%22BNBBTC)"\]'                                                                                                                                                                           |
 | \-permissions        | \-ENUM            | \-No      | \-Examples: curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT](https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT)" or curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22%2C%22LEVERAGED%22%5D](https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22%2C%22LEVERAGED%22%5D)" or curl -g -X GET '[https://api.binance.com/api/v3/exchangeInfo?permissions=\["MARGIN","LEVERAGED](https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22,%22LEVERAGED)"\]' |
 | \-showPermissionSets | \-BOOLEAN         | \-No      | \-Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true`                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| \-symbolStatus       | \-ENUM            | \-No      | \-Filters symbols that have this `tradingStatus`. Valid values: `TRADING`, `HALT`, `BREAK` Cannot be used in combination with `symbols` or `symbol`.                                                                                                                                                                                                                                                                                                                                                                                                              |
+| \-symbolStatus       | \-ENUM            | \-No      | \-Filters for symbols that have this `tradingStatus`. Valid values: `TRADING`, `HALT`, `BREAK` Cannot be used in combination with `symbols` or `symbol`.                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 **Notes:**
 
@@ -2476,7 +2503,7 @@ immediately cancels the other.
 | \-abovePrice              | \-DECIMAL | \-No      | \-Can be used if `aboveType` is `STOP_LOSS_LIMIT` , `LIMIT_MAKER`, or `TAKE_PROFIT_LIMIT` to specify the limit price.                                                                                                                                                                                     |
 | \-aboveStopPrice          | \-DECIMAL | \-No      | \-Can be used if `aboveType` is `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT`. Either `aboveStopPrice` or `aboveTrailingDelta` or both, must be specified.                                                                                                                           |
 | \-aboveTrailingDelta      | \-LONG    | \-No      | \-See [Trailing Stop order FAQ](/docs/binance-spot-api-docs/faqs/trailing-stop-faq).                                                                                                                                                                                                                      |
-| \-aboveTimeInForce        | \-DECIMAL | \-No      | \-Required if `aboveType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`                                                                                                                                                                                                                                     |
+| \-aboveTimeInForce        | \-ENUM    | \-No      | \-Required if `aboveType` is `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`                                                                                                                                                                                                                                     |
 | \-aboveStrategyId         | \-LONG    | \-No      | \-Arbitrary numeric value identifying the above order within an order strategy.                                                                                                                                                                                                                           |
 | \-aboveStrategyType       | \-INT     | \-No      | \-Arbitrary numeric value identifying the above order strategy. Values smaller than 1000000 are reserved and cannot be used.                                                                                                                                                                              |
 | \-abovePegPriceType       | \-ENUM    | \-NO      | \-See [Pegged Orders](/docs/binance-spot-api-docs/rest-api/trading-endpoints#pegged-orders-info)                                                                                                                                                                                                          |
@@ -3892,6 +3919,55 @@ Database
     "time": 1741672924895
   }
 ]
+```
+
+#### Query relevant filters (USER_DATA)
+
+```null
+GET /api/v3/myFilters
+```
+
+Retrieves the list of [filters](/docs/binance-spot-api-docs/filters) relevant to
+an account on a given symbol. This is the only endpoint that shows if an account
+has [`MAX_ASSET`](/docs/binance-spot-api-docs/filters#max_asset) filters applied
+to it.
+
+**Weight:** 40
+
+**Parameters:**
+
+| Name         | Type      | Mandatory | Description                                                                                                                                          |
+| ------------ | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol     | \-STRING  | \-YES     |                                                                                                                                                      |
+| \-recvWindow | \-DECIMAL | \-NO      | \-The value cannot be greater than `60000`. Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| \-timestamp  | \-LONG    | \-YES     |                                                                                                                                                      |
+
+**Data Source:** Memory
+
+**Response:**
+
+```json
+{
+  "exchangeFilters": [
+    {
+      "filterType": "EXCHANGE_MAX_NUM_ORDERS",
+      "maxNumOrders": 1000
+    }
+  ],
+  "symbolFilters": [
+    {
+      "filterType": "MAX_NUM_ORDER_LISTS",
+      "maxNumOrderLists": 20
+    }
+  ],
+  "assetFilters": [
+    {
+      "filterType": "MAX_ASSET",
+      "asset": "JPY",
+      "limit": "1000000.00000000"
+    }
+  ]
+}
 ```
 
 > Source:

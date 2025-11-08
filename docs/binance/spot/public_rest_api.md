@@ -2,8 +2,8 @@
 
 ## Filters
 
-Filters define trading rules on a symbol or an exchange. Filters come in two
-forms: `symbol filters` and `exchange filters`.
+Filters define trading rules on a symbol or an exchange. Filters come in three
+forms: `symbol filters`, `exchange filters` and `asset filters`.
 
 ### Symbol filters
 
@@ -401,12 +401,38 @@ one order list.
 
 **/exchangeInfo format:**
 
-````json
-   {
-      "filterType": "EXCHANGE_MAX_NUM_ORDER_LISTS",
-      "maxNumOrderLists": 20
-    }```
-````
+```json
+{
+  "filterType": "EXCHANGE_MAX_NUM_ORDER_LISTS",
+  "maxNumOrderLists": 20
+}
+```
+
+### Asset Filters
+
+#### MAX_ASSET
+
+The `MAX_ASSET` filter defines the maximum quantity of an asset that an account
+is allowed to transact in a single order.
+
+- When the asset is a symbol's base asset, the limit applies to the order's
+  quantity.
+- When the asset is a symbol's quote asset, the limit applies to the order's
+  notional value.
+- For example, a MAX_ASSET filter for USDC applies to all symbols that have USDC
+  as either a base or quote asset, such as:
+  - USDCBNB
+  - BNBUSDC
+
+**/myFilters format:**
+
+```json
+{
+  "filterType": "MAX_ASSET",
+  "asset": "USDC",
+  "limit": "42.00000000"
+}
+```
 
 > Source:
 > [https://developers.binance.com/docs/binance-spot-api-docs/filters](https://developers.binance.com/docs/binance-spot-api-docs/filters)
@@ -585,7 +611,7 @@ to learn more.
 
 ## Error codes for Binance
 
-**Last Updated: 2025-08-12**
+**Last Updated: 2025-10-28**
 
 Errors consist of two parts: an error code and a message. Codes are universal,
 but messages can vary. Here is the error JSON payload:
@@ -683,6 +709,7 @@ but messages can vary. Here is the error JSON payload:
 | \-1199 | \-SELL_OCO_TAKE_PROFIT_MUST_BE_ABOVE​    | \-A take profit order in a sell OCO must be above.                                                                                                                                                                                                                                                                                            |
 | \-1210 | \-INVALID_PEG_PRICE_TYPE​                | \-Invalid pegPriceType.                                                                                                                                                                                                                                                                                                                       |
 | \-1211 | \-INVALID_PEG_OFFSET_TYPE​               | \-Invalid pegOffsetType.                                                                                                                                                                                                                                                                                                                      |
+| \-1220 | \-SYMBOL_DOES_NOT_MATCH_STATUS​          | \-The symbol's status does not match the requested symbolStatus.                                                                                                                                                                                                                                                                              |
 | \-2010 | \-NEW_ORDER_REJECTED​                    | \-NEW_ORDER_REJECTED                                                                                                                                                                                                                                                                                                                          |
 | \-2011 | \-CANCEL_REJECTED​                       | \-CANCEL_REJECTED                                                                                                                                                                                                                                                                                                                             |
 | \-2013 | \-NO_SUCH_ORDER​                         | \-Order does not exist.                                                                                                                                                                                                                                                                                                                       |
@@ -960,7 +987,7 @@ the value it's looking for it will check the next one.
 - If unspecified, the security type is `NONE`.
 - Methods with a security type other than `NONE` are considered `SIGNED`
   requests (i.e. requires parameter `signature`). A few legacy
-  [listenKey management](/docs/binance-spot-api-docs/rest-api/account-endpoints#user-data-stream-requests)
+  [listenKey management](/docs/binance-spot-api-docs/rest-api/request-security#user-data-stream-requests)
   endpoints are an exception to this rule.
 - Secure methods require a valid API key to be specified and authenticated.
   - API keys can be created on the
@@ -1332,7 +1359,7 @@ Current exchange trading rules and symbol information
 | \-symbols            | \-ARRAY OF STRING | \-No      | \-Examples: curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BNBBTC%22,%22BTCUSDT%22%5D](https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BNBBTC%22,%22BTCUSDT%22%5D)" or curl -g -X GET '[https://api.binance.com/api/v3/exchangeInfo?symbols=\["BTCUSDT","BNBBTC](https://api.binance.com/api/v3/exchangeInfo?symbols=%5B%22BTCUSDT%22,%22BNBBTC)"\]'                                                                                                                                                                           |
 | \-permissions        | \-ENUM            | \-No      | \-Examples: curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT](https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT)" or curl -X GET "[https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22%2C%22LEVERAGED%22%5D](https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22%2C%22LEVERAGED%22%5D)" or curl -g -X GET '[https://api.binance.com/api/v3/exchangeInfo?permissions=\["MARGIN","LEVERAGED](https://api.binance.com/api/v3/exchangeInfo?permissions=%5B%22MARGIN%22,%22LEVERAGED)"\]' |
 | \-showPermissionSets | \-BOOLEAN         | \-No      | \-Controls whether the content of the `permissionSets` field is populated or not. Defaults to `true`                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| \-symbolStatus       | \-ENUM            | \-No      | \-Filters symbols that have this `tradingStatus`. Valid values: `TRADING`, `HALT`, `BREAK` Cannot be used in combination with `symbols` or `symbol`.                                                                                                                                                                                                                                                                                                                                                                                                              |
+| \-symbolStatus       | \-ENUM            | \-No      | \-Filters for symbols that have this `tradingStatus`. Valid values: `TRADING`, `HALT`, `BREAK` Cannot be used in combination with `symbols` or `symbol`.                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 **Notes:**
 
@@ -1451,10 +1478,11 @@ GET /api/v3/depth
 
 **Parameters:**
 
-| Name     | Type     | Mandatory | Description                                                                         |
-| -------- | -------- | --------- | ----------------------------------------------------------------------------------- |
-| \-symbol | \-STRING | \-YES     |                                                                                     |
-| \-limit  | \-INT    | \-NO      | \-Default: 100; Maximum: 5000. If limit > 5000, only 5000 entries will be returned. |
+| Name           | Type     | Mandatory | Description                                                                                                                                                          |
+| -------------- | -------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol       | \-STRING | \-YES     |                                                                                                                                                                      |
+| \-limit        | \-INT    | \-NO      | \-Default: 100; Maximum: 5000. If limit > 5000, only 5000 entries will be returned.                                                                                  |
+| \-symbolStatus | \-ENUM   | \-NO      | \-Filters for symbols that have this `tradingStatus`. A status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`. Valid values: `TRADING`, `HALT`, `BREAK` |
 
 **Data Source:** Memory
 
@@ -1764,11 +1792,12 @@ with no symbol.
 
 **Parameters:**
 
-| Name      | Type     | Mandatory | Description                                                                                                                                                                                                                                                           |
-| --------- | -------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| \-symbol  | \-STRING | \-NO      | \-Parameter symbol and symbols cannot be used in combination. If neither parameter is sent, tickers for all symbols will be returned in an array. Examples of accepted format for the symbols parameter: \["BTCUSDT","BNBUSDT"\] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D |
-| \-symbols | \-STRING | \-NO      |
-| \-type    | \-ENUM   | \-NO      | \-Supported values: FULL or MINI. If none provided, the default is FULL                                                                                                                                                                                               |
+| Name           | Type     | Mandatory | Description                                                                                                                                                                                                                                                                   |
+| -------------- | -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol       | \-STRING | \-NO      | \-Parameter symbol and symbols cannot be used in combination. If neither parameter is sent, tickers for all symbols will be returned in an array. Examples of accepted format for the symbols parameter: \["BTCUSDT","BNBUSDT"\] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D         |
+| \-symbols      | \-STRING | \-NO      |
+| \-type         | \-ENUM   | \-NO      | \-Supported values: FULL or MINI. If none provided, the default is FULL                                                                                                                                                                                                       |
+| \-symbolStatus | \-ENUM   | \-NO      | \-Filters for symbols that have this `tradingStatus`.For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`. For multiple or all symbols, non-matching ones are simply excluded from the response.Valid values: `TRADING`, `HALT`, `BREAK` |
 
 **Data Source:** Memory
 
@@ -1906,7 +1935,10 @@ Examples of accepted format for the symbols parameter: ["BTCUSDT","BNBUSDT"] or
 %5B%22BTCUSDT%22,%22BNBUSDT%22%5D The maximum number of symbols allowed in a
 request is 100. -symbols -timeZone | -STRING | -NO | -Default: 0 (UTC) -type |
 -ENUM | -NO | -Supported values: FULL or MINI. If none provided, the default is
-FULL |
+FULL -symbolStatus | -ENUM | -NO | -Filters for symbols that have this
+tradingStatus.For a single symbol, a status mismatch returns error -1220
+SYMBOL_DOES_NOT_MATCH_STATUS. For multiple symbols, non-matching ones are simply
+excluded from the response.Valid values: TRADING, HALT, BREAK |
 
 **Notes:**
 
@@ -2055,10 +2087,11 @@ Latest price for a symbol or symbols.
 
 **Parameters:**
 
-| Name      | Type     | Mandatory | Description                                                                                                                                                                                                                                                          |
-| --------- | -------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| \-symbol  | \-STRING | \-NO      | \-Parameter symbol and symbols cannot be used in combination. If neither parameter is sent, prices for all symbols will be returned in an array. Examples of accepted format for the symbols parameter: \["BTCUSDT","BNBUSDT"\] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D |
-| \-symbols | \-STRING | \-NO      |
+| Name           | Type     | Mandatory | Description                                                                                                                                                                                                                                                                   |
+| -------------- | -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol       | \-STRING | \-NO      | \-Parameter symbol and symbols cannot be used in combination. If neither parameter is sent, prices for all symbols will be returned in an array. Examples of accepted format for the symbols parameter: \["BTCUSDT","BNBUSDT"\] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D          |
+| \-symbols      | \-STRING | \-NO      |
+| \-symbolStatus | \-ENUM   | \-NO      | \-Filters for symbols that have this `tradingStatus`.For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`. For multiple or all symbols, non-matching ones are simply excluded from the response.Valid values: `TRADING`, `HALT`, `BREAK` |
 
 **Data Source:** Memory
 
@@ -2104,10 +2137,11 @@ Best price/qty on the order book for a symbol or symbols.
 
 **Parameters:**
 
-| Name      | Type     | Mandatory | Description                                                                                                                                                                                                                                                               |
-| --------- | -------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| \-symbol  | \-STRING | \-NO      | \-Parameter symbol and symbols cannot be used in combination. If neither parameter is sent, bookTickers for all symbols will be returned in an array. Examples of accepted format for the symbols parameter: \["BTCUSDT","BNBUSDT"\] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D |
-| \-symbols | \-STRING | \-NO      |
+| Name           | Type     | Mandatory | Description                                                                                                                                                                                                                                                                   |
+| -------------- | -------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \-symbol       | \-STRING | \-NO      | \-Parameter symbol and symbols cannot be used in combination. If neither parameter is sent, bookTickers for all symbols will be returned in an array. Examples of accepted format for the symbols parameter: \["BTCUSDT","BNBUSDT"\] or %5B%22BTCUSDT%22,%22BNBUSDT%22%5D     |
+| \-symbols      | \-STRING | \-NO      |
+| \-symbolStatus | \-ENUM   | \-NO      | \-Filters for symbols that have this `tradingStatus`.For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`. For multiple or all symbols, non-matching ones are simply excluded from the response.Valid values: `TRADING`, `HALT`, `BREAK` |
 
 **Data Source:** Memory
 
@@ -2180,7 +2214,10 @@ request is 100. -symbols -windowSize | -ENUM | -NO | -Defaults to 1d if no
 parameter provided Supported windowSize values: 1m,2m....59m for minutes 1h,
 2h....23h - for hours 1d...7d - for days Units cannot be combined (e.g. 1d2h is
 not allowed) -type | -ENUM | -NO | -Supported values: FULL or MINI. If none
-provided, the default is FULL |
+provided, the default is FULL -symbolStatus | -ENUM | -NO | -Filters for symbols
+that have this tradingStatus.For a single symbol, a status mismatch returns
+error -1220 SYMBOL_DOES_NOT_MATCH_STATUS.For multiple symbols, non-matching ones
+are simply excluded from the response.Valid values: TRADING, HALT, BREAK |
 
 **Data Source:** Database
 
