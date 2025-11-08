@@ -1,47 +1,25 @@
 import fs from "fs"
 import dotenv from "dotenv"
 import { JSDOM } from "jsdom"
-import axios from "axios"
+import { fetchHtml } from "./fetcher.js"
 
 // Load environment variables from .env file
 dotenv.config()
 
 // Function to download HTML file
-export function downloadHtml(url, filePath) {
-  return new Promise((resolve, reject) => {
+export async function downloadHtml(url, filePath) {
+  try {
     console.log(`Downloading HTML from ${url}...`)
-    const file = fs.createWriteStream(filePath)
-    axios
-      .get(url, {
-        headers: {
-          "User-Agent": "Mozilla/5.0",
-          Accept: "text/html"
-        },
-        responseType: "stream"
-      })
-      .then(response => {
-        if (response.status !== 200) {
-          reject(
-            new Error(`Failed to download: HTTP status code ${response.status}`)
-          )
-          return
-        }
-        response.data.pipe(file)
-        file.on("finish", () => {
-          file.close()
-          console.log("Download completed successfully.")
-          resolve()
-        })
-      })
-      .catch(err => {
-        fs.unlink(filePath, () => {})
-        reject(err)
-      })
-    file.on("error", err => {
-      fs.unlink(filePath, () => {})
-      reject(err)
-    })
-  })
+    const html = await fetchHtml(url, { allowPuppeteerFallback: true })
+    fs.writeFileSync(filePath, html, "utf8")
+    console.log("Download completed successfully.")
+  } catch (err) {
+    // Clean up partial file if it exists
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath)
+    }
+    throw err
+  }
 }
 
 // Function to process HTML and convert to markdown
