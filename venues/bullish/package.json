@@ -1,15 +1,22 @@
 {
-  "name": "bullish-monitor",
+  "name": "@coincise/bullish",
   "version": "1.0.0",
-  "description": "Bullish API documentation monitor",
-  "main": "src/index.js",
+  "description": "Documentation extraction for Bullish Exchange API",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
-    "extract:config": "node src/index.js"
+    "extract:general": "node src/extractGeneral.js",
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "npm run extract:general && npm run extract:endpoints",
+    "extract:config": "npm run extract:all"
   },
-  "dependencies": {
-    "prettier": "^3.6.2",
-    "widdershins": "^4.0.1"
-  }
+  "keywords": [
+    "bullish",
+    "cryptocurrency",
+    "exchange",
+    "api",
+    "documentation"
+  ],
+  "author": "Coincise",
+  "license": "MIT",
+  "dependencies": {}
 }

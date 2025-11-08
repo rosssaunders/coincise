@@ -1,5 +1,3 @@
-# Bullish Trading API - Change Log
-
 # API Change Log
 
 ## 2025 Changes
