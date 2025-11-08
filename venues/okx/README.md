@@ -1,81 +1,42 @@
 # OKX API Documentation Extractor
 
-A tool for extracting and converting OKX API documentation into markdown format.
+A tool for extracting and converting OKX API documentation into standardized LLM-friendly markdown format.
 
 ## Project Structure
 
 ```
 okx/
 ├── src/
-│   ├── index.js          # Entry point
-│   └── types.js          # Type definitions
-├── config/               # Configuration files for each section
-│   ├── overview.json
-│   ├── trading_account.json
-│   ├── order_book_trading.json
-│   ├── block_trading.json
-│   ├── spread_trading.json
-│   ├── public_data.json
-│   ├── trading_statistics.json
-│   ├── funding_account.json
-│   ├── sub_account.json
-│   ├── financial_product.json
-│   ├── affiliate.json
-│   ├── status.json
-│   ├── announcement.json
-│   ├── error_code.json
-│   ├── private_order_book_trading_rest_api.json
-│   ├── private_order_book_trading_websocket_api.json
-│   ├── public_market_data_rest_api.json
-│   └── public_market_data_websocket_api.json
-├── package.json          # Project dependencies
-└── README.md            # This file
+│   ├── extractGeneral.js    # Core documentation extraction
+│   └── extractEndpoints.js  # Individual endpoint extraction
+├── config/                  # Legacy configuration files (archived)
+├── package.json             # Project dependencies
+└── README.md               # This file
+```
+
+## Documentation Structure
+
+The extractor generates documentation in the following structure:
+
+```
+docs/okx/
+├── rate_limits.md          # API rate limiting rules and policies
+├── authentication.md       # API key creation and request signing
+├── network_connectivity.md # Connection info, endpoints, WebSocket
+├── error_codes.md          # Error code definitions
+├── response_formats.md     # Standard response structures
+├── change_log.md           # API version history
+└── endpoints/
+    ├── public/             # Public endpoints (no authentication)
+    └── private/            # Private endpoints (require authentication)
 ```
 
 ## Dependencies
 
-- puppeteer: ^24.6.0 - For web scraping
-- turndown: ^7.1.2 - For HTML to Markdown conversion
+- puppeteer: ^24.22.0 - For web scraping
+- turndown: ^7.2.1 - For HTML to Markdown conversion
 - turndown-plugin-gfm: ^1.0.2 - For GitHub Flavored Markdown support
-- jsdom: ^26.0.0 - For HTML parsing
-
-## Configuration
-
-The project uses multiple configuration files, one for each major section of the
-OKX API documentation. Each config file contains the following structure:
-
-```json
-{
-  "url": "https://www.okx.com/docs-v5/en/#overview",
-  "name": "Section Name",
-  "sections": [
-    {
-      "h1_match": "pattern",
-      "h2_match": "pattern",
-      "h3_matches": ["pattern1", "pattern2"],
-      "include_h2_html": true
-    }
-  ],
-  "output_file": "path/to/output.md"
-}
-```
-
-### Available Sections
-
-- **Overview** - General API information, authentication, rate limits
-- **Trading Account** - Account management, positions, balances
-- **Order Book Trading** - Trading operations, order management
-- **Block Trading** - Block trading workflow and APIs
-- **Spread Trading** - Spread trading operations and workflows
-- **Public Data** - Market data, instruments, funding rates
-- **Trading Statistics** - Trading analytics and metrics
-- **Funding Account** - Deposits, withdrawals, transfers
-- **Sub-account** - Sub-account management and operations
-- **Financial Product** - Staking, earning products
-- **Affiliate** - Affiliate program APIs
-- **Status** - System status and monitoring
-- **Announcement** - Platform announcements
-- **Error Code** - API error codes and descriptions
+- jsdom: 27.0.0 - For HTML parsing
 
 ## Usage
 
@@ -85,71 +46,57 @@ OKX API documentation. Each config file contains the following structure:
    npm install
    ```
 
-2. Run all extractions:
+2. Extract all documentation:
 
    ```bash
-   npm start
+   npm run extract:all
    ```
 
-3. Run specific sections:
+3. Extract specific sections:
 
    ```bash
-   # Extract overview and general information
-   npm run extract:overview
+   # Extract core documentation files only
+   npm run extract:general
 
-   # Extract trading account information
-   npm run extract:trading-account
-
-   # Extract order book trading
-   npm run extract:order-book-trading
-
-   # Extract block trading
-   npm run extract:block-trading
-
-   # Extract spread trading
-   npm run extract:spread-trading
-
-   # Extract public data
-   npm run extract:public-data
-
-   # Extract trading statistics
-   npm run extract:trading-statistics
-
-   # Extract funding account
-   npm run extract:funding-account
-
-   # Extract sub-account
-   npm run extract:sub-account
-
-   # Extract financial product
-   npm run extract:financial-product
-
-   # Extract affiliate
-   npm run extract:affiliate
-
-   # Extract status
-   npm run extract:status
-
-   # Extract announcement
-   npm run extract:announcement
-
-   # Extract error code
-   npm run extract:error-code
+   # Extract individual endpoints only
+   npm run extract:endpoints
    ```
 
-The tool will:
+## Extraction Process
 
-1. Fetch the documentation page
-2. Extract sections based on the configuration
-3. Convert the content to markdown
-4. Save the results to the specified output files
+### General Documentation (`extractGeneral.js`)
+
+Extracts the following core documentation files from the OKX API overview page:
+
+- **rate_limits.md** - Rate limiting rules, tiers, and best practices
+- **authentication.md** - API key creation, permissions, and request signing
+- **network_connectivity.md** - Production/demo services, WebSocket, timeouts
+- **error_codes.md** - REST API error codes and HTTP status codes
+- **response_formats.md** - Standard JSON response structure
+- **change_log.md** - API updates and announcements
+
+All core files are kept under 1000 lines to ensure they are focused and maintainable.
+
+### Endpoint Documentation (`extractEndpoints.js`)
+
+Extracts individual endpoint documentation:
+
+- Categorizes endpoints as **public** (no authentication) or **private** (requires API keys)
+- Uses filename format: `{http_method}_{endpoint_name}.md`
+- Includes source URL for each endpoint
+- Captures request parameters, response schemas, and rate limits
+- Extracted ~269 total endpoints (128 public, 141 private)
 
 ## Features
 
-- Extracts documentation sections based on H1, H2, and H3 headings
-- Converts HTML content to GitHub Flavored Markdown
-- Supports multiple output configurations
-- Maintains the original documentation structure
-- Handles nested sections and content hierarchy
-- Comprehensive coverage of all OKX API sections
-- Separate markdown files for each major API category
+- Follows standardized extraction pattern used by Backpack, Deribit, and XT exchanges
+- Separates core documentation from endpoint-specific documentation
+- Generates LLM-friendly markdown optimized for AI consumption
+- Maintains proper section boundaries to prevent over-extraction
+- Includes source URLs for traceability
+- Categorizes endpoints by authentication requirements
+- Uses shared Puppeteer and Turndown utilities for consistency
+
+## Source
+
+Documentation is extracted from: https://www.okx.com/docs-v5/en/
