@@ -11,7 +11,8 @@
  */
 export const extractArticleContent = async (page, options = {}) => {
   return await page.evaluate(returnHtml => {
-    const article = document.querySelector("article")
+    // Try to find content - support both old and new site structure
+    const article = document.querySelector("article") || document.querySelector("#content")
     if (!article) return "Article content not available"
 
     if (returnHtml) {
