@@ -53,6 +53,9 @@ _Notes on Exchange Upgrade and API Versions_
 
 ## Change Logs
 
+- 2025-10-16
+  - `Advanced Order Management API` section was updated
+
 - 2025-07-17
   - `private/fiat/fiat-deposit-info` was added
   - `private/fiat/fiat-deposit-history` was added

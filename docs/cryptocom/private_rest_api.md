@@ -53,6 +53,9 @@ _Notes on Exchange Upgrade and API Versions_
 
 ## Change Logs
 
+- 2025-10-16
+  - `Advanced Order Management API` section was updated
+
 - 2025-07-17
   - `private/fiat/fiat-deposit-info` was added
   - `private/fiat/fiat-deposit-history` was added
@@ -1513,7 +1516,9 @@ If a client would like to BUY/SELL BTCUSD-PERP, the default fee token is USD,
 valid tokens are USD/USDT/EUR.
 
 If a client has an insufficient balance in their preferred fee token, the system
-will switch to the default fee token. |
+will switch to the default fee token.  
+If a client has a sufficient fee credit balance from campaigns, the system will
+automatically switch to use that balance. No opt-in is required. |
 
 ### Applies To
 
@@ -2302,364 +2307,29 @@ POST
 
 # Advanced Order Management API
 
-## private/create-order (Conditional Order)
-
-[Conditional Orders](https://help.crypto.com/en/articles/4453247-stop-loss-order-and-take-profit-order)
-automatically place a mark or limit order when the mark price reaches a trigger
-price specified by the user. If the mark price reaches or exceeds the trigger
-price, the Stop-Loss/Take-Profit order will be converted to a live order and
-placed in the order book. If the mark price does not reach the trigger price,
-the Stop-Loss/Take-Profit order will remain active until it is canceled or
-triggered.
-
-See [private/create-order](#private-create-order) and the `type` parameter for
-more information.
-
-## private/create-order-list (LIST)
-
-> Request Sample
-
-    // Create List of Orders example
-    {
-      "id": 6573,
-      "method": "private/create-order-list",
-      "api_key": "xxxxxxxxxxx",
-      "params": {
-        "contingency_type": "LIST",
-        "order_list": [
-          {
-            "instrument_name": "CRO_USD",
-            "side": "SELL",
-            "type": "LIMIT",
-            "quantity": "10",
-            "price": "0.12",
-            "client_oid": "api_leg1"
-          },
-          {
-            "instrument_name": "CRO_USD",
-            "side": "SELL",
-            "type": "LIMIT",
-            "quantity": "20",
-            "price": "0.122",
-            "client_oid": "api_leg2"
-          }
-        ]
-      },
-      "nonce": 1750385416548,
-      "sig": "xxxxxxxx"
-    }
-
-> Response Sample
-
-    // Create List of Orders - All ok
-    {
-      "id": 6573,
-      "method": "private/create-order-list",
-      "code": 0,
-      "result": [
-        {
-          "code": 0,
-          "index": 0,
-          "client_oid": "api_leg1",
-          "order_id": "5755600460443882762"
-        },
-        {
-          "code": 0,
-          "index": 1,
-          "client_oid": "api_leg2",
-          "order_id": "5755600460443882763"
-        }
-      ]
-    }
-
-
-    // Create List of Orders - Some rejected
-    {
-      "id": xxxxx,
-      "method": "private/create-order-list",
-      "code": 0,
-      "result": [
-        {
-          "code": 306,
-          "index": 0,
-          "client_oid": "api_leg_111",
-          "message": "INSUFFICIENT_AVAILABLE_BALANCE",
-          "order_id": "xxxx"
-        },
-        {
-          "code": 204,
-          "index": 1,
-          "client_oid": "api_leg_22",
-          "message": "DUPLICATE_CLORDID",
-          "order_id": "xxxx"
-        }
-      ]
-    }
-
-Create a list of orders on the Exchange.
-
-`contingency_type` must be `LIST`, for list of orders creation.
-
-This call is asynchronous, so the response is simply a confirmation of the
-request.
-
-The `user.order` subscription can be used to check if the orders are
-successfully created.
-
-### Request Params
-
-| Name             | Type            | Required | Description         |
-| ---------------- | --------------- | -------- | ------------------- |
-| contingency_type | string          | Y        | LIST                |
-| order_list       | array of orders | Y        | `LIST`: 1-10 orders |
-
-Content of each order in `order_list`
-
-| Name                      | Type                        | Required | Description                                                          |
-| ------------------------- | --------------------------- | -------- | -------------------------------------------------------------------- |
-| instrument_name           | string                      | Y        | e.g., ETH_CRO, BTC_USDT                                              |
-| side                      | string                      | Y        | BUY, SELL                                                            |
-| type                      | string                      | Y        | LIMIT, MARKET, STOP_LOSS, STOP_LIMIT, TAKE_PROFIT, TAKE_PROFIT_LIMIT |
-| price                     | number                      | Depends  | For LIMIT and STOP_LIMIT orders only:                                |
-| Unit price                |
-| quantity                  | number                      | Depends  | For LIMIT Orders, MARKET, STOP_LOSS, TAKE_PROFIT orders only:        |
-| Order Quantity to be Sold |
-| notional                  | [number](#request-format-2) | Depends  | For MARKET (BUY), STOP_LOSS (BUY), TAKE_PROFIT (BUY) orders only:    |
-| Amount to spend           |
-| client_oid                | string                      | N        | Optional Client order ID (Maximum 36 characters)                     |
-| time_in_force             | string                      | N        | (Limit Orders Only)                                                  |
-
-Options are:  
-\- `GOOD_TILL_CANCEL` (Default if unspecified)  
-\- `FILL_OR_KILL`  
-\- `IMMEDIATE_OR_CANCEL` | | exec_inst | array | N | (Limit Orders Only)  
-Options are:  
-\- `POST_ONLY`  
-\- Or leave empty  
-\- `SMART_POST_ONLY`  
-Remarks: `POST_ONLY`and `SMART_POST_ONLY` cannot be coexisted in exec_inst | |
-trigger_price | number | N | Used with STOP_LOSS, STOP_LIMIT, TAKE_PROFIT, and
-TAKE_PROFIT_LIMIT orders.  
-Dictates when order will be triggered | | stp_scope | string | N | Optional
-Field
-
-Possible Values  
-\- M: Matches Master or Sub a/c  
-\- S: Matches Sub a/c only
-
-Note: orderbook-specific settings takes higher precedence. | | stp_inst | string
-| N\* | Mandatory if stp_scope is set.
-
-Possible Values  
-\- M: Cancel Maker  
-\- T: Cancel Taker  
-\- B: Cancel Both Maker and Taker | | stp_id | string of number | N\* | Optional
-Field
-
-Possible Value: 0 to 32767
-
-Default Value  
-\- If stp_scope & stp_inst are not specified, REJECT  
-\- If stp_scope is specified, default value = 0.
-
-Note: orderbook-specific settings takes higher precedence. | |
-fee_instrument_name | string | N | Specify the preferred fee token.  
-Valid Values:  
-\[SPOT\] Buy - Base/Quote CCY/USD/USDT  
-\[SPOT\] Sell - Quote CCY/USD/USDT  
-\[DERIV\] Buy/Sell - USD/USDT
-
-Example:  
-If a client would like to BUY CRO/BTC, the default fee token is CRO, valid
-currencies are CRO/BTC/USD/USDT.  
-If a client would like to SELL CRO/BTC, the default fee token is BTC, valid
-currencies are BTC/USD/USDT.  
-If a client would like to BUY/SELL BTCUSD-PERP, the default fee token is USD,
-valid currencies are USD/USDT.
-
-If a client has an insufficient balance in their preferred fee token, the system
-will switch to the default fee token. |
-
-**Here are the mandatory parameters based on order `type`:**
-
-| Type              | Side | Additional Mandatory Parameters          |
-| ----------------- | ---- | ---------------------------------------- |
-| LIMIT             | Both | quantity, price                          |
-| MARKET            | BUY  | notional or quantity, mutually exclusive |
-| MARKET            | SELL | quantity                                 |
-| STOP_LIMIT        | Both | price, quantity, trigger_price           |
-| TAKE_PROFIT_LIMIT | Both | price, quantity, trigger_price           |
-| STOP_LOSS         | BUY  | notional, trigger_price                  |
-| STOP_LOSS         | SELL | quantity, trigger_price                  |
-| TAKE_PROFIT       | BUY  | notional, trigger_price                  |
-| TAKE_PROFIT       | SELL | quantity, trigger_price                  |
-
-**Contingency Type:**
-
-| Type | Description             |
-| ---- | ----------------------- |
-| LIST | Create a list of orders |
-
-**Helpful information:**
-
-- `STOP_LIMIT` and `TAKE_PROFIT_LIMIT` will execute a LIMIT order when the
-  trigger_price is reached.
-- `STOP_LOSS` and `TAKE_PROFIT` will execute a MARKET order when the
-  trigger_price is reached.
-
-**To create trigger orders against market price:**
-
-- `trigger_price` below market price: SELL `STOP_LOSS` and `STOP_LIMIT`, BUY
-  `TAKE_PROFIT` and `TAKE_PROFIT_LIMIT`
-- `trigger_price` above market price: BUY `STOP_LOSS` and `STOP_LIMIT`, SELL
-  `TAKE_PROFIT` and `TAKE_PROFIT_LIMIT`
-
-### Applies To
-
-REST Websocket (User API)
-
-### REST Method
-
-POST
-
-### Response Attributes
-
-| Name       | Type   | Description                                                                          |
-| ---------- | ------ | ------------------------------------------------------------------------------------ |
-| code       | number | 0 if success                                                                         |
-| index      | number | The index of corresponding order request (Start from 0)                              |
-| client_oid | string | (Optional) if a Client order ID was provided in the request. (Maximum 36 characters) |
-| message    | string | (Optional) For server or error messages                                              |
-| order_id   | number | Newly created order ID                                                               |
-
-## private/cancel-order-list (LIST)
-
-> Request Sample
-
-    // Cancel List of Orders example
-    {
-      "id": 6575,
-      "method": "private/cancel-order-list",
-      "api_key": "xxxxxxxxx",
-      "params": {
-        "contingency_type": "LIST",
-        "order_list": [
-          {
-            "instrument_name": "CRO_USD",
-            "client_oid": "api_leg1"
-          },
-          {
-            "instrument_name": "CRO_USD",
-            "client_oid": "api_leg2"
-          }
-        ]
-      },
-      "nonce": 1750389124417,
-      "sig": "xxxxxxxx"
-    }
-
-> Response Sample
-
-    // Cancel List of Orders - All ok
-    {
-      "id": 6575,
-      "method": "private/cancel-order-list",
-      "code": 0,
-      "result": [
-        {
-          "code": 0,
-          "index": 0
-        },
-        {
-          "code": 0,
-          "index": 1
-        }
-      ]
-    }
-
-    // Cancel List of Orders - Error encountered
-    {
-      "id": 6576,
-      "method": "private/cancel-order-list",
-      "code": 0,
-      "result": [
-        {
-          "code": 212,
-          "index": 0,
-          "message": "INVALID_ORDERID"
-        },
-        {
-          "code": 212,
-          "index": 1,
-          "message": "INVALID_ORDERID"
-        }
-      ]
-    }
-
-Cancel a list of orders on the Exchange.
-
-This call is asynchronous, so the response is simply a confirmation of the
-request.
-
-The `user.order` subscription can be used to check when each of the orders is
-successfully cancelled.
-
-### Request Params (List of Orders)
-
-| Name             | Type            | Required | Description                                                   |
-| ---------------- | --------------- | -------- | ------------------------------------------------------------- |
-| order_list       | array of orders | Y        | For non contingency orders, A list of orders to be cancelled  |
-| instrument_name  | string          | N        | Instrument name of contingency order, e.g., ETH_CRO, BTC_USDT |
-| contingency_type | string          | Y        | Must be value "LIST"                                          |
-
-Content of each order in `order_list`
-
-| Name            | Type   | Required | Description                                      |
-| --------------- | ------ | -------- | ------------------------------------------------ |
-| instrument_name | string | N        | instrument_name, e.g., ETH_CRO, BTC_USDT         |
-| order_id        | string | Y        | Order ID                                         |
-| client_oid      | string | N        | Optional Client order ID (Maximum 36 characters) |
-
-### Applies To
-
-REST Websocket (User API)
-
-### REST Method
-
-POST
-
-### Response Attributes
-
-| Name    | Type   | Description                                             |
-| ------- | ------ | ------------------------------------------------------- |
-| code    | number | 0 if success                                            |
-| index   | number | The index of corresponding order request (Start from 0) |
-| message | string | (Optional) For server or error messages                 |
-
-## private/create-order-list (OCO)
+## private/advanced/create-oto
 
 > Request Example
 
     {
-      "method":"private/create-order-list",
+      "method":"private/advanced/create-oto",
       "id":123456789,
       "nonce":123456789000,
       "params":{
-        "contingency_type":"OCO",
         "order_list":[
           {
-            "instrument_name":"BTCUSD-PERP",
+            "instrument_name":"BTCUSD",
             "quantity":"0.1",
             "type":"LIMIT",
-            "price":"23000",
-            "side":"SELL"
+            "price":"93000",
+            "side":"BUY",
           },
           {
-            "instrument_name":"BTCUSD-PERP",
+            "instrument_name":"BTCUSD",
             "quantity":"0.1",
             "type":"STOP_LOSS",
-            "ref_price":"19000",
-            "side":"SELL"
+            "ref_price":"80000",
+            "side":"SELL",
           }
         ]
       }
@@ -2669,37 +2339,37 @@ POST
 
     {
       "id" : 1661331443,
-      "method" : "private/create-order-list",
+      "method" : "private/advanced/create-oto",
       "code" : 0,
       "result" : {
         "list_id" : 6498090546073120100
       }
     }
 
-Creates a One-Cancel-the-Other (OCO) order on the Exchange.
+Creates a One-triggers-the-Other (OTO) execution strategy on the Exchange.
 
-[OCO Order](https://help.crypto.com/en/articles/5807203-one-cancels-the-other-oco-orders)
-allows users to place two orders at the same time. Users are able to place a
-limit order with a stop order, and only one of them will be executed. When
-either one of the above orders is executed, the other is automatically canceled.
-This allows users to take a profit while minimizing potential loss. The OCO
-order type is available for Spot trading pairs and Futures and Perpetual
-contracts only.
+OTO execution strategy allows users to place a two-order strategy where one
+order automatically triggers the other when the first order is fully executed.
+Users are able to place a limit order with a trigger order, and only when the
+limit order is fully executed, the trigger order will take effect. The trigger
+order can either be a stop loss or take profit order. The OTO order type is only
+available for Spot trading pairs for now.
 
 This call is asynchronous, so the response is simply a confirmation of the
-request. The `user.order` subscription can be used to check if the orders are
-successfully created.
+request. The `user.advanced.order` subscription can be used to check if the
+orders are successfully created.
 
 ### Request Params
 
-| Name             | Type            | Required | Description      |
-| ---------------- | --------------- | -------- | ---------------- |
-| contingency_type | string          | Y        | `OCO`            |
-|  |
-| order_list       | array of orders | Y        | Exactly 2 orders |
+| Name       | Type            | Required | Description      |
+| ---------- | --------------- | -------- | ---------------- |
+| order_list | array of orders | Y        | Exactly 2 orders |
 
 For the content of each order in `order_list`, please refer to
-[`private/create-order`](#private-create-order) for details.
+[`private/create-order`](#private-create-order) for details. One order must be
+`LIMIT` and the other must be `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT_LIMIT` or
+`TAKE_PROFIT`. For `ref_price_type` of the trigger order, only `MARK_PRICE` is
+supported for now.
 
 ### Applies To
 
@@ -2715,18 +2385,16 @@ POST
 | ------- | ------ | ----------- |
 | list_id | number | List ID     |
 
-## private/cancel-order-list (OCO)
+## private/advanced/cancel-oto
 
 > Request Example
 
     {
-      "method":"private/cancel-order-list",
+      "method":"private/advanced/cancel-oto",
       "id":1234,
       "nonce":123456789000,
       "params":{
-        "instrument_name":"BTCUSD-PERP",
-        "list_id":"4421958062479290999",
-        "contingency_type":"OCO"
+        "list_id":"4421958062479290999"
       }
     }
 
@@ -2734,25 +2402,19 @@ POST
 
     {
       "id" : 1661328073,
-      "method" : "private/cancel-order-list",
+      "method" : "private/advanced/cancel-oto",
       "code" : 0
     }
 
-Cancel a contingency order on the Exchange.
-
-This call is asynchronous, so the response is simply a confirmation of the
-request.
-
-The `user.order` subscription can be used to check when each of the orders is
-successfully cancelled.
+Cancel a OTO order on the Exchange. This call is asynchronous, so the response
+is simply a confirmation of the request. The `user.advanced.order` subscription
+can be used to check when each of the orders is successfully cancelled.
 
 ### Request Params
 
-| Name             | Type   | Required | Description     |
-| ---------------- | ------ | -------- | --------------- |
-| contingency_type | string | Y        | `OCO`           |
-| list_id          | string | Y        | List ID         |
-| instrument_name  | string | Y        | Instrument Name |
+| Name    | Type   | Required | Description |
+| ------- | ------ | -------- | ----------- |
+| list_id | string | Y        | List ID     |
 
 ### Applies To
 
@@ -2767,97 +2429,461 @@ POST
 No result block is returned. The code (0 = success) is the primary indicator
 that the request is queued.
 
-## private/get-order-list (OCO)
+## private/advanced/create-otoco
 
 > Request Example
 
     {
-      "method":"private/get-order-list",
-      "id":123,
+      "method":"private/advanced/create-otoco",
+      "id":123456789,
       "nonce":123456789000,
       "params":{
-        "instrument_name":"BTCUSD-PERP",
-        "list_id":"6498090546073120100",
-        "contingency_type":"OCO"
+        "order_list":[
+          {
+            "instrument_name":"BTCUSD",
+            "quantity":"0.1",
+            "type":"LIMIT",
+            "price":"93000",
+            "side":"BUY",
+          },
+          {
+            "instrument_name":"BTCUSD",
+            "quantity":"0.1",
+            "type":"STOP_LOSS",
+            "ref_price":"80000",
+            "side":"SELL",
+          },
+          {
+            "instrument_name":"BTCUSD",
+            "quantity":"0.1",
+            "type":"TAKE_PROFIT",
+            "ref_price":"108000",
+            "side":"SELL",
+          }
+        ]
       }
     }
 
 > Response Example
 
     {
-      "id":1661331609,
-      "method":"private/get-order-list",
-      "code":0,
-      "result":{
-        "data":[
-          {
-            "account_id":"88888888-8888-8888-8888-000000000001",
-            "order_id":"4611686018427387905",
-            "client_oid":"1661331443",
-            "type":"LIMIT",
-            "time_in_force":"GOOD_TILL_CANCEL",
-            "side":"SELL",
-            "exec_inst":[],
-            "quantity":"0.1000",
-            "price":"23000.0",
-            "order_value":"2300.00000000",
-            "avg_price":"0",
-            "trigger_price":"0",
-            "cumulative_quantity":"0",
-            "cumulative_value":"0",
-            "cumulative_fee":"0",
-            "status":"ACTIVE",
-            "update_user_id":"11111111-1111-1111-1111-000000000001",
-            "order_date":"2022-08-24",
-            "instrument_name":"BTCUSD-PERP",
-            "fee_instrument_name":"USD",
-            "list_id":"6498090546073120100",
-            "contingency_type":"OCO",
-            "trigger_price_type":"NULL_VAL",
-            "create_time":1661331445398,
-            "create_time_ns":"1661331445398773329",
-            "update_time":1661331445482
-          },
-          {
-            "account_id":"88888888-8888-8888-8888-000000000001",
-            "order_id":"4611686018427387906",
-            "client_oid":"1661331443-2",
-            "type":"STOP_LOSS",
-            "time_in_force":"GOOD_TILL_CANCEL",
-            "side":"SELL",
-            "exec_inst":[],
-            "quantity":"0.1000",
-            "order_value":"1900.00000000",
-            "avg_price":"0",
-            "trigger_price":"0",
-            "cumulative_quantity":"0",
-            "cumulative_value":"0",
-            "cumulative_fee":"0",
-            "status":"PENDING",
-            "update_user_id":"11111111-1111-1111-1111-000000000001",
-            "order_date":"2022-08-24",
-            "instrument_name":"BTCUSD-PERP",
-            "fee_instrument_name":"USD",
-            "list_id":"6498090546073120100",
-            "contingency_type":"OCO",
-            "trigger_price_type":"NULL_VAL",
-            "create_time":1661331445040,
-            "create_time_ns":"1661331445040100934",
-            "update_time":0
-          }
-        ]
+      "id" : 1661331443,
+      "method" : "private/advanced/create-otoco",
+      "code" : 0,
+      "result" : {
+        "list_id" : 6498090546073120100
       }
     }
 
-Gets the details of an outstanding (not executed) contingency order on Exchange.
+Creates a One-Triggers-a-One-Cancels-the-Other (OTOCO) execution strategy on the
+Exchange.
+
+OTOCO execution strategy allows users to place a three-order strategy where one
+order automatically triggers the other two when the first order is fully
+executed. Users are able to place a limit order with two trigger orders, and
+only when the limit order is fully executed, the two trigger orders will take
+effect. The two trigger orders must be one stop loss and one take profit orders.
+When either one of the two trigger orders is executed, the other is
+automatically canceled. The OTOCO order type is only available for Spot trading
+pairs for now.
+
+This call is asynchronous, so the response is simply a confirmation of the
+request. The `user.advanced.order` subscription can be used to check if the
+orders are successfully created.
 
 ### Request Params
 
-| Name             | Type   | Required | Description                                                       |
-| ---------------- | ------ | -------- | ----------------------------------------------------------------- |
-| contingency_type | string | Y        | `OCO`                                                             |
-| list_id          | string | Y        | ID of the contingency order                                       |
-| instrument_name  | string | Y        | instrument_name of the contingency order, e.g. ETH_CRO, BTC_USDT. |
+| Name       | Type            | Required | Description      |
+| ---------- | --------------- | -------- | ---------------- |
+| order_list | array of orders | Y        | Exactly 3 orders |
+
+For the content of each order in `order_list`, please refer to
+[`private/create-order`](#private-create-order) for details. One order must be
+`LIMIT`, and for the two trigger orders, one must be `STOP_LOSS` or
+`STOP_LIMIT`, and the other one must be `TAKE_PROFIT` or `TAKE_PROFIT_LIMIT`.
+For `ref_price_type` of the two trigger orders, only `MARK_PRICE` is supported
+for now.
+
+### Applies To
+
+REST Websocket (User API)
+
+### REST Method
+
+POST
+
+### Response Attributes
+
+| Name    | Type   | Description |
+| ------- | ------ | ----------- |
+| list_id | number | List ID     |
+
+## private/advanced/cancel-otoco
+
+> Request Example
+
+    {
+      "method":"private/advanced/cancel-otoco",
+      "id":1234,
+      "nonce":123456789000,
+      "params":{
+        "list_id":"4421958062479290999"
+      }
+    }
+
+> Response Example
+
+    {
+      "id" : 1661328073,
+      "method" : "private/advanced/cancel-otoco",
+      "code" : 0
+    }
+
+Cancel a OTOCO order on the Exchange. This call is asynchronous, so the response
+is simply a confirmation of the request. The `user.advanced.order` subscription
+can be used to check when each of the orders is successfully cancelled.
+
+### Request Params
+
+| Name    | Type   | Required | Description |
+| ------- | ------ | -------- | ----------- |
+| list_id | string | Y        | List ID     |
+
+### Applies To
+
+REST Websocket (User API)
+
+### REST Method
+
+POST
+
+### Response Attributes
+
+No result block is returned. The code (0 = success) is the primary indicator
+that the request is queued.
+
+## private/advanced/cancel-order
+
+> Request Example
+
+    {
+      "id": 1,
+      "nonce" : 1610905028000,
+      "method": "private/advanced/cancel-order",
+      "params": {
+        "order_id": "18342311"
+      }
+    }
+
+> Response Example
+
+    {
+      "id": 1,
+      "method": "private/advanced/cancel-order",
+      "code": 0,
+      "message": "NO_ERROR",
+      "result": {
+        "client_oid": "c5f682ed-7108-4f1c-b755-972fcdca0f02",
+        "order_id": "18342311"
+      }
+    }
+
+Cancel an individual order of a OTO/OTOCO order on the Exchange (asynchronous).
+This call is asynchronous, so the response is simply a confirmation of the
+request. The `user.advanced.order` subscription can be used to check when the
+order is successfully canceled.
+
+### Request Params
+
+| Name     | Type                       | Required | Description       |
+| -------- | -------------------------- | -------- | ----------------- |
+| order_id | number or string of number | Depends  | Optional Order ID |
+
+Either `order_id` or `client_oid` must be present  
+`string` format is highly recommended. | | client_oid | string | Depends |
+Optional Client Order ID  
+Either `order_id` or `client_oid` must be present |
+
+### Applies To
+
+REST Websocket (User API)
+
+### REST Method
+
+POST
+
+### Response Attributes
+
+| Name       | Type             | Description     |
+| ---------- | ---------------- | --------------- |
+| order_id   | string of number | Order ID        |
+| client_oid | string           | Client Order ID |
+
+## private/advanced/cancel-all-orders
+
+> Request Example
+
+    {
+      "id": 1,
+      "nonce": 1611169184000,
+      "method": "private/advanced/cancel-all-orders",
+      "params": {
+        "instrument_name": "BTCUSD"
+      }
+    }
+
+> Response Example
+
+    {
+      "id": 1,
+      "method": "private/advanced/cancel-all-orders",
+      "code": 0
+    }
+
+Cancels all OTO/OTOCO orders for a particular instrument/pair (asynchronous).
+This call is asynchronous, so the response is simply a confirmation of the
+request. The `user.advanced.order` subscription can be used to check when the
+order is successfully canceled.
+
+### Request Params
+
+| Name            | Type   | Required | Description                                                                            |
+| --------------- | ------ | -------- | -------------------------------------------------------------------------------------- |
+| instrument_name | string | N        | e.g. BTCUSD. If not provided, the OTO/OTOCO orders of ALL instruments will be canceled |
+| type            | string | N        | e.g. `LIMIT`, `TRIGGER`, `ALL`                                                         |
+
+### Applies To
+
+REST Websocket (User API)
+
+### REST Method
+
+POST
+
+### Response Attributes
+
+No result block is returned. The code (0 = success) is the primary indicator
+that the request is queued.
+
+## private/advanced/get-open-orders
+
+> Request Example
+
+    {
+      "id": 1,
+      "method": "private/advanced/get-open-orders",
+      "params": {
+        "instrument_name": "BTCUSD"
+      }
+    }
+
+> Response Example
+
+    {
+      "id": 1,
+      "method": "private/advanced/get-open-orders",
+      "code": 0,
+      "result": {
+        "data": [{
+          "account_id": "52e7c00f-1324-5a6z-bfgt-de445bde21a5",
+          "order_id": "19848525",
+          "client_oid": "1613571154900",
+          "order_type": "LIMIT",
+          "time_in_force": "GOOD_TILL_CANCEL",
+          "side": "BUY",
+          "exec_inst": [],
+          "quantity": "0.0100",
+          "limit_price": "50000.0",
+          "order_value": "500.000000",
+          "maker_fee_rate": "0.000250",
+          "taker_fee_rate": "0.000400",
+          "avg_price": "0.0",
+          "cumulative_quantity": "0.0000",
+          "cumulative_value": "0.000000",
+          "cumulative_fee": "0.000000",
+          "status": "ACTIVE",
+          "update_user_id": "fd797356-55db-48c2-a44d-157aabf702e8",
+          "order_date": "2021-02-17",
+          "instrument_name": "BTCUSD",
+          "fee_instrument_name": "USD",
+          "list_id": 6498090546073120100,
+          "contingency_type": "OTOCO",
+          "leg_id": 1,
+          "create_time": 1613575617173,
+          "create_time_ns": "1613575617173123456",
+          "update_time": 1613575617173
+        },
+        {
+          "account_id": "52e7c00f-1324-5a6z-bfgt-de445bde21a5",
+          "order_id": "19848526",
+          "client_oid": "1613571154901",
+          "order_type": "STOP_LOSS",
+          "time_in_force": "GOOD_TILL_CANCEL",
+          "side": "SELL",
+          "exec_inst": [],
+          "quantity": "0.0100",
+          "ref_price": "45000.00",
+          "ref_price_type": "MARK_PRICE",
+          "maker_fee_rate": "0.000250",
+          "taker_fee_rate": "0.000400",
+          "avg_price": "0.0",
+          "cumulative_quantity": "0.0000",
+          "cumulative_value": "0.000000",
+          "cumulative_fee": "0.000000",
+          "status": "ACTIVE",
+          "update_user_id": "fd797356-55db-48c2-a44d-157aabf702e8",
+          "order_date": "2021-02-17",
+          "instrument_name": "BTCUSD",
+          "fee_instrument_name": "USD",
+          "list_id": 6498090546073120100,
+          "contingency_type": "OTOCO",
+          "leg_id": 2,
+          "create_time": 1613575617173,
+          "create_time_ns": "1613575617173123456",
+          "update_time": 1613575617173
+        },
+        {
+          "account_id": "52e7c00f-1324-5a6z-bfgt-de445bde21a5",
+          "order_id": "19848526",
+          "client_oid": "1613571154901",
+          "order_type": "TAKE_PROFIT",
+          "time_in_force": "GOOD_TILL_CANCEL",
+          "side": "SELL",
+          "exec_inst": [],
+          "quantity": "0.0100",
+          "ref_price": "55000.00",
+          "ref_price_type": "MARK_PRICE",
+          "maker_fee_rate": "0.000250",
+          "taker_fee_rate": "0.000400",
+          "avg_price": "0.0",
+          "cumulative_quantity": "0.0000",
+          "cumulative_value": "0.000000",
+          "cumulative_fee": "0.000000",
+          "status": "ACTIVE",
+          "update_user_id": "fd797356-55db-48c2-a44d-157aabf702e8",
+          "order_date": "2021-02-17",
+          "instrument_name": "BTCUSD",
+          "fee_instrument_name": "USD",
+          "list_id": 6498090546073120100,
+          "contingency_type": "OTOCO",
+          "leg_id": 3,
+          "create_time": 1613575617173,
+          "create_time_ns": "1613575617173123456",
+          "update_time": 1613575617173
+        }
+      }
+    }
+
+Gets all **open** orders for OTO/OTOCO orders for a particular instrument.
+
+### Request Params
+
+| Name            | Type   | Required | Description                 |
+| --------------- | ------ | -------- | --------------------------- |
+| instrument_name | string | N        | e.g. BTCUSD. Omit for 'all' |
+
+### Applies To
+
+REST Websocket (User API)
+
+### REST Method
+
+POST
+
+### Response Attributes
+
+An array, consisting of:
+
+| Name                | Type             | Description                                                            |
+| ------------------- | ---------------- | ---------------------------------------------------------------------- |
+| account_id          | string           | Account ID                                                             |
+| order_id            | string of number | Order ID                                                               |
+| client_oid          | string           | Client Order ID                                                        |
+| order_type          | string           | `LIMIT`, `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` |
+| time_in_force       | string           | `GOOD_TILL_CANCEL`                                                     |
+| side                | string           | `BUY` or `SELL`                                                        |
+| exec_inst           | array            | `POST_ONLY`                                                            |
+| quantity            | string           | Quantity specified in the order                                        |
+| limit_price         | string           | Limit price specified in the order                                     |
+| order_value         | string           | Order value                                                            |
+| maker_fee_rate      | string           | User's maker fee rate                                                  |
+| taker_fee_rate      | string           | User's taker fee rate                                                  |
+| avg_price           | string           | Average price                                                          |
+| cumulative_quantity | string           | Cumulative executed quantity                                           |
+| cumulative_value    | string           | Cumulative executed value                                              |
+| cumulative_fee      | string           | Cumulative executed fee                                                |
+| status              | string           | Order status:                                                          |
+
+\- `NEW`  
+\- `PENDING`  
+\- `ACTIVE` | | update_user_id | string | Updated user | | order_date | string |
+Order creation date | | create_time | number | Order creation timestamp | |
+create_time_ns | string | Order creation timestamp (nanosecond) | | update_time
+| number | Order update timestamp | | instrument_name | string | e.g. BTCUSD | |
+fee_instrument_name | string | Currency used for the fees | | list_id | number |
+List id of OTO/OTOCO | | contingency_type | string | `OTO` or `OTOCO` | | leg_id
+| number | Leg id of OTO/OTOCO orders |
+
+Note: To detect a 'partial filled' status, look for `status` as `ACTIVE` and
+`cumulative_quantity` > 0.
+
+## private/advanced/get-order-detail
+
+> Request Sample
+
+    {
+      "id": 1,
+      "method": "private/advanced/get-order-detail",
+      "params": {
+        "order_id": "19848525"
+      }
+    }
+
+> Response Sample
+
+    {
+      "id": 1,
+      "method": "private/advanced/get-order-detail",
+      "code": 0,
+      "result": {
+        "account_id": "52e7c00f-1324-5a6z-bfgt-de445bde21a5",
+        "order_id": "19848525",
+        "client_oid": "1613571154900",
+        "order_type": "LIMIT",
+        "time_in_force": "GOOD_TILL_CANCEL",
+        "side": "BUY",
+        "exec_inst": [],
+        "quantity": "0.0100",
+        "limit_price": "50000.0",
+        "order_value": "500.000000",
+        "maker_fee_rate": "0.000250",
+        "taker_fee_rate": "0.000400",
+        "avg_price": "0.0",
+        "cumulative_quantity": "0.0000",
+        "cumulative_value": "0.000000",
+        "cumulative_fee": "0.000000",
+        "status": "ACTIVE",
+        "update_user_id": "fd797356-55db-48c2-a44d-157aabf702e8",
+        "order_date": "2021-02-17",
+        "instrument_name": "BTCUSD",
+        "fee_instrument_name": "USD",
+        "list_id": 6498090546073120199,
+        "contingency_type": "OTO",
+        "leg_id": 2,
+        "create_time": 1613575617173,
+        "create_time_ns": "1613575617173123456",
+        "update_time": 1613575617173
+      }
+    }
+
+### Request Params
+
+| Name       | Type                       | Required | Description                                                                                                                         |
+| ---------- | -------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| order_id   | number or string of number | N        | Order ID. `string` format is highly recommended, especially for JavaScript client. If not provided, `client_oid` must be specified. |
+| client_oid | string                     | N        | Client Order ID. If not provided, `order_id` must be specified.                                                                     |
+
+Note: Either `order_id` or `client_oid` must be specified.
 
 ### Applies To
 
@@ -2869,8 +2895,227 @@ POST
 
 ### Response Attributes
 
-List of order in the field `data`. For content of `data`, please refer to
-[`private/get-open-orders`](#private-get-open-orders) for details
+An array, consisting of:
+
+| Name                | Type             | Description                                                            |
+| ------------------- | ---------------- | ---------------------------------------------------------------------- |
+| account_id          | string           | Account ID                                                             |
+| order_id            | string of number | Order ID                                                               |
+| client_oid          | string           | Client Order ID                                                        |
+| order_type          | string           | `LIMIT`, `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` |
+| time_in_force       | string           | `GOOD_TILL_CANCEL`                                                     |
+| side                | string           | `BUY` or `SELL`                                                        |
+| exec_inst           | array            | `POST_ONLY`                                                            |
+| quantity            | string           | Quantity specified in the order                                        |
+| limit_price         | string           | Limit price specified in the order                                     |
+| order_value         | string           | Order value                                                            |
+| maker_fee_rate      | string           | User's maker fee rate                                                  |
+| taker_fee_rate      | string           | User's taker fee rate                                                  |
+| avg_price           | string           | Average price                                                          |
+| cumulative_quantity | string           | Cumulative executed quantity                                           |
+| cumulative_value    | string           | Cumulative executed value                                              |
+| cumulative_fee      | string           | Cumulative executed fee                                                |
+| status              | string           | Order status:                                                          |
+
+\- `NEW`  
+\- `PENDING`  
+\- `REJECTED`  
+\- `ACTIVE`  
+\- `CANCELED`  
+\- `FILLED` | | update_user_id | string | Updated user | | order_date | string |
+Order creation date | | create_time | number | Order creation timestamp | |
+create_time_ns | string | Order creation timestamp (nanosecond) | | update_time
+| number | Order update timestamp | | instrument_name | string | e.g.
+BTCUSD-PERP | | fee_instrument_name | string | Currency used for the fees | |
+list_id | number | List id of OTO/OTOCO | | contingency_type | string | `OTO` or
+`OTOCO` | | leg_id | number | Leg id of OTO/OTOCO orders |
+
+Note: To detect a 'partial filled' status, look for `status` as `ACTIVE` and
+`cumulative_quantity` > 0.
+
+## private/advanced/get-order-history
+
+> Request Example
+
+    {
+      "id": 1,
+      "method": "private/advanced/get-order-history",
+      "params": {
+        "instrument_name": "BTCUSD",
+        "start_time": 1610905028000081486,
+        "end_time": 1613570791058211357,
+        "limit": 20
+      }
+    }
+
+> Response Example
+
+    {
+      "id": 1,
+      "method": "private/advanced/get-order-history",
+      "code": 0,
+      "result": {
+        "data": [{
+          "account_id": "52e7c00f-1324-5a6z-bfgt-de445bde21a5",
+          "order_id": "19848525",
+          "client_oid": "1613571154900",
+          "order_type": "LIMIT",
+          "time_in_force": "GOOD_TILL_CANCEL",
+          "side": "BUY",
+          "exec_inst": [],
+          "quantity": "0.0100",
+          "limit_price": "50000.0",
+          "order_value": "500.000000",
+          "maker_fee_rate": "0.000250",
+          "taker_fee_rate": "0.000400",
+          "avg_price": "0.0",
+          "cumulative_quantity": "0.0100",
+          "cumulative_value": "500.000000",
+          "cumulative_fee": "0.000000",
+          "status": "FILLED",
+          "update_user_id": "fd797356-55db-48c2-a44d-157aabf702e8",
+          "order_date": "2021-02-17",
+          "instrument_name": "BTCUSD",
+          "fee_instrument_name": "USD",
+          "list_id": 6498090546073120100,
+          "contingency_type": "OTOCO",
+          "leg_id": 1,
+          "create_time": 1613575617173,
+          "create_time_ns": "1613575617173123456",
+          "update_time": 1613575617173
+        },
+        {
+          "account_id": "52e7c00f-1324-5a6z-bfgt-de445bde21a5",
+          "order_id": "19848526",
+          "client_oid": "1613571154901",
+          "order_type": "STOP_LOSS",
+          "time_in_force": "GOOD_TILL_CANCEL",
+          "side": "SELL",
+          "exec_inst": [],
+          "quantity": "0.0100",
+          "ref_price": "45000.00",
+          "ref_price_type": "MARK_PRICE",
+          "maker_fee_rate": "0.000250",
+          "taker_fee_rate": "0.000400",
+          "avg_price": "0.0",
+          "cumulative_quantity": "0.0100",
+          "cumulative_value": "450.0000",
+          "cumulative_fee": "0.000000",
+          "status": "FILLED",
+          "update_user_id": "fd797356-55db-48c2-a44d-157aabf702e8",
+          "order_date": "2021-02-17",
+          "instrument_name": "BTCUSD",
+          "fee_instrument_name": "USD",
+          "list_id": 6498090546073120100,
+          "contingency_type": "OTOCO",
+          "leg_id": 2
+          "create_time": 1613575617173,
+          "create_time_ns": "1613575617173123456",
+          "update_time": 1613575617173
+        },
+        {
+          "account_id": "52e7c00f-1324-5a6z-bfgt-de445bde21a5",
+          "order_id": "19848526",
+          "client_oid": "1613571154901",
+          "order_type": "TAKE_PROFIT",
+          "time_in_force": "GOOD_TILL_CANCEL",
+          "side": "SELL",
+          "exec_inst": [],
+          "quantity": "0.0100",
+          "ref_price": "55000.00",
+          "ref_price_type": "MARK_PRICE",
+          "maker_fee_rate": "0.000250",
+          "taker_fee_rate": "0.000400",
+          "avg_price": "0.0",
+          "cumulative_quantity": "0.0000",
+          "cumulative_value": "0.000000",
+          "cumulative_fee": "0.000000",
+          "status": "CANCELED",
+          "update_user_id": "fd797356-55db-48c2-a44d-157aabf702e8",
+          "order_date": "2021-02-17",
+          "instrument_name": "BTCUSD",
+          "fee_instrument_name": "USD",
+          "list_id": 6498090546073120100,
+          "contingency_type": "OTOCO",
+          "leg_id": 3,
+          "create_time": 1613575617173,
+          "create_time_ns": "1613575617173123456",
+          "update_time": 1613575617173
+        }
+      }
+    }
+
+Gets the order history of OTO/OTOCO orders for a particular instrument.
+
+Users should use `user.advanced.order` to keep track of real-time order updates,
+and `private/advanced/get-order-history` should primarily be used for recovery;
+typically when the websocket is disconnected.
+
+### Request Params
+
+| Name            | Type             | Required | Description                                   |
+| --------------- | ---------------- | -------- | --------------------------------------------- |
+| instrument_name | string           | N        | e.g. BTCUSD-PERP. Omit for 'all'              |
+| start_time      | number or string | N        | Start time in Unix time format (`inclusive`). |
+
+Default: `end_time - 1 day`.  
+Nanosecond is recommended for accurate pagination | | end_time | number or
+string | N | End time in Unix time format (`exclusive`)  
+Default: current system timestamp.  
+Nanosecond is recommended for accurate pagination | | limit | int | N | The
+maximum number of trades to be retrieved before the `end_time`.  
+Default: 100.  
+Max: 100. |
+
+**Note**: If you omit all parameters, you still need to pass in an empty
+`params` block like `params: {}` for API request consistency
+
+### Applies To
+
+REST
+
+### REST Method
+
+POST
+
+### Response Attributes
+
+An array, consisting of:
+
+| Name                | Type             | Description                                                            |
+| ------------------- | ---------------- | ---------------------------------------------------------------------- |
+| account_id          | string           | Account ID                                                             |
+| order_id            | string of number | Order ID                                                               |
+| client_oid          | string           | Client Order ID                                                        |
+| order_type          | string           | `LIMIT`, `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` |
+| time_in_force       | string           | `GOOD_TILL_CANCEL`                                                     |
+| side                | string           | `BUY` or `SELL`                                                        |
+| exec_inst           | array            | `POST_ONLY`                                                            |
+| quantity            | string           | Quantity specified in the order                                        |
+| limit_price         | string           | Limit price specified in the order                                     |
+| order_value         | string           | Order value                                                            |
+| maker_fee_rate      | string           | User's maker fee rate                                                  |
+| taker_fee_rate      | string           | User's taker fee rate                                                  |
+| avg_price           | string           | Average price                                                          |
+| cumulative_quantity | string           | Cumulative executed quantity                                           |
+| cumulative_value    | string           | Cumulative executed value                                              |
+| cumulative_fee      | string           | Cumulative executed fee                                                |
+| status              | string           | Order status:                                                          |
+
+\- `REJECTED`  
+\- `CANCELED`  
+\- `FILLED`  
+\- `EXPIRED` | | update_user_id | string | Updated user | | order_date | string
+| Order creation date | | create_time | number | Order creation timestamp | |
+create_time_ns | string | Order creation timestamp (nanosecond) | | update_time
+| number | Order update timestamp | | instrument_name | string | e.g.
+BTCUSD-PERP | | fee_instrument_name | string | Currency used for the fees | |
+list_id | number | List id of OTO/OTOCO | | contingency_type | string | `OTO` or
+`OTOCO` | | leg_id | number | Leg id of OTO/OTOCO orders |
+
+Note: Please note `PENDING`,`ACTIVE` can only be found in
+`private/advanced/get-open-orders` REST endpoint or `user.advanced.order`
+WebSocket subscription.
 
 # Order, Trade, Transaction History API
 
