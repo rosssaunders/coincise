@@ -1,15 +1,22 @@
 {
-  "name": "mexc-api-docs-converter",
+  "name": "@coincise/mexc",
   "version": "1.0.0",
   "type": "module",
-  "description": "Convert HTML API docs to Markdown",
+  "description": "Documentation extraction for MEXC Exchange API",
   "scripts": {
-    "start": "npm run all",
-    "spot": "node src/index.js spot",
-    "contract": "node src/index.js contract",
-    "broker": "node src/index.js broker",
-    "all": "npm run spot && npm run contract && npm run broker"
+    "extract:general": "node src/extractGeneral.js",
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "npm run extract:general && npm run extract:endpoints"
   },
+  "keywords": [
+    "mexc",
+    "cryptocurrency",
+    "exchange",
+    "api",
+    "documentation"
+  ],
+  "author": "Coincise",
+  "license": "MIT",
   "dependencies": {
     "puppeteer": "^24.22.0",
     "turndown": "^7.2.1",
