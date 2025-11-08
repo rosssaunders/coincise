@@ -47,28 +47,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # REST API Processing
-      - name: Process Wallets API
-        run: npm run extract:wallets
+      # Extract documentation using standardized scripts
+      - name: Extract general documentation
+        run: npm run extract:general
 
-      - name: Process Positions API
-        run: npm run extract:positions
-
-      - name: Process Orders API
-        run: npm run extract:orders
-
-      - name: Process Merchants API
-        run: npm run extract:merchants
-
-      - name: Process Margin Funding API
-        run: npm run extract:margin
-
-      # WebSocket API Processing
-      - name: Process Private WebSocket API
-        run: npm run extract:ws-private
-
-      - name: Process Public WebSocket API
-        run: npm run extract:ws-public
+      - name: Extract endpoint documentation
+        run: npm run extract:endpoints
 
       - name: Check for changes
         id: git-check

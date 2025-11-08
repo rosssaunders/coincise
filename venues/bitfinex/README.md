@@ -1,41 +1,51 @@
 # Bitfinex API Documentation Extractor
 
-This project extracts API documentation from Bitfinex and converts it to markdown format.
+This project extracts API documentation from Bitfinex and converts it to markdown format following the standardized Coincise extraction pattern.
 
 ## Features
 
-- Extracts REST API authenticated endpoints from HTML documentation
-- Extracts WebSocket API documentation (both public and private)
-- Organizes endpoints by section
+- Extracts core documentation sections (authentication, rate limits, network connectivity, error codes, response formats, change log)
+- Extracts all REST API endpoints (both public and private)
+- Organizes endpoints by authentication requirement
 - Converts HTML to Markdown with proper formatting
 - Preserves code blocks with syntax highlighting
+- Uses shared Puppeteer and Turndown utilities
 
 ## Project Structure
 
 ```
 bitfinex/
-├── config/
-│   ├── margin_funding.json  # Configuration for margin funding endpoints
-│   ├── merchants.json       # Configuration for merchant endpoints
-│   ├── orders.json          # Configuration for order endpoints
-│   ├── positions.json       # Configuration for position endpoints
-│   ├── wallets.json         # Configuration for wallet endpoints
-│   ├── ws_private.json      # Configuration for private WebSocket API
-│   └── ws_public.json       # Configuration for public WebSocket API
 ├── src/
-│   ├── index.js             # Main REST API extraction script
-│   └── ws.js                # WebSocket API extraction script
+│   ├── extractGeneral.js     # Extracts core documentation files
+│   └── extractEndpoints.js   # Extracts individual endpoint documentation
 ├── package.json
 └── README.md
 ```
 
+## Output Structure
+
+```
+docs/bitfinex/
+├── authentication.md          # API authentication documentation
+├── rate_limits.md             # Rate limiting rules and policies
+├── network_connectivity.md    # Connection info and endpoints
+├── error_codes.md             # Error code definitions
+├── response_formats.md        # Standard response structures
+├── change_log.md              # API version history
+└── endpoints/
+    ├── public/                # Public endpoints (no authentication required)
+    │   └── get_*.md          # Public endpoint files
+    └── private/               # Private endpoints (authentication required)
+        └── post_*.md         # Private endpoint files
+```
+
 ## Dependencies
 
-- turndown: ^7.1.2 - For HTML to Markdown conversion
+- turndown: ^7.2.1 - For HTML to Markdown conversion
 - turndown-plugin-gfm: ^1.0.2 - GitHub Flavored Markdown support
-- jsdom: 26.1.0 - For HTML parsing
-- puppeteer: ^24.7.2 - For web scraping and dynamic content extraction
-- npm-run-all: ^4.1.5 - For running multiple scripts sequentially
+- puppeteer: ^24.22.0 - For web scraping and dynamic content extraction
+
+Shared utilities are imported from `venues/shared/` (puppeteer.js, turndown.js).
 
 ## Usage
 
@@ -45,54 +55,41 @@ bitfinex/
 npm install
 ```
 
-2. Run all extractors:
+2. Extract all documentation:
 
 ```bash
-npm start
+npm run extract:all
 ```
 
 3. Or run specific extractors:
 
 ```bash
-# Extract REST API endpoints
-npm run extract:wallets
-npm run extract:positions
-npm run extract:orders
-npm run extract:merchants
-npm run extract:margin
+# Extract core documentation
+npm run extract:general
 
-# Extract WebSocket API documentation
-npm run extract:ws-private
-npm run extract:ws-public
+# Extract endpoint documentation
+npm run extract:endpoints
 ```
 
-## Output Files
+## Documentation Sources
 
-The extracted markdown will be saved to the following locations:
+- **Core Documentation**: Extracted from various pages under `https://docs.bitfinex.com/docs/`
+- **Public Endpoints**: Extracted from `https://docs.bitfinex.com/docs/rest-public`
+- **Private Endpoints**: Extracted from `https://docs.bitfinex.com/docs/rest-auth`
 
-- REST API:
+All endpoint pages are under `https://docs.bitfinex.com/reference/`
 
-  - `../../docs/bitfinex/private_rest_wallets_account_api.md`
-  - `../../docs/bitfinex/private_rest_positions_api.md`
-  - `../../docs/bitfinex/private_rest_orders_api.md`
-  - `../../docs/bitfinex/private_rest_merchants_api.md`
-  - `../../docs/bitfinex/private_rest_margin_funding_api.md`
+## Endpoint Categorization
 
-- WebSocket API:
-  - `../../docs/bitfinex/private_websocket_api.md`
-  - `../../docs/bitfinex/public_websocket_api.md`
+Endpoints are automatically categorized as public or private based on:
 
-## Configuration
+1. API path analysis (presence of `/auth/` in the path)
+2. URL pattern matching (rest-public vs rest-auth)
+3. Content analysis for authentication requirements
 
-Extraction settings can be modified in the respective configuration files in the `config/` directory. Each configuration file includes:
+## Notes
 
-- `docUrl`: URL of the main documentation page
-- `output`: Path where the markdown file will be saved (relative to src/)
-- `title`: Title for the markdown document
-- `baseUrl`: Base URL for resolving relative links
-- `section`: Section name to extract from the documentation
-
-For WebSocket configurations, additional parameters include:
-
-- `urls`: Array of URLs to process for the WebSocket documentation
-- `mainDocsUrl`: URL of the main documentation page that contains links to other pages
+- Public endpoints typically use GET method and do not require authentication
+- Private endpoints typically use POST method and require API key authentication
+- All extracted documentation includes source URLs for reference
+- Core documentation files are kept under 1000 lines for optimal LLM consumption

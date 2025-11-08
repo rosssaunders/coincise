@@ -1,8 +1,0 @@
-{
-  "docUrl": "https://docs.bitfinex.com/docs/rest-auth",
-  "output": "../../../docs/bitfinex/private_rest_wallets_account_api.md",
-  "title": "Bitfinex Wallets & Account Actions",
-  "selector": "body",
-  "baseUrl": "https://docs.bitfinex.com",
-  "section": "Wallets & Account Actions"
-}
