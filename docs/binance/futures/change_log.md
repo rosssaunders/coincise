@@ -2,6 +2,86 @@
 
 ## Change Log
 
+### 2025-11-06
+
+- Effective on **2025-12-02**, USDⓈ-M Futures will migrate conditional orders to
+  the Algo Service, which will affect the following order types:
+  `STOP_MARKET`/`TAKE_PROFIT_MARKET`/`STOP`/`TAKE_PROFIT`/`TRAILING_STOP_MARKET`.
+- The new endpoints for conditional orders of REST API :
+  - `POST fapi/v1/algoOrder`: Place an algo order
+  - `DELETE /fapi/v1/algoOrder`: Cancel an algo order
+  - `DELETE fapi/v1/algoOpenOrders`: Cancel all open algo orders
+  - `GET /fapi/v1/algoOrder`: Query an algo order
+  - `GET /fapi/v1/openAlgoOrders`: Query algo open order(s)
+  - `GET /fapi/v1/allAlgoOrders`: Query algo order(s)
+
+- Websocket User Stream Update
+  - New algo order event: `ALGO_UPDATE`
+
+- Please note that after the migration:
+  - No margin check before the conditional order gets triggered.
+  - GTE_GTC orders no longer depend on open orders of the opposite side, but
+    rather on positions only.
+  - There should be no latency increase in order triggering.
+  - Modification of untriggered conditional orders is not supported.
+
+### 2025-10-21
+
+- Effective **2025-10-23**, the `priceMatch` enum values **`OPPONENT_10`** and
+  **`OPPONENT_20`** are temporarily removed from **place/amend** flows, other
+  enums are not impacted. Affected endpoints:
+
+  **USDT-M Futures (`/fapi`)**
+  - `POST /fapi/v1/order`
+  - `POST /fapi/v1/batchOrders`
+  - `PUT /fapi/v1/order`
+  - `PUT /fapi/v1/batchOrders`
+
+  **COIN-M Futures (`/dapi`)**
+  - `POST /dapi/v1/order`
+  - `POST /dapi/v1/batchOrders`
+  - `PUT /dapi/v1/order`
+  - `PUT /dapi/v1/batchOrders`
+
+  **Portfolio Margin (`/papi`)**
+  - `POST /papi/v1/um/order`
+  - `PUT /papi/v1/um/order`
+  - `POST /papi/v1/um/conditional/order`
+  - `POST /papi/v1/cm/order`
+  - `PUT /papi/v1/cm/order`
+  - `POST /papi/v1/cm/conditional/order`
+
+### 2025-10-20
+
+USDⓈ-M Futures
+
+- Effective 2025-10-23, Order expire reason field `er` will be available in
+  `ORDER_TRADE_UPDATE` stream.
+
+### 2025-10-14
+
+- Effective 2025-10-23, the error message for the code below will be updated:
+
+```json
+{
+  "code": -1008,
+  "msg": "Request throttled by system-level protection. Reduce-only/close-position orders are exempt. Please try again."
+}
+```
+
+### 2025-10-09
+
+- Futures now supports trading pair symbols in Chinese. Example from
+  `exchangeInfo`: `"symbol": "测试USDT"`.
+- When placing orders via API, if `symbol` contains Chinese characters, it
+  **must** be URL-encoded (UTF-8 percent-encoding). Example:  
+  `https://fapi.binance.com/fapi/v1/order?symbol=%E6%B5%8B%E8%AF%95USDT&side=BUY&type=TAKE_PROFIT_MARKET&timeInForce=GTE_GTC&quantity=1&stopPrice=30&timestamp=1760000007980`
+- The `symbol` field in push messages (WebSocket/User Data Stream) may also
+  contain Chinese. Ensure clients/downstream systems handle decoding and
+  rendering properly.
+- Requests with unencoded Chinese `symbol` may fail or return parameter parsing
+  errors.
+
 ### 2025-08-11
 
 - BFUSD will be migrated to Binance Earn on 2025-08-13. The following endpoints
@@ -29,6 +109,9 @@ USDⓈ-M Futures
 - REST API
   - `GET /futures/data/openInterestHist`: add response field
     `CMCCirculatingSupply`
+
+- Websocket Market Streams
+  - A single connection of maximum streams change from 200 to 1024.
 
 ### 2025-04-23
 
