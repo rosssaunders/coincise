@@ -1,48 +1,58 @@
 # Error Codes
 
-This document lists all error codes that may be returned by BingX APIs.
+## [Common Error Codes](#/en-us/spot/base-info.html#Common Error Codes)
 
-| Error Code | Description                                |
-| ---------- | ------------------------------------------ |
-| 0          | Success                                     |
-| 100001     | Signature verification failed              |
-| 100202     | Insufficient balance                       |
-| 100400     | Invalid parameter                          |
-| 100403     | Rate limit exceeded                        |
-| 100440     | Order price deviates greatly from market   |
-| 100500     | Internal server error                      |
-| 101001     | Order does not exist                       |
-| 101002     | Order has been filled                      |
-| 101003     | Order has been cancelled                   |
-| 102001     | Position does not exist                    |
-| 102002     | Insufficient position                      |
-| 103001     | Symbol does not exist                      |
-| 103002     | Symbol is not trading                      |
+#### Types:
 
-## Error Response Format
+- 4XX error codes are used to indicate wrong request content, behavior, format.
 
-```json
-{
-  "code": 100001,
-  "msg": "Signature verification failed"
-}
-```
+- 5XX error codes are used to indicate problems with the Bingx service.
 
-## Common Errors
+#### Common business error codes:
 
-### 100001 - Signature Verification Failed
+- 100001 - signature verification failed#
 
-This error occurs when the request signature is invalid. Check:
+- 100202 - Insufficient balance
 
-- API Key and Secret Key are correct
-- Timestamp is within acceptable range
-- Query string is properly formatted
-- Signature algorithm is HMAC SHA256
+- 100204 - No data
 
-### 100403 - Rate Limit Exceeded
+- 100400 - Invalid parameter
 
-You have exceeded the rate limit for this endpoint. Implement exponential backoff and retry logic.
+- 100440 - Order price deviates greatly from the market price
 
-### 100500 - Internal Server Error
+- 100500 - We had a problem with our server
 
-Server-side error. Retry the request after a brief delay.
+- 100503 - Server busy
+
+100202
+
+- Insufficient assets
+- The current system is busy, please try again later
+
+100421
+
+- The current system is busy, please try again later
+
+100400
+
+- quantity/quoteOrderQty can't both be lte 0 in limit order
+- The current system is busy, please try again later
+- The same order can only be submitted once per second.
+- invalid symbol, send symbol like BTC-USDT
+- The minimum amount per order is \*
+- miss arguments
+
+100414
+
+- The account is abnormal, please contact customer service.
+
+100413
+
+- Incorrect apiKey
+- Null apiKey
+
+#### Notes:
+
+- If it fails, there will be an error description included in the response body.
+
+- Errors may be thrown from every interface.

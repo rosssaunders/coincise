@@ -1,30 +1,31 @@
 # Rate Limits
 
-BingX API implements rate limiting across different products and endpoints.
+## [Rate limit](#/en-us/spot/base-info.html#Rate limit)
 
-## Overview
+If the request is too frequent, the system will automatically restrict the
+request and recover after 5 minutes;
 
-- Rate limits are enforced per UID (user ID) and per IP address
-- Different API groups have different rate limits
-- You can check rate limit usage via response headers:
-  - `X-RateLimit-Requests-Remain`: Remaining requests in the current window
-  - `X-RateLimit-Requests-Expire`: Window expiration time
+Based on account UID rate limit, each api has its own independent rate limit,
+which does not affect each other
 
-## Rate Limit Groups
+Users can check the current frequency limit usage and the expiration of the time
+window according to "X-RateLimit-Requests-Remain" (remaining number of frequency
+limits) and "X-RateLimit-Requests-Expire" (window expiration time) in the Http
+Header. time, and dynamically adjust your request frequency based on this value.
 
-Different endpoints belong to different rate limit groups. Each group has its own limits:
+#### REST API
 
-- **Group 1**: 10 requests per second
-- **Group 2**: 5 requests per second
-- **Group 3**: 2 requests per second
+The API requests are subject to different rate limits based on UID and IP.
+Please refer to the respective API documentation for UID rate limits. IP rate
+limits are based on the following grouping rules:
 
-## Handling Rate Limits
+- Market API Group \[1\]: The total IP rate limit for all interfaces within the
+  group is 500 requests per 10 seconds and 1000 requests per minute.
 
-When you exceed the rate limit, you will receive a 429 (Too Many Requests) response with error code 100403.
+- Account API Group \[2\]: The total IP rate limit for all interfaces within the
+  group is 2000 requests per 10 seconds, with an individual IP rate limit of 300
+  requests per 10 seconds for each interface.
 
-To avoid rate limiting:
-
-1. Implement exponential backoff
-2. Cache frequently accessed data
-3. Use WebSocket connections for real-time data
-4. Monitor rate limit headers in responses
+- Account API Group \[3\]: The total IP rate limit for all interfaces within the
+  group is 2000 requests per 10 seconds, with an individual IP rate limit of 300
+  requests per 10 seconds for each interface.
