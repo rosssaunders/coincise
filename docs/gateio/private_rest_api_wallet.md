@@ -13,6 +13,9 @@ Wallet API
 
 _Query chains supported for specified currency_
 
+API operations are not supported for tokens with low liquidity or extremely low
+value. Please use the Web or App interface to query and process.
+
 ### Parameters
 
 **Source:**
@@ -35,7 +38,8 @@ _Query chains supported for specified currency_
     "contract_address": "",
     "is_disabled": 0,
     "is_deposit_disabled": 0,
-    "is_withdraw_disabled": 0
+    "is_withdraw_disabled": 0,
+    "is_tag": 0
   }
 ]
 ```
@@ -66,6 +70,7 @@ Status Code **200**
 | » is_deposit_disabled  | integer(int32) | Is deposit disabled. 0 means not disabled                                                       |
 | » is_withdraw_disabled | integer(int32) | Is withdrawal disabled. 0 means not disabled                                                    |
 | » decimal              | string         | Withdrawal precision                                                                            |
+| » is_tag               | integer        | Whether to Include Tag                                                                          |
 
 This operation does not require authentication
 
@@ -103,9 +108,11 @@ _Generate currency deposit address_
       "address": "LPXtk1kWHioP62SzfqwKbYE3Z7Wt2ujYEc",
       "payment_id": "",
       "payment_name": "",
-      "obtain_failed": 0
+      "obtain_failed": 0,
+      "min_confirms": 1
     }
-  ]
+  ],
+  "min_deposit_amount": "0.000006"
 }
 ```
 
@@ -129,6 +136,7 @@ Status Code **200**
 | ------------------------ | ------- | --------------------------------------------------------------------------------------- |
 | » currency               | string  | Currency detail                                                                         |
 | » address                | string  | Deposit address                                                                         |
+| » min_deposit_amount     | string  | Minimum Deposit Amount                                                                  |
 | » multichain_addresses   | array   | none                                                                                    |
 | »» MultiChainAddressItem | object  | none                                                                                    |
 | »»» chain                | string  | Name of the chain                                                                       |
@@ -136,6 +144,7 @@ Status Code **200**
 | »»» payment_id           | string  | Notes that some currencies required(e.g., Tag, Memo) when depositing                    |
 | »»» payment_name         | string  | Note type, `Tag` or `Memo`                                                              |
 | »»» obtain_failed        | integer | The obtain failed status- 0: address successfully obtained- 1: failed to obtain address |
+| »»» min_confirms         | integer | Minimum Confirmation Count                                                              |
 
 WARNING
 
@@ -233,27 +242,27 @@ Status Code **200**
 | » fee               | string | Fee                                                                                                      |
 | » currency          | string | Currency name                                                                                            |
 | » address           | string | Withdrawal address                                                                                       |
+| » type              | string | Business Type                                                                                            |
 | » fail_reason       | string | Reason for withdrawal failure. Has a value when status = CANCEL, empty for all other statuses            |
 | » timestamp2        | string | Withdrawal final time, i.e.: withdrawal cancellation time or withdrawal success time                     |
 
 When status = CANCEL, corresponds to cancellation time  
 When status = DONE and block_number > 0, it is the withdrawal success time | | »
 memo | string | Additional remarks with regards to the withdrawal | | » status |
-string | Transaction status
+string | Transaction Status
 
-\- DONE: Completed (block_number > 0 is considered to be truly completed)  
-\- CANCEL: Canceled  
-\- REQUEST: Requesting  
-\- MANUAL: Pending manual review  
-\- BCODE: Recharge code operation  
-\- EXTPEND: Sent awaiting confirmation  
-\- FAIL: Failure on the chain awaiting confirmation  
-\- INVALID: Invalid order  
-\- VERIFY: Verifying  
-\- PROCES: Processing  
-\- PEND: Processing  
-\- DMOVE: pending manual review  
-\- REVIEW: Under review | | » chain | string | Name of the chain used in
+\- BCODE: Deposit Code Operation  
+\- CANCEL: Cancelled  
+\- CANCELPEND: Withdrawal Cancellation Pending  
+\- DONE: Completed (Only considered truly on-chain when block_number > 0)  
+\- EXTPEND: Sent and Waiting for Confirmation  
+\- FAIL: On-Chain Failure Pending Confirmation  
+\- FVERIFY: Facial Verification in Progress  
+\- LOCKED: Wallet-Side Order Locked  
+\- MANUAL: Pending Manual Review  
+\- REJECT: Rejected  
+\- REQUEST: Request in Progress  
+\- REVIEW: Under Review | | » chain | string | Name of the chain used in
 withdrawals |
 
 WARNING
@@ -295,7 +304,6 @@ Record query time range cannot exceed 30 days
   {
     "id": "210496",
     "timestamp": "1542000000",
-    "withdraw_order_id": "order_123456",
     "currency": "USDT",
     "address": "1HkxtBAMrA3tP5ENnYY2CZortjZvFDH5Cs",
     "txid": "128988928203223323290",
@@ -323,27 +331,26 @@ Record query time range cannot exceed 30 days
 
 Status Code **200**
 
-| Name                | Type   | Description                                                                                              |
-| ------------------- | ------ | -------------------------------------------------------------------------------------------------------- |
-| » id                | string | Record ID                                                                                                |
-| » txid              | string | Hash record of the withdrawal                                                                            |
-| » withdraw_order_id | string | Client order id, up to 32 length and can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.) |
-| » timestamp         | string | Operation time                                                                                           |
-| » amount            | string | Token amount                                                                                             |
-| » currency          | string | Currency name                                                                                            |
-| » address           | string | Withdrawal address. Required for withdrawals                                                             |
-| » memo              | string | Additional remarks with regards to the withdrawal                                                        |
-| » status            | string | Trading Status                                                                                           |
+| Name        | Type   | Description                                       |
+| ----------- | ------ | ------------------------------------------------- |
+| » id        | string | Record ID                                         |
+| » txid      | string | Hash record of the withdrawal                     |
+| » timestamp | string | Operation time                                    |
+| » amount    | string | Token amount                                      |
+| » currency  | string | Currency name                                     |
+| » address   | string | Withdrawal address. Required for withdrawals      |
+| » memo      | string | Additional remarks with regards to the withdrawal |
+| » status    | string | Transaction Status                                |
 
-\- REVIEW: Recharge review (compliance review)  
+\- BLOCKED: Deposit Blocked  
+\- DEP_CREDITED: Deposit Credited, Withdrawal Pending Unlock  
+\- DONE: Funds Credited to Spot Account  
+\- INVALID: Invalid Transaction  
+\- MANUAL: Manual Review Required  
 \- PEND: Processing  
-\- DONE: Waiting for funds to be unlocked  
-\- INVALID: Invalid data  
-\- TRACK: Track the number of confirmations, waiting to add funds to the user
-(spot)  
-\- BLOCKED: Rejected Recharge  
-\- DEP_CREDITED: Recharge to account, withdrawal is not unlocked | | » chain |
-string | Name of the chain used in withdrawals |
+\- REVIEW: Under Compliance Review  
+\- TRACK: Tracking Block Confirmations, Pending Spot Account Credit | | » chain
+| string | Name of the chain used in withdrawals |
 
 WARNING
 
@@ -761,6 +768,9 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Query withdrawal status_
 
+API operations are not supported for tokens with low liquidity or extremely low
+value. Please use the Web or App interface to query and process.
+
 ### Parameters
 
 **Source:**
@@ -1132,50 +1142,49 @@ _Query sub-account perpetual futures account balance information_
 
 Status Code **200**
 
-| Name                                                                           | Type    | Description                                                                                                                                                                                     |
-| ------------------------------------------------------------------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| » uid                                                                          | string  | User ID                                                                                                                                                                                         |
-| » available                                                                    | object  | Futures account balances                                                                                                                                                                        |
-| »» **additionalProperties**                                                    | object  | none                                                                                                                                                                                            |
-| »»» total                                                                      | string  | total is the balance after the user's accumulated deposit, withdraw, profit and loss (including realized profit and loss, fund, fee and referral rebate), excluding unrealized profit and loss. |
+| Name                                                                           | Type    | Description                                                                                                                                                                                                                                                                                                                                            |
+| ------------------------------------------------------------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| » uid                                                                          | string  | User ID                                                                                                                                                                                                                                                                                                                                                |
+| » available                                                                    | object  | Futures account balances                                                                                                                                                                                                                                                                                                                               |
+| »» **additionalProperties**                                                    | object  | none                                                                                                                                                                                                                                                                                                                                                   |
+| »»» total                                                                      | string  | total is the balance after the user's accumulated deposit, withdraw, profit and loss (including realized profit and loss, fund, fee and referral rebate), excluding unrealized profit and loss.                                                                                                                                                        |
 | total = SUM(history_dnw, history_pnl, history_fee, history_refr, history_fund) |
-| »»» unrealised_pnl                                                             | string  | Unrealized PNL                                                                                                                                                                                  |
-| »»» position_margin                                                            | string  | Position margin                                                                                                                                                                                 |
-| »»» order_margin                                                               | string  | Order margin of unfinished orders                                                                                                                                                               |
-| »»» available                                                                  | string  | Available balance for transferring or trading (including bonus. Bonus cannot be withdrawn, so transfer amount needs to deduct bonus)                                                            |
-| »»» point                                                                      | string  | Point card amount                                                                                                                                                                               |
-| »»» currency                                                                   | string  | Settlement currency                                                                                                                                                                             |
-| »»» in_dual_mode                                                               | boolean | Whether dual mode is enabled                                                                                                                                                                    |
-| »»» position_mode                                                              | string  | 持仓模式，single-单向持仓，dual-双向持仓，split-分仓(in_dual_mode失效了)                                                                                                                        |
-| »»» enable_credit                                                              | boolean | Whether portfolio margin account mode is enabled                                                                                                                                                |
-| »»» position_initial_margin                                                    | string  | Initial margin occupied by positions, applicable to unified account mode                                                                                                                        |
-| »»» maintenance_margin                                                         | string  | Maintenance margin occupied by positions, applicable to new classic account margin mode and unified account mode                                                                                |
-| »»» bonus                                                                      | string  | Bonus                                                                                                                                                                                           |
-| »»» enable_evolved_classic                                                     | boolean | Classic account margin mode, true-new mode, false-old mode                                                                                                                                      |
-| »»» cross_order_margin                                                         | string  | Cross margin order margin, applicable to new classic account margin mode                                                                                                                        |
-| »»» cross_initial_margin                                                       | string  | Cross margin initial margin, applicable to new classic account margin mode                                                                                                                      |
-| »»» cross_maintenance_margin                                                   | string  | Cross margin maintenance margin, applicable to new classic account margin mode                                                                                                                  |
-| »»» cross_unrealised_pnl                                                       | string  | Cross margin unrealized P&L, applicable to new classic account margin mode                                                                                                                      |
-| »»» cross_available                                                            | string  | Cross margin available balance, applicable to new classic account margin mode                                                                                                                   |
-| »»» cross_margin_balance                                                       | string  | Cross margin balance, applicable to new classic account margin mode                                                                                                                             |
-| »»» cross_mmr                                                                  | string  | Cross margin maintenance margin rate, applicable to new classic account margin mode                                                                                                             |
-| »»» cross_imr                                                                  | string  | Cross margin initial margin rate, applicable to new classic account margin mode                                                                                                                 |
-| »»» isolated_position_margin                                                   | string  | Isolated position margin, applicable to new classic account margin mode                                                                                                                         |
-| »»» enable_new_dual_mode                                                       | boolean | Whether to open a new two-way position mode                                                                                                                                                     |
-| »»» margin_mode                                                                | integer | Margin mode, 0-classic margin mode, 1-cross-currency margin mode, 2-combined margin mode                                                                                                        |
-| »»» enable_tiered_mm                                                           | boolean | Whether to enable tiered maintenance margin calculation                                                                                                                                         |
-| »»» position_voucher_total                                                     | string  | Total Position Experience Coupon Amount in Account                                                                                                                                              |
-| »»» history                                                                    | object  | Statistical data                                                                                                                                                                                |
-| »»»» dnw                                                                       | string  | total amount of deposit and withdraw                                                                                                                                                            |
-| »»»» pnl                                                                       | string  | total amount of trading profit and loss                                                                                                                                                         |
-| »»»» fee                                                                       | string  | total amount of fee                                                                                                                                                                             |
-| »»»» refr                                                                      | string  | total amount of referrer rebates                                                                                                                                                                |
-| »»»» fund                                                                      | string  | total amount of funding costs                                                                                                                                                                   |
-| »»»» point_dnw                                                                 | string  | total amount of point deposit and withdraw                                                                                                                                                      |
-| »»»» point_fee                                                                 | string  | total amount of point fee                                                                                                                                                                       |
-| »»»» point_refr                                                                | string  | total amount of referrer rebates of point fee                                                                                                                                                   |
-| »»»» bonus_dnw                                                                 | string  | total amount of perpetual contract bonus transfer                                                                                                                                               |
-| »»»» bonus_offset                                                              | string  | total amount of perpetual contract bonus deduction                                                                                                                                              |
+| »»» unrealised_pnl                                                             | string  | Unrealized PNL                                                                                                                                                                                                                                                                                                                                         |
+| »»» position_margin                                                            | string  | Position margin                                                                                                                                                                                                                                                                                                                                        |
+| »»» order_margin                                                               | string  | Order margin of unfinished orders                                                                                                                                                                                                                                                                                                                      |
+| »»» available                                                                  | string  | Refers to the available withdrawal or trading amount in per-position, specifically the per-position available balance under the unified account that includes the credit line (which incorporates trial funds; since trial funds cannot be withdrawn, the actual withdrawal amount needs to deduct the trial fund portion when processing withdrawals) |
+| »»» point                                                                      | string  | Point card amount                                                                                                                                                                                                                                                                                                                                      |
+| »»» currency                                                                   | string  | Settlement currency                                                                                                                                                                                                                                                                                                                                    |
+| »»» in_dual_mode                                                               | boolean | Whether Hedge Mode is enabled                                                                                                                                                                                                                                                                                                                          |
+| »»» position_mode                                                              | string  | Position mode: single - one-way, dual - dual-side, split - sub-positions (in_dual_mode is deprecated)                                                                                                                                                                                                                                                  |
+| »»» enable_credit                                                              | boolean | Whether portfolio margin account mode is enabled                                                                                                                                                                                                                                                                                                       |
+| »»» position_initial_margin                                                    | string  | Initial margin occupied by positions, applicable to unified account mode                                                                                                                                                                                                                                                                               |
+| »»» maintenance_margin                                                         | string  | Maintenance margin occupied by positions, applicable to new classic account margin mode and unified account mode                                                                                                                                                                                                                                       |
+| »»» bonus                                                                      | string  | Bonus                                                                                                                                                                                                                                                                                                                                                  |
+| »»» enable_evolved_classic                                                     | boolean | Classic account margin mode, true-new mode, false-old mode                                                                                                                                                                                                                                                                                             |
+| »»» cross_order_margin                                                         | string  | Cross margin order margin, applicable to new classic account margin mode                                                                                                                                                                                                                                                                               |
+| »»» cross_initial_margin                                                       | string  | Cross margin initial margin, applicable to new classic account margin mode                                                                                                                                                                                                                                                                             |
+| »»» cross_maintenance_margin                                                   | string  | Cross margin maintenance margin, applicable to new classic account margin mode                                                                                                                                                                                                                                                                         |
+| »»» cross_unrealised_pnl                                                       | string  | Cross margin unrealized P&L, applicable to new classic account margin mode                                                                                                                                                                                                                                                                             |
+| »»» cross_available                                                            | string  | Cross margin available balance, applicable to new classic account margin mode                                                                                                                                                                                                                                                                          |
+| »»» cross_margin_balance                                                       | string  | Cross margin balance, applicable to new classic account margin mode                                                                                                                                                                                                                                                                                    |
+| »»» cross_mmr                                                                  | string  | Cross margin maintenance margin rate, applicable to new classic account margin mode                                                                                                                                                                                                                                                                    |
+| »»» cross_imr                                                                  | string  | Cross margin initial margin rate, applicable to new classic account margin mode                                                                                                                                                                                                                                                                        |
+| »»» isolated_position_margin                                                   | string  | Isolated position margin, applicable to new classic account margin mode                                                                                                                                                                                                                                                                                |
+| »»» enable_new_dual_mode                                                       | boolean | Whether to open a new two-way position mode                                                                                                                                                                                                                                                                                                            |
+| »»» margin_mode                                                                | integer | Margin mode, 0-classic margin mode, 1-cross-currency margin mode, 2-combined margin mode                                                                                                                                                                                                                                                               |
+| »»» enable_tiered_mm                                                           | boolean | Whether to enable tiered maintenance margin calculation                                                                                                                                                                                                                                                                                                |
+| »»» history                                                                    | object  | Statistical data                                                                                                                                                                                                                                                                                                                                       |
+| »»»» dnw                                                                       | string  | total amount of deposit and withdraw                                                                                                                                                                                                                                                                                                                   |
+| »»»» pnl                                                                       | string  | total amount of trading profit and loss                                                                                                                                                                                                                                                                                                                |
+| »»»» fee                                                                       | string  | total amount of fee                                                                                                                                                                                                                                                                                                                                    |
+| »»»» refr                                                                      | string  | total amount of referrer rebates                                                                                                                                                                                                                                                                                                                       |
+| »»»» fund                                                                      | string  | total amount of funding costs                                                                                                                                                                                                                                                                                                                          |
+| »»»» point_dnw                                                                 | string  | total amount of point deposit and withdraw                                                                                                                                                                                                                                                                                                             |
+| »»»» point_fee                                                                 | string  | total amount of point fee                                                                                                                                                                                                                                                                                                                              |
+| »»»» point_refr                                                                | string  | total amount of referrer rebates of point fee                                                                                                                                                                                                                                                                                                          |
+| »»»» bonus_dnw                                                                 | string  | total amount of perpetual contract bonus transfer                                                                                                                                                                                                                                                                                                      |
+| »»»» bonus_offset                                                              | string  | total amount of perpetual contract bonus deduction                                                                                                                                                                                                                                                                                                     |
 
 WARNING
 

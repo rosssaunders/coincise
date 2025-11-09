@@ -717,8 +717,9 @@ _Get sub-account mode_
 Unified account mode:
 
 - `classic`: Classic account mode
-- `multi_currency`: Multi-currency margin mode
+- `multi_currency`: Cross-currency margin mode
 - `portfolio`: Portfolio margin mode
+- `single_currency`: Single-currency margin mode
 
 > Example responses
 
@@ -757,8 +758,9 @@ Status Code **200**
 | » mode       | string         | Unified account mode:           |
 
 \- `classic`: Classic account mode  
-\- `multi_currency`: Multi-currency margin mode  
-\- `portfolio`: Portfolio margin mode |
+\- `multi_currency`: Cross-currency margin mode  
+\- `portfolio`: Portfolio margin mode  
+\- `single_currency`: Single-currency margin mode |
 
 WARNING
 

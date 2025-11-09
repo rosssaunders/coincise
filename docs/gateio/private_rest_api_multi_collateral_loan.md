@@ -374,7 +374,7 @@ _Multi-currency collateral repayment_
 | »» MultiLoanRepayItem | body | object         | false    | none                                                                          |
 | »»» currency          | body | string         | false    | Repayment currency                                                            |
 | »»» amount            | body | string         | false    | Amount                                                                        |
-| »»» repaid_all        | body | boolean        | false    | Repayment method, set to true for full repayment, false for partial repayment |
+| »»» repaid_all        | body | boolean        | true     | Repayment method, set to true for full repayment, false for partial repayment |
 
 > Example responses
 

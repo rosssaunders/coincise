@@ -1,4 +1,4 @@
-# [#](#gate-api-v4-105-4) Gate API v4.105.4
+# [#](#gate-api-v4-105-26) Gate API v4.105.26
 
 Scroll down for code samples, example requests and responses. Select a language
 for code samples from the tabs above or the mobile navigation menu.
@@ -26,23 +26,23 @@ authenticated private interfaces for implementing API-based automated trading.
 
 Available SDK:
 
-- [Python (opens new window)](https://github.com/gateio/gateapi-python)
-- [Java (opens new window)](https://github.com/gateio/gateapi-java)
-- [PHP (opens new window)](https://github.com/gateio/gateapi-php)
-- [Go (opens new window)](https://github.com/gateio/gateapi-go)
-- [C# (opens new window)](https://github.com/gateio/gateapi-csharp)
-- [NodeJS (opens new window)](https://github.com/gateio/gateapi-nodejs)
-- [Javascript (opens new window)](https://github.com/gateio/gateapi-js)
+- [Python (opens new window)](https://github.com/gate/gateapi-python)
+- [Java (opens new window)](https://github.com/gate/gateapi-java)
+- [PHP (opens new window)](https://github.com/gate/gateapi-php)
+- [Go (opens new window)](https://github.com/gate/gateapi-go)
+- [C# (opens new window)](https://github.com/gate/gateapi-csharp)
+- [NodeJS (opens new window)](https://github.com/gate/gateapi-nodejs)
+- [Javascript (opens new window)](https://github.com/gate/gateapi-js)
 
 Besides API examples, some SDK provides an additional demo application. The demo
 application is a relatively complete example demonstrating how to use the SDK.
 It can be built and run separately. Refer to corresponding repository for
 details.
 
-- [Python (opens new window)](https://github.com/gateio/gateapi-python/tree/master/example)
-- [Java (opens new window)](https://github.com/gateio/gateapi-java/tree/master/example)
-- [C# (opens new window)](https://github.com/gateio/gateapi-csharp/tree/master/example)
-- [Go (opens new window)](https://github.com/gateio/gateapi-go/tree/master/_example)
+- [Python (opens new window)](https://github.com/gate/gateapi-python/tree/master/example)
+- [Java (opens new window)](https://github.com/gate/gateapi-java/tree/master/example)
+- [C# (opens new window)](https://github.com/gate/gateapi-csharp/tree/master/example)
+- [Go (opens new window)](https://github.com/gate/gateapi-go/tree/master/_example)
 
 ## [#](#about-apiv4-key-improvement) About APIv4 key improvement
 
@@ -151,7 +151,7 @@ has been accidentally leaked, please delete the existing API and rebuild it.
 
 Gate Order matching follows Price Priority > Time priority principle.
 
-Suppose that the order book is as follows：
+Suppose that the order book is as follows:
 
 | Order | Order time | Ask/Selling price |
 | ----- | ---------- | ----------------- |
@@ -213,7 +213,7 @@ endpoint will be deprecated, and the new version of the endpoint can be found in
 the /margin/uni endpoint group. For detailed endpoint migration, please refer to
 the following table:"
 
-Margin account related endpoints：
+Margin account related endpoints:
 
 | Name                                                           | Path                         | Deprecated | New Path |
 | -------------------------------------------------------------- | ---------------------------- | ---------- | -------- |
@@ -225,7 +225,7 @@ Margin account related endpoints：
 | Get the max transferable amount for a specific margin currency | GET /margin/transferable     | No         | `-`      |
 
 The margin lending and borrowing related APIs have been migrated to the
-`/margin/uni` API group：
+`/margin/uni` API group:
 
 | Name                                                          | Old Path                                   | Deprecated | New Path                                       |
 | ------------------------------------------------------------- | ------------------------------------------ | ---------- | ---------------------------------------------- |
@@ -421,7 +421,7 @@ Earning, collateral etc |
 
 **Rate Limit**
 
-Each request to the API response header will contain the following fields:：
+Each request to the API response header will contain the following fields::
 
 - X-Gate-RateLimit-Requests-Remain - your remaining requests for current
   endpoint
@@ -626,7 +626,7 @@ The HTTP status code 2XX will be returned when all operations are successful.
 401 indicates that there is a problem with the certification. Other 4xx status
 codes indicate that the request is invalid. If it is a 5xx error, the server has
 encountered an unknown serious error when processing the request. Please give
-feedback as soon as possible。
+feedback as soon as possible.
 
 **Return Status**
 
@@ -649,12 +649,12 @@ feedback as soon as possible。
 | Type             | Description                                                                                  |
 | ---------------- | -------------------------------------------------------------------------------------------- |
 | `string`         | String type, in double quotation marks. Price and amount are also formatted in string format |
-| `integer`        | 32-bit integer，Mainly related to status codes, size, times, etc.                            |
-| `integer(int64)` | 64-bit integer，Mainly involves ID and higher precision timestamp                            |
+| `integer`        | 32-bit integer, Mainly related to status codes, size, times, etc.                            |
+| `integer(int64)` | 64-bit integer, Mainly involves ID and higher precision timestamp                            |
 | `float`          | Floating point number. Some time and stat fields use float.                                  |
-| `object`         | Object，Contains a child object{}                                                            |
-| `array`          | List，Includes multiple groups of content                                                    |
-| `boolean`        | true is true，false is false                                                                 |
+| `object`         | Object, Contains a child object{}                                                            |
+| `array`          | List, Includes multiple groups of content                                                    |
+| `boolean`        | true is true, false is false                                                                 |
 
 ## [#](#portfolio-margin-account) Portfolio Margin Account
 
@@ -833,9 +833,9 @@ New request body parameter:
 
 New response fields:
 
-| Name    | Type   | Required | Restriction | Description                 |
-| ------- | ------ | -------- | ----------- | --------------------------- |
-| stp_act | string | No       | none        | STP Strategies, including： |
+| Name    | Type   | Required | Restriction | Description                |
+| ------- | ------ | -------- | ----------- | -------------------------- |
+| stp_act | string | No       | none        | STP Strategies, including: |
 
 \- cn  
 \- co  
@@ -1755,8 +1755,7 @@ example, error handling can be written like:
 > Following examples only deal with business-related errors. Network timeout or
 > other common errors need to be handled separately:
 
-or with
-[Python SDK (opens new window)](https://github.com/gateio/gateapi-python):
+or with [Python SDK (opens new window)](https://github.com/gate/gateapi-python):
 
 ## [#](#label-list) `label` list
 
@@ -2103,7 +2102,7 @@ Suppose the key we used is `key`, while the secret is `secret`.
 	GET /api/v4/futures/orders?contract=BTC_USD&status=finished&limit=50 HTTP/1.1
 ```
 
-Signature string：
+Signature string:
 
 ```
 	GET\n
@@ -2113,7 +2112,7 @@ Signature string：
 	1541993715
 ```
 
-Explanation：
+Explanation:
 
 - `/api/v4/futures/orders`: request url
 - `contract=BTC_USD&status=finished&limit=50`: keep the query string as it is in
@@ -2133,7 +2132,7 @@ Signature generated
 	{"contract":"BTC_USD","type":"limit","size":100,"price":6800,"time_in_force":"gtc"}
 ```
 
-Signature string：
+Signature string:
 
 ```
 	POST\n
@@ -2143,7 +2142,7 @@ Signature string：
 	1541993715
 ```
 
-Explanation：
+Explanation:
 
 - request query string is empty, use plain empty string
 - use the hashed result of the json-string-formatted request body
@@ -2158,7 +2157,6 @@ Signature generated
 
   Records of transfers generated through `POST /wallet/transfers` has multiple
   methods to be retrieved based on account, including:
-
   - `GET /margin/account_book` to retrieve transferals from or to margin
     account.
   - `GET /futures/{settle}/account_book?type=dnw` to retrieve perpetual contract
@@ -2186,7 +2184,6 @@ Signature generated
   `GET /futures/{settle}/contracts` or `GET /delivery/{settle}/contracts`
 
 - Difference between sub account and main account
-
   - Sub account API Key cannot operate transferals between main and sub account,
     i.e., `POST /wallet/sub_account_transfers`
   - Sub account API Key cannot operate withdrawal, i.e., `POST /withdrawals`
@@ -2200,7 +2197,6 @@ Signature generated
 
   When submitting an issue, please include the following information to help
   identify the problem:
-
   - User ID
     - Original request URL, request parameters and request body
     - What API key was used and where was it used, TestNet or real trading(API

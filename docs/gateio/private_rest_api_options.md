@@ -338,7 +338,7 @@ _List settlement history_
 | from       | query | integer(int64) | false    | Start timestamp                                      |
 | to         | query | integer(int64) | false    | Termination Timestamp                                |
 
-#### [#](#detailed-descriptions-43) Detailed descriptions
+#### [#](#detailed-descriptions-48) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -484,7 +484,7 @@ _Query personal settlement records_
 | from       | query | integer(int64) | false    | Start timestamp                                      |
 | to         | query | integer(int64) | false    | Termination Timestamp                                |
 
-#### [#](#detailed-descriptions-44) Detailed descriptions
+#### [#](#detailed-descriptions-49) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -573,7 +573,7 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 | limit    | query | integer | false    | Number of depth levels                                                                        |
 | with_id  | query | boolean | false    | Whether to return depth update ID. This ID increments by 1 each time depth changes            |
 
-#### [#](#enumerated-values-118) Enumerated Values
+#### [#](#enumerated-values-120) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -815,7 +815,7 @@ _Options contract market candlestick chart_
 | to       | query | integer(int64) | false    | Termination Timestamp                               |
 | interval | query | string         | false    | Time interval between data points                   |
 
-#### [#](#detailed-descriptions-45) Detailed descriptions
+#### [#](#detailed-descriptions-50) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -827,7 +827,7 @@ to (the data start time of the time range actually returned by to and limit)
 Specify the end time. If not specified, it defaults to the current time, and the
 time format is a Unix timestamp
 
-#### [#](#enumerated-values-119) Enumerated Values
+#### [#](#enumerated-values-121) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -906,7 +906,7 @@ _Underlying index price candlestick chart_
 | to         | query | integer(int64) | false    | Termination Timestamp                                |
 | interval   | query | string         | false    | Time interval between data points                    |
 
-#### [#](#detailed-descriptions-46) Detailed descriptions
+#### [#](#detailed-descriptions-51) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -918,7 +918,7 @@ to (the data start time of the time range actually returned by to and limit)
 Specify the end time. If not specified, it defaults to the current time, and the
 time format is a Unix timestamp
 
-#### [#](#enumerated-values-120) Enumerated Values
+#### [#](#enumerated-values-122) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -1001,7 +1001,7 @@ _Market trade records_
 | from     | query | integer(int64) | false    | Start timestamp                                     |
 | to       | query | integer(int64) | false    | Termination Timestamp                               |
 
-#### [#](#detailed-descriptions-47) Detailed descriptions
+#### [#](#detailed-descriptions-52) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -1122,8 +1122,8 @@ Status Code **200**
 | » short_enabled                                                        | boolean        | If the account is allowed to short                                                          |
 | » mmp_enabled                                                          | boolean        | Whether to enable MMP                                                                       |
 | » liq_triggered                                                        | boolean        | Whether to trigger position liquidation                                                     |
-| » margin_mode                                                          | integer(int32) | ｜ Margin模式：                                                                             |
-| \- 0：经典SpotMargin模式 - 1：跨CurrencyMargin模式 - 2：组合Margin模式 |
+| » margin_mode                                                          | integer(int32) | ｜ Margin模式:                                                                              |
+| \- 0: 经典SpotMargin模式 - 1: 跨CurrencyMargin模式 - 2: 组合Margin模式 |
 | » unrealised_pnl                                                       | string         | Unrealized PNL                                                                              |
 | » init_margin                                                          | string         | Initial position margin                                                                     |
 | » maint_margin                                                         | string         | Position maintenance margin                                                                 |
@@ -1136,7 +1136,7 @@ Status Code **200**
 | » orders_limit                                                         | integer(int32) | Maximum number of outstanding orders                                                        |
 | » position_notional_limit                                              | integer(int64) | Notional value upper limit, including the nominal value of positions and outstanding orders |
 
-#### [#](#enumerated-values-121) Enumerated Values
+#### [#](#enumerated-values-123) Enumerated Values
 
 | Property    | Value |
 | ----------- | ----- |
@@ -1172,7 +1172,7 @@ _Query account change history_
 | to     | query | integer(int64) | false    | Termination Timestamp                               |
 | type   | query | string         | false    | Change types:                                       |
 
-#### [#](#detailed-descriptions-48) Detailed descriptions
+#### [#](#detailed-descriptions-53) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -1192,7 +1192,7 @@ time format is a Unix timestamp
 - refr: Referrer rebate
 - set: Settlement P&L
 
-#### [#](#enumerated-values-122) Enumerated Values
+#### [#](#enumerated-values-124) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -1505,7 +1505,7 @@ Status Code **200**
 of close order. See `order.text` field for specific values | | » settle_size |
 string | Settlement size |
 
-#### [#](#enumerated-values-123) Enumerated Values
+#### [#](#enumerated-values-125) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |
@@ -1558,7 +1558,7 @@ _Create an options order_
 | » tif         | body | string         | false    | Time in force strategy. Market orders currently only support IOC mode                                        |
 | » text        | body | string         | false    | User defined information. If not empty, must follow the rules below:                                         |
 
-#### [#](#detailed-descriptions-49) Detailed descriptions
+#### [#](#detailed-descriptions-54) Detailed descriptions
 
 **» tif**: Time in force strategy. Market orders currently only support IOC mode
 
@@ -1581,7 +1581,7 @@ _Create an options order_
 - liquidation: from liquidation
 - insurance: from insurance
 
-#### [#](#enumerated-values-124) Enumerated Values
+#### [#](#enumerated-values-126) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -1686,7 +1686,7 @@ how the order is created:
 | Maker fee | | » refu | integer | Referrer user ID | | » refr | string |
 Referrer rebate |
 
-#### [#](#enumerated-values-125) Enumerated Values
+#### [#](#enumerated-values-127) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -1735,7 +1735,7 @@ _List options orders_
 | from       | query | integer(int64) | false    | Start timestamp                                     |
 | to         | query | integer(int64) | false    | Termination Timestamp                               |
 
-#### [#](#detailed-descriptions-50) Detailed descriptions
+#### [#](#detailed-descriptions-55) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -1747,7 +1747,7 @@ to (the data start time of the time range actually returned by to and limit)
 Specify the end time. If not specified, it defaults to the current time, and the
 time format is a Unix timestamp
 
-#### [#](#enumerated-values-126) Enumerated Values
+#### [#](#enumerated-values-128) Enumerated Values
 
 | Parameter | Value    |
 | --------- | -------- |
@@ -1853,7 +1853,7 @@ how the order is created:
 string | Maker fee | | »» refu | integer | Referrer user ID | | »» refr | string
 | Referrer rebate |
 
-#### [#](#enumerated-values-127) Enumerated Values
+#### [#](#enumerated-values-129) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -1898,7 +1898,7 @@ _Cancel all orders with 'open' status_
 | underlying | query | string | false    | Underlying                                                   |
 | side       | query | string | false    | Specify all bids or all asks, both included if not specified |
 
-#### [#](#enumerated-values-128) Enumerated Values
+#### [#](#enumerated-values-130) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -2004,7 +2004,7 @@ how the order is created:
 string | Maker fee | | »» refu | integer | Referrer user ID | | »» refr | string
 | Referrer rebate |
 
-#### [#](#enumerated-values-129) Enumerated Values
+#### [#](#enumerated-values-131) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -2144,7 +2144,7 @@ how the order is created:
 | Maker fee | | » refu | integer | Referrer user ID | | » refr | string |
 Referrer rebate |
 
-#### [#](#enumerated-values-130) Enumerated Values
+#### [#](#enumerated-values-132) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -2284,7 +2284,7 @@ how the order is created:
 | Maker fee | | » refu | integer | Referrer user ID | | » refr | string |
 Referrer rebate |
 
-#### [#](#enumerated-values-131) Enumerated Values
+#### [#](#enumerated-values-133) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -2352,7 +2352,7 @@ function will be cancelled.
 | » contract   | body | string         | false    | Options contract name     |
 | » underlying | body | string         | false    | Underlying                |
 
-#### [#](#detailed-descriptions-51) Detailed descriptions
+#### [#](#detailed-descriptions-56) Detailed descriptions
 
 **» timeout**: Countdown time in seconds At least 5 seconds, 0 means cancel
 countdown
@@ -2418,7 +2418,7 @@ _Query personal trading records_
 | from       | query | integer(int64) | false    | Start timestamp                                      |
 | to         | query | integer(int64) | false    | Termination Timestamp                                |
 
-#### [#](#detailed-descriptions-52) Detailed descriptions
+#### [#](#detailed-descriptions-57) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -2476,7 +2476,7 @@ Status Code **200**
 | » underlying_price | string         | Underlying price (quote currency)        |
 | » role             | string         | Trade role. taker - taker, maker - maker |
 
-#### [#](#enumerated-values-132) Enumerated Values
+#### [#](#enumerated-values-134) Enumerated Values
 
 | Property | Value |
 | -------- | ----- |

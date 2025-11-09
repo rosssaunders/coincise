@@ -658,11 +658,11 @@ Status Code **200**
 | » lowest_size             | string | The latest seller's lowest price order quantity                                                                        |
 | » highest_bid             | string | Recent highest bid                                                                                                     |
 | » highest_size            | string | The latest buyer's highest price order volume                                                                          |
-| » change_utc0             | string | utc0 涨跌百分比，跌用负数标识，如 -7.45                                                                                |
-| » change_utc8             | string | utc8 涨跌百分比，跌用负数标识，如 -7.45                                                                                |
-| » change_price            | string | 24h 涨跌额，跌用负数标识，如 -7.45                                                                                     |
-| » change_utc0_price       | string | utc0 涨跌额，跌用负数标识，如 -7.45                                                                                    |
-| » change_utc8_price       | string | utc8 涨跌额，跌用负数标识，如 -7.45                                                                                    |
+| » change_utc0             | string | Percentage change at utc0. Negative values indicate a drop, e.g., -7.45%                                               |
+| » change_utc8             | string | Percentage change at utc8. Negative values indicate a drop, e.g., -7.45%                                               |
+| » change_price            | string | 24h change amount. Negative values indicate a drop, e.g., -7.45                                                        |
+| » change_utc0_price       | string | Change amount at utc0. Negative values indicate a drop, e.g., -7.45                                                    |
+| » change_utc8_price       | string | Change amount at utc8. Negative values indicate a drop, e.g., -7.45                                                    |
 
 This operation does not require authentication
 
@@ -897,7 +897,7 @@ Status Code **200**
 | » open_interest_usd | number(double) | Total open interest volume (quote currency) |
 | » top_lsr_account   | number(double) | Top trader long/short account ratio         |
 | » top_lsr_size      | number(double) | Top trader long/short position ratio        |
-| » mark_price        | number(double) | 标记Price                                   |
+| » mark_price        | number(double) | Mark price                                  |
 
 This operation does not require authentication
 
@@ -1089,9 +1089,9 @@ This operation does not require authentication
 _Query risk limit tiers_
 
 When the 'contract' parameter is not passed, the default is to query the risk
-limits for the top 100 markets.'Limit' and 'offset' correspond to pagination
+limits for the top 100 markets. 'Limit' and 'offset' correspond to pagination
 queries at the market level, not to the length of the returned array. This only
-takes effect empty.
+takes effect when the contract parameter is empty.
 
 ### Parameters
 
@@ -1281,47 +1281,46 @@ _Get futures account_
 
 Status Code **200**
 
-| Name                                                                           | Type    | Description                                                                                                                                                                                     |
-| ------------------------------------------------------------------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| » total                                                                        | string  | total is the balance after the user's accumulated deposit, withdraw, profit and loss (including realized profit and loss, fund, fee and referral rebate), excluding unrealized profit and loss. |
+| Name                                                                           | Type    | Description                                                                                                                                                                                                                                                                                                                                            |
+| ------------------------------------------------------------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| » total                                                                        | string  | total is the balance after the user's accumulated deposit, withdraw, profit and loss (including realized profit and loss, fund, fee and referral rebate), excluding unrealized profit and loss.                                                                                                                                                        |
 | total = SUM(history_dnw, history_pnl, history_fee, history_refr, history_fund) |
-| » unrealised_pnl                                                               | string  | Unrealized PNL                                                                                                                                                                                  |
-| » position_margin                                                              | string  | Position margin                                                                                                                                                                                 |
-| » order_margin                                                                 | string  | Order margin of unfinished orders                                                                                                                                                               |
-| » available                                                                    | string  | Available balance for transferring or trading (including bonus. Bonus cannot be withdrawn, so transfer amount needs to deduct bonus)                                                            |
-| » point                                                                        | string  | Point card amount                                                                                                                                                                               |
-| » currency                                                                     | string  | Settlement currency                                                                                                                                                                             |
-| » in_dual_mode                                                                 | boolean | Whether dual mode is enabled                                                                                                                                                                    |
-| » position_mode                                                                | string  | 持仓模式，single-单向持仓，dual-双向持仓，split-分仓(in_dual_mode失效了)                                                                                                                        |
-| » enable_credit                                                                | boolean | Whether portfolio margin account mode is enabled                                                                                                                                                |
-| » position_initial_margin                                                      | string  | Initial margin occupied by positions, applicable to unified account mode                                                                                                                        |
-| » maintenance_margin                                                           | string  | Maintenance margin occupied by positions, applicable to new classic account margin mode and unified account mode                                                                                |
-| » bonus                                                                        | string  | Bonus                                                                                                                                                                                           |
-| » enable_evolved_classic                                                       | boolean | Classic account margin mode, true-new mode, false-old mode                                                                                                                                      |
-| » cross_order_margin                                                           | string  | Cross margin order margin, applicable to new classic account margin mode                                                                                                                        |
-| » cross_initial_margin                                                         | string  | Cross margin initial margin, applicable to new classic account margin mode                                                                                                                      |
-| » cross_maintenance_margin                                                     | string  | Cross margin maintenance margin, applicable to new classic account margin mode                                                                                                                  |
-| » cross_unrealised_pnl                                                         | string  | Cross margin unrealized P&L, applicable to new classic account margin mode                                                                                                                      |
-| » cross_available                                                              | string  | Cross margin available balance, applicable to new classic account margin mode                                                                                                                   |
-| » cross_margin_balance                                                         | string  | Cross margin balance, applicable to new classic account margin mode                                                                                                                             |
-| » cross_mmr                                                                    | string  | Cross margin maintenance margin rate, applicable to new classic account margin mode                                                                                                             |
-| » cross_imr                                                                    | string  | Cross margin initial margin rate, applicable to new classic account margin mode                                                                                                                 |
-| » isolated_position_margin                                                     | string  | Isolated position margin, applicable to new classic account margin mode                                                                                                                         |
-| » enable_new_dual_mode                                                         | boolean | Whether to open a new two-way position mode                                                                                                                                                     |
-| » margin_mode                                                                  | integer | Margin mode, 0-classic margin mode, 1-cross-currency margin mode, 2-combined margin mode                                                                                                        |
-| » enable_tiered_mm                                                             | boolean | Whether to enable tiered maintenance margin calculation                                                                                                                                         |
-| » position_voucher_total                                                       | string  | Total Position Experience Coupon Amount in Account                                                                                                                                              |
-| » history                                                                      | object  | Statistical data                                                                                                                                                                                |
-| »» dnw                                                                         | string  | total amount of deposit and withdraw                                                                                                                                                            |
-| »» pnl                                                                         | string  | total amount of trading profit and loss                                                                                                                                                         |
-| »» fee                                                                         | string  | total amount of fee                                                                                                                                                                             |
-| »» refr                                                                        | string  | total amount of referrer rebates                                                                                                                                                                |
-| »» fund                                                                        | string  | total amount of funding costs                                                                                                                                                                   |
-| »» point_dnw                                                                   | string  | total amount of point deposit and withdraw                                                                                                                                                      |
-| »» point_fee                                                                   | string  | total amount of point fee                                                                                                                                                                       |
-| »» point_refr                                                                  | string  | total amount of referrer rebates of point fee                                                                                                                                                   |
-| »» bonus_dnw                                                                   | string  | total amount of perpetual contract bonus transfer                                                                                                                                               |
-| »» bonus_offset                                                                | string  | total amount of perpetual contract bonus deduction                                                                                                                                              |
+| » unrealised_pnl                                                               | string  | Unrealized PNL                                                                                                                                                                                                                                                                                                                                         |
+| » position_margin                                                              | string  | Position margin                                                                                                                                                                                                                                                                                                                                        |
+| » order_margin                                                                 | string  | Order margin of unfinished orders                                                                                                                                                                                                                                                                                                                      |
+| » available                                                                    | string  | Refers to the available withdrawal or trading amount in per-position, specifically the per-position available balance under the unified account that includes the credit line (which incorporates trial funds; since trial funds cannot be withdrawn, the actual withdrawal amount needs to deduct the trial fund portion when processing withdrawals) |
+| » point                                                                        | string  | Point card amount                                                                                                                                                                                                                                                                                                                                      |
+| » currency                                                                     | string  | Settlement currency                                                                                                                                                                                                                                                                                                                                    |
+| » in_dual_mode                                                                 | boolean | Whether Hedge Mode is enabled                                                                                                                                                                                                                                                                                                                          |
+| » position_mode                                                                | string  | Position mode: single - one-way, dual - dual-side, split - sub-positions (in_dual_mode is deprecated)                                                                                                                                                                                                                                                  |
+| » enable_credit                                                                | boolean | Whether portfolio margin account mode is enabled                                                                                                                                                                                                                                                                                                       |
+| » position_initial_margin                                                      | string  | Initial margin occupied by positions, applicable to unified account mode                                                                                                                                                                                                                                                                               |
+| » maintenance_margin                                                           | string  | Maintenance margin occupied by positions, applicable to new classic account margin mode and unified account mode                                                                                                                                                                                                                                       |
+| » bonus                                                                        | string  | Bonus                                                                                                                                                                                                                                                                                                                                                  |
+| » enable_evolved_classic                                                       | boolean | Classic account margin mode, true-new mode, false-old mode                                                                                                                                                                                                                                                                                             |
+| » cross_order_margin                                                           | string  | Cross margin order margin, applicable to new classic account margin mode                                                                                                                                                                                                                                                                               |
+| » cross_initial_margin                                                         | string  | Cross margin initial margin, applicable to new classic account margin mode                                                                                                                                                                                                                                                                             |
+| » cross_maintenance_margin                                                     | string  | Cross margin maintenance margin, applicable to new classic account margin mode                                                                                                                                                                                                                                                                         |
+| » cross_unrealised_pnl                                                         | string  | Cross margin unrealized P&L, applicable to new classic account margin mode                                                                                                                                                                                                                                                                             |
+| » cross_available                                                              | string  | Cross margin available balance, applicable to new classic account margin mode                                                                                                                                                                                                                                                                          |
+| » cross_margin_balance                                                         | string  | Cross margin balance, applicable to new classic account margin mode                                                                                                                                                                                                                                                                                    |
+| » cross_mmr                                                                    | string  | Cross margin maintenance margin rate, applicable to new classic account margin mode                                                                                                                                                                                                                                                                    |
+| » cross_imr                                                                    | string  | Cross margin initial margin rate, applicable to new classic account margin mode                                                                                                                                                                                                                                                                        |
+| » isolated_position_margin                                                     | string  | Isolated position margin, applicable to new classic account margin mode                                                                                                                                                                                                                                                                                |
+| » enable_new_dual_mode                                                         | boolean | Whether to open a new two-way position mode                                                                                                                                                                                                                                                                                                            |
+| » margin_mode                                                                  | integer | Margin mode, 0-classic margin mode, 1-cross-currency margin mode, 2-combined margin mode                                                                                                                                                                                                                                                               |
+| » enable_tiered_mm                                                             | boolean | Whether to enable tiered maintenance margin calculation                                                                                                                                                                                                                                                                                                |
+| » history                                                                      | object  | Statistical data                                                                                                                                                                                                                                                                                                                                       |
+| »» dnw                                                                         | string  | total amount of deposit and withdraw                                                                                                                                                                                                                                                                                                                   |
+| »» pnl                                                                         | string  | total amount of trading profit and loss                                                                                                                                                                                                                                                                                                                |
+| »» fee                                                                         | string  | total amount of fee                                                                                                                                                                                                                                                                                                                                    |
+| »» refr                                                                        | string  | total amount of referrer rebates                                                                                                                                                                                                                                                                                                                       |
+| »» fund                                                                        | string  | total amount of funding costs                                                                                                                                                                                                                                                                                                                          |
+| »» point_dnw                                                                   | string  | total amount of point deposit and withdraw                                                                                                                                                                                                                                                                                                             |
+| »» point_fee                                                                   | string  | total amount of point fee                                                                                                                                                                                                                                                                                                                              |
+| »» point_refr                                                                  | string  | total amount of referrer rebates of point fee                                                                                                                                                                                                                                                                                                          |
+| »» bonus_dnw                                                                   | string  | total amount of perpetual contract bonus transfer                                                                                                                                                                                                                                                                                                      |
+| »» bonus_offset                                                                | string  | total amount of perpetual contract bonus deduction                                                                                                                                                                                                                                                                                                     |
 
 WARNING
 
@@ -1354,7 +1353,7 @@ If the contract field is passed, only records containing this field after
 | offset   | query | integer        | false    | List offset, starting from 0                            |
 | from     | query | integer(int64) | false    | Start timestamp                                         |
 | to       | query | integer(int64) | false    | Termination Timestamp                                   |
-| type     | query | string         | false    | Changing Type:                                          |
+| type     | query | string         | false    | Change types:                                           |
 
 #### [#](#detailed-descriptions-26) Detailed descriptions
 
@@ -1368,15 +1367,16 @@ to (the data start time of the time range actually returned by to and limit)
 Specify the end time. If not specified, it defaults to the current time, and the
 time format is a Unix timestamp
 
-**type**: Changing Type:
+**type**: Change types:
 
-- dnw: Deposit & Withdraw
-- pnl: Profit & Loss by reducing position
-- fee: Trading fee
-- refr: Referrer rebate
-- fund: Funding
-- point_dnw: point_fee: POINT Trading fee
-- point_refr: POINT Referrer rebate
+- dnw: Deposit and withdrawal
+- pnl: Profit and loss from position reduction
+- fee: Trading fees
+- refr: Referrer rebates
+- fund: Funding fees
+- point_dnw: Point card deposit and withdrawal
+- point_fee: Point card trading fees
+- point_refr: Point card referrer rebates
 
 #### [#](#enumerated-values-44) Enumerated Values
 
@@ -1426,19 +1426,20 @@ Status Code **200**
 | » time    | number(double) | Change time          |
 | » change  | string         | Change amount        |
 | » balance | string         | Balance after change |
-| » type    | string         | Changing Type：      |
+| » type    | string         | Change types:        |
 
-\- dnw: Deposit & Withdraw  
-\- pnl: Profit & Loss by reducing position  
-\- fee: Trading fee  
-\- refr: Referrer rebate  
-\- fund: Funding  
-\- point_dnw: point_fee: POINT Trading fee  
-\- point_refr: POINT Referrer rebate  
-\- bonus_offset: bouns deduction | | » text | string | Comment | | » contract |
-string | Futures contract, the field is only available for data after 2023-10-30
-| | » trade_id | string | trade id | | » id | string | Account change record ID
-|
+\- dnw: Deposit and withdrawal  
+\- pnl: Profit and loss from position reduction  
+\- fee: Trading fees  
+\- refr: Referrer rebates  
+\- fund: Funding fees  
+\- point_dnw: Point card deposit and withdrawal  
+\- point_fee: Point card trading fees  
+\- point_refr: Point card referrer rebates  
+\- bonus_offset: Trial fund deduction | | » text | string | Comment | | »
+contract | string | Futures contract, the field is only available for data after
+2023-10-30 | | » trade_id | string | trade id | | » id | string | Account change
+record ID |
 
 #### [#](#enumerated-values-45) Enumerated Values
 
@@ -1737,7 +1738,7 @@ _Update position leverage_
 | contract             | path  | string         | true     | Futures contract                                        |
 | leverage             | query | string         | true     | New position leverage                                   |
 | cross_leverage_limit | query | string         | false    | Cross margin leverage (valid only when `leverage` is 0) |
-| pid                  | query | integer(int32) | false    | 产品ID                                                  |
+| pid                  | query | integer(int32) | false    | Product ID                                              |
 
 #### [#](#enumerated-values-49) Enumerated Values
 
@@ -2090,18 +2091,18 @@ To perform this operation, you must be authenticated by API key and secret
 
 _Set position mode_
 
-The prerequisite for changing mode is that all positions have no holdings and no
-pending orders
+The prerequisite for changing mode is that there are no open positions and no
+open orders
 
 ### Parameters
 
 **Source:**
 [https://www.gate.io/docs/developers/apiv4/en/#setdualmode-parameters](https://www.gate.io/docs/developers/apiv4/en/#setdualmode-parameters)
 
-| Name      | In    | Type    | Required | Description                 |
-| --------- | ----- | ------- | -------- | --------------------------- |
-| settle    | path  | string  | true     | Settle currency             |
-| dual_mode | query | boolean | true     | Whether to enable dual mode |
+| Name      | In    | Type    | Required | Description                  |
+| --------- | ----- | ------- | -------- | ---------------------------- |
+| settle    | path  | string  | true     | Settle currency              |
+| dual_mode | query | boolean | true     | Whether to enable Hedge Mode |
 
 #### [#](#enumerated-values-53) Enumerated Values
 
@@ -2168,62 +2169,61 @@ pending orders
 
 Status Code **200**
 
-| Name                                                                           | Type    | Description                                                                                                                                                                                     |
-| ------------------------------------------------------------------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| » total                                                                        | string  | total is the balance after the user's accumulated deposit, withdraw, profit and loss (including realized profit and loss, fund, fee and referral rebate), excluding unrealized profit and loss. |
+| Name                                                                           | Type    | Description                                                                                                                                                                                                                                                                                                                                            |
+| ------------------------------------------------------------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| » total                                                                        | string  | total is the balance after the user's accumulated deposit, withdraw, profit and loss (including realized profit and loss, fund, fee and referral rebate), excluding unrealized profit and loss.                                                                                                                                                        |
 | total = SUM(history_dnw, history_pnl, history_fee, history_refr, history_fund) |
-| » unrealised_pnl                                                               | string  | Unrealized PNL                                                                                                                                                                                  |
-| » position_margin                                                              | string  | Position margin                                                                                                                                                                                 |
-| » order_margin                                                                 | string  | Order margin of unfinished orders                                                                                                                                                               |
-| » available                                                                    | string  | Available balance for transferring or trading (including bonus. Bonus cannot be withdrawn, so transfer amount needs to deduct bonus)                                                            |
-| » point                                                                        | string  | Point card amount                                                                                                                                                                               |
-| » currency                                                                     | string  | Settlement currency                                                                                                                                                                             |
-| » in_dual_mode                                                                 | boolean | Whether dual mode is enabled                                                                                                                                                                    |
-| » position_mode                                                                | string  | 持仓模式，single-单向持仓，dual-双向持仓，split-分仓(in_dual_mode失效了)                                                                                                                        |
-| » enable_credit                                                                | boolean | Whether portfolio margin account mode is enabled                                                                                                                                                |
-| » position_initial_margin                                                      | string  | Initial margin occupied by positions, applicable to unified account mode                                                                                                                        |
-| » maintenance_margin                                                           | string  | Maintenance margin occupied by positions, applicable to new classic account margin mode and unified account mode                                                                                |
-| » bonus                                                                        | string  | Bonus                                                                                                                                                                                           |
-| » enable_evolved_classic                                                       | boolean | Classic account margin mode, true-new mode, false-old mode                                                                                                                                      |
-| » cross_order_margin                                                           | string  | Cross margin order margin, applicable to new classic account margin mode                                                                                                                        |
-| » cross_initial_margin                                                         | string  | Cross margin initial margin, applicable to new classic account margin mode                                                                                                                      |
-| » cross_maintenance_margin                                                     | string  | Cross margin maintenance margin, applicable to new classic account margin mode                                                                                                                  |
-| » cross_unrealised_pnl                                                         | string  | Cross margin unrealized P&L, applicable to new classic account margin mode                                                                                                                      |
-| » cross_available                                                              | string  | Cross margin available balance, applicable to new classic account margin mode                                                                                                                   |
-| » cross_margin_balance                                                         | string  | Cross margin balance, applicable to new classic account margin mode                                                                                                                             |
-| » cross_mmr                                                                    | string  | Cross margin maintenance margin rate, applicable to new classic account margin mode                                                                                                             |
-| » cross_imr                                                                    | string  | Cross margin initial margin rate, applicable to new classic account margin mode                                                                                                                 |
-| » isolated_position_margin                                                     | string  | Isolated position margin, applicable to new classic account margin mode                                                                                                                         |
-| » enable_new_dual_mode                                                         | boolean | Whether to open a new two-way position mode                                                                                                                                                     |
-| » margin_mode                                                                  | integer | Margin mode, 0-classic margin mode, 1-cross-currency margin mode, 2-combined margin mode                                                                                                        |
-| » enable_tiered_mm                                                             | boolean | Whether to enable tiered maintenance margin calculation                                                                                                                                         |
-| » position_voucher_total                                                       | string  | Total Position Experience Coupon Amount in Account                                                                                                                                              |
-| » history                                                                      | object  | Statistical data                                                                                                                                                                                |
-| »» dnw                                                                         | string  | total amount of deposit and withdraw                                                                                                                                                            |
-| »» pnl                                                                         | string  | total amount of trading profit and loss                                                                                                                                                         |
-| »» fee                                                                         | string  | total amount of fee                                                                                                                                                                             |
-| »» refr                                                                        | string  | total amount of referrer rebates                                                                                                                                                                |
-| »» fund                                                                        | string  | total amount of funding costs                                                                                                                                                                   |
-| »» point_dnw                                                                   | string  | total amount of point deposit and withdraw                                                                                                                                                      |
-| »» point_fee                                                                   | string  | total amount of point fee                                                                                                                                                                       |
-| »» point_refr                                                                  | string  | total amount of referrer rebates of point fee                                                                                                                                                   |
-| »» bonus_dnw                                                                   | string  | total amount of perpetual contract bonus transfer                                                                                                                                               |
-| »» bonus_offset                                                                | string  | total amount of perpetual contract bonus deduction                                                                                                                                              |
+| » unrealised_pnl                                                               | string  | Unrealized PNL                                                                                                                                                                                                                                                                                                                                         |
+| » position_margin                                                              | string  | Position margin                                                                                                                                                                                                                                                                                                                                        |
+| » order_margin                                                                 | string  | Order margin of unfinished orders                                                                                                                                                                                                                                                                                                                      |
+| » available                                                                    | string  | Refers to the available withdrawal or trading amount in per-position, specifically the per-position available balance under the unified account that includes the credit line (which incorporates trial funds; since trial funds cannot be withdrawn, the actual withdrawal amount needs to deduct the trial fund portion when processing withdrawals) |
+| » point                                                                        | string  | Point card amount                                                                                                                                                                                                                                                                                                                                      |
+| » currency                                                                     | string  | Settlement currency                                                                                                                                                                                                                                                                                                                                    |
+| » in_dual_mode                                                                 | boolean | Whether Hedge Mode is enabled                                                                                                                                                                                                                                                                                                                          |
+| » position_mode                                                                | string  | Position mode: single - one-way, dual - dual-side, split - sub-positions (in_dual_mode is deprecated)                                                                                                                                                                                                                                                  |
+| » enable_credit                                                                | boolean | Whether portfolio margin account mode is enabled                                                                                                                                                                                                                                                                                                       |
+| » position_initial_margin                                                      | string  | Initial margin occupied by positions, applicable to unified account mode                                                                                                                                                                                                                                                                               |
+| » maintenance_margin                                                           | string  | Maintenance margin occupied by positions, applicable to new classic account margin mode and unified account mode                                                                                                                                                                                                                                       |
+| » bonus                                                                        | string  | Bonus                                                                                                                                                                                                                                                                                                                                                  |
+| » enable_evolved_classic                                                       | boolean | Classic account margin mode, true-new mode, false-old mode                                                                                                                                                                                                                                                                                             |
+| » cross_order_margin                                                           | string  | Cross margin order margin, applicable to new classic account margin mode                                                                                                                                                                                                                                                                               |
+| » cross_initial_margin                                                         | string  | Cross margin initial margin, applicable to new classic account margin mode                                                                                                                                                                                                                                                                             |
+| » cross_maintenance_margin                                                     | string  | Cross margin maintenance margin, applicable to new classic account margin mode                                                                                                                                                                                                                                                                         |
+| » cross_unrealised_pnl                                                         | string  | Cross margin unrealized P&L, applicable to new classic account margin mode                                                                                                                                                                                                                                                                             |
+| » cross_available                                                              | string  | Cross margin available balance, applicable to new classic account margin mode                                                                                                                                                                                                                                                                          |
+| » cross_margin_balance                                                         | string  | Cross margin balance, applicable to new classic account margin mode                                                                                                                                                                                                                                                                                    |
+| » cross_mmr                                                                    | string  | Cross margin maintenance margin rate, applicable to new classic account margin mode                                                                                                                                                                                                                                                                    |
+| » cross_imr                                                                    | string  | Cross margin initial margin rate, applicable to new classic account margin mode                                                                                                                                                                                                                                                                        |
+| » isolated_position_margin                                                     | string  | Isolated position margin, applicable to new classic account margin mode                                                                                                                                                                                                                                                                                |
+| » enable_new_dual_mode                                                         | boolean | Whether to open a new two-way position mode                                                                                                                                                                                                                                                                                                            |
+| » margin_mode                                                                  | integer | Margin mode, 0-classic margin mode, 1-cross-currency margin mode, 2-combined margin mode                                                                                                                                                                                                                                                               |
+| » enable_tiered_mm                                                             | boolean | Whether to enable tiered maintenance margin calculation                                                                                                                                                                                                                                                                                                |
+| » history                                                                      | object  | Statistical data                                                                                                                                                                                                                                                                                                                                       |
+| »» dnw                                                                         | string  | total amount of deposit and withdraw                                                                                                                                                                                                                                                                                                                   |
+| »» pnl                                                                         | string  | total amount of trading profit and loss                                                                                                                                                                                                                                                                                                                |
+| »» fee                                                                         | string  | total amount of fee                                                                                                                                                                                                                                                                                                                                    |
+| »» refr                                                                        | string  | total amount of referrer rebates                                                                                                                                                                                                                                                                                                                       |
+| »» fund                                                                        | string  | total amount of funding costs                                                                                                                                                                                                                                                                                                                          |
+| »» point_dnw                                                                   | string  | total amount of point deposit and withdraw                                                                                                                                                                                                                                                                                                             |
+| »» point_fee                                                                   | string  | total amount of point fee                                                                                                                                                                                                                                                                                                                              |
+| »» point_refr                                                                  | string  | total amount of referrer rebates of point fee                                                                                                                                                                                                                                                                                                          |
+| »» bonus_dnw                                                                   | string  | total amount of perpetual contract bonus transfer                                                                                                                                                                                                                                                                                                      |
+| »» bonus_offset                                                                | string  | total amount of perpetual contract bonus deduction                                                                                                                                                                                                                                                                                                     |
 
 WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#get-position-information-in-dual-mode) Get position information in dual mode
+## [#](#get-position-information-in-hedge-mode) Get position information in Hedge Mode
 
 **Source:**
-[https://www.gate.io/docs/developers/apiv4/en/#get-position-information-in-dual-mode](https://www.gate.io/docs/developers/apiv4/en/#get-position-information-in-dual-mode)
+[https://www.gate.io/docs/developers/apiv4/en/#get-position-information-in-hedge-mode](https://www.gate.io/docs/developers/apiv4/en/#get-position-information-in-hedge-mode)
 
 > Code samples
 
 `GET /futures/{settle}/dual_comp/positions/{contract}`
 
-_Get position information in dual mode_
+_Get position information in Hedge Mode_
 
 ### Parameters
 
@@ -2300,16 +2300,16 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#update-position-margin-in-dual-mode) Update position margin in dual mode
+## [#](#update-position-margin-in-hedge-mode) Update position margin in Hedge Mode
 
 **Source:**
-[https://www.gate.io/docs/developers/apiv4/en/#update-position-margin-in-dual-mode](https://www.gate.io/docs/developers/apiv4/en/#update-position-margin-in-dual-mode)
+[https://www.gate.io/docs/developers/apiv4/en/#update-position-margin-in-hedge-mode](https://www.gate.io/docs/developers/apiv4/en/#update-position-margin-in-hedge-mode)
 
 > Code samples
 
 `POST /futures/{settle}/dual_comp/positions/{contract}/margin`
 
-_Update position margin in dual mode_
+_Update position margin in Hedge Mode_
 
 ### Parameters
 
@@ -2388,16 +2388,16 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#update-position-leverage-in-dual-mode) Update position leverage in dual mode
+## [#](#update-position-leverage-in-hedge-mode) Update position leverage in Hedge Mode
 
 **Source:**
-[https://www.gate.io/docs/developers/apiv4/en/#update-position-leverage-in-dual-mode](https://www.gate.io/docs/developers/apiv4/en/#update-position-leverage-in-dual-mode)
+[https://www.gate.io/docs/developers/apiv4/en/#update-position-leverage-in-hedge-mode](https://www.gate.io/docs/developers/apiv4/en/#update-position-leverage-in-hedge-mode)
 
 > Code samples
 
 `POST /futures/{settle}/dual_comp/positions/{contract}/leverage`
 
-_Update position leverage in dual mode_
+_Update position leverage in Hedge Mode_
 
 ### Parameters
 
@@ -2476,16 +2476,16 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#update-position-risk-limit-in-dual-mode) Update position risk limit in dual mode
+## [#](#update-position-risk-limit-in-hedge-mode) Update position risk limit in Hedge Mode
 
 **Source:**
-[https://www.gate.io/docs/developers/apiv4/en/#update-position-risk-limit-in-dual-mode](https://www.gate.io/docs/developers/apiv4/en/#update-position-risk-limit-in-dual-mode)
+[https://www.gate.io/docs/developers/apiv4/en/#update-position-risk-limit-in-hedge-mode](https://www.gate.io/docs/developers/apiv4/en/#update-position-risk-limit-in-hedge-mode)
 
 > Code samples
 
 `POST /futures/{settle}/dual_comp/positions/{contract}/risk_limit`
 
-_Update position risk limit in dual mode_
+_Update position risk limit in Hedge Mode_
 
 ### Parameters
 
@@ -2614,25 +2614,23 @@ _Place futures order_
 **Source:**
 [https://www.gate.io/docs/developers/apiv4/en/#createfuturesorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#createfuturesorder-parameters)
 
-| Name           | In     | Type                                | Required | Description                                                                                                                                       |
-| -------------- | ------ | ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| x-gate-exptime | header | string                              | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected  |
-| body           | body   | [FuturesOrder](#schemafuturesorder) | true     | none                                                                                                                                              |
-| » contract     | body   | string                              | true     | Futures contract                                                                                                                                  |
-| » size         | body   | integer(int64)                      | true     | Required. Trading quantity. Positive for buy, negative for sell. Set to 0 for close position orders.                                              |
-| » iceberg      | body   | integer(int64)                      | false    | Display size for iceberg orders. 0 for non-iceberg orders. Note that hidden portions are charged taker fees.                                      |
-| » price        | body   | string                              | false    | Order price. Price of 0 with `tif` set to `ioc` represents a market order.                                                                        |
-| » close        | body   | boolean                             | false    | Set as `true` to close the position, with `size` set to 0                                                                                         |
-| » reduce_only  | body   | boolean                             | false    | Set as `true` to be reduce-only order                                                                                                             |
-| » tif          | body   | string                              | false    | Time in force                                                                                                                                     |
-| » text         | body   | string                              | false    | Custom order information. If not empty, must follow the rules below:                                                                              |
-| » auto_size    | body   | string                              | false    | Set side to close dual-mode position. `close_long` closes the long side; while `close_short` the short one. Note `size` also needs to be set to 0 |
-| » stp_act      | body   | string                              | false    | Self-Trading Prevention Action. Users can use this field to set self-trade prevention strategies                                                  |
-
-|» limit_vip|body|integer(int64)|false|限价委托成交的对手单User
-VIP 等级，当前下单仅会跟小于等于对手单User
-VIP 等级的单成交，仅支持传递11~16，默认是0| |»
-pid|body|integer(int64)|false|仓位ID| |settle|path|string|true|Settle currency|
+| Name           | In     | Type                                | Required | Description                                                                                                                                                                                         |
+| -------------- | ------ | ----------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| x-gate-exptime | header | string                              | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected                                                    |
+| body           | body   | [FuturesOrder](#schemafuturesorder) | true     | none                                                                                                                                                                                                |
+| » contract     | body   | string                              | true     | Futures contract                                                                                                                                                                                    |
+| » size         | body   | integer(int64)                      | true     | Required. Trading quantity. Positive for buy, negative for sell. Set to 0 for close position orders.                                                                                                |
+| » iceberg      | body   | integer(int64)                      | false    | Display size for iceberg orders. 0 for non-iceberg orders. Note that hidden portions are charged taker fees.                                                                                        |
+| » price        | body   | string                              | false    | Order price. Price of 0 with `tif` set to `ioc` represents a market order.                                                                                                                          |
+| » close        | body   | boolean                             | false    | Set as `true` to close the position, with `size` set to 0                                                                                                                                           |
+| » reduce_only  | body   | boolean                             | false    | Set as `true` to be reduce-only order                                                                                                                                                               |
+| » tif          | body   | string                              | false    | Time in force                                                                                                                                                                                       |
+| » text         | body   | string                              | false    | Custom order information. If not empty, must follow the rules below:                                                                                                                                |
+| » auto_size    | body   | string                              | false    | Set side to close dual-mode position. `close_long` closes the long side; while `close_short` the short one. Note `size` also needs to be set to 0                                                   |
+| » stp_act      | body   | string                              | false    | Self-Trading Prevention Action. Users can use this field to set self-trade prevention strategies                                                                                                    |
+| » limit_vip    | body   | integer(int64)                      | false    | Counterparty user's VIP level for limit order fills. Current order will only match with orders whose VIP level is less than or equal to the specified level. Only 11~16 are supported; default is 0 |
+| » pid          | body   | integer(int64)                      | false    | Position ID                                                                                                                                                                                         |
+| settle         | path   | string                              | true     | Settle currency                                                                                                                                                                                     |
 
 #### [#](#detailed-descriptions-27) Detailed descriptions
 
@@ -2771,14 +2769,23 @@ _Query futures order list_
 **Source:**
 [https://www.gate.io/docs/developers/apiv4/en/#listfuturesorders-parameters](https://www.gate.io/docs/developers/apiv4/en/#listfuturesorders-parameters)
 
-| Name     | In    | Type    | Required | Description                                                                                    |
-| -------- | ----- | ------- | -------- | ---------------------------------------------------------------------------------------------- |
-| contract | query | string  | false    | Futures contract, return related data only if specified                                        |
-| status   | query | string  | true     | Query order list based on status                                                               |
-| limit    | query | integer | false    | Maximum number of records returned in a single list                                            |
-| offset   | query | integer | false    | List offset, starting from 0                                                                   |
-| last_id  | query | string  | false    | Specify the currency name to query in batches, and support up to 100 pass parameters at a time |
-| settle   | path  | string  | true     | Settle currency                                                                                |
+| Name     | In    | Type    | Required | Description                                                                                |
+| -------- | ----- | ------- | -------- | ------------------------------------------------------------------------------------------ |
+| contract | query | string  | false    | Futures contract, return related data only if specified                                    |
+| status   | query | string  | true     | Query order list based on status                                                           |
+| limit    | query | integer | false    | Maximum number of records returned in a single list                                        |
+| offset   | query | integer | false    | List offset, starting from 0                                                               |
+| last_id  | query | string  | false    | Use the ID of the last record in the previous list as the starting point for the next list |
+| settle   | path  | string  | true     | Settle currency                                                                            |
+
+#### [#](#detailed-descriptions-28) Detailed descriptions
+
+**last_id**: Use the ID of the last record in the previous list as the starting
+point for the next list
+
+Operations based on custom IDs can only be checked when orders are pending.
+After orders are completed (filled/cancelled), they can be checked within 1 hour
+after completion. After expiration, only order IDs can be used
 
 #### [#](#enumerated-values-59) Enumerated Values
 
@@ -2867,8 +2874,8 @@ Zero-fill orders cannot be retrieved 10 minutes after order cancellation
 | x-gate-exptime      | header | string  | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected         |
 | contract            | query  | string  | true     | Futures contract                                                                                                                                         |
 | side                | query  | string  | false    | Specify all buy orders or all sell orders, both are included if not specified. Set to bid to cancel all buy orders, set to ask to cancel all sell orders |
-| exclude_reduce_only | query  | boolean | false    | 是否排除仅减仓Order                                                                                                                                      |
-| text                | query  | string  | false    | 取消Order的Note信息                                                                                                                                      |
+| exclude_reduce_only | query  | boolean | false    | Whether to exclude reduce-only orders                                                                                                                    |
+| text                | query  | string  | false    | Remark for order cancellation                                                                                                                            |
 | settle              | path   | string  | true     | Settle currency                                                                                                                                          |
 
 #### [#](#enumerated-values-60) Enumerated Values
@@ -2950,7 +2957,7 @@ _Query futures order list by time range_
 | limit    | query | integer        | false    | Maximum number of records returned in a single list     |
 | offset   | query | integer        | false    | List offset, starting from 0                            |
 
-#### [#](#detailed-descriptions-28) Detailed descriptions
+#### [#](#detailed-descriptions-29) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -3271,7 +3278,7 @@ _Query single order details_
 | settle   | path | string | true     | Settle currency                                           |
 | order_id | path | string | true     | Order ID returned, or user custom ID(i.e., `text` field). |
 
-#### [#](#detailed-descriptions-29) Detailed descriptions
+#### [#](#detailed-descriptions-30) Detailed descriptions
 
 **order_id**: Order ID returned, or user custom ID(i.e., `text` field).
 Operations based on custom ID can only be checked when the order is in
@@ -3352,7 +3359,7 @@ _Cancel single order_
 | settle         | path   | string | true     | Settle currency                                                                                                                                  |
 | order_id       | path   | string | true     | Order ID returned, or user custom ID(i.e., `text` field).                                                                                        |
 
-#### [#](#detailed-descriptions-30) Detailed descriptions
+#### [#](#detailed-descriptions-31) Detailed descriptions
 
 **order_id**: Order ID returned, or user custom ID(i.e., `text` field).
 Operations based on custom ID can only be checked when the order is in
@@ -3443,11 +3450,11 @@ _Amend single order_
 | » size         | body   | integer(int64) | false    | New order size, including filled part.                                                                                                           |
 | » price        | body   | string         | false    | New order price                                                                                                                                  |
 | » amend_text   | body   | string         | false    | Custom info during order amendment                                                                                                               |
-| » text         | body   | string         | false    | 内部User可以在text修改信息。                                                                                                                     |
+| » text         | body   | string         | false    | Internal users can modify information in the text field.                                                                                         |
 | settle         | path   | string         | true     | Settle currency                                                                                                                                  |
 | order_id       | path   | string         | true     | Order ID returned, or user custom ID(i.e., `text` field).                                                                                        |
 
-#### [#](#detailed-descriptions-31) Detailed descriptions
+#### [#](#detailed-descriptions-32) Detailed descriptions
 
 **» size**: New order size, including filled part.
 
@@ -3545,7 +3552,7 @@ query data for a longer period, please use
 | offset   | query | integer        | false    | List offset, starting from 0                                                |
 | last_id  | query | string         | false    | Specify the starting point for this list based on a previously retrieved id |
 
-#### [#](#detailed-descriptions-32) Detailed descriptions
+#### [#](#detailed-descriptions-33) Detailed descriptions
 
 **last_id**: Specify the starting point for this list based on a previously
 retrieved id
@@ -3667,7 +3674,7 @@ _Query personal trading records by time range_
 | offset   | query | integer        | false    | List offset, starting from 0                            |
 | role     | query | string         | false    | Query role, maker or taker                              |
 
-#### [#](#detailed-descriptions-33) Detailed descriptions
+#### [#](#detailed-descriptions-34) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -3793,7 +3800,7 @@ _Query position close history_
 | side     | query | string         | false    | Query side. long or shot                                |
 | pnl      | query | string         | false    | Query profit or loss                                    |
 
-#### [#](#detailed-descriptions-34) Detailed descriptions
+#### [#](#detailed-descriptions-35) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -3908,7 +3915,7 @@ _Query liquidation history_
 | to       | query | integer(int64) | false    | Termination Timestamp                                   |
 | at       | query | integer        | false    | Specify liquidation timestamp                           |
 
-#### [#](#detailed-descriptions-35) Detailed descriptions
+#### [#](#detailed-descriptions-36) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -4012,7 +4019,7 @@ _Query ADL auto-deleveraging order information_
 | to       | query | integer(int64) | false    | Termination Timestamp                                   |
 | at       | query | integer        | false    | Specify auto-deleveraging timestamp                     |
 
-#### [#](#detailed-descriptions-36) Detailed descriptions
+#### [#](#detailed-descriptions-37) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -4127,7 +4134,7 @@ cancellation function will be disabled.
 | » contract | body | string         | false    | Futures contract          |
 | settle     | path | string         | true     | Settle currency           |
 
-#### [#](#detailed-descriptions-37) Detailed descriptions
+#### [#](#detailed-descriptions-38) Detailed descriptions
 
 **» timeout**: Countdown time in seconds At least 5 seconds, 0 means cancel
 countdown
@@ -4666,6 +4673,171 @@ Status Code **200**
 
 This operation does not require authentication
 
+## [#](#level-based-bbo-contract-order-placement) Level-based BBO Contract Order Placement
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#level-based-bbo-contract-order-placement](https://www.gate.io/docs/developers/apiv4/en/#level-based-bbo-contract-order-placement)
+
+> Code samples
+
+`POST /futures/{settle}/bbo_orders`
+
+_Level-based BBO Contract Order Placement_
+
+Compared to the futures trading order placement interface
+(futures/{settle}/orders), it adds the `level` and `direction` parameters.
+
+> Body parameter
+
+```
+{
+  "contract": "PI_USDT",
+  "level": 8,
+  "direction": "sell",
+  "size": 1
+}
+```
+
+### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createfuturesbboorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#createfuturesbboorder-parameters)
+
+| Name           | In     | Type                                      | Required | Description                                                                                                                                                                                         |
+| -------------- | ------ | ----------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| x-gate-exptime | header | string                                    | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected                                                    |
+| body           | body   | [FuturesBBOOrder](#schemafuturesbboorder) | true     | none                                                                                                                                                                                                |
+| » contract     | body   | string                                    | true     | Futures contract                                                                                                                                                                                    |
+| » size         | body   | integer(int64)                            | true     | Required. Trading quantity. Positive for buy, negative for sell. Set to 0 for close position orders.                                                                                                |
+| » direction    | body   | string                                    | true     | Direction: 'sell' fetches the bid side, 'buy' fetches the ask side.                                                                                                                                 |
+| » iceberg      | body   | integer(int64)                            | false    | Display size for iceberg orders. 0 for non-iceberg orders. Note that hidden portions are charged taker fees.                                                                                        |
+| » level        | body   | integer(int64)                            | true     | Level: maximum 20 levels                                                                                                                                                                            |
+| » close        | body   | boolean                                   | false    | Set as `true` to close the position, with `size` set to 0                                                                                                                                           |
+| » reduce_only  | body   | boolean                                   | false    | Set as `true` to be reduce-only order                                                                                                                                                               |
+| » tif          | body   | string                                    | false    | Time in force                                                                                                                                                                                       |
+| » text         | body   | string                                    | false    | Custom order information. If not empty, must follow the rules below:                                                                                                                                |
+| » auto_size    | body   | string                                    | false    | Set side to close dual-mode position. `close_long` closes the long side; while `close_short` the short one. Note `size` also needs to be set to 0                                                   |
+| » stp_act      | body   | string                                    | false    | Self-Trading Prevention Action. Users can use this field to set self-trade prevention strategies                                                                                                    |
+| » limit_vip    | body   | integer(int64)                            | false    | Counterparty user's VIP level for limit order fills. Current order will only match with orders whose VIP level is less than or equal to the specified level. Only 11~16 are supported; default is 0 |
+| » pid          | body   | integer(int64)                            | false    | Position ID                                                                                                                                                                                         |
+| settle         | path   | string                                    | true     | Settle currency                                                                                                                                                                                     |
+
+#### [#](#detailed-descriptions-39) Detailed descriptions
+
+**» tif**: Time in force
+
+- gtc: GoodTillCancelled
+- ioc: ImmediateOrCancelled, taker only
+- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker
+  fee
+- fok: FillOrKill, fill either completely or none
+
+**» text**: Custom order information. If not empty, must follow the rules below:
+
+1.  Prefixed with `t-`
+2.  No longer than 28 bytes without `t-` prefix
+3.  Can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.)
+
+In addition to user-defined information, the following are internal reserved
+fields that identify the order source:
+
+- web: Web
+- api: API call
+- app: Mobile app
+- auto_deleveraging: Automatic deleveraging
+- liquidation: Forced liquidation of positions under the old classic mode
+- liq-xxx: a. Forced liquidation of positions under the new classic mode,
+  including isolated margin, one-way cross margin, and non-hedged positions
+  under two-way cross margin. b. Forced liquidation of isolated positions under
+  the unified account single-currency margin mode
+- hedge-liq-xxx: Forced liquidation of hedged positions under the new classic
+  mode two-way cross margin, i.e., simultaneously closing long and short
+  positions
+- pm_liquidate: Forced liquidation under unified account multi-currency margin
+  mode
+- comb_margin_liquidate: Forced liquidation under unified account portfolio
+  margin mode
+- scm_liquidate: Forced liquidation of positions under unified account
+  single-currency margin mode
+- insurance: Insurance
+
+**» stp_act**: Self-Trading Prevention Action. Users can use this field to set
+self-trade prevention strategies
+
+1.  After users join the `STP Group`, they can pass `stp_act` to limit the
+    user's self-trade prevention strategy. If `stp_act` is not passed, the
+    default is `cn` strategy.
+2.  When the user does not join the `STP group`, an error will be returned when
+    passing the `stp_act` parameter.
+3.  If the user did not use `stp_act` when placing the order, `stp_act` will
+    return '-'
+
+- cn: Cancel newest, cancel new orders and keep old ones
+- co: Cancel oldest, cancel old orders and keep new ones
+- cb: Cancel both, both old and new orders will be cancelled
+
+#### [#](#enumerated-values-81) Enumerated Values
+
+| Parameter   | Value       |
+| ----------- | ----------- |
+| » tif       | gtc         |
+| » tif       | ioc         |
+| » tif       | poc         |
+| » tif       | fok         |
+| » auto_size | close_long  |
+| » auto_size | close_short |
+| » stp_act   | co          |
+| » stp_act   | cn          |
+| » stp_act   | cb          |
+| » stp_act   | \-          |
+| settle      | btc         |
+| settle      | usdt        |
+
+> Example responses
+
+> 201 Response
+
+```
+{
+  "id": 15675394,
+  "user": 100000,
+  "contract": "BTC_USDT",
+  "create_time": 1546569968,
+  "size": 6024,
+  "iceberg": 0,
+  "left": 6024,
+  "price": "3765",
+  "fill_price": "0",
+  "mkfr": "-0.00025",
+  "tkfr": "0.00075",
+  "tif": "gtc",
+  "refu": 0,
+  "is_reduce_only": false,
+  "is_close": false,
+  "is_liq": false,
+  "text": "t-my-custom-id",
+  "status": "finished",
+  "finish_time": 1514764900,
+  "finish_as": "cancelled",
+  "stp_id": 0,
+  "stp_act": "-",
+  "amend_text": "-"
+}
+```
+
+### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#createfuturesbboorder-responses](https://www.gate.io/docs/developers/apiv4/en/#createfuturesbboorder-responses)
+
+| Status | Meaning                                                                         | Description   | Schema                              |
+| ------ | ------------------------------------------------------------------------------- | ------------- | ----------------------------------- |
+| 201    | [Created (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.2) | Order details | [FuturesOrder](#schemafuturesorder) |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
 ## [#](#create-price-triggered-order-2) Create price-triggered order
 
 **Source:**
@@ -4709,29 +4881,29 @@ _Create price-triggered order_
 | »» contract      | body | string                                                          | true     | Futures contract                                                                                                                                                                   |
 | »» size          | body | integer(int64)                                                  | false    | Represents the number of contracts that need to be closed, full closing: size=0                                                                                                    |
 | »» price         | body | string                                                          | true     | Order price. Set to 0 to use market price                                                                                                                                          |
-| »» close         | body | boolean                                                         | false    | When all positions are closed in a single position mode, it must be set to true to perform the closing operation                                                                   |
+| »» close         | body | boolean                                                         | false    | In One-way Mode, when closing all positions, this must be set to true to perform the closing operation                                                                             |
 | »» tif           | body | string                                                          | false    | Time in force strategy, default is gtc, market orders currently only support ioc mode                                                                                              |
 | »» text          | body | string                                                          | false    | The source of the order, including:                                                                                                                                                |
 | »» reduce_only   | body | boolean                                                         | false    | When set to true, perform automatic position reduction operation. Set to true to ensure that the order will not open a new position, and is only used to close or reduce positions |
-| »» auto_size     | body | string                                                          | false    | Single position mode: auto_size is not required                                                                                                                                    |
+| »» auto_size     | body | string                                                          | false    | One-way Mode: auto_size is not required                                                                                                                                            |
 | » trigger        | body | object                                                          | true     | none                                                                                                                                                                               |
 | »» strategy_type | body | integer(int32)                                                  | false    | Trigger Strategy                                                                                                                                                                   |
 | »» price_type    | body | integer(int32)                                                  | false    | Reference price type. 0 - Latest trade price, 1 - Mark price, 2 - Index price                                                                                                      |
-| »» price         | body | string                                                          | false    | Price value for price trigger, or spread value for spread trigger                                                                                                                  |
-| »» rule          | body | integer(int32)                                                  | false    | Price Condition Type                                                                                                                                                               |
+| »» price         | body | string                                                          | true     | Price value for price trigger, or spread value for spread trigger                                                                                                                  |
+| »» rule          | body | integer(int32)                                                  | true     | Price Condition Type                                                                                                                                                               |
 | »» expiration    | body | integer                                                         | false    | Maximum wait time for trigger condition (in seconds). Order will be cancelled if timeout                                                                                           |
 | » order_type     | body | string                                                          | false    | Types of take-profit and stop-loss orders, including:                                                                                                                              |
 | settle           | path | string                                                          | true     | Settle currency                                                                                                                                                                    |
 
-#### [#](#detailed-descriptions-38) Detailed descriptions
+#### [#](#detailed-descriptions-40) Detailed descriptions
 
 **»» size**: Represents the number of contracts that need to be closed, full
 closing: size=0 Partial closing: plan-close-short-position size>0 Partial
 closing: plan-close-long-position size<0
 
-**»» close**: When all positions are closed in a single position mode, it must
-be set to true to perform the closing operation When partially closed positions
-in single-store mode/double-store mode, you can not set close, or close=false
+**»» close**: In One-way Mode, when closing all positions, this must be set to
+true to perform the closing operation When partially closing positions in
+One-way Mode or Hedge Mode, you can omit close or set close=false
 
 **»» tif**: Time in force strategy, default is gtc, market orders currently only
 support ioc mode
@@ -4745,10 +4917,10 @@ support ioc mode
 - api: API call
 - app: Mobile app
 
-**»» auto_size**: Single position mode: auto_size is not required Dual position
-mode full closing (size=0): auto_size must be set, close_long for closing long
-positions, close_short for closing short positions Dual position mode partial
-closing (size≠0): auto_size is not required
+**»» auto_size**: One-way Mode: auto_size is not required Hedge Mode full
+closing (size=0): auto_size must be set, close_long for closing long positions,
+close_short for closing short positions Hedge Mode partial closing (size≠0):
+auto_size is not required
 
 **»» strategy_type**: Trigger Strategy
 
@@ -4781,7 +4953,7 @@ closing (size≠0): auto_size is not required
 The two types of order take-profit/stop-loss are read-only and cannot be passed
 in requests
 
-#### [#](#enumerated-values-81) Enumerated Values
+#### [#](#enumerated-values-82) Enumerated Values
 
 | Parameter        | Value |
 | ---------------- | ----- |
@@ -4857,7 +5029,7 @@ _Query auto order list_
 | offset   | query | integer | false    | List offset, starting from 0                            |
 | settle   | path  | string  | true     | Settle currency                                         |
 
-#### [#](#enumerated-values-82) Enumerated Values
+#### [#](#enumerated-values-83) Enumerated Values
 
 | Parameter | Value    |
 | --------- | -------- |
@@ -4932,7 +5104,7 @@ _Cancel all auto orders_
 | contract | query | string | false    | Futures contract, return related data only if specified |
 | settle   | path  | string | true     | Settle currency                                         |
 
-#### [#](#enumerated-values-83) Enumerated Values
+#### [#](#enumerated-values-84) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5005,7 +5177,7 @@ _Query single auto order details_
 | settle   | path | string | true     | Settle currency                                |
 | order_id | path | string | true     | ID returned when order is successfully created |
 
-#### [#](#enumerated-values-84) Enumerated Values
+#### [#](#enumerated-values-85) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5076,7 +5248,7 @@ _Cancel single auto order_
 | settle   | path | string | true     | Settle currency                                |
 | order_id | path | string | true     | ID returned when order is successfully created |
 
-#### [#](#enumerated-values-85) Enumerated Values
+#### [#](#enumerated-values-86) Enumerated Values
 
 | Parameter | Value |
 | --------- | ----- |
@@ -5121,6 +5293,97 @@ _Cancel single auto order_
 | Status | Meaning                                                                    | Description        | Schema                                                          |
 | ------ | -------------------------------------------------------------------------- | ------------------ | --------------------------------------------------------------- |
 | 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Auto order details | [FuturesPriceTriggeredOrder](#schemafuturespricetriggeredorder) |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
+## [#](#modify-a-single-auto-order) Modify a Single Auto Order
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#modify-a-single-auto-order](https://www.gate.io/docs/developers/apiv4/en/#modify-a-single-auto-order)
+
+> Code samples
+
+`PUT /futures/{settle}/price_orders/{order_id}`
+
+_Modify a Single Auto Order_
+
+> Body parameter
+
+```
+{
+  "contract": "BTC_USDT",
+  "size": 0,
+  "price": "0",
+  "trigger_price": "988888",
+  "price_type": 0,
+  "auto_size": "close_long"
+}
+```
+
+### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#updatepricetriggeredorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#updatepricetriggeredorder-parameters)
+
+| Name            | In   | Type                                                                        | Required | Description                                                                                                                                                                                            |
+| --------------- | ---- | --------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| body            | body | [FuturesUpdatePriceTriggeredOrder](#schemafuturesupdatepricetriggeredorder) | true     | none                                                                                                                                                                                                   |
+| » contact       | body | string                                                                      | false    | The order ID of the modified price-triggered order. This ID is returned upon successful creation of the price-triggered order. Note: This ID must be passed in both the request path and request body. |
+| » size          | body | integer(int64)                                                              | false    | Modified Contract Quantity. Full Close: 0; Partial Close: Positive/Negative values indicate direction (consistent with the creation interface logic).                                                  |
+| » price         | body | string                                                                      | false    | Represents the modified trading price. A value of 0 indicates a market order.                                                                                                                          |
+| » trigger_price | body | string                                                                      | false    | Modified Trigger Price                                                                                                                                                                                 |
+| » price_type    | body | integer(int32)                                                              | false    | Reference price type. 0 - Latest trade price, 1 - Mark price, 2 - Index price                                                                                                                          |
+| » auto_size     | body | string                                                                      | false    | 单仓模式不需设置auto_size                                                                                                                                                                              |
+| settle          | path | string                                                                      | true     | Settle currency                                                                                                                                                                                        |
+| order_id        | path | string                                                                      | true     | ID returned when order is successfully created                                                                                                                                                         |
+
+#### [#](#detailed-descriptions-41) Detailed descriptions
+
+**» auto_size**: 单仓模式不需设置auto_size
+
+#### [#](#enumerated-values-87) Enumerated Values
+
+| Parameter    | Value |
+| ------------ | ----- |
+| » price_type | 0     |
+| » price_type | 1     |
+| » price_type | 2     |
+| settle       | btc   |
+| settle       | usdt  |
+
+> Example responses
+
+> 200 Response
+
+```
+{
+  "id": 1432329
+}
+```
+
+### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#updatepricetriggeredorder-responses](https://www.gate.io/docs/developers/apiv4/en/#updatepricetriggeredorder-responses)
+
+| Status | Meaning                                                                    | Description                | Schema |
+| ------ | -------------------------------------------------------------------------- | -------------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Order created successfully | Inline |
+
+### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#updatepricetriggeredorder-responseschema](https://www.gate.io/docs/developers/apiv4/en/#updatepricetriggeredorder-responseschema)
+
+Status Code **200**
+
+_TriggerOrderResponse_
+
+| Name | Type           | Description   |
+| ---- | -------------- | ------------- |
+| » id | integer(int64) | Auto order ID |
 
 WARNING
 

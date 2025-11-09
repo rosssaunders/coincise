@@ -297,7 +297,7 @@ _Collateral loan repayment_
 | » repay_amount | body | string         | true     | Repayment amount, it is mandatory when making partial repayments                       |
 | » repaid_all   | body | boolean        | true     | Repayment method, set to `true` for full repayment, and `false` for partial repayment; |
 
-#### [#](#detailed-descriptions-55) Detailed descriptions
+#### [#](#detailed-descriptions-60) Detailed descriptions
 
 **» repaid_all**: Repayment method, set to `true` for full repayment, and
 `false` for partial repayment; When partial repayment, the repay_amount

@@ -87,7 +87,6 @@ Status Code **200**
 | » trade_disabled      | boolean | Whether currency's trading is disabled                                          |
 | » fixed_rate          | string  | Fixed fee rate. Only for fixed rate currencies, not valid for normal currencies |
 | » chain               | string  | The main chain corresponding to the coin                                        |
-| » is_private          | boolean | Is it a privacy currency?                                                       |
 | » chains              | array   | All links corresponding to coins                                                |
 | »» SpotCurrencyChain  | object  | none                                                                            |
 | »»» name              | string  | Blockchain name                                                                 |
@@ -185,7 +184,6 @@ Status Code **200**
 | » trade_disabled      | boolean | Whether currency's trading is disabled                                          |
 | » fixed_rate          | string  | Fixed fee rate. Only for fixed rate currencies, not valid for normal currencies |
 | » chain               | string  | The main chain corresponding to the coin                                        |
-| » is_private          | boolean | Is it a privacy currency?                                                       |
 | » chains              | array   | All links corresponding to coins                                                |
 | »» SpotCurrencyChain  | object  | none                                                                            |
 | »»» name              | string  | Blockchain name                                                                 |
@@ -261,7 +259,7 @@ Status Code **200**
 | »» base_name        | string  | Base currency name                                               |
 | »» quote            | string  | Quote currency                                                   |
 | »» quote_name       | string  | Quote currency name                                              |
-| »» fee              | string  | Trading fee rate                                                 |
+| »» fee              | string  | Trading fee rate(deprecated)                                     |
 | »» min_base_amount  | string  | Minimum amount of base currency to trade, `null` means no limit  |
 | »» min_quote_amount | string  | Minimum amount of quote currency to trade, `null` means no limit |
 | »» max_base_amount  | string  | Maximum amount of base currency to trade, `null` means no limit  |
@@ -364,7 +362,7 @@ _Spot currency pair_
 | » base_name        | string  | Base currency name                                               |
 | » quote            | string  | Quote currency                                                   |
 | » quote_name       | string  | Quote currency name                                              |
-| » fee              | string  | Trading fee rate                                                 |
+| » fee              | string  | Trading fee rate(deprecated)                                     |
 | » min_base_amount  | string  | Minimum amount of base currency to trade, `null` means no limit  |
 | » min_quote_amount | string  | Minimum amount of quote currency to trade, `null` means no limit |
 | » max_base_amount  | string  | Maximum amount of base currency to trade, `null` means no limit  |
@@ -602,17 +600,24 @@ is 100,000, that is, limit \* (page - 1) <= 100,000.
 **Source:**
 [https://www.gate.io/docs/developers/apiv4/en/#listtrades-parameters](https://www.gate.io/docs/developers/apiv4/en/#listtrades-parameters)
 
-| Name          | In    | Type           | Required | Description                                                                                    |
-| ------------- | ----- | -------------- | -------- | ---------------------------------------------------------------------------------------------- |
-| currency_pair | query | string         | true     | Trading pair                                                                                   |
-| limit         | query | integer(int32) | false    | Maximum number of items returned in list. Default: 100, minimum: 1, maximum: 1000              |
-| last_id       | query | string         | false    | Specify the currency name to query in batches, and support up to 100 pass parameters at a time |
-| reverse       | query | boolean        | false    | Whether to retrieve data less than `last_id`. Default returns records greater than `last_id`.  |
-| from          | query | integer(int64) | false    | Start timestamp for the query                                                                  |
-| to            | query | integer(int64) | false    | End timestamp for the query, defaults to current time if not specified                         |
-| page          | query | integer(int32) | false    | Page number                                                                                    |
+| Name          | In    | Type           | Required | Description                                                                                   |
+| ------------- | ----- | -------------- | -------- | --------------------------------------------------------------------------------------------- |
+| currency_pair | query | string         | true     | Trading pair                                                                                  |
+| limit         | query | integer(int32) | false    | Maximum number of items returned in list. Default: 100, minimum: 1, maximum: 1000             |
+| last_id       | query | string         | false    | Use the ID of the last record in the previous list as the starting point for the next list    |
+| reverse       | query | boolean        | false    | Whether to retrieve data less than `last_id`. Default returns records greater than `last_id`. |
+| from          | query | integer(int64) | false    | Start timestamp for the query                                                                 |
+| to            | query | integer(int64) | false    | End timestamp for the query, defaults to current time if not specified                        |
+| page          | query | integer(int32) | false    | Page number                                                                                   |
 
 #### [#](#detailed-descriptions-10) Detailed descriptions
+
+**last_id**: Use the ID of the last record in the previous list as the starting
+point for the next list
+
+Operations based on custom IDs can only be checked when orders are pending.
+After orders are completed (filled/cancelled), they can be checked within 1 hour
+after completion. After expiration, only order IDs can be used
 
 **reverse**: Whether to retrieve data less than `last_id`. Default returns
 records greater than `last_id`.
@@ -1281,9 +1286,9 @@ use this field to set self-trade prevetion strategies
 
 1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
 self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy。  
+strategy.  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter。  
+passing the `stp_act` parameter.  
 3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
 return '-'
 
@@ -1516,7 +1521,7 @@ return '-'
 \- poc: Not met the order poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown | | »»» fee_discount | string | Fee rate discount |
+\- unknown: Unknown |
 
 #### [#](#enumerated-values-16) Enumerated Values
 
@@ -1768,7 +1773,7 @@ string | Order completion statuses include:
 \- poc: Not met the order poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown | | » fee_discount | string | Fee rate discount |
+\- unknown: Unknown |
 
 #### [#](#enumerated-values-17) Enumerated Values
 
@@ -1897,7 +1902,6 @@ Set `stp_act` to determine the self-trade prevention strategy to use
 | » auto_borrow   | body   | boolean | false    | Used in margin or cross margin trading to allow automatic loan of insufficient amount if balance is not enough                                   |
 | » auto_repay    | body   | boolean | false    | Enable or disable automatic repayment for automatic borrow loan generated by cross margin order. Default is disabled. Note that:                 |
 | » stp_act       | body   | string  | false    | Self-Trading Prevention Action. Users can use this field to set self-trade prevention strategies                                                 |
-| » fee_discount  | body   | string  | false    | Fee rate discount                                                                                                                                |
 | » action_mode   | body   | string  | false    | Processing Mode:                                                                                                                                 |
 
 #### [#](#detailed-descriptions-13) Detailed descriptions
@@ -2183,8 +2187,7 @@ string | Order completion statuses include:
 \- poc: Not met the order poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown | | » fee_discount | string | Fee rate discount | | »
-action_mode | string | Processing Mode:  
+\- unknown: Unknown | | » action_mode | string | Processing Mode:  
 When placing an order, different fields are returned based on action_mode. This
 field is only valid during the request and is not included in the response
 result  
@@ -2434,7 +2437,7 @@ string | Order completion statuses include:
 \- poc: Not met the order poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown | | »» fee_discount | string | Fee rate discount |
+\- unknown: Unknown |
 
 #### [#](#enumerated-values-20) Enumerated Values
 
@@ -2673,8 +2676,7 @@ string | How the order was finished.
 \- filled: filled totally  
 \- cancelled: manually cancelled  
 \- ioc: time in force is `IOC`, finish immediately  
-\- stp: cancelled because self trade prevention | | »» fee_discount | string |
-Fee rate discount |
+\- stp: cancelled because self trade prevention |
 
 #### [#](#enumerated-values-21) Enumerated Values
 
@@ -2978,7 +2980,7 @@ string | Order completion statuses include:
 \- poc: Not met the order poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown | | » fee_discount | string | Fee rate discount |
+\- unknown: Unknown |
 
 #### [#](#enumerated-values-22) Enumerated Values
 
@@ -3258,7 +3260,7 @@ string | Order completion statuses include:
 \- poc: Not met the order poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown | | » fee_discount | string | Fee rate discount |
+\- unknown: Unknown |
 
 #### [#](#enumerated-values-23) Enumerated Values
 
@@ -3496,7 +3498,7 @@ string | Order completion statuses include:
 \- poc: Not met the order poc  
 \- fok: Not fully filled immediately because tif is set to fok  
 \- stp: Cancelled due to self-trade prevention  
-\- unknown: Unknown | | » fee_discount | string | Fee rate discount |
+\- unknown: Unknown |
 
 #### [#](#enumerated-values-24) Enumerated Values
 
@@ -3568,15 +3570,15 @@ is 100,0, that is, limit \* (page - 1) <= 100,0.
 **Source:**
 [https://www.gate.io/docs/developers/apiv4/en/#listmytrades-parameters](https://www.gate.io/docs/developers/apiv4/en/#listmytrades-parameters)
 
-| Name          | In    | Type           | Required | Description                                                                                      |
-| ------------- | ----- | -------------- | -------- | ------------------------------------------------------------------------------------------------ |
-| currency_pair | query | string         | false    | Retrieve results with specified currency pair                                                    |
-| limit         | query | integer        | false    | Maximum number of items returned in list. Default: 100, minimum: 1, maximum: 1000                |
-| page          | query | integer(int32) | false    | Page number                                                                                      |
-| order_id      | query | string         | false    | Filter trades with specified order ID. `currency_pair` is also required if this field is present |
-| account       | query | string         | false    | Specify query account                                                                            |
-| from          | query | integer(int64) | false    | Start timestamp for the query                                                                    |
-| to            | query | integer(int64) | false    | End timestamp for the query, defaults to current time if not specified                           |
+| Name          | In    | Type           | Required | Description                                                                                                       |
+| ------------- | ----- | -------------- | -------- | ----------------------------------------------------------------------------------------------------------------- |
+| currency_pair | query | string         | false    | Retrieve results with specified currency pair                                                                     |
+| limit         | query | integer        | false    | Maximum number of items returned in list. Default: 100, minimum: 1, maximum: 1000                                 |
+| page          | query | integer(int32) | false    | Page number                                                                                                       |
+| order_id      | query | string         | false    | Filter trades with specified order ID. `currency_pair` is also required if this field is present                  |
+| account       | query | string         | false    | The accountparameter has been deprecated. The interface supports querying all transaction records of the account. |
+| from          | query | integer(int64) | false    | Start timestamp for the query                                                                                     |
+| to            | query | integer(int64) | false    | End timestamp for the query, defaults to current time if not specified                                            |
 
 > Example responses
 
@@ -3950,9 +3952,9 @@ use this field to set self-trade prevetion strategies
 
 1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
 self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy。  
+strategy.  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter。  
+passing the `stp_act` parameter.  
 3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
 return '-'
 
@@ -4101,24 +4103,24 @@ _Create price-triggered order_
 **Source:**
 [https://www.gate.io/docs/developers/apiv4/en/#createspotpricetriggeredorder-parameters](https://www.gate.io/docs/developers/apiv4/en/#createspotpricetriggeredorder-parameters)
 
-| Name             | In   | Type                                                      | Required | Description                                                                              |
-| ---------------- | ---- | --------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------- |
-| body             | body | [SpotPriceTriggeredOrder](#schemaspotpricetriggeredorder) | true     | none                                                                                     |
-| » trigger        | body | object                                                    | true     | none                                                                                     |
-| »» price         | body | string                                                    | true     | Trigger price                                                                            |
-| »» rule          | body | string                                                    | true     | Price trigger condition                                                                  |
-| »» expiration    | body | integer                                                   | true     | Maximum wait time for trigger condition (in seconds). Order will be cancelled if timeout |
-| » put            | body | object                                                    | true     | none                                                                                     |
-| »» type          | body | string                                                    | false    | Order type，default to `limit`                                                           |
-| »» side          | body | string                                                    | true     | Order side                                                                               |
-| »» price         | body | string                                                    | true     | Order price                                                                              |
-| »» amount        | body | string                                                    | true     | Trading quantity                                                                         |
-| »» account       | body | string                                                    | true     | Trading account type. Unified account must be set to `unified`                           |
-| »» time_in_force | body | string                                                    | false    | time_in_force                                                                            |
-| »» auto_borrow   | body | boolean                                                   | false    | Whether to borrow coins automatically                                                    |
-| »» auto_repay    | body | boolean                                                   | false    | Whether to repay the loan automatically                                                  |
-| »» text          | body | string                                                    | false    | The source of the order, including:                                                      |
-| » market         | body | string                                                    | true     | Market                                                                                   |
+| Name             | In   | Type                                                      | Required | Description                                                                                                                                                         |
+| ---------------- | ---- | --------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| body             | body | [SpotPriceTriggeredOrder](#schemaspotpricetriggeredorder) | true     | none                                                                                                                                                                |
+| » trigger        | body | object                                                    | true     | none                                                                                                                                                                |
+| »» price         | body | string                                                    | true     | Trigger price                                                                                                                                                       |
+| »» rule          | body | string                                                    | true     | Price trigger condition                                                                                                                                             |
+| »» expiration    | body | integer                                                   | true     | Maximum wait time for trigger condition (in seconds). Order will be cancelled if timeout                                                                            |
+| » put            | body | object                                                    | true     | none                                                                                                                                                                |
+| »» type          | body | string                                                    | false    | Order type, default to `limit`                                                                                                                                      |
+| »» side          | body | string                                                    | true     | Order side                                                                                                                                                          |
+| »» price         | body | string                                                    | true     | Order price                                                                                                                                                         |
+| »» amount        | body | string                                                    | true     | Trading quantity, refers to the trading quantity of the trading currency, i.e., the currency that needs to be traded, for example, the quantity of BTC in BTC_USDT. |
+| »» account       | body | string                                                    | true     | Trading account type. Unified account must be set to `unified`                                                                                                      |
+| »» time_in_force | body | string                                                    | false    | time_in_force                                                                                                                                                       |
+| »» auto_borrow   | body | boolean                                                   | false    | Whether to borrow coins automatically                                                                                                                               |
+| »» auto_repay    | body | boolean                                                   | false    | Whether to repay the loan automatically                                                                                                                             |
+| »» text          | body | string                                                    | false    | The source of the order, including:                                                                                                                                 |
+| » market         | body | string                                                    | true     | Market                                                                                                                                                              |
 
 #### [#](#detailed-descriptions-20) Detailed descriptions
 
@@ -4127,7 +4129,7 @@ _Create price-triggered order_
 - `>=`: triggered when market price is greater than or equal to `price`
 - `<=`: triggered when market price is less than or equal to `price`
 
-**»» type**: Order type，default to `limit`
+**»» type**: Order type, default to `limit`
 
 - limit : Limit Order
 - market : Market Order
@@ -4136,13 +4138,6 @@ _Create price-triggered order_
 
 - buy: buy side
 - sell: sell side
-
-**»» amount**: Trading quantity When `type` is `limit`, it refers to the base
-currency (the currency being traded), such as `BTC` in `BTC_USDT` When `type` is
-`market`, it refers to different currencies based on the side:
-
-- `side`: `buy` refers to quote currency, `BTC_USDT` means `USDT`
-- `side`: `sell` refers to base currency, `BTC_USDT` means `BTC`
 
 **»» account**: Trading account type. Unified account must be set to `unified`
 

@@ -223,7 +223,6 @@ _Cancel withdrawal with specified ID_
 {
   "id": "210496",
   "timestamp": "1542000000",
-  "withdraw_order_id": "order_123456",
   "currency": "USDT",
   "address": "1HkxtBAMrA3tP5ENnYY2CZortjZvFDH5Cs",
   "txid": "128988928203223323290",
@@ -250,37 +249,30 @@ _Cancel withdrawal with specified ID_
 
 Status Code **202**
 
-| Name                | Type   | Description                                                                                                                                                                               |
-| ------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| » id                | string | Record ID                                                                                                                                                                                 |
-| » txid              | string | Hash record of the withdrawal                                                                                                                                                             |
-| » withdraw_order_id | string | User-defined order number for withdrawal. Default is empty. When not empty, the specified user-defined order number record will be queried                                                |
-| » timestamp         | string | Operation time                                                                                                                                                                            |
-| » amount            | string | Token amount                                                                                                                                                                              |
-| » currency          | string | Currency name                                                                                                                                                                             |
-| » address           | string | Withdrawal address. Required for withdrawals                                                                                                                                              |
-| » memo              | string | Additional remarks with regards to the withdrawal                                                                                                                                         |
-| » withdraw_id       | string | Withdrawal record ID starts with 'w', such as: w1879219868. When withdraw_id is not empty, only this specific withdrawal record will be queried, and time-based querying will be disabled |
-| » asset_class       | string | Withdrawal record currency type, empty by default. Supports users to query withdrawal records in main area and innovation area on demand.                                                 |
+| Name        | Type   | Description                                       |
+| ----------- | ------ | ------------------------------------------------- |
+| » id        | string | Record ID                                         |
+| » txid      | string | Hash record of the withdrawal                     |
+| » timestamp | string | Operation time                                    |
+| » amount    | string | Token amount                                      |
+| » currency  | string | Currency name                                     |
+| » address   | string | Withdrawal address. Required for withdrawals      |
+| » memo      | string | Additional remarks with regards to the withdrawal |
+| » status    | string | Transaction Status                                |
 
-Valid values: SPOT, PILOT
-
-SPOT: Main area  
-PILOT: Innovation area | | » status | string | Transaction status
-
-\- DONE: Completed  
+\- BCODE: Deposit Code Operation  
 \- CANCEL: Cancelled  
-\- REQUEST: Requesting  
-\- MANUAL: Pending manual review  
-\- BCODE: GateCode operation  
-\- EXTPEND: Sent, waiting for confirmation  
-\- FAIL: Failed on chain, waiting for confirmation  
-\- INVALID: Invalid order  
-\- VERIFY: Verifying  
-\- PROCES: Processing  
-\- PEND: Processing  
-\- DMOVE: Pending manual review  
-\- REVIEW: Under review | | » chain | string | Name of the chain used in
+\- CANCELPEND: Withdrawal Cancellation Pending  
+\- DMOVE: Pending Manual Review  
+\- DONE: Completed (Only considered truly on-chain when block_number > 0)  
+\- EXTPEND: Sent and Waiting for Confirmation  
+\- FAIL: On-Chain Failure Pending Confirmation  
+\- FVERIFY: Facial Verification in Progress  
+\- LOCKED: Wallet-Side Order Locked  
+\- MANUAL: Pending Manual Review  
+\- REJECT: Rejected  
+\- REQUEST: Request in Progress  
+\- REVIEW: Under Review | | » chain | string | Name of the chain used in
 withdrawals |
 
 WARNING

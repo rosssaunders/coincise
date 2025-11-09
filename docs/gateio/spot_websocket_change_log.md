@@ -1,5 +1,13 @@
 ### [#](#changelog) Changelog
 
+2025-10-21
+
+- Update the description of `type` in `spot.orders` and `spot.orders_v2`
+
+2025-09-29
+
+- Update the description of `change_type` in `spot.balances`
+
 2025-06-24
 
 - Added documentation for the Order Book V2 API

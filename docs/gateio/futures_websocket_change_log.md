@@ -1,5 +1,9 @@
 ## [#](#changelog) Changelog
 
+2025-09-25
+
+- Add `Positions ADL API` documentation
+
 2025-05-22
 
 - Added documentation for the Order Book V2 API

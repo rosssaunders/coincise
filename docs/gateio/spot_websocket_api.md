@@ -2071,24 +2071,25 @@ remarked when amending the order |
 
 #### [#](#enumerated-values-6) Enumerated Values
 
-| Property      | Value              | Description                                                                                                                                                                                                                                               |
-| ------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| type          | limit              | Place a limit order in the spot account                                                                                                                                                                                                                   |
-| type          | market             | Place a market order in the spot account                                                                                                                                                                                                                  |
-| type          | limit_repay        | When a limit order is filled under the unified account, the system will automatically trigger repayment                                                                                                                                                   |
-| type          | market_repay       | When a market order is filled under the unified account, the system will automatically trigger repayment                                                                                                                                                  |
-| type          | limit_borrow       | When placing a limit order under the unified account with insufficient balance, the system will automatically borrow funds before submitting the order                                                                                                    |
-| type          | market_borrow      | When placing a market order under the unified account with insufficient balance, the system will automatically borrow funds before submitting the order                                                                                                   |
-| type          | limit_borrow_repay | Under the unified account, if the available balance is insufficient when placing a limit order, the system will automatically borrow the required funds before order submission. Upon execution of the order, the system will trigger automatic repayment |
-| account       | spot               | spot account                                                                                                                                                                                                                                              |
-| account       | margin             | margin account                                                                                                                                                                                                                                            |
-| account       | cross_margin       | cross margin account                                                                                                                                                                                                                                      |
-| account       | unified            | unified account                                                                                                                                                                                                                                           |
-| side          | buy                | buy                                                                                                                                                                                                                                                       |
-| side          | sell               | sell                                                                                                                                                                                                                                                      |
-| time_in_force | gtc                | GoodTillCancelled                                                                                                                                                                                                                                         |
-| time_in_force | ioc                | ImmediateOrCancelled                                                                                                                                                                                                                                      |
-| time_in_force | poc                | PendingOrCancelled                                                                                                                                                                                                                                        |
+| Property      | Value               | Description                                                                                                                                                                                                                                                |
+| ------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type          | limit               | Place a limit order in the spot account                                                                                                                                                                                                                    |
+| type          | market              | Place a market order in the spot account                                                                                                                                                                                                                   |
+| type          | limit_repay         | When a limit order is filled under the unified account, the system will automatically trigger repayment                                                                                                                                                    |
+| type          | market_repay        | When a market order is filled under the unified account, the system will automatically trigger repayment                                                                                                                                                   |
+| type          | limit_borrow        | When placing a limit order under the unified account with insufficient balance, the system will automatically borrow funds before submitting the order                                                                                                     |
+| type          | market_borrow       | When placing a market order under the unified account with insufficient balance, the system will automatically borrow funds before submitting the order                                                                                                    |
+| type          | limit_borrow_repay  | Under the unified account, if the available balance is insufficient when placing a limit order, the system will automatically borrow the required funds before order submission. Upon execution of the order, the system will trigger automatic repayment  |
+| type          | market_borrow_repay | Under the unified account, if the available balance is insufficient when placing a market order, the system will automatically borrow the required funds before order submission. Upon execution of the order, the system will trigger automatic repayment |
+| account       | spot                | spot account                                                                                                                                                                                                                                               |
+| account       | margin              | margin account                                                                                                                                                                                                                                             |
+| account       | cross_margin        | cross margin account                                                                                                                                                                                                                                       |
+| account       | unified             | unified account                                                                                                                                                                                                                                            |
+| side          | buy                 | buy                                                                                                                                                                                                                                                        |
+| side          | sell                | sell                                                                                                                                                                                                                                                       |
+| time_in_force | gtc                 | GoodTillCancelled                                                                                                                                                                                                                                          |
+| time_in_force | ioc                 | ImmediateOrCancelled                                                                                                                                                                                                                                       |
+| time_in_force | poc                 | PendingOrCancelled                                                                                                                                                                                                                                         |
 
 # [#](#orders-channel-v2-lite) Orders Channel V2(lite)
 
@@ -2299,24 +2300,25 @@ remarked when amending the order |
 
 #### [#](#enumerated-values-7) Enumerated Values
 
-| Property      | Value              | Description                                                                                                                                                                                                                                               |
-| ------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| type          | limit              | Place a limit order in the spot account                                                                                                                                                                                                                   |
-| type          | market             | Place a market order in the spot account                                                                                                                                                                                                                  |
-| type          | limit_repay        | When a limit order is filled under the unified account, the system will automatically trigger repayment                                                                                                                                                   |
-| type          | market_repay       | When a market order is filled under the unified account, the system will automatically trigger repayment                                                                                                                                                  |
-| type          | limit_borrow       | When placing a limit order under the unified account with insufficient balance, the system will automatically borrow funds before submitting the order                                                                                                    |
-| type          | market_borrow      | When placing a market order under the unified account with insufficient balance, the system will automatically borrow funds before submitting the order                                                                                                   |
-| type          | limit_borrow_repay | Under the unified account, if the available balance is insufficient when placing a limit order, the system will automatically borrow the required funds before order submission. Upon execution of the order, the system will trigger automatic repayment |
-| account       | spot               | spot account                                                                                                                                                                                                                                              |
-| account       | margin             | margin account                                                                                                                                                                                                                                            |
-| account       | cross_margin       | cross margin account                                                                                                                                                                                                                                      |
-| account       | unified            | unified account                                                                                                                                                                                                                                           |
-| side          | buy                | buy                                                                                                                                                                                                                                                       |
-| side          | sell               | sell                                                                                                                                                                                                                                                      |
-| time_in_force | gtc                | GoodTillCancelled                                                                                                                                                                                                                                         |
-| time_in_force | ioc                | ImmediateOrCancelled                                                                                                                                                                                                                                      |
-| time_in_force | poc                | PendingOrCancelled                                                                                                                                                                                                                                        |
+| Property      | Value               | Description                                                                                                                                                                                                                                                |
+| ------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type          | limit               | Place a limit order in the spot account                                                                                                                                                                                                                    |
+| type          | market              | Place a market order in the spot account                                                                                                                                                                                                                   |
+| type          | limit_repay         | When a limit order is filled under the unified account, the system will automatically trigger repayment                                                                                                                                                    |
+| type          | market_repay        | When a market order is filled under the unified account, the system will automatically trigger repayment                                                                                                                                                   |
+| type          | limit_borrow        | When placing a limit order under the unified account with insufficient balance, the system will automatically borrow funds before submitting the order                                                                                                     |
+| type          | market_borrow       | When placing a market order under the unified account with insufficient balance, the system will automatically borrow funds before submitting the order                                                                                                    |
+| type          | limit_borrow_repay  | Under the unified account, if the available balance is insufficient when placing a limit order, the system will automatically borrow the required funds before order submission. Upon execution of the order, the system will trigger automatic repayment  |
+| type          | market_borrow_repay | Under the unified account, if the available balance is insufficient when placing a market order, the system will automatically borrow the required funds before order submission. Upon execution of the order, the system will trigger automatic repayment |
+| account       | spot                | spot account                                                                                                                                                                                                                                               |
+| account       | margin              | margin account                                                                                                                                                                                                                                             |
+| account       | cross_margin        | cross margin account                                                                                                                                                                                                                                       |
+| account       | unified             | unified account                                                                                                                                                                                                                                            |
+| side          | buy                 | buy                                                                                                                                                                                                                                                        |
+| side          | sell                | sell                                                                                                                                                                                                                                                       |
+| time_in_force | gtc                 | GoodTillCancelled                                                                                                                                                                                                                                          |
+| time_in_force | ioc                 | ImmediateOrCancelled                                                                                                                                                                                                                                       |
+| time_in_force | poc                 | PendingOrCancelled                                                                                                                                                                                                                                         |
 
 # [#](#user-trades-channel) User Trades Channel
 
@@ -2781,13 +2783,16 @@ Result format:
 
 \- `withdraw`  
 \- `deposit`  
-\- `trade-fee-deduct`  
-\- `order-create`: order creation  
-\- `order-match`: order fill update  
-\- `order-update`: cancel order or modify order  
-\- `margin-transfer`  
-\- `future-transfer`  
-\- `cross-margin-transfer`  
+\- `trade-fee-deduct`: Deduct the fee from the account  
+\- `order-create`: Create Order  
+\- `order-match`: Order Fill Update  
+\- `order-update`: Cancel or Amend Order  
+\- `margin-transfer`: Transfer between Spot and Isolated Margin  
+\- `future-transfer`: Transfer between Spot and Perpetual Futures  
+\- `cross-margin-transfer`: Transfer between Spot and Cross Margin  
+\- `referral-fee`: Referral Commission  
+\- `sub-transfer`: Transfer between Sub-accounts  
+\- `spot-transfer`: Transfer between Spot Accounts  
 \- `other` |
 
 # [#](#margin-balance-channel) Margin Balance Channel
@@ -6201,4 +6206,4 @@ Result format:
 | »»`label`        | String  | denotes error type in string format                                                                |
 | »»`message`      | String  | detailed error message                                                                             |
 
-Last Updated: 7/23/2025, 4:08:40 AM
+Last Updated: 10/21/2025, 8:25:17 AM

@@ -2,16 +2,16 @@
 
 Earn service
 
-## [#](#eth2-swap) ETH2 swap
+## [#](#eth-swap) ETH swap
 
 **Source:**
-[https://www.gate.io/docs/developers/apiv4/en/#eth2-swap](https://www.gate.io/docs/developers/apiv4/en/#eth2-swap)
+[https://www.gate.io/docs/developers/apiv4/en/#eth-swap](https://www.gate.io/docs/developers/apiv4/en/#eth-swap)
 
 > Code samples
 
 `POST /earn/staking/eth2/swap`
 
-_ETH2 swap_
+_ETH swap_
 
 > Body parameter
 
@@ -27,11 +27,11 @@ _ETH2 swap_
 **Source:**
 [https://www.gate.io/docs/developers/apiv4/en/#swapeth2-parameters](https://www.gate.io/docs/developers/apiv4/en/#swapeth2-parameters)
 
-| Name     | In   | Type   | Required | Description                                                |
-| -------- | ---- | ------ | -------- | ---------------------------------------------------------- |
-| body     | body | object | true     | none                                                       |
-| » side   | body | string | true     | 1-Forward Swap (ETH -> ETH2), 2-Reverse Swap (ETH2 -> ETH) |
-| » amount | body | string | true     | Swap Amount                                                |
+| Name     | In   | Type   | Required | Description                                                  |
+| -------- | ---- | ------ | -------- | ------------------------------------------------------------ |
+| body     | body | object | true     | none                                                         |
+| » side   | body | string | true     | 1-Forward Swap (ETH -> GTETH), 2-Reverse Swap (GTETH -> ETH) |
+| » amount | body | string | true     | Swap Amount                                                  |
 
 ### Responses
 
@@ -46,16 +46,16 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
-## [#](#eth2-historical-return-rate-query) ETH2 historical return rate query
+## [#](#gteth-historical-return-rate-query) GTETH historical return rate query
 
 **Source:**
-[https://www.gate.io/docs/developers/apiv4/en/#eth2-historical-return-rate-query](https://www.gate.io/docs/developers/apiv4/en/#eth2-historical-return-rate-query)
+[https://www.gate.io/docs/developers/apiv4/en/#gteth-historical-return-rate-query](https://www.gate.io/docs/developers/apiv4/en/#gteth-historical-return-rate-query)
 
 > Code samples
 
 `GET /earn/staking/eth2/rate_records`
 
-_ETH2 historical return rate query_
+_GTETH historical return rate query_
 
 Query ETH earnings rate records for the last 31 days
 
@@ -314,7 +314,7 @@ _Place Dual Investment order_
 | » amount  | body | string | true     | Subscription amount, mutually exclusive with copies field                                                            |
 | » text    | body | string | false    | Order custom information. Users can set custom ID with this field. Custom fields must meet the following conditions: |
 
-#### [#](#detailed-descriptions-56) Detailed descriptions
+#### [#](#detailed-descriptions-61) Detailed descriptions
 
 **» text**: Order custom information. Users can set custom ID with this field.
 Custom fields must meet the following conditions:
@@ -359,7 +359,7 @@ _Structured Product List_
 | page   | query | integer(int32) | false    | Page number                                         |
 | limit  | query | integer        | false    | Maximum number of records returned in a single list |
 
-#### [#](#detailed-descriptions-57) Detailed descriptions
+#### [#](#detailed-descriptions-62) Detailed descriptions
 
 **type**: Product Type (Default empty to query all)
 
@@ -460,7 +460,7 @@ _Structured Product Order List_
 | page  | query | integer(int32) | false    | Page number                                         |
 | limit | query | integer        | false    | Maximum number of records returned in a single list |
 
-#### [#](#detailed-descriptions-58) Detailed descriptions
+#### [#](#detailed-descriptions-63) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -583,7 +583,6 @@ _Staking coins_
 
 ```
 {
-  "coin": "string",
   "cointype": "string"
 }
 ```
@@ -593,11 +592,10 @@ _Staking coins_
 **Source:**
 [https://www.gate.io/docs/developers/apiv4/en/#findcoin-parameters](https://www.gate.io/docs/developers/apiv4/en/#findcoin-parameters)
 
-| Name       | In   | Type   | Required | Description                           |
-| ---------- | ---- | ------ | -------- | ------------------------------------- |
-| body       | body | object | true     | none                                  |
-| » coin     | body | string | false    | Currency                              |
-| » cointype | body | string | false    | Token Type: swap-Voucher, lock-Locked |
+| Name       | In   | Type   | Required | Description                                                                     |
+| ---------- | ---- | ------ | -------- | ------------------------------------------------------------------------------- |
+| body       | body | object | true     | none                                                                            |
+| » cointype | body | string | false    | Currency type: swap - voucher; lock - locked position; debt - US Treasury bond. |
 
 > Example responses
 
@@ -605,13 +603,51 @@ _Staking coins_
 
 ```
 [
-  "GT",
-  "SOL",
-  "USDT",
-  "ALEO",
-  "DOT",
-  "TRX",
-  "ADA"
+  {
+    "pid": 1,
+    "productType": 0,
+    "isDefi": 0,
+    "currency": "GT",
+    "estimateApr": "36.00",
+    "minStakeAmount": "1",
+    "maxStakeAmount": 700,
+    "protocolName": "Gatechain",
+    "redeemPeriod": 0,
+    "exchangeRate": "1.00000000",
+    "exchangeRateReserve": "1.00000000",
+    "extraInterest": [
+      {
+        "start_time": 1749427201,
+        "end_time": 1765497600,
+        "reward_coin": "GT",
+        "segment_interest": [
+          {
+            "money_min": "0",
+            "money_max": "1000",
+            "money_rate": "10.00"
+          },
+          {
+            "money_min": "1000",
+            "money_max": "2000",
+            "money_rate": "15.00"
+          },
+          {
+            "money_min": "2000",
+            "money_max": "3000",
+            "money_rate": "30.00"
+          }
+        ]
+      }
+    ],
+    "currencyRewards": [
+      {
+        "apr": "6.00",
+        "reward_coin": "GT2",
+        "reward_delay_days": 1,
+        "interest_delay_days": 1
+      }
+    ]
+  }
 ]
 ```
 
@@ -622,12 +658,41 @@ _Staking coins_
 
 | Status | Meaning                                                                    | Description            | Schema     |
 | ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
-| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[string\] |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
 
 ### Response Schema
 
 **Source:**
 [https://www.gate.io/docs/developers/apiv4/en/#findcoin-responseschema](https://www.gate.io/docs/developers/apiv4/en/#findcoin-responseschema)
+
+Status Code **200**
+
+| Name                    | Type    | Description                                                         |
+| ----------------------- | ------- | ------------------------------------------------------------------- |
+| » pid                   | integer | Product ID                                                          |
+| » productType           | integer | Project type 0-voucher 1-locked position 2-US Treasury bond         |
+| » isDefi                | integer | Is DEFI protocol 0-no 1-yes                                         |
+| » currency              | string  | Staked currencies (multiple entries separated by commas)            |
+| » estimateApr           | string  | Estimated yield rate                                                |
+| » minStakeAmount        | string  | Minimum staked amount                                               |
+| » maxStakeAmount        | string  | Maximum staked amount                                               |
+| » protocolName          | string  | Protocol name                                                       |
+| » redeemPeriod          | string  | Redemption period (days)                                            |
+| » exchangeRate          | string  | Exchange rate                                                       |
+| » exchangeRateReserve   | string  | Reverse exchange rate                                               |
+| » extraInterest         | array   | Additional rewards                                                  |
+| »» start_time           | string  | Start timestamp                                                     |
+| »» end_time             | string  | End Timestamp                                                       |
+| »» reward_coin          | string  | Additional reward currency                                          |
+| »» segment_interest     | array   | Tiered reward information                                           |
+| »»» money_min           | string  | Tiered lower value                                                  |
+| »»» money_max           | string  | Tiered upper value                                                  |
+| »»» money_rate          | string  | Tiered interest rate                                                |
+| »» currencyRewards      | array   | Reward currency information                                         |
+| »»» apr                 | string  | Base interest rate                                                  |
+| »»» reward_coin         | string  | Reward currency                                                     |
+| »»» reward_delay_days   | string  | Dividend day -1 indicates dividends are distributed upon redemption |
+| »»» interest_delay_days | string  | Interest accrual day                                                |
 
 WARNING
 
@@ -708,16 +773,333 @@ Status Code **200**
 | » uid             | integer | User ID                     |
 | » coin            | string  | Currency                    |
 | » type            | integer | Type 0-Staking 1-Redemption |
-| » subtype         | string  | 子Type                      |
+| » subtype         | string  | SubType                     |
 | » amount          | string  | Amount                      |
 | » exchange_rate   | string  | Exchange ratio              |
 | » exchange_amount | string  | Redemption Amount           |
-| » updateStamp     | integer | 更新Timestamp               |
+| » updateStamp     | integer | UpdateTimestamp             |
 | » createStamp     | integer | Transaction timestamp       |
 | » status          | integer | status 1-success            |
 | » protocol_type   | integer | DEFI Protocol Type          |
 | » client_order_id | string  | Reference ID                |
 | » source          | string  | Order Origin                |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
+## [#](#list-of-on-chain-coin-earning-orders) List of on-chain coin-earning orders
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#list-of-on-chain-coin-earning-orders](https://www.gate.io/docs/developers/apiv4/en/#list-of-on-chain-coin-earning-orders)
+
+> Code samples
+
+`GET /earn/staking/order_list`
+
+_List of on-chain coin-earning orders_
+
+### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#orderlist-parameters](https://www.gate.io/docs/developers/apiv4/en/#orderlist-parameters)
+
+| Name | In    | Type           | Required | Description                 |
+| ---- | ----- | -------------- | -------- | --------------------------- |
+| pid  | query | integer        | false    | Product ID                  |
+| coin | query | string         | false    | Currency name               |
+| type | query | integer        | false    | Type 0-staking 1-redemption |
+| page | query | integer(int32) | false    | Page number                 |
+
+> Example responses
+
+> 200 Response
+
+```
+{
+  "page": 1,
+  "pageSize": 20,
+  "pageCount": 5,
+  "totalCount": 90,
+  "list": [
+    {
+      "pid": 2,
+      "coin": "SOL",
+      "amount": "1.00000000",
+      "type": 0,
+      "status": 1,
+      "redeem_stamp": 0,
+      "createStamp": 1756105456,
+      "exchange_amount": "1.00000000",
+      "fee": "0.0000000000"
+    },
+    {
+      "pid": 2,
+      "coin": "SOL",
+      "amount": "1.00000000",
+      "type": 0,
+      "status": 1,
+      "redeem_stamp": 0,
+      "createStamp": 1755588122,
+      "exchange_amount": "0.80000000",
+      "fee": "0.0000000000"
+    }
+  ]
+}
+```
+
+### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#orderlist-responses](https://www.gate.io/docs/developers/apiv4/en/#orderlist-responses)
+
+| Status | Meaning                                                                    | Description            | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+
+### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#orderlist-responseschema](https://www.gate.io/docs/developers/apiv4/en/#orderlist-responseschema)
+
+Status Code **200**
+
+| Name               | Type    | Description                    |
+| ------------------ | ------- | ------------------------------ |
+| » page             | integer | Page                           |
+| » pageSize         | integer | Items per page                 |
+| » pageCount        | integer | Total pages                    |
+| » totalCount       | integer | Total entries                  |
+| » list             | array   | none                           |
+| »» pid             | integer | Product ID                     |
+| »» coin            | string  | Staked and redeemed currencies |
+| »» amount          | string  | Amount                         |
+| »» type            | integer | Type 0-Staking 1-Redemption    |
+| »» status          | integer | Status                         |
+| »» redeem_stamp    | integer | Redemption credit time         |
+| »» createStamp     | integer | Order time                     |
+| »» exchange_amount | string  | Exchange rate                  |
+| »» fee             | string  | Fee                            |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
+## [#](#on-chain-coin-earning-dividend-records) On-chain coin-earning dividend records
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#on-chain-coin-earning-dividend-records](https://www.gate.io/docs/developers/apiv4/en/#on-chain-coin-earning-dividend-records)
+
+> Code samples
+
+`GET /earn/staking/award_list`
+
+_On-chain coin-earning dividend records_
+
+### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#awardlist-parameters](https://www.gate.io/docs/developers/apiv4/en/#awardlist-parameters)
+
+| Name | In    | Type           | Required | Description   |
+| ---- | ----- | -------------- | -------- | ------------- |
+| pid  | query | integer        | false    | Product ID    |
+| coin | query | string         | false    | Currency name |
+| page | query | integer(int32) | false    | Page number   |
+
+> Example responses
+
+> 200 Response
+
+```
+{
+  "page": 1,
+  "pageSize": 20,
+  "pageCount": 2,
+  "totalCount": 33,
+  "list": [
+    {
+      "pid": 64,
+      "mortgage_coin": "USDT",
+      "amount": "0.0000019100",
+      "reward_coin": "COMP",
+      "interest": "0.0000019100",
+      "fee": "0.0000000700",
+      "status": 4,
+      "bonus_date": "2025-08-08 00:00:00",
+      "should_bonus_stamp": 1755907200
+    },
+    {
+      "pid": 27,
+      "mortgage_coin": "DOT",
+      "amount": "0.0023424700",
+      "reward_coin": "DOT",
+      "interest": "0.0023424700",
+      "fee": "0.0001232800",
+      "status": 4,
+      "bonus_date": "2025-08-11 00:00:00",
+      "should_bonus_stamp": 1755043200
+    }
+  ]
+}
+```
+
+### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#awardlist-responses](https://www.gate.io/docs/developers/apiv4/en/#awardlist-responses)
+
+| Status | Meaning                                                                    | Description            | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+
+### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#awardlist-responseschema](https://www.gate.io/docs/developers/apiv4/en/#awardlist-responseschema)
+
+Status Code **200**
+
+| Name                  | Type    | Description                      |
+| --------------------- | ------- | -------------------------------- |
+| » page                | integer | Page                             |
+| » pageSize            | integer | Items per page                   |
+| » pageCount           | integer | Total pages                      |
+| » totalCount          | integer | Total entries                    |
+| » list                | array   | none                             |
+| »» pid                | integer | Product ID                       |
+| »» mortgage_coin      | string  | Collateral currency              |
+| »» amount             | string  | Amount                           |
+| »» reward_coin        | string  | Reward currency                  |
+| »» interest           | string  | Interest amount                  |
+| »» fee                | string  | Fee                              |
+| »» status             | integer | Status                           |
+| »» bonus_date         | string  | Date                             |
+| »» should_bonus_stamp | integer | Scheduled distribution timestamp |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
+## [#](#on-chain-coin-earning-assets) On-chain coin-earning assets
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#on-chain-coin-earning-assets](https://www.gate.io/docs/developers/apiv4/en/#on-chain-coin-earning-assets)
+
+> Code samples
+
+`GET /earn/staking/assets`
+
+_On-chain coin-earning assets_
+
+### Parameters
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#assetlist-parameters](https://www.gate.io/docs/developers/apiv4/en/#assetlist-parameters)
+
+| Name | In    | Type   | Required | Description   |
+| ---- | ----- | ------ | -------- | ------------- |
+| coin | query | string | false    | Currency name |
+
+> Example responses
+
+> 200 Response
+
+```
+[
+  {
+    "pid": 1,
+    "mortgage_coin": "GT",
+    "mortgage_amount": "111.60000000",
+    "createStamp": 1728530266,
+    "extra_income": "0",
+    "freeze_amount": "0.0000000000",
+    "move_income": "0.0000000000",
+    "type": 0,
+    "status": 1,
+    "income_total": "0",
+    "yesterday_income_multi": [],
+    "reward_coins": [
+      {
+        "reward_coin": "GT2",
+        "interest_delay_days": 1,
+        "reward_delay_days": 1
+      }
+    ]
+  },
+  {
+    "pid": 64,
+    "mortgage_coin": "USDT",
+    "mortgage_amount": "1.0000000000",
+    "createStamp": 1750764156,
+    "extra_income": "0",
+    "freeze_amount": "0.0000000000",
+    "move_income": "0.0000000000",
+    "type": 1,
+    "status": 1,
+    "income_total": "0",
+    "yesterday_income_multi": [],
+    "defi_income": {
+      "total": [
+        {
+          "coin": "COMP",
+          "amount": "0.0000076200"
+        }
+      ]
+    },
+    "reward_coins": [
+      {
+        "reward_coin": "USDT",
+        "interest_delay_days": 1,
+        "reward_delay_days": -1
+      },
+      {
+        "reward_coin": "COMP",
+        "interest_delay_days": 1,
+        "reward_delay_days": 15
+      }
+    ]
+  }
+]
+```
+
+### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#assetlist-responses](https://www.gate.io/docs/developers/apiv4/en/#assetlist-responses)
+
+| Status | Meaning                                                                    | Description            | Schema     |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ---------- |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | \[Inline\] |
+
+### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#assetlist-responseschema](https://www.gate.io/docs/developers/apiv4/en/#assetlist-responseschema)
+
+Status Code **200**
+
+| Name                     | Type    | Description                                                         |
+| ------------------------ | ------- | ------------------------------------------------------------------- |
+| » pid                    | integer | Product ID                                                          |
+| » mortgage_coin          | string  | Staked currencies (multiple entries separated by commas)            |
+| » mortgage_amount        | string  | Position amount                                                     |
+| » createStamp            | integer | First timestamp                                                     |
+| » extra_income           | string  | Additional rewards converted to USDT amount                         |
+| » freeze_amount          | string  | Locked amount, used in trading                                      |
+| » move_income            | string  | none                                                                |
+| » type                   | integer | Type 0-voucher 1-locked position 2-US Treasury bond                 |
+| » status                 | integer | Status                                                              |
+| » income_total           | string  | Total earnings by currency                                          |
+| » yesterday_income_multi | array   | Yesterday's earnings                                                |
+| » reward_coins           | array   | Currency-specific reward earnings                                   |
+| »» reward_coin           | string  | Reward currency                                                     |
+| »» interest_delay_days   | integer | Interest accrual day                                                |
+| »» reward_delay_days     | integer | Dividend day -1 indicates dividends are distributed upon redemption |
+| » defi_income            | object  | DEIF earnings                                                       |
+| »» total                 | array   | none                                                                |
+| »»» coin                 | string  | none                                                                |
+| »»» amount               | string  | none                                                                |
 
 WARNING
 

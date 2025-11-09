@@ -66,6 +66,129 @@ WARNING
 
 To perform this operation, you must be authenticated by API key and secret
 
+## [#](#query-all-main-account-key-information) Query All Main Account Key Information
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#query-all-main-account-key-information](https://www.gate.io/docs/developers/apiv4/en/#query-all-main-account-key-information)
+
+> Code samples
+
+`GET /account/main_keys`
+
+_Query All Main Account Key Information_
+
+> Example responses
+
+> 200 Response
+
+```
+[
+  {
+    "state": 1,
+    "mode": 1,
+    "name": "test1",
+    "user_id": 1,
+    "perms": [
+      {
+        "name": "account",
+        "read_only": false
+      },
+      {
+        "name": "spot",
+        "read_only": false
+      }
+    ],
+    "ip_whitelist": [],
+    "currency_pairs": [
+      "BTC_USD",
+      "ETH_USD"
+    ],
+    "key": "c5dcfbf1f3a7*****",
+    "created_at": 1753030929,
+    "update_at": 1756300567,
+    "last_access": 1753030929
+  },
+  {
+    "state": 1,
+    "mode": 1,
+    "name": "test2",
+    "user_id": 1,
+    "perms": [
+      {
+        "name": "spot",
+        "read_only": false
+      },
+      {
+        "name": "account",
+        "read_only": false
+      }
+    ],
+    "ip_whitelist": [],
+    "currency_pairs": [
+      "BTC_USD",
+      "ETH_USD"
+    ],
+    "key": "52fd0035f665*****",
+    "created_at": 1753897991,
+    "update_at": 1756300567,
+    "last_access": 1753897991
+  }
+]
+```
+
+### Responses
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getaccountmainkeys-responses](https://www.gate.io/docs/developers/apiv4/en/#getaccountmainkeys-responses)
+
+| Status | Meaning                                                                    | Description            | Schema |
+| ------ | -------------------------------------------------------------------------- | ---------------------- | ------ |
+| 200    | [OK (opens new window)](https://tools.ietf.org/html/rfc7231#section-6.3.1) | Successfully retrieved | Inline |
+
+### Response Schema
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#getaccountmainkeys-responseschema](https://www.gate.io/docs/developers/apiv4/en/#getaccountmainkeys-responseschema)
+
+Status Code **200**
+
+_Query All Main Account Key Information_
+
+| Name             | Type           | Description                                                                                                   |
+| ---------------- | -------------- | ------------------------------------------------------------------------------------------------------------- |
+| » state          | integer(int32) | API Key Status: 1 - Normal, 2 - Locked, 3 - Frozen (can only be modified; default is 1 upon creation)         |
+| » mode           | integer(int32) | User Mode: 1 - Classic, 2 - Legacy Unified (can only be specified during creation, non-modifiable afterwards) |
+| » name           | string         | API Key Remark                                                                                                |
+| » currency_pairs | array          | Trading Pair Whitelist, Maximum 30 Pairs                                                                      |
+| » user_id        | integer(int64) | User ID                                                                                                       |
+| » ip_whitelist   | array          | IP Whitelist                                                                                                  |
+| » perms          | array          | none                                                                                                          |
+| »» name          | string         | Permission function name (no value will be cleared)                                                           |
+
+\- `wallet`: wallet  
+\- `spot`: spot/margin  
+\- `futures`: perpetual contract  
+\- `delivery`: delivery contract  
+\- `earn`: earn  
+\- `custody`: custody  
+\- `options`: options  
+\- `account`: account information  
+\- `loan`: lending  
+\- `margin`: margin  
+\- `unified`: unified account  
+\- `copy`: copy trading- `pilot`: pilot  
+\- `otc`: otc  
+\- `alpha`: alpha  
+\- `crossx`: cross-exchange | | »» read_only | boolean | Read Only | | » key |
+object | API Key details | | »» mode | integer(int32) | Mode: 1 - Classic mode,
+2 - Legacy unified mode | | » created_at | string | Creation time | | »
+updated_at | string | Last Update Time | | » last_access | string | Last Access
+Time |
+
+WARNING
+
+To perform this operation, you must be authenticated by API key and secret
+
 ## [#](#get-user-transaction-rate-limit-information) Get user transaction rate limit information
 
 **Source:**

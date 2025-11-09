@@ -1842,7 +1842,8 @@ The above command returns JSON structured like this:
       "l": "89.5",
       "o": "94.3",
       "n": "1m_BTC_USD",
-      "a": "314732.87412"
+      "a": "314732.87412",
+      "w": false
     },
     {
       "t": 1545129300,
@@ -1852,7 +1853,8 @@ The above command returns JSON structured like this:
       "l": "89.5",
       "o": "94.3",
       "n": "1m_BTC_USD",
-      "a": "314732.87412"
+      "a": "314732.87412",
+      "w": true
     }
   ]
 }
@@ -1876,16 +1878,17 @@ The above command returns JSON structured like this:
   | -------- | ----- | ---------------- |
   | `result` | Array | Array of objects |
 
-  | field | type    | description           |
-  | ----- | ------- | --------------------- |
-  | `t`   | Integer | Time                  |
-  | `o`   | String  | Open                  |
-  | `c`   | String  | Close                 |
-  | `h`   | String  | Highest               |
-  | `l`   | String  | Lowest                |
-  | `v`   | Integer | Volume                |
-  | `n`   | String  | Futures contract name |
-  | `a`   | String  | Amount                |
+  | field | type    | description                                                                      |
+  | ----- | ------- | -------------------------------------------------------------------------------- |
+  | `t`   | Integer | Time                                                                             |
+  | `o`   | String  | Open                                                                             |
+  | `c`   | String  | Close                                                                            |
+  | `h`   | String  | Highest                                                                          |
+  | `l`   | String  | Lowest                                                                           |
+  | `v`   | Integer | Volume                                                                           |
+  | `n`   | String  | Futures contract name                                                            |
+  | `a`   | String  | Amount                                                                           |
+  | `w`   | Boolean | `true` means window close. `true` may be missing, but does not affect data usage |
 
 ## [#](#cancel-subscription-3) Cancel subscription
 
@@ -2640,22 +2643,26 @@ The above command returns JSON structured like this:
   | `create_time`    | Integer | Creation time of order(deprecated)          |
   | `create_time_ms` | Integer | Creation timestamp in milliseconds of order |
   | `fill_price`     | Float   | Fill price of the order                     |
-  | `finish_as`      | String  | How the order was finished.                 |
+  | `finish_as`      | String  | How the order was completed.                |
 
-  \- filled: all filled  
-  \- cancelled: manually cancelled  
-  \- liquidated: cancelled because of liquidation  
-  \- ioc: time in force is IOC, finish immediately  
-  \- auto_deleveraged: finished by ADL  
-  \- reduce_only: cancelled because of increasing position while reduce-only
-  set- position_closed: cancelled because of position close  
-  \- stp: cancelled because self trade prevention | | `iceberg` | Integer |
-  Display size for iceberg order. 0 for non-iceberg. Note that you will have to
-  pay the taker fee for the hidden size | | `id` | Integer | Futures order ID |
-  | `is_close` | Bool | Is the order to close position | | `is_liq` | Bool | Is
-  the order for liquidation | | `left` | Integer | Size left to be traded | |
-  `mkfr` | Float | Maker fee | | `is_reduce_only` | Bool | Is the order
-  reduce-only | | `status` | String | Order status  
+  \- `filled`: Fully Filled  
+  \- `cancelled`: Manually Cancelled  
+  \- `liquidated`: Cancelled Due to Liquidation  
+  \- `ioc`: IOC (Immediate or Cancel), executed immediately  
+  \- `auto_deleveraging`: Completed via ADL (Automatic Deleveraging)  
+  \- `reduce_only`: Cancelled when attempting to increase position under
+  reduce-only rule  
+  \- `position_close`: Cancelled due to position closing  
+  \- `stp`: Cancelled due to self-trade prevention (STP)  
+  \- `_new`: Newly Created  
+  \- `_update`: Filled, Partially Filled, or Order Updated  
+  \- `reduce_out`: Reduce-only: Excluded illiquid pending orders | | `iceberg` |
+  Integer | Display size for iceberg order. 0 for non-iceberg. Note that you
+  will have to pay the taker fee for the hidden size | | `id` | Integer |
+  Futures order ID | | `is_close` | Bool | Is the order to close position | |
+  `is_liq` | Bool | Is the order for liquidation | | `left` | Integer | Size
+  left to be traded | | `mkfr` | Float | Maker fee | | `is_reduce_only` | Bool |
+  Is the order reduce-only | | `status` | String | Order status  
   \- open: waiting to be traded  
   \- finished: finished | | `tkfr` | Float | Taker fee | | `price` | Float |
   Order price. 0 for market order with tif set as ioc | | `refu` | Integer |
@@ -4738,6 +4745,273 @@ The above command returns JSON structured like this:
 
   `unsubscribe`
 
+# [#](#positions-adl-api) Positions ADL API
+
+**The channel for pushing users' ADL ranking information**
+
+WARNING
+
+Authentication required.
+
+## [#](#positions-adl-subscription) Positions adl subscription
+
+If you want to subscribe to adl updates in all contracts, use `!all` in contract
+list.
+
+Code example
+
+```python
+import json, time
+from websocket import create_connection
+
+ws = create_connection("wss://ws-testnet.gate.com/v4/ws/futures/usdt")
+req = {
+    "time": int(time.time()),
+    "channel": "futures.position_adl_rank",
+    "event": "subscribe",
+    "payload": ["BTC_USDT"],
+    "auth": {
+        "method": "api_key",
+        "KEY": "xxxx",
+        "SIGN": "xxxx"
+    }
+}
+ws.send(json.dumps(req))
+print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://ws-testnet.gate.com/v4/ws/futures/usdt"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal("Dial error:", err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.position_adl_rank",
+		"event":   "subscribe",
+		"payload": []string{"BTC_USDT"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx",
+			"SIGN":   "xxxx",
+		},
+	}
+
+	reqBytes, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal("JSON Marshal error:", err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, reqBytes)
+	if err != nil {
+		log.Fatal("Write error:", err)
+	}
+
+	_, msg, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal("Read error:", err)
+	}
+	fmt.Println(string(msg))
+}
+```
+
+The above command returns JSON structured like this:
+
+```json
+{
+  "time": 1545459681,
+  "time_ms": 1545459681123,
+  "channel": "futures.position_adl_rank",
+  "event": "subscribe",
+  "payload": ["BTC_USDT"],
+  "result": {
+    "status": "success"
+  }
+}
+```
+
+**Subscribe for user positions adl update.**
+
+### [#](#request-34) Request
+
+- channel
+
+  `futures.position_adl_rank`
+
+- event
+
+  `subscribe`
+
+- params
+
+| parameter  | type   | required | description           |
+| ---------- | ------ | -------- | --------------------- |
+| `contract` | String | yes      | Futures contract name |
+
+## [#](#positions-adl-notification) Positions adl notification
+
+```json
+{
+  "time": 1588212926,
+  "time_ms": 1588212926123,
+  "channel": "futures.position_adl_rank",
+  "event": "update",
+  "result": [
+    {
+      "contract": "BTC_USDT",
+      "mode": "single",
+      "rank_division": 1,
+      "time_ms": 1588212926119,
+      "user_id": 2124426495
+    }
+  ]
+}
+```
+
+**Notify positions adl update.**
+
+### [#](#notify-17) Notify
+
+- channel
+
+  `futures.position_adl_rank`
+
+- event
+
+  `update`
+
+- params
+
+| field    | type  | description      |
+| -------- | ----- | ---------------- |
+| `result` | Array | Array of objects |
+
+| field           | type    | description                                                                                                                                             |
+| --------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `contract`      | String  | Futures contract name                                                                                                                                   |
+| `mode`          | String  | Position mode                                                                                                                                           |
+| `rank_division` | Integer | Ranking tier (1～6, with 1 being the highest priority for ADL, and 5 being the lowest priority for ADL. 6: in liquidation, not included in ADL ranking) |
+| `time_ms`       | Integer | The millisecond timestamp of the message push                                                                                                           |
+| `user_id`       | Integer | User Id                                                                                                                                                 |
+
+## [#](#cancel-subscription-14) Cancel subscription
+
+Code example
+
+```python
+import json, time
+from websocket import create_connection
+
+ws = create_connection("wss://ws-testnet.gate.com/v4/ws/futures/usdt")
+req = {
+    "time": int(time.time()),
+    "channel": "futures.position_adl_rank",
+    "event": "unsubscribe",
+    "payload": ["BTC_USDT"],
+    "auth": {
+        "method": "api_key",
+        "KEY": "xxxx",
+        "SIGN": "xxxx"
+    }
+}
+ws.send(json.dumps(req))
+print(ws.recv())
+```
+
+Code example
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+  "time"
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	url := "wss://ws-testnet.gate.com/v4/ws/futures/usdt"
+	conn, _, err := websocket.DefaultDialer.Dial(url, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer conn.Close()
+
+	req := map[string]interface{}{
+		"time":    time.Now().Unix(),
+		"channel": "futures.position_adl_rank",
+		"event":   "unsubscribe",
+		"payload": []string{"BTC_USDT"},
+		"auth": map[string]string{
+			"method": "api_key",
+			"KEY":    "xxxx",
+			"SIGN":   "xxxx",
+		},
+	}
+
+	reqBytes, err := json.Marshal(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = conn.WriteMessage(websocket.TextMessage, reqBytes)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, msg, err := conn.ReadMessage()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(msg))
+}
+```
+
+The above command returns JSON structured like this:
+
+```json
+{
+  "time": 1545459681,
+  "time_ms": 1545459681123,
+  "channel": "futures.position_adl_rank",
+  "event": "unsubscribe",
+  "result": {
+    "status": "success"
+  }
+}
+```
+
+**Unsubscribe positions adl update**
+
+### [#](#request-35) Request
+
+- channel
+
+  `futures.position_adl_rank`
+
+- event
+
+  `unsubscribe`
+
 # [#](#auto-orders-api) Auto orders API
 
 **Provides a way to receive user auto orders info.**
@@ -4840,7 +5114,7 @@ The above command returns JSON structured like this:
 
 **Subscribe for user auto orders update.**
 
-### [#](#request-34) Request
+### [#](#request-36) Request
 
 - channel
 
@@ -4907,7 +5181,7 @@ The above command returns JSON structured like this:
 
 **Notify auto orders update.**
 
-### [#](#notify-17) Notify
+### [#](#notify-18) Notify
 
 - channel
 
@@ -4939,7 +5213,7 @@ The above command returns JSON structured like this:
   | `order_type`    | String  | Take-profit/stop-loss types, detail to http api        |
   | `me_order_id`   | Number  | Corresponding order ID of order take-profit/stop-loss. |
 
-## [#](#cancel-subscription-14) Cancel subscription
+## [#](#cancel-subscription-15) Cancel subscription
 
 Code example
 
@@ -5029,7 +5303,7 @@ The above command returns JSON structured like this:
 
 **Unsubscribe auto orders update.**
 
-### [#](#request-35) Request
+### [#](#request-37) Request
 
 - channel
 
@@ -7590,4 +7864,4 @@ Result format:
 | »»`label`        | String  | Denotes error type in string format                                                                              |
 | »»`message`      | String  | Detailed error message                                                                                           |
 
-Last Updated: 7/31/2025, 2:17:36 AM
+Last Updated: 11/6/2025, 2:14:26 AM

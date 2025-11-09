@@ -106,14 +106,15 @@ Record query time range cannot exceed 30 days
 **Source:**
 [https://www.gate.io/docs/developers/apiv4/en/#agencycommissionshistory-parameters](https://www.gate.io/docs/developers/apiv4/en/#agencycommissionshistory-parameters)
 
-| Name     | In    | Type           | Required | Description                                                                              |
-| -------- | ----- | -------------- | -------- | ---------------------------------------------------------------------------------------- |
-| currency | query | string         | false    | Specify the currency. If not specified, returns all currencies                           |
-| user_id  | query | integer(int64) | false    | User ID. If not specified, all user records will be returned                             |
-| from     | query | integer(int64) | false    | Start time for querying records, defaults to 7 days before current time if not specified |
-| to       | query | integer(int64) | false    | End timestamp for the query, defaults to current time if not specified                   |
-| limit    | query | integer        | false    | Maximum number of records returned in a single list                                      |
-| offset   | query | integer        | false    | List offset, starting from 0                                                             |
+| Name            | In    | Type           | Required | Description                                                                              |
+| --------------- | ----- | -------------- | -------- | ---------------------------------------------------------------------------------------- |
+| currency        | query | string         | false    | Specify the currency. If not specified, returns all currencies                           |
+| commission_type | query | integer        | false    | Rebate type: 1 - Direct rebate, 2 - Indirect rebate, 3 - Self rebate                     |
+| user_id         | query | integer(int64) | false    | User ID. If not specified, all user records will be returned                             |
+| from            | query | integer(int64) | false    | Start time for querying records, defaults to 7 days before current time if not specified |
+| to              | query | integer(int64) | false    | End timestamp for the query, defaults to current time if not specified                   |
+| limit           | query | integer        | false    | Maximum number of records returned in a single list                                      |
+| offset          | query | integer        | false    | List offset, starting from 0                                                             |
 
 > Example responses
 
@@ -868,21 +869,17 @@ _Spot price order details_
 \- `<=`: triggered when market price is less than or equal to `price` | | »
 expiration | integer | true | none | Maximum wait time for trigger condition (in
 seconds). Order will be cancelled if timeout | | put | object | true | none |
-none | | » type | string | false | none | Order type，default to `limit`
+none | | » type | string | false | none | Order type, default to `limit`
 
 \- limit : Limit Order  
 \- market : Market Order | | » side | string | true | none | Order side
 
 \- buy: buy side  
 \- sell: sell side | | » price | string | true | none | Order price | | » amount
-| string | true | none | Trading quantity  
-When `type` is `limit`, it refers to the base currency (the currency being
-traded), such as `BTC` in `BTC_USDT`  
-When `type` is `market`, it refers to different currencies based on the side:  
-\- `side`: `buy` refers to quote currency, `BTC_USDT` means `USDT`  
-\- `side`: `sell` refers to base currency, `BTC_USDT` means `BTC` | | » account
-| string | true | none | Trading account type. Unified account must be set to
-`unified`
+| string | true | none | Trading quantity, refers to the trading quantity of the
+trading currency, i.e., the currency that needs to be traded, for example, the
+quantity of BTC in BTC_USDT. | | » account | string | true | none | Trading
+account type. Unified account must be set to `unified`
 
 \- normal: spot trading  
 \- margin: margin trading  
@@ -910,7 +907,7 @@ status | string | false | read-only | Status
 \- expired: Expired | | reason | string | false | read-only | Additional
 description of how the order was completed |
 
-#### [#](#enumerated-values-135) Enumerated Values
+#### [#](#enumerated-values-137) Enumerated Values
 
 | Property      | Value   |
 | ------------- | ------- |
@@ -1028,13 +1025,14 @@ enabled | | create_time | number(double) | false | none | Created time of the
 contract | | funding_cap_ratio | string | false | none | The factor for the
 maximum of the funding rate. Maximum of funding rate = (1/market maximum
 leverage - maintenance margin rate) \* funding_cap_ratio | | status | string |
-false | none | FuturesStatus Type包含：prelaunch(预上线),
-trading(Trade中),delisting(下架中), delisted(已下架), circuit_breaker（熔断) | |
-launch_time | integer(int64) | false | none | Contract expiry timestamp | |
-delisting_time | integer(int64) | false | none | Futures进入只减仓StatusTime | |
-delisted_time | integer(int64) | false | none | Futures下架Time |
+false | none | Contract status types include: prelaunch (pre-launch), trading
+(active), delisting (delisting), delisted (delisted), circuit_breaker (circuit
+breaker) | | launch_time | integer(int64) | false | none | Contract expiry
+timestamp | | delisting_time | integer(int64) | false | none | Timestamp when
+contract enters reduce-only state | | delisted_time | integer(int64) | false |
+none | Contract delisting time |
 
-#### [#](#enumerated-values-136) Enumerated Values
+#### [#](#enumerated-values-138) Enumerated Values
 
 | Property  | Value    |
 | --------- | -------- |
@@ -1084,17 +1082,9 @@ delisted_time | integer(int64) | false | none | Futures下架Time |
   "cross_leverage_limit": "string",
   "update_time": 0,
   "update_id": 0,
-  "trade_long_size": 0,
-  "trade_long_xprice": "string",
-  "trade_short_size": 0,
-  "trade_short_xprice": "string",
-  "trade_max_size": "string",
   "open_time": 0,
   "risk_limit_table": "string",
   "average_maintenance_rate": "string",
-  "voucher_size": "string",
-  "voucher_margin": "string",
-  "voucher_id": 0,
   "pid": 0
 }
 
@@ -1140,27 +1130,19 @@ _Futures position details_
 | » is_liq           | boolean        | false    | none         | Whether the close order is from liquidation                                                                                                                              |
 | mode               | string         | false    | none         | Position mode, including:                                                                                                                                                |
 
-\- `single`: Single position mode  
-\- `dual_long`: Long position in dual position mode  
-\- `dual_short`: Short position in dual position mode | | cross_leverage_limit |
-string | false | none | Cross margin leverage (valid only when `leverage` is 0)
-| | update_time | integer(int64) | false | read-only | Last update time | |
+\- `single`: One-way Mode  
+\- `dual_long`: Long position in Hedge Mode  
+\- `dual_short`: Short position in Hedge Mode | | cross_leverage_limit | string
+| false | none | Cross margin leverage (valid only when `leverage` is 0) | |
+update_time | integer(int64) | false | read-only | Last update time | |
 update_id | integer(int64) | false | read-only | Update ID. The value increments
-by 1 each time the position is updated | | trade_long_size | integer(int64) |
-false | read-only | Cumulative long size | | trade_long_xprice | string | false
-| read-only | Cumulative long size\*price | | trade_short_size | integer(int64)
-| false | read-only | Cumulative short size | | trade_short_xprice | string |
-false | read-only | Cumulative short size\*price | | trade_max_size | string |
-false | none | Maximum position | | open_time | integer(int64) | false | none |
-First Open Time | | risk_limit_table | string | false | read-only | Risk limit
-table ID | | average_maintenance_rate | string | false | read-only | Average
-maintenance margin rate | | voucher_size | string | false | read-only |
-Experience Coupon Position Size | | voucher_margin | string | false | read-only
-| Experience Coupon Position Margin | | voucher_id | integer(int64) | false |
-read-only | Experience Coupon ID | | pid | integer(int64) | false | read-only
-| 分仓仓位id |
+by 1 each time the position is updated | | open_time | integer(int64) | false |
+none | First Open Time | | risk_limit_table | string | false | read-only | Risk
+limit table ID | | average_maintenance_rate | string | false | read-only |
+Average maintenance margin rate | | pid | integer(int64) | false | read-only |
+Sub-account position ID |
 
-#### [#](#enumerated-values-137) Enumerated Values
+#### [#](#enumerated-values-139) Enumerated Values
 
 | Property | Value      |
 | -------- | ---------- |
@@ -1202,7 +1184,6 @@ read-only | Experience Coupon ID | | pid | integer(int64) | false | read-only
   "stp_id": 0,
   "stp_act": "co",
   "amend_text": "string",
-
   "limit_vip": 0,
   "pid": 0
 }
@@ -1221,7 +1202,7 @@ _Futures order details_
 | id          | integer(int64) | false    | read-only    | Futures order ID                                   |
 | user        | integer        | false    | read-only    | User ID                                            |
 | create_time | number(double) | false    | read-only    | Creation time of order                             |
-| update_time | number(double) | false    | read-only    | Order更新Time                                      |
+| update_time | number(double) | false    | read-only    | OrderUpdateTime                                    |
 | finish_time | number(double) | false    | read-only    | Order finished time. Not returned if order is open |
 | finish_as   | string         | false    | read-only    | How the order was finished:                        |
 
@@ -1313,14 +1294,13 @@ return '-'
 \- co: Cancel oldest, cancel old orders and keep new ones  
 \- cb: Cancel both, both old and new orders will be cancelled | | amend_text |
 string | false | read-only | The custom data that the user remarked when
-amending the order |
+amending the order | | limit_vip | integer(int64) | false | write-only |
+Counterparty user's VIP level for limit order fills. Current order will only
+match with orders whose VIP level is less than or equal to the specified level.
+Only 11~16 are supported; default is 0 | | pid | integer(int64) | false |
+write-only | Position ID |
 
-|limit_vip|integer(int64)|false|write-only|限价委托成交的对手单User
-VIP 等级，当前下单仅会跟小于等于对手单User
-VIP 等级的单成交，仅支持传递11~16，默认是0|
-|pid|integer(int64)|false|write-only|仓位ID|
-
-#### [#](#enumerated-values-138) Enumerated Values
+#### [#](#enumerated-values-140) Enumerated Values
 
 | Property  | Value            |
 | --------- | ---------------- |
@@ -1346,6 +1326,143 @@ VIP 等级的单成交，仅支持传递11~16，默认是0|
 | stp_act   | cb               |
 | stp_act   | \-               |
 
+## [#](#futuresbboorder) FuturesBBOOrder
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#futuresbboorder](https://www.gate.io/docs/developers/apiv4/en/#futuresbboorder)
+
+```
+{
+  "contract": "string",
+  "size": 0,
+  "direction": "string",
+  "iceberg": 0,
+  "level": 0,
+  "close": false,
+  "is_close": true,
+  "reduce_only": false,
+  "is_reduce_only": true,
+  "is_liq": true,
+  "tif": "gtc",
+  "left": 0,
+  "fill_price": "string",
+  "text": "string",
+  "tkfr": "string",
+  "mkfr": "string",
+  "refu": 0,
+  "auto_size": "close_long",
+  "stp_id": 0,
+  "stp_act": "co",
+  "amend_text": "string",
+  "limit_vip": 0,
+  "pid": 0
+}
+
+```
+
+_contractBBOorderdetails_
+
+### [#](#properties-7) Properties
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#properties-7](https://www.gate.io/docs/developers/apiv4/en/#properties-7)
+
+| Name           | Type           | Required | Restrictions | Description                                                                                                  |
+| -------------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------ |
+| contract       | string         | true     | none         | Futures contract                                                                                             |
+| size           | integer(int64) | true     | none         | Required. Trading quantity. Positive for buy, negative for sell. Set to 0 for close position orders.         |
+| direction      | string         | true     | none         | Direction: 'sell' fetches the bid side, 'buy' fetches the ask side.                                          |
+| iceberg        | integer(int64) | false    | none         | Display size for iceberg orders. 0 for non-iceberg orders. Note that hidden portions are charged taker fees. |
+| level          | integer(int64) | true     | write-only   | Level: maximum 20 levels                                                                                     |
+| close          | boolean        | false    | write-only   | Set as `true` to close the position, with `size` set to 0                                                    |
+| is_close       | boolean        | false    | read-only    | Is the order to close position                                                                               |
+| reduce_only    | boolean        | false    | write-only   | Set as `true` to be reduce-only order                                                                        |
+| is_reduce_only | boolean        | false    | read-only    | Is the order reduce-only                                                                                     |
+| is_liq         | boolean        | false    | read-only    | Is the order for liquidation                                                                                 |
+| tif            | string         | false    | none         | Time in force                                                                                                |
+
+\- gtc: GoodTillCancelled  
+\- ioc: ImmediateOrCancelled, taker only  
+\- poc: PendingOrCancelled, makes a post-only order that always enjoys a maker
+fee  
+\- fok: FillOrKill, fill either completely or none | | left | integer(int64) |
+false | read-only | Unfilled quantity | | fill_price | string | false |
+read-only | Fill price | | text | string | false | none | Custom order
+information. If not empty, must follow the rules below:
+
+1\. Prefixed with `t-`  
+2\. No longer than 28 bytes without `t-` prefix  
+3\. Can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.)
+
+In addition to user-defined information, the following are internal reserved
+fields that identify the order source:
+
+\- web: Web  
+\- api: API call  
+\- app: Mobile app  
+\- auto_deleveraging: Automatic deleveraging  
+\- liquidation: Forced liquidation of positions under the old classic mode  
+\- liq-xxx: a. Forced liquidation of positions under the new classic mode,
+including isolated margin, one-way cross margin, and non-hedged positions under
+two-way cross margin. b. Forced liquidation of isolated positions under the
+unified account single-currency margin mode  
+\- hedge-liq-xxx: Forced liquidation of hedged positions under the new classic
+mode two-way cross margin, i.e., simultaneously closing long and short
+positions  
+\- pm_liquidate: Forced liquidation under unified account multi-currency margin
+mode  
+\- comb_margin_liquidate: Forced liquidation under unified account portfolio
+margin mode  
+\- scm_liquidate: Forced liquidation of positions under unified account
+single-currency margin mode  
+\- insurance: Insurance | | tkfr | string | false | read-only | Taker fee | |
+mkfr | string | false | read-only | Maker fee | | refu | integer | false |
+read-only | Referrer user ID | | auto_size | string | false | write-only | Set
+side to close dual-mode position. `close_long` closes the long side; while
+`close_short` the short one. Note `size` also needs to be set to 0 | | stp_id |
+integer | false | read-only | Orders between users in the same `stp_id` group
+are not allowed to be self-traded
+
+1\. If the `stp_id` of two orders being matched is non-zero and equal, they will
+not be executed. Instead, the corresponding strategy will be executed based on
+the `stp_act` of the taker.  
+2\. `stp_id` returns `0` by default for orders that have not been set for
+`STP group` | | stp_act | string | false | none | Self-Trading Prevention
+Action. Users can use this field to set self-trade prevention strategies
+
+1\. After users join the `STP Group`, they can pass `stp_act` to limit the
+user's self-trade prevention strategy. If `stp_act` is not passed, the default
+is `cn` strategy.  
+2\. When the user does not join the `STP group`, an error will be returned when
+passing the `stp_act` parameter.  
+3\. If the user did not use `stp_act` when placing the order, `stp_act` will
+return '-'
+
+\- cn: Cancel newest, cancel new orders and keep old ones  
+\- co: Cancel oldest, cancel old orders and keep new ones  
+\- cb: Cancel both, both old and new orders will be cancelled | | amend_text |
+string | false | read-only | The custom data that the user remarked when
+amending the order | | limit_vip | integer(int64) | false | write-only |
+Counterparty user's VIP level for limit order fills. Current order will only
+match with orders whose VIP level is less than or equal to the specified level.
+Only 11~16 are supported; default is 0 | | pid | integer(int64) | false |
+write-only | Position ID |
+
+#### [#](#enumerated-values-141) Enumerated Values
+
+| Property  | Value       |
+| --------- | ----------- |
+| tif       | gtc         |
+| tif       | ioc         |
+| tif       | poc         |
+| tif       | fok         |
+| auto_size | close_long  |
+| auto_size | close_short |
+| stp_act   | co          |
+| stp_act   | cn          |
+| stp_act   | cb          |
+| stp_act   | \-          |
+
 ## [#](#batchamendorderreq) BatchAmendOrderReq
 
 **Source:**
@@ -1357,18 +1474,17 @@ VIP 等级的单成交，仅支持传递11~16，默认是0|
   "text": "string",
   "size": 0,
   "price": "string",
-  "amend_text": "string",
-
-  }
+  "amend_text": "string"
+}
 
 ```
 
 _Modify contract order parameters_
 
-### [#](#properties-7) Properties
+### [#](#properties-8) Properties
 
 **Source:**
-[https://www.gate.io/docs/developers/apiv4/en/#properties-7](https://www.gate.io/docs/developers/apiv4/en/#properties-7)
+[https://www.gate.io/docs/developers/apiv4/en/#properties-8](https://www.gate.io/docs/developers/apiv4/en/#properties-8)
 
 | Name     | Type           | Required | Restrictions | Description                                                               |
 | -------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------- |
@@ -1428,10 +1544,10 @@ string | false | none | Custom info during order amendment |
 
 _Futures price-triggered order details_
 
-### [#](#properties-8) Properties
+### [#](#properties-9) Properties
 
 **Source:**
-[https://www.gate.io/docs/developers/apiv4/en/#properties-8](https://www.gate.io/docs/developers/apiv4/en/#properties-8)
+[https://www.gate.io/docs/developers/apiv4/en/#properties-9](https://www.gate.io/docs/developers/apiv4/en/#properties-9)
 
 | Name       | Type           | Required | Restrictions | Description                                                                     |
 | ---------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------- |
@@ -1442,10 +1558,10 @@ _Futures price-triggered order details_
 Partial closing: plan-close-short-position size>0  
 Partial closing: plan-close-long-position size<0 | | » price | string | true |
 none | Order price. Set to 0 to use market price | | » close | boolean | false |
-write-only | When all positions are closed in a single position mode, it must be
-set to true to perform the closing operation  
-When partially closed positions in single-store mode/double-store mode, you can
-not set close, or close=false | | » tif | string | false | none | Time in force
+write-only | In One-way Mode, when closing all positions, this must be set to
+true to perform the closing operation  
+When partially closing positions in One-way Mode or Hedge Mode, you can omit
+close or set close=false | | » tif | string | false | none | Time in force
 strategy, default is gtc, market orders currently only support ioc mode
 
 \- gtc: GoodTillCancelled  
@@ -1456,11 +1572,11 @@ the order, including:
 \- app: Mobile app | | » reduce_only | boolean | false | none | When set to
 true, perform automatic position reduction operation. Set to true to ensure that
 the order will not open a new position, and is only used to close or reduce
-positions | | » auto_size | string | false | write-only | Single position mode:
+positions | | » auto_size | string | false | write-only | One-way Mode:
 auto_size is not required  
-Dual position mode full closing (size=0): auto_size must be set, close_long for
-closing long positions, close_short for closing short positions  
-Dual position mode partial closing (size≠0): auto_size is not required | | »
+Hedge Mode full closing (size=0): auto_size must be set, close_long for closing
+long positions, close_short for closing short positions  
+Hedge Mode partial closing (size≠0): auto_size is not required | | »
 is_reduce_only | boolean | false | read-only | Is the order reduce-only | | »
 is_close | boolean | false | read-only | Is the order to close position | |
 trigger | object | true | none | none | | » strategy_type | integer(int32) |
@@ -1471,9 +1587,9 @@ false | none | Trigger Strategy
 specified in `price_type` and the second-last price  
 Currently only supports 0 (latest transaction price) | | » price_type |
 integer(int32) | false | none | Reference price type. 0 - Latest trade price,
-1 - Mark price, 2 - Index price | | » price | string | false | none | Price
-value for price trigger, or spread value for spread trigger | | » rule |
-integer(int32) | false | none | Price Condition Type
+1 - Mark price, 2 - Index price | | » price | string | true | none | Price value
+for price trigger, or spread value for spread trigger | | » rule |
+integer(int32) | true | none | Price Condition Type
 
 \- 1: Trigger when the price calculated based on `strategy_type` and
 `price_type` is greater than or equal to `Trigger.Price`, while Trigger.Price
@@ -1512,7 +1628,7 @@ The two types of order take-profit/stop-loss are read-only and cannot be passed
 in requests | | me_order_id | integer(int64) | false | read-only | Corresponding
 order ID for order take-profit/stop-loss orders |
 
-#### [#](#enumerated-values-139) Enumerated Values
+#### [#](#enumerated-values-142) Enumerated Values
 
 | Property      | Value     |
 | ------------- | --------- |
@@ -1533,6 +1649,55 @@ order ID for order take-profit/stop-loss orders |
 | finish_as     | succeeded |
 | finish_as     | failed    |
 | finish_as     | expired   |
+
+## [#](#futuresupdatepricetriggeredorder) FuturesUpdatePriceTriggeredOrder
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#futuresupdatepricetriggeredorder](https://www.gate.io/docs/developers/apiv4/en/#futuresupdatepricetriggeredorder)
+
+```
+{
+  "settle": "string",
+  "order_id": 0,
+  "contact": "string",
+  "size": 0,
+  "price": "string",
+  "trigger_price": "string",
+  "price_type": 0,
+  "auto_size": "string"
+}
+
+```
+
+_Modify Price Order Details_
+
+### [#](#properties-10) Properties
+
+**Source:**
+[https://www.gate.io/docs/developers/apiv4/en/#properties-10](https://www.gate.io/docs/developers/apiv4/en/#properties-10)
+
+| Name          | Type           | Required | Restrictions | Description                                                                                                                                                                                            |
+| ------------- | -------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| settle        | string         | false    | read-only    | Settlement Currency (e.g., USDT, BTC)                                                                                                                                                                  |
+| order_id      | integer        | false    | read-only    | ID of the Pending Take-Profit/Stop-Loss Trigger Order                                                                                                                                                  |
+| contact       | string         | false    | none         | The order ID of the modified price-triggered order. This ID is returned upon successful creation of the price-triggered order. Note: This ID must be passed in both the request path and request body. |
+| size          | integer(int64) | false    | none         | Modified Contract Quantity. Full Close: 0; Partial Close: Positive/Negative values indicate direction (consistent with the creation interface logic).                                                  |
+| price         | string         | false    | none         | Represents the modified trading price. A value of 0 indicates a market order.                                                                                                                          |
+| trigger_price | string         | false    | none         | Modified Trigger Price                                                                                                                                                                                 |
+| price_type    | integer(int32) | false    | none         | Reference price type. 0 - Latest trade price, 1 - Mark price, 2 - Index price                                                                                                                          |
+| auto_size     | string         | false    | none         | 单仓模式不需设置auto_size                                                                                                                                                                              |
+
+双仓模式部分平仓(size≠0)时, 不需设置auto_size  
+双仓模式全部平仓(size=0)时, 必须设置auto_size, close_long 平多头,
+close_short 平空头 |
+
+#### [#](#enumerated-values-143) Enumerated Values
+
+| Property   | Value |
+| ---------- | ----- |
+| price_type | 0     |
+| price_type | 1     |
+| price_type | 2     |
 
 ## [#](#deliverycontract) DeliveryContract
 
@@ -1585,10 +1750,10 @@ order ID for order take-profit/stop-loss orders |
 
 _Futures contract details_
 
-### [#](#properties-9) Properties
+### [#](#properties-11) Properties
 
 **Source:**
-[https://www.gate.io/docs/developers/apiv4/en/#properties-9](https://www.gate.io/docs/developers/apiv4/en/#properties-9)
+[https://www.gate.io/docs/developers/apiv4/en/#properties-11](https://www.gate.io/docs/developers/apiv4/en/#properties-11)
 
 | Name                  | Type           | Required | Restrictions | Description                                                                                                                               |
 | --------------------- | -------------- | -------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1633,7 +1798,7 @@ position_size | integer(int64) | false | none | Current total long position size
 update time | | in_delisting | boolean | false | none | Contract is delisting |
 | orders_limit | integer | false | none | Maximum number of pending orders |
 
-#### [#](#enumerated-values-140) Enumerated Values
+#### [#](#enumerated-values-144) Enumerated Values
 
 | Property  | Value        |
 | --------- | ------------ |
@@ -1658,10 +1823,10 @@ update time | | in_delisting | boolean | false | none | Contract is delisting |
 
 ```
 
-### [#](#properties-10) Properties
+### [#](#properties-12) Properties
 
 **Source:**
-[https://www.gate.io/docs/developers/apiv4/en/#properties-10](https://www.gate.io/docs/developers/apiv4/en/#properties-10)
+[https://www.gate.io/docs/developers/apiv4/en/#properties-12](https://www.gate.io/docs/developers/apiv4/en/#properties-12)
 
 | Name    | Type    | Required | Restrictions | Description                         |
 | ------- | ------- | -------- | ------------ | ----------------------------------- |

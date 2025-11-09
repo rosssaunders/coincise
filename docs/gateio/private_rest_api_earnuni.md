@@ -167,7 +167,7 @@ and redemption are prohibited.
 | » type     | body | string | true     | Operation type: lend - Lend, redeem - Redeem                                                                              |
 | » min_rate | body | string | false    | Minimum interest rate. If set too high, lending may fail and no interest will be earned. Required for lending operations. |
 
-#### [#](#enumerated-values-133) Enumerated Values
+#### [#](#enumerated-values-135) Enumerated Values
 
 | Parameter | Value  |
 | --------- | ------ |
@@ -335,7 +335,7 @@ _Query lending transaction records_
 | to       | query | integer(int64) | false    | Termination Timestamp                                                    |
 | type     | query | string         | false    | Operation type: lend - Lend, redeem - Redeem                             |
 
-#### [#](#detailed-descriptions-53) Detailed descriptions
+#### [#](#detailed-descriptions-58) Detailed descriptions
 
 **from**: Start timestamp
 
@@ -347,7 +347,7 @@ to (the data start time of the time range actually returned by to and limit)
 Specify the end time. If not specified, it defaults to the current time, and the
 time format is a Unix timestamp
 
-#### [#](#enumerated-values-134) Enumerated Values
+#### [#](#enumerated-values-136) Enumerated Values
 
 | Parameter | Value  |
 | --------- | ------ |
@@ -485,7 +485,7 @@ _Query user dividend records_
 | from     | query | integer(int64) | false    | Start timestamp                                                          |
 | to       | query | integer(int64) | false    | Termination Timestamp                                                    |
 
-#### [#](#detailed-descriptions-54) Detailed descriptions
+#### [#](#detailed-descriptions-59) Detailed descriptions
 
 **from**: Start timestamp
 
