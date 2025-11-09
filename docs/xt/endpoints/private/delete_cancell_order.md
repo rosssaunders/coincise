@@ -1,34 +1,42 @@
-# DELETE Cancell order
+# DELETE /v4/order/{orderId}
 
-Source:
-[https://doc.xt.com/docs/spot/Order/CancelOrder](https://doc.xt.com/docs/spot/Order/CancelOrder)
+**Source:** [https://doc.xt.com/docs/spot/Order/CancelOrder](https://doc.xt.com/docs/spot/Order/CancelOrder)
 
-# Cancell order
+## Description
 
-**Type:** DELETE **Description:** `/v4/order/{orderId}`
+This endpoint performs operations on /v4/order/{orderId}.
 
-### Parameters[​](#parameters "Direct link to Parameters")
+## Authentication
 
-| name    | type   | mandatory | default | description | ranges |
-| ------- | ------ | --------- | ------- | ----------- | ------ |
-| orderId | number | true      |         |             |        |
+Required (Private Endpoint)
 
-#### **Limit Flow Rules**[​](#limit-flow-rules "Direct link to limit-flow-rules")
+## Rate Limit
 
 N/A
 
-### Parameters Example[​](#parameters-example "Direct link to Parameters Example")
+## HTTP Request
 
-```
-curl --location --request DELETE 'https://sapi.xt.com/v4/order/xxxxxxxxxxx' \    // xxxxxxxxxxx：orderId--header 'accept: */*' \--header 'Content-Type: application/json' \--header 'validate-algorithms: HmacSHA256' \--header 'validate-recvwindow: 60000' \--header 'validate-appkey: xxxxxxxxxx' \--header 'validate-timestamp: xxxxxxxxxx' \--header 'validate-signature: xxxxxxxxxx'
-```
+`DELETE /v4/order/{orderId}`
 
-### Response Example[​](#response-example "Direct link to Response Example")
+## Request Parameters
 
-Response
+| name | type | Required | default | description | ranges |
+| --- | --- | --- | --- | --- | --- |
+| orderId | number | Yes |  |  |  |
 
-```
+## Response Parameters
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| rc | number | - |
+| mc | string | - |
+| ma | array | - |
+| result | object | - |
+| result.cancelId | string | - |
+
+
+## Response Example
+
+```json
 {  "rc": 0,  "mc": "string",  "ma": [{}],  "result": {    "cancelId": "6216559590087220004"  }}
 ```
-
-[Edit this page](https://github.com/facebook/docusaurus/edit/main/website/docs/spot/Order/orderDel.mdx)

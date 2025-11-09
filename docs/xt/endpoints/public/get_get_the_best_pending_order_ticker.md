@@ -1,39 +1,40 @@
-# GET Get the best pending order ticker
+# GET /v4/public/ticker/book
 
-Source:
-[https://doc.xt.com/docs/spot/Market/GetBestPendingOrderTicker](https://doc.xt.com/docs/spot/Market/GetBestPendingOrderTicker)
+**Source:** [https://doc.xt.com/docs/spot/Market/GetBestPendingOrderTicker](https://doc.xt.com/docs/spot/Market/GetBestPendingOrderTicker)
 
-# Get the best pending order ticker
+## Description
 
-**Type:** GET **Description:** `/v4/public/ticker/book`
+This endpoint retrieves operations on /v4/public/ticker/book.
 
-### Parameters[​](#parameters "Direct link to Parameters")
+## Authentication
 
-| name    | type   | mandatory | default | description                                                                        | ranges |
-| ------- | ------ | --------- | ------- | ---------------------------------------------------------------------------------- | ------ |
-| symbol  | string | false     |         | trading pair eg:btc_usdt                                                           |        |
-| symbols | array  | false     |         | Collection of trading pairs. Priority is higher than symbol. eg: btc_usdt,eth_usdt |        |
-| tags    | string | false     |         | Set of tags, separated by commas, currently only supports spot                     |        |
+Not Required (Public Endpoint)
 
-#### **Limit Flow Rules**[​](#limit-flow-rules "Direct link to limit-flow-rules")
+## Rate Limit
 
 1.  single symbol: `10/s/ip`
 2.  multiple symbols: `10/s/ip`
 
-### Request Example[​](#request-example "Direct link to Request Example")
+## HTTP Request
 
-Request
+`GET /v4/public/ticker/book`
 
-```
+## Request Parameters
+
+| name | type | Required | default | description | ranges |
+| --- | --- | --- | --- | --- | --- |
+| symbol | string | No |  | trading pair eg:btc\_usdt |  |
+| symbols | array | No |  | Collection of trading pairs. Priority is higher than symbol. eg: btc\_usdt,eth\_usdt |  |
+| tags | string | No |  | Set of tags, separated by commas, currently only supports spot |  |
+
+## Request Example
+
+```bash
   curl --location --request GET 'https://sapi.xt.com/v4/public/ticker/book?symbol=XT_USDT' \    --header 'accept: */*' \    --header 'Content-Type: application/json' \
 ```
 
-### Response Example[​](#response-example "Direct link to Response Example")
+## Response Example
 
-Response
-
+```json
+{  "rc": 0,  "mc": "SUCCESS",  "ma": [],  "result": [    {      "s": "btc_usdt",
 ```
-{  "rc": 0,  "mc": "SUCCESS",  "ma": [],  "result": [    {      "s": "btc_usdt", // trading pair      "t": 1661856036925, // update time      "ap": null, // best ask price      "aq": null, // best ask quantity      "bp": null, // best bid price      "bq": null // best bid quantity    }  ]}
-```
-
-[Edit this page](https://github.com/facebook/docusaurus/edit/main/website/docs/spot/Market/tickerBook.mdx)

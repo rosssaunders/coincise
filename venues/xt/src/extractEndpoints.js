@@ -81,7 +81,276 @@ const isPrivateEndpoint = content => {
 }
 
 /**
- * Extract all endpoints from the documentation
+ * Extract response parameters from JSON example
+ */
+const extractResponseParameters = content => {
+  // Find the response example section - use simpler regex that works with template literals
+  const responseMatch = content.match(
+    /Response Example[^`]*```[^\n]*\n([\s\S]*?)```/i
+  )
+  if (!responseMatch) return null
+
+  let originalJson = responseMatch[1]
+  let jsonText = originalJson.trim()
+
+  // Handle git conflict markers - extract the correct version
+  if (jsonText.includes("<<<<<<< Updated upstream")) {
+    // Extract the version between ======= and >>>>>>> (the "incoming" changes)
+    const conflictMatch = jsonText.match(/=======\s*([\s\S]*?)>>>>>>> [^\n]+/)
+    if (conflictMatch) {
+      jsonText = conflictMatch[1].trim()
+      originalJson = jsonText // Update original for comment extraction
+    }
+  }
+
+  // Remove inline comments (e.g., //symbol)
+  jsonText = jsonText.replace(/\/\/.*$/gm, "")
+
+  try {
+    const jsonObj = JSON.parse(jsonText)
+    const params = []
+
+    const extractParams = (obj, prefix = "") => {
+      for (const key in obj) {
+        const fullKey = prefix ? `${prefix}.${key}` : key
+        const value = obj[key]
+        const type = Array.isArray(value) ? "array" : typeof value
+
+        // Determine description from inline comments if available (restrict to same line)
+        let description = ""
+        const commentMatch = originalJson.match(
+          new RegExp(`"${key}"[^\\n]*//\\s*(.+?)$`, "m")
+        )
+        if (commentMatch) {
+          description = commentMatch[1].trim()
+        }
+
+        params.push({ param: fullKey, type, description })
+
+        // Recursively extract nested objects (but not arrays)
+        if (value && typeof value === "object" && !Array.isArray(value)) {
+          extractParams(value, fullKey)
+        }
+      }
+    }
+
+    extractParams(jsonObj)
+    return params
+  } catch (e) {
+    return null
+  }
+}
+
+/**
+ * Post-process markdown content to conform to standard format
+ * Returns an object with the processed content and extracted path
+ */
+const postProcessMarkdown = (markdown, method, path, isPrivate) => {
+  let processed = markdown
+
+  // Remove navigation anchors like [​](#description "Direct link to Description")
+  processed = processed.replace(/\[​\]\(#[^)]+\)/g, "")
+
+  // Remove "Edit this page" links
+  processed = processed.replace(/\[Edit this page\]\([^)]+\)/g, "")
+
+  // Remove horizontal rules (both --- and * * * formats)
+  processed = processed.replace(/^---+$/gm, "")
+  processed = processed.replace(/^\* \* \*$/gm, "")
+
+  // Fix section headings and standardize structure
+  const sections = []
+  let currentSection = { title: "", content: "" }
+
+  const lines = processed.split("\n")
+  let i = 0
+
+  while (i < lines.length) {
+    const line = lines[i]
+
+    // Check if this is a heading
+    if (line.match(/^#{1,6}\s+/)) {
+      if (currentSection.content.trim()) {
+        sections.push({ ...currentSection })
+      }
+      currentSection = { title: line, content: "" }
+    } else {
+      currentSection.content += line + "\n"
+    }
+    i++
+  }
+
+  if (currentSection.content.trim() || currentSection.title) {
+    sections.push(currentSection)
+  }
+
+  // Rebuild document in standard format
+  let output = ""
+
+  // Process sections and reorder/rename them
+  let description = ""
+  let rateLimit = ""
+  let httpRequest = path ? `\`${method} ${path}\`` : ""
+  let requestParams = ""
+  let requestExample = ""
+  let responseParams = ""
+  let responseExample = ""
+  let extractedPath = path // Track the extracted path
+
+  sections.forEach(section => {
+    const heading = section.title.toLowerCase()
+    let content = section.content.trim()
+
+    if (
+      heading.includes("description") ||
+      heading.includes("full ticker") ||
+      heading.includes("submit order") ||
+      heading.includes("query") ||
+      heading.includes("cancel")
+    ) {
+      // Extract description - clean up any path/method info
+      if (content) {
+        // Remove Type and Description fields that show the path
+        content = content.replace(/\*\*Type:?\*\*[^\n]*\n?/gi, "")
+        content = content.replace(/\*\*Description:?\*\*[^\n]*\n?/gi, "")
+        content = content.replace(
+          /\*\*(GET|POST|PUT|DELETE|PATCH)\*\*\s+`[^`]+`\s*/gi,
+          ""
+        )
+        content = content.trim()
+        if (content) {
+          description = content
+        }
+      }
+      // Try to extract HTTP request from description if not already found
+      if (!httpRequest && section.content) {
+        const pathMatch = section.content.match(
+          /\*\*([A-Z]+)\*\*\s+`(\/v4\/[^`]+)`/
+        )
+        if (pathMatch) {
+          httpRequest = `\`${pathMatch[1]} ${pathMatch[2]}\``
+          extractedPath = pathMatch[2] // Store the extracted path
+        }
+      }
+    } else if (
+      heading.includes("limit") ||
+      heading.includes("flow rule") ||
+      heading.includes("remark")
+    ) {
+      rateLimit = content
+    } else if (heading.includes("parameter") && !heading.includes("example")) {
+      requestParams = content
+    } else if (heading.includes("request") && heading.includes("example")) {
+      // Remove "Request" label that sometimes appears
+      content = content.replace(/^Request\s*\n+/i, "")
+      requestExample = content
+      // Remove untagged code blocks and add bash tag
+      requestExample = requestExample.replace(/```\s*\n/g, "```bash\n")
+    } else if (heading.includes("response") && heading.includes("example")) {
+      // Remove "Response" label that sometimes appears
+      content = content.replace(/^Response\s*\n+/i, "")
+      responseExample = content
+
+      // Handle git conflict markers in the JSON - extract the correct version
+      if (responseExample.includes("<<<<<<< Updated upstream")) {
+        // Find the code block and extract just the version between ======= and >>>>>>>
+        const codeBlockMatch = responseExample.match(/```[^\n]*\n([\s\S]*?)```/)
+        if (codeBlockMatch) {
+          const fullJson = codeBlockMatch[1]
+          const conflictMatch = fullJson.match(/=======\s*([\s\S]*?)>>>>>>> [^\n]+/)
+          if (conflictMatch) {
+            // Reconstruct with just the "incoming" version (after =======)
+            responseExample = "```\n" + conflictMatch[1].trim() + "\n```"
+          }
+        }
+      }
+
+      // Remove untagged code blocks and add json tag
+      responseExample = responseExample.replace(/```\s*\n/g, "```json\n")
+      // Remove inline comments - preserve existing commas, just remove the comment part
+      responseExample = responseExample.replace(/\s*\/\/.*$/gm, "")
+      // Clean up any double commas that might have been created
+      responseExample = responseExample.replace(/,(\s*,)+/g, ",")
+    }
+  })
+
+  // Add Description section
+  if (description) {
+    output += "## Description\n\n"
+    output += description + "\n\n"
+  } else {
+    output += "## Description\n\n"
+    output += `This endpoint ${method === "GET" ? "retrieves" : "performs"} operations on ${path || "the resource"}.\n\n`
+  }
+
+  // Add Authentication section
+  output += "## Authentication\n\n"
+  output += isPrivate
+    ? "Required (Private Endpoint)\n\n"
+    : "Not Required (Public Endpoint)\n\n"
+
+  // Add Rate Limit section
+  if (rateLimit) {
+    output += "## Rate Limit\n\n"
+    output += rateLimit + "\n\n"
+  }
+
+  // Add HTTP Request section
+  if (httpRequest) {
+    output += "## HTTP Request\n\n"
+    output += httpRequest + "\n\n"
+  }
+
+  // Add Request Parameters section
+  if (requestParams) {
+    output += "## Request Parameters\n\n"
+    // Fix table headers to include "Required" column
+    let params = requestParams
+    // Check if the table has "mandatory" or "Mandatory" and replace with "Required"
+    params = params.replace(/\|\s*mandatory\s*\|/gi, "| Required |")
+    params = params.replace(/\|\s*true\s*\|/g, "| Yes |")
+    params = params.replace(/\|\s*false\s*\|/g, "| No |")
+    output += params + "\n\n"
+  }
+
+  // Add Request Example section
+  if (requestExample) {
+    output += "## Request Example\n\n"
+    output += requestExample + "\n\n"
+  }
+
+  // Try to extract response parameters from the response example
+  if (responseExample && !responseParams) {
+    const extractedParams = extractResponseParameters(processed)
+    if (extractedParams && extractedParams.length > 0) {
+      responseParams = "| Parameter | Type | Description |\n"
+      responseParams += "| --- | --- | --- |\n"
+      extractedParams.forEach(p => {
+        responseParams += `| ${p.param} | ${p.type} | ${p.description || "-"} |\n`
+      })
+    }
+  }
+
+  // Add Response Parameters section
+  if (responseParams) {
+    output += "## Response Parameters\n\n"
+    output += responseParams + "\n\n"
+  }
+
+  // Add Response Example section
+  if (responseExample) {
+    output += "## Response Example\n\n"
+    output += responseExample + "\n\n"
+  }
+
+  return {
+    content: output.trim(),
+    extractedPath: extractedPath
+  }
+}
+
+/**
+ * Extract all endpoints from the XT.com documentation
  */
 const extractEndpoints = async (page, turndownService) => {
   console.log("Extracting endpoint information...")
@@ -144,7 +413,6 @@ const extractEndpoints = async (page, turndownService) => {
     const allItems = mainMenu ? getAllMenuItems(mainMenu) : []
 
     // Filter to get only endpoint pages (exclude general documentation)
-
     return allItems.filter(item => {
       if (!item.href) return false
 
@@ -190,23 +458,37 @@ const extractEndpoints = async (page, turndownService) => {
         )
         elementsToRemove.forEach(el => el.remove())
 
-        // Extract HTTP method from the page content
+        // Extract HTTP method and path from the page content
         const content = clone.innerHTML
+        const textContent = clone.textContent
+
         let method = "GET" // Default
+        let path = null
 
         // Look for the Type field which contains the actual HTTP method
-        // Two formats:
-        // 1. <p><strong>Type:</strong> post <strong>Description:</strong> /v4/order</p>
-        // 2. <p><strong>Type</strong> POST</p>
-        const textContent = clone.textContent
+        // Format: Type: post Description: /v4/order
         const typeMatch = textContent.match(/Type:?\s+(get|post|put|delete)/i)
         if (typeMatch) {
           method = typeMatch[1].toUpperCase()
         }
 
+        // Look for the path in the Description field or in the content
+        // Multiple possible formats:
+        // 1. Description: /v4/public/ticker
+        // 2. **GET** `/v4/public/ticker`
+        // 3. Type: GET Description: /v4/order
+        const pathMatch =
+          textContent.match(/Description:?\s+(\/v4\/[^\s\n]+)/) ||
+          textContent.match(/\*\*(?:GET|POST|PUT|DELETE)\*\*\s+`(\/v4\/[^`]+)`/)
+
+        if (pathMatch) {
+          path = pathMatch[1].trim()
+        }
+
         return {
           content: content,
           method: method,
+          path: path,
           sourceUrl: url
         }
       }, link.href)
@@ -217,6 +499,7 @@ const extractEndpoints = async (page, turndownService) => {
         endpoints.push({
           name: link.text,
           method: endpointData.method,
+          path: endpointData.path,
           sourceUrl: endpointData.sourceUrl,
           content: markdown
         })
@@ -253,12 +536,27 @@ const writeEndpoints = endpoints => {
     const filename = generateFilename(endpoint.method, endpoint.name)
     const filePath = path.join(dir, filename)
 
-    // Add source URL and method to the content
-    const contentWithMetadata = `# ${endpoint.method} ${endpoint.name}
+    // Post-process the markdown content
+    const processed = postProcessMarkdown(
+      endpoint.content,
+      endpoint.method,
+      endpoint.path,
+      isPrivate
+    )
 
-Source: [${endpoint.sourceUrl}](${endpoint.sourceUrl})
+    // Use extracted path if original path was not available
+    const finalPath = endpoint.path || processed.extractedPath
 
-${endpoint.content}`
+    // Build the final document with proper H1 title
+    const title = finalPath
+      ? `# ${endpoint.method} ${finalPath}`
+      : `# ${endpoint.method} ${endpoint.name}`
+
+    const contentWithMetadata = `${title}
+
+**Source:** [${endpoint.sourceUrl}](${endpoint.sourceUrl})
+
+${processed.content}`
 
     writeFile(filePath, contentWithMetadata)
 
