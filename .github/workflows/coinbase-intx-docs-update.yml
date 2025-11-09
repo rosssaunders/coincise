@@ -34,10 +34,10 @@ jobs:
           cd venues/coinbase/intx
           npm install
 
-      - name: Extract general documentation
+      - name: Extract documentation
         run: |
           cd venues/coinbase/intx
-          npm run extract:general
+          npm run extract:all
 
       - name: Format documentation
         run: ./formatdocs.sh

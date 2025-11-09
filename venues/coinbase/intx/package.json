@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "extract:general": "node src/extractGeneral.js",
-    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:endpoints": "node src/extractFromOpenAPI.js",
     "extract:all": "npm run extract:general && npm run extract:endpoints"
   },
   "keywords": [
@@ -20,6 +20,7 @@
   "author": "Coincise",
   "license": "MIT",
   "dependencies": {
+    "js-yaml": "^4.1.0",
     "jsdom": "27.0.0",
     "puppeteer": "24.22.0",
     "turndown": "7.2.1",

@@ -19,11 +19,11 @@ docs/coinbase/intx/
 ├── response_formats.md       # Response data types and formats
 ├── change_log.md            # API version history
 └── endpoints/
-    ├── public/              # Public (unauthenticated) endpoints
+    ├── public/              # Public (unauthenticated) endpoints - 16 files
+    │   ├── getassets.md
     │   ├── getinstruments.md
-    │   ├── getinstrument.md
     │   └── ...
-    └── private/             # Private (authenticated) endpoints
+    └── private/             # Private (authenticated) endpoints - 47 files
         ├── getportfolios.md
         ├── createorder.md
         └── ...
@@ -81,18 +81,20 @@ Endpoints are automatically classified as public or private based on authenticat
 - **REST API Docs**: https://docs.cdp.coinbase.com/intx/docs/rest-api
 - **Authentication**: https://docs.cdp.coinbase.com/intx/docs/rest-api-auth
 
-## Note on Endpoint Extraction
+## Endpoint Extraction
 
-The Coinbase INTX API documentation does not follow the same URL structure as Coinbase Exchange
-for individual endpoint pages. The endpoints are documented in a different format that requires
-a different extraction approach.
+The scraper successfully extracts individual endpoint documentation from the Coinbase INTX OpenAPI specification. The extraction process:
 
-For now, this scraper focuses on extracting the general documentation (authentication, rate limits,
-etc.). A future enhancement can add endpoint extraction once the correct documentation URL patterns
-are identified.
+1. Downloads the OpenAPI spec from `https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/intx-spec.yaml`
+2. Parses the specification using js-yaml
+3. Generates markdown documentation for each endpoint with:
+   - HTTP method and path
+   - Operation ID and tags
+   - Parameters table
+   - Authentication requirements
+   - Response codes and descriptions
 
-The known endpoints list in `endpoints-config.js` provides a reference for what endpoints should
-be extracted when the proper URL structure is determined.
+The endpoints are automatically classified as public (16) or private (47) based on their tags and path structure.
 
 ## Authentication Headers
 
