@@ -1,6 +1,7 @@
 # GET /loan/multi_collateral/repay
 
-**Source:** [/loan/multi_collateral/repay](https://www.gate.io/docs/developers/apiv4/en/#listmultirepayrecords-parameters)
+**Source:**
+[/loan/multi_collateral/repay](https://www.gate.io/docs/developers/apiv4/en/#listmultirepayrecords-parameters)
 
 ## Authentication
 

@@ -1,6 +1,7 @@
 # GET /margin/uni/borrowable
 
-**Source:** [/margin/uni/borrowable](https://www.gate.io/docs/developers/apiv4/en/#getisolateduniborrowable-parameters)
+**Source:**
+[/margin/uni/borrowable](https://www.gate.io/docs/developers/apiv4/en/#getisolateduniborrowable-parameters)
 
 ## Authentication
 

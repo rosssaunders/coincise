@@ -220,7 +220,7 @@ const extractMethodAndPath = content => {
   if (methodMatch) {
     return {
       method: methodMatch[1],
-      path: methodMatch[2].replace(/^https?:\/\/[^\/]+/, "") // Remove domain
+      path: methodMatch[2].replace(/^https?:\/\/[^/]+/, "") // Remove domain
     }
   }
   // Default to POST /info for info endpoints, POST /exchange for exchange endpoints
@@ -241,7 +241,12 @@ const extractDescription = (content, endpointName) => {
       foundMethod = true
       continue
     }
-    if (foundMethod && line.trim() && !line.startsWith("**") && !line.startsWith("####")) {
+    if (
+      foundMethod &&
+      line.trim() &&
+      !line.startsWith("**") &&
+      !line.startsWith("####")
+    ) {
       // Stop at sections we don't want
       if (
         line.includes("**Headers**") ||
@@ -268,7 +273,11 @@ const extractDescription = (content, endpointName) => {
 /**
  * Convert parameter text to GFM table
  */
-const convertParametersToTable = (content, sectionName, includeRequired = true) => {
+const convertParametersToTable = (
+  content,
+  sectionName,
+  includeRequired = true
+) => {
   const lines = content.split("\n")
   let inSection = false
   const params = []
@@ -357,7 +366,7 @@ const convertParametersToTable = (content, sectionName, includeRequired = true) 
  */
 const fixJsonCodeBlocks = content => {
   // Add json tag to code blocks
-  return content.replace(/```\n(\s*[{\[])/g, "```json\n$1")
+  return content.replace(/```\n(\s*[{[])/g, "```json\n$1")
 }
 
 /**
@@ -375,7 +384,9 @@ const transformToStandardFormat = (endpoint, category) => {
   let path = "/info"
   if (methodPath) {
     method = methodPath.method
-    path = methodPath.path || (sourceUrl.includes("exchange-endpoint") ? "/exchange" : "/info")
+    path =
+      methodPath.path ||
+      (sourceUrl.includes("exchange-endpoint") ? "/exchange" : "/info")
   } else {
     path = sourceUrl.includes("exchange-endpoint") ? "/exchange" : "/info"
   }
@@ -418,7 +429,9 @@ const transformToStandardFormat = (endpoint, category) => {
   sections.push("")
   sections.push("**Weight:** 1")
   sections.push("")
-  sections.push("See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.")
+  sections.push(
+    "See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules."
+  )
   sections.push("")
 
   // HTTP Request
@@ -462,7 +475,9 @@ const transformToStandardFormat = (endpoint, category) => {
   } else {
     sections.push(`curl -X ${method} "https://api.hyperliquid.xyz${path}" \\`)
     sections.push('  -H "Content-Type: application/json" \\')
-    sections.push('  -d \'{"action": {...}, "nonce": 1234567890, "signature": {...}}\'')
+    sections.push(
+      '  -d \'{"action": {...}, "nonce": 1234567890, "signature": {...}}\''
+    )
   }
   sections.push("```")
   sections.push("")
@@ -476,7 +491,10 @@ const transformToStandardFormat = (endpoint, category) => {
   if (responseMatch) {
     let response = responseMatch[0]
     // Remove "Response" header and status code
-    response = response.replace(/\*\*Response\*\*[\s\S]*?200: OK[\s\S]*?Copy[\s\S]*?/m, "")
+    response = response.replace(
+      /\*\*Response\*\*[\s\S]*?200: OK[\s\S]*?Copy[\s\S]*?/m,
+      ""
+    )
     // Fix code block
     response = fixJsonCodeBlocks(response)
     sections.push(response.trim())

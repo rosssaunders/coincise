@@ -1,6 +1,7 @@
 # POST /spot/cancel_batch_orders
 
-**Source:** [/spot/cancel_batch_orders](https://www.gate.io/docs/developers/apiv4/en/#cancelbatchorders-parameters)
+**Source:**
+[/spot/cancel_batch_orders](https://www.gate.io/docs/developers/apiv4/en/#cancelbatchorders-parameters)
 
 ## Authentication
 

@@ -1,6 +1,7 @@
 # POST /unified/portfolio_calculator
 
-**Source:** [/unified/portfolio_calculator](https://www.gate.io/docs/developers/apiv4/en/#calculateportfoliomargin-parameters)
+**Source:**
+[/unified/portfolio_calculator](https://www.gate.io/docs/developers/apiv4/en/#calculateportfoliomargin-parameters)
 
 ## Authentication
 
@@ -236,8 +237,8 @@ _Portfolio margin calculator output_
 `original_position` - Original position  
 `long_delta_original_position` - Positive delta + Original position  
 `short_delta_original_position` - Negative delta + Original position | | »»»»»
-profit_loss_ranges | array | Results of 33 stress scenarios for MR1 | | »»»»»»
-_None_ | object | Profit and loss range | | »»»»»»» price_percentage | string |
+profit*loss_ranges | array | Results of 33 stress scenarios for MR1 | | »»»»»»
+\_None* | object | Profit and loss range | | »»»»»»» price_percentage | string |
 Percentage change in price | | »»»»»»» implied_volatility_percentage | string |
 Percentage change in implied volatility | | »»»»»»» profit_loss | string | PnL |
 | »»»»»» max_loss | object | Profit and loss range | | »»»»»»» price_percentage

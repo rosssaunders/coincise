@@ -1,6 +1,7 @@
 # GET /loan/multi_collateral/mortgage
 
-**Source:** [/loan/multi_collateral/mortgage](https://www.gate.io/docs/developers/apiv4/en/#listmulticollateralrecords-parameters)
+**Source:**
+[/loan/multi_collateral/mortgage](https://www.gate.io/docs/developers/apiv4/en/#listmulticollateralrecords-parameters)
 
 ## Authentication
 

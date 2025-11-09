@@ -1,6 +1,7 @@
 # POST /spot/countdown_cancel_all
 
-**Source:** [/spot/countdown_cancel_all](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelallspot-parameters)
+**Source:**
+[/spot/countdown_cancel_all](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelallspot-parameters)
 
 ## Authentication
 

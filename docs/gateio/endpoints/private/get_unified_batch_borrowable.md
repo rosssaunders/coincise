@@ -1,6 +1,7 @@
 # GET /unified/batch_borrowable
 
-**Source:** [/unified/batch_borrowable](https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowablelist-parameters)
+**Source:**
+[/unified/batch_borrowable](https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowablelist-parameters)
 
 ## Authentication
 

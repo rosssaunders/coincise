@@ -27,6 +27,7 @@ pnpm run extract:all
 ```
 
 The general extraction creates these core files in `docs/gateio/`:
+
 - `network_connectivity.md` - API base URLs and data center information
 - `authentication.md` - API key generation and signature requirements
 - `rate_limits.md` - Frequency limits and rate limiting rules
@@ -34,7 +35,9 @@ The general extraction creates these core files in `docs/gateio/`:
 - `response_formats.md` - Response format specifications
 - `change_log.md` - API changelog (when available)
 
-The endpoint extraction processes existing legacy documentation files and creates individual endpoint files:
+The endpoint extraction processes existing legacy documentation files and
+creates individual endpoint files:
+
 - Splits legacy files into individual endpoints
 - Categorizes as public (63 endpoints) or private (217 endpoints)
 - Saves to `docs/gateio/endpoints/public/` and `docs/gateio/endpoints/private/`
@@ -43,7 +46,8 @@ The endpoint extraction processes existing legacy documentation files and create
 
 ### Legacy Extraction
 
-The original config-based extraction scripts are still available with the `extract:legacy:*` prefix:
+The original config-based extraction scripts are still available with the
+`extract:legacy:*` prefix:
 
 ```bash
 # REST API sections
@@ -72,43 +76,63 @@ retry logic and fallback mechanisms.
 
 ### Standardized Extraction
 
-The new extraction scripts follow the pattern established in Backpack, Deribit, and XT venues:
+The new extraction scripts follow the pattern established in Backpack, Deribit,
+and XT venues:
 
 - **Pure ES6 JavaScript**: No TypeScript, functional programming paradigms
-- **Shared Utilities**: Uses `venues/shared/puppeteer.js` and `venues/shared/turndown.js`
-- **Consistent Structure**: Matches the standardized extraction pattern across all venues
+- **Shared Utilities**: Uses `venues/shared/puppeteer.js` and
+  `venues/shared/turndown.js`
+- **Consistent Structure**: Matches the standardized extraction pattern across
+  all venues
 - **Focused Output**: Creates targeted documentation files for core API concepts
 
 ### Resilient HTTP Fetching
 
-The legacy scraper implements robust HTTP fetching to handle Gate.io's anti-bot protection:
+The legacy scraper implements robust HTTP fetching to handle Gate.io's anti-bot
+protection:
 
-1. **Browser-like User-Agent Headers**: All requests include realistic browser headers to avoid being flagged as bots
-2. **Automatic Retry with Exponential Backoff**: Failed requests are automatically retried up to 3 times with increasing delays (500ms → 1500ms → 4500ms)
-3. **Detailed Error Logging**: Failed requests log status codes, response headers, and response body previews for debugging
-4. **Puppeteer Fallback**: If HTTP requests fail with 403 (Forbidden) errors, the scraper automatically falls back to using a headless browser (Puppeteer)
+1. **Browser-like User-Agent Headers**: All requests include realistic browser
+   headers to avoid being flagged as bots
+2. **Automatic Retry with Exponential Backoff**: Failed requests are
+   automatically retried up to 3 times with increasing delays (500ms → 1500ms →
+   4500ms)
+3. **Detailed Error Logging**: Failed requests log status codes, response
+   headers, and response body previews for debugging
+4. **Puppeteer Fallback**: If HTTP requests fail with 403 (Forbidden) errors,
+   the scraper automatically falls back to using a headless browser (Puppeteer)
 
 ### Architecture
 
-- **`src/extractGeneral.js`**: Extracts core documentation sections (authentication, rate limits, etc.)
-- **`src/splitEndpoints.js`**: Processes legacy documentation and creates individual endpoint files
-- **`src/extractEndpoints.js`**: Framework for future direct endpoint extraction from multi-page docs
+- **`src/extractGeneral.js`**: Extracts core documentation sections
+  (authentication, rate limits, etc.)
+- **`src/splitEndpoints.js`**: Processes legacy documentation and creates
+  individual endpoint files
+- **`src/extractEndpoints.js`**: Framework for future direct endpoint extraction
+  from multi-page docs
 - **`src/rest_api.js`**: Legacy config-based extraction (DEPRECATED)
-- **`src/websocket_*.js`**: Legacy WebSocket documentation extractors (DEPRECATED)
+- **`src/websocket_*.js`**: Legacy WebSocket documentation extractors
+  (DEPRECATED)
 - **`src/fetcher.js`**: Core HTTP fetching logic with axios-retry
-- **`src/puppeteer-fallback.js`**: Headless browser fallback for blocked requests
+- **`src/puppeteer-fallback.js`**: Headless browser fallback for blocked
+  requests
 - **`src/utils.js`**: Utility functions including the `downloadHtml` wrapper
 - **`src/scripts/test-fetch.js`**: Smoke test to validate fetch behavior
 
 ## Current Implementation
 
-**Endpoint Extraction**: The `extract:endpoints` script processes existing legacy documentation files to create individual endpoint files in the standardized structure. This hybrid approach:
-- Leverages the comprehensive endpoint documentation already extracted by legacy scripts
+**Endpoint Extraction**: The `extract:endpoints` script processes existing
+legacy documentation files to create individual endpoint files in the
+standardized structure. This hybrid approach:
+
+- Leverages the comprehensive endpoint documentation already extracted by legacy
+  scripts
 - Splits documentation into individual files per endpoint
-- Properly categorizes endpoints as public (authentication not required) or private
+- Properly categorizes endpoints as public (authentication not required) or
+  private
 - Creates 280 individual endpoint files (63 public, 217 private)
 
-For future enhancement, `src/extractEndpoints.js` provides a framework for direct multi-page extraction from Gate.io's documentation.
+For future enhancement, `src/extractEndpoints.js` provides a framework for
+direct multi-page extraction from Gate.io's documentation.
 
 ## Dependencies
 
@@ -159,4 +183,6 @@ The detailed logging will help identify whether the issue is:
 
 ## Migration Notes
 
-The venue is currently in transition from config-based extraction to the standardized extraction pattern. The legacy scripts (`extract:legacy:*`) will be maintained until endpoint extraction is fully implemented.
+The venue is currently in transition from config-based extraction to the
+standardized extraction pattern. The legacy scripts (`extract:legacy:*`) will be
+maintained until endpoint extraction is fully implemented.

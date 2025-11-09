@@ -28,9 +28,9 @@ Get Current Funding Rate.
 | code             | required | string  |                                                              |
 | data             | required | object  |                                                              |
 | data.symbol      | required | string  | Funding Rate Symbol                                          |
-|  |
+|                  |
 | data.granularity | required | integer | Granularity (milliseconds)                                   |
-|  |
+|                  |
 | data.timePoint   | required | integer | The funding rate settlement time point of the previous cycle |
 
 (milliseconds) Before going live, the system will pre-generate the first funding

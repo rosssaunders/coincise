@@ -1,6 +1,7 @@
 # GET /unified/borrowable
 
-**Source:** [/unified/borrowable](https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowable-parameters)
+**Source:**
+[/unified/borrowable](https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowable-parameters)
 
 ## Authentication
 

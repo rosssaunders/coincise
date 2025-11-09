@@ -1,6 +1,7 @@
 # GET /wallet/small_balance_history
 
-**Source:** [/wallet/small_balance_history](https://www.gate.io/docs/developers/apiv4/en/#listsmallbalancehistory-parameters)
+**Source:**
+[/wallet/small_balance_history](https://www.gate.io/docs/developers/apiv4/en/#listsmallbalancehistory-parameters)
 
 ## Authentication
 

@@ -31,7 +31,7 @@ last 24 hours.
 | data.time             | required | integer | timestamp                                                                                                                                                                        |
 | data.symbol           | required | string  | Symbol                                                                                                                                                                           |
 | data.buy              | required | string  | Best bid price                                                                                                                                                                   |
-|  |
+|                       |
 | data.sell             | required | string  | Best ask price                                                                                                                                                                   |
 | data.changeRate       | required | string  | 24h change rate                                                                                                                                                                  |
 | data.changePrice      | required | string  | 24h change price                                                                                                                                                                 |

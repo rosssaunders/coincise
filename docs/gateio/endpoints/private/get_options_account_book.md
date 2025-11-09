@@ -1,6 +1,7 @@
 # GET /options/account_book
 
-**Source:** [/options/account_book](https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccountbook-parameters)
+**Source:**
+[/options/account_book](https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccountbook-parameters)
 
 ## Authentication
 

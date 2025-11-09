@@ -1,6 +1,7 @@
 # POST /flash_swap/orders/preview
 
-**Source:** [/flash_swap/orders/preview](https://www.gate.io/docs/developers/apiv4/en/#previewflashswaporder-parameters)
+**Source:**
+[/flash_swap/orders/preview](https://www.gate.io/docs/developers/apiv4/en/#previewflashswaporder-parameters)
 
 ## Authentication
 

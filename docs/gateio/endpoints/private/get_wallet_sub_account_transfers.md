@@ -1,6 +1,7 @@
 # GET /wallet/sub_account_transfers
 
-**Source:** [/wallet/sub_account_transfers](https://www.gate.io/docs/developers/apiv4/en/#listsubaccounttransfers-parameters)
+**Source:**
+[/wallet/sub_account_transfers](https://www.gate.io/docs/developers/apiv4/en/#listsubaccounttransfers-parameters)
 
 ## Authentication
 

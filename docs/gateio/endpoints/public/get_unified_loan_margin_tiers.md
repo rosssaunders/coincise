@@ -1,6 +1,7 @@
 # GET /unified/loan_margin_tiers
 
-**Source:** [/unified/loan_margin_tiers](https://www.gate.io/docs/developers/apiv4/en/#listloanmargintiers-responses)
+**Source:**
+[/unified/loan_margin_tiers](https://www.gate.io/docs/developers/apiv4/en/#listloanmargintiers-responses)
 
 ## Authentication
 

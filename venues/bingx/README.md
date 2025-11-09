@@ -1,6 +1,7 @@
 # BingX API Documentation Extractor
 
-This project extracts BingX API documentation and converts it to structured markdown format following the standardized Coincise extraction pattern.
+This project extracts BingX API documentation and converts it to structured
+markdown format following the standardized Coincise extraction pattern.
 
 ## Project Structure
 
@@ -44,7 +45,8 @@ pnpm run extract:endpoints
 
 ## Output Structure
 
-Generated documentation is organized in `../../docs/bingx/` with the following structure:
+Generated documentation is organized in `../../docs/bingx/` with the following
+structure:
 
 ```
 docs/bingx/
@@ -78,17 +80,21 @@ Extracts the following core documentation files:
 
 Extracts individual endpoint documentation:
 
-- Automatically categorizes endpoints as public or private based on authentication requirements
+- Automatically categorizes endpoints as public or private based on
+  authentication requirements
 - Generates filenames in the format: `{http_method}_{endpoint_name}.md`
 - Includes proper source URLs linking back to original documentation
 - Handles complex HTML tables and converts them to GitHub Flavored Markdown
 
 ## Features
 
-- **Standardized Structure**: Follows the same pattern as Backpack, Deribit, and XT venues
-- **Advanced Web Scraping**: Uses Puppeteer with optimized settings from shared utilities
+- **Standardized Structure**: Follows the same pattern as Backpack, Deribit, and
+  XT venues
+- **Advanced Web Scraping**: Uses Puppeteer with optimized settings from shared
+  utilities
 - **Smart Categorization**: Automatically detects public vs private endpoints
 - **Clean Markdown**: High-quality conversion to GitHub Flavored Markdown
 - **Error Handling**: Comprehensive error handling with detailed logging
-- **Table Processing**: Smart table extraction and formatting for parameter documentation
+- **Table Processing**: Smart table extraction and formatting for parameter
+  documentation
 - **Source Attribution**: Automatic source links for each extracted endpoint
