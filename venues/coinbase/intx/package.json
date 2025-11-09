@@ -1,0 +1,28 @@
+{
+  "name": "@coincise/coinbase-intx",
+  "version": "1.0.0",
+  "description": "Documentation extraction for Coinbase International Exchange (INTX) API",
+  "type": "module",
+  "scripts": {
+    "extract:general": "node src/extractGeneral.js",
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "npm run extract:general && npm run extract:endpoints"
+  },
+  "keywords": [
+    "coinbase",
+    "coinbase-international",
+    "intx",
+    "cryptocurrency",
+    "exchange",
+    "api",
+    "documentation"
+  ],
+  "author": "Coincise",
+  "license": "MIT",
+  "dependencies": {
+    "jsdom": "27.0.0",
+    "puppeteer": "24.22.0",
+    "turndown": "7.2.1",
+    "turndown-plugin-gfm": "1.0.2"
+  }
+}
