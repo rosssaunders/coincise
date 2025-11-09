@@ -114,7 +114,7 @@ Order Status
 | RSN\_PAUSE | Order canceled during moments of pause in the order book. (This is usually for AMPL orders that are placed during the rebase period). |
 | RSN\_BOOK\_SLIP was: PARTIALLY FILLED @ xxxx | This happens an order would move the market too significantly. The order is partially executed and the remainder is canceled to avoid further slippage. |
 
-Updated 23 days ago
+Updated 24 days ago
 
 * * *
 
