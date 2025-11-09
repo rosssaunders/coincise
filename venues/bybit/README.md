@@ -1,85 +1,105 @@
-# Bybit API Documentation Generator
+# Bybit V5 API Documentation Extraction
 
-A JavaScript-based tool for generating comprehensive documentation for Bybit's V5 API endpoints.
+Documentation extraction for Bybit's V5 API following the standardized Coincise structure.
 
 ## Features
 
-- Generates documentation for all Bybit V5 API endpoints:
-  - Public REST API
-  - Private REST API
-  - Public WebSocket API
-  - Private WebSocket API
-- Converts HTML documentation to Markdown format
-- Maintains consistent formatting and structure
-- Provides detailed logging of the generation process
+- Extracts 6 core documentation files:
+  - `rate_limits.md` - Rate limiting rules and policies
+  - `authentication.md` - API authentication and security
+  - `network_connectivity.md` - Connection information and endpoints
+  - `error_codes.md` - Error code definitions
+  - `response_formats.md` - Standard response structures
+  - `change_log.md` - API version history
+- Extracts individual endpoint documentation:
+  - 22 public endpoints
+  - 113 private endpoints
+  - Proper categorization based on authentication headers
+  - Individual markdown files per endpoint
 
 ## Prerequisites
 
-- Node.js >= 18.0.0
-- npm or yarn
+- Node.js >= 20.0.0
+- pnpm
 
 ## Installation
 
-1. Clone the repository
-2. Install dependencies:
+From the venue directory:
+
 ```bash
 pnpm install
 ```
 
 ## Usage
 
-Run the documentation generator:
+### Extract All Documentation
+
 ```bash
-npm start
+pnpm run extract:all
 ```
 
-The generated documentation will be saved in the following locations:
-- Public REST API: `bybit/v5/public_rest_api.md`
-- Private REST API: `bybit/v5/private_rest_api.md`
-- Public WebSocket API: `bybit/v5/public_websocket_api.md`
-- Private WebSocket API: `bybit/v5/private_websocket_api.md`
+### Extract Only General Documentation
 
-## Configuration
+```bash
+pnpm run extract:general
+```
 
-The tool uses JSON configuration files located in `src/config/`:
-- `public_rest.json`
-- `private_rest.json`
-- `public_websocket.json`
-- `private_websocket.json`
+### Extract Only Endpoint Documentation
 
-Each configuration file contains:
-- `endpoints`: Array of API endpoints to document
-- `output_file`: Path where the documentation will be saved
-- `title`: Title of the documentation
+```bash
+pnpm run extract:endpoints
+```
+
+## Output Structure
+
+```
+docs/bybit/
+├── rate_limits.md
+├── authentication.md
+├── network_connectivity.md
+├── error_codes.md
+├── response_formats.md
+├── change_log.md
+└── endpoints/
+    ├── public/
+    │   └── get_v5_market_time.md
+    │   └── ... (22 endpoints)
+    └── private/
+        └── post_v5_order_create.md
+        └── ... (113 endpoints)
+```
+
+## Documentation Source
+
+- **Base URL:** https://bybit-exchange.github.io/docs/v5/
+- **API Version:** V5
+- **Changelog:** https://bybit-exchange.github.io/docs/changelog/v5
+
+## Technical Details
+
+### Extraction Approach
+
+- Uses Puppeteer for web scraping
+- Converts HTML to Markdown using Turndown with GFM support
+- Classifies endpoints as public/private based on authentication headers:
+  - Private endpoints require: X-BAPI-API-KEY, X-BAPI-SIGN, X-BAPI-TIMESTAMP
+  - Public endpoints do not require authentication headers
+
+### Authentication Detection
+
+The script checks for Bybit-specific authentication headers:
+- `X-BAPI-API-KEY` - API key header
+- `X-BAPI-SIGN` - Signature header
+- `X-BAPI-TIMESTAMP` - Timestamp header
+
+Endpoints requiring any of these headers are classified as private.
 
 ## Dependencies
 
-- puppeteer: ^24.6.0 - For web scraping
-- turndown: ^7.1.2 - For HTML to Markdown conversion
-- turndown-plugin-gfm: ^1.0.2 - For GitHub Flavored Markdown support
-- jsdom: ^26.0.0 - For DOM manipulation
+- `puppeteer` - Web scraping and browser automation
+- `turndown` - HTML to Markdown conversion
+- `turndown-plugin-gfm` - GitHub Flavored Markdown support
 
-## Project Structure
+## Last Updated
 
-```
-bybit-js/
-├── src/
-│   ├── main.js           # Entry point
-│   ├── config/           # Configuration files
-│   ├── processors/       # Documentation processors
-│   └── utils/           # Utility functions
-├── package.json
-└── README.md
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## License
-
-MIT 
+2024-11-08 
