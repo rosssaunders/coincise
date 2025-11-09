@@ -26,10 +26,10 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl https://api-cloud.bitmart.com/spot/quotation/v3/trades?symbol=BMX_ETH&limit=10`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| symbol | String | Yes | Trading pair (e.g. `BMX_USDT`) |
-| limit | Int | No | Number of returned items, maximum is 50, default 50 |
+| Field  | Type   | Required? | Description                                         |
+| ------ | ------ | --------- | --------------------------------------------------- |
+| symbol | String | Yes       | Trading pair (e.g. `BMX_USDT`)                      |
+| limit  | Int    | No        | Number of returned items, maximum is 50, default 50 |
 
 #### Response Data
 
@@ -37,12 +37,13 @@ See [Detailed Rate Limit](#rate-limit)
 
 `{   "code": 1000,   "trace":"886fb6ae-456b-4654-b4e0-1231",   "message": "success",   "data": [     [       "BMX_ETH", // symbol       "1691743270994", // ts       "1.00000000", // price       "1.0", // size       "sell" // side     ]   ] }`
 
-| Field | Type | Description |
-| --- | --- | --- |
-| symbol | String | Trading pair |
-| ts | String | Trade time (in milliseconds) |
-| price | String | Trade price |
-| size | String | Trade number |
-| side | String | Order Side  
+| Field  | Type   | Description                  |
+| ------ | ------ | ---------------------------- |
+| symbol | String | Trading pair                 |
+| ts     | String | Trade time (in milliseconds) |
+| price  | String | Trade price                  |
+| size   | String | Trade number                 |
+| side   | String | Order Side                   |
+
 \- `buy`  
 \- `sell` |

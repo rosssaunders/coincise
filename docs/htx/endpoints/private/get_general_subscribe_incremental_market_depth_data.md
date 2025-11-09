@@ -1,6 +1,7 @@
 # GET [General] Subscribe Incremental Market Depth Data
 
-**Source:** [[General] Subscribe Incremental Market Depth Data](https://www.htx.com/en-us/opend/newApiPages/?id=8cb7c51d-77b5-11ed-9966-0242ac110003)
+**Source:**
+[[General] Subscribe Incremental Market Depth Data](https://www.htx.com/en-us/opend/newApiPages/?id=8cb7c51d-77b5-11ed-9966-0242ac110003)
 
 **Category:** WebSocket Market Interface
 
@@ -8,63 +9,76 @@
 
 Required (Private Endpoint)
 
-### market.$contract\_code.depth.size\_${size}.high\_freq (\[General\] Subscribe Incremental Market Depth Data)
+### market.$contract\_code.depth.size\_${size}.high_freq (\[General\] Subscribe Incremental Market Depth Data)
 
 Signature verification: No
 
 Interface permission: Read
 
-Rate Limit: For public interface to get market data such as Get Kline data, Get Market Data Overview, Get Contract Information,Get market in-depth data, Get premium index Kline, Get real-time forecast capital rate kline, Get basis data, Get the last Trade of a Contract and so on： For websocket: The rate limit for “req” request is 50 times at once. No limit for “sub” request as the data will be pushed by sever voluntarily.
+Rate Limit: For public interface to get market data such as Get Kline data, Get
+Market Data Overview, Get Contract Information,Get market in-depth data, Get
+premium index Kline, Get real-time forecast capital rate kline, Get basis data,
+Get the last Trade of a Contract and so on： For websocket: The rate limit for
+“req” request is 50 times at once. No limit for “sub” request as the data will
+be pushed by sever voluntarily.
 
-Interface description: The interface supports cross margin mode and isolated margin mode. The request parameter "contract\_code" supports the contract code of futures, in that the format is BTC-USDT-210625; and supports contract type: BTC-USDT, BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ.
+Interface description: The interface supports cross margin mode and isolated
+margin mode. The request parameter "contract_code" supports the contract code of
+futures, in that the format is BTC-USDT-210625; and supports contract type:
+BTC-USDT, BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ.
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.hbdm.com/linear-swap-ws |
-| Online (preferred by aws customers) | wss://api.hbdm.vn/linear-swap-ws |
+| Environment                         | Address                           |
+| ----------------------------------- | --------------------------------- |
+| Online                              | wss://api.hbdm.com/linear-swap-ws |
+| Online (preferred by aws customers) | wss://api.hbdm.vn/linear-swap-ws  |
 
 #### Request Parameter
 
 | Field Name | Type | Description |
-| --- | --- | --- |
+| ---------- | ---- | ----------- |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
+| -------------- | -------------------- | ---- |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | contract code or contract type |  | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... or BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ |
-| size | string | true | Depth size |  | 20: stands for 20 unmerged data. 150:stands for 150 unmerged data. |
+| Parameter     | Data Type | Required | Description                    | Value Range | Default Value                                                                                             |
+| ------------- | --------- | -------- | ------------------------------ | ----------- | --------------------------------------------------------------------------------------------------------- |
+| contract_code | string    | true     | contract code or contract type |             | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... or BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ |
+| size          | string    | true     | Depth size                     |             | 20: stands for 20 unmerged data. 150:stands for 150 unmerged data.                                        |
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| ts | string | true | Timestamp of Respond Generation, Unit: Millisecond |  |
-| ch | long | true | Data channel, Format：market.$contract\_code.depth.size\_${size}.high\_freq |  |
-| TICK\_START |  | false |  |  |
-| mrid | long | true | Order ID |  |
-| id | long | true | tick ID，system timestamp.seconds |  |
-| asks | object | true | Sell,\[price(Ask price), vol(Ask orders (cont.) )\], price in ascending sequence |  |
-| bids | object | true | Buy,\[price(Bid price), vol(Bid orders(Cont.))\], Price in descending sequence |  |
-| ts | long | true | Timepoint for system detecting orderbook, unit: millisecond |  |
-| version | long | true | version ID,auto increment ID. |  |
-| event | string | true | event type: update or snapshot |  |
-| ch | string | true | Data channel, Format： market.$contract\_code.depth.size\_${size}.high\_freq |  |
-| TICK\_END |  | false |  |  |
+| Parameter  | Data Type | Required | Description                                                                      | Value Range |
+| ---------- | --------- | -------- | -------------------------------------------------------------------------------- | ----------- |
+| ts         | string    | true     | Timestamp of Respond Generation, Unit: Millisecond                               |             |
+| ch         | long      | true     | Data channel, Format：market.$contract\_code.depth.size\_${size}.high_freq       |             |
+| TICK_START |           | false    |                                                                                  |             |
+| mrid       | long      | true     | Order ID                                                                         |             |
+| id         | long      | true     | tick ID，system timestamp.seconds                                                |             |
+| asks       | object    | true     | Sell,\[price(Ask price), vol(Ask orders (cont.) )\], price in ascending sequence |             |
+| bids       | object    | true     | Buy,\[price(Bid price), vol(Bid orders(Cont.))\], Price in descending sequence   |             |
+| ts         | long      | true     | Timepoint for system detecting orderbook, unit: millisecond                      |             |
+| version    | long      | true     | version ID,auto increment ID.                                                    |             |
+| event      | string    | true     | event type: update or snapshot                                                   |             |
+| ch         | string    | true     | Data channel, Format： market.$contract\_code.depth.size\_${size}.high_freq      |             |
+| TICK_END   |           | false    |                                                                                  |             |
 
 Notes:  
-when data\_type is incremental,snapshot data wil be pushed for the first time. When re-connection occurs, snapshort data will be pushed for the first time.  
-version: auto increment in single websocket connection. version may be different among several websocket subscription connections.  
-orderbook will be pushed if orderbook is updated whenever incremental or snapshot.  
-orderbook event will be checked every 30ms. If there is no orderbook event, you will not receive any orderbook data.  
-you HAVE TO maintain local orderbook data,such as updating your local orderbook bids and asks data.
+when data_type is incremental,snapshot data wil be pushed for the first time.
+When re-connection occurs, snapshort data will be pushed for the first time.  
+version: auto increment in single websocket connection. version may be different
+among several websocket subscription connections.  
+orderbook will be pushed if orderbook is updated whenever incremental or
+snapshot.  
+orderbook event will be checked every 30ms. If there is no orderbook event, you
+will not receive any orderbook data.  
+you HAVE TO maintain local orderbook data,such as updating your local orderbook
+bids and asks data.
 
 #### Subscription Example
 
@@ -72,9 +86,9 @@ you HAVE TO maintain local orderbook data,such as updating your local orderbook 
 
 "sub":
 
-"market.BTC-USDT.depth.size\_20.high\_freq"
+"market.BTC-USDT.depth.size_20.high_freq"
 
-"data\_type":
+"data_type":
 
 "incremental"
 
@@ -94,9 +108,9 @@ you HAVE TO maintain local orderbook data,such as updating your local orderbook 
 
 "subbed":
 
-"market.BTC-USDT.depth.size\_20.high\_freq"
+"market.BTC-USDT.depth.size_20.high_freq"
 
-"data\_type":
+"data_type":
 
 "incremental"
 
@@ -116,7 +130,7 @@ you HAVE TO maintain local orderbook data,such as updating your local orderbook 
 
 "ch":
 
-"market.BTC-USDT.depth.size\_20.high\_freq"
+"market.BTC-USDT.depth.size_20.high_freq"
 
 "tick":{
 
@@ -194,7 +208,7 @@ you HAVE TO maintain local orderbook data,such as updating your local orderbook 
 
 "ch":
 
-"market.BTC-USDT.depth.size\_20.high\_freq"
+"market.BTC-USDT.depth.size_20.high_freq"
 
 "event":
 
@@ -230,9 +244,9 @@ you HAVE TO maintain local orderbook data,such as updating your local orderbook 
 
 "unsub":
 
-"market.BTC-USDT.depth.size\_20.high\_freq"
+"market.BTC-USDT.depth.size_20.high_freq"
 
-"data\_type":
+"data_type":
 
 "incremental"
 

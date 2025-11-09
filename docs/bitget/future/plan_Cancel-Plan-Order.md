@@ -4,13 +4,14 @@ Speed limit is 10 times/s (UID)
 
 ### Description[​](#description "Direct link to Description")
 
-Interface for cancelling trigger orders, can be used to cancel by 'productType', 'symbol' and/or trigger ID list.
+Interface for cancelling trigger orders, can be used to cancel by 'productType',
+'symbol' and/or trigger ID list.
 
 All orders that fall under that'productType' and 'symbol' will be cancelled.
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   POST /api/v2/mix/order/cancel-plan-order
+- POST /api/v2/mix/order/cancel-plan-order
 
 Request Example
 
@@ -20,15 +21,15 @@ curl -X POST "https://api.bitget.com/api/v2/mix/order/cancel-plan-order" \   -H 
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| orderIdList | List | No | Trigger order id list.<br>If it is passed, symbol must not be null and must be aligned with symbol/productType/planType. 
-| &gt;orderId | String | No | Trigger order ID<br>Either orderId or clientOid is required. If both are entered, orderId prevails. 
-| &gt;clientOid | String | No | Customized trigger order ID<br>Either orderId or clientOid is required. If both are entered, triggerId prevails. 
-| symbol | String | No | Trading pair, e.g. ETHUSDT 
-| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures 
-| marginCoin | String | No | Margin coin must be capitalized 
-| planType | String | No | Trigger order type<br>normal_plan plan order(default)<br>profit_plan batch profit order<br>loss_plan batch loss order<br>pos_profit position profit order<br>pos_loss position loss order<br>moving_plan trailing order 
+| Parameter     | Type   | Required | Description                                                                                                                                                                                                             |
+| :------------ | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| orderIdList   | List   | No       | Trigger order id list.<br>If it is passed, symbol must not be null and must be aligned with symbol/productType/planType.                                                                                                |
+| &gt;orderId   | String | No       | Trigger order ID<br>Either orderId or clientOid is required. If both are entered, orderId prevails.                                                                                                                     |
+| &gt;clientOid | String | No       | Customized trigger order ID<br>Either orderId or clientOid is required. If both are entered, triggerId prevails.                                                                                                        |
+| symbol        | String | No       | Trading pair, e.g. ETHUSDT                                                                                                                                                                                              |
+| productType   | String | Yes      | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures                                                                        |
+| marginCoin    | String | No       | Margin coin must be capitalized                                                                                                                                                                                         |
+| planType      | String | No       | Trigger order type<br>normal_plan plan order(default)<br>profit_plan batch profit order<br>loss_plan batch loss order<br>pos_profit position profit order<br>pos_loss position loss order<br>moving_plan trailing order |
 
 Response Example
 
@@ -38,14 +39,14 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| successList | List&lt;Object&gt; | The collection of successfully cancelled orders. 
-| &gt; orderId | String | Order ID 
-| &gt; clientOid | String | Customize order ID 
-| failureList | List&lt;Object&gt; | The collection of unsuccessfully cancelled orders. 
-| &gt; orderId | String | Order ID 
-| &gt; clientOid | String | Customize order ID 
-| &gt;errorMsg | String | Failure reason
+| Parameter      | Type               | Description                                        |
+| :------------- | :----------------- | :------------------------------------------------- |
+| successList    | List&lt;Object&gt; | The collection of successfully cancelled orders.   |
+| &gt; orderId   | String             | Order ID                                           |
+| &gt; clientOid | String             | Customize order ID                                 |
+| failureList    | List&lt;Object&gt; | The collection of unsuccessfully cancelled orders. |
+| &gt; orderId   | String             | Order ID                                           |
+| &gt; clientOid | String             | Customize order ID                                 |
+| &gt;errorMsg   | String             | Failure reason                                     |
 
 > **Source:** https://www.bitget.com/api-doc/contract/plan/Cancel-Plan-Order

@@ -1,13 +1,20 @@
 # Upbit API Documentation Extractor
 
-This tool extracts and converts Upbit API documentation to clean markdown format, organized for easy consumption by LLMs and developers following the standardized Coincise extraction pattern.
+This tool extracts and converts Upbit API documentation to clean markdown
+format, organized for easy consumption by LLMs and developers following the
+standardized Coincise extraction pattern.
 
 ## Features
 
-- **Standardized Structure**: Follows the same extraction pattern as other exchanges (Backpack, Deribit, XT)
-- **Core Documentation Files**: Extracts 6 essential documentation files (rate limits, authentication, network connectivity, error codes, response formats, change log)
-- **Endpoint Documentation**: Automatically categorizes endpoints as public or private
-- **Clean Markdown**: Converts HTML documentation to clean, readable markdown using Turndown
+- **Standardized Structure**: Follows the same extraction pattern as other
+  exchanges (Backpack, Deribit, XT)
+- **Core Documentation Files**: Extracts 6 essential documentation files (rate
+  limits, authentication, network connectivity, error codes, response formats,
+  change log)
+- **Endpoint Documentation**: Automatically categorizes endpoints as public or
+  private
+- **Clean Markdown**: Converts HTML documentation to clean, readable markdown
+  using Turndown
 - **Puppeteer-based**: Uses headless Chrome for reliable content extraction
 
 ## Usage
@@ -62,15 +69,19 @@ docs/upbit/
 ## Endpoint Categorization
 
 - **Public Endpoints**: Quotation and Service APIs (no authentication required)
-- **Private Endpoints**: Assets, Order, Withdrawal, and Deposit APIs (authentication required)
+- **Private Endpoints**: Assets, Order, Withdrawal, and Deposit APIs
+  (authentication required)
 
 ## Technical Details
 
 - **Engine**: Uses Puppeteer with optimized browser configuration
-- **Content Processing**: Extracts main content areas while filtering out navigation
-- **Error Handling**: Graceful error handling with detailed logging and fallbacks
+- **Content Processing**: Extracts main content areas while filtering out
+  navigation
+- **Error Handling**: Graceful error handling with detailed logging and
+  fallbacks
 - **Performance**: Includes polite delays between requests
-- **Format**: Converts to clean markdown with proper heading structure and table support
+- **Format**: Converts to clean markdown with proper heading structure and table
+  support
 
 ## Dependencies
 
@@ -79,5 +90,6 @@ docs/upbit/
 - `turndown-plugin-gfm`: ^1.0.2 - GitHub Flavored Markdown support
 
 Shared utilities are imported from `venues/shared/`:
+
 - `puppeteer.js` - Browser configuration and page setup
 - `turndown.js` - Markdown conversion service

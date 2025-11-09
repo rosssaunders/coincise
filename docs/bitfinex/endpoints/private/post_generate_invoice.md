@@ -6,35 +6,38 @@ post https://api.bitfinex.com/v2/auth/w/deposit/invoice
 
 Generates a Lightning Network deposit invoice
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
+/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+theme, base, components, utilities; @layer utilities;
 
 > ❗️
-> 
-> ### 
-> 
+>
+> ###
+>
 > Creating a deposit address
-> 
+>
 > [](#creating-a-deposit-address)
-> 
-> If this is the first time you are generating an LNX invoice on your account, you will first need to create a deposit address. To do this, call w/deposit/address with { method: 'LNX', wallet: 'exchange' }
+>
+> If this is the first time you are generating an LNX invoice on your account,
+> you will first need to create a deposit address. To do this, call
+> w/deposit/address with { method: 'LNX', wallet: 'exchange' }
 
-#### 
+####
 
 Response data
 
 [](#response-data)
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| \[0\] | INVOICE\_HASH | String | Hashed invoice |
-| \[1\] | INVOICE | String | Requested invoice |
-| 
-\[ . . . \]
+| Index | Field        | Type   | Description       |
+| ----- | ------------ | ------ | ----------------- |
+| \[0\] | INVOICE_HASH | String | Hashed invoice    |
+| \[1\] | INVOICE      | String | Requested invoice |
 
- |
-| \[4\] | AMOUNT | String | Amount of invoice |
+| \[ . . . \]
 
-td:has(div.placeholders) { background-color: #ebebeb; } .placeholders { height: 10px; text-align: center; font-size: 16px; line-height: 8px; }
+| | \[4\] | AMOUNT | String | Amount of invoice |
+
+td:has(div.placeholders) { background-color: #ebebeb; } .placeholders { height:
+10px; text-align: center; font-size: 16px; line-height: 8px; }
 
 Body Params
 
@@ -46,7 +49,8 @@ required
 
 Defaults to exchange
 
-Select the wallet that will receive the invoice payment. Currently only 'exchange' is available
+Select the wallet that will receive the invoice payment. Currently only
+'exchange' is available
 
 currency
 
@@ -56,7 +60,8 @@ required
 
 Defaults to LNX
 
-Select the currency for which you wish to generate an invoice. Currently only LNX (Bitcoin Lightning Network) is available.
+Select the currency for which you wish to generate an invoice. Currently only
+LNX (Bitcoin Lightning Network) is available.
 
 amount
 
@@ -70,7 +75,7 @@ Amount that you wish to deposit (in BTC; min 0.000001, max 0.02)
 
 Responses
 
-# 
+#
 
 200
 
@@ -80,7 +85,7 @@ Response body
 
 json
 
-# 
+#
 
 400
 
@@ -92,7 +97,7 @@ object
 
 Updated 5 months ago
 
-* * *
+---
 
 Language
 
@@ -132,15 +137,15 @@ curl \--request POST \\
 
 7
 
-  "wallet": "exchange",
+"wallet": "exchange",
 
 8
 
-  "currency": "LNX",
+"currency": "LNX",
 
 9
 
-  "amount": "0"
+"amount": "0"
 
 10
 
@@ -156,7 +161,8 @@ RESPONSE
 
 Examples
 
-Click `Try It!` to start a request and see the response here! Or choose an example:
+Click `Try It!` to start a request and see the response here! Or choose an
+example:
 
 application/json
 
@@ -164,10 +170,10 @@ application/json
 
 Updated 5 months ago
 
-* * *
+---
 
 ---
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-deposit-invoice
-Path: /v2/auth/w/deposit/invoice
-Method: POST
+
+Section: Account Actions Source:
+https://docs.bitfinex.com/reference/rest-auth-deposit-invoice Path:
+/v2/auth/w/deposit/invoice Method: POST

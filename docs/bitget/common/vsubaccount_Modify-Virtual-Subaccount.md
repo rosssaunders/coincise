@@ -8,7 +8,7 @@ Modify the virtual sub-account
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   POST /api/v2/user/modify-virtual-subaccount
+- POST /api/v2/user/modify-virtual-subaccount
 
 Request Example
 
@@ -18,11 +18,11 @@ curl -X POST "https://api.bitget.com/api/v2/user/modify-virtual-subaccount" \   
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| subAccountUid | String | Yes | Sub-account Uid 
-| permList | List&lt;String&gt; | Yes | Permissions<br>spot_trade Spot trade<br>contract_trade Futures trade read-write<br>read Read permissions 
-| status | String | Yes | Sub-account status<br>normal Normal<br>freeze Freeze 
+| Parameter     | Type               | Required | Description                                                                                              |
+| :------------ | :----------------- | :------- | :------------------------------------------------------------------------------------------------------- |
+| subAccountUid | String             | Yes      | Sub-account Uid                                                                                          |
+| permList      | List&lt;String&gt; | Yes      | Permissions<br>spot_trade Spot trade<br>contract_trade Futures trade read-write<br>read Read permissions |
+| status        | String             | Yes      | Sub-account status<br>normal Normal<br>freeze Freeze                                                     |
 
 Response Example
 
@@ -32,8 +32,9 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| result | String | Edit result<br><code>success</code> Success<br><code>failure</code> Failure
+| Parameter | Type   | Description                                                                 |
+| :-------- | :----- | :-------------------------------------------------------------------------- |
+| result    | String | Edit result<br><code>success</code> Success<br><code>failure</code> Failure |
 
-> **Source:** https://www.bitget.com/api-doc/common/vsubaccount/Modify-Virtual-Subaccount
+> **Source:**
+> https://www.bitget.com/api-doc/common/vsubaccount/Modify-Virtual-Subaccount

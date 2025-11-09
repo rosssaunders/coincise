@@ -65,44 +65,45 @@ or
 ]
 ```
 
--   **GET** `/api/v3/ticker/24hr`
+- **GET** `/api/v3/ticker/24hr`
 
 **Weight(IP):**
 
 | Parameter | Symbols Provided | Weight |
-| --- | --- | --- |
-| symbol | 1 | 1 |
-| symbols | all | 40 |
+| --------- | ---------------- | ------ |
+| symbol    | 1                | 1      |
+| symbols   | all              | 40     |
 
 Parameters:
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | string | NO | If the symbol is not sent, tickers for all symbols will be returned in an array. |
+| Name   | Type   | Mandatory | Description                                                                      |
+| ------ | ------ | --------- | -------------------------------------------------------------------------------- |
+| symbol | string | NO        | If the symbol is not sent, tickers for all symbols will be returned in an array. |
 
 Response:
 
-| Name | Description |
-| --- | --- |
-| symbol | Symbol |
-| priceChange | price Change |
+| Name               | Description          |
+| ------------------ | -------------------- |
+| symbol             | Symbol               |
+| priceChange        | price Change         |
 | priceChangePercent | price change percent |
-| prevClosePrice | Previous close price |
-| lastPrice | Last price |
-| lastQty | Last quantity |
-| bidPrice | Bid best price |
-| bidQty | Bid best quantity |
-| askPrice | Ask best price |
-| askQty | Ask best quantity |
-| openPrice | Open |
-| highPrice | High |
-| lowPrice | Low |
-| volume | Deal volume |
-| quoteVolume | Quote asset volume |
-| openTime | Start time |
-| closeTime | Close time |
-| count |  |
+| prevClosePrice     | Previous close price |
+| lastPrice          | Last price           |
+| lastQty            | Last quantity        |
+| bidPrice           | Bid best price       |
+| bidQty             | Bid best quantity    |
+| askPrice           | Ask best price       |
+| askQty             | Ask best quantity    |
+| openPrice          | Open                 |
+| highPrice          | High                 |
+| lowPrice           | Low                  |
+| volume             | Deal volume          |
+| quoteVolume        | Quote asset volume   |
+| openTime           | Start time           |
+| closeTime          | Close time           |
+| count              |                      |
 
 ---
 
-**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#24hr-ticker-price-change-statistics
+**Source:**
+https://mexcdevelop.github.io/apidocs/spot_v3_en#24hr-ticker-price-change-statistics

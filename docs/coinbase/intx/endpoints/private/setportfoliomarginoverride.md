@@ -2,7 +2,8 @@
 
 ## Set portfolio margin override
 
-Specify the margin override value for a portfolio to either increase notional requirements or opt-in to higher leverage.
+Specify the margin override value for a portfolio to either increase notional
+requirements or opt-in to higher leverage.
 
 **Operation ID:** setPortfolioMarginOverride
 
@@ -37,4 +38,5 @@ Invalid permission
 
 ## Documentation
 
-For more details, see the [INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).
+For more details, see the
+[INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).

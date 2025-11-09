@@ -1,6 +1,7 @@
 # GET [Cross] Query A Sub-Account's Assets Information
 
-**Source:** [[Cross] Query A Sub-Account's Assets Information](https://www.htx.com/en-us/opend/newApiPages/?id=8cb82663-77b5-11ed-9966-0242ac110003)
+**Source:**
+[[Cross] Query A Sub-Account's Assets Information](https://www.htx.com/en-us/opend/newApiPages/?id=8cb82663-77b5-11ed-9966-0242ac110003)
 
 **Category:** Swap Account Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /linear-swap-api/v1/swap\_cross\_sub\_account\_info (\[Cross\] Query A Sub-Account's Assets Information)
+### /linear-swap-api/v1/swap_cross_sub_account_info (\[Cross\] Query A Sub-Account's Assets Information)
 
 Request type: POST
 
@@ -16,92 +17,97 @@ Signature verification: Yes
 
 Interface permission: Read
 
-Rate Limit: Generally, the private interface rate limit of API key is at most 144 times every 3 seconds for each UID (Trade Interface: at most 72 times every 3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is shared by all the altcoins contracts delivered by different date).
+Rate Limit: Generally, the private interface rate limit of API key is at most
+144 times every 3 seconds for each UID (Trade Interface: at most 72 times every
+3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is
+shared by all the altcoins contracts delivered by different date).
 
 Interface description: The interface only supports cross margin mode.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| sub\_uid | long | true | sub-account UID |  |  |
-| margin\_account | string | false | margin account，return all margin account info when null | "USDT"...，but now only USDT |  |
+| Parameter      | Data Type | Required | Description                                              | Value Range                  | Default Value |
+| -------------- | --------- | -------- | -------------------------------------------------------- | ---------------------------- | ------------- |
+| sub_uid        | long      | true     | sub-account UID                                          |                              |               |
+| margin_account | string    | false    | margin account，return all margin account info when null | "USDT"...，but now only USDT |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request Processing Result | "ok" , "error" |
-| ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| DATA\_START | object array | true |  |  |
-| margin\_mode | string | true | margin mode | cross: cross margin mode |
-| margin\_account | string | true | margin account | "USDT"... |
-| margin\_asset | string | true | margin asset |  |
-| margin\_balance | decimal | true | account equity |  |
-| margin\_static | decimal | true | static margin |  |
-| margin\_position | decimal | true | position margin (the margin used by current positions) |  |
-| margin\_frozen | decimal | true | frozen margin |  |
-| profit\_unreal | decimal | true | unrealized profits and losses |  |
-| withdraw\_available | decimal | true | available transfer amount |  |
-| risk\_rate | decimal | true | margin rate |  |
-| money\_in | bigdecimal | true | money in |  |
-| money\_out | bigdecimal | true | money out |  |
-| new\_risk\_rate | bigdecimal | true | new risk rate |  |
-| position\_mode | string | true | position mode | single\_side，dual\_side |
-| CONTRACT\_DETAIL\_START | object array | true |  |  |
-| symbol | string | true | symbol | "BTC","ETH"... |
-| contract\_code | string | true | contract code | swap:"BTC-USDT" ... |
-| margin\_position | decimal | true | position margin (the margin used by current positions) |  |
-| margin\_frozen | decimal | true | frozen margin |  |
-| margin\_available | decimal | true | available margin |  |
-| profit\_unreal | decimal | true | unrealized profits and losses |  |
-| liquidation\_price | decimal | true | estimated liquidation price |  |
-| lever\_rate | decimal | true | lever rate |  |
-| adjust\_factor | decimal | true | adjustment factor |  |
-| contract\_type | string | true | contract type | swap, this\_week, next\_week, quarter, next\_quarter |
-| cross\_max\_available | bigdecimal | true | cross max available |  |
-| trade\_partition | string | true | trade partition |  |
-| pair | string | true | pair | such as: “BTC-USDT” |
-| business\_type | string | true | business type | futures, swap |
-| CONTRACT\_DETAIL\_END |  | false |  |  |
-| FUTURES\_CONTRACT\_DETAIL\_START | object array | true |  |  |
-| symbol | string | true | symbol | "BTC","ETH"... |
-| contract\_code | string | true | contract code | future:"BTC-USDT-211231" ... |
-| margin\_position | decimal | true | position margin (the margin used by current positions) |  |
-| margin\_frozen | decimal | true | frozen margin |  |
-| margin\_available | decimal | true | available margin |  |
-| profit\_unreal | decimal | true | unrealized profits and losses |  |
-| liquidation\_price | decimal | true | estimated liquidation price |  |
-| lever\_rate | decimal | true | lever rate |  |
-| adjust\_factor | decimal | true | adjustment factor |  |
-| contract\_type | string | true | contract type | swap, this\_week, next\_week, quarter, next\_quarter |
-| cross\_max\_available | bigdecimal | true | cross max available |  |
-| trade\_partition | string | true | trade partition |  |
-| pair | string | true | pair | such as: “BTC-USDT” |
-| business\_type | string | true | business type | futures, swap |
-| FUTURES\_CONTRACT\_DETAIL\_END |  | false |  |  |
-| DATA\_END |  | false |  |  |
+| Parameter                     | Data Type    | Required | Description                                            | Value Range                                       |
+| ----------------------------- | ------------ | -------- | ------------------------------------------------------ | ------------------------------------------------- |
+| status                        | string       | true     | Request Processing Result                              | "ok" , "error"                                    |
+| ts                            | long         | false    | Time of Respond Generation, Unit: Millisecond          |                                                   |
+| DATA_START                    | object array | true     |                                                        |                                                   |
+| margin_mode                   | string       | true     | margin mode                                            | cross: cross margin mode                          |
+| margin_account                | string       | true     | margin account                                         | "USDT"...                                         |
+| margin_asset                  | string       | true     | margin asset                                           |                                                   |
+| margin_balance                | decimal      | true     | account equity                                         |                                                   |
+| margin_static                 | decimal      | true     | static margin                                          |                                                   |
+| margin_position               | decimal      | true     | position margin (the margin used by current positions) |                                                   |
+| margin_frozen                 | decimal      | true     | frozen margin                                          |                                                   |
+| profit_unreal                 | decimal      | true     | unrealized profits and losses                          |                                                   |
+| withdraw_available            | decimal      | true     | available transfer amount                              |                                                   |
+| risk_rate                     | decimal      | true     | margin rate                                            |                                                   |
+| money_in                      | bigdecimal   | true     | money in                                               |                                                   |
+| money_out                     | bigdecimal   | true     | money out                                              |                                                   |
+| new_risk_rate                 | bigdecimal   | true     | new risk rate                                          |                                                   |
+| position_mode                 | string       | true     | position mode                                          | single_side，dual_side                            |
+| CONTRACT_DETAIL_START         | object array | true     |                                                        |                                                   |
+| symbol                        | string       | true     | symbol                                                 | "BTC","ETH"...                                    |
+| contract_code                 | string       | true     | contract code                                          | swap:"BTC-USDT" ...                               |
+| margin_position               | decimal      | true     | position margin (the margin used by current positions) |                                                   |
+| margin_frozen                 | decimal      | true     | frozen margin                                          |                                                   |
+| margin_available              | decimal      | true     | available margin                                       |                                                   |
+| profit_unreal                 | decimal      | true     | unrealized profits and losses                          |                                                   |
+| liquidation_price             | decimal      | true     | estimated liquidation price                            |                                                   |
+| lever_rate                    | decimal      | true     | lever rate                                             |                                                   |
+| adjust_factor                 | decimal      | true     | adjustment factor                                      |                                                   |
+| contract_type                 | string       | true     | contract type                                          | swap, this_week, next_week, quarter, next_quarter |
+| cross_max_available           | bigdecimal   | true     | cross max available                                    |                                                   |
+| trade_partition               | string       | true     | trade partition                                        |                                                   |
+| pair                          | string       | true     | pair                                                   | such as: “BTC-USDT”                               |
+| business_type                 | string       | true     | business type                                          | futures, swap                                     |
+| CONTRACT_DETAIL_END           |              | false    |                                                        |                                                   |
+| FUTURES_CONTRACT_DETAIL_START | object array | true     |                                                        |                                                   |
+| symbol                        | string       | true     | symbol                                                 | "BTC","ETH"...                                    |
+| contract_code                 | string       | true     | contract code                                          | future:"BTC-USDT-211231" ...                      |
+| margin_position               | decimal      | true     | position margin (the margin used by current positions) |                                                   |
+| margin_frozen                 | decimal      | true     | frozen margin                                          |                                                   |
+| margin_available              | decimal      | true     | available margin                                       |                                                   |
+| profit_unreal                 | decimal      | true     | unrealized profits and losses                          |                                                   |
+| liquidation_price             | decimal      | true     | estimated liquidation price                            |                                                   |
+| lever_rate                    | decimal      | true     | lever rate                                             |                                                   |
+| adjust_factor                 | decimal      | true     | adjustment factor                                      |                                                   |
+| contract_type                 | string       | true     | contract type                                          | swap, this_week, next_week, quarter, next_quarter |
+| cross_max_available           | bigdecimal   | true     | cross max available                                    |                                                   |
+| trade_partition               | string       | true     | trade partition                                        |                                                   |
+| pair                          | string       | true     | pair                                                   | such as: “BTC-USDT”                               |
+| business_type                 | string       | true     | business type                                          | futures, swap                                     |
+| FUTURES_CONTRACT_DETAIL_END   |              | false    |                                                        |                                                   |
+| DATA_END                      |              | false    |                                                        |                                                   |
 
 Notes:  
-Only query account information for activated contract sub-account (i.e. sub-accounts that have gained contract trading permission);  
-No data return for sub-accounts which has logged in hbdm but have not gained trading permission/activated.
+Only query account information for activated contract sub-account (i.e.
+sub-accounts that have gained contract trading permission);  
+No data return for sub-accounts which has logged in hbdm but have not gained
+trading permission/activated.
 
 #### Request example
 
 {
 
-"sub\_uid":
+"sub_uid":
 
 123456
 
-"margin\_account":
+"margin_account":
 
 "USDT"
 
@@ -121,7 +127,7 @@ No data return for sub-accounts which has logged in hbdm but have not gained tra
 
 0:{
 
-"futures\_contract\_detail":\[
+"futures_contract_detail":\[
 
 0:{
 
@@ -129,47 +135,47 @@ No data return for sub-accounts which has logged in hbdm but have not gained tra
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-211217"
 
-"margin\_position":
+"margin_position":
 
 0
 
-"margin\_frozen":
+"margin_frozen":
 
 0
 
-"margin\_available":
+"margin_available":
 
 500
 
-"profit\_unreal":
+"profit_unreal":
 
 0
 
-"liquidation\_price":
+"liquidation_price":
 
 NULL
 
-"lever\_rate":
+"lever_rate":
 
 5
 
-"adjust\_factor":
+"adjust_factor":
 
 0.04
 
-"contract\_type":
+"contract_type":
 
-"next\_week"
+"next_week"
 
-"cross\_max\_available":
+"cross_max_available":
 
 ""
 
-"trade\_partition":
+"trade_partition":
 
 ""
 
@@ -177,7 +183,7 @@ NULL
 
 "BTC-USDT"
 
-"business\_type":
+"business_type":
 
 "futures"
 
@@ -189,43 +195,43 @@ NULL
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-211210"
 
-"margin\_position":
+"margin_position":
 
 0
 
-"margin\_frozen":
+"margin_frozen":
 
 0
 
-"margin\_available":
+"margin_available":
 
 500
 
-"profit\_unreal":
+"profit_unreal":
 
 0
 
-"liquidation\_price":
+"liquidation_price":
 
 NULL
 
-"lever\_rate":
+"lever_rate":
 
 5
 
-"adjust\_factor":
+"adjust_factor":
 
 0.04
 
-"contract\_type":
+"contract_type":
 
-"this\_week"
+"this_week"
 
-"trade\_partition":
+"trade_partition":
 
 ""
 
@@ -233,7 +239,7 @@ NULL
 
 "BTC-USDT"
 
-"business\_type":
+"business_type":
 
 "futures"
 
@@ -245,47 +251,47 @@ NULL
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-211231"
 
-"margin\_position":
+"margin_position":
 
 0
 
-"margin\_frozen":
+"margin_frozen":
 
 0
 
-"margin\_available":
+"margin_available":
 
 500
 
-"profit\_unreal":
+"profit_unreal":
 
 0
 
-"liquidation\_price":
+"liquidation_price":
 
 NULL
 
-"lever\_rate":
+"lever_rate":
 
 5
 
-"adjust\_factor":
+"adjust_factor":
 
 0.04
 
-"contract\_type":
+"contract_type":
 
 "quarter"
 
-"cross\_max\_available":
+"cross_max_available":
 
 ""
 
-"trade\_partition":
+"trade_partition":
 
 ""
 
@@ -293,7 +299,7 @@ NULL
 
 "BTC-USDT"
 
-"business\_type":
+"business_type":
 
 "futures"
 
@@ -301,67 +307,67 @@ NULL
 
 \]
 
-"margin\_mode":
+"margin_mode":
 
 "cross"
 
-"margin\_account":
+"margin_account":
 
 "USDT"
 
-"margin\_asset":
+"margin_asset":
 
 "USDT"
 
-"margin\_balance":
+"margin_balance":
 
 500
 
-"margin\_static":
+"margin_static":
 
 500
 
-"margin\_position":
+"margin_position":
 
 0
 
-"margin\_frozen":
+"margin_frozen":
 
 0
 
-"profit\_real":
+"profit_real":
 
 0
 
-"profit\_unreal":
+"profit_unreal":
 
 0
 
-"withdraw\_available":
+"withdraw_available":
 
 500
 
-"risk\_rate":
+"risk_rate":
 
 NULL
 
-"money\_in":
+"money_in":
 
 ""
 
-"money\_out":
+"money_out":
 
 ""
 
-"new\_risk\_rate":
+"new_risk_rate":
 
 ""
 
-"position\_mode":
+"position_mode":
 
-"dual\_side"
+"dual_side"
 
-"contract\_detail":\[
+"contract_detail":\[
 
 0:{
 
@@ -369,47 +375,47 @@ NULL
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 
-"margin\_position":
+"margin_position":
 
 0
 
-"margin\_frozen":
+"margin_frozen":
 
 0
 
-"margin\_available":
+"margin_available":
 
 500
 
-"profit\_unreal":
+"profit_unreal":
 
 0
 
-"liquidation\_price":
+"liquidation_price":
 
 NULL
 
-"lever\_rate":
+"lever_rate":
 
 5
 
-"adjust\_factor":
+"adjust_factor":
 
 0.04
 
-"contract\_type":
+"contract_type":
 
 "swap"
 
-"cross\_max\_available":
+"cross_max_available":
 
 ""
 
-"trade\_partition":
+"trade_partition":
 
 ""
 
@@ -417,7 +423,7 @@ NULL
 
 "BTC-USDT"
 
-"business\_type":
+"business_type":
 
 "swap"
 

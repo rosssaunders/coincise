@@ -1,6 +1,7 @@
 # GET Query Deposit Address
 
-**Source:** [Query Deposit Address](https://www.htx.com/en-us/opend/newApiPages/?id=7ec50029-7773-11ed-9966-0242ac110003)
+**Source:**
+[Query Deposit Address](https://www.htx.com/en-us/opend/newApiPages/?id=7ec50029-7773-11ed-9966-0242ac110003)
 
 **Category:** Wallet (Deposits and Withdrawals)
 
@@ -18,33 +19,34 @@ Interface permission: Read
 
 Rate Limit: 20times/2s
 
-Interface description: Parent user and sub user could query deposit address of corresponding chain, for a specific crypto currency (except IOTA).
+Interface description: Parent user and sub user could query deposit address of
+corresponding chain, for a specific crypto currency (except IOTA).
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| currency | string | false | Crypto currency | Refer to GET /v1/common/currencys |  |
+| Parameter | Data Type | Required | Description     | Value Range                       | Default Value |
+| --------- | --------- | -------- | --------------- | --------------------------------- | ------------- |
+| currency  | string    | false    | Crypto currency | Refer to GET /v1/common/currencys |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| code | int | false | Status code |  |
-| message | string | false | Error message (if any) |  |
-| DATA\_START | object | false |  |  |
-| currency | string | false | Crypto currency |  |
-| address | string | false | Deposit address |  |
-| addressTag | string | false | Deposit address tag |  |
-| chain | string | false | Block chain name |  |
-| DATA\_END |  | false |  |  |
+| Parameter  | Data Type | Required | Description            | Value Range |
+| ---------- | --------- | -------- | ---------------------- | ----------- |
+| code       | int       | false    | Status code            |             |
+| message    | string    | false    | Error message (if any) |             |
+| DATA_START | object    | false    |                        |             |
+| currency   | string    | false    | Crypto currency        |             |
+| address    | string    | false    | Deposit address        |             |
+| addressTag | string    | false    | Deposit address tag    |             |
+| chain      | string    | false    | Block chain name       |             |
+| DATA_END   |           | false    |                        |             |
 
 #### Request example
 

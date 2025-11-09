@@ -56,7 +56,7 @@ const generateFilename = (method, path) => {
 /**
  * Extract all endpoints from the documentation
  */
-const extractEndpoints = async (page, turndownService) => {
+const extractEndpoints = async (page) => {
   console.log("Extracting endpoint information...")
 
   const endpoints = await page.evaluate(baseUrl => {
@@ -122,7 +122,7 @@ const extractEndpoints = async (page, turndownService) => {
               try {
                 const url = new URL(fullUrl)
                 endpointPath = url.pathname
-              } catch (e) {
+              } catch {
                 endpointPath = fullUrl.split(".com")[1] || fullUrl
               }
               break
@@ -140,7 +140,7 @@ const extractEndpoints = async (page, turndownService) => {
                 try {
                   const url = new URL(fullUrl)
                   endpointPath = url.pathname
-                } catch (e) {
+                } catch {
                   endpointPath = fullUrl.split(".com")[1] || fullUrl
                 }
                 break

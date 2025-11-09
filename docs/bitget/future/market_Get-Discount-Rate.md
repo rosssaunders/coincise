@@ -8,7 +8,7 @@ Get Discount Rate
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/mix/market/discount-rate
+- GET /api/v2/mix/market/discount-rate
 
 Request Example
 
@@ -28,15 +28,15 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| coin | String | Assets 
-| userLimit | String | Individual limit 
-| totalLimit | String | Total platform limit 
-| discountRateList | List | Tier discount rate 
-| &gt; tier | String | Tier 
-| &gt; minAmount | String | Min 
-| &gt; maxAmount | String | Max 
-| &gt; discountRate | String | Discount rate
+| Parameter         | Type   | Description          |
+| :---------------- | :----- | :------------------- |
+| coin              | String | Assets               |
+| userLimit         | String | Individual limit     |
+| totalLimit        | String | Total platform limit |
+| discountRateList  | List   | Tier discount rate   |
+| &gt; tier         | String | Tier                 |
+| &gt; minAmount    | String | Min                  |
+| &gt; maxAmount    | String | Max                  |
+| &gt; discountRate | String | Discount rate        |
 
 > **Source:** https://www.bitget.com/api-doc/contract/market/Get-Discount-Rate

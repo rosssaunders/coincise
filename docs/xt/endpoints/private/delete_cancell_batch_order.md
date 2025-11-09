@@ -1,6 +1,7 @@
 # DELETE Cancell batch order
 
-Source: [https://doc.xt.com/docs/spot/Order/CancelBatchOrder](https://doc.xt.com/docs/spot/Order/CancelBatchOrder)
+Source:
+[https://doc.xt.com/docs/spot/Order/CancelBatchOrder](https://doc.xt.com/docs/spot/Order/CancelBatchOrder)
 
 # Cancell batch order
 
@@ -8,10 +9,10 @@ Source: [https://doc.xt.com/docs/spot/Order/CancelBatchOrder](https://doc.xt.com
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| clientBatchId | string | false |  | client batch id |  |
-| orderIds | array | true |  | 6216559590087220004, 6216559590087220005 |  |
+| name          | type   | mandatory | default | description                              | ranges |
+| ------------- | ------ | --------- | ------- | ---------------------------------------- | ------ |
+| clientBatchId | string | false     |         | client batch id                          |        |
+| orderIds      | array  | true      |         | 6216559590087220004, 6216559590087220005 |        |
 
 > Note: The parameters should be placed in the request body in the form of JSON.
 

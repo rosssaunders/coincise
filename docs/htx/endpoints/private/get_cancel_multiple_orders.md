@@ -1,6 +1,7 @@
 # GET Cancel Multiple Orders
 
-**Source:** [Cancel Multiple Orders](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-195894d0de8)
+**Source:**
+[Cancel Multiple Orders](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-195894d0de8)
 
 **Category:** Orders
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /v5/trade/cancel\_batch\_orders (Cancel Multiple Orders)
+### /v5/trade/cancel_batch_orders (Cancel Multiple Orders)
 
 Request type: POST
 
@@ -16,41 +17,45 @@ Signature verification: Yes
 
 Interface permission: Trade
 
-Rate Limit: Generally, the private interface rate limit of API key is at most 144 times every 3 seconds for each UID (Trade Interface: at most 72 times every 3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is shared by all the altcoins contracts delivered by different date).
+Rate Limit: Generally, the private interface rate limit of API key is at most
+144 times every 3 seconds for each UID (Trade Interface: at most 72 times every
+3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is
+shared by all the altcoins contracts delivered by different date).
 
-Interface description: Cancel orders in a batch. A maximum of 10 orders can be cancelled per request.
+Interface description: Cancel orders in a batch. A maximum of 10 orders can be
+cancelled per request.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | String | true | Symbol |  |  |
-| order\_id | Array of string | false | Order ID |  |  |
-| client\_order\_id | Array of string | false | Your order ID |  |  |
+| Parameter       | Data Type       | Required | Description   | Value Range | Default Value |
+| --------------- | --------------- | -------- | ------------- | ----------- | ------------- |
+| contract_code   | String          | true     | Symbol        |             |               |
+| order_id        | Array of string | false    | Order ID      |             |               |
+| client_order_id | Array of string | false    | Your order ID |             |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| order\_id | String | true | Order ID |  |
-| client\_order\_id | String | true | Your order ID |  |
+| Parameter       | Data Type | Required | Description   | Value Range |
+| --------------- | --------- | -------- | ------------- | ----------- |
+| order_id        | String    | true     | Order ID      |             |
+| client_order_id | String    | true     | Your order ID |             |
 
 #### Request example
 
 {
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-241115"
 
-"order\_id":\[
+"order_id":\[
 
 0
 
@@ -78,7 +83,7 @@ Interface description: Cancel orders in a batch. A maximum of 10 orders can be c
 
 \]
 
-"client\_order\_id":\[
+"client_order_id":\[
 
 0
 
@@ -122,7 +127,7 @@ Interface description: Cancel orders in a batch. A maximum of 10 orders can be c
 
 0:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854624141070336"
 
@@ -134,7 +139,7 @@ Interface description: Cancel orders in a batch. A maximum of 10 orders can be c
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854624141070336"
 
@@ -142,7 +147,7 @@ Interface description: Cancel orders in a batch. A maximum of 10 orders can be c
 
 1:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854624082350080"
 
@@ -154,7 +159,7 @@ Interface description: Cancel orders in a batch. A maximum of 10 orders can be c
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854624082350080"
 
@@ -162,7 +167,7 @@ Interface description: Cancel orders in a batch. A maximum of 10 orders can be c
 
 2:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854623927160832"
 
@@ -174,7 +179,7 @@ Interface description: Cancel orders in a batch. A maximum of 10 orders can be c
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854623927160832"
 
@@ -182,7 +187,7 @@ Interface description: Cancel orders in a batch. A maximum of 10 orders can be c
 
 3:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854624195596288"
 
@@ -194,7 +199,7 @@ Interface description: Cancel orders in a batch. A maximum of 10 orders can be c
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854624195596288"
 

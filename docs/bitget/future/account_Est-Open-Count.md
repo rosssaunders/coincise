@@ -8,24 +8,24 @@ Get estimated open count per UID
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/mix/account/open-count
+- GET /api/v2/mix/account/open-count
 
 Request Example
 
 ```
-curl "https://api.bitget.com/api/v2/mix/account/open-count?productType=usdt-futures&symbol=ethusdt&marginCoin=USDT&openPrice=23189.5&leverage=20&openAmount=5000" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" 
+curl "https://api.bitget.com/api/v2/mix/account/open-count?productType=usdt-futures&symbol=ethusdt&marginCoin=USDT&openPrice=23189.5&leverage=20&openAmount=5000" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair, e.g. ETHUSDT 
-| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures 
-| marginCoin | String | Yes | Margin coin 
-| openAmount | String | Yes | Margin amount 
-| openPrice | String | Yes | Price of the order 
-| leverage | String | No | Leverage<br>default 20 
+| Parameter   | Type   | Required | Description                                                                                                                                      |
+| :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol      | String | Yes      | Trading pair, e.g. ETHUSDT                                                                                                                       |
+| productType | String | Yes      | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures |
+| marginCoin  | String | Yes      | Margin coin                                                                                                                                      |
+| openAmount  | String | Yes      | Margin amount                                                                                                                                    |
+| openPrice   | String | Yes      | Price of the order                                                                                                                               |
+| leverage    | String | No       | Leverage<br>default 20                                                                                                                           |
 
 Response Example
 
@@ -35,8 +35,8 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| size | String | Estimated open size
+| Parameter | Type   | Description         |
+| :-------- | :----- | :------------------ |
+| size      | String | Estimated open size |
 
 > **Source:** https://www.bitget.com/api-doc/contract/account/Est-Open-Count

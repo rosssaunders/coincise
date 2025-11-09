@@ -8,7 +8,7 @@ Get Merchant Advertisement List
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/p2p/advList
+- GET /api/v2/p2p/advList
 
 Request Example
 
@@ -18,21 +18,21 @@ curl "https://api.bitget.com/api/v2/p2p/advList?startTime=1659403328000&endTime=
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| startTime | String | Yes | Start time, Unix millisecond timestamp, e.g. 1690196141868 
-| endTime | String | No | End time, Unix millisecond timestamp, e.g. 1690196141868<br>Maximum interval between start time and end time is 90 days 
-| idLessThan | String | No | The minAdvId returned from the previous query. Returns the data whose advId is less than the specified input parameter. 
-| limit | String | No | Number of queries: Default: 20, max:20. 
-| status | String | Yes | Advertisement order status<br><code>online</code>: Online<br><code>offline</code>: Offline<br><code>editing</code>: Editing<br><code>completed</code>: Completed 
-| advNo | String | No | Advertisement order 
-| side | String | Yes | TX type<br>buy: Buy<br>sell: Sell 
-| coin | String | Yes | Digital currency 
-| language | String | No | Language<br>zh-CN: Chinese<br>en-US: English 
-| fiat | String | Yes | Fiat 
-| orderBy | String | No | Sort Fields<br>createTime: Create time<br>price: Price<br>Descending, by createTime by default 
-| payMethodId | String | No | Payment method id 
-| sourceType | String | No | Query range<br>owner:query owner advertisement(default)<br>competitior:query other merchant advertisement<br>ownerAndCompetitior:query all advertisement 
+| Parameter   | Type   | Required | Description                                                                                                                                                      |
+| :---------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| startTime   | String | Yes      | Start time, Unix millisecond timestamp, e.g. 1690196141868                                                                                                       |
+| endTime     | String | No       | End time, Unix millisecond timestamp, e.g. 1690196141868<br>Maximum interval between start time and end time is 90 days                                          |
+| idLessThan  | String | No       | The minAdvId returned from the previous query. Returns the data whose advId is less than the specified input parameter.                                          |
+| limit       | String | No       | Number of queries: Default: 20, max:20.                                                                                                                          |
+| status      | String | Yes      | Advertisement order status<br><code>online</code>: Online<br><code>offline</code>: Offline<br><code>editing</code>: Editing<br><code>completed</code>: Completed |
+| advNo       | String | No       | Advertisement order                                                                                                                                              |
+| side        | String | Yes      | TX type<br>buy: Buy<br>sell: Sell                                                                                                                                |
+| coin        | String | Yes      | Digital currency                                                                                                                                                 |
+| language    | String | No       | Language<br>zh-CN: Chinese<br>en-US: English                                                                                                                     |
+| fiat        | String | Yes      | Fiat                                                                                                                                                             |
+| orderBy     | String | No       | Sort Fields<br>createTime: Create time<br>price: Price<br>Descending, by createTime by default                                                                   |
+| payMethodId | String | No       | Payment method id                                                                                                                                                |
+| sourceType  | String | No       | Query range<br>owner:query owner advertisement(default)<br>competitior:query other merchant advertisement<br>ownerAndCompetitior:query all advertisement         |
 
 Response Example
 
@@ -42,47 +42,47 @@ Response Example
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| advList | Array | Number of advertisement orders 
-| &gt; advId | String | Advertisement order ID 
-| &gt; advNo | String | Advertisement order number 
-| &gt; side | String | TX type<br>sell<br>buy 
-| &gt; advSize | String | Total number of advertisement orders 
-| &gt; size | String | Filled quantity 
-| &gt; coin | String | Coins such as BGB, USDT, BTC, ETH etc. 
-| &gt; price | String | Price 
-| &gt; coinPrecision | String | Currency precision, decimala 
-| &gt; fiat | String | Fiat 
-| &gt; fiatPrecision | String | Fiat decimals 
-| &gt; fiatSymbol | String | Currency symbol 
-| &gt; status | String | Advertisement order status<br><code>online</code>: Online<br><code>offline</code>: Offline<br><code>editing</code>: Editing<br><code>completed</code>: Completed 
-| &gt; hide | String | Hide the advertisement order or not<br>yes: Hide<br>no: not hide 
-| &gt; maxTradeAmount | String | Maximum order quantity 
-| &gt; minTradeAmount | String | Minimum order quantity 
-| &gt; payDuration | String | Time period for payment after placing an order, min 
-| &gt; turnoverNum | String | Total trading amount 
-| &gt; turnoverRate | String | Close rate 
-| &gt; label | String | Note 
-| &gt; cTime | String | Creation time, Unix millisecond timestamps 
-| &gt; uTime | String | Update time, Unix millisecond timestamps 
-| &gt; userLimitList | Array | Upper limit of the advertiser order restricted user 
-| &gt;&gt; minCompleteNum | String | Minimum number of completed user orders 
-| &gt;&gt; maxCompleteNum | String | Maximum number of completed user orders 
-| &gt;&gt; placeOrderNum | String | Maximum number of orders a user can place under this advertisement 
-| &gt;&gt; allowMerchantPlace | String | Whether to allow merchants to place orders<br>yes: allow<br>no: not allow 
-| &gt;&gt; completeRate30d | String | 30-day close rate 
-| &gt;&gt; country | String | Only people from these countries are allowed to place orders 
-| &gt; paymentMethodList | Array | Payment methods number 
-| &gt;&gt; paymentMethod | String | Payment name 
-| &gt;&gt; paymentId | String | Payment ID 
-| &gt;&gt; paymentInfo | Array | Payment method detail information 
-| &gt;&gt;&gt; required | Boolean | Required or not: true/false 
-| &gt;&gt;&gt; name | String | Payment details 
-| &gt;&gt;&gt; type | String | Payment method detail information type 
-| &gt; merchantCertifiedResult | Array | Merchant authentication number 
-| &gt;&gt; imageUrl | String | Gold Merchant certification pictures 
-| &gt;&gt; desc | String | Gold Merchant certification parameter description 
-| minAdvId | String | Returns the minimum advId of the result
+| Parameter                    | Type    | Description                                                                                                                                                      |
+| :--------------------------- | :------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| advList                      | Array   | Number of advertisement orders                                                                                                                                   |
+| &gt; advId                   | String  | Advertisement order ID                                                                                                                                           |
+| &gt; advNo                   | String  | Advertisement order number                                                                                                                                       |
+| &gt; side                    | String  | TX type<br>sell<br>buy                                                                                                                                           |
+| &gt; advSize                 | String  | Total number of advertisement orders                                                                                                                             |
+| &gt; size                    | String  | Filled quantity                                                                                                                                                  |
+| &gt; coin                    | String  | Coins such as BGB, USDT, BTC, ETH etc.                                                                                                                           |
+| &gt; price                   | String  | Price                                                                                                                                                            |
+| &gt; coinPrecision           | String  | Currency precision, decimala                                                                                                                                     |
+| &gt; fiat                    | String  | Fiat                                                                                                                                                             |
+| &gt; fiatPrecision           | String  | Fiat decimals                                                                                                                                                    |
+| &gt; fiatSymbol              | String  | Currency symbol                                                                                                                                                  |
+| &gt; status                  | String  | Advertisement order status<br><code>online</code>: Online<br><code>offline</code>: Offline<br><code>editing</code>: Editing<br><code>completed</code>: Completed |
+| &gt; hide                    | String  | Hide the advertisement order or not<br>yes: Hide<br>no: not hide                                                                                                 |
+| &gt; maxTradeAmount          | String  | Maximum order quantity                                                                                                                                           |
+| &gt; minTradeAmount          | String  | Minimum order quantity                                                                                                                                           |
+| &gt; payDuration             | String  | Time period for payment after placing an order, min                                                                                                              |
+| &gt; turnoverNum             | String  | Total trading amount                                                                                                                                             |
+| &gt; turnoverRate            | String  | Close rate                                                                                                                                                       |
+| &gt; label                   | String  | Note                                                                                                                                                             |
+| &gt; cTime                   | String  | Creation time, Unix millisecond timestamps                                                                                                                       |
+| &gt; uTime                   | String  | Update time, Unix millisecond timestamps                                                                                                                         |
+| &gt; userLimitList           | Array   | Upper limit of the advertiser order restricted user                                                                                                              |
+| &gt;&gt; minCompleteNum      | String  | Minimum number of completed user orders                                                                                                                          |
+| &gt;&gt; maxCompleteNum      | String  | Maximum number of completed user orders                                                                                                                          |
+| &gt;&gt; placeOrderNum       | String  | Maximum number of orders a user can place under this advertisement                                                                                               |
+| &gt;&gt; allowMerchantPlace  | String  | Whether to allow merchants to place orders<br>yes: allow<br>no: not allow                                                                                        |
+| &gt;&gt; completeRate30d     | String  | 30-day close rate                                                                                                                                                |
+| &gt;&gt; country             | String  | Only people from these countries are allowed to place orders                                                                                                     |
+| &gt; paymentMethodList       | Array   | Payment methods number                                                                                                                                           |
+| &gt;&gt; paymentMethod       | String  | Payment name                                                                                                                                                     |
+| &gt;&gt; paymentId           | String  | Payment ID                                                                                                                                                       |
+| &gt;&gt; paymentInfo         | Array   | Payment method detail information                                                                                                                                |
+| &gt;&gt;&gt; required        | Boolean | Required or not: true/false                                                                                                                                      |
+| &gt;&gt;&gt; name            | String  | Payment details                                                                                                                                                  |
+| &gt;&gt;&gt; type            | String  | Payment method detail information type                                                                                                                           |
+| &gt; merchantCertifiedResult | Array   | Merchant authentication number                                                                                                                                   |
+| &gt;&gt; imageUrl            | String  | Gold Merchant certification pictures                                                                                                                             |
+| &gt;&gt; desc                | String  | Gold Merchant certification parameter description                                                                                                                |
+| minAdvId                     | String  | Returns the minimum advId of the result                                                                                                                          |
 
 > **Source:** https://www.bitget.com/api-doc/common/p2p/Get-P2P-Adv-List

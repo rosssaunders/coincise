@@ -1,6 +1,7 @@
-# GET [General] Subscribe contract elements  (no authentication)（sub）
+# GET [General] Subscribe contract elements (no authentication)（sub）
 
-**Source:** [[General] Subscribe contract elements  (no authentication)（sub）](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-18ef15d1f28)
+**Source:**
+[[General] Subscribe contract elements (no authentication)（sub）](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-18ef15d1f28)
 
 **Category:** Orders and Accounts WebSocket Interfaces
 
@@ -8,104 +9,110 @@
 
 Required (Private Endpoint)
 
-### public.$contract\_code.contract\_elements (\[General\] Subscribe contract elements (no authentication)（sub）)
+### public.$contract_code.contract_elements (\[General\] Subscribe contract elements (no authentication)（sub）)
 
 Signature verification: Yes
 
 Interface permission: Read
 
-Rate Limit: For public interface to get market data such as Get Kline data, Get Market Data Overview, Get Contract Information,Get market in-depth data, Get premium index Kline, Get real-time forecast capital rate kline, Get basis data, Get the last Trade of a Contract and so on： For websocket: The rate limit for “req” request is 50 times at once. No limit for “sub” request as the data will be pushed by sever voluntarily.
+Rate Limit: For public interface to get market data such as Get Kline data, Get
+Market Data Overview, Get Contract Information,Get market in-depth data, Get
+premium index Kline, Get real-time forecast capital rate kline, Get basis data,
+Get the last Trade of a Contract and so on： For websocket: The rate limit for
+“req” request is 50 times at once. No limit for “sub” request as the data will
+be pushed by sever voluntarily.
 
-Interface description: The interface supports cross margin mode and isolated margin mode，Check the latest contract elements information
+Interface description: The interface supports cross margin mode and isolated
+margin mode，Check the latest contract elements information
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.hbdm.com/linear-swap-notification |
-| Online (preferred by aws customers) | wss://api.hbdm.vn/linear-swap-notification |
+| Environment                         | Address                                     |
+| ----------------------------------- | ------------------------------------------- |
+| Online                              | wss://api.hbdm.com/linear-swap-notification |
+| Online (preferred by aws customers) | wss://api.hbdm.vn/linear-swap-notification  |
 
 #### Request Parameter
 
-| Field Name | Type | Description |
-| --- | --- | --- |
-| op | string | Required； Operator Name，value for unsubscribe is Sub/Unsubscribe ; |
-| cid | string | Optional; ID Client requests unique ID |
-| topic | string | Required；Sub/Unsubscribe Topic Name, format: orders.$contract\_code; For parameter details please check req Subscribe Parameter |
+| Field Name | Type   | Description                                                                                                                     |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| op         | string | Required； Operator Name，value for unsubscribe is Sub/Unsubscribe ;                                                            |
+| cid        | string | Optional; ID Client requests unique ID                                                                                          |
+| topic      | string | Required；Sub/Unsubscribe Topic Name, format: orders.$contract_code; For parameter details please check req Subscribe Parameter |
 
 #### Rule description
 
-| Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
-| public.$contract\_code.contract\_elements | public.$contract\_code.contract\_elements | Allowed (single contract) |
-| public.\*.contract\_elements | public.\*.contract\_elements | Allowed (all contracts) |
+| Subscribe(sub)                          | Unsubscribe( unsub )                    | Rule                      |
+| --------------------------------------- | --------------------------------------- | ------------------------- |
+| public.$contract_code.contract_elements | public.$contract_code.contract_elements | Allowed (single contract) |
+| public.\*.contract_elements             | public.\*.contract_elements             | Allowed (all contracts)   |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | contract code | all: \* (swap and future), swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |  |
-| cid | string | false | Current request's ID |  |  |
+| Parameter     | Data Type | Required | Description          | Value Range                                                                    | Default Value |
+| ------------- | --------- | -------- | -------------------- | ------------------------------------------------------------------------------ | ------------- |
+| contract_code | string    | true     | contract code        | all: \* (swap and future), swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |               |
+| cid           | string    | false    | Current request's ID |                                                                                |               |
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| op | string | true | op |  |
-| topic | string | true | topic |  |
-| ts | long | true |  |  |
-| DATA\_START | object array | true |  |  |
-| contract\_code | string | true | BTC-USDT... |  |
-| mode\_type | int | true | Margin Mode: 1: Isolated margin; 2: Cross margin and isolated margin; 3: Cross margin |  |
-| swap\_delivery\_type | int | true | Type of Futures: 1: USDT-M perpetual futures; 2: USDT-M delivery futures; 3: Both of them |  |
-| instrument\_index\_code | string | true | index |  |
-| real\_time\_settlement | int | true | Whether to enable real-time settlement: 0: No; 1: Yes |  |
-| transfer\_profit\_ratio | Number | true | Available coefficient of isolated margin |  |
-| cross\_transfer\_profit\_ratio | Number | true | Available coefficient of cross margin |  |
-| instrument\_type | list | true | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |  |
-| trade\_partition | String | true | trade partition USDT HUSD |  |
-| min\_level | int | true | min level |  |
-| max\_level | int | true | max level |  |
-| settle\_period | int | true | settle period |  |
-| funding\_rate\_cap | int | true | funding rate cap |  |
-| funding\_rate\_floor | int | true | funding rate floor |  |
-| CONTRACT\_INFOS\_START |  | false |  |  |
-| contract\_code |  | false |  |  |
-| instrument\_type |  | false |  |  |
-| settlement\_date | string | true |  |  |
-| delivery\_time | string | true | delivery time（When the contract does not need to be delivered, the field value is an empty string），millesecond timestamp |  |
-| create\_date | string | true | Listing Date | eg "20190808" |
-| contract\_status | int | true | Contract Status | contract status ： 0: Delisting,1: Listing,2: Pending Listing,3: Suspension,4: Suspending of Listing,6: Delivering,8: Delivered |
-| delivery\_date | string | true | delivery date, empty string when swap | such as: "20180720" |
-| CONTRACT\_INFOS\_START |  | false |  |  |
-| long\_position\_limit |  | false | long position limit |  |
-| offset\_order\_limit |  | false | offset order limit |  |
-| open\_order\_limit |  | false | open order limit |  |
-| short\_position\_limit |  | false | short position limit |  |
-| PRICE\_TICKS\_START | object array | false | The Minimum Price Change |  |
-| business\_type | Integer | true | 1: Perpetual futures; 2: Delivery futures; 3: Perpetual futures + delivery futures |  |
-| price | String | true | The Minimum Price Change |  |
-| INSTRUMENT\_VALUES\_START |  | true | contract Face Value |  |
-| business\_type | Integer | true | 1: Perpetual futures; 2: Delivery futures; 3: Perpetual futures + delivery futures |  |
-| price | String | true | contract Face Value |  |
-| ORDER\_LIMITS\_START | object array | true | The maximum quantity of single order (Cont) |  |
-| instrument\_type | int | true | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |  |
-| open | String | true | open |  |
-| close | String | true | close |  |
-| open\_after\_closing | String | true | open after closing |  |
-| NORMAL\_LIMITS\_START |  | false | Hard Price Limit |  |
-| instrument\_type | int | true | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |  |
-| open | String | true | open |  |
-| close | String | true | close |  |
-| OPEN\_LIMITS\_START | object | false | Non-basis Price Limit |  |
-| instrument\_type | int | true | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |  |
-| open | String | true | open |  |
-| close | String | true | close |  |
-| TRADE\_LIMITS\_START |  | false | Basis Price Limit |  |
-| instrument\_type | int | true | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |  |
-| open | String | true | open |  |
-| close | String | true | close |  |
-| DATA\_END |  | false |  |  |
+| Parameter                   | Data Type    | Required | Description                                                                                                                               | Value Range                                                                                                                     |
+| --------------------------- | ------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| op                          | string       | true     | op                                                                                                                                        |                                                                                                                                 |
+| topic                       | string       | true     | topic                                                                                                                                     |                                                                                                                                 |
+| ts                          | long         | true     |                                                                                                                                           |                                                                                                                                 |
+| DATA_START                  | object array | true     |                                                                                                                                           |                                                                                                                                 |
+| contract_code               | string       | true     | BTC-USDT...                                                                                                                               |                                                                                                                                 |
+| mode_type                   | int          | true     | Margin Mode: 1: Isolated margin; 2: Cross margin and isolated margin; 3: Cross margin                                                     |                                                                                                                                 |
+| swap_delivery_type          | int          | true     | Type of Futures: 1: USDT-M perpetual futures; 2: USDT-M delivery futures; 3: Both of them                                                 |                                                                                                                                 |
+| instrument_index_code       | string       | true     | index                                                                                                                                     |                                                                                                                                 |
+| real_time_settlement        | int          | true     | Whether to enable real-time settlement: 0: No; 1: Yes                                                                                     |                                                                                                                                 |
+| transfer_profit_ratio       | Number       | true     | Available coefficient of isolated margin                                                                                                  |                                                                                                                                 |
+| cross_transfer_profit_ratio | Number       | true     | Available coefficient of cross margin                                                                                                     |                                                                                                                                 |
+| instrument_type             | list         | true     | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |                                                                                                                                 |
+| trade_partition             | String       | true     | trade partition USDT HUSD                                                                                                                 |                                                                                                                                 |
+| min_level                   | int          | true     | min level                                                                                                                                 |                                                                                                                                 |
+| max_level                   | int          | true     | max level                                                                                                                                 |                                                                                                                                 |
+| settle_period               | int          | true     | settle period                                                                                                                             |                                                                                                                                 |
+| funding_rate_cap            | int          | true     | funding rate cap                                                                                                                          |                                                                                                                                 |
+| funding_rate_floor          | int          | true     | funding rate floor                                                                                                                        |                                                                                                                                 |
+| CONTRACT_INFOS_START        |              | false    |                                                                                                                                           |                                                                                                                                 |
+| contract_code               |              | false    |                                                                                                                                           |                                                                                                                                 |
+| instrument_type             |              | false    |                                                                                                                                           |                                                                                                                                 |
+| settlement_date             | string       | true     |                                                                                                                                           |                                                                                                                                 |
+| delivery_time               | string       | true     | delivery time（When the contract does not need to be delivered, the field value is an empty string），millesecond timestamp               |                                                                                                                                 |
+| create_date                 | string       | true     | Listing Date                                                                                                                              | eg "20190808"                                                                                                                   |
+| contract_status             | int          | true     | Contract Status                                                                                                                           | contract status ： 0: Delisting,1: Listing,2: Pending Listing,3: Suspension,4: Suspending of Listing,6: Delivering,8: Delivered |
+| delivery_date               | string       | true     | delivery date, empty string when swap                                                                                                     | such as: "20180720"                                                                                                             |
+| CONTRACT_INFOS_START        |              | false    |                                                                                                                                           |                                                                                                                                 |
+| long_position_limit         |              | false    | long position limit                                                                                                                       |                                                                                                                                 |
+| offset_order_limit          |              | false    | offset order limit                                                                                                                        |                                                                                                                                 |
+| open_order_limit            |              | false    | open order limit                                                                                                                          |                                                                                                                                 |
+| short_position_limit        |              | false    | short position limit                                                                                                                      |                                                                                                                                 |
+| PRICE_TICKS_START           | object array | false    | The Minimum Price Change                                                                                                                  |                                                                                                                                 |
+| business_type               | Integer      | true     | 1: Perpetual futures; 2: Delivery futures; 3: Perpetual futures + delivery futures                                                        |                                                                                                                                 |
+| price                       | String       | true     | The Minimum Price Change                                                                                                                  |                                                                                                                                 |
+| INSTRUMENT_VALUES_START     |              | true     | contract Face Value                                                                                                                       |                                                                                                                                 |
+| business_type               | Integer      | true     | 1: Perpetual futures; 2: Delivery futures; 3: Perpetual futures + delivery futures                                                        |                                                                                                                                 |
+| price                       | String       | true     | contract Face Value                                                                                                                       |                                                                                                                                 |
+| ORDER_LIMITS_START          | object array | true     | The maximum quantity of single order (Cont)                                                                                               |                                                                                                                                 |
+| instrument_type             | int          | true     | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |                                                                                                                                 |
+| open                        | String       | true     | open                                                                                                                                      |                                                                                                                                 |
+| close                       | String       | true     | close                                                                                                                                     |                                                                                                                                 |
+| open_after_closing          | String       | true     | open after closing                                                                                                                        |                                                                                                                                 |
+| NORMAL_LIMITS_START         |              | false    | Hard Price Limit                                                                                                                          |                                                                                                                                 |
+| instrument_type             | int          | true     | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |                                                                                                                                 |
+| open                        | String       | true     | open                                                                                                                                      |                                                                                                                                 |
+| close                       | String       | true     | close                                                                                                                                     |                                                                                                                                 |
+| OPEN_LIMITS_START           | object       | false    | Non-basis Price Limit                                                                                                                     |                                                                                                                                 |
+| instrument_type             | int          | true     | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |                                                                                                                                 |
+| open                        | String       | true     | open                                                                                                                                      |                                                                                                                                 |
+| close                       | String       | true     | close                                                                                                                                     |                                                                                                                                 |
+| TRADE_LIMITS_START          |              | false    | Basis Price Limit                                                                                                                         |                                                                                                                                 |
+| instrument_type             | int          | true     | Types of Futures Expiration: 1: Weekly futures; 2: Bi-weekly futures; 3: Quarterly futures; 4: Bi-quarterly futures; 0: Perpetual futures |                                                                                                                                 |
+| open                        | String       | true     | open                                                                                                                                      |                                                                                                                                 |
+| close                       | String       | true     | close                                                                                                                                     |                                                                                                                                 |
+| DATA_END                    |              | false    |                                                                                                                                           |                                                                                                                                 |
 
 #### Subscription Example
 
@@ -121,7 +128,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 "topic":
 
-"public.BTC-USDT.contract\_elements"
+"public.BTC-USDT.contract_elements"
 
 }
 
@@ -139,7 +146,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 "topic":
 
-"public.BTC-USDT.contract\_elements"
+"public.BTC-USDT.contract_elements"
 
 "ts":
 
@@ -165,7 +172,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 "topic":
 
-"public.DOSE-USDT.contract\_elements"
+"public.DOSE-USDT.contract_elements"
 
 "ts":
 
@@ -173,39 +180,39 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 "data":{
 
-"contract\_code":
+"contract_code":
 
 "DOSE-USDT"
 
-"funding\_rate\_cap":
+"funding_rate_cap":
 
 "0.007800000000000000"
 
-"funding\_rate\_floor":
+"funding_rate_floor":
 
 "-0.007600000000000000"
 
-"mode\_type":
+"mode_type":
 
 2
 
-"swap\_delivery\_type":
+"swap_delivery_type":
 
 3
 
-"settle\_period":
+"settle_period":
 
 4
 
-"instrument\_index\_code":
+"instrument_index_code":
 
 "DOSE-USDT"
 
-"price\_ticks":\[
+"price_ticks":\[
 
 0:{
 
-"business\_type":
+"business_type":
 
 2
 
@@ -217,7 +224,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 1:{
 
-"business\_type":
+"business_type":
 
 1
 
@@ -229,11 +236,11 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 \]
 
-"instrument\_values":\[
+"instrument_values":\[
 
 0:{
 
-"business\_type":
+"business_type":
 
 2
 
@@ -245,7 +252,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 1:{
 
-"business\_type":
+"business_type":
 
 1
 
@@ -257,23 +264,23 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 \]
 
-"min\_level":
+"min_level":
 
 "1"
 
-"max\_level":
+"max_level":
 
 "74"
 
-"order\_limits":\[
+"order_limits":\[
 
 0:{
 
-"open\_after\_closing":
+"open_after_closing":
 
 "500000000000.000000000000000000"
 
-"instrument\_type":
+"instrument_type":
 
 1
 
@@ -289,11 +296,11 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 1:{
 
-"open\_after\_closing":
+"open_after_closing":
 
 "500000000000.000000000000000000"
 
-"instrument\_type":
+"instrument_type":
 
 2
 
@@ -309,11 +316,11 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 2:{
 
-"open\_after\_closing":
+"open_after_closing":
 
 "500000000000.000000000000000000"
 
-"instrument\_type":
+"instrument_type":
 
 3
 
@@ -329,11 +336,11 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 3:{
 
-"open\_after\_closing":
+"open_after_closing":
 
 "500000000003.000000000000000000"
 
-"instrument\_type":
+"instrument_type":
 
 0
 
@@ -349,11 +356,11 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 \]
 
-"normal\_limits":\[
+"normal_limits":\[
 
 0:{
 
-"instrument\_type":
+"instrument_type":
 
 1
 
@@ -369,7 +376,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 1:{
 
-"instrument\_type":
+"instrument_type":
 
 2
 
@@ -385,7 +392,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 2:{
 
-"instrument\_type":
+"instrument_type":
 
 3
 
@@ -401,7 +408,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 3:{
 
-"instrument\_type":
+"instrument_type":
 
 0
 
@@ -417,11 +424,11 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 \]
 
-"open\_limits":\[
+"open_limits":\[
 
 0:{
 
-"instrument\_type":
+"instrument_type":
 
 1
 
@@ -437,7 +444,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 1:{
 
-"instrument\_type":
+"instrument_type":
 
 2
 
@@ -453,7 +460,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 2:{
 
-"instrument\_type":
+"instrument_type":
 
 3
 
@@ -469,7 +476,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 3:{
 
-"instrument\_type":
+"instrument_type":
 
 0
 
@@ -485,11 +492,11 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 \]
 
-"trade\_limits":\[
+"trade_limits":\[
 
 0:{
 
-"instrument\_type":
+"instrument_type":
 
 1
 
@@ -505,7 +512,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 1:{
 
-"instrument\_type":
+"instrument_type":
 
 2
 
@@ -521,7 +528,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 2:{
 
-"instrument\_type":
+"instrument_type":
 
 3
 
@@ -537,7 +544,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 3:{
 
-"instrument\_type":
+"instrument_type":
 
 0
 
@@ -553,19 +560,19 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 \]
 
-"real\_time\_settlement":
+"real_time_settlement":
 
 0
 
-"transfer\_profit\_ratio":
+"transfer_profit_ratio":
 
 0
 
-"cross\_transfer\_profit\_ratio":
+"cross_transfer_profit_ratio":
 
 1
 
-"instrument\_type":\[
+"instrument_type":\[
 
 0
 
@@ -593,63 +600,63 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 \]
 
-"price\_tick":
+"price_tick":
 
 "0.000000000100000000"
 
-"instrument\_value":
+"instrument_value":
 
 "0.000010000000000000"
 
-"trade\_partition":
+"trade_partition":
 
 "USDT"
 
-"open\_order\_limit":
+"open_order_limit":
 
 "500000000001.000000000000000000"
 
-"offset\_order\_limit":
+"offset_order_limit":
 
 "10005000000002.000000000000000000"
 
-"long\_position\_limit":
+"long_position_limit":
 
 "4000001.000000000000000000"
 
-"short\_position\_limit":
+"short_position_limit":
 
 "4000002.000000000000000000"
 
-"contract\_infos":\[
+"contract_infos":\[
 
 0:{
 
-"contract\_code":
+"contract_code":
 
 "DOSE-USDT-231027"
 
-"instrument\_type":
+"instrument_type":
 
 1
 
-"settlement\_date":
+"settlement_date":
 
 "1694592000000"
 
-"delivery\_time":
+"delivery_time":
 
 "1698393600000"
 
-"create\_date":
+"create_date":
 
 "20231024"
 
-"contract\_status":
+"contract_status":
 
 1
 
-"delivery\_date":
+"delivery_date":
 
 "20231027"
 
@@ -657,31 +664,31 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 1:{
 
-"contract\_code":
+"contract_code":
 
 "DOSE-USDT-231103"
 
-"instrument\_type":
+"instrument_type":
 
 2
 
-"settlement\_date":
+"settlement_date":
 
 "1694592000000"
 
-"delivery\_time":
+"delivery_time":
 
 "1698998400000"
 
-"create\_date":
+"create_date":
 
 "20231024"
 
-"contract\_status":
+"contract_status":
 
 1
 
-"delivery\_date":
+"delivery_date":
 
 "20231103"
 
@@ -689,31 +696,31 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 2:{
 
-"contract\_code":
+"contract_code":
 
 "DOSE-USDT-231229"
 
-"instrument\_type":
+"instrument_type":
 
 3
 
-"settlement\_date":
+"settlement_date":
 
 "1694592000000"
 
-"delivery\_time":
+"delivery_time":
 
 "1703836800000"
 
-"create\_date":
+"create_date":
 
 "20231024"
 
-"contract\_status":
+"contract_status":
 
 1
 
-"delivery\_date":
+"delivery_date":
 
 "20231229"
 
@@ -721,31 +728,31 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 3:{
 
-"contract\_code":
+"contract_code":
 
 "DOSE-USDT"
 
-"instrument\_type":
+"instrument_type":
 
 0
 
-"settlement\_date":
+"settlement_date":
 
 "1712822400000"
 
-"delivery\_time":
+"delivery_time":
 
 ""
 
-"create\_date":
+"create_date":
 
 "20231024"
 
-"contract\_status":
+"contract_status":
 
 1
 
-"delivery\_date":
+"delivery_date":
 
 ""
 
@@ -767,7 +774,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 "topic":
 
-"public.BTC-USDT.contract\_elements"
+"public.BTC-USDT.contract_elements"
 
 "cid":
 

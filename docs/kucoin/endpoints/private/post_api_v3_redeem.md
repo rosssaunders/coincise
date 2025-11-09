@@ -14,19 +14,18 @@ Redeem your loan order.
 
 ## Request Body
 
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| currency | required | string | Currency |
-| size | required | string | Redemption amount |
+| Parameter       | Required | Type   | Description       |
+| --------------- | -------- | ------ | ----------------- |
+| currency        | required | string | Currency          |
+| size            | required | string | Redemption amount |
 | purchaseOrderNo | required | string | Purchase order ID |
 
 ## Responses
 
 ### 200
 
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| code | required | string |  |
-| data | required | object |  |
+| Parameter    | Required | Type   | Description     |
+| ------------ | -------- | ------ | --------------- |
+| code         | required | string |                 |
+| data         | required | object |                 |
 | data.orderNo | required | string | Redeem order ID |
-

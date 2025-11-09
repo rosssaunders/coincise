@@ -1,12 +1,13 @@
 # Update leverage
 
-**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:**
+https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
 `POST` `https://api.hyperliquid.xyz/exchange`
 
 Update cross or isolated leverage on a coin.
 
-#### 
+####
 
 [](#headers-6)
 
@@ -24,7 +25,7 @@ String
 
 "application/json"
 
-#### 
+####
 
 [](#request-body-6)
 
@@ -48,7 +49,8 @@ Object
 
 "isCross": true or false if updating cross-leverage,
 
-"leverage": integer representing new leverage, subject to leverage constraints on that coin
+"leverage": integer representing new leverage, subject to leverage constraints
+on that coin
 
 }
 
@@ -66,7 +68,8 @@ vaultAddress
 
 String
 
-If trading on behalf of a vault or subaccount, its Onchain address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
+If trading on behalf of a vault or subaccount, its Onchain address in
+42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
 
 expiresAfter
 

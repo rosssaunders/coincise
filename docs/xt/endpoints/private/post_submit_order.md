@@ -1,6 +1,7 @@
 # POST Submit order
 
-Source: [https://doc.xt.com/docs/spot/Order/SubmitOrder](https://doc.xt.com/docs/spot/Order/SubmitOrder)
+Source:
+[https://doc.xt.com/docs/spot/Order/SubmitOrder](https://doc.xt.com/docs/spot/Order/SubmitOrder)
 
 # Submit order
 
@@ -8,23 +9,25 @@ Source: [https://doc.xt.com/docs/spot/Order/SubmitOrder](https://doc.xt.com/docs
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | true |  |  |  |
-| clientOrderId | string | false |  | Pattern: ^\[a-zA-Z0-9\_\]`{4,22}` |  |
-| $ |  |  |  |  |  |
-| side | string | true |  | "BUY,SELL" |  |
-| type | string | true |  | "order type:LIMIT,MARKET" |  |
-| timeInForce | string | true |  | effective way:GTC, FOK, IOC, GTX |  |
-| bizType | string | true |  | "SPOT, LEVER" |  |
-| price | number | false |  | price. Required if it is the LIMIT price; blank if it is the MARKET price |  |
-| quantity | number | false |  | quantity. Required if it is the LIMIT price or the order is placed at the market price by quantity |  |
-| quoteQty | number | false |  | amount. Required if it is the LIMIT price or the order is the market price when placing an order by amount |  |
-| nftId | string | false |  | nft id |  |
+| name          | type   | mandatory | default | description                                                                                                | ranges |
+| ------------- | ------ | --------- | ------- | ---------------------------------------------------------------------------------------------------------- | ------ |
+| symbol        | string | true      |         |                                                                                                            |        |
+| clientOrderId | string | false     |         | Pattern: ^\[a-zA-Z0-9\_\]`{4,22}`                                                                          |        |
+| $             |        |           |         |                                                                                                            |        |
+| side          | string | true      |         | "BUY,SELL"                                                                                                 |        |
+| type          | string | true      |         | "order type:LIMIT,MARKET"                                                                                  |        |
+| timeInForce   | string | true      |         | effective way:GTC, FOK, IOC, GTX                                                                           |        |
+| bizType       | string | true      |         | "SPOT, LEVER"                                                                                              |        |
+| price         | number | false     |         | price. Required if it is the LIMIT price; blank if it is the MARKET price                                  |        |
+| quantity      | number | false     |         | quantity. Required if it is the LIMIT price or the order is placed at the market price by quantity         |        |
+| quoteQty      | number | false     |         | amount. Required if it is the LIMIT price or the order is the market price when placing an order by amount |        |
+| nftId         | string | false     |         | nft id                                                                                                     |        |
 
 #### Remark[​](#remark "Direct link to Remark")
 
-Create a BUY order based on market price, quantity must be null, quoteQty required. Create a SELL order based on market price, quoteQty must be null, quantity required.
+Create a BUY order based on market price, quantity must be null, quoteQty
+required. Create a SELL order based on market price, quoteQty must be null,
+quantity required.
 
 #### Limit Flow Rules[​](#limit-flow-rules "Direct link to Limit Flow Rules")
 

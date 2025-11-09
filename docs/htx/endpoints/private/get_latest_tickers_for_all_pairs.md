@@ -1,6 +1,7 @@
 # GET Latest Tickers for All Pairs
 
-**Source:** [Get Latest Tickers for All Pairs](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4a808-7773-11ed-9966-0242ac110003)
+**Source:**
+[Get Latest Tickers for All Pairs](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4a808-7773-11ed-9966-0242ac110003)
 
 **Category:** Market Data
 
@@ -16,43 +17,44 @@ Signature verification: No
 
 Rate Limit: 4,500 5 minutes
 
-Interface description: This endpoint retrieves the latest tickers for all supported pairs.
+Interface description: This endpoint retrieves the latest tickers for all
+supported pairs.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
 | Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
+| --------- | --------- | -------- | ----------- | ----------- | ------------- |
 
 Notes:  
 No parameters are needed for this endpoint.
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | false | Request Processing Result "ok","error" |  |
-| ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| DATA\_START | object | false |  |  |
-| amount | float | false | The aggregated trading volume in last 24 hours (rotating 24h) |  |
-| count | integer | false | The number of completed trades of last 24 hours (rotating 24h) |  |
-| open | float | false | The opening price of a nature day (Singapore time) |  |
-| close | float | false | The closing price of a nature day (Singapore time) |  |
-| low | float | false | The lowest price of a nature day (Singapore time) |  |
-| high | float | false | The highest price of a nature day (Singapore time) |  |
-| vol | float | false | The aggregated trading value in last 24 hours (rotating 24h) |  |
-| symbol | string | false | The trading symbol of this object, e.g. btcusdt, bccbtc |  |
-| bid | float | false | Best bid price |  |
-| bidSize | float | false | Best bid size |  |
-| ask | float | false | Best ask price |  |
-| askSize | float | false | Best ask size |  |
-| DATA\_END |  | false |  |  |
+| Parameter  | Data Type | Required | Description                                                    | Value Range |
+| ---------- | --------- | -------- | -------------------------------------------------------------- | ----------- |
+| status     | string    | false    | Request Processing Result "ok","error"                         |             |
+| ts         | long      | false    | Time of Respond Generation, Unit: Millisecond                  |             |
+| DATA_START | object    | false    |                                                                |             |
+| amount     | float     | false    | The aggregated trading volume in last 24 hours (rotating 24h)  |             |
+| count      | integer   | false    | The number of completed trades of last 24 hours (rotating 24h) |             |
+| open       | float     | false    | The opening price of a nature day (Singapore time)             |             |
+| close      | float     | false    | The closing price of a nature day (Singapore time)             |             |
+| low        | float     | false    | The lowest price of a nature day (Singapore time)              |             |
+| high       | float     | false    | The highest price of a nature day (Singapore time)             |             |
+| vol        | float     | false    | The aggregated trading value in last 24 hours (rotating 24h)   |             |
+| symbol     | string    | false    | The trading symbol of this object, e.g. btcusdt, bccbtc        |             |
+| bid        | float     | false    | Best bid price                                                 |             |
+| bidSize    | float     | false    | Best bid size                                                  |             |
+| ask        | float     | false    | Best ask price                                                 |             |
+| askSize    | float     | false    | Best ask size                                                  |             |
+| DATA_END   |           | false    |                                                                |             |
 
 #### Request example
 

@@ -1,12 +1,14 @@
 # Crypto.com Exchange Documentation Extraction
 
-This folder contains scripts for extracting and converting Crypto.com Exchange API documentation into LLM-friendly markdown format.
+This folder contains scripts for extracting and converting Crypto.com Exchange
+API documentation into LLM-friendly markdown format.
 
 ## Documentation Source
 
 - **Source URL**: https://exchange-docs.crypto.com/exchange/v1/rest-ws/
 - **Documentation Type**: Custom HTML-based API documentation
-- **API Base URL**: https://uat-api.3ona.co/ (UAT), https://api.crypto.com/exchange/v1/ (Production)
+- **API Base URL**: https://uat-api.3ona.co/ (UAT),
+  https://api.crypto.com/exchange/v1/ (Production)
 - **WebSocket URL**: Included in documentation
 
 ## Features
@@ -30,6 +32,7 @@ pnpm run extract:general
 ```
 
 This creates:
+
 - `docs/cryptocom/authentication.md` - API authentication and request signing
 - `docs/cryptocom/network_connectivity.md` - API endpoints and connection info
 - `docs/cryptocom/change_log.md` - API version history and breaking changes
@@ -46,6 +49,7 @@ pnpm run extract:endpoints
 ```
 
 This creates individual markdown files in:
+
 - `docs/cryptocom/endpoints/public/` - Public API endpoints
 - `docs/cryptocom/endpoints/private/` - Authenticated API endpoints
 
@@ -68,7 +72,8 @@ pnpm install
 
 ### Authentication
 
-Crypto.com Exchange uses HMAC SHA256 signature authentication for private endpoints. The signature is generated using:
+Crypto.com Exchange uses HMAC SHA256 signature authentication for private
+endpoints. The signature is generated using:
 
 1. API key and secret key pair
 2. Request parameters including method, id, nonce, and params
@@ -77,7 +82,8 @@ Crypto.com Exchange uses HMAC SHA256 signature authentication for private endpoi
 
 ### Documentation Structure
 
-The Crypto.com documentation is a single-page HTML application. The extraction scripts:
+The Crypto.com documentation is a single-page HTML application. The extraction
+scripts:
 
 - Use Puppeteer to navigate and render the documentation
 - Extract content by H1/H2 section traversal
@@ -87,6 +93,7 @@ The Crypto.com documentation is a single-page HTML application. The extraction s
 ### Endpoint Categories
 
 **Public Endpoints**:
+
 - Announcements
 - Risk Parameters
 - Instruments
@@ -100,6 +107,7 @@ The Crypto.com documentation is a single-page HTML application. The extraction s
 - Staking
 
 **Private Endpoints**:
+
 - Account Balance and Positions
 - Trading (create, amend, cancel orders)
 - Advanced Order Management (OTO, OTOCO)
@@ -112,7 +120,9 @@ The Crypto.com documentation is a single-page HTML application. The extraction s
 
 ## Maintenance
 
-The extraction scripts are run automatically via GitHub Actions on a daily schedule. When changes are detected, a pull request is automatically created for review.
+The extraction scripts are run automatically via GitHub Actions on a daily
+schedule. When changes are detected, a pull request is automatically created for
+review.
 
 ## Last Updated
 

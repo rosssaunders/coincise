@@ -16,13 +16,13 @@ Request Example
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| op | String | Yes | subscribe unsubscribe 
-| args | List&lt;Object&gt; | Yes | List of channels to request subscription 
-| &gt; channel | String | Yes | Channel name: <code>positions-history</code> 
-| &gt; instType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures 
-| &gt; instId | String | Yes | Symbol name,<code>default</code>represents all the symbols，Only default is supported now 
+| Parameter     | Type               | Required | Description                                                                                                                                      |
+| :------------ | :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| op            | String             | Yes      | subscribe unsubscribe                                                                                                                            |
+| args          | List&lt;Object&gt; | Yes      | List of channels to request subscription                                                                                                         |
+| &gt; channel  | String             | Yes      | Channel name: <code>positions-history</code>                                                                                                     |
+| &gt; instType | String             | Yes      | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures |
+| &gt; instId   | String             | Yes      | Symbol name,<code>default</code>represents all the symbols，Only default is supported now                                                        |
 
 Response Example
 
@@ -32,15 +32,15 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| event | String | Event 
-| arg | Object | Subscribed channels 
-| &gt; channel | String | Channel name: <code>positions-history</code> 
-| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures 
-| &gt; instId | String | <code>default</code> 
-| code | String | Error code 
-| msg | String | Error message 
+| Parameter     | Type   | Description                                                                                                                                      |
+| :------------ | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| event         | String | Event                                                                                                                                            |
+| arg           | Object | Subscribed channels                                                                                                                              |
+| &gt; channel  | String | Channel name: <code>positions-history</code>                                                                                                     |
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures |
+| &gt; instId   | String | <code>default</code>                                                                                                                             |
+| code          | String | Error code                                                                                                                                       |
+| msg           | String | Error message                                                                                                                                    |
 
 Push Data
 
@@ -50,29 +50,30 @@ Push Data
 
 ### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| action | String | 'snapshot' 
-| arg | Object | Channels with successful subscription 
-| &gt; channel | String | Channel name: <code>positions-history</code> 
-| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures 
-| &gt; instId | String | <code>default</code> 
-| data | List&lt;Object&gt; | Subscription data 
-| &gt; posId | String | Position ID 
-| &gt; instId | String | Product ID<br>delivery contract reference：<a href="https://www.bitget.com/api-doc/common/release-note" target="_blank" rel="noopener noreferrer">https://www.bitget.com/api-doc/common/release-note</a> 
-| &gt; marginCoin | String | Currency of occupied margin 
-| &gt; marginMode | String | Margin mode<br><code>fixed</code>: isolated mode<br><code>crossed</code>: crossed mode 
-| &gt; holdSide | String | Position direction 
-| &gt; posMode | String | Position mode 
-| &gt; openPriceAvg | String | Average entry price 
-| &gt; closePriceAvg | String | Average close price 
-| &gt; openSize | String | Open size 
-| &gt; closeSize | String | Close size 
-| &gt; achievedProfits | String | Realized PnL 
-| &gt; settleFee | String | Settle fee 
-| &gt; openFee | String | Total open fee 
-| &gt; closeFee | String | Total close fee 
-| &gt; cTime | String | Position creation time, milliseconds format of Unix timestamp, e.g.1597026383085 
-| &gt; uTime | String | Lastest position update time, milliseconds format of Unix timestamp, e.g.1597026383085
+| Parameter            | Type               | Description                                                                                                                                                                                              |
+| :------------------- | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| action               | String             | 'snapshot'                                                                                                                                                                                               |
+| arg                  | Object             | Channels with successful subscription                                                                                                                                                                    |
+| &gt; channel         | String             | Channel name: <code>positions-history</code>                                                                                                                                                             |
+| &gt; instType        | String             | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures                                                         |
+| &gt; instId          | String             | <code>default</code>                                                                                                                                                                                     |
+| data                 | List&lt;Object&gt; | Subscription data                                                                                                                                                                                        |
+| &gt; posId           | String             | Position ID                                                                                                                                                                                              |
+| &gt; instId          | String             | Product ID<br>delivery contract reference：<a href="https://www.bitget.com/api-doc/common/release-note" target="_blank" rel="noopener noreferrer">https://www.bitget.com/api-doc/common/release-note</a> |
+| &gt; marginCoin      | String             | Currency of occupied margin                                                                                                                                                                              |
+| &gt; marginMode      | String             | Margin mode<br><code>fixed</code>: isolated mode<br><code>crossed</code>: crossed mode                                                                                                                   |
+| &gt; holdSide        | String             | Position direction                                                                                                                                                                                       |
+| &gt; posMode         | String             | Position mode                                                                                                                                                                                            |
+| &gt; openPriceAvg    | String             | Average entry price                                                                                                                                                                                      |
+| &gt; closePriceAvg   | String             | Average close price                                                                                                                                                                                      |
+| &gt; openSize        | String             | Open size                                                                                                                                                                                                |
+| &gt; closeSize       | String             | Close size                                                                                                                                                                                               |
+| &gt; achievedProfits | String             | Realized PnL                                                                                                                                                                                             |
+| &gt; settleFee       | String             | Settle fee                                                                                                                                                                                               |
+| &gt; openFee         | String             | Total open fee                                                                                                                                                                                           |
+| &gt; closeFee        | String             | Total close fee                                                                                                                                                                                          |
+| &gt; cTime           | String             | Position creation time, milliseconds format of Unix timestamp, e.g.1597026383085                                                                                                                         |
+| &gt; uTime           | String             | Lastest position update time, milliseconds format of Unix timestamp, e.g.1597026383085                                                                                                                   |
 
-> **Source:** https://www.bitget.com/api-doc/contract/websocket/private/History-Positions-Channel
+> **Source:**
+> https://www.bitget.com/api-doc/contract/websocket/private/History-Positions-Channel

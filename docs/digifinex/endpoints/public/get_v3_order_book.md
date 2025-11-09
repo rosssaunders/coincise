@@ -2,7 +2,8 @@
 
 **Title:** Get orderbook
 
-**Source:** [Get orderbook](https://docs.digifinex.com/en-ww/spot/v3/rest.html#get-orderbook)
+**Source:**
+[Get orderbook](https://docs.digifinex.com/en-ww/spot/v3/rest.html#get-orderbook)
 
 ## Authentication
 
@@ -14,14 +15,14 @@ Not Required (Public Endpoint)
 
 ### HTTP Request
 
--   GET `https://openapi.digifinex.com/v3/order_book`
+- GET `https://openapi.digifinex.com/v3/order_book`
 
 ### Request Parameters
 
-| Field | Request Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | string | true | "btc\_usdt" |
-| limit | int | false | Limit of depth, default 10, maximum 150 |
+| Field  | Request Type | Mandatory | Description                             |
+| ------ | ------------ | --------- | --------------------------------------- |
+| symbol | string       | true      | "btc_usdt"                              |
+| limit  | int          | false     | Limit of depth, default 10, maximum 150 |
 
 > Response:
 
@@ -46,9 +47,9 @@ Not Required (Public Endpoint)
 
 ### Response Content
 
-| Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| bids | true | object | Bids \[price, size\] |
-| asks | true | object | Asks \[price, size\] |
-| date | true | int | Timestamp |
-| code | true | int | Status |
+| Field | Mandatory | Request Type | Description          |
+| ----- | --------- | ------------ | -------------------- |
+| bids  | true      | object       | Bids \[price, size\] |
+| asks  | true      | object       | Asks \[price, size\] |
+| date  | true      | int          | Timestamp            |
+| code  | true      | int          | Status               |

@@ -20,7 +20,8 @@ Copy to Clipboard
 
 The format of the failed message returned by the BitMart server to the client.
 
-If the returned field contains `errorCode`, it means failure. For the reason of failure, please refer to: [WebSocket Error Code](#websocket-error-code)
+If the returned field contains `errorCode`, it means failure. For the reason of
+failure, please refer to: [WebSocket Error Code](#websocket-error-code)
 
 Failed Response Format
 

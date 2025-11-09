@@ -1,6 +1,7 @@
 # GET Get a list of currency assets
 
-Source: [https://doc.xt.com/docs/spot/Balance/GetBalances](https://doc.xt.com/docs/spot/Balance/GetBalances)
+Source:
+[https://doc.xt.com/docs/spot/Balance/GetBalances](https://doc.xt.com/docs/spot/Balance/GetBalances)
 
 # Get a list of currency assets
 
@@ -8,21 +9,21 @@ Source: [https://doc.xt.com/docs/spot/Balance/GetBalances](https://doc.xt.com/do
 
 **GET** `/v4/balances`
 
-* * *
+---
 
 ### Limit Rule[​](#limit-rule "Direct link to Limit Rule")
 
--   10 requests/second/apikey
+- 10 requests/second/apikey
 
-* * *
+---
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| Name | Type | Mandatory | Default | Description | Ranges |
-| --- | --- | --- | --- | --- | --- |
-| currencies | string | No | N/A | List of currencies, comma separated, e.g. `usdt,btc` |  |
+| Name       | Type   | Mandatory | Default | Description                                          | Ranges |
+| ---------- | ------ | --------- | ------- | ---------------------------------------------------- | ------ |
+| currencies | string | No        | N/A     | List of currencies, comma separated, e.g. `usdt,btc` |        |
 
-* * *
+---
 
 ### Response Example[​](#response-example "Direct link to Response Example")
 

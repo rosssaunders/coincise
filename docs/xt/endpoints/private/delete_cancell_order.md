@@ -1,6 +1,7 @@
 # DELETE Cancell order
 
-Source: [https://doc.xt.com/docs/spot/Order/CancelOrder](https://doc.xt.com/docs/spot/Order/CancelOrder)
+Source:
+[https://doc.xt.com/docs/spot/Order/CancelOrder](https://doc.xt.com/docs/spot/Order/CancelOrder)
 
 # Cancell order
 
@@ -8,9 +9,9 @@ Source: [https://doc.xt.com/docs/spot/Order/CancelOrder](https://doc.xt.com/docs
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| orderId | number | true |  |  |  |
+| name    | type   | mandatory | default | description | ranges |
+| ------- | ------ | --------- | ------- | ----------- | ------ |
+| orderId | number | true      |         |             |        |
 
 #### **Limit Flow Rules**[​](#limit-flow-rules "Direct link to limit-flow-rules")
 

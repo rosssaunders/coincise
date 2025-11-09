@@ -1,6 +1,7 @@
 # GET [General]Get Market BBO Data
 
-**Source:** [[General]Get Market BBO Data](https://www.htx.com/en-us/opend/newApiPages/?id=8cb8098e-77b5-11ed-9966-0242ac110003)
+**Source:**
+[[General]Get Market BBO Data](https://www.htx.com/en-us/opend/newApiPages/?id=8cb8098e-77b5-11ed-9966-0242ac110003)
 
 **Category:** Swap Market Data interface
 
@@ -16,38 +17,48 @@ Signature verification: No
 
 Interface permission: Read
 
-Rate Limit: For public interface to get market data such as Get Kline data, Get Market Data Overview, Get Contract Information,Get market in-depth data, Get premium index Kline, Get real-time forecast capital rate kline, Get basis data, Get the last Trade of a Contract and so on： （1）For restful interfaces, products, (future, coin margined swap, usdt margined Contracts)800 times/second for one IP at most
+Rate Limit: For public interface to get market data such as Get Kline data, Get
+Market Data Overview, Get Contract Information,Get market in-depth data, Get
+premium index Kline, Get real-time forecast capital rate kline, Get basis data,
+Get the last Trade of a Contract and so on： （1）For restful interfaces,
+products, (future, coin margined swap, usdt margined Contracts)800 times/second
+for one IP at most
 
-Interface description: he interface supports cross margin mode and isolated margin mode. The request parameter "contract\_code" supports the contract code of futures, in that the format is BTC-USDT-210625; and supports contract type: BTC-USDT, BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ. business\_type is a required parameter when query info of futures contract, and its value must be futures or all.
+Interface description: he interface supports cross margin mode and isolated
+margin mode. The request parameter "contract_code" supports the contract code of
+futures, in that the format is BTC-USDT-210625; and supports contract type:
+BTC-USDT, BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ. business_type is a
+required parameter when query info of futures contract, and its value must be
+futures or all.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | contract code or contract type | swap: "BTC-USDT"... , future: "BTC-USDT-220325" ... or BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ |  |
-| business\_type | string | false | business type, default is swap | futures, swap, all |  |
+| Parameter     | Data Type | Required | Description                    | Value Range                                                                                               | Default Value |
+| ------------- | --------- | -------- | ------------------------------ | --------------------------------------------------------------------------------------------------------- | ------------- |
+| contract_code | string    | false    | contract code or contract type | swap: "BTC-USDT"... , future: "BTC-USDT-220325" ... or BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ |               |
+| business_type | string    | false    | business type, default is swap | futures, swap, all                                                                                        |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | the result of server handling to request | "ok" , "error" |
-| TICKS\_START | object array | true |  |  |
-| contract\_code | string | true | contract code or contract type | swap: "BTC-USDT"... , future: "BTC-USDT-220325" ... or BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ |
-| business\_type | string | true | business type | futures, swap |
-| mrid | long | true | Match ID, unique identification |  |
-| ask | array | false | \[Ask 1 price, Ask 1 qty (cont)\] |  |
-| bid | array | false | \[Bid 1 price, Bid 1 qty (cont)\] |  |
-| ts | long | true | The system detects the orderbook time point, unit: milliseconds |  |
-| TICKS\_END |  | false |  |  |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
+| Parameter     | Data Type    | Required | Description                                                     | Value Range                                                                                               |
+| ------------- | ------------ | -------- | --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| status        | string       | true     | the result of server handling to request                        | "ok" , "error"                                                                                            |
+| TICKS_START   | object array | true     |                                                                 |                                                                                                           |
+| contract_code | string       | true     | contract code or contract type                                  | swap: "BTC-USDT"... , future: "BTC-USDT-220325" ... or BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ |
+| business_type | string       | true     | business type                                                   | futures, swap                                                                                             |
+| mrid          | long         | true     | Match ID, unique identification                                 |                                                                                                           |
+| ask           | array        | false    | \[Ask 1 price, Ask 1 qty (cont)\]                               |                                                                                                           |
+| bid           | array        | false    | \[Bid 1 price, Bid 1 qty (cont)\]                               |                                                                                                           |
+| ts            | long         | true     | The system detects the orderbook time point, unit: milliseconds |                                                                                                           |
+| TICKS_END     |              | false    |                                                                 |                                                                                                           |
+| ts            | long         | true     | Time of Respond Generation, Unit: Millisecond                   |                                                                                                           |
 
 #### Request example
 
@@ -67,11 +78,11 @@ Interface description: he interface supports cross margin mode and isolated marg
 
 0:{
 
-"business\_type":
+"business_type":
 
 "futures"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-CW"
 
@@ -119,11 +130,11 @@ Interface description: he interface supports cross margin mode and isolated marg
 
 1:{
 
-"business\_type":
+"business_type":
 
 "futures"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-NW"
 
@@ -171,11 +182,11 @@ Interface description: he interface supports cross margin mode and isolated marg
 
 2:{
 
-"business\_type":
+"business_type":
 
 "futures"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-CQ"
 
@@ -223,11 +234,11 @@ Interface description: he interface supports cross margin mode and isolated marg
 
 3:{
 
-"business\_type":
+"business_type":
 
 "swap"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 

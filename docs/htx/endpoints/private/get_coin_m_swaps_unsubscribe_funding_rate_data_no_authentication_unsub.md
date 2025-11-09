@@ -1,6 +1,7 @@
 # GET 【Coin-M Swaps】Unsubscribe Funding Rate Data(no authentication)(unsub)
 
-**Source:** [【Coin-M Swaps】Unsubscribe Funding Rate Data(no authentication)(unsub)](https://www.htx.com/en-us/opend/newApiPages/?id=10000062-77b7-11ed-9966-0242ac110003)
+**Source:**
+[【Coin-M Swaps】Unsubscribe Funding Rate Data(no authentication)(unsub)](https://www.htx.com/en-us/opend/newApiPages/?id=10000062-77b7-11ed-9966-0242ac110003)
 
 **Category:** Downline Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### public.$contract\_code.funding\_rate (【Coin-M Swaps】Unsubscribe Funding Rate Data(no authentication)(unsub))
+### public.$contract_code.funding_rate (【Coin-M Swaps】Unsubscribe Funding Rate Data(no authentication)(unsub))
 
 Signature verification: Yes
 
@@ -17,35 +18,35 @@ Interface permission: Read
 #### Subscription Address
 
 | Environment | Address |
-| --- | --- |
+| ----------- | ------- |
 
 #### Request Parameter
 
-| Field Name | Type | Description |
-| --- | --- | --- |
-| op | string | Required;Operator Name，value for unsubscribe is unsub; |
-| cid | string | Optional; Client requests unique ID |
-| topic | string | Subscribe topic name，Require subscribe public.$contract\_code.funding\_rate Subscribe/unsubscribe the data of a given contract code; when the $contract\_code value is \*, it stands for subscribing/unsubscribing all the funding rates of contract codes，; |
+| Field Name | Type   | Description                                                                                                                                                                                                                                                 |
+| ---------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| op         | string | Required;Operator Name，value for unsubscribe is unsub;                                                                                                                                                                                                     |
+| cid        | string | Optional; Client requests unique ID                                                                                                                                                                                                                         |
+| topic      | string | Subscribe topic name，Require subscribe public.$contract_code.funding_rate Subscribe/unsubscribe the data of a given contract code; when the $contract_code value is \*, it stands for subscribing/unsubscribing all the funding rates of contract codes，; |
 
 #### Rule description
 
-| Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
-| public.\*.funding\_rate | public.\*.funding\_rate | allowd |
-| public.contract\_code1.funding\_rate | public.\*.funding\_rate | allowd |
-| public.contract\_code1.funding\_rate | public.contract\_code1.funding\_rate | allowd |
-| public.contract\_code1.funding\_rate | public.contract\_code2.funding\_rate | not allowed |
-| public.\*.funding\_rate | public.contract\_code1.funding\_rate | not allowed |
+| Subscribe(sub)                     | Unsubscribe( unsub )               | Rule        |
+| ---------------------------------- | ---------------------------------- | ----------- |
+| public.\*.funding_rate             | public.\*.funding_rate             | allowd      |
+| public.contract_code1.funding_rate | public.\*.funding_rate             | allowd      |
+| public.contract_code1.funding_rate | public.contract_code1.funding_rate | allowd      |
+| public.contract_code1.funding_rate | public.contract_code2.funding_rate | not allowed |
+| public.\*.funding_rate             | public.contract_code1.funding_rate | not allowed |
 
 #### Subscription Parameter
 
 | Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
+| --------- | --------- | -------- | ----------- | ----------- | ------------- |
 
 #### Data Update
 
 | Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
+| --------- | --------- | -------- | ----------- | ----------- |
 
 #### Subscription Example
 
@@ -57,7 +58,7 @@ Interface permission: Read
 
 "topic":
 
-"public.BTC-USD.funding\_rate"
+"public.BTC-USD.funding_rate"
 
 "cid":
 

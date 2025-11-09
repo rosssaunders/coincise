@@ -1,6 +1,7 @@
 # GET Request Index Kline Data
 
-**Source:** [Request Index Kline Data](https://www.htx.com/en-us/opend/newApiPages/?id=5d514b52-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Request Index Kline Data](https://www.htx.com/en-us/opend/newApiPages/?id=5d514b52-77b6-11ed-9966-0242ac110003)
 
 **Category:** WebSocket Index and Basis Interface
 
@@ -16,52 +17,52 @@ Interface permission: Read
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.hbdm.com/ws\_index |
-| Online (preferred by aws customers) | wss://api.hbdm.vn/ws\_index |
+| Environment                         | Address                     |
+| ----------------------------------- | --------------------------- |
+| Online                              | wss://api.hbdm.com/ws_index |
+| Online (preferred by aws customers) | wss://api.hbdm.vn/ws_index  |
 
 #### Request Parameter
 
 | Field Name | Type | Description |
-| --- | --- | --- |
+| ---------- | ---- | ----------- |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
+| -------------- | -------------------- | ---- |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| from | long | true | start time, from 3017-07-38T00:00:00+08:00 to 3050-01-01T00:00:00+08:00. timestamp unit：seconds |  |  |
-| to | long | true | end time, from 3017-07-38T00:00:00+08:00 to 3050-01-01T00:00:00+08:00. timestamp unit：seconds. larger than 'from' value |  |  |
-| contract\_code | string | true | index symbol | Case-Insenstive.Both uppercase and lowercase are supported.."BTC-USD","ETH-USD"… |  |
-| period | string | true | kline type | 1min, 5min, 15min, 30min, 60min,4hour,1day, 1mon |  |
+| Parameter     | Data Type | Required | Description                                                                                                              | Value Range                                                                      | Default Value |
+| ------------- | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- | ------------- |
+| from          | long      | true     | start time, from 3017-07-38T00:00:00+08:00 to 3050-01-01T00:00:00+08:00. timestamp unit：seconds                         |                                                                                  |               |
+| to            | long      | true     | end time, from 3017-07-38T00:00:00+08:00 to 3050-01-01T00:00:00+08:00. timestamp unit：seconds. larger than 'from' value |                                                                                  |               |
+| contract_code | string    | true     | index symbol                                                                                                             | Case-Insenstive.Both uppercase and lowercase are supported.."BTC-USD","ETH-USD"… |               |
+| period        | string    | true     | kline type                                                                                                               | 1min, 5min, 15min, 30min, 60min,4hour,1day, 1mon                                 |               |
 
 Notes:  
 Pushed once the index data is changed.
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| req | string | true | Data channel，Format：market.$contract\_code.index.$period |  |
-| status | string | true | Request processing result |  |
-| id | string | true | ID |  |
-| wsid | long | true | wsid |  |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| TICK\_START | object array | false |  |  |
-| id | decimal | true | index kline id,the same as kline timestamp,kline start timestamp |  |
-| vol | decimal | true | Trade Volume. The value is 0. |  |
-| count | decimal | true | count. The value is 0. |  |
-| open | decimal | true | open index price |  |
-| close | decimal | true | close index price |  |
-| low | decimal | true | lowest index price |  |
-| high | decimal | true | highest index price |  |
-| amount | decimal | true | amount based on coins. |  |
-| TICK\_END |  | false |  |  |
+| Parameter  | Data Type    | Required | Description                                                      | Value Range |
+| ---------- | ------------ | -------- | ---------------------------------------------------------------- | ----------- |
+| req        | string       | true     | Data channel，Format：market.$contract\_code.index.$period       |             |
+| status     | string       | true     | Request processing result                                        |             |
+| id         | string       | true     | ID                                                               |             |
+| wsid       | long         | true     | wsid                                                             |             |
+| ts         | long         | true     | Time of Respond Generation, Unit: Millisecond                    |             |
+| TICK_START | object array | false    |                                                                  |             |
+| id         | decimal      | true     | index kline id,the same as kline timestamp,kline start timestamp |             |
+| vol        | decimal      | true     | Trade Volume. The value is 0.                                    |             |
+| count      | decimal      | true     | count. The value is 0.                                           |             |
+| open       | decimal      | true     | open index price                                                 |             |
+| close      | decimal      | true     | close index price                                                |             |
+| low        | decimal      | true     | lowest index price                                               |             |
+| high       | decimal      | true     | highest index price                                              |             |
+| amount     | decimal      | true     | amount based on coins.                                           |             |
+| TICK_END   |              | false    |                                                                  |             |
 
 #### Subscription Example
 

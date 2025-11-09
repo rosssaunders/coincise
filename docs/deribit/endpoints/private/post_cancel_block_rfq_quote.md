@@ -47,18 +47,18 @@ Execution instruction of the quote. Default - `any_part_of`
 - `"any_part_of (APO)"` - The quote can be filled either partially or fully,
   with the filled amount potentially being less than the Block RFQ amount.
 
-| |   ›  filled_amount | number | Filled amount of the quote. For perpetual and
+| |   ›  filled*amount | number | Filled amount of the quote. For perpetual and
 futures the filled_amount is in USD units, for options - in units or
 corresponding cryptocurrency contracts, e.g., BTC or ETH. | |   ›  hedge |
-_object_ | | |   ›    ›  amount | integer | It represents the requested hedge
+\_object* | | |   ›    ›  amount | integer | It represents the requested hedge
 leg size. For perpetual and inverse futures the amount is in USD units. For
 options and linear futures and it is the underlying base currency coin. | |
   ›    ›  direction | string | Direction: `buy`, or `sell` | |
-  ›    ›  instrument_name | string | Unique instrument identifier | |
+  ›    ›  instrument*name | string | Unique instrument identifier | |
   ›    ›  price | number | Price for a hedge leg | |   ›  label | string | User
 defined label for the quote (maximum 64 characters) | |
   ›  last_update_timestamp | integer | Timestamp of the last update of the quote
-(milliseconds since the UNIX epoch) | |   ›  legs | array of _object_ | | |
+(milliseconds since the UNIX epoch) | |   ›  legs | array of \_object* | | |
   ›    ›  direction | string | Direction: `buy`, or `sell` | |
   ›    ›  instrument_name | string | Unique instrument identifier | |
   ›    ›  price | number | Price for a leg | |   ›    ›  ratio | integer | Ratio

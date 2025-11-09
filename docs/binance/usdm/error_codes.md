@@ -15,853 +15,880 @@ Codes are universal,but messages can vary.
 
 #### \-1000 UNKNOWN
 
--   An unknown error occured while processing the request.
+- An unknown error occured while processing the request.
 
 #### \-1001 DISCONNECTED
 
--   Internal error; unable to process your request. Please try again.
+- Internal error; unable to process your request. Please try again.
 
 #### \-1002 UNAUTHORIZED
 
--   You are not authorized to execute this request.
+- You are not authorized to execute this request.
 
-#### \-1003 TOO\_MANY\_REQUESTS
+#### \-1003 TOO_MANY_REQUESTS
 
--   Too many requests; current limit is %s requests per minute. Please use the websocket for live updates to avoid polling the API.
--   Way too many requests; IP banned until %s. Please use the websocket for live updates to avoid bans.
+- Too many requests; current limit is %s requests per minute. Please use the
+  websocket for live updates to avoid polling the API.
+- Way too many requests; IP banned until %s. Please use the websocket for live
+  updates to avoid bans.
 
-#### \-1004 DUPLICATE\_IP
+#### \-1004 DUPLICATE_IP
 
--   This IP is already on the white list
+- This IP is already on the white list
 
-#### \-1005 NO\_SUCH\_IP
+#### \-1005 NO_SUCH_IP
 
--   No such IP has been white listed
+- No such IP has been white listed
 
-#### \-1006 UNEXPECTED\_RESP
+#### \-1006 UNEXPECTED_RESP
 
--   An unexpected response was received from the message bus. Execution status unknown.
+- An unexpected response was received from the message bus. Execution status
+  unknown.
 
 #### \-1007 TIMEOUT
 
--   Timeout waiting for response from backend server. Send status unknown; execution status unknown.
+- Timeout waiting for response from backend server. Send status unknown;
+  execution status unknown.
 
 #### \-1008 Request Throttled
 
--   Server is currently overloaded with other requests. Please try again in a few minutes.
--   Request throttled by system-level protection. Reduce-only/close-position orders are exempt. Please try again.
+- Server is currently overloaded with other requests. Please try again in a few
+  minutes.
+- Request throttled by system-level protection. Reduce-only/close-position
+  orders are exempt. Please try again.
 
-#### \-1010 ERROR\_MSG\_RECEIVED
+#### \-1010 ERROR_MSG_RECEIVED
 
--   ERROR\_MSG\_RECEIVED.
+- ERROR_MSG_RECEIVED.
 
-#### \-1011 NON\_WHITE\_LIST
+#### \-1011 NON_WHITE_LIST
 
--   This IP cannot access this route.
+- This IP cannot access this route.
 
-#### \-1013 INVALID\_MESSAGE
+#### \-1013 INVALID_MESSAGE
 
--   INVALID\_MESSAGE.
+- INVALID_MESSAGE.
 
-#### \-1014 UNKNOWN\_ORDER\_COMPOSITION
+#### \-1014 UNKNOWN_ORDER_COMPOSITION
 
--   Unsupported order combination.
+- Unsupported order combination.
 
-#### \-1015 TOO\_MANY\_ORDERS
+#### \-1015 TOO_MANY_ORDERS
 
--   Too many new orders.
--   Too many new orders; current limit is %s orders per %s.
+- Too many new orders.
+- Too many new orders; current limit is %s orders per %s.
 
-#### \-1016 SERVICE\_SHUTTING\_DOWN
+#### \-1016 SERVICE_SHUTTING_DOWN
 
--   This service is no longer available.
+- This service is no longer available.
 
-#### \-1020 UNSUPPORTED\_OPERATION
+#### \-1020 UNSUPPORTED_OPERATION
 
--   This operation is not supported.
+- This operation is not supported.
 
-#### \-1021 INVALID\_TIMESTAMP
+#### \-1021 INVALID_TIMESTAMP
 
--   Timestamp for this request is outside of the recvWindow.
--   Timestamp for this request was 1000ms ahead of the server's time.
+- Timestamp for this request is outside of the recvWindow.
+- Timestamp for this request was 1000ms ahead of the server's time.
 
-#### \-1022 INVALID\_SIGNATURE
+#### \-1022 INVALID_SIGNATURE
 
--   Signature for this request is not valid.
+- Signature for this request is not valid.
 
-#### \-1023 START\_TIME\_GREATER\_THAN\_END\_TIME
+#### \-1023 START_TIME_GREATER_THAN_END_TIME
 
--   Start time is greater than end time.
+- Start time is greater than end time.
 
-#### \-1099 NOT\_FOUND
+#### \-1099 NOT_FOUND
 
--   Not found, unauthenticated, or unauthorized.
+- Not found, unauthenticated, or unauthorized.
 
 ### 11xx - Request issues
 
-#### \-1100 ILLEGAL\_CHARS
+#### \-1100 ILLEGAL_CHARS
 
--   Illegal characters found in a parameter.
--   Illegal characters found in parameter '%s'; legal range is '%s'.
+- Illegal characters found in a parameter.
+- Illegal characters found in parameter '%s'; legal range is '%s'.
 
-#### \-1101 TOO\_MANY\_PARAMETERS
+#### \-1101 TOO_MANY_PARAMETERS
 
--   Too many parameters sent for this endpoint.
--   Too many parameters; expected '%s' and received '%s'.
--   Duplicate values for a parameter detected.
+- Too many parameters sent for this endpoint.
+- Too many parameters; expected '%s' and received '%s'.
+- Duplicate values for a parameter detected.
 
-#### \-1102 MANDATORY\_PARAM\_EMPTY\_OR\_MALFORMED
+#### \-1102 MANDATORY_PARAM_EMPTY_OR_MALFORMED
 
--   A mandatory parameter was not sent, was empty/null, or malformed.
--   Mandatory parameter '%s' was not sent, was empty/null, or malformed.
--   Param '%s' or '%s' must be sent, but both were empty/null!
+- A mandatory parameter was not sent, was empty/null, or malformed.
+- Mandatory parameter '%s' was not sent, was empty/null, or malformed.
+- Param '%s' or '%s' must be sent, but both were empty/null!
 
-#### \-1103 UNKNOWN\_PARAM
+#### \-1103 UNKNOWN_PARAM
 
--   An unknown parameter was sent.
+- An unknown parameter was sent.
 
-#### \-1104 UNREAD\_PARAMETERS
+#### \-1104 UNREAD_PARAMETERS
 
--   Not all sent parameters were read.
--   Not all sent parameters were read; read '%s' parameter(s) but was sent '%s'.
+- Not all sent parameters were read.
+- Not all sent parameters were read; read '%s' parameter(s) but was sent '%s'.
 
-#### \-1105 PARAM\_EMPTY
+#### \-1105 PARAM_EMPTY
 
--   A parameter was empty.
--   Parameter '%s' was empty.
+- A parameter was empty.
+- Parameter '%s' was empty.
 
-#### \-1106 PARAM\_NOT\_REQUIRED
+#### \-1106 PARAM_NOT_REQUIRED
 
--   A parameter was sent when not required.
--   Parameter '%s' sent when not required.
+- A parameter was sent when not required.
+- Parameter '%s' sent when not required.
 
-#### \-1108 BAD\_ASSET
+#### \-1108 BAD_ASSET
 
--   Invalid asset.
+- Invalid asset.
 
-#### \-1109 BAD\_ACCOUNT
+#### \-1109 BAD_ACCOUNT
 
--   Invalid account.
+- Invalid account.
 
-#### \-1110 BAD\_INSTRUMENT\_TYPE
+#### \-1110 BAD_INSTRUMENT_TYPE
 
--   Invalid symbolType.
+- Invalid symbolType.
 
-#### \-1111 BAD\_PRECISION
+#### \-1111 BAD_PRECISION
 
--   Precision is over the maximum defined for this asset.
+- Precision is over the maximum defined for this asset.
 
-#### \-1112 NO\_DEPTH
+#### \-1112 NO_DEPTH
 
--   No orders on book for symbol.
+- No orders on book for symbol.
 
-#### \-1113 WITHDRAW\_NOT\_NEGATIVE
+#### \-1113 WITHDRAW_NOT_NEGATIVE
 
--   Withdrawal amount must be negative.
+- Withdrawal amount must be negative.
 
-#### \-1114 TIF\_NOT\_REQUIRED
+#### \-1114 TIF_NOT_REQUIRED
 
--   TimeInForce parameter sent when not required.
+- TimeInForce parameter sent when not required.
 
-#### \-1115 INVALID\_TIF
+#### \-1115 INVALID_TIF
 
--   Invalid timeInForce.
+- Invalid timeInForce.
 
-#### \-1116 INVALID\_ORDER\_TYPE
+#### \-1116 INVALID_ORDER_TYPE
 
--   Invalid orderType.
+- Invalid orderType.
 
-#### \-1117 INVALID\_SIDE
+#### \-1117 INVALID_SIDE
 
--   Invalid side.
+- Invalid side.
 
-#### \-1118 EMPTY\_NEW\_CL\_ORD\_ID
+#### \-1118 EMPTY_NEW_CL_ORD_ID
 
--   New client order ID was empty.
+- New client order ID was empty.
 
-#### \-1119 EMPTY\_ORG\_CL\_ORD\_ID
+#### \-1119 EMPTY_ORG_CL_ORD_ID
 
--   Original client order ID was empty.
+- Original client order ID was empty.
 
-#### \-1120 BAD\_INTERVAL
+#### \-1120 BAD_INTERVAL
 
--   Invalid interval.
+- Invalid interval.
 
-#### \-1121 BAD\_SYMBOL
+#### \-1121 BAD_SYMBOL
 
--   Invalid symbol.
+- Invalid symbol.
 
-#### \-1122 INVALID\_SYMBOL\_STATUS
+#### \-1122 INVALID_SYMBOL_STATUS
 
--   Invalid symbol status.
+- Invalid symbol status.
 
-#### \-1125 INVALID\_LISTEN\_KEY
+#### \-1125 INVALID_LISTEN_KEY
 
--   This listenKey does not exist. Please use `POST /fapi/v1/listenKey` to recreate `listenKey`
+- This listenKey does not exist. Please use `POST /fapi/v1/listenKey` to
+  recreate `listenKey`
 
-#### \-1126 ASSET\_NOT\_SUPPORTED
+#### \-1126 ASSET_NOT_SUPPORTED
 
--   This asset is not supported.
+- This asset is not supported.
 
-#### \-1127 MORE\_THAN\_XX\_HOURS
+#### \-1127 MORE_THAN_XX_HOURS
 
--   Lookup interval is too big.
--   More than %s hours between startTime and endTime.
+- Lookup interval is too big.
+- More than %s hours between startTime and endTime.
 
-#### \-1128 OPTIONAL\_PARAMS\_BAD\_COMBO
+#### \-1128 OPTIONAL_PARAMS_BAD_COMBO
 
--   Combination of optional parameters invalid.
+- Combination of optional parameters invalid.
 
-#### \-1130 INVALID\_PARAMETER
+#### \-1130 INVALID_PARAMETER
 
--   Invalid data sent for a parameter.
--   Data sent for parameter '%s' is not valid.
+- Invalid data sent for a parameter.
+- Data sent for parameter '%s' is not valid.
 
-#### \-1136 INVALID\_NEW\_ORDER\_RESP\_TYPE
+#### \-1136 INVALID_NEW_ORDER_RESP_TYPE
 
--   Invalid newOrderRespType.
+- Invalid newOrderRespType.
 
 ### 20xx - Processing Issues
 
-#### \-2010 NEW\_ORDER\_REJECTED
+#### \-2010 NEW_ORDER_REJECTED
 
--   NEW\_ORDER\_REJECTED
+- NEW_ORDER_REJECTED
 
-#### \-2011 CANCEL\_REJECTED
+#### \-2011 CANCEL_REJECTED
 
--   CANCEL\_REJECTED
--   Cancel request failure as open order not found in the orderbook: "Unknown order sent".
+- CANCEL_REJECTED
+- Cancel request failure as open order not found in the orderbook: "Unknown
+  order sent".
 
-#### \-2012 CANCEL\_ALL\_FAIL
+#### \-2012 CANCEL_ALL_FAIL
 
--   Batch cancel failure.
+- Batch cancel failure.
 
-#### \-2013 NO\_SUCH\_ORDER
+#### \-2013 NO_SUCH_ORDER
 
--   Order does not exist.
+- Order does not exist.
 
-#### \-2014 BAD\_API\_KEY\_FMT
+#### \-2014 BAD_API_KEY_FMT
 
--   API-key format invalid.
+- API-key format invalid.
 
-#### \-2015 REJECTED\_MBX\_KEY
+#### \-2015 REJECTED_MBX_KEY
 
--   Invalid API-key, IP, or permissions for action.
+- Invalid API-key, IP, or permissions for action.
 
-#### \-2016 NO\_TRADING\_WINDOW
+#### \-2016 NO_TRADING_WINDOW
 
--   No trading window could be found for the symbol. Try ticker/24hrs instead.
+- No trading window could be found for the symbol. Try ticker/24hrs instead.
 
-#### \-2017 API\_KEYS\_LOCKED
+#### \-2017 API_KEYS_LOCKED
 
--   API Keys are locked on this account.
+- API Keys are locked on this account.
 
-#### \-2018 BALANCE\_NOT\_SUFFICIENT
+#### \-2018 BALANCE_NOT_SUFFICIENT
 
--   Balance is insufficient.
+- Balance is insufficient.
 
-#### \-2019 MARGIN\_NOT\_SUFFICIEN
+#### \-2019 MARGIN_NOT_SUFFICIEN
 
--   Margin is insufficient.
+- Margin is insufficient.
 
-#### \-2020 UNABLE\_TO\_FILL
+#### \-2020 UNABLE_TO_FILL
 
--   Unable to fill.
+- Unable to fill.
 
-#### \-2021 ORDER\_WOULD\_IMMEDIATELY\_TRIGGER
+#### \-2021 ORDER_WOULD_IMMEDIATELY_TRIGGER
 
--   Order would immediately trigger.
+- Order would immediately trigger.
 
-#### \-2022 REDUCE\_ONLY\_REJECT
+#### \-2022 REDUCE_ONLY_REJECT
 
--   ReduceOnly Order is rejected.
--   This indicates the new reduce-only order conflicts with existing open orders; cancel the existing order and resubmit the reduce-only order.
+- ReduceOnly Order is rejected.
+- This indicates the new reduce-only order conflicts with existing open orders;
+  cancel the existing order and resubmit the reduce-only order.
 
-#### \-2023 USER\_IN\_LIQUIDATION
+#### \-2023 USER_IN_LIQUIDATION
 
--   User in liquidation mode now.
+- User in liquidation mode now.
 
-#### \-2024 POSITION\_NOT\_SUFFICIENT
+#### \-2024 POSITION_NOT_SUFFICIENT
 
--   Position is not sufficient.
+- Position is not sufficient.
 
-#### \-2025 MAX\_OPEN\_ORDER\_EXCEEDED
+#### \-2025 MAX_OPEN_ORDER_EXCEEDED
 
--   Reach max open order limit.
+- Reach max open order limit.
 
-#### \-2026 REDUCE\_ONLY\_ORDER\_TYPE\_NOT\_SUPPORTED
+#### \-2026 REDUCE_ONLY_ORDER_TYPE_NOT_SUPPORTED
 
--   This OrderType is not supported when reduceOnly.
+- This OrderType is not supported when reduceOnly.
 
-#### \-2027 MAX\_LEVERAGE\_RATIO
+#### \-2027 MAX_LEVERAGE_RATIO
 
--   Exceeded the maximum allowable position at current leverage.
+- Exceeded the maximum allowable position at current leverage.
 
-#### \-2028 MIN\_LEVERAGE\_RATIO
+#### \-2028 MIN_LEVERAGE_RATIO
 
--   Leverage is smaller than permitted: insufficient margin balance.
+- Leverage is smaller than permitted: insufficient margin balance.
 
 ### 40xx - Filters and other Issues
 
-#### \-4000 INVALID\_ORDER\_STATUS
+#### \-4000 INVALID_ORDER_STATUS
 
--   Invalid order status.
+- Invalid order status.
 
-#### \-4001 PRICE\_LESS\_THAN\_ZERO
+#### \-4001 PRICE_LESS_THAN_ZERO
 
--   Price less than 0.
+- Price less than 0.
 
-#### \-4002 PRICE\_GREATER\_THAN\_MAX\_PRICE
+#### \-4002 PRICE_GREATER_THAN_MAX_PRICE
 
--   Price greater than max price.
+- Price greater than max price.
 
-#### \-4003 QTY\_LESS\_THAN\_ZERO
+#### \-4003 QTY_LESS_THAN_ZERO
 
--   Quantity less than zero.
+- Quantity less than zero.
 
-#### \-4004 QTY\_LESS\_THAN\_MIN\_QTY
+#### \-4004 QTY_LESS_THAN_MIN_QTY
 
--   Quantity less than min quantity.
+- Quantity less than min quantity.
 
-#### \-4005 QTY\_GREATER\_THAN\_MAX\_QTY
+#### \-4005 QTY_GREATER_THAN_MAX_QTY
 
--   Quantity greater than max quantity.
+- Quantity greater than max quantity.
 
-#### \-4006 STOP\_PRICE\_LESS\_THAN\_ZERO
+#### \-4006 STOP_PRICE_LESS_THAN_ZERO
 
--   Stop price less than zero.
+- Stop price less than zero.
 
-#### \-4007 STOP\_PRICE\_GREATER\_THAN\_MAX\_PRICE
+#### \-4007 STOP_PRICE_GREATER_THAN_MAX_PRICE
 
--   Stop price greater than max price.
+- Stop price greater than max price.
 
-#### \-4008 TICK\_SIZE\_LESS\_THAN\_ZERO
+#### \-4008 TICK_SIZE_LESS_THAN_ZERO
 
--   Tick size less than zero.
+- Tick size less than zero.
 
-#### \-4009 MAX\_PRICE\_LESS\_THAN\_MIN\_PRICE
+#### \-4009 MAX_PRICE_LESS_THAN_MIN_PRICE
 
--   Max price less than min price.
+- Max price less than min price.
 
-#### \-4010 MAX\_QTY\_LESS\_THAN\_MIN\_QTY
+#### \-4010 MAX_QTY_LESS_THAN_MIN_QTY
 
--   Max qty less than min qty.
+- Max qty less than min qty.
 
-#### \-4011 STEP\_SIZE\_LESS\_THAN\_ZERO
+#### \-4011 STEP_SIZE_LESS_THAN_ZERO
 
--   Step size less than zero.
+- Step size less than zero.
 
-#### \-4012 MAX\_NUM\_ORDERS\_LESS\_THAN\_ZERO
+#### \-4012 MAX_NUM_ORDERS_LESS_THAN_ZERO
 
--   Max mum orders less than zero.
+- Max mum orders less than zero.
 
-#### \-4013 PRICE\_LESS\_THAN\_MIN\_PRICE
+#### \-4013 PRICE_LESS_THAN_MIN_PRICE
 
--   Price less than min price.
+- Price less than min price.
 
-#### \-4014 PRICE\_NOT\_INCREASED\_BY\_TICK\_SIZE
+#### \-4014 PRICE_NOT_INCREASED_BY_TICK_SIZE
 
--   Price not increased by tick size.
+- Price not increased by tick size.
 
-#### \-4015 INVALID\_CL\_ORD\_ID\_LEN
+#### \-4015 INVALID_CL_ORD_ID_LEN
 
--   Client order id is not valid.
--   Client order id length should not be more than 36 chars
+- Client order id is not valid.
+- Client order id length should not be more than 36 chars
 
-#### \-4016 PRICE\_HIGHTER\_THAN\_MULTIPLIER\_UP
+#### \-4016 PRICE_HIGHTER_THAN_MULTIPLIER_UP
 
--   Price is higher than mark price multiplier cap.
+- Price is higher than mark price multiplier cap.
 
-#### \-4017 MULTIPLIER\_UP\_LESS\_THAN\_ZERO
+#### \-4017 MULTIPLIER_UP_LESS_THAN_ZERO
 
--   Multiplier up less than zero.
+- Multiplier up less than zero.
 
-#### \-4018 MULTIPLIER\_DOWN\_LESS\_THAN\_ZERO
+#### \-4018 MULTIPLIER_DOWN_LESS_THAN_ZERO
 
--   Multiplier down less than zero.
+- Multiplier down less than zero.
 
-#### \-4019 COMPOSITE\_SCALE\_OVERFLOW
+#### \-4019 COMPOSITE_SCALE_OVERFLOW
 
--   Composite scale too large.
+- Composite scale too large.
 
-#### \-4020 TARGET\_STRATEGY\_INVALID
+#### \-4020 TARGET_STRATEGY_INVALID
 
--   Target strategy invalid for orderType '%s',reduceOnly '%b'.
+- Target strategy invalid for orderType '%s',reduceOnly '%b'.
 
-#### \-4021 INVALID\_DEPTH\_LIMIT
+#### \-4021 INVALID_DEPTH_LIMIT
 
--   Invalid depth limit.
--   '%s' is not valid depth limit.
+- Invalid depth limit.
+- '%s' is not valid depth limit.
 
-#### \-4022 WRONG\_MARKET\_STATUS
+#### \-4022 WRONG_MARKET_STATUS
 
--   market status sent is not valid.
+- market status sent is not valid.
 
-#### \-4023 QTY\_NOT\_INCREASED\_BY\_STEP\_SIZE
+#### \-4023 QTY_NOT_INCREASED_BY_STEP_SIZE
 
--   Qty not increased by step size.
+- Qty not increased by step size.
 
-#### \-4024 PRICE\_LOWER\_THAN\_MULTIPLIER\_DOWN
+#### \-4024 PRICE_LOWER_THAN_MULTIPLIER_DOWN
 
--   Price is lower than mark price multiplier floor.
+- Price is lower than mark price multiplier floor.
 
-#### \-4025 MULTIPLIER\_DECIMAL\_LESS\_THAN\_ZERO
+#### \-4025 MULTIPLIER_DECIMAL_LESS_THAN_ZERO
 
--   Multiplier decimal less than zero.
+- Multiplier decimal less than zero.
 
-#### \-4026 COMMISSION\_INVALID
+#### \-4026 COMMISSION_INVALID
 
--   Commission invalid.
--   `%s` less than zero.
--   `%s` absolute value greater than `%s`
+- Commission invalid.
+- `%s` less than zero.
+- `%s` absolute value greater than `%s`
 
-#### \-4027 INVALID\_ACCOUNT\_TYPE
+#### \-4027 INVALID_ACCOUNT_TYPE
 
--   Invalid account type.
+- Invalid account type.
 
-#### \-4028 INVALID\_LEVERAGE
+#### \-4028 INVALID_LEVERAGE
 
--   Invalid leverage
--   Leverage `%s` is not valid
--   Leverage `%s` already exist with `%s`
+- Invalid leverage
+- Leverage `%s` is not valid
+- Leverage `%s` already exist with `%s`
 
-#### \-4029 INVALID\_TICK\_SIZE\_PRECISION
+#### \-4029 INVALID_TICK_SIZE_PRECISION
 
--   Tick size precision is invalid.
+- Tick size precision is invalid.
 
-#### \-4030 INVALID\_STEP\_SIZE\_PRECISION
+#### \-4030 INVALID_STEP_SIZE_PRECISION
 
--   Step size precision is invalid.
+- Step size precision is invalid.
 
-#### \-4031 INVALID\_WORKING\_TYPE
+#### \-4031 INVALID_WORKING_TYPE
 
--   Invalid parameter working type
--   Invalid parameter working type: `%s`
+- Invalid parameter working type
+- Invalid parameter working type: `%s`
 
-#### \-4032 EXCEED\_MAX\_CANCEL\_ORDER\_SIZE
+#### \-4032 EXCEED_MAX_CANCEL_ORDER_SIZE
 
--   Exceed maximum cancel order size.
--   Invalid parameter working type: `%s`
+- Exceed maximum cancel order size.
+- Invalid parameter working type: `%s`
 
-#### \-4033 INSURANCE\_ACCOUNT\_NOT\_FOUND
+#### \-4033 INSURANCE_ACCOUNT_NOT_FOUND
 
--   Insurance account not found.
+- Insurance account not found.
 
-#### \-4044 INVALID\_BALANCE\_TYPE
+#### \-4044 INVALID_BALANCE_TYPE
 
--   Balance Type is invalid.
+- Balance Type is invalid.
 
-#### \-4045 MAX\_STOP\_ORDER\_EXCEEDED
+#### \-4045 MAX_STOP_ORDER_EXCEEDED
 
--   Reach max stop order limit.
+- Reach max stop order limit.
 
-#### \-4046 NO\_NEED\_TO\_CHANGE\_MARGIN\_TYPE
+#### \-4046 NO_NEED_TO_CHANGE_MARGIN_TYPE
 
--   No need to change margin type.
+- No need to change margin type.
 
-#### \-4047 THERE\_EXISTS\_OPEN\_ORDERS
+#### \-4047 THERE_EXISTS_OPEN_ORDERS
 
--   Margin type cannot be changed if there exists open orders.
+- Margin type cannot be changed if there exists open orders.
 
-#### \-4048 THERE\_EXISTS\_QUANTITY
+#### \-4048 THERE_EXISTS_QUANTITY
 
--   Margin type cannot be changed if there exists position.
+- Margin type cannot be changed if there exists position.
 
-#### \-4049 ADD\_ISOLATED\_MARGIN\_REJECT
+#### \-4049 ADD_ISOLATED_MARGIN_REJECT
 
--   Add margin only support for isolated position.
+- Add margin only support for isolated position.
 
-#### \-4050 CROSS\_BALANCE\_INSUFFICIENT
+#### \-4050 CROSS_BALANCE_INSUFFICIENT
 
--   Cross balance insufficient.
+- Cross balance insufficient.
 
-#### \-4051 ISOLATED\_BALANCE\_INSUFFICIENT
+#### \-4051 ISOLATED_BALANCE_INSUFFICIENT
 
--   Isolated balance insufficient.
+- Isolated balance insufficient.
 
-#### \-4052 NO\_NEED\_TO\_CHANGE\_AUTO\_ADD\_MARGIN
+#### \-4052 NO_NEED_TO_CHANGE_AUTO_ADD_MARGIN
 
--   No need to change auto add margin.
+- No need to change auto add margin.
 
-#### \-4053 AUTO\_ADD\_CROSSED\_MARGIN\_REJECT
+#### \-4053 AUTO_ADD_CROSSED_MARGIN_REJECT
 
--   Auto add margin only support for isolated position.
+- Auto add margin only support for isolated position.
 
-#### \-4054 ADD\_ISOLATED\_MARGIN\_NO\_POSITION\_REJECT
+#### \-4054 ADD_ISOLATED_MARGIN_NO_POSITION_REJECT
 
--   Cannot add position margin: position is 0.
+- Cannot add position margin: position is 0.
 
-#### \-4055 AMOUNT\_MUST\_BE\_POSITIVE
+#### \-4055 AMOUNT_MUST_BE_POSITIVE
 
--   Amount must be positive.
+- Amount must be positive.
 
-#### \-4056 INVALID\_API\_KEY\_TYPE
+#### \-4056 INVALID_API_KEY_TYPE
 
--   Invalid api key type.
+- Invalid api key type.
 
-#### \-4057 INVALID\_RSA\_PUBLIC\_KEY
+#### \-4057 INVALID_RSA_PUBLIC_KEY
 
--   Invalid api public key
+- Invalid api public key
 
-#### \-4058 MAX\_PRICE\_TOO\_LARGE
+#### \-4058 MAX_PRICE_TOO_LARGE
 
--   maxPrice and priceDecimal too large,please check.
+- maxPrice and priceDecimal too large,please check.
 
-#### \-4059 NO\_NEED\_TO\_CHANGE\_POSITION\_SIDE
+#### \-4059 NO_NEED_TO_CHANGE_POSITION_SIDE
 
--   No need to change position side.
+- No need to change position side.
 
-#### \-4060 INVALID\_POSITION\_SIDE
+#### \-4060 INVALID_POSITION_SIDE
 
--   Invalid position side.
+- Invalid position side.
 
-#### \-4061 POSITION\_SIDE\_NOT\_MATCH
+#### \-4061 POSITION_SIDE_NOT_MATCH
 
--   Order's position side does not match user's setting.
+- Order's position side does not match user's setting.
 
-#### \-4062 REDUCE\_ONLY\_CONFLICT
+#### \-4062 REDUCE_ONLY_CONFLICT
 
--   Invalid or improper reduceOnly value.
+- Invalid or improper reduceOnly value.
 
-#### \-4063 INVALID\_OPTIONS\_REQUEST\_TYPE
+#### \-4063 INVALID_OPTIONS_REQUEST_TYPE
 
--   Invalid options request type
+- Invalid options request type
 
-#### \-4064 INVALID\_OPTIONS\_TIME\_FRAME
+#### \-4064 INVALID_OPTIONS_TIME_FRAME
 
--   Invalid options time frame
+- Invalid options time frame
 
-#### \-4065 INVALID\_OPTIONS\_AMOUNT
+#### \-4065 INVALID_OPTIONS_AMOUNT
 
--   Invalid options amount
+- Invalid options amount
 
-#### \-4066 INVALID\_OPTIONS\_EVENT\_TYPE
+#### \-4066 INVALID_OPTIONS_EVENT_TYPE
 
--   Invalid options event type
+- Invalid options event type
 
-#### \-4067 POSITION\_SIDE\_CHANGE\_EXISTS\_OPEN\_ORDERS
+#### \-4067 POSITION_SIDE_CHANGE_EXISTS_OPEN_ORDERS
 
--   Position side cannot be changed if there exists open orders.
+- Position side cannot be changed if there exists open orders.
 
-#### \-4068 POSITION\_SIDE\_CHANGE\_EXISTS\_QUANTITY
+#### \-4068 POSITION_SIDE_CHANGE_EXISTS_QUANTITY
 
--   Position side cannot be changed if there exists position.
+- Position side cannot be changed if there exists position.
 
-#### \-4069 INVALID\_OPTIONS\_PREMIUM\_FEE
+#### \-4069 INVALID_OPTIONS_PREMIUM_FEE
 
--   Invalid options premium fee
+- Invalid options premium fee
 
-#### \-4070 INVALID\_CL\_OPTIONS\_ID\_LEN
+#### \-4070 INVALID_CL_OPTIONS_ID_LEN
 
--   Client options id is not valid.
--   Client options id length should be less than 32 chars
+- Client options id is not valid.
+- Client options id length should be less than 32 chars
 
-#### \-4071 INVALID\_OPTIONS\_DIRECTION
+#### \-4071 INVALID_OPTIONS_DIRECTION
 
--   Invalid options direction
+- Invalid options direction
 
-#### \-4072 OPTIONS\_PREMIUM\_NOT\_UPDATE
+#### \-4072 OPTIONS_PREMIUM_NOT_UPDATE
 
--   premium fee is not updated, reject order
+- premium fee is not updated, reject order
 
-#### \-4073 OPTIONS\_PREMIUM\_INPUT\_LESS\_THAN\_ZERO
+#### \-4073 OPTIONS_PREMIUM_INPUT_LESS_THAN_ZERO
 
--   input premium fee is less than 0, reject order
+- input premium fee is less than 0, reject order
 
-#### \-4074 OPTIONS\_AMOUNT\_BIGGER\_THAN\_UPPER
+#### \-4074 OPTIONS_AMOUNT_BIGGER_THAN_UPPER
 
--   Order amount is bigger than upper boundary or less than 0, reject order
+- Order amount is bigger than upper boundary or less than 0, reject order
 
-#### \-4075 OPTIONS\_PREMIUM\_OUTPUT\_ZERO
+#### \-4075 OPTIONS_PREMIUM_OUTPUT_ZERO
 
--   output premium fee is less than 0, reject order
+- output premium fee is less than 0, reject order
 
-#### \-4076 OPTIONS\_PREMIUM\_TOO\_DIFF
+#### \-4076 OPTIONS_PREMIUM_TOO_DIFF
 
--   original fee is too much higher than last fee
+- original fee is too much higher than last fee
 
-#### \-4077 OPTIONS\_PREMIUM\_REACH\_LIMIT
+#### \-4077 OPTIONS_PREMIUM_REACH_LIMIT
 
--   place order amount has reached to limit, reject order
+- place order amount has reached to limit, reject order
 
-#### \-4078 OPTIONS\_COMMON\_ERROR
+#### \-4078 OPTIONS_COMMON_ERROR
 
--   options internal error
+- options internal error
 
-#### \-4079 INVALID\_OPTIONS\_ID
+#### \-4079 INVALID_OPTIONS_ID
 
--   invalid options id
--   invalid options id: %s
--   duplicate options id %d for user %d
+- invalid options id
+- invalid options id: %s
+- duplicate options id %d for user %d
 
-#### \-4080 OPTIONS\_USER\_NOT\_FOUND
+#### \-4080 OPTIONS_USER_NOT_FOUND
 
--   user not found
--   user not found with id: %s
+- user not found
+- user not found with id: %s
 
-#### \-4081 OPTIONS\_NOT\_FOUND
+#### \-4081 OPTIONS_NOT_FOUND
 
--   options not found
--   options not found with id: %s
+- options not found
+- options not found with id: %s
 
-#### \-4082 INVALID\_BATCH\_PLACE\_ORDER\_SIZE
+#### \-4082 INVALID_BATCH_PLACE_ORDER_SIZE
 
--   Invalid number of batch place orders.
--   Invalid number of batch place orders: %s
+- Invalid number of batch place orders.
+- Invalid number of batch place orders: %s
 
-#### \-4083 PLACE\_BATCH\_ORDERS\_FAIL
+#### \-4083 PLACE_BATCH_ORDERS_FAIL
 
--   Fail to place batch orders.
+- Fail to place batch orders.
 
-#### \-4084 UPCOMING\_METHOD
+#### \-4084 UPCOMING_METHOD
 
--   Method is not allowed currently. Upcoming soon.
+- Method is not allowed currently. Upcoming soon.
 
-#### \-4085 INVALID\_NOTIONAL\_LIMIT\_COEF
+#### \-4085 INVALID_NOTIONAL_LIMIT_COEF
 
--   Invalid notional limit coefficient
+- Invalid notional limit coefficient
 
-#### \-4086 INVALID\_PRICE\_SPREAD\_THRESHOLD
+#### \-4086 INVALID_PRICE_SPREAD_THRESHOLD
 
--   Invalid price spread threshold
+- Invalid price spread threshold
 
-#### \-4087 REDUCE\_ONLY\_ORDER\_PERMISSION
+#### \-4087 REDUCE_ONLY_ORDER_PERMISSION
 
--   User can only place reduce only order
+- User can only place reduce only order
 
-#### \-4088 NO\_PLACE\_ORDER\_PERMISSION
+#### \-4088 NO_PLACE_ORDER_PERMISSION
 
--   User can not place order currently
+- User can not place order currently
 
-#### \-4104 INVALID\_CONTRACT\_TYPE
+#### \-4104 INVALID_CONTRACT_TYPE
 
--   Invalid contract type
+- Invalid contract type
 
-#### \-4109 INACTIVE\_ACCOUNT
+#### \-4109 INACTIVE_ACCOUNT
 
--   Inactive account
--   Transfer any amount of asset to future wallet to reactive
+- Inactive account
+- Transfer any amount of asset to future wallet to reactive
 
-#### \-4114 INVALID\_CLIENT\_TRAN\_ID\_LEN
+#### \-4114 INVALID_CLIENT_TRAN_ID_LEN
 
--   clientTranId is not valid
--   Client tran id length should be less than 64 chars
+- clientTranId is not valid
+- Client tran id length should be less than 64 chars
 
-#### \-4115 DUPLICATED\_CLIENT\_TRAN\_ID
+#### \-4115 DUPLICATED_CLIENT_TRAN_ID
 
--   clientTranId is duplicated
--   Client tran id should be unique within 7 days
+- clientTranId is duplicated
+- Client tran id should be unique within 7 days
 
-#### \-4116 DUPLICATED\_CLIENT\_ORDER\_ID
+#### \-4116 DUPLICATED_CLIENT_ORDER_ID
 
--   clientOrderId is duplicated
+- clientOrderId is duplicated
 
-#### \-4117 STOP\_ORDER\_TRIGGERING
+#### \-4117 STOP_ORDER_TRIGGERING
 
--   stop order is triggering
+- stop order is triggering
 
-#### \-4118 REDUCE\_ONLY\_MARGIN\_CHECK\_FAILED
+#### \-4118 REDUCE_ONLY_MARGIN_CHECK_FAILED
 
--   ReduceOnly Order Failed. Please check your existing position and open orders
--   This indicates that the new reduce-only order, combined with an existing same-side open order, would create an opposite-side position and lead to insufficient margin; please cancel the open order and try again.
+- ReduceOnly Order Failed. Please check your existing position and open orders
+- This indicates that the new reduce-only order, combined with an existing
+  same-side open order, would create an opposite-side position and lead to
+  insufficient margin; please cancel the open order and try again.
 
-#### \-4131 MARKET\_ORDER\_REJECT
+#### \-4131 MARKET_ORDER_REJECT
 
--   The counterparty's best price does not meet the PERCENT\_PRICE filter limit
+- The counterparty's best price does not meet the PERCENT_PRICE filter limit
 
-#### \-4135 INVALID\_ACTIVATION\_PRICE
+#### \-4135 INVALID_ACTIVATION_PRICE
 
--   Invalid activation price
+- Invalid activation price
 
-#### \-4137 QUANTITY\_EXISTS\_WITH\_CLOSE\_POSITION
+#### \-4137 QUANTITY_EXISTS_WITH_CLOSE_POSITION
 
--   Quantity must be zero with closePosition equals true
+- Quantity must be zero with closePosition equals true
 
-#### \-4138 REDUCE\_ONLY\_MUST\_BE\_TRUE
+#### \-4138 REDUCE_ONLY_MUST_BE_TRUE
 
--   Reduce only must be true with closePosition equals true
+- Reduce only must be true with closePosition equals true
 
-#### \-4139 ORDER\_TYPE\_CANNOT\_BE\_MKT
+#### \-4139 ORDER_TYPE_CANNOT_BE_MKT
 
--   Order type can not be market if it's unable to cancel
+- Order type can not be market if it's unable to cancel
 
-#### \-4140 INVALID\_OPENING\_POSITION\_STATUS
+#### \-4140 INVALID_OPENING_POSITION_STATUS
 
--   Invalid symbol status for opening position
+- Invalid symbol status for opening position
 
-#### \-4141 SYMBOL\_ALREADY\_CLOSED
+#### \-4141 SYMBOL_ALREADY_CLOSED
 
--   Symbol is closed
+- Symbol is closed
 
-#### \-4142 STRATEGY\_INVALID\_TRIGGER\_PRICE
+#### \-4142 STRATEGY_INVALID_TRIGGER_PRICE
 
--   REJECT: take profit or stop order will be triggered immediately
+- REJECT: take profit or stop order will be triggered immediately
 
-#### \-4144 INVALID\_PAIR
+#### \-4144 INVALID_PAIR
 
--   Invalid pair
+- Invalid pair
 
-#### \-4161 ISOLATED\_LEVERAGE\_REJECT\_WITH\_POSITION
+#### \-4161 ISOLATED_LEVERAGE_REJECT_WITH_POSITION
 
--   Leverage reduction is not supported in Isolated Margin Mode with open positions
+- Leverage reduction is not supported in Isolated Margin Mode with open
+  positions
 
-#### \-4164 MIN\_NOTIONAL
+#### \-4164 MIN_NOTIONAL
 
--   Order's notional must be no smaller than 5.0 (unless you choose reduce only)
--   Order's notional must be no smaller than %s (unless you choose reduce only)
+- Order's notional must be no smaller than 5.0 (unless you choose reduce only)
+- Order's notional must be no smaller than %s (unless you choose reduce only)
 
-#### \-4165 INVALID\_TIME\_INTERVAL
+#### \-4165 INVALID_TIME_INTERVAL
 
--   Invalid time interval
--   Maximum time interval is %s days
+- Invalid time interval
+- Maximum time interval is %s days
 
-#### \-4167 ISOLATED\_REJECT\_WITH\_JOINT\_MARGIN
+#### \-4167 ISOLATED_REJECT_WITH_JOINT_MARGIN
 
--   Unable to adjust to Multi-Assets mode with symbols of USDⓈ-M Futures under isolated-margin mode.
+- Unable to adjust to Multi-Assets mode with symbols of USDⓈ-M Futures under
+  isolated-margin mode.
 
-#### \-4168 JOINT\_MARGIN\_REJECT\_WITH\_ISOLATED
+#### \-4168 JOINT_MARGIN_REJECT_WITH_ISOLATED
 
--   Unable to adjust to isolated-margin mode under the Multi-Assets mode.
+- Unable to adjust to isolated-margin mode under the Multi-Assets mode.
 
-#### \-4169 JOINT\_MARGIN\_REJECT\_WITH\_MB
+#### \-4169 JOINT_MARGIN_REJECT_WITH_MB
 
--   Unable to adjust Multi-Assets Mode with insufficient margin balance in USDⓈ-M Futures.
+- Unable to adjust Multi-Assets Mode with insufficient margin balance in USDⓈ-M
+  Futures.
 
-#### \-4170 JOINT\_MARGIN\_REJECT\_WITH\_OPEN\_ORDER
+#### \-4170 JOINT_MARGIN_REJECT_WITH_OPEN_ORDER
 
--   Unable to adjust Multi-Assets Mode with open orders in USDⓈ-M Futures.
+- Unable to adjust Multi-Assets Mode with open orders in USDⓈ-M Futures.
 
-#### \-4171 NO\_NEED\_TO\_CHANGE\_JOINT\_MARGIN
+#### \-4171 NO_NEED_TO_CHANGE_JOINT_MARGIN
 
--   Adjusted asset mode is currently set and does not need to be adjusted repeatedly.
+- Adjusted asset mode is currently set and does not need to be adjusted
+  repeatedly.
 
-#### \-4172 JOINT\_MARGIN\_REJECT\_WITH\_NEGATIVE\_BALANCE
+#### \-4172 JOINT_MARGIN_REJECT_WITH_NEGATIVE_BALANCE
 
--   Unable to adjust Multi-Assets Mode with a negative wallet balance of margin available asset in USDⓈ-M Futures account.
+- Unable to adjust Multi-Assets Mode with a negative wallet balance of margin
+  available asset in USDⓈ-M Futures account.
 
-#### \-4183 ISOLATED\_REJECT\_WITH\_JOINT\_MARGIN
+#### \-4183 ISOLATED_REJECT_WITH_JOINT_MARGIN
 
--   Price is higher than stop price multiplier cap.
--   Limit price can't be higher than %s.
+- Price is higher than stop price multiplier cap.
+- Limit price can't be higher than %s.
 
-#### \-4184 PRICE\_LOWER\_THAN\_STOP\_MULTIPLIER\_DOWN
+#### \-4184 PRICE_LOWER_THAN_STOP_MULTIPLIER_DOWN
 
--   Price is lower than stop price multiplier floor.
--   Limit price can't be lower than %s.
+- Price is lower than stop price multiplier floor.
+- Limit price can't be lower than %s.
 
-#### \-4192 COOLING\_OFF\_PERIOD
+#### \-4192 COOLING_OFF_PERIOD
 
--   Trade forbidden due to Cooling-off Period.
+- Trade forbidden due to Cooling-off Period.
 
-#### \-4202 ADJUST\_LEVERAGE\_KYC\_FAILED
+#### \-4202 ADJUST_LEVERAGE_KYC_FAILED
 
--   Intermediate Personal Verification is required for adjusting leverage over 20x
+- Intermediate Personal Verification is required for adjusting leverage over 20x
 
-#### \-4203 ADJUST\_LEVERAGE\_ONE\_MONTH\_FAILED
+#### \-4203 ADJUST_LEVERAGE_ONE_MONTH_FAILED
 
--   More than 20x leverage is available one month after account registration.
+- More than 20x leverage is available one month after account registration.
 
-#### \-4205 ADJUST\_LEVERAGE\_X\_DAYS\_FAILED
+#### \-4205 ADJUST_LEVERAGE_X_DAYS_FAILED
 
--   More than 20x leverage is available %s days after Futures account registration.
+- More than 20x leverage is available %s days after Futures account
+  registration.
 
-#### \-4206 ADJUST\_LEVERAGE\_KYC\_LIMIT
+#### \-4206 ADJUST_LEVERAGE_KYC_LIMIT
 
--   Users in this country has limited adjust leverage.
--   Users in your location/country can only access a maximum leverage of %s
+- Users in this country has limited adjust leverage.
+- Users in your location/country can only access a maximum leverage of %s
 
-#### \-4208 ADJUST\_LEVERAGE\_ACCOUNT\_SYMBOL\_FAILED
+#### \-4208 ADJUST_LEVERAGE_ACCOUNT_SYMBOL_FAILED
 
--   Current symbol leverage cannot exceed 20 when using position limit adjustment service.
+- Current symbol leverage cannot exceed 20 when using position limit adjustment
+  service.
 
-#### \-4209 ADJUST\_LEVERAGE\_SYMBOL\_FAILED
+#### \-4209 ADJUST_LEVERAGE_SYMBOL_FAILED
 
--   The max leverage of Symbol is 20x
--   Leverage adjustment failed. Current symbol max leverage limit is %sx
+- The max leverage of Symbol is 20x
+- Leverage adjustment failed. Current symbol max leverage limit is %sx
 
-#### \-4210 STOP\_PRICE\_HIGHER\_THAN\_PRICE\_MULTIPLIER\_LIMIT
+#### \-4210 STOP_PRICE_HIGHER_THAN_PRICE_MULTIPLIER_LIMIT
 
--   Stop price is higher than price multiplier cap.
--   Stop price can't be higher than %s
+- Stop price is higher than price multiplier cap.
+- Stop price can't be higher than %s
 
-#### \-4211 STOP\_PRICE\_LOWER\_THAN\_PRICE\_MULTIPLIER\_LIMIT
+#### \-4211 STOP_PRICE_LOWER_THAN_PRICE_MULTIPLIER_LIMIT
 
--   Stop price is lower than price multiplier floor.
--   Stop price can't be lower than %s
+- Stop price is lower than price multiplier floor.
+- Stop price can't be lower than %s
 
-#### \-4400 TRADING\_QUANTITATIVE\_RULE
+#### \-4400 TRADING_QUANTITATIVE_RULE
 
--   Futures Trading Quantitative Rules violated, only reduceOnly order is allowed, please try again later.
+- Futures Trading Quantitative Rules violated, only reduceOnly order is allowed,
+  please try again later.
 
-#### \-4401 LARGE\_POSITION\_SYM\_RULE
+#### \-4401 LARGE_POSITION_SYM_RULE
 
--   Futures Trading Risk Control Rules of large position holding violated, only reduceOnly order is allowed, please reduce the position. .
+- Futures Trading Risk Control Rules of large position holding violated, only
+  reduceOnly order is allowed, please reduce the position. .
 
-#### \-4402 COMPLIANCE\_BLACK\_SYMBOL\_RESTRICTION
+#### \-4402 COMPLIANCE_BLACK_SYMBOL_RESTRICTION
 
--   Dear user, as per our Terms of Use and compliance with local regulations, this feature is currently not available in your region.
+- Dear user, as per our Terms of Use and compliance with local regulations, this
+  feature is currently not available in your region.
 
-#### \-4403 ADJUST\_LEVERAGE\_COMPLIANCE\_FAILED
+#### \-4403 ADJUST_LEVERAGE_COMPLIANCE_FAILED
 
--   Dear user, as per our Terms of Use and compliance with local regulations, the leverage can only up to 10x in your region
--   Dear user, as per our Terms of Use and compliance with local regulations, the leverage can only up to %sx in your region
+- Dear user, as per our Terms of Use and compliance with local regulations, the
+  leverage can only up to 10x in your region
+- Dear user, as per our Terms of Use and compliance with local regulations, the
+  leverage can only up to %sx in your region
 
 ### 50xx - Order Execution Issues
 
-#### \-5021 FOK\_ORDER\_REJECT
+#### \-5021 FOK_ORDER_REJECT
 
--   Due to the order could not be filled immediately, the FOK order has been rejected.
+- Due to the order could not be filled immediately, the FOK order has been
+  rejected.
 
-#### \-5022 GTX\_ORDER\_REJECT
+#### \-5022 GTX_ORDER_REJECT
 
--   Due to the order could not be executed as maker, the Post Only order will be rejected.
+- Due to the order could not be executed as maker, the Post Only order will be
+  rejected.
 
-#### \-5024 MOVE\_ORDER\_NOT\_ALLOWED\_SYMBOL\_REASON
+#### \-5024 MOVE_ORDER_NOT_ALLOWED_SYMBOL_REASON
 
--   Symbol is not in trading status. Order amendment is not permitted.
+- Symbol is not in trading status. Order amendment is not permitted.
 
-#### \-5025 LIMIT\_ORDER\_ONLY
+#### \-5025 LIMIT_ORDER_ONLY
 
--   Only limit order is supported.
+- Only limit order is supported.
 
-#### \-5026 Exceed\_Maximum\_Modify\_Order\_Limit
+#### \-5026 Exceed_Maximum_Modify_Order_Limit
 
--   Exceed maximum modify order limit.
+- Exceed maximum modify order limit.
 
-#### \-5027 SAME\_ORDER
+#### \-5027 SAME_ORDER
 
--   No need to modify the order.
+- No need to modify the order.
 
-#### \-5028 ME\_RECVWINDOW\_REJECT
+#### \-5028 ME_RECVWINDOW_REJECT
 
--   Timestamp for this request is outside of the ME recvWindow.
+- Timestamp for this request is outside of the ME recvWindow.
 
-#### \-5029 MODIFICATION\_MIN\_NOTIONAL
+#### \-5029 MODIFICATION_MIN_NOTIONAL
 
--   Order's notional must be no smaller than %s
+- Order's notional must be no smaller than %s
 
-#### \-5037 INVALID\_PRICE\_MATCH
+#### \-5037 INVALID_PRICE_MATCH
 
--   Invalid price match
+- Invalid price match
 
-#### \-5038 UNSUPPORTED\_ORDER\_TYPE\_PRICE\_MATCH
+#### \-5038 UNSUPPORTED_ORDER_TYPE_PRICE_MATCH
 
--   Price match only supports order type: LIMIT, STOP AND TAKE\_PROFIT
+- Price match only supports order type: LIMIT, STOP AND TAKE_PROFIT
 
-#### \-5039 INVALID\_SELF\_TRADE\_PREVENTION\_MODE
+#### \-5039 INVALID_SELF_TRADE_PREVENTION_MODE
 
--   Invalid self trade prevention mode
+- Invalid self trade prevention mode
 
-#### \-5040 FUTURE\_GOOD\_TILL\_DATE
+#### \-5040 FUTURE_GOOD_TILL_DATE
 
--   The goodTillDate timestamp must be greater than the current time plus 600 seconds and smaller than 253402300799000 (UTC 9999-12-31 23:59:59)
+- The goodTillDate timestamp must be greater than the current time plus 600
+  seconds and smaller than 253402300799000 (UTC 9999-12-31 23:59:59)
 
-#### \-5041 BBO\_ORDER\_REJECT
+#### \-5041 BBO_ORDER_REJECT
 
--   No depth matches this BBO order
+- No depth matches this BBO order
 
-#### \-5043 Existing\_Pending\_Modification
+#### \-5043 Existing_Pending_Modification
 
--   A pending modification already exists for this order.
+- A pending modification already exists for this order.
 
-> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/error-code](https://developers.binance.com/docs/derivatives/usds-margined-futures/error-code)
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/error-code](https://developers.binance.com/docs/derivatives/usds-margined-futures/error-code)

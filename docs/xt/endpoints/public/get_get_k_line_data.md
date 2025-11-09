@@ -1,6 +1,7 @@
 # GET Get K-line data
 
-Source: [https://doc.xt.com/docs/spot/Market/GetKlineData](https://doc.xt.com/docs/spot/Market/GetKlineData)
+Source:
+[https://doc.xt.com/docs/spot/Market/GetKlineData](https://doc.xt.com/docs/spot/Market/GetKlineData)
 
 # Get K-line data
 
@@ -9,14 +10,14 @@ Source: [https://doc.xt.com/docs/spot/Market/GetKlineData](https://doc.xt.com/do
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | true |  | trading pair eg:btc\_usdt |  |
-| interval | string | true |  | K line type,  
-eg:1m | `[1m;3m;5m;15m;30m;1h;2h;4h;6h;8h;12h;1d;3d;1w;1M]` |
-| startTime | number | false |  | start timestamp |  |
-| endTime | number | false |  | end timestamp |  |
-| limit | number | false | '100' |  | 1~1000 |
+| name      | type                                                | mandatory | default | description              | ranges |
+| --------- | --------------------------------------------------- | --------- | ------- | ------------------------ | ------ |
+| symbol    | string                                              | true      |         | trading pair eg:btc_usdt |        |
+| interval  | string                                              | true      |         | K line type,             |
+| eg:1m     | `[1m;3m;5m;15m;30m;1h;2h;4h;6h;8h;12h;1d;3d;1w;1M]` |
+| startTime | number                                              | false     |         | start timestamp          |        |
+| endTime   | number                                              | false     |         | end timestamp            |        |
+| limit     | number                                              | false     | '100'   |                          | 1~1000 |
 
 #### **Limit Flow Rules**[​](#limit-flow-rules "Direct link to limit-flow-rules")
 

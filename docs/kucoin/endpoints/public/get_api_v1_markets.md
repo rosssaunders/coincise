@@ -10,14 +10,14 @@ Not Required (Public Endpoint)
 
 Get Market List
 
-Request via this endpoint the transaction currency for the entire trading market.
+Request via this endpoint the transaction currency for the entire trading
+market.
 
 ## Responses
 
 ### 200
 
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| code | required | string |  |
-| data | required | array |  |
-
+| Parameter | Required | Type   | Description |
+| --------- | -------- | ------ | ----------- |
+| code      | required | string |             |
+| data      | required | array  |             |

@@ -1,6 +1,7 @@
 # POST private/create-withdrawal
 
-**Source:** [private/create-withdrawal](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-create-withdrawal)
+**Source:**
+[private/create-withdrawal](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-create-withdrawal)
 
 ## Authentication
 
@@ -46,23 +47,27 @@ Required (Private Endpoint)
 }
 ```
 
-Creates a withdrawal request. Withdrawal setting must be enabled for your API Key. If you do not see the option when viewing your API Key, this feature is not yet available for you.
+Creates a withdrawal request. Withdrawal setting must be enabled for your API
+Key. If you do not see the option when viewing your API Key, this feature is not
+yet available for you.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| client\_wid | string | N | Optional Client withdrawal ID |
-| currency | string | Y | E.g. BTC, CRO |
-| amount | decimal | Y |  |
-| address | string | Y |  |
-| address\_tag | string | N | Secondary address identifier for coins like XRP, XLM etc. Also known as memo or tags. |
-| network\_id | string | N | Select the desired network, require the address to be whitelisted first. See default\_network and network in get-currency-networks for the value. |
+| Name        | Type    | Required | Description                                                                                                                                      |
+| ----------- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| client_wid  | string  | N        | Optional Client withdrawal ID                                                                                                                    |
+| currency    | string  | Y        | E.g. BTC, CRO                                                                                                                                    |
+| amount      | decimal | Y        |                                                                                                                                                  |
+| address     | string  | Y        |                                                                                                                                                  |
+| address_tag | string  | N        | Secondary address identifier for coins like XRP, XLM etc. Also known as memo or tags.                                                            |
+| network_id  | string  | N        | Select the desired network, require the address to be whitelisted first. See default_network and network in get-currency-networks for the value. |
 
 ### Helpful Information
 
--   Withdrawal addresses must first be whitelisted in your account’s Withdrawal Whitelist page.
--   Withdrawal fees and minimum withdrawal amount can be found on the Fees & Limits page on the Exchange website.
+- Withdrawal addresses must first be whitelisted in your account’s Withdrawal
+  Whitelist page.
+- Withdrawal fees and minimum withdrawal amount can be found on the Fees &
+  Limits page on the Exchange website.
 
 ### Applies To
 
@@ -74,12 +79,12 @@ POST
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| id | long | Newly created withdrawal ID |
-| client\_wid | string | (Optional) if a Client withdrawal ID was provided in the request |
-| currency | string | E.g. BTC, CRO |
-| amount | decimal |  |
-| fee | decimal |  |
-| address | string | Address with Address Tag (if any) |
-| create\_time | long |  |
+| Name        | Type    | Description                                                      |
+| ----------- | ------- | ---------------------------------------------------------------- |
+| id          | long    | Newly created withdrawal ID                                      |
+| client_wid  | string  | (Optional) if a Client withdrawal ID was provided in the request |
+| currency    | string  | E.g. BTC, CRO                                                    |
+| amount      | decimal |                                                                  |
+| fee         | decimal |                                                                  |
+| address     | string  | Address with Address Tag (if any)                                |
+| create_time | long    |                                                                  |

@@ -4,21 +4,24 @@
 
 post https://api.bitfinex.com/v2/auth/r/settings
 
-Allows you to read custom settings by providing a key. You can set or adjust these settings using the [User Settings Write](/reference#user-settings-set) endpoint.
+Allows you to read custom settings by providing a key. You can set or adjust
+these settings using the [User Settings Write](/reference#user-settings-set)
+endpoint.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
+/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+theme, base, components, utilities; @layer utilities;
 
 **Body Fields**
 
-| Term | Type | Description |
-| --- | --- | --- |
+| Term | Type  | Description                                                                 |
+| ---- | ----- | --------------------------------------------------------------------------- |
 | Keys | Array | Array of keys requested. Must follow regex pattern `/^api:[A-Za-z0-9_-]*$/` |
 
 **Returned Fields**
 
-| Term | Type | Description |
-| --- | --- | --- |
-| KEY | String | Requested Key |
+| Term  | Type         | Description      |
+| ----- | ------------ | ---------------- |
+| KEY   | String       | Requested Key    |
 | VALUE | Self defined | Returned setting |
 
 **Ratelimit**: 90 req/min
@@ -39,7 +42,7 @@ ADD string
 
 Responses
 
-# 
+#
 
 200
 
@@ -49,7 +52,7 @@ Response body
 
 json
 
-# 
+#
 
 400
 
@@ -61,7 +64,7 @@ object
 
 Updated 5 months ago
 
-* * *
+---
 
 Language
 
@@ -95,7 +98,8 @@ RESPONSE
 
 Examples
 
-Click `Try It!` to start a request and see the response here! Or choose an example:
+Click `Try It!` to start a request and see the response here! Or choose an
+example:
 
 application/json
 
@@ -103,10 +107,10 @@ application/json
 
 Updated 5 months ago
 
-* * *
+---
 
 ---
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-settings
-Path: /v2/auth/r/settings
+
+Section: Account Actions Source:
+https://docs.bitfinex.com/reference/rest-auth-settings Path: /v2/auth/r/settings
 Method: POST

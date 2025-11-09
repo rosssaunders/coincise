@@ -1,6 +1,7 @@
 # GET Contract Info
 
-**Source:** [Get Contract Info](https://www.htx.com/en-us/opend/newApiPages/?id=28c2d918-77ae-11ed-9966-0242ac110003)
+**Source:**
+[Get Contract Info](https://www.htx.com/en-us/opend/newApiPages/?id=28c2d918-77ae-11ed-9966-0242ac110003)
 
 **Category:** Reference Data
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /api/v1/contract\_contract\_info (Get Contract Info)
+### /api/v1/contract_contract_info (Get Contract Info)
 
 Request type: GET
 
@@ -16,46 +17,51 @@ Signature verification: No
 
 Interface permission: Read
 
-Rate Limit: the rate limit is 120 times every 3 seconds at most for each IP (this 120 times every 3 seconds public interface rate limit is shared by all the requests from that IP of non-marketing information, like above)
+Rate Limit: the rate limit is 120 times every 3 seconds at most for each IP
+(this 120 times every 3 seconds public interface rate limit is shared by all the
+requests from that IP of non-marketing information, like above)
 
-Interface description: contract elements it can display more futures fields, we recommend you to use it.
+Interface description: contract elements it can display more futures fields, we
+recommend you to use it.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | false | Case-Insenstive.Both uppercase and lowercase are supported.e.g. "BTC","ETH"... |  |  |
-| contract\_type | string | false | "this\_week","next\_week", "quarter" "next\_quarter" |  |  |
-| contract\_code | string | false | BTC180914 |  |  |
+| Parameter     | Data Type | Required | Description                                                                    | Value Range | Default Value |
+| ------------- | --------- | -------- | ------------------------------------------------------------------------------ | ----------- | ------------- |
+| symbol        | string    | false    | Case-Insenstive.Both uppercase and lowercase are supported.e.g. "BTC","ETH"... |             |               |
+| contract_type | string    | false    | "this_week","next_week", "quarter" "next_quarter"                              |             |               |
+| contract_code | string    | false    | BTC180914                                                                      |             |               |
 
 Notes:  
-If there is a number in the Contract Code row，inquiry with Contract\_Code. If there is no number，inquiry by Symbol + Contract Type. One of the query conditions must be chosen.
+If there is a number in the Contract Code row，inquiry with Contract_Code. If
+there is no number，inquiry by Symbol + Contract Type. One of the query
+conditions must be chosen.
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request Processing Result | "ok" , "error" |
-| DATA\_START |  | false |  |  |
-| symbol | string | true | Product Code | "BTC","ETH"... |
-| contract\_code | string | true | Contract Code | "BTC180914" ... |
-| contract\_type | string | true | Contract Type | "this\_week","next\_week", "quarter" ,"next\_quarter" |
-| contract\_size | decimal | true | Contract Value (USD of one contract) | 10, 100... |
-| price\_tick | decimal | true | Minimum Variation of Contract Price | 0.001, 0.01... |
-| delivery\_date | string | true | Contract Delivery Date | eg "20180720" |
-| create\_date | string | true | Contract Listing Date | eg "20180706" |
-| settlement\_time | string | true | Next settlement time（timestamp，unit: millisecond） |  |
-| delivery\_time | string | true | delivery time（timestamp，unit: millisecond） |  |
-| contract\_status | int | true | Contract Status | 0: Delisting,1: Listing,2: Pending Listing,3: Suspension,4: Suspending of Listing,5: In Settlement,6: Delivering,7: Settlement Completed,8: Delivered,9: Suspending of Trade |
-| DATA\_END |  | false |  |  |
-| ts | long | true | Time of Respond Generation，Unit：Millisecond |  |
+| Parameter       | Data Type | Required | Description                                          | Value Range                                                                                                                                                                  |
+| --------------- | --------- | -------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| status          | string    | true     | Request Processing Result                            | "ok" , "error"                                                                                                                                                               |
+| DATA_START      |           | false    |                                                      |                                                                                                                                                                              |
+| symbol          | string    | true     | Product Code                                         | "BTC","ETH"...                                                                                                                                                               |
+| contract_code   | string    | true     | Contract Code                                        | "BTC180914" ...                                                                                                                                                              |
+| contract_type   | string    | true     | Contract Type                                        | "this_week","next_week", "quarter" ,"next_quarter"                                                                                                                           |
+| contract_size   | decimal   | true     | Contract Value (USD of one contract)                 | 10, 100...                                                                                                                                                                   |
+| price_tick      | decimal   | true     | Minimum Variation of Contract Price                  | 0.001, 0.01...                                                                                                                                                               |
+| delivery_date   | string    | true     | Contract Delivery Date                               | eg "20180720"                                                                                                                                                                |
+| create_date     | string    | true     | Contract Listing Date                                | eg "20180706"                                                                                                                                                                |
+| settlement_time | string    | true     | Next settlement time（timestamp，unit: millisecond） |                                                                                                                                                                              |
+| delivery_time   | string    | true     | delivery time（timestamp，unit: millisecond）        |                                                                                                                                                                              |
+| contract_status | int       | true     | Contract Status                                      | 0: Delisting,1: Listing,2: Pending Listing,3: Suspension,4: Suspending of Listing,5: In Settlement,6: Delivering,7: Settlement Completed,8: Delivered,9: Suspending of Trade |
+| DATA_END        |           | false    |                                                      |                                                                                                                                                                              |
+| ts              | long      | true     | Time of Respond Generation，Unit：Millisecond        |                                                                                                                                                                              |
 
 #### Request example
 
@@ -79,39 +85,39 @@ If there is a number in the Contract Code row，inquiry with Contract\_Code. If 
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC210813"
 
-"contract\_type":
+"contract_type":
 
-"this\_week"
+"this_week"
 
-"contract\_size":
+"contract_size":
 
 100
 
-"price\_tick":
+"price_tick":
 
 0.01
 
-"delivery\_date":
+"delivery_date":
 
 "20210813"
 
-"delivery\_time":
+"delivery_time":
 
 "1628841600000"
 
-"create\_date":
+"create_date":
 
 "20210730"
 
-"contract\_status":
+"contract_status":
 
 1
 
-"settlement\_time":
+"settlement_time":
 
 "1628668800000"
 
@@ -123,39 +129,39 @@ If there is a number in the Contract Code row，inquiry with Contract\_Code. If 
 
 "ETH"
 
-"contract\_code":
+"contract_code":
 
 "ETH210813"
 
-"contract\_type":
+"contract_type":
 
-"this\_week"
+"this_week"
 
-"contract\_size":
+"contract_size":
 
 10
 
-"price\_tick":
+"price_tick":
 
 0.001
 
-"delivery\_date":
+"delivery_date":
 
 "20210813"
 
-"delivery\_time":
+"delivery_time":
 
 "1628841600000"
 
-"create\_date":
+"create_date":
 
 "20210730"
 
-"contract\_status":
+"contract_status":
 
 1
 
-"settlement\_time":
+"settlement_time":
 
 "1628668800000"
 

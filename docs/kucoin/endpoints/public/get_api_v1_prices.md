@@ -10,21 +10,21 @@ Not Required (Public Endpoint)
 
 Get Fiat Price
 
-Request the fiat price of the currencies for the available trading pairs via this endpoint.
+Request the fiat price of the currencies for the available trading pairs via
+this endpoint.
 
 ## Parameters
 
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| base | optional | string | Ticker symbol of a base currency, e.g. USD, EUR. Default is USD |
+| Parameter  | Required | Type   | Description                                                                                                                         |
+| ---------- | -------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| base       | optional | string | Ticker symbol of a base currency, e.g. USD, EUR. Default is USD                                                                     |
 | currencies | optional | string | Comma-separated cryptocurrencies to be converted into fiat, e.g.: BTC,ETH, etc. Default to return the fiat price of all currencies. |
 
 ## Responses
 
 ### 200
 
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| code | required | string |  |
-| data | required | object |  |
-
+| Parameter | Required | Type   | Description |
+| --------- | -------- | ------ | ----------- |
+| code      | required | string |             |
+| data      | required | object |             |

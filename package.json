@@ -1,10 +1,9 @@
 {
-  "name": "cryptoapidocs",
+  "name": "coincise",
   "version": "1.0.0",
-  "description": "Cryptocurrency exchange API documentation scraper",
+  "description": "Concise Crypto Currency Exchange APIs",
   "scripts": {
-    "scrape:binance": "cd venues/binance && pnpm run start",
-    "format": "prettier --write \"**/*.js\""
+    "format": "prettier --write \"**/*.{js,md}\""
   },
   "dependencies": {
     "jsdom": "^27.0.0",

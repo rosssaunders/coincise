@@ -1,6 +1,7 @@
 # GET Get client ip
 
-Source: [https://doc.xt.com/docs/spot/Market/GetClientIp](https://doc.xt.com/docs/spot/Market/GetClientIp)
+Source:
+[https://doc.xt.com/docs/spot/Market/GetClientIp](https://doc.xt.com/docs/spot/Market/GetClientIp)
 
 # Get client ip
 

@@ -2,15 +2,18 @@
 
 **Check the proper endpoint based on your region.**
 
-The examples in this page is written using Singapore fiat code(SGD). Set the quote currency to match your region. The base\_url differs by country/region. Make sure to specify the correct region value for your environment.  
-  
+The examples in this page is written using Singapore fiat code(SGD). Set the
+quote currency to match your region. The base_url differs by country/region.
+Make sure to specify the correct region value for your environment.
+
 \- Singapore (sg): https://sg-api.upbit.com  
 \- Indonesia (id): https://id-api.upbit.com  
 \- Thailand (th): https://th-api.upbit.com
 
 Rate Limit
 
-Up to 10 calls per second are allowed. This is measured on an IP basis and request counts are shared within the exchange 'trade' group.
+Up to 10 calls per second are allowed. This is measured on an IP basis and
+request counts are shared within the exchange 'trade' group.
 
 market
 
@@ -24,12 +27,15 @@ to
 
 string
 
-End time of the query period(UTC). This is an optional filter parameter to retrieve trade executed before a specific time window on the selected date.
+End time of the query period(UTC). This is an optional filter parameter to
+retrieve trade executed before a specific time window on the selected date.
 
-Specify the time in either HHmmss or HH:mm:ss format. The results are returned in reverse chronological order starting from the specified time.
+Specify the time in either HHmmss or HH:mm:ss format. The results are returned
+in reverse chronological order starting from the specified time.
 
 \[Example\]  
-days\_ago=1&to=130000 returns trades before 13:00:00 UTC of the previous day in descending order.
+days_ago=1&to=130000 returns trades before 13:00:00 UTC of the previous day in
+descending order.
 
 count
 
@@ -44,18 +50,22 @@ cursor
 string
 
 Cursor for pagination.  
-Enter the "sequential\_id" from the API response into this field to continue retrieving trade history.  
-It returns up to "count" trades prior to the specified sequential\_id.
+Enter the "sequential_id" from the API response into this field to continue
+retrieving trade history.  
+It returns up to "count" trades prior to the specified sequential_id.
 
-days\_ago
+days_ago
 
 integer
 
-Day offset between the trade date to query and the request time. Trade history must be queried by specifying the trade date, and up to 7 days of history is supported (based on UTC). Specify an integer between 1 and 7.  
+Day offset between the trade date to query and the request time. Trade history
+must be queried by specifying the trade date, and up to 7 days of history is
+supported (based on UTC). Specify an integer between 1 and 7.  
 If omitted, the API returns the trades for the request date.  
-If set to 7, it returns trades executed 7 days before the request date, in reverse chronological order (latest first).
+If set to 7, it returns trades executed 7 days before the request date, in
+reverse chronological order (latest first).
 
-# 
+#
 
 200
 
@@ -73,7 +83,7 @@ required
 
 Trading pair code representing the market.
 
-trade\_date\_utc
+trade_date_utc
 
 string
 
@@ -81,7 +91,7 @@ required
 
 Trade date in UTC.
 
-trade\_time\_utc
+trade_time_utc
 
 string
 
@@ -97,15 +107,16 @@ required
 
 The timestamp (in milliseconds) when the trade was executed.
 
-trade\_price
+trade_price
 
 double
 
 required
 
-The closing price of the candle, representing the last trading price during the candle period.
+The closing price of the candle, representing the last trading price during the
+candle period.
 
-trade\_volume
+trade_volume
 
 double
 
@@ -113,7 +124,7 @@ required
 
 Most recent trade volume for the trading pair.
 
-prev\_closing\_price
+prev_closing_price
 
 double
 
@@ -121,18 +132,19 @@ required
 
 Previous day's closing price, based on UTC.
 
-change\_price
+change_price
 
 double
 
 required
 
-Price change compared to the previous day's closing price. Calculated as "trade\_price" - "prev\_closing\_price".
+Price change compared to the previous day's closing price. Calculated as
+"trade_price" - "prev_closing_price".
 
--   Positive (+): Current price is higher than previous day's closing price
--   Negative (-): Current price is lower than previous day's closing price
+- Positive (+): Current price is higher than previous day's closing price
+- Negative (-): Current price is lower than previous day's closing price
 
-ask\_bid
+ask_bid
 
 string
 
@@ -145,7 +157,7 @@ Trade direction.
 
 `ASK` `BID`
 
-sequential\_id
+sequential_id
 
 integer
 
@@ -154,7 +166,7 @@ required
 Unique identifier for the trade.  
 This field does not guarantee trade order sequence.
 
-# 
+#
 
 400
 
@@ -182,7 +194,7 @@ required
 
 Message describing the cause of the error.
 
-# 
+#
 
 404
 
@@ -212,7 +224,7 @@ Message describing the cause of the error.
 
 Updated about 1 month ago
 
-* * *
+---
 
 ShellPythonJavaNode
 
@@ -244,7 +256,7 @@ xxxxxxxxxx
 
 2
 
-  {
+{
 
 3
 
@@ -288,7 +300,7 @@ xxxxxxxxxx
 
 13
 
-  }
+}
 
 14
 
@@ -296,8 +308,9 @@ xxxxxxxxxx
 
 Updated about 1 month ago
 
-* * *
+---
 
 ---
 
-**Source:** [recent-trades-history](https://global-docs.upbit.com/reference/today-trades-history)
+**Source:**
+[recent-trades-history](https://global-docs.upbit.com/reference/today-trades-history)

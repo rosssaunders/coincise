@@ -6,25 +6,26 @@ post https://api.bitfinex.com/v2/auth/w/ext/wallets/withdrawals/request
 
 Withdraw from Thalex to Bitfinex
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
+/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+theme, base, components, utilities; @layer utilities;
 
-#### 
+####
 
 Response data
 
 [](#response-data)
 
-| Key | Type | Description |
-| --- | --- | --- |
-| type | String | Specifies the transfer type: "withdrawal" |
-| addressDest | String | Specifies the address for the transaction |
-| amount | String | Amount of the withdrawal |
-| ccy | String | Currency withdrawn |
-| createdAt | Integer | Withdrawal creation timestamp |
-| updatedAt | Integer | Withdrawal update timestamp |
-| id | string | Withdrawal id |
-| status | string | Withdrawal status |
-| fee | string | Fee charged for the withdrawal |
+| Key         | Type    | Description                               |
+| ----------- | ------- | ----------------------------------------- |
+| type        | String  | Specifies the transfer type: "withdrawal" |
+| addressDest | String  | Specifies the address for the transaction |
+| amount      | String  | Amount of the withdrawal                  |
+| ccy         | String  | Currency withdrawn                        |
+| createdAt   | Integer | Withdrawal creation timestamp             |
+| updatedAt   | Integer | Withdrawal update timestamp               |
+| id          | string  | Withdrawal id                             |
+| status      | string  | Withdrawal status                         |
+| fee         | string  | Fee charged for the withdrawal            |
 
 Body Params
 
@@ -66,7 +67,7 @@ tfaToken object
 
 Responses
 
-# 
+#
 
 200
 
@@ -116,7 +117,7 @@ fee
 
 string
 
-# 
+#
 
 500
 
@@ -128,7 +129,7 @@ array
 
 Updated 5 months ago
 
-* * *
+---
 
 Language
 
@@ -166,7 +167,7 @@ curl \--request POST \\
 
 7
 
-  "provider": "thalex"
+"provider": "thalex"
 
 8
 
@@ -188,10 +189,10 @@ application/json
 
 Updated 5 months ago
 
-* * *
+---
 
 ---
-Section: Thalex Derivatives
-Source: https://docs.bitfinex.com/reference/thalex-withdrawal-request
-Path: /v2/auth/w/ext/wallets/withdrawals/request
-Method: POST
+
+Section: Thalex Derivatives Source:
+https://docs.bitfinex.com/reference/thalex-withdrawal-request Path:
+/v2/auth/w/ext/wallets/withdrawals/request Method: POST

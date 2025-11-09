@@ -2,32 +2,32 @@
 
 **Check the proper endpoint based on your region.**
 
-The base\_url differs by country/region. Make sure to specify the correct region value for your environment.  
-  
+The base_url differs by country/region. Make sure to specify the correct region
+value for your environment.
+
 \- Singapore (sg): https://sg-api.upbit.com  
 \- Indonesia (id): https://id-api.upbit.com  
 \- Thailand (th): https://th-api.upbit.com
 
-  
-
 Revision History
 
-| Version | Date | Changes |
-| --- | --- | --- |
-| v1.0.7 | 2023-05-23 | [Addition of `net_type` field](https://global-docs.upbit.com/changelog/net_type#/) |
+| Version | Date       | Changes                                                                            |
+| ------- | ---------- | ---------------------------------------------------------------------------------- |
+| v1.0.7  | 2023-05-23 | [Addition of `net_type` field](https://global-docs.upbit.com/changelog/net_type#/) |
 
 Rate Limit
 
-Up to 30 calls per second are allowed. This is measured on an account basis and request counts are shared within the exchange 'default' group.
-
-  
+Up to 30 calls per second are allowed. This is measured on an account basis and
+request counts are shared within the exchange 'default' group.
 
 API Key Permission
 
-This API requires [authentication](auth) and an API Key with \[View Deposits\] permission.  
-If an out\_of\_scope error occurs, please check the permission settings in the API Key Management page.
+This API requires [authentication](auth) and an API Key with \[View Deposits\]
+permission.  
+If an out_of_scope error occurs, please check the permission settings in the API
+Key Management page.
 
-# 
+#
 
 200
 
@@ -45,7 +45,7 @@ required
 
 Currency code to be queried.
 
-net\_type
+net_type
 
 string | null
 
@@ -54,7 +54,7 @@ required
 Deposit network type.  
 Blockchain network identifier defined and used by Upbit.
 
-deposit\_address
+deposit_address
 
 string
 
@@ -62,22 +62,25 @@ required
 
 Deposit address for the digital asset.
 
-secondary\_address
+secondary_address
 
 string | null
 
 Secondary withdrawal address (e.g., Destination Tag, Memo, Message).  
-For some digital assets, deposits and withdrawals require a secondary address such as a Destination Tag, Memo, or Message. If the deposit address of the receiving exchange includes a secondary address, you must provide this field when submitting a withdrawal request.
+For some digital assets, deposits and withdrawals require a secondary address
+such as a Destination Tag, Memo, or Message. If the deposit address of the
+receiving exchange includes a secondary address, you must provide this field
+when submitting a withdrawal request.
 
 Updated 16 days ago
 
-* * *
+---
 
 ShellPythonJavaNode
 
 Base URL
 
-https://region\-api.upbit.com/v1/deposits/coin\_addresses
+https://region\-api.upbit.com/v1/deposits/coin_addresses
 
 xxxxxxxxxx
 
@@ -87,15 +90,15 @@ curl \--request GET \\
 
 2
 
-  \--url 'https://{region}-api.upbit.com/v1/deposits/coin\_addresses' \\
+\--url 'https://{region}-api.upbit.com/v1/deposits/coin_addresses' \\
 
 3
 
-  \--header 'Authorization: Bearer {JWT\_TOKEN}' \\
+\--header 'Authorization: Bearer {JWT_TOKEN}' \\
 
 4
 
-  \--header 'Accept: application/json'
+\--header 'Accept: application/json'
 
 5
 
@@ -111,7 +114,7 @@ xxxxxxxxxx
 
 2
 
-  {
+{
 
 3
 
@@ -131,11 +134,11 @@ xxxxxxxxxx
 
 7
 
-  },
+},
 
 8
 
-  {
+{
 
 9
 
@@ -155,11 +158,11 @@ xxxxxxxxxx
 
 13
 
-  },
+},
 
 14
 
-  {
+{
 
 15
 
@@ -179,7 +182,7 @@ xxxxxxxxxx
 
 19
 
-  }
+}
 
 20
 
@@ -187,8 +190,9 @@ xxxxxxxxxx
 
 Updated 16 days ago
 
-* * *
+---
 
 ---
 
-**Source:** [general-deposit-address-inquiry](https://global-docs.upbit.com/reference/general-deposit-address-inquiry)
+**Source:**
+[general-deposit-address-inquiry](https://global-docs.upbit.com/reference/general-deposit-address-inquiry)

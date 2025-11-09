@@ -1,6 +1,7 @@
 # OKX API Documentation Extractor
 
-A tool for extracting and converting OKX API documentation into standardized LLM-friendly markdown format.
+A tool for extracting and converting OKX API documentation into standardized
+LLM-friendly markdown format.
 
 ## Project Structure
 
@@ -75,13 +76,15 @@ Extracts the following core documentation files from the OKX API overview page:
 - **response_formats.md** - Standard JSON response structure
 - **change_log.md** - API updates and announcements
 
-All core files are kept under 1000 lines to ensure they are focused and maintainable.
+All core files are kept under 1000 lines to ensure they are focused and
+maintainable.
 
 ### Endpoint Documentation (`extractEndpoints.js`)
 
 Extracts individual endpoint documentation:
 
-- Categorizes endpoints as **public** (no authentication) or **private** (requires API keys)
+- Categorizes endpoints as **public** (no authentication) or **private**
+  (requires API keys)
 - Uses filename format: `{http_method}_{endpoint_name}.md`
 - Includes source URL for each endpoint
 - Captures request parameters, response schemas, and rate limits
@@ -89,7 +92,8 @@ Extracts individual endpoint documentation:
 
 ## Features
 
-- Follows standardized extraction pattern used by Backpack, Deribit, and XT exchanges
+- Follows standardized extraction pattern used by Backpack, Deribit, and XT
+  exchanges
 - Separates core documentation from endpoint-specific documentation
 - Generates LLM-friendly markdown optimized for AI consumption
 - Maintains proper section boundaries to prevent over-extraction

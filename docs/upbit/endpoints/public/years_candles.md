@@ -2,23 +2,24 @@
 
 **Check the proper endpoint based on your region.**
 
-The examples in this page is written using Singapore fiat code(SGD). Set the quote currency to match your region. The base\_url differs by country/region. Make sure to specify the correct region value for your environment.  
-  
+The examples in this page is written using Singapore fiat code(SGD). Set the
+quote currency to match your region. The base_url differs by country/region.
+Make sure to specify the correct region value for your environment.
+
 \- Singapore (sg): https://sg-api.upbit.com  
 \- Indonesia (id): https://id-api.upbit.com  
 \- Thailand (th): https://th-api.upbit.com
 
-  
-
 Revision History
 
-| Version | Date | Changes |
-| --- | --- | --- |
-| v1.1.8 | 2024-10-30 | [Addition of `List Year Candles`](https://global-docs.upbit.com/changelog/year_sec_candles#/) |
+| Version | Date       | Changes                                                                                       |
+| ------- | ---------- | --------------------------------------------------------------------------------------------- |
+| v1.1.8  | 2024-10-30 | [Addition of `List Year Candles`](https://global-docs.upbit.com/changelog/year_sec_candles#/) |
 
 Rate Limit
 
-Up to 10 calls per second are allowed. This is measured on an IP basis and request counts are shared within the exchange 'candle' group.
+Up to 10 calls per second are allowed. This is measured on an IP basis and
+request counts are shared within the exchange 'candle' group.
 
 market
 
@@ -32,9 +33,13 @@ to
 
 string
 
-End time of the query period. Retrieves candles that occurred before the specified time. If not provided, the most recent candles based on the request time are returned by default.
+End time of the query period. Retrieves candles that occurred before the
+specified time. If not provided, the most recent candles based on the request
+time are returned by default.
 
-Specify the time in ISO 8601 datetime format. When making the actual request, ensure that any spaces or special characters in the datetime string are properly URL-encoded.
+Specify the time in ISO 8601 datetime format. When making the actual request,
+ensure that any spaces or special characters in the datetime string are properly
+URL-encoded.
 
 \[Example\]  
 2025-06-24T04:56:53Z (UTC)  
@@ -51,7 +56,7 @@ Number of candles to retrieve.
 Supports up to 200 candles.  
 Default: 1.
 
-# 
+#
 
 200
 
@@ -69,7 +74,7 @@ required
 
 Trading pair code representing the market.
 
-candle\_date\_time\_utc
+candle_date_time_utc
 
 string
 
@@ -77,15 +82,16 @@ required
 
 Start time of the candle period in UTC.
 
-opening\_price
+opening_price
 
 double
 
 required
 
-The opening price of the candle, representing the first trading price during the candle period.
+The opening price of the candle, representing the first trading price during the
+candle period.
 
-high\_price
+high_price
 
 double
 
@@ -93,7 +99,7 @@ required
 
 The highest trading price, recorded during the candle period.
 
-low\_price
+low_price
 
 double
 
@@ -101,13 +107,14 @@ required
 
 The lowest trading price. recorded during the candle period.
 
-trade\_price
+trade_price
 
 double
 
 required
 
-The closing price of the candle, representing the last trading price during the candle period.
+The closing price of the candle, representing the last trading price during the
+candle period.
 
 timestamp
 
@@ -117,23 +124,25 @@ required
 
 The timestamp (in milliseconds) when the last tick of the candle was recorded.
 
-candle\_acc\_trade\_price
+candle_acc_trade_price
 
 double
 
 required
 
-The total trade amount (in the quoted currency) accumulated during the candle period.
+The total trade amount (in the quoted currency) accumulated during the candle
+period.
 
-candle\_acc\_trade\_volume
+candle_acc_trade_volume
 
 double
 
 required
 
-The total traded volume (in the base asset) accumulated during the candle period.
+The total traded volume (in the base asset) accumulated during the candle
+period.
 
-first\_day\_of\_period
+first_day_of_period
 
 string
 
@@ -141,7 +150,7 @@ required
 
 Start date of candle aggregation.
 
-# 
+#
 
 400
 
@@ -169,7 +178,7 @@ required
 
 Message describing the cause of the error.
 
-# 
+#
 
 404
 
@@ -199,7 +208,7 @@ Message describing the cause of the error.
 
 Updated about 1 month ago
 
-* * *
+---
 
 ShellPythonJavaNode
 
@@ -231,7 +240,7 @@ xxxxxxxxxx
 
 2
 
-  {
+{
 
 3
 
@@ -275,7 +284,7 @@ xxxxxxxxxx
 
 13
 
-  }
+}
 
 14
 
@@ -283,8 +292,9 @@ xxxxxxxxxx
 
 Updated about 1 month ago
 
-* * *
+---
 
 ---
 
-**Source:** [years-candles](https://global-docs.upbit.com/reference/years-candles)
+**Source:**
+[years-candles](https://global-docs.upbit.com/reference/years-candles)

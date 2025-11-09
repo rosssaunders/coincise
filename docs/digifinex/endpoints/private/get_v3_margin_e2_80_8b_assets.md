@@ -2,7 +2,8 @@
 
 **Title:** Margin assets
 
-**Source:** [Margin assets](https://docs.digifinex.com/en-ww/spot/v3/rest.html#margin-assets)
+**Source:**
+[Margin assets](https://docs.digifinex.com/en-ww/spot/v3/rest.html#margin-assets)
 
 ## Authentication
 
@@ -14,7 +15,7 @@ Required (Private Endpoint)
 
 ### HTTP Request
 
--   GET `https://openapi.digifinex.com/v3/margin​/assets`
+- GET `https://openapi.digifinex.com/v3/margin​/assets`
 
 ### Request Parameters
 
@@ -43,11 +44,11 @@ No parameter is available for this endpoint.
 
 ### Response Content
 
-| Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| list | true | object | Account List |
-| currency | true | string | Currency Name |
-| free | true | float | Free |
-| total | true | float | Total |
-| code | true | int | Status |
-| valuation\_rate | true | float | valuation rate |
+| Field          | Mandatory | Request Type | Description    |
+| -------------- | --------- | ------------ | -------------- |
+| list           | true      | object       | Account List   |
+| currency       | true      | string       | Currency Name  |
+| free           | true      | float        | Free           |
+| total          | true      | float        | Total          |
+| code           | true      | int          | Status         |
+| valuation_rate | true      | float        | valuation rate |

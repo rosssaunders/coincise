@@ -2,23 +2,24 @@
 
 **Check the proper endpoint based on your region.**
 
-The examples in this page is written using Singapore fiat code(SGD). Set the quote currency to match your region. The base\_url differs by country/region. Make sure to specify the correct region value for your environment.  
-  
+The examples in this page is written using Singapore fiat code(SGD). Set the
+quote currency to match your region. The base_url differs by country/region.
+Make sure to specify the correct region value for your environment.
+
 \- Singapore (sg): https://sg-api.upbit.com  
 \- Indonesia (id): https://id-api.upbit.com  
 \- Thailand (th): https://th-api.upbit.com
 
-  
-
 Revision History
 
-| Version | Date | Changes |
-| --- | --- | --- |
-| v1.2.2 | 2025-07-31 | [Addition of `List Orderbook Instruments` API](https://global-docs.upbit.com/changelog/orderbook-instruments#/) |
+| Version | Date       | Changes                                                                                                         |
+| ------- | ---------- | --------------------------------------------------------------------------------------------------------------- |
+| v1.2.2  | 2025-07-31 | [Addition of `List Orderbook Instruments` API](https://global-docs.upbit.com/changelog/orderbook-instruments#/) |
 
 Rate Limit
 
-Up to 10 calls per second are allowed. This is measured on an IP basis and request counts are shared within the exchange 'orderbook' group.
+Up to 10 calls per second are allowed. This is measured on an IP basis and
+request counts are shared within the exchange 'orderbook' group.
 
 markets
 
@@ -31,7 +32,7 @@ For multiple pairs, specify them as a comma-separated string.
 
 \[Example\] SGD-BTC,SGD-ETH
 
-# 
+#
 
 200
 
@@ -49,7 +50,7 @@ required
 
 Trading pair code representing the market.
 
-quote\_currency
+quote_currency
 
 string
 
@@ -57,7 +58,7 @@ required
 
 Quote currency code of the pair
 
-tick\_size
+tick_size
 
 string
 
@@ -65,7 +66,7 @@ required
 
 Price unit applied to the orderbook level
 
-# 
+#
 
 400
 
@@ -93,7 +94,7 @@ required
 
 Message describing the cause of the error.
 
-# 
+#
 
 404
 
@@ -123,7 +124,7 @@ Message describing the cause of the error.
 
 Updated about 1 month ago
 
-* * *
+---
 
 ShellPythonJavaNode
 
@@ -155,7 +156,7 @@ xxxxxxxxxx
 
 2
 
-  {
+{
 
 3
 
@@ -171,11 +172,11 @@ xxxxxxxxxx
 
 6
 
-  },
+},
 
 7
 
-  {
+{
 
 8
 
@@ -191,7 +192,7 @@ xxxxxxxxxx
 
 11
 
-  }
+}
 
 12
 
@@ -199,8 +200,9 @@ xxxxxxxxxx
 
 Updated about 1 month ago
 
-* * *
+---
 
 ---
 
-**Source:** [order-book-policy](https://global-docs.upbit.com/reference/order-book-policy)
+**Source:**
+[order-book-policy](https://global-docs.upbit.com/reference/order-book-policy)

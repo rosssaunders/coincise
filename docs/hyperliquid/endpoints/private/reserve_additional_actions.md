@@ -1,12 +1,15 @@
 # Reserve Additional Actions
 
-**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:**
+https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
 `POST` `https://api.hyperliquid.xyz/exchange`
 
-Instead of trading to increase the address based rate limits, this action allows reserving additional actions for 0.0005 USDC per request. The cost is paid from the Perps balance.
+Instead of trading to increase the address based rate limits, this action allows
+reserving additional actions for 0.0005 USDC per request. The cost is paid from
+the Perps balance.
 
-#### 
+####
 
 [](#headers-17)
 
@@ -24,7 +27,7 @@ String
 
 "application/json"
 
-#### 
+####
 
 [](#request-body-13)
 

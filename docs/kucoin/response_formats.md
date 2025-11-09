@@ -14,10 +14,12 @@ All KuCoin API responses follow a standard JSON format:
 ```
 
 ### Success Response
+
 - **code**: "200000" indicates success
 - **data**: Contains the actual response data
 
 ### Error Response
+
 ```json
 {
   "code": "400100",
@@ -45,4 +47,5 @@ For endpoints that support pagination, the response includes:
 }
 ```
 
-Please refer to the official KuCoin API documentation for specific endpoint response formats.
+Please refer to the official KuCoin API documentation for specific endpoint
+response formats.

@@ -1,6 +1,7 @@
 # GET Add Or Reduce Margin
 
-**Source:** [Add Or Reduce Margin](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-19126bd4850)
+**Source:**
+[Add Or Reduce Margin](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-19126bd4850)
 
 **Category:** Future Copy Trade
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /copytrading/trader/add\_margin (Add Or Reduce Margin)
+### /copytrading/trader/add_margin (Add Or Reduce Margin)
 
 Request type: POST
 
@@ -16,44 +17,46 @@ Signature verification: Yes
 
 Interface permission: Trade
 
-Rate Limit: A single user requests all copytrading interfaces 18 times per second.
+Rate Limit: A single user requests all copytrading interfaces 18 times per
+second.
 
-Interface description: Manually add or reduce margin for isolated margin position
+Interface description: Manually add or reduce margin for isolated margin
+position
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | String | true |  |  |  |
-| amount | String | true |  |  |  |
-| type | Integer | true | 1：add,2：reduce |  |  |
-| position\_side | String | true | long, short |  |  |
+| Parameter     | Data Type | Required | Description      | Value Range | Default Value |
+| ------------- | --------- | -------- | ---------------- | ----------- | ------------- |
+| contract_code | String    | true     |                  |             |               |
+| amount        | String    | true     |                  |             |               |
+| type          | Integer   | true     | 1：add,2：reduce |             |               |
+| position_side | String    | true     | long, short      |             |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| tid | String | true | request id |  |
-| DATA\_START |  | true |  |  |
-| contract\_code | String | true |  |  |
-| amount | String | true |  |  |
-| type | Integer | true | 1：add,2：reduce |  |
-| position\_side | String | true | long, short |  |
-| DATA\_END |  | false |  |  |
-| code | Long | true |  |  |
+| Parameter     | Data Type | Required | Description      | Value Range |
+| ------------- | --------- | -------- | ---------------- | ----------- |
+| tid           | String    | true     | request id       |             |
+| DATA_START    |           | true     |                  |             |
+| contract_code | String    | true     |                  |             |
+| amount        | String    | true     |                  |             |
+| type          | Integer   | true     | 1：add,2：reduce |             |
+| position_side | String    | true     | long, short      |             |
+| DATA_END      |           | false    |                  |             |
+| code          | Long      | true     |                  |             |
 
 #### Request example
 
 {
 
-"contract\_code":
+"contract_code":
 
 "DOT-USDT"
 
@@ -65,7 +68,7 @@ Interface description: Manually add or reduce margin for isolated margin positio
 
 1
 
-"position\_side":
+"position_side":
 
 "long"
 
@@ -83,7 +86,7 @@ Interface description: Manually add or reduce margin for isolated margin positio
 
 "data":{
 
-"contract\_code":
+"contract_code":
 
 "DOT-USDT"
 
@@ -95,7 +98,7 @@ Interface description: Manually add or reduce margin for isolated margin positio
 
 1
 
-"position\_side":
+"position_side":
 
 "long"
 

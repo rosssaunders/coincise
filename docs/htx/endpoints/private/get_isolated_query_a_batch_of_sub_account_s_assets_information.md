@@ -1,6 +1,7 @@
 # GET [Isolated]Query a Batch of Sub-Account's Assets Information
 
-**Source:** [[Isolated]Query a Batch of Sub-Account's Assets Information](https://www.htx.com/en-us/opend/newApiPages/?id=8cb822f5-77b5-11ed-9966-0242ac110003)
+**Source:**
+[[Isolated]Query a Batch of Sub-Account's Assets Information](https://www.htx.com/en-us/opend/newApiPages/?id=8cb822f5-77b5-11ed-9966-0242ac110003)
 
 **Category:** Swap Account Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /linear-swap-api/v1/swap\_sub\_account\_info\_list (\[Isolated\]Query a Batch of Sub-Account's Assets Information)
+### /linear-swap-api/v1/swap_sub_account_info_list (\[Isolated\]Query a Batch of Sub-Account's Assets Information)
 
 Request type: POST
 
@@ -16,67 +17,73 @@ Signature verification: Yes
 
 Interface permission: Read
 
-Rate Limit: Generally, the private interface rate limit of API key is at most 144 times every 3 seconds for each UID (Trade Interface: at most 72 times every 3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is shared by all the altcoins contracts delivered by different date).
+Rate Limit: Generally, the private interface rate limit of API key is at most
+144 times every 3 seconds for each UID (Trade Interface: at most 72 times every
+3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is
+shared by all the altcoins contracts delivered by different date).
 
 Interface description: This interface only supports isolated margin mode.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | contract code | "BTC-USDT"... ,if not filled, return all |  |
-| page\_index | int | false | page index, if not filled in as 1st |  |  |
-| page\_size | int | false | if not filled in as 20，50 at most |  |  |
+| Parameter     | Data Type | Required | Description                         | Value Range                              | Default Value |
+| ------------- | --------- | -------- | ----------------------------------- | ---------------------------------------- | ------------- |
+| contract_code | string    | false    | contract code                       | "BTC-USDT"... ,if not filled, return all |               |
+| page_index    | int       | false    | page index, if not filled in as 1st |                                          |               |
+| page_size     | int       | false    | if not filled in as 20，50 at most  |                                          |               |
 
 Notes:  
-Only return data of sub-accounts that have agreed to access the contract market.  
-By default, the list of sub-accounts is in ascending order according to the time when agree to access the contract market, and the earlier the agreed time, the first the position
+Only return data of sub-accounts that have agreed to access the contract
+market.  
+By default, the list of sub-accounts is in ascending order according to the time
+when agree to access the contract market, and the earlier the agreed time, the
+first the position
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | result of server handled request | "ok" , "error" |
-| ts | long | true | Time of Respond Generation，Unit：Millisecond |  |
-| DATA\_START | object | true |  |  |
-| SUB\_LIST\_START | object array | true |  |  |
-| sub\_uid | long | true | sub uid |  |
-| ACCOUNT\_INFO\_LIST\_START | object array | true |  |  |
-| symbol | string | true | symbol | "BTC","ETH"... |
-| contract\_code | string | true | contract code | "BTC-USDT" ... |
-| margin\_account | string | true | margin account | such as:BTC-USDT” |
-| margin\_mode | string | true | margin mode | isolated: isolated |
-| margin\_asset | string | true | margin asset) |  |
-| margin\_balance | decimal | true | margin balance |  |
-| liquidation\_price | decimal | true | liquidation price |  |
-| risk\_rate | decimal | true | risk rate |  |
-| ACCOUNT\_INFO\_LIST\_END |  | false |  |  |
-| SUB\_LIST\_END |  | false |  |  |
-| current\_page | int | true | current page |  |
-| total\_page | int | true | total page |  |
-| total\_size | int | true | total size |  |
-| DATA\_END |  | false |  |  |
+| Parameter               | Data Type    | Required | Description                                   | Value Range        |
+| ----------------------- | ------------ | -------- | --------------------------------------------- | ------------------ |
+| status                  | string       | true     | result of server handled request              | "ok" , "error"     |
+| ts                      | long         | true     | Time of Respond Generation，Unit：Millisecond |                    |
+| DATA_START              | object       | true     |                                               |                    |
+| SUB_LIST_START          | object array | true     |                                               |                    |
+| sub_uid                 | long         | true     | sub uid                                       |                    |
+| ACCOUNT_INFO_LIST_START | object array | true     |                                               |                    |
+| symbol                  | string       | true     | symbol                                        | "BTC","ETH"...     |
+| contract_code           | string       | true     | contract code                                 | "BTC-USDT" ...     |
+| margin_account          | string       | true     | margin account                                | such as:BTC-USDT”  |
+| margin_mode             | string       | true     | margin mode                                   | isolated: isolated |
+| margin_asset            | string       | true     | margin asset)                                 |                    |
+| margin_balance          | decimal      | true     | margin balance                                |                    |
+| liquidation_price       | decimal      | true     | liquidation price                             |                    |
+| risk_rate               | decimal      | true     | risk rate                                     |                    |
+| ACCOUNT_INFO_LIST_END   |              | false    |                                               |                    |
+| SUB_LIST_END            |              | false    |                                               |                    |
+| current_page            | int          | true     | current page                                  |                    |
+| total_page              | int          | true     | total page                                    |                    |
+| total_size              | int          | true     | total size                                    |                    |
+| DATA_END                |              | false    |                                               |                    |
 
 #### Request example
 
 {
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 
-"page\_index":
+"page_index":
 
 1
 
-"page\_size":
+"page_size":
 
 100
 
@@ -94,27 +101,27 @@ By default, the list of sub-accounts is in ascending order according to the time
 
 "data":{
 
-"total\_page":
+"total_page":
 
 1
 
-"current\_page":
+"current_page":
 
 1
 
-"total\_size":
+"total_size":
 
 1
 
-"sub\_list":\[
+"sub_list":\[
 
 0:{
 
-"sub\_uid":
+"sub_uid":
 
 123456789
 
-"account\_info\_list":\[
+"account_info_list":\[
 
 0:{
 
@@ -122,31 +129,31 @@ By default, the list of sub-accounts is in ascending order according to the time
 
 "BTC"
 
-"margin\_balance":
+"margin_balance":
 
 0
 
-"liquidation\_price":
+"liquidation_price":
 
 NULL
 
-"risk\_rate":
+"risk_rate":
 
 NULL
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 
-"margin\_asset":
+"margin_asset":
 
 "USDT"
 
-"margin\_mode":
+"margin_mode":
 
 "isolated"
 
-"margin\_account":
+"margin_account":
 
 "BTC-USDT"
 

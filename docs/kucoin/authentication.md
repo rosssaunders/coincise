@@ -6,7 +6,9 @@ Copy Page
 
 #### Generating an API Key[#](#generating-an-api-key)
 
-Before being able to sign any requests, you must create an API key via the [KuCoin website](https://www.kucoin.com/account/api). Upon creating a key you need to write down 3 pieces of information:
+Before being able to sign any requests, you must create an API key via the
+[KuCoin website](https://www.kucoin.com/account/api). Upon creating a key you
+need to write down 3 pieces of information:
 
 Key
 
@@ -14,11 +16,16 @@ Secret
 
 Passphrase
 
-The Key and Secret are generated and provided by KuCoin and the Passphrase refers to the one you used to create the KuCoin API. Please note that these three pieces of information can not be recovered once lost. If you lost this information, please create a new API key.
+The Key and Secret are generated and provided by KuCoin and the Passphrase
+refers to the one you used to create the KuCoin API. Please note that these
+three pieces of information can not be recovered once lost. If you lost this
+information, please create a new API key.
 
 #### API KEY PERMISSIONS[#](#api-key-permissions)
 
-You can manage the API permission on KuCoin’s official website. Please refer to the documentation below to see what API key permissions are required for a specific route.
+You can manage the API permission on KuCoin’s official website. Please refer to
+the documentation below to see what API key permissions are required for a
+specific route.
 
 #### Creating a Request[#](#creating-a-request)
 
@@ -32,15 +39,19 @@ All private REST requests must contain the following headers:
 
 **KC-API-PASSPHRASE** The passphrase you specified when creating the API key.
 
-**KC-API-KEY-VERSION** You can check the API key version on the page of [API Management](https://www.kucoin.com/account/api).
+**KC-API-KEY-VERSION** You can check the API key version on the page of
+[API Management](https://www.kucoin.com/account/api).
 
-**Content-Type** All requests and responses are **application/json** content type.
+**Content-Type** All requests and responses are **application/json** content
+type.
 
 #### Signing a Message[#](#signing-a-message)
 
 For the header of **KC-API-SIGN**:
 
-Use API-Secret to encrypt the prehash string {timestamp+method+endpoint+body} with sha256 HMAC. The request body is a JSON string and need to be the same with the parameters passed by the API.
+Use API-Secret to encrypt the prehash string {timestamp+method+endpoint+body}
+with sha256 HMAC. The request body is a JSON string and need to be the same with
+the parameters passed by the API.
 
 Encode contents by **base64** before you pass the request.
 
@@ -52,19 +63,28 @@ Encode contents by **base64** before you pass the request.
 
 Note:
 
-The encrypted timestamp shall be consistent with the KC-API-TIMESTAMP field in the request header.
+The encrypted timestamp shall be consistent with the KC-API-TIMESTAMP field in
+the request header.
 
-The body to be encrypted shall be consistent with the content of the Request Body.
+The body to be encrypted shall be consistent with the content of the Request
+Body.
 
 The Method should be UPPER CASE.
 
-For GET, DELETE request, all query parameters need to be included in the request url. e.g. /api/v1/deposit-addresses?currency=XBT. The body is "" if there is no request body (typically for GET requests).
+For GET, DELETE request, all query parameters need to be included in the request
+url. e.g. /api/v1/deposit-addresses?currency=XBT. The body is "" if there is no
+request body (typically for GET requests).
 
-For the POST request, all query parameters need to be included in the request body with JSON. (e.g. {"currency":"BTC"}). Do not include extra spaces in JSON strings.
+For the POST request, all query parameters need to be included in the request
+body with JSON. (e.g. {"currency":"BTC"}). Do not include extra spaces in JSON
+strings.
 
-When generating signature, the URL must use the content that has not been URL-encoded to participate in the signature.  
-For example: When the url is /api/v1/sub/api-key?apiKey=67*b3&subName=test&passphrase=abc%21%40%2311  
-, the url content participating in the signature should be the original information /api/v1/sub/api-key?apiKey=67*b3&subName=test&passphrase=abc!@#11
+When generating signature, the URL must use the content that has not been
+URL-encoded to participate in the signature.  
+For example: When the url is
+/api/v1/sub/api-key?apiKey=67*b3&subName=test&passphrase=abc%21%40%2311  
+, the url content participating in the signature should be the original
+information /api/v1/sub/api-key?apiKey=67*b3&subName=test&passphrase=abc!@#11
 
 #### PHP Example[#](#php-example)
 
@@ -93,7 +113,8 @@ For example: When the url is /api/v1/sub/api-key?apiKey=67*b3&subName=test&passp
 
 #### Python Example[#](#python-example)
 
-For a more production-ready implementation, please refer to: [Code](https://github.com/Kucoin/kucoin-universal-sdk/blob/main/sdk/python/kucoin_universal_sdk/internal/infra/default_transport.py)
+For a more production-ready implementation, please refer to:
+[Code](https://github.com/Kucoin/kucoin-universal-sdk/blob/main/sdk/python/kucoin_universal_sdk/internal/infra/default_transport.py)
 
 ```
 import base64
@@ -218,7 +239,8 @@ if __name__ == '__main__':
 
 #### Go Example[#](#go-example)
 
-For a more production-ready implementation, please refer to: [Code](https://github.com/Kucoin/kucoin-universal-sdk/blob/main/sdk/golang/internal/infra/default_transport.go)
+For a more production-ready implementation, please refer to:
+[Code](https://github.com/Kucoin/kucoin-universal-sdk/blob/main/sdk/golang/internal/infra/default_transport.go)
 
 ```
 package main
@@ -390,8 +412,6 @@ Modified at about 1 month ago
 Previous
 
 Introduction
-
-
 
 ](/docs-new/introduction)[
 

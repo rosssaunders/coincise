@@ -1,6 +1,7 @@
 # GET / Product info
 
-Source: [https://www.okx.com/docs-v5/en/#financial-product-sol-staking-get-product-info](https://www.okx.com/docs-v5/en/#financial-product-sol-staking-get-product-info)
+Source:
+[https://www.okx.com/docs-v5/en/#financial-product-sol-staking-get-product-info](https://www.okx.com/docs-v5/en/#financial-product-sol-staking-get-product-info)
 
 ### GET / Product info
 
@@ -16,8 +17,8 @@ Source: [https://www.okx.com/docs-v5/en/#financial-product-sol-staking-get-produ
 
 #### Response Parameters
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| fastRedemptionDailyLimit | String | Fast redemption daily limit  
-The master account and sub-accounts share the same limit |
-| fastRedemptionAvail | String | Currently fast redemption max available amount |
+| Parameter                                                | Type   | Description                                    |
+| -------------------------------------------------------- | ------ | ---------------------------------------------- |
+| fastRedemptionDailyLimit                                 | String | Fast redemption daily limit                    |
+| The master account and sub-accounts share the same limit |
+| fastRedemptionAvail                                      | String | Currently fast redemption max available amount |

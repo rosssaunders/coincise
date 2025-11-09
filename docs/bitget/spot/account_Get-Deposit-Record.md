@@ -8,7 +8,7 @@ Get Deposit Records
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/spot/wallet/deposit-records
+- GET /api/v2/spot/wallet/deposit-records
 
 Request Example
 
@@ -18,14 +18,14 @@ curl "https://api.bitget.com/api/v2/spot/wallet/deposit-records?coin=USDT&startT
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| coin | String | No | Coin name, e.g. USDT 
-| orderId | String | No | The response orderId 
-| startTime | String | Yes | The record start time for the query. Unix millisecond timestamp, e.g. 1690196141868 
-| endTime | String | Yes | The end time of the record for the query. Unix millisecond timestamp, e.g. 1690196141868 
-| idLessThan | String | No | Requests the content on the page before this ID (older data), the value input should be the orderId of the corresponding interface. 
-| limit | String | No | Number of entries per page<br>The default value is 20 and the maximum value is 100 
+| Parameter  | Type   | Required | Description                                                                                                                         |
+| :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| coin       | String | No       | Coin name, e.g. USDT                                                                                                                |
+| orderId    | String | No       | The response orderId                                                                                                                |
+| startTime  | String | Yes      | The record start time for the query. Unix millisecond timestamp, e.g. 1690196141868                                                 |
+| endTime    | String | Yes      | The end time of the record for the query. Unix millisecond timestamp, e.g. 1690196141868                                            |
+| idLessThan | String | No       | Requests the content on the page before this ID (older data), the value input should be the orderId of the corresponding interface. |
+| limit      | String | No       | Number of entries per page<br>The default value is 20 and the maximum value is 100                                                  |
 
 Response Example
 
@@ -35,19 +35,19 @@ Response Example
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| orderId | String | Order ID 
-| tradeId | String | TX ID<br>when <code>dest</code> is <code>on_chain</code>, it's the on chain hash value<br>if the <code>dest</code> is <code>internal_transfer</code>, it is the trade ID 
-| coin | String | Token name 
-| type | String | Type<br>Fixed value: <code>deposit</code> 
-| size | String | Quantity 
-| status | String | Withdrawal status<br><code>pending</code>: pending confirmation<br><code>fail</code>: failed<br><code>success</code>: successed 
-| fromAddress | String | Deposit Initiators<br>If <code>dest</code> is <code>on_chain</code>, it's the on chain address<br>If <code>dest</code> is <code>internal_transfer</code>, it would be the UID,email or the mobile 
-| toAddress | String | Coin Receiver<br>If <code>dest</code> is <code>on_chain</code>, it's the on chain address<br>If <code>dest</code> is <code>internal_transfer</code>, it would be the UID,email or the mobile 
-| chain | String | Deposit network<br>if <code>dest</code> is <code>internal_transfer</code>, please ignore this parameter 
-| dest | String | Deposit Type<br><code>on_chain</code>: the on chain deposit<br><code>internal_transfer</code>: internal deposit 
-| cTime | String | Creation time, ms 
-| uTime | String | Edit time, ms
+| Parameter   | Type   | Description                                                                                                                                                                                       |
+| :---------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| orderId     | String | Order ID                                                                                                                                                                                          |
+| tradeId     | String | TX ID<br>when <code>dest</code> is <code>on_chain</code>, it's the on chain hash value<br>if the <code>dest</code> is <code>internal_transfer</code>, it is the trade ID                          |
+| coin        | String | Token name                                                                                                                                                                                        |
+| type        | String | Type<br>Fixed value: <code>deposit</code>                                                                                                                                                         |
+| size        | String | Quantity                                                                                                                                                                                          |
+| status      | String | Withdrawal status<br><code>pending</code>: pending confirmation<br><code>fail</code>: failed<br><code>success</code>: successed                                                                   |
+| fromAddress | String | Deposit Initiators<br>If <code>dest</code> is <code>on_chain</code>, it's the on chain address<br>If <code>dest</code> is <code>internal_transfer</code>, it would be the UID,email or the mobile |
+| toAddress   | String | Coin Receiver<br>If <code>dest</code> is <code>on_chain</code>, it's the on chain address<br>If <code>dest</code> is <code>internal_transfer</code>, it would be the UID,email or the mobile      |
+| chain       | String | Deposit network<br>if <code>dest</code> is <code>internal_transfer</code>, please ignore this parameter                                                                                           |
+| dest        | String | Deposit Type<br><code>on_chain</code>: the on chain deposit<br><code>internal_transfer</code>: internal deposit                                                                                   |
+| cTime       | String | Creation time, ms                                                                                                                                                                                 |
+| uTime       | String | Edit time, ms                                                                                                                                                                                     |
 
 > **Source:** https://www.bitget.com/api-doc/spot/account/Get-Deposit-Record

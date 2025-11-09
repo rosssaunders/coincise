@@ -144,11 +144,6 @@ const extractEndpoints = async (page, turndownService) => {
     const allItems = mainMenu ? getAllMenuItems(mainMenu) : []
 
     // Filter to get only endpoint pages (exclude general documentation)
-    const excludePatterns = [
-      "Access%20Description",
-      "WebSocket%20Private",
-      "WebSocket%20Public"
-    ]
 
     return allItems.filter(item => {
       if (!item.href) return false

@@ -1,6 +1,7 @@
 # POST public/get-book
 
-**Source:** [public/get-book](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-get-book)
+**Source:**
+[public/get-book](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-get-book)
 
 ## Authentication
 
@@ -58,10 +59,10 @@ Fetches the public order book for a particular instrument and depth.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | Y | e.g. BTCUSD-PERP |
-| depth | string | Y | Number of bids and asks to return (up to 50) |
+| Name            | Type   | Required | Description                                  |
+| --------------- | ------ | -------- | -------------------------------------------- |
+| instrument_name | string | Y        | e.g. BTCUSD-PERP                             |
+| depth           | string | Y        | Number of bids and asks to return (up to 50) |
 
 ### Applies To
 
@@ -73,16 +74,16 @@ GET
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| instrument\_name | string | e.g. BTCUSD-PERP |
-| depth | string | Number of bids and asks to return (up to 50) |
-| data | array | See below |
+| Name            | Type   | Description                                  |
+| --------------- | ------ | -------------------------------------------- |
+| instrument_name | string | e.g. BTCUSD-PERP                             |
+| depth           | string | Number of bids and asks to return (up to 50) |
+| data            | array  | See below                                    |
 
 `data` consists of:
 
-| Name | Type | Description |
-| --- | --- | --- |
+| Name | Type  | Description                                                           |
+| ---- | ----- | --------------------------------------------------------------------- |
 | bids | array | Bids array: \[0\] = Price, \[1\] = Quantity, \[2\] = Number of Orders |
 | asks | array | Asks array: \[0\] = Price, \[1\] = Quantity, \[2\] = Number of Orders |
 

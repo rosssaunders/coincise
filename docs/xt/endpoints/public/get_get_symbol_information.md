@@ -1,6 +1,7 @@
 # GET Get symbol information
 
-Source: [https://doc.xt.com/docs/spot/Market/GetSymbolInformation](https://doc.xt.com/docs/spot/Market/GetSymbolInformation)
+Source:
+[https://doc.xt.com/docs/spot/Market/GetSymbolInformation](https://doc.xt.com/docs/spot/Market/GetSymbolInformation)
 
 # Get symbol information
 
@@ -8,11 +9,11 @@ Source: [https://doc.xt.com/docs/spot/Market/GetSymbolInformation](https://doc.x
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | false | \- | trading pair eg:btc\_usdt |  |
-| symbols | array | false | \- | collection of trading pairs. priority is higher than symbol. eg: btc\_usdt,eth\_usdt |  |
-| version | string | false | \- | version number, if request version equals response version, list will not be returned (reduce IO). eg: 2e14d2cd5czcb2c2af2c1db6 |  |
+| name    | type   | mandatory | default | description                                                                                                                     | ranges |
+| ------- | ------ | --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| symbol  | string | false     | \-      | trading pair eg:btc_usdt                                                                                                        |        |
+| symbols | array  | false     | \-      | collection of trading pairs. priority is higher than symbol. eg: btc_usdt,eth_usdt                                              |        |
+| version | string | false     | \-      | version number, if request version equals response version, list will not be returned (reduce IO). eg: 2e14d2cd5czcb2c2af2c1db6 |        |
 
 ### Limit Flow Rules[​](#limit-flow-rules "Direct link to Limit Flow Rules")
 
@@ -23,9 +24,9 @@ Source: [https://doc.xt.com/docs/spot/Market/GetSymbolInformation](https://doc.x
 
 #### PRICE FILTER[​](#price-filter "Direct link to PRICE FILTER")
 
--   `min`: minimum price allowed
--   `max`: maximum price allowed
--   `tickSize`: step interval → `price = minPrice + (integer * tickSize)`
+- `min`: minimum price allowed
+- `max`: maximum price allowed
+- `tickSize`: step interval → `price = minPrice + (integer * tickSize)`
 
 ```
 price >= minprice <= max(price - minPrice) % tickSize == 0
@@ -33,39 +34,40 @@ price >= minprice <= max(price - minPrice) % tickSize == 0
 
 #### QUANTITY FILTER[​](#quantity-filter "Direct link to QUANTITY FILTER")
 
--   `min`: minimum allowed
--   `max`: maximum allowed
--   `tickSize`: step interval
+- `min`: minimum allowed
+- `max`: maximum allowed
+- `tickSize`: step interval
 
 ```
 quantity >= minquantity <= max(quantity - minQuantity) % tickSize == 0
 ```
 
-#### QUOTE\_QTY FILTER[​](#quote_qty-filter "Direct link to QUOTE_QTY FILTER")
+#### QUOTE_QTY FILTER[​](#quote_qty-filter "Direct link to QUOTE_QTY FILTER")
 
--   If `min` is null → no restriction
--   LIMIT orders → `price * quantity >= min`
--   MARKET BUY orders → `quoteQty >= min`
+- If `min` is null → no restriction
+- LIMIT orders → `price * quantity >= min`
+- MARKET BUY orders → `quoteQty >= min`
 
-#### PROTECTION\_LIMIT FILTER[​](#protection_limit-filter "Direct link to PROTECTION_LIMIT FILTER")
+#### PROTECTION_LIMIT FILTER[​](#protection_limit-filter "Direct link to PROTECTION_LIMIT FILTER")
 
--   `buyMaxDeviation`, `buyPriceLimitCoefficient`, `sellMaxDeviation`, `sellPriceLimitCoefficient`
+- `buyMaxDeviation`, `buyPriceLimitCoefficient`, `sellMaxDeviation`,
+  `sellPriceLimitCoefficient`
 
 ```
 Buy:  price >= latestPrice - latestPrice * buyMaxDeviation      price <= latestPrice + latestPrice * buyPriceLimitCoefficientSell: price <= latestPrice + latestPrice * sellMaxDeviation      price >= latestPrice - latestPrice * sellPriceLimitCoefficient
 ```
 
-#### PROTECTION\_MARKET FILTER[​](#protection_market-filter "Direct link to PROTECTION_MARKET FILTER")
+#### PROTECTION_MARKET FILTER[​](#protection_market-filter "Direct link to PROTECTION_MARKET FILTER")
 
--   `maxDeviation`: maximum deviation
+- `maxDeviation`: maximum deviation
 
 ```
 Buy:  latestPrice + latestPrice * maxDeviation >= sellBestPriceSell: latestPrice - latestPrice * maxDeviation <= buyBestPrice
 ```
 
-#### PROTECTION\_ONLINE FILTER[​](#protection_online-filter "Direct link to PROTECTION_ONLINE FILTER")
+#### PROTECTION_ONLINE FILTER[​](#protection_online-filter "Direct link to PROTECTION_ONLINE FILTER")
 
--   `maxPriceMultiple`, `durationSeconds`
+- `maxPriceMultiple`, `durationSeconds`
 
 ```
 price <= openPrice * maxPriceMultiple

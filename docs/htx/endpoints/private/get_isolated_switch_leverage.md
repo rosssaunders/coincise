@@ -1,6 +1,7 @@
 # GET [Isolated] Switch Leverage
 
-**Source:** [[Isolated] Switch Leverage](https://www.htx.com/en-us/opend/newApiPages/?id=8cb84ff2-77b5-11ed-9966-0242ac110003)
+**Source:**
+[[Isolated] Switch Leverage](https://www.htx.com/en-us/opend/newApiPages/?id=8cb84ff2-77b5-11ed-9966-0242ac110003)
 
 **Category:** Swap Trade Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /linear-swap-api/v1/swap\_switch\_lever\_rate (\[Isolated\] Switch Leverage)
+### /linear-swap-api/v1/swap_switch_lever_rate (\[Isolated\] Switch Leverage)
 
 Request type: POST
 
@@ -18,45 +19,48 @@ Interface permission: Trade
 
 Rate Limit: 1 time per 3 seconds.
 
-Interface description: This interface only supports isolated margin mode. Only if a user has positions of a single token and has no open orders, the leverage is available to be switched flexibly. The interface limits the number of requests to 1 time per 3 seconds.
+Interface description: This interface only supports isolated margin mode. Only
+if a user has positions of a single token and has no open orders, the leverage
+is available to be switched flexibly. The interface limits the number of
+requests to 1 time per 3 seconds.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | contract code | "BTC-USDT"... |  |
-| lever\_rate | int | true | The leverage multiple to be switched; high leverage has a high risk factor, so please use it with caution. |  |  |
+| Parameter     | Data Type | Required | Description                                                                                                | Value Range   | Default Value |
+| ------------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| contract_code | string    | true     | contract code                                                                                              | "BTC-USDT"... |               |
+| lever_rate    | int       | true     | The leverage multiple to be switched; high leverage has a high risk factor, so please use it with caution. |               |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | status: ok,error |  |
-| DATA\_START | object | false |  |  |
-| contract\_code | string | false | contract code | "BTC-USDT"... |
-| margin\_mode | string | false | margin mode | isolated : "isolated" |
-| lever\_rate | int | false | Switched leverage |  |
-| DATA\_END |  | false |  |  |
-| err\_code | int | false | error code |  |
-| err\_msg | string | false | error msg |  |
-| ts | long | true | Timestamp |  |
+| Parameter     | Data Type | Required | Description       | Value Range           |
+| ------------- | --------- | -------- | ----------------- | --------------------- |
+| status        | string    | true     | status: ok,error  |                       |
+| DATA_START    | object    | false    |                   |                       |
+| contract_code | string    | false    | contract code     | "BTC-USDT"...         |
+| margin_mode   | string    | false    | margin mode       | isolated : "isolated" |
+| lever_rate    | int       | false    | Switched leverage |                       |
+| DATA_END      |           | false    |                   |                       |
+| err_code      | int       | false    | error code        |                       |
+| err_msg       | string    | false    | error msg         |                       |
+| ts            | long      | true     | Timestamp         |                       |
 
 #### Request example
 
 {
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 
-"lever\_rate":
+"lever_rate":
 
 20
 

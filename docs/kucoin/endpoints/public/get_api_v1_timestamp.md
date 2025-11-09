@@ -1,6 +1,7 @@
 # GET /api/v1/timestamp
 
-**Source:** [/api/v1/timestamp](https://www.kucoin.com/docs/rest//api/v1/timestamp)
+**Source:**
+[/api/v1/timestamp](https://www.kucoin.com/docs/rest//api/v1/timestamp)
 
 ## Authentication
 
@@ -16,8 +17,7 @@ Get the API server time. This is the Unix timestamp.
 
 ### 200
 
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| code | required | string |  |
-| data | required | integer | ServerTime (milliseconds) |
-
+| Parameter | Required | Type    | Description               |
+| --------- | -------- | ------- | ------------------------- |
+| code      | required | string  |                           |
+| data      | required | integer | ServerTime (milliseconds) |

@@ -12,8 +12,6 @@ async function createTwitterSummaryPr() {
     const prUrl = process.env.PR_URL
     const mergedBy = process.env.MERGED_BY
     const mergedAt = process.env.MERGED_AT
-    const repoOwner = process.env.REPO_OWNER
-    const repoName = process.env.REPO_NAME
     const githubToken = process.env.GITHUB_TOKEN
 
     if (!githubToken) {
@@ -72,7 +70,7 @@ When this PR is merged, the above Twitter/X update will be automatically posted 
     let hasChanges = false
     try {
       execSync("git diff --staged --quiet", { encoding: "utf8" })
-    } catch (error) {
+    } catch {
       hasChanges = true
     }
 

@@ -1,6 +1,7 @@
 # POST public/get-expired-settlement-price
 
-**Source:** [public/get-expired-settlement-price](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-get-expired-settlement-price)
+**Source:**
+[public/get-expired-settlement-price](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#public-get-expired-settlement-price)
 
 ## Authentication
 
@@ -42,10 +43,10 @@ Fetches settlement price of expired instruments.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_type | string | Y | `FUTURE` |
-| page | number | N | Default is 1 |
+| Name            | Type   | Required | Description  |
+| --------------- | ------ | -------- | ------------ |
+| instrument_type | string | Y        | `FUTURE`     |
+| page            | number | N        | Default is 1 |
 
 ### Applies To
 
@@ -57,9 +58,9 @@ GET
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| i | string | Instrument name |
-| x | long | Expiry timestamp (millisecond) |
-| v | string | Value |
-| t | long | Timestamp |
+| Name | Type   | Description                    |
+| ---- | ------ | ------------------------------ |
+| i    | string | Instrument name                |
+| x    | long   | Expiry timestamp (millisecond) |
+| v    | string | Value                          |
+| t    | long   | Timestamp                      |

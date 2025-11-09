@@ -1,6 +1,7 @@
 # GET Query Referral History
 
-**Source:** [Query Referral History](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-1929398ed07)
+**Source:**
+[Query Referral History](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-1929398ed07)
 
 **Category:** Referral
 
@@ -16,41 +17,42 @@ Signature verification: Yes
 
 Interface permission: Read
 
-Interface description: This interface can query the historical rebate information of invitees.
+Interface description: This interface can query the historical rebate
+information of invitees.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| inviteeUid | Integer | true | Query the uid of the invitee |  |  |
-| startTime | string | false | yyyy-MM-dd queries the start time and queries data based on the creation time. | The query window is the last 90 days |  |
-| endTime | string | false | yyyy-MM-dd query end time, query data according to creation time. | The query window is the last 90 days |  |
-| direct | string | false | Search direct, If the direction is NEXT, the data is returned in positive chronological order; if the direction is PREV, the data is returned in reverse chronological order | next, prev default is prev | now |
-| fromId | string | false | If the query direction is prev, from\_id should be the min query\_id in the last query result. If the query direction is next, from\_id should be the max query\_id in the last query result |  |  |
-| limit | long | false | Number of results per request. Maximum is 100. Default is 100. |  |  |
+| Parameter  | Data Type | Required | Description                                                                                                                                                                              | Value Range                          | Default Value |
+| ---------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | ------------- |
+| inviteeUid | Integer   | true     | Query the uid of the invitee                                                                                                                                                             |                                      |               |
+| startTime  | string    | false    | yyyy-MM-dd queries the start time and queries data based on the creation time.                                                                                                           | The query window is the last 90 days |               |
+| endTime    | string    | false    | yyyy-MM-dd query end time, query data according to creation time.                                                                                                                        | The query window is the last 90 days |               |
+| direct     | string    | false    | Search direct, If the direction is NEXT, the data is returned in positive chronological order; if the direction is PREV, the data is returned in reverse chronological order             | next, prev default is prev           | now           |
+| fromId     | string    | false    | If the query direction is prev, from_id should be the min query_id in the last query result. If the query direction is next, from_id should be the max query_id in the last query result |                                      |               |
+| limit      | long      | false    | Number of results per request. Maximum is 100. Default is 100.                                                                                                                           |                                      |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | false |  |  |
-| DATA>\_START | List<Object> | true |  |  |
-| date | long | true |  |  |
-| Invitee\_total\_commission\_usdt | string | true | Invitee Total rebate amount, amount of USDT |  |
-| Invitee\_total\_commission\_trx | string | true | Invitee Total rebate amount, amount of TRX |  |
-| Invitee\_total\_commission\_htx | string | true | Invitee Total rebate amount, amount of HTX |  |
-| partner\_total\_commission\_usdt | string | true | partner Total rebate amount, amount of USDT |  |
-| partner\_total\_commission\_trx | string | true | partner Total rebate amount, amount of TRX |  |
-| partner\_total\_commission\_htx | string | true | partner Total rebate amount, amount of HTX |  |
-| DATA>\_END |  | false |  |  |
-| ts | long | true |  |  |
+| Parameter                     | Data Type    | Required | Description                                 | Value Range |
+| ----------------------------- | ------------ | -------- | ------------------------------------------- | ----------- |
+| status                        | string       | false    |                                             |             |
+| DATA>\_START                  | List<Object> | true     |                                             |             |
+| date                          | long         | true     |                                             |             |
+| Invitee_total_commission_usdt | string       | true     | Invitee Total rebate amount, amount of USDT |             |
+| Invitee_total_commission_trx  | string       | true     | Invitee Total rebate amount, amount of TRX  |             |
+| Invitee_total_commission_htx  | string       | true     | Invitee Total rebate amount, amount of HTX  |             |
+| partner_total_commission_usdt | string       | true     | partner Total rebate amount, amount of USDT |             |
+| partner_total_commission_trx  | string       | true     | partner Total rebate amount, amount of TRX  |             |
+| partner_total_commission_htx  | string       | true     | partner Total rebate amount, amount of HTX  |             |
+| DATA>\_END                    |              | false    |                                             |             |
+| ts                            | long         | true     |                                             |             |
 
 #### Request example
 
@@ -74,55 +76,55 @@ Interface description: This interface can query the historical rebate informatio
 
 20240710
 
-"invitee\_rebate\_rate\_contract\_m2":
+"invitee_rebate_rate_contract_m2":
 
 NULL
 
-"invitee\_rebate\_rate\_partner\_contract":
+"invitee_rebate_rate_partner_contract":
 
 NULL
 
-"invitee\_rebate\_rate\_partner\_spot":
+"invitee_rebate_rate_partner_spot":
 
 NULL
 
-"invitee\_rebate\_rate\_spot\_m2":
+"invitee_rebate_rate_spot_m2":
 
 NULL
 
-"invitee\_total\_commission\_htx":
+"invitee_total_commission_htx":
 
 0
 
-"invitee\_total\_commission\_trx":
+"invitee_total_commission_trx":
 
 0
 
-"invitee\_total\_commission\_usdt":
+"invitee_total_commission_usdt":
 
 0
 
-"invitee\_type":
+"invitee_type":
 
 NULL
 
-"join\_time\_m2":
+"join_time_m2":
 
 NULL
 
-"join\_time\_partner":
+"join_time_partner":
 
 NULL
 
-"partner\_total\_commission\_htx":
+"partner_total_commission_htx":
 
 NULL
 
-"partner\_total\_commission\_trx":
+"partner_total_commission_trx":
 
 NULL
 
-"partner\_total\_commission\_usdt":
+"partner_total_commission_usdt":
 
 NULL
 
@@ -134,55 +136,55 @@ NULL
 
 20240709
 
-"invitee\_rebate\_rate\_contract\_m2":
+"invitee_rebate_rate_contract_m2":
 
 NULL
 
-"invitee\_rebate\_rate\_partner\_contract":
+"invitee_rebate_rate_partner_contract":
 
 NULL
 
-"invitee\_rebate\_rate\_partner\_spot":
+"invitee_rebate_rate_partner_spot":
 
 NULL
 
-"invitee\_rebate\_rate\_spot\_m2":
+"invitee_rebate_rate_spot_m2":
 
 NULL
 
-"invitee\_total\_commission\_htx":
+"invitee_total_commission_htx":
 
 0
 
-"invitee\_total\_commission\_trx":
+"invitee_total_commission_trx":
 
 0
 
-"invitee\_total\_commission\_usdt":
+"invitee_total_commission_usdt":
 
 0
 
-"invitee\_type":
+"invitee_type":
 
 NULL
 
-"join\_time\_m2":
+"join_time_m2":
 
 NULL
 
-"join\_time\_partner":
+"join_time_partner":
 
 NULL
 
-"partner\_total\_commission\_htx":
+"partner_total_commission_htx":
 
 0
 
-"partner\_total\_commission\_trx":
+"partner_total_commission_trx":
 
 0
 
-"partner\_total\_commission\_usdt":
+"partner_total_commission_usdt":
 
 0
 

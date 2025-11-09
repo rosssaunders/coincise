@@ -1,6 +1,7 @@
 # GET Market Data Overview
 
-**Source:** [Get Market Data Overview](https://www.htx.com/en-us/opend/newApiPages/?id=5d517bbc-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Get Market Data Overview](https://www.htx.com/en-us/opend/newApiPages/?id=5d517bbc-77b6-11ed-9966-0242ac110003)
 
 **Category:** Swap Market Data interface
 
@@ -18,37 +19,37 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USD" |  |  |
+| Parameter     | Data Type | Required | Description                                                                | Value Range | Default Value |
+| ------------- | --------- | -------- | -------------------------------------------------------------------------- | ----------- | ------------- |
+| contract_code | string    | true     | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USD" |             |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| ch | string | true | Data belonged channel，format： market.$contract\_code.detail.merged |  |
-| status | string | true | Request Processing Result | "ok" , "error" |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| TICK\_START |  | false | kline data (Start at 00:00(UTC+8) of the day) |  |
-| id | long | true | kline id,the same as kline timestamp |  |
-| vol | string | true | Trade Volume(Cont.).from nowtime - 24 hours. Sum of both buy and sell sides |  |
-| count | decimal | true | Order Quantity. from nowtime - 24 hours. Sum of both buy and sell sides |  |
-| open | string | true | Opening Price |  |
-| close | string | true | Closing Price, the price in the last kline is the latest order price |  |
-| low | string | true | Low |  |
-| high | string | true | High |  |
-| amount | string | true | Trade Amount(Coin), trade amount(coin)=sum(order quantity of a single order \* face value of the coin/order price). from nowtime - 24 hours. Sum of both buy and sell sides |  |
-| ask | object | true | Sell,\[price(Ask price), vol(Ask orders (cont.) )\], price in ascending sequence |  |
-| bid | object | true | Buy,\[price(Bid price), vol(Bid orders(Cont.))\], Price in descending sequence |  |
-| ts | long | true | Timestamp |  |
-| TICK\_END |  | false |  |  |
+| Parameter  | Data Type | Required | Description                                                                                                                                                                 | Value Range    |
+| ---------- | --------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| ch         | string    | true     | Data belonged channel，format： market.$contract_code.detail.merged                                                                                                         |                |
+| status     | string    | true     | Request Processing Result                                                                                                                                                   | "ok" , "error" |
+| ts         | long      | true     | Time of Respond Generation, Unit: Millisecond                                                                                                                               |                |
+| TICK_START |           | false    | kline data (Start at 00:00(UTC+8) of the day)                                                                                                                               |                |
+| id         | long      | true     | kline id,the same as kline timestamp                                                                                                                                        |                |
+| vol        | string    | true     | Trade Volume(Cont.).from nowtime - 24 hours. Sum of both buy and sell sides                                                                                                 |                |
+| count      | decimal   | true     | Order Quantity. from nowtime - 24 hours. Sum of both buy and sell sides                                                                                                     |                |
+| open       | string    | true     | Opening Price                                                                                                                                                               |                |
+| close      | string    | true     | Closing Price, the price in the last kline is the latest order price                                                                                                        |                |
+| low        | string    | true     | Low                                                                                                                                                                         |                |
+| high       | string    | true     | High                                                                                                                                                                        |                |
+| amount     | string    | true     | Trade Amount(Coin), trade amount(coin)=sum(order quantity of a single order \* face value of the coin/order price). from nowtime - 24 hours. Sum of both buy and sell sides |                |
+| ask        | object    | true     | Sell,\[price(Ask price), vol(Ask orders (cont.) )\], price in ascending sequence                                                                                            |                |
+| bid        | object    | true     | Buy,\[price(Bid price), vol(Bid orders(Cont.))\], Price in descending sequence                                                                                              |                |
+| ts         | long      | true     | Timestamp                                                                                                                                                                   |                |
+| TICK_END   |           | false    |                                                                                                                                                                             |                |
 
 #### Request example
 

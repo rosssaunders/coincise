@@ -1,8 +1,10 @@
-This page explains how to sign and authenticate REST API endpoints with API keys that let you control authorization.
+This page explains how to sign and authenticate REST API endpoints with API keys
+that let you control authorization.
 
-See [FIX API Connectivity](/exchange/fix-api/connectivity) for FIX API authentication.
+See [FIX API Connectivity](/exchange/fix-api/connectivity) for FIX API
+authentication.
 
-## 
+##
 
 [​
 
@@ -10,11 +12,13 @@ See [FIX API Connectivity](/exchange/fix-api/connectivity) for FIX API authentic
 
 Private Endpoints
 
-Private endpoints are available for order management and account management. Every private request must be signed using the described authentication scheme.
+Private endpoints are available for order management and account management.
+Every private request must be signed using the described authentication scheme.
 
-Private endpoints require authentication using your Coinbase Exchange API key. You can generate API keys [here](https://exchange.coinbase.com/profile/api).
+Private endpoints require authentication using your Coinbase Exchange API key.
+You can generate API keys [here](https://exchange.coinbase.com/profile/api).
 
-## 
+##
 
 [​
 
@@ -22,9 +26,11 @@ Private endpoints require authentication using your Coinbase Exchange API key. Y
 
 API Keys
 
-To sign a request, you must create an API key via the Coinbase Exchange website. The API key is scoped to a specific profile. Each user can generate a max of 300 API keys.
+To sign a request, you must create an API key via the Coinbase Exchange website.
+The API key is scoped to a specific profile. Each user can generate a max of 300
+API keys.
 
-### 
+###
 
 [​
 
@@ -32,11 +38,15 @@ To sign a request, you must create an API key via the Coinbase Exchange website.
 
 Generating an API Key
 
-When creating a key, you must remember (and should write down) your (1) key, (2) secret, and (3) passphrase. The key and secret are randomly generated and provided by Coinbase Exchange — you choose a passphrase to further secure your API access.
+When creating a key, you must remember (and should write down) your (1) key, (2)
+secret, and (3) passphrase. The key and secret are randomly generated and
+provided by Coinbase Exchange — you choose a passphrase to further secure your
+API access.
 
-Coinbase Exchange stores the salted hash of your passphrase for verification and cannot be recovered if you forget it.
+Coinbase Exchange stores the salted hash of your passphrase for verification and
+cannot be recovered if you forget it.
 
-### 
+###
 
 [​
 
@@ -44,18 +54,21 @@ Coinbase Exchange stores the salted hash of your passphrase for verification and
 
 API Key Permissions
 
-You can control access by restricting the functionality of API keys. Before creating the key, you must choose what permissions you would like the key to have:
+You can control access by restricting the functionality of API keys. Before
+creating the key, you must choose what permissions you would like the key to
+have:
 
-| Permission | Description |
-| --- | --- |
-| View | Key has read permissions for all endpoints (including GET) |
-| Transfer | Key can transfer value for accounts, including deposits/withdrawals (and bypasses 2FA) |
-| Trade | Key can post orders and get data |
-| Manage | Key can manage user settings and preferences such as address books entries |
+| Permission | Description                                                                            |
+| ---------- | -------------------------------------------------------------------------------------- |
+| View       | Key has read permissions for all endpoints (including GET)                             |
+| Transfer   | Key can transfer value for accounts, including deposits/withdrawals (and bypasses 2FA) |
+| Trade      | Key can post orders and get data                                                       |
+| Manage     | Key can manage user settings and preferences such as address books entries             |
 
-Refer to the documentation below to see what API key permissions are required for a specific route.
+Refer to the documentation below to see what API key permissions are required
+for a specific route.
 
-## 
+##
 
 [​
 
@@ -65,16 +78,17 @@ Signing Requests
 
 All REST requests must contain the following headers:
 
-| Header | Description |
-| --- | --- |
-| `CB-ACCESS-KEY` | API key as a string |
-| `CB-ACCESS-SIGN` | base64-encoded signature (see [Signing a Message](#signing-a-message)) |
-| `CB-ACCESS-TIMESTAMP` | Timestamp for your request |
-| `CB-ACCESS-PASSPHRASE` | Passphrase you specified when creating the API key |
+| Header                 | Description                                                            |
+| ---------------------- | ---------------------------------------------------------------------- |
+| `CB-ACCESS-KEY`        | API key as a string                                                    |
+| `CB-ACCESS-SIGN`       | base64-encoded signature (see [Signing a Message](#signing-a-message)) |
+| `CB-ACCESS-TIMESTAMP`  | Timestamp for your request                                             |
+| `CB-ACCESS-PASSPHRASE` | Passphrase you specified when creating the API key                     |
 
-All request bodies should have content type `application/json` and be valid JSON.
+All request bodies should have content type `application/json` and be valid
+JSON.
 
-### 
+###
 
 [​
 
@@ -82,9 +96,15 @@ All request bodies should have content type `application/json` and be valid JSON
 
 Selecting a Timestamp
 
-The `CB-ACCESS-TIMESTAMP` header MUST be number of seconds since [Unix Epoch](http://en.wikipedia.org/wiki/Unix_time) in UTC. Decimal values are allowed. Your timestamp must be within 30 seconds of the API service time or your request is considered expired and rejected. We recommend using the [time](https://api.exchange.coinbase.com/time) endpoint to query for the API server time if you believe there is a time difference between your server and the API servers.
+The `CB-ACCESS-TIMESTAMP` header MUST be number of seconds since
+[Unix Epoch](http://en.wikipedia.org/wiki/Unix_time) in UTC. Decimal values are
+allowed. Your timestamp must be within 30 seconds of the API service time or
+your request is considered expired and rejected. We recommend using the
+[time](https://api.exchange.coinbase.com/time) endpoint to query for the API
+server time if you believe there is a time difference between your server and
+the API servers.
 
-### 
+###
 
 [​
 
@@ -92,16 +112,22 @@ The `CB-ACCESS-TIMESTAMP` header MUST be number of seconds since [Unix Epoch](ht
 
 Signing a Message
 
-The `CB-ACCESS-SIGN` header is generated by creating a sha256 HMAC using the base64-decoded secret key on the prehash string `timestamp + method + requestPath + body` (where `+` represents string concatenation) and base64-encode the output.
+The `CB-ACCESS-SIGN` header is generated by creating a sha256 HMAC using the
+base64-decoded secret key on the prehash string
+`timestamp + method + requestPath + body` (where `+` represents string
+concatenation) and base64-encode the output.
 
-Remember to base64-decode the alphanumeric secret string (resulting in 64 bytes) before using it as the key for HMAC. Also, base64-encode the digest output before sending in the header.
+Remember to base64-decode the alphanumeric secret string (resulting in 64 bytes)
+before using it as the key for HMAC. Also, base64-encode the digest output
+before sending in the header.
 
--   `timestamp` is the same as the `CB-ACCESS-TIMESTAMP` header.
--   `method` should be UPPER CASE e.g., `GET` or `POST`.
--   `requestPath` should only include the path of the API endpoint.
--   `body` is the request body string or omitted if there is no request body (typically for `GET` requests).
+- `timestamp` is the same as the `CB-ACCESS-TIMESTAMP` header.
+- `method` should be UPPER CASE e.g., `GET` or `POST`.
+- `requestPath` should only include the path of the API endpoint.
+- `body` is the request body string or omitted if there is no request body
+  (typically for `GET` requests).
 
-### 
+###
 
 [​
 

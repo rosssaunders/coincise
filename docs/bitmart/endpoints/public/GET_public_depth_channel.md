@@ -1,6 +1,7 @@
 # GET 【Public】Depth Channel
 
-**Source:** [【Public】Depth Channel](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[【Public】Depth Channel](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -27,16 +28,16 @@ Message Format:
 
 `{"action":"subscribe","args":["<channel:symbol><@speed>"]}`
 
--   actions: `subscribe`
--   channel: Channel name, such as `futures/depth20`
--   symbol: Trading pair, such as `BTCUSDT`
--   speed: Update speed, support `200ms` or `100ms`
+- actions: `subscribe`
+- channel: Channel name, such as `futures/depth20`
+- symbol: Trading pair, such as `BTCUSDT`
+- speed: Update speed, support `200ms` or `100ms`
 
 #### Parameters Channel Name List
 
-| Channel Name | Description |
-| --- | --- |
-| futures/depth5 | 5 Level Depth Channel |
+| Channel Name    | Description            |
+| --------------- | ---------------------- |
+| futures/depth5  | 5 Level Depth Channel  |
 | futures/depth20 | 20 Level Depth Channel |
 | futures/depth50 | 50 Level Depth Channel |
 
@@ -48,24 +49,25 @@ Message Format:
 
 Return data description:
 
-| Field | Type | Description |
-| --- | --- | --- |
+| Field  | Type   | Description                            |
+| ------ | ------ | -------------------------------------- |
 | symbol | String | Symbol of the contract(like `BTCUSDT`) |
-| way | Long | Trading side  
+| way    | Long   | Trading side                           |
+
 \-`1`\=bid  
-\-`2`\=ask |
-| depths | List | Array of depth details |
-| ms\_t | Long | Data push timestamp (in millisecond) |
+\-`2`\=ask | | depths | List | Array of depth details | | ms_t | Long | Data
+push timestamp (in millisecond) |
 
 **Instruction**
 
 Description of the `depths` details field:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| price | String | price |
-| vol | String | volume |
+| Field | Type   | Description |
+| ----- | ------ | ----------- |
+| price | String | price       |
+| vol   | String | volume      |
 
-An example of the array of depths values: {"price":"20159.6","vol":"7284"}. price field is the price, and vol field is the quantity.
+An example of the array of depths values: {"price":"20159.6","vol":"7284"}.
+price field is the price, and vol field is the quantity.
 
-* * *
+---

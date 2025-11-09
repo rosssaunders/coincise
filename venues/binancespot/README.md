@@ -1,6 +1,7 @@
 # Binance Spot API Documentation Extractor
 
-Extracts and processes Binance Spot API documentation from the official Binance developer documentation.
+Extracts and processes Binance Spot API documentation from the official Binance
+developer documentation.
 
 ## Documentation Source
 
@@ -24,11 +25,13 @@ pnpm run extract:all
 ### Extract Specific Sections
 
 **General Documentation:**
+
 ```bash
 pnpm run extract:general
 ```
 
 This extracts core documentation sections into separate files:
+
 - `rate_limits.md` - Rate limiting rules and policies
 - `authentication.md` - API authentication and request signing
 - `network_connectivity.md` - API endpoints and connectivity info
@@ -37,15 +40,18 @@ This extracts core documentation sections into separate files:
 - `change_log.md` - API changelog
 
 **Endpoint Documentation:**
+
 ```bash
 pnpm run extract:endpoints  # Extract individual REST endpoint files
 ```
 
-This extracts each REST API endpoint into its own markdown file in the `endpoints/` directory, organized into `public/` and `private/` subdirectories.
+This extracts each REST API endpoint into its own markdown file in the
+`endpoints/` directory, organized into `public/` and `private/` subdirectories.
 
 ## Output Structure
 
-Documentation is saved to `docs/binance/spot/` following the standardized structure:
+Documentation is saved to `docs/binance/spot/` following the standardized
+structure:
 
 ```
 docs/binance/spot/
@@ -73,12 +79,16 @@ docs/binance/spot/
 
 ## Architecture
 
-- **extractGeneral.js** - Extracts core documentation sections (authentication, rate limits, etc.)
-- **extractEndpoints.js** - Extracts individual REST endpoints from documentation pages and saves each to a separate file
+- **extractGeneral.js** - Extracts core documentation sections (authentication,
+  rate limits, etc.)
+- **extractEndpoints.js** - Extracts individual REST endpoints from
+  documentation pages and saves each to a separate file
 
 ## Notes
 
 - Binance uses Docusaurus for documentation with multi-page structure
-- Each REST endpoint is extracted into its own markdown file for better organization and LLM consumption
-- WebSocket endpoints are excluded as they don't follow the REST endpoint pattern
+- Each REST endpoint is extracted into its own markdown file for better
+  organization and LLM consumption
+- WebSocket endpoints are excluded as they don't follow the REST endpoint
+  pattern
 - Extraction respects rate limits with polite delays between requests

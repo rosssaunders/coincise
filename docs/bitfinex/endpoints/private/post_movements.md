@@ -4,66 +4,61 @@
 
 post https://api.bitfinex.com/v2/auth/r/movements/{Currency}/hist
 
-View your past deposits/withdrawals. Currency can be specified to retrieve movements specific to that currency.
+View your past deposits/withdrawals. Currency can be specified to retrieve
+movements specific to that currency.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
+/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+theme, base, components, utilities; @layer utilities;
 
-#### 
+####
 
 Response data
 
 [](#response-data)
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| \[0...n\] | MOVEMENT\_ARRAY | [Movement array](#movement-arrays-index-0n) | Each index contains one of the n\` current user's movements entries. |
+| Index     | Field          | Type                                        | Description                                                          |
+| --------- | -------------- | ------------------------------------------- | -------------------------------------------------------------------- |
+| \[0...n\] | MOVEMENT_ARRAY | [Movement array](#movement-arrays-index-0n) | Each index contains one of the n\` current user's movements entries. |
 
-#### 
+####
 
 Movement arrays (Index \[0...n\])
 
 [](#movement-arrays-index-0n)
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| \[0\] | ID | String | Movement identifier |
-| \[1\] | CURRENCY | String | The symbol of the currency (ex. "BTC") |
-| \[2\] | CURRENCY\_NAME | String | The extended name of the currency (ex. "BITCOIN") |
-| 
-\[ . . . \]
+| Index | Field         | Type   | Description                                       |
+| ----- | ------------- | ------ | ------------------------------------------------- |
+| \[0\] | ID            | String | Movement identifier                               |
+| \[1\] | CURRENCY      | String | The symbol of the currency (ex. "BTC")            |
+| \[2\] | CURRENCY_NAME | String | The extended name of the currency (ex. "BITCOIN") |
 
- |
-| \[5\] | MTS\_STARTED | Int | Movement started at |
-| \[6\] | MTS\_UPDATED | Int | Movement last updated at |
-| 
+| \[ . . . \]
+
+| | \[5\] | MTS_STARTED | Int | Movement started at | | \[6\] | MTS_UPDATED |
+Int | Movement last updated at | |
 
 \[ . . . \]
 
- |
-| \[9\] | STATUS | String | Current status |
-| 
+| | \[9\] | STATUS | String | Current status | |
 
 \[ . . . \]
 
- |
-| \[12\] | AMOUNT | String | Amount of funds moved (positive for deposits, negative for withdrawals) |
-| \[13\] | FEES | String | Tx Fees applied |
-| 
+| | \[12\] | AMOUNT | String | Amount of funds moved (positive for deposits,
+negative for withdrawals) | | \[13\] | FEES | String | Tx Fees applied | |
 
 \[ . . . \]
 
- |
-| \[16\] | DESTINATION\_ADDRESS | String | Destination address |
-| \[17\] | PAYMENT\_ID | String | Payment ID (if relevant) |
-| 
+| | \[16\] | DESTINATION_ADDRESS | String | Destination address | | \[17\] |
+PAYMENT_ID | String | Payment ID (if relevant) | |
 
 \[ . . . \]
 
- |
-| \[20\] | TRANSACTION\_ID | String | Transaction identifier |
-| \[21\] | WITHDRAW\_TRANSACTION\_NOTE | String | Optional personal withdraw transaction note |
+| | \[20\] | TRANSACTION_ID | String | Transaction identifier | | \[21\] |
+WITHDRAW_TRANSACTION_NOTE | String | Optional personal withdraw transaction note
+|
 
-td:has(div.placeholders) { background-color: #ebebeb; } .placeholders { height: 10px; text-align: center; font-size: 16px; line-height: 8px; }
+td:has(div.placeholders) { background-color: #ebebeb; } .placeholders { height:
+10px; text-align: center; font-size: 16px; line-height: 8px; }
 
 **Ratelimit**: 90 req/min
 
@@ -75,7 +70,9 @@ string
 
 required
 
-Currency (BTC, ...). For an up-to-date listing of supported currencies see: [https://api.bitfinex.com/v2/conf/pub:map:currency:label](https://api.bitfinex.com/v2/conf/pub:map:currency:label) - Currency param can be omitted to retrieve recent movements for all currencies.
+Currency (BTC, ...). For an up-to-date listing of supported currencies see:
+[https://api.bitfinex.com/v2/conf/pub:map:currency:label](https://api.bitfinex.com/v2/conf/pub:map:currency:label) -
+Currency param can be omitted to retrieve recent movements for all currencies.
 
 Body Params
 
@@ -83,13 +80,15 @@ start
 
 int64
 
-Millisecond start time, only records with MTS\_UPDATED >= start (milliseconds) will be given as response.
+Millisecond start time, only records with MTS_UPDATED >= start (milliseconds)
+will be given as response.
 
 end
 
 int64
 
-Millisecond end time, only records with MTS\_UPDATED <= end (milliseconds) will be given as response.
+Millisecond end time, only records with MTS_UPDATED <= end (milliseconds) will
+be given as response.
 
 limit
 
@@ -115,7 +114,7 @@ Optional deposit address filter
 
 Responses
 
-# 
+#
 
 200
 
@@ -125,7 +124,7 @@ Response body
 
 json
 
-# 
+#
 
 400
 
@@ -137,7 +136,7 @@ object
 
 Updated 3 months ago
 
-* * *
+---
 
 Language
 
@@ -171,7 +170,8 @@ RESPONSE
 
 Examples
 
-Click `Try It!` to start a request and see the response here! Or choose an example:
+Click `Try It!` to start a request and see the response here! Or choose an
+example:
 
 application/json
 
@@ -179,10 +179,10 @@ application/json
 
 Updated 3 months ago
 
-* * *
+---
 
 ---
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-movements
-Path: /v2/auth/r/movements/Currency/hist
-Method: POST
+
+Section: Account Actions Source:
+https://docs.bitfinex.com/reference/rest-auth-movements Path:
+/v2/auth/r/movements/Currency/hist Method: POST

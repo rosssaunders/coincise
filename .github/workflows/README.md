@@ -15,8 +15,8 @@ The workflow is triggered when:
 
 1. **Collects PR Information**: Gathers all relevant information about the
    merged PR
-2. **Creates CCRXT Issue**: Automatically creates an issue in the rosssaunders/ccrxt
-   repository with:
+2. **Creates CCRXT Issue**: Automatically creates an issue in the
+   rosssaunders/ccrxt repository with:
    - PR title, number, and URL
    - Who merged it and when
    - Original PR description

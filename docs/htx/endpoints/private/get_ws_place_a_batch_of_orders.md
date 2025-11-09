@@ -1,6 +1,7 @@
 # GET ws Place a Batch of Orders
 
-**Source:** [ws Place a Batch of Orders](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-1902a2119f4)
+**Source:**
+[ws Place a Batch of Orders](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-1902a2119f4)
 
 **Category:** Websocket Trade
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### create\_batchorder (ws Place a Batch of Orders)
+### create_batchorder (ws Place a Batch of Orders)
 
 Signature verification: Yes
 
@@ -16,75 +17,103 @@ Interface permission: Trade
 
 Rate Limit: Shared REST frequency limit
 
-Interface description: This interface supports websocket batch orders placement for Coin-M Swaps.
+Interface description: This interface supports websocket batch orders placement
+for Coin-M Swaps.
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.hbdm.com/swap-trade |
-| Online (preferred by aws customers) | wss://api.hbdm.vn/swap-trade |
+| Environment                         | Address                       |
+| ----------------------------------- | ----------------------------- |
+| Online                              | wss://api.hbdm.com/swap-trade |
+| Online (preferred by aws customers) | wss://api.hbdm.vn/swap-trade  |
 
 #### Request Parameter
 
-| Field Name | Type | Description |
-| --- | --- | --- |
-| op | string | Required； Operator Name，create\_batchorder |
-| cid | string | Optional; ID Client requests unique ID |
-| data | string | batch order parameters |
+| Field Name | Type   | Description                                 |
+| ---------- | ------ | ------------------------------------------- |
+| op         | string | Required； Operator Name，create_batchorder |
+| cid        | string | Optional; ID Client requests unique ID      |
+| data       | string | batch order parameters                      |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
+| -------------- | -------------------- | ---- |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| DATA\_START |  | false |  |  |  |
-| orders\_data | List<Object> | false | 25 orders most. |  |  |
-| contract\_code | string | true | Case-Insenstive.Both uppercase and lowercase are supported.e.g. "BTC-USD" |  |  |
-| client\_order\_id | long | false | Clients fill and maintain themselves. the value must be in \[1, 9223372036854775807\] |  |  |
-| price | decimal | false | Price |  |  |
-| volume | long | true | Numbers of orders (volume) |  |  |
-| direction | string | true | Transaction direction |  |  |
-| offset | string | true | "open": "close" |  |  |
-| lever\_rate | int | true | Leverage rate \[if“Open”is multiple orders in 10 rate, there will be not multiple orders in 20 rate;Using Leverage greater than 20 times requires prior approval of high-leverage agreement for the first time.\] |  |  |
-| order\_price\_type | string | true | "limit”: Limit Order "opponent":BBO "post\_only": Post-Only Order, No order limit but position limit for post-only orders.,optimal\_5： Optimal , optimal\_10： Optimal 10, optimal\_20：Optimal 20，ioc: IOC Order,，fok：FOK Order, "opponent\_ioc"：IOC order using the BBO price，"optimal\_5\_ioc"：optimal\_5 IOC，"optimal\_10\_ioc"：optimal\_10 IOC，"optimal\_20\_ioc"：optimal\_20 IOC, "opponent\_fok"：FOK order using the BBO price，"optimal\_5\_fok"：optimal\_5 FOK，"optimal\_10\_fok"：optimal\_10 FOK，"optimal\_20\_fok"：optimal\_20 FOK |  |  |
-| tp\_trigger\_price | decimal | false | Trigger price of take-profit order |  |  |
-| tp\_order\_price | decimal | false | Order price of take-profit order（The order price is not required to fill in for Optimal N) |  |  |
-| tp\_order\_price\_type | string | false | Order type of take-profit order default is limit; limit，optimal\_5，optimal\_10，optimal\_20 |  |  |
-| sl\_trigger\_price | decimal | false | Trigger price of stop-loss order |  |  |
-| sl\_order\_price | decimal | false | Order price of stop-loss order（The order price is not required to fill in for Optimal N） |  |  |
-| sl\_order\_price\_type | string | false | Order type of stop-loss order default is limit; limit，optimal\_5，optimal\_10，optimal\_20 |  |  |
-| self\_match\_prevent | int | false | Self trading prevention | 0 means self-trading is allowed, 1 means self-trading is not allowed, which means canceling taker orders and retaining maker orders. The default value is 1. |  |
-| DATA\_START |  | false |  |  |  |
-| cid | string | false | Current request's ID |  |  |
+| Parameter           | Data Type    | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Value Range                                                                                                                                                  | Default Value |
+| ------------------- | ------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| DATA_START          |              | false    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |                                                                                                                                                              |               |
+| orders_data         | List<Object> | false    | 25 orders most.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |                                                                                                                                                              |               |
+| contract_code       | string       | true     | Case-Insenstive.Both uppercase and lowercase are supported.e.g. "BTC-USD"                                                                                                                                                                                                                                                                                                                                                                                                                                                              |                                                                                                                                                              |               |
+| client_order_id     | long         | false    | Clients fill and maintain themselves. the value must be in \[1, 9223372036854775807\]                                                                                                                                                                                                                                                                                                                                                                                                                                                  |                                                                                                                                                              |               |
+| price               | decimal      | false    | Price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |                                                                                                                                                              |               |
+| volume              | long         | true     | Numbers of orders (volume)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |                                                                                                                                                              |               |
+| direction           | string       | true     | Transaction direction                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |                                                                                                                                                              |               |
+| offset              | string       | true     | "open": "close"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |                                                                                                                                                              |               |
+| lever_rate          | int          | true     | Leverage rate \[if“Open”is multiple orders in 10 rate, there will be not multiple orders in 20 rate;Using Leverage greater than 20 times requires prior approval of high-leverage agreement for the first time.\]                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                              |               |
+| order_price_type    | string       | true     | "limit”: Limit Order "opponent":BBO "post_only": Post-Only Order, No order limit but position limit for post-only orders.,optimal_5： Optimal , optimal_10： Optimal 10, optimal_20：Optimal 20，ioc: IOC Order,，fok：FOK Order, "opponent_ioc"：IOC order using the BBO price，"optimal_5_ioc"：optimal_5 IOC，"optimal_10_ioc"：optimal_10 IOC，"optimal_20_ioc"：optimal_20 IOC, "opponent_fok"：FOK order using the BBO price，"optimal_5_fok"：optimal_5 FOK，"optimal_10_fok"：optimal_10 FOK，"optimal_20_fok"：optimal_20 FOK |                                                                                                                                                              |               |
+| tp_trigger_price    | decimal      | false    | Trigger price of take-profit order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                              |               |
+| tp_order_price      | decimal      | false    | Order price of take-profit order（The order price is not required to fill in for Optimal N)                                                                                                                                                                                                                                                                                                                                                                                                                                            |                                                                                                                                                              |               |
+| tp_order_price_type | string       | false    | Order type of take-profit order default is limit; limit，optimal_5，optimal_10，optimal_20                                                                                                                                                                                                                                                                                                                                                                                                                                             |                                                                                                                                                              |               |
+| sl_trigger_price    | decimal      | false    | Trigger price of stop-loss order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                                                                                              |               |
+| sl_order_price      | decimal      | false    | Order price of stop-loss order（The order price is not required to fill in for Optimal N）                                                                                                                                                                                                                                                                                                                                                                                                                                             |                                                                                                                                                              |               |
+| sl_order_price_type | string       | false    | Order type of stop-loss order default is limit; limit，optimal_5，optimal_10，optimal_20                                                                                                                                                                                                                                                                                                                                                                                                                                               |                                                                                                                                                              |               |
+| self_match_prevent  | int          | false    | Self trading prevention                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 0 means self-trading is allowed, 1 means self-trading is not allowed, which means canceling taker orders and retaining maker orders. The default value is 1. |               |
+| DATA_START          |              | false    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |                                                                                                                                                              |               |
+| cid                 | string       | false    | Current request's ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |                                                                                                                                                              |               |
 
-Notes: Description of post\_only: assure that the maker order remains as maker order, it will not be filled immediately with the use of post\_only, for the match system will automatically check whether the price of the maker order is higher/lower than the opponent first price, i.e. higher than bid price 1 or lower than the ask price 1. If yes, the maker order will placed on the orderbook, if not, the maker order will be cancelled. If you’re holding a position currently, the leverage you choose when placing an order should be the same as the leverage of your current positions, otherwise, the order will fail to be placed. If you need a new leverage to place an order, you should switch the leverage of current positions first by using the Switch Leverage interface. Only open orders can support setting take profit and stop loss. The take profit trigger price is a required field for setting a take profit order, and the stop loss trigger price is a required field for setting a stop loss order; if the trigger price field is not filled in, the corresponding take profit order or stop loss order will not be set. No need to transfer BBO order price(ask 1 and bid 1) parameter, optimal\_5: top 5 optimal BBO price, optimal\_10：top 10 optimal BBO price, optimal\_20：top 20 optimal BBO price (No need to transfer price data) ，limit": limit order, "post\_only": maker order only (price data transfer is needed),IOC :Immediate-Or-cancel Order,FOK:Fill-Or-Kill Order. Risk Reminder:By using Best Bid/Offer( bbo ), you are to place limit orders at the best prices offered by the opposite side. In the event of extreme volatility or insufficient liquidity，there is a risk that your orders may not be filled in full. Any unfilled part will remain open in the market pending further execution. Selecting BBO means you understand how this order type is executed and acknowledge to bear the risk of incomplete execution.
+Notes: Description of post_only: assure that the maker order remains as maker
+order, it will not be filled immediately with the use of post_only, for the
+match system will automatically check whether the price of the maker order is
+higher/lower than the opponent first price, i.e. higher than bid price 1 or
+lower than the ask price 1. If yes, the maker order will placed on the
+orderbook, if not, the maker order will be cancelled. If you’re holding a
+position currently, the leverage you choose when placing an order should be the
+same as the leverage of your current positions, otherwise, the order will fail
+to be placed. If you need a new leverage to place an order, you should switch
+the leverage of current positions first by using the Switch Leverage interface.
+Only open orders can support setting take profit and stop loss. The take profit
+trigger price is a required field for setting a take profit order, and the stop
+loss trigger price is a required field for setting a stop loss order; if the
+trigger price field is not filled in, the corresponding take profit order or
+stop loss order will not be set. No need to transfer BBO order price(ask 1 and
+bid 1) parameter, optimal_5: top 5 optimal BBO price, optimal_10：top 10 optimal
+BBO price, optimal_20：top 20 optimal BBO price (No need to transfer price
+data) ，limit": limit order, "post_only": maker order only (price data transfer
+is needed),IOC :Immediate-Or-cancel Order,FOK:Fill-Or-Kill Order. Risk
+Reminder:By using Best Bid/Offer( bbo ), you are to place limit orders at the
+best prices offered by the opposite side. In the event of extreme volatility or
+insufficient liquidity，there is a risk that your orders may not be filled in
+full. Any unfilled part will remain open in the market pending further
+execution. Selecting BBO means you understand how this order type is executed
+and acknowledge to bear the risk of incomplete execution.
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request Processing Result | "ok" , "error" |
-| DATA\_START |  | false |  |  |
-| LIST>(ATTRIBUTE NAME: ERRORS\_START |  | false |  |  |
-| index | int | true | order Index |  |
-| err\_code | int | true | Error code |  |
-| err\_msg | string | true | Error information |  |
-| LIST\_END |  | false |  |  |
-| LIST>(ATTRIBUTE NAME: SUCCESS\_START |  | false |  |  |
-| index | int | true | order Index |  |
-| order\_id | long | true | Order ID |  |
-| order\_id\_str | string | true | Order ID |  |
-| client\_order\_id | long | true | the client ID that is filled in when the order is placed, if it’s not filled, it won’t be returned |  |
-| LIST\_END |  | false |  |  |
-| DATA\_END |  | false |  |  |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
+| Parameter                           | Data Type | Required | Description                                                                                        | Value Range    |
+| ----------------------------------- | --------- | -------- | -------------------------------------------------------------------------------------------------- | -------------- |
+| status                              | string    | true     | Request Processing Result                                                                          | "ok" , "error" |
+| DATA_START                          |           | false    |                                                                                                    |                |
+| LIST>(ATTRIBUTE NAME: ERRORS_START  |           | false    |                                                                                                    |                |
+| index                               | int       | true     | order Index                                                                                        |                |
+| err_code                            | int       | true     | Error code                                                                                         |                |
+| err_msg                             | string    | true     | Error information                                                                                  |                |
+| LIST_END                            |           | false    |                                                                                                    |                |
+| LIST>(ATTRIBUTE NAME: SUCCESS_START |           | false    |                                                                                                    |                |
+| index                               | int       | true     | order Index                                                                                        |                |
+| order_id                            | long      | true     | Order ID                                                                                           |                |
+| order_id_str                        | string    | true     | Order ID                                                                                           |                |
+| client_order_id                     | long      | true     | the client ID that is filled in when the order is placed, if it’s not filled, it won’t be returned |                |
+| LIST_END                            |           | false    |                                                                                                    |                |
+| DATA_END                            |           | false    |                                                                                                    |                |
+| ts                                  | long      | true     | Time of Respond Generation, Unit: Millisecond                                                      |                |
 
-Notes: The return order\_id is 18 bits, it will make mistake when nodejs and JavaScript analysed 18 bits. Because the Json.parse in nodejs and JavaScript is int by default. so the number over 18 bits need be parsed by json-bigint package.
+Notes: The return order_id is 18 bits, it will make mistake when nodejs and
+JavaScript analysed 18 bits. Because the Json.parse in nodejs and JavaScript is
+int by default. so the number over 18 bits need be parsed by json-bigint
+package.
 
 #### Subscription Example
 
@@ -92,7 +121,7 @@ Notes: The return order\_id is 18 bits, it will make mistake when nodejs and Jav
 
 "op":
 
-"create\_batchorder"
+"create_batchorder"
 
 "cid":
 
@@ -100,11 +129,11 @@ Notes: The return order\_id is 18 bits, it will make mistake when nodejs and Jav
 
 "data":{
 
-"orders\_data":\[
+"orders_data":\[
 
 0:{
 
-"contract\_code":
+"contract_code":
 
 "ltc-usd"
 
@@ -120,7 +149,7 @@ Notes: The return order\_id is 18 bits, it will make mistake when nodejs and Jav
 
 "136"
 
-"lever\_rate":
+"lever_rate":
 
 5
 
@@ -128,39 +157,39 @@ Notes: The return order\_id is 18 bits, it will make mistake when nodejs and Jav
 
 1
 
-"order\_price\_type":
+"order_price_type":
 
 "opponent"
 
-"tp\_trigger\_price":
+"tp_trigger_price":
 
 133
 
-"tp\_order\_price":
+"tp_order_price":
 
 133
 
-"tp\_order\_price\_type":
+"tp_order_price_type":
 
-"optimal\_5"
+"optimal_5"
 
-"sl\_trigger\_price":
-
-"139"
-
-"sl\_order\_price":
+"sl_trigger_price":
 
 "139"
 
-"sl\_order\_price\_type":
+"sl_order_price":
 
-"optimal\_5"
+"139"
+
+"sl_order_price_type":
+
+"optimal_5"
 
 }
 
 1:{
 
-"contract\_code":
+"contract_code":
 
 "ltc-usd"
 
@@ -176,7 +205,7 @@ Notes: The return order\_id is 18 bits, it will make mistake when nodejs and Jav
 
 "136"
 
-"lever\_rate":
+"lever_rate":
 
 5
 
@@ -184,33 +213,33 @@ Notes: The return order\_id is 18 bits, it will make mistake when nodejs and Jav
 
 1
 
-"order\_price\_type":
+"order_price_type":
 
-"post\_only"
+"post_only"
 
-"tp\_trigger\_price":
-
-139
-
-"tp\_order\_price":
+"tp_trigger_price":
 
 139
 
-"tp\_order\_price\_type":
+"tp_order_price":
 
-"optimal\_5"
+139
 
-"sl\_trigger\_price":
+"tp_order_price_type":
+
+"optimal_5"
+
+"sl_trigger_price":
 
 "133"
 
-"sl\_order\_price":
+"sl_order_price":
 
 "133"
 
-"sl\_order\_price\_type":
+"sl_order_price_type":
 
-"optimal\_5"
+"optimal_5"
 
 }
 
@@ -242,11 +271,11 @@ Notes: The return order\_id is 18 bits, it will make mistake when nodejs and Jav
 
 2
 
-"err\_code":
+"err_code":
 
 1034
 
-"err\_msg":
+"err_msg":
 
 "Incorrect field of order price type."
 
@@ -258,7 +287,7 @@ Notes: The return order\_id is 18 bits, it will make mistake when nodejs and Jav
 
 0:{
 
-"order\_id":
+"order_id":
 
 771038739454672900
 
@@ -266,7 +295,7 @@ Notes: The return order\_id is 18 bits, it will make mistake when nodejs and Jav
 
 1
 
-"order\_id\_str":
+"order_id_str":
 
 "771038739454672896"
 

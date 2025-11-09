@@ -6,36 +6,37 @@ Frequency limit: 20 times/1s (IP)
 
 Search for announcements within one month
 
-Description of the announcement sub-type： The announcement sub-type matches the announcement type.
+Description of the announcement sub-type： The announcement sub-type matches the
+announcement type.
 
-*   annType=`latest_news`
-    *   `announcements` Latest announcement
-    *   `news` Bitget news
-*   annType=`coin_listings`
-    *   `spot`
-    *   `futures`
-    *   `margin`
-    *   `copy_trading`
-*   annType=`product_updates`
-    *   `spot`
-    *   `futures`
-    *   `margin`
-    *   `copy_trading`
-*   annType=`security`
-    *   `security_information`
-*   annType=`api_trading`
-    *   `api_announcement`
-*   annType=`symbol_delisting`
-    *   `trading_pair_delisting`
-*   annType=`maintenance_system_updates`
-    *   `asset_maintenance`
-    *   `system_updates`
-    *   `spot_maintenance`
-    *   `futures_maintenance`
+- annType=`latest_news`
+  - `announcements` Latest announcement
+  - `news` Bitget news
+- annType=`coin_listings`
+  - `spot`
+  - `futures`
+  - `margin`
+  - `copy_trading`
+- annType=`product_updates`
+  - `spot`
+  - `futures`
+  - `margin`
+  - `copy_trading`
+- annType=`security`
+  - `security_information`
+- annType=`api_trading`
+  - `api_announcement`
+- annType=`symbol_delisting`
+  - `trading_pair_delisting`
+- annType=`maintenance_system_updates`
+  - `asset_maintenance`
+  - `system_updates`
+  - `spot_maintenance`
+  - `futures_maintenance`
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/public/annoucements
+- GET /api/v2/public/annoucements
 
 Request Example
 
@@ -45,14 +46,14 @@ curl "https://api.bitget.com/api/v2/public/annoucements?language=zh_CN"
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| annType | String | No | Announcement type<br><code>latest_news</code>: Latest events<br><code>coin_listings</code>: New coin listings<br><code>product_updates</code>: Product update<br><code>security</code>: Security<br><code>api_trading</code>: Api trading<br><code>maintenance_system_updates</code>: maintenance/system upgrades<br><code>symbol_delisting</code>: Delisting information 
-| startTime | String | No | Start time of the query, Unix millisecond timestamp, e.g. 1690196141868<br>Search by announcement time 
-| endTime | String | No | End time of the query, Unix millisecond timestamp, e.g. 1690196141868<br>Search by announcement time 
-| cursor | String | No | Cursor ID<br>It is not required for the first call. For subsequent calls, pass the last annId in the previous response. 
-| limit | String | No | Number of entries per page<br>By default, it is 10 entries, and the maximum is 10 entries. 
-| language | String | Yes | language type<br>zh_CN: Chinese<br>en_US: English<br>Returns English if the language chosen is not supported 
+| Parameter | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                               |
+| :-------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| annType   | String | No       | Announcement type<br><code>latest_news</code>: Latest events<br><code>coin_listings</code>: New coin listings<br><code>product_updates</code>: Product update<br><code>security</code>: Security<br><code>api_trading</code>: Api trading<br><code>maintenance_system_updates</code>: maintenance/system upgrades<br><code>symbol_delisting</code>: Delisting information |
+| startTime | String | No       | Start time of the query, Unix millisecond timestamp, e.g. 1690196141868<br>Search by announcement time                                                                                                                                                                                                                                                                    |
+| endTime   | String | No       | End time of the query, Unix millisecond timestamp, e.g. 1690196141868<br>Search by announcement time                                                                                                                                                                                                                                                                      |
+| cursor    | String | No       | Cursor ID<br>It is not required for the first call. For subsequent calls, pass the last annId in the previous response.                                                                                                                                                                                                                                                   |
+| limit     | String | No       | Number of entries per page<br>By default, it is 10 entries, and the maximum is 10 entries.                                                                                                                                                                                                                                                                                |
+| language  | String | Yes      | language type<br>zh_CN: Chinese<br>en_US: English<br>Returns English if the language chosen is not supported                                                                                                                                                                                                                                                              |
 
 Response Example
 
@@ -62,16 +63,16 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| annId | String | Announcement ID 
-| annTitle | String | Announcement title 
-| annDesc | String | Announcement description (This field is deprecated) 
-| cTime | String | Announcement creation time, Unix millisecond timestamp format 
-| language | String | language type 
-| annUrl | String | Announcement URL 
-| annType | String | Announcement type<br><code>latest_news</code>: Latest events<br><code>coin_listings</code>: New coin listings<br><code>product_updates</code>: Product update<br><code>security</code>: Security<br><code>api_trading</code>: Api trading<br><code>maintenance_system_updates</code>: maintenance/system upgrades<br><code>symbol_delisting</code>: Delisting information 
-| annSubType | String | Announcement sub-type 
-| cTime | String | Announcement release time<br>In the format of Unix timestamp in milliseconds
+| Parameter  | Type   | Description                                                                                                                                                                                                                                                                                                                                                               |
+| :--------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| annId      | String | Announcement ID                                                                                                                                                                                                                                                                                                                                                           |
+| annTitle   | String | Announcement title                                                                                                                                                                                                                                                                                                                                                        |
+| annDesc    | String | Announcement description (This field is deprecated)                                                                                                                                                                                                                                                                                                                       |
+| cTime      | String | Announcement creation time, Unix millisecond timestamp format                                                                                                                                                                                                                                                                                                             |
+| language   | String | language type                                                                                                                                                                                                                                                                                                                                                             |
+| annUrl     | String | Announcement URL                                                                                                                                                                                                                                                                                                                                                          |
+| annType    | String | Announcement type<br><code>latest_news</code>: Latest events<br><code>coin_listings</code>: New coin listings<br><code>product_updates</code>: Product update<br><code>security</code>: Security<br><code>api_trading</code>: Api trading<br><code>maintenance_system_updates</code>: maintenance/system upgrades<br><code>symbol_delisting</code>: Delisting information |
+| annSubType | String | Announcement sub-type                                                                                                                                                                                                                                                                                                                                                     |
+| cTime      | String | Announcement release time<br>In the format of Unix timestamp in milliseconds                                                                                                                                                                                                                                                                                              |
 
 > **Source:** https://www.bitget.com/api-doc/common/notice/Get-All-Notices

@@ -8,7 +8,7 @@ Get a list of Flash Currencies
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/convert/currencies
+- GET /api/v2/convert/currencies
 
 Request Example
 
@@ -28,11 +28,12 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| coin | String | Token name 
-| available | String | Currency accounts available 
-| maxAmount | String | Maximum available quantity as fromCoin means maximum consumable quantity, as toCoin means maximum redeemable quantity. 
-| minAmount | String | Minimum usable quantity as fromCoin represents the minimum consumable quantity, as toCoin represents the minimum redeemable quantity.
+| Parameter | Type   | Description                                                                                                                           |
+| :-------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------ |
+| coin      | String | Token name                                                                                                                            |
+| available | String | Currency accounts available                                                                                                           |
+| maxAmount | String | Maximum available quantity as fromCoin means maximum consumable quantity, as toCoin means maximum redeemable quantity.                |
+| minAmount | String | Minimum usable quantity as fromCoin represents the minimum consumable quantity, as toCoin represents the minimum redeemable quantity. |
 
-> **Source:** https://www.bitget.com/api-doc/common/convert/Get-Convert-Currencies
+> **Source:**
+> https://www.bitget.com/api-doc/common/convert/Get-Convert-Currencies

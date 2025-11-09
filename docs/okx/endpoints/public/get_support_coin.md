@@ -1,6 +1,7 @@
 # GET support coin
 
-Source: [https://www.okx.com/docs-v5/en/#trading-statistics-rest-api-get-support-coin](https://www.okx.com/docs-v5/en/#trading-statistics-rest-api-get-support-coin)
+Source:
+[https://www.okx.com/docs-v5/en/#trading-statistics-rest-api-get-support-coin](https://www.okx.com/docs-v5/en/#trading-statistics-rest-api-get-support-coin)
 
 ### Get support coin
 
@@ -16,8 +17,8 @@ Retrieve the currencies supported by the trading statistics endpoints.
 
 #### Response Parameters
 
-| **Parameter** | **Type** | **Description** |
-| --- | --- | --- |
-| contract | Array of strings | Currency supported by derivatives trading data |
-| option | Array of strings | Currency supported by option trading data |
-| spot | Array of strings | Currency supported by spot trading data |
+| **Parameter** | **Type**         | **Description**                                |
+| ------------- | ---------------- | ---------------------------------------------- |
+| contract      | Array of strings | Currency supported by derivatives trading data |
+| option        | Array of strings | Currency supported by option trading data      |
+| spot          | Array of strings | Currency supported by spot trading data        |

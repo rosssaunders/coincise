@@ -1,6 +1,7 @@
 # POST private/get-accounts
 
-**Source:** [private/get-accounts](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-accounts)
+**Source:**
+[private/get-accounts](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-accounts)
 
 ## Authentication
 
@@ -80,9 +81,10 @@ Get Account and its Sub Accounts
 
 By default, the `page_size` is `20` and `page` is `0` respectively.
 
-It can be overided in the JSON request: i.e. "page\_size": 30, "page": 2
+It can be overided in the JSON request: i.e. "page_size": 30, "page": 2
 
-Note: if using default setting, please ensure you keep `params: {}` for API request consistency.
+Note: if using default setting, please ensure you keep `params: {}` for API
+request consistency.
 
 ### Applies To
 
@@ -94,26 +96,27 @@ POST
 
 ### Response Attributes
 
-an object of `master_account`, with an array of `sub_account_list`, both consisting of:
+an object of `master_account`, with an array of `sub_account_list`, both
+consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| uuid | string | Sub account uuid |
-| master\_account\_uuid | string | Master account uuid |
-| margin\_account\_uuid | string | (optional) Margin account uuid |
-| label | string | Sub account label |
-| enabled | boolean | true or false |
-| tradable | boolean | true or false |
-| name | string | Name of sub account |
-| email | string | Email of sub account |
-| mobile\_number | string | Mobile number of sub account |
-| country\_code | string | Country Code of sub account |
-| address | string | Address of sub account |
-| margin\_access | string | DEFAULT or DISABLED |
-| derivatives\_access | string | DEFAULT or DISABLED |
-| create\_time | number | Creation timestamp (milliseconds since the Unix epoch) |
-| update\_time | number | Last update timestamp (milliseconds since the Unix epoch) |
-| two\_fa\_enabled | boolean | true or false |
-| kyc\_level | string | Kyc Level |
-| suspended | boolean | true or false |
-| terminated | boolean | true or false |
+| Name                | Type    | Description                                               |
+| ------------------- | ------- | --------------------------------------------------------- |
+| uuid                | string  | Sub account uuid                                          |
+| master_account_uuid | string  | Master account uuid                                       |
+| margin_account_uuid | string  | (optional) Margin account uuid                            |
+| label               | string  | Sub account label                                         |
+| enabled             | boolean | true or false                                             |
+| tradable            | boolean | true or false                                             |
+| name                | string  | Name of sub account                                       |
+| email               | string  | Email of sub account                                      |
+| mobile_number       | string  | Mobile number of sub account                              |
+| country_code        | string  | Country Code of sub account                               |
+| address             | string  | Address of sub account                                    |
+| margin_access       | string  | DEFAULT or DISABLED                                       |
+| derivatives_access  | string  | DEFAULT or DISABLED                                       |
+| create_time         | number  | Creation timestamp (milliseconds since the Unix epoch)    |
+| update_time         | number  | Last update timestamp (milliseconds since the Unix epoch) |
+| two_fa_enabled      | boolean | true or false                                             |
+| kyc_level           | string  | Kyc Level                                                 |
+| suspended           | boolean | true or false                                             |
+| terminated          | boolean | true or false                                             |

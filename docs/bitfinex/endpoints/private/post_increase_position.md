@@ -4,68 +4,81 @@
 
 post https://api.bitfinex.com/v2/auth/w/position/increase
 
-Essentially a reverse of the [Claim Position](/reference#rest-auth-position-claim) feature, the Increase Position feature allows you to create a new position using the funds in your margin wallet. For more information about this feature, please look to the [Increase Position article](https://support.bitfinex.com/hc/en-us/articles/900004477903-Increase-Position) on our knowledge base.
+Essentially a reverse of the
+[Claim Position](/reference#rest-auth-position-claim) feature, the Increase
+Position feature allows you to create a new position using the funds in your
+margin wallet. For more information about this feature, please look to the
+[Increase Position article](https://support.bitfinex.com/hc/en-us/articles/900004477903-Increase-Position)
+on our knowledge base.
 
-The Increase Position feature requires a verified or paper trading account. Full verification is required to use the increase position feature to open a long position on pairs with a fiat quote currency.
+The Increase Position feature requires a verified or paper trading account. Full
+verification is required to use the increase position feature to open a long
+position on pairs with a fiat quote currency.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
+/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+theme, base, components, utilities; @layer utilities;
 
 > 🚧
-> 
-> ### 
-> 
+>
+> ###
+>
 > Verification Required
-> 
+>
 > [](#verification-required)
-> 
-> The Increase Position feature is only available on accounts with, basic+, intermediate or full [verification levels](https://support.bitfinex.com/hc/en-us/articles/360017321633-Verification-Levels-and-Advantages) or on accounts marked for paper trading.
-> 
-> Full verification is required to use the increase position feature to open a long position on pairs with a fiat quote currency.
+>
+> The Increase Position feature is only available on accounts with, basic+,
+> intermediate or full
+> [verification levels](https://support.bitfinex.com/hc/en-us/articles/360017321633-Verification-Levels-and-Advantages)
+> or on accounts marked for paper trading.
+>
+> Full verification is required to use the increase position feature to open a
+> long position on pairs with a fiat quote currency.
 
-### 
+###
 
 Response Fields
 
 [](#response-fields)
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| \[0\] | MTS | int | Seconds epoch timestamp of notification |
-| \[1\] | TYPE | string | Notification's type ("pmi-req") |
-| \[2\] | MESSAGE\_ID | int | Unique notification's ID |
-| 
-\[ . . . \]
+| Index | Field      | Type   | Description                             |
+| ----- | ---------- | ------ | --------------------------------------- |
+| \[0\] | MTS        | int    | Seconds epoch timestamp of notification |
+| \[1\] | TYPE       | string | Notification's type ("pmi-req")         |
+| \[2\] | MESSAGE_ID | int    | Unique notification's ID                |
 
- |
-| \[4\] | DATA | [Position increase array](#position-increase-array)\[\] | An array containing info on the position increase |
-| \[5\] | CODE | int | W.I.P. (work in progress) |
-| \[6\] | STATUS | string | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
-| \[7\] | TEXT | string | Additional notification description |
+| \[ . . . \]
 
-td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height: 10px; text-align: center; font-size: 16px; line-height: 8px; }
+| | \[4\] | DATA | [Position increase array](#position-increase-array)\[\] | An
+array containing info on the position increase | | \[5\] | CODE | int | W.I.P.
+(work in progress) | | \[6\] | STATUS | string | Status of the notification; it
+may vary over time (SUCCESS, ERROR, FAILURE, ...) | | \[7\] | TEXT | string |
+Additional notification description |
 
-#### 
+td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
+10px; text-align: center; font-size: 16px; line-height: 8px; }
+
+####
 
 Position increase array
 
 [](#position-increase-array)
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
+| Index | Field  | Type   | Description       |
+| ----- | ------ | ------ | ----------------- |
 | \[0\] | SYMBOL | string | Pair (tBTCUSD, …) |
-| 
+
+| \[ . . . \]
+
+| | \[2\] | AMOUNT | float | Size of the position. Positive for long, negative
+for short positions | | \[3\] | BASE_PRICE | float | Base price of the position
+(average of all trades related to the position) | |
+
 \[ . . . \]
 
- |
-| \[2\] | AMOUNT | float | Size of the position. Positive for long, negative for short positions |
-| \[3\] | BASE\_PRICE | float | Base price of the position (average of all trades related to the position) |
-| 
+|
 
-\[ . . . \]
-
- |
-
-td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height: 10px; text-align: center; font-size: 16px; line-height: 8px; }
+td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
+10px; text-align: center; font-size: 16px; line-height: 8px; }
 
 **Ratelimit**: 90 req/min
 
@@ -93,7 +106,7 @@ Amount of the position. (positive for long, negative for short)
 
 Responses
 
-# 
+#
 
 200
 
@@ -103,7 +116,7 @@ Response body
 
 json
 
-# 
+#
 
 400
 
@@ -115,7 +128,7 @@ object
 
 Updated 5 months ago
 
-* * *
+---
 
 Language
 
@@ -155,11 +168,11 @@ curl \--request POST \\
 
 7
 
-  "symbol": "tBTCUSD",
+"symbol": "tBTCUSD",
 
 8
 
-  "amount": "123"
+"amount": "123"
 
 9
 
@@ -175,7 +188,8 @@ RESPONSE
 
 Examples
 
-Click `Try It!` to start a request and see the response here! Or choose an example:
+Click `Try It!` to start a request and see the response here! Or choose an
+example:
 
 application/json
 
@@ -183,10 +197,10 @@ application/json
 
 Updated 5 months ago
 
-* * *
+---
 
 ---
-Section: Positions
-Source: https://docs.bitfinex.com/reference/rest-auth-position-increase
-Path: /v2/auth/w/position/increase
-Method: POST
+
+Section: Positions Source:
+https://docs.bitfinex.com/reference/rest-auth-position-increase Path:
+/v2/auth/w/position/increase Method: POST

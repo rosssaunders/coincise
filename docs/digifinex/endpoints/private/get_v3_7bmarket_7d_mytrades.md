@@ -2,7 +2,8 @@
 
 **Title:** Customer's trades
 
-**Source:** [Customer's trades](https://docs.digifinex.com/en-ww/spot/v3/rest.html#customer-39-s-trades)
+**Source:**
+[Customer's trades](https://docs.digifinex.com/en-ww/spot/v3/rest.html#customer-39-s-trades)
 
 ## Authentication
 
@@ -14,19 +15,19 @@ Required (Private Endpoint)
 
 ### HTTP Request
 
--   GET `https://openapi.digifinex.com/v3/{market}/mytrades`
+- GET `https://openapi.digifinex.com/v3/{market}/mytrades`
 
 ### Request Parameters
 
 market：spot, margin
 
-| Field | Request Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| market | str | true | "spot","margin" |
-| symbol | str | false | Symbol Name |
-| limit | int | false | Default 50, maximum 500 |
-| start\_time | int | false | Starting time, default 3 days before now, maximum 30 days |
-| end\_time | int | false | Ending time, default current timestamp |
+| Field      | Request Type | Mandatory | Description                                               |
+| ---------- | ------------ | --------- | --------------------------------------------------------- |
+| market     | str          | true      | "spot","margin"                                           |
+| symbol     | str          | false     | Symbol Name                                               |
+| limit      | int          | false     | Default 50, maximum 500                                   |
+| start_time | int          | false     | Starting time, default 3 days before now, maximum 30 days |
+| end_time   | int          | false     | Ending time, default current timestamp                    |
 
 > Response:
 
@@ -54,17 +55,17 @@ market：spot, margin
 
 ### Response Content
 
-| Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| list | true | object | Customer's trades List |
-| symbol | true | string | Symbol Name |
-| order\_id | true | string | Order ID |
-| id | true | string | Trading ID |
-| price | true | float | Trading Price |
-| amount | true | float | Volume |
-| fee | true | float | Fee |
-| fee\_currency | true | string | Fee Currency |
-| timestamp | true | int | Timestamp |
-| side | true | string | Trading Type，buy,sell,buy\_market,sell\_market |
-| is\_maker | true | bool | maker or taker |
-| code | true | int | Status |
+| Field        | Mandatory | Request Type | Description                                   |
+| ------------ | --------- | ------------ | --------------------------------------------- |
+| list         | true      | object       | Customer's trades List                        |
+| symbol       | true      | string       | Symbol Name                                   |
+| order_id     | true      | string       | Order ID                                      |
+| id           | true      | string       | Trading ID                                    |
+| price        | true      | float        | Trading Price                                 |
+| amount       | true      | float        | Volume                                        |
+| fee          | true      | float        | Fee                                           |
+| fee_currency | true      | string       | Fee Currency                                  |
+| timestamp    | true      | int          | Timestamp                                     |
+| side         | true      | string       | Trading Type，buy,sell,buy_market,sell_market |
+| is_maker     | true      | bool         | maker or taker                                |
+| code         | true      | int          | Status                                        |

@@ -1,6 +1,7 @@
 # GET updated trader contract leverage
 
-**Source:** [updated trader contract leverage](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-19126b04331)
+**Source:**
+[updated trader contract leverage](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-19126b04331)
 
 **Category:** Future Copy Trade
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /copytrading/trader/updated\_contract\_lever (updated trader contract leverage)
+### /copytrading/trader/updated_contract_lever (updated trader contract leverage)
 
 Request type: POST
 
@@ -16,42 +17,44 @@ Signature verification: Yes
 
 Interface permission: Trade
 
-Rate Limit: A single user requests all copytrading interfaces 18 times per second.
+Rate Limit: A single user requests all copytrading interfaces 18 times per
+second.
 
-Interface description: This interface is used to Updated the trader’s leverage level
+Interface description: This interface is used to Updated the trader’s leverage
+level
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | String | true | BTC-USDT |  |  |
-| lever | Integer | true |  |  |  |
-| margin\_mode | String | true | isolated：，cross： |  |  |
+| Parameter     | Data Type | Required | Description         | Value Range | Default Value |
+| ------------- | --------- | -------- | ------------------- | ----------- | ------------- |
+| contract_code | String    | true     | BTC-USDT            |             |               |
+| lever         | Integer   | true     |                     |             |               |
+| margin_mode   | String    | true     | isolated：，cross： |             |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| tid | String | true | request id |  |
-| DATA\_START |  | true |  |  |
-| contract\_code | String | true | BTC-USDT |  |
-| lever | Integer | true |  |  |
-| margin\_mode | String | true | isolated：，cross： |  |
-| DATA\_END |  | false |  |  |
-| code | long | true |  |  |
+| Parameter     | Data Type | Required | Description         | Value Range |
+| ------------- | --------- | -------- | ------------------- | ----------- |
+| tid           | String    | true     | request id          |             |
+| DATA_START    |           | true     |                     |             |
+| contract_code | String    | true     | BTC-USDT            |             |
+| lever         | Integer   | true     |                     |             |
+| margin_mode   | String    | true     | isolated：，cross： |             |
+| DATA_END      |           | false    |                     |             |
+| code          | long      | true     |                     |             |
 
 #### Request example
 
 {
 
-"contract\_code":
+"contract_code":
 
 "DOT-USDT"
 
@@ -59,7 +62,7 @@ Interface description: This interface is used to Updated the trader’s leverage
 
 5
 
-"margin\_mode":
+"margin_mode":
 
 "cross"
 
@@ -81,11 +84,11 @@ Interface description: This interface is used to Updated the trader’s leverage
 
 5
 
-"contract\_code":
+"contract_code":
 
 "DOT-USDT"
 
-"margin\_mode":
+"margin_mode":
 
 "cross"
 

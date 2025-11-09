@@ -1,6 +1,7 @@
 # GET / Transaction details (last 3 days)
 
-Source: [https://www.okx.com/docs-v5/en/#order-book-trading-trade-get-transaction-details-last-3-days](https://www.okx.com/docs-v5/en/#order-book-trading-trade-get-transaction-details-last-3-days)
+Source:
+[https://www.okx.com/docs-v5/en/#order-book-trading-trade-get-transaction-details-last-3-days](https://www.okx.com/docs-v5/en/#order-book-trading-trade-get-transaction-details-last-3-days)
 
 ### GET / Transaction details (last 3 days)
 
@@ -18,19 +19,18 @@ Retrieve recently-filled transaction details in the last 3 day.
 
 #### Request Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| instType | String | No | Instrument type  
+| Parameter | Type   | Required | Description     |
+| --------- | ------ | -------- | --------------- |
+| instType  | String | No       | Instrument type |
+
 `SPOT`  
 `MARGIN`  
 `SWAP`  
 `FUTURES`  
-`OPTION` |
-| instFamily | String | No | Instrument family  
-Applicable to `FUTURES`/`SWAP`/`OPTION` |
-| instId | String | No | Instrument ID, e.g. `BTC-USDT` |
-| ordId | String | No | Order ID |
-| subType | String | No | Transaction type  
+`OPTION` | | instFamily | String | No | Instrument family  
+Applicable to `FUTURES`/`SWAP`/`OPTION` | | instId | String | No | Instrument
+ID, e.g. `BTC-USDT` | | ordId | String | No | Order ID | | subType | String | No
+| Transaction type  
 `1`: Buy  
 `2`: Sell  
 `3`: Open long  
@@ -78,60 +78,67 @@ Applicable to `FUTURES`/`SWAP`/`OPTION` |
 `328`: Move position close long  
 `329`: Move position close short  
 `376`: Collateralized borrowing auto conversion buy  
-`377`: Collateralized borrowing auto conversion sell |
-| after | String | No | Pagination of data to return records earlier than the requested `billId` |
-| before | String | No | Pagination of data to return records newer than the requested `billId` |
-| begin | String | No | Filter with a begin timestamp `ts`. Unix timestamp format in milliseconds, e.g. `1597026383085` |
-| end | String | No | Filter with an end timestamp `ts`. Unix timestamp format in milliseconds, e.g. `1597026383085` |
-| limit | String | No | Number of results per request. The maximum is `100`; The default is `100` |
+`377`: Collateralized borrowing auto conversion sell | | after | String | No |
+Pagination of data to return records earlier than the requested `billId` | |
+before | String | No | Pagination of data to return records newer than the
+requested `billId` | | begin | String | No | Filter with a begin timestamp `ts`.
+Unix timestamp format in milliseconds, e.g. `1597026383085` | | end | String |
+No | Filter with an end timestamp `ts`. Unix timestamp format in milliseconds,
+e.g. `1597026383085` | | limit | String | No | Number of results per request.
+The maximum is `100`; The default is `100` |
 
 #### Response Parameters
 
-| **Parameter** | **Type** | **Description** |
-| --- | --- | --- |
-| instType | String | Instrument type |
-| instId | String | Instrument ID |
-| tradeId | String | Last trade ID |
-| ordId | String | Order ID |
-| clOrdId | String | Client Order ID as assigned by the client |
-| billId | String | Bill ID |
-| subType | String | Transaction type |
-| tag | String | Order tag |
-| fillPx | String | Last filled price. It is the same as the px from "Get bills details". |
-| fillSz | String | Last filled quantity |
-| fillIdxPx | String | Index price at the moment of trade execution  
-For cross currency spot pairs, it returns baseCcy-USDT index price. For example, for LTC-ETH, this field returns the index price of LTC-USDT. |
-| fillPnl | String | Last filled profit and loss, applicable to orders which have a trade and aim to close position. It always is 0 in other conditions |
-| fillPxVol | String | Implied volatility when filled  
-Only applicable to options; return "" for other instrument types |
-| fillPxUsd | String | Options price when filled, in the unit of USD  
-Only applicable to options; return "" for other instrument types |
-| fillMarkVol | String | Mark volatility when filled  
-Only applicable to options; return "" for other instrument types |
-| fillFwdPx | String | Forward price when filled  
-Only applicable to options; return "" for other instrument types |
-| fillMarkPx | String | Mark price when filled  
-Applicable to `FUTURES`, `SWAP`, `OPTION` |
-| side | String | Order side, `buy` `sell` |
-| posSide | String | Position side  
+| **Parameter**                                                                                                                                 | **Type** | **Description**                                                                                                                    |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| instType                                                                                                                                      | String   | Instrument type                                                                                                                    |
+| instId                                                                                                                                        | String   | Instrument ID                                                                                                                      |
+| tradeId                                                                                                                                       | String   | Last trade ID                                                                                                                      |
+| ordId                                                                                                                                         | String   | Order ID                                                                                                                           |
+| clOrdId                                                                                                                                       | String   | Client Order ID as assigned by the client                                                                                          |
+| billId                                                                                                                                        | String   | Bill ID                                                                                                                            |
+| subType                                                                                                                                       | String   | Transaction type                                                                                                                   |
+| tag                                                                                                                                           | String   | Order tag                                                                                                                          |
+| fillPx                                                                                                                                        | String   | Last filled price. It is the same as the px from "Get bills details".                                                              |
+| fillSz                                                                                                                                        | String   | Last filled quantity                                                                                                               |
+| fillIdxPx                                                                                                                                     | String   | Index price at the moment of trade execution                                                                                       |
+| For cross currency spot pairs, it returns baseCcy-USDT index price. For example, for LTC-ETH, this field returns the index price of LTC-USDT. |
+| fillPnl                                                                                                                                       | String   | Last filled profit and loss, applicable to orders which have a trade and aim to close position. It always is 0 in other conditions |
+| fillPxVol                                                                                                                                     | String   | Implied volatility when filled                                                                                                     |
+| Only applicable to options; return "" for other instrument types                                                                              |
+| fillPxUsd                                                                                                                                     | String   | Options price when filled, in the unit of USD                                                                                      |
+| Only applicable to options; return "" for other instrument types                                                                              |
+| fillMarkVol                                                                                                                                   | String   | Mark volatility when filled                                                                                                        |
+| Only applicable to options; return "" for other instrument types                                                                              |
+| fillFwdPx                                                                                                                                     | String   | Forward price when filled                                                                                                          |
+| Only applicable to options; return "" for other instrument types                                                                              |
+| fillMarkPx                                                                                                                                    | String   | Mark price when filled                                                                                                             |
+| Applicable to `FUTURES`, `SWAP`, `OPTION`                                                                                                     |
+| side                                                                                                                                          | String   | Order side, `buy` `sell`                                                                                                           |
+| posSide                                                                                                                                       | String   | Position side                                                                                                                      |
+
 `long` `short`  
-it returns `net` in`net` mode. |
-| execType | String | Liquidity taker or maker  
+it returns `net` in`net` mode. | | execType | String | Liquidity taker or
+maker  
 `T`: taker  
 `M`: maker  
-Not applicable to system orders such as ADL and liquidation |
-| feeCcy | String | Trading fee or rebate currency |
-| fee | String | The amount of trading fee or rebate. The trading fee deduction is negative, such as '-0.01'; the rebate is positive, such as '0.01'. |
-| ts | String | Data generation time, Unix timestamp format in milliseconds, e.g. `1597026383085`. |
-| fillTime | String | Trade time which is the same as `fillTime` for the order channel. |
-| feeRate | String | Fee rate. This field is returned for `SPOT` and `MARGIN` only |
-| tradeQuoteCcy | String | The quote currency for trading. |
+Not applicable to system orders such as ADL and liquidation | | feeCcy | String
+| Trading fee or rebate currency | | fee | String | The amount of trading fee or
+rebate. The trading fee deduction is negative, such as '-0.01'; the rebate is
+positive, such as '0.01'. | | ts | String | Data generation time, Unix timestamp
+format in milliseconds, e.g. `1597026383085`. | | fillTime | String | Trade time
+which is the same as `fillTime` for the order channel. | | feeRate | String |
+Fee rate. This field is returned for `SPOT` and `MARGIN` only | | tradeQuoteCcy
+| String | The quote currency for trading. |
 
 tradeId  
-For partial\_liquidation, full\_liquidation, or adl, when it comes to fill information, this field will be assigned a negative value to distinguish it from other matching transaction scenarios, when it comes to order information, this field will be 0.
+For partial_liquidation, full_liquidation, or adl, when it comes to fill
+information, this field will be assigned a negative value to distinguish it from
+other matching transaction scenarios, when it comes to order information, this
+field will be 0.
 
 ordId  
-Order ID, always "" for block trading.  
+Order ID, always "" for block trading.
 
 clOrdId  
 Client-supplied order ID, always "" for block trading.
