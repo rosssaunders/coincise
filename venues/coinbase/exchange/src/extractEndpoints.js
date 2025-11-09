@@ -114,6 +114,130 @@ const extractEndpoint = async (page, turndownService, operationId) => {
     // Try to find the endpoint method and path
     const methodMatch = bodyText.match(/(GET|POST|PUT|DELETE|PATCH)\s+(\/[^\s\n]*)/i)
     
+    // Clean up Coinbase documentation structure to create proper GFM tables
+    const cleanupCoinbaseParams = () => {
+      if (!content) return
+      
+      // Find all h4 headers
+      const headers = Array.from(content.querySelectorAll("h4"))
+      
+      // Find all api-section divs (they contain the actual parameter data)
+      const apiSections = Array.from(content.querySelectorAll(".api-section"))
+      
+      // Match h4 headers to api-sections by order
+      // Typically: Authorizations h4 -> api-section[0], Path Parameters h4 -> api-section[1], Response h4 -> api-section[2]
+      let apiSectionIndex = 0
+      
+      headers.forEach(header => {
+        const headerText = header.textContent.trim()
+        
+        // Only process parameter/response sections
+        if (!headerText.includes("Authorization") && 
+            !headerText.includes("Parameter") && 
+            !headerText.includes("Response")) {
+          return
+        }
+        
+        // Get the corresponding api-section for this header
+        const apiSection = apiSections[apiSectionIndex]
+        apiSectionIndex++
+        
+        if (!apiSection) return
+        
+        // Extract parameters from this section
+        const tableData = []
+        const paramDivs = apiSection.querySelectorAll(".font-semibold.text-primary")
+        
+        paramDivs.forEach(paramDiv => {
+          const paramName = paramDiv.textContent.trim()
+          
+          // Skip if empty
+          if (!paramName) return
+          
+          // Find type and required info
+          let type = ""
+          let required = "optional"
+          let description = ""
+          
+          // The type/required info is in the container's parent
+          let container = paramDiv.parentElement
+          while (container && !container.classList.contains("param-head")) {
+            container = container.parentElement
+          }
+          
+          if (container) {
+            // Look for type and required in the container's parent text
+            const allText = container.parentElement.textContent
+            
+            // Extract type
+            const typeMatch = allText.match(/(string|number|integer|boolean|array|object|null)/i)
+            if (typeMatch) {
+              type = typeMatch[1]
+            }
+            
+            // Check if required
+            if (allText.includes("required")) {
+              required = "required"
+            }
+            
+            // Try to find description
+            const descDivs = container.parentElement.querySelectorAll("div")
+            descDivs.forEach(div => {
+              const text = div.textContent.trim()
+              if (text.length > 20 && 
+                  !text.match(/^(string|number|integer|boolean|array|object|required|optional|header|query|path)$/i) &&
+                  !description) {
+                description = text
+              }
+            })
+          }
+          
+          tableData.push({
+            parameter: paramName,
+            type: type || "string",
+            required: required,
+            description: description || ""
+          })
+        })
+        
+        // Create table if we have data
+        if (tableData.length > 0) {
+          const table = document.createElement("table")
+          const thead = document.createElement("thead")
+          const tbody = document.createElement("tbody")
+          
+          // Header row
+          const headerRow = document.createElement("tr")
+          ;["Parameter", "Type", "Required", "Description"].forEach(h => {
+            const th = document.createElement("th")
+            th.textContent = h
+            headerRow.appendChild(th)
+          })
+          thead.appendChild(headerRow)
+          
+          // Data rows
+          tableData.forEach(data => {
+            const tr = document.createElement("tr")
+            ;["parameter", "type", "required", "description"].forEach(key => {
+              const td = document.createElement("td")
+              td.textContent = data[key]
+              tr.appendChild(td)
+            })
+            tbody.appendChild(tr)
+          })
+          
+          table.appendChild(thead)
+          table.appendChild(tbody)
+          
+          // Insert table after the header
+          header.parentNode.insertBefore(table, header.nextSibling)
+        }
+      })
+    }
+    
+    // Apply cleanup
+    cleanupCoinbaseParams()
+    
     return {
       html: content ? content.innerHTML : "",
       title: title ? title.textContent.trim() : "",

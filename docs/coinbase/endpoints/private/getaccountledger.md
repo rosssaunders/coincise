@@ -77,6 +77,13 @@ A `400 Bad Request` error is returned for any formats that are not accepted.
 
 #### Authorizations
 
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| cb-access-key | string | required | ​cb-access-keystringheaderrequired |
+| cb-access-passphrase | string | required | ​cb-access-passphrasestringheaderrequired |
+| cb-access-sign | string | required | ​cb-access-signstringheaderrequired |
+| cb-access-timestamp | string | required | ​cb-access-timestampstringheaderrequired |
+
 [​
 
 ](#authorization-cb-access-key)
@@ -127,6 +134,10 @@ required
 
 #### Path Parameters
 
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| account\_id | string | required | ​account\_idstringrequired |
+
 [​
 
 ](#parameter-account-id)
@@ -140,6 +151,15 @@ required
 Returns list of ledger entries from this account id.
 
 #### Query Parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| start\_date | string | optional | Search by minimum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time. |
+| end\_date | string | optional | Search by maximum posted date time and is inclusive of time provided. Valid formats are either RFC3339, date or date time and must be after Unix Epoch time. |
+| before | string | optional | Used for pagination. Sets start cursor to before id. |
+| after | string | optional | Used for pagination. Sets end cursor to after id. |
+| limit | integer | optional | ​limitintegerdefault:100 |
+| profile\_id | string | optional |  |
 
 [​
 
@@ -202,6 +222,15 @@ profile\_id
 string
 
 #### Response
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| id | string | required |  |
+| amount | string | required | ​amountstringrequired |
+| created\_at | string | required | ​created\_atstring<date-time>required |
+| balance | string | required | ​balancestringrequired |
+| type | string | required | ​typeenum<string>default:transferrequired |
+| details | object | required | ​detailsobjectrequired |
 
 200
 

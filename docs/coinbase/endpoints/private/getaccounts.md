@@ -41,6 +41,13 @@ When you place an order, the funds for the order are placed on hold. They cannot
 
 #### Authorizations
 
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| cb-access-key | string | required | ​cb-access-keystringheaderrequired |
+| cb-access-passphrase | string | required | ​cb-access-passphrasestringheaderrequired |
+| cb-access-sign | string | required | ​cb-access-signstringheaderrequired |
+| cb-access-timestamp | string | required | ​cb-access-timestampstringheaderrequired |
+
 [​
 
 ](#authorization-cb-access-key)
@@ -91,6 +98,10 @@ required
 
 #### Path Parameters
 
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| account\_id | string | required | ​account\_idstringrequired |
+
 [​
 
 ](#parameter-account-id)
@@ -102,6 +113,18 @@ string
 required
 
 #### Response
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| id | string | required |  |
+| currency | string | required | ​currencystringrequired |
+| balance | string | required | ​balancestringrequired |
+| hold | string | required |  |
+| available | string | required | ​availablestringrequired |
+| profile\_id | string | required | ​profile\_idstringrequired |
+| trading\_enabled | boolean | required | ​trading\_enabledbooleanrequired |
+| pending\_deposit | string | optional | ​pending\_depositstring |
+| display\_name | string | optional |  |
 
 200
 
