@@ -2,7 +2,7 @@
  * Configuration of known Coinbase INTX API endpoints
  * Based on the Coinbase International Exchange API documentation
  */
-"use strict";
+"use strict"
 
 export const KNOWN_ENDPOINTS = [
   // Portfolios
@@ -15,7 +15,7 @@ export const KNOWN_ENDPOINTS = [
   "intxrestapi_getpositionforportfolioinstrument",
   "intxrestapi_getportfoliofills",
   "intxrestapi_getportfoliofill",
-  
+
   // Instruments
   "intxrestapi_getinstruments",
   "intxrestapi_getinstrument",
@@ -23,17 +23,17 @@ export const KNOWN_ENDPOINTS = [
   "intxrestapi_getdailytradingvolumes",
   "intxrestapi_getaggregatedcandlesdata",
   "intxrestapi_gethistoricalfundingrates",
-  
+
   // Orders
   "intxrestapi_createorder",
   "intxrestapi_cancelorders",
   "intxrestapi_modifyorder",
   "intxrestapi_listorders",
   "intxrestapi_getorder",
-  
+
   // Fills
   "intxrestapi_getfills",
-  
+
   // Transfers
   "intxrestapi_createcryptotransfer",
   "intxrestapi_createcounterpartytransfer",
@@ -41,12 +41,12 @@ export const KNOWN_ENDPOINTS = [
   "intxrestapi_createwithdrawaltocoinbaseaccount",
   "intxrestapi_getwithdrawaltocoinbaseaccountinformation",
   "intxrestapi_listtransfers",
-  
+
   // Assets
   "intxrestapi_getassets",
   "intxrestapi_getasset",
   "intxrestapi_getsupportednetworksperasset",
-  
+
   // Fee Rate Tiers
   "intxrestapi_getfeeratetiers"
-];
+]
