@@ -68,29 +68,15 @@ const extractAuthentication = async (page, turndownService) => {
  */
 const extractRateLimits = async (page, turndownService) => {
   console.log("  Extracting rate limits documentation...");
-  const url = `${API_REF_BASE_URL}/rest-api/rate-limits`;
-  const fullContent = await extractContent(page, turndownService, url);
   
-  // Extract only the rate limits section if it exists
-  const lines = fullContent.split("\n");
-  const startIdx = lines.findIndex(line => 
-    line.toLowerCase().includes("rate limit") || 
-    line.toLowerCase().includes("ratelimit")
-  );
-  
-  if (startIdx !== -1) {
-    // Find the next major heading after rate limits section
-    const endIdx = lines.findIndex((line, idx) => 
-      idx > startIdx + 5 && line.startsWith("##")
-    );
-    
-    if (endIdx !== -1) {
-      return lines.slice(startIdx, endIdx).join("\n");
-    }
-    return lines.slice(startIdx).join("\n");
+  // Try the intx docs page first
+  try {
+    const url = `${DOCS_BASE_URL}/docs/rate-limits`;
+    return await extractContent(page, turndownService, url);
+  } catch (error) {
+    console.log("  Rate limits page not found, using placeholder");
+    return "# Rate Limits\n\nNo specific rate limit information found. Please refer to the main API documentation.";
   }
-  
-  return "# Rate Limits\n\nNo specific rate limit information found. Please refer to the main API documentation.";
 };
 
 /**
@@ -98,8 +84,15 @@ const extractRateLimits = async (page, turndownService) => {
  */
 const extractNetworkConnectivity = async (page, turndownService) => {
   console.log("  Extracting network connectivity documentation...");
-  const url = `${API_REF_BASE_URL}/rest-api/requests`;
-  return await extractContent(page, turndownService, url);
+  
+  // Try the intx docs page
+  try {
+    const url = `${DOCS_BASE_URL}/docs/rest-api`;
+    return await extractContent(page, turndownService, url);
+  } catch (error) {
+    console.log("  Network connectivity page not found, using placeholder");
+    return "# Network Connectivity\n\nNo specific network connectivity information found. Please refer to the main API documentation.";
+  }
 };
 
 /**
