@@ -1,6 +1,7 @@
 # POST /futures/{settle}/batch_amend_orders
 
-**Source:** [/futures/{settle}/batch_amend_orders](https://www.gate.io/docs/developers/apiv4/en/#amendbatchfutureorders-parameters)
+**Source:**
+[/futures/{settle}/batch_amend_orders](https://www.gate.io/docs/developers/apiv4/en/#amendbatchfutureorders-parameters)
 
 ## Authentication
 

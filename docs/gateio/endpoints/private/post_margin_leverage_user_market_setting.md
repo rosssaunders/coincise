@@ -1,6 +1,7 @@
 # POST /margin/leverage/user_market_setting
 
-**Source:** [/margin/leverage/user_market_setting](https://www.gate.io/docs/developers/apiv4/en/#setisolatedusermarketleverage-parameters)
+**Source:**
+[/margin/leverage/user_market_setting](https://www.gate.io/docs/developers/apiv4/en/#setisolatedusermarketleverage-parameters)
 
 ## Authentication
 

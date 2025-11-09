@@ -1,6 +1,7 @@
 # GET /v4/deposit/address
 
-**Source:** [https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetDepositAddress](https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetDepositAddress)
+**Source:**
+[https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetDepositAddress](https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetDepositAddress)
 
 ## Description
 
@@ -16,10 +17,10 @@ Required (Private Endpoint)
 
 ## Request Parameters
 
-| name | type | Required | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| chain | string | Yes | N/A | Network for deposit |  |
-| currency | string | Yes | N/A | Currency name |  |
+| name     | type   | Required | default | description         | ranges |
+| -------- | ------ | -------- | ------- | ------------------- | ------ |
+| chain    | string | Yes      | N/A     | Network for deposit |        |
+| currency | string | Yes      | N/A     | Currency name       |        |
 
 ## Request Example
 
@@ -30,5 +31,13 @@ Required (Private Endpoint)
 ## Response Example
 
 ```json
-{  "rc": 0,  "mc": "string",  "ma": [{}],  "result": {    "address": "0xfa3abfa50eb2006f5be7831658b17aca240d8526",
+{
+  "rc": 0,
+  "mc": "string",
+  "ma": [{}],
+  "result": {
+    "address": "0xfa3abfa50eb2006f5be7831658b17aca240d8526",
+    "memo": ""
+  }
+}
 ```

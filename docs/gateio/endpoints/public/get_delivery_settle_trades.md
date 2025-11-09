@@ -1,6 +1,7 @@
 # GET /delivery/{settle}/trades
 
-**Source:** [/delivery/{settle}/trades](https://www.gate.io/docs/developers/apiv4/en/#listdeliverytrades-parameters)
+**Source:**
+[/delivery/{settle}/trades](https://www.gate.io/docs/developers/apiv4/en/#listdeliverytrades-parameters)
 
 ## Authentication
 

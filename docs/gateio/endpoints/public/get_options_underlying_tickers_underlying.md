@@ -1,6 +1,7 @@
 # GET /options/underlying/tickers/{underlying}
 
-**Source:** [/options/underlying/tickers/{underlying}](https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyingtickers-parameters)
+**Source:**
+[/options/underlying/tickers/{underlying}](https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyingtickers-parameters)
 
 ## Authentication
 

@@ -1,6 +1,7 @@
 # POST /loan/collateral/repay
 
-**Source:** [/loan/collateral/repay](https://www.gate.io/docs/developers/apiv4/en/#repaycollateralloan-parameters)
+**Source:**
+[/loan/collateral/repay](https://www.gate.io/docs/developers/apiv4/en/#repaycollateralloan-parameters)
 
 ## Authentication
 

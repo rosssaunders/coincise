@@ -1,6 +1,7 @@
 # GET /futures/{settle}/price_orders/{order_id}
 
-**Source:** [/futures/{settle}/price_orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getpricetriggeredorder-parameters)
+**Source:**
+[/futures/{settle}/price_orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getpricetriggeredorder-parameters)
 
 ## Authentication
 

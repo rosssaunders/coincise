@@ -1,6 +1,7 @@
 # GET /spot/my_trades
 
-**Source:** [/spot/my_trades](https://www.gate.io/docs/developers/apiv4/en/#listmytrades-parameters)
+**Source:**
+[/spot/my_trades](https://www.gate.io/docs/developers/apiv4/en/#listmytrades-parameters)
 
 ## Authentication
 

@@ -1,6 +1,7 @@
 # GET /earn/structured/orders
 
-**Source:** [/earn/structured/orders](https://www.gate.io/docs/developers/apiv4/en/#liststructuredorders-parameters)
+**Source:**
+[/earn/structured/orders](https://www.gate.io/docs/developers/apiv4/en/#liststructuredorders-parameters)
 
 ## Authentication
 

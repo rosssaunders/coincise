@@ -1,6 +1,7 @@
 # GET /v4/public/trade/recent
 
-**Source:** [https://doc.xt.com/docs/spot/Market/QueryRecentTransactions](https://doc.xt.com/docs/spot/Market/QueryRecentTransactions)
+**Source:**
+[https://doc.xt.com/docs/spot/Market/QueryRecentTransactions](https://doc.xt.com/docs/spot/Market/QueryRecentTransactions)
 
 ## Description
 
@@ -20,10 +21,10 @@ Not Required (Public Endpoint)
 
 ## Request Parameters
 
-| name | type | Required | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | Yes |  | trading pair |  |
-| limit | number | No | 200 |  | 1~1000 |
+| name   | type   | Required | default | description  | ranges |
+| ------ | ------ | -------- | ------- | ------------ | ------ |
+| symbol | string | Yes      |         | trading pair |        |
+| limit  | number | No       | 200     |              | 1~1000 |
 
 ## Request Example
 
@@ -34,5 +35,19 @@ Not Required (Public Endpoint)
 ## Response Example
 
 ```json
-{  "rc": 0,  "mc": "string",  "ma": [{}],  "result": [    {      "i": 0,
+{
+  "rc": 0,
+  "mc": "string",
+  "ma": [{}],
+  "result": [
+    {
+      "i": 0,
+      "t": 0,
+      "p": "string",
+      "q": "string",
+      "v": "string",
+      "b": true
+    }
+  ]
+}
 ```

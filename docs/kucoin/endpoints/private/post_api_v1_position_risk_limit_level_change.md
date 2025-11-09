@@ -29,4 +29,4 @@ specific contract (only valid for Isolated Margin).
 | --------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | code      | required | string  |                                                                                                                                                                    |
 | data      | required | boolean | Adjusting the level will result in the cancellation of any open orders. The response will indicate only whether the adjustment request was successfully submitted. |
-|  |
+|           |

@@ -1,6 +1,7 @@
 # GET /earn/dual/investment_plan
 
-**Source:** [/earn/dual/investment_plan](https://www.gate.io/docs/developers/apiv4/en/#listdualinvestmentplans-parameters)
+**Source:**
+[/earn/dual/investment_plan](https://www.gate.io/docs/developers/apiv4/en/#listdualinvestmentplans-parameters)
 
 ## Authentication
 

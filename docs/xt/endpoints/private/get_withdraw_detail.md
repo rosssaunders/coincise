@@ -1,6 +1,7 @@
 # GET /v4/withdraw
 
-**Source:** [https://doc.xt.com/docs/spot/Deposit&Withdrawal/WithdrawDetail](https://doc.xt.com/docs/spot/Deposit&Withdrawal/WithdrawDetail)
+**Source:**
+[https://doc.xt.com/docs/spot/Deposit&Withdrawal/WithdrawDetail](https://doc.xt.com/docs/spot/Deposit&Withdrawal/WithdrawDetail)
 
 ## Description
 
@@ -16,10 +17,10 @@ Required (Private Endpoint)
 
 ## Request Parameters
 
-| name | type | Required | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| recordId | string | No | N/A | Withdrawal record ID, obtained from the **Withdraw** endpoint. Recommended to use this first. |  |
-| clientOrderId | string | No | N/A | Custom client ID |  |
+| name          | type   | Required | default | description                                                                                   | ranges |
+| ------------- | ------ | -------- | ------- | --------------------------------------------------------------------------------------------- | ------ |
+| recordId      | string | No       | N/A     | Withdrawal record ID, obtained from the **Withdraw** endpoint. Recommended to use this first. |        |
+| clientOrderId | string | No       | N/A     | Custom client ID                                                                              |        |
 
 ## Request Example
 
@@ -30,5 +31,24 @@ Required (Private Endpoint)
 ## Response Example
 
 ```json
-{  "rc": 0,  "mc": "SUCCESS",  "ma": [],  "result": {    "id": 100,
+{
+  "rc": 0,
+  "mc": "SUCCESS",
+  "ma": [],
+  "result": {
+    "id": 100,
+    "clientOrderId": 10,
+    "type": 0,
+    "currency": "btc",
+    "address": "xxxxx",
+    "status": "REVIEW",
+    "amount": 0.1,
+    "fee": 0.0001,
+    "chain": "Tron",
+    "memo": "yyyyy",
+    "confirmations": 2,
+    "transactionId": "490267492",
+    "createdTime": 1737093343000
+  }
+}
 ```

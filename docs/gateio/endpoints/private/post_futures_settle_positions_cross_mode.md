@@ -1,6 +1,7 @@
 # POST /futures/{settle}/positions/cross_mode
 
-**Source:** [/futures/{settle}/positions/cross_mode](https://www.gate.io/docs/developers/apiv4/en/#updatepositioncrossmode-parameters)
+**Source:**
+[/futures/{settle}/positions/cross_mode](https://www.gate.io/docs/developers/apiv4/en/#updatepositioncrossmode-parameters)
 
 ## Authentication
 

@@ -1,6 +1,7 @@
 # DELETE /v4/order/{orderId}
 
-**Source:** [https://doc.xt.com/docs/spot/Order/CancelOrder](https://doc.xt.com/docs/spot/Order/CancelOrder)
+**Source:**
+[https://doc.xt.com/docs/spot/Order/CancelOrder](https://doc.xt.com/docs/spot/Order/CancelOrder)
 
 ## Description
 
@@ -20,23 +21,29 @@ N/A
 
 ## Request Parameters
 
-| name | type | Required | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| orderId | number | Yes |  |  |  |
+| name    | type   | Required | default | description | ranges |
+| ------- | ------ | -------- | ------- | ----------- | ------ |
+| orderId | number | Yes      |         |             |        |
 
 ## Response Parameters
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| rc | number | - |
-| mc | string | - |
-| ma | array | - |
-| result | object | - |
-| result.cancelId | string | - |
-
+| Parameter       | Type   | Description |
+| --------------- | ------ | ----------- |
+| rc              | number | -           |
+| mc              | string | -           |
+| ma              | array  | -           |
+| result          | object | -           |
+| result.cancelId | string | -           |
 
 ## Response Example
 
 ```json
-{  "rc": 0,  "mc": "string",  "ma": [{}],  "result": {    "cancelId": "6216559590087220004"  }}
+{
+  "rc": 0,
+  "mc": "string",
+  "ma": [{}],
+  "result": {
+    "cancelId": "6216559590087220004"
+  }
+}
 ```

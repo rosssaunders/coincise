@@ -1,6 +1,7 @@
 # GET /futures/{settle}/liquidates
 
-**Source:** [/futures/{settle}/liquidates](https://www.gate.io/docs/developers/apiv4/en/#listliquidates-parameters)
+**Source:**
+[/futures/{settle}/liquidates](https://www.gate.io/docs/developers/apiv4/en/#listliquidates-parameters)
 
 ## Authentication
 

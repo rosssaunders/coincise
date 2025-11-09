@@ -1,6 +1,7 @@
 # GET /options/contracts/{contract}
 
-**Source:** [/options/contracts/{contract}](https://www.gate.io/docs/developers/apiv4/en/#getoptionscontract-parameters)
+**Source:**
+[/options/contracts/{contract}](https://www.gate.io/docs/developers/apiv4/en/#getoptionscontract-parameters)
 
 ## Authentication
 

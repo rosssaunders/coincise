@@ -20,7 +20,7 @@ Retrieve option market data.
 | Parameter  | Type   | Required | Description                                                 |
 | ---------- | ------ | -------- | ----------------------------------------------------------- |
 | instFamily | String | Yes      | Instrument family, only applicable to `OPTION`              |
-|  |
+|            |
 | expTime    | String | No       | Contract expiry date, the format is "YYMMDD", e.g. "200527" |
 
 #### Response Parameters

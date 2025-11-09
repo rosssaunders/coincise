@@ -267,10 +267,23 @@ const postProcessMarkdown = (markdown, method, path, isPrivate, responseJsonExam
 
       // Remove untagged code blocks and add json tag
       responseExample = responseExample.replace(/```\s*\n/g, "```json\n")
-      // Remove inline comments - preserve existing commas, just remove the comment part
-      responseExample = responseExample.replace(/\s*\/\/.*$/gm, "")
-      // Clean up any double commas that might have been created
-      responseExample = responseExample.replace(/,(\s*,)+/g, ",")
+
+      // Try to reformat the JSON properly
+      const jsonMatch = responseExample.match(/```json\n([\s\S]*?)\n```/)
+      if (jsonMatch) {
+        try {
+          // Remove comments and parse
+          const jsonWithoutComments = jsonMatch[1].replace(/\s*\/\/.*$/gm, '')
+          const parsed = JSON.parse(jsonWithoutComments)
+          // Re-stringify with proper formatting
+          const formatted = JSON.stringify(parsed, null, 2)
+          responseExample = `\`\`\`json\n${formatted}\n\`\`\``
+        } catch (e) {
+          // If parsing fails, just remove inline comments
+          responseExample = responseExample.replace(/\s*\/\/.*$/gm, "")
+          responseExample = responseExample.replace(/,(\s*,)+/g, ",")
+        }
+      }
     }
   })
 
@@ -357,7 +370,7 @@ const postProcessMarkdown = (markdown, method, path, isPrivate, responseJsonExam
 /**
  * Extract all endpoints from the XT.com documentation
  */
-const extractEndpoints = async (page, turndownService) => {
+const extractEndpoints = async (page, turndownService, browser) => {
   console.log("Extracting endpoint information...")
 
   // Navigate to the main spot trading page
@@ -373,15 +386,18 @@ const extractEndpoints = async (page, turndownService) => {
   await page.waitForSelector(".menu__list", { timeout: 10000 })
 
   // Expand all collapsed categories
-  await page.evaluate(() => {
+  const collapsedCount = await page.evaluate(() => {
     const collapsedItems = document.querySelectorAll(
       ".menu__list-item--collapsed"
     )
+    console.log(`Found ${collapsedItems.length} collapsed items`)
     collapsedItems.forEach(item => {
       const link = item.querySelector("a")
       if (link) link.click()
     })
+    return collapsedItems.length
   })
+  console.log(`Expanded ${collapsedCount} collapsed menu items`)
 
   // Wait for expansion - increased timeout for stability
   await new Promise(resolve => setTimeout(resolve, 3000))
@@ -416,9 +432,10 @@ const extractEndpoints = async (page, turndownService) => {
 
     const mainMenu = document.querySelector(".menu__list")
     const allItems = mainMenu ? getAllMenuItems(mainMenu) : []
+    console.log(`Found ${allItems.length} total menu items`)
 
     // Filter to get only endpoint pages (exclude general documentation)
-    return allItems.filter(item => {
+    const filtered = allItems.filter(item => {
       if (!item.href) return false
 
       // Must be in Balance, Deposit&Withdrawal, Market, Order, Trade, or Transfer sections
@@ -432,6 +449,8 @@ const extractEndpoints = async (page, turndownService) => {
 
       return isEndpointSection
     })
+    console.log(`Filtered to ${filtered.length} endpoint items`)
+    return filtered
   })
 
   console.log(`Found ${endpointLinks.length} endpoints to extract`)
@@ -488,67 +507,105 @@ const extractEndpoints = async (page, turndownService) => {
           path = pathMatch[1].trim()
         }
 
-        // Extract clean JSON from Response Example code blocks in the clone
-        const responseJsonExamples = []
-
-        // Find Response Example heading in clone
-        const headings = Array.from(clone.querySelectorAll('h2, h3, h4'))
-        const responseHeading = headings.find(h =>
-          h.textContent.toLowerCase().includes('response') &&
-          h.textContent.toLowerCase().includes('example')
-        )
-
-        if (responseHeading) {
-          // Find the next code block after the heading
-          let element = responseHeading.nextElementSibling
-          while (element && responseJsonExamples.length === 0) {
-            const codeBlock = element.querySelector('code')
-            if (codeBlock) {
-              // Use innerHTML to get the raw content, then strip HTML tags
-              let jsonText = codeBlock.innerHTML
-                .replace(/<[^>]+>/g, '') // Remove HTML tags
-                .replace(/&lt;/g, '<')
-                .replace(/&gt;/g, '>')
-                .replace(/&amp;/g, '&')
-                .trim()
-
-              // Handle git conflict markers - extract the "incoming" version (after =======)
-              if (jsonText.includes('<<<<<<< Updated upstream')) {
-                const conflictMatch = jsonText.match(/=======\s*([\s\S]*?)>>>>>>> [^\n]+/)
-                if (conflictMatch) {
-                  jsonText = conflictMatch[1].trim()
-                }
-              }
-
-              // Remove inline comments (e.g., //symbol)
-              jsonText = jsonText.replace(/\s*\/\/.*$/gm, '')
-
-              // Clean up any trailing commas before closing braces/brackets
-              jsonText = jsonText.replace(/,(\s*[}\]])/g, '$1')
-
-              if (jsonText.startsWith('{') || jsonText.startsWith('[')) {
-                responseJsonExamples.push(jsonText)
-              }
-              break
-            }
-            element = element.nextElementSibling
-          }
-        }
-
-        // Extract content AFTER cleaning JSON
+        // Extract content
         const content = clone.innerHTML
 
         return {
           content: content,
           method: method,
           path: path,
-          sourceUrl: url,
-          responseJsonExamples: responseJsonExamples
+          sourceUrl: url
         }
       }, link.href)
 
       if (endpointData) {
         const markdown = turndownService.turndown(endpointData.content)
+
+        // Extract clean JSON by clicking the copy button
+        const responseJsonExamples = []
+        try {
+          // Wait for the response section and buttons to fully load
+          await page.waitForSelector('article', { timeout: 2000 })
+          // Add a small delay to ensure copy buttons are rendered
+          await new Promise(resolve => setTimeout(resolve, 500))
+
+          // Grant clipboard permissions
+          const context = browser.defaultBrowserContext()
+          await context.overridePermissions(link.href, ['clipboard-read', 'clipboard-write'])
+
+          // Find and click the copy button for JSON code blocks
+          const result = await page.evaluate(async () => {
+            // Find copy buttons using aria-label attribute (works on XT.com)
+            const copyButtons = Array.from(document.querySelectorAll('button[aria-label*="copy" i]'))
+
+            // Debug logging
+            const debugInfo = {
+              copyButtonsFound: copyButtons.length,
+              clicked: false
+            }
+
+            // Find the one associated with a JSON code block
+            for (const button of copyButtons) {
+              const codeBlock = button.closest('div[class*="codeBlock"]') ||
+                                button.closest('pre') ||
+                                button.parentElement?.querySelector('code')
+
+              if (codeBlock) {
+                const codeText = codeBlock.textContent || ''
+                // Check if this looks like JSON
+                if (codeText.trim().startsWith('{') || codeText.trim().startsWith('[')) {
+                  button.click()
+                  debugInfo.clicked = true
+                  return debugInfo
+                }
+              }
+            }
+            return debugInfo
+          })
+
+          const jsonCopied = result.clicked
+
+          if (jsonCopied) {
+            // Wait a moment for clipboard to be populated
+            await new Promise(resolve => setTimeout(resolve, 200))
+
+            // Read clipboard content
+            const clipboardContent = await page.evaluate(() => {
+              return navigator.clipboard.readText()
+            })
+
+            if (clipboardContent && (clipboardContent.startsWith('{') || clipboardContent.startsWith('['))) {
+              // Remove inline comments before parsing
+              const jsonWithoutComments = clipboardContent.replace(/\s*\/\/.*$/gm, '')
+
+              // Parse and reformat the JSON
+              try {
+                const parsed = JSON.parse(jsonWithoutComments)
+                responseJsonExamples.push(JSON.stringify(parsed, null, 2))
+              } catch (e) {
+                // If parsing still fails, try to clean up trailing commas
+                const cleaned = jsonWithoutComments
+                  .replace(/,(\s*[}\]])/g, '$1') // Remove trailing commas
+                  .replace(/,(\s*,)+/g, ',') // Remove duplicate commas
+                try {
+                  const parsed = JSON.parse(cleaned)
+                  responseJsonExamples.push(JSON.stringify(parsed, null, 2))
+                } catch (e2) {
+                  // If all parsing fails, store the cleaned version
+                  responseJsonExamples.push(jsonWithoutComments)
+                }
+              }
+            }
+          }
+        } catch (clipboardError) {
+          // If copy button method fails, continue without JSON example
+          console.log(`    Clipboard error for ${link.text}: ${clipboardError.message}`)
+        }
+
+        // Log if we extracted JSON successfully
+        if (responseJsonExamples.length > 0) {
+          console.log(`    ✓ Extracted JSON response`)
+        }
 
         endpoints.push({
           name: link.text,
@@ -556,7 +613,7 @@ const extractEndpoints = async (page, turndownService) => {
           path: endpointData.path,
           sourceUrl: endpointData.sourceUrl,
           content: markdown,
-          responseJsonExamples: endpointData.responseJsonExamples || []
+          responseJsonExamples: responseJsonExamples
         })
       }
 
@@ -638,10 +695,19 @@ const main = async () => {
   const page = await browser.newPage()
   await configurePage(page)
 
+  // Enable console logging from the page for debugging
+  page.on("console", msg => {
+    const type = msg.type()
+    const text = msg.text()
+    if (type === "log" && !text.includes("Logo link not found")) {
+      console.log(`[PAGE] ${text}`)
+    }
+  })
+
   const turndownService = createTurndownBuilder().build()
 
   try {
-    const endpoints = await extractEndpoints(page, turndownService)
+    const endpoints = await extractEndpoints(page, turndownService, browser)
     writeEndpoints(endpoints)
 
     console.log("\n✅ Endpoint documentation extraction completed successfully")

@@ -1,6 +1,7 @@
 # GET /v4/public/currencies
 
-**Source:** [https://doc.xt.com/docs/spot/Balance/GetCurrencies](https://doc.xt.com/docs/spot/Balance/GetCurrencies)
+**Source:**
+[https://doc.xt.com/docs/spot/Balance/GetCurrencies](https://doc.xt.com/docs/spot/Balance/GetCurrencies)
 
 ## Description
 
@@ -16,9 +17,9 @@ Not Required (Public Endpoint)
 
 ## Request Parameters
 
-| Name | Type | Required | Default | Description | Ranges |
-| --- | --- | --- | --- | --- | --- |
-| — | string | No | N/A | No request parameters required |  |
+| Name | Type   | Required | Default | Description                    | Ranges |
+| ---- | ------ | -------- | ------- | ------------------------------ | ------ |
+| —    | string | No       | N/A     | No request parameters required |        |
 
 ## Request Example
 
@@ -29,5 +30,24 @@ Not Required (Public Endpoint)
 ## Response Example
 
 ```json
-{  "rc": 0,  "mc": "string",  "ma": [{}],  "result": [    {      "id": 11,
+{
+  "rc": 0,
+  "mc": "string",
+  "ma": [{}],
+  "result": [
+    {
+      "id": 11,
+      "currency": "usdt",
+      "fullName": "usdt",
+      "logo": null,
+      "cmcLink": null,
+      "weight": 100,
+      "maxPrecision": 6,
+      "depositStatus": 1,
+      "withdrawStatus": 1,
+      "convertEnabled": 1,
+      "transferEnabled": 1
+    }
+  ]
+}
 ```

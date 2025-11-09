@@ -1,6 +1,7 @@
 # GET /v4/public/time
 
-**Source:** [https://doc.xt.com/docs/spot/Market/GetServerTime](https://doc.xt.com/docs/spot/Market/GetServerTime)
+**Source:**
+[https://doc.xt.com/docs/spot/Market/GetServerTime](https://doc.xt.com/docs/spot/Market/GetServerTime)
 
 ## Description
 
@@ -16,7 +17,7 @@ Not Required (Public Endpoint)
 
 ## Request Example
 
-```bash
+````bash
   curl --location --request GET 'https://sapi.xt.com/v4/public/time' \    --header 'accept: */*' \    --header 'Content-Type: application/json' \
 ```bash
 Response Example
@@ -25,4 +26,27 @@ Response
 
 ```bash
 {  "rc": 0,  "mc": "SUCCESS",  "ma": [],  "result": {    "serverTime": 1662435658062  }}
+````
+
+## Response Parameters
+
+| Parameter         | Type   | Description |
+| ----------------- | ------ | ----------- |
+| rc                | number | -           |
+| mc                | string | -           |
+| ma                | array  | -           |
+| result            | object | -           |
+| result.serverTime | number | -           |
+
+## Response Example
+
+```json
+{
+  "rc": 0,
+  "mc": "SUCCESS",
+  "ma": [],
+  "result": {
+    "serverTime": 1662435658062
+  }
+}
 ```

@@ -1,6 +1,7 @@
 # GET /delivery/{settle}/account_book
 
-**Source:** [/delivery/{settle}/account_book](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryaccountbook-parameters)
+**Source:**
+[/delivery/{settle}/account_book](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryaccountbook-parameters)
 
 ## Authentication
 

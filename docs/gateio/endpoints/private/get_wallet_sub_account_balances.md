@@ -1,6 +1,7 @@
 # GET /wallet/sub_account_balances
 
-**Source:** [/wallet/sub_account_balances](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountbalances-parameters)
+**Source:**
+[/wallet/sub_account_balances](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountbalances-parameters)
 
 ## Authentication
 

@@ -1,6 +1,7 @@
 # POST /sub_accounts/{user_id}/unlock
 
-**Source:** [/sub_accounts/{user_id}/unlock](https://www.gate.io/docs/developers/apiv4/en/#unlocksubaccount-parameters)
+**Source:**
+[/sub_accounts/{user_id}/unlock](https://www.gate.io/docs/developers/apiv4/en/#unlocksubaccount-parameters)
 
 ## Authentication
 
