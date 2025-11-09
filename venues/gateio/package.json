@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
   "extract:general": "node src/extractGeneral.js",
-  "extract:endpoints": "node src/extractEndpoints.js",
+  "extract:endpoints": "node src/splitEndpoints.js",
   "extract:all": "pnpm run extract:general && pnpm run extract:endpoints",
   "extract:legacy:change-log": "node src/rest_api.js config/change_log.json",
   "extract:legacy:general": "node src/rest_api.js config/general.json",
