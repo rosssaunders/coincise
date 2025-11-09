@@ -27,4 +27,6 @@ This interface can query all Margin symbols that have active orders.
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.symbolSize | required | integer | Symbol Size |
+| data.symbols | required | array | The symbol that has active orders |
 

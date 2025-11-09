@@ -33,4 +33,14 @@ Request the interest records of the cross/isolated margin lending via this endpo
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.timestamp | required | integer |  |
+| data.currentPage | required | integer | current page |
+| data.pageSize | required | integer | page size |
+| data.totalNum | required | integer | total number |
+| data.totalPage | required | integer | total pages |
+| data.items | required | array |  |
+| data.items[].currency | required | string | currency |
+| data.items[].dayRatio | required | string | Daily interest rate |
+| data.items[].interestAmount | required | string | Interest amount |
+| data.items[].createdTime | required | integer | Interest Timestamp |
 

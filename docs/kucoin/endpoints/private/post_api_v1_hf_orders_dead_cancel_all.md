@@ -27,4 +27,6 @@ Set Disconnection Protect (Deadman Switch). Through this interface, call this in
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object | If the data is empty, it means that DCP is not set. |
+| data.currentTime | required | integer | System current time (in seconds) |
+| data.triggerTime | required | integer | Trigger cancellation time (in seconds) |
 

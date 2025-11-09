@@ -26,4 +26,12 @@ Request via this endpoint to get Level 1 Market Data. The returned value include
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.time | required | integer | timestamp |
+| data.sequence | required | string | Sequence |
+| data.price | required | string | Last traded price |
+| data.size | required | string | Last traded size |
+| data.bestBid | required | string | Best bid price |
+| data.bestBidSize | required | string | Best bid size |
+| data.bestAsk | required | string | Best ask price |
+| data.bestAskSize | required | string | Best ask size |
 

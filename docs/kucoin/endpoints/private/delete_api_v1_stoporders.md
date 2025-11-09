@@ -26,4 +26,5 @@ Cancel all untriggered stop orders. The response is a list of orderIDs of the ca
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.cancelledOrderIds | required | array | Unique ID of the cancelled order |
 

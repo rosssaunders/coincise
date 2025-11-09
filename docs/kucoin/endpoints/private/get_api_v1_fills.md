@@ -34,4 +34,40 @@ Get a list of recent fills. If you need to get your recent trade history with lo
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.currentPage | required | integer |  |
+| data.pageSize | required | integer |  |
+| data.totalNum | required | integer |  |
+| data.totalPage | required | integer |  |
+| data.items | required | array |  |
+| data.items[].symbol | required | string | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)  |
+| data.items[].tradeId | required | string | Trade ID
+ |
+| data.items[].orderId | required | string | Order ID
+ |
+| data.items[].side | required | string | Transaction side |
+| data.items[].liquidity | required | string | Liquidity-taker or -maker |
+| data.items[].forceTaker | required | boolean | Whether to force processing as a taker
+ |
+| data.items[].price | required | string | Filled price |
+| data.items[].size | required | integer | Filled amount |
+| data.items[].value | required | string | Order value |
+| data.items[].openFeePay | required | string | Opening transaction fee |
+| data.items[].closeFeePay | required | string | Closing transaction fee |
+| data.items[].stop | required | string | A mark to the stop order type |
+| data.items[].feeRate | required | string | Fee Rate |
+| data.items[].fixFee | required | string | Fixed fees (Deprecated field, no actual use of the value field) |
+| data.items[].feeCurrency | required | string | Charging currency |
+| data.items[].tradeTime | required | integer | Trade time in nanoseconds |
+| data.items[].subTradeType | required | string | Deprecated field, no actual use of the value field |
+| data.items[].marginMode | required | string | Margin mode: ISOLATED (isolated), CROSS (cross margin). |
+| data.items[].settleCurrency | required | string | Settle currency |
+| data.items[].displayType | required | string | Order type |
+| data.items[].fee | required | string | Trading fee |
+| data.items[].orderType | required | string | Order type |
+| data.items[].tradeType | required | string | Trade type (trade, liquid, adl or settlement)
+ |
+| data.items[].createdAt | required | integer | Order creation time
+ |
+| data.items[].openFeeTaxPay | required | string | Opening tax fee (Only KYC users in some regions have this parameter) |
+| data.items[].closeFeeTaxPay | required | string | Close tax fee (Only KYC users in some regions have this parameter) |
 

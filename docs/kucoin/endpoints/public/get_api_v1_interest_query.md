@@ -32,4 +32,10 @@ Get interest rate Index (real-time query).
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.dataList | required | array |  |
+| data.dataList[].symbol | required | string | Symbol of the contract. Please refer to [Get Symbol endpoint: fundingBaseSymbol, fundingQuoteSymbol, fundingBaseSymbol1M, fundingQuoteSymbol1M](https://www.kucoin.com/docs-new/api-3470220)  |
+| data.dataList[].granularity | required | integer | Granularity (milliseconds) |
+| data.dataList[].timePoint | required | integer | Timestamp (milliseconds) |
+| data.dataList[].value | required | number | Interest rate value |
+| data.hasMore | required | boolean | Whether there are more pages |
 

@@ -20,4 +20,8 @@ This endpoint can cancel all spot orders for all symbol. This endpoint only send
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.succeedSymbols | required | array | The Symbols Successfully cancelled |
+| data.failedSymbols | required | array | The Symbols Failed to cancel |
+| data.failedSymbols[].symbol | optional | string | symbol |
+| data.failedSymbols[].error | optional | string | error message |
 

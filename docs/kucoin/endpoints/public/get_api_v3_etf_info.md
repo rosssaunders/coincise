@@ -27,4 +27,10 @@ This interface returns leveraged token information.
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | array |  |
+| data[].currency | required | string | ETF Currency |
+| data[].netAsset | required | string | Net worth |
+| data[].targetLeverage | required | string | Target leverage |
+| data[].actualLeverage | required | string | Actual leverage |
+| data[].issuedSize | required | string | The amount of currency issued |
+| data[].basket | required | string | Basket information |
 

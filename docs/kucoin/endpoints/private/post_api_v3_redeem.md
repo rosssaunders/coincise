@@ -28,4 +28,5 @@ Redeem your loan order.
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.orderNo | required | string | Redeem order ID |
 

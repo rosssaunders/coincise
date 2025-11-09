@@ -20,4 +20,5 @@ Get the statistics of the platform futures trading volume in the last 24 hours.
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.turnoverOf24h | required | number | 24-hour platform Futures trading volume. Unit is USD |
 

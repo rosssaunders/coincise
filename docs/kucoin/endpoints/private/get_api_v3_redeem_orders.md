@@ -30,4 +30,16 @@ This API endpoint provides pagination query for the redeem orders.
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.currentPage | required | integer | Current Page |
+| data.pageSize | required | integer | Page Size |
+| data.totalNum | required | integer | Total Number |
+| data.totalPage | required | integer | Total Pages |
+| data.items | required | array |  |
+| data.items[].currency | required | string | Currency |
+| data.items[].purchaseOrderNo | required | string | Purchase order ID |
+| data.items[].redeemOrderNo | required | string | Redeem order ID |
+| data.items[].redeemSize | required | string | Redemption size |
+| data.items[].receiptSize | required | string | Redeemed size |
+| data.items[].applyTime | required | string | Time of redeem |
+| data.items[].status | required | string | Status: DONE-completed; PENDING-settling |
 

@@ -28,4 +28,5 @@ Invest credit in the market and earn interest
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.orderNo | required | string | Purchase order ID |
 

@@ -30,4 +30,9 @@ Get Maximum Open Position Size.
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.symbol | required | string | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)  |
+| data.maxBuyOpenSize | required | integer | Maximum buy size (unit: lot)
+ |
+| data.maxSellOpenSize | required | integer | Maximum buy size (unit: lot)
+ |
 

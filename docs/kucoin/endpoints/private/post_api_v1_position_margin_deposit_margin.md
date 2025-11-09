@@ -28,4 +28,46 @@ Add Isolated Margin Manually.
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.id | required | string | Position ID |
+| data.symbol | required | string | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)  |
+| data.autoDeposit | required | boolean | Auto deposit margin or not |
+| data.maintMarginReq | required | number | Maintenance margin requirement
+
+ |
+| data.riskLimit | required | integer | Risk limit
+ |
+| data.realLeverage | required | number | Leverage o the order |
+| data.crossMode | required | boolean | Cross mode or not |
+| data.delevPercentage | required | number | ADL ranking percentile |
+| data.openingTimestamp | required | integer | Open time |
+| data.currentTimestamp | required | integer | Current timestamp
+ |
+| data.currentQty | required | integer | Current postion quantity |
+| data.currentCost | required | number | Current postion value |
+| data.currentComm | required | number | Current commission |
+| data.unrealisedCost | required | number | Unrealised value |
+| data.realisedGrossCost | required | number | Accumulated realised gross profit value |
+| data.realisedCost | required | number | Current realised position value |
+| data.isOpen | required | boolean | Opened position or not |
+| data.markPrice | required | number | Mark price |
+| data.markValue | required | number | Mark value
+ |
+| data.posCost | required | number | Position value |
+| data.posCross | required | number | added margin |
+| data.posInit | required | number | Leverage margin |
+| data.posComm | required | number | Bankruptcy cost |
+| data.posLoss | required | number | Funding fees paid out |
+| data.posMargin | required | number | Position margin |
+| data.posMaint | required | number | Maintenance margin |
+| data.maintMargin | required | number | Position margin |
+| data.realisedGrossPnl | required | number | Accumulated realised gross profit value |
+| data.realisedPnl | required | number | Realised profit and loss |
+| data.unrealisedPnl | required | number | Unrealised profit and loss |
+| data.unrealisedPnlPcnt | required | number | Profit-loss ratio of the position |
+| data.unrealisedRoePcnt | required | number | Rate of return on investment |
+| data.avgEntryPrice | required | number | Average entry price |
+| data.liquidationPrice | required | number | Liquidation price |
+| data.bankruptPrice | required | number | Bankruptcy price |
+| data.userId | required | integer | userId |
+| data.settleCurrency | required | string | Currency used to clear and settle the trades |
 

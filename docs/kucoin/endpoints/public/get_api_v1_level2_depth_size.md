@@ -27,4 +27,9 @@ Query for part orderbook depth data. (aggregated by price). It is recommended th
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.sequence | required | integer | Sequence number |
+| data.symbol | required | string | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)  |
+| data.bids | required | array | bids, from high to low |
+| data.asks | required | array | asks, from low to high |
+| data.ts | required | integer | Timestamp (nanoseconds) |
 

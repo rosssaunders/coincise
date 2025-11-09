@@ -31,4 +31,6 @@ This API endpoint is used to initiate an application for cross or isolated margi
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.orderNo | required | string | Borrow Order ID |
+| data.actualSize | required | string | Actual borrowed amount |
 

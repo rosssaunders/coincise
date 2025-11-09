@@ -30,4 +30,7 @@ This API endpoint is used to initiate an application for cross or isolated margi
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.timestamp | required | integer |  |
+| data.orderNo | required | string | Repay order ID |
+| data.actualSize | required | string | Actual repay amount |
 

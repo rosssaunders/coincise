@@ -20,4 +20,6 @@ Get the service status.
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.msg | required | string |  |
+| data.status | required | string | Status of service: open: normal transaction; close: Stop Trading/Maintenance; cancelonly: can only cancel the order but not place order |
 

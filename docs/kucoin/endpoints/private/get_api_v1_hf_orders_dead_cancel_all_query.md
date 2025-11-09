@@ -20,4 +20,8 @@ Get Disconnection Protect (Deadman Switch). Through this interface, you can quer
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object | If the data is empty, it means that DCP is not set. |
+| data.timeout | optional | integer | Auto cancel order trigger setting time, the unit is second. Range: timeout=-1 (meaning unset) or 5 <= timeout <= 86400 |
+| data.symbols | optional | string | List of trading pairs. Separated by commas; empty means all trading pairs |
+| data.currentTime | optional | integer | System current time (in seconds) |
+| data.triggerTime | optional | integer | Trigger cancellation time (in seconds) |
 

@@ -18,6 +18,8 @@ Cancel a bach of orders by client defined orderId or system generated orderId
 |-----------|----------|------|-------------|
 | orderIdsList | required | array | the list of orderId |
 | clientOidsList | required | array | the list of client orderId |
+| clientOidsList[].symbol | required | string | Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)  |
+| clientOidsList[].clientOid | required | string |  |
 
 ## Responses
 
@@ -27,4 +29,8 @@ Cancel a bach of orders by client defined orderId or system generated orderId
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | array |  |
+| data[].orderId | required | string |  |
+| data[].clientOid | required | string |  |
+| data[].code | required | string |  |
+| data[].msg | required | string |  |
 

@@ -27,4 +27,5 @@ This endpoint can be used to cancel a margin order by orderId. This endpoint onl
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.orderId | required | string | Order id |
 

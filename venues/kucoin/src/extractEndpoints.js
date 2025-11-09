@@ -110,23 +110,41 @@ const parameterToMarkdown = (param) => {
 };
 
 /**
- * Convert OpenAPI schema properties to markdown table
+ * Convert OpenAPI schema properties to markdown table with nested object support
  */
-const schemaPropertiesToMarkdown = (schema) => {
+const schemaPropertiesToMarkdown = (schema, prefix = "") => {
   if (!schema || !schema.properties) {
     return "";
   }
   
   const required = schema.required || [];
-  let table = "| Parameter | Required | Type | Description |\n";
-  table += "|-----------|----------|------|-------------|\n";
+  let table = "";
+  
+  // Only add header if this is the top-level call
+  if (prefix === "") {
+    table = "| Parameter | Required | Type | Description |\n";
+    table += "|-----------|----------|------|-------------|\n";
+  }
   
   for (const [propName, propSchema] of Object.entries(schema.properties)) {
     const isRequired = required.includes(propName);
     const type = propSchema.type || "string";
     const description = propSchema.description || "";
+    const fullName = prefix ? `${prefix}.${propName}` : propName;
     
-    table += `| ${propName} | ${isRequired ? "required" : "optional"} | ${type} | ${description} |\n`;
+    table += `| ${fullName} | ${isRequired ? "required" : "optional"} | ${type} | ${description} |\n`;
+    
+    // Recursively handle nested objects
+    if (propSchema.type === "object" && propSchema.properties) {
+      table += schemaPropertiesToMarkdown(propSchema, fullName);
+    }
+    
+    // Handle arrays of objects
+    if (propSchema.type === "array" && propSchema.items) {
+      if (propSchema.items.type === "object" && propSchema.items.properties) {
+        table += schemaPropertiesToMarkdown(propSchema.items, `${fullName}[]`);
+      }
+    }
   }
   
   return table;

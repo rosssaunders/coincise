@@ -27,4 +27,9 @@ Batch modify the margin mode of the symbols.
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.marginMode | required | object | Target Margin Model, Symbols that failed to be modified will also be included |
+| data.errors | required | array | Symbol which modification failed |
+| data.errors[].code | optional | string | Error code |
+| data.errors[].msg | optional | string | Error message |
+| data.errors[].symbol | optional | string | Symbol |
 

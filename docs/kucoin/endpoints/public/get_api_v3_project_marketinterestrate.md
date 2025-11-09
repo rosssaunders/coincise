@@ -26,4 +26,6 @@ This API endpoint is used to get the interest rates of the margin lending market
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | array |  |
+| data[].time | required | string | Time: YYYYMMDDHH00 |
+| data[].marketInterestRate | required | string | Market lending rate |
 

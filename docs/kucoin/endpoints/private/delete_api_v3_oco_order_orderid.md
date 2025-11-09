@@ -26,4 +26,5 @@ This endpoint can be used to cancel a spot order by orderId. This endpoint only 
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.cancelledOrderIds | required | array | List of two order IDs related to the canceled OCO order |
 

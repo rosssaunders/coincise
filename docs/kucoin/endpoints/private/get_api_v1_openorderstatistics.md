@@ -26,4 +26,14 @@ You can query this endpoint to get the total number and value of all your active
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.openOrderBuySize | required | integer | Total number of unexecuted buy orders
+ |
+| data.openOrderSellSize | required | integer | Total number of unexecuted sell orders
+ |
+| data.openOrderBuyCost | required | string | Value of all unexecuted buy orders
+ |
+| data.openOrderSellCost | required | string | Value of all unexecuted sell orders
+ |
+| data.settleCurrency | required | string | Settlement currency
+ |
 

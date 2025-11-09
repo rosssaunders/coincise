@@ -27,4 +27,5 @@ This endpoint can be used to cancel a margin order by clientOid. This endpoint o
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.clientOid | required | string | Client Order Id, unique identifier created by the user |
 

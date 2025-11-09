@@ -32,4 +32,10 @@ Submit request to get premium index (Update snapshots once per second, real-time
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.dataList | required | array |  |
+| data.dataList[].symbol | required | string | Symbol of the contract. Please refer to [Get Symbol endpoint: premiumsSymbol1M, premiumsSymbol8H](https://www.kucoin.com/docs-new/api-3470220)  |
+| data.dataList[].granularity | required | integer | Granularity (milliseconds) |
+| data.dataList[].timePoint | required | integer | Timestamp (milliseconds) |
+| data.dataList[].value | required | number | Premium index |
+| data.hasMore | required | boolean | Whether there are more pages |
 

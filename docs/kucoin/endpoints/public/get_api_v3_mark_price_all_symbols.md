@@ -20,4 +20,7 @@ This endpoint returns the current Mark price for all margin trading pairs.
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | array |  |
+| data[].symbol | required | string | symbol |
+| data[].timePoint | required | integer | Timestamp (milliseconds) |
+| data[].value | required | number | Mark price |
 

@@ -27,4 +27,5 @@ Cancel order by client defined orderId.
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.clientOid | required | string |  |
 

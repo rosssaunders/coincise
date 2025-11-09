@@ -32,4 +32,14 @@ Get Spot Index Price (Update snapshots once per second,  and there is a 5s cache
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.dataList | required | array |  |
+| data.dataList[].symbol | required | string | Symbol of the contract. Please refer to [Get Symbol endpoint: indexSymbol](https://www.kucoin.com/docs-new/api-3470220)  |
+| data.dataList[].granularity | required | integer | Granularity (milliseconds) |
+| data.dataList[].timePoint | required | integer | Timestamp (milliseconds) |
+| data.dataList[].value | required | number | Index Value |
+| data.dataList[].decomposionList | required | array | Component List |
+| data.dataList[].decomposionList[].exchange | required | string | Exchange |
+| data.dataList[].decomposionList[].price | required | number | Price |
+| data.dataList[].decomposionList[].weight | required | number | Weight |
+| data.hasMore | required | boolean | Whether there are more pages |
 

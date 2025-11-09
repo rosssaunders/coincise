@@ -34,4 +34,17 @@ This API endpoint is used to get the borrowing orders for cross and isolated mar
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.timestamp | required | integer |  |
+| data.currentPage | required | integer | current page |
+| data.pageSize | required | integer | page size |
+| data.totalNum | required | integer | total number |
+| data.totalPage | required | integer | total pages |
+| data.items | required | array |  |
+| data.items[].orderNo | required | string | Borrow Order ID |
+| data.items[].symbol | required | string | Isolated Margin symbol; empty for cross margin |
+| data.items[].currency | required | string | currency |
+| data.items[].size | required | string | Initiated borrow amount |
+| data.items[].actualSize | required | string | Actual borrow amount |
+| data.items[].status | required | string | PENDING: Processing, SUCCESS: Successful, FAILED: Failed |
+| data.items[].createdTime | required | integer | Borrow time |
 

@@ -27,4 +27,9 @@ Query for Full orderbook depth data (aggregated by price). It is generally used 
 |-----------|----------|------|-------------|
 | code | required | string | 200000 is for success, other is error |
 | data | required | object |  |
+| data.sequence | required | integer | Sequence number |
+| data.symbol | required | string | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)  |
+| data.bids | required | array | bids, from high to low |
+| data.asks | required | array | asks, from low to high |
+| data.ts | required | integer | Timestamp (nanoseconds) |
 

@@ -20,4 +20,5 @@ This interface can query all spot symbol that has active orders
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.symbols | required | array | The symbol that has active orders |
 

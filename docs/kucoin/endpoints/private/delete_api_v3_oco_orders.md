@@ -27,4 +27,5 @@ This interface can batch cancel OCO orders through orderIds.  You will receive c
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.cancelledOrderIds | required | array | List of two order IDs related to the canceled OCO order |
 

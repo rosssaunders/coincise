@@ -27,4 +27,5 @@ This endpoint can be used to cancel a spot order by clientOid. This endpoint onl
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.clientOid | required | string | Client Order Id，unique identifier created by the user |
 

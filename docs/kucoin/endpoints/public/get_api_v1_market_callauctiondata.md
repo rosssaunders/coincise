@@ -26,4 +26,12 @@ Get call auction data. This interface will return the following information for 
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.symbol | required | string | Symbol |
+| data.estimatedPrice | required | string | Estimated price |
+| data.estimatedSize | required | string | Estimated size |
+| data.sellOrderRangeLowPrice | required | string | Sell ​​order minimum price |
+| data.sellOrderRangeHighPrice | required | string | Sell ​​order maximum price |
+| data.buyOrderRangeLowPrice | required | string | Buy order minimum price |
+| data.buyOrderRangeHighPrice | required | string | Buy ​​order maximum price |
+| data.time | required | integer | Timestamp (ms) |
 

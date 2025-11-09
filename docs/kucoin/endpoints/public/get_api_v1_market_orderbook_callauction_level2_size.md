@@ -27,4 +27,8 @@ Query for call auction part orderbook depth data. (aggregated by price). It is r
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.time | required | integer | Timestamp (milliseconds) |
+| data.sequence | required | string | Sequence number |
+| data.bids | required | array | bids, from high to low |
+| data.asks | required | array | asks, from low to high |
 

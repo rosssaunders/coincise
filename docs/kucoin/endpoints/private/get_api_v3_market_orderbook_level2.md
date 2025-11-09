@@ -26,4 +26,8 @@ Query for Full orderbook depth data. (aggregated by price)  It is generally used
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.time | required | integer | Timestamp(millisecond) |
+| data.sequence | required | string | Sequence number |
+| data.bids | required | array | bids, from high to low |
+| data.asks | required | array | asks, from low to high |
 

@@ -26,4 +26,5 @@ This endpoint can be used to cancel a spot stop order by orderId.
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.cancelledOrderIds | required | array | order ID array |
 

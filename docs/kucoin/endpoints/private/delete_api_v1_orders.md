@@ -26,4 +26,5 @@ Cancel all open orders (excluding stop orders). The response is a list of orderI
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.cancelledOrderIds | required | array | Unique ID of the canceled order |
 

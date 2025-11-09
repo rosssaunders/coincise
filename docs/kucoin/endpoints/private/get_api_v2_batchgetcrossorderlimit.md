@@ -31,4 +31,15 @@ Defaults to the symbol’s max cross leverage. |
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | array |  |
+| data[].symbol | required | string | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
+| data[].maxOpenSize | required | integer | Maximum amount of open position(Unit is **lots**)
+ |
+| data[].maxOpenValue | required | string | Maximum value of open position(Unit is **quoteCcy**)
+ |
+| data[].totalMargin | required | string | Margin amount used for max position calculation. |
+| data[].price | required | string | Price used for max position calculation. Defaults to latest transaction price |
+| data[].leverage | required | string | Leverage used for max position calculation. |
+| data[].mmr | required | string | Maintenance Margin Rate |
+| data[].imr | required | string | Initial Margin Rate |
+| data[].currency | required | string | Margin Currency |
 

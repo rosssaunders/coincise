@@ -28,4 +28,6 @@ This interface can cancel the specified quantity of the order according to the o
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.orderId | required | string | order id |
+| data.cancelSize | required | string | The size you canceled |
 

@@ -34,4 +34,18 @@ This API endpoint is used to get the borrowing orders for cross and isolated mar
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.timestamp | required | integer |  |
+| data.currentPage | required | integer | current page |
+| data.pageSize | required | integer | page size |
+| data.totalNum | required | integer | total number |
+| data.totalPage | required | integer | total pages |
+| data.items | required | array |  |
+| data.items[].orderNo | required | string | Repay order ID |
+| data.items[].symbol | required | string | Isolated Margin symbol; empty for cross margin |
+| data.items[].currency | required | string | currency |
+| data.items[].size | required | string | Amount of initiated repay |
+| data.items[].principal | required | string | Amount of principal paid |
+| data.items[].interest | required | string | Amount of interest paid |
+| data.items[].status | required | string | PENDING: Processing, SUCCESS: Successful, FAILED: Failed |
+| data.items[].createdTime | required | integer | Repayment time |
 

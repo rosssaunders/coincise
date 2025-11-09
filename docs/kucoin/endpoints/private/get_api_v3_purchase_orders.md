@@ -30,4 +30,17 @@ This API endpoint provides a pagination query for the purchase orders.
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.currentPage | required | integer | Current Page |
+| data.pageSize | required | integer | Page Size |
+| data.totalNum | required | integer | Total Number |
+| data.totalPage | required | integer | Total Pages |
+| data.items | required | array |  |
+| data.items[].currency | required | string | Currency |
+| data.items[].purchaseOrderNo | required | string | Purchase order ID |
+| data.items[].purchaseSize | required | string | Total purchase size |
+| data.items[].matchSize | required | string | Executed size |
+| data.items[].interestRate | required | string | Target annualized interest rate |
+| data.items[].incomeSize | required | string | Redeemed amount |
+| data.items[].applyTime | required | integer | Time of purchase |
+| data.items[].status | required | string | Status: DONE-completed; PENDING-settling |
 

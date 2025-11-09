@@ -31,4 +31,16 @@ This interface can obtain the latest news announcements, and the default page se
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.totalNum | required | integer | Total Number |
+| data.items | required | array |  |
+| data.items[].annId | required | integer | Announcement ID |
+| data.items[].annTitle | required | string | Announcement title |
+| data.items[].annType | required | array | Announcement type |
+| data.items[].annDesc | required | string | Announcement description |
+| data.items[].cTime | required | integer | Announcement release time, Unix millisecond timestamp format |
+| data.items[].language | required | string | language type |
+| data.items[].annUrl | required | string | Announcement link |
+| data.currentPage | required | integer | Current page |
+| data.pageSize | required | integer | Page size |
+| data.totalPage | required | integer | Total Page |
 

@@ -26,4 +26,5 @@ Request via this interface to cancel a stop order via the clientOid.  You will r
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.cancelledOrderIds | required | array | List of two order IDs related to the canceled OCO order |
 

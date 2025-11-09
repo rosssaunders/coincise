@@ -26,4 +26,5 @@ Cancel order by system generated orderId.
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.cancelledOrderIds | required | array | The orderId that is to be canceled |
 

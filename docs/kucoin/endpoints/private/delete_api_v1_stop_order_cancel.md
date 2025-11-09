@@ -28,4 +28,5 @@ This endpoint can be used to cancel a spot stop orders by batch.
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.cancelledOrderIds | required | array | order id array |
 

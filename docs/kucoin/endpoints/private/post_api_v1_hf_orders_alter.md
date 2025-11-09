@@ -30,4 +30,6 @@ This interface can modify the price and quantity of the order according to order
 |-----------|----------|------|-------------|
 | code | required | string |  |
 | data | required | object |  |
+| data.newOrderId | required | string | The new order ID |
+| data.clientOid | required | string | The original client order ID |
 
