@@ -35,7 +35,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request GET      --url 'https://region-api.upbit.com/v1/orderbook?count=30'      --header 'accept: application/json'
+curl --request GET      --url 'https://region-api.upbit.com/v1/orderbook?count=30'      --header 'accept: application/json'
 ```
 
 ## Response Parameters

@@ -202,7 +202,7 @@ const extractEndpointData = async (page, url) => {
       if (text.match(/^["'][^"']+["']$/)) continue
       
       // Clean up code - remove line number prefixes and escape sequences
-      text = text.replace(/^x+\d+\s+\d+/gm, '')  // Remove "xxxxxxxxxx54 1" prefix
+      text = text.replace(/^x+\d+\s*/gm, '')      // Remove "xxxxxxxxxx1 " or "xxxxxxxxxx54 1" prefix
       text = text.replace(/\\\d+/g, '')           // Remove "\2", "\3" escape sequences
       text = text.replace(/\s+\d+\s+(?=[{])/g, ' ')  // Remove " 2  " before {
       text = text.replace(/,\d+\s+/g, ', ')       // Remove line numbers after commas

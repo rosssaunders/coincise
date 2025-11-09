@@ -36,7 +36,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request GET     --url 'https://{region}-api.upbit.com/v1/withdraw?currency=BTC'     --header 'Authorization: Bearer {JWT_TOKEN}'     --header 'Accept: application/json'5​
+curl --request GET     --url 'https://{region}-api.upbit.com/v1/withdraw?currency=BTC'     --header 'Authorization: Bearer {JWT_TOKEN}'     --header 'Accept: application/json'5​
 ```
 
 ## Response Parameters
@@ -55,11 +55,3 @@ xxxxxxxxxx1curl --request GET     --url 'https://{region}-api.upbit.com/v1/withd
 | fee | string | Fee amount for the withdrawal. |
 | transaction_type | string | Withdrawal type. The available values are as follows:  default: General withdrawal internal: Internal (between Upbit accounts)  default internal |
 | is_cancelable | boolean | Indicates whether the withdrawal can be cancelled. |
-
-## Response Example
-
-### Success Response (200 OK)
-
-```json
-{2  "type": "withdraw", "uuid": "9f432943-54e0-40b7-825f-b6fec8b42b79", "currency": "BTC", "txid": null, "state": "PROCESSING", "created_at": "2025-07-04T15:00:00", "done_at": null, "amount": "0.01", "fee": "0.0", "transaction_type": "default", "is_cancelable": false13}
-```

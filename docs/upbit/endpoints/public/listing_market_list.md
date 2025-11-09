@@ -33,7 +33,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request GET      --url https://region-api.upbit.com/v1/market/all      --header 'accept: application/json'
+curl --request GET      --url https://region-api.upbit.com/v1/market/all      --header 'accept: application/json'
 ```
 
 ## Response Parameters
@@ -43,11 +43,3 @@ xxxxxxxxxx1curl --request GET      --url https://region-api.upbit.com/v1/market/
 | market | string | Trading pair code representing the market. |
 | english_name | string | English name of the digital asset. |
 | market_warning | string | Trading pair warning Information.  NONE (Not applicable) CAUTION(Investment warning) |
-
-## Response Example
-
-### Success Response (200 OK)
-
-```json
-[2  {3    "market": "SGD-ETH", "english_name": "Ethereum", "market_warning": "NONE"6  }, {8    "market": "SGD-XRP", "english_name": "XRP", "market_warning": "NONE"11  }, {13    "market": "SGD-BTC", "english_name": "Bitcoin", "market_warning": "NONE"16  }, {18    "market": "SGD-USDT", "english_name": "Tether", "market_warning": "NONE"21  }, {23    "market": "SGD-SOL", "english_name": "Solana", "market_warning": "NONE"26  }27]
-```

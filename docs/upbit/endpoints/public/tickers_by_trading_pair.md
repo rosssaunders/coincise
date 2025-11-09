@@ -33,7 +33,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request GET      --url https://region-api.upbit.com/v1/ticker      --header 'accept: application/json'
+curl --request GET      --url https://region-api.upbit.com/v1/ticker      --header 'accept: application/json'
 ```
 
 ## Response Parameters
@@ -64,11 +64,3 @@ xxxxxxxxxx1curl --request GET      --url https://region-api.upbit.com/v1/ticker 
 | lowest_52_week_price | double | Lowest trading price achieved in the past 52 weeks. |
 | lowest_52_week_date | string | Date when the 52-week low price was achieved. |
 | timestamp | int64 | The timestamp (in milliseconds) when the ticker was requested. |
-
-## Response Example
-
-### Success Response (200 OK)
-
-```json
-[2  {3    "market": "SGD-BTC", "trade_date": "20250802", "trade_time": "050603", "trade_timestamp": 1754111163227, "opening_price": 146200, "high_price": 147185, "low_price": 146200, "trade_price": 147152, "prev_closing_price": 146069, "change": "RISE", "change_price": 1083, "change_rate": 0.0074143042, "signed_change_price": 1083, "signed_change_rate": 0.0074143042, "trade_volume": 0.00001592, "acc_trade_price": 4615.64264147, "acc_trade_price_24h": 2449.59753547, "acc_trade_volume": 0.0315062, "acc_trade_volume_24h": 0.01669057, "highest_52_week_price": 157745, "highest_52_week_date": "2025-07-14", "lowest_52_week_price": 65687, "lowest_52_week_date": "2024-08-05", "timestamp": 175419093503127  }, {29    "market": "SGD-ETH", "trade_date": "20250803", "trade_time": "025714", "trade_timestamp": 1754189834969, "opening_price": 4333, "high_price": 4448, "low_price": 4333, "trade_price": 4448, "prev_closing_price": 4397, "change": "RISE", "change_price": 51, "change_rate": 0.0115988174, "signed_change_price": 51, "signed_change_rate": 0.0115988174, "trade_volume": 0.22116943, "acc_trade_price": 1225.0473119, "acc_trade_price_24h": 2461.18629393, "acc_trade_volume": 0.27675085, "acc_trade_volume_24h": 0.54777252, "highest_52_week_price": 5483, "highest_52_week_date": "2024-12-16", "lowest_52_week_price": 1881, "lowest_52_week_date": "2025-04-07", "timestamp": 175419093503053  }54]
-```

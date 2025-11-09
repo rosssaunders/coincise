@@ -35,7 +35,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request GET      --url 'https://region-api.upbit.com/v1/candles/years?count=1'      --header 'accept: application/json'
+curl --request GET      --url 'https://region-api.upbit.com/v1/candles/years?count=1'      --header 'accept: application/json'
 ```
 
 ## Response Parameters
@@ -52,11 +52,3 @@ xxxxxxxxxx1curl --request GET      --url 'https://region-api.upbit.com/v1/candle
 | candle_acc_trade_price | double | The total trade amount (in the quoted currency) accumulated during the candle period. |
 | candle_acc_trade_volume | double | The total traded volume (in the base asset) accumulated during the candle period. |
 | first_day_of_period | string | Start date of candle aggregation. |
-
-## Response Example
-
-### Success Response (200 OK)
-
-```json
-[2  {3    "market": "SGD-BTC", "candle_date_time_utc": "2025-01-01T00:00:00", "opening_price": 127871, "high_price": 157745, "low_price": 101000, "trade_price": 152114, "timestamp": 1753909903998, "candle_acc_trade_price": 3041987.66401311, "candle_acc_trade_volume": 23.30205337, "first_day_of_period": "2025-01-01"13  }14]
-```

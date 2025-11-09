@@ -34,7 +34,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request GET     --url 'https://{region}-api.upbit.com/v1/withdraws/chance?currency=BTC&net_type=BTC'     --header 'Authorization: Bearer {JWT_TOKEN}'     --header 'Accept: application/json'5​
+curl --request GET     --url 'https://{region}-api.upbit.com/v1/withdraws/chance?currency=BTC&net_type=BTC'     --header 'Authorization: Bearer {JWT_TOKEN}'     --header 'Accept: application/json'5​
 ```
 
 ## Response Parameters
@@ -67,11 +67,3 @@ xxxxxxxxxx1curl --request GET     --url 'https://{region}-api.upbit.com/v1/withd
 | withdraw_delayed_fiat | string | Amount restricted from withdrawal due to the withdrawal delay system. |
 | can_withdraw | boolean | Indicates whether withdrawal is currently supported for the currency. To check if withdrawal is available, verify that "withdraw" is present in currency.wallet_support. |
 | remaining_daily_sgd | string | Integrated daily remaining withdrawal limit in SGD. (deprecated) |
-
-## Response Example
-
-### Success Response (200 OK)
-
-```json
-{2  "member_level": {3    "security_level": 4, "fee_level": 0, "email_verified": true, "identity_auth_verified": true, "bank_account_verified": true, "locked": false, "wallet_locked": false10  }, "currency": {12    "code": "BTC", "withdraw_fee": "0.0008", "is_coin": true, "wallet_state": "working", "wallet_support": [17      "deposit", "withdraw"19    ]20  }, "account": {22    "currency": "BTC", "balance": "0.0", "locked": "0.0", "avg_buy_price": "145115000", "avg_buy_price_modified": false, "unit_currency": "SGD"28  }, "withdraw_limit": {30    "currency": "BTC", "onetime": "50.0", "daily": null, "remaining_daily": "0.0", "remaining_daily_fiat": "1000000.0", "fiat_currency": "SGD", "minimum": "0.00001", "fixed": 8, "withdraw_delayed_fiat": "227.0", "can_withdraw": true, "remaining_daily_sgd": "1000000.0"41  }42}
-```

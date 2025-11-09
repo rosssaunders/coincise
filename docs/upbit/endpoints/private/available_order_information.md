@@ -33,7 +33,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request GET     --url 'https://{region}-api.upbit.com/v1/orders/chance?market=SGD-BTC'     --header 'Authorization: Bearer {JWT_TOKEN}'     --header 'accept: application/json'5​
+curl --request GET     --url 'https://{region}-api.upbit.com/v1/orders/chance?market=SGD-BTC'     --header 'Authorization: Bearer {JWT_TOKEN}'     --header 'accept: application/json'5​
 ```
 
 ## Response Parameters

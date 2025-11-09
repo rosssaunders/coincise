@@ -34,7 +34,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx111curl --request POST   --url 'https://{region}-api.upbit.com/v1/deposits/generate_coin_address'   --header 'Authorization: Bearer {JWT_TOKEN}'   --header 'Content-Type: application/json'   --data '6{7"currency": "BTC",8"net_type": "BTC"9}10'11​
+curl --request POST   --url 'https://{region}-api.upbit.com/v1/deposits/generate_coin_address'   --header 'Authorization: Bearer {JWT_TOKEN}'   --header 'Content-Type: application/json'   --data '6{7"currency": "BTC",8"net_type": "BTC"9}10'11​
 ```
 
 ## Response Parameters

@@ -40,13 +40,5 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx151curl --request POST --url 'https://{region}-api.upbit.com/v1/orders' --header 'Authorization: Bearer {JWT_TOKEN}' --header 'Accept: application/json' --header 'Content-Type: application/json' --data '7  {8  "market":"SGD-BTC", "side":"bid", "volume":"1", "price":"153559", "ord_type":"limit"13  }14'15​
-```
-
-## Response Example
-
-### Success Response (200 OK)
-
-```json
-{2  "uuid": "d098ceaf-6811-4df8-97f2-b7e01aefc03f", "side": "bid", "ord_type": "limit", "price": "153559.00", "state": "wait", "market": "SGD-BTC", "created_at": "2025-07-04T15:00:00", "volume": "1.0", "remaining_volume": "1.0", "executed_volume": "0.0", "reserved_fee": "383.8975", "remaining_fee": "383.8975", "paid_fee": "0", "locked": "153942.8975", "prevented_volume": "0", "prevented_locked": "0", "trades_count": 019}
+curl --request POST --url 'https://{region}-api.upbit.com/v1/orders' --header 'Authorization: Bearer {JWT_TOKEN}' --header 'Accept: application/json' --header 'Content-Type: application/json' --data '7  {8  "market":"SGD-BTC", "side":"bid", "volume":"1", "price":"153559", "ord_type":"limit"13  }14'15​
 ```

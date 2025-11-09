@@ -37,7 +37,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request GET      --url 'https://region-api.upbit.com/v1/trades/ticks?count=1'      --header 'accept: application/json'
+curl --request GET      --url 'https://region-api.upbit.com/v1/trades/ticks?count=1'      --header 'accept: application/json'
 ```
 
 ## Response Parameters
@@ -54,11 +54,3 @@ xxxxxxxxxx1curl --request GET      --url 'https://region-api.upbit.com/v1/trades
 | change_price | double | Price change compared to the previous day's closing price. Calculated as "trade_price" - "prev_closing_price".  Positive (+): Current price is higher than previous day's closing price Negative (-): Current price is lower than previous day's closing price |
 | ask_bid | string | Trade direction. "ASK" for sell orders, "BID" for buy orders. ASK BID |
 | sequential_id | integer | Unique identifier for the trade. This field does not guarantee trade order sequence. |
-
-## Response Example
-
-### Success Response (200 OK)
-
-```json
-[2  {3    "market": "SGD-BTC", "trade_date_utc": "2025-07-31", "trade_time_utc": "15:28:57", "timestamp": 1753975737159, "trade_price": 153099, "trade_volume": 0.00008736, "prev_closing_price": 152114, "change_price": 985, "ask_bid": "ASK", "sequential_id": 175397573715900013  }14]
-```

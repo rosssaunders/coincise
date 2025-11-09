@@ -36,7 +36,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request GET      --url 'https://region-api.upbit.com/v1/candles/days?count=1'      --header 'accept: application/json'
+curl --request GET      --url 'https://region-api.upbit.com/v1/candles/days?count=1'      --header 'accept: application/json'
 ```
 
 ## Response Parameters
@@ -56,11 +56,3 @@ xxxxxxxxxx1curl --request GET      --url 'https://region-api.upbit.com/v1/candle
 | change_price | double | Price change compared to the previous day's closing price. Calculated as "trade_price" - "prev_closing_price".  Positive (+): Current price is higher than previous day's closing price Negative (-): Current price is lower than previous day's closing price |
 | change_rate | double | Price change rate compared to the previous day's closing price. Calculated as ("trade_price" - "prev_closing_price") ÷ "prev_closing_price".  Positive (+): Price increase Negative (-): Price decrease  Example: 0.015 = 1.5% increase |
 | converted_trade_price | double | The closing price converted based on the currency specified in converted_trade_price.  If converted_trade_price is not included in the request, this field is not provided. If not digital asset market, return null value. |
-
-## Response Example
-
-### Success Response (200 OK)
-
-```json
-[2  {3    "market": "SGD-BTC", "candle_date_time_utc": "2025-07-30T00:00:00", "opening_price": 153473, "high_price": 153504, "low_price": 151937, "trade_price": 152114, "timestamp": 1753909903998, "candle_acc_trade_price": 4564.10881053, "candle_acc_trade_volume": 0.0299313, "prev_closing_price": 151721, "change_price": 393, "change_rate": 0.002590280815  }16]
-```

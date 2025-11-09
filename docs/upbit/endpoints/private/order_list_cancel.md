@@ -27,7 +27,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request DELETE     --url 'https://{region}-api.upbit.com/v1/orders/uuids?uuids[]=bbbb8e07-1689-4769-af3e-a117016623f8&uuids[]=4312ba49-5f1a-4a01-9f3b-2d2bce17267e&uuids[]=bdb49a54-de36-4eb4-a963-9c8d4337a9da'     --header 'Authorization: Bearer {JWT_TOKEN}'     --header 'accept: application/json'5​
+curl --request DELETE     --url 'https://{region}-api.upbit.com/v1/orders/uuids?uuids[]=bbbb8e07-1689-4769-af3e-a117016623f8&uuids[]=4312ba49-5f1a-4a01-9f3b-2d2bce17267e&uuids[]=bdb49a54-de36-4eb4-a963-9c8d4337a9da'     --header 'Authorization: Bearer {JWT_TOKEN}'     --header 'accept: application/json'5​
 ```
 
 ## Response Parameters
@@ -38,11 +38,3 @@ xxxxxxxxxx1curl --request DELETE     --url 'https://{region}-api.upbit.com/v1/or
 | uuid | string | Unique identifier for the order. |
 | market | string | Trading pair code representing the market. |
 | identifier | string | Order identifier specified by the client at order creation.  identifier field is only provided for orders created on or after October 18, 2024. |
-
-## Response Example
-
-### Success Response (200 OK)
-
-```json
-{2  "success": {3    "count": 2, "orders": [5      {6        "uuid": "bbbb8e07-1689-4769-af3e-a117016623f8", "market": "SGD-ETH"8      }, {10        "uuid": "4312ba49-5f1a-4a01-9f3b-2d2bce17267e", "market": "SGD-ETH"12      }13    ]14  }, "failed": {16    "count": 1, "orders": [18      {19        "uuid": "bdb49a54-de36-4eb4-a963-9c8d4337a9da", "market": "SGD-BTC"21      }22    ]23  }24}
-```

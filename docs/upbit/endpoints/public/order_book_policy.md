@@ -34,7 +34,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request GET      --url https://region-api.upbit.com/v1/orderbook/instruments      --header 'accept: application/json'
+curl --request GET      --url https://region-api.upbit.com/v1/orderbook/instruments      --header 'accept: application/json'
 ```
 
 ## Response Parameters
@@ -44,11 +44,3 @@ xxxxxxxxxx1curl --request GET      --url https://region-api.upbit.com/v1/orderbo
 | market | string | Trading pair code representing the market. |
 | quote_currency | string | Quote currency code of the pair |
 | tick_size | string | Price unit applied to the orderbook level |
-
-## Response Example
-
-### Success Response (200 OK)
-
-```json
-[2  {3    "market": "SGD-BTC", "quote_currency": "SGD", "tick_size": "1"6  }, {8    "market": "SGD-ETH", "quote_currency": "SGD", "tick_size": "1"11  }12]
-```

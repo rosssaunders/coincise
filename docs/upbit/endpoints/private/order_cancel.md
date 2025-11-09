@@ -34,7 +34,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request DELETE     --url 'https://{region}-api.upbit.com/v1/order?uuid=cdd92199-2897-4e14-9448-f923320408ad'     --header 'Authorization: Bearer {JWT_TOKEN}'     --header 'Accept: application/json'5​
+curl --request DELETE     --url 'https://{region}-api.upbit.com/v1/order?uuid=cdd92199-2897-4e14-9448-f923320408ad'     --header 'Authorization: Bearer {JWT_TOKEN}'     --header 'Accept: application/json'5​
 ```
 
 ## Response Parameters
@@ -61,11 +61,3 @@ xxxxxxxxxx1curl --request DELETE     --url 'https://{region}-api.upbit.com/v1/or
 | prevented_volume | string | Quantity cancelled due to Self-Match Prevention (SMP). Which prevents execution between orders from the same user. |
 | prevented_locked | string | Assets released due to Self-Match Prevention (SMP). Remaining assets from an order canceled due to the Self-Match Prevention setting.  For buy orders: Cancelled amount For sell orders: Cancelled quantity |
 | trades_count | integer | Number of trades executed for the order. |
-
-## Response Example
-
-### Success Response (200 OK)
-
-```json
-[2  {3    "uuid": "cdd92199-2897-4e14-9448-f923320408ad", "side": "bid", "ord_type": "limit", "price": "153559.00", "state": "wait", "market": "SGD-BTC", "created_at": "2025-07-04T15:00:00", "volume": "1.0", "remaining_volume": "1.0", "executed_volume": "0", "reserved_fee": "383.8975", "remaining_fee": "383.8975", "paid_fee": "0", "locked": "153942.8975", "prevented_volume": "0", "prevented_locked": "0", "trades_count": 020  }21]
-```
