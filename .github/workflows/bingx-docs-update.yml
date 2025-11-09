@@ -43,7 +43,9 @@ jobs:
         run: pnpm run extract:all
 
       - name: Format documentation
-        run: ./formatdocs.sh docs/bingx/
+        run: |
+          cd ../..
+          ./formatdocs.sh docs/bingx/
 
       - name: Check for changes
         id: git-check
