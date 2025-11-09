@@ -1,91 +1,41 @@
-# Update isolated margin
+# POST /exchange
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
-`POST` `https://api.hyperliquid.xyz/exchange`
+## Description
 
 Add or remove margin from isolated position
 
-Note that to target a specific leverage instead of a USDC value of margin
-change, there is an alternate action
-`{"type": "topUpIsolatedOnlyMargin", "asset": <asset>, "leverage": <float string>}`
+Note that to target a specific leverage instead of a USDC value of margin change, there is an alternate action `{"type": "topUpIsolatedOnlyMargin", "asset": <asset>, "leverage": <float string>}`
 
-####
+## Authentication
 
-[](#headers-7)
+Required (Private Endpoint)
 
-Headers
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Name
+## Rate Limit
 
-Type
+**Weight:** 1
 
-Description
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-Content-Type\*
+## HTTP Request
 
-String
+`POST /exchange`
 
-"application/json"
+## Request Example
 
-####
-
-[](#request-body-7)
-
-Request Body
-
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "updateIsolatedMargin",
-
-"asset": index of coin,
-
-"isBuy": true, (this parameter won't have any effect until hedge mode is
-introduced)
-
-"ntli": int representing amount to add or remove with 6 decimals, e.g. 1000000
-for 1 usd,
-
-}
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
-
-vaultAddress
-
-String
-
-If trading on behalf of a vault or subaccount, its Onchain address in
-42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
-
-expiresAfter
-
-Number
-
-Timestamp in milliseconds
-
-200: OK Successful response
-
-Copy
-
+```bash
+curl -X POST "https://api.hyperliquid.xyz/exchange" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
 ```
-{'status': 'ok', 'response': {'type': 'default'}}
+
+## Response Example
+
+```json
+{
+  "status": "ok"
+}
 ```

@@ -1,68 +1,39 @@
-# Query a user's staking rewards
+# POST /info
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
-`POST` `https://api.hyperliquid.xyz/info`
+## Description
 
-####
+Query a user's staking rewards endpoint
 
-[](#headers-17)
+## Authentication
 
-Headers
+Required (Private Endpoint)
 
-Name
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Type
+## Rate Limit
 
-Description
+**Weight:** 1
 
-Content-Type\*
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-String
+## HTTP Request
 
-"application/json"
+`POST /info`
 
-####
+## Request Example
 
-[](#request-body-19)
-
-Request Body
-
-Name
-
-Type
-
-Description
-
-type\*
-
-String
-
-"delegatorRewards"
-
-user\*
-
-String
-
-hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.
-
-200: OK
-
-Copy
-
+```bash
+curl -X POST "https://api.hyperliquid.xyz/info" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
 ```
-[
-    {
-        "time": 1736726400073,
-        "source": "delegation",
-        "totalAmount": "0.73117184"
-    },
-    {
-        "time": 1736726400073,
-        "source": "commission",
-        "totalAmount": "130.76445876"
-    },
-    ...
-]
+
+## Response Example
+
+```json
+{
+  "status": "ok"
+}
 ```

@@ -1,107 +1,39 @@
-# Cancel a TWAP order
+# POST /exchange
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
-`POST` `https://api.hyperliquid.xyz/exchange`
+## Description
 
-####
+Cancel a TWAP order endpoint
 
-[](#headers-16)
+## Authentication
 
-Headers
+Required (Private Endpoint)
 
-Name
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Type
+## Rate Limit
 
-Description
+**Weight:** 1
 
-Content-Type\*
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-String
+## HTTP Request
 
-"application/json"
+`POST /exchange`
 
-####
+## Request Example
 
-[](#request-body-12)
-
-Request Body
-
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "twapCancel",
-
-"a": Number,
-
-"t": Number
-
-} Meaning of keys: a is asset t is twap_id
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
-
-vaultAddress
-
-String
-
-If trading on behalf of a vault or subaccount, its address in 42-character
-hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
-
-expiresAfter
-
-Number
-
-Timestamp in milliseconds
-
-200: OK Successful Response
-
-200: OK Error Response
-
-Copy
-
-```
-{
-   "status":"ok",
-   "response":{
-      "type":"twapCancel",
-      "data":{
-         "status": "success"
-      }
-   }
-}
+```bash
+curl -X POST "https://api.hyperliquid.xyz/exchange" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
 ```
 
-Copy
+## Response Example
 
-```
+```json
 {
-   "status":"ok",
-   "response":{
-      "type":"twapCancel",
-      "data":{
-         "status": {
-            "error": "TWAP was never placed, already canceled, or filled."
-         }
-      }
-   }
+  "status": "ok"
 }
 ```

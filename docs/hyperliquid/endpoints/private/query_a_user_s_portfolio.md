@@ -1,92 +1,39 @@
-# Query a user's portfolio
+# POST /info
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
-`POST` `https://api.hyperliquid.xyz/info`
+## Description
 
-####
+Query a user's portfolio endpoint
 
-[](#headers-11)
+## Authentication
 
-Headers
+Required (Private Endpoint)
 
-Name
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Type
+## Rate Limit
 
-Description
+**Weight:** 1
 
-Content-Type\*
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-String
+## HTTP Request
 
-"application/json"
+`POST /info`
 
-####
+## Request Example
 
-[](#request-body-13)
-
-Request Body
-
-Name
-
-Type
-
-Description
-
-type\*
-
-String
-
-"portfolio"
-
-user\*
-
-String
-
-hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.
-
-200: OK
-
-Copy
-
+```bash
+curl -X POST "https://api.hyperliquid.xyz/info" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
 ```
-[
-  [
-    "day",
-    {
-      "accountValueHistory": [
-        [
-          1741886630493,
-          "0.0"
-        ],
-        [
-          1741895270493,
-          "0.0"
-        ],
-        ...
-      ],
-      "pnlHistory": [
-        [
-          1741886630493,
-          "0.0"
-        ],
-        [
-          1741895270493,
-          "0.0"
-        ],
-        ...
-      ],
-      "vlm": "0.0"
-    }
-  ],
-  ["week", { ... }],
-  ["month", { ... }],
-  ["allTime", { ... }],
-  ["perpDay", { ... }],
-  ["perpWeek", { ... }],
-  ["perpMonth", { ... }],
-  ["perpAllTime", { ... }]
-]
+
+## Response Example
+
+```json
+{
+  "status": "ok"
+}
 ```

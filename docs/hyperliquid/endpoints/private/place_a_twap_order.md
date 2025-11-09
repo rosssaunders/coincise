@@ -1,123 +1,39 @@
-# Place a TWAP order
+# POST /exchange
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
-`POST` `https://api.hyperliquid.xyz/exchange`
+## Description
 
-####
+Place a TWAP order endpoint
 
-[](#headers-15)
+## Authentication
 
-Headers
+Required (Private Endpoint)
 
-Name
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Type
+## Rate Limit
 
-Description
+**Weight:** 1
 
-Content-Type\*
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-String
+## HTTP Request
 
-"application/json"
+`POST /exchange`
 
-####
+## Request Example
 
-[](#request-body-11)
-
-Request Body
-
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "twapOrder", "twap": {
-
-"a": Number,
-
-"b": Boolean,
-
-"s": String,
-
-"r": Boolean,
-
-"m": Number,
-
-"t": Boolean
-
-}
-
-} Meaning of keys: a is asset b is isBuy s is size r is reduceOnly
-
-m is minutes t is randomize
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
-
-vaultAddress
-
-String
-
-If trading on behalf of a vault or subaccount, its Onchain address in
-42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
-
-expiresAfter
-
-Number
-
-Timestamp in milliseconds
-
-200: OK Successful Response
-
-200: OK Error Response
-
-Copy
-
-```
-{
-   "status":"ok",
-   "response":{
-      "type":"twapOrder",
-      "data":{
-         "status": {
-            "running":{
-               "twapId":77738308
-            }
-         }
-      }
-   }
-}
+```bash
+curl -X POST "https://api.hyperliquid.xyz/exchange" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
 ```
 
-Copy
+## Response Example
 
-```
+```json
 {
-   "status":"ok",
-   "response":{
-      "type":"twapOrder",
-      "data":{
-         "status": {
-            "error":"Invalid TWAP duration: 1 min(s)"
-         }
-      }
-   }
+  "status": "ok"
 }
 ```

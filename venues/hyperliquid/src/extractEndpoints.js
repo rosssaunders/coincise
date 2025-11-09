@@ -212,18 +212,294 @@ const classifyEndpoint = (name, content) => {
 }
 
 /**
+ * Extract HTTP method and path from content
+ */
+const extractMethodAndPath = content => {
+  // Look for POST/GET followed by URL
+  const methodMatch = content.match(/`(POST|GET|PUT|DELETE|PATCH)`\s+`([^`]+)`/)
+  if (methodMatch) {
+    return {
+      method: methodMatch[1],
+      path: methodMatch[2].replace(/^https?:\/\/[^\/]+/, "") // Remove domain
+    }
+  }
+  // Default to POST /info for info endpoints, POST /exchange for exchange endpoints
+  return null
+}
+
+/**
+ * Extract description from content
+ */
+const extractDescription = (content, endpointName) => {
+  // Get the first paragraph after the method line
+  const lines = content.split("\n")
+  const description = []
+
+  let foundMethod = false
+  for (const line of lines) {
+    if (line.includes("`POST`") || line.includes("`GET`")) {
+      foundMethod = true
+      continue
+    }
+    if (foundMethod && line.trim() && !line.startsWith("**") && !line.startsWith("####")) {
+      // Stop at sections we don't want
+      if (
+        line.includes("**Headers**") ||
+        line.includes("**Body**") ||
+        line.includes("**Response**") ||
+        line === "Name" ||
+        line === "Value" ||
+        line === "Type" ||
+        line === "Description" ||
+        line.startsWith("[](#") || // GitBook anchor links
+        line.toLowerCase() === "headers" ||
+        line.toLowerCase() === "body"
+      ) {
+        break
+      }
+      description.push(line.trim())
+    }
+  }
+
+  const result = description.join("\n\n").trim()
+  return result || `${endpointName} endpoint`
+}
+
+/**
+ * Convert parameter text to GFM table
+ */
+const convertParametersToTable = (content, sectionName, includeRequired = true) => {
+  const lines = content.split("\n")
+  let inSection = false
+  const params = []
+  let currentParam = {}
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim()
+
+    // Find section start
+    if (line.includes(`**${sectionName}**`)) {
+      inSection = true
+      continue
+    }
+
+    // Stop at next section
+    if (
+      inSection &&
+      (line.startsWith("**") || line.startsWith("####")) &&
+      !line.includes("Name") &&
+      !line.includes("Type") &&
+      !line.includes("Description") &&
+      !line.includes("Value")
+    ) {
+      break
+    }
+
+    if (inSection && line) {
+      // Skip header rows
+      if (
+        line === "Name" ||
+        line === "Type" ||
+        line === "Description" ||
+        line === "Value"
+      ) {
+        continue
+      }
+
+      // Collect parameter info - order is Name, Type, Description (or Name, Value for headers)
+      if (!currentParam.name) {
+        // Check if this looks like a parameter name
+        if (line && !line.includes("**") && line.length < 100) {
+          currentParam.name = line
+          // Check if required (has asterisk or escaped asterisk)
+          currentParam.required = line.includes("*") || line.includes("\\*")
+        }
+      } else if (!currentParam.type) {
+        currentParam.type = line
+      } else if (!currentParam.description) {
+        currentParam.description = line
+        // Add the parameter
+        if (currentParam.name) {
+          params.push({ ...currentParam })
+          currentParam = {}
+        }
+      }
+    }
+  }
+
+  if (params.length === 0) return ""
+
+  // Generate table
+  const headers = includeRequired
+    ? "| Parameter | Type | Required | Description |"
+    : "| Parameter | Type | Description |"
+  const separator = includeRequired
+    ? "| --------- | ---- | -------- | ----------- |"
+    : "| --------- | ---- | ----------- |"
+
+  const rows = params.map(p => {
+    const isRequired = p.required ? "Yes" : "No"
+    // Clean name - remove asterisks and escaped characters
+    const cleanName = p.name.replace(/\*/g, "").replace(/\\/g, "").trim()
+    const cleanType = (p.type || "string").trim()
+    const desc = (p.description || "").trim()
+
+    return includeRequired
+      ? `| ${cleanName} | ${cleanType} | ${isRequired} | ${desc} |`
+      : `| ${cleanName} | ${cleanType} | ${desc} |`
+  })
+
+  return `${headers}\n${separator}\n${rows.join("\n")}`
+}
+
+/**
+ * Fix JSON code blocks
+ */
+const fixJsonCodeBlocks = content => {
+  // Add json tag to code blocks
+  return content.replace(/```\n(\s*[{\[])/g, "```json\n$1")
+}
+
+/**
+ * Transform content to standard format
+ */
+const transformToStandardFormat = (endpoint, category) => {
+  const { name, content, sourceUrl } = endpoint
+
+  // Extract components
+  const methodPath = extractMethodAndPath(content)
+  const description = extractDescription(content, name)
+
+  // Determine method and path
+  let method = "POST"
+  let path = "/info"
+  if (methodPath) {
+    method = methodPath.method
+    path = methodPath.path || (sourceUrl.includes("exchange-endpoint") ? "/exchange" : "/info")
+  } else {
+    path = sourceUrl.includes("exchange-endpoint") ? "/exchange" : "/info"
+  }
+
+  // Build sections
+  const sections = []
+
+  // Title
+  sections.push(`# ${method} ${path}`)
+  sections.push("")
+
+  // Source
+  sections.push(`**Source:** ${sourceUrl}`)
+  sections.push("")
+
+  // Description
+  if (description) {
+    sections.push("## Description")
+    sections.push("")
+    sections.push(description)
+    sections.push("")
+  }
+
+  // Authentication
+  sections.push("## Authentication")
+  sections.push("")
+  if (category === "public") {
+    sections.push("Not Required (Public Endpoint)")
+  } else {
+    sections.push("Required (Private Endpoint)")
+    sections.push("")
+    sections.push(
+      "This endpoint requires authentication using EIP-712 signing with your private key or API wallet."
+    )
+  }
+  sections.push("")
+
+  // Rate Limit
+  sections.push("## Rate Limit")
+  sections.push("")
+  sections.push("**Weight:** 1")
+  sections.push("")
+  sections.push("See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.")
+  sections.push("")
+
+  // HTTP Request
+  sections.push("## HTTP Request")
+  sections.push("")
+  sections.push(`\`${method} ${path}\``)
+  sections.push("")
+
+  // Request Parameters - Headers
+  const headersTable = convertParametersToTable(content, "Headers", false)
+  if (headersTable) {
+    sections.push("## Request Parameters")
+    sections.push("")
+    sections.push("### Headers")
+    sections.push("")
+    sections.push(headersTable)
+    sections.push("")
+  }
+
+  // Request Parameters - Body
+  const bodyTable = convertParametersToTable(content, "Body", true)
+  if (bodyTable) {
+    if (!headersTable) {
+      sections.push("## Request Parameters")
+      sections.push("")
+    }
+    sections.push("### Body Parameters")
+    sections.push("")
+    sections.push(bodyTable)
+    sections.push("")
+  }
+
+  // Request Example
+  sections.push("## Request Example")
+  sections.push("")
+  sections.push("```bash")
+  if (category === "public") {
+    sections.push(`curl -X ${method} "https://api.hyperliquid.xyz${path}" \\`)
+    sections.push('  -H "Content-Type: application/json" \\')
+    sections.push('  -d \'{"type": "...", ...}\'')
+  } else {
+    sections.push(`curl -X ${method} "https://api.hyperliquid.xyz${path}" \\`)
+    sections.push('  -H "Content-Type: application/json" \\')
+    sections.push('  -d \'{"action": {...}, "nonce": 1234567890, "signature": {...}}\'')
+  }
+  sections.push("```")
+  sections.push("")
+
+  // Response Example
+  sections.push("## Response Example")
+  sections.push("")
+
+  // Extract and fix response
+  const responseMatch = content.match(/\*\*Response\*\*[\s\S]*?```[\s\S]*?```/m)
+  if (responseMatch) {
+    let response = responseMatch[0]
+    // Remove "Response" header and status code
+    response = response.replace(/\*\*Response\*\*[\s\S]*?200: OK[\s\S]*?Copy[\s\S]*?/m, "")
+    // Fix code block
+    response = fixJsonCodeBlocks(response)
+    sections.push(response.trim())
+  } else {
+    sections.push("```json")
+    sections.push("{")
+    sections.push('  "status": "ok"')
+    sections.push("}")
+    sections.push("```")
+  }
+  sections.push("")
+
+  return sections.join("\n")
+}
+
+/**
  * Save endpoint to file
  */
 const saveEndpoint = (endpoint, category) => {
   const filename = `${sanitizeFilename(endpoint.name)}.md`
   const outputPath = path.join(OUTPUT_DIR, "endpoints", category, filename)
 
-  const content = `# ${endpoint.name}
-
-**Source:** ${endpoint.sourceUrl}
-
-${endpoint.content}
-`
+  const content = transformToStandardFormat(endpoint, category)
 
   writeFile(outputPath, content)
 }

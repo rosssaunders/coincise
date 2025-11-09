@@ -1,64 +1,39 @@
-# Validator vote on risk-free rate for aligned quote asset
+# POST /exchange
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
-####
+## Description
 
-[](#headers-21)
+Validator vote on risk-free rate for aligned quote asset endpoint
 
-Headers
+## Authentication
 
-Name
+Required (Private Endpoint)
 
-Type
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Description
+## Rate Limit
 
-Content-Type\*
+**Weight:** 1
 
-String
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-"application/json"
+## HTTP Request
 
-####
+`POST /exchange`
 
-[](#request-body-17)
+## Request Example
 
-Request Body
-
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "validatorL1Stream",
-
-"riskFreeRate": String // e.g. "0.04" for 4%
-
-}
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
-
-200: OK Successful Response
-
-Copy
-
+```bash
+curl -X POST "https://api.hyperliquid.xyz/exchange" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
 ```
-{'status': 'ok', 'response': {'type': 'default'}}
+
+## Response Example
+
+```json
+{
+  "status": "ok"
+}
 ```

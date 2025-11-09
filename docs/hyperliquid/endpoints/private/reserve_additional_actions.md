@@ -1,76 +1,39 @@
-# Reserve Additional Actions
+# POST /exchange
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
-`POST` `https://api.hyperliquid.xyz/exchange`
+## Description
 
-Instead of trading to increase the address based rate limits, this action allows
-reserving additional actions for 0.0005 USDC per request. The cost is paid from
-the Perps balance.
+Instead of trading to increase the address based rate limits, this action allows reserving additional actions for 0.0005 USDC per request. The cost is paid from the Perps balance.
 
-####
+## Authentication
 
-[](#headers-17)
+Required (Private Endpoint)
 
-Headers
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Name
+## Rate Limit
 
-Type
+**Weight:** 1
 
-Description
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-Content-Type\*
+## HTTP Request
 
-String
+`POST /exchange`
 
-"application/json"
+## Request Example
 
-####
-
-[](#request-body-13)
-
-Request Body
-
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "reserveRequestWeight",
-
-"weight": Number
-
-}
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
-
-expiresAfter
-
-Number
-
-Timestamp in milliseconds
-
-200: OK Successful Response
-
-Copy
-
+```bash
+curl -X POST "https://api.hyperliquid.xyz/exchange" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
 ```
-{'status': 'ok', 'response': {'type': 'default'}}
+
+## Response Example
+
+```json
+{
+  "status": "ok"
+}
 ```

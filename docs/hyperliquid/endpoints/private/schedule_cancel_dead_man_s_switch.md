@@ -1,77 +1,39 @@
-# Schedule cancel (dead man's switch)
+# POST /exchange
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
-`POST` `https://api.hyperliquid.xyz/exchange`
+## Description
 
-####
+Schedule cancel (dead man's switch) endpoint
 
-[](#headers-3)
+## Authentication
 
-Headers
+Required (Private Endpoint)
 
-Name
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Type
+## Rate Limit
 
-Description
+**Weight:** 1
 
-Content-Type\*
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-String
+## HTTP Request
 
-"application/json"
+`POST /exchange`
 
-####
+## Request Example
 
-[](#request-body-3)
+```bash
+curl -X POST "https://api.hyperliquid.xyz/exchange" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
+```
 
-Request Body
+## Response Example
 
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
+```json
 {
-
-"type": "scheduleCancel",
-
-"time": number (optional)
-
+  "status": "ok"
 }
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
-
-vaultAddress
-
-String
-
-If trading on behalf of a vault or subaccount, its address in 42-character
-hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
-
-expiresAfter
-
-Number
-
-Timestamp in milliseconds
-
-Schedule a cancel-all operation at a future time. Not including time will remove
-the scheduled cancel operation. The time must be at least 5 seconds after the
-current time. Once the time comes, all open orders will be canceled and a
-trigger count will be incremented. The max number of triggers per day is 10.
-This trigger count is reset at 00:00 UTC.
+```

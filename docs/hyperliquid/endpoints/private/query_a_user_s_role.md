@@ -1,89 +1,39 @@
-# Query a user's role
+# POST /info
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
-`POST` `https://api.hyperliquid.xyz/info`
+## Description
 
-####
+Query a user's role endpoint
 
-[](#headers-10)
+## Authentication
 
-Headers
+Required (Private Endpoint)
 
-Name
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Type
+## Rate Limit
 
-Description
+**Weight:** 1
 
-Content-Type\*
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-String
+## HTTP Request
 
-"application/json"
+`POST /info`
 
-####
+## Request Example
 
-[](#request-body-12)
-
-Request Body
-
-Name
-
-Type
-
-Description
-
-type\*
-
-String
-
-"userRole"
-
-user\*
-
-String
-
-Address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000.
-
-User
-
-Agent
-
-Vault
-
-Subaccount
-
-Missing
-
-Copy
-
-```
-{"role":"user"} # "missing", "user", "agent", "vault", or "subAccount"
+```bash
+curl -X POST "https://api.hyperliquid.xyz/info" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
 ```
 
-Copy
+## Response Example
 
-```
-{"role":"agent", "data": {"user": "0x..."}}
-```
-
-Copy
-
-```
-{"role":"vault"}
-```
-
-Copy
-
-```
-{"role":"subAccount", "data":{"master":"0x..."}}
-```
-
-Copy
-
-```
-{"role":"missing"}
+```json
+{
+  "status": "ok"
+}
 ```

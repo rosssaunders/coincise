@@ -1,63 +1,47 @@
-# L2 book snapshot
+# POST /info
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
-`POST` `https://api.hyperliquid.xyz/info`
+## Description
 
 Returns at most 20 levels per side
 
-**Headers**
+## Authentication
 
-Name
+Not Required (Public Endpoint)
 
-Value
+## Rate Limit
 
-Content-Type\*
+**Weight:** 1
 
-"application/json"
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-**Body**
+## HTTP Request
 
-Name
+`POST /info`
 
-Type
+## Request Parameters
 
-Description
+### Body Parameters
 
-type\*
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| type | String | Yes | "l2Book" |
+| coin | String | Yes | coin |
+| nSigFigs | Number | No | Optional field to aggregate levels to `nSigFigs` significant figures. Valid values are 2, 3, 4, 5, and `null`, which means full precision |
+| mantissa | Number | No | Optional field to aggregate levels. This field is only allowed if nSigFigs is 5. Accepts values of 1, 2 or 5. |
 
-String
+## Request Example
 
-"l2Book"
-
-coin\*
-
-String
-
-coin
-
-nSigFigs
-
-Number
-
-Optional field to aggregate levels to `nSigFigs` significant figures. Valid
-values are 2, 3, 4, 5, and `null`, which means full precision
-
-mantissa
-
-Number
-
-Optional field to aggregate levels. This field is only allowed if nSigFigs is 5.
-Accepts values of 1, 2 or 5.
-
-**Response**
-
-200: OK
-
-Copy
-
+```bash
+curl -X POST "https://api.hyperliquid.xyz/info" \
+  -H "Content-Type: application/json" \
+  -d '{"type": "...", ...}'
 ```
+
+## Response Example
+
+```json
 {
   "coin": "BTC",
   "time": 1754450974231,

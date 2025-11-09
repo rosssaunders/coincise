@@ -1,78 +1,39 @@
-# Core USDC transfer
+# POST /exchange
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
-`POST` `https://api.hyperliquid.xyz/exchange`
+## Description
 
-Send usd to another address. This transfer does not touch the EVM bridge. The
-signature format is human readable for wallet interfaces.
+Send usd to another address. This transfer does not touch the EVM bridge. The signature format is human readable for wallet interfaces.
 
-####
+## Authentication
 
-[](#headers-8)
+Required (Private Endpoint)
 
-Headers
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Name
+## Rate Limit
 
-Type
+**Weight:** 1
 
-Description
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-Content-Type\*
+## HTTP Request
 
-String
+`POST /exchange`
 
-"application/json"
+## Request Example
 
-####
-
-[](#request-body-8)
-
-Request Body
-
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "usdSend",
-
-"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead),
-"signatureChainId": the id of the chain used when signing in hexadecimal format;
-e.g. "0xa4b1" for Arbitrum,
-
-"destination": address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000,
-
-"amount": amount of usd to send as a string, e.g. "1" for 1 usd,
-
-"time": current timestamp in milliseconds as a Number, should match nonce
-
-}
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
-
-200: OK Successful Response
-
-Copy
-
+```bash
+curl -X POST "https://api.hyperliquid.xyz/exchange" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
 ```
-{'status': 'ok', 'response': {'type': 'default'}}
+
+## Response Example
+
+```json
+{
+  "status": "ok"
+}
 ```

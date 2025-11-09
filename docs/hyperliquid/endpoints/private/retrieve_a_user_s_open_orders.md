@@ -1,75 +1,39 @@
-# Retrieve a user's open orders
+# POST /info
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
-`POST` `https://api.hyperliquid.xyz/info`
+## Description
 
 See a user's open orders
 
-####
+## Authentication
 
-[](#headers-1)
+Required (Private Endpoint)
 
-Headers
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Name
+## Rate Limit
 
-Type
+**Weight:** 1
 
-Description
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-Content-Type\*
+## HTTP Request
 
-String
+`POST /info`
 
-"application/json"
+## Request Example
 
-####
-
-[](#request-body-1)
-
-Request Body
-
-Name
-
-Type
-
-Description
-
-type\*
-
-String
-
-"openOrders"
-
-user\*
-
-String
-
-Address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000.
-
-dex
-
-String
-
-Perp dex name. Defaults to the empty string which represents the first perp dex.
-Spot open orders are only included with the first perp dex.
-
-200: OK Successful R
-
-Copy
-
+```bash
+curl -X POST "https://api.hyperliquid.xyz/info" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
 ```
-[
-    {
-        "coin": "BTC",
-        "limitPx": "29792.0",
-        "oid": 91490942,
-        "side": "A",
-        "sz": "0.0",
-        "timestamp": 1681247412573
-    }
-]
+
+## Response Example
+
+```json
+{
+  "status": "ok"
+}
 ```

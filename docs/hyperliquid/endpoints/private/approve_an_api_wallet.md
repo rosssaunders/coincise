@@ -1,63 +1,46 @@
-# Approve an API wallet
+# POST /exchange
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
-`POST` `https://api.hyperliquid.xyz/exchange`
+## Description
 
-Approves an API Wallet (also sometimes referred to as an Agent Wallet). See
-[here](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/nonces-and-api-wallets#api-wallets)
-for more details.
+Approves an API Wallet (also sometimes referred to as an Agent Wallet). See [here](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/nonces-and-api-wallets#api-wallets) for more details.
 
-**Headers**
+## Authentication
 
-Name
+Required (Private Endpoint)
 
-Value
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Content-Type\*
+## Rate Limit
 
-`application/json`
+**Weight:** 1
 
-**Body**
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-Name
+## HTTP Request
 
-Type
+`POST /exchange`
 
-Description
+## Request Parameters
 
-action\*
+### Body Parameters
 
-Object
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| action | Object | Yes | { "type": "approveAgent", |
+| "nonce": current timestamp in milliseconds as a Number, must match nonce in outer request body | } | No | nonce\* |
+| number | Recommended to use the current timestamp in milliseconds | No | signature\* |
 
-{ "type": "approveAgent",
+## Request Example
 
-"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead),
-"signatureChainId": the id of the chain used when signing in hexadecimal format;
-e.g. "0xa4b1" for Arbitrum,
+```bash
+curl -X POST "https://api.hyperliquid.xyz/exchange" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
+```
 
-"agentAddress": address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000,
-
-"agentName": Optional name for the API wallet. An account can have 1 unnamed
-approved wallet and up to 3 named ones. And additional 2 named agents are
-allowed per subaccount,
-
-"nonce": current timestamp in milliseconds as a Number, must match nonce in
-outer request body
-
-}
-
-nonce\*
-
-number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
+## Response Example
 
 **Response**
 
@@ -65,6 +48,6 @@ Object
 
 Copy
 
-```
+```json
 {'status': 'ok', 'response': {'type': 'default'}}
 ```

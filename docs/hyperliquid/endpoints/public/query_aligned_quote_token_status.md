@@ -1,72 +1,37 @@
-# Query aligned quote token status
+# POST /info
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
-`POST` `https://api.hyperliquid.xyz/info`
+## Description
 
-####
+Query aligned quote token status endpoint
 
-[](#headers-19)
+## Authentication
 
-Headers
+Not Required (Public Endpoint)
 
-Name
+## Rate Limit
 
-Type
+**Weight:** 1
 
-Description
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-Content-Type\*
+## HTTP Request
 
-String
+`POST /info`
 
-"application/json"
+## Request Example
 
-####
-
-[](#request-body-21)
-
-Request Body
-
-Name
-
-Type
-
-Description
-
-type\*
-
-String
-
-"alignedQuoteTokenInfo"
-
-token\*
-
-Number
-
-token index
-
-200: OK
-
-Copy
-
+```bash
+curl -X POST "https://api.hyperliquid.xyz/info" \
+  -H "Content-Type: application/json" \
+  -d '{"type": "...", ...}'
 ```
+
+## Response Example
+
+```json
 {
-    "isAligned": true,
-    "firstAlignedTime": 1758949452538,
-    "evmMintedSupply": "0.0",
-    "dailyAmountOwed": [
-        [
-            "2025-10-04",
-            "0.0"
-        ],
-        [
-            "2025-10-05",
-            "0.0"
-        ],
-        ...
-    ],
-    "predictedRate": "0.01"
+  "status": "ok"
 }
 ```

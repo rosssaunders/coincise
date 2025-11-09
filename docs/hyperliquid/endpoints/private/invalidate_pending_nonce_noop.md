@@ -1,74 +1,39 @@
-# Invalidate Pending Nonce (noop)
+# POST /exchange
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
-`POST` `https://api.hyperliquid.xyz/exchange`
+## Description
 
-This action does not do anything (no operation), but causes the nonce to be
-marked as used. This can be a more effective way to cancel in-flight orders than
-the cancel action.
+This action does not do anything (no operation), but causes the nonce to be marked as used. This can be a more effective way to cancel in-flight orders than the cancel action.
 
-####
+## Authentication
 
-[](#headers-18)
+Required (Private Endpoint)
 
-Headers
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Name
+## Rate Limit
 
-Type
+**Weight:** 1
 
-Description
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-Content-Type\*
+## HTTP Request
 
-String
+`POST /exchange`
 
-"application/json"
+## Request Example
 
-####
-
-[](#request-body-14)
-
-Request Body
-
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "noop"
-
-}
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
-
-expiresAfter
-
-Number
-
-Timestamp in milliseconds
-
-200: OK Successful Response
-
-Copy
-
+```bash
+curl -X POST "https://api.hyperliquid.xyz/exchange" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
 ```
-{'status': 'ok', 'response': {'type': 'default'}}
+
+## Response Example
+
+```json
+{
+  "status": "ok"
+}
 ```

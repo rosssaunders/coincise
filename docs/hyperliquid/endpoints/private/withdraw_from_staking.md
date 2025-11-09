@@ -1,80 +1,39 @@
-# Withdraw from staking
+# POST /exchange
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
-`POST` `https://api.hyperliquid.xyz/exchange`
+## Description
 
-This method is used to transfer native token from staking into the user's spot
-account. Note that transfers from staking to spot account go through a 7 day
-unstaking queue.
+This method is used to transfer native token from staking into the user's spot account. Note that transfers from staking to spot account go through a 7 day unstaking queue.
 
-####
+## Authentication
 
-[](#headers-13)
+Required (Private Endpoint)
 
-Headers
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Name
+## Rate Limit
 
-Value
+**Weight:** 1
 
-Content-Type\*
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-`application/json`
+## HTTP Request
 
-####
+`POST /exchange`
 
-[](#body-2)
+## Request Example
 
-Body
-
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "cWithdraw",
-
-"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead),
-"signatureChainId": the id of the chain used when signing in hexadecimal format;
-e.g. "0xa4b1" for Arbitrum,
-
-"wei": amount of wei to transfer as a number,
-
-"nonce": current timestamp in milliseconds as a Number, must match nonce in
-outer request body
-
-}
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds, must match the nonce
-in the action Object above
-
-signature\*
-
-Object
-
-####
-
-[](#response-2)
-
-Response
-
-200: OK
-
-Copy
-
+```bash
+curl -X POST "https://api.hyperliquid.xyz/exchange" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
 ```
-{'status': 'ok', 'response': {'type': 'default'}}
+
+## Response Example
+
+```json
+{
+  "status": "ok"
+}
 ```

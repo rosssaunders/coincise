@@ -1,53 +1,47 @@
-# Candle snapshot
+# POST /info
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
-`POST` `https://api.hyperliquid.xyz/info`
+## Description
 
 Only the most recent 5000 candles are available
 
-Supported intervals: "1m", "3m", "5m", "15m", "30m", "1h", "2h", "4h", "8h",
-"12h", "1d", "3d", "1w", "1M"
+Supported intervals: "1m", "3m", "5m", "15m", "30m", "1h", "2h", "4h", "8h", "12h", "1d", "3d", "1w", "1M"
 
-**Headers**
+## Authentication
 
-Name
+Not Required (Public Endpoint)
 
-Value
+## Rate Limit
 
-Content-Type\*
+**Weight:** 1
 
-"application/json"
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-**Body**
+## HTTP Request
 
-Name
+`POST /info`
 
-Type
+## Request Parameters
 
-Description
+### Body Parameters
 
-type\*
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| type | String | Yes | "candleSnapshot" |
+| req | Object | Yes | {"coin": <coin>, "interval": "15m", "startTime": <epoch millis>, "endTime": <epoch millis>} |
 
-String
+## Request Example
 
-"candleSnapshot"
-
-req\*
-
-Object
-
-{"coin": <coin>, "interval": "15m", "startTime": <epoch millis>, "endTime":
-<epoch millis>}
-
-**Response**
-
-200: OK
-
-Copy
-
+```bash
+curl -X POST "https://api.hyperliquid.xyz/info" \
+  -H "Content-Type: application/json" \
+  -d '{"type": "...", ...}'
 ```
+
+## Response Example
+
+```json
 [
   {
     "T": 1681924499999,

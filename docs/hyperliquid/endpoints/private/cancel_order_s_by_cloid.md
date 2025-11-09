@@ -1,85 +1,39 @@
-# Cancel order(s) by cloid
+# POST /exchange
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
-`POST` `https://api.hyperliquid.xyz/exchange`
+## Description
 
-####
+Cancel order(s) by cloid endpoint
 
-[](#headers-2)
+## Authentication
 
-Headers
+Required (Private Endpoint)
 
-Name
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Type
+## Rate Limit
 
-Description
+**Weight:** 1
 
-Content-Type\*
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-String
+## HTTP Request
 
-"application/json"
+`POST /exchange`
 
-####
+## Request Example
 
-[](#request-body-2)
+```bash
+curl -X POST "https://api.hyperliquid.xyz/exchange" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
+```
 
-Request Body
+## Response Example
 
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
+```json
 {
-
-"type": "cancelByCloid",
-
-"cancels": \[
-
-{
-
-"asset": Number,
-
-"cloid": String
-
+  "status": "ok"
 }
-
-\]
-
-}
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
-
-vaultAddress
-
-String
-
-If trading on behalf of a vault or subaccount, its address in 42-character
-hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
-
-expiresAfter
-
-Number
-
-Timestamp in milliseconds
-
-200: OK Successful Response
-
-200: OK Error Response
+```

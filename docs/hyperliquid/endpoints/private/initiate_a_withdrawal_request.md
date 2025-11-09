@@ -1,79 +1,39 @@
-# Initiate a withdrawal request
+# POST /exchange
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
-`POST` `https://api.hyperliquid.xyz/exchange`
+## Description
 
-This method is used to initiate the withdrawal flow. After making this request,
-the L1 validators will sign and send the withdrawal request to the bridge
-contract. There is a $1 fee for withdrawing at the time of this writing and
-withdrawals take approximately 5 minutes to finalize.
+This method is used to initiate the withdrawal flow. After making this request, the L1 validators will sign and send the withdrawal request to the bridge contract. There is a $1 fee for withdrawing at the time of this writing and withdrawals take approximately 5 minutes to finalize.
 
-####
+## Authentication
 
-[](#headers-10)
+Required (Private Endpoint)
 
-Headers
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Name
+## Rate Limit
 
-Type
+**Weight:** 1
 
-Description
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-Content-Type\*
+## HTTP Request
 
-String
+`POST /exchange`
 
-"application/json"
+## Request Example
 
-####
-
-[](#request-body-10)
-
-Request Body
-
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{ "type": "withdraw3",
-
-"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead),
-"signatureChainId": the id of the chain used when signing in hexadecimal format;
-e.g. "0xa4b1" for Arbitrum,
-
-"amount": amount of usd to send as a string, e.g. "1" for 1 usd,
-
-"time": current timestamp in milliseconds as a Number, should match nonce,
-
-"destination": address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000
-
-}
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds, must match the nonce
-in the action Object above
-
-signature\*
-
-Object
-
-200: OK
-
-Copy
-
+```bash
+curl -X POST "https://api.hyperliquid.xyz/exchange" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
 ```
-{'status': 'ok', 'response': {'type': 'default'}}
+
+## Response Example
+
+```json
+{
+  "status": "ok"
+}
 ```

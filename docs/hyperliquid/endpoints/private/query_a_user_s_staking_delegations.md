@@ -1,63 +1,39 @@
-# Query a user's staking delegations
+# POST /info
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
-`POST` `https://api.hyperliquid.xyz/info`
+## Description
 
-####
+Query a user's staking delegations endpoint
 
-[](#headers-14)
+## Authentication
 
-Headers
+Required (Private Endpoint)
 
-Name
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Type
+## Rate Limit
 
-Description
+**Weight:** 1
 
-Content-Type\*
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-String
+## HTTP Request
 
-"application/json"
+`POST /info`
 
-####
+## Request Example
 
-[](#request-body-16)
-
-Request Body
-
-Name
-
-Type
-
-Description
-
-type\*
-
-String
-
-"delegations"
-
-user\*
-
-String
-
-hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.
-
-200: OK
-
-Copy
-
+```bash
+curl -X POST "https://api.hyperliquid.xyz/info" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
 ```
-[
-    {
-        "validator":"0x5ac99df645f3414876c816caa18b2d234024b487",
-        "amount":"12060.16529862",
-        "lockedUntilTimestamp":1735466781353
-    },
-    ...
-]
+
+## Response Example
+
+```json
+{
+  "status": "ok"
+}
 ```

@@ -1,81 +1,39 @@
-# Delegate or undelegate stake from validator
+# POST /exchange
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
-`POST` `https://api.hyperliquid.xyz/exchange`
+## Description
 
-Delegate or undelegate native tokens to or from a validator. Note that
-delegations to a particular validator have a lockup duration of 1 day.
+Delegate or undelegate native tokens to or from a validator. Note that delegations to a particular validator have a lockup duration of 1 day.
 
-####
+## Authentication
 
-[](#headers-14)
+Required (Private Endpoint)
 
-Headers
+This endpoint requires authentication using EIP-712 signing with your private key or API wallet.
 
-Name
+## Rate Limit
 
-Value
+**Weight:** 1
 
-Content-Type\*
+See [Rate Limits](/docs/hyperliquid/rate_limits.md) for complete rate limiting rules.
 
-`application/json`
+## HTTP Request
 
-####
+`POST /exchange`
 
-[](#body-3)
+## Request Example
 
-Body
-
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "tokenDelegate",
-
-"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead),
-"signatureChainId": the id of the chain used when signing in hexadecimal format;
-e.g. "0xa4b1" for Arbitrum,
-
-"validator": address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000, "isUndelegate": boolean,
-
-"wei": number,
-
-"nonce": current timestamp in milliseconds as a Number, must match nonce in
-outer request body
-
-}
-
-nonce\*
-
-number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
-
-####
-
-[](#response-3)
-
-Response
-
-200: OK
-
-Copy
-
+```bash
+curl -X POST "https://api.hyperliquid.xyz/exchange" \
+  -H "Content-Type: application/json" \
+  -d '{"action": {...}, "nonce": 1234567890, "signature": {...}}'
 ```
-{'status': 'ok', 'response': {'type': 'default'}}
+
+## Response Example
+
+```json
+{
+  "status": "ok"
+}
 ```
