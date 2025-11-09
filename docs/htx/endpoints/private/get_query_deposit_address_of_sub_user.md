@@ -1,6 +1,7 @@
 # GET Query Deposit Address of Sub User
 
-**Source:** [Query Deposit Address of Sub User](https://www.htx.com/en-us/opend/newApiPages/?id=7ec5255a-7773-11ed-9966-0242ac110003)
+**Source:**
+[Query Deposit Address of Sub User](https://www.htx.com/en-us/opend/newApiPages/?id=7ec5255a-7773-11ed-9966-0242ac110003)
 
 **Category:** Sub-account Management
 
@@ -16,34 +17,35 @@ Signature verification: Yes
 
 Interface permission: Read
 
-Interface description: Parent user could query sub user's deposit address on corresponding chain, for a specific crypto currency (except IOTA).
+Interface description: Parent user could query sub user's deposit address on
+corresponding chain, for a specific crypto currency (except IOTA).
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| subUid | long | false |  |  | Sub user UID (limited to 1 per request) |
-| currency | string | false |  |  | Crypto currency,refer to GET /v1/common/currencys |
+| Parameter | Data Type | Required | Description | Value Range | Default Value                                     |
+| --------- | --------- | -------- | ----------- | ----------- | ------------------------------------------------- |
+| subUid    | long      | false    |             |             | Sub user UID (limited to 1 per request)           |
+| currency  | string    | false    |             |             | Crypto currency,refer to GET /v1/common/currencys |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| code | int | false |  |  |
-| message | string | false |  |  |
-| DATA\_START | object | false |  |  |
-| currency | string | false |  |  |
-| address | string | false |  |  |
-| addressTag | string | false |  |  |
-| chain | string | false |  |  |
-| DATA\_END |  | false |  |  |
+| Parameter  | Data Type | Required | Description | Value Range |
+| ---------- | --------- | -------- | ----------- | ----------- |
+| code       | int       | false    |             |             |
+| message    | string    | false    |             |             |
+| DATA_START | object    | false    |             |             |
+| currency   | string    | false    |             |             |
+| address    | string    | false    |             |             |
+| addressTag | string    | false    |             |             |
+| chain      | string    | false    |             |             |
+| DATA_END   |           | false    |             |             |
 
 #### Request example
 

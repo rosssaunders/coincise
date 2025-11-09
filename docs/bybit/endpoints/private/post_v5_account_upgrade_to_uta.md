@@ -61,9 +61,8 @@ but please note belows:
 
 2.  Please ensure: there is no open orders when upgrade from
     [UTA2.0](/docs/v5/acct-mode#uta-20) to [UTA2.0](/docs/v5/acct-mode#uta-20)
-    Pro
-    Regaring the conditions that upgrade [UTA1.0](/docs/v5/acct-mode#uta-10) Pro
-    to [UTA2.0](/docs/v5/acct-mode#uta-20) Pro, please ensure:
+    Pro Regaring the conditions that upgrade [UTA1.0](/docs/v5/acct-mode#uta-10)
+    Pro to [UTA2.0](/docs/v5/acct-mode#uta-20) Pro, please ensure:
 
 - There is no open orders regardless of order types;
 - All inverse contract positions must keep consistent with the margin mode of

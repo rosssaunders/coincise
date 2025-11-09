@@ -2,7 +2,8 @@
 
 **Title:** Server timestamp
 
-**Source:** [Server timestamp](https://docs.digifinex.com/en-ww/spot/v3/rest.html#server-timestamp)
+**Source:**
+[Server timestamp](https://docs.digifinex.com/en-ww/spot/v3/rest.html#server-timestamp)
 
 ## Authentication
 
@@ -14,7 +15,7 @@ Not Required (Public Endpoint)
 
 ### HTTP Request
 
--   GET `https://openapi.digifinex.com/v3/time`
+- GET `https://openapi.digifinex.com/v3/time`
 
 ### Request Parameters
 
@@ -33,7 +34,7 @@ No parameter is available for this endpoint.
 
 ### Response Content
 
-| Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| server\_time | true | int | Server timestamp |
-| code | true | int | Status |
+| Field       | Mandatory | Request Type | Description      |
+| ----------- | --------- | ------------ | ---------------- |
+| server_time | true      | int          | Server timestamp |
+| code        | true      | int          | Status           |

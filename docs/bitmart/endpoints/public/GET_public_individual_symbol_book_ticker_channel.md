@@ -1,6 +1,7 @@
 # GET 【Public】Individual Symbol Book Ticker Channel
 
-**Source:** [【Public】Individual Symbol Book Ticker Channel](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[【Public】Individual Symbol Book Ticker Channel](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -10,7 +11,8 @@ Not Required (Public Endpoint)
 
 ## 【Public】Individual Symbol Book Ticker Channel
 
-Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol
+Pushes any update to the best bid or ask's price or quantity in real-time for a
+specified symbol
 
 ### Pushing Rules
 
@@ -28,9 +30,9 @@ Message Format:
 
 `{"action":"subscribe","args":["<channel:symbol>"]}`
 
--   actions: `subscribe`
--   channel: Channel name, such as `futures/bookticker`
--   symbol: Trading pair, such as `BTCUSDT`
+- actions: `subscribe`
+- channel: Channel name, such as `futures/bookticker`
+- symbol: Trading pair, such as `BTCUSDT`
 
 ### Response
 
@@ -40,13 +42,13 @@ Message Format:
 
 Return data description:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| symbol | String | Symbol of the contract(like `BTCUSDT`) |
-| best\_bid\_price | String | Best bid price |
-| best\_bid\_vol | String | Best bid volume |
-| best\_ask\_price | String | Best ask price |
-| best\_ask\_vol | String | Best ask volume |
-| ms\_t | Long | Data push timestamp (in millisecond) |
+| Field          | Type   | Description                            |
+| -------------- | ------ | -------------------------------------- |
+| symbol         | String | Symbol of the contract(like `BTCUSDT`) |
+| best_bid_price | String | Best bid price                         |
+| best_bid_vol   | String | Best bid volume                        |
+| best_ask_price | String | Best ask price                         |
+| best_ask_vol   | String | Best ask volume                        |
+| ms_t           | Long   | Data push timestamp (in millisecond)   |
 
-* * *
+---

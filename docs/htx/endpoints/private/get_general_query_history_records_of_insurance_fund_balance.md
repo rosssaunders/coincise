@@ -1,6 +1,7 @@
 # GET [General] Query history records of insurance fund balance
 
-**Source:** [[General] Query history records of insurance fund balance](https://www.htx.com/en-us/opend/newApiPages/?id=8cb7fd58-77b5-11ed-9966-0242ac110003)
+**Source:**
+[[General] Query history records of insurance fund balance](https://www.htx.com/en-us/opend/newApiPages/?id=8cb7fd58-77b5-11ed-9966-0242ac110003)
 
 **Category:** Downline Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /linear-swap-api/v1/swap\_insurance\_fund (\[General\] Query history records of insurance fund balance)
+### /linear-swap-api/v1/swap_insurance_fund (\[General\] Query history records of insurance fund balance)
 
 Request type: GET
 
@@ -16,44 +17,50 @@ Signature verification: No
 
 Interface permission: Read
 
-Rate Limit: For public interface used to get information of index, price limit, settlement, delivery, open positions and so on, the rate limit is 240 times every 3 second at most for each IP (this 240 times every 3 second public interface rate limit is shared by all the requests from that IP of non-marketing information, like above).
+Rate Limit: For public interface used to get information of index, price limit,
+settlement, delivery, open positions and so on, the rate limit is 240 times
+every 3 second at most for each IP (this 240 times every 3 second public
+interface rate limit is shared by all the requests from that IP of non-marketing
+information, like above).
 
-Interface description: The interface supports cross margin mode and isolated margin mode. The request parameter "contract\_code" supports the contract code of futures, in that the format is BTC-USDT-FUTURES.
+Interface description: The interface supports cross margin mode and isolated
+margin mode. The request parameter "contract_code" supports the contract code of
+futures, in that the format is BTC-USDT-FUTURES.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | contract code | swap: "BTC-USDT"... , future: "BTC-USDT-FUTURES" ... |  |
-| page\_index | int | false | page index. 1 by default |  |  |
-| page\_size | int | false | page size.100 by default. 100 at most | \[1-100\] |  |
+| Parameter     | Data Type | Required | Description                           | Value Range                                          | Default Value |
+| ------------- | --------- | -------- | ------------------------------------- | ---------------------------------------------------- | ------------- |
+| contract_code | string    | true     | contract code                         | swap: "BTC-USDT"... , future: "BTC-USDT-FUTURES" ... |               |
+| page_index    | int       | false    | page index. 1 by default              |                                                      |               |
+| page_size     | int       | false    | page size.100 by default. 100 at most | \[1-100\]                                            |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request Processing Result | "ok" , "error" |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| DATA\_START |  | false |  | Dictionary Data |
-| symbol | string | true | symbol | "BTC","ETH"... |
-| contract\_code | string | true | contract code | e.g. swap: "BTC-USDT"... , future: "BTC-USDT-FUTURES" ... |
-| pair | string | true | pair | such as: “BTC-USDT” |
-| business\_type | string | true | business type | futures, swap |
-| TICK\_START |  | false |  |  |
-| insurance\_fund | decimal | true | Insurance Fund Balance |  |
-| ts | long | true | Timestamp, Unit: Millisecond |  |
-| TICK\_END |  | false |  |  |
-| total\_page | int | true | total page |  |
-| current\_page | int | true | current page |  |
-| total\_size | int | true | total size |  |
-| DATA\_END |  | false |  |  |
+| Parameter      | Data Type | Required | Description                                   | Value Range                                               |
+| -------------- | --------- | -------- | --------------------------------------------- | --------------------------------------------------------- |
+| status         | string    | true     | Request Processing Result                     | "ok" , "error"                                            |
+| ts             | long      | true     | Time of Respond Generation, Unit: Millisecond |                                                           |
+| DATA_START     |           | false    |                                               | Dictionary Data                                           |
+| symbol         | string    | true     | symbol                                        | "BTC","ETH"...                                            |
+| contract_code  | string    | true     | contract code                                 | e.g. swap: "BTC-USDT"... , future: "BTC-USDT-FUTURES" ... |
+| pair           | string    | true     | pair                                          | such as: “BTC-USDT”                                       |
+| business_type  | string    | true     | business type                                 | futures, swap                                             |
+| TICK_START     |           | false    |                                               |                                                           |
+| insurance_fund | decimal   | true     | Insurance Fund Balance                        |                                                           |
+| ts             | long      | true     | Timestamp, Unit: Millisecond                  |                                                           |
+| TICK_END       |           | false    |                                               |                                                           |
+| total_page     | int       | true     | total page                                    |                                                           |
+| current_page   | int       | true     | current page                                  |                                                           |
+| total_size     | int       | true     | total size                                    |                                                           |
+| DATA_END       |           | false    |                                               |                                                           |
 
 #### Request example
 
@@ -71,15 +78,15 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 "data":{
 
-"total\_page":
+"total_page":
 
 1
 
-"current\_page":
+"current_page":
 
 1
 
-"total\_size":
+"total_size":
 
 4
 
@@ -87,7 +94,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-FUTURES"
 
@@ -95,7 +102,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 0:{
 
-"insurance\_fund":
+"insurance_fund":
 
 16174.621898868114
 
@@ -107,7 +114,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 1:{
 
-"insurance\_fund":
+"insurance_fund":
 
 130.91239886811348
 
@@ -119,7 +126,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 2:{
 
-"insurance\_fund":
+"insurance_fund":
 
 0.00286055422
 
@@ -131,7 +138,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 3:{
 
-"insurance\_fund":
+"insurance_fund":
 
 0
 
@@ -143,7 +150,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 \]
 
-"business\_type":
+"business_type":
 
 "futures"
 

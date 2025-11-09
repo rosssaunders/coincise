@@ -1,22 +1,30 @@
 # Gate.io Documentation Scraper
 
-This scraper extracts API documentation from Gate.io's official documentation website and converts it to Markdown format.
+This scraper extracts API documentation from Gate.io's official documentation
+website and converts it to Markdown format.
 
 ## Features
 
 ### Resilient HTTP Fetching
 
-The scraper implements robust HTTP fetching to handle Gate.io's anti-bot protection:
+The scraper implements robust HTTP fetching to handle Gate.io's anti-bot
+protection:
 
-1. **Browser-like User-Agent Headers**: All requests include realistic browser headers to avoid being flagged as bots
-2. **Automatic Retry with Exponential Backoff**: Failed requests are automatically retried up to 3 times with increasing delays (500ms → 1500ms → 4500ms)
-3. **Detailed Error Logging**: Failed requests log status codes, response headers, and response body previews for debugging
-4. **Puppeteer Fallback**: If HTTP requests fail with 403 (Forbidden) errors, the scraper automatically falls back to using a headless browser (Puppeteer)
+1. **Browser-like User-Agent Headers**: All requests include realistic browser
+   headers to avoid being flagged as bots
+2. **Automatic Retry with Exponential Backoff**: Failed requests are
+   automatically retried up to 3 times with increasing delays (500ms → 1500ms →
+   4500ms)
+3. **Detailed Error Logging**: Failed requests log status codes, response
+   headers, and response body previews for debugging
+4. **Puppeteer Fallback**: If HTTP requests fail with 403 (Forbidden) errors,
+   the scraper automatically falls back to using a headless browser (Puppeteer)
 
 ### Architecture
 
 - **`src/fetcher.js`**: Core HTTP fetching logic with axios-retry
-- **`src/puppeteer-fallback.js`**: Headless browser fallback for blocked requests
+- **`src/puppeteer-fallback.js`**: Headless browser fallback for blocked
+  requests
 - **`src/utils.js`**: Utility functions including the `downloadHtml` wrapper
 - **`src/scripts/test-fetch.js`**: Smoke test to validate fetch behavior
 
@@ -56,11 +64,13 @@ pnpm run extract:websocket-futures
 pnpm run test:fetch
 ```
 
-This smoke test validates that the HTTP fetching works correctly, including retry logic and fallback mechanisms.
+This smoke test validates that the HTTP fetching works correctly, including
+retry logic and fallback mechanisms.
 
 ## Environment Variables
 
-You can disable the Puppeteer fallback by modifying the code if needed (though it's recommended to keep it enabled for resilience).
+You can disable the Puppeteer fallback by modifying the code if needed (though
+it's recommended to keep it enabled for resilience).
 
 ## Dependencies
 
@@ -80,11 +90,13 @@ The scraper will:
 3. Fall back to Puppeteer if axios continues to fail with 403 errors
 4. Exit with a non-zero code and clear error message if all attempts fail
 
-This ensures that transient network issues or anti-bot protections don't cause the CI/CD pipeline to fail unnecessarily.
+This ensures that transient network issues or anti-bot protections don't cause
+the CI/CD pipeline to fail unnecessarily.
 
 ## CI/CD Integration
 
-The scraper runs automatically via GitHub Actions (`.github/workflows/gateio-docs-update.yml`):
+The scraper runs automatically via GitHub Actions
+(`.github/workflows/gateio-docs-update.yml`):
 
 - **Schedule**: Daily at 00:00 UTC
 - **Trigger**: Manual dispatch or pushes to `venues/gateio/**`
@@ -100,6 +112,7 @@ If extractions fail:
 4. Check if Gate.io has implemented new anti-bot measures
 
 The detailed logging will help identify whether the issue is:
+
 - Network connectivity
 - Anti-bot blocking (look for 403 errors)
 - Changed HTML structure

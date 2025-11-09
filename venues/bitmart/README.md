@@ -1,10 +1,12 @@
 # Bitmart API Documentation Extractor
 
-This project extracts API documentation from Bitmart and converts it to markdown format following the Coincise standardized extraction pattern.
+This project extracts API documentation from Bitmart and converts it to markdown
+format following the Coincise standardized extraction pattern.
 
 ## Features
 
-- Extracts core documentation sections (authentication, rate limits, network connectivity, error codes, changelog, response formats)
+- Extracts core documentation sections (authentication, rate limits, network
+  connectivity, error codes, changelog, response formats)
 - Extracts individual REST API endpoints into separate files
 - Organizes endpoints by public/private classification
 - Converts HTML to Markdown with proper formatting
@@ -31,6 +33,7 @@ bitmart/
 - turndown-plugin-gfm: ^1.0.2 - GitHub Flavored Markdown support
 
 Uses shared utilities from `venues/shared/`:
+
 - puppeteer.js - Browser automation
 - turndown.js - Markdown conversion
 - utils.js - File system utilities
@@ -96,20 +99,24 @@ docs/bitmart/
 
 ## Endpoint Classification
 
-Endpoints are automatically classified as public or private based on authentication requirements:
+Endpoints are automatically classified as public or private based on
+authentication requirements:
 
-- **Public endpoints**: No authentication headers required (X-BM-KEY, X-BM-SIGN, X-BM-TIMESTAMP)
+- **Public endpoints**: No authentication headers required (X-BM-KEY, X-BM-SIGN,
+  X-BM-TIMESTAMP)
 - **Private endpoints**: Require KEYED or SIGNED authentication
 
 ## API Documentation Source
 
 The scraper targets the official Bitmart API documentation at:
+
 - Spot API: https://developer-pro.bitmart.com/en/spot/
 - Futures API: https://developer-pro.bitmart.com/en/futuresv2/
 
 ## Last Updated
 
-Extraction scripts updated to follow Coincise standardized pattern - November 2024
+Extraction scripts updated to follow Coincise standardized pattern - November
+2024
 
 ## Contributing
 

@@ -1,10 +1,12 @@
 # Coinbase International Exchange (INTX) API Documentation Scraper
 
-Documentation extraction for the Coinbase International Exchange (INTX) API following the standardized Coincise pipeline.
+Documentation extraction for the Coinbase International Exchange (INTX) API
+following the standardized Coincise pipeline.
 
 ## Overview
 
-This scraper extracts Coinbase INTX API documentation and converts it to the standardized LLM-friendly markdown format used across all Coincise venues.
+This scraper extracts Coinbase INTX API documentation and converts it to the
+standardized LLM-friendly markdown format used across all Coincise venues.
 
 ## Documentation Structure
 
@@ -52,6 +54,7 @@ npm run extract:general
 ```
 
 Extracts core documentation files:
+
 - Authentication
 - Rate limits
 - Network connectivity
@@ -65,13 +68,16 @@ Extracts core documentation files:
 npm run extract:endpoints
 ```
 
-Extracts individual API endpoint documentation into `endpoints/public/` and `endpoints/private/` directories.
+Extracts individual API endpoint documentation into `endpoints/public/` and
+`endpoints/private/` directories.
 
 ## Endpoint Classification
 
-Endpoints are automatically classified as public or private based on authentication requirements:
+Endpoints are automatically classified as public or private based on
+authentication requirements:
 
-- **Public endpoints**: No authentication headers required (CB-ACCESS-KEY, CB-ACCESS-SIGN, etc.)
+- **Public endpoints**: No authentication headers required (CB-ACCESS-KEY,
+  CB-ACCESS-SIGN, etc.)
 - **Private endpoints**: Require authentication headers
 
 ## Documentation Source
@@ -83,9 +89,11 @@ Endpoints are automatically classified as public or private based on authenticat
 
 ## Endpoint Extraction
 
-The scraper successfully extracts individual endpoint documentation from the Coinbase INTX OpenAPI specification. The extraction process:
+The scraper successfully extracts individual endpoint documentation from the
+Coinbase INTX OpenAPI specification. The extraction process:
 
-1. Downloads the OpenAPI spec from `https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/intx-spec.yaml`
+1. Downloads the OpenAPI spec from
+   `https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/intx-spec.yaml`
 2. Parses the specification using js-yaml
 3. Generates markdown documentation for each endpoint with:
    - HTTP method and path
@@ -94,7 +102,8 @@ The scraper successfully extracts individual endpoint documentation from the Coi
    - Authentication requirements
    - Response codes and descriptions
 
-The endpoints are automatically classified as public (16) or private (47) based on their tags and path structure.
+The endpoints are automatically classified as public (16) or private (47) based
+on their tags and path structure.
 
 ## Authentication Headers
 
@@ -107,10 +116,13 @@ Coinbase INTX uses the following authentication headers:
 
 ## Notes
 
-- The Coinbase INTX documentation uses a custom framework similar to Coinbase Exchange
-- Each endpoint is documented on a separate page with the pattern: `intxrestapi_{operation}`
+- The Coinbase INTX documentation uses a custom framework similar to Coinbase
+  Exchange
+- Each endpoint is documented on a separate page with the pattern:
+  `intxrestapi_{operation}`
 - Documentation is updated regularly by GitHub Actions workflow
-- INTX is Coinbase's institutional trading platform with perpetual futures and other derivatives
+- INTX is Coinbase's institutional trading platform with perpetual futures and
+  other derivatives
 
 ## Project Structure
 
@@ -133,7 +145,8 @@ venues/coinbase/intx/
 
 ## Automation
 
-Documentation is automatically updated via GitHub Actions workflow that runs weekly. The workflow:
+Documentation is automatically updated via GitHub Actions workflow that runs
+weekly. The workflow:
 
 1. Extracts general documentation
 2. Extracts all endpoint documentation

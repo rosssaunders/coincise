@@ -6,13 +6,14 @@ post https://api.bitfinex.com/v2/auth/calc/order/avail
 
 Calculate the balance available for orders/offers
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
+/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+theme, base, components, utilities; @layer utilities;
 
 **Fields**
 
-| Fields | Type | Description |
-| --- | --- | --- |
-| AMOUNT\_AVAIL | float | Amount available for order/offer |
+| Fields       | Type  | Description                      |
+| ------------ | ----- | -------------------------------- |
+| AMOUNT_AVAIL | float | Amount available for order/offer |
 
 **Ratelimit**: 90 req/min
 
@@ -30,7 +31,8 @@ dir
 
 int32
 
-Direction of the order (1 for by, -1 for sell) (Mandatory for EXCHANGE and MARGIN type, not used for FUNDING)
+Direction of the order (1 for by, -1 for sell) (Mandatory for EXCHANGE and
+MARGIN type, not used for FUNDING)
 
 rate
 
@@ -54,7 +56,7 @@ Leverage that you want to use in calculating the max order amount (DERIV only)
 
 Responses
 
-# 
+#
 
 200
 
@@ -64,7 +66,7 @@ Response body
 
 json
 
-# 
+#
 
 400
 
@@ -76,7 +78,7 @@ object
 
 Updated 5 months ago
 
-* * *
+---
 
 Language
 
@@ -110,7 +112,8 @@ RESPONSE
 
 Examples
 
-Click `Try It!` to start a request and see the response here! Or choose an example:
+Click `Try It!` to start a request and see the response here! Or choose an
+example:
 
 application/json
 
@@ -118,10 +121,10 @@ application/json
 
 Updated 5 months ago
 
-* * *
+---
 
 ---
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-calc-order-avail
-Path: /v2/auth/calc/order/avail
-Method: POST
+
+Section: Account Actions Source:
+https://docs.bitfinex.com/reference/rest-auth-calc-order-avail Path:
+/v2/auth/calc/order/avail Method: POST

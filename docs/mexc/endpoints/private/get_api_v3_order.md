@@ -24,10 +24,9 @@
 }
 ```
 
--   **GET** `/api/v3/order`  
-    
+- **GET** `/api/v3/order`
 
-**Permission:** SPOT\_DEAL\_READ
+**Permission:** SPOT_DEAL_READ
 
 **Weight(IP):** 2
 
@@ -35,34 +34,34 @@ Check an order's status.
 
 Parameters:
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | String | No |  |
-| origClientOrderId | String | NO |  |
-| orderId | String | NO |  |
-| recvWindow | long | NO |  |
-| timestamp | long | YES |  |
+| Name              | Type   | Mandatory | Description |
+| ----------------- | ------ | --------- | ----------- |
+| symbol            | String | No        |             |
+| origClientOrderId | String | NO        |             |
+| orderId           | String | NO        |             |
+| recvWindow        | long   | NO        |             |
+| timestamp         | long   | YES       |             |
 
 Response:
 
-| Name | Description |
-| --- | --- |
-| symbol | Symbol |
-| origClientOrderId | Original client order id |
-| orderId | order id |
-| clientOrderId | client order id |
-| price | Price |
-| Qty | Original order quantity |
-| executedQty | Executed order quantity |
-| cummulativeQuoteQty | Cummulative quote quantity |
-| status | [order status](#order_status) |
-| timeInForce |  |
-| type | [Order type](#order_type) |
-| side | [Order side](#order_side) |
-| stopPrice | stop price |
-| time | Order created time |
-| updateTime | Last update time |
-| isWorking | is orderbook |
+| Name                | Description                   |
+| ------------------- | ----------------------------- |
+| symbol              | Symbol                        |
+| origClientOrderId   | Original client order id      |
+| orderId             | order id                      |
+| clientOrderId       | client order id               |
+| price               | Price                         |
+| Qty                 | Original order quantity       |
+| executedQty         | Executed order quantity       |
+| cummulativeQuoteQty | Cummulative quote quantity    |
+| status              | [order status](#order_status) |
+| timeInForce         |                               |
+| type                | [Order type](#order_type)     |
+| side                | [Order side](#order_side)     |
+| stopPrice           | stop price                    |
+| time                | Order created time            |
+| updateTime          | Last update time              |
+| isWorking           | is orderbook                  |
 
 ---
 

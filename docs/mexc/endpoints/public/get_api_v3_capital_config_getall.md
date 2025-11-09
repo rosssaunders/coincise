@@ -55,10 +55,9 @@ Get /api/v3/capital/config/getall
 ]
 ```
 
--   **GET** `/api/v3/capital/config/getall`  
-    
+- **GET** `/api/v3/capital/config/getall`
 
-**Permission:** SPOT\_WITHDRAW\_READ
+**Permission:** SPOT_WITHDRAW_READ
 
 **Weight(IP):** 10
 
@@ -70,19 +69,20 @@ None
 
 Response:
 
-| Name | Description |
-| --- | --- |
-| depositEnable | depositEnable |
-| withdrawEnable | withdrawEnable |
-| withdrawFee | withdrawFee |
-| withdrawMax | Max withdraw amount |
-| withdrawMin | Min withdraw amount |
-| contract | coin contract |
-| withdrawTips | withdrawTips |
-| depositTips | depositTips |
-| network | withdraw network(previous params,offline soon) |
-| netWork | withdraw network(new params,for new withdraw endpoint) |
+| Name           | Description                                            |
+| -------------- | ------------------------------------------------------ |
+| depositEnable  | depositEnable                                          |
+| withdrawEnable | withdrawEnable                                         |
+| withdrawFee    | withdrawFee                                            |
+| withdrawMax    | Max withdraw amount                                    |
+| withdrawMin    | Min withdraw amount                                    |
+| contract       | coin contract                                          |
+| withdrawTips   | withdrawTips                                           |
+| depositTips    | depositTips                                            |
+| network        | withdraw network(previous params,offline soon)         |
+| netWork        | withdraw network(new params,for new withdraw endpoint) |
 
 ---
 
-**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#query-the-currency-information
+**Source:**
+https://mexcdevelop.github.io/apidocs/spot_v3_en#query-the-currency-information

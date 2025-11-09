@@ -167,7 +167,7 @@ const extractSectionContent = async (page, menuKey, sectionName) => {
     await new Promise(resolve => setTimeout(resolve, 3000))
 
     // Try to detect content change by checking for specific text related to the section
-    const contentAppeared = await page.evaluate((sectionText) => {
+    const contentAppeared = await page.evaluate(sectionText => {
       const body = document.body.textContent
       // Check if section-specific content appeared
       return body.includes(sectionText) || body.length > 20000

@@ -1,6 +1,7 @@
 # Tools Directory
 
-This directory contains various utility scripts and tools for managing the coincise repository.
+This directory contains various utility scripts and tools for managing the
+coincise repository.
 
 ## Dependency Management Scripts
 
@@ -9,16 +10,19 @@ See [`depends/`](./depends/) directory for dependency management tools.
 ### Quick Reference
 
 **Safe updates (within semver ranges):**
+
 ```bash
 ./tools/depends/update-dependencies-robust.sh
 ```
 
 **Latest version bumps (like dependi):**
+
 ```bash
 ./tools/depends/bump-dependencies.sh
 ```
 
-For detailed documentation, see [`tools/depends/README.md`](./depends/README.md).
+For detailed documentation, see
+[`tools/depends/README.md`](./depends/README.md).
 
 ## Other Tools
 
@@ -41,6 +45,7 @@ All scripts should be run from the repository root:
 ```
 
 The scripts will automatically:
+
 1. Find all JavaScript projects
 2. Update dependencies appropriately
 3. Provide detailed progress reports

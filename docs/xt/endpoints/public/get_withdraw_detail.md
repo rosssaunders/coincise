@@ -1,6 +1,7 @@
 # GET Withdraw Detail
 
-Source: [https://doc.xt.com/docs/spot/Deposit&Withdrawal/WithdrawDetail](https://doc.xt.com/docs/spot/Deposit&Withdrawal/WithdrawDetail)
+Source:
+[https://doc.xt.com/docs/spot/Deposit&Withdrawal/WithdrawDetail](https://doc.xt.com/docs/spot/Deposit&Withdrawal/WithdrawDetail)
 
 # Withdraw Detail
 
@@ -8,16 +9,17 @@ Source: [https://doc.xt.com/docs/spot/Deposit&Withdrawal/WithdrawDetail](https:/
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| recordId | string | false | N/A | Withdrawal record ID, obtained from the **Withdraw** endpoint. Recommended to use this first. |  |
-| clientOrderId | string | false | N/A | Custom client ID |  |
+| name          | type   | mandatory | default | description                                                                                   | ranges |
+| ------------- | ------ | --------- | ------- | --------------------------------------------------------------------------------------------- | ------ |
+| recordId      | string | false     | N/A     | Withdrawal record ID, obtained from the **Withdraw** endpoint. Recommended to use this first. |        |
+| clientOrderId | string | false     | N/A     | Custom client ID                                                                              |        |
 
 ### Notes[​](#notes "Direct link to Notes")
 
--   Limit flow rules: **1 request/second per apikey**.
--   Use `recordId` if available, otherwise `clientOrderId`.
--   This endpoint retrieves the detailed information of a specific withdrawal record.
+- Limit flow rules: **1 request/second per apikey**.
+- Use `recordId` if available, otherwise `clientOrderId`.
+- This endpoint retrieves the detailed information of a specific withdrawal
+  record.
 
 ### Response Example[​](#response-example "Direct link to Response Example")
 

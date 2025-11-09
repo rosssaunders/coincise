@@ -1,6 +1,7 @@
 # AI PR Summary Tool
 
-This tool generates AI-powered PR summaries and Twitter summaries based on git changes for cryptocurrency exchange API documentation updates.
+This tool generates AI-powered PR summaries and Twitter summaries based on git
+changes for cryptocurrency exchange API documentation updates.
 
 ## Features
 
@@ -48,13 +49,15 @@ node generate-twitter-summary.js /path/to/repo 15000
 
 ### Environment Variables
 
-- `OPENAI_API_KEY`: Required for AI-powered summaries. If not provided, falls back to basic summaries.
+- `OPENAI_API_KEY`: Required for AI-powered summaries. If not provided, falls
+  back to basic summaries.
 
 ## Integration with GitHub Workflows
 
 ### PR Summary Integration
 
-The PR summary tool is integrated into autodoc workflows to generate comprehensive PR descriptions:
+The PR summary tool is integrated into autodoc workflows to generate
+comprehensive PR descriptions:
 
 ```yaml
 - name: Generate AI PR Summary
@@ -70,7 +73,9 @@ The PR summary tool is integrated into autodoc workflows to generate comprehensi
 
 Twitter summaries are generated automatically when autodoc PRs are merged:
 
-1. **Twitter Summary Generator Workflow**: Triggers when autodoc PRs are merged, creates a new PR with Twitter content
-2. **Tweet Poster Workflow**: Triggers when Twitter summary PRs are merged, posts the tweet automatically
+1. **Twitter Summary Generator Workflow**: Triggers when autodoc PRs are merged,
+   creates a new PR with Twitter content
+2. **Tweet Poster Workflow**: Triggers when Twitter summary PRs are merged,
+   posts the tweet automatically
 
 This ensures proper review and approval of social media content before posting.

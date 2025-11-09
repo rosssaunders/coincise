@@ -1,6 +1,7 @@
 # GET Query Swap Index Price Information
 
-**Source:** [Query Swap Index Price Information](https://www.htx.com/en-us/opend/newApiPages/?id=5d517062-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Query Swap Index Price Information](https://www.htx.com/en-us/opend/newApiPages/?id=5d517062-77b6-11ed-9966-0242ac110003)
 
 **Category:** Reference Data
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /swap-api/v1/swap\_index (Query Swap Index Price Information)
+### /swap-api/v1/swap_index (Query Swap Index Price Information)
 
 Request type: GET
 
@@ -18,28 +19,28 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | Case-insenstive."BTC-USD","ETH-USD"... |  |  |
+| Parameter     | Data Type | Required | Description                            | Value Range | Default Value |
+| ------------- | --------- | -------- | -------------------------------------- | ----------- | ------------- |
+| contract_code | string    | false    | Case-insenstive."BTC-USD","ETH-USD"... |             |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request Processing Result | "ok" , "error" |
-| data<list> |  | false |  |  |
-| contract\_code | string | true | contract\_code | "BTC-USD","ETH-USD"... |
-| index\_price | decimal | true | Index Price |  |
-| index\_ts | Long | true | Index time |  |
-| LIST\_END |  | false |  |  |
-| ts | long | true | Time of Respond Generation，Unit：Millisecond |  |
+| Parameter     | Data Type | Required | Description                                   | Value Range            |
+| ------------- | --------- | -------- | --------------------------------------------- | ---------------------- |
+| status        | string    | true     | Request Processing Result                     | "ok" , "error"         |
+| data<list>    |           | false    |                                               |                        |
+| contract_code | string    | true     | contract_code                                 | "BTC-USD","ETH-USD"... |
+| index_price   | decimal   | true     | Index Price                                   |                        |
+| index_ts      | Long      | true     | Index time                                    |                        |
+| LIST_END      |           | false    |                                               |                        |
+| ts            | long      | true     | Time of Respond Generation，Unit：Millisecond |                        |
 
 #### Request example
 
@@ -59,15 +60,15 @@ Interface permission: Read
 
 0:{
 
-"index\_price":
+"index_price":
 
 13764.0725
 
-"index\_ts":
+"index_ts":
 
 1603851876012
 
-"contract\_code":
+"contract_code":
 
 "BTC-USD"
 

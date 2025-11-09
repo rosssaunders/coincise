@@ -4,22 +4,24 @@
 
 post https://api.bitfinex.com/v2/auth/r/ext/wallets/transfers/free/count
 
-Get information about free transfers and their renewal. Users are eligible for two free deposits every 24 hours.
+Get information about free transfers and their renewal. Users are eligible for
+two free deposits every 24 hours.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
+/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+theme, base, components, utilities; @layer utilities;
 
-#### 
+####
 
 Response data
 
 [](#response-data)
 
-| Key | Type | Description |
-| --- | --- | --- |
-| deposits.available | Integer | Number of free deposits available |
-| deposits.resetsAt | Integer || null | Timestamp at which the number of free deposits resets (defaults to null if not available) |
+| Key                   | Type    | Description                          |
+| --------------------- | ------- | ------------------------------------ | ---- | -------------------------------------------------------------------------------------------- |
+| deposits.available    | Integer | Number of free deposits available    |
+| deposits.resetsAt     | Integer |                                      | null | Timestamp at which the number of free deposits resets (defaults to null if not available)    |
 | withdrawals.available | Integer | Number of free withdrawals available |
-| withdrawals.resetsAt | Integer || null | Timestamp at which the number of free withdrawals resets (defaults to null if not available) |
+| withdrawals.resetsAt  | Integer |                                      | null | Timestamp at which the number of free withdrawals resets (defaults to null if not available) |
 
 Body Params
 
@@ -35,7 +37,7 @@ Specify the provider ('thalex')
 
 Responses
 
-# 
+#
 
 200
 
@@ -75,7 +77,7 @@ resetsAt
 
 string
 
-# 
+#
 
 500
 
@@ -87,7 +89,7 @@ array
 
 Updated 5 months ago
 
-* * *
+---
 
 Language
 
@@ -125,7 +127,7 @@ curl \--request POST \\
 
 7
 
-  "Provider": "thalex"
+"Provider": "thalex"
 
 8
 
@@ -147,10 +149,10 @@ application/json
 
 Updated 5 months ago
 
-* * *
+---
 
 ---
-Section: Thalex Derivatives
-Source: https://docs.bitfinex.com/reference/thalex-free-transfer-count
-Path: /v2/auth/r/ext/wallets/transfers/free/count
-Method: POST
+
+Section: Thalex Derivatives Source:
+https://docs.bitfinex.com/reference/thalex-free-transfer-count Path:
+/v2/auth/r/ext/wallets/transfers/free/count Method: POST

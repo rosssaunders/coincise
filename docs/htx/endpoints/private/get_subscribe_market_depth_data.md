@@ -1,6 +1,7 @@
 # GET Subscribe Market Depth Data
 
-**Source:** [Subscribe Market Depth Data](https://www.htx.com/en-us/opend/newApiPages/?id=5d514395-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Subscribe Market Depth Data](https://www.htx.com/en-us/opend/newApiPages/?id=5d514395-77b6-11ed-9966-0242ac110003)
 
 **Category:** WebSocket Market Interface
 
@@ -16,32 +17,37 @@ Interface permission: Read
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.hbdm.com/swap-ws |
-| Online (preferred by aws customers) | wss://api.hbdm.vn/swap-ws |
+| Environment                         | Address                    |
+| ----------------------------------- | -------------------------- |
+| Online                              | wss://api.hbdm.com/swap-ws |
+| Online (preferred by aws customers) | wss://api.hbdm.vn/swap-ws  |
 
 #### Request Parameter
 
 | Field Name | Type | Description |
-| --- | --- | --- |
+| ---------- | ---- | ----------- |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
+| -------------- | -------------------- | ---- |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | swap code | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USD" |  |
-| type | string | true | Depth Type | Get depth data within step 150, use step0, step1, step3, step3, step4, step5, step14, step15, step16, step17（merged depth data 0-5,14-17）；when step is 0，depth data will not be merged; Get depth data within step 30, use step6, step7, step8, step9, step10, step11, step13, step13, step18, step19(merged depth data 7-13,18-19); when step is 6, depth data will not be merged. |  |
+| Parameter     | Data Type | Required | Description | Value Range                                                                                                                                                                                                                                                                                                                                                                             | Default Value |
+| ------------- | --------- | -------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| contract_code | string    | true     | swap code   | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USD"                                                                                                                                                                                                                                                                                                              |               |
+| type          | string    | true     | Depth Type  | Get depth data within step 150, use step0, step1, step3, step3, step4, step5, step14, step15, step16, step17（merged depth data 0-5,14-17）；when step is 0，depth data will not be merged; Get depth data within step 30, use step6, step7, step8, step9, step10, step11, step13, step13, step18, step19(merged depth data 7-13,18-19); when step is 6, depth data will not be merged. |               |
 
 Notes:  
-When clients choose merged depth data, WebSocket server will only display the merged price within price steps in order book. Please note that the merged depth price will not make any change on the actual order price.  
-step16, step17, step18, and step19 are only for SHIB-USD contract, and the other contracts is not supported now.  
-steps between step1 and step5, step14 and step17 are merged orderbook data of step 150. steps between step7 and step13, step18, step19 are merged orderbook data of step 20. Details are below:  
+When clients choose merged depth data, WebSocket server will only display the
+merged price within price steps in order book. Please note that the merged depth
+price will not make any change on the actual order price.  
+step16, step17, step18, and step19 are only for SHIB-USD contract, and the other
+contracts is not supported now.  
+steps between step1 and step5, step14 and step17 are merged orderbook data of
+step 150. steps between step7 and step13, step18, step19 are merged orderbook
+data of step 20. Details are below:  
 Depth precision  
 step16、step18 0.0000001  
 step17、step19 0.000001  
@@ -55,19 +61,19 @@ step15、step13 10
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| ch | string | true | Time of Respond Generation, Unit: Millisecond |  |
-| ts | long | true | Data channel, Format： market.period |  |
-| TICK\_START |  | false |  |  |
-| mrid | long | true | Order ID |  |
-| id | long | true | tick ID |  |
-| asks | object | false | Sell,\[price(Ask price), vol(Ask orders (cont.) )\], price in ascending sequence |  |
-| bids | object | false | Buy,\[price(Bid price), vol(Bid orders(Cont.))\], Price in descending sequence |  |
-| ts | long | true | Timestamp for depth generation; generated once every 100ms, unit: millisecond |  |
-| version | long | true | version ID |  |
-| ch | string | true | Data channel, Format： market.period |  |
-| TICK\_END |  | false |  |  |
+| Parameter  | Data Type | Required | Description                                                                      | Value Range |
+| ---------- | --------- | -------- | -------------------------------------------------------------------------------- | ----------- |
+| ch         | string    | true     | Time of Respond Generation, Unit: Millisecond                                    |             |
+| ts         | long      | true     | Data channel, Format： market.period                                             |             |
+| TICK_START |           | false    |                                                                                  |             |
+| mrid       | long      | true     | Order ID                                                                         |             |
+| id         | long      | true     | tick ID                                                                          |             |
+| asks       | object    | false    | Sell,\[price(Ask price), vol(Ask orders (cont.) )\], price in ascending sequence |             |
+| bids       | object    | false    | Buy,\[price(Bid price), vol(Bid orders(Cont.))\], Price in descending sequence   |             |
+| ts         | long      | true     | Timestamp for depth generation; generated once every 100ms, unit: millisecond    |             |
+| version    | long      | true     | version ID                                                                       |             |
+| ch         | string    | true     | Data channel, Format： market.period                                             |             |
+| TICK_END   |           | false    |                                                                                  |             |
 
 #### Subscription Example
 
@@ -75,9 +81,9 @@ step15、step13 10
 
 "sub":
 
-"market.BTC-USD.depth.size\_20.high\_freq"
+"market.BTC-USD.depth.size_20.high_freq"
 
-"data\_type":
+"data_type":
 
 "incremental"
 

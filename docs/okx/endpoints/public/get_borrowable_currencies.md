@@ -1,6 +1,7 @@
 # GET / Borrowable currencies
 
-Source: [https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-get-borrowable-currencies](https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-get-borrowable-currencies)
+Source:
+[https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-get-borrowable-currencies](https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-get-borrowable-currencies)
 
 ### GET / Borrowable currencies
 
@@ -18,6 +19,6 @@ Get borrowable currencies
 
 #### Response Parameters
 
-| **Parameter** | **Type** | **Description** |
-| --- | --- | --- |
-| borrowCcy | String | Borrowable currency, e.g. `BTC` |
+| **Parameter** | **Type** | **Description**                 |
+| ------------- | -------- | ------------------------------- |
+| borrowCcy     | String   | Borrowable currency, e.g. `BTC` |

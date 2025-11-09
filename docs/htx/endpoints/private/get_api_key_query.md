@@ -1,6 +1,7 @@
 # GET API key query
 
-**Source:** [API key query](https://www.htx.com/en-us/opend/newApiPages/?id=7ec52c92-7773-11ed-9966-0242ac110003)
+**Source:**
+[API key query](https://www.htx.com/en-us/opend/newApiPages/?id=7ec52c92-7773-11ed-9966-0242ac110003)
 
 **Category:** Sub-account Management
 
@@ -16,38 +17,40 @@ Signature verification: Yes
 
 Interface permission: Read
 
-Interface description: This endpoint is used by the parent user to query their own API key information, and the parent user to query their sub user's API key information.
+Interface description: This endpoint is used by the parent user to query their
+own API key information, and the parent user to query their sub user's API key
+information.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| uid | long | false | parent user uid , sub user uid |  |  |
-| accessKey | string | false | The access key of the API key, if not specified, it will return all API keys belong to the UID. |  |  |
+| Parameter | Data Type | Required | Description                                                                                     | Value Range | Default Value |
+| --------- | --------- | -------- | ----------------------------------------------------------------------------------------------- | ----------- | ------------- |
+| uid       | long      | false    | parent user uid , sub user uid                                                                  |             |               |
+| accessKey | string    | false    | The access key of the API key, if not specified, it will return all API keys belong to the UID. |             |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| code | int | false | Status code |  |
-| message | string | false | Error message (if any) |  |
-| DATA\_START | object | false |  |  |
-| accessKey | string | false | access key |  |
-| note | string | false | API key note |  |
-| permission | string | false | API key permission |  |
-| ipAddresses | string | false | API key IP addresses |  |
-| validDays | int | false | API key expire in (days) | If it is -1, it means permanently valid |
-| status | string | false | API key status | normal, expired |
-| createTime | long | false | API key creation time |  |
-| updateTime | long | false | API key last modified time |  |
-| DATA\_END |  | false |  |  |
+| Parameter   | Data Type | Required | Description                | Value Range                             |
+| ----------- | --------- | -------- | -------------------------- | --------------------------------------- |
+| code        | int       | false    | Status code                |                                         |
+| message     | string    | false    | Error message (if any)     |                                         |
+| DATA_START  | object    | false    |                            |                                         |
+| accessKey   | string    | false    | access key                 |                                         |
+| note        | string    | false    | API key note               |                                         |
+| permission  | string    | false    | API key permission         |                                         |
+| ipAddresses | string    | false    | API key IP addresses       |                                         |
+| validDays   | int       | false    | API key expire in (days)   | If it is -1, it means permanently valid |
+| status      | string    | false    | API key status             | normal, expired                         |
+| createTime  | long      | false    | API key creation time      |                                         |
+| updateTime  | long      | false    | API key last modified time |                                         |
+| DATA_END    |           | false    |                            |                                         |
 
 #### Request example
 

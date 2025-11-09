@@ -4,35 +4,35 @@
 
 get https://api-pub.bitfinex.com/v2/tickers/hist
 
-History of recent trading tickers. Provides historic data of the best bid and ask at an hourly interval.
+History of recent trading tickers. Provides historic data of the best bid and
+ask at an hourly interval.
 
 Historic data goes back 1 year.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
+/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+theme, base, components, utilities; @layer utilities;
 
-### 
+###
 
 Response Fields
 
 [](#response-fields)
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
+| Index | Field  | Type   | Description                                     |
+| ----- | ------ | ------ | ----------------------------------------------- |
 | \[0\] | SYMBOL | string | The symbol of the requested ticker history data |
-| \[1\] | BID | float | Price of last highest bid |
-| 
-\[ . . . \]
+| \[1\] | BID    | float  | Price of last highest bid                       |
 
- |
-| \[3\] | ASK | float | Price of last lowest ask |
-| 
+| \[ . . . \]
+
+| | \[3\] | ASK | float | Price of last lowest ask | |
 
 \[ . . . \]
 
- |
-| \[12\] | MTS | int | Millisecond epoch timestamp |
+| | \[12\] | MTS | int | Millisecond epoch timestamp |
 
-td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height: 10px; text-align: center; font-size: 16px; line-height: 8px; }
+td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
+10px; text-align: center; font-size: 16px; line-height: 8px; }
 
 Query Params
 
@@ -44,7 +44,8 @@ required
 
 Defaults to ALL
 
-The symbols you want information about as a comma separated list, or ALL for every symbol. Ex: 'tBTCUSD' (funding currencies are not supported at this time).
+The symbols you want information about as a comma separated list, or ALL for
+every symbol. Ex: 'tBTCUSD' (funding currencies are not supported at this time).
 
 limit
 
@@ -58,13 +59,15 @@ start
 
 integer
 
-If start is given, only records with MTS >= start (milliseconds) will be given as response.
+If start is given, only records with MTS >= start (milliseconds) will be given
+as response.
 
 end
 
 integer
 
-If end is given, only records with MTS <= end (milliseconds) will be given as response.
+If end is given, only records with MTS <= end (milliseconds) will be given as
+response.
 
 sort
 
@@ -76,7 +79,7 @@ Defaults to -1
 
 Response
 
-# 
+#
 
 200
 
@@ -88,7 +91,7 @@ json
 
 Updated 4 months ago
 
-* * *
+---
 
 Language
 
@@ -116,7 +119,8 @@ RESPONSE
 
 Examples
 
-Click `Try It!` to start a request and see the response here! Or choose an example:
+Click `Try It!` to start a request and see the response here! Or choose an
+example:
 
 application/json
 
@@ -124,10 +128,10 @@ application/json
 
 Updated 4 months ago
 
-* * *
+---
 
 ---
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-tickers-history
-Path: /v2/tickers/hist?symbols=ALL&limit=100&sort=-1
-Method: GET
+
+Section: General Source:
+https://docs.bitfinex.com/reference/rest-public-tickers-history Path:
+/v2/tickers/hist?symbols=ALL&limit=100&sort=-1 Method: GET

@@ -2,7 +2,8 @@
 
 **Title:** Get all orders (including history orders)
 
-**Source:** [Get all orders (including history orders)](https://docs.digifinex.com/en-ww/spot/v3/rest.html#get-all-orders-including-history-orders)
+**Source:**
+[Get all orders (including history orders)](https://docs.digifinex.com/en-ww/spot/v3/rest.html#get-all-orders-including-history-orders)
 
 ## Authentication
 
@@ -14,19 +15,19 @@ Required (Private Endpoint)
 
 ### HTTP Request
 
--   GET `https://openapi.digifinex.com/v3/{market}/order/history`
+- GET `https://openapi.digifinex.com/v3/{market}/order/history`
 
 ### Request Parameters
 
 market：spot, margin
 
-| Field | Request Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| market | str | true | "spot","margin" |
-| symbol | str | false | Symbol Name |
-| limit | int | false | Default 10, maximum 100 |
-| start\_time | int | false | Starting time, default 3 days before now, maximum 30 days |
-| end\_time | int | false | Ending time, default current timestamp |
+| Field      | Request Type | Mandatory | Description                                               |
+| ---------- | ------------ | --------- | --------------------------------------------------------- |
+| market     | str          | true      | "spot","margin"                                           |
+| symbol     | str          | false     | Symbol Name                                               |
+| limit      | int          | false     | Default 10, maximum 100                                   |
+| start_time | int          | false     | Starting time, default 3 days before now, maximum 30 days |
+| end_time   | int          | false     | Ending time, default current timestamp                    |
 
 > Response:
 
@@ -56,19 +57,19 @@ market：spot, margin
 
 ### Response Content
 
-| Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| data | true | object | Order History List |
-| symbol | true | string | Symbol Name |
-| order\_id | true | string | Order ID |
-| created\_date | true | int | Created Time |
-| finished\_date | true | int | Finished Time |
-| price | true | float | Price |
-| amount | true | float | Volume |
-| cash\_amount | true | float | Cash amount of orders, 0 for none order |
-| executed\_amount | true | float | Amount been executed |
-| avg\_price | true | float | Average price of amount been executed |
-| status | true | int | Order status, 0 for none executed, 1 for partially executed, 2 for fully executed, 3 for cancelled with none executed, 4 for cancelled with partially executed |
-| type | true | string | buy for limit buy order, sell for limit sell order, buy\_market for market buy order, sell\_market for market sell order |
-| kind | true | string | spot, margin |
-| code | true | int | Status |
+| Field           | Mandatory | Request Type | Description                                                                                                                                                    |
+| --------------- | --------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| data            | true      | object       | Order History List                                                                                                                                             |
+| symbol          | true      | string       | Symbol Name                                                                                                                                                    |
+| order_id        | true      | string       | Order ID                                                                                                                                                       |
+| created_date    | true      | int          | Created Time                                                                                                                                                   |
+| finished_date   | true      | int          | Finished Time                                                                                                                                                  |
+| price           | true      | float        | Price                                                                                                                                                          |
+| amount          | true      | float        | Volume                                                                                                                                                         |
+| cash_amount     | true      | float        | Cash amount of orders, 0 for none order                                                                                                                        |
+| executed_amount | true      | float        | Amount been executed                                                                                                                                           |
+| avg_price       | true      | float        | Average price of amount been executed                                                                                                                          |
+| status          | true      | int          | Order status, 0 for none executed, 1 for partially executed, 2 for fully executed, 3 for cancelled with none executed, 4 for cancelled with partially executed |
+| type            | true      | string       | buy for limit buy order, sell for limit sell order, buy_market for market buy order, sell_market for market sell order                                         |
+| kind            | true      | string       | spot, margin                                                                                                                                                   |
+| code            | true      | int          | Status                                                                                                                                                         |

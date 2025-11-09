@@ -5,9 +5,11 @@ This directory contains extraction scripts for MEXC Exchange API documentation.
 ## Overview
 
 MEXC uses a single-page documentation format hosted at:
+
 - Spot API: https://mexcdevelop.github.io/apidocs/spot_v3_en
 
-The extraction scripts convert this HTML documentation into LLM-friendly Markdown format following the standardized Coincise structure.
+The extraction scripts convert this HTML documentation into LLM-friendly
+Markdown format following the standardized Coincise structure.
 
 ## Structure
 
@@ -25,6 +27,7 @@ venues/mexc/
 ### General Documentation (`extractGeneral.js`)
 
 Extracts core documentation files to `docs/mexc/`:
+
 - `rate_limits.md` - API rate limiting rules and policies
 - `authentication.md` - API key generation and request signing
 - `network_connectivity.md` - Base endpoints and HTTP return codes
@@ -35,10 +38,12 @@ Extracts core documentation files to `docs/mexc/`:
 ### Endpoint Documentation (`extractEndpoints.js`)
 
 Extracts individual endpoint documentation to `docs/mexc/endpoints/`:
+
 - `public/` - Endpoints that don't require authentication
 - `private/` - Endpoints that require API keys and signatures
 
-Each endpoint is saved as `{http_method}_{endpoint_path}.md` (e.g., `get_api_v3_ticker_24hr.md`).
+Each endpoint is saved as `{http_method}_{endpoint_path}.md` (e.g.,
+`get_api_v3_ticker_24hr.md`).
 
 ## Usage
 
@@ -63,6 +68,7 @@ pnpm run extract:endpoints
 ## Authentication Detection
 
 Endpoints are automatically categorized as public or private based on:
+
 - Presence of authentication headers (X-MEXC-APIKEY)
 - Signature requirements
 - RecvWindow parameters
@@ -77,7 +83,8 @@ Endpoints are automatically categorized as public or private based on:
 
 ## Automated Updates
 
-This documentation is automatically updated weekly via GitHub Actions workflow (`.github/workflows/mexc-docs-update.yml`).
+This documentation is automatically updated weekly via GitHub Actions workflow
+(`.github/workflows/mexc-docs-update.yml`).
 
 ## Dependencies
 
@@ -96,7 +103,9 @@ This documentation is automatically updated weekly via GitHub Actions workflow (
 
 ## Future Enhancements
 
-The current implementation extracts only Spot API documentation. Future work may include:
+The current implementation extracts only Spot API documentation. Future work may
+include:
+
 - Contract API extraction (https://mexcdevelop.github.io/apidocs/contract_v1_en)
 - Broker API extraction (https://mexcdevelop.github.io/apidocs/broker_en)
 - WebSocket documentation extraction

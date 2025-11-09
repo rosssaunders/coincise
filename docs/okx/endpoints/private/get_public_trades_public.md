@@ -1,10 +1,12 @@
 # GET public trades (Public)
 
-Source: [https://www.okx.com/docs-v5/en/#spread-trading-rest-api-get-public-trades-public](https://www.okx.com/docs-v5/en/#spread-trading-rest-api-get-public-trades-public)
+Source:
+[https://www.okx.com/docs-v5/en/#spread-trading-rest-api-get-public-trades-public](https://www.okx.com/docs-v5/en/#spread-trading-rest-api-get-public-trades-public)
 
 ### Get public trades (Public)
 
-Retrieve the recent transactions of an instrument (at most 500 records per request). Results are returned in counter chronological order.
+Retrieve the recent transactions of an instrument (at most 500 records per
+request). Results are returned in counter chronological order.
 
 #### Rate Limit: 20 requests per 2 seconds
 
@@ -18,19 +20,20 @@ Retrieve the recent transactions of an instrument (at most 500 records per reque
 
 #### Request Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| sprdId | String | No | Spread ID, e.g. BTC-USDT\_BTC-USDT-SWAP |
+| Parameter | Type   | Required | Description                            |
+| --------- | ------ | -------- | -------------------------------------- |
+| sprdId    | String | No       | Spread ID, e.g. BTC-USDT_BTC-USDT-SWAP |
 
 #### Response Parameters
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| sprdId | String | spread ID |
-| tradeId | String | Trade ID |
-| px | String | Trade price |
-| sz | String | Trade quantity |
-| side | String | Trade side of the taker.  
+| Parameter | Type   | Description              |
+| --------- | ------ | ------------------------ |
+| sprdId    | String | spread ID                |
+| tradeId   | String | Trade ID                 |
+| px        | String | Trade price              |
+| sz        | String | Trade quantity           |
+| side      | String | Trade side of the taker. |
+
 `buy`  
-`sell` |
-| ts | String | Trade time, Unix timestamp format in milliseconds, e.g. `1597026383085`. |
+`sell` | | ts | String | Trade time, Unix timestamp format in milliseconds, e.g.
+`1597026383085`. |

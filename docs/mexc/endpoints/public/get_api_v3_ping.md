@@ -6,7 +6,7 @@
 {}
 ```
 
--   **GET** `/api/v3/ping`
+- **GET** `/api/v3/ping`
 
 Test connectivity to the Rest API.
 

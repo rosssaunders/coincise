@@ -4,90 +4,122 @@
 
 info
 
-Please visit Bybit's [**testnet**](https://testnet.bybit.com/app/user/api-management) or [**mainnet**](https://www.bybit.com/app/user/api-management) to generate an API key
+Please visit Bybit's
+[**testnet**](https://testnet.bybit.com/app/user/api-management) or
+[**mainnet**](https://www.bybit.com/app/user/api-management) to generate an API
+key
 
 info
 
-Please visit Bybit's [**testnet**](https://testnet.bybit.com/app/user/api-management) or [**mainnet**](https://www.bybit.com/app/user/api-management) to generate an API key
+Please visit Bybit's
+[**testnet**](https://testnet.bybit.com/app/user/api-management) or
+[**mainnet**](https://www.bybit.com/app/user/api-management) to generate an API
+key
 
-Please visit Bybit's [**testnet**](https://testnet.bybit.com/app/user/api-management) or [**mainnet**](https://www.bybit.com/app/user/api-management) to generate an API key
+Please visit Bybit's
+[**testnet**](https://testnet.bybit.com/app/user/api-management) or
+[**mainnet**](https://www.bybit.com/app/user/api-management) to generate an API
+key
 
-[**testnet**](https://testnet.bybit.com/app/user/api-management)**testnet** [**mainnet**](https://www.bybit.com/app/user/api-management)**mainnet**
+[**testnet**](https://testnet.bybit.com/app/user/api-management)**testnet**
+[**mainnet**](https://www.bybit.com/app/user/api-management)**mainnet**
 
 REST API Base Endpoint:
 
--   **Testnet:**  
-    `https://api-testnet.bybit.com`
--   **Mainnet** (both endpoints are available):  
-    `https://api.bybit.com`  
-    `https://api.bytick.com`
+- **Testnet:**  
+  `https://api-testnet.bybit.com`
+- **Mainnet** (both endpoints are available):  
+  `https://api.bybit.com`  
+  `https://api.bytick.com`
 
--   **Testnet:**  
-    `https://api-testnet.bybit.com`
-**Testnet:**  
-`https://api-testnet.bybit.com`-   **Mainnet** (both endpoints are available):  
-    `https://api.bybit.com`  
-    `https://api.bytick.com`
-**Mainnet**  
-`https://api.bybit.com`  
-`https://api.bytick.com`
+- **Testnet:**  
+   `https://api-testnet.bybit.com` **Testnet:**  
+  `https://api-testnet.bybit.com`- **Mainnet** (both endpoints are available):  
+   `https://api.bybit.com`  
+   `https://api.bytick.com` **Mainnet**  
+  `https://api.bybit.com`  
+  `https://api.bytick.com`
 
 important
 
--   **Netherlands users:** use `https://api.bybit.nl` for mainnet
--   **Turkey users:** use `https://api.bybit-tr.com` for mainnet
--   **Kazakhstan users:** use `https://api.bybit.kz` for mainnet
--   **Georgia users:** use `https://api.bybitgeorgia.ge` for mainnet
--   **United Arab Emirates users:** use `https://api.bybit.ae` for mainnet
+- **Netherlands users:** use `https://api.bybit.nl` for mainnet
+- **Turkey users:** use `https://api.bybit-tr.com` for mainnet
+- **Kazakhstan users:** use `https://api.bybit.kz` for mainnet
+- **Georgia users:** use `https://api.bybitgeorgia.ge` for mainnet
+- **United Arab Emirates users:** use `https://api.bybit.ae` for mainnet
 
 important
 
--   **Netherlands users:** use `https://api.bybit.nl` for mainnet
--   **Turkey users:** use `https://api.bybit-tr.com` for mainnet
--   **Kazakhstan users:** use `https://api.bybit.kz` for mainnet
--   **Georgia users:** use `https://api.bybitgeorgia.ge` for mainnet
--   **United Arab Emirates users:** use `https://api.bybit.ae` for mainnet
+- **Netherlands users:** use `https://api.bybit.nl` for mainnet
+- **Turkey users:** use `https://api.bybit-tr.com` for mainnet
+- **Kazakhstan users:** use `https://api.bybit.kz` for mainnet
+- **Georgia users:** use `https://api.bybitgeorgia.ge` for mainnet
+- **United Arab Emirates users:** use `https://api.bybit.ae` for mainnet
 
--   **Netherlands users:** use `https://api.bybit.nl` for mainnet
--   **Turkey users:** use `https://api.bybit-tr.com` for mainnet
--   **Kazakhstan users:** use `https://api.bybit.kz` for mainnet
--   **Georgia users:** use `https://api.bybitgeorgia.ge` for mainnet
--   **United Arab Emirates users:** use `https://api.bybit.ae` for mainnet
+- **Netherlands users:** use `https://api.bybit.nl` for mainnet
+- **Turkey users:** use `https://api.bybit-tr.com` for mainnet
+- **Kazakhstan users:** use `https://api.bybit.kz` for mainnet
+- **Georgia users:** use `https://api.bybitgeorgia.ge` for mainnet
+- **United Arab Emirates users:** use `https://api.bybit.ae` for mainnet
 
--   **Netherlands users:** use `https://api.bybit.nl` for mainnet
-**Netherlands users:**`https://api.bybit.nl`-   **Turkey users:** use `https://api.bybit-tr.com` for mainnet
-**Turkey users:**`https://api.bybit-tr.com`-   **Kazakhstan users:** use `https://api.bybit.kz` for mainnet
-**Kazakhstan users:**`https://api.bybit.kz`-   **Georgia users:** use `https://api.bybitgeorgia.ge` for mainnet
-**Georgia users:**`https://api.bybitgeorgia.ge`-   **United Arab Emirates users:** use `https://api.bybit.ae` for mainnet
-**United Arab Emirates users:**`https://api.bybit.ae`
+- **Netherlands users:** use `https://api.bybit.nl` for mainnet **Netherlands
+  users:**`https://api.bybit.nl`- **Turkey users:** use
+  `https://api.bybit-tr.com` for mainnet **Turkey
+  users:**`https://api.bybit-tr.com`- **Kazakhstan users:** use
+  `https://api.bybit.kz` for mainnet **Kazakhstan
+  users:**`https://api.bybit.kz`- **Georgia users:** use
+  `https://api.bybitgeorgia.ge` for mainnet **Georgia
+  users:**`https://api.bybitgeorgia.ge`- **United Arab Emirates users:** use
+  `https://api.bybit.ae` for mainnet **United Arab Emirates
+  users:**`https://api.bybit.ae`
 
 ### Select Your API Key Type[​](#select-your-api-key-type "Direct link to heading")
 
 [​](#select-your-api-key-type "Direct link to heading")
 
-**System-generated API Keys**: The API key generated by the Bybit system operates with HMAC encryption. You will be provided with a pair of public and private keys. Please treat this pair of keys as passwords and keep them safe.
+**System-generated API Keys**: The API key generated by the Bybit system
+operates with HMAC encryption. You will be provided with a pair of public and
+private keys. Please treat this pair of keys as passwords and keep them safe.
 
 **System-generated API Keys**
 
-> Follow [HMAC sample scripts](https://github.com/bybit-exchange/api-usage-examples) to complete encryption procedures.
+> Follow
+> [HMAC sample scripts](https://github.com/bybit-exchange/api-usage-examples) to
+> complete encryption procedures.
 
-Follow [HMAC sample scripts](https://github.com/bybit-exchange/api-usage-examples) to complete encryption procedures.
+Follow
+[HMAC sample scripts](https://github.com/bybit-exchange/api-usage-examples) to
+complete encryption procedures.
 
 [HMAC sample scripts](https://github.com/bybit-exchange/api-usage-examples)
 
-**Auto-generated API Keys**: Self-generated API keys operate with RSA encryption. You must create your public and private keys through the software, and then only provide the public key to Bybit, we will never hold your private key.
+**Auto-generated API Keys**: Self-generated API keys operate with RSA
+encryption. You must create your public and private keys through the software,
+and then only provide the public key to Bybit, we will never hold your private
+key.
 
 **Auto-generated API Keys**
 
-> 1.  Use [api-rsa-generator](https://github.com/bybit-exchange/api-rsa-generator) to create RSA private and public keys
-> 2.  Follow the [RSA sample scripts](https://github.com/bybit-exchange/api-usage-examples) to complete encryption procedures.
+> 1.  Use
+>     [api-rsa-generator](https://github.com/bybit-exchange/api-rsa-generator)
+>     to create RSA private and public keys
+> 2.  Follow the
+>     [RSA sample scripts](https://github.com/bybit-exchange/api-usage-examples)
+>     to complete encryption procedures.
 
-1.  Use [api-rsa-generator](https://github.com/bybit-exchange/api-rsa-generator) to create RSA private and public keys
-2.  Follow the [RSA sample scripts](https://github.com/bybit-exchange/api-usage-examples) to complete encryption procedures.
+1.  Use [api-rsa-generator](https://github.com/bybit-exchange/api-rsa-generator)
+    to create RSA private and public keys
+2.  Follow the
+    [RSA sample scripts](https://github.com/bybit-exchange/api-usage-examples)
+    to complete encryption procedures.
 
--   Use [api-rsa-generator](https://github.com/bybit-exchange/api-rsa-generator) to create RSA private and public keys
-[api-rsa-generator](https://github.com/bybit-exchange/api-rsa-generator)-   Follow the [RSA sample scripts](https://github.com/bybit-exchange/api-usage-examples) to complete encryption procedures.
-[RSA sample scripts](https://github.com/bybit-exchange/api-usage-examples)
+- Use [api-rsa-generator](https://github.com/bybit-exchange/api-rsa-generator)
+  to create RSA private and public keys
+  [api-rsa-generator](https://github.com/bybit-exchange/api-rsa-generator)-
+  Follow the
+  [RSA sample scripts](https://github.com/bybit-exchange/api-usage-examples) to
+  complete encryption procedures.
+  [RSA sample scripts](https://github.com/bybit-exchange/api-usage-examples)
 
 ### HTTP Headers for Authenticated Endpoints[​](#http-headers-for-authenticated-endpoints "Direct link to heading")
 
@@ -95,47 +127,64 @@ Follow [HMAC sample scripts](https://github.com/bybit-exchange/api-usage-example
 
 The following HTTP header keys must be used for authentication:
 
--   `X-BAPI-API-KEY` - API key
--   `X-BAPI-TIMESTAMP` - UTC timestamp in milliseconds
--   `X-BAPI-SIGN` - a signature derived from the request's parameters
--   `X-Referer` or `Referer` - the header for broker users only
+- `X-BAPI-API-KEY` - API key
+- `X-BAPI-TIMESTAMP` - UTC timestamp in milliseconds
+- `X-BAPI-SIGN` - a signature derived from the request's parameters
+- `X-Referer` or `Referer` - the header for broker users only
 
--   `X-BAPI-API-KEY` - API key
-`X-BAPI-API-KEY`-   `X-BAPI-TIMESTAMP` - UTC timestamp in milliseconds
-`X-BAPI-TIMESTAMP`-   `X-BAPI-SIGN` - a signature derived from the request's parameters
-`X-BAPI-SIGN`-   `X-Referer` or `Referer` - the header for broker users only
-`X-Referer``Referer`
+- `X-BAPI-API-KEY` - API key `X-BAPI-API-KEY`- `X-BAPI-TIMESTAMP` - UTC
+  timestamp in milliseconds `X-BAPI-TIMESTAMP`- `X-BAPI-SIGN` - a signature
+  derived from the request's parameters `X-BAPI-SIGN`- `X-Referer` or
+  `Referer` - the header for broker users only `X-Referer``Referer`
 
-We also provide `X-BAPI-RECV-WINDOW` (unit in millisecond and default value is 5,000) to specify how long an HTTP request is valid. It is also used to prevent replay attacks.
+We also provide `X-BAPI-RECV-WINDOW` (unit in millisecond and default value is
+5,000) to specify how long an HTTP request is valid. It is also used to prevent
+replay attacks.
 
 `X-BAPI-RECV-WINDOW`
 
-A smaller `X-BAPI-RECV-WINDOW` is more secure, but your request may fail if the transmission time is greater than your `X-BAPI-RECV-WINDOW`.
+A smaller `X-BAPI-RECV-WINDOW` is more secure, but your request may fail if the
+transmission time is greater than your `X-BAPI-RECV-WINDOW`.
 
 `X-BAPI-RECV-WINDOW``X-BAPI-RECV-WINDOW`
 
 caution
 
-Please make sure that the timestamp parameter adheres to the **following rule**:  
-*server\_time - recv\_window <= timestamp < server\_time + 1000*  
-which means your timestamp should lie in range: \[server\_time - recv\_window; server\_time + 1000)  
-server\_time stands for Bybit server time, which can be queried via the [Server Time endpoint](/docs/v5/market/time). Keep in mind it's highly recommended that you use local device time for `timestamp` and keep it NTP-synchronized at all times.
+Please make sure that the timestamp parameter adheres to the **following
+rule**:  
+_server_time - recv_window <= timestamp < server_time + 1000_  
+which means your timestamp should lie in range: \[server_time - recv_window;
+server_time + 1000)  
+server_time stands for Bybit server time, which can be queried via the
+[Server Time endpoint](/docs/v5/market/time). Keep in mind it's highly
+recommended that you use local device time for `timestamp` and keep it
+NTP-synchronized at all times.
 
 caution
 
-Please make sure that the timestamp parameter adheres to the **following rule**:  
-*server\_time - recv\_window <= timestamp < server\_time + 1000*  
-which means your timestamp should lie in range: \[server\_time - recv\_window; server\_time + 1000)  
-server\_time stands for Bybit server time, which can be queried via the [Server Time endpoint](/docs/v5/market/time). Keep in mind it's highly recommended that you use local device time for `timestamp` and keep it NTP-synchronized at all times.
+Please make sure that the timestamp parameter adheres to the **following
+rule**:  
+_server_time - recv_window <= timestamp < server_time + 1000_  
+which means your timestamp should lie in range: \[server_time - recv_window;
+server_time + 1000)  
+server_time stands for Bybit server time, which can be queried via the
+[Server Time endpoint](/docs/v5/market/time). Keep in mind it's highly
+recommended that you use local device time for `timestamp` and keep it
+NTP-synchronized at all times.
 
-Please make sure that the timestamp parameter adheres to the **following rule**:  
-*server\_time - recv\_window <= timestamp < server\_time + 1000*  
-which means your timestamp should lie in range: \[server\_time - recv\_window; server\_time + 1000)  
-server\_time stands for Bybit server time, which can be queried via the [Server Time endpoint](/docs/v5/market/time). Keep in mind it's highly recommended that you use local device time for `timestamp` and keep it NTP-synchronized at all times.
+Please make sure that the timestamp parameter adheres to the **following
+rule**:  
+_server_time - recv_window <= timestamp < server_time + 1000_  
+which means your timestamp should lie in range: \[server_time - recv_window;
+server_time + 1000)  
+server_time stands for Bybit server time, which can be queried via the
+[Server Time endpoint](/docs/v5/market/time). Keep in mind it's highly
+recommended that you use local device time for `timestamp` and keep it
+NTP-synchronized at all times.
 
 **following rule**  
-*server\_time - recv\_window <= timestamp < server\_time + 1000*  
-  
+_server_time - recv_window <= timestamp < server_time + 1000_
+
 [Server Time endpoint](/docs/v5/market/time)`timestamp`
 
 ### Create A Request[​](#create-a-request "Direct link to heading")
@@ -144,13 +193,19 @@ server\_time stands for Bybit server time, which can be queried via the [Server 
 
 tip
 
-To assist in diagnosing advanced network problems, you may consider adding `cdn-request-id` to your request headers. Its value should be unique for each request.
+To assist in diagnosing advanced network problems, you may consider adding
+`cdn-request-id` to your request headers. Its value should be unique for each
+request.
 
 tip
 
-To assist in diagnosing advanced network problems, you may consider adding `cdn-request-id` to your request headers. Its value should be unique for each request.
+To assist in diagnosing advanced network problems, you may consider adding
+`cdn-request-id` to your request headers. Its value should be unique for each
+request.
 
-To assist in diagnosing advanced network problems, you may consider adding `cdn-request-id` to your request headers. Its value should be unique for each request.
+To assist in diagnosing advanced network problems, you may consider adding
+`cdn-request-id` to your request headers. Its value should be unique for each
+request.
 
 `cdn-request-id`
 
@@ -158,31 +213,44 @@ To assist in diagnosing advanced network problems, you may consider adding `cdn-
 
 **Basic steps:**
 
-1.  Calculate the string you want to sign as follows: For GET requests: timestamp + API key + recv\_window + queryString For POST requests: timestamp + API key + recv\_window + jsonBodyString
-2.  Use the **HMAC\_SHA256** or **RSA\_SHA256** algorithm to sign the string in step 1, and convert it to a lowercase HEX string for HMAC\_SHA256, or base64 for RSA\_SHA256 to obtain the string value of your signature.
-3.  Add your signature to `X-BAPI-API-KEY` header send the HTTP request. You can refer to examples below for more info
+1.  Calculate the string you want to sign as follows: For GET requests:
+    timestamp + API key + recv_window + queryString For POST requests:
+    timestamp + API key + recv_window + jsonBodyString
+2.  Use the **HMAC_SHA256** or **RSA_SHA256** algorithm to sign the string in
+    step 1, and convert it to a lowercase HEX string for HMAC_SHA256, or base64
+    for RSA_SHA256 to obtain the string value of your signature.
+3.  Add your signature to `X-BAPI-API-KEY` header send the HTTP request. You can
+    refer to examples below for more info
 
--   Calculate the string you want to sign as follows: For GET requests: timestamp + API key + recv\_window + queryString For POST requests: timestamp + API key + recv\_window + jsonBodyString
--   Use the **HMAC\_SHA256** or **RSA\_SHA256** algorithm to sign the string in step 1, and convert it to a lowercase HEX string for HMAC\_SHA256, or base64 for RSA\_SHA256 to obtain the string value of your signature.
-**HMAC\_SHA256****RSA\_SHA256**-   Add your signature to `X-BAPI-API-KEY` header send the HTTP request. You can refer to examples below for more info
-`X-BAPI-API-KEY`
+- Calculate the string you want to sign as follows: For GET requests:
+  timestamp + API key + recv_window + queryString For POST requests: timestamp +
+  API key + recv_window + jsonBodyString
+- Use the **HMAC_SHA256** or **RSA_SHA256** algorithm to sign the string in step
+  1, and convert it to a lowercase HEX string for HMAC_SHA256, or base64 for
+  RSA_SHA256 to obtain the string value of your signature.
+  **HMAC_SHA256\*\***RSA_SHA256\*\*- Add your signature to `X-BAPI-API-KEY`
+  header send the HTTP request. You can refer to examples below for more info
+  `X-BAPI-API-KEY`
 
 info
 
-**Example signature algorithms can be found [here](https://github.com/bybit-exchange/api-usage-examples).**
+**Example signature algorithms can be found
+[here](https://github.com/bybit-exchange/api-usage-examples).**
 
 info
 
-**Example signature algorithms can be found [here](https://github.com/bybit-exchange/api-usage-examples).**
+**Example signature algorithms can be found
+[here](https://github.com/bybit-exchange/api-usage-examples).**
 
-**Example signature algorithms can be found [here](https://github.com/bybit-exchange/api-usage-examples).**[here](https://github.com/bybit-exchange/api-usage-examples)
+**Example signature algorithms can be found
+[here](https://github.com/bybit-exchange/api-usage-examples).**[here](https://github.com/bybit-exchange/api-usage-examples)
 
 > An example for how to generate plain text to encrypt
 
 An example for how to generate plain text to encrypt
 
--   GET
--   POST
+- GET
+- POST
 
 ```
 # rule:timestamp+api_key+recv_window+queryString# example values:timestamp = "1658384314791"api_key = "XXXXXXXXXX"recv_window = "5000"queryString = "category=option&symbol=BTC-29JUL22-25000-C"# resulting string that needs to be signed:"1658384314791XXXXXXXXXX5000category=option&symbol=BTC-29JUL22-25000-C"# resulting example signature for HMAC:"410e0f387bafb7afd0f1722c068515e09945610124fa11774da1da857b72f30b"
@@ -192,11 +260,11 @@ An example for how to generate plain text to encrypt
 # rule:timestamp+api_key+recv_window+jsonBodyString# example values:timestamp = 1658385579423api_key = XXXXXXXXXXrecv_window = 5000jsonBodyString = {"category": "option"}# resulting string that needs to be signed:1658385579423XXXXXXXXXX5000{"category": "option"}# resulting example signature for HMAC:"f0da71972ce1811c882ca5e3fd1779791fb1fed499bef40e5558e50259acfd66"
 ```
 
--   GET
--   POST
+- GET
+- POST
 
--   GET
--   POST
+- GET
+- POST
 
 ```
 # rule:timestamp+api_key+recv_window+queryString# example values:timestamp = "1658384314791"api_key = "XXXXXXXXXX"recv_window = "5000"queryString = "category=option&symbol=BTC-29JUL22-25000-C"# resulting string that needs to be signed:"1658384314791XXXXXXXXXX5000category=option&symbol=BTC-29JUL22-25000-C"# resulting example signature for HMAC:"410e0f387bafb7afd0f1722c068515e09945610124fa11774da1da857b72f30b"
@@ -222,34 +290,32 @@ An example for how to generate plain text to encrypt
 # rule:timestamp+api_key+recv_window+queryString# example values:timestamp = "1658384314791"api_key = "XXXXXXXXXX"recv_window = "5000"queryString = "category=option&symbol=BTC-29JUL22-25000-C"# resulting string that needs to be signed:"1658384314791XXXXXXXXXX5000category=option&symbol=BTC-29JUL22-25000-C"# resulting example signature for HMAC:"410e0f387bafb7afd0f1722c068515e09945610124fa11774da1da857b72f30b"
 ```
 
-`# rule:   timestamp+api_key+recv_window+queryString      # example values:   timestamp = "1658384314791"   api_key = "XXXXXXXXXX"   recv_window = "5000"   queryString = "category=option&symbol=BTC-29JUL22-25000-C"      # resulting string that needs to be signed:   "1658384314791XXXXXXXXXX5000category=option&symbol=BTC-29JUL22-25000-C"      # resulting example signature for HMAC:   "410e0f387bafb7afd0f1722c068515e09945610124fa11774da1da857b72f30b"   `\# rule:  
+`# rule:   timestamp+api_key+recv_window+queryString      # example values:   timestamp = "1658384314791"   api_key = "XXXXXXXXXX"   recv_window = "5000"   queryString = "category=option&symbol=BTC-29JUL22-25000-C"      # resulting string that needs to be signed:   "1658384314791XXXXXXXXXX5000category=option&symbol=BTC-29JUL22-25000-C"      # resulting example signature for HMAC:   "410e0f387bafb7afd0f1722c068515e09945610124fa11774da1da857b72f30b"   `\#
+rule:  
 \# rule:  
-timestamp+api\_key+recv\_window+queryString  
-timestamp+api\_key+recv\_window+queryString  
-  
-  
+timestamp+api_key+recv_window+queryString  
+timestamp+api_key+recv_window+queryString
+
 \# example values:  
 \# example values:  
 timestamp \= "1658384314791"  
 timestamp \= "1658384314791"  
-api\_key \= "XXXXXXXXXX"  
-api\_key \= "XXXXXXXXXX"  
-recv\_window \= "5000"  
-recv\_window \= "5000"  
+api_key \= "XXXXXXXXXX"  
+api_key \= "XXXXXXXXXX"  
+recv_window \= "5000"  
+recv_window \= "5000"  
 queryString \= "category=option&symbol=BTC-29JUL22-25000-C"  
-queryString \= "category=option&symbol=BTC-29JUL22-25000-C"  
-  
-  
+queryString \= "category=option&symbol=BTC-29JUL22-25000-C"
+
 \# resulting string that needs to be signed:  
 \# resulting string that needs to be signed:  
 "1658384314791XXXXXXXXXX5000category=option&symbol=BTC-29JUL22-25000-C"  
-"1658384314791XXXXXXXXXX5000category=option&symbol=BTC-29JUL22-25000-C"  
-  
-  
+"1658384314791XXXXXXXXXX5000category=option&symbol=BTC-29JUL22-25000-C"
+
 \# resulting example signature for HMAC:  
 \# resulting example signature for HMAC:  
 "410e0f387bafb7afd0f1722c068515e09945610124fa11774da1da857b72f30b"  
-"410e0f387bafb7afd0f1722c068515e09945610124fa11774da1da857b72f30b"  
+"410e0f387bafb7afd0f1722c068515e09945610124fa11774da1da857b72f30b"
 
 ```
 # rule:timestamp+api_key+recv_window+jsonBodyString# example values:timestamp = 1658385579423api_key = XXXXXXXXXXrecv_window = 5000jsonBodyString = {"category": "option"}# resulting string that needs to be signed:1658385579423XXXXXXXXXX5000{"category": "option"}# resulting example signature for HMAC:"f0da71972ce1811c882ca5e3fd1779791fb1fed499bef40e5558e50259acfd66"
@@ -267,41 +333,39 @@ queryString \= "category=option&symbol=BTC-29JUL22-25000-C"
 # rule:timestamp+api_key+recv_window+jsonBodyString# example values:timestamp = 1658385579423api_key = XXXXXXXXXXrecv_window = 5000jsonBodyString = {"category": "option"}# resulting string that needs to be signed:1658385579423XXXXXXXXXX5000{"category": "option"}# resulting example signature for HMAC:"f0da71972ce1811c882ca5e3fd1779791fb1fed499bef40e5558e50259acfd66"
 ```
 
-`# rule:   timestamp+api_key+recv_window+jsonBodyString      # example values:   timestamp = 1658385579423   api_key = XXXXXXXXXX   recv_window = 5000   jsonBodyString = {"category": "option"}      # resulting string that needs to be signed:   1658385579423XXXXXXXXXX5000{"category": "option"}      # resulting example signature for HMAC:   "f0da71972ce1811c882ca5e3fd1779791fb1fed499bef40e5558e50259acfd66"   `\# rule:  
+`# rule:   timestamp+api_key+recv_window+jsonBodyString      # example values:   timestamp = 1658385579423   api_key = XXXXXXXXXX   recv_window = 5000   jsonBodyString = {"category": "option"}      # resulting string that needs to be signed:   1658385579423XXXXXXXXXX5000{"category": "option"}      # resulting example signature for HMAC:   "f0da71972ce1811c882ca5e3fd1779791fb1fed499bef40e5558e50259acfd66"   `\#
+rule:  
 \# rule:  
-timestamp+api\_key+recv\_window+jsonBodyString  
-timestamp+api\_key+recv\_window+jsonBodyString  
-  
-  
+timestamp+api_key+recv_window+jsonBodyString  
+timestamp+api_key+recv_window+jsonBodyString
+
 \# example values:  
 \# example values:  
 timestamp \= 1658385579423  
 timestamp \= 1658385579423  
-api\_key \= XXXXXXXXXX  
-api\_key \= XXXXXXXXXX  
-recv\_window \= 5000  
-recv\_window \= 5000  
+api_key \= XXXXXXXXXX  
+api_key \= XXXXXXXXXX  
+recv_window \= 5000  
+recv_window \= 5000  
 jsonBodyString \= {"category": "option"}  
-jsonBodyString \= {"category": "option"}  
-  
-  
+jsonBodyString \= {"category": "option"}
+
 \# resulting string that needs to be signed:  
 \# resulting string that needs to be signed:  
 1658385579423XXXXXXXXXX5000{"category": "option"}  
-1658385579423XXXXXXXXXX5000{"category": "option"}  
-  
-  
+1658385579423XXXXXXXXXX5000{"category": "option"}
+
 \# resulting example signature for HMAC:  
 \# resulting example signature for HMAC:  
 "f0da71972ce1811c882ca5e3fd1779791fb1fed499bef40e5558e50259acfd66"  
-"f0da71972ce1811c882ca5e3fd1779791fb1fed499bef40e5558e50259acfd66"  
+"f0da71972ce1811c882ca5e3fd1779791fb1fed499bef40e5558e50259acfd66"
 
 > HTTP request examples
 
 HTTP request examples
 
--   GET
--   POST
+- GET
+- POST
 
 ```
 GET /v5/order/realtime?category=option&symbol=BTC-29JUL22-25000-C HTTP/1.1Host: api-testnet.bybit.com-H 'X-BAPI-SIGN: XXXXXXXXXX' \-H 'X-BAPI-API-KEY: xxxxxxxxxxxxxxxxxx' \-H 'X-BAPI-TIMESTAMP: 1658384431891' \-H 'X-BAPI-RECV-WINDOW: 5000'
@@ -311,11 +375,11 @@ GET /v5/order/realtime?category=option&symbol=BTC-29JUL22-25000-C HTTP/1.1Host: 
 POST /v5/order/create HTTP/1.1Host: api-testnet.bybit.com-H 'X-Referer: XXXXXXXXXX' \ [the header for broker users only]-H 'X-BAPI-SIGN: XXXXXXXXXX' \-H 'X-BAPI-API-KEY: xxxxxxxxxxxxxxxxxx' \-H 'X-BAPI-TIMESTAMP: 1658385589135' \-H 'X-BAPI-RECV-WINDOW: 5000' \-H 'Content-Type: application/json' \-d '{"category": "option"}'
 ```
 
--   GET
--   POST
+- GET
+- POST
 
--   GET
--   POST
+- GET
+- POST
 
 ```
 GET /v5/order/realtime?category=option&symbol=BTC-29JUL22-25000-C HTTP/1.1Host: api-testnet.bybit.com-H 'X-BAPI-SIGN: XXXXXXXXXX' \-H 'X-BAPI-API-KEY: xxxxxxxxxxxxxxxxxx' \-H 'X-BAPI-TIMESTAMP: 1658384431891' \-H 'X-BAPI-RECV-WINDOW: 5000'
@@ -341,7 +405,8 @@ GET /v5/order/realtime?category=option&symbol=BTC-29JUL22-25000-C HTTP/1.1Host: 
 GET /v5/order/realtime?category=option&symbol=BTC-29JUL22-25000-C HTTP/1.1Host: api-testnet.bybit.com-H 'X-BAPI-SIGN: XXXXXXXXXX' \-H 'X-BAPI-API-KEY: xxxxxxxxxxxxxxxxxx' \-H 'X-BAPI-TIMESTAMP: 1658384431891' \-H 'X-BAPI-RECV-WINDOW: 5000'
 ```
 
-`GET /v5/order/realtime?category=option&symbol=BTC-29JUL22-25000-C HTTP/1.1   Host: api-testnet.bybit.com   -H 'X-BAPI-SIGN: XXXXXXXXXX' \   -H 'X-BAPI-API-KEY: xxxxxxxxxxxxxxxxxx' \   -H 'X-BAPI-TIMESTAMP: 1658384431891' \   -H 'X-BAPI-RECV-WINDOW: 5000'   `GET /v5/order/realtime?category=option&symbol=BTC-29JUL22-25000-C HTTP/1.1  
+`GET /v5/order/realtime?category=option&symbol=BTC-29JUL22-25000-C HTTP/1.1   Host: api-testnet.bybit.com   -H 'X-BAPI-SIGN: XXXXXXXXXX' \   -H 'X-BAPI-API-KEY: xxxxxxxxxxxxxxxxxx' \   -H 'X-BAPI-TIMESTAMP: 1658384431891' \   -H 'X-BAPI-RECV-WINDOW: 5000'   `GET
+/v5/order/realtime?category=option&symbol=BTC-29JUL22-25000-C HTTP/1.1  
 GET /v5/order/realtime?category=option&symbol=BTC-29JUL22-25000-C HTTP/1.1  
 Host: api-testnet.bybit.com  
 Host: api-testnet.bybit.com  
@@ -352,7 +417,7 @@ Host: api-testnet.bybit.com
 \-H 'X-BAPI-TIMESTAMP: 1658384431891' \\  
 \-H 'X-BAPI-TIMESTAMP: 1658384431891' \\  
 \-H 'X-BAPI-RECV-WINDOW: 5000'  
-\-H 'X-BAPI-RECV-WINDOW: 5000'  
+\-H 'X-BAPI-RECV-WINDOW: 5000'
 
 ```
 POST /v5/order/create HTTP/1.1Host: api-testnet.bybit.com-H 'X-Referer: XXXXXXXXXX' \ [the header for broker users only]-H 'X-BAPI-SIGN: XXXXXXXXXX' \-H 'X-BAPI-API-KEY: xxxxxxxxxxxxxxxxxx' \-H 'X-BAPI-TIMESTAMP: 1658385589135' \-H 'X-BAPI-RECV-WINDOW: 5000' \-H 'Content-Type: application/json' \-d '{"category": "option"}'
@@ -370,7 +435,8 @@ POST /v5/order/create HTTP/1.1Host: api-testnet.bybit.com-H 'X-Referer: XXXXXXXX
 POST /v5/order/create HTTP/1.1Host: api-testnet.bybit.com-H 'X-Referer: XXXXXXXXXX' \ [the header for broker users only]-H 'X-BAPI-SIGN: XXXXXXXXXX' \-H 'X-BAPI-API-KEY: xxxxxxxxxxxxxxxxxx' \-H 'X-BAPI-TIMESTAMP: 1658385589135' \-H 'X-BAPI-RECV-WINDOW: 5000' \-H 'Content-Type: application/json' \-d '{"category": "option"}'
 ```
 
-`POST /v5/order/create HTTP/1.1   Host: api-testnet.bybit.com   -H 'X-Referer: XXXXXXXXXX' \ [the header for broker users only]   -H 'X-BAPI-SIGN: XXXXXXXXXX' \   -H 'X-BAPI-API-KEY: xxxxxxxxxxxxxxxxxx' \   -H 'X-BAPI-TIMESTAMP: 1658385589135' \   -H 'X-BAPI-RECV-WINDOW: 5000' \   -H 'Content-Type: application/json' \   -d '{"category": "option"}'   `POST /v5/order/create HTTP/1.1  
+`POST /v5/order/create HTTP/1.1   Host: api-testnet.bybit.com   -H 'X-Referer: XXXXXXXXXX' \ [the header for broker users only]   -H 'X-BAPI-SIGN: XXXXXXXXXX' \   -H 'X-BAPI-API-KEY: xxxxxxxxxxxxxxxxxx' \   -H 'X-BAPI-TIMESTAMP: 1658385589135' \   -H 'X-BAPI-RECV-WINDOW: 5000' \   -H 'Content-Type: application/json' \   -d '{"category": "option"}'   `POST
+/v5/order/create HTTP/1.1  
 POST /v5/order/create HTTP/1.1  
 Host: api-testnet.bybit.com  
 Host: api-testnet.bybit.com  

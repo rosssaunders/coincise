@@ -1,6 +1,7 @@
 # POST private/get-subaccount-balances
 
-**Source:** [private/get-subaccount-balances](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-subaccount-balances)
+**Source:**
+[private/get-subaccount-balances](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-subaccount-balances)
 
 ## Authentication
 
@@ -131,7 +132,8 @@ Returns the user's wallet balances of all sub-accounts.
 
 ### Request Params
 
-**Note**: You still need to pass in an empty `params` block like `params: {}` for API request consistency
+**Note**: You still need to pass in an empty `params` block like `params: {}`
+for API request consistency
 
 ### Applies To
 
@@ -145,33 +147,33 @@ POST
 
 An array consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| account | string | Sub account ID |
-| instrument\_name | string | Instrument name of the balance e.g. `USD` |
-| total\_available\_balance | string | Balance that user can open new order (Margin Balance - Initial Margin) |
-| total\_margin\_balance | string | Positive cash balance on eligible collateral tokens + Negative balance on all tokens + Unrealised PnL - Fee reserves |
-| total\_initial\_margin | string | Total margin requirement to support positions and all open orders IM and haircut from risk asset holdings |
-| total\_maintenance\_margin | string | Total maintenance margin requirement for all positions |
-| total\_position\_cost | string | Position value in USD |
-| total\_cash\_balance | string | Wallet Balance (Deposits - Withdrawals + Realized PnL - Fees) |
-| total\_collateral\_value | string | Collateral Value |
-| total\_session\_unrealized\_pnl | string | Current unrealized profit and loss from all open positions (calculated with Mark Price and Avg Price) |
-| total\_session\_realized\_pnl | string | Current realized profit and loss from all open positions (calculated with Mark Price and Avg Price) |
-| is\_liquidating | boolean | Describes whether the account is under liquidation |
-| total\_effective\_leverage | string | The actual leverage used (all open positions combined), i.e. position size / margin balance |
-| position\_limit | string | Maximum position size allowed (for all open positions combined) |
-| used\_position\_limit | string | Combined position size of all open positions + order exposure on all instruments |
-| position\_balances | array | Collateral balances as shown below |
+| Name                         | Type    | Description                                                                                                          |
+| ---------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------- |
+| account                      | string  | Sub account ID                                                                                                       |
+| instrument_name              | string  | Instrument name of the balance e.g. `USD`                                                                            |
+| total_available_balance      | string  | Balance that user can open new order (Margin Balance - Initial Margin)                                               |
+| total_margin_balance         | string  | Positive cash balance on eligible collateral tokens + Negative balance on all tokens + Unrealised PnL - Fee reserves |
+| total_initial_margin         | string  | Total margin requirement to support positions and all open orders IM and haircut from risk asset holdings            |
+| total_maintenance_margin     | string  | Total maintenance margin requirement for all positions                                                               |
+| total_position_cost          | string  | Position value in USD                                                                                                |
+| total_cash_balance           | string  | Wallet Balance (Deposits - Withdrawals + Realized PnL - Fees)                                                        |
+| total_collateral_value       | string  | Collateral Value                                                                                                     |
+| total_session_unrealized_pnl | string  | Current unrealized profit and loss from all open positions (calculated with Mark Price and Avg Price)                |
+| total_session_realized_pnl   | string  | Current realized profit and loss from all open positions (calculated with Mark Price and Avg Price)                  |
+| is_liquidating               | boolean | Describes whether the account is under liquidation                                                                   |
+| total_effective_leverage     | string  | The actual leverage used (all open positions combined), i.e. position size / margin balance                          |
+| position_limit               | string  | Maximum position size allowed (for all open positions combined)                                                      |
+| used_position_limit          | string  | Combined position size of all open positions + order exposure on all instruments                                     |
+| position_balances            | array   | Collateral balances as shown below                                                                                   |
 
 `position_balances` is an array consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| instrument\_name | string | Instrument name of the collateral e.g. `USD`, `CRO`, `USDT`, or `DAI` |
-| quantity | string | Quantity of the collateral |
-| market\_value | string | Market value of the collateral |
-| collateral\_eligible | boolean | true or false |
-| haircut | string | Show haircut for eligible collateral token |
-| collateral\_amount | string | Collateral amount derived by market\_value minus haircut |
-| max\_withdrawal\_balance | string | Max withdrawal balance of the collateral |
+| Name                   | Type    | Description                                                           |
+| ---------------------- | ------- | --------------------------------------------------------------------- |
+| instrument_name        | string  | Instrument name of the collateral e.g. `USD`, `CRO`, `USDT`, or `DAI` |
+| quantity               | string  | Quantity of the collateral                                            |
+| market_value           | string  | Market value of the collateral                                        |
+| collateral_eligible    | boolean | true or false                                                         |
+| haircut                | string  | Show haircut for eligible collateral token                            |
+| collateral_amount      | string  | Collateral amount derived by market_value minus haircut               |
+| max_withdrawal_balance | string  | Max withdrawal balance of the collateral                              |

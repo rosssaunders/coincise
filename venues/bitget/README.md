@@ -1,6 +1,7 @@
 # Bitget API Documentation Extractor
 
-This project extracts API documentation from Bitget and converts it to markdown format, creating separate files for each documentation page.
+This project extracts API documentation from Bitget and converts it to markdown
+format, creating separate files for each documentation page.
 
 ## Features
 
@@ -79,7 +80,8 @@ docs/bitget/
 └── change_log.md
 ```
 
-Each URL in the configuration is extracted into its own markdown file, named based on the URL path (excluding the category prefix).
+Each URL in the configuration is extracted into its own markdown file, named
+based on the URL path (excluding the category prefix).
 
 ## Configuration
 
@@ -96,11 +98,7 @@ Each configuration file in the `config/` directory includes:
 {
   "title": "Bitget Common API Documentation",
   "base_url": "https://www.bitget.com/api-doc",
-  "urls": [
-    "/common/intro",
-    "/common/quick-start",
-    "/common/faq"
-  ],
+  "urls": ["/common/intro", "/common/quick-start", "/common/faq"],
   "output_dir": "../../docs/bitget/common"
 }
 ```
@@ -108,6 +106,7 @@ Each configuration file in the `config/` directory includes:
 ## API Documentation Source
 
 The scraper targets the official Bitget API documentation at:
+
 - Base URL: https://www.bitget.com/api-doc
 
 ## Recent Changes
@@ -120,7 +119,8 @@ The scraper targets the official Bitget API documentation at:
 - Added source URL tracking in each generated file
 - Organized output into subdirectories by API category
 
-This change aligns Bitget's extraction approach with other venues like Bitmart, making the documentation more modular and easier to navigate.
+This change aligns Bitget's extraction approach with other venues like Bitmart,
+making the documentation more modular and easier to navigate.
 
 ## Contributing
 

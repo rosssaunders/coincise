@@ -1,6 +1,7 @@
 # GET the Balance of the Margin Loan Account（Cross）
 
-**Source:** [Get the Balance of the Margin Loan Account（Cross）](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4bca0-7773-11ed-9966-0242ac110003)
+**Source:**
+[Get the Balance of the Margin Loan Account（Cross）](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4bca0-7773-11ed-9966-0242ac110003)
 
 **Category:** Margin Loan (Cross/Isolated)
 
@@ -18,39 +19,40 @@ Interface permission: Read
 
 Rate Limit: 2times/2s
 
-Interface description: This endpoint returns the balance of the margin loan account.
+Interface description: This endpoint returns the balance of the margin loan
+account.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| sub-uid | long | false | Sub user UID |  | If not specified, returns account balance of current logged in user |
+| Parameter | Data Type | Required | Description  | Value Range | Default Value                                                       |
+| --------- | --------- | -------- | ------------ | ----------- | ------------------------------------------------------------------- |
+| sub-uid   | long      | false    | Sub user UID |             | If not specified, returns account balance of current logged in user |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | false |  |  |
-| DATA\_START | object | false |  |  |
-| id | integer | false |  |  |
-| type | integer | false |  |  |
-| state | string | false | account state: working, fl-sys, fl-end, fl-negative |  |
-| risk-rate | string | false |  |  |
-| acct-balance-sum | string | false |  |  |
-| debt-balance-sum | string | false |  |  |
-| LIST\_START | array | false |  |  |
-| currency | string | false |  |  |
-| type | string | false | account type: trade, frozen, loan, interest, transfer-out-available, loan-available |  |
-| balance | string | false | The negative balance means the loan or interest that need to repay. All trade balance can be transferred out if transfer-out-available balance is -1 |  |
-| LIST\_END |  | false |  |  |
-| DATA\_END |  | false |  |  |
+| Parameter        | Data Type | Required | Description                                                                                                                                          | Value Range |
+| ---------------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| status           | string    | false    |                                                                                                                                                      |             |
+| DATA_START       | object    | false    |                                                                                                                                                      |             |
+| id               | integer   | false    |                                                                                                                                                      |             |
+| type             | integer   | false    |                                                                                                                                                      |             |
+| state            | string    | false    | account state: working, fl-sys, fl-end, fl-negative                                                                                                  |             |
+| risk-rate        | string    | false    |                                                                                                                                                      |             |
+| acct-balance-sum | string    | false    |                                                                                                                                                      |             |
+| debt-balance-sum | string    | false    |                                                                                                                                                      |             |
+| LIST_START       | array     | false    |                                                                                                                                                      |             |
+| currency         | string    | false    |                                                                                                                                                      |             |
+| type             | string    | false    | account type: trade, frozen, loan, interest, transfer-out-available, loan-available                                                                  |             |
+| balance          | string    | false    | The negative balance means the loan or interest that need to repay. All trade balance can be transferred out if transfer-out-available balance is -1 |             |
+| LIST_END         |           | false    |                                                                                                                                                      |             |
+| DATA_END         |           | false    |                                                                                                                                                      |             |
 
 #### Request example
 

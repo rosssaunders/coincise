@@ -8,22 +8,22 @@ Get Convert History
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/convert/convert-record
+- GET /api/v2/convert/convert-record
 
 Request Example
 
 ```
-curl "https://api.bitget.com/api/v2/convert/convert-record?startTime=1686128558000&endTime=1686214958000&limit=10" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" 
+curl "https://api.bitget.com/api/v2/convert/convert-record?startTime=1686128558000&endTime=1686214958000&limit=10" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
 ### request parameters[​](#request-parameters "Direct link to request parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| startTime | String | Yes | Start time, Unix millisecond timestamps 
-| endTime | String | Yes | End time, Unix millisecond timestamps<br>The maximum interval between startTime and endTime is 90 days. 
-| limit | String | No | Default 20 Maximum 100 
-| idLessThan | String | No | ID of the last record endId 
+| Parameter  | Type   | Required | Description                                                                                             |
+| :--------- | :----- | :------- | :------------------------------------------------------------------------------------------------------ |
+| startTime  | String | Yes      | Start time, Unix millisecond timestamps                                                                 |
+| endTime    | String | Yes      | End time, Unix millisecond timestamps<br>The maximum interval between startTime and endTime is 90 days. |
+| limit      | String | No       | Default 20 Maximum 100                                                                                  |
+| idLessThan | String | No       | ID of the last record endId                                                                             |
 
 Response Example
 
@@ -33,17 +33,17 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| dataList | List | List 
-| id | String | Splash Record id 
-| ts | String | Time of generation of flash transfer records 
-| cnvtPrice | String | Coin swap price 
-| fee | String | Transaction fee 
-| fromCoinSize | String | Coin swap amount 
-| fromCoin | String | Switch 
-| toCoinSize | String | Get the number of target coins 
-| toCoin | String | Target currency 
-| endId | String | Pagination
+| Parameter    | Type   | Description                                  |
+| :----------- | :----- | :------------------------------------------- |
+| dataList     | List   | List                                         |
+| id           | String | Splash Record id                             |
+| ts           | String | Time of generation of flash transfer records |
+| cnvtPrice    | String | Coin swap price                              |
+| fee          | String | Transaction fee                              |
+| fromCoinSize | String | Coin swap amount                             |
+| fromCoin     | String | Switch                                       |
+| toCoinSize   | String | Get the number of target coins               |
+| toCoin       | String | Target currency                              |
+| endId        | String | Pagination                                   |
 
 > **Source:** https://www.bitget.com/api-doc/common/convert/Get-Convert-Record

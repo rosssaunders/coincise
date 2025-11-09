@@ -2,7 +2,8 @@
 
 **Title:** Currencies which support margin trading
 
-**Source:** [Currencies which support margin trading](https://docs.digifinex.com/en-ww/spot/v3/rest.html#currencies-which-support-margin-trading)
+**Source:**
+[Currencies which support margin trading](https://docs.digifinex.com/en-ww/spot/v3/rest.html#currencies-which-support-margin-trading)
 
 ## Authentication
 
@@ -14,7 +15,7 @@ Not Required (Public Endpoint)
 
 ### HTTP Request
 
--   GET `https://openapi.digifinex.com/v3/margin/currencies`
+- GET `https://openapi.digifinex.com/v3/margin/currencies`
 
 ### Request Parameters
 
@@ -47,13 +48,13 @@ No parameter is available for this endpoint.
 
 ### Response Content
 
-| Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| currencys | true | list | Currencys List |
-| margin\_fees | true | object | Margin Fees |
-| currency\_mark | true | str | Currency |
-| loan\_fees | true | float | Loan Fees |
-| range | true | str | Range |
-| level | true | int | Level |
-| code | true | int | Status |
-| funding\_time | true | str | Funding Time |
+| Field         | Mandatory | Request Type | Description    |
+| ------------- | --------- | ------------ | -------------- |
+| currencys     | true      | list         | Currencys List |
+| margin_fees   | true      | object       | Margin Fees    |
+| currency_mark | true      | str          | Currency       |
+| loan_fees     | true      | float        | Loan Fees      |
+| range         | true      | str          | Range          |
+| level         | true      | int          | Level          |
+| code          | true      | int          | Status         |
+| funding_time  | true      | str          | Funding Time   |

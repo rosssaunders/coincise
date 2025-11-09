@@ -1,6 +1,7 @@
 # GET Query Swap Price Limitation
 
-**Source:** [Query Swap Price Limitation](https://www.htx.com/en-us/opend/newApiPages/?id=5d51727b-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Query Swap Price Limitation](https://www.htx.com/en-us/opend/newApiPages/?id=5d51727b-77b6-11ed-9966-0242ac110003)
 
 **Category:** Reference Data
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /swap-api/v1/swap\_price\_limit (Query Swap Price Limitation)
+### /swap-api/v1/swap_price_limit (Query Swap Price Limitation)
 
 Request type: GET
 
@@ -18,29 +19,29 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | Case-insenstive.such as:BTC-USD, All swaps default |  |  |
+| Parameter     | Data Type | Required | Description                                        | Value Range | Default Value |
+| ------------- | --------- | -------- | -------------------------------------------------- | ----------- | ------------- |
+| contract_code | string    | false    | Case-insenstive.such as:BTC-USD, All swaps default |             |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request Processing Result | "ok" ,"error" |
-| DATA\_START |  | false |  |  |
-| symbol | string | true | Variety code | "BTC","ETH" ... |
-| high\_limit | decimal | true | Highest Buying Price |  |
-| low\_limit | decimal | true | Lowest Selling Price |  |
-| contract\_code | string | true | Contract Code | eg "BTC-USD" ... |
-| DATA\_START |  | false |  |  |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
+| Parameter     | Data Type | Required | Description                                   | Value Range      |
+| ------------- | --------- | -------- | --------------------------------------------- | ---------------- |
+| status        | string    | true     | Request Processing Result                     | "ok" ,"error"    |
+| DATA_START    |           | false    |                                               |                  |
+| symbol        | string    | true     | Variety code                                  | "BTC","ETH" ...  |
+| high_limit    | decimal   | true     | Highest Buying Price                          |                  |
+| low_limit     | decimal   | true     | Lowest Selling Price                          |                  |
+| contract_code | string    | true     | Contract Code                                 | eg "BTC-USD" ... |
+| DATA_START    |           | false    |                                               |                  |
+| ts            | long      | true     | Time of Respond Generation, Unit: Millisecond |                  |
 
 #### Request example
 
@@ -64,15 +65,15 @@ Interface permission: Read
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USD"
 
-"high\_limit":
+"high_limit":
 
 14313.1
 
-"low\_limit":
+"low_limit":
 
 13212.2
 

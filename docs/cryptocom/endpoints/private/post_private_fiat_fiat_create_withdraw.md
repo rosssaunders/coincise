@@ -1,6 +1,7 @@
 # POST private/fiat/fiat-create-withdraw
 
-**Source:** [private/fiat/fiat-create-withdraw](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-fiat-fiat-create-withdraw)
+**Source:**
+[private/fiat/fiat-create-withdraw](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-fiat-fiat-create-withdraw)
 
 ## Authentication
 
@@ -133,65 +134,62 @@ Creates a new fiat withdrawal request for the authenticated user.
 
 ### Request Params
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| id | string | Y | Unique request identifier |
-| method | string | Y | "private/fiat/fiat-create-withdraw" |
-| params | object | Y | Request parameters |
-| nonce | number | Y | Unix timestamp in milliseconds |
+| Field  | Type   | Required | Description                         |
+| ------ | ------ | -------- | ----------------------------------- |
+| id     | string | Y        | Unique request identifier           |
+| method | string | Y        | "private/fiat/fiat-create-withdraw" |
+| params | object | Y        | Request parameters                  |
+| nonce  | number | Y        | Unix timestamp in milliseconds      |
 
-  
-****params**** consists of:  
+\***\*params\*\*** consists of:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| account\_id | string | Y | Account ID for the withdrawal (UUID format), please refer to the `private/fiat/fiat-get-bank-accounts` API for available accounts and use the id field in the response |
-| amount | string | Y | Withdrawal amount as string |
-| currency | string | Y | Currency code (3-letter format) |
-| payment\_network | string | Y | Payment network identifier |
-| intermediate\_bank | object | N | Only required for usd\_swift. Intermediary bank information will update the bank intermediate bank info if provided. Please check with your bank for the correct information. |
-| beneficiary\_id | string | N | Beneficiary ID (optional) |
-| authorization\_id | string | N | Authorization ID (optional) |
-| bank\_identifier\_value | string | N | Only available to aed\_ipi. Bank identifier value for the AED network. |
-| account\_identifier\_value | string | N | Only available to aed\_ipi. Account identifier value for the AED network. |
+| Field                    | Type   | Required | Description                                                                                                                                                                  |
+| ------------------------ | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| account_id               | string | Y        | Account ID for the withdrawal (UUID format), please refer to the `private/fiat/fiat-get-bank-accounts` API for available accounts and use the id field in the response       |
+| amount                   | string | Y        | Withdrawal amount as string                                                                                                                                                  |
+| currency                 | string | Y        | Currency code (3-letter format)                                                                                                                                              |
+| payment_network          | string | Y        | Payment network identifier                                                                                                                                                   |
+| intermediate_bank        | object | N        | Only required for usd_swift. Intermediary bank information will update the bank intermediate bank info if provided. Please check with your bank for the correct information. |
+| beneficiary_id           | string | N        | Beneficiary ID (optional)                                                                                                                                                    |
+| authorization_id         | string | N        | Authorization ID (optional)                                                                                                                                                  |
+| bank_identifier_value    | string | N        | Only available to aed_ipi. Bank identifier value for the AED network.                                                                                                        |
+| account_identifier_value | string | N        | Only available to aed_ipi. Account identifier value for the AED network.                                                                                                     |
 
-  
-****intermediate\_bank**** consists of:  
+\***\*intermediate_bank\*\*** consists of:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| bank\_identifier\_type | string | N | Type of bank identifier (e.g., SWIFT, ROUTING) |
-| bank\_identifier\_value | string | N | Bank identifier value |
-| bank\_name | string | N | Name of the intermediary bank |
-| address\_1 | string | N | Bank address line 1 |
-| address\_2 | string | N | Bank address line 2 |
+| Field                 | Type   | Required | Description                                    |
+| --------------------- | ------ | -------- | ---------------------------------------------- |
+| bank_identifier_type  | string | N        | Type of bank identifier (e.g., SWIFT, ROUTING) |
+| bank_identifier_value | string | N        | Bank identifier value                          |
+| bank_name             | string | N        | Name of the intermediary bank                  |
+| address_1             | string | N        | Bank address line 1                            |
+| address_2             | string | N        | Bank address line 2                            |
 
 ### Response Params
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| id | string | N | Echo back the request identifier from the original request |
-| method | string | Y | Method invoked |
-| code | number | Y | 0 for success; otherwise, see error details |
-| msg | string | N | Response message |
-| data | object | Y | See below |
+| Field  | Type   | Required | Description                                                |
+| ------ | ------ | -------- | ---------------------------------------------------------- |
+| id     | string | N        | Echo back the request identifier from the original request |
+| method | string | Y        | Method invoked                                             |
+| code   | number | Y        | 0 for success; otherwise, see error details                |
+| msg    | string | N        | Response message                                           |
+| data   | object | Y        | See below                                                  |
 
-  
-****data**** consists of:  
+\***\*data\*\*** consists of:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| id | string | Y | System-generated withdrawal ID |
-| account\_id | string | Y | Account ID for the withdrawal |
-| status | string | Y | Withdrawal status (e.g., "pending") |
-| payment\_network | string | Y | Payment network identifier |
-| currency | string | Y | Currency code |
-| amount | number | Y | Withdrawal amount as number |
-| amount\_in\_usd | number | Y | Withdrawal amount converted to USD |
-| fee\_currency | string | Y | Currency of the withdrawal fee |
-| fee\_amount | number | Y | Withdrawal fee amount |
-| beneficiary\_id | string | Y | Beneficiary identifier |
-| authorization\_id | string | Y | Authorization identifier for the withdrawal |
+| Field            | Type   | Required | Description                                 |
+| ---------------- | ------ | -------- | ------------------------------------------- |
+| id               | string | Y        | System-generated withdrawal ID              |
+| account_id       | string | Y        | Account ID for the withdrawal               |
+| status           | string | Y        | Withdrawal status (e.g., "pending")         |
+| payment_network  | string | Y        | Payment network identifier                  |
+| currency         | string | Y        | Currency code                               |
+| amount           | number | Y        | Withdrawal amount as number                 |
+| amount_in_usd    | number | Y        | Withdrawal amount converted to USD          |
+| fee_currency     | string | Y        | Currency of the withdrawal fee              |
+| fee_amount       | number | Y        | Withdrawal fee amount                       |
+| beneficiary_id   | string | Y        | Beneficiary identifier                      |
+| authorization_id | string | Y        | Authorization identifier for the withdrawal |
 
 ### Applies To
 

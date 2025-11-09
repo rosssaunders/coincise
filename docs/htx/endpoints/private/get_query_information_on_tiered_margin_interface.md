@@ -1,6 +1,7 @@
 # GET Query information on Tiered Margin interface
 
-**Source:** [Query information on Tiered Margin interface](https://www.htx.com/en-us/opend/newApiPages/?id=5d516609-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Query information on Tiered Margin interface](https://www.htx.com/en-us/opend/newApiPages/?id=5d516609-77b6-11ed-9966-0242ac110003)
 
 **Category:** Reference Data
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /swap-api/v1/swap\_ladder\_margin (Query information on Tiered Margin interface)
+### /swap-api/v1/swap_ladder_margin (Query information on Tiered Margin interface)
 
 Request type: GET
 
@@ -18,36 +19,36 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | contract code, if not filled in return all | such as: “BTC-USD”, “ETH-USD”。。。 |  |
+| Parameter     | Data Type | Required | Description                                | Value Range                         | Default Value |
+| ------------- | --------- | -------- | ------------------------------------------ | ----------------------------------- | ------------- |
+| contract_code | string    | false    | contract code, if not filled in return all | such as: “BTC-USD”, “ETH-USD”。。。 |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | the result of server handling to request | "ok" , "error" |
-| DATA\_START | object array | true |  |  |
-| symbol | string | true | symbol | such as: "BTC" |
-| contract\_code | string | true | contract code | such as: "BTC-USD" |
-| LIST\_START | object array | true |  |  |
-| lever\_rate | int | true | lever rate |  |
-| LADDERS\_START | object array | true | ladders for margin |  |
-| min\_margin\_balance | decimal | true | min margin balance(the starting point in this ladder, included in this ladder) |  |
-| max\_margin\_balance | decimal | true | max margin balance(the end point in this ladder, excluded in this ladder, is next ladder's min\_margin\_balance) |  |
-| min\_margin\_available | decimal | true | min margin available(in the range of this ladder margin balance) |  |
-| max\_margin\_available | decimal | true | max margin available（not in the range of this ladder margin balance, is next ladder's min\_margin\_available) |  |
-| LADDERS\_END |  | false |  |  |
-| LIST\_END |  | false |  |  |
-| DATA\_END |  | false |  |  |
-| ts | long | true | Time of Respond Generation，Unit：Millisecond |  |
+| Parameter            | Data Type    | Required | Description                                                                                                    | Value Range        |
+| -------------------- | ------------ | -------- | -------------------------------------------------------------------------------------------------------------- | ------------------ |
+| status               | string       | true     | the result of server handling to request                                                                       | "ok" , "error"     |
+| DATA_START           | object array | true     |                                                                                                                |                    |
+| symbol               | string       | true     | symbol                                                                                                         | such as: "BTC"     |
+| contract_code        | string       | true     | contract code                                                                                                  | such as: "BTC-USD" |
+| LIST_START           | object array | true     |                                                                                                                |                    |
+| lever_rate           | int          | true     | lever rate                                                                                                     |                    |
+| LADDERS_START        | object array | true     | ladders for margin                                                                                             |                    |
+| min_margin_balance   | decimal      | true     | min margin balance(the starting point in this ladder, included in this ladder)                                 |                    |
+| max_margin_balance   | decimal      | true     | max margin balance(the end point in this ladder, excluded in this ladder, is next ladder's min_margin_balance) |                    |
+| min_margin_available | decimal      | true     | min margin available(in the range of this ladder margin balance)                                               |                    |
+| max_margin_available | decimal      | true     | max margin available（not in the range of this ladder margin balance, is next ladder's min_margin_available)   |                    |
+| LADDERS_END          |              | false    |                                                                                                                |                    |
+| LIST_END             |              | false    |                                                                                                                |                    |
+| DATA_END             |              | false    |                                                                                                                |                    |
+| ts                   | long         | true     | Time of Respond Generation，Unit：Millisecond                                                                  |                    |
 
 #### Request example
 
@@ -71,7 +72,7 @@ Interface permission: Read
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USD"
 
@@ -79,7 +80,7 @@ Interface permission: Read
 
 0:{
 
-"lever\_rate":
+"lever_rate":
 
 20
 
@@ -87,19 +88,19 @@ Interface permission: Read
 
 0:{
 
-"min\_margin\_balance":
+"min_margin_balance":
 
 0
 
-"max\_margin\_balance":
+"max_margin_balance":
 
 10
 
-"min\_margin\_available":
+"min_margin_available":
 
 0
 
-"max\_margin\_available":
+"max_margin_available":
 
 10
 
@@ -107,19 +108,19 @@ Interface permission: Read
 
 1:{
 
-"min\_margin\_balance":
+"min_margin_balance":
 
 10
 
-"max\_margin\_balance":
+"max_margin_balance":
 
 50
 
-"min\_margin\_available":
+"min_margin_available":
 
 10
 
-"max\_margin\_available":
+"max_margin_available":
 
 30
 
@@ -127,19 +128,19 @@ Interface permission: Read
 
 2:{
 
-"min\_margin\_balance":
+"min_margin_balance":
 
 50
 
-"max\_margin\_balance":
+"max_margin_balance":
 
 250
 
-"min\_margin\_available":
+"min_margin_available":
 
 30
 
-"max\_margin\_available":
+"max_margin_available":
 
 70
 
@@ -147,19 +148,19 @@ Interface permission: Read
 
 3:{
 
-"min\_margin\_balance":
+"min_margin_balance":
 
 250
 
-"max\_margin\_balance":
+"max_margin_balance":
 
 950
 
-"min\_margin\_available":
+"min_margin_available":
 
 70
 
-"max\_margin\_available":
+"max_margin_available":
 
 140
 
@@ -167,19 +168,19 @@ Interface permission: Read
 
 4:{
 
-"min\_margin\_balance":
+"min_margin_balance":
 
 950
 
-"max\_margin\_balance":
+"max_margin_balance":
 
 NULL
 
-"min\_margin\_available":
+"min_margin_available":
 
 140
 
-"max\_margin\_available":
+"max_margin_available":
 
 NULL
 

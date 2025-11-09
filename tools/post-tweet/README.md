@@ -53,7 +53,8 @@ This tool is designed to run in GitHub Actions workflows:
 
 ## Workflow Integration
 
-This tool is used in the `tweet-poster.yml` workflow that triggers when PRs with the "twitter-summary" label are merged.
+This tool is used in the `tweet-poster.yml` workflow that triggers when PRs with
+the "twitter-summary" label are merged.
 
 ## Process Flow
 

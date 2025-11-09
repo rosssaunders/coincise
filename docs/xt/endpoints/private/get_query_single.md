@@ -1,6 +1,7 @@
 # GET Query single
 
-Source: [https://doc.xt.com/docs/spot/Order/QuerySingle](https://doc.xt.com/docs/spot/Order/QuerySingle)
+Source:
+[https://doc.xt.com/docs/spot/Order/QuerySingle](https://doc.xt.com/docs/spot/Order/QuerySingle)
 
 # Query single
 
@@ -10,20 +11,20 @@ Source: [https://doc.xt.com/docs/spot/Order/QuerySingle](https://doc.xt.com/docs
 
 **Path:** `/v4/order`
 
-* * *
+---
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| Name | Type | Mandatory | Default | Description |
-| --- | --- | --- | --- | --- |
-| orderId | number | No | N/A | Order ID |
-| clientOrderId | string | No | N/A | Client order ID |
+| Name          | Type   | Mandatory | Default | Description     |
+| ------------- | ------ | --------- | ------- | --------------- |
+| orderId       | number | No        | N/A     | Order ID        |
+| clientOrderId | string | No        | N/A     | Client order ID |
 
-* * *
+---
 
 ### Limit Flow Rules[​](#limit-flow-rules "Direct link to Limit Flow Rules")
 
--   50/s/apikey
+- 50/s/apikey
 
 ### Parameters Example[​](#parameters-example "Direct link to Parameters Example")
 
@@ -31,7 +32,7 @@ Source: [https://doc.xt.com/docs/spot/Order/QuerySingle](https://doc.xt.com/docs
 curl --location --request GET 'https://sapi.xt.com/v4/order?orderId=xxxxxx' \--header 'accept: */*' \--header 'Content-Type: application/json' \--header 'validate-algorithms: HmacSHA256' \--header 'validate-recvwindow: 60000' \--header 'validate-appkey: xxxxxxxxxx' \--header 'validate-timestamp: xxxxxxxxxx' \--header 'validate-signature: xxxxxxxxxx'
 ```
 
-* * *
+---
 
 ### Code Example[​](#code-example "Direct link to Code Example")
 
@@ -41,7 +42,7 @@ Java
 public String orderGet(){}
 ```
 
-* * *
+---
 
 ### Response Example[​](#response-example "Direct link to Response Example")
 

@@ -6,41 +6,40 @@ post https://api.bitfinex.com/v2/auth/r/audit/hist
 
 Retrieve account changelog.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
+/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+theme, base, components, utilities; @layer utilities;
 
-#### 
+####
 
 Response data
 
 [](#response-data)
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| \[0...n\] | CHANGELOG\_ARRAY | [Changelog array](#changelog-array-index-0n) | Each index contains one of the n current user's changelog entries |
+| Index     | Field           | Type                                         | Description                                                       |
+| --------- | --------------- | -------------------------------------------- | ----------------------------------------------------------------- |
+| \[0...n\] | CHANGELOG_ARRAY | [Changelog array](#changelog-array-index-0n) | Each index contains one of the n current user's changelog entries |
 
-#### 
+####
 
 Changelog array (Index \[0...n\])
 
 [](#changelog-array-index-0n)
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| \[0\] | MTS\_CREATE | Int | Millisecond timestamp of change |
-| 
-\[ . . . \]
+| Index | Field      | Type | Description                     |
+| ----- | ---------- | ---- | ------------------------------- |
+| \[0\] | MTS_CREATE | Int  | Millisecond timestamp of change |
 
- |
-| \[2\] | LOG | String | Log entry |
-| 
+| \[ . . . \]
+
+| | \[2\] | LOG | String | Log entry | |
 
 \[ . . . \]
 
- |
-| \[5\] | IP | String | IP address for logged change |
-| \[6\] | USER\_AGENT | Object | Browser info |
+| | \[5\] | IP | String | IP address for logged change | | \[6\] | USER_AGENT |
+Object | Browser info |
 
-td:has(div.placeholders) { background-color: #ebebeb; } .placeholders { height: 10px; text-align: center; font-size: 16px; line-height: 8px; }
+td:has(div.placeholders) { background-color: #ebebeb; } .placeholders { height:
+10px; text-align: center; font-size: 16px; line-height: 8px; }
 
 **Ratelimit**: 90 req/min
 
@@ -66,7 +65,7 @@ Number of records (Max: 500)
 
 Responses
 
-# 
+#
 
 200
 
@@ -76,7 +75,7 @@ Response body
 
 json
 
-# 
+#
 
 400
 
@@ -88,7 +87,7 @@ object
 
 Updated 5 months ago
 
-* * *
+---
 
 Language
 
@@ -122,7 +121,8 @@ RESPONSE
 
 Examples
 
-Click `Try It!` to start a request and see the response here! Or choose an example:
+Click `Try It!` to start a request and see the response here! Or choose an
+example:
 
 application/json
 
@@ -130,10 +130,10 @@ application/json
 
 Updated 5 months ago
 
-* * *
+---
 
 ---
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-audit-hist
-Path: /v2/auth/r/audit/hist
-Method: POST
+
+Section: Account Actions Source:
+https://docs.bitfinex.com/reference/rest-auth-audit-hist Path:
+/v2/auth/r/audit/hist Method: POST

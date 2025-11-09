@@ -15,30 +15,29 @@ post /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{sign
 
 ```
 
--   **POST** `/api/v3/capital/transfer/internal`  
-    
+- **POST** `/api/v3/capital/transfer/internal`
 
-**Permission:** SPOT\_WITHDRAW\_WRITE
+**Permission:** SPOT_WITHDRAW_WRITE
 
 **Weight(IP):** 1
 
 **Parameters**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| toAccountType | string | Yes | toAccountTyp:EMAIL/UID/MOBILE |
-| toAccount | string | Yes | toAccount:EMAIL/UID/MOBILE |
-| areaCode | string | No | areaCode of mobile |
-| asset | string | Yes | asset |
-| amount | string | Yes | amount |
-| timestamp | string | Yes | timestamp |
-| signature | string | Yes | signature |
+| Name          | Type   | Mandatory | Description                   |
+| ------------- | ------ | --------- | ----------------------------- |
+| toAccountType | string | Yes       | toAccountTyp:EMAIL/UID/MOBILE |
+| toAccount     | string | Yes       | toAccount:EMAIL/UID/MOBILE    |
+| areaCode      | string | No        | areaCode of mobile            |
+| asset         | string | Yes       | asset                         |
+| amount        | string | Yes       | amount                        |
+| timestamp     | string | Yes       | timestamp                     |
+| signature     | string | Yes       | signature                     |
 
 **Response**
 
-| Name | Description |
-| --- | --- |
-| tranId | tranId |
+| Name   | Description |
+| ------ | ----------- |
+| tranId | tranId      |
 
 ---
 

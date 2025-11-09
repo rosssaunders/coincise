@@ -8,7 +8,7 @@ Get Interest exchange rate
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/mix/market/exchange-rate
+- GET /api/v2/mix/market/exchange-rate
 
 Request Example
 
@@ -28,13 +28,13 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| coin | String | Assets 
-| exchangeRateList | List | Tier exchange rate 
-| &gt; tier | String | Tier 
-| &gt; minAmount | String | Min 
-| &gt; maxAmount | String | Max<br><code>-1</code> means there is no limitation 
-| &gt; exchangeRate | String | Exchange rate
+| Parameter         | Type   | Description                                         |
+| :---------------- | :----- | :-------------------------------------------------- |
+| coin              | String | Assets                                              |
+| exchangeRateList  | List   | Tier exchange rate                                  |
+| &gt; tier         | String | Tier                                                |
+| &gt; minAmount    | String | Min                                                 |
+| &gt; maxAmount    | String | Max<br><code>-1</code> means there is no limitation |
+| &gt; exchangeRate | String | Exchange rate                                       |
 
 > **Source:** https://www.bitget.com/api-doc/contract/market/Get-Exchange-Rate

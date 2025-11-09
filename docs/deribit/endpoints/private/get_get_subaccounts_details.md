@@ -91,8 +91,8 @@ The fill condition of the linked order (Only for linked order types), default:
   subtracted/added to the secondary order will be rounded down to the contract
   size.
 
-| |   ›    ›  primary_order_id | string | Unique order identifier | |
-  ›  positions | array of _object_ | | |   ›    ›  average_price | number |
+| |   ›    ›  primary*order_id | string | Unique order identifier | |
+  ›  positions | array of \_object* | | |   ›    ›  average_price | number |
 Average price of trades that built this position | |   ›    ›  average_price_usd
 | number | Only for options, average price in USD | |   ›    ›  delta | number |
 Delta parameter | |   ›    ›  direction | string | Direction: `buy`, `sell` or

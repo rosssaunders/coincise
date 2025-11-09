@@ -1,6 +1,7 @@
 # GET Subscribe system status updates
 
-**Source:** [Subscribe system status updates](https://www.htx.com/en-us/opend/newApiPages/?id=5d516118-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Subscribe system status updates](https://www.htx.com/en-us/opend/newApiPages/?id=5d516118-77b6-11ed-9966-0242ac110003)
 
 **Category:** WebSocket interface for system status updates
 
@@ -16,39 +17,39 @@ Interface permission: Read
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.hbdm.com/center-notification |
-| Online (preferred by aws customers) | wss://api.hbdm.vn/center-notification |
+| Environment                         | Address                                |
+| ----------------------------------- | -------------------------------------- |
+| Online                              | wss://api.hbdm.com/center-notification |
+| Online (preferred by aws customers) | wss://api.hbdm.vn/center-notification  |
 
 #### Request Parameter
 
 | Field Name | Type | Description |
-| --- | --- | --- |
+| ---------- | ---- | ----------- |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
+| -------------- | -------------------- | ---- |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| service | string | true | Business Code | swap |  |
+| Parameter | Data Type | Required | Description   | Value Range | Default Value |
+| --------- | --------- | -------- | ------------- | ----------- | ------------- |
+| service   | string    | true     | Business Code | swap        |               |
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| op | string | true | Operation name, the fixed value of push is notify; |  |
-| topic | string | true | Push topic |  |
-| event | string | true | Description on notification related event | The initial system status information returned by a successful subscription (init), triggered by system status change (update) |
-| ts | long | true | Server response timestamp |  |
-| DATA\_START |  | false |  |  |
-| heartbeat | int | true | System Status | 1 is available, 0 is not available(maintenance with service suspended) |
-| estimated\_recovery\_time | long | true | Estimated system recovery time, unit: millisecond | When the system status is available, return NULL |
-| DATA\_END |  | false |  |  |
+| Parameter               | Data Type | Required | Description                                        | Value Range                                                                                                                    |
+| ----------------------- | --------- | -------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| op                      | string    | true     | Operation name, the fixed value of push is notify; |                                                                                                                                |
+| topic                   | string    | true     | Push topic                                         |                                                                                                                                |
+| event                   | string    | true     | Description on notification related event          | The initial system status information returned by a successful subscription (init), triggered by system status change (update) |
+| ts                      | long      | true     | Server response timestamp                          |                                                                                                                                |
+| DATA_START              |           | false    |                                                    |                                                                                                                                |
+| heartbeat               | int       | true     | System Status                                      | 1 is available, 0 is not available(maintenance with service suspended)                                                         |
+| estimated_recovery_time | long      | true     | Estimated system recovery time, unit: millisecond  | When the system status is available, return NULL                                                                               |
+| DATA_END                |           | false    |                                                    |                                                                                                                                |
 
 Notes:  
 Since this push is a poll query status, there may be a delay of 1-2 seconds.
@@ -109,7 +110,7 @@ Since this push is a poll query status, there may be a delay of 1-2 seconds.
 
 0
 
-"estimated\_recovery\_time":
+"estimated_recovery_time":
 
 1408076414000
 

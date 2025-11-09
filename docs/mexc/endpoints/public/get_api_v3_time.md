@@ -8,7 +8,7 @@
 }
 ```
 
--   **GET** `/api/v3/time`
+- **GET** `/api/v3/time`
 
 **Weight(IP):** 1
 

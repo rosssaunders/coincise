@@ -1,6 +1,7 @@
 # GET Full ticker
 
-Source: [https://doc.xt.com/docs/spot/Market/FullTicker](https://doc.xt.com/docs/spot/Market/FullTicker)
+Source:
+[https://doc.xt.com/docs/spot/Market/FullTicker](https://doc.xt.com/docs/spot/Market/FullTicker)
 
 # Full ticker
 
@@ -8,24 +9,24 @@ Source: [https://doc.xt.com/docs/spot/Market/FullTicker](https://doc.xt.com/docs
 
 **GET** `/v4/public/ticker`
 
-* * *
+---
 
 ### Limit Rule[​](#limit-rule "Direct link to Limit Rule")
 
 1.  Single symbol: 10 requests/second/ip
 2.  Multiple symbols: 10 requests/second/ip
 
-* * *
+---
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| Name | Type | Mandatory | Default | Description | Ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | No | N/A | Trading pair, e.g. `btc_usdt` | \- |
-| symbols | array | No | N/A | Collection of trading pairs. Priority is higher than symbol, e.g. `btc_usdt,eth_usdt` | \- |
-| tags | string | No | N/A | Set of tags, separated by commas. Currently only supports `spot` | \- |
+| Name    | Type   | Mandatory | Default | Description                                                                           | Ranges |
+| ------- | ------ | --------- | ------- | ------------------------------------------------------------------------------------- | ------ |
+| symbol  | string | No        | N/A     | Trading pair, e.g. `btc_usdt`                                                         | \-     |
+| symbols | array  | No        | N/A     | Collection of trading pairs. Priority is higher than symbol, e.g. `btc_usdt,eth_usdt` | \-     |
+| tags    | string | No        | N/A     | Set of tags, separated by commas. Currently only supports `spot`                      | \-     |
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to Request Example")
 

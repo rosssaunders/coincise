@@ -1,6 +1,7 @@
 # GET [Cross] Query Trigger Order History
 
-**Source:** [[Cross] Query Trigger Order History](https://www.htx.com/en-us/opend/newApiPages/?id=8cb877ac-77b5-11ed-9966-0242ac110003)
+**Source:**
+[[Cross] Query Trigger Order History](https://www.htx.com/en-us/opend/newApiPages/?id=8cb877ac-77b5-11ed-9966-0242ac110003)
 
 **Category:** Swap Strategy Order Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /linear-swap-api/v1/swap\_cross\_trigger\_hisorders (\[Cross\] Query Trigger Order History)
+### /linear-swap-api/v1/swap_cross_trigger_hisorders (\[Cross\] Query Trigger Order History)
 
 Request type: POST
 
@@ -16,82 +17,89 @@ Signature verification: Yes
 
 Interface permission: Read
 
-Rate Limit: Generally, the private interface rate limit of API key is at most 144 times every 3 seconds for each UID (Trade Interface: at most 72 times every 3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is shared by all the altcoins contracts delivered by different date).
+Rate Limit: Generally, the private interface rate limit of API key is at most
+144 times every 3 seconds for each UID (Trade Interface: at most 72 times every
+3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is
+shared by all the altcoins contracts delivered by different date).
 
-Interface description: The interface only supports cross margin mode. The request parameter "contract\_code" supports the contract code of futures, in that the format is BTC-USDT-210625. one of pair and contract\_code must be filled in(if all of them not filled in, will get 1014 error code); and all filled in, the contract\_code is the preferred.
+Interface description: The interface only supports cross margin mode. The
+request parameter "contract_code" supports the contract code of futures, in that
+the format is BTC-USDT-210625. one of pair and contract_code must be filled
+in(if all of them not filled in, will get 1014 error code); and all filled in,
+the contract_code is the preferred.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | contract code | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |  |
-| pair | string | false | pair | BTC-USDT |  |
-| trade\_type | int | true | trade type | 0: All ,1: Open Long,2: Close Short,3: Open Short,4: Close Long, 17:buy(one-way mode), 18:sell(one-way mode)；the system will transfer these parameters into offset and direction and query the requested data. Please note that no data can be requested with parameter out of this range. |  |
-| status | string | true | order status | data divided with several commas, trigger orders ready to be submitted：0: All (All filled orders),4: Trigger orders successfully submitted,5: Trigger orders failed being submitted, 6: Trigger orders cancelled |  |
-| create\_date | int | true | date | any positive integer available. Requesting data beyond 90 will not be supported, otherwise, system will return trigger history data within the last 90 days by default. |  |
-| page\_index | int | false | page index, default 1st page | page index, default 1st |  |
-| page\_size | int | false | default 20，no more than 50 | default 20，no more than 50 |  |
-| sort\_by | string | false | sort fields(Default: “created\_at” descending order) | "created\_at"：descending order by order creation time, "update\_time": descending order by order update time |  |
+| Parameter     | Data Type | Required | Description                                         | Value Range                                                                                                                                                                                                                                                                                 | Default Value |
+| ------------- | --------- | -------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| contract_code | string    | false    | contract code                                       | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ...                                                                                                                                                                                                                                         |               |
+| pair          | string    | false    | pair                                                | BTC-USDT                                                                                                                                                                                                                                                                                    |               |
+| trade_type    | int       | true     | trade type                                          | 0: All ,1: Open Long,2: Close Short,3: Open Short,4: Close Long, 17:buy(one-way mode), 18:sell(one-way mode)；the system will transfer these parameters into offset and direction and query the requested data. Please note that no data can be requested with parameter out of this range. |               |
+| status        | string    | true     | order status                                        | data divided with several commas, trigger orders ready to be submitted：0: All (All filled orders),4: Trigger orders successfully submitted,5: Trigger orders failed being submitted, 6: Trigger orders cancelled                                                                           |               |
+| create_date   | int       | true     | date                                                | any positive integer available. Requesting data beyond 90 will not be supported, otherwise, system will return trigger history data within the last 90 days by default.                                                                                                                     |               |
+| page_index    | int       | false    | page index, default 1st page                        | page index, default 1st                                                                                                                                                                                                                                                                     |               |
+| page_size     | int       | false    | default 20，no more than 50                         | default 20，no more than 50                                                                                                                                                                                                                                                                 |               |
+| sort_by       | string    | false    | sort fields(Default: “created_at” descending order) | "created_at"：descending order by order creation time, "update_time": descending order by order update time                                                                                                                                                                                 |               |
 
 Notes:  
 Default to query completed orders (order status is one of 4, 5, 6);
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request Processing Result | "ok" , "error" |
-| DATA\_START | object | true |  |  |
-| total\_page | int | true | total page |  |
-| current\_page | int | true | current page |  |
-| total\_size | int | true | total size |  |
-| ORDERS\_START | object array | true |  |  |
-| symbol | string | true | symbol |  |
-| contract\_code | string | true | contract code | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |
-| margin\_mode | string | true | margin mode | cross: cross margin mode |
-| margin\_account | string | true | margin account | "USDT"... |
-| trigger\_type | string | true | trigger type： ge: Equal to or Greater than；le: Less than or Equal to |  |
-| volume | decimal | true | place volume |  |
-| order\_type | int | true | order type：1、Place orders 2、Cancel orders |  |
-| direction | string | true | direction \[buy/sell\] |  |
-| offset | string | true | offset \[open,close,both\] |  |
-| lever\_rate | int | true | leverage |  |
-| order\_id | long | true | order id |  |
-| order\_id\_str | string | true | order id |  |
-| relation\_order\_id | string | true | relation order ID is the string related to the limit orders The value is -1 before the trigger orders executed |  |
-| order\_price\_type | string | true | order type "limit": Limit order price，"optimal\_5": Optimal 5 price level，"optimal\_10":Optimal 10 price level，"optimal\_20": the Optimal 20 price level |  |
-| status | int | true | status (4:Orders accepted、5: Orders failing being placed、6: Orders canceled ) |  |
-| order\_source | string | true | order source | system、web、api、m、risk、settlement、ios、android、windows、mac、trigger |
-| trigger\_price | decimal | true | trigger price |  |
-| triggered\_price | decimal | true | triggered price |  |
-| order\_price | decimal | true | order price |  |
-| created\_at | long | true | created time |  |
-| update\_time | long | true | order update time，millesecond timestamp |  |
-| triggered\_at | long | true | trigger time |  |
-| order\_insert\_at | long | true | insert time |  |
-| canceled\_at | long | true | canceled time |  |
-| fail\_code | int | true | fail code |  |
-| fail\_reason | string | true | fail reason |  |
-| contract\_type | string | true | contract type | swap, this\_week, next\_week, quarter, next\_quarter |
-| pair | string | true | pair | such as: “BTC-USDT” |
-| business\_type | string | true | business type | futures, swap |
-| reduce\_only | int | true | reduce only | 0: no, 1: yes |
-| ORDERS\_END |  | false |  |  |
-| DATA\_END |  | false |  |  |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
+| Parameter         | Data Type    | Required | Description                                                                                                                                              | Value Range                                                                |
+| ----------------- | ------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| status            | string       | true     | Request Processing Result                                                                                                                                | "ok" , "error"                                                             |
+| DATA_START        | object       | true     |                                                                                                                                                          |                                                                            |
+| total_page        | int          | true     | total page                                                                                                                                               |                                                                            |
+| current_page      | int          | true     | current page                                                                                                                                             |                                                                            |
+| total_size        | int          | true     | total size                                                                                                                                               |                                                                            |
+| ORDERS_START      | object array | true     |                                                                                                                                                          |                                                                            |
+| symbol            | string       | true     | symbol                                                                                                                                                   |                                                                            |
+| contract_code     | string       | true     | contract code                                                                                                                                            | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ...                        |
+| margin_mode       | string       | true     | margin mode                                                                                                                                              | cross: cross margin mode                                                   |
+| margin_account    | string       | true     | margin account                                                                                                                                           | "USDT"...                                                                  |
+| trigger_type      | string       | true     | trigger type： ge: Equal to or Greater than；le: Less than or Equal to                                                                                   |                                                                            |
+| volume            | decimal      | true     | place volume                                                                                                                                             |                                                                            |
+| order_type        | int          | true     | order type：1、Place orders 2、Cancel orders                                                                                                             |                                                                            |
+| direction         | string       | true     | direction \[buy/sell\]                                                                                                                                   |                                                                            |
+| offset            | string       | true     | offset \[open,close,both\]                                                                                                                               |                                                                            |
+| lever_rate        | int          | true     | leverage                                                                                                                                                 |                                                                            |
+| order_id          | long         | true     | order id                                                                                                                                                 |                                                                            |
+| order_id_str      | string       | true     | order id                                                                                                                                                 |                                                                            |
+| relation_order_id | string       | true     | relation order ID is the string related to the limit orders The value is -1 before the trigger orders executed                                           |                                                                            |
+| order_price_type  | string       | true     | order type "limit": Limit order price，"optimal_5": Optimal 5 price level，"optimal_10":Optimal 10 price level，"optimal_20": the Optimal 20 price level |                                                                            |
+| status            | int          | true     | status (4:Orders accepted、5: Orders failing being placed、6: Orders canceled )                                                                          |                                                                            |
+| order_source      | string       | true     | order source                                                                                                                                             | system、web、api、m、risk、settlement、ios、android、windows、mac、trigger |
+| trigger_price     | decimal      | true     | trigger price                                                                                                                                            |                                                                            |
+| triggered_price   | decimal      | true     | triggered price                                                                                                                                          |                                                                            |
+| order_price       | decimal      | true     | order price                                                                                                                                              |                                                                            |
+| created_at        | long         | true     | created time                                                                                                                                             |                                                                            |
+| update_time       | long         | true     | order update time，millesecond timestamp                                                                                                                 |                                                                            |
+| triggered_at      | long         | true     | trigger time                                                                                                                                             |                                                                            |
+| order_insert_at   | long         | true     | insert time                                                                                                                                              |                                                                            |
+| canceled_at       | long         | true     | canceled time                                                                                                                                            |                                                                            |
+| fail_code         | int          | true     | fail code                                                                                                                                                |                                                                            |
+| fail_reason       | string       | true     | fail reason                                                                                                                                              |                                                                            |
+| contract_type     | string       | true     | contract type                                                                                                                                            | swap, this_week, next_week, quarter, next_quarter                          |
+| pair              | string       | true     | pair                                                                                                                                                     | such as: “BTC-USDT”                                                        |
+| business_type     | string       | true     | business type                                                                                                                                            | futures, swap                                                              |
+| reduce_only       | int          | true     | reduce only                                                                                                                                              | 0: no, 1: yes                                                              |
+| ORDERS_END        |              | false    |                                                                                                                                                          |                                                                            |
+| DATA_END          |              | false    |                                                                                                                                                          |                                                                            |
+| ts                | long         | true     | Time of Respond Generation, Unit: Millisecond                                                                                                            |                                                                            |
 
 #### Request example
 
 {
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 
@@ -99,7 +107,7 @@ Default to query completed orders (order status is one of 4, 5, 6);
 
 "BTC-USDT"
 
-"trade\_type":
+"trade_type":
 
 0
 
@@ -107,21 +115,21 @@ Default to query completed orders (order status is one of 4, 5, 6);
 
 0
 
-"create\_date":
+"create_date":
 
 30
 
-"page\_index":
+"page_index":
 
 1
 
-"page\_size":
+"page_size":
 
 50
 
-"sort\_by":
+"sort_by":
 
-"created\_at"
+"created_at"
 
 }
 
@@ -141,11 +149,11 @@ Default to query completed orders (order status is one of 4, 5, 6);
 
 0:{
 
-"contract\_type":
+"contract_type":
 
 "quarter"
 
-"business\_type":
+"business_type":
 
 "futures"
 
@@ -157,11 +165,11 @@ Default to query completed orders (order status is one of 4, 5, 6);
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-211231"
 
-"trigger\_type":
+"trigger_type":
 
 "le"
 
@@ -169,7 +177,7 @@ Default to query completed orders (order status is one of 4, 5, 6);
 
 1
 
-"order\_type":
+"order_type":
 
 1
 
@@ -181,23 +189,23 @@ Default to query completed orders (order status is one of 4, 5, 6);
 
 "open"
 
-"lever\_rate":
+"lever_rate":
 
 1
 
-"order\_id":
+"order_id":
 
 918808635214700500
 
-"order\_id\_str":
+"order_id_str":
 
 "918808635214700544"
 
-"relation\_order\_id":
+"relation_order_id":
 
 "-1"
 
-"order\_price\_type":
+"order_price_type":
 
 "limit"
 
@@ -205,59 +213,59 @@ Default to query completed orders (order status is one of 4, 5, 6);
 
 6
 
-"order\_source":
+"order_source":
 
 "api"
 
-"trigger\_price":
+"trigger_price":
 
 40000
 
-"triggered\_price":
+"triggered_price":
 
 NULL
 
-"order\_price":
+"order_price":
 
 40000
 
-"created\_at":
+"created_at":
 
 1639102649275
 
-"triggered\_at":
+"triggered_at":
 
 NULL
 
-"order\_insert\_at":
+"order_insert_at":
 
 0
 
-"canceled\_at":
+"canceled_at":
 
 1639103205980
 
-"fail\_code":
+"fail_code":
 
 NULL
 
-"fail\_reason":
+"fail_reason":
 
 NULL
 
-"margin\_mode":
+"margin_mode":
 
 "cross"
 
-"margin\_account":
+"margin_account":
 
 "USDT"
 
-"update\_time":
+"update_time":
 
 1639103206083
 
-"reduce\_only":
+"reduce_only":
 
 0
 
@@ -265,15 +273,15 @@ NULL
 
 \]
 
-"total\_page":
+"total_page":
 
 1
 
-"current\_page":
+"current_page":
 
 1
 
-"total\_size":
+"total_size":
 
 1
 

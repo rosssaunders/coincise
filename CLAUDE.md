@@ -15,9 +15,12 @@ consumption.
 
 **NEVER DIRECTLY MODIFY DOCUMENTATION FILES IN `docs/`**
 
-- Documentation files (`docs/**/*.md`) must ONLY be modified by extraction scripts
-- You may READ these files but you are FORBIDDEN from using Write or Edit tools on them
-- All documentation changes must come from running the extraction scripts in `venues/`
+- Documentation files (`docs/**/*.md`) must ONLY be modified by extraction
+  scripts
+- You may READ these files but you are FORBIDDEN from using Write or Edit tools
+  on them
+- All documentation changes must come from running the extraction scripts in
+  `venues/`
 - A hook is configured to block direct modifications to enforce this rule
 - If documentation needs to be changed, update the extraction scripts instead
 
@@ -470,7 +473,8 @@ Each endpoint file MUST contain the following sections in this order:
 **1. Heading Hierarchy**
 
 - Use H1 (`#`) for the main title only
-- Use H2 (`##`) for major sections (Description, Authentication, Request, Response, etc.)
+- Use H2 (`##`) for major sections (Description, Authentication, Request,
+  Response, etc.)
 - Use H3 (`###`) for subsections (Parameters, Example, Success Response, etc.)
 - Use H4 (`####`) or deeper only when absolutely necessary for nested content
 - Maintain consistent heading levels throughout the document
@@ -484,21 +488,21 @@ Markdown tables with the following columns:
 For **Request Parameters**:
 
 ```markdown
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| symbol | string | Yes | Trading pair (e.g., BTCUSDT) |
-| limit | integer | No | Number of results (default: 100, max: 1000) |
+| Parameter | Type    | Required | Description                                 |
+| --------- | ------- | -------- | ------------------------------------------- |
+| symbol    | string  | Yes      | Trading pair (e.g., BTCUSDT)                |
+| limit     | integer | No       | Number of results (default: 100, max: 1000) |
 ```
 
 For **Response Parameters**:
 
 ```markdown
-| Parameter | Type | Description |
-| --- | --- | --- |
-| code | string | Response code (00000 for success) |
-| data | object | Response data object |
-| data.orderId | string | Unique order identifier |
-| data.status | string | Order status (e.g., FILLED, PARTIAL, CANCELLED) |
+| Parameter    | Type   | Description                                     |
+| ------------ | ------ | ----------------------------------------------- |
+| code         | string | Response code (00000 for success)               |
+| data         | object | Response data object                            |
+| data.orderId | string | Unique order identifier                         |
+| data.status  | string | Order status (e.g., FILLED, PARTIAL, CANCELLED) |
 ```
 
 **Table Guidelines:**
@@ -532,15 +536,9 @@ All JSON examples MUST be tagged with the language identifier:
 **Never use untagged code blocks for JSON:**
 
 ```markdown
-❌ BAD:
-\`\`\`
-{"code": "00000"}
-\`\`\`
+❌ BAD: \`\`\` {"code": "00000"} \`\`\`
 
-✅ GOOD:
-\`\`\`json
-{"code": "00000"}
-\`\`\`
+✅ GOOD: \`\`\`json {"code": "00000"} \`\`\`
 ```
 
 **4. Rate Limit Documentation**
@@ -557,6 +555,7 @@ Rate limits should be documented in one of two ways:
 **Rate Limit Rule:** IP-based
 
 **Limits:**
+
 - 1200 requests per minute per IP
 - 10 orders per second per account
 ```
@@ -568,12 +567,13 @@ Rate limits should be documented in one of two ways:
 
 **Weight:** 5
 
-See [Rate Limits](/docs/{exchange}/rate_limits.md) for complete rate limiting rules.
+See [Rate Limits](/docs/{exchange}/rate_limits.md) for complete rate limiting
+rules.
 ```
 
 Choose the approach that best fits the venue's documentation structure. Use
-inline documentation for simple, endpoint-specific limits. Use links for
-complex rate limiting systems that apply across multiple endpoints.
+inline documentation for simple, endpoint-specific limits. Use links for complex
+rate limiting systems that apply across multiple endpoints.
 
 **5. Authentication Section**
 
@@ -598,6 +598,7 @@ Not Required (Public Endpoint)
 #### Complete Endpoint Template
 
 \`\`\`\`markdown
+
 # {HTTP_METHOD} {endpoint_path}
 
 **Source:** [Original Documentation Title](https://original-url.com)
@@ -629,88 +630,68 @@ Inline rate limit details OR link to global rate limit documentation.
 
 ### Path Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| paramName | type | Yes/No | Description with constraints |
+| Parameter | Type | Required | Description                  |
+| --------- | ---- | -------- | ---------------------------- |
+| paramName | type | Yes/No   | Description with constraints |
 
 ### Query Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| paramName | type | Yes/No | Description with constraints |
+| Parameter | Type | Required | Description                  |
+| --------- | ---- | -------- | ---------------------------- |
+| paramName | type | Yes/No   | Description with constraints |
 
 ### Body Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| paramName | type | Yes/No | Description with constraints |
+| Parameter | Type | Required | Description                  |
+| --------- | ---- | -------- | ---------------------------- |
+| paramName | type | Yes/No   | Description with constraints |
 
 ## Request Example
 
-\`\`\`http
-GET /api/v1/endpoint?param=value HTTP/1.1
-Host: api.exchange.com
-X-API-Key: your-api-key
-\`\`\`
+\`\`\`http GET /api/v1/endpoint?param=value HTTP/1.1 Host: api.exchange.com
+X-API-Key: your-api-key \`\`\`
 
 Or for cURL:
 
-\`\`\`bash
-curl -X GET "https://api.exchange.com/api/v1/endpoint?param=value" \\
-  -H "X-API-Key: your-api-key"
-\`\`\`
+\`\`\`bash curl -X GET "https://api.exchange.com/api/v1/endpoint?param=value" \\
+-H "X-API-Key: your-api-key" \`\`\`
 
 ## Response Parameters
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| code | string | Response code |
-| message | string | Response message |
-| data | object | Response data container |
-| data.field1 | string | Description of field1 |
-| data.field2 | integer | Description of field2 |
-| data.nested | object | Nested object description |
-| data.nested.subfield | string | Description of nested field |
+| Parameter            | Type    | Description                 |
+| -------------------- | ------- | --------------------------- |
+| code                 | string  | Response code               |
+| message              | string  | Response message            |
+| data                 | object  | Response data container     |
+| data.field1          | string  | Description of field1       |
+| data.field2          | integer | Description of field2       |
+| data.nested          | object  | Nested object description   |
+| data.nested.subfield | string  | Description of nested field |
 
 ## Response Example
 
 ### Success Response (200 OK)
 
-\`\`\`json
-{
-  "code": "00000",
-  "message": "success",
-  "data": {
-    "field1": "value1",
-    "field2": 12345,
-    "nested": {
-      "subfield": "nested_value"
-    }
-  }
-}
-\`\`\`
+\`\`\`json { "code": "00000", "message": "success", "data": { "field1":
+"value1", "field2": 12345, "nested": { "subfield": "nested_value" } } } \`\`\`
 
 ### Error Response (4xx/5xx)
 
-\`\`\`json
-{
-  "code": "40001",
-  "message": "Invalid parameter",
-  "data": null
-}
+\`\`\`json { "code": "40001", "message": "Invalid parameter", "data": null }
 \`\`\`
 
 ## Error Codes
 
 Common error codes for this endpoint:
 
-| Code | Message | Description |
-| --- | --- | --- |
-| 40001 | Invalid parameter | One or more parameters are invalid |
-| 40003 | Authentication failed | API key is invalid or missing |
-| 42001 | Insufficient balance | Account balance too low |
+| Code  | Message               | Description                        |
+| ----- | --------------------- | ---------------------------------- |
+| 40001 | Invalid parameter     | One or more parameters are invalid |
+| 40003 | Authentication failed | API key is invalid or missing      |
+| 42001 | Insufficient balance  | Account balance too low            |
 
-See [Error Codes](/docs/{exchange}/error_codes.md) for complete error code reference.
+See [Error Codes](/docs/{exchange}/error_codes.md) for complete error code
+reference.
 
 ## Notes
 

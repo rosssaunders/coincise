@@ -8,7 +8,7 @@ Cancel Plan Orders in Batch
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   POST /api/v2/spot/trade/batch-cancel-plan-order
+- POST /api/v2/spot/trade/batch-cancel-plan-order
 
 Request Example
 
@@ -18,9 +18,9 @@ curl -X POST "https://api.bitget.com/api/v2/spot/trade/batch-cancel-plan-order" 
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbolList | List &lt;String&gt; | No | Collection of trading pairs: ["BTCUSDT", "ETHUSDT"],<br>If no value is set, all spot trigger orders will be cancelled. 
+| Parameter  | Type                | Required | Description                                                                                                            |
+| :--------- | :------------------ | :------- | :--------------------------------------------------------------------------------------------------------------------- |
+| symbolList | List &lt;String&gt; | No       | Collection of trading pairs: ["BTCUSDT", "ETHUSDT"],<br>If no value is set, all spot trigger orders will be cancelled. |
 
 Response Example
 
@@ -30,14 +30,14 @@ Response Example
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| successList | List&lt;Object&gt; | The collection of successfully cancelled orders. 
-| &gt;orderId | String | Order ID 
-| &gt;clientOid | String | Customize order ID 
-| failureList | List&lt;Object&gt; | The collection of unsuccessfully cancelled orders. 
-| &gt;orderId | String | Order ID 
-| &gt;clientOid | String | Customize order ID 
-| &gt;errorMsg | String | Failure reason
+| Parameter     | Type               | Description                                        |
+| :------------ | :----------------- | :------------------------------------------------- |
+| successList   | List&lt;Object&gt; | The collection of successfully cancelled orders.   |
+| &gt;orderId   | String             | Order ID                                           |
+| &gt;clientOid | String             | Customize order ID                                 |
+| failureList   | List&lt;Object&gt; | The collection of unsuccessfully cancelled orders. |
+| &gt;orderId   | String             | Order ID                                           |
+| &gt;clientOid | String             | Customize order ID                                 |
+| &gt;errorMsg  | String             | Failure reason                                     |
 
 > **Source:** https://www.bitget.com/api-doc/spot/plan/Batch-Cancel-Plan-Order

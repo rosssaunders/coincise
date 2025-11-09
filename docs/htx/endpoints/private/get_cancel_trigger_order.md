@@ -1,6 +1,7 @@
 # GET Cancel Trigger Order
 
-**Source:** [Cancel Trigger Order](https://www.htx.com/en-us/opend/newApiPages/?id=5d51b077-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Cancel Trigger Order](https://www.htx.com/en-us/opend/newApiPages/?id=5d51b077-77b6-11ed-9966-0242ac110003)
 
 **Category:** Swap Strategy Order Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /swap-api/v1/swap\_trigger\_cancel (Cancel Trigger Order)
+### /swap-api/v1/swap_trigger_cancel (Cancel Trigger Order)
 
 Request type: POST
 
@@ -20,41 +21,41 @@ Rate Limit: 5 times per second
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | Case-Insenstive.Both uppercase and lowercase are supported.BTC-USD... |  |  |
-| order\_id | string | true | order id. multiple orderids need to be joined by ",".Max number of order ids is 10 once. |  |  |
+| Parameter     | Data Type | Required | Description                                                                              | Value Range | Default Value |
+| ------------- | --------- | -------- | ---------------------------------------------------------------------------------------- | ----------- | ------------- |
+| contract_code | string    | true     | Case-Insenstive.Both uppercase and lowercase are supported.BTC-USD...                    |             |               |
+| order_id      | string    | true     | order id. multiple orderids need to be joined by ",".Max number of order ids is 10 once. |             |               |
 
 Notes:  
 The frequency limit of this interface is 5 times per second.
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | response status | "ok" , "error" |
-| DATA\_START |  | false |  |  |
-| successes | string | true | successful orders |  |
-| LIST>(FIELD NAME: ERRORS\_START |  | false |  |  |
-| order\_id | string | true | order id |  |
-| err\_code | int | true | error code |  |
-| err\_msg | string | true | error messages |  |
-| LIST\_END |  | false |  |  |
-| DATA\_END |  | false |  |  |
-| ts | long | true | response timestamp millseconds |  |
+| Parameter                      | Data Type | Required | Description                    | Value Range    |
+| ------------------------------ | --------- | -------- | ------------------------------ | -------------- |
+| status                         | string    | true     | response status                | "ok" , "error" |
+| DATA_START                     |           | false    |                                |                |
+| successes                      | string    | true     | successful orders              |                |
+| LIST>(FIELD NAME: ERRORS_START |           | false    |                                |                |
+| order_id                       | string    | true     | order id                       |                |
+| err_code                       | int       | true     | error code                     |                |
+| err_msg                        | string    | true     | error messages                 |                |
+| LIST_END                       |           | false    |                                |                |
+| DATA_END                       |           | false    |                                |                |
+| ts                             | long      | true     | response timestamp millseconds |                |
 
 #### Request example
 
 {
 
-"contract\_code":
+"contract_code":
 
 "BTC-USD"
 
@@ -84,15 +85,15 @@ The frequency limit of this interface is 5 times per second.
 
 0:{
 
-"order\_id":
+"order_id":
 
 "7002236"
 
-"err\_code":
+"err_code":
 
 1061
 
-"err\_msg":
+"err_msg":
 
 "This order doesnt exist."
 

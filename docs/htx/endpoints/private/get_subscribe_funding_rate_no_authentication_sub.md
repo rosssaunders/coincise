@@ -1,6 +1,7 @@
 # GET Subscribe funding rate (no authentication)（sub）
 
-**Source:** [Subscribe funding rate (no authentication)（sub）](https://www.htx.com/en-us/opend/newApiPages/?id=5d515a03-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Subscribe funding rate (no authentication)（sub）](https://www.htx.com/en-us/opend/newApiPages/?id=5d515a03-77b6-11ed-9966-0242ac110003)
 
 **Category:** Orders and Accounts WebSocket Interfaces
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### public.$contract\_code.funding\_rate (Subscribe funding rate (no authentication)（sub）)
+### public.$contract_code.funding_rate (Subscribe funding rate (no authentication)（sub）)
 
 Signature verification: Yes
 
@@ -16,60 +17,63 @@ Interface permission: Read
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.hbdm.com/swap-notification |
-| Online (preferred by aws customers) | wss://api.hbdm.vn/swap-notification |
+| Environment                         | Address                              |
+| ----------------------------------- | ------------------------------------ |
+| Online                              | wss://api.hbdm.com/swap-notification |
+| Online (preferred by aws customers) | wss://api.hbdm.vn/swap-notification  |
 
 #### Request Parameter
 
-| Field Name | Type | Description |
-| --- | --- | --- |
-| op | string | Required;Operator Name，value for unsubscribe is unsub; |
-| cid | string | Optional; Client requests unique ID |
-| topic | string | Subscribe topic name，Require subscribe public.$contract\_code.funding\_rate Subscribe/unsubscribe the data of a given contract code; when the $contract\_code value is \*, it stands for subscribing/unsubscribing all the funding rates of contract codes，; |
+| Field Name | Type   | Description                                                                                                                                                                                                                                                 |
+| ---------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| op         | string | Required;Operator Name，value for unsubscribe is unsub;                                                                                                                                                                                                     |
+| cid        | string | Optional; Client requests unique ID                                                                                                                                                                                                                         |
+| topic      | string | Subscribe topic name，Require subscribe public.$contract_code.funding_rate Subscribe/unsubscribe the data of a given contract code; when the $contract_code value is \*, it stands for subscribing/unsubscribing all the funding rates of contract codes，; |
 
 #### Rule description
 
-| Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
-| public.\*.funding\_rate | public.\*.funding\_rate | allowd |
-| public.contract\_code1.funding\_rate | public.\*.funding\_rate | allowd |
-| public.contract\_code1.funding\_rate | public.contract\_code1.funding\_rate | allowd |
-| public.contract\_code1.funding\_rate | public.contract\_code2.funding\_rate | not allowed |
-| public.\*.funding\_rate | public.contract\_code1.funding\_rate | not allowed |
+| Subscribe(sub)                     | Unsubscribe( unsub )               | Rule        |
+| ---------------------------------- | ---------------------------------- | ----------- |
+| public.\*.funding_rate             | public.\*.funding_rate             | allowd      |
+| public.contract_code1.funding_rate | public.\*.funding_rate             | allowd      |
+| public.contract_code1.funding_rate | public.contract_code1.funding_rate | allowd      |
+| public.contract_code1.funding_rate | public.contract_code2.funding_rate | not allowed |
+| public.\*.funding_rate             | public.contract_code1.funding_rate | not allowed |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| op | string | true | Required； Operator Name，required subscribe value is sub |  |  |
-| cid | string | false | Optional; ID Client requests unique ID |  |  |
-| topic | string | true | Required；Topic name format: public.$contract\_code.funding\_rate.; contract\_code is case-insenstive.Both uppercase and lowercase are supported.e.g. "BTC-USD" |  |  |
+| Parameter | Data Type | Required | Description                                                                                                                                                  | Value Range | Default Value |
+| --------- | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------- | ------------- |
+| op        | string    | true     | Required； Operator Name，required subscribe value is sub                                                                                                    |             |               |
+| cid       | string    | false    | Optional; ID Client requests unique ID                                                                                                                       |             |               |
+| topic     | string    | true     | Required；Topic name format: public.$contract_code.funding_rate.; contract_code is case-insenstive.Both uppercase and lowercase are supported.e.g. "BTC-USD" |             |               |
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| op | string | true | value: "notify"; |  |
-| topic | string | true | topic subscribed |  |
-| ts | long | true | timestamp of server response.unit: millionseconds |  |
-| DATA\_START | object array | true |  |  |
-| symbol | string | true | symbol,"BTC","ETH"... |  |
-| contract\_code | string | true | contract\_code,"BTC-USD" |  |
-| fee\_asset | string | true | fee asset,"BTC","ETH"... |  |
-| funding\_time | string | true | current funding time |  |
-| funding\_rate | string | true | current funding rate |  |
-| estimated\_rate | string | true | (Deprecated, default is null) |  |
-| settlement\_time | string | true | settlement timestamp.eg:"1490759594753" |  |
-| DATA\_END |  | false |  |  |
+| Parameter       | Data Type    | Required | Description                                       | Value Range |
+| --------------- | ------------ | -------- | ------------------------------------------------- | ----------- |
+| op              | string       | true     | value: "notify";                                  |             |
+| topic           | string       | true     | topic subscribed                                  |             |
+| ts              | long         | true     | timestamp of server response.unit: millionseconds |             |
+| DATA_START      | object array | true     |                                                   |             |
+| symbol          | string       | true     | symbol,"BTC","ETH"...                             |             |
+| contract_code   | string       | true     | contract_code,"BTC-USD"                           |             |
+| fee_asset       | string       | true     | fee asset,"BTC","ETH"...                          |             |
+| funding_time    | string       | true     | current funding time                              |             |
+| funding_rate    | string       | true     | current funding rate                              |             |
+| estimated_rate  | string       | true     | (Deprecated, default is null)                     |             |
+| settlement_time | string       | true     | settlement timestamp.eg:"1490759594753"           |             |
+| DATA_END        |              | false    |                                                   |             |
 
 Notes:  
-Funding rate will be pushed every 60 seconds by default.Funding rate will not be calculated under conditions below:  
-the contract can't be traded.eg:Pending Listing、Suspension、Delisting、In settlement、Delivering、Settlement Completed、Delivered,etc.  
-the 'update\_time' field of index data hasn't been changed over 5 minutes.  
-the 'update\_time' field of orderbook data hasn't been changed over 5 minutes.  
-If the value is equal to last value over 5 continuous counts calculated by md5 of 150 bids data and 150 asks data.
+Funding rate will be pushed every 60 seconds by default.Funding rate will not be
+calculated under conditions below:  
+the contract can't be traded.eg:Pending Listing、Suspension、Delisting、In
+settlement、Delivering、Settlement Completed、Delivered,etc.  
+the 'update_time' field of index data hasn't been changed over 5 minutes.  
+the 'update_time' field of orderbook data hasn't been changed over 5 minutes.  
+If the value is equal to last value over 5 continuous counts calculated by md5
+of 150 bids data and 150 asks data.
 
 #### Subscription Example
 
@@ -85,7 +89,7 @@ If the value is equal to last value over 5 continuous counts calculated by md5 o
 
 "topic":
 
-"public.BTC-USD.liquidation\_orders"
+"public.BTC-USD.liquidation_orders"
 
 }
 
@@ -103,7 +107,7 @@ If the value is equal to last value over 5 continuous counts calculated by md5 o
 
 "topic":
 
-"public.btc-usd.funding\_rate"
+"public.btc-usd.funding_rate"
 
 "ts":
 
@@ -125,7 +129,7 @@ If the value is equal to last value over 5 continuous counts calculated by md5 o
 
 "topic":
 
-"public.BTC-USDT.funding\_rate"
+"public.BTC-USDT.funding_rate"
 
 "ts":
 
@@ -139,27 +143,27 @@ If the value is equal to last value over 5 continuous counts calculated by md5 o
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 
-"fee\_asset":
+"fee_asset":
 
 "USDT"
 
-"funding\_time":
+"funding_time":
 
 "1603778700000"
 
-"funding\_rate":
+"funding_rate":
 
 "-0.000220068774978695"
 
-"settlement\_time":
+"settlement_time":
 
 "1603785600000"
 
-"estimated\_rate":
+"estimated_rate":
 
 "null"
 
@@ -179,7 +183,7 @@ If the value is equal to last value over 5 continuous counts calculated by md5 o
 
 "topic":
 
-"public.BTC-USD.funding\_rate"
+"public.BTC-USD.funding_rate"
 
 "cid":
 

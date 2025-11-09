@@ -1,6 +1,7 @@
 # GET Transfer Asset from Spot Trading Account to Cross Margin Account（Cross）
 
-**Source:** [Transfer Asset from Spot Trading Account to Cross Margin Account（Cross）](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4c32c-7773-11ed-9966-0242ac110003)
+**Source:**
+[Transfer Asset from Spot Trading Account to Cross Margin Account（Cross）](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4c32c-7773-11ed-9966-0242ac110003)
 
 **Category:** Margin Loan (Cross/Isolated)
 
@@ -16,28 +17,29 @@ Signature verification: Yes
 
 Interface permission: Trade
 
-Interface description: This endpoint transfers specific asset from spot trading account to cross margin account.
+Interface description: This endpoint transfers specific asset from spot trading
+account to cross margin account.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| currency | string | false | Currency |  |  |
-| amount | string | false | Transfer amount |  |  |
+| Parameter | Data Type | Required | Description     | Value Range | Default Value |
+| --------- | --------- | -------- | --------------- | ----------- | ------------- |
+| currency  | string    | false    | Currency        |             |               |
+| amount    | string    | false    | Transfer amount |             |               |
 
 #### Response Parameter
 
 | Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | false | status |  |
-| data | integer | false | Transfer id |  |
+| --------- | --------- | -------- | ----------- | ----------- |
+| status    | string    | false    | status      |             |
+| data      | integer   | false    | Transfer id |             |
 
 #### Request example
 

@@ -1,6 +1,7 @@
 # GET Get the deposit address
 
-Source: [https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetDepositAddress](https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetDepositAddress)
+Source:
+[https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetDepositAddress](https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetDepositAddress)
 
 # Get the deposit address
 
@@ -9,17 +10,18 @@ Source: [https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetDepositAddress](http
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| chain | string | true | N/A | Network for deposit |  |
-| currency | string | true | N/A | Currency name |  |
+| name     | type   | mandatory | default | description         | ranges |
+| -------- | ------ | --------- | ------- | ------------------- | ------ |
+| chain    | string | true      | N/A     | Network for deposit |        |
+| currency | string | true      | N/A     | Currency name       |        |
 
 ### Notes[​](#notes "Direct link to Notes")
 
-This endpoint retrieves the deposit address for a specified currency on a given chain.
+This endpoint retrieves the deposit address for a specified currency on a given
+chain.
 
--   Some currencies may require a **memo/tag** in addition to the address.
--   Always confirm the network matches the currency to avoid loss of funds.
+- Some currencies may require a **memo/tag** in addition to the address.
+- Always confirm the network matches the currency to avoid loss of funds.
 
 ### Response Example[​](#response-example "Direct link to Response Example")
 

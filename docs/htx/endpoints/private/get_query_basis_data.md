@@ -1,6 +1,7 @@
 # GET Query Basis Data
 
-**Source:** [Query Basis Data](https://www.htx.com/en-us/opend/newApiPages/?id=5d5182b0-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Query Basis Data](https://www.htx.com/en-us/opend/newApiPages/?id=5d5182b0-77b6-11ed-9966-0242ac110003)
 
 **Category:** Swap Market Data interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /index/market/history/swap\_basis (Query Basis Data)
+### /index/market/history/swap_basis (Query Basis Data)
 
 Request type: GET
 
@@ -18,34 +19,34 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | contract code | Case-Insenstive.Both uppercase and lowercase are supported..e.g."BTC-USD" |  |
-| period | string | true | kline period | 1min,5min, 15min, 30min, 60min,4hour,1day,1mon |  |
-| basis\_price\_type | string | false | use basis price type to calculate the basis data | open price："open"，close price："close"，highest price："high"，lowest price："low"，avg=（high price +low price）/2："average" | Using open price default |
-| size | int | true | data size | \[1,2000\] | 150 |
+| Parameter        | Data Type | Required | Description                                      | Value Range                                                                                                                      | Default Value            |
+| ---------------- | --------- | -------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| contract_code    | string    | true     | contract code                                    | Case-Insenstive.Both uppercase and lowercase are supported..e.g."BTC-USD"                                                        |                          |
+| period           | string    | true     | kline period                                     | 1min,5min, 15min, 30min, 60min,4hour,1day,1mon                                                                                   |                          |
+| basis_price_type | string    | false    | use basis price type to calculate the basis data | open price："open"，close price："close"，highest price："high"，lowest price："low"，avg=（high price +low price）/2："average" | Using open price default |
+| size             | int       | true     | data size                                        | \[1,2000\]                                                                                                                       | 150                      |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| ch | string | true | data channel，eg： market.basis |  |
-| DATA\_START | object array | false |  |  |
-| id | long | true | unique id |  |
-| contract\_price | string | true | contract last price |  |
-| index\_price | string | true | index price |  |
-| basis | string | true | basis=contract\_price - index\_price |  |
-| basis\_rate | string | true | basis\_rate=basis/index\_price |  |
-| DATA\_END |  | false |  |  |
-| status | string | true | status | "ok" , "error" |
-| ts | long | true | created time |  |
+| Parameter      | Data Type    | Required | Description                        | Value Range    |
+| -------------- | ------------ | -------- | ---------------------------------- | -------------- |
+| ch             | string       | true     | data channel，eg： market.basis    |                |
+| DATA_START     | object array | false    |                                    |                |
+| id             | long         | true     | unique id                          |                |
+| contract_price | string       | true     | contract last price                |                |
+| index_price    | string       | true     | index price                        |                |
+| basis          | string       | true     | basis=contract_price - index_price |                |
+| basis_rate     | string       | true     | basis_rate=basis/index_price       |                |
+| DATA_END       |              | false    |                                    |                |
+| status         | string       | true     | status                             | "ok" , "error" |
+| ts             | long         | true     | created time                       |                |
 
 Notes:  
 2000 size at most per request ；
@@ -72,11 +73,11 @@ Notes:
 
 "2.2525000000005093"
 
-"basis\_rate":
+"basis_rate":
 
 "0.00016353574072709766"
 
-"contract\_price":
+"contract_price":
 
 "13776"
 
@@ -84,7 +85,7 @@ Notes:
 
 1603866300
 
-"index\_price":
+"index_price":
 
 "13773.7475"
 
@@ -96,11 +97,11 @@ Notes:
 
 "9.072500000000218"
 
-"basis\_rate":
+"basis_rate":
 
 "0.0006591696787033861"
 
-"contract\_price":
+"contract_price":
 
 "13772.6"
 
@@ -108,7 +109,7 @@ Notes:
 
 1603866600
 
-"index\_price":
+"index_price":
 
 "13763.5275"
 

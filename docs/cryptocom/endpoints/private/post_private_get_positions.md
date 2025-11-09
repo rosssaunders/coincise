@@ -1,6 +1,7 @@
 # POST private/get-positions
 
-**Source:** [private/get-positions](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-positions)
+**Source:**
+[private/get-positions](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-positions)
 
 ## Authentication
 
@@ -46,11 +47,12 @@ Returns the user's position.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | N | e.g. BTCUSD-PERP |
+| Name            | Type   | Required | Description      |
+| --------------- | ------ | -------- | ---------------- |
+| instrument_name | string | N        | e.g. BTCUSD-PERP |
 
-**Note**: If you omit all parameters, you still need to pass in an empty `params` block like `params: {}` for API request consistency
+**Note**: If you omit all parameters, you still need to pass in an empty
+`params` block like `params: {}` for API request consistency
 
 ### Applies To
 
@@ -64,13 +66,13 @@ POST
 
 An array consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| instrument\_name | string | e.g. BTCUSD-PERP |
-| type | string | e.g. Perpetual Swap |
-| quantity | string | Position quantity |
-| cost | string | Position cost or value in USD |
-| open\_position\_pnl | string | Profit and loss for the open position |
-| open\_pos\_cost | string | Open position cost |
-| session\_pnl | string | Profit and loss in the current trading session |
-| update\_timestamp\_ms | number | Updated time (Unix timestamp) |
+| Name                | Type   | Description                                    |
+| ------------------- | ------ | ---------------------------------------------- |
+| instrument_name     | string | e.g. BTCUSD-PERP                               |
+| type                | string | e.g. Perpetual Swap                            |
+| quantity            | string | Position quantity                              |
+| cost                | string | Position cost or value in USD                  |
+| open_position_pnl   | string | Profit and loss for the open position          |
+| open_pos_cost       | string | Open position cost                             |
+| session_pnl         | string | Profit and loss in the current trading session |
+| update_timestamp_ms | number | Updated time (Unix timestamp)                  |

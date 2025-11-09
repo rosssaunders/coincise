@@ -1,6 +1,7 @@
 # GET Query unified account assets
 
-**Source:** [Query unified account assets](https://www.htx.com/en-us/opend/newApiPages/?id=10000074-77b7-11ed-9966-0242ac110003)
+**Source:**
+[Query unified account assets](https://www.htx.com/en-us/opend/newApiPages/?id=10000074-77b7-11ed-9966-0242ac110003)
 
 **Category:** USDT-M Unified Account
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /linear-swap-api/v3/unified\_account\_info (Query unified account assets)
+### /linear-swap-api/v3/unified_account_info (Query unified account assets)
 
 Request type: GET
 
@@ -16,68 +17,74 @@ Signature verification: Yes
 
 Interface permission: Read
 
-Rate Limit: Generally, the private interface rate limit of API key is at most 144 times every 3 seconds for each UID (Trade Interface: at most 72 times every 3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is shared by all the altcoins contracts delivered by different date).
+Rate Limit: Generally, the private interface rate limit of API key is at most
+144 times every 3 seconds for each UID (Trade Interface: at most 72 times every
+3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is
+shared by all the altcoins contracts delivered by different date).
 
-Interface description: Used to query the total assets of the account of the USTD-m unified account type user. User assets of non-unified account types are still queried separately according to the previous cross-margin account and isolated- margin account.
+Interface description: Used to query the total assets of the account of the
+USTD-m unified account type user. User assets of non-unified account types are
+still queried separately according to the previous cross-margin account and
+isolated- margin account.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | String | false | Contract code, return all if not filled | Swap: "BTC-USDT"... ， Future: "BTC-USDT -210625"... |  |
+| Parameter     | Data Type | Required | Description                             | Value Range                                          | Default Value |
+| ------------- | --------- | -------- | --------------------------------------- | ---------------------------------------------------- | ------------- |
+| contract_code | String    | false    | Contract code, return all if not filled | Swap: "BTC-USDT"... ， Future: "BTC-USDT -210625"... |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| code | int | true | Status code |  |
-| msg | String | true | Result description |  |
-| ts | Long | true | Timestamp |  |
-| DATA\_START | object array | true | USDT-M unified account |  |
-| margin\_balance | decimal | true | margin account |  |
-| margin\_static | decimal | true | Static equity,excluding profit and loss |  |
-| cross\_profit\_unreal | decimal | true | account unrealized profit and loss of the currency |  |
-| cross\_margin\_static | decimal | true | Cross-margin static equity,excluding isolated position assets |  |
-| margin\_asset | string | true | Margin Currency (Pricing Currency) | USDT |
-| margin\_frozen | decimal | true | Freeze Margin (Frozen Quantity of Cross Margin & Isolated Margin) |  |
-| withdraw\_available | decimal | true | Transferable quantity (the amount of assets that users can transfer out of the account) |  |
-| cross\_risk\_rate | decimal | true | Cross Margin Rate (%) |  |
-| CROSS\_SWAP \_START | object array | true | Contract-related fields of cross-position swap |  |
-| symbol | string | true | Variety Code | "BTC","ETH"... |
-| contract\_code | string | true | Contract code | Swap："BTC-USDT" ... |
-| margin\_mode | string | true | Margin model | Cross Margin Mode：cross |
-| margin\_available | decimal | true | Available margin for the current leverage of the contract code |  |
-| cross\_max\_available | int | true | cross max available |  |
-| lever\_rate | decimal | true | Lever rate |  |
-| contract\_type | string | true | Contract type | swap |
-| business\_type | string | true | Business type | swap |
-| CROSS\_SWAP \_END |  | false |  |  |
-| CROSS\_FUTURES \_START | object array | true | Fields related to cross-position future contracts |  |
-| symbol | string | true | Variety Code | "BTC","ETH"... |
-| contract\_code | string | true | Contract code | future："BTC-USDT-211231" ... |
-| margin\_mode | string | true | Margin model | Cross Margin Mode：cross |
-| margin\_available | decimal | true | Available margin for the current leverage of the contract code |  |
-| lever\_rate | decimal | true | Lever rate |  |
-| contract\_type | string | true | Contract type | this\_week、next\_week、quarter、next\_quarter |
-| business\_type | string | true | Business type | futures |
-| CROSS\_FUTURES \_END |  | false |  |  |
-| ISOLATED\_SWAP\_START | object array | true | Unified Account Isolated Margin Contract |  |
-| symbol | string | true | Variety Code | "BTC","ETH"... |
-| contract\_code | string | true | Contract code | "BTC-USDT","ETH-USDT"... |
-| margin\_mode | string | true | Margin model | Isolated Margin Mode：isolated |
-| margin\_available | decimal | true | Available margin for the current leverage of the contract code |  |
-| withdraw\_available | decimal | true | Maximum amount that can be reduced | Hedge is superposition of long-short isolation, one- way is normal calculation |
-| lever\_rate | int | true | Lever rate |  |
-| position\_mode | string | true | Position mode | single\_side,dual\_side |
-| ISOLATED\_SWAP \_END |  | false |  |  |
-| DATA\_END |  | false |  |  |
+| Parameter             | Data Type    | Required | Description                                                                             | Value Range                                                                    |
+| --------------------- | ------------ | -------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| code                  | int          | true     | Status code                                                                             |                                                                                |
+| msg                   | String       | true     | Result description                                                                      |                                                                                |
+| ts                    | Long         | true     | Timestamp                                                                               |                                                                                |
+| DATA_START            | object array | true     | USDT-M unified account                                                                  |                                                                                |
+| margin_balance        | decimal      | true     | margin account                                                                          |                                                                                |
+| margin_static         | decimal      | true     | Static equity,excluding profit and loss                                                 |                                                                                |
+| cross_profit_unreal   | decimal      | true     | account unrealized profit and loss of the currency                                      |                                                                                |
+| cross_margin_static   | decimal      | true     | Cross-margin static equity,excluding isolated position assets                           |                                                                                |
+| margin_asset          | string       | true     | Margin Currency (Pricing Currency)                                                      | USDT                                                                           |
+| margin_frozen         | decimal      | true     | Freeze Margin (Frozen Quantity of Cross Margin & Isolated Margin)                       |                                                                                |
+| withdraw_available    | decimal      | true     | Transferable quantity (the amount of assets that users can transfer out of the account) |                                                                                |
+| cross_risk_rate       | decimal      | true     | Cross Margin Rate (%)                                                                   |                                                                                |
+| CROSS_SWAP \_START    | object array | true     | Contract-related fields of cross-position swap                                          |                                                                                |
+| symbol                | string       | true     | Variety Code                                                                            | "BTC","ETH"...                                                                 |
+| contract_code         | string       | true     | Contract code                                                                           | Swap："BTC-USDT" ...                                                           |
+| margin_mode           | string       | true     | Margin model                                                                            | Cross Margin Mode：cross                                                       |
+| margin_available      | decimal      | true     | Available margin for the current leverage of the contract code                          |                                                                                |
+| cross_max_available   | int          | true     | cross max available                                                                     |                                                                                |
+| lever_rate            | decimal      | true     | Lever rate                                                                              |                                                                                |
+| contract_type         | string       | true     | Contract type                                                                           | swap                                                                           |
+| business_type         | string       | true     | Business type                                                                           | swap                                                                           |
+| CROSS_SWAP \_END      |              | false    |                                                                                         |                                                                                |
+| CROSS_FUTURES \_START | object array | true     | Fields related to cross-position future contracts                                       |                                                                                |
+| symbol                | string       | true     | Variety Code                                                                            | "BTC","ETH"...                                                                 |
+| contract_code         | string       | true     | Contract code                                                                           | future："BTC-USDT-211231" ...                                                  |
+| margin_mode           | string       | true     | Margin model                                                                            | Cross Margin Mode：cross                                                       |
+| margin_available      | decimal      | true     | Available margin for the current leverage of the contract code                          |                                                                                |
+| lever_rate            | decimal      | true     | Lever rate                                                                              |                                                                                |
+| contract_type         | string       | true     | Contract type                                                                           | this_week、next_week、quarter、next_quarter                                    |
+| business_type         | string       | true     | Business type                                                                           | futures                                                                        |
+| CROSS_FUTURES \_END   |              | false    |                                                                                         |                                                                                |
+| ISOLATED_SWAP_START   | object array | true     | Unified Account Isolated Margin Contract                                                |                                                                                |
+| symbol                | string       | true     | Variety Code                                                                            | "BTC","ETH"...                                                                 |
+| contract_code         | string       | true     | Contract code                                                                           | "BTC-USDT","ETH-USDT"...                                                       |
+| margin_mode           | string       | true     | Margin model                                                                            | Isolated Margin Mode：isolated                                                 |
+| margin_available      | decimal      | true     | Available margin for the current leverage of the contract code                          |                                                                                |
+| withdraw_available    | decimal      | true     | Maximum amount that can be reduced                                                      | Hedge is superposition of long-short isolation, one- way is normal calculation |
+| lever_rate            | int          | true     | Lever rate                                                                              |                                                                                |
+| position_mode         | string       | true     | Position mode                                                                           | single_side,dual_side                                                          |
+| ISOLATED_SWAP \_END   |              | false    |                                                                                         |                                                                                |
+| DATA_END              |              | false    |                                                                                         |                                                                                |
 
 #### Request example
 

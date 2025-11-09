@@ -2,7 +2,8 @@
 
 ## Create portfolio
 
-Create a new portfolio. Request will fail if no name is provided or if user already has max number of portfolios. Max number of portfolios is 20.
+Create a new portfolio. Request will fail if no name is provided or if user
+already has max number of portfolios. Max number of portfolios is 20.
 
 **Operation ID:** createPortfolio
 
@@ -33,4 +34,5 @@ Invalid attribute
 
 ## Documentation
 
-For more details, see the [INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).
+For more details, see the
+[INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).

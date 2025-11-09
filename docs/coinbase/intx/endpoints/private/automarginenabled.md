@@ -2,7 +2,9 @@
 
 ## Enable/Disable portfolio auto margin mode
 
-Enable or disable the auto margin feature, which lets the portfolio automatically post margin amounts required to exceed the high leverage position restrictions.
+Enable or disable the auto margin feature, which lets the portfolio
+automatically post margin amounts required to exceed the high leverage position
+restrictions.
 
 **Operation ID:** autoMarginEnabled
 
@@ -14,9 +16,9 @@ Enable or disable the auto margin feature, which lets the portfolio automaticall
 
 ## Parameters
 
-| Name | In | Type | Required | Description |
-|------|----|------|----------|-------------|
-| portfolio | path | string | Yes | Identifies the portfolio by UUID (e.g., `892e8c7c-e979-4cad-b61b-55a197932cf1`) or portfolio ID (e.g., `5189861793641175`) |
+| Name      | In   | Type   | Required | Description                                                                                                                |
+| --------- | ---- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| portfolio | path | string | Yes      | Identifies the portfolio by UUID (e.g., `892e8c7c-e979-4cad-b61b-55a197932cf1`) or portfolio ID (e.g., `5189861793641175`) |
 
 ## Authentication
 
@@ -43,4 +45,5 @@ Invalid permission
 
 ## Documentation
 
-For more details, see the [INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).
+For more details, see the
+[INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).

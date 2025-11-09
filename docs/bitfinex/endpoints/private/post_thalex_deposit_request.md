@@ -6,25 +6,26 @@ post https://api.bitfinex.com/v2/auth/w/ext/wallets/deposits/request
 
 Deposit to Thalex from Bitfinex
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
+/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+theme, base, components, utilities; @layer utilities;
 
-#### 
+####
 
 Response data
 
 [](#response-data)
 
-| Key | Type | Description |
-| --- | --- | --- |
-| type | String | Specifies the transfer type: "deposit" |
-| addressDest | String | Specifies the address for the transaction |
-| amount | String | Amount of the deposit |
-| ccy | String | Currency deposited |
-| createdAt | Integer | Deposit creation timestamp |
-| updatedAt | Integer | Deposit update timestamp |
-| id | string | Deposit id |
-| status | string | Deposit status |
-| fee | string | Fee charged for the deposit |
+| Key         | Type    | Description                               |
+| ----------- | ------- | ----------------------------------------- |
+| type        | String  | Specifies the transfer type: "deposit"    |
+| addressDest | String  | Specifies the address for the transaction |
+| amount      | String  | Amount of the deposit                     |
+| ccy         | String  | Currency deposited                        |
+| createdAt   | Integer | Deposit creation timestamp                |
+| updatedAt   | Integer | Deposit update timestamp                  |
+| id          | string  | Deposit id                                |
+| status      | string  | Deposit status                            |
+| fee         | string  | Fee charged for the deposit               |
 
 Body Params
 
@@ -64,7 +65,7 @@ tfaToken object
 
 Responses
 
-# 
+#
 
 200
 
@@ -114,7 +115,7 @@ fee
 
 string
 
-# 
+#
 
 500
 
@@ -126,7 +127,7 @@ array
 
 Updated 5 months ago
 
-* * *
+---
 
 Language
 
@@ -166,10 +167,10 @@ application/json
 
 Updated 5 months ago
 
-* * *
+---
 
 ---
-Section: Thalex Derivatives
-Source: https://docs.bitfinex.com/reference/thalex-deposit-request
-Path: /v2/auth/w/ext/wallets/deposits/request
-Method: POST
+
+Section: Thalex Derivatives Source:
+https://docs.bitfinex.com/reference/thalex-deposit-request Path:
+/v2/auth/w/ext/wallets/deposits/request Method: POST

@@ -1,6 +1,7 @@
 # POST / Amend TPSL
 
-Source: [https://www.okx.com/docs-v5/en/#order-book-trading-signal-bot-trading-post-amend-tpsl](https://www.okx.com/docs-v5/en/#order-book-trading-signal-bot-trading-post-amend-tpsl)
+Source:
+[https://www.okx.com/docs-v5/en/#order-book-trading-signal-bot-trading-post-amend-tpsl](https://www.okx.com/docs-v5/en/#order-book-trading-signal-bot-trading-post-amend-tpsl)
 
 ### POST / Amend TPSL
 
@@ -16,18 +17,19 @@ Source: [https://www.okx.com/docs-v5/en/#order-book-trading-signal-bot-trading-p
 
 #### Request Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| algoId | String | Yes | Algo ID |
-| exitSettingParam | String | Yes | Exit setting |
-| \> tpSlType | String | Yes | Type of set the take-profit and stop-loss trigger price  
+| Parameter        | Type   | Required | Description                                             |
+| ---------------- | ------ | -------- | ------------------------------------------------------- |
+| algoId           | String | Yes      | Algo ID                                                 |
+| exitSettingParam | String | Yes      | Exit setting                                            |
+| \> tpSlType      | String | Yes      | Type of set the take-profit and stop-loss trigger price |
+
 `pnl`: Based on the estimated profit and loss percentage from the entry point  
-`price`: Based on price increase or decrease from the crypto’s entry price |
-| \> tpPct | String | No | Take-profit percentage |
-| \> slPct | String | No | Stop-loss percentage |
+`price`: Based on price increase or decrease from the crypto’s entry price | |
+\> tpPct | String | No | Take-profit percentage | | \> slPct | String | No |
+Stop-loss percentage |
 
 #### Response Parameters
 
 | **Parameter** | **Type** | **Description** |
-| --- | --- | --- |
-| algoId | String | Algo ID |
+| ------------- | -------- | --------------- |
+| algoId        | String   | Algo ID         |

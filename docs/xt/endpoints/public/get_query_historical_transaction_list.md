@@ -1,6 +1,7 @@
 # GET Query historical transaction list
 
-Source: [https://doc.xt.com/docs/spot/Market/QueryHistoricalTransactions](https://doc.xt.com/docs/spot/Market/QueryHistoricalTransactions)
+Source:
+[https://doc.xt.com/docs/spot/Market/QueryHistoricalTransactions](https://doc.xt.com/docs/spot/Market/QueryHistoricalTransactions)
 
 # Query historical transaction list
 
@@ -8,12 +9,12 @@ Source: [https://doc.xt.com/docs/spot/Market/QueryHistoricalTransactions](https:
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | true |  | trading pair |  |
-| limit | number | false | 200 |  | 1~1000 |
-| direction | string | true |  | query direction | PREV - previous page, NEXT - next page |
-| fromId | number | false |  | Start ID, e.g. 6216559590087220004 |  |
+| name      | type   | mandatory | default | description                        | ranges                                 |
+| --------- | ------ | --------- | ------- | ---------------------------------- | -------------------------------------- |
+| symbol    | string | true      |         | trading pair                       |                                        |
+| limit     | number | false     | 200     |                                    | 1~1000                                 |
+| direction | string | true      |         | query direction                    | PREV - previous page, NEXT - next page |
+| fromId    | number | false     |         | Start ID, e.g. 6216559590087220004 |                                        |
 
 #### **Limit Flow Rules**[​](#limit-flow-rules "Direct link to limit-flow-rules")
 

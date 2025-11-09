@@ -1,6 +1,7 @@
 # GET Leverage List
 
-**Source:** [Get Leverage List](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-1959436a93a)
+**Source:**
+[Get Leverage List](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-1959436a93a)
 
 **Category:** Positions
 
@@ -16,33 +17,36 @@ Signature verification: Yes
 
 Interface permission: Read
 
-Rate Limit: Generally, the private interface rate limit of API key is at most 144 times every 3 seconds for each UID (Trade Interface: at most 72 times every 3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is shared by all the altcoins contracts delivered by different date).
+Rate Limit: Generally, the private interface rate limit of API key is at most
+144 times every 3 seconds for each UID (Trade Interface: at most 72 times every
+3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is
+shared by all the altcoins contracts delivered by different date).
 
 Interface description: Get the list of leverage.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | String | false | Symbol | "BTC-USDT", "ETH-USDT"…… |  |
-| margin\_mode | String | false | Margin mode | cross: Cross margin |  |
+| Parameter     | Data Type | Required | Description | Value Range              | Default Value |
+| ------------- | --------- | -------- | ----------- | ------------------------ | ------------- |
+| contract_code | String    | false    | Symbol      | "BTC-USDT", "ETH-USDT"…… |               |
+| margin_mode   | String    | false    | Margin mode | cross: Cross margin      |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| contract\_code | String | true | Symbol | "BTC-USDT", "ETH-USDT"…… |
-| contract\_type | String | true | Contract type | swap: Perpetual; this\_week: Weekly; next\_week: Bi-weekly; quarter: Quarterly; next\_quarter: Bi-quarterly |
-| margin\_mode | String | true | Margin mode | cross: Cross margin |
-| lever\_rate | Long | true | Leverage |  |
-| available\_lever | String | true | Leverage available | Leverage available |
+| Parameter       | Data Type | Required | Description        | Value Range                                                                                              |
+| --------------- | --------- | -------- | ------------------ | -------------------------------------------------------------------------------------------------------- |
+| contract_code   | String    | true     | Symbol             | "BTC-USDT", "ETH-USDT"……                                                                                 |
+| contract_type   | String    | true     | Contract type      | swap: Perpetual; this_week: Weekly; next_week: Bi-weekly; quarter: Quarterly; next_quarter: Bi-quarterly |
+| margin_mode     | String    | true     | Margin mode        | cross: Cross margin                                                                                      |
+| lever_rate      | Long      | true     | Leverage           |                                                                                                          |
+| available_lever | String    | true     | Leverage available | Leverage available                                                                                       |
 
 #### Request example
 
@@ -66,23 +70,23 @@ No data
 
 0:{
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 
-"margin\_mode":
+"margin_mode":
 
 "cross"
 
-"lever\_rate":
+"lever_rate":
 
 5
 
-"contract\_type":
+"contract_type":
 
 "swap"
 
-"available\_lever":
+"available_lever":
 
 \[
 

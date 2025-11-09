@@ -5,7 +5,8 @@ Copy
 
 # Notation
 
-The current v0 API currently uses some nonstandard notation. Relevant standardization will be batched into a breaking v1 API change.
+The current v0 API currently uses some nonstandard notation. Relevant
+standardization will be batched into a breaking v1 API change.
 
 Abbreviation
 
@@ -51,7 +52,8 @@ Tif
 
 Time in force
 
-GTC = good until canceled, ALO = add liquidity only (post only), IOC = immediate or cancel
+GTC = good until canceled, ALO = add liquidity only (post only), IOC = immediate
+or cancel
 
 [PreviousAPI](/hyperliquid-docs/for-developers/api)[NextAsset IDs](/hyperliquid-docs/for-developers/api/asset-ids)
 

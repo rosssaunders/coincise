@@ -1,10 +1,12 @@
 # GET / Balance
 
-Source: [https://www.okx.com/docs-v5/en/#financial-product-sol-staking-get-balance](https://www.okx.com/docs-v5/en/#financial-product-sol-staking-get-balance)
+Source:
+[https://www.okx.com/docs-v5/en/#financial-product-sol-staking-get-balance](https://www.okx.com/docs-v5/en/#financial-product-sol-staking-get-balance)
 
 ### GET / Balance
 
-The balance is summarized all OKSOL assets (including assets in redeeming) in account.
+The balance is summarized all OKSOL assets (including assets in redeeming) in
+account.
 
 #### Rate Limit: 6 requests per second
 
@@ -22,9 +24,9 @@ None
 
 #### Response Parameters
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| ccy | String | Currency, e.g. `OKSOL` |
-| amt | String | Currency amount |
+| Parameter             | Type   | Description             |
+| --------------------- | ------ | ----------------------- |
+| ccy                   | String | Currency, e.g. `OKSOL`  |
+| amt                   | String | Currency amount         |
 | latestInterestAccrual | String | Latest interest accrual |
-| totalInterestAccrual | String | Total interest accrual |
+| totalInterestAccrual  | String | Total interest accrual  |

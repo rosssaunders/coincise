@@ -8,7 +8,7 @@ Get Merchant Information
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/p2p/merchantInfo
+- GET /api/v2/p2p/merchantInfo
 
 Request Example
 
@@ -28,25 +28,25 @@ Response Example
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| registerTime | String | Registration time 
-| nickName | String | Alias 
-| merchantId | String | Merchant ID 
-| kycStatus | Boolean | KYC or not<br>true: yes<br>false: no 
-| emailBindStatus | Boolean | Email bound?<br>true: yes<br>false: no 
-| mobileBindStatus | Boolean | Phone number bound？<br>true: yes<br>false: no 
-| email | String | Email 
-| mobile | String | Phone number 
-| avgPaymentTime | String | Average payment time in minutes 
-| avgReleaseTime | String | Average coin release time in minutes 
-| totalTrades | String | Total traded orders 
-| totalBuy | String | Total number of purchase orders 
-| totalSell | String | Total number of sell orders 
-| totalCompletionRate | String | Total execution rate 
-| trades30d | String | 30-day trading volume 
-| sell30d | String | 30-day sell orders 
-| buy30d | String | 30-day purchase orders 
-| completionRate30d | String | 30-day close rate
+| Parameter           | Type    | Description                                    |
+| :------------------ | :------ | :--------------------------------------------- |
+| registerTime        | String  | Registration time                              |
+| nickName            | String  | Alias                                          |
+| merchantId          | String  | Merchant ID                                    |
+| kycStatus           | Boolean | KYC or not<br>true: yes<br>false: no           |
+| emailBindStatus     | Boolean | Email bound?<br>true: yes<br>false: no         |
+| mobileBindStatus    | Boolean | Phone number bound？<br>true: yes<br>false: no |
+| email               | String  | Email                                          |
+| mobile              | String  | Phone number                                   |
+| avgPaymentTime      | String  | Average payment time in minutes                |
+| avgReleaseTime      | String  | Average coin release time in minutes           |
+| totalTrades         | String  | Total traded orders                            |
+| totalBuy            | String  | Total number of purchase orders                |
+| totalSell           | String  | Total number of sell orders                    |
+| totalCompletionRate | String  | Total execution rate                           |
+| trades30d           | String  | 30-day trading volume                          |
+| sell30d             | String  | 30-day sell orders                             |
+| buy30d              | String  | 30-day purchase orders                         |
+| completionRate30d   | String  | 30-day close rate                              |
 
 > **Source:** https://www.bitget.com/api-doc/common/p2p/Get-Merchant-Information

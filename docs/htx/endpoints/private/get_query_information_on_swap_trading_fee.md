@@ -1,6 +1,7 @@
 # GET Query information on swap trading fee
 
-**Source:** [Query information on swap trading fee](https://www.htx.com/en-us/opend/newApiPages/?id=5d519908-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Query information on swap trading fee](https://www.htx.com/en-us/opend/newApiPages/?id=5d519908-77b6-11ed-9966-0242ac110003)
 
 **Category:** Swap Account Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /swap-api/v1/swap\_fee (Query information on swap trading fee)
+### /swap-api/v1/swap_fee (Query information on swap trading fee)
 
 Request type: POST
 
@@ -18,32 +19,32 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | contract type code | Case-Insenstive.Both uppercase and lowercase are supported.e.g. "BTC-USD",... |  |
+| Parameter     | Data Type | Required | Description        | Value Range                                                                   | Default Value |
+| ------------- | --------- | -------- | ------------------ | ----------------------------------------------------------------------------- | ------------- |
+| contract_code | string    | false    | contract type code | Case-Insenstive.Both uppercase and lowercase are supported.e.g. "BTC-USD",... |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request Processing Result | "ok" , "error" |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| DATA\_START |  | false |  |  |
-| contract\_code | string | true | contract type code | "BTC-USD",... |
-| open\_maker\_fee | string | true | Open maker order fee, decimal |  |
-| open\_taker\_fee | string | true | Open taker order fee, decimal |  |
-| close\_maker\_fee | string | true | Close maker order fee, decimal |  |
-| close\_taker\_fee | string | true | Close taker order fee, decimal |  |
-| delivery\_fee | string | true | delivery fee, decimal |  |
-| fee\_asset | string | true | the corresponding cryptocurrency to the given fee | "BTC","ETH"... |
-| DATA\_END |  | false |  |  |
+| Parameter       | Data Type | Required | Description                                       | Value Range    |
+| --------------- | --------- | -------- | ------------------------------------------------- | -------------- |
+| status          | string    | true     | Request Processing Result                         | "ok" , "error" |
+| ts              | long      | true     | Time of Respond Generation, Unit: Millisecond     |                |
+| DATA_START      |           | false    |                                                   |                |
+| contract_code   | string    | true     | contract type code                                | "BTC-USD",...  |
+| open_maker_fee  | string    | true     | Open maker order fee, decimal                     |                |
+| open_taker_fee  | string    | true     | Open taker order fee, decimal                     |                |
+| close_maker_fee | string    | true     | Close maker order fee, decimal                    |                |
+| close_taker_fee | string    | true     | Close taker order fee, decimal                    |                |
+| delivery_fee    | string    | true     | delivery fee, decimal                             |                |
+| fee_asset       | string    | true     | the corresponding cryptocurrency to the given fee | "BTC","ETH"... |
+| DATA_END        |           | false    |                                                   |                |
 
 #### Request example
 
@@ -67,27 +68,27 @@ Interface permission: Read
 
 "THETA"
 
-"contract\_code":
+"contract_code":
 
 "THETA-USD"
 
-"open\_maker\_fee":
+"open_maker_fee":
 
 "0.0002"
 
-"open\_taker\_fee":
+"open_taker_fee":
 
 "0.0005"
 
-"close\_maker\_fee":
+"close_maker_fee":
 
 "0.0002"
 
-"close\_taker\_fee":
+"close_taker_fee":
 
 "0.0005"
 
-"fee\_asset":
+"fee_asset":
 
 "THETA"
 

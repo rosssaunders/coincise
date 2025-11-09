@@ -1,6 +1,7 @@
 # GET Query information on contract insurance fund balance and estimated clawback rate
 
-**Source:** [Query information on contract insurance fund balance and estimated clawback rate](https://www.htx.com/en-us/opend/newApiPages/?id=5d5161f1-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Query information on contract insurance fund balance and estimated clawback rate](https://www.htx.com/en-us/opend/newApiPages/?id=5d5161f1-77b6-11ed-9966-0242ac110003)
 
 **Category:** Downline Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /swap-api/v1/swap\_risk\_info (Query information on contract insurance fund balance and estimated clawback rate)
+### /swap-api/v1/swap_risk_info (Query information on contract insurance fund balance and estimated clawback rate)
 
 Request type: GET
 
@@ -18,28 +19,28 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | contract code | Case-Insenstive.e.g. "BTC-USD" |  |
+| Parameter     | Data Type | Required | Description   | Value Range                    | Default Value |
+| ------------- | --------- | -------- | ------------- | ------------------------------ | ------------- |
+| contract_code | string    | false    | contract code | Case-Insenstive.e.g. "BTC-USD" |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request processing Result | "ok" , "error" |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| DATA\_START |  | false |  |  |
-| contract\_code | string | true | e.g. "BTC-USD" |  |
-| insurance\_fund | decimal | true | Insurance Fund Balance |  |
-| estimated\_clawback | decimal | true | Estimated Clawback Rate |  |
-| DATA\_END |  | false |  |  |
+| Parameter          | Data Type | Required | Description                                   | Value Range    |
+| ------------------ | --------- | -------- | --------------------------------------------- | -------------- |
+| status             | string    | true     | Request processing Result                     | "ok" , "error" |
+| ts                 | long      | true     | Time of Respond Generation, Unit: Millisecond |                |
+| DATA_START         |           | false    |                                               |                |
+| contract_code      | string    | true     | e.g. "BTC-USD"                                |                |
+| insurance_fund     | decimal   | true     | Insurance Fund Balance                        |                |
+| estimated_clawback | decimal   | true     | Estimated Clawback Rate                       |                |
+| DATA_END           |           | false    |                                               |                |
 
 #### Request example
 
@@ -59,15 +60,15 @@ Interface permission: Read
 
 0:{
 
-"contract\_code":
+"contract_code":
 
 "BTC-USD"
 
-"insurance\_fund":
+"insurance_fund":
 
 593.7706304354919
 
-"estimated\_clawback":
+"estimated_clawback":
 
 0
 

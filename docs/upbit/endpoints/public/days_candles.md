@@ -2,19 +2,26 @@
 
 **Check the proper endpoint based on your region.**
 
-The examples in this page is written using Singapore fiat code(SGD). Set the quote currency to match your region. The base\_url differs by country/region. Make sure to specify the correct region value for your environment.  
-  
+The examples in this page is written using Singapore fiat code(SGD). Set the
+quote currency to match your region. The base_url differs by country/region.
+Make sure to specify the correct region value for your environment.
+
 \- Singapore (sg): https://sg-api.upbit.com  
 \- Indonesia (id): https://id-api.upbit.com  
 \- Thailand (th): https://th-api.upbit.com
 
 Candles are created only when trades occur within the given time interval.
 
-If no trades occur between the start and end time of a candle, it will not be created and therefore will not appear in the API response. For example, a Day candle with `candle_date_time = 2024-08-31T00:00:00` will not be created if no trades occur between 2024-08-31T00:00:00 (inclusive) and 2024-09-01T00:00:00 (exclusive).
+If no trades occur between the start and end time of a candle, it will not be
+created and therefore will not appear in the API response. For example, a Day
+candle with `candle_date_time = 2024-08-31T00:00:00` will not be created if no
+trades occur between 2024-08-31T00:00:00 (inclusive) and 2024-09-01T00:00:00
+(exclusive).
 
 Rate Limit
 
-Up to 10 calls per second are allowed. This is measured on an IP basis and request counts are shared within the exchange 'candle' group.
+Up to 10 calls per second are allowed. This is measured on an IP basis and
+request counts are shared within the exchange 'candle' group.
 
 market
 
@@ -28,9 +35,13 @@ to
 
 string
 
-End time of the query period. Retrieves candles that occurred before the specified time. If not provided, the most recent candles based on the request time are returned by default.
+End time of the query period. Retrieves candles that occurred before the
+specified time. If not provided, the most recent candles based on the request
+time are returned by default.
 
-Specify the time in ISO 8601 datetime format. When making the actual request, ensure that any spaces or special characters in the datetime string are properly URL-encoded.
+Specify the time in ISO 8601 datetime format. When making the actual request,
+ensure that any spaces or special characters in the datetime string are properly
+URL-encoded.
 
 \[Example\]  
 2025-06-24T04:56:53Z (UTC)  
@@ -47,16 +58,18 @@ Number of candles to retrieve.
 Supports up to 200 candles.  
 Default: 1.
 
-converting\_price\_unit
+converting_price_unit
 
 string
 
-Conversion currency for the closing price. You can optionally specify a currency to convert the closing price. When used, the response includes an additional field, converted\_trade\_price.
+Conversion currency for the closing price. You can optionally specify a currency
+to convert the closing price. When used, the response includes an additional
+field, converted_trade_price.
 
 \[Example\]  
 If specified as “SGD”, the closing price is returned in SGD.
 
-# 
+#
 
 200
 
@@ -74,7 +87,7 @@ required
 
 Trading pair code representing the market.
 
-candle\_date\_time\_utc
+candle_date_time_utc
 
 string
 
@@ -82,15 +95,16 @@ required
 
 Start time of the candle period in UTC.
 
-opening\_price
+opening_price
 
 double
 
 required
 
-The opening price of the candle, representing the first trading price during the candle period.
+The opening price of the candle, representing the first trading price during the
+candle period.
 
-high\_price
+high_price
 
 double
 
@@ -98,7 +112,7 @@ required
 
 The highest trading price, recorded during the candle period.
 
-low\_price
+low_price
 
 double
 
@@ -106,13 +120,14 @@ required
 
 The lowest trading price. recorded during the candle period.
 
-trade\_price
+trade_price
 
 double
 
 required
 
-The closing price of the candle, representing the last trading price during the candle period.
+The closing price of the candle, representing the last trading price during the
+candle period.
 
 timestamp
 
@@ -122,23 +137,25 @@ required
 
 The timestamp (in milliseconds) when the last tick of the candle was recorded.
 
-candle\_acc\_trade\_price
+candle_acc_trade_price
 
 double
 
 required
 
-The total trade amount (in the quoted currency) accumulated during the candle period.
+The total trade amount (in the quoted currency) accumulated during the candle
+period.
 
-candle\_acc\_trade\_volume
+candle_acc_trade_volume
 
 double
 
 required
 
-The total traded volume (in the base asset) accumulated during the candle period.
+The total traded volume (in the base asset) accumulated during the candle
+period.
 
-prev\_closing\_price
+prev_closing_price
 
 double
 
@@ -146,40 +163,44 @@ required
 
 Previous day's closing price, based on UTC.
 
-change\_price
+change_price
 
 double
 
 required
 
-Price change compared to the previous day's closing price. Calculated as "trade\_price" - "prev\_closing\_price".
+Price change compared to the previous day's closing price. Calculated as
+"trade_price" - "prev_closing_price".
 
--   Positive (+): Current price is higher than previous day's closing price
--   Negative (-): Current price is lower than previous day's closing price
+- Positive (+): Current price is higher than previous day's closing price
+- Negative (-): Current price is lower than previous day's closing price
 
-change\_rate
+change_rate
 
 double
 
 required
 
-Price change rate compared to the previous day's closing price. Calculated as ("trade\_price" - "prev\_closing\_price") ÷ "prev\_closing\_price".
+Price change rate compared to the previous day's closing price. Calculated as
+("trade_price" - "prev_closing_price") ÷ "prev_closing_price".
 
--   Positive (+): Price increase
--   Negative (-): Price decrease
+- Positive (+): Price increase
+- Negative (-): Price decrease
 
 Example: 0.015 = 1.5% increase
 
-converted\_trade\_price
+converted_trade_price
 
 double
 
-The closing price converted based on the currency specified in converted\_trade\_price.
+The closing price converted based on the currency specified in
+converted_trade_price.
 
--   If converted\_trade\_price is not included in the request, this field is not provided.
--   If not digital asset market, return null value.
+- If converted_trade_price is not included in the request, this field is not
+  provided.
+- If not digital asset market, return null value.
 
-# 
+#
 
 400
 
@@ -207,7 +228,7 @@ required
 
 Message describing the cause of the error.
 
-# 
+#
 
 404
 
@@ -237,7 +258,7 @@ Message describing the cause of the error.
 
 Updated about 1 month ago
 
-* * *
+---
 
 ShellPythonJavaNode
 
@@ -269,7 +290,7 @@ xxxxxxxxxx
 
 2
 
-  {
+{
 
 3
 
@@ -321,7 +342,7 @@ xxxxxxxxxx
 
 15
 
-  }
+}
 
 16
 
@@ -329,7 +350,7 @@ xxxxxxxxxx
 
 Updated about 1 month ago
 
-* * *
+---
 
 ---
 

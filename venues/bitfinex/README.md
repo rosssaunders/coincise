@@ -1,10 +1,12 @@
 # Bitfinex API Documentation Extractor
 
-This project extracts API documentation from Bitfinex and converts it to markdown format following the standardized Coincise extraction pattern.
+This project extracts API documentation from Bitfinex and converts it to
+markdown format following the standardized Coincise extraction pattern.
 
 ## Features
 
-- Extracts core documentation sections (authentication, rate limits, network connectivity, error codes, response formats, change log)
+- Extracts core documentation sections (authentication, rate limits, network
+  connectivity, error codes, response formats, change log)
 - Extracts all REST API endpoints (both public and private)
 - Organizes endpoints by authentication requirement
 - Converts HTML to Markdown with proper formatting
@@ -73,9 +75,12 @@ pnpm run extract:endpoints
 
 ## Documentation Sources
 
-- **Core Documentation**: Extracted from various pages under `https://docs.bitfinex.com/docs/`
-- **Public Endpoints**: Extracted from `https://docs.bitfinex.com/docs/rest-public`
-- **Private Endpoints**: Extracted from `https://docs.bitfinex.com/docs/rest-auth`
+- **Core Documentation**: Extracted from various pages under
+  `https://docs.bitfinex.com/docs/`
+- **Public Endpoints**: Extracted from
+  `https://docs.bitfinex.com/docs/rest-public`
+- **Private Endpoints**: Extracted from
+  `https://docs.bitfinex.com/docs/rest-auth`
 
 All endpoint pages are under `https://docs.bitfinex.com/reference/`
 

@@ -1,6 +1,7 @@
 # GET Get batch
 
-Source: [https://doc.xt.com/docs/spot/Order/GetBatch](https://doc.xt.com/docs/spot/Order/GetBatch)
+Source:
+[https://doc.xt.com/docs/spot/Order/GetBatch](https://doc.xt.com/docs/spot/Order/GetBatch)
 
 # Get batch
 
@@ -10,9 +11,9 @@ Source: [https://doc.xt.com/docs/spot/Order/GetBatch](https://doc.xt.com/docs/sp
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| orderIds | string | true |  | order Ids eg: 6216559590087220004, 6216559590087220004 |  |
+| name     | type   | mandatory | default | description                                            | ranges |
+| -------- | ------ | --------- | ------- | ------------------------------------------------------ | ------ |
+| orderIds | string | true      |         | order Ids eg: 6216559590087220004, 6216559590087220004 |        |
 
 ### Notes[​](#notes "Direct link to Notes")
 

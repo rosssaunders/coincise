@@ -2,7 +2,8 @@
 
 **Title:** Server ping
 
-**Source:** [Server ping](https://docs.digifinex.com/en-ww/spot/v3/rest.html#server-ping)
+**Source:**
+[Server ping](https://docs.digifinex.com/en-ww/spot/v3/rest.html#server-ping)
 
 ## Authentication
 
@@ -14,7 +15,7 @@ Not Required (Public Endpoint)
 
 ### HTTP Request
 
--   GET `https://openapi.digifinex.com/v3/ping`
+- GET `https://openapi.digifinex.com/v3/ping`
 
 ### Request Parameters
 
@@ -34,6 +35,6 @@ No parameter is available for this endpoint.
 ### Response Content
 
 | Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| msg | true | string | Response |
-| code | true | int | Status |
+| ----- | --------- | ------------ | ----------- |
+| msg   | true      | string       | Response    |
+| code  | true      | int          | Status      |

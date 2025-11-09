@@ -1,6 +1,7 @@
 # GET / Public borrow info (public)
 
-Source: [https://www.okx.com/docs-v5/en/#financial-product-simple-earn-flexible-get-public-borrow-info-public](https://www.okx.com/docs-v5/en/#financial-product-simple-earn-flexible-get-public-borrow-info-public)
+Source:
+[https://www.okx.com/docs-v5/en/#financial-product-simple-earn-flexible-get-public-borrow-info-public](https://www.okx.com/docs-v5/en/#financial-product-simple-earn-flexible-get-public-borrow-info-public)
 
 ### GET / Public borrow info (public)
 
@@ -16,17 +17,17 @@ Authentication is not required for this public endpoint.
 
 #### Request Parameters
 
-| **Parameters** | **Types** | **Required** | **Description** |
-| --- | --- | --- | --- |
-| ccy | String | No | Currency, e.g. `BTC` |
+| **Parameters** | **Types** | **Required** | **Description**      |
+| -------------- | --------- | ------------ | -------------------- |
+| ccy            | String    | No           | Currency, e.g. `BTC` |
 
 #### Response Parameters
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| ccy | String | Currency, e.g. `BTC` |
-| avgAmt | String | ~24H average borrowing amount~(deprecated) |
+| Parameter | Type   | Description                                               |
+| --------- | ------ | --------------------------------------------------------- |
+| ccy       | String | Currency, e.g. `BTC`                                      |
+| avgAmt    | String | ~24H average borrowing amount~(deprecated)                |
 | avgAmtUsd | String | ~24H average borrowing amount in `USD` value~(deprecated) |
-| avgRate | String | 24H average lending rate |
-| preRate | String | Last annual interest rate |
-| estRate | String | Next estimate annual interest rate |
+| avgRate   | String | 24H average lending rate                                  |
+| preRate   | String | Last annual interest rate                                 |
+| estRate   | String | Next estimate annual interest rate                        |

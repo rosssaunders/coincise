@@ -1,6 +1,7 @@
 # GET Lock/Unlock Sub User
 
-**Source:** [Lock/Unlock Sub User](https://www.htx.com/en-us/opend/newApiPages/?id=7ec52620-7773-11ed-9966-0242ac110003)
+**Source:**
+[Lock/Unlock Sub User](https://www.htx.com/en-us/opend/newApiPages/?id=7ec52620-7773-11ed-9966-0242ac110003)
 
 **Category:** Sub-account Management
 
@@ -18,31 +19,32 @@ Interface permission: Trade
 
 Rate Limit: 20times/2s
 
-Interface description: This endpoint allows parent user to lock or unlock a specific sub user.
+Interface description: This endpoint allows parent user to lock or unlock a
+specific sub user.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| subUid | long | false | Sub user UID |  |  |
-| action | string | false | Action type | lock,unlock |  |
+| Parameter | Data Type | Required | Description  | Value Range | Default Value |
+| --------- | --------- | -------- | ------------ | ----------- | ------------- |
+| subUid    | long      | false    | Sub user UID |             |               |
+| action    | string    | false    | Action type  | lock,unlock |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| code | int | false | status code |  |
-| DATA\_START | object | false |  |  |
-| subUid | long | false | sub user UID |  |
-| userState | string | false | The state of sub user | lock,normal |
-| DATA\_END |  | false |  |  |
+| Parameter  | Data Type | Required | Description           | Value Range |
+| ---------- | --------- | -------- | --------------------- | ----------- |
+| code       | int       | false    | status code           |             |
+| DATA_START | object    | false    |                       |             |
+| subUid     | long      | false    | sub user UID          |             |
+| userState  | string    | false    | The state of sub user | lock,normal |
+| DATA_END   |           | false    |                       |             |
 
 #### Request example
 

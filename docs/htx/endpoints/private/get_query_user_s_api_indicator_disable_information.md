@@ -1,6 +1,7 @@
 # GET Query user's API indicator disable information
 
-**Source:** [Query user's API indicator disable information](https://www.htx.com/en-us/opend/newApiPages/?id=5d519e20-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Query user's API indicator disable information](https://www.htx.com/en-us/opend/newApiPages/?id=5d519e20-77b6-11ed-9966-0242ac110003)
 
 **Category:** Swap Account Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /swap-api/v1/swap\_api\_trading\_status (Query user's API indicator disable information)
+### /swap-api/v1/swap_api_trading_status (Query user's API indicator disable information)
 
 Request type: GET
 
@@ -18,44 +19,44 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
 | Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
+| --------- | --------- | -------- | ----------- | ----------- | ------------- |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | response status | "ok" , "error" |
-| ts | long | true | response millionseconds |  |
-| DATA\_START | array object | true |  |  |
-| is\_disable | int | true |  | 1：is disabled，0：isn't disabled |
-| order\_price\_types | string | true | order price types,such as：“limit,post\_only,FOK,IOC” |  |
-| disable\_reason | string | true | disable reason | "COR":（Cancel Order Ratio），“TDN”：（Total Disable Number） |
-| disable\_interval | long | true | disable millionseconds |  |
-| recovery\_time | long | true | recovery millionseconds |  |
-| COR\_START | dict object | true | （Cancel Order Ratio） |  |
-| orders\_threshold | long | true | orders threshold |  |
-| orders | long | true | total pending orders |  |
-| invalid\_cancel\_orders | long | true | numbers of invalid cancel orders |  |
-| cancel\_ratio\_threshold | decimal | true | cancel ratio threshold |  |
-| cancel\_ratio | decimal | true | cancel ratio |  |
-| is\_trigger | int | true |  | 1: triggered，0: not triggered |
-| is\_active | int | true |  | 1: active，0：not active |
-| COR\_END |  | false |  |  |
-| TDN\_START | dict object | true | Total Disable Number |  |
-| disables\_threshold | long | true | disable threshold |  |
-| disables | long | true | total disable number |  |
-| is\_trigger | int | true |  | 1：triggered，0：not triggered |
-| is\_active | int | true |  | 1：active，0：not active |
-| TDN\_END |  | false |  |  |
-| DATA\_END |  | false |  |  |
+| Parameter              | Data Type    | Required | Description                                          | Value Range                                                   |
+| ---------------------- | ------------ | -------- | ---------------------------------------------------- | ------------------------------------------------------------- |
+| status                 | string       | true     | response status                                      | "ok" , "error"                                                |
+| ts                     | long         | true     | response millionseconds                              |                                                               |
+| DATA_START             | array object | true     |                                                      |                                                               |
+| is_disable             | int          | true     |                                                      | 1：is disabled，0：isn't disabled                             |
+| order_price_types      | string       | true     | order price types,such as：“limit,post_only,FOK,IOC” |                                                               |
+| disable_reason         | string       | true     | disable reason                                       | "COR":（Cancel Order Ratio），“TDN”：（Total Disable Number） |
+| disable_interval       | long         | true     | disable millionseconds                               |                                                               |
+| recovery_time          | long         | true     | recovery millionseconds                              |                                                               |
+| COR_START              | dict object  | true     | （Cancel Order Ratio）                               |                                                               |
+| orders_threshold       | long         | true     | orders threshold                                     |                                                               |
+| orders                 | long         | true     | total pending orders                                 |                                                               |
+| invalid_cancel_orders  | long         | true     | numbers of invalid cancel orders                     |                                                               |
+| cancel_ratio_threshold | decimal      | true     | cancel ratio threshold                               |                                                               |
+| cancel_ratio           | decimal      | true     | cancel ratio                                         |                                                               |
+| is_trigger             | int          | true     |                                                      | 1: triggered，0: not triggered                                |
+| is_active              | int          | true     |                                                      | 1: active，0：not active                                      |
+| COR_END                |              | false    |                                                      |                                                               |
+| TDN_START              | dict object  | true     | Total Disable Number                                 |                                                               |
+| disables_threshold     | long         | true     | disable threshold                                    |                                                               |
+| disables               | long         | true     | total disable number                                 |                                                               |
+| is_trigger             | int          | true     |                                                      | 1：triggered，0：not triggered                                |
+| is_active              | int          | true     |                                                      | 1：active，0：not active                                      |
+| TDN_END                |              | false    |                                                      |                                                               |
+| DATA_END               |              | false    |                                                      |                                                               |
 
 #### Request example
 

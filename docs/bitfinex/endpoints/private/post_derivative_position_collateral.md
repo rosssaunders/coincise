@@ -6,17 +6,19 @@ post https://api.bitfinex.com/v2/auth/w/deriv/collateral/set
 
 Update the amount of collateral assigned to a derivative position
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
+/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+theme, base, components, utilities; @layer utilities;
 
-Sets the amount of collateral, applied to the active derivative position, for the given symbol.
+Sets the amount of collateral, applied to the active derivative position, for
+the given symbol.
 
 ![](https://files.readme.io/1e9466b-Screenshot_2.png "Screenshot_2.png")
 
 **Response Fields**
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| \[0\] | STATUS | int | Returns 1 if successful |
+| Index | Field  | Type | Description             |
+| ----- | ------ | ---- | ----------------------- |
+| \[0\] | STATUS | int  | Returns 1 if successful |
 
 **Ratelimit**: 90 req/min
 
@@ -40,7 +42,7 @@ The amount of collateral to apply to the open position
 
 Responses
 
-# 
+#
 
 200
 
@@ -52,7 +54,7 @@ array of arrays of integers
 
 array of integers
 
-# 
+#
 
 400
 
@@ -62,7 +64,7 @@ Response body
 
 object
 
-# 
+#
 
 500
 
@@ -78,7 +80,7 @@ No active positions for the given symbol
 
 Updated 3 months ago
 
-* * *
+---
 
 Language
 
@@ -118,11 +120,11 @@ curl \--request POST \\
 
 7
 
-  "symbol": "tBTCF0:USTF0",
+"symbol": "tBTCF0:USTF0",
 
 8
 
-  "collateral": 1150.61
+"collateral": 1150.61
 
 9
 
@@ -138,18 +140,20 @@ RESPONSE
 
 Examples
 
-Click `Try It!` to start a request and see the response here! Or choose an example:
+Click `Try It!` to start a request and see the response here! Or choose an
+example:
 
 application/json
 
-200 - Result400 - Result500 - Collateral amount is too large / small500 - Symbol does not support derivatives500 - No active positions for the given symbol
+200 - Result400 - Result500 - Collateral amount is too large / small500 - Symbol
+does not support derivatives500 - No active positions for the given symbol
 
 Updated 3 months ago
 
-* * *
+---
 
 ---
-Section: Positions
-Source: https://docs.bitfinex.com/reference/rest-auth-deriv-pos-collateral-set
-Path: /v2/auth/w/deriv/collateral/set
-Method: POST
+
+Section: Positions Source:
+https://docs.bitfinex.com/reference/rest-auth-deriv-pos-collateral-set Path:
+/v2/auth/w/deriv/collateral/set Method: POST

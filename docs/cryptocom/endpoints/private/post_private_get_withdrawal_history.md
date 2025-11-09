@@ -1,6 +1,7 @@
 # POST private/get-withdrawal-history
 
-**Source:** [private/get-withdrawal-history](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-withdrawal-history)
+**Source:**
+[private/get-withdrawal-history](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-withdrawal-history)
 
 ## Authentication
 
@@ -53,21 +54,22 @@ Required (Private Endpoint)
 }
 ```
 
-Fetches withdrawal history. If you do not see the option when viewing your API Keys, this feature is not yet available for you.  
-  
-Note: It works for master account only, not for sub-accounts.  
+Fetches withdrawal history. If you do not see the option when viewing your API
+Keys, this feature is not yet available for you.
+
+Note: It works for master account only, not for sub-accounts.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| currency | string | N | E.g. BTC, CRO |
-| start\_ts | long | N | Default is 90 days from current timestamp |
-| end\_ts | long | N | Default is current timestamp |
-| page\_size | int | N | Page size (Default: 20, Max: 200) |
-| page | int | N | Page number (0-based) |
-| status | string | N | "0"  
-  
+| Name      | Type   | Required | Description                               |
+| --------- | ------ | -------- | ----------------------------------------- |
+| currency  | string | N        | E.g. BTC, CRO                             |
+| start_ts  | long   | N        | Default is 90 days from current timestamp |
+| end_ts    | long   | N        | Default is current timestamp              |
+| page_size | int    | N        | Page size (Default: 20, Max: 200)         |
+| page      | int    | N        | Page number (0-based)                     |
+| status    | string | N        | "0"                                       |
+
 0 - Pending  
 1 - Processing  
 2 - Rejected  
@@ -88,23 +90,23 @@ POST
 
 An array of `withdrawal_list`, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| id | long | Newly created withdrawal ID |
-| client\_wid | string | (Optional) if a Client withdrawal ID was provided in the request |
-| currency | string | E.g. BTC, CRO |
-| amount | decimal |  |
-| fee | decimal |  |
-| address | string | Address with Address Tag (if any) |
-| create\_time | long |  |
-| status | string | "0"  
-  
+| Name        | Type    | Description                                                      |
+| ----------- | ------- | ---------------------------------------------------------------- |
+| id          | long    | Newly created withdrawal ID                                      |
+| client_wid  | string  | (Optional) if a Client withdrawal ID was provided in the request |
+| currency    | string  | E.g. BTC, CRO                                                    |
+| amount      | decimal |                                                                  |
+| fee         | decimal |                                                                  |
+| address     | string  | Address with Address Tag (if any)                                |
+| create_time | long    |                                                                  |
+| status      | string  | "0"                                                              |
+
 0 - Pending  
 1 - Processing  
 2 - Rejected  
 3 - Payment In-progress  
 4 - Payment Failed  
 5 - Completed  
-6 - Cancelled |
-| txid | string | Transaction hash |
-| network\_id | string | Network for the transaction - please see get-currency-networks. Only available when Exchange support multiple network on the currency |
+6 - Cancelled | | txid | string | Transaction hash | | network_id | string |
+Network for the transaction - please see get-currency-networks. Only available
+when Exchange support multiple network on the currency |

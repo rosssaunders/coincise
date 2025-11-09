@@ -2,7 +2,8 @@
 
 **Title:** All the market description
 
-**Source:** [All the market description](https://docs.digifinex.com/en-ww/spot/v3/rest.html#all-the-market-description)
+**Source:**
+[All the market description](https://docs.digifinex.com/en-ww/spot/v3/rest.html#all-the-market-description)
 
 ## Authentication
 
@@ -14,7 +15,7 @@ Not Required (Public Endpoint)
 
 ### HTTP Request
 
--   GET `https://openapi.digifinex.com/v3/markets`
+- GET `https://openapi.digifinex.com/v3/markets`
 
 ### Request Parameters
 
@@ -40,13 +41,13 @@ No parameter is available for this endpoint.
 
 ### Response Content
 
-| Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| data | true | object | Trading Pair Information |
-| volume\_precision | true | int | Volume Precision |
-| price\_precision | true | int | Price Precision |
-| market | true | string | Symbol Name |
-| min\_amount | true | float | Minimum Trading Amount |
-| min\_volume | true | float | Minimum Trading Volume |
-| date | true | int | Timestamp |
-| code | true | int | Status |
+| Field            | Mandatory | Request Type | Description              |
+| ---------------- | --------- | ------------ | ------------------------ |
+| data             | true      | object       | Trading Pair Information |
+| volume_precision | true      | int          | Volume Precision         |
+| price_precision  | true      | int          | Price Precision          |
+| market           | true      | string       | Symbol Name              |
+| min_amount       | true      | float        | Minimum Trading Amount   |
+| min_volume       | true      | float        | Minimum Trading Volume   |
+| date             | true      | int          | Timestamp                |
+| code             | true      | int          | Status                   |

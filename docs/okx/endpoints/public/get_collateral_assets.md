@@ -1,6 +1,7 @@
 # GET / Collateral assets
 
-Source: [https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-get-collateral-assets](https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-get-collateral-assets)
+Source:
+[https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-get-collateral-assets](https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-get-collateral-assets)
 
 ### GET / Collateral assets
 
@@ -18,15 +19,15 @@ Get collateral assets in funding account.
 
 #### Request Parameters
 
-| **Parameters** | **Types** | **Required** | **Description** |
-| --- | --- | --- | --- |
-| ccy | String | No | Collateral currency, e.g. `BTC` |
+| **Parameters** | **Types** | **Required** | **Description**                 |
+| -------------- | --------- | ------------ | ------------------------------- |
+| ccy            | String    | No           | Collateral currency, e.g. `BTC` |
 
 #### Response Parameters
 
-| **Parameter** | **Type** | **Description** |
-| --- | --- | --- |
-| assets | Array of objects | Collateral assets data |
-| \> ccy | String | Currency, e.g. `BTC` |
-| \> amt | String | Available amount |
-| \> notionalUsd | String | Notional value in `USD` |
+| **Parameter**  | **Type**         | **Description**         |
+| -------------- | ---------------- | ----------------------- |
+| assets         | Array of objects | Collateral assets data  |
+| \> ccy         | String           | Currency, e.g. `BTC`    |
+| \> amt         | String           | Available amount        |
+| \> notionalUsd | String           | Notional value in `USD` |

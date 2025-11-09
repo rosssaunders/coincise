@@ -1,12 +1,13 @@
 # Retrieve mids for all coins
 
-**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:**
+https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
 `POST` `https://api.hyperliquid.xyz/info`
 
 Note that if the book is empty, the last trade price will be used as a fallback
 
-#### 
+####
 
 [](#headers)
 
@@ -24,7 +25,7 @@ String
 
 "application/json"
 
-#### 
+####
 
 [](#request-body)
 
@@ -46,7 +47,8 @@ dex
 
 String
 
-Perp dex name. Defaults to the empty string which represents the first perp dex. Spot mids are only included with the first perp dex..
+Perp dex name. Defaults to the empty string which represents the first perp dex.
+Spot mids are only included with the first perp dex..
 
 200: OK Successful Response
 
