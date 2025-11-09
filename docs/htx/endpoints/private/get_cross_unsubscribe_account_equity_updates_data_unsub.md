@@ -1,0 +1,81 @@
+# GET [Cross] Unsubscribe Account Equity Updates Data（unsub）
+
+**Source:** [[Cross] Unsubscribe Account Equity Updates Data（unsub）](https://www.htx.com/en-us/opend/newApiPages/?id=10000016-77b7-11ed-9966-0242ac110003)
+
+**Category:** Downline Interface
+
+## Authentication
+
+Required (Private Endpoint)
+
+### accounts\_cross.$margin\_account (\[Cross\] Unsubscribe Account Equity Updates Data（unsub）)
+
+Signature verification: Yes
+
+Interface permission: Read
+
+Interface description: The interface only supports cross margin mode.
+
+#### Subscription Address
+
+| Environment | Address |
+| --- | --- |
+
+#### Request Parameter
+
+| Field Name | Type | Description |
+| --- | --- | --- |
+| op | string | Required； Operator Name，value for unsubscribe is unsub; |
+| cid | string | Optional; ID Client requests unique ID |
+| topic | string | Required；Unsubscribe Topic Name, format: orders.$contract\_code; For parameter details please check req Subscribe Parameter |
+
+#### Rule description
+
+| Subscribe(sub) | Unsubscribe( unsub ) | Rule |
+| --- | --- | --- |
+| accounts\_cross.\* | accounts\_cross.\* | Allowed |
+| accounts\_cross.margin\_account1 | accounts\_cross.\* | Allowed |
+| accounts\_cross.margin\_account1 | accounts\_cross.margin\_account1 | Allowed |
+| accounts\_cross.margin\_account1 | accounts\_cross.margin\_account1 | Not Allowed |
+| accounts\_cross.\* | accounts\_cross.margin\_account1 | Not Allowed |
+
+#### Subscription Parameter
+
+| Parameter | Data Type | Required | Description | Value Range | Default Value |
+| --- | --- | --- | --- | --- | --- |
+| margin\_account | string | true | '\*' all(it means to unsubscribe the balance change of all coins), 'USDT'... |  |  |
+
+#### Data Update
+
+| Parameter | Data Type | Required | Description | Value Range |
+| --- | --- | --- | --- | --- |
+
+#### Subscription Example
+
+{
+
+"op":
+
+"unsub"
+
+"topic":
+
+"accounts\_cross.USDT"
+
+"cid":
+
+"40sG903yz80oDFWr"
+
+}
+
+#### Example of a Successful Subscription
+
+No data
+
+#### Example of a Data Update
+
+No data
+
+#### Example of a Subscription Cancellation
+
+No data

@@ -1,0 +1,91 @@
+# GET Chains Information
+
+**Source:** [Get Chains Information](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4f25c-7773-11ed-9966-0242ac110003)
+
+**Category:** Reference Data
+
+## Authentication
+
+Required (Private Endpoint)
+
+### /v1/settings/common/chains ( Get Chains Information)
+
+Request type: GET
+
+Signature verification: No
+
+Interface permission: Read
+
+#### Request Address
+
+| Environment | Address |
+| --- | --- |
+| Online | https://api.huobi.pro |
+| Online (preferred by aws customers) | https://api-aws.huobi.pro |
+
+#### Request Parameter
+
+| Parameter | Data Type | Required | Description | Value Range | Default Value |
+| --- | --- | --- | --- | --- | --- |
+| show-desc | string | false | show desc, 0: no, 1: all, 2: suspend deposit/withdrawal and chain exchange |  |  |
+| currency | string | false | currency |  |  |
+| ts | long | false | timestamp to get incremental data |  |  |
+
+Notes:  
+It returns updated data from this timestample to the current time if filled in with ts. If there is no update, the "data" of response is "\[\]".
+
+#### Response Parameter
+
+| Parameter | Data Type | Required | Description | Value Range |
+| --- | --- | --- | --- | --- |
+| status | string | false | status |  |
+| data | Object | false |  |  |
+| adt | boolean | false | has addr deposit tag |  |
+| ac | string | false | address of chain |  |
+| ao | boolean | false | addr oneoff |  |
+| awt | boolean | false | addr with tag |  |
+| chain | string | false | chain name |  |
+| ct | string | false | chain type. plain, live, old, new, legal, tooold |  |
+| code | string | false | obsolete, please to use chain |  |
+| currency | string | false | currency |  |
+| deposit-desc | string | false | deposit desc |  |
+| de | boolean | false | deposit enable |  |
+| dma | string | false | deposit-min-amount, if the amount is less than this amount will be: 1. The small amount will exceed the deposit-min-amount and then be credited 2. The small amount will not be accumulated and will never be credited to the account |  |
+| deposit-tips-desc | string | false | deposit tips desc |  |
+| dn | string | false | display name, general be upper |  |
+| fc | integer | false | fast-confirms, when height of the exchange node to that chain tail is greater than this number, the deposit and withdrawal will be not settled to the user account, this deposit order is regarded as an unsafe deposit, and the available amount in the withdrawal and account transfer must be excluded that amount from this order. |  |
+| ft | string | false | fee type |  |
+| default | integer | false | is default |  |
+| replace-chain-info-desc | string | false | replace chain info desc |  |
+| replace-chain-notification-desc | string | false | replace chain notification desc |  |
+| replace-chain-popup-desc | string | false | replace chain popup desc |  |
+| ca | string | false | contract address |  |
+| cct | integer | false | contract chain type 0; coin; 1: token |  |
+| sc | integer | false | safe confirms, When the distance between the height of the current exchange's chain node and the chain tail is greater than this number, the asset management DW will mark this order as a safe deposit, and it will be regarded as the available amount when withdrawing and transferring funds. |  |
+| sda | string | false | suspend deposit announcement |  |
+| suspend-deposit-desc | string | false | suspend deposit desc |  |
+| swa | string | false | suspend withdraw announcement |  |
+| suspend-withdraw-desc | string | false | suspend withdraw desc |  |
+| v | boolean | false | visible |  |
+| withdraw-desc | string | false | withdraw desc |  |
+| we | boolean | false | withdraw enable |  |
+| wma | string | false | withdraw min amount, refused to withdraw if less than this amount |  |
+| wp | integer | false | withdraw precision, refused to withdraw if greater than this amount |  |
+| fn | string | false |  |  |
+| withdraw-tips-desc | string | false | withdraw tips desc |  |
+| suspend-visible-desc | string | false | suspend visible desc |  |
+| DATA\_END |  | false |  |  |
+| ts | String | false | timestamp of incremental data |  |
+| full | int | false | full data flag: 0 for no and 1 for yes |  |
+| err-code | string | false | error code(returned when the interface reports an error) |  |
+| err-msg | string | false | error msg(returned when the interface reports an error) |  |
+
+#### Request example
+
+`curl"https://api.huobi.pro/v1/settings/common/chains"`
+
+#### Response Example
+
+##### Success Example
+
+`{ "status": "ok", "data": [ { "chain": "husd", "currency": "husd", "code": "husd", "ct": "plain", "ac": "eth", "default": 1, "dma": "1", "wma": "1", "de": true, "we": false, "wp": 8, "ft": "eth", "dn": "HUSD", "fn": "", "awt": false, "adt": false, "ao": false, "fc": 999, "sc": 999, "v": true, "sda": null, "swa": null, "deposit-desc": "", "deposit-tips-desc": "", "withdraw-desc": "", "suspend-deposit-desc": "", "suspend-withdraw-desc": "", "replace-chain-info-desc": "", "replace-chain-notification-desc": "", "replace-chain-popup-desc": "", "ca": "0x24902AA0cf0000a08c0EA0b003B0c0bF600000E0", "cct": 0 }, ], "ts": "1640743459822", "full": 1 }`

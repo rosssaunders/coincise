@@ -1,88 +1,35 @@
 # Upbit API Documentation Extractor
 
-This tool extracts and converts Upbit API documentation to clean markdown format, organized by API sections for easy consumption by LLMs and developers.
+This tool extracts and converts Upbit API documentation to clean markdown format, organized for easy consumption by LLMs and developers following the standardized Coincise extraction pattern.
 
 ## Features
 
-- **Comprehensive API Coverage**: Extracts all major API sections (Assets, Order, Withdrawal, Deposit, Service, Quotation, WebSocket)
-- **Structured Output**: Organizes documentation into logical directories matching the API structure
+- **Standardized Structure**: Follows the same extraction pattern as other exchanges (Backpack, Deribit, XT)
+- **Core Documentation Files**: Extracts 6 essential documentation files (rate limits, authentication, network connectivity, error codes, response formats, change log)
+- **Endpoint Documentation**: Automatically categorizes endpoints as public or private
 - **Clean Markdown**: Converts HTML documentation to clean, readable markdown using Turndown
 - **Puppeteer-based**: Uses headless Chrome for reliable content extraction
-- **Change Log Support**: Maintains existing changelog monitoring functionality
 
 ## Usage
 
-### Extract All API Documentation
+### Extract All Documentation
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
-# Extract all API sections
-npm run extract:all
+# Extract all documentation (general + endpoints)
+pnpm run extract:all
 ```
 
 ### Extract Individual Sections
 
 ```bash
-# Extract specific API sections
-npm run extract:assets
-npm run extract:order
-npm run extract:withdrawal
-npm run extract:deposit
-npm run extract:service
-npm run extract:quotation
-npm run extract:websocket
+# Extract core documentation files only
+pnpm run extract:general
 
-# Extract changelog (legacy functionality)
-npm run extract:changelog
-```
-
-### Manual Extraction
-
-```bash
-# Run extraction with specific config file
-node src/index.js config/assets.json
-node src/index.js config/order.json
-# ... etc
-```
-
-## Configuration
-
-Each API section has its own configuration file in the `config/` directory:
-
-### API Section Config Format
-
-```json
-{
-  "section": "assets",
-  "title": "Assets API",
-  "baseUrl": "https://global-docs.upbit.com/reference",
-  "endpoints": [
-    {
-      "name": "overall-account-inquiry",
-      "url": "https://global-docs.upbit.com/reference/overall-account-inquiry",
-      "filename": "overall_account_inquiry.md"
-    }
-  ],
-  "outputConfig": {
-    "docsDir": "../../docs/upbit",
-    "subDir": "assets"
-  }
-}
-```
-
-### Changelog Config Format
-
-```json
-{
-  "urls": ["https://global-docs.upbit.com/changelog"],
-  "outputConfig": {
-    "docsDir": "../../docs/upbit",
-    "outputFileName": "change_log.md"
-  },
-  "title": "Upbit API Change Log"
-}
+# Extract endpoint documentation only
+pnpm run extract:endpoints
 ```
 
 ## Output Structure
@@ -91,44 +38,46 @@ The extracted documentation is organized as follows:
 
 ```
 docs/upbit/
-├── assets/
-│   └── overall_account_inquiry.md
-├── order/
-│   ├── available_order_information.md
-│   ├── individual_order_inquiry.md
-│   ├── query_order_list_by_id.md
-│   └── ...
-├── withdrawal/
-│   ├── withdrawal_list_inquiry.md
-│   └── ...
-├── deposit/
-│   ├── deposit_list_inquiry.md
-│   └── ...
-├── service/
-│   └── wallet_status.md
-├── quotation/
-│   ├── listing_market_list.md
-│   ├── seconds_candles.md
-│   └── ...
-├── websocket/
-│   ├── general_information.md
-│   ├── authentication.md
-│   └── ...
-└── change_log.md
+├── rate_limits.md
+├── authentication.md
+├── network_connectivity.md
+├── error_codes.md
+├── response_formats.md
+├── change_log.md
+└── endpoints/
+    ├── public/
+    │   ├── listing_market_list.md
+    │   ├── seconds_candles.md
+    │   ├── order_book_list.md
+    │   └── ...
+    └── private/
+        ├── overall_account_inquiry.md
+        ├── order.md
+        ├── order_cancel.md
+        ├── deposit_list_inquiry.md
+        ├── withdrawal_list_inquiry.md
+        └── ...
 ```
+
+## Endpoint Categorization
+
+- **Public Endpoints**: Quotation and Service APIs (no authentication required)
+- **Private Endpoints**: Assets, Order, Withdrawal, and Deposit APIs (authentication required)
 
 ## Technical Details
 
-- **Engine**: Uses Puppeteer with optimized browser configuration for scraping
+- **Engine**: Uses Puppeteer with optimized browser configuration
 - **Content Processing**: Extracts main content areas while filtering out navigation
-- **Error Handling**: Graceful error handling with detailed logging
-- **Performance**: Includes polite delays between requests and resource optimization
+- **Error Handling**: Graceful error handling with detailed logging and fallbacks
+- **Performance**: Includes polite delays between requests
 - **Format**: Converts to clean markdown with proper heading structure and table support
 
 ## Dependencies
 
-- `puppeteer`: ^22.0.0 - Headless Chrome automation
-- `turndown`: ^7.1.2 - HTML to Markdown conversion
+- `puppeteer`: ^24.22.0 - Headless Chrome automation
+- `turndown`: ^7.2.1 - HTML to Markdown conversion
 - `turndown-plugin-gfm`: ^1.0.2 - GitHub Flavored Markdown support
-- `jsdom`: ^22.1.0 - HTML parsing for legacy changelog functionality
-- `node-fetch`: ^3.3.2 - HTTP requests for legacy functionality
+
+Shared utilities are imported from `venues/shared/`:
+- `puppeteer.js` - Browser configuration and page setup
+- `turndown.js` - Markdown conversion service

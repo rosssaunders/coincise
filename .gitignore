@@ -169,4 +169,8 @@ Thumbs.db
 
 # Keep yarn.lock if using yarn
 # !yarn.lock
+
+# Backup files
+*.bak
+
 .playwright-mcp/

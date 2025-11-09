@@ -1,15 +1,14 @@
 # DigiFinex API Documentation Extractor
 
 This project extracts and processes DigiFinex API documentation from their
-official documentation site.
+official documentation site using a standardized extraction structure.
 
 ## Overview
 
-The extractor scrapes the DigiFinex API documentation and categorizes it into
-three main sections:
+The extractor scrapes the DigiFinex API documentation and organizes it into:
 
-- **Public API**: Market data, symbols, and other public endpoints
-- **Private API**: Account management, trading, and authenticated endpoints
+- **General Documentation**: Core documentation files (authentication, rate limits, error codes, etc.)
+- **Endpoint Documentation**: Individual endpoint files categorized as public or private
 - **WebSocket API**: Real-time data streaming endpoints
 
 ## Source
@@ -22,32 +21,59 @@ https://docs.digifinex.com/en-ww/spot/v3/rest.html
 ### Extract All Documentation
 
 ```bash
-npm run extract:all
+pnpm run extract:all
 ```
 
 ### Extract Specific Categories
 
 ```bash
-npm run extract:public           # Public endpoints only
-npm run extract:private          # Private endpoints only
-npm run extract:websocket-github # Complete WebSocket API from GitHub
+pnpm run extract:general          # Core documentation files
+pnpm run extract:endpoints        # Individual endpoint documentation
+pnpm run extract:websocket-github # Complete WebSocket API from GitHub
 ```
 
 ## Output
 
 Generated markdown files are saved to `docs/digifinex/`:
 
-- `public_rest_api.md` - Public API documentation
-- `private_rest_api.md` - Private API documentation
+### General Documentation
+- `authentication.md` - Authentication and signature requirements
+- `rate_limits.md` - API rate limiting rules and trading guidelines
+- `network_connectivity.md` - API base URLs and connectivity information
+- `error_codes.md` - Error codes and their descriptions
+- `response_formats.md` - Standard response format documentation
+- `change_log.md` - API changelog (placeholder)
+
+### Endpoint Documentation
+- `endpoints/public/` - Public market data endpoints (11 endpoints)
+- `endpoints/private/` - Private trading and account endpoints (15 endpoints)
+
+### WebSocket Documentation
 - `websocket_api.md` - Complete WebSocket API documentation from GitHub
+
+## Categorization
+
+Endpoints are automatically categorized as public or private based on:
+
+1. **Public endpoints**: Market data endpoints that don't require authentication
+   - Examples: ping, time, markets, ticker, orderbook, trades, klines, symbols
+   
+2. **Private endpoints**: Trading and account operations that require authentication
+   - Examples: assets, orders, trades history, positions, transfers
 
 ## Dependencies
 
 ### Required
 
-- `turndown: ^7.1.2` - HTML to Markdown conversion
+- `turndown: ^7.2.1` - HTML to Markdown conversion
 - `turndown-plugin-gfm: ^1.0.2` - GitHub Flavored Markdown support
-- `puppeteer: ^22.0.0` - Web scraping automation
+- `puppeteer: ^24.22.0` - Web scraping automation
+
+### Shared Utilities
+
+The extractor uses shared utilities from `venues/shared/`:
+- `puppeteer.js` - Standardized browser configuration
+- `turndown.js` - Markdown conversion utilities
 
 ## Automation
 
@@ -59,32 +85,22 @@ a pull request is created if documentation updates are detected.
 
 ```
 digifinex/
-├── config/              # Configuration files (if needed)
 ├── src/
-│   └── index.js         # Main extraction script
-├── package.json         # Dependencies and scripts
-├── package-lock.json    # Dependency lock file
-└── README.md           # This file
+│   ├── extractGeneral.js       # Core documentation extraction
+│   ├── extractEndpoints.js     # Endpoint documentation extraction
+│   └── websocket-github.js     # WebSocket documentation from GitHub
+├── package.json                # Dependencies and scripts
+├── package-lock.json           # Dependency lock file
+└── README.md                   # This file
 ```
 
 ## Implementation Notes
 
-The scraper categorizes content based on keywords and context:
+The scraper follows the standardized extraction pattern established in Backpack, 
+Deribit, and XT venues:
 
-- **Public**: Market data, tickers, symbols, public endpoints
-- **Private**: Authentication, accounts, orders, trading, signatures
-- **WebSocket**: Socket connections, real-time streaming
-
-### Dual WebSocket Documentation Sources
-
-DigiFinex provides WebSocket documentation:
-
-2. **GitHub Repository**: Complete WebSocket API documentation
-
-API docs
-
-- `websocket_api.md` contains the complete WebSocket documentation fetched
-  directly from GitHub
-
-The extraction follows the project's Puppeteer scraping rules for optimal
-performance and reliability.
+- Pure ES6 JavaScript with ES6 modules
+- Shared Puppeteer and Turndown utilities
+- Proper section boundary detection
+- Authentication-based endpoint categorization
+- Individual endpoint files with source URLs

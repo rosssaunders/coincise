@@ -1,0 +1,131 @@
+# GET Place an Order
+
+**Source:** [Place an Order](https://www.htx.com/en-us/opend/newApiPages/?id=5d519ef5-77b6-11ed-9966-0242ac110003)
+
+**Category:** Swap Trade Interface
+
+## Authentication
+
+Required (Private Endpoint)
+
+### /swap-api/v1/swap\_order (Place an Order)
+
+Request type: POST
+
+Signature verification: Yes
+
+Interface permission: Trade
+
+#### Request Address
+
+| Environment | Address |
+| --- | --- |
+| Online | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn |
+
+#### Request Parameter
+
+| Parameter | Data Type | Required | Description | Value Range | Default Value |
+| --- | --- | --- | --- | --- | --- |
+| contract\_code | string | true | Case-Insenstive.Both uppercase and lowercase are supported.e.g. "BTC-USD" |  |  |
+| client\_order\_id | long | false | Clients fill and maintain themselves. the value must be in \[1, 9223372036854775807\] |  |  |
+| price | decimal | false | Price |  |  |
+| volume | long | true | Numbers of orders (volume) |  |  |
+| direction | string | true | Transaction direction |  |  |
+| offset | string | true | "open", "close" |  |  |
+| lever\_rate | int | true | Leverage rate \[if“Open”is multiple orders in 10 rate, there will be not multiple orders in 20 rate;Using Leverage greater than 20 times requires prior approval of high-leverage agreement for the first time.\] |  |  |
+| order\_price\_type | string | true | "limit”: Limit Order "opponent":BBO "post\_only": Post-Only Order, No order limit but position limit for post-only orders.,optimal\_5： Optimal , optimal\_10： Optimal 10, optimal\_20：Optimal 20，ioc: IOC Order,fok：FOK Order, "opponent\_ioc"：IOC order using the BBO price，"optimal\_5\_ioc"：optimal\_5 IOC，"optimal\_10\_ioc"：optimal\_10 IOC，"optimal\_20\_ioc"：optimal\_20 IOC, "opponent\_fok"：FOK order using the BBO price，"optimal\_5\_fok"：optimal\_5 FOK，"optimal\_10\_fok"：optimal\_10 FOK，"optimal\_20\_fok"：optimal\_20 FOK |  |  |
+| tp\_trigger\_price | decimal | false | Trigger price of take-profit order |  |  |
+| tp\_order\_price | decimal | false | Order price of take-profit order（The order price is not required to fill in for Optimal N) |  |  |
+| tp\_order\_price\_type | string | false | Order type of take-profit order default is limit; limit，optimal\_5，optimal\_10，optimal\_20 |  |  |
+| sl\_trigger\_price | decimal | false | Trigger price of stop-loss order |  |  |
+| sl\_order\_price | decimal | false | Order price of stop-loss order（The order price is not required to fill in for Optimal N） |  |  |
+| sl\_order\_price\_type | string | false | Order type of stop-loss order default is limit; limit，optimal\_5，optimal\_10，optimal\_20 |  |  |
+| price\_protect | booleanint | false | price protection, default is false. This parameter is only required when setting tp/sl | true or false |  |
+| self\_match\_prevent | int | false | Self trading prevention | 0 means self-trading is allowed, 1 means self-trading is not allowed, which means canceling taker orders and retaining maker orders. The default value is 1. |  |
+
+Notes:  
+Post-Only orders are limit orders that will never take liquidity (also called maker-only order). There are order limit and position for post-only orders which the upper limit is 500,000 for open/close orders.  
+If you’re holding a position currently, the leverage you choose when placing an order should be the same as the leverage of your current positions, otherwise, the order will fail to be placed. If you need a new leverage to place an order, you should switch the leverage of current positions first by using the Switch Leverage interface.  
+Only open orders can support setting take profit and stop loss.  
+The take profit trigger price is a required field for setting a take profit order, and the stop loss trigger price is a required field for setting a stop loss order; if the trigger price field is not filled in, the corresponding take profit order or stop loss order will not be set.  
+Description of post\_only: assure that the maker order remains as maker order, it will not be filled immediately with the use of post\_only, for the match system will automatically check whether the price of the maker order is higher/lower than the opponent first price, i.e. higher than bid price 1 or lower than the ask price 1. If yes, the maker order will placed on the orderbook, if not, the maker order will be cancelled.  
+open long: direction - buy、offset - open  
+close long: direction -sell、offset - close  
+open short: direction -sell、offset - open  
+close short: direction -buy、offset - close  
+No need to transfer BBO order price(ask 1 and bid 1) parameter, optimal\_5: top 5 optimal BBO price, optimal\_10：top 10 optimal BBO price, optimal\_20：top 20 optimal BBO price (No need to transfer price data) ，limit": limit order, "post\_only": maker order only (price data transfer is needed),IOC :Immediate-Or-Cancel Order,FOK:Fill-Or-Kill Order.  
+Risk Reminder:By using Best Bid/Offer( bbo ), you are to place limit orders at the best prices offered by the opposite side. In the event of extreme volatility or insufficient liquidity，there is a risk that your orders may not be filled in full. Any unfilled part will remain open in the market pending further execution. Selecting BBO means you understand how this order type is executed and acknowledge to bear the risk of incomplete execution.
+
+#### Response Parameter
+
+| Parameter | Data Type | Required | Description | Value Range |
+| --- | --- | --- | --- | --- |
+| status | string | true | Request Processing Result | "ok" , "error" |
+| DATA\_START |  | false |  |  |
+| order\_id | long | true | Order ID |  |
+| order\_id\_str | string | true | Order ID |  |
+| client\_order\_id | long | true | the client ID that is filled in when the order is placed, if it’s not filled, it won’t be returned |  |
+| DATA\_END |  | false |  |  |
+| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
+
+Notes:  
+The return order\_id is 18 bits, it will make mistake when nodejs and JavaScript analysed 18 bits. Because the Json.parse in nodejs and JavaScript is int by default. so the number over 18 bits need be parsed by json-bigint package.
+
+#### Request example
+
+{
+
+"contract\_code":
+
+"BTC-USD"
+
+"order\_id":
+
+123456
+
+"created\_at":
+
+1671090403222
+
+"order\_type":
+
+1
+
+"page\_index":
+
+1
+
+"page\_size":
+
+20
+
+}
+
+#### Response Example
+
+##### Success Example
+
+{
+
+"status":
+
+"ok"
+
+"data":{
+
+"order\_id":
+
+796021813275869200
+
+"order\_id\_str":
+
+"796021813275869184"
+
+}
+
+"ts":
+
+1609827989746
+
+}

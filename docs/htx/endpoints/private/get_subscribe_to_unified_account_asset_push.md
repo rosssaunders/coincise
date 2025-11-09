@@ -1,0 +1,117 @@
+# GET Subscribe to unified account asset push
+
+**Source:** [Subscribe to unified account asset push](https://www.htx.com/en-us/opend/newApiPages/?id=10000084-77b7-11ed-9966-0242ac110003)
+
+**Category:** USDT-M Unified Account
+
+## Authentication
+
+Required (Private Endpoint)
+
+### accounts\_unify.USDT (Subscribe to unified account asset push)
+
+Signature verification: Yes
+
+Interface permission: Read
+
+Interface description: It is used for real-time monitoring of asset changes in the unified account.
+
+#### Subscription Address
+
+| Environment | Address |
+| --- | --- |
+| Online | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn |
+
+#### Request Parameter
+
+| Field Name | Type | Description |
+| --- | --- | --- |
+
+#### Rule description
+
+| Subscribe(sub) | Unsubscribe( unsub ) | Rule |
+| --- | --- | --- |
+
+#### Subscription Parameter
+
+| Parameter | Data Type | Required | Description | Value Range | Default Value |
+| --- | --- | --- | --- | --- | --- |
+
+#### Data Update
+
+| Parameter | Data Type | Required | Description | Value Range |
+| --- | --- | --- | --- | --- |
+| op | string | true | Operation name, push fixed value is notify; |  |
+| topic | string | true | Push topic |  |
+| ts | long | true | Server response timestamp |  |
+| uid | string | true | User uid |  |
+| event | string | true | Description of events related to asset change notification | For example, order creation and opening (order.open), order execution (order.match) (except forced liquidation and settlement delivery), settlement and delivery (settlement),order forced liquidation (order.liquidati on) (liquidation and takeover positions), order Cancellation (order.cancel), contract account transfer (contract.transf er) (including external transfer, parent-child transfer and transfer of different margin accounts), system (contract.system ), other asset changes (other), switching leverage ( switch\_lever\_r ate), initial capital (init), triggered by periodic push by the system (snapshot), ADL trade, margin adjustment (margin.adjustme nt) |
+| DATA\_START | object array | true | USDT-M unified account |  |
+| margin\_balance | decimal | true | margin account |  |
+| margin\_static | decimal | true | Static equity, excluding profit and loss |  |
+| cross\_profit\_unreal | decimal | true | cross unrealized profit and loss of the currency |  |
+| cross\_margin\_static | decimal | true | Cross-margin static equity, excluding isolated position assets |  |
+| margin\_asset | string | true | Margin Currency(Pricing Currency) | USDT |
+| margin\_frozen | decimal | true | Freeze Margin(Frozen Quantity of Cross Margin & Isolated Margin) |  |
+| withdraw\_available | decimal | true | Transferabl e quantity (the amount of assets that users can transfer out of the account) |  |
+| cross\_risk\_rate | decimal | true | Cross Margin Rate (%) |  |
+| CROSS\_SWAP \_START | object array | true | Contract-related fields of cross-position swap |  |
+| symbol | string | true | Variety Code | "BTC","ETH"... |
+| contract\_code | string | true | Contract code | swap："BTC-USDT" ... |
+| margin\_mode | string | true | Margin model | Cross Margin Mode：cross |
+| margin\_available | decimal | true | Available margin for the current leverage of the contract code |  |
+| cross\_max\_available | int | true |  |  |
+| lever\_rate | decimal | true | Lever rate |  |
+| contract\_type | string | true | Contract type | swap |
+| business\_type | string | true | Business type | swap |
+| CROSS\_SWAP \_END |  | true |  |  |
+| CROSS\_FUTURES \_START | object array | true | Fields related to cross position future contracts |  |
+| symbol | string | true | Variety Code | "BTC","ETH"... |
+| contract\_code | string | true | Contract code | future："BTC-USDT-211231" ... |
+| margin\_mode | string | true | margin model | Cross Margin Mode：cross |
+| margin\_available | decimal | true | Available margin for the current leverage of the contract code |  |
+| lever\_rate | decimal | true | Lever rate |  |
+| contract\_type | string | true | Contract type | this\_week、next\_week、quarter、next\_quarter |
+| business\_type | string | true | Business type | futures |
+| CROSS\_FUTURES \_END |  | true |  |  |
+| ISOLATED\_SWAP\_START | object array | true | Unified Account Isolated Margin Contract |  |
+| symbol | string | true | Variety Code | "BTC","ETH"... |
+| contract\_code | string | true | Contract code | "BTC-USDT","ETH-USDT"... |
+| margin\_mode | string | true | margin model | Isolated Margin Mode：isolated |
+| margin\_available | decimal | true | Available margin for the current leverage of the contract code |  |
+| withdraw\_available | decimal | true | Maximum amount that can be reduced | Hedge is superposition of long-short isolation, one-way is normal calculation |
+| lever\_rate | int | true | Lever rate |  |
+| position\_mode | string | true | Position mode | single\_side；dual\_side |
+| ISOLATED\_SWAP \_END |  | true |  |  |
+| DATA\_END |  | true |  |  |
+
+#### Subscription Example
+
+{
+
+"op":
+
+"sub"
+
+"cid":
+
+"40sG903yz80oDFWr"
+
+"topic":
+
+"accounts\_unify.USDT"
+
+}
+
+#### Example of a Successful Subscription
+
+No data
+
+#### Example of a Data Update
+
+`{ 'op': 'notify', 'topic': 'accounts_unify', 'ts': 1699500917664, 'event': 'init', 'data': [{ 'margin_asset': 'USDT', 'margin_static': 19.92483057113564, 'cross_margin_static': 19.92483057113564, 'margin_balance': 19.92483057113564, 'cross_profit_unreal': 0, 'margin_frozen': 0.0, 'withdraw_available': 19.924656252203462, 'cross_risk_rate': None, 'cross_swap': [{ 'symbol': 'DOSE', 'contract_code': 'DOSE-USDT', 'margin_mode': 'cross', 'margin_available': 19.92483057113564, 'lever_rate': 5, 'contract_type': 'swap', 'business_type': 'swap', 'cross_max_available': 19.92483057113564 }, { 'symbol': 'OP', 'contract_code': 'OP-USDT', 'margin_mode': 'cross', 'margin_available': 19.92483057113564, 'lever_rate': 5, 'contract_type': 'swap', 'business_type': 'swap', 'cross_max_available': 19.92483057113564 }], 'cross_future': [], 'isolated_swap': [] }], 'uid': '421092473' }`
+
+#### Example of a Subscription Cancellation
+
+No data

@@ -2,13 +2,13 @@
   "name": "digifinex-docs-extractor",
   "version": "1.0.0",
   "description": "DigiFinex API documentation extractor",
-  "main": "src/index.js",
+  "main": "src/extractGeneral.js",
   "type": "module",
   "scripts": {
-    "extract:public": "node src/index.js public",
-    "extract:private": "node src/index.js private",
+    "extract:general": "node src/extractGeneral.js",
+    "extract:endpoints": "node src/extractEndpoints.js",
     "extract:websocket-github": "node src/websocket-github.js",
-    "extract:all": "node src/index.js all && node src/websocket-github.js"
+    "extract:all": "pnpm run extract:general && pnpm run extract:endpoints && pnpm run extract:websocket-github"
   },
   "dependencies": {
     "turndown": "^7.2.1",

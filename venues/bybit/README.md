@@ -27,7 +27,7 @@ Documentation extraction for Bybit's V5 API following the standardized Coincise 
 From the venue directory:
 
 ```bash
-npm install
+pnpm install
 ```
 
 ## Usage

@@ -17,7 +17,7 @@ echo ""
 # Install npm-check-updates globally if not available
 if ! command -v ncu >/dev/null 2>&1; then
     echo "📦 Installing npm-check-updates for latest version bumping..."
-    npm install -g npm-check-updates
+    pnpm add -g npm-check-updates
 fi
 
 # Function to bump dependencies in a single project
@@ -52,7 +52,7 @@ bump_project() {
     echo "  🚀 Bumping dependencies to latest versions..."
     if ncu -u; then
         echo "  📥 Installing updated dependencies..."
-        npm install
+        pnpm install
         echo "  ✅ Successfully bumped $project_dir"
     else
         echo "  ⚠️  No updates available or update failed in $project_dir"

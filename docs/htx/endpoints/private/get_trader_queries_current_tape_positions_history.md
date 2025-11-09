@@ -1,0 +1,239 @@
+# GET Trader queries current tape positions history
+
+**Source:** [Trader queries current tape positions history](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-19126dc80c9)
+
+**Category:** Future Copy Trade
+
+## Authentication
+
+Required (Private Endpoint)
+
+### /copytrading/trader/position\_positions (Trader queries current tape positions history)
+
+Request type: GET
+
+Signature verification: Yes
+
+Interface permission: Read
+
+Rate Limit: A single user requests all copytrading interfaces 18 times per second.
+
+Interface description: This interface is used to query the trader's historical positions with orders.
+
+#### Request Address
+
+| Environment | Address |
+| --- | --- |
+| Online | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn |
+
+#### Request Parameter
+
+| Parameter | Data Type | Required | Description | Value Range | Default Value |
+| --- | --- | --- | --- | --- | --- |
+| contract\_code | string | true | BTC-USDT... |  |  |
+| start\_time | long | false | Query start time, query by data creation. time,millisecond timestamp. | The query window is the last 90 days |  |
+| end\_time | long | false | Query end time, query data by creation. timetime,millisecond timestamp. | The query window is the last 90 days |  |
+| direct | string | false | Search direct, If the direction is NEXT, the data is returned in positive chronological order; if the direction is PREV, the data is returned in reverse chronological order | next, prev default is prev | now |
+| from\_id | long | false | If the query direction is prev, from\_id should be the min query\_id in the last query result. If the query direction is next, from\_id should be the max query\_id in the last query result |  |  |
+| limit | long | false | Number of results per request. Maximum is 100. Default is 100. |  |  |
+
+#### Response Parameter
+
+| Parameter | Data Type | Required | Description | Value Range |
+| --- | --- | --- | --- | --- |
+| tid | String | true | request id |  |
+| DATA\_START |  | true |  |  |
+| POSITIONS\_START | array | true |  |  |
+| sub\_position\_id | String | true | copy position ID |  |
+| margin\_mode | String | true | margin mode |  |
+| position\_side | String | true | position side |  |
+| lever | String | true | lever |  |
+| open\_order\_id | String | true | Order ID for opening position |  |
+| open\_avg\_price | String | true | Average open price |  |
+| open\_time | long | true | Open time |  |
+| volume | String | true | Quantity of positions |  |
+| close\_time | long | true | Time of closing position |  |
+| close\_avg\_price | string | true | Average price of closing position |  |
+| open\_fee | string | true | open fee |  |
+| close\_fee | string | true | close fee |  |
+| profit | string | true | Profit and loss |  |
+| profit\_rate | string | true | Profit and loss Rate |  |
+| close\_type | integer | true |  |  |
+| follow\_takes | string | true |  |  |
+| POSITIONS\_END |  | true |  |  |
+| query\_id | long | true | Query id, which can be used as the from\_id field for the next query request. |  |
+| DATA\_END |  | false |  |  |
+| code | long | true |  |  |
+
+#### Request example
+
+`curl"https://api.hbdm.com?contract_code=DOT-USDT&start_time=1716539773000&end_time=1719284288864&direct=prev&from_id=249639&limit=2"`
+
+#### Response Example
+
+##### Success Example
+
+{
+
+"code":
+
+200
+
+"data":{
+
+"positions":\[
+
+0:{
+
+"sub\_position\_id":
+
+"249788"
+
+"open\_order\_id":
+
+"1255161109104218112"
+
+"lever":
+
+"5"
+
+"position\_side":
+
+"short"
+
+"open\_avg\_price":
+
+"200"
+
+"volume":
+
+"null"
+
+"margin\_mode":
+
+"cross"
+
+"open\_time":
+
+1719295328176
+
+"close\_time":
+
+1719295398821
+
+"close\_avg\_price":
+
+"10"
+
+"open\_fee":
+
+"0.072"
+
+"close\_fee":
+
+"0.0036"
+
+"profit":
+
+"189.9244"
+
+"profit\_rate":
+
+"4.7481"
+
+"close\_type":
+
+2
+
+"follow\_takes":
+
+"37.984880"
+
+}
+
+1:{
+
+"sub\_position\_id":
+
+"249786"
+
+"open\_order\_id":
+
+"1255160729700061184"
+
+"lever":
+
+"5"
+
+"position\_side":
+
+"long"
+
+"open\_avg\_price":
+
+"10"
+
+"volume":
+
+"null"
+
+"margin\_mode":
+
+"cross"
+
+"open\_time":
+
+1719295237719
+
+"close\_time":
+
+1719295354578
+
+"close\_avg\_price":
+
+"200"
+
+"open\_fee":
+
+"0.36"
+
+"close\_fee":
+
+"7.2"
+
+"profit":
+
+"18992.44"
+
+"profit\_rate":
+
+"94.9622"
+
+"close\_type":
+
+2
+
+"follow\_takes":
+
+"949.622000"
+
+}
+
+\]
+
+"query\_id":
+
+249786
+
+}
+
+"tid":
+
+"3b4bbd53cfc64dd4bd6bce2e6f2f08c5"
+
+"success":
+
+true
+
+}

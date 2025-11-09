@@ -1,0 +1,87 @@
+# GET /api/v1/contracts/active
+
+**Source:** [/api/v1/contracts/active](https://www.kucoin.com/docs/rest//api/v1/contracts/active)
+
+## Authentication
+
+Not Required (Public Endpoint)
+
+## Description
+
+Get All Symbols
+
+Get detailed information of all contracts that can be traded. This API will return a list of tradable contracts, including some key parameters of the contract such as the symbol name, tick size, mark price, etc.
+
+## Responses
+
+### 200
+
+| Parameter | Required | Type | Description |
+|-----------|----------|------|-------------|
+| code | required | string | 200000 is for success, other is error |
+| data | required | array | List of all contracts |
+| data[].symbol | required | string | Symbol |
+| data[].rootSymbol | required | string | Contract group |
+| data[].type | required | string | Type of contract |
+| data[].firstOpenDate | required | integer | First Open Date (milliseconds) |
+| data[].expireDate | optional | integer | Expiration date (milliseconds) Null means it will never expire |
+| data[].settleDate | optional | integer | Settlement date (milliseconds) Null indicates that automatic settlement is not supported |
+| data[].baseCurrency | required | string | Base currency |
+| data[].quoteCurrency | required | string | Quote currency |
+| data[].settleCurrency | required | string | Currency used to clear and settle the trades |
+| data[].maxOrderQty | required | integer | Maximum order quantity |
+| data[].maxPrice | required | number | Maximum order price |
+| data[].lotSize | required | integer | Minimum lot size |
+| data[].tickSize | required | number | Minimum price changes |
+| data[].indexPriceTickSize | required | number | Index price of tick size |
+| data[].multiplier | required | number | The basic unit of the contract API is lots. For the number of coins in each lot, please refer to the param multiplier. For example, for XBTUSDTM, multiplier=0.001, which corresponds to the value of each XBTUSDTM contract being 0.001 BTC. There is also a special case. All coin-swap contracts, such as each XBTUSDM contract, correspond to 1 USD. |
+| data[].initialMargin | required | number | Initial margin requirement |
+| data[].maintainMargin | required | number | Maintenance margin requirement |
+| data[].maxRiskLimit | required | integer | Maximum risk limit (unit: XBT) |
+| data[].minRiskLimit | required | integer | Minimum risk limit (unit: XBT) |
+| data[].riskStep | required | integer | Risk limit increment value (unit: XBT) |
+| data[].makerFeeRate | required | number | Maker fee rate |
+| data[].takerFeeRate | required | number | Taker fee rate |
+| data[].takerFixFee | required | number | Deprecated param |
+| data[].makerFixFee | required | number | Deprecated param |
+| data[].settlementFee | optional | number | Settlement fee |
+| data[].isDeleverage | required | boolean | Enabled ADL or not |
+| data[].isQuanto | required | boolean | Deprecated param |
+| data[].isInverse | required | boolean | Whether it is a reverse contract |
+| data[].markMethod | required | string | Marking method |
+| data[].fairMethod | optional | string | Fair price marking method; the Futures contract is null |
+| data[].fundingBaseSymbol | optional | string | Ticker symbol of the base currency |
+| data[].fundingQuoteSymbol | optional | string | Ticker symbol of the quote currency |
+| data[].fundingRateSymbol | optional | string | Funding rate symbol |
+| data[].indexSymbol | required | string | Index symbol |
+| data[].settlementSymbol | required | string | Settlement symbol |
+| data[].status | required | string | Contract status |
+| data[].fundingFeeRate | required | number | Funding fee rate |
+| data[].predictedFundingFeeRate | required | number | Predicted funding fee rate |
+| data[].fundingRateGranularity | required | integer | Funding interval (milliseconds) |
+| data[].openInterest | required | string | Open interest (unit: lots) |
+| data[].turnoverOf24h | required | number | 24-hour turnover |
+| data[].volumeOf24h | required | number | 24-hour volume |
+| data[].markPrice | required | number | Mark price |
+| data[].indexPrice | required | number | Index price |
+| data[].lastTradePrice | required | number | Last trade price |
+| data[].nextFundingRateTime | required | integer | Next funding rate time (milliseconds) |
+| data[].maxLeverage | required | integer | Maximum leverage |
+| data[].sourceExchanges | required | array | The contract index price source exchange |
+| data[].premiumsSymbol1M | required | string | Premium index symbol (1 minute) |
+| data[].premiumsSymbol8H | required | string | Premium index symbol (8 hours) |
+| data[].fundingBaseSymbol1M | required | string | Base currency interest rate symbol (1 minute) |
+| data[].fundingQuoteSymbol1M | required | string | Quote currency interest rate symbol (1 minute) |
+| data[].lowPrice | required | number | 24-hour lowest price |
+| data[].highPrice | required | number | 24-hour highest price |
+| data[].priceChgPct | required | number | 24-hour % price change  |
+| data[].priceChg | required | number | 24-hour price change |
+| data[].k | required | number |  |
+| data[].m | required | number |  |
+| data[].f | required | number |  |
+| data[].mmrLimit | required | number |  |
+| data[].mmrLevConstant | required | number |  |
+| data[].supportCross | required | boolean | Whether support Cross Margin |
+| data[].buyLimit | required | number | The current maximum buying price allowed |
+| data[].sellLimit | required | number | The current minimum selling price allowed |
+

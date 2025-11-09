@@ -142,7 +142,7 @@ const scrapeApiDocumentation = async (url, outputPath) => {
     browser = await launchBrowser()
 
     const page = await browser.newPage()
-    
+
     // Set longer timeouts for Coinbase's slower-loading pages
     await page.setDefaultNavigationTimeout(90000)
     await page.setDefaultTimeout(90000)
@@ -178,10 +178,11 @@ const scrapeApiDocumentation = async (url, outputPath) => {
     const articleHtml = await extractArticleContent(page, { html: true })
     const articleContent = convertHtmlToMarkdown(articleHtml)
     console.log("Article content converted to markdown")
-    
+
     // Check if we got a 404 page (be more specific to avoid false positives)
-    const is404 = articleContent.includes('# Page Not Found') && 
-                  articleContent.includes("We couldn't find the page");
+    const is404 =
+      articleContent.includes("# Page Not Found") &&
+      articleContent.includes("We couldn't find the page")
     if (is404) {
       console.warn(`⚠️  Warning: Page appears to be a 404 Not Found page`)
       console.warn(`   URL may need to be updated in the configuration`)

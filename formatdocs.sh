@@ -1,1 +1,1 @@
-npx prettier --config ./prettierrc --write "docs/**/*" && echo "Formatting complete!"
+pnpm exec prettier --config ./.prettierrc --write "docs/**/*" && echo "Formatting complete!"

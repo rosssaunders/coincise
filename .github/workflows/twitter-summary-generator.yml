@@ -24,16 +24,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: "npm"
-          cache-dependency-path: >-
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
             tools/create-twitter-summary-pr/package-lock.json
 
       - name: Install dependencies
         run: |
           cd tools/create-twitter-summary-pr
-          npm install
+          pnpm install
           cd ../ai-pr-summary
-          npm install
+          pnpm install
 
       - name: Create Twitter Summary PR
         run: |

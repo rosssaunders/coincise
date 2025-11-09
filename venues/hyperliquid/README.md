@@ -38,20 +38,20 @@ Total: **52 endpoints** (7 public, 45 private)
 ### Install Dependencies
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### Extract All Documentation
 
 ```bash
-npm run extract:all
+pnpm run extract:all
 ```
 
 ### Extract Individual Sections
 
 ```bash
-npm run extract:general      # Extract general documentation
-npm run extract:endpoints    # Extract endpoint documentation
+pnpm run extract:general      # Extract general documentation
+pnpm run extract:endpoints    # Extract endpoint documentation
 ```
 
 ## Output Structure

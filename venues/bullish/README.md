@@ -18,13 +18,13 @@ Bullish provides their API documentation as an OpenAPI specification. Since they
 
 ```bash
 # Extract general documentation (overview, authentication, rate limits, etc.)
-npm run extract:general
+pnpm run extract:general
 
 # Extract individual endpoint documentation
-npm run extract:endpoints
+pnpm run extract:endpoints
 
 # Run both extraction scripts
-npm run extract:all
+pnpm run extract:all
 ```
 
 ## Output Structure

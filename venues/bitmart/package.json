@@ -6,7 +6,7 @@
   "scripts": {
     "extract:general": "node src/extractGeneral.js",
     "extract:endpoints": "node src/extractEndpoints.js",
-    "extract:all": "npm run extract:general && npm run extract:endpoints",
+    "extract:all": "pnpm run extract:general && pnpm run extract:endpoints",
     "extract:legacy:spot": "node src/index.js config/spot.json",
     "extract:legacy:futures": "node src/index.js config/futures.json"
   },

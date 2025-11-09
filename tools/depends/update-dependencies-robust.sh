@@ -40,9 +40,9 @@ update_project() {
     
     # First, install dependencies if they're missing
     echo "  📥 Installing/updating dependencies..."
-    if ! npm install; then
-        echo "  ⚠️  npm install failed, trying npm ci..."
-        if ! npm ci; then
+    if ! pnpm install; then
+        echo "  ⚠️  pnpm install failed, trying with frozen lockfile..."
+        if ! pnpm install --frozen-lockfile; then
             echo "  ❌ Failed to install dependencies in $project_dir"
             cd - > /dev/null
             return 1
@@ -51,13 +51,13 @@ update_project() {
     
     # Update dependencies to latest versions within semver ranges
     echo "  🔄 Updating dependencies to latest versions..."
-    if ! npm update; then
-        echo "  ⚠️  npm update failed, but dependencies are installed"
+    if ! pnpm update; then
+        echo "  ⚠️  pnpm update failed, but dependencies are installed"
     fi
     
-    # Final install to ensure package-lock.json is up to date
-    echo "  🔧 Final install to update package-lock.json..."
-    npm install
+    # Final install to ensure pnpm-lock.yaml is up to date
+    echo "  🔧 Final install to update pnpm-lock.yaml..."
+    pnpm install
     
     echo "  ✅ Successfully updated $project_dir"
     cd - > /dev/null

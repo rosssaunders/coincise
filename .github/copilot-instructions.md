@@ -8,12 +8,12 @@ Coincise is a cryptocurrency exchange API documentation repository that scrapes,
 
 ### Installation
 ```bash
-npm install
+pnpm install
 ```
 
 ### Common Commands
-- Format code: `npm run format`
-- Run extraction: `cd venues/{exchange-name} && npm run extract:config`
+- Format code: `pnpm run format`
+- Run extraction: `cd venues/{exchange-name} && pnpm run extract:config`
 - Format docs: `./formatdocs.sh`
 - Generate llms.txt: `./tools/llms/generate-llms-txt.sh`
 
@@ -69,13 +69,13 @@ coincise/
 ### Modifying Existing Scrapers
 1. Navigate to `venues/{exchange-name}/`
 2. Edit scraper code in `src/`
-3. Test extraction: `npm run extract:config`
+3. Test extraction: `pnpm run extract:config`
 4. Verify output in `docs/{exchange}/`
 5. Format documentation: `./formatdocs.sh`
 
 ### Updating Dependencies
 1. Update package.json with new dependencies
-2. Run `npm install`
+2. Run `pnpm install`
 3. Test affected scrapers
 4. Document dependency changes in commit message
 
@@ -106,9 +106,51 @@ Each venue has a GitHub Actions workflow that:
 - Creates PRs when documentation changes
 - Named as `{venue}-docs-update.yml`
 
+## Endpoint Documentation Format
+
+All endpoint documentation must follow a consistent format. See `AGENTS.md` for complete specification.
+
+### Key Requirements
+
+**Heading Hierarchy:**
+- H1 for title only (HTTP method + path)
+- H2 for major sections (Description, Authentication, Request, Response)
+- H3 for subsections (Parameters, Example)
+- Never skip heading levels
+
+**Parameter Tables:**
+- Request parameters must include: Parameter, Type, Required, Description
+- Response parameters must include: Parameter, Type, Description
+- Use dot notation for nested fields (e.g., `data.orderId`)
+
+**Code Blocks:**
+- ALL JSON examples must use language tag: ` ```json `
+- Never use untagged code blocks for JSON
+
+**Rate Limits:**
+- Document inline with weight/limits OR link to global rate_limits.md
+- Always include rate limit information
+
+**Required Sections:**
+1. Title (H1) with HTTP method and path
+2. Source link to original documentation
+3. Description
+4. Authentication status (Required/Not Required)
+5. Rate limit information
+6. HTTP Request section
+7. Request Parameters (in GFM table)
+8. Request Example
+9. Response Parameters (in GFM table)
+10. Response Example (with `json` tag)
+
+**Examples:**
+See [Endpoint Format Examples](.github/examples/endpoint-format-example.md) for
+complete examples showing correct and incorrect formatting patterns.
+
 ## Additional Resources
 
 - See `AGENTS.md` for comprehensive coding guidelines
+- See `CLAUDE.md` for Claude-specific documentation
 - See `README.md` for complete venue documentation table
 - Each venue has specific requirements in its own `README.md`
 - Follow [llms.txt specification](https://llmstxt.org/) for documentation structure

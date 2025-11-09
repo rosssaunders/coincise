@@ -61,7 +61,7 @@ The PR summary tool is integrated into autodoc workflows to generate comprehensi
   if: steps.git-check.outputs.changes == 'true'
   id: ai-summary
   run: |
-    cd tools/ai-pr-summary && npm run generate-pr-summary ../../ 15000
+    cd tools/ai-pr-summary && pnpm run generate-pr-summary ../../ 15000
   env:
     OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 ```

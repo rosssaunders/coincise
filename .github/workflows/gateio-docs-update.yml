@@ -29,92 +29,88 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: "npm"
-          cache-dependency-path: venues/gateio/package-lock.json
 
-      - name: Install shared dependencies
-        run: |
-          pushd ../shared
-          npm install
-          popd
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
-      - name: Install AI PR summary tool dependencies
-        run: |
-          pushd ../../tools/ai-pr-summary
-          npm install
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
           popd
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Run extract:change-log
-        run: npm run extract:change-log
+        run: pnpm run extract:change-log
 
       - name: Run extract:general
-        run: npm run extract:general
+        run: pnpm run extract:general
 
       - name: Run extract:account
-        run: npm run extract:account
+        run: pnpm run extract:account
 
       - name: Run extract:subaccount
-        run: npm run extract:subaccount
+        run: pnpm run extract:subaccount
 
       - name: Run extract:collateral-loan
-        run: npm run extract:collateral-loan
+        run: pnpm run extract:collateral-loan
 
       - name: Run extract:multi-collateral-loan
-        run: npm run extract:multi-collateral-loan
+        run: pnpm run extract:multi-collateral-loan
 
       - name: Run extract:isolated-margin
-        run: npm run extract:isolated-margin
+        run: pnpm run extract:isolated-margin
 
       - name: Run extract:earn
-        run: npm run extract:earn
+        run: pnpm run extract:earn
 
       - name: Run extract:earnuni
-        run: npm run extract:earnuni
+        run: pnpm run extract:earnuni
 
       - name: Run extract:flash-swap
-        run: npm run extract:flash-swap
+        run: pnpm run extract:flash-swap
 
       - name: Run extract:rebate
-        run: npm run extract:rebate
+        run: pnpm run extract:rebate
 
       - name: Run extract:wallet
-        run: npm run extract:wallet
+        run: pnpm run extract:wallet
 
       - name: Run extract:withdrawal
-        run: npm run extract:withdrawal
+        run: pnpm run extract:withdrawal
 
       - name: Run extract:unified
-        run: npm run extract:unified
+        run: pnpm run extract:unified
 
       - name: Run extract:spot
-        run: npm run extract:spot
+        run: pnpm run extract:spot
 
       - name: Run extract:options
-        run: npm run extract:options
+        run: pnpm run extract:options
 
       - name: Run extract:futures
-        run: npm run extract:futures
+        run: pnpm run extract:futures
 
       - name: Run extract:delivery
-        run: npm run extract:delivery
+        run: pnpm run extract:delivery
 
       - name: Run extract:websocket-spot
-        run: npm run extract:websocket-spot
+        run: pnpm run extract:websocket-spot
 
       - name: Run extract:websocket-delivery
-        run: npm run extract:websocket-delivery
+        run: pnpm run extract:websocket-delivery
 
       - name: Run extract:websocket-futures
-        run: npm run extract:websocket-futures
+        run: pnpm run extract:websocket-futures
 
       - name: Run extract:websocket-options
-        run: npm run extract:websocket-options
+        run: pnpm run extract:websocket-options
 
       - name: Run extract:websocket-unified
-        run: npm run extract:websocket-unified
+        run: pnpm run extract:websocket-unified
 
       - name: Check for changes
         id: git-check
@@ -131,7 +127,7 @@ jobs:
         run: |
           cd ../..  # Move back to root directory for git operations
           # Generate AI summary using the AI PR summary tool (max diff length: 15000)
-          SUMMARY=$(cd tools/ai-pr-summary && npm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
+          SUMMARY=$(cd tools/ai-pr-summary && pnpm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
           # Escape the summary for GitHub Actions
           echo "summary<<EOF" >> $GITHUB_OUTPUT
           echo "$SUMMARY" >> $GITHUB_OUTPUT
