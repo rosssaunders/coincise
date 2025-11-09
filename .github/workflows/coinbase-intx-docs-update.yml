@@ -1,4 +1,4 @@
-name: Update Coinbase INTX Documentation
+name: Coinbase INTX Docs Update
 
 on:
   schedule:

@@ -1,4 +1,4 @@
-name: Update Binance Options Documentation
+name: Binance Options Docs Update
 
 on:
   schedule:

@@ -1,4 +1,4 @@
-name: Update Backpack Documentation
+name: Backpack Docs Update
 
 on:
   schedule:

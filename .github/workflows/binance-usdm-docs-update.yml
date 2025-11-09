@@ -1,4 +1,4 @@
-name: Update Binance USD-M Futures Documentation
+name: Binance USD-M Futures Docs Update
 
 on:
   schedule:
