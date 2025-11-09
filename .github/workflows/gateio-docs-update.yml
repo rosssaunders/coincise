@@ -35,11 +35,17 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Install Puppeteer browsers
+        run: pnpm exec puppeteer browsers install chrome
+
 
           popd
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Install Puppeteer browsers
+        run: pnpm exec puppeteer browsers install chrome
+
 
       - name: Run extract:change-log
         run: pnpm run extract:change-log

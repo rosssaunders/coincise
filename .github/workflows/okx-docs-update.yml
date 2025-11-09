@@ -36,11 +36,17 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Install Puppeteer browsers
+        run: pnpm exec puppeteer browsers install chrome
+
 
           popd
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Install Puppeteer browsers
+        run: pnpm exec puppeteer browsers install chrome
+
 
       - name: Extract all OKX API documentation
         run: pnpm run extract:all

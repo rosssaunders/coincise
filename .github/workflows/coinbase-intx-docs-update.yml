@@ -31,6 +31,9 @@ jobs:
         working-directory: venues/coinbase/intx
         run: pnpm install --frozen-lockfile
 
+      - name: Install Puppeteer browsers
+        run: pnpm exec puppeteer browsers install chrome
+
       - name: Extract documentation
         working-directory: venues/coinbase/intx
         run: pnpm run extract:all

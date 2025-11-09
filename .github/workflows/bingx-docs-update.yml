@@ -36,6 +36,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
+      - name: Install Puppeteer browsers
+        run: pnpm exec puppeteer browsers install chrome
+
       - name: Run BingX Documentation Extraction
         run: pnpm run extract:all
 
