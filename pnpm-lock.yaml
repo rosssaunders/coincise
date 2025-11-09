@@ -186,9 +186,6 @@ importers:
 
   venues/bybit:
     dependencies:
-      jsdom:
-        specifier: 27.0.0
-        version: 27.0.0
       puppeteer:
         specifier: ^24.22.0
         version: 24.22.0
