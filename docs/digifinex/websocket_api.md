@@ -1,8 +1,10 @@
 # DigiFinex WebSocket API Documentation
 
-> **Note**: This documentation is automatically synchronized from the official DigiFinex GitHub repository.
+> **Note**: This documentation is automatically synchronized from the official
+> DigiFinex GitHub repository.
 >
-> **Source**: https://raw.githubusercontent.com/DigiFinex/api/master/Websocket_API_en.md
+> **Source**:
+> https://raw.githubusercontent.com/DigiFinex/api/master/Websocket_API_en.md
 
 ---
 
@@ -50,7 +52,8 @@ private
 
 ## System state API
 
-Interfaces are provided to check system status, such as ping-pong and server time queries
+Interfaces are provided to check system status, such as ping-pong and server
+time queries
 
 ## Ping
 
@@ -126,7 +129,8 @@ The above request returns JSON data for the following structure：
 
 ## Auth
 
-Authorization is obtained through apikey/secret and the private interface can only be used if the authorization succeeds
+Authorization is obtained through apikey/secret and the private interface can
+only be used if the authorization succeeds
 
 ### Request
 
@@ -162,7 +166,8 @@ The above request returns JSON data for the following structure：
 
 ## Transaction API
 
-Transaction channel pushes transaction information, including transaction price, transaction volume, time and type, etc
+Transaction channel pushes transaction information, including transaction price,
+transaction volume, time and type, etc
 
 ## Trades subscription
 
@@ -381,7 +386,8 @@ The above request returns JSON data for the following structure：
 
 ## Ticker
 
-Get the latest transaction price, bid price, ask price and 24-hour trading volume of all coin pairs on the platform.
+Get the latest transaction price, bid price, ask price and 24-hour trading
+volume of all coin pairs on the platform.
 
 ## All Ticker subscriptions
 
@@ -629,7 +635,8 @@ The above request returns JSON data for the following structure：
 - mode: 1-spot, 2-margin
 - side: buy, sell
 - type: limit, market
-- status: 0-unfilled，1-partially filled，2-fully filled，3-canceled unfilled，4-canceled partially filled
+- status: 0-unfilled，1-partially filled，2-fully filled，3-canceled
+  unfilled，4-canceled partially filled
 
 ```json
 {

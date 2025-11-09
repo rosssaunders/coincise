@@ -1,6 +1,7 @@
 # POST / Spot grid withdraw income
 
-Source: [https://www.okx.com/docs-v5/en/#order-book-trading-grid-trading-post-spot-grid-withdraw-income](https://www.okx.com/docs-v5/en/#order-book-trading-grid-trading-post-spot-grid-withdraw-income)
+Source:
+[https://www.okx.com/docs-v5/en/#order-book-trading-grid-trading-post-spot-grid-withdraw-income](https://www.okx.com/docs-v5/en/#order-book-trading-grid-trading-post-spot-grid-withdraw-income)
 
 ### POST / Spot grid withdraw income
 
@@ -16,14 +17,14 @@ Source: [https://www.okx.com/docs-v5/en/#order-book-trading-grid-trading-post-sp
 
 #### Request Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| algoId | String | Yes | Algo ID |
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| algoId    | String | Yes      | Algo ID     |
 
 #### Response Parameters
 
-| **Parameter** | **Type** | **Description** |
-| --- | --- | --- |
-| algoId | String | Algo ID |
-| algoClOrdId | String | Client-supplied Algo ID |
-| profit | String | Withdraw profit |
+| **Parameter** | **Type** | **Description**         |
+| ------------- | -------- | ----------------------- |
+| algoId        | String   | Algo ID                 |
+| algoClOrdId   | String   | Client-supplied Algo ID |
+| profit        | String   | Withdraw profit         |

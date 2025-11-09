@@ -1,6 +1,7 @@
 # GET Get latest prices ticker
 
-Source: [https://doc.xt.com/docs/spot/Market/GetLatestPricesTicker](https://doc.xt.com/docs/spot/Market/GetLatestPricesTicker)
+Source:
+[https://doc.xt.com/docs/spot/Market/GetLatestPricesTicker](https://doc.xt.com/docs/spot/Market/GetLatestPricesTicker)
 
 # Get latest prices ticker
 
@@ -8,11 +9,11 @@ Source: [https://doc.xt.com/docs/spot/Market/GetLatestPricesTicker](https://doc.
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | false |  | trading pair eg:btc\_usdt |  |
-| symbols | array | false |  | Collection of trading pairs. Priority is higher than symbol. eg: btc\_usdt,eth\_usdt |  |
-| tags | string | false |  | Set of tags, separated by commas, currently only supports spot |  |
+| name    | type   | mandatory | default | description                                                                        | ranges |
+| ------- | ------ | --------- | ------- | ---------------------------------------------------------------------------------- | ------ |
+| symbol  | string | false     |         | trading pair eg:btc_usdt                                                           |        |
+| symbols | array  | false     |         | Collection of trading pairs. Priority is higher than symbol. eg: btc_usdt,eth_usdt |        |
+| tags    | string | false     |         | Set of tags, separated by commas, currently only supports spot                     |        |
 
 #### **Limit Flow Rules**[​](#limit-flow-rules "Direct link to limit-flow-rules")
 

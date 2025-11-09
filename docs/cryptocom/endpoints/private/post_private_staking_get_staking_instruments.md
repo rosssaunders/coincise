@@ -1,6 +1,7 @@
 # POST private/staking/get-staking-instruments
 
-**Source:** [private/staking/get-staking-instruments](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-staking-get-staking-instruments)
+**Source:**
+[private/staking/get-staking-instruments](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-staking-get-staking-instruments)
 
 ## Authentication
 
@@ -74,9 +75,9 @@ Get staking instruments information
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| no param required | N/A |  |  |
+| Name              | Type | Required | Description |
+| ----------------- | ---- | -------- | ----------- |
+| no param required | N/A  |          |             |
 
 ### Applies To
 
@@ -90,26 +91,26 @@ POST
 
 An array, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| instrument\_name | string | Staking instrument name, e.g. SOL.staked |
-| underlying\_inst\_name | string | Underlying instrument name, e.g. SOL |
-| reward\_inst\_name | string | Reward instrument name, e.g. SOL.staked |
-| out\_of\_stock | boolean | Disabled stake - true or false |
-| block\_unstake | boolean | Disabled unstake - true or false |
-| est\_rewards | string | Estimated rewards |
-| apr\_y | string | Estimated rewards unit - APR or APY |
-| min\_stake\_amt | string | Minimum stake amount |
-| reward\_frequency | string | Estimated reward frequency (day) |
-| lock\_up\_period | string | Estimated lock up period (day) |
-| is\_compound\_reward | boolean | Is reward compounded - true or false |
-| pre\_stake\_charge\_enable | boolean | Is pre stake charge applied - true or false |
-| pre\_stake\_charge\_rate\_in\_bps | string | Pre stake charge rate in basis point |
-| is\_restaked | boolean | Is restaked instrument - true or false |
-| additional\_rewards | array | See below |
+| Name                         | Type    | Description                                 |
+| ---------------------------- | ------- | ------------------------------------------- |
+| instrument_name              | string  | Staking instrument name, e.g. SOL.staked    |
+| underlying_inst_name         | string  | Underlying instrument name, e.g. SOL        |
+| reward_inst_name             | string  | Reward instrument name, e.g. SOL.staked     |
+| out_of_stock                 | boolean | Disabled stake - true or false              |
+| block_unstake                | boolean | Disabled unstake - true or false            |
+| est_rewards                  | string  | Estimated rewards                           |
+| apr_y                        | string  | Estimated rewards unit - APR or APY         |
+| min_stake_amt                | string  | Minimum stake amount                        |
+| reward_frequency             | string  | Estimated reward frequency (day)            |
+| lock_up_period               | string  | Estimated lock up period (day)              |
+| is_compound_reward           | boolean | Is reward compounded - true or false        |
+| pre_stake_charge_enable      | boolean | Is pre stake charge applied - true or false |
+| pre_stake_charge_rate_in_bps | string  | Pre stake charge rate in basis point        |
+| is_restaked                  | boolean | Is restaked instrument - true or false      |
+| additional_rewards           | array   | See below                                   |
 
 `additional_rewards` consists of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| reward\_inst\_name | string | Additional reward instrument name |
+| Name             | Type   | Description                       |
+| ---------------- | ------ | --------------------------------- |
+| reward_inst_name | string | Additional reward instrument name |

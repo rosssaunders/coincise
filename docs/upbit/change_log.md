@@ -72,7 +72,7 @@ Improved
 
 `improved` `allowlisted withdrawal address`
 
-## [\[Important\] BingX vasp\_uuid Update & Withdrawal Wallet Re-registration Required (June 5, 2025)](/changelog/vasp_uuid_change_bingx)
+## [\[Important\] BingX vasp_uuid Update & Withdrawal Wallet Re-registration Required (June 5, 2025)](/changelog/vasp_uuid_change_bingx)
 
 5 months ago
 

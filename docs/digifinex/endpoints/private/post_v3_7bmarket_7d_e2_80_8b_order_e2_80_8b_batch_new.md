@@ -2,7 +2,8 @@
 
 **Title:** Create multiple order
 
-**Source:** [Create multiple order](https://docs.digifinex.com/en-ww/spot/v3/rest.html#create-multiple-order)
+**Source:**
+[Create multiple order](https://docs.digifinex.com/en-ww/spot/v3/rest.html#create-multiple-order)
 
 ## Authentication
 
@@ -14,17 +15,17 @@ Required (Private Endpoint)
 
 ### HTTP Request
 
--   POST `https://openapi.digifinex.com/v3/{market}​/order​/batch_new`
+- POST `https://openapi.digifinex.com/v3/{market}​/order​/batch_new`
 
 ### Request Parameters
 
 market：spot, margin up to 10 orders at a time, either all succeed or all fail
 
-| Field | Request Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| market | str | true | "spot","margin" |
-| symbol | str | true | Symbol Name |
-| list | str | true | order list, must be json-format, eg:\[{"type":"buy","amount":0.1,"price":6000,"post\_only":1},{"type":"sell","amount":0.1,"price":6100,"post\_only":0}\] |
+| Field  | Request Type | Mandatory | Description                                                                                                                                            |
+| ------ | ------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| market | str          | true      | "spot","margin"                                                                                                                                        |
+| symbol | str          | true      | Symbol Name                                                                                                                                            |
+| list   | str          | true      | order list, must be json-format, eg:\[{"type":"buy","amount":0.1,"price":6000,"post_only":1},{"type":"sell","amount":0.1,"price":6100,"post_only":0}\] |
 
 > Response:
 
@@ -42,7 +43,7 @@ market：spot, margin up to 10 orders at a time, either all succeed or all fail
 
 ### Response Content
 
-| Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| order\_ids | true | object | Order ID列表 |
-| code | true | int | Status |
+| Field     | Mandatory | Request Type | Description  |
+| --------- | --------- | ------------ | ------------ |
+| order_ids | true      | object       | Order ID列表 |
+| code      | true      | int          | Status       |

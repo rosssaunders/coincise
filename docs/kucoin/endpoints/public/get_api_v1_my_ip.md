@@ -16,8 +16,7 @@ Get the server time.
 
 ### 200
 
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| code | required | string |  |
-| data | required | string |  |
-
+| Parameter | Required | Type   | Description |
+| --------- | -------- | ------ | ----------- |
+| code      | required | string |             |
+| data      | required | string |             |

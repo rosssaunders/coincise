@@ -1,6 +1,7 @@
 # Bybit V5 API Documentation Extraction
 
-Documentation extraction for Bybit's V5 API following the standardized Coincise structure.
+Documentation extraction for Bybit's V5 API following the standardized Coincise
+structure.
 
 ## Features
 
@@ -88,6 +89,7 @@ docs/bybit/
 ### Authentication Detection
 
 The script checks for Bybit-specific authentication headers:
+
 - `X-BAPI-API-KEY` - API key header
 - `X-BAPI-SIGN` - Signature header
 - `X-BAPI-TIMESTAMP` - Timestamp header
@@ -102,4 +104,4 @@ Endpoints requiring any of these headers are classified as private.
 
 ## Last Updated
 
-2024-11-08 
+2024-11-08

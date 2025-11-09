@@ -7,8 +7,10 @@ official documentation site using a standardized extraction structure.
 
 The extractor scrapes the DigiFinex API documentation and organizes it into:
 
-- **General Documentation**: Core documentation files (authentication, rate limits, error codes, etc.)
-- **Endpoint Documentation**: Individual endpoint files categorized as public or private
+- **General Documentation**: Core documentation files (authentication, rate
+  limits, error codes, etc.)
+- **Endpoint Documentation**: Individual endpoint files categorized as public or
+  private
 - **WebSocket API**: Real-time data streaming endpoints
 
 ## Source
@@ -37,6 +39,7 @@ pnpm run extract:websocket-github # Complete WebSocket API from GitHub
 Generated markdown files are saved to `docs/digifinex/`:
 
 ### General Documentation
+
 - `authentication.md` - Authentication and signature requirements
 - `rate_limits.md` - API rate limiting rules and trading guidelines
 - `network_connectivity.md` - API base URLs and connectivity information
@@ -45,10 +48,12 @@ Generated markdown files are saved to `docs/digifinex/`:
 - `change_log.md` - API changelog (placeholder)
 
 ### Endpoint Documentation
+
 - `endpoints/public/` - Public market data endpoints (11 endpoints)
 - `endpoints/private/` - Private trading and account endpoints (15 endpoints)
 
 ### WebSocket Documentation
+
 - `websocket_api.md` - Complete WebSocket API documentation from GitHub
 
 ## Categorization
@@ -57,8 +62,8 @@ Endpoints are automatically categorized as public or private based on:
 
 1. **Public endpoints**: Market data endpoints that don't require authentication
    - Examples: ping, time, markets, ticker, orderbook, trades, klines, symbols
-   
-2. **Private endpoints**: Trading and account operations that require authentication
+2. **Private endpoints**: Trading and account operations that require
+   authentication
    - Examples: assets, orders, trades history, positions, transfers
 
 ## Dependencies
@@ -72,6 +77,7 @@ Endpoints are automatically categorized as public or private based on:
 ### Shared Utilities
 
 The extractor uses shared utilities from `venues/shared/`:
+
 - `puppeteer.js` - Standardized browser configuration
 - `turndown.js` - Markdown conversion utilities
 
@@ -96,7 +102,7 @@ digifinex/
 
 ## Implementation Notes
 
-The scraper follows the standardized extraction pattern established in Backpack, 
+The scraper follows the standardized extraction pattern established in Backpack,
 Deribit, and XT venues:
 
 - Pure ES6 JavaScript with ES6 modules

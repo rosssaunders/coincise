@@ -1,6 +1,7 @@
 # GET [Cross] ws cancel an Order
 
-**Source:** [[Cross] ws cancel an Order](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-190293b5999)
+**Source:**
+[[Cross] ws cancel an Order](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-190293b5999)
 
 **Category:** Websocket Trade
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### cross\_cancel (\[Cross\] ws cancel an Order)
+### cross_cancel (\[Cross\] ws cancel an Order)
 
 Signature verification: Yes
 
@@ -16,55 +17,62 @@ Interface permission: Trade
 
 Rate Limit: Shared REST frequency limit
 
-Interface description: This interface only supports order cancellation for websocket contracts in cross position mode.
+Interface description: This interface only supports order cancellation for
+websocket contracts in cross position mode.
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.hbdm.com/linear-swap-trade |
-| Online (preferred by aws customers) | wss://api.hbdm.vn/linear-swap-trade |
+| Environment                         | Address                              |
+| ----------------------------------- | ------------------------------------ |
+| Online                              | wss://api.hbdm.com/linear-swap-trade |
+| Online (preferred by aws customers) | wss://api.hbdm.vn/linear-swap-trade  |
 
 #### Request Parameter
 
-| Field Name | Type | Description |
-| --- | --- | --- |
-| op | string | Required； Operator Name，cross\_cancel; |
-| cid | string | Optional; ID Client requests unique ID |
-| data | string | cancellation parameters |
+| Field Name | Type   | Description                             |
+| ---------- | ------ | --------------------------------------- |
+| op         | string | Required； Operator Name，cross_cancel; |
+| cid        | string | Optional; ID Client requests unique ID  |
+| data       | string | cancellation parameters                 |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
+| -------------- | -------------------- | ---- |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| order\_id | string | false | order ID（different IDs are separated by ",", maximum 25 orders can be withdrew at one time） |  |  |
-| client\_order\_id | string | false | Client order ID (different IDs are separated by ",", maximum 25 orders can be withdrew at one time) |  |  |
-| contract\_code | string | false | contract code | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |  |
-| pair | string | false | pair | BTC-USDT |  |
-| contract\_type | string | false | contract type | swap, this\_week, next\_week, quarter, next\_quarter |  |
-| cid | string | false | Current request's ID |  |  |
+| Parameter       | Data Type | Required | Description                                                                                         | Value Range                                         | Default Value |
+| --------------- | --------- | -------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ------------- |
+| order_id        | string    | false    | order ID（different IDs are separated by ",", maximum 25 orders can be withdrew at one time）       |                                                     |               |
+| client_order_id | string    | false    | Client order ID (different IDs are separated by ",", maximum 25 orders can be withdrew at one time) |                                                     |               |
+| contract_code   | string    | false    | contract code                                                                                       | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |               |
+| pair            | string    | false    | pair                                                                                                | BTC-USDT                                            |               |
+| contract_type   | string    | false    | contract type                                                                                       | swap, this_week, next_week, quarter, next_quarter   |               |
+| cid             | string    | false    | Current request's ID                                                                                |                                                     |               |
 
-Notes: Both order\_id and client\_order\_id can be used for order withdrawl，one of them needed at one time，if both of them are set，the default will be order id。 The return data from cancel An Order Interface only means that order cancelation designation is executed successfully. To check cancelation result, please check your order status at Get Information Of An Order interface. client\_order\_id, order status query is available for orders placed within 8 hours; Otherwise, clients cannot check orders placed beyond 8 hours.
+Notes: Both order_id and client_order_id can be used for order withdrawl，one of
+them needed at one time，if both of them are set，the default will be order
+id。 The return data from cancel An Order Interface only means that order
+cancelation designation is executed successfully. To check cancelation result,
+please check your order status at Get Information Of An Order interface.
+client_order_id, order status query is available for orders placed within 8
+hours; Otherwise, clients cannot check orders placed beyond 8 hours.
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request Processing Result | "ok" , "error" |
-| DATA\_START | object | true |  |  |
-| ERRORS\_START | array | true |  |  |
-| order\_id | string | true | order ID |  |
-| err\_code | int | true | error code |  |
-| err\_msg | string | true | error message |  |
-| ERRORS\_END |  | false |  |  |
-| successes | string | true | successfully withdrew list of order\_id or client\_order\_id |  |
-| DATA\_END |  | false |  |  |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
+| Parameter    | Data Type | Required | Description                                               | Value Range    |
+| ------------ | --------- | -------- | --------------------------------------------------------- | -------------- |
+| status       | string    | true     | Request Processing Result                                 | "ok" , "error" |
+| DATA_START   | object    | true     |                                                           |                |
+| ERRORS_START | array     | true     |                                                           |                |
+| order_id     | string    | true     | order ID                                                  |                |
+| err_code     | int       | true     | error code                                                |                |
+| err_msg      | string    | true     | error message                                             |                |
+| ERRORS_END   |           | false    |                                                           |                |
+| successes    | string    | true     | successfully withdrew list of order_id or client_order_id |                |
+| DATA_END     |           | false    |                                                           |                |
+| ts           | long      | true     | Time of Respond Generation, Unit: Millisecond             |                |
 
 #### Subscription Example
 
@@ -72,7 +80,7 @@ Notes: Both order\_id and client\_order\_id can be used for order withdrawl，on
 
 "op":
 
-"cross\_cancel"
+"cross_cancel"
 
 "cid":
 
@@ -80,15 +88,15 @@ Notes: Both order\_id and client\_order\_id can be used for order withdrawl，on
 
 "data":{
 
-"order\_id":
+"order_id":
 
 "456789133445"
 
-"client\_order\_id":
+"client_order_id":
 
 "4567891312345"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 
@@ -96,7 +104,7 @@ Notes: Both order\_id and client\_order\_id can be used for order withdrawl，on
 
 "BTC-USDT"
 
-"contract\_type":
+"contract_type":
 
 "swap"
 
@@ -122,15 +130,15 @@ Notes: Both order\_id and client\_order\_id can be used for order withdrawl，on
 
 0:{
 
-"order\_id":
+"order_id":
 
 "770323133537685504"
 
-"err\_code":
+"err_code":
 
 1071
 
-"err\_msg":
+"err_msg":
 
 "Repeated withdraw."
 

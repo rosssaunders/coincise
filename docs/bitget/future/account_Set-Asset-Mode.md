@@ -8,7 +8,7 @@ Set USDT-M Futures Asset Mode
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   POST /api/v2/mix/account/set-asset-mode
+- POST /api/v2/mix/account/set-asset-mode
 
 Request Example
 
@@ -18,10 +18,10 @@ curl -X POST "https://api.bitget.com/api/v2/mix/account/set-asset-mode" \   -H "
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT professional futures 
-| assetMode | String | Yes | Asset mode<br><code>single</code>: Single asset mode<br><code>union</code>: Multi-assets mode 
+| Parameter   | Type   | Required | Description                                                                                   |
+| :---------- | :----- | :------- | :-------------------------------------------------------------------------------------------- |
+| productType | String | Yes      | Product type<br><code>USDT-FUTURES</code> USDT professional futures                           |
+| assetMode   | String | Yes      | Asset mode<br><code>single</code>: Single asset mode<br><code>union</code>: Multi-assets mode |
 
 Response Example
 
@@ -31,8 +31,8 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| data | String | 'success' mean set the asset mode success
+| Parameter | Type   | Description                               |
+| :-------- | :----- | :---------------------------------------- |
+| data      | String | 'success' mean set the asset mode success |
 
 > **Source:** https://www.bitget.com/api-doc/contract/account/Set-Asset-Mode

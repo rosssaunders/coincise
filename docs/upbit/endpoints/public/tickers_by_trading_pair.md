@@ -2,23 +2,29 @@
 
 **Check the proper endpoint based on your region.**
 
-The examples in this page is written using Singapore fiat code(SGD). Set the quote currency to match your region. The base\_url differs by country/region. Make sure to specify the correct region value for your environment.  
-  
+The examples in this page is written using Singapore fiat code(SGD). Set the
+quote currency to match your region. The base_url differs by country/region.
+Make sure to specify the correct region value for your environment.
+
 \- Singapore (sg): https://sg-api.upbit.com  
 \- Indonesia (id): https://id-api.upbit.com  
 \- Thailand (th): https://th-api.upbit.com
 
-### 
+###
 
 Price Change Indicators
 
 [](#price-change-indicators)
 
-The fields `change`, `change_price`, `change_rate`, `signed_change_price`, and `signed_change_rate` returned when retrieving the current price of a pair provide indicators related to price changes. These change indicators are **calculated based on the previous day’s closing price.**
+The fields `change`, `change_price`, `change_rate`, `signed_change_price`, and
+`signed_change_rate` returned when retrieving the current price of a pair
+provide indicators related to price changes. These change indicators are
+**calculated based on the previous day’s closing price.**
 
 Rate Limit
 
-Up to 10 calls per second are allowed. This is measured on an IP basis and request counts are shared within the exchange 'ticker' group.
+Up to 10 calls per second are allowed. This is measured on an IP basis and
+request counts are shared within the exchange 'ticker' group.
 
 markets
 
@@ -31,7 +37,7 @@ For multiple pairs, specify them as a comma-separated string.
 
 \[Example\] SGD-BTC,SGD-ETH
 
-# 
+#
 
 200
 
@@ -49,7 +55,7 @@ required
 
 Trading pair code representing the market.
 
-trade\_date
+trade_date
 
 string
 
@@ -57,7 +63,7 @@ required
 
 Recent trade date in UTC.
 
-trade\_time
+trade_time
 
 string
 
@@ -65,7 +71,7 @@ required
 
 Recent trade time in UTC.
 
-trade\_timestamp
+trade_timestamp
 
 int64
 
@@ -73,15 +79,16 @@ required
 
 The timestamp (in milliseconds) when the trade was executed.
 
-opening\_price
+opening_price
 
 double
 
 required
 
-The opening price of the candle, representing the first trading price during the candle period.
+The opening price of the candle, representing the first trading price during the
+candle period.
 
-high\_price
+high_price
 
 double
 
@@ -89,7 +96,7 @@ required
 
 The highest trading price, recorded during the candle period.
 
-low\_price
+low_price
 
 double
 
@@ -97,15 +104,16 @@ required
 
 The lowest trading price. recorded during the candle period.
 
-trade\_price
+trade_price
 
 double
 
 required
 
-The closing price of the candle, representing the last trading price during the candle period.
+The closing price of the candle, representing the last trading price during the
+candle period.
 
-prev\_closing\_price
+prev_closing_price
 
 double
 
@@ -123,53 +131,58 @@ required
 
 Status of price change.
 
--   `EVEN`: No change
--   `RISE`: Increase
--   `FALL`: Decrease
+- `EVEN`: No change
+- `RISE`: Increase
+- `FALL`: Decrease
 
 `EVEN` `RISE` `FALL`
 
-change\_price
+change_price
 
 double
 
 required
 
-Absolute value of the price change compared to the previous day's closing price. Calculated as "trade\_price" - "prev\_closing\_price".
+Absolute value of the price change compared to the previous day's closing price.
+Calculated as "trade_price" - "prev_closing_price".
 
-change\_rate
-
-double
-
-required
-
-Absolute value of the price change rate compared to the previous day's closing price. Calculated as ("trade\_price" - "prev\_closing\_price") ÷ "prev\_closing\_price".
-
-signed\_change\_price
+change_rate
 
 double
 
 required
 
-Signed price change compared to the previous day's closing price. Calculated as "trade\_price" - "prev\_closing\_price".
+Absolute value of the price change rate compared to the previous day's closing
+price. Calculated as ("trade_price" - "prev_closing_price") ÷
+"prev_closing_price".
 
--   Positive (+): Current price is higher than previous day's closing price
--   Negative (-): Current price is lower than previous day's closing price
-
-signed\_change\_rate
+signed_change_price
 
 double
 
 required
 
-Signed price change rate compared to the previous day's closing price. Calculated as ("trade\_price" - "prev\_closing\_price") ÷ "prev\_closing\_price".
+Signed price change compared to the previous day's closing price. Calculated as
+"trade_price" - "prev_closing_price".
 
--   Positive (+): Price increase
--   Negative (-): Price decrease
+- Positive (+): Current price is higher than previous day's closing price
+- Negative (-): Current price is lower than previous day's closing price
+
+signed_change_rate
+
+double
+
+required
+
+Signed price change rate compared to the previous day's closing price.
+Calculated as ("trade_price" - "prev_closing_price") ÷ "prev_closing_price".
+
+- Positive (+): Price increase
+- Negative (-): Price decrease
 
 \[Example\]: 0.015 = 1.5% increase
 
-trade\_volume
+trade_volume
 
 double
 
@@ -177,7 +190,7 @@ required
 
 Most recent trade volume for the trading pair.
 
-acc\_trade\_price
+acc_trade_price
 
 double
 
@@ -185,7 +198,7 @@ required
 
 Accumulated trade amount since UTC.
 
-acc\_trade\_price\_24h
+acc_trade_price_24h
 
 double
 
@@ -193,7 +206,7 @@ required
 
 Accumulated trade amount over the past 24 hours.
 
-acc\_trade\_volume
+acc_trade_volume
 
 double
 
@@ -201,7 +214,7 @@ required
 
 Accumulated trade volume since UTC.
 
-acc\_trade\_volume\_24h
+acc_trade_volume_24h
 
 double
 
@@ -209,7 +222,7 @@ required
 
 Accumulated trade volume over the past 24 hours.
 
-highest\_52\_week\_price
+highest_52_week_price
 
 double
 
@@ -217,7 +230,7 @@ required
 
 Highest trading price achieved in the past 52 weeks.
 
-highest\_52\_week\_date
+highest_52_week_date
 
 string
 
@@ -225,7 +238,7 @@ required
 
 Date when the 52-week high price was achieved.
 
-lowest\_52\_week\_price
+lowest_52_week_price
 
 double
 
@@ -233,7 +246,7 @@ required
 
 Lowest trading price achieved in the past 52 weeks.
 
-lowest\_52\_week\_date
+lowest_52_week_date
 
 string
 
@@ -249,7 +262,7 @@ required
 
 The timestamp (in milliseconds) when the ticker was requested.
 
-# 
+#
 
 400
 
@@ -277,7 +290,7 @@ required
 
 Message describing the cause of the error.
 
-# 
+#
 
 404
 
@@ -307,7 +320,7 @@ Message describing the cause of the error.
 
 Updated about 1 month ago
 
-* * *
+---
 
 ShellPythonJavaNode
 
@@ -339,7 +352,7 @@ xxxxxxxxxx
 
 2
 
-  {
+{
 
 3
 
@@ -439,11 +452,11 @@ xxxxxxxxxx
 
 27
 
-  },
+},
 
 28
 
-  {
+{
 
 29
 
@@ -543,7 +556,7 @@ xxxxxxxxxx
 
 53
 
-  }
+}
 
 54
 
@@ -551,8 +564,9 @@ xxxxxxxxxx
 
 Updated about 1 month ago
 
-* * *
+---
 
 ---
 
-**Source:** [tickers-by-trading-pair](https://global-docs.upbit.com/reference/tickers)
+**Source:**
+[tickers-by-trading-pair](https://global-docs.upbit.com/reference/tickers)

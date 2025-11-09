@@ -1,6 +1,7 @@
 # GET Current Orders
 
-**Source:** [Get Current Orders](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-19589587da5)
+**Source:**
+[Get Current Orders](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-19589587da5)
 
 **Category:** Orders
 
@@ -16,73 +17,78 @@ Signature verification: Yes
 
 Interface permission: Read
 
-Rate Limit: Generally, the private interface rate limit of API key is at most 144 times every 3 seconds for each UID (Trade Interface: at most 72 times every 3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is shared by all the altcoins contracts delivered by different date).
+Rate Limit: Generally, the private interface rate limit of API key is at most
+144 times every 3 seconds for each UID (Trade Interface: at most 72 times every
+3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is
+shared by all the altcoins contracts delivered by different date).
 
-Interface description: Get unfilled futures orders. If no request parameters are specified, you will get all open orders sorted on the creation time in chronological order.
+Interface description: Get unfilled futures orders. If no request parameters are
+specified, you will get all open orders sorted on the creation time in
+chronological order.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | String | false | Symbol |  |  |
-| margin\_mode | String | false | Margin mode | cross: Cross margin |  |
-| order\_id | String | false | Order ID |  |  |
-| client\_order\_id | String | false | Order ID you entered |  |  |
-| from | long | false | ID for the query starts at 0 by default. |  |  |
-| limit | Intege | false | Pagination size defaults to 10, with a maximum limit of 100. |  |  |
-| direct | String | false | prev, next |  |  |
+| Parameter       | Data Type | Required | Description                                                  | Value Range         | Default Value |
+| --------------- | --------- | -------- | ------------------------------------------------------------ | ------------------- | ------------- |
+| contract_code   | String    | false    | Symbol                                                       |                     |               |
+| margin_mode     | String    | false    | Margin mode                                                  | cross: Cross margin |               |
+| order_id        | String    | false    | Order ID                                                     |                     |               |
+| client_order_id | String    | false    | Order ID you entered                                         |                     |               |
+| from            | long      | false    | ID for the query starts at 0 by default.                     |                     |               |
+| limit           | Intege    | false    | Pagination size defaults to 10, with a maximum limit of 100. |                     |               |
+| direct          | String    | false    | prev, next                                                   |                     |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| id | String | true | Query ID |  |
-| contract\_code | String | true | Symbol | Perpetual: "BTC-USDT"...; Delivery: "BTC-USDT-210625"... |
-| side | String | true | Buy or Sell | buy; sell |
-| position\_side | String | true | Position side | long: going long; short: going short; both: One-way mode |
-| type | String | true | Order type | "market": market order; "limit": limit order; "post\_only": post-only order |
-| price\_match | String | true | BBO and price are mutually exclusive | opponent: counterparty price; "optimal\_5": Best 5 BBO; "optimal\_10": Best 10 BBO; "optimal\_20": Best 20 BBO |
-| order\_id | String | true | Order ID |  |
-| client\_order\_id | String | true | Order ID you entered |  |
-| margin\_mode | String | true | Margin mode | cross: Cross margin |
-| price | String | true | Price, applicable for limit orders only. No price input is required for market orders. |  |
-| volume | String | true | Order size, specifically in Cont |  |
-| lever\_rate | Long | true | Leverage |  |
-| state | String | true | Status | new, partially\_filled, filled, partially\_canceled, canceled, and rejected |
-| order\_source | String | true | Order source | system: System; web: Website for PC clients, api: API, m: Website for mobile clients, risk: Risk management system, settlement: Delivery settlement, ios: iOS clients, android: Android clients, windows: Windows clients, mac: Mac clients, trigger: Conditional order trigger, tpsl: Take profit or stop loss order, ADL: Auto deleveraging orders |
-| reduce\_only | Boolean | true | Reduce only |  |
-| time\_in\_force | String | true | Enumerate FOK, IOC, and GTC. It is an optional field with GTC by default |  |
-| tp\_trigger\_price | String | true | Take Profit Trigger Price |  |
-| tp\_order\_price | String | true | Take Profit Order Price (No need to fill in the price for the best N-level order type) |  |
-| tp\_type | String | true | Take profit order type, if not filled in, default is market: market price, maket: limit price: limit, optimal 5: optimal\_5, optimal 10: optimal\_10, optimal 20: optimal\_20--Field reserved, not open to the public for the time being |  |
-| tp\_trigger\_price\_type | int | false | The take profit price trigger type, the default is the latest price | "last": last price; "market": mark price |
-| sl\_trigger\_price | String | true | Stop loss trigger price |  |
-| sl\_order\_price | String | true | Stop loss order price (no need to fill in the price for the optimal N-level order type) |  |
-| sl\_type | String | true | Stop loss order type, if not filled in, default is market price, maket: limit price: limit, optimal 5: optimal\_5, optimal 10: optimal\_10, optimal 20: optimal\_20 |  |
-| sl\_trigger\_price\_type | int | false | Stop loss price trigger type, the default is the latest price | "last": last price; "market": mark price |
-| trade\_avg\_price | String | true | Average execution price |  |
-| trade\_volume | String | true | Execution amount |  |
-| trade\_turnover | String | true | Total value executed |  |
-| fee\_currency | String | true | Currency for fee payment; if multiple currencies are used, separate them with a comma. |  |
-| fee | String | true | Total trading fees in USDT |  |
-| profit | String | true | Closing PnL |  |
-| contract\_type | String | true | Contract type | swap: Perpetual; this\_week: Weekly; next\_week: Bi-weekly; quarter: Quarterly; next\_quarter: Bi-quarterly |
-| created\_time | Long | true | Order creation time with a UTC timestamp (MS) |  |
-| updated\_time | Long | true | Order update time with a UTC timestamp (MS) |  |
-| self\_match\_prevent | String | true | Prevent self-trading | cancel\_taker: Cancel a taker order cancel\_maker: Cancel a maker order cancel\_both: Cancel all orders allow: Allow self-trading |
+| Parameter             | Data Type | Required | Description                                                                                                                                                                                                                           | Value Range                                                                                                                                                                                                                                                                                                                                          |
+| --------------------- | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id                    | String    | true     | Query ID                                                                                                                                                                                                                              |                                                                                                                                                                                                                                                                                                                                                      |
+| contract_code         | String    | true     | Symbol                                                                                                                                                                                                                                | Perpetual: "BTC-USDT"...; Delivery: "BTC-USDT-210625"...                                                                                                                                                                                                                                                                                             |
+| side                  | String    | true     | Buy or Sell                                                                                                                                                                                                                           | buy; sell                                                                                                                                                                                                                                                                                                                                            |
+| position_side         | String    | true     | Position side                                                                                                                                                                                                                         | long: going long; short: going short; both: One-way mode                                                                                                                                                                                                                                                                                             |
+| type                  | String    | true     | Order type                                                                                                                                                                                                                            | "market": market order; "limit": limit order; "post_only": post-only order                                                                                                                                                                                                                                                                           |
+| price_match           | String    | true     | BBO and price are mutually exclusive                                                                                                                                                                                                  | opponent: counterparty price; "optimal_5": Best 5 BBO; "optimal_10": Best 10 BBO; "optimal_20": Best 20 BBO                                                                                                                                                                                                                                          |
+| order_id              | String    | true     | Order ID                                                                                                                                                                                                                              |                                                                                                                                                                                                                                                                                                                                                      |
+| client_order_id       | String    | true     | Order ID you entered                                                                                                                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                      |
+| margin_mode           | String    | true     | Margin mode                                                                                                                                                                                                                           | cross: Cross margin                                                                                                                                                                                                                                                                                                                                  |
+| price                 | String    | true     | Price, applicable for limit orders only. No price input is required for market orders.                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                      |
+| volume                | String    | true     | Order size, specifically in Cont                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                      |
+| lever_rate            | Long      | true     | Leverage                                                                                                                                                                                                                              |                                                                                                                                                                                                                                                                                                                                                      |
+| state                 | String    | true     | Status                                                                                                                                                                                                                                | new, partially_filled, filled, partially_canceled, canceled, and rejected                                                                                                                                                                                                                                                                            |
+| order_source          | String    | true     | Order source                                                                                                                                                                                                                          | system: System; web: Website for PC clients, api: API, m: Website for mobile clients, risk: Risk management system, settlement: Delivery settlement, ios: iOS clients, android: Android clients, windows: Windows clients, mac: Mac clients, trigger: Conditional order trigger, tpsl: Take profit or stop loss order, ADL: Auto deleveraging orders |
+| reduce_only           | Boolean   | true     | Reduce only                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                      |
+| time_in_force         | String    | true     | Enumerate FOK, IOC, and GTC. It is an optional field with GTC by default                                                                                                                                                              |                                                                                                                                                                                                                                                                                                                                                      |
+| tp_trigger_price      | String    | true     | Take Profit Trigger Price                                                                                                                                                                                                             |                                                                                                                                                                                                                                                                                                                                                      |
+| tp_order_price        | String    | true     | Take Profit Order Price (No need to fill in the price for the best N-level order type)                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                      |
+| tp_type               | String    | true     | Take profit order type, if not filled in, default is market: market price, maket: limit price: limit, optimal 5: optimal_5, optimal 10: optimal_10, optimal 20: optimal_20--Field reserved, not open to the public for the time being |                                                                                                                                                                                                                                                                                                                                                      |
+| tp_trigger_price_type | int       | false    | The take profit price trigger type, the default is the latest price                                                                                                                                                                   | "last": last price; "market": mark price                                                                                                                                                                                                                                                                                                             |
+| sl_trigger_price      | String    | true     | Stop loss trigger price                                                                                                                                                                                                               |                                                                                                                                                                                                                                                                                                                                                      |
+| sl_order_price        | String    | true     | Stop loss order price (no need to fill in the price for the optimal N-level order type)                                                                                                                                               |                                                                                                                                                                                                                                                                                                                                                      |
+| sl_type               | String    | true     | Stop loss order type, if not filled in, default is market price, maket: limit price: limit, optimal 5: optimal_5, optimal 10: optimal_10, optimal 20: optimal_20                                                                      |                                                                                                                                                                                                                                                                                                                                                      |
+| sl_trigger_price_type | int       | false    | Stop loss price trigger type, the default is the latest price                                                                                                                                                                         | "last": last price; "market": mark price                                                                                                                                                                                                                                                                                                             |
+| trade_avg_price       | String    | true     | Average execution price                                                                                                                                                                                                               |                                                                                                                                                                                                                                                                                                                                                      |
+| trade_volume          | String    | true     | Execution amount                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                      |
+| trade_turnover        | String    | true     | Total value executed                                                                                                                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                      |
+| fee_currency          | String    | true     | Currency for fee payment; if multiple currencies are used, separate them with a comma.                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                      |
+| fee                   | String    | true     | Total trading fees in USDT                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                                                                      |
+| profit                | String    | true     | Closing PnL                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                      |
+| contract_type         | String    | true     | Contract type                                                                                                                                                                                                                         | swap: Perpetual; this_week: Weekly; next_week: Bi-weekly; quarter: Quarterly; next_quarter: Bi-quarterly                                                                                                                                                                                                                                             |
+| created_time          | Long      | true     | Order creation time with a UTC timestamp (MS)                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                      |
+| updated_time          | Long      | true     | Order update time with a UTC timestamp (MS)                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                      |
+| self_match_prevent    | String    | true     | Prevent self-trading                                                                                                                                                                                                                  | cancel_taker: Cancel a taker order cancel_maker: Cancel a maker order cancel_both: Cancel all orders allow: Allow self-trading                                                                                                                                                                                                                       |
 
 #### Request example
 
 {
 
-"margin\_mode":
+"margin_mode":
 
 "cross"
 
@@ -98,15 +104,15 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 "next"
 
-"contract\_code":
+"contract_code":
 
 ""
 
-"order\_id":
+"order_id":
 
 ""
 
-"client\_order\_id":
+"client_order_id":
 
 ""
 
@@ -126,19 +132,19 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 0:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1331226415994253312"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-241122"
 
-"contract\_type":
+"contract_type":
 
-"this\_week"
+"this_week"
 
-"created\_time":
+"created_time":
 
 "1737430710575"
 
@@ -146,7 +152,7 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 "0"
 
-"fee\_currency":
+"fee_currency":
 
 ""
 
@@ -154,23 +160,23 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 "1331226415994253312"
 
-"lever\_rate":
+"lever_rate":
 
 5
 
-"margin\_mode":
+"margin_mode":
 
 "cross"
 
-"order\_id":
+"order_id":
 
 "1331226415994253312"
 
-"order\_source":
+"order_source":
 
 "web"
 
-"position\_side":
+"position_side":
 
 "long"
 
@@ -178,11 +184,11 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 "6409.114"
 
-"price\_match":
+"price_match":
 
-"optimal\_20"
+"optimal_20"
 
-"price\_protect":
+"price_protect":
 
 ""
 
@@ -190,7 +196,7 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 ""
 
-"reduce\_only":
+"reduce_only":
 
 ""
 
@@ -198,19 +204,19 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 "buy"
 
-"sl\_order\_price":
+"sl_order_price":
 
 ""
 
-"sl\_trigger\_price":
+"sl_trigger_price":
 
 ""
 
-"sl\_trigger\_price\_type":
+"sl_trigger_price_type":
 
 ""
 
-"sl\_type":
+"sl_type":
 
 "0"
 
@@ -218,35 +224,35 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 3
 
-"time\_in\_force":
+"time_in_force":
 
 "gtc"
 
-"tp\_order\_price":
+"tp_order_price":
 
 ""
 
-"tp\_trigger\_price":
+"tp_trigger_price":
 
 ""
 
-"tp\_trigger\_price\_type":
+"tp_trigger_price_type":
 
 ""
 
-"tp\_type":
+"tp_type":
 
 "0"
 
-"trade\_avg\_price":
+"trade_avg_price":
 
 "0"
 
-"trade\_turnover":
+"trade_turnover":
 
 "0"
 
-"trade\_volume":
+"trade_volume":
 
 "0"
 
@@ -254,13 +260,13 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 "limit"
 
-"updated\_time":
+"updated_time":
 
 "1737455579520"
 
-"self\_match\_prevent":
+"self_match_prevent":
 
-"cancel\_both"
+"cancel_both"
 
 "volume":
 
@@ -270,19 +276,19 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 1:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1331268439239704576"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-241129"
 
-"contract\_type":
+"contract_type":
 
-"next\_week"
+"next_week"
 
-"created\_time":
+"created_time":
 
 "1737440729999"
 
@@ -290,7 +296,7 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 "0"
 
-"fee\_currency":
+"fee_currency":
 
 ""
 
@@ -298,23 +304,23 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 "1331268439239704576"
 
-"lever\_rate":
+"lever_rate":
 
 5
 
-"margin\_mode":
+"margin_mode":
 
 "cross"
 
-"order\_id":
+"order_id":
 
 "1331268439239704576"
 
-"order\_source":
+"order_source":
 
 "api"
 
-"position\_side":
+"position_side":
 
 "long"
 
@@ -322,11 +328,11 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 "5000"
 
-"price\_match":
+"price_match":
 
 ""
 
-"price\_protect":
+"price_protect":
 
 ""
 
@@ -334,7 +340,7 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 ""
 
-"reduce\_only":
+"reduce_only":
 
 ""
 
@@ -342,19 +348,19 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 "buy"
 
-"sl\_order\_price":
+"sl_order_price":
 
 ""
 
-"sl\_trigger\_price":
+"sl_trigger_price":
 
 ""
 
-"sl\_trigger\_price\_type":
+"sl_trigger_price_type":
 
 ""
 
-"sl\_type":
+"sl_type":
 
 "0"
 
@@ -362,35 +368,35 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 3
 
-"time\_in\_force":
+"time_in_force":
 
 "gtc"
 
-"tp\_order\_price":
+"tp_order_price":
 
 ""
 
-"tp\_trigger\_price":
+"tp_trigger_price":
 
 ""
 
-"tp\_trigger\_price\_type":
+"tp_trigger_price_type":
 
 ""
 
-"tp\_type":
+"tp_type":
 
 "0"
 
-"trade\_avg\_price":
+"trade_avg_price":
 
 "0"
 
-"trade\_turnover":
+"trade_turnover":
 
 "0"
 
-"trade\_volume":
+"trade_volume":
 
 "0"
 
@@ -398,13 +404,13 @@ Interface description: Get unfilled futures orders. If no request parameters are
 
 "limit"
 
-"updated\_time":
+"updated_time":
 
 "1737455579520"
 
-"self\_match\_prevent":
+"self_match_prevent":
 
-"cancel\_both"
+"cancel_both"
 
 "volume":
 

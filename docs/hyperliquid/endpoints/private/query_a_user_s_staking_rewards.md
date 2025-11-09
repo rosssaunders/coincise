@@ -1,10 +1,11 @@
 # Query a user's staking rewards
 
-**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:**
+https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
 `POST` `https://api.hyperliquid.xyz/info`
 
-#### 
+####
 
 [](#headers-17)
 
@@ -22,7 +23,7 @@ String
 
 "application/json"
 
-#### 
+####
 
 [](#request-body-19)
 

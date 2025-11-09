@@ -7,9 +7,11 @@
 
 Required (Private Endpoint)
 
-**Info**Your trading accounts are separate from your Coinbase accounts. See [Deposit from Coinbase account](/api-reference/exchange-api/rest-api/transfers/deposit-from-coinbase-account) for documentation on how to deposit funds to begin trading.
+**Info**Your trading accounts are separate from your Coinbase accounts. See
+[Deposit from Coinbase account](/api-reference/exchange-api/rest-api/transfers/deposit-from-coinbase-account)
+for documentation on how to deposit funds to begin trading.
 
-## 
+##
 
 [​
 
@@ -19,7 +21,7 @@ API Key Permissions
 
 This endpoint requires either the “view” or “trade” permission.
 
-## 
+##
 
 [​
 
@@ -27,9 +29,10 @@ This endpoint requires either the “view” or “trade” permission.
 
 Rate Limits
 
-This endpoint has a custom rate limit by profile ID: 25 requests per second, up to 50 requests per second in bursts
+This endpoint has a custom rate limit by profile ID: 25 requests per second, up
+to 50 requests per second in bursts
 
-## 
+##
 
 [​
 
@@ -37,16 +40,18 @@ This endpoint has a custom rate limit by profile ID: 25 requests per second, up 
 
 Funds on Hold
 
-When you place an order, the funds for the order are placed on hold. They cannot be used for other orders or withdrawn. Funds will remain on hold until the order is filled or canceled.
+When you place an order, the funds for the order are placed on hold. They cannot
+be used for other orders or withdrawn. Funds will remain on hold until the order
+is filled or canceled.
 
 #### Authorizations
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| cb-access-key | string | required | ​cb-access-keystringheaderrequired |
+| Parameter            | Type   | Required | Description                               |
+| -------------------- | ------ | -------- | ----------------------------------------- |
+| cb-access-key        | string | required | ​cb-access-keystringheaderrequired        |
 | cb-access-passphrase | string | required | ​cb-access-passphrasestringheaderrequired |
-| cb-access-sign | string | required | ​cb-access-signstringheaderrequired |
-| cb-access-timestamp | string | required | ​cb-access-timestampstringheaderrequired |
+| cb-access-sign       | string | required | ​cb-access-signstringheaderrequired       |
+| cb-access-timestamp  | string | required | ​cb-access-timestampstringheaderrequired  |
 
 [​
 
@@ -98,15 +103,15 @@ required
 
 #### Path Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| account\_id | string | required | ​account\_idstringrequired |
+| Parameter  | Type   | Required | Description               |
+| ---------- | ------ | -------- | ------------------------- |
+| account_id | string | required | ​account_idstringrequired |
 
 [​
 
 ](#parameter-account-id)
 
-account\_id
+account_id
 
 string
 
@@ -114,17 +119,17 @@ required
 
 #### Response
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| id | string | required |  |
-| currency | string | required | ​currencystringrequired |
-| balance | string | required | ​balancestringrequired |
-| hold | string | required |  |
-| available | string | required | ​availablestringrequired |
-| profile\_id | string | required | ​profile\_idstringrequired |
-| trading\_enabled | boolean | required | ​trading\_enabledbooleanrequired |
-| pending\_deposit | string | optional | ​pending\_depositstring |
-| display\_name | string | optional |  |
+| Parameter       | Type    | Required | Description                     |
+| --------------- | ------- | -------- | ------------------------------- |
+| id              | string  | required |                                 |
+| currency        | string  | required | ​currencystringrequired         |
+| balance         | string  | required | ​balancestringrequired          |
+| hold            | string  | required |                                 |
+| available       | string  | required | ​availablestringrequired        |
+| profile_id      | string  | required | ​profile_idstringrequired       |
+| trading_enabled | boolean | required | ​trading_enabledbooleanrequired |
+| pending_deposit | string  | optional | ​pending_depositstring          |
+| display_name    | string  | optional |                                 |
 
 200
 
@@ -184,7 +189,7 @@ required
 
 ](#response-profile-id)
 
-profile\_id
+profile_id
 
 string
 
@@ -194,7 +199,7 @@ required
 
 ](#response-trading-enabled)
 
-trading\_enabled
+trading_enabled
 
 boolean
 
@@ -204,7 +209,7 @@ required
 
 ](#response-pending-deposit)
 
-pending\_deposit
+pending_deposit
 
 string
 
@@ -214,6 +219,6 @@ Amount in pending deposits transfers.
 
 ](#response-display-name)
 
-display\_name
+display_name
 
 string

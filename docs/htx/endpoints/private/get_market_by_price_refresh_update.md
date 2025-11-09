@@ -1,6 +1,7 @@
 # GET Market By Price (refresh update)
 
-**Source:** [Market By Price (refresh update)](https://www.htx.com/en-us/opend/newApiPages/?id=7ec5378b-7773-11ed-9966-0242ac110003)
+**Source:**
+[Market By Price (refresh update)](https://www.htx.com/en-us/opend/newApiPages/?id=7ec5378b-7773-11ed-9966-0242ac110003)
 
 **Category:** Websocket Market Data
 
@@ -12,48 +13,50 @@ Required (Private Endpoint)
 
 Signature verification: No
 
-Interface description: User could subscribe to this channel to receive refresh update of Market By Price order book. The update interval is around 100ms.
+Interface description: User could subscribe to this channel to receive refresh
+update of Market By Price order book. The update interval is around 100ms.
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.huobi.pro/feed |
+| Environment                         | Address                      |
+| ----------------------------------- | ---------------------------- |
+| Online                              | wss://api.huobi.pro/feed     |
 | Online (preferred by aws customers) | wss://api-aws.huobi.pro/feed |
 
-Notes: Originally, the wss://api.huobi.pro/ws and wss://api-aws.huobi.pro/ws addresses will still provide services, but may be offline in the future.
+Notes: Originally, the wss://api.huobi.pro/ws and wss://api-aws.huobi.pro/ws
+addresses will still provide services, but may be offline in the future.
 
 #### Request Parameter
 
-| Field Name | Type | Description |
-| --- | --- | --- |
-| ch | string | Required； Operator Name， sub、unsub; |
-| params | string | parameters |
-| cid | string | request id |
+| Field Name | Type   | Description                            |
+| ---------- | ------ | -------------------------------------- |
+| ch         | string | Required； Operator Name， sub、unsub; |
+| params     | string | parameters                             |
+| cid        | string | request id                             |
 
 #### Rule description
 
-| Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
-| "market.btcusdt.mbp.refresh.20" | "market.btcusdt.mbp.refresh.20" | Allowed |
-| "market.btcusdt.mbp.refresh.20","market.ethusdt.mbp.refresh.20","market.htxusdt.mbp.refresh.20" | "market.btcusdt.mbp.refresh.20","market.ethusdt.mbp.refresh.20","market.htxusdt.mbp.refresh.20" | Allowed |
-| "market.btcusdt.mbp.refresh.20","market.ethusdt.mbp.refresh.20","market.htxusdt.mbp.refresh.20" | "market.bnbusdt.mbp.5" | Not Allowed |
+| Subscribe(sub)                                                                                  | Unsubscribe( unsub )                                                                            | Rule        |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------- |
+| "market.btcusdt.mbp.refresh.20"                                                                 | "market.btcusdt.mbp.refresh.20"                                                                 | Allowed     |
+| "market.btcusdt.mbp.refresh.20","market.ethusdt.mbp.refresh.20","market.htxusdt.mbp.refresh.20" | "market.btcusdt.mbp.refresh.20","market.ethusdt.mbp.refresh.20","market.htxusdt.mbp.refresh.20" | Allowed     |
+| "market.btcusdt.mbp.refresh.20","market.ethusdt.mbp.refresh.20","market.htxusdt.mbp.refresh.20" | "market.bnbusdt.mbp.5"                                                                          | Not Allowed |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| symbol | Array | false | Trading symbol (wildcard inacceptable) |  |  |
-| levels | Array | false | Number of price levels | 5,10,20 |  |
-| cid | string | false | Current request's ID |  |  |
+| Parameter | Data Type | Required | Description                            | Value Range | Default Value |
+| --------- | --------- | -------- | -------------------------------------- | ----------- | ------------- |
+| symbol    | Array     | false    | Trading symbol (wildcard inacceptable) |             |               |
+| levels    | Array     | false    | Number of price levels                 | 5,10,20     |               |
+| cid       | string    | false    | Current request's ID                   |             |               |
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| seqNum | integer | false | Sequence number of the message |  |
-| bids | object | false | Bid side, (in descending order of "price"), \["price","size"\] |  |
-| asks | object | false | Ask side, (in ascending order of "price"), \["price","size"\] |  |
+| Parameter | Data Type | Required | Description                                                    | Value Range |
+| --------- | --------- | -------- | -------------------------------------------------------------- | ----------- |
+| seqNum    | integer   | false    | Sequence number of the message                                 |             |
+| bids      | object    | false    | Bid side, (in descending order of "price"), \["price","size"\] |             |
+| asks      | object    | false    | Ask side, (in ascending order of "price"), \["price","size"\]  |             |
 
 #### Subscription Example
 

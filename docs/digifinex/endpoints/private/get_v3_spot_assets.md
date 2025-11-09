@@ -2,7 +2,8 @@
 
 **Title:** Spot account assets
 
-**Source:** [Spot account assets](https://docs.digifinex.com/en-ww/spot/v3/rest.html#spot-account-assets)
+**Source:**
+[Spot account assets](https://docs.digifinex.com/en-ww/spot/v3/rest.html#spot-account-assets)
 
 ## Authentication
 
@@ -14,7 +15,7 @@ Required (Private Endpoint)
 
 ### HTTP Request
 
--   GET `https://openapi.digifinex.com/v3/spot/assets`
+- GET `https://openapi.digifinex.com/v3/spot/assets`
 
 ### Request Parameters
 
@@ -39,10 +40,10 @@ No parameter is available for this endpoint.
 
 ### Response Content
 
-| Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| list | true | object | Account List |
-| currency | true | string | Currency Name |
-| free | true | float | Free |
-| total | true | float | Total |
-| code | true | int | Status |
+| Field    | Mandatory | Request Type | Description   |
+| -------- | --------- | ------------ | ------------- |
+| list     | true      | object       | Account List  |
+| currency | true      | string       | Currency Name |
+| free     | true      | float        | Free          |
+| total    | true      | float        | Total         |
+| code     | true      | int          | Status        |

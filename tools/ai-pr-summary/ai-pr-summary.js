@@ -127,7 +127,7 @@ Generate only the Twitter/X update text (no additional formatting or sections).`
  * @returns {string|null} Exchange name or null
  */
 function extractExchangeName(filePath) {
-  const match = filePath.match(/docs\/([^\/]+)\//)
+  const match = filePath.match(/docs\/([^/]+)\//)
   if (match) {
     const exchangeName = match[1]
     // Capitalize first letter

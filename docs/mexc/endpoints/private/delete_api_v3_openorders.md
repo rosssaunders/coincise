@@ -37,10 +37,9 @@
 ]
 ```
 
--   **DELETE** `/api/v3/openOrders`  
-    
+- **DELETE** `/api/v3/openOrders`
 
-**Permission:** SPOT\_DEAL\_WRITE
+**Permission:** SPOT_DEAL_WRITE
 
 **Weight(IP):** 1
 
@@ -48,29 +47,30 @@ Cancel all pending orders for a single symbol, including OCO pending orders.
 
 Parameters:
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | string | YES | maximum input 5 symbols,separated by ",". e.g. "BTCUSDT,MXUSDT,ADAUSDT" |
-| recvWindow | long | NO |  |
-| timestamp | long | YES |  |
+| Name       | Type   | Mandatory | Description                                                             |
+| ---------- | ------ | --------- | ----------------------------------------------------------------------- |
+| symbol     | string | YES       | maximum input 5 symbols,separated by ",". e.g. "BTCUSDT,MXUSDT,ADAUSDT" |
+| recvWindow | long   | NO        |                                                                         |
+| timestamp  | long   | YES       |                                                                         |
 
 Response:
 
-| Name | Description |
-| --- | --- |
-| symbol | Symbol |
-| origClientOrderId | Original client order id |
-| orderId | order id |
-| clientOrderId | client order id |
-| price | Price |
-| origOty | Original order quantity |
-| executedQty | Executed order quantity |
-| cummulativeQuoteQty | Cummulative quote quantity |
-| status | [order status](#order_status) |
-| timeInForce |  |
-| type | [Order type](#order_type) |
-| side | [order side](#order_side) |
+| Name                | Description                   |
+| ------------------- | ----------------------------- |
+| symbol              | Symbol                        |
+| origClientOrderId   | Original client order id      |
+| orderId             | order id                      |
+| clientOrderId       | client order id               |
+| price               | Price                         |
+| origOty             | Original order quantity       |
+| executedQty         | Executed order quantity       |
+| cummulativeQuoteQty | Cummulative quote quantity    |
+| status              | [order status](#order_status) |
+| timeInForce         |                               |
+| type                | [Order type](#order_type)     |
+| side                | [order side](#order_side)     |
 
 ---
 
-**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#cancel-all-open-orders-on-a-symbol
+**Source:**
+https://mexcdevelop.github.io/apidocs/spot_v3_en#cancel-all-open-orders-on-a-symbol

@@ -1,6 +1,7 @@
 # KuCoin API Documentation Extractor
 
-This project extracts API documentation from KuCoin and converts it to standardized LLM-friendly markdown format.
+This project extracts API documentation from KuCoin and converts it to
+standardized LLM-friendly markdown format.
 
 ## Extraction Approach
 
@@ -21,14 +22,17 @@ Extracts core documentation sections from the KuCoin documentation website:
 
 ### 2. Endpoint Documentation (`extractEndpoints.js`)
 
-Extracts individual endpoint documentation from OpenAPI specifications hosted in the KuCoin Universal SDK GitHub repository:
+Extracts individual endpoint documentation from OpenAPI specifications hosted in
+the KuCoin Universal SDK GitHub repository:
 
 - Processes REST API specs for Spot, Futures, and Margin trading
-- Automatically categorizes endpoints as public/private using the `x-api-channel` field
+- Automatically categorizes endpoints as public/private using the
+  `x-api-channel` field
 - Generates individual markdown files for each endpoint
 - Includes parameters, request/response formats, and examples
 
-**Source:** https://github.com/Kucoin/kucoin-universal-sdk/tree/main/spec/rest/api
+**Source:**
+https://github.com/Kucoin/kucoin-universal-sdk/tree/main/spec/rest/api
 
 ## Directory Structure
 
@@ -75,7 +79,8 @@ Extracts the 6 core documentation files to `docs/kucoin/`.
 pnpm run extract:endpoints
 ```
 
-Extracts individual endpoint files to `docs/kucoin/endpoints/public/` and `docs/kucoin/endpoints/private/`.
+Extracts individual endpoint files to `docs/kucoin/endpoints/public/` and
+`docs/kucoin/endpoints/private/`.
 
 ### Legacy Method (Deprecated)
 
@@ -120,11 +125,15 @@ docs/kucoin/
 - **Dual Extraction**: Combines web scraping and OpenAPI parsing
 - **Smart Classification**: Uses `x-api-channel` field to categorize endpoints
 - **Standardized Format**: Follows the project's LLM-friendly markdown standards
-- **Comprehensive Coverage**: Captures both narrative documentation and technical specifications
+- **Comprehensive Coverage**: Captures both narrative documentation and
+  technical specifications
 
 ## Notes
 
-- Rate limit documentation is critical and requires web scraping as it's not in OpenAPI specs
+- Rate limit documentation is critical and requires web scraping as it's not in
+  OpenAPI specs
 - OpenAPI specs provide the most accurate and complete endpoint documentation
-- The `x-api-channel` field in KuCoin's OpenAPI specs reliably indicates public vs private endpoints
-- All endpoints are properly categorized with 44 public and 113 private endpoints (as of latest extraction)
+- The `x-api-channel` field in KuCoin's OpenAPI specs reliably indicates public
+  vs private endpoints
+- All endpoints are properly categorized with 44 public and 113 private
+  endpoints (as of latest extraction)

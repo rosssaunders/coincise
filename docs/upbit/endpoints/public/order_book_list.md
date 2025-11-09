@@ -2,25 +2,26 @@
 
 **Check the proper endpoint based on your region.**
 
-The examples in this page is written using Singapore fiat code(SGD). Set the quote currency to match your region. The base\_url differs by country/region. Make sure to specify the correct region value for your environment.  
-  
+The examples in this page is written using Singapore fiat code(SGD). Set the
+quote currency to match your region. The base_url differs by country/region.
+Make sure to specify the correct region value for your environment.
+
 \- Singapore (sg): https://sg-api.upbit.com  
 \- Indonesia (id): https://id-api.upbit.com  
 \- Thailand (th): https://th-api.upbit.com
 
-  
-
 Revision History
 
-| Version | Date | Changes |
-| --- | --- | --- |
-| v1.2.1 | 2025-07-02 | [Addition of `count` parameter, up to 30 orderbook levels supported](https://global-docs.upbit.com/changelog/rest_orderbook_unit_options#/) |
-| v1.1.9 | 2025-05-07 | [Change in `orderbook_units` field of the Orderbook API,  
-Increased from 15 to 30](https://global-docs.upbit.com/changelog/orderbook_expansion#/) |
+| Version                                                                                 | Date       | Changes                                                                                                                                     |
+| --------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| v1.2.1                                                                                  | 2025-07-02 | [Addition of `count` parameter, up to 30 orderbook levels supported](https://global-docs.upbit.com/changelog/rest_orderbook_unit_options#/) |
+| v1.1.9                                                                                  | 2025-05-07 | [Change in `orderbook_units` field of the Orderbook API,                                                                                    |
+| Increased from 15 to 30](https://global-docs.upbit.com/changelog/orderbook_expansion#/) |
 
 Rate Limit
 
-Up to 10 calls per second are allowed. This is measured on an IP basis and request counts are shared within the exchange 'orderbook' group.
+Up to 10 calls per second are allowed. This is measured on an IP basis and
+request counts are shared within the exchange 'orderbook' group.
 
 markets
 
@@ -40,10 +41,11 @@ integer
 Defaults to 30
 
 Number of order book entries to query.  
-Returns the specified number of order book entries, based on the highest bid and lowest ask.  
+Returns the specified number of order book entries, based on the highest bid and
+lowest ask.  
 If not specified, the default value is 30.
 
-# 
+#
 
 200
 
@@ -69,7 +71,7 @@ required
 
 Timestamp of the query request (ms)
 
-total\_ask\_size
+total_ask_size
 
 double
 
@@ -77,7 +79,7 @@ required
 
 Total ask volume in the current orderbook.
 
-total\_bid\_size
+total_bid_size
 
 double
 
@@ -85,7 +87,7 @@ required
 
 Total bid volume in the current orderbook.
 
-orderbook\_units
+orderbook_units
 
 array of objects
 
@@ -93,11 +95,11 @@ required
 
 List of order book entries, ordered sequentially from level 1 to level 30.
 
-orderbook\_units\*
+orderbook_units\*
 
 object
 
-ask\_price
+ask_price
 
 double
 
@@ -105,7 +107,7 @@ required
 
 The lowest sell (ask) price in the orderbook.
 
-bid\_price
+bid_price
 
 double
 
@@ -113,7 +115,7 @@ required
 
 The highest buy (bid) price in the orderbook.
 
-ask\_size
+ask_size
 
 double
 
@@ -121,7 +123,7 @@ required
 
 Sell (ask) quantity at the corresponding ask price.
 
-bid\_size
+bid_size
 
 double
 
@@ -129,7 +131,7 @@ required
 
 Buy (bid) quantity at the corresponding bid price.
 
-# 
+#
 
 400
 
@@ -157,7 +159,7 @@ required
 
 Message describing the cause of the error.
 
-# 
+#
 
 404
 
@@ -187,7 +189,7 @@ Message describing the cause of the error.
 
 Updated about 1 month ago
 
-* * *
+---
 
 ShellPythonJavaNode
 
@@ -221,7 +223,7 @@ xxxxxxxxxx
 
 2
 
-  {
+{
 
 3
 
@@ -445,8 +447,9 @@ xxxxxxxxxx
 
 Updated about 1 month ago
 
-* * *
+---
 
 ---
 
-**Source:** [order-book-list](https://global-docs.upbit.com/reference/order-book-list)
+**Source:**
+[order-book-list](https://global-docs.upbit.com/reference/order-book-list)

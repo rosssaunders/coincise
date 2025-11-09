@@ -1,6 +1,7 @@
 # GET [General] Query swap information on order limit
 
-**Source:** [[General] Query swap information on order limit](https://www.htx.com/en-us/opend/newApiPages/?id=8cb83090-77b5-11ed-9966-0242ac110003)
+**Source:**
+[[General] Query swap information on order limit](https://www.htx.com/en-us/opend/newApiPages/?id=8cb83090-77b5-11ed-9966-0242ac110003)
 
 **Category:** Swap Account Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /linear-swap-api/v1/swap\_order\_limit (\[General\] Query swap information on order limit)
+### /linear-swap-api/v1/swap_order_limit (\[General\] Query swap information on order limit)
 
 Request type: POST
 
@@ -16,45 +17,53 @@ Signature verification: Yes
 
 Interface permission: Read
 
-Rate Limit: Generally, the private interface rate limit of API key is at most 144 times every 3 seconds for each UID (Trade Interface: at most 72 times every 3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is shared by all the altcoins contracts delivered by different date).
+Rate Limit: Generally, the private interface rate limit of API key is at most
+144 times every 3 seconds for each UID (Trade Interface: at most 72 times every
+3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is
+shared by all the altcoins contracts delivered by different date).
 
-Interface description: The interface supports cross margin mode and isolated margin mode. The request parameter "contract\_code" supports the contract code of futures, in that the format is BTC-USDT-210625. When both of pair, contract\_type and contract\_code filled in, the contract\_code is the preferred. business\_type is a required parameter when query info of futures contract, and its value must be futures or all.
+Interface description: The interface supports cross margin mode and isolated
+margin mode. The request parameter "contract_code" supports the contract code of
+futures, in that the format is BTC-USDT-210625. When both of pair, contract_type
+and contract_code filled in, the contract_code is the preferred. business_type
+is a required parameter when query info of futures contract, and its value must
+be futures or all.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string  | false | contract type code  | Case-Insenstive.Both uppercase and lowercase are supported.e.g. swap:"BTC-USDT"... , future:"BTC-USDT-210625"... |  |
-| order\_price\_type | string | true | Order Type | "limit": Limit Order，"opponent":BBO，"lightning": Lightning Close，"optimal\_5": Optimal top 5 price，"optimal\_10":Optimal top 10 price，"optimal\_20":Optimal top 20 price,"fok":FOK order,"ioc":ioc order, "opponent\_ioc"：IOC order using the BBO price，"lightning\_ioc"：lightning IOC，"optimal\_5\_ioc"：optimal\_5 IOC，"optimal\_10\_ioc"：optimal\_10 IOC，"optimal\_20\_ioc"：optimal\_20 IOC, "opponent\_fok"：FOK order using the BBO price，"lightning\_fok"：lightning FOK，"optimal\_5\_fok"：optimal\_5 FOK，"optimal\_10\_fok"：optimal\_10 FOK，"optimal\_20\_fok"：optimal\_20 FOK |  |
-| pair | string | false | pair | BTC-USDT |  |
-| contract\_type | string | false | contract type | swap, this\_week, next\_week, quarter, next\_quarter |  |
-| business\_type | string | false | business type, default is swap | futures, swap, all |  |
+| Parameter        | Data Type | Required | Description                    | Value Range                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Default Value |
+| ---------------- | --------- | -------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| contract_code    | string    | false    | contract type code             | Case-Insenstive.Both uppercase and lowercase are supported.e.g. swap:"BTC-USDT"... , future:"BTC-USDT-210625"...                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |               |
+| order_price_type | string    | true     | Order Type                     | "limit": Limit Order，"opponent":BBO，"lightning": Lightning Close，"optimal_5": Optimal top 5 price，"optimal_10":Optimal top 10 price，"optimal_20":Optimal top 20 price,"fok":FOK order,"ioc":ioc order, "opponent_ioc"：IOC order using the BBO price，"lightning_ioc"：lightning IOC，"optimal_5_ioc"：optimal_5 IOC，"optimal_10_ioc"：optimal_10 IOC，"optimal_20_ioc"：optimal_20 IOC, "opponent_fok"：FOK order using the BBO price，"lightning_fok"：lightning FOK，"optimal_5_fok"：optimal_5 FOK，"optimal_10_fok"：optimal_10 FOK，"optimal_20_fok"：optimal_20 FOK |               |
+| pair             | string    | false    | pair                           | BTC-USDT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |               |
+| contract_type    | string    | false    | contract type                  | swap, this_week, next_week, quarter, next_quarter                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |               |
+| business_type    | string    | false    | business type, default is swap | futures, swap, all                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request Processing Result | "ok" , "error" |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| DATA\_START |  | false |  |  |
-| order\_price\_type | string | true | Order Type | "limit": Limit Order，"opponent":BBO，"lightning": Lightning Close，"optimal\_5": Optimal top 5 price，"optimal\_10":Optimal top 10 price，"optimal\_20":Optimal top 20 price,"fok":FOK order,"ioc":ioc order, "opponent\_ioc"：IOC order using the BBO price，"lightning\_ioc"：lightning IOC，"optimal\_5\_ioc"：optimal\_5 IOC，"optimal\_10\_ioc"：optimal\_10 IOC，"optimal\_20\_ioc"：optimal\_20 IOC, "opponent\_fok"：FOK order using the BBO price，"lightning\_fok"：lightning FOK，"optimal\_5\_fok"：optimal\_5 FOK，"optimal\_10\_fok"：optimal\_10 FOK，"optimal\_20\_fok"：optimal\_20 FOK |
-| LIST\_START |  | false |  |  |
-| symbol | string | true | symbol | "BTC","ETH"... |
-| contract\_code | string | true | contract type code | swap:"BTC-USDT"... , future:"BTC-USDT-210625"... |
-| open\_limit | decimal | true | Max open order limit |  |
-| close\_limit | decimal | true | Max close order limit |  |
-| contract\_type | string | true | contract type | swap, this\_week, next\_week, quarter, next\_quarter |
-| pair | string | true | pair | such as: “BTC-USDT” |
-| business\_type | string | true | business type | futures, swap |
-| LIST\_END |  | false |  |  |
-| DATA\_END |  | false |  |  |
+| Parameter        | Data Type | Required | Description                                   | Value Range                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ---------------- | --------- | -------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| status           | string    | true     | Request Processing Result                     | "ok" , "error"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ts               | long      | true     | Time of Respond Generation, Unit: Millisecond |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| DATA_START       |           | false    |                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| order_price_type | string    | true     | Order Type                                    | "limit": Limit Order，"opponent":BBO，"lightning": Lightning Close，"optimal_5": Optimal top 5 price，"optimal_10":Optimal top 10 price，"optimal_20":Optimal top 20 price,"fok":FOK order,"ioc":ioc order, "opponent_ioc"：IOC order using the BBO price，"lightning_ioc"：lightning IOC，"optimal_5_ioc"：optimal_5 IOC，"optimal_10_ioc"：optimal_10 IOC，"optimal_20_ioc"：optimal_20 IOC, "opponent_fok"：FOK order using the BBO price，"lightning_fok"：lightning FOK，"optimal_5_fok"：optimal_5 FOK，"optimal_10_fok"：optimal_10 FOK，"optimal_20_fok"：optimal_20 FOK |
+| LIST_START       |           | false    |                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| symbol           | string    | true     | symbol                                        | "BTC","ETH"...                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| contract_code    | string    | true     | contract type code                            | swap:"BTC-USDT"... , future:"BTC-USDT-210625"...                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| open_limit       | decimal   | true     | Max open order limit                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| close_limit      | decimal   | true     | Max close order limit                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| contract_type    | string    | true     | contract type                                 | swap, this_week, next_week, quarter, next_quarter                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| pair             | string    | true     | pair                                          | such as: “BTC-USDT”                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| business_type    | string    | true     | business type                                 | futures, swap                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| LIST_END         |           | false    |                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| DATA_END         |           | false    |                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 #### Request example
 
@@ -72,7 +81,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 "data":{
 
-"order\_price\_type":
+"order_price_type":
 
 "limit"
 
@@ -84,23 +93,23 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 
-"open\_limit":
+"open_limit":
 
 170000
 
-"close\_limit":
+"close_limit":
 
 170000
 
-"business\_type":
+"business_type":
 
 "swap"
 
-"contract\_type":
+"contract_type":
 
 "swap"
 
@@ -116,25 +125,25 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-211217"
 
-"open\_limit":
+"open_limit":
 
 170000
 
-"close\_limit":
+"close_limit":
 
 170000
 
-"business\_type":
+"business_type":
 
 "futures"
 
-"contract\_type":
+"contract_type":
 
-"next\_week"
+"next_week"
 
 "pair":
 
@@ -148,25 +157,25 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-211210"
 
-"open\_limit":
+"open_limit":
 
 170000
 
-"close\_limit":
+"close_limit":
 
 170000
 
-"business\_type":
+"business_type":
 
 "futures"
 
-"contract\_type":
+"contract_type":
 
-"this\_week"
+"this_week"
 
 "pair":
 
@@ -180,23 +189,23 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-211231"
 
-"open\_limit":
+"open_limit":
 
 170000
 
-"close\_limit":
+"close_limit":
 
 170000
 
-"business\_type":
+"business_type":
 
 "futures"
 
-"contract\_type":
+"contract_type":
 
 "quarter"
 

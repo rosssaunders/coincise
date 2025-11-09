@@ -2,47 +2,57 @@
 
 **Check the proper endpoint based on your region.**
 
-The base\_url differs by country/region. Make sure to specify the correct region value for your environment.  
-  
+The base_url differs by country/region. Make sure to specify the correct region
+value for your environment.
+
 \- Singapore (sg): https://sg-api.upbit.com  
 \- Indonesia (id): https://id-api.upbit.com  
 \- Thailand (th): https://th-api.upbit.com
 
-### 
+###
 
 Differentiation of API Response Objects Due to Asynchronous Address Generation
 
 [](#differentiation-of-api-response-objects-due-to-asynchronous-address-generation)
 
-Deposit address generation works asynchronously. Depending on the completion status at the time of the API call, two types of responses may be returned:
+Deposit address generation works asynchronously. Depending on the completion
+status at the time of the API call, two types of responses may be returned:
 
--   Immediately after the initial request, the response shows whether the creation request was received successfully and includes only the `success` and `message` fields. This response will continue to be returned until the address creation is finished.
--   After the address is generated asynchronously, the response will include the created address details: `currency`, `net_type`, and `deposit_address`. An address is generated only once per currency. Subsequent creation requests will return the previously generated address.
+- Immediately after the initial request, the response shows whether the creation
+  request was received successfully and includes only the `success` and
+  `message` fields. This response will continue to be returned until the address
+  creation is finished.
+- After the address is generated asynchronously, the response will include the
+  created address details: `currency`, `net_type`, and `deposit_address`. An
+  address is generated only once per currency. Subsequent creation requests will
+  return the previously generated address.
 
-If the deposit address is still not generated after some time, please retry the request at intervals.
+If the deposit address is still not generated after some time, please retry the
+request at intervals.
 
 Form-based POST requests are no longer supported from March 1, 2022.
 
-Due to the end of Form support, POST requests sent using URL-encoded Form data are no longer guaranteed to work properly. **Please ensure that the request body is sent** strictly in JSON format.
-
-  
+Due to the end of Form support, POST requests sent using URL-encoded Form data
+are no longer guaranteed to work properly. **Please ensure that the request body
+is sent** strictly in JSON format.
 
 Revision History
 
-| Version | Date | Changes |
-| --- | --- | --- |
-| v1.0.7 | 2023-05-23 | [Addition of `net_type` field](https://global-docs.upbit.com/changelog/net_type#/) |
+| Version | Date       | Changes                                                                            |
+| ------- | ---------- | ---------------------------------------------------------------------------------- |
+| v1.0.7  | 2023-05-23 | [Addition of `net_type` field](https://global-docs.upbit.com/changelog/net_type#/) |
 
 Rate Limit
 
-Up to 30 calls per second are allowed. This is measured on an account basis and request counts are shared within the exchange 'default' group.
-
-  
+Up to 30 calls per second are allowed. This is measured on an account basis and
+request counts are shared within the exchange 'default' group.
 
 API Key Permission
 
-API Key with [authentication](auth) is required, and must have the \[Deposit\] permission.  
-If you encounter an out\_of\_scope error, please check the permission settings in the API Key Management page.
+API Key with [authentication](auth) is required, and must have the \[Deposit\]
+permission.  
+If you encounter an out_of_scope error, please check the permission settings in
+the API Key Management page.
 
 Create Deposit Address
 
@@ -54,7 +64,7 @@ required
 
 Currency code to be queried.
 
-net\_type
+net_type
 
 string
 
@@ -62,7 +72,7 @@ required
 
 Blockchain network type.
 
-# 
+#
 
 200
 
@@ -78,7 +88,7 @@ required
 
 Currency code to be queried.
 
-net\_type
+net_type
 
 string | null
 
@@ -87,7 +97,7 @@ required
 Deposit network type.  
 Blockchain network identifier defined and used by Upbit.
 
-deposit\_address
+deposit_address
 
 string
 
@@ -95,14 +105,17 @@ required
 
 Deposit address for the digital asset.
 
-secondary\_address
+secondary_address
 
 string | null
 
 Secondary withdrawal address (e.g., Destination Tag, Memo, Message).  
-For some digital assets, deposits and withdrawals require a secondary address such as a Destination Tag, Memo, or Message. If the deposit address of the receiving exchange includes a secondary address, you must provide this field when submitting a withdrawal request.
+For some digital assets, deposits and withdrawals require a secondary address
+such as a Destination Tag, Memo, or Message. If the deposit address of the
+receiving exchange includes a secondary address, you must provide this field
+when submitting a withdrawal request.
 
-# 
+#
 
 201
 
@@ -128,7 +141,7 @@ required
 
 Message regarding the deposit address creation request.
 
-# 
+#
 
 400
 
@@ -158,13 +171,13 @@ Message describing the cause of the error.
 
 Updated 16 days ago
 
-* * *
+---
 
 ShellPythonJavaNode
 
 Base URL
 
-https://region\-api.upbit.com/v1/deposits/generate\_coin\_address
+https://region\-api.upbit.com/v1/deposits/generate_coin_address
 
 xxxxxxxxxx
 
@@ -176,19 +189,19 @@ curl \--request POST \\
 
 2
 
-  \--url 'https://{region}-api.upbit.com/v1/deposits/generate\_coin\_address' \\
+\--url 'https://{region}-api.upbit.com/v1/deposits/generate_coin_address' \\
 
 3
 
-  \--header 'Authorization: Bearer {JWT\_TOKEN}' \\
+\--header 'Authorization: Bearer {JWT_TOKEN}' \\
 
 4
 
-  \--header 'Content-Type: application/json' \\
+\--header 'Content-Type: application/json' \\
 
 5
 
-  \--data '
+\--data '
 
 6
 
@@ -200,7 +213,7 @@ curl \--request POST \\
 
 8
 
-"net\_type": "BTC"
+"net_type": "BTC"
 
 9
 
@@ -222,19 +235,19 @@ xxxxxxxxxx
 
 2
 
-  "currency": "BTC",
+"currency": "BTC",
 
 3
 
-  "net\_type": "BTC",
+"net_type": "BTC",
 
 4
 
-  "deposit\_address": "3EusRwybuZUhVDeHL7gh3HSLmbhLcy7NqD",
+"deposit_address": "3EusRwybuZUhVDeHL7gh3HSLmbhLcy7NqD",
 
 5
 
-  "secondary\_address": null
+"secondary_address": null
 
 6
 
@@ -242,8 +255,9 @@ xxxxxxxxxx
 
 Updated 16 days ago
 
-* * *
+---
 
 ---
 
-**Source:** [deposit-address-generation](https://global-docs.upbit.com/reference/deposit-address-generation)
+**Source:**
+[deposit-address-generation](https://global-docs.upbit.com/reference/deposit-address-generation)

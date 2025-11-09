@@ -6,7 +6,8 @@ post https://api.bitfinex.com/v2/auth/w/alert/price:{symbol}:{price}/del
 
 Delete an active alert.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
+/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+theme, base, components, utilities; @layer utilities;
 
 **Ratelimit**: 90 req/min
 
@@ -30,7 +31,7 @@ Defaults to 600
 
 Body Params
 
-RAW\_BODY
+RAW_BODY
 
 json
 
@@ -40,7 +41,7 @@ Defaults to {}
 
 Responses
 
-# 
+#
 
 200
 
@@ -50,7 +51,7 @@ Response body
 
 array of booleans
 
-# 
+#
 
 400
 
@@ -62,7 +63,7 @@ object
 
 Updated 2 months ago
 
-* * *
+---
 
 Language
 
@@ -100,7 +101,8 @@ RESPONSE
 
 Examples
 
-Click `Try It!` to start a request and see the response here! Or choose an example:
+Click `Try It!` to start a request and see the response here! Or choose an
+example:
 
 application/json
 
@@ -108,10 +110,10 @@ application/json
 
 Updated 2 months ago
 
-* * *
+---
 
 ---
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-alert-del
-Path: /v2/auth/w/alert/price:tBTCUSD:600/del
-Method: POST
+
+Section: Account Actions Source:
+https://docs.bitfinex.com/reference/rest-auth-alert-del Path:
+/v2/auth/w/alert/price:tBTCUSD:600/del Method: POST

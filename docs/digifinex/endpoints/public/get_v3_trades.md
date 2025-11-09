@@ -2,7 +2,8 @@
 
 **Title:** Get recent trades
 
-**Source:** [Get recent trades](https://docs.digifinex.com/en-ww/spot/v3/rest.html#get-recent-trades)
+**Source:**
+[Get recent trades](https://docs.digifinex.com/en-ww/spot/v3/rest.html#get-recent-trades)
 
 ## Authentication
 
@@ -14,14 +15,14 @@ Not Required (Public Endpoint)
 
 ### HTTP Request
 
--   GET `https://openapi.digifinex.com/v3/trades`
+- GET `https://openapi.digifinex.com/v3/trades`
 
 ### Request Parameters
 
-| Field | Request Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | string | true | "btc\_usdt" |
-| limit | int | false | Limit of trades returned, default 100, maximum 500 |
+| Field  | Request Type | Mandatory | Description                                        |
+| ------ | ------------ | --------- | -------------------------------------------------- |
+| symbol | string       | true      | "btc_usdt"                                         |
+| limit  | int          | false     | Limit of trades returned, default 100, maximum 500 |
 
 > Response:
 
@@ -51,12 +52,12 @@ Not Required (Public Endpoint)
 
 ### Response Content
 
-| Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| data | true | object | Customer's trades |
-| date | true | int | Timestamp |
-| id | true | int | Trading ID |
-| amount | true | float | Volume |
-| type | true | str | Trading Type |
-| price | true | float | Trading Price |
-| code | true | int | Status |
+| Field  | Mandatory | Request Type | Description       |
+| ------ | --------- | ------------ | ----------------- |
+| data   | true      | object       | Customer's trades |
+| date   | true      | int          | Timestamp         |
+| id     | true      | int          | Trading ID        |
+| amount | true      | float        | Volume            |
+| type   | true      | str          | Trading Type      |
+| price  | true      | float        | Trading Price     |
+| code   | true      | int          | Status            |

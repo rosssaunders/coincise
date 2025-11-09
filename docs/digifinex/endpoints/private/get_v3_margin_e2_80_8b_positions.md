@@ -2,7 +2,8 @@
 
 **Title:** Margin positions
 
-**Source:** [Margin positions](https://docs.digifinex.com/en-ww/spot/v3/rest.html#margin-positions)
+**Source:**
+[Margin positions](https://docs.digifinex.com/en-ww/spot/v3/rest.html#margin-positions)
 
 ## Authentication
 
@@ -14,13 +15,13 @@ Required (Private Endpoint)
 
 ### HTTP Request
 
--   GET `https://openapi.digifinex.com/v3/margin​/positions`
+- GET `https://openapi.digifinex.com/v3/margin​/positions`
 
 ### Request Parameters
 
-| Field | Request Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | str | false | Symbol Name |
+| Field  | Request Type | Mandatory | Description |
+| ------ | ------------ | --------- | ----------- |
+| symbol | str          | false     | Symbol Name |
 
 > Response:
 
@@ -49,18 +50,18 @@ Required (Private Endpoint)
 
 ### Response Content
 
-| Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| margin | true | str | Margin |
-| margin\_rate | true | str | Margin Rate |
-| unrealized\_pnl | true | str | Unrealized Profit and Loss |
-| positions | true | object | Positions |
-| symbol | true | string | Symbol Name |
-| leverage\_ratio | true | float | Leverage Ratio |
-| side | true | string | long, short, empty for none position |
-| amount | true | float | Amount in position |
-| entry\_price | true | float | Entrance price of position |
-| unrealized\_pnl | true | float | Unrealized Profit and Loss |
-| liquidation\_price | true | float | Estimated liquidation price |
-| liquidation\_rate | true | float | liquidation leverage ratio |
-| code | true | int | Status |
+| Field             | Mandatory | Request Type | Description                          |
+| ----------------- | --------- | ------------ | ------------------------------------ |
+| margin            | true      | str          | Margin                               |
+| margin_rate       | true      | str          | Margin Rate                          |
+| unrealized_pnl    | true      | str          | Unrealized Profit and Loss           |
+| positions         | true      | object       | Positions                            |
+| symbol            | true      | string       | Symbol Name                          |
+| leverage_ratio    | true      | float        | Leverage Ratio                       |
+| side              | true      | string       | long, short, empty for none position |
+| amount            | true      | float        | Amount in position                   |
+| entry_price       | true      | float        | Entrance price of position           |
+| unrealized_pnl    | true      | float        | Unrealized Profit and Loss           |
+| liquidation_price | true      | float        | Estimated liquidation price          |
+| liquidation_rate  | true      | float        | liquidation leverage ratio           |
+| code              | true      | int          | Status                               |

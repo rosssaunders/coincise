@@ -2,61 +2,69 @@
 
 **Check the proper endpoint based on your region.**
 
-The base\_url differs by country/region. Make sure to specify the correct region value for your environment.  
-  
+The base_url differs by country/region. Make sure to specify the correct region
+value for your environment.
+
 \- Singapore (sg): https://sg-api.upbit.com  
 \- Indonesia (id): https://id-api.upbit.com  
 \- Thailand (th): https://th-api.upbit.com
 
-You can set query parameters to retrieve a filtered list of withdrawals that meet the specified conditions. Currency, withdrawal status, UUID list, or TXID list can be used as filter parameters. If no conditions are specified, the API returns the most recent 100 withdrawal records.
-
-  
+You can set query parameters to retrieve a filtered list of withdrawals that
+meet the specified conditions. Currency, withdrawal status, UUID list, or TXID
+list can be used as filter parameters. If no conditions are specified, the API
+returns the most recent 100 withdrawal records.
 
 Revision History
 
-| Version | Date | Changes |
-| --- | --- | --- |
-| v1.0.7 | 2023-05-23 | [Addition of `net_type` field](https://global-docs.upbit.com/changelog/net_type#/) |
+| Version | Date       | Changes                                                                            |
+| ------- | ---------- | ---------------------------------------------------------------------------------- |
+| v1.0.7  | 2023-05-23 | [Addition of `net_type` field](https://global-docs.upbit.com/changelog/net_type#/) |
 
 Rate Limit
 
-Up to 30 calls per second are allowed. This is measured on an account basis and request counts are shared within the exchange 'default' group.
-
-  
+Up to 30 calls per second are allowed. This is measured on an account basis and
+request counts are shared within the exchange 'default' group.
 
 API Key Permission
 
-This API requires [authentication](auth) and an API Key with \[View Withdrawals\] permission.  
-If you receive an out\_of\_scope permission error, please verify your API Key permissions in the API Key Management page.
+This API requires [authentication](auth) and an API Key with \[View
+Withdrawals\] permission.  
+If you receive an out_of_scope permission error, please verify your API Key
+permissions in the API Key Management page.
 
 currency
 
 string
 
-Currency code to filter withdrawal history. A filter parameter used to narrow down results by currency code. if not provided, returns the latest withdrawals across all currencies.
+Currency code to filter withdrawal history. A filter parameter used to narrow
+down results by currency code. if not provided, returns the latest withdrawals
+across all currencies.
 
 state
 
 string
 
 Withdrawal processing status to be queried.  
-A filter parameter used to limit the query target by withdrawal processing status. Only withdrawal information with the specified status will be returned in the response.
+A filter parameter used to limit the query target by withdrawal processing
+status. Only withdrawal information with the specified status will be returned
+in the response.
 
 The available values are as follows:
 
--   `WAITING`: Waiting
--   `PROCESSING`: Processing
--   `DONE`: Completed
--   `FAILED`: Failed
--   `CANCELLED`: Cancelled
--   `REJECTED`: Rejected
+- `WAITING`: Waiting
+- `PROCESSING`: Processing
+- `DONE`: Completed
+- `FAILED`: Failed
+- `CANCELLED`: Cancelled
+- `REJECTED`: Rejected
 
 uuids
 
 array of strings
 
 List of UUIDs to query withdrawal information.  
-Only the deposit/withdrawal information corresponding to the specified UUIDs will be returned. Up to 100 UUIDs can be specified.
+Only the deposit/withdrawal information corresponding to the specified UUIDs
+will be returned. Up to 100 UUIDs can be specified.
 
 The uuids and txids parameters cannot be used simultaneously.
 
@@ -71,7 +79,8 @@ txids
 array of strings
 
 List of transaction IDs to query withdrawal information.  
-Only the deposit/withdrawal information corresponding to the specified txids will be returned. Up to 100 txids can be specified.
+Only the deposit/withdrawal information corresponding to the specified txids
+will be returned. Up to 100 txids can be specified.
 
 The uuids and txids parameters cannot be used simultaneously.
 
@@ -88,8 +97,10 @@ integer
 Defaults to 100
 
 Number of items per page.  
-A parameter for pagination that allows you to specify the number of items per page to retrieve.  
-Up to 100 items can be retrieved at a time, and if not specified, the default value is 100.
+A parameter for pagination that allows you to specify the number of items per
+page to retrieve.  
+Up to 100 items can be retrieved at a time, and if not specified, the default
+value is 100.
 
 page
 
@@ -101,7 +112,7 @@ Page number for pagination.
 A parameter for pagination that allows you to specify the page to retrieve.  
 If not specified, the default value is 1.
 
-order\_by
+order_by
 
 string
 
@@ -110,8 +121,10 @@ enum
 Defaults to desc
 
 Sorting method for query results.  
-Returns a list of orders sorted according to the specified method based on the order creation time.  
-The available values are "desc" (descending, latest orders first) or "asc" (ascending, oldest orders first).  
+Returns a list of orders sorted according to the specified method based on the
+order creation time.  
+The available values are "desc" (descending, latest orders first) or "asc"
+(ascending, oldest orders first).  
 The default value is "desc".
 
 Allowed:
@@ -123,16 +136,20 @@ from
 string
 
 Cursor for pagination.  
-By entering the "uuid" value included in the response into this field, you can continue retrieving up to "limit" withdrawal records made after the specified withdrawal time.
+By entering the "uuid" value included in the response into this field, you can
+continue retrieving up to "limit" withdrawal records made after the specified
+withdrawal time.
 
 to
 
 string
 
 Cursor for pagination.  
-By entering the "uuid" value included in the response into this field, you can retrieve up to "limit" withdrawal records made before the specified withdrawal time.
+By entering the "uuid" value included in the response into this field, you can
+retrieve up to "limit" withdrawal records made before the specified withdrawal
+time.
 
-# 
+#
 
 200
 
@@ -168,7 +185,7 @@ required
 
 Currency code to be queried.
 
-net\_type
+net_type
 
 string | null
 
@@ -196,16 +213,16 @@ required
 
 Withdrawal status.
 
--   `WAITING`: Waiting
--   `PROCESSING`: In progress
--   `DONE`: Completed
--   `FAILED`: Failed
--   `CANCELLED`: Cancelled
--   `REJECTED`: Rejected
+- `WAITING`: Waiting
+- `PROCESSING`: In progress
+- `DONE`: Completed
+- `FAILED`: Failed
+- `CANCELLED`: Cancelled
+- `REJECTED`: Rejected
 
 `WAITING` `PROCESSING` `DONE` `FAILED` `CANCELLED` `REJECTED`
 
-created\_at
+created_at
 
 string
 
@@ -213,7 +230,7 @@ required
 
 Time when the withdrawal was created.
 
-done\_at
+done_at
 
 string | null
 
@@ -236,7 +253,7 @@ required
 
 Fee amount for the withdrawal.
 
-transaction\_type
+transaction_type
 
 string
 
@@ -249,12 +266,12 @@ Defaults to default
 Withdrawal type.  
 The available values are as follows:
 
--   `default`: General withdrawal
--   `internal`: Internal (between Upbit accounts)
+- `default`: General withdrawal
+- `internal`: Internal (between Upbit accounts)
 
 `default` `internal`
 
-is\_cancelable
+is_cancelable
 
 boolean
 
@@ -262,7 +279,7 @@ required
 
 Indicates whether the withdrawal can be cancelled.
 
-# 
+#
 
 400
 
@@ -290,7 +307,7 @@ required
 
 Message describing the cause of the error.
 
-# 
+#
 
 401
 
@@ -320,7 +337,7 @@ Message describing the cause of the error.
 
 Updated 16 days ago
 
-* * *
+---
 
 ShellPythonJavaNode
 
@@ -360,7 +377,7 @@ xxxxxxxxxx
 
 2
 
-  {
+{
 
 3
 
@@ -412,7 +429,7 @@ xxxxxxxxxx
 
 15
 
-  }
+}
 
 16
 
@@ -420,8 +437,9 @@ xxxxxxxxxx
 
 Updated 16 days ago
 
-* * *
+---
 
 ---
 
-**Source:** [withdrawal-list-inquiry](https://global-docs.upbit.com/reference/withdrawal-list-inquiry)
+**Source:**
+[withdrawal-list-inquiry](https://global-docs.upbit.com/reference/withdrawal-list-inquiry)

@@ -22,37 +22,37 @@ get /api/v3/capital/transfer/tranId?tranId=cb28c88cd20c42819e4d5148d5fb5742&time
 }
 ```
 
--   **GET** `/api/v3/capital/transfer/tranId`  
-    
+- **GET** `/api/v3/capital/transfer/tranId`
 
-**Permission:** SPOT\_TRANSFER\_R
+**Permission:** SPOT_TRANSFER_R
 
 **Weight(IP):** 1
 
 **request**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| tranId | string | YES | tranId |
-| timestamp | string | YES | timestamp |
-| signature | string | YES | signature |
+| Name      | Type   | Mandatory | Description |
+| --------- | ------ | --------- | ----------- |
+| tranId    | string | YES       | tranId      |
+| timestamp | string | YES       | timestamp   |
+| signature | string | YES       | signature   |
 
 Only can quary the data for the last six months
 
 **response**
 
-| Name | Description |
-| --- | --- |
-| tranId | tranId |
-| clientTranId | client ID |
-| asset | coin |
-| amount | amount |
+| Name            | Description     |
+| --------------- | --------------- |
+| tranId          | tranId          |
+| clientTranId    | client ID       |
+| asset           | coin            |
+| amount          | amount          |
 | fromAccountType | fromAccountType |
-| toAccountType | toAccountType |
-| symbol | symbol |
-| status | status |
-| timestamp | timestamp |
+| toAccountType   | toAccountType   |
+| symbol          | symbol          |
+| status          | status          |
+| timestamp       | timestamp       |
 
 ---
 
-**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#query-user-universal-transfer-history-by-tranid
+**Source:**
+https://mexcdevelop.github.io/apidocs/spot_v3_en#query-user-universal-transfer-history-by-tranid

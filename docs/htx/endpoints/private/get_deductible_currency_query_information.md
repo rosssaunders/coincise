@@ -1,6 +1,7 @@
 # GET Deductible currency query information
 
-**Source:** [Deductible currency query information](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-18f7c4cea32)
+**Source:**
+[Deductible currency query information](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-18f7c4cea32)
 
 **Category:** Account
 
@@ -18,29 +19,30 @@ Interface permission: Read
 
 Rate Limit: 5 times/1s
 
-Interface description: Users query asset information that can be used to deduct handling fees.
+Interface description: Users query asset information that can be used to deduct
+handling fees.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
 | Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
+| --------- | --------- | -------- | ----------- | ----------- | ------------- |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| code | integer | false | code |  |
-| message | string | false | message |  |
-| DATA\_START | object | true |  |  |
-| currency | string | true | The currency of this balance |  |
-| DATA\_START |  | false |  |  |
+| Parameter  | Data Type | Required | Description                  | Value Range |
+| ---------- | --------- | -------- | ---------------------------- | ----------- |
+| code       | integer   | false    | code                         |             |
+| message    | string    | false    | message                      |             |
+| DATA_START | object    | true     |                              |             |
+| currency   | string    | true     | The currency of this balance |             |
+| DATA_START |           | false    |                              |             |
 
 #### Request example
 

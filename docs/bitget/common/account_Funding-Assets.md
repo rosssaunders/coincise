@@ -4,7 +4,7 @@ Frequency limit: 10 times/1s (User ID)
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/account/funding-assets
+- GET /api/v2/account/funding-assets
 
 Request Example
 
@@ -14,9 +14,9 @@ curl "https://api.bitget.com/api/v2/account/funding-assets" \  -H "ACCESS-KEY:yo
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| coin | String | No | default all coin 
+| Parameter | Type   | Required | Description      |
+| :-------- | :----- | :------- | :--------------- |
+| coin      | String | No       | default all coin |
 
 Response Example
 
@@ -26,12 +26,12 @@ Response Example
 
 ### Response parameters[​](#response-parameters "Direct link to Response parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| data | List&lt;Object&gt; | assets List 
-| &gt; coin | String | coin 
-| &gt; available | String | available 
-| &gt; frozen | String | forzen 
-| &gt; usdtValue | String | USDT value
+| Parameter      | Type               | Description |
+| :------------- | :----------------- | :---------- |
+| data           | List&lt;Object&gt; | assets List |
+| &gt; coin      | String             | coin        |
+| &gt; available | String             | available   |
+| &gt; frozen    | String             | forzen      |
+| &gt; usdtValue | String             | USDT value  |
 
 > **Source:** https://www.bitget.com/api-doc/common/account/Funding-Assets

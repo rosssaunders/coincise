@@ -4,11 +4,12 @@ Frequency limit: 1 time/10s (uid)
 
 ### Description[​](#description "Direct link to Description")
 
-Query the contract asset information of all sub-accounts. **ND Brokers are not allowed to call this endpoint**
+Query the contract asset information of all sub-accounts. **ND Brokers are not
+allowed to call this endpoint**
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/mix/account/sub-account-assets
+- GET /api/v2/mix/account/sub-account-assets
 
 Request Example
 
@@ -18,9 +19,9 @@ curl "https://api.bitget.com/api/v2/mix/account/sub-account-assets?productType=U
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures 
+| Parameter   | Type   | Required | Description                                                                                                                                      |
+| :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| productType | String | Yes      | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures |
 
 Response Example
 
@@ -30,20 +31,21 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| &gt;userId | String | Sub account userId 
-| &gt;assetList | String | Collection of all futures assets under sub-accounts 
-| &gt;&gt;marginCoin | String | Margin coin 
-| &gt;&gt;locked | String | Locked quantity (margin coin) 
-| &gt;&gt;available | String | Available quantity in the account 
-| &gt;&gt;crossedMaxAvailable | String | Maximum available balance to open positions under the cross margin mode (margin coin) 
-| &gt;&gt;isolatedMaxAvailable | String | Maximum available balance to open positions under the isolated margin mode (margin coin) 
-| &gt;&gt;maxTransferOut | String | Maximum transferable amount 
-| &gt;&gt;equity | String | Account equity (margin coin) 
-| &gt;&gt;usdtEquity | String | Account equity in USDT 
-| &gt;&gt;btcEquity | String | Account equity in BTC 
-| &gt;&gt;unrealizedPL | String | PnL of open positions 
-| &gt;&gt;coupon | String | Trading bonus
+| Parameter                    | Type   | Description                                                                              |
+| :--------------------------- | :----- | :--------------------------------------------------------------------------------------- |
+| &gt;userId                   | String | Sub account userId                                                                       |
+| &gt;assetList                | String | Collection of all futures assets under sub-accounts                                      |
+| &gt;&gt;marginCoin           | String | Margin coin                                                                              |
+| &gt;&gt;locked               | String | Locked quantity (margin coin)                                                            |
+| &gt;&gt;available            | String | Available quantity in the account                                                        |
+| &gt;&gt;crossedMaxAvailable  | String | Maximum available balance to open positions under the cross margin mode (margin coin)    |
+| &gt;&gt;isolatedMaxAvailable | String | Maximum available balance to open positions under the isolated margin mode (margin coin) |
+| &gt;&gt;maxTransferOut       | String | Maximum transferable amount                                                              |
+| &gt;&gt;equity               | String | Account equity (margin coin)                                                             |
+| &gt;&gt;usdtEquity           | String | Account equity in USDT                                                                   |
+| &gt;&gt;btcEquity            | String | Account equity in BTC                                                                    |
+| &gt;&gt;unrealizedPL         | String | PnL of open positions                                                                    |
+| &gt;&gt;coupon               | String | Trading bonus                                                                            |
 
-> **Source:** https://www.bitget.com/api-doc/contract/account/Get-Sub-Account-Contract-Assets
+> **Source:**
+> https://www.bitget.com/api-doc/contract/account/Get-Sub-Account-Contract-Assets

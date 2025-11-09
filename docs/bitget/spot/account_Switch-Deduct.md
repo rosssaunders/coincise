@@ -6,7 +6,7 @@ Rate Limit: 1 req/sec/UID
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   POST /api/v2/spot/account/switch-deduct
+- POST /api/v2/spot/account/switch-deduct
 
 Request Example
 
@@ -16,9 +16,9 @@ curl -X POST "https://api.bitget.com/api/v2/spot/account/switch-deduct" \   -H "
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| deduct | String | Yes | on/off 
+| Parameter | Type   | Required | Description |
+| :-------- | :----- | :------- | :---------- |
+| deduct    | String | Yes      | on/off      |
 
 Response Example
 
@@ -29,6 +29,6 @@ Response Example
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
 | Parameter | Type | Description |
-| :-- | :-- | :-- |
+| :-------- | :--- | :---------- |
 
 > **Source:** https://www.bitget.com/api-doc/spot/account/Switch-Deduct

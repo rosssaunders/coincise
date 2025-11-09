@@ -1,6 +1,7 @@
 # GET Query a Batch of Trade Records of a Contract
 
-**Source:** [Query a Batch of Trade Records of a Contract](https://www.htx.com/en-us/opend/newApiPages/?id=5d517ef5-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Query a Batch of Trade Records of a Contract](https://www.htx.com/en-us/opend/newApiPages/?id=5d517ef5-77b6-11ed-9966-0242ac110003)
 
 **Category:** Swap Market Data interface
 
@@ -18,40 +19,41 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | contract code | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USD" |  |
-| size | int | true | Number of Trading Records Acquisition | \[1, 2000\] | 1 |
+| Parameter     | Data Type | Required | Description                           | Value Range                                                                | Default Value |
+| ------------- | --------- | -------- | ------------------------------------- | -------------------------------------------------------------------------- | ------------- |
+| contract_code | string    | true     | contract code                         | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USD" |               |
+| size          | int       | true     | Number of Trading Records Acquisition | \[1, 2000\]                                                                | 1             |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| ch | string | true | Data belonged channel，Format： market.$contract\_code.trade.detail |  |
-| status | string | true |  | "ok"，"error" |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| DATA> (ATTRS: DATA\_START |  | false |  |  |
-| id | long | true | Unique Order Id(symbol level) |  |
-| ts | long | true | Latest Creation Time |  |
-| LIST> (ATTRS: DATA\_START |  | false |  |  |
-| id | long | true | Unique Transaction Id(symbol level) |  |
-| price | decimal | true | Price |  |
-| amount | decimal | true | Quantity(Cont.). Sum of both buy and sell sides |  |
-| direction | string | true | The direction to buy or sell is the direction of the taker (active transaction) |  |
-| ts | long | true | Order Creation Time |  |
-| quantity | decimal | true | trading quantity(coin) |  |
-| LIST\_END |  | false |  |  |
-| DATA> (ATTRS: DATA\_END |  | false |  |  |
+| Parameter                | Data Type | Required | Description                                                                     | Value Range   |
+| ------------------------ | --------- | -------- | ------------------------------------------------------------------------------- | ------------- |
+| ch                       | string    | true     | Data belonged channel，Format： market.$contract_code.trade.detail              |               |
+| status                   | string    | true     |                                                                                 | "ok"，"error" |
+| ts                       | long      | true     | Time of Respond Generation, Unit: Millisecond                                   |               |
+| DATA> (ATTRS: DATA_START |           | false    |                                                                                 |               |
+| id                       | long      | true     | Unique Order Id(symbol level)                                                   |               |
+| ts                       | long      | true     | Latest Creation Time                                                            |               |
+| LIST> (ATTRS: DATA_START |           | false    |                                                                                 |               |
+| id                       | long      | true     | Unique Transaction Id(symbol level)                                             |               |
+| price                    | decimal   | true     | Price                                                                           |               |
+| amount                   | decimal   | true     | Quantity(Cont.). Sum of both buy and sell sides                                 |               |
+| direction                | string    | true     | The direction to buy or sell is the direction of the taker (active transaction) |               |
+| ts                       | long      | true     | Order Creation Time                                                             |               |
+| quantity                 | decimal   | true     | trading quantity(coin)                                                          |               |
+| LIST_END                 |           | false    |                                                                                 |               |
+| DATA> (ATTRS: DATA_END   |           | false    |                                                                                 |               |
 
 Notes:  
-There are "quantity" parameter in return data only after 21:00:00 on February 3, 2021
+There are "quantity" parameter in return data only after 21:00:00 on February 3,
+2021
 
 #### Request example
 

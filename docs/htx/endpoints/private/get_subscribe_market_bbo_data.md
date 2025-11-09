@@ -1,6 +1,7 @@
 # GET Subscribe Market BBO Data
 
-**Source:** [Subscribe Market BBO Data](https://www.htx.com/en-us/opend/newApiPages/?id=28c339da-77ae-11ed-9966-0242ac110003)
+**Source:**
+[Subscribe Market BBO Data](https://www.htx.com/en-us/opend/newApiPages/?id=28c339da-77ae-11ed-9966-0242ac110003)
 
 **Category:** WebSocket Market Interface
 
@@ -14,52 +15,56 @@ Signature verification: No
 
 Interface permission: Read
 
-Rate Limit: The rate limit for “req” request is 50 times at once. No limit for “sub” request as the data will be pushed by sever voluntarily.
+Rate Limit: The rate limit for “req” request is 50 times at once. No limit for
+“sub” request as the data will be pushed by sever voluntarily.
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.hbdm.com/ws |
-| Online (preferred by aws customers) | wss://api.hbdm.vn/ws |
+| Environment                         | Address               |
+| ----------------------------------- | --------------------- |
+| Online                              | wss://api.hbdm.com/ws |
+| Online (preferred by aws customers) | wss://api.hbdm.vn/ws  |
 
 #### Request Parameter
 
 | Field Name | Type | Description |
-| --- | --- | --- |
+| ---------- | ---- | ----------- |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
+| -------------- | -------------------- | ---- |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | true | Pairs |  | Case-Insenstive.Both uppercase and lowercase are supported.. E.g.: "BTC190412" stands for BTC contract with the the delivery date of 20190412, "BTC\_CW" stands for BTC weekly contract, "BTC\_NW" stands for BTC bi-weekly contract, "BTC\_CQ" stands for BTC quarterly contract."BTC\_NQ" stands for BTC next quarterly contract. contract code is supported too, e.g.: "BTC200918"(weekly), "BTC200925"(Bi-weekly),"BTC201225"(quarterly),"BTC210326"(next quarterly) |
+| Parameter | Data Type | Required | Description | Value Range | Default Value                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| --------- | --------- | -------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol    | string    | true     | Pairs       |             | Case-Insenstive.Both uppercase and lowercase are supported.. E.g.: "BTC190412" stands for BTC contract with the the delivery date of 20190412, "BTC_CW" stands for BTC weekly contract, "BTC_NW" stands for BTC bi-weekly contract, "BTC_CQ" stands for BTC quarterly contract."BTC_NQ" stands for BTC next quarterly contract. contract code is supported too, e.g.: "BTC200918"(weekly), "BTC200925"(Bi-weekly),"BTC201225"(quarterly),"BTC210326"(next quarterly) |
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| ts | int | true | Timestamp of Respond Generation, Unit: Millisecond |  |
-| ch | string | true | Data channel, Format：market.$symbol.bbo |  |
-| TICK\_START |  | false |  |  |
-| mrid | long | true | Order ID |  |
-| id | long | true | tick ID |  |
-| ask | object | false | Best Ask Quotation,\[price(Ask price), vol(Ask order (cont.) )\] |  |
-| bid | object | false | Best Bid Quotation,\[price(Bid price), vol(Bid order(Cont.))\] |  |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| version | long | true | version ID. |  |
-| ch | string | true | Data channel, Format： market.$symbol.bbo |  |
-| TICK\_END |  | false |  |  |
+| Parameter  | Data Type | Required | Description                                                      | Value Range |
+| ---------- | --------- | -------- | ---------------------------------------------------------------- | ----------- |
+| ts         | int       | true     | Timestamp of Respond Generation, Unit: Millisecond               |             |
+| ch         | string    | true     | Data channel, Format：market.$symbol.bbo                         |             |
+| TICK_START |           | false    |                                                                  |             |
+| mrid       | long      | true     | Order ID                                                         |             |
+| id         | long      | true     | tick ID                                                          |             |
+| ask        | object    | false    | Best Ask Quotation,\[price(Ask price), vol(Ask order (cont.) )\] |             |
+| bid        | object    | false    | Best Bid Quotation,\[price(Bid price), vol(Bid order(Cont.))\]   |             |
+| ts         | long      | true     | Time of Respond Generation, Unit: Millisecond                    |             |
+| version    | long      | true     | version ID.                                                      |             |
+| ch         | string    | true     | Data channel, Format： market.$symbol.bbo                        |             |
+| TICK_END   |           | false    |                                                                  |             |
 
 Notes:  
 Once Best Bid/Ask Quotations (price,volume) change, it will be pushed.  
-When the price and volume of Best Bid/Ask Quotations both change, only the latest BBO will be pushed.  
-When the data received by the client is failed or delayed, the old data buffer in the server will be discarded.The latest BBO will be pushed.  
-version（version number). Use match id directly to ensure it is globally unique and the value of version number pushed is the largest.
+When the price and volume of Best Bid/Ask Quotations both change, only the
+latest BBO will be pushed.  
+When the data received by the client is failed or delayed, the old data buffer
+in the server will be discarded.The latest BBO will be pushed.  
+version（version number). Use match id directly to ensure it is globally unique
+and the value of version number pushed is the largest.
 
 #### Subscription Example
 
@@ -67,7 +72,7 @@ version（version number). Use match id directly to ensure it is globally unique
 
 "sub":
 
-"market.BTC\_CQ.bbo"
+"market.BTC_CQ.bbo"
 
 "id":
 
@@ -89,7 +94,7 @@ version（version number). Use match id directly to ensure it is globally unique
 
 "subbed":
 
-"market.BTC\_CQ.bbo"
+"market.BTC_CQ.bbo"
 
 "ts":
 
@@ -103,7 +108,7 @@ version（version number). Use match id directly to ensure it is globally unique
 
 "ch":
 
-"market.BTC\_CQ.bbo"
+"market.BTC_CQ.bbo"
 
 "ts":
 
@@ -161,7 +166,7 @@ version（version number). Use match id directly to ensure it is globally unique
 
 "ch":
 
-"market.BTC\_CQ.bbo"
+"market.BTC_CQ.bbo"
 
 }
 
@@ -173,7 +178,7 @@ version（version number). Use match id directly to ensure it is globally unique
 
 "unsub":
 
-"market.BTC\_CQ.bbo"
+"market.BTC_CQ.bbo"
 
 "id":
 

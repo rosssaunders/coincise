@@ -1,6 +1,7 @@
 # GET Get a single currency asset
 
-Source: [https://doc.xt.com/docs/spot/Balance/GetSingleCurrencyAsset](https://doc.xt.com/docs/spot/Balance/GetSingleCurrencyAsset)
+Source:
+[https://doc.xt.com/docs/spot/Balance/GetSingleCurrencyAsset](https://doc.xt.com/docs/spot/Balance/GetSingleCurrencyAsset)
 
 # Get a single currency asset
 
@@ -8,15 +9,15 @@ Source: [https://doc.xt.com/docs/spot/Balance/GetSingleCurrencyAsset](https://do
 
 **GET** `/v4/balance`
 
-* * *
+---
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| Name | Type | Mandatory | Default | Description | Ranges |
-| --- | --- | --- | --- | --- | --- |
-| currency | string | Yes | N/A | Example: usdt | \- |
+| Name     | Type   | Mandatory | Default | Description   | Ranges |
+| -------- | ------ | --------- | ------- | ------------- | ------ |
+| currency | string | Yes       | N/A     | Example: usdt | \-     |
 
-* * *
+---
 
 ### Code Example[​](#code-example "Direct link to Code Example")
 
@@ -32,7 +33,7 @@ public String getBalance(){    // Your request logic here}
 # Your request logic here
 ```
 
-* * *
+---
 
 ### Response Example[​](#response-example "Direct link to Response Example")
 

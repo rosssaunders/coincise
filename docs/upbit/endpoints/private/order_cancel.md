@@ -2,35 +2,38 @@
 
 **Check the proper endpoint based on your region.**
 
-The examples in this page is written using Singapore fiat code(SGD). Set the quote currency to match your region. The base\_url differs by country/region. Make sure to specify the correct region value for your environment.  
-  
+The examples in this page is written using Singapore fiat code(SGD). Set the
+quote currency to match your region. The base_url differs by country/region.
+Make sure to specify the correct region value for your environment.
+
 \- Singapore (sg): https://sg-api.upbit.com  
 \- Indonesia (id): https://id-api.upbit.com  
 \- Thailand (th): https://th-api.upbit.com
 
 Either \`uuid\` or \`identifier\` must be included when canceling an order.
 
-Both parameters are optional, but to specify the order to be canceled, at least one of these parameters must be included. If both \`uuid\` and \`identifier\` are provided, the cancellation will be based on the \`uuid\`.
-
-  
+Both parameters are optional, but to specify the order to be canceled, at least
+one of these parameters must be included. If both \`uuid\` and \`identifier\`
+are provided, the cancellation will be based on the \`uuid\`.
 
 Revision History
 
-| Version | Date | Changes |
-| --- | --- | --- |
-| v1.2.1 | 2025-07-02 | [Addition of `Self-Match Prevention (SMP)` feature](https://global-docs.upbit.com/changelog/smp#/) |
-| v1.1.9 | 2024-12-04 | [Addition of `identifier` field](https://global-docs.upbit.com/changelog/myorder_identifier#/) |
+| Version | Date       | Changes                                                                                            |
+| ------- | ---------- | -------------------------------------------------------------------------------------------------- |
+| v1.2.1  | 2025-07-02 | [Addition of `Self-Match Prevention (SMP)` feature](https://global-docs.upbit.com/changelog/smp#/) |
+| v1.1.9  | 2024-12-04 | [Addition of `identifier` field](https://global-docs.upbit.com/changelog/myorder_identifier#/)     |
 
 Rate Limit
 
-Up to 30 calls per second are allowed. This is measured on an account basis and request counts are shared within the exchange 'default' group.
-
-  
+Up to 30 calls per second are allowed. This is measured on an account basis and
+request counts are shared within the exchange 'default' group.
 
 API Key Permission
 
-This API requires [authentication](auth), and an API Key with the \[Make Orders\] permission must be used.  
-If you encounter an out\_of\_scope error, please check and adjust your permissions in the API Key Management page.
+This API requires [authentication](auth), and an API Key with the \[Make
+Orders\] permission must be used.  
+If you encounter an out_of_scope error, please check and adjust your permissions
+in the API Key Management page.
 
 uuid
 
@@ -45,9 +48,10 @@ identifier
 string
 
 Client-assigned identifier of the order to be canceled.  
-Used when canceling an order by the order identifier assigned by the user or client at the time of order creation.
+Used when canceling an order by the order identifier assigned by the user or
+client at the time of order creation.
 
-# 
+#
 
 200
 
@@ -85,7 +89,7 @@ Order side: "ask" (sell), "bid" (buy).
 
 `ask` `bid`
 
-ord\_type
+ord_type
 
 string
 
@@ -95,10 +99,10 @@ required
 
 Order type.
 
--   `limit`: Limit buy/sell order
--   `price`: Market buy order
--   `market`: Market sell order
--   `best`: Best limit buy/sell order
+- `limit`: Limit buy/sell order
+- `price`: Market buy order
+- `market`: Market sell order
+- `best`: Best limit buy/sell order
 
 `limit` `price` `market` `best`
 
@@ -120,12 +124,12 @@ required
 
 Order status.
 
--   `wait`: Waiting for execution
--   `watch`: Scheduled order
+- `wait`: Waiting for execution
+- `watch`: Scheduled order
 
 `wait` `watch`
 
-created\_at
+created_at
 
 string
 
@@ -139,7 +143,7 @@ string
 
 Order request amount or quantity.
 
-remaining\_volume
+remaining_volume
 
 string
 
@@ -147,7 +151,7 @@ required
 
 Remaining order quantity after execution.
 
-executed\_volume
+executed_volume
 
 string
 
@@ -155,7 +159,7 @@ required
 
 Executed order quantity.
 
-reserved\_fee
+reserved_fee
 
 string
 
@@ -163,7 +167,7 @@ required
 
 Fee amount reserved for the order.
 
-remaining\_fee
+remaining_fee
 
 string
 
@@ -171,7 +175,7 @@ required
 
 Remaining fee amount.
 
-paid\_fee
+paid_fee
 
 string
 
@@ -187,7 +191,7 @@ required
 
 Amount or quantity locked by pending orders or trades.
 
-time\_in\_force
+time_in_force
 
 string
 
@@ -203,9 +207,10 @@ string
 
 Order identifier specified by the client at order creation.
 
--   identifier field is only provided for orders created on or after October 18, 2024.
+- identifier field is only provided for orders created on or after October
+  18, 2024.
 
-smp\_type
+smp_type
 
 string
 
@@ -215,7 +220,7 @@ Self-Match Prevention (SMP) mode applied in the response.
 
 `reduce` `cancel_maker` `cancel_taker`
 
-prevented\_volume
+prevented_volume
 
 string
 
@@ -224,18 +229,19 @@ required
 Quantity cancelled due to Self-Match Prevention (SMP).  
 Which prevents execution between orders from the same user.
 
-prevented\_locked
+prevented_locked
 
 string
 
 required
 
-Assets released due to Self-Match Prevention (SMP). Remaining assets from an order canceled due to the Self-Match Prevention setting.
+Assets released due to Self-Match Prevention (SMP). Remaining assets from an
+order canceled due to the Self-Match Prevention setting.
 
--   For buy orders: Cancelled amount
--   For sell orders: Cancelled quantity
+- For buy orders: Cancelled amount
+- For sell orders: Cancelled quantity
 
-trades\_count
+trades_count
 
 integer
 
@@ -243,7 +249,7 @@ required
 
 Number of trades executed for the order.
 
-# 
+#
 
 400
 
@@ -271,7 +277,7 @@ required
 
 Message describing the cause of the error.
 
-# 
+#
 
 404
 
@@ -301,7 +307,7 @@ Message describing the cause of the error.
 
 Updated 16 days ago
 
-* * *
+---
 
 ShellPythonJavaNode
 
@@ -341,7 +347,7 @@ xxxxxxxxxx
 
 2
 
-  {
+{
 
 3
 
@@ -413,7 +419,7 @@ xxxxxxxxxx
 
 20
 
-  }
+}
 
 21
 
@@ -421,7 +427,7 @@ xxxxxxxxxx
 
 Updated 16 days ago
 
-* * *
+---
 
 ---
 

@@ -1,11 +1,12 @@
 # POST / Purchase
 
-Source: [https://www.okx.com/docs-v5/en/#financial-product-sol-staking-post-purchase](https://www.okx.com/docs-v5/en/#financial-product-sol-staking-post-purchase)
+Source:
+[https://www.okx.com/docs-v5/en/#financial-product-sol-staking-post-purchase](https://www.okx.com/docs-v5/en/#financial-product-sol-staking-post-purchase)
 
 ### POST / Purchase
 
 Staking SOL for OKSOL  
-Only the assets in the funding account can be used.  
+Only the assets in the funding account can be used.
 
 #### Rate Limit: 2 requests per second
 
@@ -19,9 +20,9 @@ Only the assets in the funding account can be used.
 
 #### Request Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| amt | String | Yes | Investment amount |
+| Parameter | Type   | Required | Description       |
+| --------- | ------ | -------- | ----------------- |
+| amt       | String | Yes      | Investment amount |
 
 #### Response Parameters
 

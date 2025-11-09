@@ -1,6 +1,7 @@
 # GET [Isolated]Place a Trailing Order
 
-**Source:** [[Isolated]Place a Trailing Order](https://www.htx.com/en-us/opend/newApiPages/?id=8cb88960-77b5-11ed-9966-0242ac110003)
+**Source:**
+[[Isolated]Place a Trailing Order](https://www.htx.com/en-us/opend/newApiPages/?id=8cb88960-77b5-11ed-9966-0242ac110003)
 
 **Category:** Swap Strategy Order Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /linear-swap-api/v1/swap\_track\_order (\[Isolated\]Place a Trailing Order)
+### /linear-swap-api/v1/swap_track_order (\[Isolated\]Place a Trailing Order)
 
 Request type: POST
 
@@ -18,55 +19,66 @@ Interface permission: Trade
 
 Rate Limit: 5 times per second.
 
-Interface description: This interface only supports isolated margin mode. The frequency limit of this interface is 5 times per second.
+Interface description: This interface only supports isolated margin mode. The
+frequency limit of this interface is 5 times per second.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | contract code | BTC-USDT |  |
-| reduce\_only | int | false | reduce only(in hedge mode it is invalid, and in one-way mode it's value is 0 when not filled.) | 0: no, 1: yes |  |
-| direction | string | true | direction | buy, sell |  |
-| offset | string | false | offset | open, close, both |  |
-| lever\_rate | int | false | lever rate, is required when open position, is optional when close position |  |  |
-| volume | decimal | true | volume(cont) |  |  |
-| callback\_rate | decimal | true | callback rate | Such as: 0.01 means 1%. And must be not less than 0.001 (0.1%) |  |
-| active price | decimal | true | active price |  |  |
-| order\_price\_type | string | true | order price type | optimal\_5, optimal\_10, optimal\_20, formula\_price |  |
+| Parameter        | Data Type | Required | Description                                                                                    | Value Range                                                    | Default Value |
+| ---------------- | --------- | -------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------- |
+| contract_code    | string    | true     | contract code                                                                                  | BTC-USDT                                                       |               |
+| reduce_only      | int       | false    | reduce only(in hedge mode it is invalid, and in one-way mode it's value is 0 when not filled.) | 0: no, 1: yes                                                  |               |
+| direction        | string    | true     | direction                                                                                      | buy, sell                                                      |               |
+| offset           | string    | false    | offset                                                                                         | open, close, both                                              |               |
+| lever_rate       | int       | false    | lever rate, is required when open position, is optional when close position                    |                                                                |               |
+| volume           | decimal   | true     | volume(cont)                                                                                   |                                                                |               |
+| callback_rate    | decimal   | true     | callback rate                                                                                  | Such as: 0.01 means 1%. And must be not less than 0.001 (0.1%) |               |
+| active price     | decimal   | true     | active price                                                                                   |                                                                |               |
+| order_price_type | string    | true     | order price type                                                                               | optimal_5, optimal_10, optimal_20, formula_price               |               |
 
 Notes:  
-When order\_price\_type is the formula\_price, it means that after the tracking order is triggered successfully, use the lowest (highest) market price \*(1 ± callback rate) that from statistic since place trading order, as the order price (the precision is the minimum variation of the contract price and be truncated) to place a limit price order  
-whether filled in with the optimal N or the formula price, there is no guarantee that the order can be completely filled, which mainly depends on the market conditions.  
-offset, in hedge mode it is a required field, and in one-way mode it is optional paramater which's value must be both when filled.  
-please note that, in the one-way mode, if using the parameter reduce\_only=1 to place an order for opening positions, when the order triggered, it will respond error message: 1492 Amount of Reduce Only order exceeds the amount available to close. order will be failed.
+When order_price_type is the formula_price, it means that after the tracking
+order is triggered successfully, use the lowest (highest) market price \*(1 ±
+callback rate) that from statistic since place trading order, as the order price
+(the precision is the minimum variation of the contract price and be truncated)
+to place a limit price order  
+whether filled in with the optimal N or the formula price, there is no guarantee
+that the order can be completely filled, which mainly depends on the market
+conditions.  
+offset, in hedge mode it is a required field, and in one-way mode it is optional
+paramater which's value must be both when filled.  
+please note that, in the one-way mode, if using the parameter reduce_only=1 to
+place an order for opening positions, when the order triggered, it will respond
+error message: 1492 Amount of Reduce Only order exceeds the amount available to
+close. order will be failed.
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | the result of server handling to request | "ok" , "error" |
-| ts | long | true | timestamp |  |
-| DATA\_START | object | true | the returned data which is successful |  |
-| order\_id | long | true | trailing order id\[Globally Unique\] |  |
-| order\_id\_str | string | true | trailing order id in string format |  |
-| DATA\_END |  | false |  |  |
+| Parameter    | Data Type | Required | Description                              | Value Range    |
+| ------------ | --------- | -------- | ---------------------------------------- | -------------- |
+| status       | string    | true     | the result of server handling to request | "ok" , "error" |
+| ts           | long      | true     | timestamp                                |                |
+| DATA_START   | object    | true     | the returned data which is successful    |                |
+| order_id     | long      | true     | trailing order id\[Globally Unique\]     |                |
+| order_id_str | string    | true     | trailing order id in string format       |                |
+| DATA_END     |           | false    |                                          |                |
 
 #### Request example
 
 {
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 
-"reduce\_only":
+"reduce_only":
 
 0
 
@@ -78,7 +90,7 @@ please note that, in the one-way mode, if using the parameter reduce\_only=1 to 
 
 "open"
 
-"lever\_rate":
+"lever_rate":
 
 20
 
@@ -86,17 +98,17 @@ please note that, in the one-way mode, if using the parameter reduce\_only=1 to 
 
 100
 
-"callback\_rate":
+"callback_rate":
 
 0.01
 
-"active\_price":
+"active_price":
 
 1670
 
-"order\_price\_type":
+"order_price_type":
 
-"optimal\_5"
+"optimal_5"
 
 }
 
@@ -112,11 +124,11 @@ please note that, in the one-way mode, if using the parameter reduce\_only=1 to 
 
 "data":{
 
-"order\_id":
+"order_id":
 
 826052268312821800
 
-"order\_id\_str":
+"order_id_str":
 
 "826052268312821760"
 

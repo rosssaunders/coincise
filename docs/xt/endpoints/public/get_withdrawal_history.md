@@ -1,6 +1,7 @@
 # GET Withdrawal history
 
-Source: [https://doc.xt.com/docs/spot/Deposit&Withdrawal/WithdrawHistory](https://doc.xt.com/docs/spot/Deposit&Withdrawal/WithdrawHistory)
+Source:
+[https://doc.xt.com/docs/spot/Deposit&Withdrawal/WithdrawHistory](https://doc.xt.com/docs/spot/Deposit&Withdrawal/WithdrawHistory)
 
 # Withdrawal history
 
@@ -8,36 +9,36 @@ Source: [https://doc.xt.com/docs/spot/Deposit&Withdrawal/WithdrawHistory](https:
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| currency | string | true | N/A | Currency name, from **Get supported currencies for deposit/withdrawal** API |  |
-| chain | string | true | N/A | Transfer network, from **Get supported currencies for deposit/withdrawal** API |  |
-| status | string | false | N/A | Withdrawal status (see [depositWithdrawStatus](#depositWithdrawStatus)) | SUBMIT, REVIEW, AUDITED, AUDITED\_AGAIN, PENDING, SUCCESS, FAIL, CANCEL |
-| fromId | long | false | N/A | The last pagination ID, i.e. the primary key ID of the record |  |
-| direction | string | false | NEXT | Pagination direction | NEXT = next page, PREV = previous page |
-| limit | int | false | 10 | Number of records per page (max 200) | 1 ≤ limit ≤ 200 |
-| startTime | long | false | N/A | Query range start boundary (timestamp in ms) |  |
-| endTime | long | false | N/A | Query range end boundary (timestamp in ms) |  |
+| name      | type   | mandatory | default | description                                                                    | ranges                                                                 |
+| --------- | ------ | --------- | ------- | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| currency  | string | true      | N/A     | Currency name, from **Get supported currencies for deposit/withdrawal** API    |                                                                        |
+| chain     | string | true      | N/A     | Transfer network, from **Get supported currencies for deposit/withdrawal** API |                                                                        |
+| status    | string | false     | N/A     | Withdrawal status (see [depositWithdrawStatus](#depositWithdrawStatus))        | SUBMIT, REVIEW, AUDITED, AUDITED_AGAIN, PENDING, SUCCESS, FAIL, CANCEL |
+| fromId    | long   | false     | N/A     | The last pagination ID, i.e. the primary key ID of the record                  |                                                                        |
+| direction | string | false     | NEXT    | Pagination direction                                                           | NEXT = next page, PREV = previous page                                 |
+| limit     | int    | false     | 10      | Number of records per page (max 200)                                           | 1 ≤ limit ≤ 200                                                        |
+| startTime | long   | false     | N/A     | Query range start boundary (timestamp in ms)                                   |                                                                        |
+| endTime   | long   | false     | N/A     | Query range end boundary (timestamp in ms)                                     |                                                                        |
 
 #### depositWithdrawStatus[​](#depositwithdrawstatus "Direct link to depositWithdrawStatus")
 
-| Status | Description |
-| --- | --- |
-| SUBMIT | 已提交 |
-| REVIEW | 审核中 |
-| AUDITED | 已审核 |
-| AUDITED\_AGAIN | 重新审核 |
-| PENDING | 处理中 |
-| SUCCESS | 成功 |
-| FAIL | 失败 |
-| CANCEL | 已取消 |
+| Status        | Description |
+| ------------- | ----------- |
+| SUBMIT        | 已提交      |
+| REVIEW        | 审核中      |
+| AUDITED       | 已审核      |
+| AUDITED_AGAIN | 重新审核    |
+| PENDING       | 处理中      |
+| SUCCESS       | 成功        |
+| FAIL          | 失败        |
+| CANCEL        | 已取消      |
 
 ### Notes[​](#notes "Direct link to Notes")
 
--   Supports pagination using `fromId` + `direction`.
--   Limit per page is configurable with `limit` (default 10, max 200).
--   Time range filtering is supported with `startTime` and `endTime`.
--   Status values align with **Deposit/Withdrawal record status** definitions.
+- Supports pagination using `fromId` + `direction`.
+- Limit per page is configurable with `limit` (default 10, max 200).
+- Time range filtering is supported with `startTime` and `endTime`.
+- Status values align with **Deposit/Withdrawal record status** definitions.
 
 ### Response Example[​](#response-example "Direct link to Response Example")
 

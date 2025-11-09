@@ -1,6 +1,7 @@
 # GET [Isolated]Query information on Tiered Margin
 
-**Source:** [[Isolated]Query information on Tiered Margin](https://www.htx.com/en-us/opend/newApiPages/?id=8cb7f887-77b5-11ed-9966-0242ac110003)
+**Source:**
+[[Isolated]Query information on Tiered Margin](https://www.htx.com/en-us/opend/newApiPages/?id=8cb7f887-77b5-11ed-9966-0242ac110003)
 
 **Category:** Reference Data
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /linear-swap-api/v1/swap\_ladder\_margin (\[Isolated\]Query information on Tiered Margin)
+### /linear-swap-api/v1/swap_ladder_margin (\[Isolated\]Query information on Tiered Margin)
 
 Request type: GET
 
@@ -16,44 +17,48 @@ Signature verification: No
 
 Interface permission: Read
 
-Rate Limit: For public interface used to get information of index, price limit, settlement, delivery, open positions and so on, the rate limit is 240 times every 3 second at most for each IP (this 240 times every 3 second public interface rate limit is shared by all the requests from that IP of non-marketing information, like above).
+Rate Limit: For public interface used to get information of index, price limit,
+settlement, delivery, open positions and so on, the rate limit is 240 times
+every 3 second at most for each IP (this 240 times every 3 second public
+interface rate limit is shared by all the requests from that IP of non-marketing
+information, like above).
 
 Interface description: This interface only supports isolated margin mode.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | contract code, if not filled in return all contract infomation | such as: “BTC-USDT”, “ETH-USDT”。。。 |  |
+| Parameter     | Data Type | Required | Description                                                    | Value Range                           | Default Value |
+| ------------- | --------- | -------- | -------------------------------------------------------------- | ------------------------------------- | ------------- |
+| contract_code | string    | false    | contract code, if not filled in return all contract infomation | such as: “BTC-USDT”, “ETH-USDT”。。。 |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | status | "ok" , "error" |
-| DATA\_START | object array | true |  |  |
-| symbol | string | true | symbol | such as: "BTC" |
-| contract\_code | string | true | contract code | such as: "BTC-USDT" |
-| margin\_mode | string | true | margin mode | isolated: isolated |
-| margin\_account | string | true | margin account | such as: “BTC-USDT” |
-| LIST\_START | object array | true |  |  |
-| lever\_rate | int | true | lever rate |  |
-| LADDERS\_START | object array | true | ladders for margin |  |
-| min\_margin\_balance | decimal | true | min margin balance(the starting point in this ladder, included in this ladder) |  |
-| max\_margin\_balance | decimal | true | max margin balance(the end point in this ladder, excluded in this ladder, is next ladder's min\_margin\_balance) |  |
-| min\_margin\_available | decimal | true | min margin available(in the range of this ladder margin balance) |  |
-| max\_margin\_available | decimal | true | max margin available（not in the range of this ladder margin balance, is next ladder's min\_margin\_available) |  |
-| LADDERS\_END |  | false |  |  |
-| LIST\_END |  | false |  |  |
-| DATA\_END |  | false |  |  |
-| ts | long | true | Time of Respond Generation，Unit：Millisecond |  |
+| Parameter            | Data Type    | Required | Description                                                                                                    | Value Range         |
+| -------------------- | ------------ | -------- | -------------------------------------------------------------------------------------------------------------- | ------------------- |
+| status               | string       | true     | status                                                                                                         | "ok" , "error"      |
+| DATA_START           | object array | true     |                                                                                                                |                     |
+| symbol               | string       | true     | symbol                                                                                                         | such as: "BTC"      |
+| contract_code        | string       | true     | contract code                                                                                                  | such as: "BTC-USDT" |
+| margin_mode          | string       | true     | margin mode                                                                                                    | isolated: isolated  |
+| margin_account       | string       | true     | margin account                                                                                                 | such as: “BTC-USDT” |
+| LIST_START           | object array | true     |                                                                                                                |                     |
+| lever_rate           | int          | true     | lever rate                                                                                                     |                     |
+| LADDERS_START        | object array | true     | ladders for margin                                                                                             |                     |
+| min_margin_balance   | decimal      | true     | min margin balance(the starting point in this ladder, included in this ladder)                                 |                     |
+| max_margin_balance   | decimal      | true     | max margin balance(the end point in this ladder, excluded in this ladder, is next ladder's min_margin_balance) |                     |
+| min_margin_available | decimal      | true     | min margin available(in the range of this ladder margin balance)                                               |                     |
+| max_margin_available | decimal      | true     | max margin available（not in the range of this ladder margin balance, is next ladder's min_margin_available)   |                     |
+| LADDERS_END          |              | false    |                                                                                                                |                     |
+| LIST_END             |              | false    |                                                                                                                |                     |
+| DATA_END             |              | false    |                                                                                                                |                     |
+| ts                   | long         | true     | Time of Respond Generation，Unit：Millisecond                                                                  |                     |
 
 #### Request example
 
@@ -73,7 +78,7 @@ Interface description: This interface only supports isolated margin mode.
 
 0:{
 
-"margin\_account":
+"margin_account":
 
 "BTC-USDT"
 
@@ -81,11 +86,11 @@ Interface description: This interface only supports isolated margin mode.
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 
-"margin\_mode":
+"margin_mode":
 
 "isolated"
 
@@ -93,7 +98,7 @@ Interface description: This interface only supports isolated margin mode.
 
 0:{
 
-"lever\_rate":
+"lever_rate":
 
 20
 
@@ -101,19 +106,19 @@ Interface description: This interface only supports isolated margin mode.
 
 0:{
 
-"min\_margin\_balance":
+"min_margin_balance":
 
 0
 
-"max\_margin\_balance":
+"max_margin_balance":
 
 250000
 
-"min\_margin\_available":
+"min_margin_available":
 
 0
 
-"max\_margin\_available":
+"max_margin_available":
 
 250000
 
@@ -121,19 +126,19 @@ Interface description: This interface only supports isolated margin mode.
 
 1:{
 
-"min\_margin\_balance":
+"min_margin_balance":
 
 250000
 
-"max\_margin\_balance":
+"max_margin_balance":
 
 2500000
 
-"min\_margin\_available":
+"min_margin_available":
 
 250000
 
-"max\_margin\_available":
+"max_margin_available":
 
 1000000
 
@@ -141,19 +146,19 @@ Interface description: This interface only supports isolated margin mode.
 
 2:{
 
-"min\_margin\_balance":
+"min_margin_balance":
 
 2500000
 
-"max\_margin\_balance":
+"max_margin_balance":
 
 10000000
 
-"min\_margin\_available":
+"min_margin_available":
 
 1000000
 
-"max\_margin\_available":
+"max_margin_available":
 
 2500000
 
@@ -161,19 +166,19 @@ Interface description: This interface only supports isolated margin mode.
 
 3:{
 
-"min\_margin\_balance":
+"min_margin_balance":
 
 10000000
 
-"max\_margin\_balance":
+"max_margin_balance":
 
 85000000
 
-"min\_margin\_available":
+"min_margin_available":
 
 2500000
 
-"max\_margin\_available":
+"max_margin_available":
 
 10000000
 
@@ -181,19 +186,19 @@ Interface description: This interface only supports isolated margin mode.
 
 4:{
 
-"min\_margin\_balance":
+"min_margin_balance":
 
 85000000
 
-"max\_margin\_balance":
+"max_margin_balance":
 
 NULL
 
-"min\_margin\_available":
+"min_margin_available":
 
 10000000
 
-"max\_margin\_available":
+"max_margin_available":
 
 NULL
 

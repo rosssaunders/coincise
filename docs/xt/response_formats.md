@@ -8,4 +8,6 @@ Response
 {  "rc": 0,  "result": {},  "mc": "SUCCESS",  "ma": []}
 ```
 
-[Edit this page](https://github.com/facebook/docusaurus/edit/main/website/docs/spot/Access Description/returnFormat.mdx)
+[Edit this
+page](https://github.com/facebook/docusaurus/edit/main/website/docs/spot/Access
+Description/returnFormat.mdx)

@@ -1,6 +1,7 @@
 # POST private/get-cancel-on-disconnect
 
-**Source:** [private/get-cancel-on-disconnect](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-cancel-on-disconnect)
+**Source:**
+[private/get-cancel-on-disconnect](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-cancel-on-disconnect)
 
 ## Authentication
 
@@ -42,6 +43,6 @@ Websocket (User API)
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
+| Name  | Type   | Description                                                                                                                                               |
+| ----- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | scope | string | Specifies the scope of cancellation to be applied to the specific connection (all orders created via Websocket). The ONLY scope supported is `CONNECTION` |

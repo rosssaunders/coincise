@@ -85,40 +85,9 @@ const expandAllMenus = async page => {
 }
 
 /**
- * Extract content by numeric ID
- */
-const extractContentById = async (page, ids) => {
-  return await page.evaluate(ids => {
-    const listItems = document.querySelectorAll('li[role="menuitem"]')
-    const items = Array.from(listItems).map(item => {
-      const categoryElement =
-        item.parentElement?.parentElement?.firstElementChild
-      const categoryText = categoryElement
-        ? categoryElement.textContent.trim()
-        : "Unknown Category"
-
-      return {
-        menuIds: item.getAttribute("keys"),
-        text: item.textContent.trim(),
-        category: categoryText
-      }
-    })
-
-    // Filter items by IDs
-    const idsStr = ids.map(id => id.toString())
-    const filteredItems = items.filter(item => {
-      const keyParts = item.menuIds ? item.menuIds.split(",") : []
-      return keyParts.some(keyPart => idsStr.includes(keyPart.trim()))
-    })
-
-    return filteredItems
-  }, ids)
-}
-
-/**
  * Extract section content by simulating real browser click and waiting for content to render
  */
-const extractSectionContent = async (page, menuKey, sectionName) => {
+const extractSectionContent = async (page, menuKey) => {
   console.log(`  Looking for menu item with key: ${menuKey}`)
 
   // Try to use Puppeteer's real click on the element
@@ -167,7 +136,7 @@ const extractSectionContent = async (page, menuKey, sectionName) => {
     await new Promise(resolve => setTimeout(resolve, 3000))
 
     // Try to detect content change by checking for specific text related to the section
-    const contentAppeared = await page.evaluate((sectionText) => {
+    const contentAppeared = await page.evaluate(sectionText => {
       const body = document.body.textContent
       // Check if section-specific content appeared
       return body.includes(sectionText) || body.length > 20000
@@ -358,7 +327,7 @@ const extractResponseFormats = async (page, turndownService) => {
 /**
  * Extract Changelog section
  */
-const extractChangelog = async (page, turndownService) => {
+const extractChangelog = async () => {
   console.log("Extracting changelog...")
 
   // Note: HTX appears to have removed the changelog from the API menu structure

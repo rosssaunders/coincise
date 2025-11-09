@@ -1,6 +1,7 @@
 # GET Query Top Trader Sentiment Index Function-Account
 
-**Source:** [Query Top Trader Sentiment Index Function-Account](https://www.htx.com/en-us/opend/newApiPages/?id=5d51674d-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Query Top Trader Sentiment Index Function-Account](https://www.htx.com/en-us/opend/newApiPages/?id=5d51674d-77b6-11ed-9966-0242ac110003)
 
 **Category:** Reference Data
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /swap-api/v1/swap\_elite\_account\_ratio (Query Top Trader Sentiment Index Function-Account)
+### /swap-api/v1/swap_elite_account_ratio (Query Top Trader Sentiment Index Function-Account)
 
 Request type: GET
 
@@ -18,34 +19,34 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | Contract Code | Case-Insenstive.e.g. "BTC-USD" |  |
-| period | string | true | period | 5min, 15min, 30min, 60min,4hour,1day |  |
+| Parameter     | Data Type | Required | Description   | Value Range                          | Default Value |
+| ------------- | --------- | -------- | ------------- | ------------------------------------ | ------------- |
+| contract_code | string    | true     | Contract Code | Case-Insenstive.e.g. "BTC-USD"       |               |
+| period        | string    | true     | period        | 5min, 15min, 30min, 60min,4hour,1day |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request Processing Result | "ok" , "error" |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| DATA\_START |  | false |  |  |
-| symbol | string | true | symbol | "BTC","ETH"... |
-| contract\_code | string | true | contract code | e.g. "BTC-USD" |
-| LIST\_START |  | false |  |  |
-| buy\_ratio | decimal | true | net long accounts ratio |  |
-| sell\_ratio | decimal | true | net short accounts ratio |  |
-| locked\_ratio | decimal | true | locked accounts ratio |  |
-| ts | long | true | Time of Respond Generation |  |
-| LIST\_END |  | false |  |  |
-| DATA\_END |  | false |  |  |
+| Parameter     | Data Type | Required | Description                                   | Value Range    |
+| ------------- | --------- | -------- | --------------------------------------------- | -------------- |
+| status        | string    | true     | Request Processing Result                     | "ok" , "error" |
+| ts            | long      | true     | Time of Respond Generation, Unit: Millisecond |                |
+| DATA_START    |           | false    |                                               |                |
+| symbol        | string    | true     | symbol                                        | "BTC","ETH"... |
+| contract_code | string    | true     | contract code                                 | e.g. "BTC-USD" |
+| LIST_START    |           | false    |                                               |                |
+| buy_ratio     | decimal   | true     | net long accounts ratio                       |                |
+| sell_ratio    | decimal   | true     | net short accounts ratio                      |                |
+| locked_ratio  | decimal   | true     | locked accounts ratio                         |                |
+| ts            | long      | true     | Time of Respond Generation                    |                |
+| LIST_END      |           | false    |                                               |                |
+| DATA_END      |           | false    |                                               |                |
 
 #### Request example
 
@@ -67,15 +68,15 @@ Interface permission: Read
 
 0:{
 
-"buy\_ratio":
+"buy_ratio":
 
 0.47
 
-"sell\_ratio":
+"sell_ratio":
 
 0.52
 
-"locked\_ratio":
+"locked_ratio":
 
 0.01
 
@@ -87,15 +88,15 @@ Interface permission: Read
 
 1:{
 
-"buy\_ratio":
+"buy_ratio":
 
 0.47
 
-"sell\_ratio":
+"sell_ratio":
 
 0.52
 
-"locked\_ratio":
+"locked_ratio":
 
 0.01
 
@@ -111,7 +112,7 @@ Interface permission: Read
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USD"
 

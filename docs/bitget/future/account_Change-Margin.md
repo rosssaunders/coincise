@@ -8,7 +8,7 @@ Add or reduce the margin（**only for isolated margin mode**）
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   POST /api/v2/mix/account/set-margin
+- POST /api/v2/mix/account/set-margin
 
 Request Example
 
@@ -18,13 +18,13 @@ curl -X POST "https://api.bitget.com/api/v2/mix/account/set-margin" \   -H "ACCE
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair 
-| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures 
-| marginCoin | String | Yes | Margin coin must be capitalized 
-| holdSide | String | Yes | Position direction<br>long – long position; short – short position 
-| amount | String | Yes | Margin amount, positive means increase, and negative means decrease 
+| Parameter   | Type   | Required | Description                                                                                                                                      |
+| :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol      | String | Yes      | Trading pair                                                                                                                                     |
+| productType | String | Yes      | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures |
+| marginCoin  | String | Yes      | Margin coin must be capitalized                                                                                                                  |
+| holdSide    | String | Yes      | Position direction<br>long – long position; short – short position                                                                               |
+| amount      | String | Yes      | Margin amount, positive means increase, and negative means decrease                                                                              |
 
 Response Example
 
@@ -34,8 +34,8 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| code | String | ‘00000’: success; others: fail
+| Parameter | Type   | Description                    |
+| :-------- | :----- | :----------------------------- |
+| code      | String | ‘00000’: success; others: fail |
 
 > **Source:** https://www.bitget.com/api-doc/contract/account/Change-Margin

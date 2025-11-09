@@ -13,7 +13,6 @@ import { createTurndownBuilder } from "../../shared/turndown.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const BASE_URL = "https://global-docs.upbit.com"
 const OUTPUT_DIR = path.resolve(__dirname, "../../../docs/upbit/endpoints")
 
 /**

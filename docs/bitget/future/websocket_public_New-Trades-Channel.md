@@ -14,13 +14,13 @@ Request Example
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| op | String | Yes | Operation, subscribe unsubscribe 
-| args | List&lt;Object&gt; | Yes | op list 
-| &gt; instType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures 
-| &gt; channel | String | Yes | Channel, <code>trade</code> 
-| &gt; instId | String | Yes | Product ID<br>e.g: ETHUSDT 
+| Parameter     | Type               | Required | Description                                                                                                                                      |
+| :------------ | :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| op            | String             | Yes      | Operation, subscribe unsubscribe                                                                                                                 |
+| args          | List&lt;Object&gt; | Yes      | op list                                                                                                                                          |
+| &gt; instType | String             | Yes      | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures |
+| &gt; channel  | String             | Yes      | Channel, <code>trade</code>                                                                                                                      |
+| &gt; instId   | String             | Yes      | Product ID<br>e.g: ETHUSDT                                                                                                                       |
 
 Response Example
 
@@ -30,15 +30,15 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| event | String | event 
-| arg | Object | arg list 
-| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures 
-| &gt; channel | String | Channel, <code>trade</code> 
-| &gt; instId | String | Symbol name<br>e.g: ETHUSDT 
-| code | String | Error code 
-| msg | String | Error message 
+| Parameter     | Type   | Description                                                                                                                                      |
+| :------------ | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| event         | String | event                                                                                                                                            |
+| arg           | Object | arg list                                                                                                                                         |
+| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures |
+| &gt; channel  | String | Channel, <code>trade</code>                                                                                                                      |
+| &gt; instId   | String | Symbol name<br>e.g: ETHUSDT                                                                                                                      |
+| code          | String | Error code                                                                                                                                       |
+| msg           | String | Error message                                                                                                                                    |
 
 Push Data
 
@@ -48,18 +48,19 @@ Push Data
 
 ### Push Parameters[​](#push-parameters "Direct link to Push Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| action | String | action 
-| arg | Object | arg 
-| &gt; instType | String | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures 
-| &gt; channel | String | Channel, <code>trade</code> 
-| &gt; instId | String | Symbol: ETHUSDT 
-| data | List&lt;Object&gt; | Data 
-| &gt; ts | String | Fill time: 1597026383085 
-| &gt; price | String | Filled price 
-| &gt; size | String | Filled amount 
-| &gt; side | String | Filled side, sell/buy 
-| &gt; tradeId | String | tradeId
+| Parameter     | Type               | Description                                                                                                                                      |
+| :------------ | :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| action        | String             | action                                                                                                                                           |
+| arg           | Object             | arg                                                                                                                                              |
+| &gt; instType | String             | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures |
+| &gt; channel  | String             | Channel, <code>trade</code>                                                                                                                      |
+| &gt; instId   | String             | Symbol: ETHUSDT                                                                                                                                  |
+| data          | List&lt;Object&gt; | Data                                                                                                                                             |
+| &gt; ts       | String             | Fill time: 1597026383085                                                                                                                         |
+| &gt; price    | String             | Filled price                                                                                                                                     |
+| &gt; size     | String             | Filled amount                                                                                                                                    |
+| &gt; side     | String             | Filled side, sell/buy                                                                                                                            |
+| &gt; tradeId  | String             | tradeId                                                                                                                                          |
 
-> **Source:** https://www.bitget.com/api-doc/contract/websocket/public/New-Trades-Channel
+> **Source:**
+> https://www.bitget.com/api-doc/contract/websocket/public/New-Trades-Channel

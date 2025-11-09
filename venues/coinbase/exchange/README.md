@@ -1,10 +1,12 @@
 # Coinbase Exchange API Documentation Scraper
 
-Documentation extraction for the Coinbase Exchange API following the standardized Coincise pipeline.
+Documentation extraction for the Coinbase Exchange API following the
+standardized Coincise pipeline.
 
 ## Overview
 
-This scraper extracts Coinbase Exchange API documentation and converts it to the standardized LLM-friendly markdown format used across all Coincise venues.
+This scraper extracts Coinbase Exchange API documentation and converts it to the
+standardized LLM-friendly markdown format used across all Coincise venues.
 
 ## Documentation Structure
 
@@ -52,6 +54,7 @@ pnpm run extract:general
 ```
 
 Extracts core documentation files:
+
 - Authentication
 - Rate limits
 - Network connectivity
@@ -65,11 +68,13 @@ Extracts core documentation files:
 pnpm run extract:endpoints
 ```
 
-Extracts individual API endpoint documentation into `endpoints/public/` and `endpoints/private/` directories.
+Extracts individual API endpoint documentation into `endpoints/public/` and
+`endpoints/private/` directories.
 
 ### Legacy Scripts
 
-The original batch scraping scripts are still available with the `legacy:` prefix:
+The original batch scraping scripts are still available with the `legacy:`
+prefix:
 
 ```bash
 pnpm run legacy:privaterestapi
@@ -80,9 +85,11 @@ pnpm run legacy:all
 
 ## Endpoint Classification
 
-Endpoints are automatically classified as public or private based on authentication requirements:
+Endpoints are automatically classified as public or private based on
+authentication requirements:
 
-- **Public endpoints**: No authentication headers required (CB-ACCESS-KEY, CB-ACCESS-SIGN, etc.)
+- **Public endpoints**: No authentication headers required (CB-ACCESS-KEY,
+  CB-ACCESS-SIGN, etc.)
 - **Private endpoints**: Require authentication headers
 
 ## Documentation Source
@@ -93,7 +100,8 @@ Endpoints are automatically classified as public or private based on authenticat
 
 ## Known Endpoints
 
-The scraper includes a comprehensive list of known Coinbase Exchange API endpoints in `src/extractEndpoints.js`. This list includes:
+The scraper includes a comprehensive list of known Coinbase Exchange API
+endpoints in `src/extractEndpoints.js`. This list includes:
 
 - Account management endpoints
 - Order management endpoints
@@ -114,7 +122,8 @@ Coinbase Exchange uses the following authentication headers:
 ## Notes
 
 - The Coinbase documentation uses a custom framework (not Redocly)
-- Each endpoint is documented on a separate page with the pattern: `exchangerestapi_{operation}`
+- Each endpoint is documented on a separate page with the pattern:
+  `exchangerestapi_{operation}`
 - Documentation is updated regularly by GitHub Actions workflow
 
 ## Project Structure
@@ -141,7 +150,8 @@ venues/coinbase/exchange/
 
 ## Automation
 
-Documentation is automatically updated via GitHub Actions workflow that runs weekly. The workflow:
+Documentation is automatically updated via GitHub Actions workflow that runs
+weekly. The workflow:
 
 1. Extracts general documentation
 2. Extracts all endpoint documentation

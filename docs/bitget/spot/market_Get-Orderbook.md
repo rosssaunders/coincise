@@ -8,7 +8,7 @@ Get OrderBook Depth
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/spot/market/orderbook
+- GET /api/v2/spot/market/orderbook
 
 Request Example
 
@@ -18,11 +18,11 @@ curl "https://api.bitget.com/api/v2/spot/market/orderbook?symbol=BTCUSDT&type=st
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair 
-| type | String | No | Default：step0： The value enums：step0，step1，step2，step3，step4，step5 
-| limit | String | No | Number of queries: Default: 150, maximum: 150 
+| Parameter | Type   | Required | Description                                                                |
+| :-------- | :----- | :------- | :------------------------------------------------------------------------- |
+| symbol    | String | Yes      | Trading pair                                                               |
+| type      | String | No       | Default：step0： The value enums：step0，step1，step2，step3，step4，step5 |
+| limit     | String | No       | Number of queries: Default: 150, maximum: 150                              |
 
 Response Example
 
@@ -32,10 +32,10 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| asks | Array | Ask depth<br>e.g. ["38084.5","0.5"] ，"38084.5" is price，"0.5" is base coin volume 
-| bids | Array | Bid depth 
-| ts | String | Matching engine timestamp(ms), e.g. 1597026383085
+| Parameter | Type   | Description                                                                         |
+| :-------- | :----- | :---------------------------------------------------------------------------------- |
+| asks      | Array  | Ask depth<br>e.g. ["38084.5","0.5"] ，"38084.5" is price，"0.5" is base coin volume |
+| bids      | Array  | Bid depth                                                                           |
+| ts        | String | Matching engine timestamp(ms), e.g. 1597026383085                                   |
 
 > **Source:** https://www.bitget.com/api-doc/spot/market/Get-Orderbook

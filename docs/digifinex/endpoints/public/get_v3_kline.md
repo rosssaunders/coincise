@@ -2,7 +2,8 @@
 
 **Title:** Get candles data
 
-**Source:** [Get candles data](https://docs.digifinex.com/en-ww/spot/v3/rest.html#get-candles-data)
+**Source:**
+[Get candles data](https://docs.digifinex.com/en-ww/spot/v3/rest.html#get-candles-data)
 
 ## Authentication
 
@@ -14,16 +15,16 @@ Not Required (Public Endpoint)
 
 ### HTTP Request
 
--   GET `https://openapi.digifinex.com/v3/kline`
+- GET `https://openapi.digifinex.com/v3/kline`
 
 ### Request Parameters
 
-| Field | Request Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | string | true | "btc\_usdt" |
-| period | str | true | Candle timeframe type: 1,5,15,30,60,240,720,1D,1W |
-| start\_time | int | false | Candle starting time in timestamp, default 200 period befor end\_time |
-| end\_time | int | false | Candle ending time in timestamp, default current timestamp |
+| Field      | Request Type | Mandatory | Description                                                          |
+| ---------- | ------------ | --------- | -------------------------------------------------------------------- |
+| symbol     | string       | true      | "btc_usdt"                                                           |
+| period     | str          | true      | Candle timeframe type: 1,5,15,30,60,240,720,1D,1W                    |
+| start_time | int          | false     | Candle starting time in timestamp, default 200 period befor end_time |
+| end_time   | int          | false     | Candle ending time in timestamp, default current timestamp           |
 
 Get candles data by symbol, up to 500 at one time.
 
@@ -44,7 +45,7 @@ Get candles data by symbol, up to 500 at one time.
 
 ### Response Content
 
-| Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| data | true | object | Candles Data\[timestamp,vol,close,high,low,open\],last one is most recent data |
-| code | true | int | Status |
+| Field | Mandatory | Request Type | Description                                                                    |
+| ----- | --------- | ------------ | ------------------------------------------------------------------------------ |
+| data  | true      | object       | Candles Data\[timestamp,vol,close,high,low,open\],last one is most recent data |
+| code  | true      | int          | Status                                                                         |

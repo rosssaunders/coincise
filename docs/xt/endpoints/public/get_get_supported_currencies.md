@@ -1,6 +1,7 @@
 # GET Get supported currencies
 
-Source: [https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetSupportedCurrencies](https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetSupportedCurrencies)
+Source:
+[https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetSupportedCurrencies](https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetSupportedCurrencies)
 
 # Get information of currencies (available for deposit and withdraw)
 
@@ -9,14 +10,16 @@ Source: [https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetSupportedCurrencies]
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| – | – | false | N/A | No parameters required | – |
+| name | type | mandatory | default | description            | ranges |
+| ---- | ---- | --------- | ------- | ---------------------- | ------ |
+| –    | –    | false     | N/A     | No parameters required | –      |
 
 ### Notes[​](#notes "Direct link to Notes")
 
--   The `currency` and `chain` fields in the response are required inputs for other **deposit/withdrawal APIs**.
--   Each currency includes its supported transfer networks, deposit/withdrawal status, and fee details.
+- The `currency` and `chain` fields in the response are required inputs for
+  other **deposit/withdrawal APIs**.
+- Each currency includes its supported transfer networks, deposit/withdrawal
+  status, and fee details.
 
 ### Response Example[​](#response-example "Direct link to Response Example")
 

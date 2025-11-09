@@ -1,6 +1,7 @@
 # GET [Isolated] Query information on Tiered Adjustment Factor
 
-**Source:** [[Isolated] Query information on Tiered Adjustment Factor](https://www.htx.com/en-us/opend/newApiPages/?id=8cb7fb2c-77b5-11ed-9966-0242ac110003)
+**Source:**
+[[Isolated] Query information on Tiered Adjustment Factor](https://www.htx.com/en-us/opend/newApiPages/?id=8cb7fb2c-77b5-11ed-9966-0242ac110003)
 
 **Category:** Reference Data
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /linear-swap-api/v1/swap\_adjustfactor (\[Isolated\] Query information on Tiered Adjustment Factor)
+### /linear-swap-api/v1/swap_adjustfactor (\[Isolated\] Query information on Tiered Adjustment Factor)
 
 Request type: GET
 
@@ -16,43 +17,47 @@ Signature verification: No
 
 Interface permission: Read
 
-Rate Limit: For public interface used to get information of index, price limit, settlement, delivery, open positions and so on, the rate limit is 240 times every 3 second at most for each IP (this 240 times every 3 second public interface rate limit is shared by all the requests from that IP of non-marketing information, like above).
+Rate Limit: For public interface used to get information of index, price limit,
+settlement, delivery, open positions and so on, the rate limit is 240 times
+every 3 second at most for each IP (this 240 times every 3 second public
+interface rate limit is shared by all the requests from that IP of non-marketing
+information, like above).
 
 Interface description: This interface only supports isolated margin mode.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | contract code | Case-Insenstive.e.g. "BTC-USDT" |  |
+| Parameter     | Data Type | Required | Description   | Value Range                     | Default Value |
+| ------------- | --------- | -------- | ------------- | ------------------------------- | ------------- |
+| contract_code | string    | false    | contract code | Case-Insenstive.e.g. "BTC-USDT" |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request Processing Result | "ok" , "error" |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| DATA\_START |  | false |  |  |
-| symbol | string | true | symbol | "BTC","ETH"... |
-| contract\_code | string | true | contract code | e.g. "BTC-USDT" |
-| margin\_mode | string | true | margin mode | isolated : "isolated" |
-| LIST\_START |  | false |  |  |
-| lever\_rate | decimal | true | Leverage |  |
-| LADDERS\_START |  | false |  |  |
-| min\_size | decimal | true | Min net position limit |  |
-| max\_size | decimal | true | Max net position limit |  |
-| ladder | int | true | Tier |  |
-| adjust\_factor | decimal | true | Adjustment Factor |  |
-| LADDERS\_END |  | false |  |  |
-| LIST\_END |  | false |  |  |
-| DATA\_END |  | false |  |  |
+| Parameter     | Data Type | Required | Description                                   | Value Range           |
+| ------------- | --------- | -------- | --------------------------------------------- | --------------------- |
+| status        | string    | true     | Request Processing Result                     | "ok" , "error"        |
+| ts            | long      | true     | Time of Respond Generation, Unit: Millisecond |                       |
+| DATA_START    |           | false    |                                               |                       |
+| symbol        | string    | true     | symbol                                        | "BTC","ETH"...        |
+| contract_code | string    | true     | contract code                                 | e.g. "BTC-USDT"       |
+| margin_mode   | string    | true     | margin mode                                   | isolated : "isolated" |
+| LIST_START    |           | false    |                                               |                       |
+| lever_rate    | decimal   | true     | Leverage                                      |                       |
+| LADDERS_START |           | false    |                                               |                       |
+| min_size      | decimal   | true     | Min net position limit                        |                       |
+| max_size      | decimal   | true     | Max net position limit                        |                       |
+| ladder        | int       | true     | Tier                                          |                       |
+| adjust_factor | decimal   | true     | Adjustment Factor                             |                       |
+| LADDERS_END   |           | false    |                                               |                       |
+| LIST_END      |           | false    |                                               |                       |
+| DATA_END      |           | false    |                                               |                       |
 
 #### Request example
 
@@ -76,11 +81,11 @@ Interface description: This interface only supports isolated margin mode.
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 
-"margin\_mode":
+"margin_mode":
 
 "isolated"
 
@@ -88,7 +93,7 @@ Interface description: This interface only supports isolated margin mode.
 
 0:{
 
-"lever\_rate":
+"lever_rate":
 
 125
 
@@ -100,15 +105,15 @@ Interface description: This interface only supports isolated margin mode.
 
 0
 
-"min\_size":
+"min_size":
 
 0
 
-"max\_size":
+"max_size":
 
 8999
 
-"adjust\_factor":
+"adjust_factor":
 
 0.65
 
@@ -120,15 +125,15 @@ Interface description: This interface only supports isolated margin mode.
 
 1
 
-"min\_size":
+"min_size":
 
 9000
 
-"max\_size":
+"max_size":
 
 89999
 
-"adjust\_factor":
+"adjust_factor":
 
 0.8
 
@@ -140,15 +145,15 @@ Interface description: This interface only supports isolated margin mode.
 
 2
 
-"min\_size":
+"min_size":
 
 90000
 
-"max\_size":
+"max_size":
 
 NULL
 
-"adjust\_factor":
+"adjust_factor":
 
 0.85
 

@@ -1,6 +1,7 @@
 # GET Query trade
 
-Source: [https://doc.xt.com/docs/spot/Trade/QueryTrade](https://doc.xt.com/docs/spot/Trade/QueryTrade)
+Source:
+[https://doc.xt.com/docs/spot/Trade/QueryTrade](https://doc.xt.com/docs/spot/Trade/QueryTrade)
 
 # Query trade
 
@@ -8,18 +9,18 @@ Source: [https://doc.xt.com/docs/spot/Trade/QueryTrade](https://doc.xt.com/docs/
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | false | N/A | Trading pair, if not filled, represents all |  |
-| bizType | string | false | N/A | Business type: `SPOT`, `LEVER` |  |
-| orderSide | string | false | N/A | Order side: `BUY`, `SELL` |  |
-| orderType | string | false | N/A | Order type: `LIMIT`, `MARKET` |  |
-| orderId | number | false | N/A | Order ID |  |
-| fromId | number | false | N/A | Start ID |  |
-| direction | string | false | N/A | Query direction: `PREV`, `NEXT` |  |
-| limit | number | false | 20 | Limit number, max 100 |  |
-| startTime | number | false | N/A | Start time (e.g. `1657682804112`) |  |
-| endTime | number | false | N/A | End time |  |
+| name      | type   | mandatory | default | description                                 | ranges |
+| --------- | ------ | --------- | ------- | ------------------------------------------- | ------ |
+| symbol    | string | false     | N/A     | Trading pair, if not filled, represents all |        |
+| bizType   | string | false     | N/A     | Business type: `SPOT`, `LEVER`              |        |
+| orderSide | string | false     | N/A     | Order side: `BUY`, `SELL`                   |        |
+| orderType | string | false     | N/A     | Order type: `LIMIT`, `MARKET`               |        |
+| orderId   | number | false     | N/A     | Order ID                                    |        |
+| fromId    | number | false     | N/A     | Start ID                                    |        |
+| direction | string | false     | N/A     | Query direction: `PREV`, `NEXT`             |        |
+| limit     | number | false     | 20      | Limit number, max 100                       |        |
+| startTime | number | false     | N/A     | Start time (e.g. `1657682804112`)           |        |
+| endTime   | number | false     | N/A     | End time                                    |        |
 
 ### Parameters Example[​](#parameters-example "Direct link to Parameters Example")
 
@@ -31,7 +32,8 @@ curl --location --request GET 'https://sapi.xt.com/v4/trade?limit=100&bizType=SP
 
 ### Notes[​](#notes "Direct link to Notes")
 
-This endpoint retrieves trade records. Supports filtering by trading pair, business type, side, order type, time range, and pagination.
+This endpoint retrieves trade records. Supports filtering by trading pair,
+business type, side, order type, time range, and pagination.
 
 ### Response Example[​](#response-example "Direct link to Response Example")
 

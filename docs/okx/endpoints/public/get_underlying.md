@@ -1,6 +1,7 @@
 # GET underlying
 
-Source: [https://www.okx.com/docs-v5/en/#public-data-rest-api-get-underlying](https://www.okx.com/docs-v5/en/#public-data-rest-api-get-underlying)
+Source:
+[https://www.okx.com/docs-v5/en/#public-data-rest-api-get-underlying](https://www.okx.com/docs-v5/en/#public-data-rest-api-get-underlying)
 
 ### Get underlying
 
@@ -14,9 +15,10 @@ Source: [https://www.okx.com/docs-v5/en/#public-data-rest-api-get-underlying](ht
 
 #### Request Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| instType | String | Yes | Instrument type  
+| Parameter | Type   | Required | Description     |
+| --------- | ------ | -------- | --------------- |
+| instType  | String | Yes      | Instrument type |
+
 `SWAP`  
 `FUTURES`  
 `OPTION` |
@@ -24,5 +26,5 @@ Source: [https://www.okx.com/docs-v5/en/#public-data-rest-api-get-underlying](ht
 #### Response Parameters
 
 | **Parameter** | **Type** | **Description** |
-| --- | --- | --- |
-| uly | Array | Underlying |
+| ------------- | -------- | --------------- |
+| uly           | Array    | Underlying      |

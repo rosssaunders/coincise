@@ -1,11 +1,13 @@
 # XT.com Exchange Documentation Extractor
 
-This directory contains scripts for extracting API documentation from [XT.com](https://www.xt.com/).
+This directory contains scripts for extracting API documentation from
+[XT.com](https://www.xt.com/).
 
 ## Documentation Source
 
 - **URL**: https://doc.xt.com/docs/index_overview/overview
-- **Spot Trading API**: https://doc.xt.com/docs/spot/Access%20Description/BasicInformationOfTheInterface
+- **Spot Trading API**:
+  https://doc.xt.com/docs/spot/Access%20Description/BasicInformationOfTheInterface
 - **Framework**: Docusaurus
 - **GitHub**: https://github.com/XtApis/api
 
@@ -14,6 +16,7 @@ This directory contains scripts for extracting API documentation from [XT.com](h
 ### Extract General Documentation
 
 Extracts core documentation sections:
+
 - Rate limits
 - Authentication
 - Network connectivity
@@ -28,6 +31,7 @@ pnpm run extract:general
 ### Extract Endpoint Documentation
 
 Extracts individual endpoint documentation for:
+
 - Balance endpoints
 - Deposit & Withdrawal endpoints
 - Market data endpoints

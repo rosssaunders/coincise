@@ -2,30 +2,31 @@
 
 **Check the proper endpoint based on your region.**
 
-The examples in this page is written using Singapore fiat code(SGD). Set the quote currency to match your region. The base\_url differs by country/region. Make sure to specify the correct region value for your environment.  
-  
+The examples in this page is written using Singapore fiat code(SGD). Set the
+quote currency to match your region. The base_url differs by country/region.
+Make sure to specify the correct region value for your environment.
+
 \- Singapore (sg): https://sg-api.upbit.com  
 \- Indonesia (id): https://id-api.upbit.com  
 \- Thailand (th): https://th-api.upbit.com
 
-  
-
 Revision History
 
-| Version | Date | Changes |
-| --- | --- | --- |
-| v1.0.7 | 2023-05-23 | [Addition of `net_type` field](https://global-docs.upbit.com/changelog/net_type#/) |
+| Version | Date       | Changes                                                                            |
+| ------- | ---------- | ---------------------------------------------------------------------------------- |
+| v1.0.7  | 2023-05-23 | [Addition of `net_type` field](https://global-docs.upbit.com/changelog/net_type#/) |
 
 Rate Limit
 
-Up to 30 calls per second are allowed. This is measured on an account basis and request counts are shared within the exchange 'default' group.
-
-  
+Up to 30 calls per second are allowed. This is measured on an account basis and
+request counts are shared within the exchange 'default' group.
 
 API Key Permission
 
-API key with [authentication](auth) is required, with \[View Deposits\] permission enabled.  
-If an out\_of\_scope permission error occurs, please check the permission settings in the API Key Management page.
+API key with [authentication](auth) is required, with \[View Deposits\]
+permission enabled.  
+If an out_of_scope permission error occurs, please check the permission settings
+in the API Key Management page.
 
 currency
 
@@ -38,15 +39,17 @@ uuid
 
 string
 
-Unique identifier(UUID) of the deposit to query. If neither uuid nor txid is specified, the latest deposit record is returned.
+Unique identifier(UUID) of the deposit to query. If neither uuid nor txid is
+specified, the latest deposit record is returned.
 
 txid
 
 string
 
-Transaction ID of the deposit to query. If neither uuid nor txid is specified, the latest deposit record is returned.
+Transaction ID of the deposit to query. If neither uuid nor txid is specified,
+the latest deposit record is returned.
 
-# 
+#
 
 200
 
@@ -80,7 +83,7 @@ required
 
 Currency code to be queried.
 
-net\_type
+net_type
 
 string | null
 
@@ -107,17 +110,19 @@ required
 
 Deposit status.
 
--   `PROCESSING`: Deposit in progress (digital asset only)
--   `ACCEPTED`: Completed
--   `CANCELLED`: Cancelled
--   `REJECTED`: Rejected
--   `TRAVEL_RULE_SUSPECTED`: Awaiting additional Travel Rule verification (digital assets only)
--   `REFUNDING`: Refund in progress
--   `REFUNDED`: Refunded (digital asset only)
+- `PROCESSING`: Deposit in progress (digital asset only)
+- `ACCEPTED`: Completed
+- `CANCELLED`: Cancelled
+- `REJECTED`: Rejected
+- `TRAVEL_RULE_SUSPECTED`: Awaiting additional Travel Rule verification (digital
+  assets only)
+- `REFUNDING`: Refund in progress
+- `REFUNDED`: Refunded (digital asset only)
 
-`PROCESSING` `ACCEPTED` `CANCELLED` `REJECTED` `TRAVEL_RULE_SUSPECTED` `REFUNDING` `REFUNDED`
+`PROCESSING` `ACCEPTED` `CANCELLED` `REJECTED` `TRAVEL_RULE_SUSPECTED`
+`REFUNDING` `REFUNDED`
 
-created\_at
+created_at
 
 string
 
@@ -125,7 +130,7 @@ required
 
 Deposit request time (UTC).
 
-done\_at
+done_at
 
 string
 
@@ -149,7 +154,7 @@ required
 
 Deposit fee.
 
-transaction\_type
+transaction_type
 
 string
 
@@ -161,12 +166,12 @@ Defaults to default
 
 Deposit type.
 
--   `default`: General deposit
--   `internal`: Internal deposit (between Upbit accounts)
+- `default`: General deposit
+- `internal`: Internal deposit (between Upbit accounts)
 
 `default` `internal`
 
-# 
+#
 
 400
 
@@ -194,7 +199,7 @@ required
 
 Message describing the cause of the error.
 
-# 
+#
 
 401
 
@@ -222,7 +227,7 @@ required
 
 Message describing the cause of the error.
 
-# 
+#
 
 404
 
@@ -252,7 +257,7 @@ Message describing the cause of the error.
 
 Updated 16 days ago
 
-* * *
+---
 
 ShellPythonJavaNode
 
@@ -268,15 +273,17 @@ curl \--request GET \\
 
 2
 
-  \--url 'https://{region}-api.upbit.com/v1/deposit?uuid=94332e99-3a87-4a35-ad98-28b0c969f830' \\
+\--url
+'https://{region}-api.upbit.com/v1/deposit?uuid=94332e99-3a87-4a35-ad98-28b0c969f830'
+\\
 
 3
 
-  \--header 'Authorization: Bearer {JWT\_TOKEN}' \\
+\--header 'Authorization: Bearer {JWT_TOKEN}' \\
 
 4
 
-  \--header 'Accept: application/json'
+\--header 'Accept: application/json'
 
 5
 
@@ -292,47 +299,47 @@ xxxxxxxxxx
 
 2
 
-  "type": "deposit",
+"type": "deposit",
 
 3
 
-  "uuid": "94332e99-3a87-4a35-ad98-28b0c969f830",
+"uuid": "94332e99-3a87-4a35-ad98-28b0c969f830",
 
 4
 
-  "currency": "SGD",
+"currency": "SGD",
 
 5
 
-  "net\_type": null,
+"net_type": null,
 
 6
 
-  "txid": "BKD-2000-12-29-aeked29c05eadac293b4214994",
+"txid": "BKD-2000-12-29-aeked29c05eadac293b4214994",
 
 7
 
-  "state": "ACCEPTED",
+"state": "ACCEPTED",
 
 8
 
-  "created\_at": "2025-07-04T15:00:00",
+"created_at": "2025-07-04T15:00:00",
 
 9
 
-  "done\_at": "2025-07-04T15:00:10",
+"done_at": "2025-07-04T15:00:10",
 
 10
 
-  "amount": "100000.0",
+"amount": "100000.0",
 
 11
 
-  "fee": "0.0",
+"fee": "0.0",
 
 12
 
-  "transaction\_type": "default"
+"transaction_type": "default"
 
 13
 
@@ -340,8 +347,9 @@ xxxxxxxxxx
 
 Updated 16 days ago
 
-* * *
+---
 
 ---
 
-**Source:** [individual-deposit-inquiry](https://global-docs.upbit.com/reference/individual-deposit-inquiry)
+**Source:**
+[individual-deposit-inquiry](https://global-docs.upbit.com/reference/individual-deposit-inquiry)

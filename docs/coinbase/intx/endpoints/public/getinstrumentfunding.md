@@ -14,11 +14,11 @@ Retrieves the historical funding rates for a specific instrument.
 
 ## Parameters
 
-| Name | In | Type | Required | Description |
-|------|----|------|----------|-------------|
-| instrument | path | string | Yes | Identifies the instrument by name (e.g., `BTC-PERP`), UUID (e.g., `ce55a827-f04a-45c0-9d9b-8bbdb9b48065`), or instrument ID (e.g., `7149252043835013`) |
-| result_limit | query | integer | No | The number of results to return (defaults to 25 with a max supported value of 100) |
-| result_offset | query | integer | No | The number of results from the beginning to skip past |
+| Name          | In    | Type    | Required | Description                                                                                                                                            |
+| ------------- | ----- | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| instrument    | path  | string  | Yes      | Identifies the instrument by name (e.g., `BTC-PERP`), UUID (e.g., `ce55a827-f04a-45c0-9d9b-8bbdb9b48065`), or instrument ID (e.g., `7149252043835013`) |
+| result_limit  | query | integer | No       | The number of results to return (defaults to 25 with a max supported value of 100)                                                                     |
+| result_offset | query | integer | No       | The number of results from the beginning to skip past                                                                                                  |
 
 ## Authentication
 
@@ -36,4 +36,5 @@ Invalid attribute
 
 ## Documentation
 
-For more details, see the [INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).
+For more details, see the
+[INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).

@@ -12,9 +12,9 @@
 
 ## Parameters
 
-| Name | In | Type | Required | Description |
-|------|----|------|----------|-------------|
-| transfer_uuid | path | string | Yes | The UUID of the transfer request |
+| Name          | In   | Type   | Required | Description                      |
+| ------------- | ---- | ------ | -------- | -------------------------------- |
+| transfer_uuid | path | string | Yes      | The UUID of the transfer request |
 
 ## Authentication
 
@@ -37,4 +37,5 @@ Invalid attribute
 
 ## Documentation
 
-For more details, see the [INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).
+For more details, see the
+[INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).

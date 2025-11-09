@@ -2158,7 +2158,6 @@ Signature generated
 
   Records of transfers generated through `POST /wallet/transfers` has multiple
   methods to be retrieved based on account, including:
-
   - `GET /margin/account_book` to retrieve transferals from or to margin
     account.
   - `GET /futures/{settle}/account_book?type=dnw` to retrieve perpetual contract
@@ -2186,7 +2185,6 @@ Signature generated
   `GET /futures/{settle}/contracts` or `GET /delivery/{settle}/contracts`
 
 - Difference between sub account and main account
-
   - Sub account API Key cannot operate transferals between main and sub account,
     i.e., `POST /wallet/sub_account_transfers`
   - Sub account API Key cannot operate withdrawal, i.e., `POST /withdrawals`
@@ -2200,7 +2198,6 @@ Signature generated
 
   When submitting an issue, please include the following information to help
   identify the problem:
-
   - User ID
     - Original request URL, request parameters and request body
     - What API key was used and where was it used, TestNet or real trading(API

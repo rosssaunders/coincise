@@ -66,19 +66,16 @@ Additional mandatory parameters based on `type`:
 >       `callbackRate`)
 >     - SELL: the highest price after order placed >= `activationPrice`, and the
 >       latest price <= the highest price \* (1 - `callbackRate`)
->
 > - For `TRAILING_STOP_MARKET`, if you got such error code.  
 >   `{"code": -2021, "msg": "Order would immediately trigger."}`  
 >   means that the parameters you send do not meet the following requirements:
 >   - BUY: `activationPrice` should be smaller than latest price.
 >   - SELL: `activationPrice` should be larger than latest price.
->
 > - If `newOrderRespType` is sent as `RESULT` :
 >   - `MARKET` order: the final FILLED result of the order will be return
 >     directly.
 >   - `LIMIT` order with special `timeInForce`: the final status result of the
 >     order(FILLED or EXPIRED) will be returned directly.
->
 > - `STOP_MARKET`, `TAKE_PROFIT_MARKET` with `closePosition`\=`true`:
 >   - Follow the same rules for condition orders.
 >   - If triggered，**close all** current long position( if `SELL`) or current
@@ -87,7 +84,6 @@ Additional mandatory parameters based on `type`:
 >   - Cannot be used with `reduceOnly` parameter
 >   - In Hedge Mode,cannot be used with `BUY` orders in `LONG` position side.
 >     and cannot be used with `SELL` orders in `SHORT` position side
->
 > - `selfTradePreventionMode` is only effective when `timeInForce` set to `IOC`
 >   or `GTC` or `GTD`.
 > - In extreme market conditions, timeInForce `GTD` order auto cancel time might

@@ -1,6 +1,7 @@
 # GET Query The Last Trade of a Contract
 
-**Source:** [Query The Last Trade of a Contract](https://www.htx.com/en-us/opend/newApiPages/?id=5d517dc9-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Query The Last Trade of a Contract](https://www.htx.com/en-us/opend/newApiPages/?id=5d517dc9-77b6-11ed-9966-0242ac110003)
 
 **Category:** Swap Market Data interface
 
@@ -18,37 +19,37 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USD", All swaps default |  |  |
+| Parameter     | Data Type | Required | Description                                                                                   | Value Range | Default Value |
+| ------------- | --------- | -------- | --------------------------------------------------------------------------------------------- | ----------- | ------------- |
+| contract_code | string    | false    | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USD", All swaps default |             |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| ch | string | true | Data belonged channel，Format： market.$contract\_code.trade.detail |  |
-| status | string | true |  | "ok","error" |
-| ts | long | true | Sending time |  |
-| TICK> (ATTRS: TICK\_START |  | false |  |  |
-| id | long | true | Unique Order Id(symbol level) |  |
-| ts | long | true | Latest Creation Time |  |
-| LIST> (ATTRS: DATA\_START |  | false |  |  |
-| id | long | true | Unique Transaction Id(symbol level) |  |
-| price | string | true | Price |  |
-| amount | string | true | Quantity(Cont.). Sum of both buy and sell sides |  |
-| direction | string | true | The direction to buy or sell is the direction of the taker (active transaction) |  |
-| ts | long | true | Order Creation Time |  |
-| quantity | string | true | trading quantity(coin) |  |
-| contrct\_code | string | true | Contract Code |  |
-| LIST\_END |  | false |  |  |
-| TICK\_END |  | false |  |  |
+| Parameter                | Data Type | Required | Description                                                                     | Value Range  |
+| ------------------------ | --------- | -------- | ------------------------------------------------------------------------------- | ------------ |
+| ch                       | string    | true     | Data belonged channel，Format： market.$contract_code.trade.detail              |              |
+| status                   | string    | true     |                                                                                 | "ok","error" |
+| ts                       | long      | true     | Sending time                                                                    |              |
+| TICK> (ATTRS: TICK_START |           | false    |                                                                                 |              |
+| id                       | long      | true     | Unique Order Id(symbol level)                                                   |              |
+| ts                       | long      | true     | Latest Creation Time                                                            |              |
+| LIST> (ATTRS: DATA_START |           | false    |                                                                                 |              |
+| id                       | long      | true     | Unique Transaction Id(symbol level)                                             |              |
+| price                    | string    | true     | Price                                                                           |              |
+| amount                   | string    | true     | Quantity(Cont.). Sum of both buy and sell sides                                 |              |
+| direction                | string    | true     | The direction to buy or sell is the direction of the taker (active transaction) |              |
+| ts                       | long      | true     | Order Creation Time                                                             |              |
+| quantity                 | string    | true     | trading quantity(coin)                                                          |              |
+| contrct_code             | string    | true     | Contract Code                                                                   |              |
+| LIST_END                 |           | false    |                                                                                 |              |
+| TICK_END                 |           | false    |                                                                                 |              |
 
 #### Request example
 
@@ -94,7 +95,7 @@ Interface permission: Read
 
 1603852755227
 
-"contract\_code":
+"contract_code":
 
 "BTC-USD"
 

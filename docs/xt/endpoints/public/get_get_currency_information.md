@@ -1,6 +1,7 @@
 # GET Get currency information
 
-Source: [https://doc.xt.com/docs/spot/Balance/GetCurrencies](https://doc.xt.com/docs/spot/Balance/GetCurrencies)
+Source:
+[https://doc.xt.com/docs/spot/Balance/GetCurrencies](https://doc.xt.com/docs/spot/Balance/GetCurrencies)
 
 # Get currency information
 
@@ -8,15 +9,15 @@ Source: [https://doc.xt.com/docs/spot/Balance/GetCurrencies](https://doc.xt.com/
 
 **GET** `/v4/public/currencies`
 
-* * *
+---
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| Name | Type | Mandatory | Default | Description | Ranges |
-| --- | --- | --- | --- | --- | --- |
-| — | string | No | N/A | No request parameters required |  |
+| Name | Type   | Mandatory | Default | Description                    | Ranges |
+| ---- | ------ | --------- | ------- | ------------------------------ | ------ |
+| —    | string | No        | N/A     | No request parameters required |        |
 
-* * *
+---
 
 ### Response Example[​](#response-example "Direct link to Response Example")
 

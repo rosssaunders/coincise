@@ -1,6 +1,7 @@
 # GET Request a Margin Loan（Isolated）
 
-**Source:** [Request a Margin Loan（Isolated）](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4d587-7773-11ed-9966-0242ac110003)
+**Source:**
+[Request a Margin Loan（Isolated）](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4d587-7773-11ed-9966-0242ac110003)
 
 **Category:** Margin Loan (Cross/Isolated)
 
@@ -22,25 +23,25 @@ Interface description: This endpoint places an order to apply a margin loan.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | false | The trading symbol to borrow margin, e.g. btcusdt, bccbtc |  |  |
-| currency | string | false | The currency to borrow |  |  |
-| amount | string | false | The amount of currency to borrow (precision: 3 decimal places) |  |  |
+| Parameter | Data Type | Required | Description                                                    | Value Range | Default Value |
+| --------- | --------- | -------- | -------------------------------------------------------------- | ----------- | ------------- |
+| symbol    | string    | false    | The trading symbol to borrow margin, e.g. btcusdt, bccbtc      |             |               |
+| currency  | string    | false    | The currency to borrow                                         |             |               |
+| amount    | string    | false    | The amount of currency to borrow (precision: 3 decimal places) |             |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | false | Status |  |
-| data | integer | false | Margin order id |  |
+| Parameter | Data Type | Required | Description     | Value Range |
+| --------- | --------- | -------- | --------------- | ----------- |
+| status    | string    | false    | Status          |             |
+| data      | integer   | false    | Margin order id |             |
 
 #### Request example
 

@@ -1,18 +1,24 @@
 # Bullish Exchange Documentation Extraction
 
-This venue extracts API documentation for Bullish Exchange from their OpenAPI specification.
+This venue extracts API documentation for Bullish Exchange from their OpenAPI
+specification.
 
 ## Documentation Source
 
-- **OpenAPI Spec URL**: https://api.exchange.bullish.com/docs/v2/open-api/api-doc.yml
+- **OpenAPI Spec URL**:
+  https://api.exchange.bullish.com/docs/v2/open-api/api-doc.yml
 - **Exchange Website**: https://bullish.com
 
 ## Extraction Approach
 
-Bullish provides their API documentation as an OpenAPI specification. Since they don't have a publicly accessible HTML documentation site, we extract documentation directly from the OpenAPI spec file:
+Bullish provides their API documentation as an OpenAPI specification. Since they
+don't have a publicly accessible HTML documentation site, we extract
+documentation directly from the OpenAPI spec file:
 
-- General documentation sections (authentication, rate limits, etc.) are extracted from the spec metadata
-- Individual endpoints are extracted from the paths object and organized into public/private categories
+- General documentation sections (authentication, rate limits, etc.) are
+  extracted from the spec metadata
+- Individual endpoints are extracted from the paths object and organized into
+  public/private categories
 
 ## Scripts
 

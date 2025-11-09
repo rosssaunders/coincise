@@ -36,40 +36,6 @@ const writeFile = (filePath, content) => {
 }
 
 /**
- * Extract content between two H1 sections
- */
-const extractH1Section = async (page, sectionTitle) => {
-  const html = await page.evaluate(title => {
-    const content = document.createElement("div")
-    const h1Elements = Array.from(document.querySelectorAll("h1"))
-
-    let capturing = false
-    let currentH1 = null
-
-    for (const h1 of h1Elements) {
-      const h1Text = h1.textContent.trim()
-
-      if (h1Text === title) {
-        capturing = true
-        currentH1 = h1
-        content.appendChild(h1.cloneNode(true))
-
-        let sibling = h1.nextElementSibling
-        while (sibling && sibling.tagName !== "H1") {
-          content.appendChild(sibling.cloneNode(true))
-          sibling = sibling.nextElementSibling
-        }
-        break
-      }
-    }
-
-    return content.innerHTML
-  }, sectionTitle)
-
-  return html
-}
-
-/**
  * Extract content for specific H2 sections within a page
  */
 const extractH2Sections = async (page, sectionTitles) => {

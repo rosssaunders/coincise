@@ -1,6 +1,7 @@
 # POST Transfer between user business systems
 
-Source: [https://doc.xt.com/docs/spot/Transfer/TransferBetweenUserSystems](https://doc.xt.com/docs/spot/Transfer/TransferBetweenUserSystems)
+Source:
+[https://doc.xt.com/docs/spot/Transfer/TransferBetweenUserSystems](https://doc.xt.com/docs/spot/Transfer/TransferBetweenUserSystems)
 
 # Transfer between user business systems
 
@@ -10,21 +11,23 @@ Source: [https://doc.xt.com/docs/spot/Transfer/TransferBetweenUserSystems](https
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| bizId | string | true | N/A | Unique ID for idempotent processing | Maximum length: 128 |
-| from | enum | true | N/A | Fund transfer out account | [bizType enum](#bizType) |
-| to | enum | true | N/A | Fund transfer in account | [bizType enum](#bizType) |
-| currency | string | true | N/A | Currency name, must be lowercase (e.g. `usdt`, `btc`) |  |
-| symbol | string | false | N/A | Transfer symbol (must be lowercase). Required if one of the transfer-in or transfer-out accounts is **leverage** |  |
-| amount | bigDecimal | true | N/A | Transfer amount |  |
+| name     | type       | mandatory | default | description                                                                                                      | ranges                   |
+| -------- | ---------- | --------- | ------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| bizId    | string     | true      | N/A     | Unique ID for idempotent processing                                                                              | Maximum length: 128      |
+| from     | enum       | true      | N/A     | Fund transfer out account                                                                                        | [bizType enum](#bizType) |
+| to       | enum       | true      | N/A     | Fund transfer in account                                                                                         | [bizType enum](#bizType) |
+| currency | string     | true      | N/A     | Currency name, must be lowercase (e.g. `usdt`, `btc`)                                                            |                          |
+| symbol   | string     | false     | N/A     | Transfer symbol (must be lowercase). Required if one of the transfer-in or transfer-out accounts is **leverage** |                          |
+| amount   | bigDecimal | true      | N/A     | Transfer amount                                                                                                  |                          |
 
 ### Notes[​](#notes "Direct link to Notes")
 
-This endpoint allows fund transfers between **different business systems** under the same user.
+This endpoint allows fund transfers between **different business systems** under
+the same user.
 
--   `bizId` ensures idempotent processing, recommended to be stored for reconciliation.
--   If leverage accounts are involved, `symbol` must be provided.
+- `bizId` ensures idempotent processing, recommended to be stored for
+  reconciliation.
+- If leverage accounts are involved, `symbol` must be provided.
 
 #### Parameters Example[​](#parameters-example "Direct link to Parameters Example")
 

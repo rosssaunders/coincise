@@ -18,4 +18,5 @@ Test connectivity to the Rest API and get the current server time.
 {  "serverTime": 1499827319559}
 ```
 
-> Source: [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints)
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints)

@@ -1,6 +1,7 @@
 # GET all Accounts of the Current User
 
-**Source:** [Get all Accounts of the Current User](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4b291-7773-11ed-9966-0242ac110003)
+**Source:**
+[Get all Accounts of the Current User](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4b291-7773-11ed-9966-0242ac110003)
 
 **Category:** Account
 
@@ -18,34 +19,35 @@ Interface permission: Read
 
 Rate Limit: 100times/2s
 
-Interface description: This endpoint returns a list of accounts owned by this API user.
+Interface description: This endpoint returns a list of accounts owned by this
+API user.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
 | Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
+| --------- | --------- | -------- | ----------- | ----------- | ------------- |
 
 Notes:  
 No parameters are needed for this endpoint.
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | false | Request Processing Result | "ok","error" |
-| DATA\_START | object | false |  |  |
-| id | long | false | Unique account id |  |
-| state | string | false | Account state | working, lock |
-| type | string | false | The type of this account | spot, margin, point, super-margin,, grid-trading, otc-options,trust-credit ( third-party trust account ) |
-| subtype | string | false | Sub-account type (only valid for isolated margin accounts and trust-credit third-party trust account ) | The corresponding trading symbol (currency pair) the isolated margin is based on, e.g. btcusdt; Under the trust-credit account type, the value on the subtype identifies the chain where its assets or credit assets are located. Possible values ​​include (reference chain information): btc, eth, usdterc20, trc20usdt, usdc, trx1, etc. |
-| DATA\_END | object | false |  |  |
+| Parameter  | Data Type | Required | Description                                                                                            | Value Range                                                                                                                                                                                                                                                                                                                                 |
+| ---------- | --------- | -------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| status     | string    | false    | Request Processing Result                                                                              | "ok","error"                                                                                                                                                                                                                                                                                                                                |
+| DATA_START | object    | false    |                                                                                                        |                                                                                                                                                                                                                                                                                                                                             |
+| id         | long      | false    | Unique account id                                                                                      |                                                                                                                                                                                                                                                                                                                                             |
+| state      | string    | false    | Account state                                                                                          | working, lock                                                                                                                                                                                                                                                                                                                               |
+| type       | string    | false    | The type of this account                                                                               | spot, margin, point, super-margin,, grid-trading, otc-options,trust-credit ( third-party trust account )                                                                                                                                                                                                                                    |
+| subtype    | string    | false    | Sub-account type (only valid for isolated margin accounts and trust-credit third-party trust account ) | The corresponding trading symbol (currency pair) the isolated margin is based on, e.g. btcusdt; Under the trust-credit account type, the value on the subtype identifies the chain where its assets or credit assets are located. Possible values ​​include (reference chain information): btc, eth, usdterc20, trc20usdt, usdc, trx1, etc. |
+| DATA_END   | object    | false    |                                                                                                        |                                                                                                                                                                                                                                                                                                                                             |
 
 #### Request example
 

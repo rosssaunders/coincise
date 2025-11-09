@@ -100,7 +100,7 @@ const getAllEndpoints = () => {
 /**
  * Extract endpoint documentation from a page
  */
-const extractEndpoint = async (page, turndownService, url, category) => {
+const extractEndpoint = async (page, turndownService, url) => {
   try {
     await page.goto(url, {
       waitUntil: "networkidle0",
@@ -109,7 +109,9 @@ const extractEndpoint = async (page, turndownService, url, category) => {
 
     // Extract endpoint information
     const endpointInfo = await page.evaluate(() => {
-      const main = document.querySelector('main, article, .main-content, [role="main"]')
+      const main = document.querySelector(
+        'main, article, .main-content, [role="main"]'
+      )
       if (!main) {
         return null
       }
@@ -152,10 +154,10 @@ const extractEndpoint = async (page, turndownService, url, category) => {
           }
         }
       }
-      
+
       // Clean up the path - remove any trailing query parameters
       if (endpointPath) {
-        endpointPath = endpointPath.split('?')[0]
+        endpointPath = endpointPath.split("?")[0]
       }
 
       // Check for authentication headers to determine if private
@@ -175,7 +177,9 @@ const extractEndpoint = async (page, turndownService, url, category) => {
     })
 
     if (!endpointInfo || !endpointInfo.path) {
-      console.warn(`  ⚠️  Could not extract endpoint path from ${url} - skipping`)
+      console.warn(
+        `  ⚠️  Could not extract endpoint path from ${url} - skipping`
+      )
       return null
     }
 

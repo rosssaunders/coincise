@@ -178,7 +178,7 @@ const extractGeneralForType = async (
         responseFormats
       )
     }
-  } catch (e) {
+  } catch {
     console.log(`  Note: Common definitions not available for ${type}`)
     // Create minimal response_formats file
     const responseFormats = `# Response Formats\n\nRefer to general information for response format details.\n\n> Source: [${BASE_URL}/${basePath}/general-info](${BASE_URL}/${basePath}/general-info)\n`

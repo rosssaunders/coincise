@@ -1,6 +1,7 @@
 # GET Switch Leverage
 
-**Source:** [Switch Leverage](https://www.htx.com/en-us/opend/newApiPages/?id=5d51a32f-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Switch Leverage](https://www.htx.com/en-us/opend/newApiPages/?id=5d51a32f-77b6-11ed-9966-0242ac110003)
 
 **Category:** Swap Trade Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /swap-api/v1/swap\_switch\_lever\_rate (Switch Leverage)
+### /swap-api/v1/swap_switch_lever_rate (Switch Leverage)
 
 Request type: POST
 
@@ -20,44 +21,45 @@ Rate Limit: 1 time per 3 seconds
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | contract code | “BTC-USD” |  |
-| lever\_rate | int | true | Leverage to switch.\[Using Leverage greater than 20 times requires prior approval of high-leverage agreement for the first time.\] |  |  |
+| Parameter     | Data Type | Required | Description                                                                                                                        | Value Range | Default Value |
+| ------------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------- |
+| contract_code | string    | true     | contract code                                                                                                                      | “BTC-USD”   |               |
+| lever_rate    | int       | true     | Leverage to switch.\[Using Leverage greater than 20 times requires prior approval of high-leverage agreement for the first time.\] |             |               |
 
 Notes:  
-Only if a user has positions of a single token and has no open orders, the leverage is available to be switched flexibly.  
+Only if a user has positions of a single token and has no open orders, the
+leverage is available to be switched flexibly.  
 The interface limits the number of requests to 1 time per 3 seconds.
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | status: ok,error |  |
-| DATA\_START | object | false |  |  |
-| contract\_code | string | false | contract code |  |
-| lever\_rate | int | false | Switched leverage |  |
-| DATA\_END |  | false |  |  |
-| err\_code | int | false | error code |  |
-| err\_msg | string | false | error msg |  |
-| ts | long | true | Timestamp |  |
+| Parameter     | Data Type | Required | Description       | Value Range |
+| ------------- | --------- | -------- | ----------------- | ----------- |
+| status        | string    | true     | status: ok,error  |             |
+| DATA_START    | object    | false    |                   |             |
+| contract_code | string    | false    | contract code     |             |
+| lever_rate    | int       | false    | Switched leverage |             |
+| DATA_END      |           | false    |                   |             |
+| err_code      | int       | false    | error code        |             |
+| err_msg       | string    | false    | error msg         |             |
+| ts            | long      | true     | Timestamp         |             |
 
 #### Request example
 
 {
 
-"contract\_code":
+"contract_code":
 
 "BTC-USD"
 
-"order\_id":
+"order_id":
 
 "12345678"
 

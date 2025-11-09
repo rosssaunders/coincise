@@ -6,7 +6,7 @@ Rate limit: 10 req/sec/UID
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   POST /api/v2/mix/order/cancel-all-orders
+- POST /api/v2/mix/order/cancel-all-orders
 
 Request Example
 
@@ -16,12 +16,12 @@ curl -X POST "https://api.bitget.com/api/v2/mix/order/cancel-all-orders" \  -H "
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| productType | String | Yes | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures 
-| marginCoin | String | No | Margin coin, must be capitalized 
-| requestTime | String | No | request Time Unix millisecond timestamp 
-| receiveWindow | String | No | valid window period Unix millisecond timestamp Unix millisecond timestamp 
+| Parameter     | Type   | Required | Description                                                                                                                                      |
+| :------------ | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| productType   | String | Yes      | Product type<br><code>USDT-FUTURES</code> USDT-M Futures<br><code>COIN-FUTURES</code> Coin-M Futures<br><code>USDC-FUTURES</code> USDC-M Futures |
+| marginCoin    | String | No       | Margin coin, must be capitalized                                                                                                                 |
+| requestTime   | String | No       | request Time Unix millisecond timestamp                                                                                                          |
+| receiveWindow | String | No       | valid window period Unix millisecond timestamp Unix millisecond timestamp                                                                        |
 
 Response Example
 
@@ -31,15 +31,15 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| successList | List&lt;Object&gt; | The collection of successfully cancelled orders. 
-| &gt;orderId | String | Order ID 
-| &gt;clientOid | String | Customize order ID 
-| failureList | List&lt;Object&gt; | The collection of unsuccessfully cancelled orders. 
-| &gt;orderId | String | Order ID 
-| &gt;clientOid | String | Customize order ID 
-| &gt;errorMsg | String | Failure reason 
-| &gt;errorCode | String | Error code
+| Parameter     | Type               | Description                                        |
+| :------------ | :----------------- | :------------------------------------------------- |
+| successList   | List&lt;Object&gt; | The collection of successfully cancelled orders.   |
+| &gt;orderId   | String             | Order ID                                           |
+| &gt;clientOid | String             | Customize order ID                                 |
+| failureList   | List&lt;Object&gt; | The collection of unsuccessfully cancelled orders. |
+| &gt;orderId   | String             | Order ID                                           |
+| &gt;clientOid | String             | Customize order ID                                 |
+| &gt;errorMsg  | String             | Failure reason                                     |
+| &gt;errorCode | String             | Error code                                         |
 
 > **Source:** https://www.bitget.com/api-doc/contract/trade/Cancel-All-Orders

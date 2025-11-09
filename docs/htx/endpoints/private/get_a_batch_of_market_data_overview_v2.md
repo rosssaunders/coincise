@@ -1,6 +1,7 @@
 # GET a Batch of Market Data Overview(V2)
 
-**Source:** [Get a Batch of Market Data Overview(V2)](https://www.htx.com/en-us/opend/newApiPages/?id=5d517cf4-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Get a Batch of Market Data Overview(V2)](https://www.htx.com/en-us/opend/newApiPages/?id=5d517cf4-77b6-11ed-9966-0242ac110003)
 
 **Category:** Swap Market Data interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /v2/swap-ex/market/detail/batch\_merged (Get a Batch of Market Data Overview(V2))
+### /v2/swap-ex/market/detail/batch_merged (Get a Batch of Market Data Overview(V2))
 
 Request type: GET
 
@@ -18,41 +19,41 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USD" |  | if not filled in means all |
+| Parameter     | Data Type | Required | Description                                                                | Value Range | Default Value              |
+| ------------- | --------- | -------- | -------------------------------------------------------------------------- | ----------- | -------------------------- |
+| contract_code | string    | false    | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USD" |             | if not filled in means all |
 
 Notes:  
 The interface data updated frequency is 50ms
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | status | "ok" , "error" |
-| TICKS\_START | object array | true |  |  |
-| contract\_code | string | true | contract code | "BTC-USD" ... |
-| id | long | true | id |  |
-| amount | string | true | trade amount(coin), from nowtime - 24 hours. Sum of both buy and sell sides |  |
-| ask | array | true | \[ask one price, ask one vol(cont)\] |  |
-| bid | array | true | \[bid one price, bid one vol(cont)\] |  |
-| open | string | true | open price |  |
-| close | string | true | close price |  |
-| count | decimal | true | trade count, from nowtime - 24 hours. Sum of both buy and sell sides |  |
-| high | string | true | hight price |  |
-| low | string | true | low price |  |
-| vol | string | true | Transaction amount, from nowtime - 24 hours. Sum of both buy and sell sides |  |
-| number\_of | string | true | number of(cont), from nowtime - 24 hours. Sum of both buy and sell sides |  |
-| ts | long | true | timestamp |  |
-| TICKS\_END |  | false |  |  |
-| ts | long | true | Time of Respond Generation, Unit：Millisecond |  |
+| Parameter     | Data Type    | Required | Description                                                                 | Value Range    |
+| ------------- | ------------ | -------- | --------------------------------------------------------------------------- | -------------- |
+| status        | string       | true     | status                                                                      | "ok" , "error" |
+| TICKS_START   | object array | true     |                                                                             |                |
+| contract_code | string       | true     | contract code                                                               | "BTC-USD" ...  |
+| id            | long         | true     | id                                                                          |                |
+| amount        | string       | true     | trade amount(coin), from nowtime - 24 hours. Sum of both buy and sell sides |                |
+| ask           | array        | true     | \[ask one price, ask one vol(cont)\]                                        |                |
+| bid           | array        | true     | \[bid one price, bid one vol(cont)\]                                        |                |
+| open          | string       | true     | open price                                                                  |                |
+| close         | string       | true     | close price                                                                 |                |
+| count         | decimal      | true     | trade count, from nowtime - 24 hours. Sum of both buy and sell sides        |                |
+| high          | string       | true     | hight price                                                                 |                |
+| low           | string       | true     | low price                                                                   |                |
+| vol           | string       | true     | Transaction amount, from nowtime - 24 hours. Sum of both buy and sell sides |                |
+| number_of     | string       | true     | number of(cont), from nowtime - 24 hours. Sum of both buy and sell sides    |                |
+| ts            | long         | true     | timestamp                                                                   |                |
+| TICKS_END     |              | false    |                                                                             |                |
+| ts            | long         | true     | Time of Respond Generation, Unit：Millisecond                               |                |
 
 #### Request example
 
@@ -112,7 +113,7 @@ The interface data updated frequency is 50ms
 
 \]
 
-"contract\_code":
+"contract_code":
 
 "BTC-USD"
 
@@ -144,7 +145,7 @@ The interface data updated frequency is 50ms
 
 "119937400"
 
-"number\_of":
+"number_of":
 
 "1199374"
 

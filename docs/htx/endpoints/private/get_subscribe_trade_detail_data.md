@@ -1,6 +1,7 @@
 # GET Subscribe Trade Detail Data
 
-**Source:** [Subscribe Trade Detail Data](https://www.htx.com/en-us/opend/newApiPages/?id=5d514984-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Subscribe Trade Detail Data](https://www.htx.com/en-us/opend/newApiPages/?id=5d514984-77b6-11ed-9966-0242ac110003)
 
 **Category:** WebSocket Market Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### market.$contract\_code.trade.detail (Subscribe Trade Detail Data)
+### market.$contract_code.trade.detail (Subscribe Trade Detail Data)
 
 Signature verification: Yes
 
@@ -16,45 +17,45 @@ Interface permission: Read
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.hbdm.com/swap-ws |
-| Online (preferred by aws customers) | wss://api.hbdm.vn/swap-ws |
+| Environment                         | Address                    |
+| ----------------------------------- | -------------------------- |
+| Online                              | wss://api.hbdm.com/swap-ws |
+| Online (preferred by aws customers) | wss://api.hbdm.vn/swap-ws  |
 
 #### Request Parameter
 
 | Field Name | Type | Description |
-| --- | --- | --- |
+| ---------- | ---- | ----------- |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
+| -------------- | -------------------- | ---- |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | swap code |  | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USD" |
+| Parameter     | Data Type | Required | Description | Value Range | Default Value                                                              |
+| ------------- | --------- | -------- | ----------- | ----------- | -------------------------------------------------------------------------- |
+| contract_code | string    | true     | swap code   |             | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USD" |
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| ch | string | true | Data channel,format: market.$contract\_code.trade.detail |  |
-| ts | long | true | Request time |  |
-| TICK\_START |  | false |  |  |
-| id | long | true | Unique Order Id(symbol level) |  |
-| ts | long | true | tick time |  |
-| DATA\_START |  | false |  |  |
-| amount | decimal | true | quantity(Cont.). Sum of both buy and sell sides |  |
-| ts | long | true | trade timestamp |  |
-| id | long | true | Unique Transaction Id(symbol level) |  |
-| price | decimal | true | Price |  |
-| direction | string | true | The direction to buy or sell is the direction of the taker (active transaction) |  |
-| quantity | decimal | true | trading quantity(coin) |  |
-| DATA\_END |  | false |  |  |
-| TICK\_END |  | false |  |  |
+| Parameter  | Data Type | Required | Description                                                                     | Value Range |
+| ---------- | --------- | -------- | ------------------------------------------------------------------------------- | ----------- |
+| ch         | string    | true     | Data channel,format: market.$contract_code.trade.detail                         |             |
+| ts         | long      | true     | Request time                                                                    |             |
+| TICK_START |           | false    |                                                                                 |             |
+| id         | long      | true     | Unique Order Id(symbol level)                                                   |             |
+| ts         | long      | true     | tick time                                                                       |             |
+| DATA_START |           | false    |                                                                                 |             |
+| amount     | decimal   | true     | quantity(Cont.). Sum of both buy and sell sides                                 |             |
+| ts         | long      | true     | trade timestamp                                                                 |             |
+| id         | long      | true     | Unique Transaction Id(symbol level)                                             |             |
+| price      | decimal   | true     | Price                                                                           |             |
+| direction  | string    | true     | The direction to buy or sell is the direction of the taker (active transaction) |             |
+| quantity   | decimal   | true     | trading quantity(coin)                                                          |             |
+| DATA_END   |           | false    |                                                                                 |             |
+| TICK_END   |           | false    |                                                                                 |             |
 
 #### Subscription Example
 

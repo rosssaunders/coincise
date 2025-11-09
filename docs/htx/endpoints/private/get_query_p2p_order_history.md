@@ -1,6 +1,7 @@
 # GET Query P2P Order History
 
-**Source:** [Query P2P Order History](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-192e687b21e)
+**Source:**
+[Query P2P Order History](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-192e687b21e)
 
 **Category:** P2P
 
@@ -18,47 +19,48 @@ Interface permission: Read
 
 Rate Limit: 20/2s
 
-Interface description: This interface is used to query the orders of users' c2c historical transaction records.
+Interface description: This interface is used to query the orders of users' c2c
+historical transaction records.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
-| Online | https://api.huobi.pro |
+| Online                              | https://api.huobi.pro     |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| side | string | false | 0:buy , 1:sell |  |  |
-| startTime | long | false | Query start time, query by data creation. time,millisecond timestamp. | The query window is the last 90 days |  |
-| endTime | long | false | Query end time, query data by creation. timetime,millisecond timestamp. | The query window is the last 90 days |  |
-| direct | string | false | Search direct, If the direction is NEXT, the data is returned in positive chronological order; if the direction is PREV, the data is returned in reverse chronological order | next, prev default is prev | now |
-| fromId | long | false | If the query direction is prev, from\_id should be the min query\_id in the last query result. If the query direction is next, from\_id should be the max query\_id in the last query result |  |  |
-| limit | long | false | Number of results per request. Maximum is 100. Default is 100. |  |  |
+| Parameter | Data Type | Required | Description                                                                                                                                                                              | Value Range                          | Default Value |
+| --------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | ------------- |
+| side      | string    | false    | 0:buy , 1:sell                                                                                                                                                                           |                                      |               |
+| startTime | long      | false    | Query start time, query by data creation. time,millisecond timestamp.                                                                                                                    | The query window is the last 90 days |               |
+| endTime   | long      | false    | Query end time, query data by creation. timetime,millisecond timestamp.                                                                                                                  | The query window is the last 90 days |               |
+| direct    | string    | false    | Search direct, If the direction is NEXT, the data is returned in positive chronological order; if the direction is PREV, the data is returned in reverse chronological order             | next, prev default is prev           | now           |
+| fromId    | long      | false    | If the query direction is prev, from_id should be the min query_id in the last query result. If the query direction is next, from_id should be the max query_id in the last query result |                                      |               |
+| limit     | long      | false    | Number of results per request. Maximum is 100. Default is 100.                                                                                                                           |                                      |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true |  |  |
-| DATA\_START | object | true |  |  |
-| orderNo | long | true | order number |  |
-| role | string | true | taker or maker | taker or maker |
-| side | string | true | Trading direction |  |
-| fiatCurrency | string | true | legal tender |  |
-| counterpartNickName | string | true | Counterparty nickname |  |
-| asset | string | true | Trading asset currency |  |
-| amount | string | true | Quantity |  |
-| unitPrice | string | true | unit price |  |
-| totalPrice | string | true | total price |  |
-| fee | string | true | handling fee |  |
-| orderStatus | string | true | Order Status | UNPAID(0), PAID(1), CANCEL(2), COMPLETED(3), APPEAL(4), CANCEL\_APPEAL(5), PAYING(103), PAID\_FAIL(104), ABNORMAL(105) |
-| queryId |  | false |  |  |
-| createTime | long | true | creation time |  |
-| DATA\_END |  | false | Query id, which can be used as the from\_id field in the next query request |  |
-| ts | long | true |  |  |
+| Parameter           | Data Type | Required | Description                                                                | Value Range                                                                                                          |
+| ------------------- | --------- | -------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| status              | string    | true     |                                                                            |                                                                                                                      |
+| DATA_START          | object    | true     |                                                                            |                                                                                                                      |
+| orderNo             | long      | true     | order number                                                               |                                                                                                                      |
+| role                | string    | true     | taker or maker                                                             | taker or maker                                                                                                       |
+| side                | string    | true     | Trading direction                                                          |                                                                                                                      |
+| fiatCurrency        | string    | true     | legal tender                                                               |                                                                                                                      |
+| counterpartNickName | string    | true     | Counterparty nickname                                                      |                                                                                                                      |
+| asset               | string    | true     | Trading asset currency                                                     |                                                                                                                      |
+| amount              | string    | true     | Quantity                                                                   |                                                                                                                      |
+| unitPrice           | string    | true     | unit price                                                                 |                                                                                                                      |
+| totalPrice          | string    | true     | total price                                                                |                                                                                                                      |
+| fee                 | string    | true     | handling fee                                                               |                                                                                                                      |
+| orderStatus         | string    | true     | Order Status                                                               | UNPAID(0), PAID(1), CANCEL(2), COMPLETED(3), APPEAL(4), CANCEL_APPEAL(5), PAYING(103), PAID_FAIL(104), ABNORMAL(105) |
+| queryId             |           | false    |                                                                            |                                                                                                                      |
+| createTime          | long      | true     | creation time                                                              |                                                                                                                      |
+| DATA_END            |           | false    | Query id, which can be used as the from_id field in the next query request |                                                                                                                      |
+| ts                  | long      | true     |                                                                            |                                                                                                                      |
 
 #### Request example
 

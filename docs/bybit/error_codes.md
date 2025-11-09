@@ -1,5 +1,5 @@
--   [](/docs/)
--   Error Codes
+- [](/docs/)
+- Error Codes
 
 On this page
 
@@ -7,682 +7,682 @@ On this page
 
 ## HTTP Code[​](#http-code "Direct link to heading")
 
-| Code | Description |
-| :-: | :-- |
-| 400 | Bad request. Need to send the request with **GET** / **POST** (must be capitalized) |
-| [401](/docs/pilot-feature#normal-account-is-supported-by-v5-api) | Invalid request. 1. Need to use the correct key to access; 2. Need to put authentication params in the request header |
-| 403 | Forbidden request. Possible causes: 1. IP rate limit breached; 2. You send GET request with an empty json body; 3. You are using U.S IP |
-| [404](/docs/pilot-feature#normal-account-is-supported-by-v5-api) | Cannot find path. Possible causes: 1. Wrong path; 2. Category value does not match account mode |
-| 429 | System level frequency protection. Please retry when encounter this |
+|                               Code                               | Description                                                                                                                             |
+| :--------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------- |
+|                               400                                | Bad request. Need to send the request with **GET** / **POST** (must be capitalized)                                                     |
+| [401](/docs/pilot-feature#normal-account-is-supported-by-v5-api) | Invalid request. 1. Need to use the correct key to access; 2. Need to put authentication params in the request header                   |
+|                               403                                | Forbidden request. Possible causes: 1. IP rate limit breached; 2. You send GET request with an empty json body; 3. You are using U.S IP |
+| [404](/docs/pilot-feature#normal-account-is-supported-by-v5-api) | Cannot find path. Possible causes: 1. Wrong path; 2. Category value does not match account mode                                         |
+|                               429                                | System level frequency protection. Please retry when encounter this                                                                     |
 
 ## WS OE General code[​](#ws-oe-general-code "Direct link to heading")
 
-| Code | Description |
-| :-: | :-- |
-| 10404 | 1\. op type is not found; 2. `category` is not correct/supported |
-| 10429 | System level frequency protection |
-| 10003 | Too many sessions under the same UID |
-| 10016 | 1\. internal server error; 2. Service is restarting |
+| Code  | Description                                                                                                                                                            |
+| :---: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 10404 | 1\. op type is not found; 2. `category` is not correct/supported                                                                                                       |
+| 10429 | System level frequency protection                                                                                                                                      |
+| 10003 | Too many sessions under the same UID                                                                                                                                   |
+| 10016 | 1\. internal server error; 2. Service is restarting                                                                                                                    |
 | 10019 | ws trade service is restarting, do not accept new request, but the request in the process is not affected. You can build new connection to be routed to normal service |
-| 20003 | Too frequent requests under the same session |
-| 20006 | reqId is duplicated |
+| 20003 | Too frequent requests under the same session                                                                                                                           |
+| 20006 | reqId is duplicated                                                                                                                                                    |
 
 ## UTA[​](#uta "Direct link to heading")
 
-| Code | Description |
-| :-: | :-- |
-| 0 | OK |
-| \-1 | request expired: o@0, now\[\] diff\[\] |
-| 429 | The trading service is experiencing a high server load. Please retry if you encounter this issue. |
-| \-2015 | (Spot) Your api key has expired |
-| 33004 | (Derivatives) Your api key has expired |
-| 10000 | Server Timeout |
-| 10001 | Request parameter error |
-| 10002 | The request time exceeds the time window range. |
-| 10003 | API key is invalid. Check whether the key and domain are matched, there are 4 env: mainnet, testnet, mainnet-demo, testnet-demo |
-| 10004 | Error sign, please check your signature generation algorithm. |
-| 10005 | Permission denied, please check your API key permissions. |
-| 10006 | Too many visits. Exceeded the API Rate Limit. |
-| 10007 | User authentication failed. |
-| 10008 | Common banned, please check your account mode |
-| 10009 | IP has been banned. |
-| 10010 | Unmatched IP, please check your API key's bound IP addresses. |
-| 10014 | Invalid duplicate request. |
-| 10016 | Server error. |
-| 10017 | Route not found. |
-| ~10018~ | ~Exceeded the IP Rate Limit.~ |
-| 10024 | Compliance rules triggered |
-| 10027 | Transactions are banned. |
-| 10029 | The requested symbol is invalid, please check symbol whitelist |
-| 10028 | The API can only be accessed by unified account users. |
-| 30133 | OTC loan: The symbol you select for USDT Perpetual is not allowed by Institutional Lending |
-| 30134 | OTC loan: The symbol you select for USDC Contract is not allowed by Institutional Lending |
-| 30135 | The leverage you select for USDT Perpetual trading cannot exceed the maximum leverage allowed by Institutional Lending. |
-| 30136 | The leverage you select for USDC Perpetual or Futures trading cannot exceed the maximum leverage allowed by Institutional Lending. |
-| 30208 | Failed to submit order(s). The order price is higher than the maximum buying price |
-| 40004 | the order is modified during the process of replacing , please check the order status again |
-| 100028 | The API cannot be accessed by unified account users. |
-| 110001 | Order does not exist |
-| 110003 | Order price exceeds the [allowable range](https://www.bybithelp.com/en-US/s/article/Contract-Price-Limits). |
-| 110004 | Wallet balance is insufficient |
-| 110005 | position status error |
-| 110006 | The assets are estimated to be unable to cover the position margin |
-| 110007 | Available balance is insufficient |
-| 110008 | The order has been completed or cancelled. |
-| 110009 | The number of stop orders exceeds the maximum allowable limit |
-| 110010 | The order has been cancelled |
-| 110011 | Liquidation will be triggered immediately by this adjustment |
-| 110012 | Insufficient available balance. |
-| 110013 | Cannot set leverage due to risk limit level. |
-| 110014 | Insufficient available balance to add additional margin. |
-| 110015 | The position is in cross margin mode. |
-| ~110016~ | ~The quantity of contracts requested exceeds the risk limit, please adjust your risk limit level before trying again~ |
-| 110017 | Reduce-only rule not satisfied |
-| 110018 | User ID is illegal. |
-| 110019 | Order ID is illegal. |
-| 110020 | Not allowed to have more than 500 active orders. |
-| 110021 | Not allowed to exceeded position limits due to Open Interest. |
-| 110022 | Quantity has been restricted and orders cannot be modified to increase the quantity. |
-| 110023 | Currently you can only reduce your position on this contract. please check our announcement or contact customer service for details. |
-| 110024 | You have an existing position, so the position mode cannot be switched. |
-| 110025 | Position mode has not been modified. |
-| 110026 | Cross/isolated margin mode has not been modified. |
-| 110027 | Margin has not been modified. |
-| 110028 | You have existing open orders, so the position mode cannot be switched. |
-| 110029 | Hedge mode is not supported for this symbol. |
-| ~110030~ | ~Duplicate orderId~ |
-| 110031 | Non-existing risk limit info, please check the risk limit rules. |
-| 110032 | Order is illegal |
-| 110033 | You can't set margin without an open position |
-| 110034 | There is no net position |
-| 110035 | Cancellation of orders was not completed before liquidation |
-| 110036 | You are not allowed to change leverage due to cross margin mode. |
-| 110037 | User setting list does not have this symbol |
-| 110038 | You are not allowed to change leverage due to portfolio margin mode. |
-| 110039 | Maintenance margin rate is too high. This may trigger liquidation. |
-| 110040 | The order will trigger a forced liquidation, please re-submit the order. |
-| 110041 | Skip liquidation is not allowed when a position or maker order exists |
-| 110042 | Currently,due to pre-delivery status, you can only reduce your position on this contract. |
-| 110043 | Set leverage has not been modified. |
-| 110044 | Available margin is insufficient. |
-| 110045 | Wallet balance is insufficient. |
-| 110046 | Liquidation will be triggered immediately by this adjustment. |
-| 110047 | Risk limit cannot be adjusted due to insufficient available margin. |
-| 110048 | Risk limit cannot be adjusted as the current/expected position value exceeds the revised risk limit. |
-| 110049 | Tick notes can only be numbers |
-| 110050 | Invalid coin |
-| 110051 | The user's available balance cannot cover the lowest price of the current market |
-| 110052 | Your available balance is insufficient to set the price |
-| 110053 | The user's available balance cannot cover the current market price and upper limit price |
-| 110054 | This position has at least one take profit link order, so the take profit and stop loss mode cannot be switched |
-| 110055 | This position has at least one stop loss link order, so the take profit and stop loss mode cannot be switched |
-| 110056 | This position has at least one trailing stop link order, so the take profit and stop loss mode cannot be switched |
-| 110057 | Conditional order or limit order contains TP/SL related params |
-| 110058 | You can't set take profit and stop loss due to insufficient size of remaining position size. |
-| 110059 | Not allowed to modify the TP/SL of a partially filled open order |
-| 110060 | Under full TP/SL mode, it is not allowed to modify TP/SL |
-| 110061 | Not allowed to have more than 20 TP/SLs under Partial tpSlMode |
-| 110062 | There is no MMP information of the institution found. |
-| 110063 | Settlement in progress! {{key0}} not available for trading. |
-| 110064 | The modified contract quantity cannot be less than or equal to the filled quantity. |
-| 110065 | MMP hasn't yet been enabled for your account. Please contact your BD manager. |
-| 110066 | Trading is currently not allowed. |
-| 110067 | Unified account is not supported. |
-| 110068 | Leveraged trading is not allowed. |
-| 110069 | Ins lending customer is not allowed to trade. |
-| 110070 | ETP symbols cannot be traded. |
-| 110071 | Sorry, we're revamping the Unified Margin Account! Currently, new upgrades are not supported. If you have any questions, please contact our 24/7 customer support. |
-| 110072 | OrderLinkedID is duplicate |
-| 110073 | Set margin mode failed |
-| 110074 | This contract is not live |
-| ~110075~ | ~RiskId not modified~ |
-| 110076 | Only isolated mode can set auto-add-margin |
-| 110077 | Pm mode cannot support |
-| 110078 | Added margin more than max can reduce margin |
-| 110079 | The order is processing and can not be operated, please try again later |
-| 110080 | Operations Restriction: The current LTV ratio of your Institutional Lending has hit the liquidation threshold. Assets in your account are being liquidated (trade/risk limit/leverage) |
-| 110082 | You cannot lift Reduce-Only restrictions, as no Reduce-Only restrictions are applied to your position |
-| 110083 | Reduce-Only restrictions must be lifted for both Long and Short positions at the same time |
-| 110085 | The risk limit and margin ratio for this contract has been updated, please select a supported risk limit and place your order again |
-| 110086 | Current order leverage exceeds the maximum available for your current Risk Limit tier. Please lower leverage before placing an order |
-| 110087 | Leverage for Perpetual or Futures contracts cannot exceed the maximum allowed for your Institutional loan |
-| 110088 | Please Upgrade to UTA to trade |
-| 110089 | Exceeds the maximum risk limit level |
-| 110090 | Order placement failed as your position may exceed the max limit. Please adjust your leverage to {{leverage}} or below to increase the max. position limit |
-| 110092 | expect Rising, but trigger\_price\[XXXXX\] <= current\[XXXXX\]??laste |
-| 110093 | expect Falling, but trigger\_price\[XXXXX\] >= current\[XXXXX\]??last |
-| 110094 | Order notional value below the lower limit |
-| 110095 | You cannot create, modify or cancel Pre-Market Perpetual orders during the Call Auction. |
-| 110096 | Pre-Market Perpetual Trading does not support Portfolio Margin mode. |
-| 110097 | Non-UTA users cannot access Pre-Market Perpetual Trading. To place, modify or cancel Pre-Market Perpetual orders, please upgrade your Standard Account to UTA. |
-| 110098 | Only Good-Till-Canceled (GTC) orders are supported during Call Auction. |
-| 110099 | You cannot create TP/SL orders during the Call Auction for Pre-Market Perpetuals. |
-| 110100 | You cannot place, modify, or cancel Pre-Market Perpetual orders when you are in Demo Trading. |
-| 110101 | Trading inverse contracts under Cross and Portfolio modes requires enabling the settlement asset as collateral. |
-| 110102 | The user does not support trading Inverse contracts - copy trading pro, Ins loan account are not supported |
-| 110103 | Only Post-Only orders are available at this stage |
-| 110104 | The LTV for ins Loan has exceeded the limit, and opening inverse contracts is prohibited |
-| 110105 | The LTV for ins Loan has exceeded the limit, and trading inverse contracts is prohibited |
-| 110106 | Restrictions on Ins Loan; inverse contracts are not on the whitelist and are not allowed for trading |
-| 110107 | Restrictions on ins Loan; leverage exceeding the limit for inverse contracts is not allowed. |
-| 110108 | Allowable range: 5 to 2000 tick size |
-| 110109 | Allowable range: 0.05% to 1% |
-| 110110 | Spread trading is not available in isolated margin trading mode |
-| 110111 | To access spread trading, upgrade to the latest version of UTA |
-| 110112 | Spread trading is not available for Copy Trading |
-| 110113 | Spread trading is not available in hedge mode |
-| 110114 | You have a Spread trading order in progress. Please try again later |
-| 110115 | The cancellation of a combo single-leg order can only be done by canceling the combo order |
-| 110116 | The entry price of a single leg, derived from the combo order price, exceeds the limit price |
-| 110117 | The modification of a combo single-leg order can only be done by modifying the combo order |
-| 110118 | Unable to retrieve a pruce of the market order due to low liquidity |
-| 110119 | Order failed. RPI orders are restricted to approved market makers only |
-| 110120 | Order price cannot be smaller than xxxx, the price limitation |
-| 110121 | Order price cannot be higher than xxxx, the price limitation |
-| 170346 | Settle coin is not a collateral coin, cannot trade |
-| 170360 | symbol\[XXXX\] cannot trade. Used for spread trading in particular when collateral is not turned on |
-| 181017 | OrderStatus must be final status |
-| 182100 | Compulsory closing of positions, no repayment allowed |
-| 182101 | Failed repayment, insufficient collateral balance |
-| 182102 | Failed repayment, there are no liabilities in the current currency |
-| 182103 | Institutional lending users are not supported |
-| 182108 | Switching failed, margin verification failed, please re-adjust the currency status |
-| 182110 | Failed to switch |
-| 182111 | The requested currency has a non guaranteed gold currency or does not support switching status currencies |
-| 182112 | Duplicate currency, please re-adjust |
-| 3100181 | UID can not be null |
-| 3100197 | Temporary banned due to the upgrade to UTA |
-| 3200316 | USDC Options Trading Restriction: The current LTV ratio for your Institutional Lending has reached the maximum allowable amount for USDC Options trading. |
-| 3200317 | USDC Options Open Position Restriction: The current LTV ratio for your Institutional Lending has reached the maximum allowable amount for opening USDC Options positions. |
-| 3100326 | BaseCoin is required |
-| 3200403 | isolated margin can not create order |
-| 3200419 | Unable to switch to Portfolio margin due to active pre-market Perpetual orders and positions |
-| 3200320 | Operations Restriction: The current LTV ratio of your Institutional Lending has hit the liquidation threshold. Assets in your account are being liquidated. (margin mode or spot leverage) |
-| 3400208 | You have unclosed hedge mode or isolated mode USDT perpetual positions |
-| 3400209 | You have USDT perpetual positions, so upgrading is prohibited for 10 minutes before and after the hour every hour |
-| 3400210 | The risk rate of your Derivatives account is too high |
-| 3400211 | Once upgraded, the estimated risk rate will be too high |
-| 3400212 | You have USDC perpetual positions or Options positions, so upgrading is prohibited for 10 minutes before and after the hour every hour |
-| 3400213 | The risk rate of your USDC Derivatives account is too high |
-| 3400052 | You have uncancelled USDC perpetual orders |
-| 3400053 | You have uncancelled Options orders |
-| 3400054 | You have uncancelled USDT perpetual orders |
-| 3400214 | Server error, please try again later |
-| 3400071 | The net asset is not satisfied |
-| 3401010 | Cannot switch to PM mode (for copy trading master trader) |
-| 3400139 | The total value of your positions and orders has exceeded the risk limit for a Perpetual or Futures contract |
-| 34040 | Not modified. Indicates you already set this TP/SL value or you didn't pass a required parameter |
-| 500010 | The subaccount specified does not belong to the parent account |
-| 500011 | The Uid 592334 provided is not associated with a Unified Trading Account |
+|   Code   | Description                                                                                                                                                                                |
+| :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|    0     | OK                                                                                                                                                                                         |
+|   \-1    | request expired: o@0, now\[\] diff\[\]                                                                                                                                                     |
+|   429    | The trading service is experiencing a high server load. Please retry if you encounter this issue.                                                                                          |
+|  \-2015  | (Spot) Your api key has expired                                                                                                                                                            |
+|  33004   | (Derivatives) Your api key has expired                                                                                                                                                     |
+|  10000   | Server Timeout                                                                                                                                                                             |
+|  10001   | Request parameter error                                                                                                                                                                    |
+|  10002   | The request time exceeds the time window range.                                                                                                                                            |
+|  10003   | API key is invalid. Check whether the key and domain are matched, there are 4 env: mainnet, testnet, mainnet-demo, testnet-demo                                                            |
+|  10004   | Error sign, please check your signature generation algorithm.                                                                                                                              |
+|  10005   | Permission denied, please check your API key permissions.                                                                                                                                  |
+|  10006   | Too many visits. Exceeded the API Rate Limit.                                                                                                                                              |
+|  10007   | User authentication failed.                                                                                                                                                                |
+|  10008   | Common banned, please check your account mode                                                                                                                                              |
+|  10009   | IP has been banned.                                                                                                                                                                        |
+|  10010   | Unmatched IP, please check your API key's bound IP addresses.                                                                                                                              |
+|  10014   | Invalid duplicate request.                                                                                                                                                                 |
+|  10016   | Server error.                                                                                                                                                                              |
+|  10017   | Route not found.                                                                                                                                                                           |
+| ~10018~  | ~Exceeded the IP Rate Limit.~                                                                                                                                                              |
+|  10024   | Compliance rules triggered                                                                                                                                                                 |
+|  10027   | Transactions are banned.                                                                                                                                                                   |
+|  10029   | The requested symbol is invalid, please check symbol whitelist                                                                                                                             |
+|  10028   | The API can only be accessed by unified account users.                                                                                                                                     |
+|  30133   | OTC loan: The symbol you select for USDT Perpetual is not allowed by Institutional Lending                                                                                                 |
+|  30134   | OTC loan: The symbol you select for USDC Contract is not allowed by Institutional Lending                                                                                                  |
+|  30135   | The leverage you select for USDT Perpetual trading cannot exceed the maximum leverage allowed by Institutional Lending.                                                                    |
+|  30136   | The leverage you select for USDC Perpetual or Futures trading cannot exceed the maximum leverage allowed by Institutional Lending.                                                         |
+|  30208   | Failed to submit order(s). The order price is higher than the maximum buying price                                                                                                         |
+|  40004   | the order is modified during the process of replacing , please check the order status again                                                                                                |
+|  100028  | The API cannot be accessed by unified account users.                                                                                                                                       |
+|  110001  | Order does not exist                                                                                                                                                                       |
+|  110003  | Order price exceeds the [allowable range](https://www.bybithelp.com/en-US/s/article/Contract-Price-Limits).                                                                                |
+|  110004  | Wallet balance is insufficient                                                                                                                                                             |
+|  110005  | position status error                                                                                                                                                                      |
+|  110006  | The assets are estimated to be unable to cover the position margin                                                                                                                         |
+|  110007  | Available balance is insufficient                                                                                                                                                          |
+|  110008  | The order has been completed or cancelled.                                                                                                                                                 |
+|  110009  | The number of stop orders exceeds the maximum allowable limit                                                                                                                              |
+|  110010  | The order has been cancelled                                                                                                                                                               |
+|  110011  | Liquidation will be triggered immediately by this adjustment                                                                                                                               |
+|  110012  | Insufficient available balance.                                                                                                                                                            |
+|  110013  | Cannot set leverage due to risk limit level.                                                                                                                                               |
+|  110014  | Insufficient available balance to add additional margin.                                                                                                                                   |
+|  110015  | The position is in cross margin mode.                                                                                                                                                      |
+| ~110016~ | ~The quantity of contracts requested exceeds the risk limit, please adjust your risk limit level before trying again~                                                                      |
+|  110017  | Reduce-only rule not satisfied                                                                                                                                                             |
+|  110018  | User ID is illegal.                                                                                                                                                                        |
+|  110019  | Order ID is illegal.                                                                                                                                                                       |
+|  110020  | Not allowed to have more than 500 active orders.                                                                                                                                           |
+|  110021  | Not allowed to exceeded position limits due to Open Interest.                                                                                                                              |
+|  110022  | Quantity has been restricted and orders cannot be modified to increase the quantity.                                                                                                       |
+|  110023  | Currently you can only reduce your position on this contract. please check our announcement or contact customer service for details.                                                       |
+|  110024  | You have an existing position, so the position mode cannot be switched.                                                                                                                    |
+|  110025  | Position mode has not been modified.                                                                                                                                                       |
+|  110026  | Cross/isolated margin mode has not been modified.                                                                                                                                          |
+|  110027  | Margin has not been modified.                                                                                                                                                              |
+|  110028  | You have existing open orders, so the position mode cannot be switched.                                                                                                                    |
+|  110029  | Hedge mode is not supported for this symbol.                                                                                                                                               |
+| ~110030~ | ~Duplicate orderId~                                                                                                                                                                        |
+|  110031  | Non-existing risk limit info, please check the risk limit rules.                                                                                                                           |
+|  110032  | Order is illegal                                                                                                                                                                           |
+|  110033  | You can't set margin without an open position                                                                                                                                              |
+|  110034  | There is no net position                                                                                                                                                                   |
+|  110035  | Cancellation of orders was not completed before liquidation                                                                                                                                |
+|  110036  | You are not allowed to change leverage due to cross margin mode.                                                                                                                           |
+|  110037  | User setting list does not have this symbol                                                                                                                                                |
+|  110038  | You are not allowed to change leverage due to portfolio margin mode.                                                                                                                       |
+|  110039  | Maintenance margin rate is too high. This may trigger liquidation.                                                                                                                         |
+|  110040  | The order will trigger a forced liquidation, please re-submit the order.                                                                                                                   |
+|  110041  | Skip liquidation is not allowed when a position or maker order exists                                                                                                                      |
+|  110042  | Currently,due to pre-delivery status, you can only reduce your position on this contract.                                                                                                  |
+|  110043  | Set leverage has not been modified.                                                                                                                                                        |
+|  110044  | Available margin is insufficient.                                                                                                                                                          |
+|  110045  | Wallet balance is insufficient.                                                                                                                                                            |
+|  110046  | Liquidation will be triggered immediately by this adjustment.                                                                                                                              |
+|  110047  | Risk limit cannot be adjusted due to insufficient available margin.                                                                                                                        |
+|  110048  | Risk limit cannot be adjusted as the current/expected position value exceeds the revised risk limit.                                                                                       |
+|  110049  | Tick notes can only be numbers                                                                                                                                                             |
+|  110050  | Invalid coin                                                                                                                                                                               |
+|  110051  | The user's available balance cannot cover the lowest price of the current market                                                                                                           |
+|  110052  | Your available balance is insufficient to set the price                                                                                                                                    |
+|  110053  | The user's available balance cannot cover the current market price and upper limit price                                                                                                   |
+|  110054  | This position has at least one take profit link order, so the take profit and stop loss mode cannot be switched                                                                            |
+|  110055  | This position has at least one stop loss link order, so the take profit and stop loss mode cannot be switched                                                                              |
+|  110056  | This position has at least one trailing stop link order, so the take profit and stop loss mode cannot be switched                                                                          |
+|  110057  | Conditional order or limit order contains TP/SL related params                                                                                                                             |
+|  110058  | You can't set take profit and stop loss due to insufficient size of remaining position size.                                                                                               |
+|  110059  | Not allowed to modify the TP/SL of a partially filled open order                                                                                                                           |
+|  110060  | Under full TP/SL mode, it is not allowed to modify TP/SL                                                                                                                                   |
+|  110061  | Not allowed to have more than 20 TP/SLs under Partial tpSlMode                                                                                                                             |
+|  110062  | There is no MMP information of the institution found.                                                                                                                                      |
+|  110063  | Settlement in progress! {{key0}} not available for trading.                                                                                                                                |
+|  110064  | The modified contract quantity cannot be less than or equal to the filled quantity.                                                                                                        |
+|  110065  | MMP hasn't yet been enabled for your account. Please contact your BD manager.                                                                                                              |
+|  110066  | Trading is currently not allowed.                                                                                                                                                          |
+|  110067  | Unified account is not supported.                                                                                                                                                          |
+|  110068  | Leveraged trading is not allowed.                                                                                                                                                          |
+|  110069  | Ins lending customer is not allowed to trade.                                                                                                                                              |
+|  110070  | ETP symbols cannot be traded.                                                                                                                                                              |
+|  110071  | Sorry, we're revamping the Unified Margin Account! Currently, new upgrades are not supported. If you have any questions, please contact our 24/7 customer support.                         |
+|  110072  | OrderLinkedID is duplicate                                                                                                                                                                 |
+|  110073  | Set margin mode failed                                                                                                                                                                     |
+|  110074  | This contract is not live                                                                                                                                                                  |
+| ~110075~ | ~RiskId not modified~                                                                                                                                                                      |
+|  110076  | Only isolated mode can set auto-add-margin                                                                                                                                                 |
+|  110077  | Pm mode cannot support                                                                                                                                                                     |
+|  110078  | Added margin more than max can reduce margin                                                                                                                                               |
+|  110079  | The order is processing and can not be operated, please try again later                                                                                                                    |
+|  110080  | Operations Restriction: The current LTV ratio of your Institutional Lending has hit the liquidation threshold. Assets in your account are being liquidated (trade/risk limit/leverage)     |
+|  110082  | You cannot lift Reduce-Only restrictions, as no Reduce-Only restrictions are applied to your position                                                                                      |
+|  110083  | Reduce-Only restrictions must be lifted for both Long and Short positions at the same time                                                                                                 |
+|  110085  | The risk limit and margin ratio for this contract has been updated, please select a supported risk limit and place your order again                                                        |
+|  110086  | Current order leverage exceeds the maximum available for your current Risk Limit tier. Please lower leverage before placing an order                                                       |
+|  110087  | Leverage for Perpetual or Futures contracts cannot exceed the maximum allowed for your Institutional loan                                                                                  |
+|  110088  | Please Upgrade to UTA to trade                                                                                                                                                             |
+|  110089  | Exceeds the maximum risk limit level                                                                                                                                                       |
+|  110090  | Order placement failed as your position may exceed the max limit. Please adjust your leverage to {{leverage}} or below to increase the max. position limit                                 |
+|  110092  | expect Rising, but trigger_price\[XXXXX\] <= current\[XXXXX\]??laste                                                                                                                       |
+|  110093  | expect Falling, but trigger_price\[XXXXX\] >= current\[XXXXX\]??last                                                                                                                       |
+|  110094  | Order notional value below the lower limit                                                                                                                                                 |
+|  110095  | You cannot create, modify or cancel Pre-Market Perpetual orders during the Call Auction.                                                                                                   |
+|  110096  | Pre-Market Perpetual Trading does not support Portfolio Margin mode.                                                                                                                       |
+|  110097  | Non-UTA users cannot access Pre-Market Perpetual Trading. To place, modify or cancel Pre-Market Perpetual orders, please upgrade your Standard Account to UTA.                             |
+|  110098  | Only Good-Till-Canceled (GTC) orders are supported during Call Auction.                                                                                                                    |
+|  110099  | You cannot create TP/SL orders during the Call Auction for Pre-Market Perpetuals.                                                                                                          |
+|  110100  | You cannot place, modify, or cancel Pre-Market Perpetual orders when you are in Demo Trading.                                                                                              |
+|  110101  | Trading inverse contracts under Cross and Portfolio modes requires enabling the settlement asset as collateral.                                                                            |
+|  110102  | The user does not support trading Inverse contracts - copy trading pro, Ins loan account are not supported                                                                                 |
+|  110103  | Only Post-Only orders are available at this stage                                                                                                                                          |
+|  110104  | The LTV for ins Loan has exceeded the limit, and opening inverse contracts is prohibited                                                                                                   |
+|  110105  | The LTV for ins Loan has exceeded the limit, and trading inverse contracts is prohibited                                                                                                   |
+|  110106  | Restrictions on Ins Loan; inverse contracts are not on the whitelist and are not allowed for trading                                                                                       |
+|  110107  | Restrictions on ins Loan; leverage exceeding the limit for inverse contracts is not allowed.                                                                                               |
+|  110108  | Allowable range: 5 to 2000 tick size                                                                                                                                                       |
+|  110109  | Allowable range: 0.05% to 1%                                                                                                                                                               |
+|  110110  | Spread trading is not available in isolated margin trading mode                                                                                                                            |
+|  110111  | To access spread trading, upgrade to the latest version of UTA                                                                                                                             |
+|  110112  | Spread trading is not available for Copy Trading                                                                                                                                           |
+|  110113  | Spread trading is not available in hedge mode                                                                                                                                              |
+|  110114  | You have a Spread trading order in progress. Please try again later                                                                                                                        |
+|  110115  | The cancellation of a combo single-leg order can only be done by canceling the combo order                                                                                                 |
+|  110116  | The entry price of a single leg, derived from the combo order price, exceeds the limit price                                                                                               |
+|  110117  | The modification of a combo single-leg order can only be done by modifying the combo order                                                                                                 |
+|  110118  | Unable to retrieve a pruce of the market order due to low liquidity                                                                                                                        |
+|  110119  | Order failed. RPI orders are restricted to approved market makers only                                                                                                                     |
+|  110120  | Order price cannot be smaller than xxxx, the price limitation                                                                                                                              |
+|  110121  | Order price cannot be higher than xxxx, the price limitation                                                                                                                               |
+|  170346  | Settle coin is not a collateral coin, cannot trade                                                                                                                                         |
+|  170360  | symbol\[XXXX\] cannot trade. Used for spread trading in particular when collateral is not turned on                                                                                        |
+|  181017  | OrderStatus must be final status                                                                                                                                                           |
+|  182100  | Compulsory closing of positions, no repayment allowed                                                                                                                                      |
+|  182101  | Failed repayment, insufficient collateral balance                                                                                                                                          |
+|  182102  | Failed repayment, there are no liabilities in the current currency                                                                                                                         |
+|  182103  | Institutional lending users are not supported                                                                                                                                              |
+|  182108  | Switching failed, margin verification failed, please re-adjust the currency status                                                                                                         |
+|  182110  | Failed to switch                                                                                                                                                                           |
+|  182111  | The requested currency has a non guaranteed gold currency or does not support switching status currencies                                                                                  |
+|  182112  | Duplicate currency, please re-adjust                                                                                                                                                       |
+| 3100181  | UID can not be null                                                                                                                                                                        |
+| 3100197  | Temporary banned due to the upgrade to UTA                                                                                                                                                 |
+| 3200316  | USDC Options Trading Restriction: The current LTV ratio for your Institutional Lending has reached the maximum allowable amount for USDC Options trading.                                  |
+| 3200317  | USDC Options Open Position Restriction: The current LTV ratio for your Institutional Lending has reached the maximum allowable amount for opening USDC Options positions.                  |
+| 3100326  | BaseCoin is required                                                                                                                                                                       |
+| 3200403  | isolated margin can not create order                                                                                                                                                       |
+| 3200419  | Unable to switch to Portfolio margin due to active pre-market Perpetual orders and positions                                                                                               |
+| 3200320  | Operations Restriction: The current LTV ratio of your Institutional Lending has hit the liquidation threshold. Assets in your account are being liquidated. (margin mode or spot leverage) |
+| 3400208  | You have unclosed hedge mode or isolated mode USDT perpetual positions                                                                                                                     |
+| 3400209  | You have USDT perpetual positions, so upgrading is prohibited for 10 minutes before and after the hour every hour                                                                          |
+| 3400210  | The risk rate of your Derivatives account is too high                                                                                                                                      |
+| 3400211  | Once upgraded, the estimated risk rate will be too high                                                                                                                                    |
+| 3400212  | You have USDC perpetual positions or Options positions, so upgrading is prohibited for 10 minutes before and after the hour every hour                                                     |
+| 3400213  | The risk rate of your USDC Derivatives account is too high                                                                                                                                 |
+| 3400052  | You have uncancelled USDC perpetual orders                                                                                                                                                 |
+| 3400053  | You have uncancelled Options orders                                                                                                                                                        |
+| 3400054  | You have uncancelled USDT perpetual orders                                                                                                                                                 |
+| 3400214  | Server error, please try again later                                                                                                                                                       |
+| 3400071  | The net asset is not satisfied                                                                                                                                                             |
+| 3401010  | Cannot switch to PM mode (for copy trading master trader)                                                                                                                                  |
+| 3400139  | The total value of your positions and orders has exceeded the risk limit for a Perpetual or Futures contract                                                                               |
+|  34040   | Not modified. Indicates you already set this TP/SL value or you didn't pass a required parameter                                                                                           |
+|  500010  | The subaccount specified does not belong to the parent account                                                                                                                             |
+|  500011  | The Uid 592334 provided is not associated with a Unified Trading Account                                                                                                                   |
 
 ## Spot Trade[​](#spot-trade "Direct link to heading")
 
-| Code | Description |
-| :-: | :-- |
-| 170001 | Internal error. |
-| 170005 | Too many new orders; current limit is %s orders per %s. |
-| 170007 | Timeout waiting for response from backend server. |
-| 170010 | Purchase failed: Exceed the maximum position limit of leveraged tokens, the current available limit is %s USDT |
-| 170011 | "Purchase failed: Exceed the maximum position limit of innovation tokens, |
-| 170019 | the current available limit is ''{{.replaceKey0}}'' USDT" |
-| 170031 | The feature has been suspended |
-| 170032 | Network error. Please try again later |
-| 170033 | margin Insufficient account balance |
-| 170034 | Liability over flow in spot leverage trade! |
-| 170035 | Submitted to the system for processing! |
-| 170036 | You haven't enabled Cross Margin Trading yet. To do so, please head to the PC trading site or the Bybit app |
-| 170037 | Cross Margin Trading not yet supported by the selected coin |
-| 170105 | Parameter '%s' was empty. |
-| 170115 | Invalid timeInForce. |
-| 170116 | Invalid orderType. |
-| 170117 | Invalid side. |
-| 170121 | Invalid symbol. |
-| 170124 | Order amount too large. |
-| 170130 | Data sent for paramter '%s' is not valid. |
-| 170131 | Balance insufficient |
-| 170132 | Order price too high. |
-| 170133 | Order price lower than the minimum. |
-| 170134 | Order price decimal too long. |
-| 170371 | Order price cannot be lower than {}, the price limitation |
-| 170372 | Order price cannot be higher than 0, the price limitation |
-| 170381 | Order quantity too large. |
-| 170382 | Order quantity too large. |
-| 170136 | Order quantity lower than the minimum. |
-| 170137 | Order volume decimal too long |
-| 170139 | Order has been filled. |
-| 170140 | Order value exceeded lower limit |
-| 170141 | Duplicate clientOrderId |
-| 170142 | Order has been cancelled |
-| 170143 | Cannot be found on order book |
-| 170144 | Order has been locked |
-| 170145 | This order type does not support cancellation |
-| 170146 | Order creation timeout |
-| 170147 | Order cancellation timeout |
-| 170148 | Market order amount decimal too long |
-| 170149 | Create order failed |
-| 170150 | Cancel order failed |
-| 170151 | The trading pair is not open yet |
-| 170157 | The trading pair is not available for api trading |
-| 170159 | Market Order is not supported within the first %s minutes of newly launched pairs due to risk control. |
-| 170190 | Cancel order has been finished |
-| 170191 | Can not cancel order, please try again later |
-| 170192 | Order price cannot be higher than %s . |
-| 170193 | Buy order price cannot be higher than %s. |
-| 170194 | Sell order price cannot be lower than %s. |
-| 170195 | Please note that your order may not be filled. ETP buy order price deviates from risk control |
-| 170196 | Please note that your order may not be filled. ETP sell order price deviates from risk control |
-| 170197 | Your order quantity to buy is too large. The filled price may deviate significantly from the market price. Please try again |
-| 170198 | Your order quantity to sell is too large. The filled price may deviate significantly from the market price. Please try again |
-| 170199 | Your order quantity to buy is too large. The filled price may deviate significantly from the nav. Please try again. |
-| 170200 | Your order quantity to sell is too large. The filled price may deviate significantly from the nav. Please try again. |
-| 170201 | Invalid orderFilter parameter |
-| 170202 | Please enter the TP/SL price. |
-| 170203 | trigger price cannot be higher than 110% price. |
-| 170204 | trigger price cannot be lower than 90% of qty. |
-| 170206 | Stop\_limit Order is not supported within the first 5 minutes of newly launched pairs |
-| 170207 | The loan amount of the platform is not enough. |
-| 170210 | New order rejected. |
-| 170212 | Cancel order request processing |
-| 170213 | Order does not exist. |
-| 170215 | Spot Trading (Buy) Restriction: The current LTV ratio of your institutional lending has reached the maximum allowable amount for buy orders |
-| 170216 | The leverage you select for Spot Trading cannot exceed the maximum leverage allowed by Institutional Lending |
-| 170217 | Only LIMIT-MAKER order is supported for the current pair. |
-| 170218 | The LIMIT-MAKER order is rejected due to invalid price. |
-| 170219 | UID {{xxx}} is not available to this feature |
-| 170220 | Spot Trading Restriction: The current LTV ratio of your institutional lending has reached the maximum allowable amount for Spot trading |
-| 170221 | This coin does not exist. |
-| 170222 | Too many requests in this time frame. |
-| 170223 | Your Spot Account with Institutional Lending triggers an alert or liquidation. |
-| 170224 | You're not a user of the Innovation Zone. |
-| 170226 | Your Spot Account for Margin Trading is being liquidated. |
-| 170227 | This feature is not supported. |
-| 170228 | The purchase amount of each order exceeds the estimated maximum purchase amount. |
-| 170229 | The sell quantity per order exceeds the estimated maximum sell quantity. |
-| 170230 | Operations Restriction: Due to the deactivation of Margin Trading for institutional loan |
-| 170234 | System Error |
+|  Code  | Description                                                                                                                                                                                               |
+| :----: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 170001 | Internal error.                                                                                                                                                                                           |
+| 170005 | Too many new orders; current limit is %s orders per %s.                                                                                                                                                   |
+| 170007 | Timeout waiting for response from backend server.                                                                                                                                                         |
+| 170010 | Purchase failed: Exceed the maximum position limit of leveraged tokens, the current available limit is %s USDT                                                                                            |
+| 170011 | "Purchase failed: Exceed the maximum position limit of innovation tokens,                                                                                                                                 |
+| 170019 | the current available limit is ''{{.replaceKey0}}'' USDT"                                                                                                                                                 |
+| 170031 | The feature has been suspended                                                                                                                                                                            |
+| 170032 | Network error. Please try again later                                                                                                                                                                     |
+| 170033 | margin Insufficient account balance                                                                                                                                                                       |
+| 170034 | Liability over flow in spot leverage trade!                                                                                                                                                               |
+| 170035 | Submitted to the system for processing!                                                                                                                                                                   |
+| 170036 | You haven't enabled Cross Margin Trading yet. To do so, please head to the PC trading site or the Bybit app                                                                                               |
+| 170037 | Cross Margin Trading not yet supported by the selected coin                                                                                                                                               |
+| 170105 | Parameter '%s' was empty.                                                                                                                                                                                 |
+| 170115 | Invalid timeInForce.                                                                                                                                                                                      |
+| 170116 | Invalid orderType.                                                                                                                                                                                        |
+| 170117 | Invalid side.                                                                                                                                                                                             |
+| 170121 | Invalid symbol.                                                                                                                                                                                           |
+| 170124 | Order amount too large.                                                                                                                                                                                   |
+| 170130 | Data sent for paramter '%s' is not valid.                                                                                                                                                                 |
+| 170131 | Balance insufficient                                                                                                                                                                                      |
+| 170132 | Order price too high.                                                                                                                                                                                     |
+| 170133 | Order price lower than the minimum.                                                                                                                                                                       |
+| 170134 | Order price decimal too long.                                                                                                                                                                             |
+| 170371 | Order price cannot be lower than {}, the price limitation                                                                                                                                                 |
+| 170372 | Order price cannot be higher than 0, the price limitation                                                                                                                                                 |
+| 170381 | Order quantity too large.                                                                                                                                                                                 |
+| 170382 | Order quantity too large.                                                                                                                                                                                 |
+| 170136 | Order quantity lower than the minimum.                                                                                                                                                                    |
+| 170137 | Order volume decimal too long                                                                                                                                                                             |
+| 170139 | Order has been filled.                                                                                                                                                                                    |
+| 170140 | Order value exceeded lower limit                                                                                                                                                                          |
+| 170141 | Duplicate clientOrderId                                                                                                                                                                                   |
+| 170142 | Order has been cancelled                                                                                                                                                                                  |
+| 170143 | Cannot be found on order book                                                                                                                                                                             |
+| 170144 | Order has been locked                                                                                                                                                                                     |
+| 170145 | This order type does not support cancellation                                                                                                                                                             |
+| 170146 | Order creation timeout                                                                                                                                                                                    |
+| 170147 | Order cancellation timeout                                                                                                                                                                                |
+| 170148 | Market order amount decimal too long                                                                                                                                                                      |
+| 170149 | Create order failed                                                                                                                                                                                       |
+| 170150 | Cancel order failed                                                                                                                                                                                       |
+| 170151 | The trading pair is not open yet                                                                                                                                                                          |
+| 170157 | The trading pair is not available for api trading                                                                                                                                                         |
+| 170159 | Market Order is not supported within the first %s minutes of newly launched pairs due to risk control.                                                                                                    |
+| 170190 | Cancel order has been finished                                                                                                                                                                            |
+| 170191 | Can not cancel order, please try again later                                                                                                                                                              |
+| 170192 | Order price cannot be higher than %s .                                                                                                                                                                    |
+| 170193 | Buy order price cannot be higher than %s.                                                                                                                                                                 |
+| 170194 | Sell order price cannot be lower than %s.                                                                                                                                                                 |
+| 170195 | Please note that your order may not be filled. ETP buy order price deviates from risk control                                                                                                             |
+| 170196 | Please note that your order may not be filled. ETP sell order price deviates from risk control                                                                                                            |
+| 170197 | Your order quantity to buy is too large. The filled price may deviate significantly from the market price. Please try again                                                                               |
+| 170198 | Your order quantity to sell is too large. The filled price may deviate significantly from the market price. Please try again                                                                              |
+| 170199 | Your order quantity to buy is too large. The filled price may deviate significantly from the nav. Please try again.                                                                                       |
+| 170200 | Your order quantity to sell is too large. The filled price may deviate significantly from the nav. Please try again.                                                                                      |
+| 170201 | Invalid orderFilter parameter                                                                                                                                                                             |
+| 170202 | Please enter the TP/SL price.                                                                                                                                                                             |
+| 170203 | trigger price cannot be higher than 110% price.                                                                                                                                                           |
+| 170204 | trigger price cannot be lower than 90% of qty.                                                                                                                                                            |
+| 170206 | Stop_limit Order is not supported within the first 5 minutes of newly launched pairs                                                                                                                      |
+| 170207 | The loan amount of the platform is not enough.                                                                                                                                                            |
+| 170210 | New order rejected.                                                                                                                                                                                       |
+| 170212 | Cancel order request processing                                                                                                                                                                           |
+| 170213 | Order does not exist.                                                                                                                                                                                     |
+| 170215 | Spot Trading (Buy) Restriction: The current LTV ratio of your institutional lending has reached the maximum allowable amount for buy orders                                                               |
+| 170216 | The leverage you select for Spot Trading cannot exceed the maximum leverage allowed by Institutional Lending                                                                                              |
+| 170217 | Only LIMIT-MAKER order is supported for the current pair.                                                                                                                                                 |
+| 170218 | The LIMIT-MAKER order is rejected due to invalid price.                                                                                                                                                   |
+| 170219 | UID {{xxx}} is not available to this feature                                                                                                                                                              |
+| 170220 | Spot Trading Restriction: The current LTV ratio of your institutional lending has reached the maximum allowable amount for Spot trading                                                                   |
+| 170221 | This coin does not exist.                                                                                                                                                                                 |
+| 170222 | Too many requests in this time frame.                                                                                                                                                                     |
+| 170223 | Your Spot Account with Institutional Lending triggers an alert or liquidation.                                                                                                                            |
+| 170224 | You're not a user of the Innovation Zone.                                                                                                                                                                 |
+| 170226 | Your Spot Account for Margin Trading is being liquidated.                                                                                                                                                 |
+| 170227 | This feature is not supported.                                                                                                                                                                            |
+| 170228 | The purchase amount of each order exceeds the estimated maximum purchase amount.                                                                                                                          |
+| 170229 | The sell quantity per order exceeds the estimated maximum sell quantity.                                                                                                                                  |
+| 170230 | Operations Restriction: Due to the deactivation of Margin Trading for institutional loan                                                                                                                  |
+| 170234 | System Error                                                                                                                                                                                              |
 | 170241 | To proceed with trading, users must read through and confirm that they fully understand the project's risk disclosure document. For App users, please update your Bybit App to version 4.16.0 to process. |
-| 170310 | Order modification timeout |
-| 170311 | Order modification failed |
-| 170312 | The current order does not support modification |
-| 170313 | The modified contract quantity cannot be less than to the filled quantity |
-| 170341 | Request order quantity exceeds maximum limit |
-| 170344 | Symbol is not supported on Margin Trading |
-| 170348 | Please go to ([https://www.bybit-tr.com](https://www.bybit-tr.com)) to proceed. |
-| 170355 | RPI orders are restricted to approved market makers only |
-| 170358 | The current site does not support ETP |
-| 170359 | TThe current site does not support leveraged trading |
-| 170709 | OTC loan: The select trading pair is not in the whitelist pair |
-| 170810 | Cannot exceed maximum of 500 conditional, TP/SL and active orders. |
+| 170310 | Order modification timeout                                                                                                                                                                                |
+| 170311 | Order modification failed                                                                                                                                                                                 |
+| 170312 | The current order does not support modification                                                                                                                                                           |
+| 170313 | The modified contract quantity cannot be less than to the filled quantity                                                                                                                                 |
+| 170341 | Request order quantity exceeds maximum limit                                                                                                                                                              |
+| 170344 | Symbol is not supported on Margin Trading                                                                                                                                                                 |
+| 170348 | Please go to ([https://www.bybit-tr.com](https://www.bybit-tr.com)) to proceed.                                                                                                                           |
+| 170355 | RPI orders are restricted to approved market makers only                                                                                                                                                  |
+| 170358 | The current site does not support ETP                                                                                                                                                                     |
+| 170359 | TThe current site does not support leveraged trading                                                                                                                                                      |
+| 170709 | OTC loan: The select trading pair is not in the whitelist pair                                                                                                                                            |
+| 170810 | Cannot exceed maximum of 500 conditional, TP/SL and active orders.                                                                                                                                        |
 
 ## Spot Margin Trade[​](#spot-margin-trade "Direct link to heading")
 
-| Code | Description |
-| :-: | :-- |
-| 176002 | Query user account info error. Confirm that if you have completed quiz in GUI |
-| 176003 | Query user loan history error |
-| 176004 | Query order history start time exceeds end time |
-| 176005 | Failed to borrow |
-| 176006 | Repayment Failed |
-| 176007 | User not found |
-| 176008 | You haven't enabled Cross Margin Trading yet. To do so, please head to the PC trading site |
-| 176009 | You haven't enabled Cross Margin Trading yet. Confirm that if you have turned on margin trade |
-| 176010 | Failed to locate the coins to borrow |
-| 176011 | Cross Margin Trading not yet supported by the selected coin |
-| 176012 | Pair not available |
-| 176013 | Cross Margin Trading not yet supported by the selected pair |
-| 176014 | Repeated repayment requests |
-| 176015 | Insufficient available balance |
-| 176016 | No repayment required |
-| 176017 | Repayment amount has exceeded the total liability |
-| 176018 | Settlement in progress |
-| 176019 | Liquidation in progress |
-| 176020 | Failed to locate repayment history |
-| 176021 | Repeated borrowing requests |
-| 176022 | Coins to borrow not generally available yet |
-| 176023 | Pair to borrow not generally available yet |
-| 176024 | Invalid user status |
-| 176025 | Amount to borrow cannot be lower than the min. amount to borrow (per transaction) |
-| 176026 | Amount to borrow cannot be larger than the max. amount to borrow (per transaction) |
-| 176027 | Amount to borrow cannot be higher than the max. amount to borrow per user |
-| 176028 | Amount to borrow has exceeded Bybit's max. amount to borrow |
-| 176029 | Amount to borrow has exceeded the user's estimated max. amount to borrow |
-| 176030 | Query user loan info error |
-| 176031 | Number of decimals for borrow amount has exceeded the maximum precision |
-| 176034 | The leverage ratio is out of range |
-| 176035 | Failed to close the leverage switch during liquidation |
-| 176036 | Failed to adjust leverage switch during forced liquidation |
-| 176037 | For non-unified transaction users, the operation failed |
-| 176038 | The spot leverage is closed and the current operation is not allowed |
-| 176039 | Borrowing, current operation is not allowed |
-| 176040 | There is a spot leverage order, and the adjustment of the leverage switch failed! |
-| 176132 | Number of decimals for repay amount has exceeded the maximum precision |
-| 176133 | Liquidation may be triggered! Please adjust your transaction amount and try again |
-| 176134 | Account has been upgraded (upgrading) to UTA |
-| 176135 | Failed to get bond data |
-| 176136 | Failed to get borrow data |
-| 176137 | Failed to switch user status |
-| 176138 | You need to repay all your debts before closing your disabling cross margin account |
-| 176139 | Sorry, you are not eligible to enable cross margin, as you have already enabled OTC lending |
-| 176201 | Account exception. Check if the UID is bound to an institutional loan |
+|  Code  | Description                                                                                                                                     |
+| :----: | :---------------------------------------------------------------------------------------------------------------------------------------------- |
+| 176002 | Query user account info error. Confirm that if you have completed quiz in GUI                                                                   |
+| 176003 | Query user loan history error                                                                                                                   |
+| 176004 | Query order history start time exceeds end time                                                                                                 |
+| 176005 | Failed to borrow                                                                                                                                |
+| 176006 | Repayment Failed                                                                                                                                |
+| 176007 | User not found                                                                                                                                  |
+| 176008 | You haven't enabled Cross Margin Trading yet. To do so, please head to the PC trading site                                                      |
+| 176009 | You haven't enabled Cross Margin Trading yet. Confirm that if you have turned on margin trade                                                   |
+| 176010 | Failed to locate the coins to borrow                                                                                                            |
+| 176011 | Cross Margin Trading not yet supported by the selected coin                                                                                     |
+| 176012 | Pair not available                                                                                                                              |
+| 176013 | Cross Margin Trading not yet supported by the selected pair                                                                                     |
+| 176014 | Repeated repayment requests                                                                                                                     |
+| 176015 | Insufficient available balance                                                                                                                  |
+| 176016 | No repayment required                                                                                                                           |
+| 176017 | Repayment amount has exceeded the total liability                                                                                               |
+| 176018 | Settlement in progress                                                                                                                          |
+| 176019 | Liquidation in progress                                                                                                                         |
+| 176020 | Failed to locate repayment history                                                                                                              |
+| 176021 | Repeated borrowing requests                                                                                                                     |
+| 176022 | Coins to borrow not generally available yet                                                                                                     |
+| 176023 | Pair to borrow not generally available yet                                                                                                      |
+| 176024 | Invalid user status                                                                                                                             |
+| 176025 | Amount to borrow cannot be lower than the min. amount to borrow (per transaction)                                                               |
+| 176026 | Amount to borrow cannot be larger than the max. amount to borrow (per transaction)                                                              |
+| 176027 | Amount to borrow cannot be higher than the max. amount to borrow per user                                                                       |
+| 176028 | Amount to borrow has exceeded Bybit's max. amount to borrow                                                                                     |
+| 176029 | Amount to borrow has exceeded the user's estimated max. amount to borrow                                                                        |
+| 176030 | Query user loan info error                                                                                                                      |
+| 176031 | Number of decimals for borrow amount has exceeded the maximum precision                                                                         |
+| 176034 | The leverage ratio is out of range                                                                                                              |
+| 176035 | Failed to close the leverage switch during liquidation                                                                                          |
+| 176036 | Failed to adjust leverage switch during forced liquidation                                                                                      |
+| 176037 | For non-unified transaction users, the operation failed                                                                                         |
+| 176038 | The spot leverage is closed and the current operation is not allowed                                                                            |
+| 176039 | Borrowing, current operation is not allowed                                                                                                     |
+| 176040 | There is a spot leverage order, and the adjustment of the leverage switch failed!                                                               |
+| 176132 | Number of decimals for repay amount has exceeded the maximum precision                                                                          |
+| 176133 | Liquidation may be triggered! Please adjust your transaction amount and try again                                                               |
+| 176134 | Account has been upgraded (upgrading) to UTA                                                                                                    |
+| 176135 | Failed to get bond data                                                                                                                         |
+| 176136 | Failed to get borrow data                                                                                                                       |
+| 176137 | Failed to switch user status                                                                                                                    |
+| 176138 | You need to repay all your debts before closing your disabling cross margin account                                                             |
+| 176139 | Sorry, you are not eligible to enable cross margin, as you have already enabled OTC lending                                                     |
+| 176201 | Account exception. Check if the UID is bound to an institutional loan                                                                           |
 | 182021 | Cannot enable spot margin while in isolated margin mode. Please switch to cross margin mode or portfolio margin mode to trade spot with margin. |
-| 182104 | This action could not be completed as your Unified Margin Account's IM/MM utilization rate has exceeded the threshold |
-| 182105 | Adjustment failed, user is upgrading |
-| 182106 | Adjustment failed, user forced liquidation in progress. |
-| 182107 | Adjustment failed, Maintenance Margin Rate too high |
+| 182104 | This action could not be completed as your Unified Margin Account's IM/MM utilization rate has exceeded the threshold                           |
+| 182105 | Adjustment failed, user is upgrading                                                                                                            |
+| 182106 | Adjustment failed, user forced liquidation in progress.                                                                                         |
+| 182107 | Adjustment failed, Maintenance Margin Rate too high                                                                                             |
 
 ## Asset[​](#asset "Direct link to heading")
 
-| Code | Description |
-| :-: | :-- |
-| 131001 | openapi svc error |
-| 131002 | Parameter error |
-| 131002 | Withdraw address chain or destination tag are not equal |
-| 131003 | Internal error |
-| 131004 | KYC needed |
-| 131065 | Your KYC information is incomplete, please go to the KYC information page of the web or app to complete the information. kyc=India client may encounter this |
-| 131066 | This address does not support withdrawals for the time being. Please switch to another address for withdrawing |
-| 131067 | Travel rule verification failed, please contact the target exchange. Travel rule for KR user |
-| 131068 | Travel rule information is insufficient, please provide additional details. Travel rule for KR user |
-| 131069 | Unable to withdraw to the receipt, please contact the target the exchange. Travel rule for KR user |
-| 131070 | The recipient's name is mismatched with the targeted exchange. Travel rule for KR user |
-| 131071 | The recipient has not undergone KYC verification. Travel rule for KR user |
-| 131072 | Your withdrawal currency is not supported by the target exchange. Travel rule for KR user |
-| 131073 | Your withdrawal address has not been included in the target exchange. Travel rule for KR user |
-| 131074 | Beneficiary info is required, please refer to the latest api document. Travel rule for KR user |
-| 131075 | InternalAddressCannotBeYourself |
-| 131076 | internal transfer not support subaccounts |
-| 131077 | receive user not exist |
-| 131078 | receive user deposit has been banned |
-| 131079 | receive user need kyc |
-| 131080 | User left retry times is zero |
-| 131081 | Do not input memo/tag,please. |
-| 131082 | Do not repeat the request |
-| 131083 | Withdraw only allowed from address book |
-| 131084 | Withdraw failed because of Uta Upgrading |
-| 131085 | Withdrawal amount is greater than your availale balance (the deplayed withdrawal is triggered) |
-| 131086 | Withdrawal amount exceeds risk limit (the risk limit of margin trade is triggered) |
-| 131087 | your current account spot risk level is too high, withdrawal is prohibited, please adjust and try again |
-| 131088 | The withdrawal amount exceeds the remaining withdrawal limit of your identity verification level. The current available amount for withdrawal : %s |
-| 131089 | User sensitive operation, withdrawal is prohibited within 24 hours |
-| 131090 | User withdraw has been banned |
-| 131091 | Blocked login status does not allow withdrawals |
-| 131092 | User status is abnormal |
-| 131093 | The withdrawal address is not in the whitelist |
-| 131094 | UserId is not in the whitelist |
-| 131095 | Withdrawl amount exceeds the 24 hour platform limit |
-| 131096 | Withdraw amount does not satify the lower limit or upper limit |
-| 131097 | Withdrawal of this currency has been closed |
-| 131098 | Withdrawal currently is not availble from new address |
-| 131099 | Hot wallet status can cancel the withdraw |
-| 131200 | Service error |
-| 131201 | Internal error |
-| 131202 | Invalid memberId |
-| 131203 | Request parameter error |
-| 131204 | Account info error |
-| 131205 | Query transfer error |
-| 131206 | cannot be transfer |
-| 131207 | Account not exist |
-| 131208 | Forbid transfer |
-| 131209 | Get subMember relation error |
-| 131210 | Amount accuracy error |
-| 131211 | fromAccountType can't be the same as toAccountType |
-| 131212 | Insufficient balance |
-| 131213 | TransferLTV check error |
-| 131214 | TransferId exist |
-| 131215 | Amount error |
-| 131216 | Query balance error |
-| 131217 | Risk check error |
-| 131227 | subaccount do not have universal transfer permission |
-| 131228 | your balance is not enough. Please check transfer safe amount |
-| 131229 | Due to compliance requirements, the current currency is not allowed to transfer |
-| 131230 | The system is busy, please try again later |
-| 131231 | Transfers into this account are not supported |
-| 131232 | Transfers out this account are not supported |
-| 131233 | can not transfer the coin that not supported for islamic account |
-| 140001 | Switching the PM spot hedging switch is not allowed in non PM mode |
-| ~140002~ | ~Institutional lending users do not support PM spot hedging~ |
-| 140003 | You have position(s) being liquidated, please try again later. |
-| 140004 | Operations Restriction: The current LTV ratio of your Institutional Loan has hit the liquidation threshold. Assets in your account are being liquidated. |
-| 140005 | Risk level after switching modes exceeds threshold |
-| 141004 | sub member is not normal |
-| 141025 | This subaccount has assets and cannot be deleted |
-| 181000 | category is null |
-| 181001 | category only support linear or option or spot. |
-| 181002 | symbol is null. |
-| 181003 | side is null. |
-| 181004 | side only support Buy or Sell. |
-| 181005 | orderStatus is wrong |
-| 181006 | startTime is not number |
-| 181007 | endTime is not number |
-| 181008 | Parameter startTime and endTime are both needed |
-| 181009 | Parameter startTime needs to be smaller than endTime |
-| 181010 | The time range between startTime and endTime cannot exceed 7 days |
-| 181011 | limit is not a number |
-| 181012 | symbol not exist |
-| 181013 | Only support settleCoin: usdc |
-| 181014 | Classic account is not supported |
-| 181018 | Invalid expDate. |
-| 181019 | Parameter expDate can't be earlier than 2 years |
-| 182000 | symbol related quote price is null |
-| 182200 | Please upgrade UTA first. |
-| 182201 | You must enter 2 time parameters. |
-| 182202 | The start time must be less than the end time |
-| 182203 | Please enter valid characters |
-| 182204 | Coin does not exist |
-| 182205 | User level does not exist |
-| 700000 | accountType/quoteTxId cannot be null |
-| 700001 | quote fail:no dealer can used |
-| 700004 | order does not exist |
-| 700007 | Large Amount Limit |
-| 700012 | UTA upgrading, don't allow to apply for quote |
+|   Code   | Description                                                                                                                                                  |
+| :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  131001  | openapi svc error                                                                                                                                            |
+|  131002  | Parameter error                                                                                                                                              |
+|  131002  | Withdraw address chain or destination tag are not equal                                                                                                      |
+|  131003  | Internal error                                                                                                                                               |
+|  131004  | KYC needed                                                                                                                                                   |
+|  131065  | Your KYC information is incomplete, please go to the KYC information page of the web or app to complete the information. kyc=India client may encounter this |
+|  131066  | This address does not support withdrawals for the time being. Please switch to another address for withdrawing                                               |
+|  131067  | Travel rule verification failed, please contact the target exchange. Travel rule for KR user                                                                 |
+|  131068  | Travel rule information is insufficient, please provide additional details. Travel rule for KR user                                                          |
+|  131069  | Unable to withdraw to the receipt, please contact the target the exchange. Travel rule for KR user                                                           |
+|  131070  | The recipient's name is mismatched with the targeted exchange. Travel rule for KR user                                                                       |
+|  131071  | The recipient has not undergone KYC verification. Travel rule for KR user                                                                                    |
+|  131072  | Your withdrawal currency is not supported by the target exchange. Travel rule for KR user                                                                    |
+|  131073  | Your withdrawal address has not been included in the target exchange. Travel rule for KR user                                                                |
+|  131074  | Beneficiary info is required, please refer to the latest api document. Travel rule for KR user                                                               |
+|  131075  | InternalAddressCannotBeYourself                                                                                                                              |
+|  131076  | internal transfer not support subaccounts                                                                                                                    |
+|  131077  | receive user not exist                                                                                                                                       |
+|  131078  | receive user deposit has been banned                                                                                                                         |
+|  131079  | receive user need kyc                                                                                                                                        |
+|  131080  | User left retry times is zero                                                                                                                                |
+|  131081  | Do not input memo/tag,please.                                                                                                                                |
+|  131082  | Do not repeat the request                                                                                                                                    |
+|  131083  | Withdraw only allowed from address book                                                                                                                      |
+|  131084  | Withdraw failed because of Uta Upgrading                                                                                                                     |
+|  131085  | Withdrawal amount is greater than your availale balance (the deplayed withdrawal is triggered)                                                               |
+|  131086  | Withdrawal amount exceeds risk limit (the risk limit of margin trade is triggered)                                                                           |
+|  131087  | your current account spot risk level is too high, withdrawal is prohibited, please adjust and try again                                                      |
+|  131088  | The withdrawal amount exceeds the remaining withdrawal limit of your identity verification level. The current available amount for withdrawal : %s           |
+|  131089  | User sensitive operation, withdrawal is prohibited within 24 hours                                                                                           |
+|  131090  | User withdraw has been banned                                                                                                                                |
+|  131091  | Blocked login status does not allow withdrawals                                                                                                              |
+|  131092  | User status is abnormal                                                                                                                                      |
+|  131093  | The withdrawal address is not in the whitelist                                                                                                               |
+|  131094  | UserId is not in the whitelist                                                                                                                               |
+|  131095  | Withdrawl amount exceeds the 24 hour platform limit                                                                                                          |
+|  131096  | Withdraw amount does not satify the lower limit or upper limit                                                                                               |
+|  131097  | Withdrawal of this currency has been closed                                                                                                                  |
+|  131098  | Withdrawal currently is not availble from new address                                                                                                        |
+|  131099  | Hot wallet status can cancel the withdraw                                                                                                                    |
+|  131200  | Service error                                                                                                                                                |
+|  131201  | Internal error                                                                                                                                               |
+|  131202  | Invalid memberId                                                                                                                                             |
+|  131203  | Request parameter error                                                                                                                                      |
+|  131204  | Account info error                                                                                                                                           |
+|  131205  | Query transfer error                                                                                                                                         |
+|  131206  | cannot be transfer                                                                                                                                           |
+|  131207  | Account not exist                                                                                                                                            |
+|  131208  | Forbid transfer                                                                                                                                              |
+|  131209  | Get subMember relation error                                                                                                                                 |
+|  131210  | Amount accuracy error                                                                                                                                        |
+|  131211  | fromAccountType can't be the same as toAccountType                                                                                                           |
+|  131212  | Insufficient balance                                                                                                                                         |
+|  131213  | TransferLTV check error                                                                                                                                      |
+|  131214  | TransferId exist                                                                                                                                             |
+|  131215  | Amount error                                                                                                                                                 |
+|  131216  | Query balance error                                                                                                                                          |
+|  131217  | Risk check error                                                                                                                                             |
+|  131227  | subaccount do not have universal transfer permission                                                                                                         |
+|  131228  | your balance is not enough. Please check transfer safe amount                                                                                                |
+|  131229  | Due to compliance requirements, the current currency is not allowed to transfer                                                                              |
+|  131230  | The system is busy, please try again later                                                                                                                   |
+|  131231  | Transfers into this account are not supported                                                                                                                |
+|  131232  | Transfers out this account are not supported                                                                                                                 |
+|  131233  | can not transfer the coin that not supported for islamic account                                                                                             |
+|  140001  | Switching the PM spot hedging switch is not allowed in non PM mode                                                                                           |
+| ~140002~ | ~Institutional lending users do not support PM spot hedging~                                                                                                 |
+|  140003  | You have position(s) being liquidated, please try again later.                                                                                               |
+|  140004  | Operations Restriction: The current LTV ratio of your Institutional Loan has hit the liquidation threshold. Assets in your account are being liquidated.     |
+|  140005  | Risk level after switching modes exceeds threshold                                                                                                           |
+|  141004  | sub member is not normal                                                                                                                                     |
+|  141025  | This subaccount has assets and cannot be deleted                                                                                                             |
+|  181000  | category is null                                                                                                                                             |
+|  181001  | category only support linear or option or spot.                                                                                                              |
+|  181002  | symbol is null.                                                                                                                                              |
+|  181003  | side is null.                                                                                                                                                |
+|  181004  | side only support Buy or Sell.                                                                                                                               |
+|  181005  | orderStatus is wrong                                                                                                                                         |
+|  181006  | startTime is not number                                                                                                                                      |
+|  181007  | endTime is not number                                                                                                                                        |
+|  181008  | Parameter startTime and endTime are both needed                                                                                                              |
+|  181009  | Parameter startTime needs to be smaller than endTime                                                                                                         |
+|  181010  | The time range between startTime and endTime cannot exceed 7 days                                                                                            |
+|  181011  | limit is not a number                                                                                                                                        |
+|  181012  | symbol not exist                                                                                                                                             |
+|  181013  | Only support settleCoin: usdc                                                                                                                                |
+|  181014  | Classic account is not supported                                                                                                                             |
+|  181018  | Invalid expDate.                                                                                                                                             |
+|  181019  | Parameter expDate can't be earlier than 2 years                                                                                                              |
+|  182000  | symbol related quote price is null                                                                                                                           |
+|  182200  | Please upgrade UTA first.                                                                                                                                    |
+|  182201  | You must enter 2 time parameters.                                                                                                                            |
+|  182202  | The start time must be less than the end time                                                                                                                |
+|  182203  | Please enter valid characters                                                                                                                                |
+|  182204  | Coin does not exist                                                                                                                                          |
+|  182205  | User level does not exist                                                                                                                                    |
+|  700000  | accountType/quoteTxId cannot be null                                                                                                                         |
+|  700001  | quote fail:no dealer can used                                                                                                                                |
+|  700004  | order does not exist                                                                                                                                         |
+|  700007  | Large Amount Limit                                                                                                                                           |
+|  700012  | UTA upgrading, don't allow to apply for quote                                                                                                                |
 
 ## Crypto Loan (New)[​](#crypto-loan-new "Direct link to heading")
 
-| Code | Description |
-| :-: | :-- |
-| 148001 | This currency is not supported for flexible savings. |
-| 148002 | The entered amount is below the minimum borrowable amount. |
-| 148003 | Exceeds the allowed decimal precision for this currency. |
-| 148004 | This currency cannot be used as collateral. |
-| 148005 | Exceeds the allowed decimal precision for this collateral currency. |
-| 148006 | The amount of collateral exceeds the upper limit of the platform. |
-| 148007 | Borrow amount cannot be negative. |
-| 148008 | Collateral amount cannot be negative. |
-| 148009 | LTV exceeds the risk threshold. |
-| 148010 | Insufficient available quota. |
-| 148011 | Insufficient balance in the funding pool . |
-| 148012 | Insufficient collateral amount. |
-| 148013 | Non-borrowing users cannot adjust collateral. |
-| 148014 | This currency is not supported. |
-| 148015 | Loan term exceeds the allowed range. |
-| 148016 | The specified lending rate is not supported. |
-| 148017 | The interest rate exceeds the allowed decimal precision. |
-| 148018 | Exceeded the maximum number of open orders. |
-| 148019 | The system is busy, please try again later. |
-| 148020 | Insufficient platform lending quota. |
-| 148021 | Operation conflict detected. Please try again later. |
-| 148022 | Insufficient assets for lending. |
-| 148023 | Loan order not found. |
-| 148024 | Loan cancellation failed: the order may have been completed or has an invalid amount. |
+|  Code  | Description                                                                                    |
+| :----: | :--------------------------------------------------------------------------------------------- |
+| 148001 | This currency is not supported for flexible savings.                                           |
+| 148002 | The entered amount is below the minimum borrowable amount.                                     |
+| 148003 | Exceeds the allowed decimal precision for this currency.                                       |
+| 148004 | This currency cannot be used as collateral.                                                    |
+| 148005 | Exceeds the allowed decimal precision for this collateral currency.                            |
+| 148006 | The amount of collateral exceeds the upper limit of the platform.                              |
+| 148007 | Borrow amount cannot be negative.                                                              |
+| 148008 | Collateral amount cannot be negative.                                                          |
+| 148009 | LTV exceeds the risk threshold.                                                                |
+| 148010 | Insufficient available quota.                                                                  |
+| 148011 | Insufficient balance in the funding pool .                                                     |
+| 148012 | Insufficient collateral amount.                                                                |
+| 148013 | Non-borrowing users cannot adjust collateral.                                                  |
+| 148014 | This currency is not supported.                                                                |
+| 148015 | Loan term exceeds the allowed range.                                                           |
+| 148016 | The specified lending rate is not supported.                                                   |
+| 148017 | The interest rate exceeds the allowed decimal precision.                                       |
+| 148018 | Exceeded the maximum number of open orders.                                                    |
+| 148019 | The system is busy, please try again later.                                                    |
+| 148020 | Insufficient platform lending quota.                                                           |
+| 148021 | Operation conflict detected. Please try again later.                                           |
+| 148022 | Insufficient assets for lending.                                                               |
+| 148023 | Loan order not found.                                                                          |
+| 148024 | Loan cancellation failed: the order may have been completed or has an invalid amount.          |
 | 148025 | Lending order cancellation failed: the order may have been completed or has an invalid amount. |
-| 148026 | Failed to create repayment. Please try again later. |
-| 148027 | No active loan found for this account. Operation not allowed. |
-| 148028 | Repayment amount exceeds the supported precision for the currency. |
-| 148029 | Insufficient balance in the repayment account. |
-| 148030 | Deposit order not found. |
-| 148031 | Operation not allowed during liquidation. |
-| 148032 | No outstanding debt. Repayment is not allowed. |
-| 148033 | This loan order cannot be repaid. |
-| 148034 | Please wait and try again later. |
-| 148035 | Please wait and try again later. |
-| 148036 | Failed to adjust collateral amount. Please try again later. |
-| 148037 | Insufficient assets or adjustment amount exceeds the maximum allowed. |
-| 148038 | Repayment amount cannot exceed the debt amount of the position. |
-| 148039 | Duplicate collateral assets detected. Please review and resubmit. |
-| 148040 | Pledge token is error. |
-| 148041 | Repay order is exist. |
-| 148042 | Exceeds the allowed decimal precision for this currency. |
+| 148026 | Failed to create repayment. Please try again later.                                            |
+| 148027 | No active loan found for this account. Operation not allowed.                                  |
+| 148028 | Repayment amount exceeds the supported precision for the currency.                             |
+| 148029 | Insufficient balance in the repayment account.                                                 |
+| 148030 | Deposit order not found.                                                                       |
+| 148031 | Operation not allowed during liquidation.                                                      |
+| 148032 | No outstanding debt. Repayment is not allowed.                                                 |
+| 148033 | This loan order cannot be repaid.                                                              |
+| 148034 | Please wait and try again later.                                                               |
+| 148035 | Please wait and try again later.                                                               |
+| 148036 | Failed to adjust collateral amount. Please try again later.                                    |
+| 148037 | Insufficient assets or adjustment amount exceeds the maximum allowed.                          |
+| 148038 | Repayment amount cannot exceed the debt amount of the position.                                |
+| 148039 | Duplicate collateral assets detected. Please review and resubmit.                              |
+| 148040 | Pledge token is error.                                                                         |
+| 148041 | Repay order is exist.                                                                          |
+| 148042 | Exceeds the allowed decimal precision for this currency.                                       |
 
 ## Crypto Loan (legacy)[​](#crypto-loan-legacy "Direct link to heading")
 
-| Code | Description |
-| :-: | :-- |
-| 177002 | Server is busy, please wait and try again |
-| 177003 | Illegal characters found in a parameter |
-| 177004 | Precision is over the maximum defined for this asset |
-| 177005 | Order does not exist |
-| 177006 | We don't have this asset |
-| 177007 | Your borrow amount has exceed maximum borrow amount |
-| 177008 | Borrow is banned for this asset |
-| 177009 | Borrow amount is less than minimum borrow amount |
-| 177010 | Repay amount exceeds borrow amount |
-| 177011 | Balance is not enough |
-| 177012 | The system doesn't have enough asset now |
-| 177013 | adjustment amount exceeds minimum collateral amount |
-| 177014 | Individual loan quota reached |
+|  Code  | Description                                                                                                 |
+| :----: | :---------------------------------------------------------------------------------------------------------- |
+| 177002 | Server is busy, please wait and try again                                                                   |
+| 177003 | Illegal characters found in a parameter                                                                     |
+| 177004 | Precision is over the maximum defined for this asset                                                        |
+| 177005 | Order does not exist                                                                                        |
+| 177006 | We don't have this asset                                                                                    |
+| 177007 | Your borrow amount has exceed maximum borrow amount                                                         |
+| 177008 | Borrow is banned for this asset                                                                             |
+| 177009 | Borrow amount is less than minimum borrow amount                                                            |
+| 177010 | Repay amount exceeds borrow amount                                                                          |
+| 177011 | Balance is not enough                                                                                       |
+| 177012 | The system doesn't have enough asset now                                                                    |
+| 177013 | adjustment amount exceeds minimum collateral amount                                                         |
+| 177014 | Individual loan quota reached                                                                               |
 | 177015 | Collateral amount has reached the limit. Please reduce your collateral amount or try with other collaterals |
-| 177016 | Minimum collateral amount is not enough |
-| 177017 | This coin cannot be used as collateral |
-| 177018 | duplicate request |
-| 177019 | Your input param is invalid |
-| 177020 | The account does not support the asset |
-| 177021 | Repayment failed |
+| 177016 | Minimum collateral amount is not enough                                                                     |
+| 177017 | This coin cannot be used as collateral                                                                      |
+| 177018 | duplicate request                                                                                           |
+| 177019 | Your input param is invalid                                                                                 |
+| 177020 | The account does not support the asset                                                                      |
+| 177021 | Repayment failed                                                                                            |
 
 ## Institutional Loan[​](#institutional-loan "Direct link to heading")
 
-| Code | Description |
-| :-: | :-- |
-| 3777002 | UID cannot be bound repeatedly. |
-| 3777003 | UID cannot be unbound because the UID has not been bound to a risk unit. |
-| 3777004 | The main UID of the risk unit cannot be unbound. |
-| 3777005 | You have unsettled lending or borrowing orders. Please try again later. |
-| 3777006 | UID cannot be bound, please try again with a different UID." |
-| 3777007 | UID cannot be bound, please upgrade to UTA Pro." |
+|  Code   | Description                                                                |
+| :-----: | :------------------------------------------------------------------------- |
+| 3777002 | UID cannot be bound repeatedly.                                            |
+| 3777003 | UID cannot be unbound because the UID has not been bound to a risk unit.   |
+| 3777004 | The main UID of the risk unit cannot be unbound.                           |
+| 3777005 | You have unsettled lending or borrowing orders. Please try again later.    |
+| 3777006 | UID cannot be bound, please try again with a different UID."               |
+| 3777007 | UID cannot be bound, please upgrade to UTA Pro."                           |
 | 3777012 | Your request is currently being processed. Please wait and try again later |
-| 3777027 | UID cannot be bound, leveraged trading closure failed. |
-| 3777029 | You currently have orders for pre-market trading that can’t be bind UIDs |
-| 3777030 | This account has activated copyPro and cannot bind uid |
+| 3777027 | UID cannot be bound, leveraged trading closure failed.                     |
+| 3777029 | You currently have orders for pre-market trading that can’t be bind UIDs   |
+| 3777030 | This account has activated copyPro and cannot bind uid                     |
 
 ## Exchange Broker[​](#exchange-broker "Direct link to heading")
 
-| Code | Description |
-| :-: | :-- |
-| 3500402 | Parameter verification failed for 'limit'. |
-| 3500403 | Only available to exchange broker main-account |
-| 3500404 | Invalid Cursor |
+|   Code    | Description                                                    |
+| :-------: | :------------------------------------------------------------- |
+|  3500402  | Parameter verification failed for 'limit'.                     |
+|  3500403  | Only available to exchange broker main-account                 |
+|  3500404  | Invalid Cursor                                                 |
 | ~3500405~ | Parameter "startTime" and "endTime" need to be input in pairs. |
-| 3500406 | Out of query time range. |
-| 3500407 | Parameter begin and end need to be input in pairs. |
+|  3500406  | Out of query time range.                                       |
+|  3500407  | Parameter begin and end need to be input in pairs.             |
 
 ### Reward[​](#reward "Direct link to heading")
 
-| Code | Description |
-| :-: | :-- |
-| 400001 | invalid parameter |
-| 400101 | The voucher was recycled |
-| 400102 | The voucher has exceeded the redemption date (expired) |
-| 400103 | The voucher is not available for redemption |
-| 400105 | Budget exceeded |
+|  Code  | Description                                                                        |
+| :----: | :--------------------------------------------------------------------------------- |
+| 400001 | invalid parameter                                                                  |
+| 400101 | The voucher was recycled                                                           |
+| 400102 | The voucher has exceeded the redemption date (expired)                             |
+| 400103 | The voucher is not available for redemption                                        |
+| 400105 | Budget exceeded                                                                    |
 | 403001 | Account rejected, check if the input accountId valid, account banned, or kyc issue |
-| 404001 | resource not found |
-| 404011 | Insufficient inventory |
-| 409011 | VIP level limit |
-| 500001 | Internal server error |
+| 404001 | resource not found                                                                 |
+| 404011 | Insufficient inventory                                                             |
+| 409011 | VIP level limit                                                                    |
+| 500001 | Internal server error                                                              |
 
 ## Earn[​](#earn "Direct link to heading")
 
-| Code | Description |
-| :-: | :-- |
-| 180001 | Invalid parameter |
-| 180002 | Invalid coin |
-| 180003 | User banned |
+|  Code  | Description                                                    |
+| :----: | :------------------------------------------------------------- |
+| 180001 | Invalid parameter                                              |
+| 180002 | Invalid coin                                                   |
+| 180003 | User banned                                                    |
 | 180004 | Site not allowed. Only users from Bybit global site can access |
-| 180005 | Compliance wallet not reach |
-| 180006 | Validation failed |
-| 180007 | Product not available |
-| 180008 | Invalid Product |
-| 180009 | product is forbidden |
-| 180010 | User not allowed |
-| 180011 | User not VIP |
-| 180012 | Purchase share is invalid |
-| 180013 | Stake over maximum share |
-| 180014 | Redeem share invlaid |
-| 180015 | Products share not enough |
-| 180016 | Balance not enough |
-| 180017 | Invalid risk user |
-| 180018 | internal error |
-| 180019 | empty order link id |
+| 180005 | Compliance wallet not reach                                    |
+| 180006 | Validation failed                                              |
+| 180007 | Product not available                                          |
+| 180008 | Invalid Product                                                |
+| 180009 | product is forbidden                                           |
+| 180010 | User not allowed                                               |
+| 180011 | User not VIP                                                   |
+| 180012 | Purchase share is invalid                                      |
+| 180013 | Stake over maximum share                                       |
+| 180014 | Redeem share invlaid                                           |
+| 180015 | Products share not enough                                      |
+| 180016 | Balance not enough                                             |
+| 180017 | Invalid risk user                                              |
+| 180018 | internal error                                                 |
+| 180019 | empty order link id                                            |
 
 ## User[​](#user "Direct link to heading")
 
-| Code | Description |
-| :-: | :-- |
+| Code  | Description                                  |
+| :---: | :------------------------------------------- |
 | 81007 | Bybit Europe is not supported create API Key |
-| 20096 | need KYC authentication |
+| 20096 | need KYC authentication                      |
 
 ## Set api rate limit[​](#set-api-rate-limit "Direct link to heading")
 
-| Code | Description |
-| :-: | :-- |
-| 3500002 | Current user is not an institutional user |
-| 3500153 | No permission to operate these UIDs |
+|  Code   | Description                                    |
+| :-----: | :--------------------------------------------- |
+| 3500002 | Current user is not an institutional user      |
+| 3500153 | No permission to operate these UIDs            |
 | 3500153 | You do not have permission to query other UIDs |
 
 ## RFQ[​](#rfq "Direct link to heading")
 
-| Code | Description |
-| :-- | :-- |
-| 110300 | The RFQ order does not exist |
-| 110301 | The Quote order does not exist |
-| 110302 | Demo user is prohibited |
-| 110303 | RFQ value is less than the min limit |
-| 110304 | Cannot be self-executed |
-| 110305 | Quote UID is not in counterparties |
-| 110306 | Quote legs do not match |
-| 110307 | Quote order already exists for this RFQ |
-| 110308 | RFQ strategy legs size is not correct |
-| 110309 | RFQ strategy side is not correct |
-| 110310 | RFQ strategy qty is not correct |
-| 110311 | RFQ strategy symbol is not correct |
-| 110312 | No permission to execute quote |
-| 110313 | RFQ only supports one-way position mode |
-| 110314 | Order amount is less than min trade amount |
-| 110315 | Order qty exceeds the upper limit |
-| 110316 | RFQ is not available for Copy Trading |
-| 110317 | Counterparty cannot be self |
-| 110318 | There are too many counterparties to choose from |
-| 110319 | Order amount is greater than max trade amount |
+| Code   | Description                                                 |
+| :----- | :---------------------------------------------------------- |
+| 110300 | The RFQ order does not exist                                |
+| 110301 | The Quote order does not exist                              |
+| 110302 | Demo user is prohibited                                     |
+| 110303 | RFQ value is less than the min limit                        |
+| 110304 | Cannot be self-executed                                     |
+| 110305 | Quote UID is not in counterparties                          |
+| 110306 | Quote legs do not match                                     |
+| 110307 | Quote order already exists for this RFQ                     |
+| 110308 | RFQ strategy legs size is not correct                       |
+| 110309 | RFQ strategy side is not correct                            |
+| 110310 | RFQ strategy qty is not correct                             |
+| 110311 | RFQ strategy symbol is not correct                          |
+| 110312 | No permission to execute quote                              |
+| 110313 | RFQ only supports one-way position mode                     |
+| 110314 | Order amount is less than min trade amount                  |
+| 110315 | Order qty exceeds the upper limit                           |
+| 110316 | RFQ is not available for Copy Trading                       |
+| 110317 | Counterparty cannot be self                                 |
+| 110318 | There are too many counterparties to choose from            |
+| 110319 | Order amount is greater than max trade amount               |
 | 110320 | Symbols that have not enabled manual loan are not supported |
-| 110321 | Symbol is not supported |
+| 110321 | Symbol is not supported                                     |
 
 ## Manual Loan[​](#manual-loan "Direct link to heading")
 
-| Code | Description |
-| :-- | :-- |
-| 34022001 | System error. Please try again later. |
-| 34022003 | System error. Please try again later. |
-| 34022027 | Invalid request parameters. |
-| 34022030 | Borrowing demand is high, and the fund pool is currently low. Please wait a moment. |
-| 34022031 | Risk rate limit exceeded. Please reduce your borrow amount in the Unified Trading Account. |
-| 34022033 | Borrowing precision must be an integer multiple. |
-| 34022034 | The minimum repayment amount must be an integer multiple. |
-| 34022035 | You cannot repay while interest is being calculated. |
-| 34022036 | Please enable Margin Trading to continue. |
-| 34022038 | Repayment is in progress. Please do not repeat the operation. |
-| 34022010 | The borrowed asset does not exist. |
-| 34022041 | Currently, your account has no borrowed coins. No repayments are needed. |
-| 34022044 | Repayment unsuccessful. |
-| 34022045 | Borrowing unsuccessful. |
-| 34022011 | Amount must be at least. |
-| 34022014 | Decimal precision cannot exceed 18 digits. |
-| 34022047 | CopyTrade not supported. |
-| 34022048 | Borrowing is not allowed during liquidation. |
-| 34022049 | Insufficient collateral balance. |
+| Code     | Description                                                                                                              |
+| :------- | :----------------------------------------------------------------------------------------------------------------------- |
+| 34022001 | System error. Please try again later.                                                                                    |
+| 34022003 | System error. Please try again later.                                                                                    |
+| 34022027 | Invalid request parameters.                                                                                              |
+| 34022030 | Borrowing demand is high, and the fund pool is currently low. Please wait a moment.                                      |
+| 34022031 | Risk rate limit exceeded. Please reduce your borrow amount in the Unified Trading Account.                               |
+| 34022033 | Borrowing precision must be an integer multiple.                                                                         |
+| 34022034 | The minimum repayment amount must be an integer multiple.                                                                |
+| 34022035 | You cannot repay while interest is being calculated.                                                                     |
+| 34022036 | Please enable Margin Trading to continue.                                                                                |
+| 34022038 | Repayment is in progress. Please do not repeat the operation.                                                            |
+| 34022010 | The borrowed asset does not exist.                                                                                       |
+| 34022041 | Currently, your account has no borrowed coins. No repayments are needed.                                                 |
+| 34022044 | Repayment unsuccessful.                                                                                                  |
+| 34022045 | Borrowing unsuccessful.                                                                                                  |
+| 34022011 | Amount must be at least.                                                                                                 |
+| 34022014 | Decimal precision cannot exceed 18 digits.                                                                               |
+| 34022047 | CopyTrade not supported.                                                                                                 |
+| 34022048 | Borrowing is not allowed during liquidation.                                                                             |
+| 34022049 | Insufficient collateral balance.                                                                                         |
 | 34022050 | Repayment failed. You currently have spot hedging liabilities. Please close your derivatives positions before repayment. |
-| 34022051 | Institutional loan in progress. |
-| 34022052 | Institutional loan transactions banned. |
-| 35000011 | You have existing pending loan orders. Please try again later. |
-| 34022053 | Please contact the sales to enable the manual borrowing feature. |
+| 34022051 | Institutional loan in progress.                                                                                          |
+| 34022052 | Institutional loan transactions banned.                                                                                  |
+| 35000011 | You have existing pending loan orders. Please try again later.                                                           |
+| 34022053 | Please contact the sales to enable the manual borrowing feature.                                                         |
 
 [
 
@@ -698,19 +698,19 @@ Get Lending Coin Info
 
 ](/docs/v5/abandon/coin-info)
 
--   [HTTP Code](#http-code)
--   [WS OE General code](#ws-oe-general-code)
--   [UTA](#uta)
--   [Spot Trade](#spot-trade)
--   [Spot Margin Trade](#spot-margin-trade)
--   [Asset](#asset)
--   [Crypto Loan (New)](#crypto-loan-new)
--   [Crypto Loan (legacy)](#crypto-loan-legacy)
--   [Institutional Loan](#institutional-loan)
--   [Exchange Broker](#exchange-broker)
-    -   [Reward](#reward)
--   [Earn](#earn)
--   [User](#user)
--   [Set api rate limit](#set-api-rate-limit)
--   [RFQ](#rfq)
--   [Manual Loan](#manual-loan)
+- [HTTP Code](#http-code)
+- [WS OE General code](#ws-oe-general-code)
+- [UTA](#uta)
+- [Spot Trade](#spot-trade)
+- [Spot Margin Trade](#spot-margin-trade)
+- [Asset](#asset)
+- [Crypto Loan (New)](#crypto-loan-new)
+- [Crypto Loan (legacy)](#crypto-loan-legacy)
+- [Institutional Loan](#institutional-loan)
+- [Exchange Broker](#exchange-broker)
+  - [Reward](#reward)
+- [Earn](#earn)
+- [User](#user)
+- [Set api rate limit](#set-api-rate-limit)
+- [RFQ](#rfq)
+- [Manual Loan](#manual-loan)

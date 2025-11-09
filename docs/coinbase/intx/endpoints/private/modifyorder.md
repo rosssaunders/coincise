@@ -14,9 +14,9 @@ Modifies an open order.
 
 ## Parameters
 
-| Name | In | Type | Required | Description |
-|------|----|------|----------|-------------|
-| id | path | string | Yes | The exchange order ID or Client Order ID of the order being modified |
+| Name | In   | Type   | Required | Description                                                          |
+| ---- | ---- | ------ | -------- | -------------------------------------------------------------------- |
+| id   | path | string | Yes      | The exchange order ID or Client Order ID of the order being modified |
 
 ## Authentication
 
@@ -39,4 +39,5 @@ Invalid attribute
 
 ## Documentation
 
-For more details, see the [INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).
+For more details, see the
+[INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).

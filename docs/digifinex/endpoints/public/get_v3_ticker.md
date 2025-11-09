@@ -2,7 +2,8 @@
 
 **Title:** ticker price
 
-**Source:** [ticker price](https://docs.digifinex.com/en-ww/spot/v3/rest.html#ticker-price)
+**Source:**
+[ticker price](https://docs.digifinex.com/en-ww/spot/v3/rest.html#ticker-price)
 
 ## Authentication
 
@@ -14,13 +15,13 @@ Not Required (Public Endpoint)
 
 ### HTTP Request
 
--   GET `https://openapi.digifinex.com/v3/ticker`
+- GET `https://openapi.digifinex.com/v3/ticker`
 
 ### Request Parameters
 
-| Field | Request Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | string | false | "btc\_usdt" |
+| Field  | Request Type | Mandatory | Description |
+| ------ | ------------ | --------- | ----------- |
+| symbol | string       | false     | "btc_usdt"  |
 
 > Response:
 
@@ -46,17 +47,17 @@ Not Required (Public Endpoint)
 
 ### Response Content
 
-| Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| ticker | true | object | Trading Pair Information |
-| vol | true | float | 24h Volume |
-| change | true | float | 24h Change |
-| base\_vol | true | float | 24h Amount |
-| sell | true | float | Ask1 Price |
-| last | true | float | Last Price |
-| symbol | true | string | Symbol Name |
-| low | true | float | 24h Low Price |
-| buy | true | float | Bid1 Price |
-| high | true | float | 24h High Price |
-| date | true | int | Timestamp |
-| code | true | int | Status |
+| Field    | Mandatory | Request Type | Description              |
+| -------- | --------- | ------------ | ------------------------ |
+| ticker   | true      | object       | Trading Pair Information |
+| vol      | true      | float        | 24h Volume               |
+| change   | true      | float        | 24h Change               |
+| base_vol | true      | float        | 24h Amount               |
+| sell     | true      | float        | Ask1 Price               |
+| last     | true      | float        | Last Price               |
+| symbol   | true      | string       | Symbol Name              |
+| low      | true      | float        | 24h Low Price            |
+| buy      | true      | float        | Bid1 Price               |
+| high     | true      | float        | 24h High Price           |
+| date     | true      | int          | Timestamp                |
+| code     | true      | int          | Status                   |

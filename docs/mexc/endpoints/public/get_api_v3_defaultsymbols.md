@@ -22,7 +22,7 @@ GET /api/v3/defaultSymbols
 }
 ```
 
--   **GET** `/api/v3/defaultSymbols`
+- **GET** `/api/v3/defaultSymbols`
 
 **Weight(IP):** 1
 
@@ -32,9 +32,9 @@ NONE
 
 **Response**
 
-| Name | Type | Description |
-| --- | --- | --- |
-| symbol | string | symbol |
+| Name   | Type   | Description |
+| ------ | ------ | ----------- |
+| symbol | string | symbol      |
 
 ---
 

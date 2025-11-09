@@ -1,6 +1,7 @@
 # HTX API Documentation Extractor
 
-This project scrapes HTX API documentation pages and converts them to markdown format optimized for LLM consumption.
+This project scrapes HTX API documentation pages and converts them to markdown
+format optimized for LLM consumption.
 
 ## Project Structure
 
@@ -32,21 +33,25 @@ htx/
 ### Standardized Extraction (Recommended)
 
 1. Install dependencies:
+
 ```bash
 pnpm install
 ```
 
 2. Install shared dependencies:
+
 ```bash
 cd ../shared && pnpm install && cd ../htx
 ```
 
 3. Extract core documentation:
+
 ```bash
 pnpm run extract:general
 ```
 
 This extracts 6 core documentation files:
+
 - `rate_limits.md` - API rate limiting information
 - `authentication.md` - Authentication and API key setup
 - `network_connectivity.md` - Base URLs and connectivity info
@@ -55,15 +60,18 @@ This extracts 6 core documentation files:
 - `change_log.md` - API changelog
 
 4. Extract individual endpoints:
+
 ```bash
 pnpm run extract:endpoints
 ```
 
 This extracts individual endpoint documentation to:
+
 - `docs/htx/endpoints/public/` - Public endpoints (no auth required)
 - `docs/htx/endpoints/private/` - Private endpoints (auth required)
 
 5. Extract all documentation:
+
 ```bash
 pnpm run extract:all
 ```
@@ -111,8 +119,10 @@ pnpm run runall
 
 - **Base URL**: https://www.htx.com/en-us/opend/newApiPages/
 - **Framework**: Ant Design component system
-- **Navigation**: Menu items identified by numeric IDs (categories) and GUIDs (endpoints)
-- **Content Container**: `div.newApiPages_posR__RKd5D.newApiPages_posDetail__SmN2h`
+- **Navigation**: Menu items identified by numeric IDs (categories) and GUIDs
+  (endpoints)
+- **Content Container**:
+  `div.newApiPages_posR__RKd5D.newApiPages_posDetail__SmN2h`
 
 ### Extraction Process
 
@@ -126,12 +136,14 @@ pnpm run runall
    - Scans all menu items for GUID-formatted keys (contains hyphens)
    - Clicks each endpoint menu item
    - Extracts endpoint content including tables and JSON examples
-   - Determines public/private classification based on authentication requirements
+   - Determines public/private classification based on authentication
+     requirements
    - Generates filenames: `{method}_{endpoint_path}.md`
 
 ### Authentication Detection
 
 Endpoints are classified as private if content contains:
+
 - API key references (`api-key`, `apikey`, `accesskey`)
 - Signature requirements
 - Timestamp parameters
@@ -143,7 +155,8 @@ Otherwise classified as public.
 
 ### HTX Website Access Issues
 
-The HTX website may implement anti-bot measures that can cause 403 errors or timeout issues. If extractions fail:
+The HTX website may implement anti-bot measures that can cause 403 errors or
+timeout issues. If extractions fail:
 
 1. Check if the website is accessible in a regular browser
 2. Verify the selectors haven't changed (menu structure, content containers)
@@ -156,12 +169,15 @@ The HTX website may implement anti-bot measures that can cause 403 errors or tim
 - **Timeout waiting for menu**: HTX site may be slow to load or blocking access
 - **403 errors**: Site anti-bot protection may be active
 - **Missing content**: Content selectors may have changed; check HTML structure
-- **Incorrect classification**: Public/private detection may need tuning based on new patterns
+- **Incorrect classification**: Public/private detection may need tuning based
+  on new patterns
 
 ## Notes
 
-- The standardized extraction follows the pattern used by Backpack, Deribit, and XT venues
-- Each page is processed sequentially with delays to avoid overwhelming the server
+- The standardized extraction follows the pattern used by Backpack, Deribit, and
+  XT venues
+- Each page is processed sequentially with delays to avoid overwhelming the
+  server
 - The script uses headless Puppeteer with specific user agent for compatibility
 - JSON examples are extracted via clipboard API when available
-- All markdown files are formatted with Prettier for consistency 
+- All markdown files are formatted with Prettier for consistency

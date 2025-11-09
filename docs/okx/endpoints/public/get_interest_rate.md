@@ -1,6 +1,7 @@
 # GET interest rate
 
-Source: [https://www.okx.com/docs-v5/en/#trading-account-rest-api-get-interest-rate](https://www.okx.com/docs-v5/en/#trading-account-rest-api-get-interest-rate)
+Source:
+[https://www.okx.com/docs-v5/en/#trading-account-rest-api-get-interest-rate](https://www.okx.com/docs-v5/en/#trading-account-rest-api-get-interest-rate)
 
 ### Get interest rate
 
@@ -18,13 +19,13 @@ Get the user's current leveraged currency borrowing market interest rate
 
 #### Request Parameters
 
-| **Parameters** | **Types** | **Required** | **Description** |
-| --- | --- | --- | --- |
-| ccy | String | No | Currency, e.g. `BTC` |
+| **Parameters** | **Types** | **Required** | **Description**      |
+| -------------- | --------- | ------------ | -------------------- |
+| ccy            | String    | No           | Currency, e.g. `BTC` |
 
 #### Response Parameters
 
-| Parameter | Type | Description |
-| --- | --- | --- |
+| Parameter    | Type   | Description          |
+| ------------ | ------ | -------------------- |
 | interestRate | String | hourly interest rate |
-| ccy | String | currency |
+| ccy          | String | currency             |

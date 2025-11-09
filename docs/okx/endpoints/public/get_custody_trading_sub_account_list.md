@@ -1,10 +1,12 @@
 # GET custody trading sub-account list
 
-Source: [https://www.okx.com/docs-v5/en/#sub-account-rest-api-get-custody-trading-sub-account-list](https://www.okx.com/docs-v5/en/#sub-account-rest-api-get-custody-trading-sub-account-list)
+Source:
+[https://www.okx.com/docs-v5/en/#sub-account-rest-api-get-custody-trading-sub-account-list](https://www.okx.com/docs-v5/en/#sub-account-rest-api-get-custody-trading-sub-account-list)
 
 ### Get custody trading sub-account list
 
-The trading team uses this interface to view the list of sub-accounts currently under escrow
+The trading team uses this interface to view the list of sub-accounts currently
+under escrow
 
 #### Rate limit：1 request per second
 
@@ -20,14 +22,14 @@ The trading team uses this interface to view the list of sub-accounts currently 
 
 #### Request Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| subAcct | String | No | Sub-account name |
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| subAcct   | String | No       | Sub-account name |
 
 > Returned results
 
 #### Response parameters
 
-| **Parameter name** | **Type** | **Description** |
-| --- | --- | --- |
-| subAcct | String | Sub-account name |
+| **Parameter name** | **Type** | **Description**  |
+| ------------------ | -------- | ---------------- |
+| subAcct            | String   | Sub-account name |

@@ -1,6 +1,7 @@
 # Create Twitter Summary PR Tool
 
-This tool creates a new PR containing a Twitter/X summary when autodoc PRs are merged.
+This tool creates a new PR containing a Twitter/X summary when autodoc PRs are
+merged.
 
 ## Features
 
@@ -11,7 +12,8 @@ This tool creates a new PR containing a Twitter/X summary when autodoc PRs are m
 
 ## Usage
 
-This tool is designed to run in GitHub Actions workflows and expects specific environment variables:
+This tool is designed to run in GitHub Actions workflows and expects specific
+environment variables:
 
 ### Required Environment Variables
 
@@ -19,7 +21,8 @@ This tool is designed to run in GitHub Actions workflows and expects specific en
 - `PR_TITLE`: Title of the merged autodoc PR
 - `PR_NUMBER`: Number of the merged autodoc PR
 - `MERGED_BY`: User who merged the PR
-- `OPENAI_API_KEY`: OpenAI API key for generating summaries (optional, falls back to default)
+- `OPENAI_API_KEY`: OpenAI API key for generating summaries (optional, falls
+  back to default)
 
 ### Optional Environment Variables
 
@@ -46,6 +49,7 @@ This tool is used in the `twitter-summary-generator.yml` workflow:
 ## Output
 
 The tool creates:
+
 1. A markdown file containing the Twitter summary and original PR details
 2. A new PR with the "twitter-summary" label for review
 3. The PR is assigned to the original merger for approval

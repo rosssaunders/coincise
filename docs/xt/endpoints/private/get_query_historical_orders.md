@@ -1,6 +1,7 @@
 # GET Query historical orders
 
-Source: [https://doc.xt.com/docs/spot/Order/QueryHistoricalOrders](https://doc.xt.com/docs/spot/Order/QueryHistoricalOrders)
+Source:
+[https://doc.xt.com/docs/spot/Order/QueryHistoricalOrders](https://doc.xt.com/docs/spot/Order/QueryHistoricalOrders)
 
 # Query historical orders
 
@@ -8,29 +9,29 @@ Source: [https://doc.xt.com/docs/spot/Order/QueryHistoricalOrders](https://doc.x
 
 **Description:** `/v4/history-order`
 
-* * *
+---
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| Name | Type | Mandatory | Default | Description | Ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | No | N/A | Trading pair, if not filled in, represents all | — |
-| bizType | string | No | N/A | Business type | SPOT, LEVER |
-| side | string | No | N/A | Order side | BUY, SELL |
-| type | string | No | N/A | Order type | LIMIT, MARKET |
-| state | string | No | N/A | Order [state](#orderStatus) | PARTIALLY\_FILLED, FILLED, CANCELED, REJECTED, EXPIRED |
-| fromId | number | No | N/A | Start ID | — |
-| direction | string | No | N/A | Query direction | PREV, NEXT |
-| limit | number | No | 20 | Limit number (max 100) | — |
-| startTime | number | No | N/A | Start time (e.g. 1657682804112) | — |
-| endTime | number | No | N/A | End time | — |
-| hiddenCanceled | bool | No | N/A | Whether to hide canceled orders | — |
+| Name           | Type   | Mandatory | Default | Description                                    | Ranges                                                |
+| -------------- | ------ | --------- | ------- | ---------------------------------------------- | ----------------------------------------------------- |
+| symbol         | string | No        | N/A     | Trading pair, if not filled in, represents all | —                                                     |
+| bizType        | string | No        | N/A     | Business type                                  | SPOT, LEVER                                           |
+| side           | string | No        | N/A     | Order side                                     | BUY, SELL                                             |
+| type           | string | No        | N/A     | Order type                                     | LIMIT, MARKET                                         |
+| state          | string | No        | N/A     | Order [state](#orderStatus)                    | PARTIALLY_FILLED, FILLED, CANCELED, REJECTED, EXPIRED |
+| fromId         | number | No        | N/A     | Start ID                                       | —                                                     |
+| direction      | string | No        | N/A     | Query direction                                | PREV, NEXT                                            |
+| limit          | number | No        | 20      | Limit number (max 100)                         | —                                                     |
+| startTime      | number | No        | N/A     | Start time (e.g. 1657682804112)                | —                                                     |
+| endTime        | number | No        | N/A     | End time                                       | —                                                     |
+| hiddenCanceled | bool   | No        | N/A     | Whether to hide canceled orders                | —                                                     |
 
-* * *
+---
 
 ### Limit Flow Rules[​](#limit-flow-rules "Direct link to Limit Flow Rules")
 
--   10/s/apikey
+- 10/s/apikey
 
 ### Parameters Example[​](#parameters-example "Direct link to Parameters Example")
 
@@ -38,7 +39,7 @@ Source: [https://doc.xt.com/docs/spot/Order/QueryHistoricalOrders](https://doc.x
 curl --location --request GET 'https://sapi.xt.com/v4/history-order?symbol=XT_USDT&direction=NEXT&limit=10&startTime=xxxxxxxx&endTime=xxxxxxxx' \--header 'accept: */*' \--header 'Content-Type: application/json' \--header 'validate-algorithms: HmacSHA256' \--header 'validate-recvwindow: 60000' \--header 'validate-appkey: xxxxxxxxxx' \--header 'validate-timestamp: xxxxxxxxxx' \--header 'validate-signature: xxxxxxxxxx'
 ```
 
-* * *
+---
 
 ### Response Example[​](#response-example "Direct link to Response Example")
 

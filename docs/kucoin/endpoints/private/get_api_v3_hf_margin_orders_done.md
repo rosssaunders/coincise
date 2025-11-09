@@ -1,6 +1,7 @@
 # GET /api/v3/hf/margin/orders/done
 
-**Source:** [/api/v3/hf/margin/orders/done](https://www.kucoin.com/docs/rest//api/v3/hf/margin/orders/done)
+**Source:**
+[/api/v3/hf/margin/orders/done](https://www.kucoin.com/docs/rest//api/v3/hf/margin/orders/done)
 
 ## Authentication
 
@@ -10,68 +11,73 @@ Required (Private Endpoint)
 
 Get Closed Orders
 
-This interface is to obtain all Margin closed order lists, and the return value of the active order interface is the paged data of all uncompleted order lists. The returned data is sorted in descending order according to the latest update time of the order.  After the user successfully places an order, the order is in the Active state, and the user can use inOrderBook to determine whether the order has entered the order. Canceled or fully filled orders are marked as completed Done status.
+This interface is to obtain all Margin closed order lists, and the return value
+of the active order interface is the paged data of all uncompleted order lists.
+The returned data is sorted in descending order according to the latest update
+time of the order. After the user successfully places an order, the order is in
+the Active state, and the user can use inOrderBook to determine whether the
+order has entered the order. Canceled or fully filled orders are marked as
+completed Done status.
 
 ## Parameters
 
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| symbol | required | string | symbol |
-| tradeType | required | string | Transaction type: MARGIN_TRADE - cross margin trade, MARGIN_ISOLATED_TRADE - isolated margin trade |
-| side | optional | string | Specify if the order is to 'buy' or 'sell'. |
-| type | optional | string | Specify if the order is a 'limit' order or 'market' order.  |
-| lastId | optional | integer | The ID of the last set of data from the previous data batch. By default, the latest information is given.
-lastId is used to filter data and paginate. If lastId is not entered, the default is a maximum of 100 returned data items. The return results include lastId, which can be used as a query parameter to look up new data from the next page. |
-| limit | optional | integer | Default20, Max100 |
-| startAt | optional | integer | Start time (milliseconds) |
-| endAt | optional | integer | End time (milliseconds) |
+| Parameter                                                                                                                                                                                                                                    | Required | Type    | Description                                                                                               |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------- |
+| symbol                                                                                                                                                                                                                                       | required | string  | symbol                                                                                                    |
+| tradeType                                                                                                                                                                                                                                    | required | string  | Transaction type: MARGIN_TRADE - cross margin trade, MARGIN_ISOLATED_TRADE - isolated margin trade        |
+| side                                                                                                                                                                                                                                         | optional | string  | Specify if the order is to 'buy' or 'sell'.                                                               |
+| type                                                                                                                                                                                                                                         | optional | string  | Specify if the order is a 'limit' order or 'market' order.                                                |
+| lastId                                                                                                                                                                                                                                       | optional | integer | The ID of the last set of data from the previous data batch. By default, the latest information is given. |
+| lastId is used to filter data and paginate. If lastId is not entered, the default is a maximum of 100 returned data items. The return results include lastId, which can be used as a query parameter to look up new data from the next page. |
+| limit                                                                                                                                                                                                                                        | optional | integer | Default20, Max100                                                                                         |
+| startAt                                                                                                                                                                                                                                      | optional | integer | Start time (milliseconds)                                                                                 |
+| endAt                                                                                                                                                                                                                                        | optional | integer | End time (milliseconds)                                                                                   |
 
 ## Responses
 
 ### 200
 
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| code | required | string |  |
-| data | required | object |  |
-| data.lastId | required | integer | The ID of the last set of data from the previous data batch. By default, the latest information is given.
-lastId is used to filter data and paginate. If lastId is not entered, the default is a maximum of 100 returned data items. The return results include lastId, which can be used as a query parameter to look up new data from the next page. |
-| data.items | required | array |  |
-| data.items[].id | required | string | The unique order id generated by the trading system |
-| data.items[].symbol | required | string | symbol |
-| data.items[].opType | required | string |  |
-| data.items[].type | required | string | Specify if the order is a 'limit' order or 'market' order.  |
-| data.items[].side | required | string | Buy or sell |
-| data.items[].price | required | string | Order Price |
-| data.items[].size | required | string | Order Size |
-| data.items[].funds | required | string | Order Funds |
-| data.items[].dealSize | required | string | Number of filled transactions |
-| data.items[].dealFunds | required | string | Funds of filled transactions |
-| data.items[].fee | required | string | [Handling fees](https://www.kucoin.com/docs-new/api-5327739) |
-| data.items[].feeCurrency | required | string | Currency used to calculate trading fee |
-| data.items[].stp | optional | string | [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB , and DC |
-| data.items[].stop | optional | string |  |
-| data.items[].stopTriggered | required | boolean |  |
-| data.items[].stopPrice | required | string |  |
-| data.items[].timeInForce | required | string | Time in force |
-| data.items[].postOnly | required | boolean | Whether it’s a postOnly order. |
-| data.items[].hidden | required | boolean | Whether it’s a hidden order. |
-| data.items[].iceberg | required | boolean | Whether it’s a iceberg order. |
-| data.items[].visibleSize | required | string | Visible size of iceberg order in order book. |
-| data.items[].cancelAfter | required | integer | A GTT timeInForce that expires in n seconds |
-| data.items[].channel | required | string |  |
-| data.items[].clientOid | required | string | Client Order Id, unique identifier created by the user |
-| data.items[].remark | optional | string | Order placement remarks |
-| data.items[].tags | optional | string | Order tag |
-| data.items[].cancelExist | required | boolean | Whether there is a cancellation record for the order. |
-| data.items[].createdAt | required | integer |  |
-| data.items[].lastUpdatedAt | required | integer |  |
-| data.items[].tradeType | required | string | Trade type, redundancy param |
-| data.items[].inOrderBook | required | boolean | Whether to enter the orderbook: True: enter the orderbook; False: do not enter the orderbook |
-| data.items[].cancelledSize | required | string | Number of canceled transactions |
-| data.items[].cancelledFunds | required | string | Funds of canceled transactions |
-| data.items[].remainSize | required | string | Number of remain transactions |
-| data.items[].remainFunds | required | string | Funds of remain transactions |
-| data.items[].tax | required | string | Users in some regions have this field |
-| data.items[].active | required | boolean | Order status: true-The status of the order is active; false-The status of the order is done |
-
+| Parameter                                                                                                                                                                                                                                    | Required | Type    | Description                                                                                                               |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------- |
+| code                                                                                                                                                                                                                                         | required | string  |                                                                                                                           |
+| data                                                                                                                                                                                                                                         | required | object  |                                                                                                                           |
+| data.lastId                                                                                                                                                                                                                                  | required | integer | The ID of the last set of data from the previous data batch. By default, the latest information is given.                 |
+| lastId is used to filter data and paginate. If lastId is not entered, the default is a maximum of 100 returned data items. The return results include lastId, which can be used as a query parameter to look up new data from the next page. |
+| data.items                                                                                                                                                                                                                                   | required | array   |                                                                                                                           |
+| data.items[].id                                                                                                                                                                                                                              | required | string  | The unique order id generated by the trading system                                                                       |
+| data.items[].symbol                                                                                                                                                                                                                          | required | string  | symbol                                                                                                                    |
+| data.items[].opType                                                                                                                                                                                                                          | required | string  |                                                                                                                           |
+| data.items[].type                                                                                                                                                                                                                            | required | string  | Specify if the order is a 'limit' order or 'market' order.                                                                |
+| data.items[].side                                                                                                                                                                                                                            | required | string  | Buy or sell                                                                                                               |
+| data.items[].price                                                                                                                                                                                                                           | required | string  | Order Price                                                                                                               |
+| data.items[].size                                                                                                                                                                                                                            | required | string  | Order Size                                                                                                                |
+| data.items[].funds                                                                                                                                                                                                                           | required | string  | Order Funds                                                                                                               |
+| data.items[].dealSize                                                                                                                                                                                                                        | required | string  | Number of filled transactions                                                                                             |
+| data.items[].dealFunds                                                                                                                                                                                                                       | required | string  | Funds of filled transactions                                                                                              |
+| data.items[].fee                                                                                                                                                                                                                             | required | string  | [Handling fees](https://www.kucoin.com/docs-new/api-5327739)                                                              |
+| data.items[].feeCurrency                                                                                                                                                                                                                     | required | string  | Currency used to calculate trading fee                                                                                    |
+| data.items[].stp                                                                                                                                                                                                                             | optional | string  | [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB , and DC |
+| data.items[].stop                                                                                                                                                                                                                            | optional | string  |                                                                                                                           |
+| data.items[].stopTriggered                                                                                                                                                                                                                   | required | boolean |                                                                                                                           |
+| data.items[].stopPrice                                                                                                                                                                                                                       | required | string  |                                                                                                                           |
+| data.items[].timeInForce                                                                                                                                                                                                                     | required | string  | Time in force                                                                                                             |
+| data.items[].postOnly                                                                                                                                                                                                                        | required | boolean | Whether it’s a postOnly order.                                                                                            |
+| data.items[].hidden                                                                                                                                                                                                                          | required | boolean | Whether it’s a hidden order.                                                                                              |
+| data.items[].iceberg                                                                                                                                                                                                                         | required | boolean | Whether it’s a iceberg order.                                                                                             |
+| data.items[].visibleSize                                                                                                                                                                                                                     | required | string  | Visible size of iceberg order in order book.                                                                              |
+| data.items[].cancelAfter                                                                                                                                                                                                                     | required | integer | A GTT timeInForce that expires in n seconds                                                                               |
+| data.items[].channel                                                                                                                                                                                                                         | required | string  |                                                                                                                           |
+| data.items[].clientOid                                                                                                                                                                                                                       | required | string  | Client Order Id, unique identifier created by the user                                                                    |
+| data.items[].remark                                                                                                                                                                                                                          | optional | string  | Order placement remarks                                                                                                   |
+| data.items[].tags                                                                                                                                                                                                                            | optional | string  | Order tag                                                                                                                 |
+| data.items[].cancelExist                                                                                                                                                                                                                     | required | boolean | Whether there is a cancellation record for the order.                                                                     |
+| data.items[].createdAt                                                                                                                                                                                                                       | required | integer |                                                                                                                           |
+| data.items[].lastUpdatedAt                                                                                                                                                                                                                   | required | integer |                                                                                                                           |
+| data.items[].tradeType                                                                                                                                                                                                                       | required | string  | Trade type, redundancy param                                                                                              |
+| data.items[].inOrderBook                                                                                                                                                                                                                     | required | boolean | Whether to enter the orderbook: True: enter the orderbook; False: do not enter the orderbook                              |
+| data.items[].cancelledSize                                                                                                                                                                                                                   | required | string  | Number of canceled transactions                                                                                           |
+| data.items[].cancelledFunds                                                                                                                                                                                                                  | required | string  | Funds of canceled transactions                                                                                            |
+| data.items[].remainSize                                                                                                                                                                                                                      | required | string  | Number of remain transactions                                                                                             |
+| data.items[].remainFunds                                                                                                                                                                                                                     | required | string  | Funds of remain transactions                                                                                              |
+| data.items[].tax                                                                                                                                                                                                                             | required | string  | Users in some regions have this field                                                                                     |
+| data.items[].active                                                                                                                                                                                                                          | required | boolean | Order status: true-The status of the order is active; false-The status of the order is done                               |

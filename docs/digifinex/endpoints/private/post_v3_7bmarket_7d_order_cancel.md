@@ -2,7 +2,8 @@
 
 **Title:** Cancel order
 
-**Source:** [Cancel order](https://docs.digifinex.com/en-ww/spot/v3/rest.html#cancel-order)
+**Source:**
+[Cancel order](https://docs.digifinex.com/en-ww/spot/v3/rest.html#cancel-order)
 
 ## Authentication
 
@@ -14,16 +15,16 @@ Required (Private Endpoint)
 
 ### HTTP Request
 
--   POST `https://openapi.digifinex.com/v3/{market}/order/cancel`
+- POST `https://openapi.digifinex.com/v3/{market}/order/cancel`
 
 ### Request Parameters
 
 market：spot, margin
 
-| Field | Request Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| market | str | true | "spot","margin" |
-| order\_id | str | true | Order ID list, separated by commas |
+| Field    | Request Type | Mandatory | Description                        |
+| -------- | ------------ | --------- | ---------------------------------- |
+| market   | str          | true      | "spot","margin"                    |
+| order_id | str          | true      | Order ID list, separated by commas |
 
 > Response:
 
@@ -45,9 +46,9 @@ market：spot, margin
 
 ### Response Content
 
-| Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| success | true | object | Cancel Success Orders |
-| error | true | object | Cancel Failed Orders |
-| code | true | int | Status |
-| date | true | int | date |
+| Field   | Mandatory | Request Type | Description           |
+| ------- | --------- | ------------ | --------------------- |
+| success | true      | object       | Cancel Success Orders |
+| error   | true      | object       | Cancel Failed Orders  |
+| code    | true      | int          | Status                |
+| date    | true      | int          | date                  |

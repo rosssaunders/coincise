@@ -2,30 +2,30 @@
 
 **Check the proper endpoint based on your region.**
 
-The base\_url differs by country/region. Make sure to specify the correct region value for your environment.  
-  
+The base_url differs by country/region. Make sure to specify the correct region
+value for your environment.
+
 \- Singapore (sg): https://sg-api.upbit.com  
 \- Indonesia (id): https://id-api.upbit.com  
 \- Thailand (th): https://th-api.upbit.com
 
-  
-
 Revision History
 
-| Version | Date | Changes |
-| --- | --- | --- |
-| v1.0.7 | 2023-05-23 | [Addition of `net_type` field](https://global-docs.upbit.com/changelog/net_type#/) |
+| Version | Date       | Changes                                                                            |
+| ------- | ---------- | ---------------------------------------------------------------------------------- |
+| v1.0.7  | 2023-05-23 | [Addition of `net_type` field](https://global-docs.upbit.com/changelog/net_type#/) |
 
 Rate Limit
 
-Up to 30 calls per second are allowed. This is measured on an account basis and request counts are shared within the exchange 'default' group.
-
-  
+Up to 30 calls per second are allowed. This is measured on an account basis and
+request counts are shared within the exchange 'default' group.
 
 API Key Permission
 
-This API requires [authentication](auth) and an API Key with \[Withdrawal Inquiry\] permission.  
-If you receive an out\_of\_scope permission error, please verify your API Key permissions in the API Key Management page.
+This API requires [authentication](auth) and an API Key with \[Withdrawal
+Inquiry\] permission.  
+If you receive an out_of_scope permission error, please verify your API Key
+permissions in the API Key Management page.
 
 uuid
 
@@ -38,15 +38,18 @@ txid
 
 string
 
-Transaction ID of the withdrawal to query. If neither uuid nor txid is specified, the latest withdrawal record is returned.
+Transaction ID of the withdrawal to query. If neither uuid nor txid is
+specified, the latest withdrawal record is returned.
 
 currency
 
 string
 
-Currency code to filter withdrawal history. A filter parameter used to narrow down results by currency code. if not provided, returns the latest withdrawals across all currencies.
+Currency code to filter withdrawal history. A filter parameter used to narrow
+down results by currency code. if not provided, returns the latest withdrawals
+across all currencies.
 
-# 
+#
 
 200
 
@@ -80,7 +83,7 @@ required
 
 Currency code to be queried.
 
-net\_type
+net_type
 
 string | null
 
@@ -106,16 +109,16 @@ required
 
 Withdrawal status.
 
--   `WAITING`: Waiting
--   `PROCESSING`: In progress
--   `DONE`: Completed
--   `FAILED`: Failed
--   `CANCELLED`: Cancelled
--   `REJECTED`: Rejected
+- `WAITING`: Waiting
+- `PROCESSING`: In progress
+- `DONE`: Completed
+- `FAILED`: Failed
+- `CANCELLED`: Cancelled
+- `REJECTED`: Rejected
 
 `WAITING` `PROCESSING` `DONE` `FAILED` `CANCELLED` `REJECTED`
 
-created\_at
+created_at
 
 string
 
@@ -123,7 +126,7 @@ required
 
 Time when the withdrawal was created.
 
-done\_at
+done_at
 
 string | null
 
@@ -146,7 +149,7 @@ required
 
 Fee amount for the withdrawal.
 
-transaction\_type
+transaction_type
 
 string
 
@@ -159,12 +162,12 @@ Defaults to default
 Withdrawal type.  
 The available values are as follows:
 
--   `default`: General withdrawal
--   `internal`: Internal (between Upbit accounts)
+- `default`: General withdrawal
+- `internal`: Internal (between Upbit accounts)
 
 `default` `internal`
 
-is\_cancelable
+is_cancelable
 
 boolean
 
@@ -172,7 +175,7 @@ required
 
 Indicates whether the withdrawal can be cancelled.
 
-# 
+#
 
 404
 
@@ -202,7 +205,7 @@ Message describing the cause of the error.
 
 Updated 16 days ago
 
-* * *
+---
 
 ShellPythonJavaNode
 
@@ -242,47 +245,47 @@ xxxxxxxxxx
 
 2
 
-  "type": "withdraw",
+"type": "withdraw",
 
 3
 
-  "uuid": "9f432943-54e0-40b7-825f-b6fec8b42b79",
+"uuid": "9f432943-54e0-40b7-825f-b6fec8b42b79",
 
 4
 
-  "currency": "BTC",
+"currency": "BTC",
 
 5
 
-  "txid": null,
+"txid": null,
 
 6
 
-  "state": "PROCESSING",
+"state": "PROCESSING",
 
 7
 
-  "created\_at": "2025-07-04T15:00:00",
+"created_at": "2025-07-04T15:00:00",
 
 8
 
-  "done\_at": null,
+"done_at": null,
 
 9
 
-  "amount": "0.01",
+"amount": "0.01",
 
 10
 
-  "fee": "0.0",
+"fee": "0.0",
 
 11
 
-  "transaction\_type": "default",
+"transaction_type": "default",
 
 12
 
-  "is\_cancelable": false
+"is_cancelable": false
 
 13
 
@@ -290,8 +293,9 @@ xxxxxxxxxx
 
 Updated 16 days ago
 
-* * *
+---
 
 ---
 
-**Source:** [individual-withdrawal-inquiry](https://global-docs.upbit.com/reference/individual-withdrawal-inquiry)
+**Source:**
+[individual-withdrawal-inquiry](https://global-docs.upbit.com/reference/individual-withdrawal-inquiry)

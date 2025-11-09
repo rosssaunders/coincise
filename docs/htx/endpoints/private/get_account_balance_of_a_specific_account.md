@@ -1,6 +1,7 @@
 # GET Account Balance of a Specific Account
 
-**Source:** [Get Account Balance of a Specific Account](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4b429-7773-11ed-9966-0242ac110003)
+**Source:**
+[Get Account Balance of a Specific Account](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4b429-7773-11ed-9966-0242ac110003)
 
 **Category:** Account
 
@@ -18,41 +19,43 @@ Interface permission: Read
 
 Rate Limit: 100times/2s
 
-Interface description: This endpoint returns the balance of an account specified by account id.
+Interface description: This endpoint returns the balance of an account specified
+by account id.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 Notes:  
-'account-id': The specified account id to get balance for, can be found by query '/v1/account/accounts' endpoint. OTC account inquiries are not supported.
+'account-id': The specified account id to get balance for, can be found by query
+'/v1/account/accounts' endpoint. OTC account inquiries are not supported.
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| account-id | string | false | account-id in the path field | The value can be GET /v1/account/accounts |  |
+| Parameter  | Data Type | Required | Description                  | Value Range                               | Default Value |
+| ---------- | --------- | -------- | ---------------------------- | ----------------------------------------- | ------------- |
+| account-id | string    | false    | account-id in the path field | The value can be GET /v1/account/accounts |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | false | Request Processing Result | "ok","error" |
-| DATA\_START | object | false |  |  |
-| id | long | false | Unique account id |  |
-| state | string | false | Account state | working, lock |
-| type | string | false | The type of this account | spot, margin, point, super-margin, grid-trading, otc-options,trust-credit ( third-party trust account )， |
-| LIST\_START | Array | false |  |  |
-| currency | string | false | The currency of this balance |  |
-| type | string | false | The balance type | trade, frozen, loan, interest, lock, bank,credit-repay,trust-asset |
-| balance | string | false | The balance in the main currency unit |  |
-| debt | string | false | Invalid field |  |
-| available | string | false | Invalid field |  |
-| seq-num | string | false | Serial Number of Account Change |  |
-| LIST\_END |  | false |  |  |
+| Parameter  | Data Type | Required | Description                           | Value Range                                                                                               |
+| ---------- | --------- | -------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| status     | string    | false    | Request Processing Result             | "ok","error"                                                                                              |
+| DATA_START | object    | false    |                                       |                                                                                                           |
+| id         | long      | false    | Unique account id                     |                                                                                                           |
+| state      | string    | false    | Account state                         | working, lock                                                                                             |
+| type       | string    | false    | The type of this account              | spot, margin, point, super-margin, grid-trading, otc-options,trust-credit ( third-party trust account )， |
+| LIST_START | Array     | false    |                                       |                                                                                                           |
+| currency   | string    | false    | The currency of this balance          |                                                                                                           |
+| type       | string    | false    | The balance type                      | trade, frozen, loan, interest, lock, bank,credit-repay,trust-asset                                        |
+| balance    | string    | false    | The balance in the main currency unit |                                                                                                           |
+| debt       | string    | false    | Invalid field                         |                                                                                                           |
+| available  | string    | false    | Invalid field                         |                                                                                                           |
+| seq-num    | string    | false    | Serial Number of Account Change       |                                                                                                           |
+| LIST_END   |           | false    |                                       |                                                                                                           |
 
 #### Request example
 
