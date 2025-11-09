@@ -21,15 +21,15 @@ https://docs.digifinex.com/en-ww/spot/v3/rest.html
 ### Extract All Documentation
 
 ```bash
-npm run extract:all
+pnpm run extract:all
 ```
 
 ### Extract Specific Categories
 
 ```bash
-npm run extract:general          # Core documentation files
-npm run extract:endpoints        # Individual endpoint documentation
-npm run extract:websocket-github # Complete WebSocket API from GitHub
+pnpm run extract:general          # Core documentation files
+pnpm run extract:endpoints        # Individual endpoint documentation
+pnpm run extract:websocket-github # Complete WebSocket API from GitHub
 ```
 
 ## Output

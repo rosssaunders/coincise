@@ -55,8 +55,8 @@ kucoin/
 ### Extract All Documentation
 
 ```bash
-npm install
-npm run extract:all
+pnpm install
+pnpm run extract:all
 ```
 
 This runs both general and endpoint extraction.
@@ -64,7 +64,7 @@ This runs both general and endpoint extraction.
 ### Extract General Documentation Only
 
 ```bash
-npm run extract:general
+pnpm run extract:general
 ```
 
 Extracts the 6 core documentation files to `docs/kucoin/`.
@@ -72,7 +72,7 @@ Extracts the 6 core documentation files to `docs/kucoin/`.
 ### Extract Endpoint Documentation Only
 
 ```bash
-npm run extract:endpoints
+pnpm run extract:endpoints
 ```
 
 Extracts individual endpoint files to `docs/kucoin/endpoints/public/` and `docs/kucoin/endpoints/private/`.
@@ -86,7 +86,7 @@ The legacy OpenAPI extraction method is still available:
 npm start
 
 # Extract rate limit documentation only
-npm run extract:rate-limit
+pnpm run extract:rate-limit
 ```
 
 ## Output Structure

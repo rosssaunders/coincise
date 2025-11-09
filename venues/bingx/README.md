@@ -67,70 +67,70 @@ The BingX documentation is organized into the following categories:
 1. Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 2. Extract documentation by category:
 
 ```bash
 # Extract all documentation
-npm run extract:all
+pnpm run extract:all
 
 # Extract specific categories
-npm run extract:usdt-futures
-npm run extract:coin-futures
-npm run extract:spot
-npm run extract:standard-futures
-npm run extract:account-wallet
-npm run extract:copy-trading
-npm run extract:agent-broker
-npm run extract:change-log
+pnpm run extract:usdt-futures
+pnpm run extract:coin-futures
+pnpm run extract:spot
+pnpm run extract:standard-futures
+pnpm run extract:account-wallet
+pnpm run extract:copy-trading
+pnpm run extract:agent-broker
+pnpm run extract:change-log
 
 # Individual USDT futures API extractions
-npm run extract:usdt-futures-general
-npm run extract:usdt-futures-auth
-npm run extract:usdt-futures-market
-npm run extract:usdt-futures-trading
-npm run extract:usdt-futures-account
+pnpm run extract:usdt-futures-general
+pnpm run extract:usdt-futures-auth
+pnpm run extract:usdt-futures-market
+pnpm run extract:usdt-futures-trading
+pnpm run extract:usdt-futures-account
 
 # Individual standard futures API extractions
-npm run extract:standard-futures-base
-npm run extract:standard-futures-auth
-npm run extract:standard-futures-contract
+pnpm run extract:standard-futures-base
+pnpm run extract:standard-futures-auth
+pnpm run extract:standard-futures-contract
 
 # Individual coin futures API extractions
-npm run extract:coin-futures-general
-npm run extract:coin-futures-auth
-npm run extract:coin-futures-market
-npm run extract:coin-futures-trading
+pnpm run extract:coin-futures-general
+pnpm run extract:coin-futures-auth
+pnpm run extract:coin-futures-market
+pnpm run extract:coin-futures-trading
 
 # Individual account & wallet API extractions
-npm run extract:account-wallet-intro
-npm run extract:account-wallet-account
-npm run extract:account-wallet-sub
-npm run extract:account-wallet-wallet
+pnpm run extract:account-wallet-intro
+pnpm run extract:account-wallet-account
+pnpm run extract:account-wallet-sub
+pnpm run extract:account-wallet-wallet
 
 # Individual spot API extractions
-npm run extract:spot-private
-npm run extract:spot-base
-npm run extract:spot-auth
-npm run extract:spot-wallet
-npm run extract:spot-account
-npm run extract:spot-trading
-npm run extract:spot-public
-npm run extract:spot-private-ws
-npm run extract:spot-public-ws
+pnpm run extract:spot-private
+pnpm run extract:spot-base
+pnpm run extract:spot-auth
+pnpm run extract:spot-wallet
+pnpm run extract:spot-account
+pnpm run extract:spot-trading
+pnpm run extract:spot-public
+pnpm run extract:spot-private-ws
+pnpm run extract:spot-public-ws
 ```
 
 3. Legacy commands (still supported):
 
 ```bash
-npm run private    # Spot private REST API
-npm run public     # Spot public REST API
-npm run privateWs  # Spot private WebSocket API
-npm run publicWs   # Spot public WebSocket API
-npm run change_log # Change log
-npm run all        # All legacy extractions
+pnpm run private    # Spot private REST API
+pnpm run public     # Spot public REST API
+pnpm run privateWs  # Spot private WebSocket API
+pnpm run publicWs   # Spot public WebSocket API
+pnpm run change_log # Change log
+pnpm run all        # All legacy extractions
 ```
 
 ## Output Structure

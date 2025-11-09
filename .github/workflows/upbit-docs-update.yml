@@ -29,26 +29,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: "npm"
-          cache-dependency-path: venues/upbit/package-lock.json
 
-      - name: Install shared dependencies
-        run: |
-          pushd ../shared
-          npm install
-          popd
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
-      - name: Install AI PR summary tool dependencies
-        run: |
-          pushd ../../tools/ai-pr-summary
-          npm install
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
           popd
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Extract Upbit Changelog
-        run: npm run start
+        run: pnpm run start
 
       - name: Check for changes
         id: git-check
@@ -63,7 +59,7 @@ jobs:
         run: |
           cd ../..  # Move back to root directory for git operations
           # Generate AI summary using the AI PR summary tool (max diff length: 15000)
-          SUMMARY=$(cd tools/ai-pr-summary && npm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
+          SUMMARY=$(cd tools/ai-pr-summary && pnpm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
           # Escape the summary for GitHub Actions
           echo "summary<<EOF" >> $GITHUB_OUTPUT
           echo "$SUMMARY" >> $GITHUB_OUTPUT

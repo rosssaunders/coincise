@@ -8,12 +8,12 @@ Coincise is a cryptocurrency exchange API documentation repository that scrapes,
 
 ### Installation
 ```bash
-npm install
+pnpm install
 ```
 
 ### Common Commands
-- Format code: `npm run format`
-- Run extraction: `cd venues/{exchange-name} && npm run extract:config`
+- Format code: `pnpm run format`
+- Run extraction: `cd venues/{exchange-name} && pnpm run extract:config`
 - Format docs: `./formatdocs.sh`
 - Generate llms.txt: `./tools/llms/generate-llms-txt.sh`
 
@@ -69,13 +69,13 @@ coincise/
 ### Modifying Existing Scrapers
 1. Navigate to `venues/{exchange-name}/`
 2. Edit scraper code in `src/`
-3. Test extraction: `npm run extract:config`
+3. Test extraction: `pnpm run extract:config`
 4. Verify output in `docs/{exchange}/`
 5. Format documentation: `./formatdocs.sh`
 
 ### Updating Dependencies
 1. Update package.json with new dependencies
-2. Run `npm install`
+2. Run `pnpm install`
 3. Test affected scrapers
 4. Document dependency changes in commit message
 

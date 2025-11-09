@@ -33,17 +33,17 @@ htx/
 
 1. Install dependencies:
 ```bash
-npm install
+pnpm install
 ```
 
 2. Install shared dependencies:
 ```bash
-cd ../shared && npm install && cd ../htx
+cd ../shared && pnpm install && cd ../htx
 ```
 
 3. Extract core documentation:
 ```bash
-npm run extract:general
+pnpm run extract:general
 ```
 
 This extracts 6 core documentation files:
@@ -56,7 +56,7 @@ This extracts 6 core documentation files:
 
 4. Extract individual endpoints:
 ```bash
-npm run extract:endpoints
+pnpm run extract:endpoints
 ```
 
 This extracts individual endpoint documentation to:
@@ -65,7 +65,7 @@ This extracts individual endpoint documentation to:
 
 5. Extract all documentation:
 ```bash
-npm run extract:all
+pnpm run extract:all
 ```
 
 ### Legacy Config-Based Extraction
@@ -74,24 +74,24 @@ The original config-based extraction is still available:
 
 ```bash
 # Spot API
-npm run privaterestspot
-npm run publicrestspot
-npm run privatewebsocketspot
-npm run publicwebsocketspot
-npm run fixspot
+pnpm run privaterestspot
+pnpm run publicrestspot
+pnpm run privatewebsocketspot
+pnpm run publicwebsocketspot
+pnpm run fixspot
 
 # USDT-M Futures
-npm run privaterestusdtm
-npm run publicrestusdtm
-npm run privatewebsocketusdtm
-npm run publicwebsocketusdtm
+pnpm run privaterestusdtm
+pnpm run publicrestusdtm
+pnpm run privatewebsocketusdtm
+pnpm run publicwebsocketusdtm
 
 # Coin-M Futures
-npm run privaterestcoinm
-npm run publicrestcoinm
+pnpm run privaterestcoinm
+pnpm run publicrestcoinm
 
 # Run all legacy extractions
-npm run runall
+pnpm run runall
 ```
 
 ## Output

@@ -23,7 +23,7 @@ A JavaScript-based tool for generating comprehensive documentation for Bybit's V
 1. Clone the repository
 2. Install dependencies:
 ```bash
-npm install
+pnpm install
 ```
 
 ## Usage

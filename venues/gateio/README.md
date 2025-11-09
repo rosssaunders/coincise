@@ -23,7 +23,7 @@ The scraper implements robust HTTP fetching to handle Gate.io's anti-bot protect
 ## Installation
 
 ```bash
-npm ci
+pnpm install --frozen-lockfile
 ```
 
 ## Usage
@@ -38,22 +38,22 @@ npm start
 
 ```bash
 # REST API sections
-npm run extract:change-log
-npm run extract:general
-npm run extract:spot
-npm run extract:futures
+pnpm run extract:change-log
+pnpm run extract:general
+pnpm run extract:spot
+pnpm run extract:futures
 # ... etc
 
 # WebSocket sections
-npm run extract:websocket-spot
-npm run extract:websocket-futures
+pnpm run extract:websocket-spot
+pnpm run extract:websocket-futures
 # ... etc
 ```
 
 ### Test Fetch Behavior
 
 ```bash
-npm run test:fetch
+pnpm run test:fetch
 ```
 
 This smoke test validates that the HTTP fetching works correctly, including retry logic and fallback mechanisms.
@@ -95,7 +95,7 @@ The scraper runs automatically via GitHub Actions (`.github/workflows/gateio-doc
 If extractions fail:
 
 1. Check the logs for retry attempts and error details
-2. Run `npm run test:fetch` locally to diagnose fetch issues
+2. Run `pnpm run test:fetch` locally to diagnose fetch issues
 3. Verify Gate.io's documentation is accessible in your browser
 4. Check if Gate.io has implemented new anti-bot measures
 

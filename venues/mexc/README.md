@@ -45,7 +45,7 @@ Each endpoint is saved as `{http_method}_{endpoint_path}.md` (e.g., `get_api_v3_
 ### Extract All Documentation
 
 ```bash
-npm run extract:all
+pnpm run extract:all
 ```
 
 This runs both general and endpoint extraction scripts.
@@ -54,10 +54,10 @@ This runs both general and endpoint extraction scripts.
 
 ```bash
 # Extract only general documentation
-npm run extract:general
+pnpm run extract:general
 
 # Extract only endpoint documentation
-npm run extract:endpoints
+pnpm run extract:endpoints
 ```
 
 ## Authentication Detection

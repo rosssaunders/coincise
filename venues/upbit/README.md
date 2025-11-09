@@ -16,26 +16,26 @@ This tool extracts and converts Upbit API documentation to clean markdown format
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Extract all API sections
-npm run extract:all
+pnpm run extract:all
 ```
 
 ### Extract Individual Sections
 
 ```bash
 # Extract specific API sections
-npm run extract:assets
-npm run extract:order
-npm run extract:withdrawal
-npm run extract:deposit
-npm run extract:service
-npm run extract:quotation
-npm run extract:websocket
+pnpm run extract:assets
+pnpm run extract:order
+pnpm run extract:withdrawal
+pnpm run extract:deposit
+pnpm run extract:service
+pnpm run extract:quotation
+pnpm run extract:websocket
 
 # Extract changelog (legacy functionality)
-npm run extract:changelog
+pnpm run extract:changelog
 ```
 
 ### Manual Extraction

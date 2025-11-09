@@ -1,0 +1,92 @@
+name: Bitfinex Docs Update
+
+on:
+  schedule:
+    # Run every day at 00:00 UTC
+    - cron: "0 0 * * *"
+  workflow_dispatch: # Allow manual triggering
+  push:
+    paths:
+      - "venues/bitfinex/**"
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    defaults:
+      run:
+        working-directory: venues/bitfinex
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for git diff
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: venues/bitfinex/package-lock.json
+
+      - name: Install shared dependencies
+        run: |
+          pushd ../shared
+          npm install
+          popd
+
+      - name: Install AI PR summary tool dependencies
+        run: |
+          pushd ../../tools/ai-pr-summary
+          npm install
+          popd
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Extract documentation using standardized scripts
+      - name: Extract general documentation
+        run: npm run extract:general
+
+      - name: Extract endpoint documentation
+        run: npm run extract:endpoints
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          cd ../..  # Move back to root directory for git operations
+          # Explicitly add the docs/bitfinex directory to staging
+          git add docs/bitfinex
+          # Check if there are any changes
+          git diff --staged --quiet || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Generate AI PR Summary
+        if: steps.git-check.outputs.changes == 'true'
+        id: ai-summary
+        run: |
+          cd ../..  # Move back to root directory for git operations
+          # Generate AI summary using the AI PR summary tool (max diff length: 15000)
+          SUMMARY=$(cd tools/ai-pr-summary && npm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
+          # Escape the summary for GitHub Actions
+          echo "summary<<EOF" >> $GITHUB_OUTPUT
+          echo "$SUMMARY" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Create Pull Request
+        if: steps.git-check.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "docs: update Bitfinex API documentation"
+          title: "Bitfinex API Documentation Update"
+          branch: "bitfinex-docs-update"
+          base: "main"
+          delete-branch: true
+          token: ${{ secrets.PAT_GITHUB }}
+          body: ${{ steps.ai-summary.outputs.summary }}
+          reviewers: "@rosssaunders"
+          labels: "auto-docs-update"

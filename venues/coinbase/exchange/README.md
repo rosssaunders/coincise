@@ -32,7 +32,7 @@ docs/coinbase/
 ## Installation
 
 ```bash
-npm install
+pnpm install
 ```
 
 ## Usage
@@ -40,7 +40,7 @@ npm install
 ### Extract All Documentation
 
 ```bash
-npm run extract:all
+pnpm run extract:all
 ```
 
 This will run both general and endpoint extraction in sequence.
@@ -48,7 +48,7 @@ This will run both general and endpoint extraction in sequence.
 ### Extract General Documentation Only
 
 ```bash
-npm run extract:general
+pnpm run extract:general
 ```
 
 Extracts core documentation files:
@@ -62,7 +62,7 @@ Extracts core documentation files:
 ### Extract Endpoint Documentation Only
 
 ```bash
-npm run extract:endpoints
+pnpm run extract:endpoints
 ```
 
 Extracts individual API endpoint documentation into `endpoints/public/` and `endpoints/private/` directories.
@@ -72,10 +72,10 @@ Extracts individual API endpoint documentation into `endpoints/public/` and `end
 The original batch scraping scripts are still available with the `legacy:` prefix:
 
 ```bash
-npm run legacy:privaterestapi
-npm run legacy:publicrestapi
-npm run legacy:websocketapi
-npm run legacy:all
+pnpm run legacy:privaterestapi
+pnpm run legacy:publicrestapi
+pnpm run legacy:websocketapi
+pnpm run legacy:all
 ```
 
 ## Endpoint Classification

@@ -42,23 +42,23 @@ Uses shared utilities from `venues/shared/`:
 1. Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 2. Extract all documentation:
 
 ```bash
-npm run extract:all
+pnpm run extract:all
 ```
 
 3. Or run specific extractors:
 
 ```bash
 # Extract core documentation (authentication, rate limits, etc.)
-npm run extract:general
+pnpm run extract:general
 
 # Extract individual endpoint documentation
-npm run extract:endpoints
+pnpm run extract:endpoints
 ```
 
 ### Legacy Extraction Method
@@ -67,10 +67,10 @@ The old extraction method is still available for reference:
 
 ```bash
 # Extract Spot API endpoints (legacy)
-npm run extract:legacy:spot
+pnpm run extract:legacy:spot
 
 # Extract Futures API endpoints (legacy)
-npm run extract:legacy:futures
+pnpm run extract:legacy:futures
 ```
 
 ## Output Structure

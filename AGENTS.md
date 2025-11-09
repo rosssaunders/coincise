@@ -16,7 +16,7 @@ consumption.
 ### Installation
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### Run Documentation Extraction
@@ -25,7 +25,7 @@ Each venue has its own extraction script. Binance Spot example:
 
 ```bash
 cd venues/binancespot
-npm run extract:config
+pnpm run extract:config
 ```
 
 ### Format Documentation
@@ -49,7 +49,7 @@ npm run extract:config
 ### Code Formatting
 
 ```bash
-npm run format
+pnpm run format
 ```
 
 ### Linting
@@ -273,7 +273,7 @@ if (import.meta.url === \`file://\${process.argv[1]}\`) {
   documentation and raising a PR if anything has changed
 - The workflow should run weekly at midnight on Saturday night / Sunday morning
 - Workflows must execute the extraction scripts using the package.json scripts
-- Example workflow command: \`npm run extract:config\`
+- Example workflow command: \`pnpm run extract:config\`
 
 ## Puppeteer Scraping Rules
 

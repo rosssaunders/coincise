@@ -27,28 +27,26 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install shared dependencies
-        run: |
-          cd venues/shared
-          npm install
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
-      - name: Install venue dependencies
-        run: |
-          cd venues/binancefutures
-          npm install
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Extract general documentation
         run: |
           cd venues/binancefutures
-          npm run extract:general
+          pnpm run extract:general
 
       - name: Extract Options endpoints
         run: |
           cd venues/binancefutures
-          npm run extract:endpoints:options:public:rest
-          npm run extract:endpoints:options:private:rest
-          npm run extract:endpoints:options:public:ws
-          npm run extract:endpoints:options:private:ws
+          pnpm run extract:endpoints:options:public:rest
+          pnpm run extract:endpoints:options:private:rest
+          pnpm run extract:endpoints:options:public:ws
+          pnpm run extract:endpoints:options:private:ws
 
       - name: Format documentation
         run: ./formatdocs.sh
@@ -62,7 +60,7 @@ jobs:
         if: steps.git-check.outputs.changes == 'true'
         id: ai-summary
         run: |
-          SUMMARY=$(cd tools/ai-pr-summary && npm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
+          SUMMARY=$(cd tools/ai-pr-summary && pnpm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
           echo "summary<<EOF" >> $GITHUB_OUTPUT
           echo "$SUMMARY" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
@@ -94,42 +92,42 @@ jobs:
           reviewers: '@rosssaunders'
           labels: 'auto-docs-update'
       - name: Process USDM Public REST
-        run: npm run process:usdm:public:rest
+        run: pnpm run process:usdm:public:rest
 
       - name: Process USDM Private REST
-        run: npm run process:usdm:private:rest
+        run: pnpm run process:usdm:private:rest
 
       - name: Process USDM Public WebSocket
-        run: npm run process:usdm:public:ws
+        run: pnpm run process:usdm:public:ws
 
       - name: Process USDM Private WebSocket
-        run: npm run process:usdm:private:ws
+        run: pnpm run process:usdm:private:ws
 
       # COINM Processing
       - name: Process COINM Public REST
-        run: npm run process:coinm:public:rest
+        run: pnpm run process:coinm:public:rest
 
       - name: Process COINM Private REST
-        run: npm run process:coinm:private:rest
+        run: pnpm run process:coinm:private:rest
 
       - name: Process COINM Public WebSocket
-        run: npm run process:coinm:public:ws
+        run: pnpm run process:coinm:public:ws
 
       - name: Process COINM Private WebSocket
-        run: npm run process:coinm:private:ws
+        run: pnpm run process:coinm:private:ws
 
       # Options Processing
       - name: Process Options Public REST
-        run: npm run process:options:public:rest
+        run: pnpm run process:options:public:rest
 
       - name: Process Options Private REST
-        run: npm run process:options:private:rest
+        run: pnpm run process:options:private:rest
 
       - name: Process Options Public WebSocket
-        run: npm run process:options:public:ws
+        run: pnpm run process:options:public:ws
 
       - name: Process Options Private WebSocket
-        run: npm run process:options:private:ws
+        run: pnpm run process:options:private:ws
 
       - name: Check for changes
         id: git-check
@@ -146,7 +144,7 @@ jobs:
         run: |
           cd ../..  # Move back to root directory for git operations
           # Generate AI summary using the AI PR summary tool (max diff length: 15000)
-          SUMMARY=$(cd tools/ai-pr-summary && npm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
+          SUMMARY=$(cd tools/ai-pr-summary && pnpm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
           # Escape the summary for GitHub Actions
           echo "summary<<EOF" >> $GITHUB_OUTPUT
           echo "$SUMMARY" >> $GITHUB_OUTPUT

@@ -26,7 +26,7 @@ The Crypto.com Exchange API documentation includes:
 Extracts core documentation files:
 
 ```bash
-npm run extract:general
+pnpm run extract:general
 ```
 
 This creates:
@@ -42,7 +42,7 @@ This creates:
 Extracts individual endpoint documentation:
 
 ```bash
-npm run extract:endpoints
+pnpm run extract:endpoints
 ```
 
 This creates individual markdown files in:
@@ -54,14 +54,14 @@ This creates individual markdown files in:
 Run all extraction scripts:
 
 ```bash
-npm run extract:all
+pnpm run extract:all
 ```
 
 ## Installation
 
 ```bash
 cd venues/cryptocom
-npm install
+pnpm install
 ```
 
 ## Technical Notes
