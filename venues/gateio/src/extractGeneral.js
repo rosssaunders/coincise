@@ -166,69 +166,82 @@ const extractNetworkConnectivity = async (page, turndownService) => {
 };
 
 /**
- * Extract Authentication section using same logic as rest_api.js
+ * Extract Authentication section - targeted approach for specific H2 subsections
  */
 const extractAuthentication = async (page, turndownService) => {
   console.log("Extracting authentication information...");
 
   const html = await page.evaluate(() => {
-    // Find the authentication H1 heading - must be exact match
-    const allHeadings = document.querySelectorAll("div.content-block h1[id]");
-    const heading = Array.from(allHeadings).find((h) => {
-      const id = h.getAttribute("id") || "";
-      return id === "authentication";
-    });
+    const content = document.createElement("div");
 
-    if (!heading) {
-      console.log("Authentication heading not found");
-      return "";
-    }
+    // Add main heading
+    const mainHeading = document.createElement("h1");
+    mainHeading.textContent = "Authentication";
+    content.appendChild(mainHeading);
 
-    const contentContainer =
-      heading.parentElement.parentElement.parentElement.parentElement;
+    // Extract specific authentication-related H2 sections
+    const authSectionIds = [
+      "generate-api-key",
+      "apiv4-permissions",
+      "apiv4-signed-request-requirements",
+      "api-signature-string-generation"
+    ];
 
-    // Create a new div to hold all the content
-    const collectedContent = document.createElement("div");
+    for (const sectionId of authSectionIds) {
+      const allHeadings = document.querySelectorAll("div.content-block h2[id]");
+      const heading = Array.from(allHeadings).find((h) => {
+        const id = h.getAttribute("id") || "";
+        return id === sectionId;
+      });
 
-    // Add the current container's content
-    collectedContent.appendChild(contentContainer.cloneNode(true));
-
-    // Collect all content until we find an element with an H1 tag
-    let nextElement = contentContainer.nextElementSibling;
-    while (nextElement) {
-      // Check if the next element has a child with an H1 tag
-      const hasH1Child = nextElement.querySelector("h1");
-      if (hasH1Child) {
-        break;
+      if (!heading) {
+        console.log(`Section not found: ${sectionId}`);
+        continue;
       }
 
-      // Clone and add this element to our collection
-      collectedContent.appendChild(nextElement.cloneNode(true));
+      // Get the parent container
+      const contentContainer =
+        heading.parentElement.parentElement.parentElement.parentElement;
 
-      // Move to the next element
-      nextElement = nextElement.nextElementSibling;
+      // Add this container's content
+      content.appendChild(contentContainer.cloneNode(true));
+
+      // Collect content until we hit the next H2 or H1
+      let nextElement = contentContainer.nextElementSibling;
+      let elementsAdded = 0;
+      const maxElements = 10; // Safety limit per section
+
+      while (nextElement && elementsAdded < maxElements) {
+        // Stop if we hit another H1 or H2
+        const hasH1 = nextElement.querySelector("h1");
+        const hasH2 = nextElement.querySelector("h2");
+        if (hasH1 || hasH2) {
+          break;
+        }
+
+        content.appendChild(nextElement.cloneNode(true));
+        nextElement = nextElement.nextElementSibling;
+        elementsAdded++;
+      }
     }
 
     // Remove Python code blocks
-    const pythonCodeBlocks = collectedContent.querySelectorAll(
-      "div.language-python"
-    );
+    const pythonCodeBlocks = content.querySelectorAll("div.language-python");
     pythonCodeBlocks.forEach((codeBlock) => {
       codeBlock.parentNode.removeChild(codeBlock);
     });
 
-    // Remove shell code blocks with extra-class
-    const shellCodeBlocks = collectedContent.querySelectorAll(
+    const shellCodeBlocks = content.querySelectorAll(
       "div.language-shell.extra-class"
     );
     shellCodeBlocks.forEach((codeBlock) => {
       codeBlock.parentNode.removeChild(codeBlock);
     });
 
-    return collectedContent.innerHTML;
+    return content.innerHTML;
   });
 
-  if (!html) {
+  if (!html || html.trim() === "<h1>Authentication</h1>") {
     return "# Authentication\n\nPlease refer to the API documentation for authentication information.\n";
   }
 
@@ -302,7 +315,7 @@ const extractRateLimits = async (page, turndownService) => {
 };
 
 /**
- * Extract Error Codes section
+ * Extract Error Codes section - stop at label-list H2
  */
 const extractErrorCodes = async (page, turndownService) => {
   console.log("Extracting error codes...");
@@ -315,49 +328,45 @@ const extractErrorCodes = async (page, turndownService) => {
     mainHeading.textContent = "Error Codes";
     content.appendChild(mainHeading);
 
-    // Find HTTP status codes section (H3)
-    const httpStatusHeading = Array.from(
-      document.querySelectorAll("h3[id]")
-    ).find((h) => h.getAttribute("id") === "http-status-codes");
-
-    if (httpStatusHeading) {
-      content.appendChild(httpStatusHeading.cloneNode(true));
-
-      // Get content until next H3 or H2
-      let nextElement = httpStatusHeading.nextElementSibling;
-      while (nextElement && !nextElement.querySelector("h2, h3")) {
-        content.appendChild(nextElement.cloneNode(true));
-        nextElement = nextElement.nextElementSibling;
-      }
-    }
-
-    // Find Common Error Codes (H3)
-    const commonErrorsHeading = Array.from(
-      document.querySelectorAll("h3[id]")
-    ).find((h) => h.getAttribute("id") === "common-error-codes");
-
-    if (commonErrorsHeading) {
-      content.appendChild(commonErrorsHeading.cloneNode(true));
-
-      let nextElement = commonErrorsHeading.nextElementSibling;
-      while (nextElement && !nextElement.querySelector("h2, h3")) {
-        content.appendChild(nextElement.cloneNode(true));
-        nextElement = nextElement.nextElementSibling;
-      }
-    }
-
-    // Find Error Handling section (H2)
+    // Find error handling H2
     const errorHandlingHeading = Array.from(
       document.querySelectorAll("h2[id]")
     ).find((h) => h.getAttribute("id") === "error-handling");
 
-    if (errorHandlingHeading) {
-      content.appendChild(errorHandlingHeading.cloneNode(true));
+    if (!errorHandlingHeading) {
+      return content.innerHTML;
+    }
 
-      // Get content until next H2, but limit to prevent over-extraction
-      let nextElement = errorHandlingHeading.nextElementSibling;
+    // Get the container for this H2
+    const container =
+      errorHandlingHeading.parentElement.parentElement.parentElement.parentElement;
+
+    // Add this container
+    content.appendChild(container.cloneNode(true));
+
+    // Now look for the label-list H2 which is the next major section
+    const labelListHeading = Array.from(
+      document.querySelectorAll("h2[id]")
+    ).find((h) => h.getAttribute("id") === "label-list");
+
+    if (labelListHeading) {
+      // Get its container
+      const labelContainer =
+        labelListHeading.parentElement.parentElement.parentElement.parentElement;
+
+      // Add it
+      content.appendChild(labelContainer.cloneNode(true));
+
+      // Add elements after label-list until we hit the next H2
+      let nextElement = labelContainer.nextElementSibling;
       let elementsAdded = 0;
-      while (nextElement && !nextElement.querySelector("h2") && elementsAdded < 50) {
+      const maxElements = 30;
+
+      while (nextElement && elementsAdded < maxElements) {
+        const hasH2 = nextElement.querySelector("h2");
+        if (hasH2) {
+          break;
+        }
         content.appendChild(nextElement.cloneNode(true));
         nextElement = nextElement.nextElementSibling;
         elementsAdded++;
