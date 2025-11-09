@@ -17,6 +17,21 @@ Signed requests require the following additional headers:
 
 `X-Timestamp``X-Window``5000``60000``X-API-Key``X-Signature`
 
+### Generate ED25519 Keys
+
+You can generate a private/public ED25519 keypair using this Python one-liner:
+
+```python
+python3 -c "from cryptography.hazmat.primitives.asymmetric import ed25519; import base64; key = ed25519.Ed25519PrivateKey.generate(); seed = key.private_bytes_raw(); pub = key.public_key().public_bytes_raw(); print(f'Seed: {base64.b64encode(seed).decode()}\nPublic Key: {base64.b64encode(pub).decode()}')"
+```
+
+`python3 -c "from cryptography.hazmat.primitives.asymmetric import ed25519; import base64; key = ed25519.Ed25519PrivateKey.generate(); seed = key.private_bytes_raw(); pub = key.public_key().public_bytes_raw(); print(f'Seed: {base64.b64encode(seed).decode()}\nPublic Key: {base64.b64encode(pub).decode()}')"`
+
+This will output your base64-encoded private key (seed) and public key that can
+be used for API authentication.
+
+### Signature Generation
+
 To generate a signature perform the following:
 
 1.  The key/values of the request body or query parameters should be ordered
