@@ -11,8 +11,8 @@ Source: [https://doc.xt.com/docs/spot/Transfer/TransferBetweenSubAccounts](https
 | name | type | mandatory | default | description | ranges |
 | --- | --- | --- | --- | --- | --- |
 | bizId | string | true | N/A | Unique ID for idempotent processing | Maximum length: 128 |
-| from | enum | true | N/A | Fund transfer out account | [bizType enum](#bizType) |
-| to | enum | true | N/A | Fund transfer in account | [bizType enum](#bizType) |
+| from | enum | true | N/A | Fund transfer out account | [bizType](/docs/spot/Access Description/PublicModule#biztype) |
+| to | enum | true | N/A | Fund transfer in account | [bizType](/docs/spot/Access Description/PublicModule#biztype) |
 | currency | string | true | N/A | Currency name, must be lowercase (e.g. `usdt`, `btc`) |  |
 | symbol | string | false | N/A | Transfer symbol (must be lowercase). Required if one of the transfer-in or transfer-out accounts is **leverage** |  |
 | amount | bigDecimal | true | N/A | Transfer amount |  |
@@ -28,8 +28,10 @@ This endpoint performs fund transfers between business system accounts under the
 
 ### Parameters Example[​](#parameters-example "Direct link to Parameters Example")
 
+cURL
+
 ```
---header 'accept: */*' \--header 'Content-Type: application/json' \--header 'validate-algorithms: HmacSHA256' \--header 'validate-recvwindow: 60000' \--header 'validate-appkey: xxxxxxxxxx' \--header 'validate-timestamp: xxxxxxxxxx' \--header 'validate-signature: xxxxxxxxxx' \--data '{    "bizId": "xxxx_xxxxxxxx",    "from": "SPOT",    "to": "SPOT",    "currency": "USDT",    "amount": "1",    "toAccountId": accountId}'
+curl --location --request POST 'https://sapi.xt.com/v4/balance/account/transfer' \--header 'accept: */*' \--header 'Content-Type: application/json' \--header 'validate-algorithms: HmacSHA256' \--header 'validate-recvwindow: 60000' \--header 'validate-appkey: xxxxxxxxxx' \--header 'validate-timestamp: xxxxxxxxxx' \--header 'validate-signature: xxxxxxxxxx' \--data '{    "bizId": "xxxx_xxxxxxxx",    "from": "SPOT",    "to": "SPOT",    "currency": "USDT",    "amount": "1",    "toAccountId": accountId}'
 ```
 
 ### Response Example[​](#response-example "Direct link to Response Example")

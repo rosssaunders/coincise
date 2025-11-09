@@ -18,6 +18,14 @@ Source: [https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetSupportedCurrencies]
 -   The `currency` and `chain` fields in the response are required inputs for other **deposit/withdrawal APIs**.
 -   Each currency includes its supported transfer networks, deposit/withdrawal status, and fee details.
 
+### Request Example[​](#request-example "Direct link to Request Example")
+
+Request
+
+```
+  curl --location --request GET 'https://sapi.xt.com/v4/public/wallet/support/currency' \    --header 'accept: */*' \    --header 'Content-Type: application/json' \
+```
+
 ### Response Example[​](#response-example "Direct link to Response Example")
 
 Response

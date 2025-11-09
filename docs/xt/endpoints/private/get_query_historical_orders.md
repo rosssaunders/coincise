@@ -18,7 +18,7 @@ Source: [https://doc.xt.com/docs/spot/Order/QueryHistoricalOrders](https://doc.x
 | bizType | string | No | N/A | Business type | SPOT, LEVER |
 | side | string | No | N/A | Order side | BUY, SELL |
 | type | string | No | N/A | Order type | LIMIT, MARKET |
-| state | string | No | N/A | Order [state](#orderStatus) | PARTIALLY\_FILLED, FILLED, CANCELED, REJECTED, EXPIRED |
+| state | string | No | N/A | Order [state](/docs/spot/Access Description/PublicModule#order-state) | PARTIALLY\_FILLED, FILLED, CANCELED, REJECTED, EXPIRED |
 | fromId | number | No | N/A | Start ID | — |
 | direction | string | No | N/A | Query direction | PREV, NEXT |
 | limit | number | No | 20 | Limit number (max 100) | — |

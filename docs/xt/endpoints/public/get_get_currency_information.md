@@ -18,6 +18,14 @@ Source: [https://doc.xt.com/docs/spot/Balance/GetCurrencies](https://doc.xt.com/
 
 * * *
 
+### Request Example[​](#request-example "Direct link to Request Example")
+
+Request
+
+```
+  curl --location --request GET 'https://sapi.xt.com/v4/public/currencies' \    --header 'accept: */*' \    --header 'Content-Type: application/json' \
+```
+
 ### Response Example[​](#response-example "Direct link to Response Example")
 
 ```

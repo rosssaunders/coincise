@@ -24,6 +24,14 @@ Source: [https://doc.xt.com/docs/spot/Balance/GetBalances](https://doc.xt.com/do
 
 * * *
 
+### Request Example[​](#request-example "Direct link to Request Example")
+
+Request
+
+```
+  curl --location --request GET 'https://sapi.xt.com/v4/balances' \    --header 'accept: */*' \    --header 'Content-Type: application/json' \    --header 'validate-algorithms: HmacSHA256' \    --header 'validate-recvwindow: 60000' \    --header 'validate-appkey: xxxxxxxxxx' \    --header 'validate-timestamp: xxxxxxxxxx' \    --header 'validate-signature: xxxxxxxxxx' \
+```
+
 ### Response Example[​](#response-example "Direct link to Response Example")
 
 ```
