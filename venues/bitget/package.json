@@ -5,6 +5,9 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
+    "extract:general": "node src/extractGeneral.js",
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "pnpm run extract:general && pnpm run extract:endpoints",
     "extract:common": "node src/index.js config/common.json",
     "extract:spot": "node src/index.js config/spot.json",
     "extract:future": "node src/index.js config/future.json",
