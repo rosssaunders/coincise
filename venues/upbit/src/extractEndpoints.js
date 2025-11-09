@@ -225,7 +225,7 @@ const main = async () => {
   const page = await browser.newPage()
   await configurePage(page)
 
-  const turndownService = createTurndownBuilder()
+  const turndownService = createTurndownBuilder().build()
 
   try {
     // Clean up old directory structure (migration from old format)

@@ -274,7 +274,7 @@ const main = async () => {
   const page = await browser.newPage()
   await configurePage(page)
 
-  const turndownService = createTurndownBuilder()
+  const turndownService = createTurndownBuilder().build()
 
   try {
     ensureDir(OUTPUT_DIR)
