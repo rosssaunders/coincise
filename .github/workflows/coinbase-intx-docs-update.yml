@@ -22,22 +22,20 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
 
-      - name: Install shared dependencies
-        run: |
-          cd venues/shared
-          npm install
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
-      - name: Install INTX scraper dependencies
-        run: |
-          cd venues/coinbase/intx
-          npm install
+      - name: Install dependencies
+        working-directory: venues/coinbase/intx
+        run: pnpm install --frozen-lockfile
 
       - name: Extract documentation
-        run: |
-          cd venues/coinbase/intx
-          npm run extract:all
+        working-directory: venues/coinbase/intx
+        run: pnpm run extract:all
 
       - name: Format documentation
         run: ./formatdocs.sh
