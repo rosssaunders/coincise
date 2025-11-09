@@ -47,8 +47,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Extract Upbit Changelog
-        run: npm run start
+      - name: Extract Upbit Documentation
+        run: npm run extract:all
+      
+      - name: Format documentation
+        run: |
+          cd ../..
+          ./formatdocs.sh
 
       - name: Check for changes
         id: git-check
@@ -75,8 +80,8 @@ jobs:
         if: steps.git-check.outputs.changes == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
-          commit-message: "docs: update Upbit changelog documentation"
-          title: "Upbit Changelog Documentation Update"
+          commit-message: "docs: update Upbit API documentation"
+          title: "Upbit API Documentation Update"
           branch: "upbit-docs-update"
           base: "main"
           delete-branch: true
