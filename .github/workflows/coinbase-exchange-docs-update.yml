@@ -41,29 +41,26 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Private REST API scraper
-        run: npm run privaterestapi
+      - name: Extract general documentation
+        run: npm run extract:general
 
-      - name: Run Public REST API scraper
-        run: npm run publicrestapi
-
-      - name: Run WebSocket API scraper
-        run: npm run websocketapi
+      - name: Extract endpoint documentation
+        run: npm run extract:endpoints
 
       - name: Check for changes
         id: git-check
         run: |
           cd ../../../  # Move back to root directory for git operations
           # Verify docs directory exists
-          if [ -d "docs/coinbase/exchange" ]; then
-            # Explicitly add the docs/coinbase/exchange directory to staging
-            git add docs/coinbase/exchange
+          if [ -d "docs/coinbase" ]; then
+            # Explicitly add the docs/coinbase directory to staging
+            git add docs/coinbase
             # Check if there are any changes
             git diff --staged --quiet || echo "changes=true" >> $GITHUB_OUTPUT
           else
-            echo "Warning: docs/coinbase/exchange directory not found"
-            mkdir -p docs/coinbase/exchange
-            echo "Created docs/coinbase/exchange directory"
+            echo "Warning: docs/coinbase directory not found"
+            mkdir -p docs/coinbase
+            echo "Created docs/coinbase directory"
           fi
 
       - name: Generate AI PR Summary

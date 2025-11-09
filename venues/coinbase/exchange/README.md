@@ -1,129 +1,149 @@
 # Coinbase Exchange API Documentation Scraper
 
-A Node.js based tool for scraping the Coinbase Exchange API documentation and converting it to Markdown format.
+Documentation extraction for the Coinbase Exchange API following the standardized Coincise pipeline.
 
-## Features
+## Overview
 
-- Scrapes Coinbase Exchange API documentation from the official website
-- Converts HTML content to clean Markdown format
-- Supports batch processing multiple URLs from a config file
-- Combines multiple Markdown files into a single documentation file
-- Configurable output directory and file naming
+This scraper extracts Coinbase Exchange API documentation and converts it to the standardized LLM-friendly markdown format used across all Coincise venues.
+
+## Documentation Structure
+
+The scraper produces the following documentation structure:
+
+```
+docs/coinbase/
+├── authentication.md          # API authentication and signing
+├── rate_limits.md            # Rate limiting policies
+├── network_connectivity.md   # Connection and endpoint information
+├── error_codes.md            # Error code definitions
+├── response_formats.md       # Response data types and formats
+├── change_log.md            # API version history
+└── endpoints/
+    ├── public/              # Public (unauthenticated) endpoints
+    │   ├── get_products.md
+    │   ├── get_time.md
+    │   └── ...
+    └── private/             # Private (authenticated) endpoints
+        ├── get_accounts.md
+        ├── post_orders.md
+        └── ...
+```
 
 ## Installation
 
 ```bash
-# Install dependencies
 npm install
 ```
 
 ## Usage
 
-The scraper can be used in two main ways:
-
-### 1. Scrape a single URL
+### Extract All Documentation
 
 ```bash
-npm run scrape <url> <output-file>
+npm run extract:all
 ```
 
-Example:
+This will run both general and endpoint extraction in sequence.
+
+### Extract General Documentation Only
 
 ```bash
-npm run scrape https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaccounts docs/get-accounts.md
+npm run extract:general
 ```
 
-### 2. Batch process multiple URLs from a config file
+Extracts core documentation files:
+- Authentication
+- Rate limits
+- Network connectivity
+- Error codes
+- Response formats
+- Change log
+
+### Extract Endpoint Documentation Only
 
 ```bash
-npm run batch [-c config_file] [-o output_directory]
+npm run extract:endpoints
 ```
 
-Example:
+Extracts individual API endpoint documentation into `endpoints/public/` and `endpoints/private/` directories.
+
+### Legacy Scripts
+
+The original batch scraping scripts are still available with the `legacy:` prefix:
 
 ```bash
-# Use default config file (config.json)
-npm run batch
-
-# Specify a custom config file
-npm run batch:config config/custom-config.json
-
-# Specify a custom output directory
-npm run batch:output custom-output-dir
-
-# Specify both custom config and output directory
-node src/index.js batch -c config/custom-config.json -o custom-output-dir
+npm run legacy:privaterestapi
+npm run legacy:publicrestapi
+npm run legacy:websocketapi
+npm run legacy:all
 ```
 
-## Configuration File Format
+## Endpoint Classification
 
-The batch processing uses a JSON configuration file with the following structure:
+Endpoints are automatically classified as public or private based on authentication requirements:
 
-```json
-{
-  "output_directory": "docs",
-  "combined_filename": "combined_api_documentation.md",
-  "delete_individual_files": true,
-  "urls": [
-    {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaccounts",
-      "filename": "get-accounts"
-    },
-    {
-      "url": "https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postorders",
-      "filename": "post-orders"
-    }
-  ]
-}
-```
+- **Public endpoints**: No authentication headers required (CB-ACCESS-KEY, CB-ACCESS-SIGN, etc.)
+- **Private endpoints**: Require authentication headers
 
-### Configuration Options:
+## Documentation Source
 
-- `output_directory`: Directory where the markdown files will be saved (default: "output")
-- `combined_filename`: Name of the file that will contain all combined documentation (default: "combined_api_documentation.md")
-- `delete_individual_files`: Whether to delete individual markdown files after combining them (default: true)
-- `urls`: Array of URL objects to scrape, each with:
-  - `url`: The URL to scrape
-  - `filename`: Optional filename for the output (without extension), defaults to the last part of the URL
+- **Base URL**: https://docs.cdp.coinbase.com/exchange
+- **API Reference**: https://docs.cdp.coinbase.com/exchange/reference/
+- **General Docs**: https://docs.cdp.coinbase.com/exchange/rest-api/
 
-## Other Commands
+## Known Endpoints
 
-### Converting Authentication Sections
+The scraper includes a comprehensive list of known Coinbase Exchange API endpoints in `src/extractEndpoints.js`. This list includes:
 
-```bash
-npm run start convert-auth <input-file> [output-file]
-```
+- Account management endpoints
+- Order management endpoints
+- Deposit and withdrawal endpoints
+- Product and market data endpoints
+- Profile management endpoints
+- And more...
 
-### Converting Request Parameters
+## Authentication Headers
 
-```bash
-npm run start convert-params <input-file> [output-file]
-```
+Coinbase Exchange uses the following authentication headers:
 
-### Help
+- `CB-ACCESS-KEY`: Your API key
+- `CB-ACCESS-SIGN`: Request signature
+- `CB-ACCESS-TIMESTAMP`: Request timestamp
+- `CB-ACCESS-PASSPHRASE`: API key passphrase
 
-```bash
-npm run help
-```
+## Notes
+
+- The Coinbase documentation uses a custom framework (not Redocly)
+- Each endpoint is documented on a separate page with the pattern: `exchangerestapi_{operation}`
+- Documentation is updated regularly by GitHub Actions workflow
 
 ## Project Structure
 
 ```
-coinbase-exchange/
-├── config/                # Configuration files for batch processing
-├── docs/                  # Output directory for markdown files
+venues/coinbase/exchange/
+├── config/                  # Configuration files (legacy)
 ├── src/
-│   ├── index.js           # Entry point and CLI interface
-│   ├── scraper.js         # Main scraper functionality
-│   ├── processors/        # HTML processing modules
-│   └── utils/             # Utility functions
+│   ├── extractGeneral.js   # General documentation extraction
+│   ├── extractEndpoints.js # Endpoint documentation extraction
+│   ├── index.js           # Legacy batch scraper CLI
+│   ├── scraper.js         # Legacy scraper functionality
+│   ├── processors/        # Legacy HTML processing modules
+│   └── utils/             # Legacy utility functions
 ├── package.json
 └── README.md
 ```
 
 ## Dependencies
 
-- turndown: Converts HTML to Markdown
-- turndown-plugin-gfm: GFM (GitHub Flavored Markdown) plugin for Turndown
-- puppeteer: Headless browser for scraping dynamic content
-- jsdom: DOM implementation for processing HTML
+- **turndown**: HTML to Markdown conversion
+- **turndown-plugin-gfm**: GitHub Flavored Markdown support
+- **puppeteer**: Headless browser for dynamic content scraping
+
+## Automation
+
+Documentation is automatically updated via GitHub Actions workflow that runs weekly. The workflow:
+
+1. Extracts general documentation
+2. Extracts all endpoint documentation
+3. Formats the documentation
+4. Creates a pull request with any changes
