@@ -50,7 +50,7 @@ jobs:
           pnpm run extract:endpoints:usdm:private:ws
 
       - name: Format documentation
-        run: ./formatdocs.sh
+        run: ./formatdocs.sh docs/binance/usdm/
 
       - name: Check for changes
         id: git-check

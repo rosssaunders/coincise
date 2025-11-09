@@ -50,7 +50,7 @@ jobs:
           pnpm run extract:endpoints:options:private:ws
 
       - name: Format documentation
-        run: ./formatdocs.sh
+        run: ./formatdocs.sh docs/binance/options/
 
       - name: Check for changes
         id: git-check

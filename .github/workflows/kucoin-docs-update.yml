@@ -53,7 +53,7 @@ jobs:
       - name: Format documentation
         run: |
           cd ../..
-          ./formatdocs.sh
+          ./formatdocs.sh docs/kucoin/
 
       - name: Check for changes
         id: git-check

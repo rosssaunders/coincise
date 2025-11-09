@@ -116,6 +116,11 @@ jobs:
       - name: Run extract:websocket-unified
         run: pnpm run extract:websocket-unified
 
+
+      - name: Format documentation
+        run: |
+          cd ../..
+          ./formatdocs.sh docs/gateio/
       - name: Check for changes
         id: git-check
         run: |

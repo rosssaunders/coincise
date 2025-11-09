@@ -36,7 +36,7 @@ jobs:
           pnpm run extract:all
 
       - name: Format documentation
-        run: ./formatdocs.sh
+        run: ./formatdocs.sh docs/backpack/
 
       - name: Check for changes
         id: git-check

@@ -45,6 +45,11 @@ jobs:
       - name: Extract endpoint documentation
         run: pnpm run extract:endpoints
 
+      - name: Format documentation
+        run: |
+          cd ../..
+          ./formatdocs.sh docs/coinbase/exchange/
+
       - name: Check for changes
         id: git-check
         run: |

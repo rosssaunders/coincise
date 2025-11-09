@@ -59,6 +59,11 @@ jobs:
       - name: Run Bitget scraper - Change Log
         run: pnpm run extract:change_log
 
+
+      - name: Format documentation
+        run: |
+          cd ../..
+          ./formatdocs.sh docs/bitget/
       - name: Check for changes
         id: git-check
         run: |

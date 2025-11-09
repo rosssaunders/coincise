@@ -39,7 +39,7 @@ jobs:
           pnpm run extract:all
 
       - name: Format documentation
-        run: bash formatdocs.sh || true
+        run: bash formatdocs.sh docs/xt/
 
       - name: Check for changes
         id: git-check

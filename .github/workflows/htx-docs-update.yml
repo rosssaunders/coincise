@@ -69,7 +69,7 @@ jobs:
           pnpm run publicrestcoinm
 
       - name: Format documentation
-        run: ./formatdocs.sh
+        run: ./formatdocs.sh docs/htx/
 
       - name: Check for changes
         id: git-check
