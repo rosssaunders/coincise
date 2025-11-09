@@ -1,10 +1,12 @@
 {
-  "name": "kucoin",
+  "name": "@coincise/kucoin",
   "version": "1.0.0",
-  "description": "Kucoin API documentation extraction project",
-  "main": "src/main.js",
+  "description": "Documentation extraction for KuCoin API",
   "type": "module",
   "scripts": {
+    "extract:general": "node src/extractGeneral.js",
+    "extract:endpoints": "node src/extractEndpoints.js",
+    "extract:all": "npm run extract:general && npm run extract:endpoints",
     "start": "node src/index.js",
     "extract:rate-limit": "node src/index.js --rate-limit"
   },
