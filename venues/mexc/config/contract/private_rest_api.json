@@ -1,8 +1,0 @@
-{
-  "title": "Private REST API Endpoints",
-  "includeSections": [
-    "Integration guide",
-    "Error code",
-    "Account and trading endpoints"
-  ]
-}
