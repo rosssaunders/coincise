@@ -88,9 +88,14 @@ const generateFilename = (method, endpointPath) => {
 /**
  * Determine if an endpoint is public or private based on content
  */
-const isPublicEndpoint = (html, title) => {
+const isPublicEndpoint = (html, title, endpointPath) => {
   const htmlLower = html.toLowerCase()
   const titleLower = title.toLowerCase()
+
+  // Check if the endpoint path contains /public/
+  if (endpointPath && endpointPath.includes("/public/")) {
+    return true
+  }
 
   // Check for authentication requirements
   if (
@@ -113,7 +118,7 @@ const isPublicEndpoint = (html, title) => {
     return true
   }
 
-  // If in /public/ path, it's public
+  // If in /public/ path in title, it's public
   if (titleLower.includes("/public/")) {
     return true
   }
@@ -229,7 +234,7 @@ const extractEndpoint = async (page, url, turndownService) => {
       markdown += `\n\n> **Source:** ${url}\n`
 
       // Determine if public or private
-      const isPublic = isPublicEndpoint(cleanHtml, result.title)
+      const isPublic = isPublicEndpoint(cleanHtml, result.title, methodInfo.path)
 
       return {
         method: methodInfo.method,
