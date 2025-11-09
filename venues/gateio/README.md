@@ -18,7 +18,7 @@ Extract core documentation files using the new standardized approach:
 # Extract general documentation (authentication, rate limits, etc.)
 pnpm run extract:general
 
-# Extract individual endpoint documentation (currently in development)
+# Extract individual endpoint documentation
 pnpm run extract:endpoints
 
 # Extract both
@@ -32,6 +32,13 @@ The general extraction creates these core files in `docs/gateio/`:
 - `error_codes.md` - Error handling and error code reference
 - `response_formats.md` - Response format specifications
 - `change_log.md` - API changelog (when available)
+
+The endpoint extraction processes existing legacy documentation files and creates individual endpoint files:
+- Splits legacy files into individual endpoints
+- Categorizes as public (63 endpoints) or private (217 endpoints)
+- Saves to `docs/gateio/endpoints/public/` and `docs/gateio/endpoints/private/`
+- Uses filename format: `{http_method}_{endpoint_name}.md`
+- Total: 280 individual endpoint files
 
 ### Legacy Extraction
 
@@ -81,17 +88,24 @@ The legacy scraper implements robust HTTP fetching to handle Gate.io's anti-bot 
 
 ### Architecture
 
-- **`src/extractGeneral.js`**: Extracts core documentation sections (NEW)
-- **`src/extractEndpoints.js`**: Extracts individual endpoint documentation (IN DEVELOPMENT)
+- **`src/extractGeneral.js`**: Extracts core documentation sections (authentication, rate limits, etc.)
+- **`src/splitEndpoints.js`**: Processes legacy documentation and creates individual endpoint files
+- **`src/extractEndpoints.js`**: Framework for future direct endpoint extraction from multi-page docs
 - **`src/rest_api.js`**: Legacy config-based extraction (DEPRECATED)
 - **`src/websocket_*.js`**: Legacy WebSocket documentation extractors (DEPRECATED)
 - **`src/fetcher.js`**: Core HTTP fetching logic with axios-retry
 - **`src/puppeteer-fallback.js`**: Headless browser fallback for blocked requests
 - **`src/utils.js`**: Utility functions including the `downloadHtml` wrapper
 
-## Current Limitations
+## Current Implementation
 
-**Endpoint Extraction**: The `extract:endpoints` script is currently in development. Gate.io's documentation is organized across multiple pages by product type (Spot, Futures, Options, etc.), which requires a different extraction approach than single-page API docs. For now, use the legacy extraction scripts for comprehensive endpoint documentation.
+**Endpoint Extraction**: The `extract:endpoints` script processes existing legacy documentation files to create individual endpoint files in the standardized structure. This hybrid approach:
+- Leverages the comprehensive endpoint documentation already extracted by legacy scripts
+- Splits documentation into individual files per endpoint
+- Properly categorizes endpoints as public (authentication not required) or private
+- Creates 280 individual endpoint files (63 public, 217 private)
+
+For future enhancement, `src/extractEndpoints.js` provides a framework for direct multi-page extraction from Gate.io's documentation.
 
 ## Dependencies
 
