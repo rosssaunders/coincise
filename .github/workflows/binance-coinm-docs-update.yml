@@ -36,18 +36,10 @@ jobs:
         run: pnpm exec puppeteer browsers install chrome
 
 
-      - name: Extract general documentation
+      - name: Extract all documentation
         run: |
           cd venues/binancefutures
-          pnpm run extract:general
-
-      - name: Extract COIN-M endpoints
-        run: |
-          cd venues/binancefutures
-          pnpm run extract:endpoints:coinm:public:rest
-          pnpm run extract:endpoints:coinm:private:rest
-          pnpm run extract:endpoints:coinm:public:ws
-          pnpm run extract:endpoints:coinm:private:ws
+          pnpm run extract:all
 
       - name: Format documentation
         run: ./formatdocs.sh docs/binance/coinm/
