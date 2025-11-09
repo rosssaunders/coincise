@@ -42,8 +42,6 @@ Required (Private Endpoint)
 
 ## Response Example
 
-Request
-
 ```json
 {  "rc": 0,  "mc": "string",  "ma": [{}],  "result": {    "batchId": "123",    "items": [      {        "index": "0",
 ```

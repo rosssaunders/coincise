@@ -145,7 +145,7 @@ const extractResponseParameters = content => {
  * Post-process markdown content to conform to standard format
  * Returns an object with the processed content and extracted path
  */
-const postProcessMarkdown = (markdown, method, path, isPrivate) => {
+const postProcessMarkdown = (markdown, method, path, isPrivate, responseJsonExamples = []) => {
   let processed = markdown
 
   // Remove navigation anchors like [​](#description "Direct link to Description")
@@ -274,6 +274,11 @@ const postProcessMarkdown = (markdown, method, path, isPrivate) => {
     }
   })
 
+  // Replace response example with extracted clean JSON if available
+  if (responseJsonExamples && responseJsonExamples.length > 0) {
+    responseExample = "```json\n" + responseJsonExamples[0] + "\n```"
+  }
+
   // Add Description section
   if (description) {
     output += "## Description\n\n"
@@ -378,8 +383,8 @@ const extractEndpoints = async (page, turndownService) => {
     })
   })
 
-  // Wait for expansion
-  await new Promise(resolve => setTimeout(resolve, 1000))
+  // Wait for expansion - increased timeout for stability
+  await new Promise(resolve => setTimeout(resolve, 3000))
 
   // Get all endpoint links from the sidebar
   const endpointLinks = await page.evaluate(() => {
@@ -458,8 +463,6 @@ const extractEndpoints = async (page, turndownService) => {
         )
         elementsToRemove.forEach(el => el.remove())
 
-        // Extract HTTP method and path from the page content
-        const content = clone.innerHTML
         const textContent = clone.textContent
 
         let method = "GET" // Default
@@ -485,11 +488,62 @@ const extractEndpoints = async (page, turndownService) => {
           path = pathMatch[1].trim()
         }
 
+        // Extract clean JSON from Response Example code blocks in the clone
+        const responseJsonExamples = []
+
+        // Find Response Example heading in clone
+        const headings = Array.from(clone.querySelectorAll('h2, h3, h4'))
+        const responseHeading = headings.find(h =>
+          h.textContent.toLowerCase().includes('response') &&
+          h.textContent.toLowerCase().includes('example')
+        )
+
+        if (responseHeading) {
+          // Find the next code block after the heading
+          let element = responseHeading.nextElementSibling
+          while (element && responseJsonExamples.length === 0) {
+            const codeBlock = element.querySelector('code')
+            if (codeBlock) {
+              // Use innerHTML to get the raw content, then strip HTML tags
+              let jsonText = codeBlock.innerHTML
+                .replace(/<[^>]+>/g, '') // Remove HTML tags
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&amp;/g, '&')
+                .trim()
+
+              // Handle git conflict markers - extract the "incoming" version (after =======)
+              if (jsonText.includes('<<<<<<< Updated upstream')) {
+                const conflictMatch = jsonText.match(/=======\s*([\s\S]*?)>>>>>>> [^\n]+/)
+                if (conflictMatch) {
+                  jsonText = conflictMatch[1].trim()
+                }
+              }
+
+              // Remove inline comments (e.g., //symbol)
+              jsonText = jsonText.replace(/\s*\/\/.*$/gm, '')
+
+              // Clean up any trailing commas before closing braces/brackets
+              jsonText = jsonText.replace(/,(\s*[}\]])/g, '$1')
+
+              if (jsonText.startsWith('{') || jsonText.startsWith('[')) {
+                responseJsonExamples.push(jsonText)
+              }
+              break
+            }
+            element = element.nextElementSibling
+          }
+        }
+
+        // Extract content AFTER cleaning JSON
+        const content = clone.innerHTML
+
         return {
           content: content,
           method: method,
           path: path,
-          sourceUrl: url
+          sourceUrl: url,
+          responseJsonExamples: responseJsonExamples
         }
       }, link.href)
 
@@ -501,7 +555,8 @@ const extractEndpoints = async (page, turndownService) => {
           method: endpointData.method,
           path: endpointData.path,
           sourceUrl: endpointData.sourceUrl,
-          content: markdown
+          content: markdown,
+          responseJsonExamples: endpointData.responseJsonExamples || []
         })
       }
 
@@ -541,7 +596,8 @@ const writeEndpoints = endpoints => {
       endpoint.content,
       endpoint.method,
       endpoint.path,
-      isPrivate
+      isPrivate,
+      endpoint.responseJsonExamples
     )
 
     // Use extracted path if original path was not available
