@@ -38,13 +38,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-          popd
+      - name: Extract Upbit Documentation
+        run: pnpm run extract:all
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Extract Upbit Changelog
-        run: pnpm run start
+      - name: Format documentation
+        run: |
+          cd ../..
+          ./formatdocs.sh
 
       - name: Check for changes
         id: git-check
@@ -71,8 +71,8 @@ jobs:
         if: steps.git-check.outputs.changes == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
-          commit-message: "docs: update Upbit changelog documentation"
-          title: "Upbit Changelog Documentation Update"
+          commit-message: "docs: update Upbit API documentation"
+          title: "Upbit API Documentation Update"
           branch: "upbit-docs-update"
           base: "main"
           delete-branch: true

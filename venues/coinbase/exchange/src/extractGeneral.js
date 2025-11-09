@@ -88,18 +88,22 @@ const extractErrorCodes = async (page, turndownService) => {
   // Coinbase doesn't have a dedicated error codes page, extract from welcome
   const url = `${BASE_URL}/introduction/welcome`
   const fullContent = await extractContent(page, turndownService, url)
-  
+
   // Extract only the errors section
   const lines = fullContent.split("\n")
-  const startIdx = lines.findIndex(line => line.includes("Errors") || line.includes("Error Codes"))
-  const endIdx = lines.findIndex((line, idx) => idx > startIdx && line.startsWith("##"))
-  
+  const startIdx = lines.findIndex(
+    line => line.includes("Errors") || line.includes("Error Codes")
+  )
+  const endIdx = lines.findIndex(
+    (line, idx) => idx > startIdx && line.startsWith("##")
+  )
+
   if (startIdx !== -1 && endIdx !== -1) {
     return lines.slice(startIdx, endIdx).join("\n")
   } else if (startIdx !== -1) {
     return lines.slice(startIdx).join("\n")
   }
-  
+
   return "# Error Codes\n\nSee the API documentation for error code information."
 }
 
@@ -131,7 +135,9 @@ const extractChangeLog = async (page, turndownService) => {
  * Main extraction function
  */
 const main = async () => {
-  console.log("Starting general documentation extraction for Coinbase Exchange...")
+  console.log(
+    "Starting general documentation extraction for Coinbase Exchange..."
+  )
 
   const browser = await launchBrowser()
   const page = await browser.newPage()
@@ -156,8 +162,14 @@ const main = async () => {
     await writeFile(path.join(OUTPUT_DIR, "rate_limits.md"), rateLimits)
 
     // Extract network connectivity
-    const networkConnectivity = await extractNetworkConnectivity(page, turndownService)
-    await writeFile(path.join(OUTPUT_DIR, "network_connectivity.md"), networkConnectivity)
+    const networkConnectivity = await extractNetworkConnectivity(
+      page,
+      turndownService
+    )
+    await writeFile(
+      path.join(OUTPUT_DIR, "network_connectivity.md"),
+      networkConnectivity
+    )
 
     // Extract error codes
     const errorCodes = await extractErrorCodes(page, turndownService)
@@ -165,7 +177,10 @@ const main = async () => {
 
     // Extract response formats
     const responseFormats = await extractResponseFormats(page, turndownService)
-    await writeFile(path.join(OUTPUT_DIR, "response_formats.md"), responseFormats)
+    await writeFile(
+      path.join(OUTPUT_DIR, "response_formats.md"),
+      responseFormats
+    )
 
     // Extract change log
     const changeLog = await extractChangeLog(page, turndownService)

@@ -162,7 +162,9 @@ const extractAuthentication = async (page, turndownService) => {
   })
 
   const markdown = turndownService.turndown(authHtml)
-  return markdown || "# Authentication\n\nNo authentication documentation found.\n"
+  return (
+    markdown || "# Authentication\n\nNo authentication documentation found.\n"
+  )
 }
 
 /**
