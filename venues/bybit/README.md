@@ -20,7 +20,7 @@ Documentation extraction for Bybit's V5 API following the standardized Coincise 
 ## Prerequisites
 
 - Node.js >= 20.0.0
-- npm or yarn
+- pnpm
 
 ## Installation
 
@@ -35,19 +35,19 @@ pnpm install
 ### Extract All Documentation
 
 ```bash
-npm run extract:all
+pnpm run extract:all
 ```
 
 ### Extract Only General Documentation
 
 ```bash
-npm run extract:general
+pnpm run extract:general
 ```
 
 ### Extract Only Endpoint Documentation
 
 ```bash
-npm run extract:endpoints
+pnpm run extract:endpoints
 ```
 
 ## Output Structure
