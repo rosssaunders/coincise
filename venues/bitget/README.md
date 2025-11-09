@@ -1,47 +1,59 @@
 # Bitget API Documentation Extractor
 
-This project extracts API documentation from Bitget and converts it to markdown format, creating separate files for each documentation page.
+This project extracts API documentation from Bitget and converts it to markdown format following the standardized extraction structure.
 
 ## Features
 
-- Extracts REST API documentation from Bitget's documentation site
+- Extracts core documentation files (authentication, rate limits, etc.)
+- Extracts REST API endpoint documentation with public/private categorization
 - Converts HTML to Markdown with proper formatting
-- Creates separate markdown files for each documentation page
 - Preserves code blocks with syntax highlighting
-- Organizes output by API category (common, spot, futures, etc.)
+- Uses retry logic with exponential backoff for reliability
 
 ## Project Structure
 
 ```
 bitget/
 ├── config/
-│   ├── common.json       # Configuration for common API endpoints
-│   ├── spot.json         # Configuration for spot trading endpoints
-│   ├── future.json       # Configuration for futures trading endpoints
-│   └── change_log.json   # Configuration for change log
+│   ├── common.json       # Configuration for common API endpoints (legacy)
+│   ├── spot.json         # Configuration for spot trading endpoints (legacy)
+│   ├── future.json       # Configuration for futures trading endpoints (legacy)
+│   └── change_log.json   # Configuration for change log (legacy)
 ├── src/
-│   └── index.js          # Main extraction script
+│   ├── extractGeneral.js    # Extracts core documentation files
+│   ├── extractEndpoints.js  # Extracts individual API endpoints
+│   └── index.js             # Legacy extraction script
 ├── package.json
 └── README.md
 ```
 
 ## Dependencies
 
-- turndown: ^7.2.0 - For HTML to Markdown conversion
+- turndown: ^7.2.1 - For HTML to Markdown conversion
 - turndown-plugin-gfm: ^1.0.2 - GitHub Flavored Markdown support
 - puppeteer: ^24.22.0 - For web scraping and dynamic content extraction
-- cheerio: ^1.1.2 - Server-side jQuery implementation for HTML parsing
-- jsdom: 27.0.0 - For HTML parsing
 
 ## Usage
 
-1. Install dependencies:
+### Standardized Extraction (Recommended)
 
 ```bash
+# Install dependencies
 pnpm install
+
+# Extract core documentation (authentication, rate limits, etc.)
+pnpm run extract:general
+
+# Extract individual API endpoints
+pnpm run extract:endpoints
+
+# Extract both core documentation and endpoints
+pnpm run extract:all
 ```
 
-2. Run specific extractors:
+### Legacy Extraction (Deprecated)
+
+The legacy extraction scripts are still available but will be removed in a future version:
 
 ```bash
 # Extract Common API documentation
@@ -59,68 +71,79 @@ pnpm run extract:change_log
 
 ## Output Structure
 
-The extracted markdown files are organized by category:
+The extracted markdown files are organized as follows:
 
 ```
 docs/bitget/
-├── common/
-│   ├── intro.md
-│   ├── quick-start.md
-│   ├── faq.md
-│   └── ... (one file per URL in config)
-├── spot/
-│   ├── intro.md
-│   ├── symbol.md
-│   └── ... (one file per URL in config)
-├── future/
-│   ├── intro.md
-│   ├── market.md
-│   └── ... (one file per URL in config)
-└── change_log.md
+├── authentication.md           # API authentication and key management
+├── rate_limits.md              # Rate limiting rules and policies
+├── network_connectivity.md     # Connection info and endpoints
+├── error_codes.md              # Error code definitions
+├── response_formats.md         # Standard response structures
+├── change_log.md               # API version history
+└── endpoints/
+    ├── public/                 # Public endpoints (no authentication)
+    │   ├── get_api_v2_public_time.md
+    │   ├── get_api_v2_spot_market_tickers.md
+    │   └── ...
+    └── private/                # Private endpoints (require authentication)
+        ├── post_api_v2_spot_trade_place_order.md
+        ├── get_api_v2_spot_account_assets.md
+        └── ...
 ```
 
-Each URL in the configuration is extracted into its own markdown file, named based on the URL path (excluding the category prefix).
+## Extraction Details
 
-## Configuration
+### General Documentation
 
-Each configuration file in the `config/` directory includes:
+The `extractGeneral.js` script extracts the following core files:
 
-- `title`: Title for the extraction run
-- `base_url`: Base URL of the Bitget API documentation
-- `urls`: Array of URL paths to process
-- `output_dir`: Directory where markdown files will be saved
+- **authentication.md**: Combines content from `/common/quick-start` and `/common/signature`
+- **rate_limits.md**: Extracts rate limiting information from `/common/quick-start`
+- **network_connectivity.md**: Combines `/common/intro` and `/common/domain`
+- **error_codes.md**: Combines error codes from `/spot/error-code/restapi` and `/contract/error-code`
+- **response_formats.md**: Extracts response format information from `/common/intro`
+- **change_log.md**: Extracts changelog from `/common/changelog`
 
-### Example Configuration
+### Endpoint Documentation
 
-```json
-{
-  "title": "Bitget Common API Documentation",
-  "base_url": "https://www.bitget.com/api-doc",
-  "urls": [
-    "/common/intro",
-    "/common/quick-start",
-    "/common/faq"
-  ],
-  "output_dir": "../../docs/bitget/common"
-}
-```
+The `extractEndpoints.js` script:
+
+1. Loads endpoint URLs from the config files
+2. Filters out general documentation pages
+3. Extracts content from each endpoint page
+4. Determines if the endpoint is public or private based on authentication requirements
+5. Generates filenames in the format: `{method}_{endpoint_path}.md`
+6. Saves to `endpoints/public/` or `endpoints/private/` accordingly
 
 ## API Documentation Source
 
 The scraper targets the official Bitget API documentation at:
 - Base URL: https://www.bitget.com/api-doc
 
-## Recent Changes
+## Technical Details
 
-### November 2024 - Restructured Output Format
+### Retry Logic
 
-- Changed from single large combined files to individual files per page
-- Updated config format to use `output_dir` instead of `output_file`
-- Improved file naming based on URL paths
-- Added source URL tracking in each generated file
-- Organized output into subdirectories by API category
+The extraction scripts use retry logic with exponential backoff to handle:
+- Network issues
+- Rate limiting
+- Cloudflare protection
+- Temporary server errors
 
-This change aligns Bitget's extraction approach with other venues like Bitmart, making the documentation more modular and easier to navigate.
+### User Agent
+
+A standard Chrome user agent is set to avoid blocking:
+```
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+```
+
+### Polite Delays
+
+The script includes delays between requests to be respectful to the Bitget servers:
+- 2 seconds after page load
+- 1.5 seconds between endpoint requests
+- Exponential backoff on retries (5s, 10s, 20s)
 
 ## Contributing
 
