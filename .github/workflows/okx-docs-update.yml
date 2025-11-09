@@ -1,4 +1,4 @@
-name: OKX API Docs Update
+name: OKX Docs Update
 
 on:
   schedule:

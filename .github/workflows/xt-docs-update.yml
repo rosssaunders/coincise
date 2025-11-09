@@ -1,4 +1,4 @@
-name: Update XT.com Documentation
+name: XT Docs Update
 
 on:
   schedule:

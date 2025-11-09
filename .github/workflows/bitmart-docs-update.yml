@@ -1,4 +1,4 @@
-name: Update Bitmart Documentation
+name: Bitmart Docs Update
 
 on:
   schedule:

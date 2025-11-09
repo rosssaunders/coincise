@@ -1,4 +1,4 @@
-name: Update Hyperliquid Documentation
+name: Hyperliquid Docs Update
 
 on:
   schedule:

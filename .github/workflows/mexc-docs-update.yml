@@ -1,4 +1,4 @@
-name: Update MEXC Documentation
+name: MEXC Docs Update
 
 on:
   schedule:

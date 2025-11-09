@@ -1,4 +1,4 @@
-name: Update Binance COIN-M Futures Documentation
+name: Binance COIN-M Futures Docs Update
 
 on:
   schedule:

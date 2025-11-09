@@ -1,4 +1,4 @@
-name: Update Binance Spot Documentation
+name: Binance Spot Docs Update
 
 on:
   schedule:
