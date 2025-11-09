@@ -1,8 +1,0 @@
-{
-  "title": "BingX Account & Wallet API - Wallet Operations",
-  "urls": ["https://bingx-api.github.io/docs/#/en-us/common/wallet-api.html"],
-  "outputConfig": {
-    "docsDir": "../../docs/bingx/account_wallet",
-    "outputFileName": "wallet_api.md"
-  }
-}

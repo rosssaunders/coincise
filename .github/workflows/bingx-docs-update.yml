@@ -36,12 +36,7 @@ jobs:
           version: 9
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-          popd
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Run BingX Documentation Extraction
         run: pnpm run extract:all
