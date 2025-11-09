@@ -67,7 +67,7 @@ const endpointToFilename = endpointPath => {
 /**
  * Extract all endpoints from the page
  */
-const extractEndpoints = async (page, turndownService) => {
+const extractEndpoints = async (page) => {
   console.log("Extracting endpoints...")
 
   const endpoints = await page.evaluate(() => {

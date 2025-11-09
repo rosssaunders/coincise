@@ -100,7 +100,7 @@ const getAllEndpoints = () => {
 /**
  * Extract endpoint documentation from a page
  */
-const extractEndpoint = async (page, turndownService, url, category) => {
+const extractEndpoint = async (page, turndownService, url) => {
   try {
     await page.goto(url, {
       waitUntil: "networkidle0",

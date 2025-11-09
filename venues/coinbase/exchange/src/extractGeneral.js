@@ -125,7 +125,7 @@ const extractChangeLog = async (page, turndownService) => {
   try {
     const url = `${BASE_URL}/docs/changelog`
     return await extractContent(page, turndownService, url)
-  } catch (error) {
+  } catch {
     console.log("    No dedicated changelog found, using placeholder")
     return "# Change Log\n\nSee the main Coinbase Exchange documentation for version history and updates."
   }

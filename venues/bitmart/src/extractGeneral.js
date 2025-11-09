@@ -14,7 +14,6 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const BASE_URL_SPOT = "https://developer-pro.bitmart.com/en/spot/"
-const BASE_URL_FUTURES = "https://developer-pro.bitmart.com/en/futuresv2/"
 const OUTPUT_DIR = path.resolve(__dirname, "../../../docs/bitmart")
 
 /**
@@ -154,7 +153,6 @@ const extractNetworkConnectivity = async (page, turndownService) => {
 
     // Look for REST API Base URL and endpoint information
     const allElements = Array.from(document.querySelectorAll("*"))
-    let capturing = false
 
     for (const element of allElements) {
       const text = element.textContent
@@ -166,7 +164,6 @@ const extractNetworkConnectivity = async (page, turndownService) => {
           text.includes("REST API"))
       ) {
         if (element.tagName === "H2" || element.tagName === "H3") {
-          capturing = true
           content.appendChild(element.cloneNode(true))
 
           let sibling = element.nextElementSibling

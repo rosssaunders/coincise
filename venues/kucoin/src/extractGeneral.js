@@ -271,7 +271,7 @@ Please refer to the official KuCoin API documentation for a complete list of err
 /**
  * Extract Response Formats documentation
  */
-const extractResponseFormats = async (page, turndownService) => {
+const extractResponseFormats = async () => {
   console.log("Extracting response formats information...")
 
   const markdown = `# Response Formats

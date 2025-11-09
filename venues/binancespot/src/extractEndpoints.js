@@ -190,8 +190,7 @@ const splitIntoEndpoints = (html, sourceUrl, isPrivate) => {
 const extractEndpointsFromPage = async (
   page,
   endpoint,
-  isPrivate,
-  turndownService
+  isPrivate
 ) => {
   const url = `${BASE_URL}/${endpoint}`
   console.log(`  Extracting from ${url}...`)

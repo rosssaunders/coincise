@@ -204,11 +204,9 @@ const extractResponseFormats = async (page, turndownService) => {
     const elements = Array.from(
       main.querySelectorAll("h1, h2, h3, p, ul, ol, pre, code, table")
     )
-    let count = 0
 
     for (const element of elements.slice(0, 20)) {
       content.appendChild(element.cloneNode(true))
-      count++
     }
 
     return (

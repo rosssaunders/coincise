@@ -157,7 +157,7 @@ const extractErrorCodes = async (page, turndownService) => {
 /**
  * Extract Response Formats documentation
  */
-const extractResponseFormats = async (page, turndownService) => {
+const extractResponseFormats = async () => {
   console.log("Extracting response formats information...")
 
   // DigiFinex doesn't have a dedicated response format section

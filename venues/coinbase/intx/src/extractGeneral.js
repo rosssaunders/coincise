@@ -74,7 +74,7 @@ const extractRateLimits = async (page, turndownService) => {
   try {
     const url = `${DOCS_BASE_URL}/docs/rate-limits`
     return await extractContent(page, turndownService, url)
-  } catch (error) {
+  } catch {
     console.log("  Rate limits page not found, using placeholder")
     return "# Rate Limits\n\nNo specific rate limit information found. Please refer to the main API documentation."
   }
@@ -90,7 +90,7 @@ const extractNetworkConnectivity = async (page, turndownService) => {
   try {
     const url = `${DOCS_BASE_URL}/docs/rest-api`
     return await extractContent(page, turndownService, url)
-  } catch (error) {
+  } catch {
     console.log("  Network connectivity page not found, using placeholder")
     return "# Network Connectivity\n\nNo specific network connectivity information found. Please refer to the main API documentation."
   }
@@ -164,7 +164,7 @@ const extractChangeLog = async (page, turndownService) => {
 
   try {
     return await extractContent(page, turndownService, url)
-  } catch (error) {
+  } catch {
     console.log("  Change log not found, using placeholder")
     return "# Change Log\n\nNo change log available. Please refer to the main API documentation."
   }
