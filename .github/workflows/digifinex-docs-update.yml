@@ -47,11 +47,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run DigiFinex scraper - Public API
-        run: npm run extract:public
+      - name: Run DigiFinex scraper - General Documentation
+        run: npm run extract:general
 
-      - name: Run DigiFinex scraper - Private API
-        run: npm run extract:private
+      - name: Run DigiFinex scraper - Endpoints
+        run: npm run extract:endpoints
 
       - name: Run DigiFinex scraper - WebSocket API (GitHub)
         run: npm run extract:websocket-github
