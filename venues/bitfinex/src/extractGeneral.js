@@ -37,7 +37,12 @@ const writeFile = (filePath, content) => {
 /**
  * Extract content from a specific page section
  */
-const extractPageSection = async (page, url, turndownService, sectionTitle = null) => {
+const extractPageSection = async (
+  page,
+  url,
+  turndownService,
+  sectionTitle = null
+) => {
   console.log(`Navigating to ${url}...`)
   await page.goto(url, {
     waitUntil: "networkidle2",
@@ -45,7 +50,9 @@ const extractPageSection = async (page, url, turndownService, sectionTitle = nul
   })
 
   const html = await page.evaluate(section => {
-    const main = document.querySelector("main, article, .content-body, [role=\"main\"]")
+    const main = document.querySelector(
+      'main, article, .content-body, [role="main"]'
+    )
     if (!main) return ""
 
     // Clone to avoid modifying the original
@@ -299,8 +306,14 @@ const extractGeneral = async () => {
     ensureDir(OUTPUT_DIR)
 
     // Extract each core documentation section
-    const networkConnectivity = await extractNetworkConnectivity(page, turndownService)
-    writeFile(path.join(OUTPUT_DIR, "network_connectivity.md"), networkConnectivity)
+    const networkConnectivity = await extractNetworkConnectivity(
+      page,
+      turndownService
+    )
+    writeFile(
+      path.join(OUTPUT_DIR, "network_connectivity.md"),
+      networkConnectivity
+    )
 
     const authentication = await extractAuthentication(page, turndownService)
     writeFile(path.join(OUTPUT_DIR, "authentication.md"), authentication)
