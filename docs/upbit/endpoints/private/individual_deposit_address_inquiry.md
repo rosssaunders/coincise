@@ -1,216 +1,50 @@
-# Individual Deposit Address Inquiry
+# GET /v1/deposits/coin_address
 
-**Check the proper endpoint based on your region.**
+**Source:** [individual-deposit-address-inquiry](https://global-docs.upbit.com/reference/individual-deposit-address-inquiry)
 
-The base_url differs by country/region. Make sure to specify the correct region
-value for your environment.
+## Description
 
-\- Singapore (sg): https://sg-api.upbit.com  
-\- Indonesia (id): https://id-api.upbit.com  
-\- Thailand (th): https://th-api.upbit.com
+Retrieves deposit address information for the specified currency.
 
-Null deposit_address During Address Generation
-
-If this API is called after requesting deposit address creation but before the
-address is generated, the deposit_address field in the response may return null.
-Please retry the request after some time.
-
-Revision History
-
-| Version | Date       | Changes                                                                            |
-| ------- | ---------- | ---------------------------------------------------------------------------------- |
-| v1.0.7  | 2023-05-23 | [Addition of `net_type` field](https://global-docs.upbit.com/changelog/net_type#/) |
-
-Rate Limit
-
-Up to 30 calls per second are allowed. This is measured on an account basis and
-request counts are shared within the exchange 'default' group.
-
-API Key Permission
-
-This API requires [authentication](auth) and an API Key with \[View Deposits\]
-permission enabled.  
-If an out_of_scope error occurs, please check your permissions in the API Key
-Management page.
-
-currency
-
-string
-
-required
-
-Currency code to query.  
+Currency code to query.
 A filter parameter used to narrow down results by currency code.
 
-net_type
+## Authentication
 
-string
+Required (Private Endpoint)
 
-required
+## Rate Limit
 
-Blockchain network identifier for deposits and withdrawals. A filter parameter
-used to narrow down results by network identifier.
+Up to 30 calls per second are allowed.
 
-#
+This is measured on an IP basis and request counts are shared within the exchange.
 
-200
+## HTTP Request
 
-Object of deposit address
+`GET /v1/deposits/coin_address`
 
-object
+## Request Parameters
 
-currency
+### Query Parameters
 
-string
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| currency | string | Yes | Currency code to query. A filter parameter used to narrow down results by currency code. |
+| net_type | string | Yes | Blockchain network identifier for deposits and withdrawals. A filter parameter used to narrow down results by network identifier. |
 
-required
+## Request Example
 
-Currency code to be queried.
+```bash
+xxxxxxxxxx1curl --request GET \2    --url 'https://{region}-api.upbit.com/v1/deposits/coin_address?currency=BTC&net_type=BTC' \3    --header 'Authorization: Bearer {JWT_TOKEN}' \4    --header 'Accept: application/json'5​
+```
 
-net_type
+## Response Parameters
 
-string | null
-
-required
-
-Deposit network type.  
-Blockchain network identifier defined and used by Upbit.
-
-deposit_address
-
-string
-
-Deposit address for the digital asset.
-
-secondary_address
-
-string | null
-
-Secondary withdrawal address (e.g., Destination Tag, Memo, Message).  
-For some digital assets, deposits and withdrawals require a secondary address
-such as a Destination Tag, Memo, or Message. If the deposit address of the
-receiving exchange includes a secondary address, you must provide this field
-when submitting a withdrawal request.
-
-#
-
-400
-
-error object
-
-object
-
-error
-
-object
-
-name
-
-string
-
-required
-
-Name identifying the error.
-
-message
-
-string
-
-required
-
-Message describing the cause of the error.
-
-#
-
-401
-
-error object
-
-object
-
-error
-
-object
-
-name
-
-string
-
-required
-
-Name identifying the error.
-
-message
-
-string
-
-required
-
-Message describing the cause of the error.
-
-Updated 16 days ago
-
----
-
-ShellPythonJavaNode
-
-Base URL
-
-https://region\-api.upbit.com/v1/deposits/coin_address
-
-xxxxxxxxxx
-
-1
-
-curl \--request GET \\
-
-2
-
-    \--url 'https://{region}-api.upbit.com/v1/deposits/coin\_address?currency=BTC&net\_type=BTC' \\
-
-3
-
-    \--header 'Authorization: Bearer {JWT\_TOKEN}' \\
-
-4
-
-    \--header 'Accept: application/json'
-
-5
-
-​
-
-xxxxxxxxxx
-
-1
-
-{
-
-2
-
-"currency": "BTC",
-
-3
-
-"net_type": "BTC",
-
-4
-
-"deposit_address": "3EusRwybuZUhVDeHL7gh3HSLmbhLcy7NqD",
-
-5
-
-"secondary_address": null
-
-6
-
-}
-
-Updated 16 days ago
-
----
-
----
-
-**Source:**
-[individual-deposit-address-inquiry](https://global-docs.upbit.com/reference/individual-deposit-address-inquiry)
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| currency | string | Currency code to be queried. |
+| net_type | string | null | Deposit network type. Blockchain network identifier defined and used by Upbit. |
+| deposit_address | string | Deposit address for the digital asset. |
+| secondary_address | string | null | Secondary withdrawal address (e.g., Destination Tag, Memo, Message). For some digital assets, deposits and withdrawals require a secondary address such as a Destination Tag, Memo, or Message. If the deposit address of the receiving exchange includes a secondary address, you must provide this field when submitting a withdrawal request. |
+| name | string | Name identifying the error. |
+| message | string | Message describing the cause of the error. |

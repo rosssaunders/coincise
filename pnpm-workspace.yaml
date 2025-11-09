@@ -1,4 +1,9 @@
 packages:
-  - 'venues/*'
-  - 'venues/coinbase/exchange'
-  - 'tools/*'
+  - venues/*
+  - venues/coinbase/exchange
+  - tools/*
+
+onlyBuiltDependencies:
+  - ccxt
+  - core-js
+  - puppeteer
