@@ -54,8 +54,8 @@ GET `/v5/user/escrow_sub_members`
 - `1`: 經典帳戶
 - `3`: UTA帳戶
 
-| | \> remark | string | 備註 | | nextCursor | string | 下一頁數據的游標. 返
-回"0"表示沒有更多的數據了 |
+| | \> remark | string | 備註 | | nextCursor | string
+| 下一頁數據的游標. 返回"0"表示沒有更多的數據了 |
 
 ### Request Example[​](#request-example "Direct link to heading")
 

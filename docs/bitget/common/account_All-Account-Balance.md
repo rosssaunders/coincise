@@ -6,7 +6,7 @@ Assets overview
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/account/all-account-balance
+- GET /api/v2/account/all-account-balance
 
 Request Example
 
@@ -17,7 +17,7 @@ curl "https://api.bitget.com/api/v2/account/all-account-balance" \  -H "ACCESS-K
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
+| :-------- | :--- | :------- | :---------- |
 
 Response example
 
@@ -27,10 +27,10 @@ Response example
 
 ### Response parameters[​](#response-parameters "Direct link to Response parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| data | List&lt;Object&gt; | assetsList 
-| &gt; accountType | String | account Type 
-| &gt; usdtBalance | String | USDT amount
+| Parameter        | Type               | Description  |
+| :--------------- | :----------------- | :----------- |
+| data             | List&lt;Object&gt; | assetsList   |
+| &gt; accountType | String             | account Type |
+| &gt; usdtBalance | String             | USDT amount  |
 
 > **Source:** https://www.bitget.com/api-doc/common/account/All-Account-Balance

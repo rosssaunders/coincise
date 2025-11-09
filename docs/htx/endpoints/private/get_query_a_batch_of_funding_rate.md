@@ -1,6 +1,7 @@
 # GET Query a Batch of Funding Rate
 
-**Source:** [Query a Batch of Funding Rate](https://www.htx.com/en-us/opend/newApiPages/?id=5d516c58-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Query a Batch of Funding Rate](https://www.htx.com/en-us/opend/newApiPages/?id=5d516c58-77b6-11ed-9966-0242ac110003)
 
 **Category:** Reference Data
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /swap-api/v1/swap\_batch\_funding\_rate (Query a Batch of Funding Rate)
+### /swap-api/v1/swap_batch_funding_rate (Query a Batch of Funding Rate)
 
 Request type: GET
 
@@ -18,32 +19,32 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | contract code, if not filled in, default as all | "BTC-USD" ... |  |
+| Parameter     | Data Type | Required | Description                                     | Value Range   | Default Value |
+| ------------- | --------- | -------- | ----------------------------------------------- | ------------- | ------------- |
+| contract_code | string    | false    | contract code, if not filled in, default as all | "BTC-USD" ... |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | the result of server handles for the request | "ok" , "error" |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| DATA\_START | object array | true |  |  |
-| symbol | string | true | symbol |  |
-| contract\_code | string | true | contract code | "BTC-USD" ... |
-| fee\_asset | string | true | fee asset | "BTC","ETH"... |
-| funding\_time | string | true | current funding time(Millisecond) |  |
-| funding\_rate | string | true | current funding rate（Updated once a minute） |  |
-| estimated\_rate | string | true | (Deprecated, default is null) |  |
-| next\_funding\_time | string | true | (Deprecated, default is null) |  |
-| DATA\_END |  | false |  |  |
+| Parameter         | Data Type    | Required | Description                                   | Value Range    |
+| ----------------- | ------------ | -------- | --------------------------------------------- | -------------- |
+| status            | string       | true     | the result of server handles for the request  | "ok" , "error" |
+| ts                | long         | true     | Time of Respond Generation, Unit: Millisecond |                |
+| DATA_START        | object array | true     |                                               |                |
+| symbol            | string       | true     | symbol                                        |                |
+| contract_code     | string       | true     | contract code                                 | "BTC-USD" ...  |
+| fee_asset         | string       | true     | fee asset                                     | "BTC","ETH"... |
+| funding_time      | string       | true     | current funding time(Millisecond)             |                |
+| funding_rate      | string       | true     | current funding rate（Updated once a minute） |                |
+| estimated_rate    | string       | true     | (Deprecated, default is null)                 |                |
+| next_funding_time | string       | true     | (Deprecated, default is null)                 |                |
+| DATA_END          |              | false    |                                               |                |
 
 #### Request example
 
@@ -63,11 +64,11 @@ Interface permission: Read
 
 0:{
 
-"funding\_rate":
+"funding_rate":
 
 "-0.007500000000000000"
 
-"contract\_code":
+"contract_code":
 
 "ETC-USDT"
 
@@ -75,19 +76,19 @@ Interface permission: Read
 
 "ETC"
 
-"fee\_asset":
+"fee_asset":
 
 "ETC"
 
-"funding\_time":
+"funding_time":
 
 "1613976000000"
 
-"estimated\_rate":
+"estimated_rate":
 
 "null"
 
-"next\_funding\_time":
+"next_funding_time":
 
 "null"
 
@@ -95,11 +96,11 @@ Interface permission: Read
 
 1:{
 
-"funding\_rate":
+"funding_rate":
 
 "-0.007500000000000000"
 
-"contract\_code":
+"contract_code":
 
 "ADA-USDT"
 
@@ -107,19 +108,19 @@ Interface permission: Read
 
 "ADA"
 
-"fee\_asset":
+"fee_asset":
 
 "ADA"
 
-"funding\_time":
+"funding_time":
 
 "1613976000000"
 
-"estimated\_rate":
+"estimated_rate":
 
 "null"
 
-"next\_funding\_time":
+"next_funding_time":
 
 "null"
 

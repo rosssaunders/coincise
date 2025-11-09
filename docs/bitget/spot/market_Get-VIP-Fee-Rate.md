@@ -8,7 +8,7 @@ Get VIP Fee Rate
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/spot/market/vip-fee-rate
+- GET /api/v2/spot/market/vip-fee-rate
 
 Request Example
 
@@ -28,14 +28,14 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| level | String | VIP level 
-| dealAmount | String | Total trading volume in last 30 days, USDT 
-| assetAmount | String | Total assets in USDT 
-| takerFeeRate | String | Taker fee. Refer to the official announcement for the real rate when 0 is shown. 
-| makerFeeRate | String | Maker fee. Refer to the official announcement for the real rate when 0 is shown. 
-| btcWithdrawAmount | String | 24-hour withdrawal limit in BTC 
-| usdtWithdrawAmount | String | 24-hour withdrawal limit in USDT
+| Parameter          | Type   | Description                                                                      |
+| :----------------- | :----- | :------------------------------------------------------------------------------- |
+| level              | String | VIP level                                                                        |
+| dealAmount         | String | Total trading volume in last 30 days, USDT                                       |
+| assetAmount        | String | Total assets in USDT                                                             |
+| takerFeeRate       | String | Taker fee. Refer to the official announcement for the real rate when 0 is shown. |
+| makerFeeRate       | String | Maker fee. Refer to the official announcement for the real rate when 0 is shown. |
+| btcWithdrawAmount  | String | 24-hour withdrawal limit in BTC                                                  |
+| usdtWithdrawAmount | String | 24-hour withdrawal limit in USDT                                                 |
 
 > **Source:** https://www.bitget.com/api-doc/spot/market/Get-VIP-Fee-Rate

@@ -2,46 +2,52 @@
 
 **Check the proper endpoint based on your region.**
 
-The examples in this page is written using Singapore fiat code(SGD). Set the quote currency to match your region. The base\_url differs by country/region. Make sure to specify the correct region value for your environment.  
-  
+The examples in this page is written using Singapore fiat code(SGD). Set the
+quote currency to match your region. The base_url differs by country/region.
+Make sure to specify the correct region value for your environment.
+
 \- Singapore (sg): https://sg-api.upbit.com  
 \- Indonesia (id): https://id-api.upbit.com  
 \- Thailand (th): https://th-api.upbit.com
 
 Cases Where Order Cancellation Requests May Be Rejected
 
-Order cancellation requests may be rejected due to the following reasons:-   Orders that have already been fully executed and cannot be canceled
--   Orders that have already been canceled
--   Orders belonging to pairs for which service has been temporarily suspended due to reasons such as rebranding
+Order cancellation requests may be rejected due to the following reasons:-
+Orders that have already been fully executed and cannot be canceled
+
+- Orders that have already been canceled
+- Orders belonging to pairs for which service has been temporarily suspended due
+  to reasons such as rebranding
 
 This API supports only query parameter format.
 
-All request parameters must be sent as query parameters. Form data or JSON format in the request body is not supported.  
-  
+All request parameters must be sent as query parameters. Form data or JSON
+format in the request body is not supported.
+
 `Example:` /v1/orders/uuids?uuids\[\]=1234567890&uuids\[\]=1234567891
 
 When canceling orders, you must include either `uuid[]` or `identifier[]`.
 
-Both parameters are optional individually, but at least one must be included to specify the orders to cancel. You cannot use both parameters simultaneously.
-
-  
+Both parameters are optional individually, but at least one must be included to
+specify the orders to cancel. You cannot use both parameters simultaneously.
 
 Revision History
 
-| Version | Date | Changes |
-| --- | --- | --- |
-| v1.1.9 | 2024-12-11 | [Addition of `Order List Cancel`](https://global-docs.upbit.com/changelog/new_delete_orders#/) |
+| Version | Date       | Changes                                                                                        |
+| ------- | ---------- | ---------------------------------------------------------------------------------------------- |
+| v1.1.9  | 2024-12-11 | [Addition of `Order List Cancel`](https://global-docs.upbit.com/changelog/new_delete_orders#/) |
 
 Rate Limit
 
-Up to 30 calls per second are allowed. This is measured on an account basis and request counts are shared within the exchange 'default' group.
-
-  
+Up to 30 calls per second are allowed. This is measured on an account basis and
+request counts are shared within the exchange 'default' group.
 
 API Key Permission
 
-This API requires [authentication](auth) and an API Key with the \[Make Orders\] permission.  
-If you encounter an out\_of\_scope error, please verify the permission settings in the API Key Management page.
+This API requires [authentication](auth) and an API Key with the \[Make Orders\]
+permission.  
+If you encounter an out_of_scope error, please verify the permission settings in
+the API Key Management page.
 
 uuids\[\]
 
@@ -63,7 +69,8 @@ array of strings
 
 Client-specified identifiers for orders to cancel.  
 The maximum number of orders that can be canceled is 20.  
-When querying with two or more identifiers, specify the query parameters as follows:
+When querying with two or more identifiers, specify the query parameters as
+follows:
 
 \[Example\] identifiers\[\]=id1&identifiers\[\]=id2…
 
@@ -71,7 +78,7 @@ identifiers\[\]
 
 ADD string
 
-# 
+#
 
 200
 
@@ -129,7 +136,8 @@ string
 
 Order identifier specified by the client at order creation.
 
--   identifier field is only provided for orders created on or after October 18, 2024.
+- identifier field is only provided for orders created on or after October
+  18, 2024.
 
 failed
 
@@ -181,9 +189,10 @@ string
 
 Order identifier specified by the client at order creation.
 
--   identifier field is only provided for orders created on or after October 18, 2024.
+- identifier field is only provided for orders created on or after October
+  18, 2024.
 
-# 
+#
 
 400
 
@@ -213,7 +222,7 @@ Message describing the cause of the error.
 
 Updated 16 days ago
 
-* * *
+---
 
 ShellPythonJavaNode
 
@@ -253,7 +262,7 @@ xxxxxxxxxx
 
 2
 
-  "success": {
+"success": {
 
 3
 
@@ -301,11 +310,11 @@ xxxxxxxxxx
 
 14
 
-  },
+},
 
 15
 
-  "failed": {
+"failed": {
 
 16
 
@@ -337,7 +346,7 @@ xxxxxxxxxx
 
 23
 
-  }
+}
 
 24
 
@@ -345,8 +354,9 @@ xxxxxxxxxx
 
 Updated 16 days ago
 
-* * *
+---
 
 ---
 
-**Source:** [order-list-cancel](https://global-docs.upbit.com/reference/order-list-cancel)
+**Source:**
+[order-list-cancel](https://global-docs.upbit.com/reference/order-list-cancel)

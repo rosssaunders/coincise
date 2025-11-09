@@ -1,6 +1,7 @@
 # PUT Update Order(Limit)
 
-Source: [https://doc.xt.com/docs/spot/Order/UpdateOrderLimit](https://doc.xt.com/docs/spot/Order/UpdateOrderLimit)
+Source:
+[https://doc.xt.com/docs/spot/Order/UpdateOrderLimit](https://doc.xt.com/docs/spot/Order/UpdateOrderLimit)
 
 # Update Order(Limit)
 
@@ -8,11 +9,11 @@ Source: [https://doc.xt.com/docs/spot/Order/UpdateOrderLimit](https://doc.xt.com
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| orderId | number | true |  | order ID |  |
-| price | number | true |  | Price |  |
-| quantity | number | true |  | Quantity |  |
+| name     | type   | mandatory | default | description | ranges |
+| -------- | ------ | --------- | ------- | ----------- | ------ |
+| orderId  | number | true      |         | order ID    |        |
+| price    | number | true      |         | Price       |        |
+| quantity | number | true      |         | Quantity    |        |
 
 #### **Limit Flow Rules**[​](#limit-flow-rules "Direct link to limit-flow-rules")
 

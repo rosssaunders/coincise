@@ -1,12 +1,13 @@
 # GET Get server time
 
-Source: [https://doc.xt.com/docs/spot/Market/GetServerTime](https://doc.xt.com/docs/spot/Market/GetServerTime)
+Source:
+[https://doc.xt.com/docs/spot/Market/GetServerTime](https://doc.xt.com/docs/spot/Market/GetServerTime)
 
 # Get server time
 
 **Type:** GET **Description:** `/v4/public/time`
 
-* * *
+---
 
 ### Request Examples[​](#request-examples "Direct link to Request Examples")
 

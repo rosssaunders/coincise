@@ -16,28 +16,28 @@
 ]
 ```
 
--   **GET** `/api/v3/trades`
+- **GET** `/api/v3/trades`
 
 **Weight(IP):** 5
 
 Parameter:
 
-| Name | Type | Mandatory | Description | Scope |
-| --- | --- | --- | --- | --- |
-| symbol | string | YES |  |  |
-| limit | integer | NO |  | Default 500; max 1000 |
+| Name   | Type    | Mandatory | Description | Scope                 |
+| ------ | ------- | --------- | ----------- | --------------------- |
+| symbol | string  | YES       |             |                       |
+| limit  | integer | NO        |             | Default 500; max 1000 |
 
 Response:
 
-| Name | Description |
-| --- | --- |
-| id | Trade id |
-| price | Price |
-| qty | Number |
-| quoteQty | Trade total |
-| time | Trade time |
-| isBuyerMaker | Was the buyer the maker? |
-| isBestMatch | Was the trade the best price match? |
+| Name         | Description                         |
+| ------------ | ----------------------------------- |
+| id           | Trade id                            |
+| price        | Price                               |
+| qty          | Number                              |
+| quoteQty     | Trade total                         |
+| time         | Trade time                          |
+| isBuyerMaker | Was the buyer the maker?            |
+| isBestMatch  | Was the trade the best price match? |
 
 ---
 

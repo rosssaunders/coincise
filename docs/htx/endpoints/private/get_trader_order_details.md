@@ -1,6 +1,7 @@
 # GET Trader Order details
 
-**Source:** [Trader Order details](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-19126f5099a)
+**Source:**
+[Trader Order details](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-19126f5099a)
 
 **Category:** Future Copy Trade
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /copytrading/trader/order\_total\_detail (Trader Order details)
+### /copytrading/trader/order_total_detail (Trader Order details)
 
 Request type: GET
 
@@ -16,42 +17,44 @@ Signature verification: Yes
 
 Interface permission: Read
 
-Rate Limit: A single user requests all copytrading interfaces 18 times per second.
+Rate Limit: A single user requests all copytrading interfaces 18 times per
+second.
 
-Interface description: This interface is used to query trader order indicator statistics.
+Interface description: This interface is used to query trader order indicator
+statistics.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
 | Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
+| --------- | --------- | -------- | ----------- | ----------- | ------------- |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| tid | String | true | request id |  |
-| DATA\_START |  | true |  |  |
-| total\_follower\_num | String | false | Total followers |  |
-| current\_follower\_num | String | false | Current number of followers |  |
-| total\_pl | String | false | Total profit (calculated in USD) |  |
-| win\_rate | String | false | Win rate |  |
-| LAST\_24\_HOURS\_PROFIT\_START | List<Object> | false | last 24 hours profit list |  |
-| rate | string | true | rate |  |
-| amount | string | true | amount |  |
-| ts | string | true | date |  |
-| LAST\_90\_DAYS\_PROFIT\_START | List<Object> | false | last 90 days profit list |  |
-| rate | string | true | rate |  |
-| amount | string | true | amount |  |
-| ts | string | true | date |  |
-| DATA\_END |  | false |  |  |
-| code | long | true |  |  |
+| Parameter                  | Data Type    | Required | Description                      | Value Range |
+| -------------------------- | ------------ | -------- | -------------------------------- | ----------- |
+| tid                        | String       | true     | request id                       |             |
+| DATA_START                 |              | true     |                                  |             |
+| total_follower_num         | String       | false    | Total followers                  |             |
+| current_follower_num       | String       | false    | Current number of followers      |             |
+| total_pl                   | String       | false    | Total profit (calculated in USD) |             |
+| win_rate                   | String       | false    | Win rate                         |             |
+| LAST_24_HOURS_PROFIT_START | List<Object> | false    | last 24 hours profit list        |             |
+| rate                       | string       | true     | rate                             |             |
+| amount                     | string       | true     | amount                           |             |
+| ts                         | string       | true     | date                             |             |
+| LAST_90_DAYS_PROFIT_START  | List<Object> | false    | last 90 days profit list         |             |
+| rate                       | string       | true     | rate                             |             |
+| amount                     | string       | true     | amount                           |             |
+| ts                         | string       | true     | date                             |             |
+| DATA_END                   |              | false    |                                  |             |
+| code                       | long         | true     |                                  |             |
 
 #### Request example
 
@@ -69,23 +72,23 @@ Interface description: This interface is used to query trader order indicator st
 
 "data":{
 
-"total\_follower\_num":
+"total_follower_num":
 
 "6"
 
-"current\_follower\_num":
+"current_follower_num":
 
 "2"
 
-"total\_pl":
+"total_pl":
 
 "34153.436"
 
-"win\_rate":
+"win_rate":
 
 "0.1248"
 
-"last\_24\_hours\_profit":\[
+"last_24_hours_profit":\[
 
 0:{
 
@@ -473,7 +476,7 @@ Interface description: This interface is used to query trader order indicator st
 
 \]
 
-"last\_90\_days\_profit":\[
+"last_90_days_profit":\[
 
 0:{
 
@@ -883,7 +886,7 @@ Interface description: This interface is used to query trader order indicator st
 
 "amount":
 
-"-46.3262738399999.........FULL\_MSG\_VIEW\_LOG\_FILE.........999935"
+"-46.3262738399999.........FULL_MSG_VIEW_LOG_FILE.........999935"
 
 "ts":
 

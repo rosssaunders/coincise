@@ -34,15 +34,17 @@ None
 
 `{   "code": 1000,   "trace":"886fb6ae-456b-4654-b4e0-d681ac05cea1",   "message": "OK",   "data": {     "currencies": [       {         "id": "BTC",         "name": "Bitcoin",         "withdraw_enabled": true,         "deposit_enabled": true       },       {         "id": "ETH",         "name": "Ethereum",         "withdraw_enabled": true,         "deposit_enabled": true       }     ]   } }`
 
-| Field | Type | Description |
-| --- | --- | --- |
-| id | String | Currency abbreviation, such as BTC |
-| name | String | Currency full name, such as Bitcoin |
-| withdraw\_enabled | Boolean | Whether this currency can be withdrawn on the platform  
+| Field            | Type    | Description                                            |
+| ---------------- | ------- | ------------------------------------------------------ |
+| id               | String  | Currency abbreviation, such as BTC                     |
+| name             | String  | Currency full name, such as Bitcoin                    |
+| withdraw_enabled | Boolean | Whether this currency can be withdrawn on the platform |
+
 \- `true`\=can  
-\- `false`\=no |
-| deposit\_enabled | Boolean | Whether this currency can be deposited on the platform  
+\- `false`\=no | | deposit_enabled | Boolean | Whether this currency can be
+deposited on the platform  
 \- `true`\=can  
 \- `false`\=no |
 
-If the currency you need is not included in the returned response, the currency may have been delisted.
+If the currency you need is not included in the returned response, the currency
+may have been delisted.

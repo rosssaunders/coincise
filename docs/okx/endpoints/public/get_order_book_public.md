@@ -1,6 +1,7 @@
 # GET order book (Public)
 
-Source: [https://www.okx.com/docs-v5/en/#spread-trading-rest-api-get-order-book-public](https://www.okx.com/docs-v5/en/#spread-trading-rest-api-get-order-book-public)
+Source:
+[https://www.okx.com/docs-v5/en/#spread-trading-rest-api-get-order-book-public](https://www.okx.com/docs-v5/en/#spread-trading-rest-api-get-order-book-public)
 
 ### Get order book (Public)
 
@@ -18,18 +19,18 @@ Retrieve the order book of the spread.
 
 #### Request Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| sprdId | String | Yes | spread ID, e.g. BTC-USDT\_BTC-USDT-SWAP |
-| sz | String | No | Order book depth per side. Maximum value is 400. Default value is 5. |
+| Parameter | Type   | Required | Description                                                          |
+| --------- | ------ | -------- | -------------------------------------------------------------------- |
+| sprdId    | String | Yes      | spread ID, e.g. BTC-USDT_BTC-USDT-SWAP                               |
+| sz        | String | No       | Order book depth per side. Maximum value is 400. Default value is 5. |
 
 #### Response Parameters
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| asks | Array of arrays | Order book on sell side |
-| bids | Array of arrays | Order book on buy side |
-| ts | String | Order book generation time |
+| Parameter | Type            | Description                |
+| --------- | --------------- | -------------------------- |
+| asks      | Array of arrays | Order book on sell side    |
+| bids      | Array of arrays | Order book on buy side     |
+| ts        | String          | Order book generation time |
 
 An example of the array of asks and bids values: \["411.8", "10", "4"\]  
 \- "411.8" is the depth price  

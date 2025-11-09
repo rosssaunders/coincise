@@ -1,6 +1,7 @@
 # POST private/get-transactions
 
-**Source:** [private/get-transactions](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-transactions)
+**Source:**
+[private/get-transactions](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-transactions)
 
 ## Authentication
 
@@ -74,17 +75,18 @@ Fetches recent transactions
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | N | e.g. instrument\_name, e.g. BTCUSD-PERP, Omit for 'all' |
-| journal\_type | string | N | Refer to the `journal_type` in `Response Attributes` |
-| start\_time | number or string | N | Start time in Unix time format (`inclusive`).  
+| Name            | Type             | Required | Description                                            |
+| --------------- | ---------------- | -------- | ------------------------------------------------------ |
+| instrument_name | string           | N        | e.g. instrument_name, e.g. BTCUSD-PERP, Omit for 'all' |
+| journal_type    | string           | N        | Refer to the `journal_type` in `Response Attributes`   |
+| start_time      | number or string | N        | Start time in Unix time format (`inclusive`).          |
+
 Default: `end_time - 1 day`.  
-Nanosecond is recommended for accurate pagination |
-| end\_time | number or string | N | End time in Unix time format (`exclusive`)  
+Nanosecond is recommended for accurate pagination | | end_time | number or
+string | N | End time in Unix time format (`exclusive`)  
 Default: current system timestamp.  
-Nanosecond is recommended for accurate pagination |
-| limit | int | N | The maximum number of trades to be retrievd before the `end_time`.  
+Nanosecond is recommended for accurate pagination | | limit | int | N | The
+maximum number of trades to be retrievd before the `end_time`.  
 Default: 100.  
 Max: 100. |
 
@@ -98,21 +100,21 @@ POST
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| account\_id | string | Account ID |
-| event\_date | string | Event date |
-| journal\_type | string | Journal type would be `TRADING`, `TRADE_FEE`, `ONCHAIN_WITHDRAWAL`, `ONCHAIN_DEPOSIT`, `FUNDING`, `REALIZED_PNL`, `INSURANCE_FUND`, `SOCIALIZED_LOSS`, `LIQUIDATION_FEE`, `SESSION_RESET`, `ADJUSTMENT`, `SESSION_SETTLE`, `UNCOVERED_LOSS`, `ADMIN_ADJUSTMENT`, `DELIST`, `SETTLEMENT_FEE`, `AUTO_CONVERSION`, `MANUAL_CONVERSION`,`SUBACCOUNT_TX`,`FIAT_WITHDRAWAL_CANCEL`,`MARGIN_TRADE_INTEREST` |
-| journal\_id | string of number | Journal ID |
-| transaction\_qty | string | Transaction quantity |
-| transaction\_cost | string | Transaction cost |
-| realized\_pnl | string | Realized PNL |
-| order\_id | string of number | Order ID |
-| trade\_id | string of number | Trade ID |
-| trade\_match\_id | string of number | Trade match ID applicable to trades only. Non-trade related transactions will have zero or null value. |
-| client\_oid | string | Client Order ID (can be empty) |
-| taker\_side | string | `MAKER` or `TAKER` or empty |
-| side | string | `BUY` or `SELL` |
-| instrument\_name | string | e.g. BTCUSD-PERP |
-| event\_timestamp\_ms | number | Event timestamp in milliseconds |
-| event\_timestamp\_ns | string | Event timestamp in nanoseconds |
+| Name               | Type             | Description                                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------------ | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| account_id         | string           | Account ID                                                                                                                                                                                                                                                                                                                                                                                           |
+| event_date         | string           | Event date                                                                                                                                                                                                                                                                                                                                                                                           |
+| journal_type       | string           | Journal type would be `TRADING`, `TRADE_FEE`, `ONCHAIN_WITHDRAWAL`, `ONCHAIN_DEPOSIT`, `FUNDING`, `REALIZED_PNL`, `INSURANCE_FUND`, `SOCIALIZED_LOSS`, `LIQUIDATION_FEE`, `SESSION_RESET`, `ADJUSTMENT`, `SESSION_SETTLE`, `UNCOVERED_LOSS`, `ADMIN_ADJUSTMENT`, `DELIST`, `SETTLEMENT_FEE`, `AUTO_CONVERSION`, `MANUAL_CONVERSION`,`SUBACCOUNT_TX`,`FIAT_WITHDRAWAL_CANCEL`,`MARGIN_TRADE_INTEREST` |
+| journal_id         | string of number | Journal ID                                                                                                                                                                                                                                                                                                                                                                                           |
+| transaction_qty    | string           | Transaction quantity                                                                                                                                                                                                                                                                                                                                                                                 |
+| transaction_cost   | string           | Transaction cost                                                                                                                                                                                                                                                                                                                                                                                     |
+| realized_pnl       | string           | Realized PNL                                                                                                                                                                                                                                                                                                                                                                                         |
+| order_id           | string of number | Order ID                                                                                                                                                                                                                                                                                                                                                                                             |
+| trade_id           | string of number | Trade ID                                                                                                                                                                                                                                                                                                                                                                                             |
+| trade_match_id     | string of number | Trade match ID applicable to trades only. Non-trade related transactions will have zero or null value.                                                                                                                                                                                                                                                                                               |
+| client_oid         | string           | Client Order ID (can be empty)                                                                                                                                                                                                                                                                                                                                                                       |
+| taker_side         | string           | `MAKER` or `TAKER` or empty                                                                                                                                                                                                                                                                                                                                                                          |
+| side               | string           | `BUY` or `SELL`                                                                                                                                                                                                                                                                                                                                                                                      |
+| instrument_name    | string           | e.g. BTCUSD-PERP                                                                                                                                                                                                                                                                                                                                                                                     |
+| event_timestamp_ms | number           | Event timestamp in milliseconds                                                                                                                                                                                                                                                                                                                                                                      |
+| event_timestamp_ns | string           | Event timestamp in nanoseconds                                                                                                                                                                                                                                                                                                                                                                       |

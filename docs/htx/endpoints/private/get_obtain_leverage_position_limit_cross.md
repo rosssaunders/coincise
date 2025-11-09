@@ -1,6 +1,7 @@
 # GET Obtain leverage position limit（Cross）
 
-**Source:** [Obtain leverage position limit（Cross）](https://www.htx.com/en-us/opend/newApiPages/?id=7ec512ec-7773-11ed-9966-0242ac110003)
+**Source:**
+[Obtain leverage position limit（Cross）](https://www.htx.com/en-us/opend/newApiPages/?id=7ec512ec-7773-11ed-9966-0242ac110003)
 
 **Category:** Margin Loan (Cross/Isolated)
 
@@ -18,32 +19,33 @@ Interface permission: Read
 
 Rate Limit: 2times/2s
 
-Interface description: This interface returns the position limit at the user level.
+Interface description: This interface returns the position limit at the user
+level.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| currency | string | false | If empty, all currencies will be queried by default. |  |  |
+| Parameter | Data Type | Required | Description                                          | Value Range | Default Value |
+| --------- | --------- | -------- | ---------------------------------------------------- | ----------- | ------------- |
+| currency  | string    | false    | If empty, all currencies will be queried by default. |             |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| code | integer | false | Status code |  |
-| message | string | false | Incorrect description (if any) |  |
-| status | string | false | status |  |
-| DATA\_START | object | false |  |  |
-| currency | string | false | currency |  |
-| maxHoldings | string | false | Position limit |  |
-| DATA\_END |  | false |  |  |
+| Parameter   | Data Type | Required | Description                    | Value Range |
+| ----------- | --------- | -------- | ------------------------------ | ----------- |
+| code        | integer   | false    | Status code                    |             |
+| message     | string    | false    | Incorrect description (if any) |             |
+| status      | string    | false    | status                         |             |
+| DATA_START  | object    | false    |                                |             |
+| currency    | string    | false    | currency                       |             |
+| maxHoldings | string    | false    | Position limit                 |             |
+| DATA_END    |           | false    |                                |             |
 
 #### Request example
 

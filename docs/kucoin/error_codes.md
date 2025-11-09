@@ -13,6 +13,8 @@
 
 ## KuCoin Error Codes
 
-KuCoin uses specific error codes in the response body to indicate the type of error.
+KuCoin uses specific error codes in the response body to indicate the type of
+error.
 
-Please refer to the official KuCoin API documentation for a complete list of error codes.
+Please refer to the official KuCoin API documentation for a complete list of
+error codes.

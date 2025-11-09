@@ -1,6 +1,7 @@
 # POST private/staking/stake
 
-**Source:** [private/staking/stake](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-staking-stake)
+**Source:**
+[private/staking/stake](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-staking-stake)
 
 ## Authentication
 
@@ -45,10 +46,10 @@ Create a request to earn token rewards by staking on-chain in the Exchange.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | Y | Staking instrument name, e.g. SOL.staked, refer to `instrument_name` from `private/staking/get-staking-instruments` response |
-| quantity | string | Y | Stake quantity |
+| Name            | Type   | Required | Description                                                                                                                  |
+| --------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| instrument_name | string | Y        | Staking instrument name, e.g. SOL.staked, refer to `instrument_name` from `private/staking/get-staking-instruments` response |
+| quantity        | string | Y        | Stake quantity                                                                                                               |
 
 ### Applies To
 
@@ -60,18 +61,18 @@ POST
 
 ### Response Attributes
 
-| Name | Type | Description |
-| --- | --- | --- |
-| staking\_id | string | Request id |
-| instrument\_name | string | Staking instrument name, e.g. SOL.staked |
-| status | string | Request status:  
+| Name            | Type   | Description                              |
+| --------------- | ------ | ---------------------------------------- |
+| staking_id      | string | Request id                               |
+| instrument_name | string | Staking instrument name, e.g. SOL.staked |
+| status          | string | Request status:                          |
+
 \- `NEW`  
 \- `PENDING`  
 \- `STAKED`  
 \- `COMPLETED`  
-\- `REJECTED` |
-| quantity | string | Stake quantity |
-| underlying\_inst\_name | string | Underlying instrument name of staking, e.g. SOL |
-| pre\_stake\_charge\_rate\_in\_bps | string | Pre stake charge rate in basis point |
-| pre\_stake\_charge | string | Pre stake charge value |
-| reason | string | Reason for the status, e.g. "NO\_ERROR" |
+\- `REJECTED` | | quantity | string | Stake quantity | | underlying_inst_name |
+string | Underlying instrument name of staking, e.g. SOL | |
+pre_stake_charge_rate_in_bps | string | Pre stake charge rate in basis point | |
+pre_stake_charge | string | Pre stake charge value | | reason | string | Reason
+for the status, e.g. "NO_ERROR" |

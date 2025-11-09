@@ -6,25 +6,28 @@
 
 The header of all REST requests must contain the following http headers：
 
-*   ACCESS-KEY：API KEY as a string
-*   ACCESS-SIGN：Sign with base64 encoding (see [HMAC](/api-doc/common/signature-samaple/hmac) and [RSA](/api-doc/common/signature-samaple/rsa) sample code).
-*   ACCESS-TIMESTAMP：Timestamp of your request. Value equals to milliseconds since Epoch.
-*   ACCESS-PASSPHRASE：The password you set when created the API KEY.
-*   Content-Type：Please set to application/json for all POST request
-*   locale: Support language such as: Chinese (zh-CN), English (en-US)
+- ACCESS-KEY：API KEY as a string
+- ACCESS-SIGN：Sign with base64 encoding (see
+  [HMAC](/api-doc/common/signature-samaple/hmac) and
+  [RSA](/api-doc/common/signature-samaple/rsa) sample code).
+- ACCESS-TIMESTAMP：Timestamp of your request. Value equals to milliseconds
+  since Epoch.
+- ACCESS-PASSPHRASE：The password you set when created the API KEY.
+- Content-Type：Please set to application/json for all POST request
+- locale: Support language such as: Chinese (zh-CN), English (en-US)
 
 ### How to get ACCESS-TIMESTAMP[​](#how-to-get-access-timestamp "Direct link to How to get ACCESS-TIMESTAMP")
 
-*   Java
-*   Python
-*   Go
-*   JS
-*   PHP
+- Java
+- Python
+- Go
+- JS
+- PHP
 
 Long timestamp = System.currentTimeMillis();
 
 import time  
-time.time\_ns() / 1000000
+time.time_ns() / 1000000
 
 import (  
 "time"  
@@ -37,15 +40,21 @@ microtime(true) \* 1000;
 
 ## Generate Signature[​](#generate-signature "Direct link to Generate Signature")
 
-The request header of ACCESS-SIGN is to encrypt **timestamp + method.toUpperCase() + requestPath + "?" + queryString + body** string (+ means string concat) by **HMAC SHA256** algorithm with **secretKey**. and encode the encrypted result through **BASE64**.
+The request header of ACCESS-SIGN is to encrypt **timestamp +
+method.toUpperCase() + requestPath + "?" + queryString + body** string (+ means
+string concat) by **HMAC SHA256** algorithm with **secretKey**. and encode the
+encrypted result through **BASE64**.
 
 ### Description of each parameter in the signature[​](#description-of-each-parameter-in-the-signature "Direct link to Description of each parameter in the signature")
 
-*   timestamp：Same as ACCESS-TIMESTAMP request header. Value equals to milliseconds since Epoch.
-*   method：Request method (POST/GET), all uppercase.
-*   requestPath：Request interface path.
-*   queryString：The query string in the request URL (the request parameter after the ?).
-*   body：The request body in string format. If the request body is empty (usually a GET request), the body can be omitted.
+- timestamp：Same as ACCESS-TIMESTAMP request header. Value equals to
+  milliseconds since Epoch.
+- method：Request method (POST/GET), all uppercase.
+- requestPath：Request interface path.
+- queryString：The query string in the request URL (the request parameter after
+  the ?).
+- body：The request body in string format. If the request body is empty (usually
+  a GET request), the body can be omitted.
 
 **If the queryString is empty, signature content**
 
@@ -59,10 +68,10 @@ The request header of ACCESS-SIGN is to encrypt **timestamp + method.toUpperCase
 
 Get contract depth information, let's take BTCUSDT as an example:
 
-*   timestamp = 16273667805456
-*   method = "GET"
-*   requestPath = "/api/mix/v2/market/depth"
-*   queryString= "?limit=20&symbol=BTCUSDT"
+- timestamp = 16273667805456
+- method = "GET"
+- requestPath = "/api/mix/v2/market/depth"
+- queryString= "?limit=20&symbol=BTCUSDT"
 
 Generate the content to be signed:
 
@@ -70,10 +79,11 @@ Generate the content to be signed:
 
 Contract order, take BTCUSDT as an example:
 
-*   timestamp = 16273667805456
-*   method = "POST"
-*   requestPath = "/api/v2/mix/order/place-order"
-*   body = {"productType":"usdt-futures","symbol":"BTCUSDT","size":"8","marginMode":"crossed","side":"buy","orderType":"limit","clientOid":"channel#123456"}
+- timestamp = 16273667805456
+- method = "POST"
+- requestPath = "/api/v2/mix/order/place-order"
+- body =
+  {"productType":"usdt-futures","symbol":"BTCUSDT","size":"8","marginMode":"crossed","side":"buy","orderType":"limit","clientOid":"channel#123456"}
 
 Generate the content to be signed:
 
@@ -83,9 +93,10 @@ Generate the content to be signed:
 
 **_HMAC_**
 
-*   [HMAC sample code](/api-doc/common/signature-samaple/hmac)
+- [HMAC sample code](/api-doc/common/signature-samaple/hmac)
 
-Step 1. Use the private key \*\*secretkey\*\* to encrypt the string to be signed with hmac sha256
+Step 1. Use the private key \*\*secretkey\*\* to encrypt the string to be signed
+with hmac sha256
 
 ```
 String payload = hmac_sha256(secretkey, Message);
@@ -99,9 +110,10 @@ String signature = base64.encode(payload);
 
 **_RSA_**
 
-*   [RSA sample code](/api-doc/common/signature-samaple/rsa)
+- [RSA sample code](/api-doc/common/signature-samaple/rsa)
 
-Step 1. Use the RSA privateKey **privateKey** to encrypt the string to be signed with SHA-256
+Step 1. Use the RSA privateKey **privateKey** to encrypt the string to be signed
+with SHA-256
 
 Step 2. Base64 encoding for Signature.
 

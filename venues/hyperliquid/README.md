@@ -1,15 +1,19 @@
 # Hyperliquid Exchange Documentation Extractor
 
-This directory contains scripts for extracting and converting Hyperliquid API documentation into LLM-friendly markdown format.
+This directory contains scripts for extracting and converting Hyperliquid API
+documentation into LLM-friendly markdown format.
 
 ## Overview
 
-Hyperliquid is a decentralized perpetual trading protocol with comprehensive REST and WebSocket APIs. This extractor pulls documentation from their official GitBook-based docs.
+Hyperliquid is a decentralized perpetual trading protocol with comprehensive
+REST and WebSocket APIs. This extractor pulls documentation from their official
+GitBook-based docs.
 
 ## Documentation Source
 
 - **Main Documentation**: https://hyperliquid.gitbook.io/hyperliquid-docs
-- **API Documentation**: https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api
+- **API Documentation**:
+  https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api
 - **Python SDK**: https://github.com/hyperliquid-dex/hyperliquid-python-sdk
 
 ## Extraction Scripts
@@ -17,6 +21,7 @@ Hyperliquid is a decentralized perpetual trading protocol with comprehensive RES
 ### `extractGeneral.js`
 
 Extracts general API documentation:
+
 - Network connectivity (REST and WebSocket endpoints)
 - Authentication and signing
 - Rate limits and user limits
@@ -27,8 +32,11 @@ Extracts general API documentation:
 ### `extractEndpoints.js`
 
 Extracts individual endpoint documentation:
-- **Info endpoints** (26 endpoints): Public and private endpoints for querying market data and user information
-- **Exchange endpoints** (25 endpoints): Private endpoints for trading, transfers, and account management
+
+- **Info endpoints** (26 endpoints): Public and private endpoints for querying
+  market data and user information
+- **Exchange endpoints** (25 endpoints): Private endpoints for trading,
+  transfers, and account management
 - **WebSocket API** (1 endpoint): Real-time data streaming documentation
 
 Total: **52 endpoints** (7 public, 45 private)
@@ -108,8 +116,10 @@ docs/hyperliquid/
 
 ## Notes
 
-- The API is currently at version v0, with a planned v1 update for standardization
-- GitBook structure requires different extraction approach than Redocly-based docs
+- The API is currently at version v0, with a planned v1 update for
+  standardization
+- GitBook structure requires different extraction approach than Redocly-based
+  docs
 - Endpoints are classified based on authentication requirements
 - WebSocket API documentation is kept as a single comprehensive document
 

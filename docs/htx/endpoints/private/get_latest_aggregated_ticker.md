@@ -1,6 +1,7 @@
 # GET Latest Aggregated Ticker
 
-**Source:** [Get Latest Aggregated Ticker](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4a3b6-7773-11ed-9966-0242ac110003)
+**Source:**
+[Get Latest Aggregated Ticker](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4a3b6-7773-11ed-9966-0242ac110003)
 
 **Category:** Market Data
 
@@ -16,40 +17,41 @@ Signature verification: No
 
 Rate Limit: 4,500 5 minutes
 
-Interface description: This endpoint retrieves the latest ticker with some important 24h aggregated market data.
+Interface description: This endpoint retrieves the latest ticker with some
+important 24h aggregated market data.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | false | The trading symbol to query | All supported trading symbol, e.g. btcusdt, bccbtc.Refer to /v1/common/symbols |  |
+| Parameter | Data Type | Required | Description                 | Value Range                                                                    | Default Value |
+| --------- | --------- | -------- | --------------------------- | ------------------------------------------------------------------------------ | ------------- |
+| symbol    | string    | false    | The trading symbol to query | All supported trading symbol, e.g. btcusdt, bccbtc.Refer to /v1/common/symbols |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | false | Request Processing Result "ok","error" |  |
-| ch | string | false | Data belonged channel，Format：market.$symbol.detail.merged |  |
-| ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| TICK\_START | object | false |  |  |
-| id | long | false | The internal identity |  |
-| amount | float | false | Accumulated trading volume of last 24 hours (rotating 24h), in base currency |  |
-| count | integer | false | The number of completed trades (rotating 24h) |  |
-| open | float | false | The opening price of last 24 hours (rotating 24h) |  |
-| close | float | false | The last price of last 24 hours (rotating 24h) |  |
-| low | float | false | The lowest price of last 24 hours (rotating 24h) |  |
-| high | float | false | The highest price of last 24 hours (rotating 24h) |  |
-| vol | float | false | Accumulated trading value of last 24 hours (rotating 24h), in quote currency |  |
-| bid | object | false | The current best bid in format \[price, size\] |  |
-| ask | object | false | The current best ask in format \[price, size\] |  |
-| TICK\_END |  | false |  |  |
+| Parameter  | Data Type | Required | Description                                                                  | Value Range |
+| ---------- | --------- | -------- | ---------------------------------------------------------------------------- | ----------- |
+| status     | string    | false    | Request Processing Result "ok","error"                                       |             |
+| ch         | string    | false    | Data belonged channel，Format：market.$symbol.detail.merged                  |             |
+| ts         | long      | false    | Time of Respond Generation, Unit: Millisecond                                |             |
+| TICK_START | object    | false    |                                                                              |             |
+| id         | long      | false    | The internal identity                                                        |             |
+| amount     | float     | false    | Accumulated trading volume of last 24 hours (rotating 24h), in base currency |             |
+| count      | integer   | false    | The number of completed trades (rotating 24h)                                |             |
+| open       | float     | false    | The opening price of last 24 hours (rotating 24h)                            |             |
+| close      | float     | false    | The last price of last 24 hours (rotating 24h)                               |             |
+| low        | float     | false    | The lowest price of last 24 hours (rotating 24h)                             |             |
+| high       | float     | false    | The highest price of last 24 hours (rotating 24h)                            |             |
+| vol        | float     | false    | Accumulated trading value of last 24 hours (rotating 24h), in quote currency |             |
+| bid        | object    | false    | The current best bid in format \[price, size\]                               |             |
+| ask        | object    | false    | The current best ask in format \[price, size\]                               |             |
+| TICK_END   |           | false    |                                                                              |             |
 
 #### Request example
 

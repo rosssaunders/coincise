@@ -50,41 +50,41 @@ get /api/v3/rebate/affiliate/subaffiliates?timestamp={{timestamp}}&signature={{s
 
 **HTTP Request**
 
--   **GET** `/api/v3/rebate/affiliate/subaffiliates`  
-    
+- **GET** `/api/v3/rebate/affiliate/subaffiliates`
 
-**Permission:** SPOT\_ACCOUNT\_READ
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
 **Request**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| startTime | long | No | startTime |
-| endTime | long | No | endTime |
-| inviteCode | string | No | inviteCode |
-| page | int | No | page |
-| pageSize | int | No | pageSize,default: 10 |
-| timestamp | long | Yes | timestamp |
-| signature | string | Yes | signature |
+| Name       | Type   | Mandatory | Description          |
+| ---------- | ------ | --------- | -------------------- |
+| startTime  | long   | No        | startTime            |
+| endTime    | long   | No        | endTime              |
+| inviteCode | string | No        | inviteCode           |
+| page       | int    | No        | page                 |
+| pageSize   | int    | No        | pageSize,default: 10 |
+| timestamp  | long   | Yes       | timestamp            |
+| signature  | string | Yes       | signature            |
 
 **Response**
 
-| Name | Type | Description |
-| --- | --- | --- |
+| Name             | Type   | Description       |
+| ---------------- | ------ | ----------------- |
 | subaffiliateName | string | subaffiliate name |
 | subaffiliateMail | string | subaffiliate mail |
-| campaign | string | campaign |
-| inviteCode | string | inviteCode |
-| activationTime | long | activation time |
-| registered | int | registered number |
-| deposited | int | deposited number |
-| depositAmount | string | deposit amount |
-| commission | string | commission |
+| campaign         | string | campaign          |
+| inviteCode       | string | inviteCode        |
+| activationTime   | long   | activation time   |
+| registered       | int    | registered number |
+| deposited        | int    | deposited number  |
+| depositAmount    | string | deposit amount    |
+| commission       | string | commission        |
 
 If startTime and endTime are not sent, the data from T-7 to T is returned.
 
 ---
 
-**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#get-subaffiliates-data-affiliate-only
+**Source:**
+https://mexcdevelop.github.io/apidocs/spot_v3_en#get-subaffiliates-data-affiliate-only

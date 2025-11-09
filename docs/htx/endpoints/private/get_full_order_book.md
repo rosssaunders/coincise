@@ -1,6 +1,7 @@
 # GET Full Order Book
 
-**Source:** [Full Order Book](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-193426b1a86)
+**Source:**
+[Full Order Book](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-193426b1a86)
 
 **Category:** Market Data
 
@@ -18,34 +19,35 @@ Interface permission: Read
 
 Rate Limit: 5 times/1s
 
-Interface description: Query the complete market depth data, Updated once per second,and support returning up to 5000 levels.
+Interface description: Query the complete market depth data, Updated once per
+second,and support returning up to 5000 levels.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | true | Trading Pairs, and support returning up to 5000 levels. |  |  |
+| Parameter | Data Type | Required | Description                                             | Value Range | Default Value |
+| --------- | --------- | -------- | ------------------------------------------------------- | ----------- | ------------- |
+| symbol    | string    | true     | Trading Pairs, and support returning up to 5000 levels. |             |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | false | Request Processing Result "ok","error" |  |
-| ch | string | false | Data belonged channel，Format： market.$symbol.depth.$type |  |
-| ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| TICK>\_START |  | false |  |  |
-| ts | 调整为新加坡时间的时间戳，单位毫秒 | false | The UNIX timestamp in milliseconds is adjusted to Singapore time |  |
-| version | 内部字段 | false | Internal data |  |
-| bids | 当前的所有买单 \[price, size\] | false | The current all bids in format \[price, size\] |  |
-| asks | 当前的所有卖单 \[price, size\] | false | The current all asks in format \[price, size\] |  |
-| TICK>\_END |  | false |  |  |
+| Parameter    | Data Type                          | Required | Description                                                      | Value Range |
+| ------------ | ---------------------------------- | -------- | ---------------------------------------------------------------- | ----------- |
+| status       | string                             | false    | Request Processing Result "ok","error"                           |             |
+| ch           | string                             | false    | Data belonged channel，Format： market.$symbol.depth.$type       |             |
+| ts           | long                               | false    | Time of Respond Generation, Unit: Millisecond                    |             |
+| TICK>\_START |                                    | false    |                                                                  |             |
+| ts           | 调整为新加坡时间的时间戳，单位毫秒 | false    | The UNIX timestamp in milliseconds is adjusted to Singapore time |             |
+| version      | 内部字段                           | false    | Internal data                                                    |             |
+| bids         | 当前的所有买单 \[price, size\]     | false    | The current all bids in format \[price, size\]                   |             |
+| asks         | 当前的所有卖单 \[price, size\]     | false    | The current all asks in format \[price, size\]                   |             |
+| TICK>\_END   |                                    | false    |                                                                  |             |
 
 #### Request example
 

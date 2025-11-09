@@ -1,6 +1,7 @@
 # GET Current Fee Rate Applied to The User
 
-**Source:** [Get Current Fee Rate Applied to The User](https://www.htx.com/en-us/opend/newApiPages/?id=7ec51870-7773-11ed-9966-0242ac110003)
+**Source:**
+[Get Current Fee Rate Applied to The User](https://www.htx.com/en-us/opend/newApiPages/?id=7ec51870-7773-11ed-9966-0242ac110003)
 
 **Category:** Trading
 
@@ -18,37 +19,41 @@ Interface permission: Read
 
 Rate Limit: 50 times / 2s
 
-Interface description: Api users can query trading pair rates. They are limited to checking up to 10 trading pairs at a time. The rates for sub-users are the same as those for parent users.
+Interface description: Api users can query trading pair rates. They are limited
+to checking up to 10 trading pairs at a time. The rates for sub-users are the
+same as those for parent users.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| symbols | string | true | The trading symbols to query, separated by comma | btcusdt, ethbtc... |  |
+| Parameter | Data Type | Required | Description                                      | Value Range        | Default Value |
+| --------- | --------- | -------- | ------------------------------------------------ | ------------------ | ------------- |
+| symbols   | string    | true     | The trading symbols to query, separated by comma | btcusdt, ethbtc... |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| code | integer | false |  |  |
-| message | string | false |  |  |
-| DATA\_START | object | false |  |  |
-| symbol | string | false | symbol |  |
-| makerFeeRate | string | false | Basic rate - passive party, if transaction fee rebate is applicable, return rebate rate (negative value) |  |
-| takerFeeRate | string | false | Base Rate - Active Party |  |
-| actualMakerRate | string | false | Rate after deduction - Passive party, if deduction is not applicable or deduction is not enabled, the base rate will be returned; if transaction fee rebate is applicable, the rebate rate will be returned (negative value) |  |
-| actualTakerRate | string | false | Rate after deduction – the active party, if the deduction is not applicable or the deduction is not enabled, the base rate will be returned |  |
-| DATA\_END |  | false |  |  |
+| Parameter       | Data Type | Required | Description                                                                                                                                                                                                                  | Value Range |
+| --------------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| code            | integer   | false    |                                                                                                                                                                                                                              |             |
+| message         | string    | false    |                                                                                                                                                                                                                              |             |
+| DATA_START      | object    | false    |                                                                                                                                                                                                                              |             |
+| symbol          | string    | false    | symbol                                                                                                                                                                                                                       |             |
+| makerFeeRate    | string    | false    | Basic rate - passive party, if transaction fee rebate is applicable, return rebate rate (negative value)                                                                                                                     |             |
+| takerFeeRate    | string    | false    | Base Rate - Active Party                                                                                                                                                                                                     |             |
+| actualMakerRate | string    | false    | Rate after deduction - Passive party, if deduction is not applicable or deduction is not enabled, the base rate will be returned; if transaction fee rebate is applicable, the rebate rate will be returned (negative value) |             |
+| actualTakerRate | string    | false    | Rate after deduction – the active party, if the deduction is not applicable or the deduction is not enabled, the base rate will be returned                                                                                  |             |
+| DATA_END        |           | false    |                                                                                                                                                                                                                              |             |
 
 Notes:  
-\- If makerFeeRate/actualMakerRate is positive，this field means the transaction fee rate. - If makerFeeRate/actualMakerRate is negative, this field means the rebate fee rate.
+\- If makerFeeRate/actualMakerRate is positive，this field means the transaction
+fee rate. - If makerFeeRate/actualMakerRate is negative, this field means the
+rebate fee rate.
 
 #### Request example
 

@@ -167,7 +167,7 @@ const extractEndpointContent = async (page, guid) => {
       { timeout: 10000 }
     )
     console.log("  ✅ Content loaded")
-  } catch (e) {
+  } catch {
     console.log("  ⚠️  Timeout waiting for content to load")
   }
 

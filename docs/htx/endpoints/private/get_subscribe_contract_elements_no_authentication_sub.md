@@ -1,6 +1,7 @@
-# GET Subscribe contract elements  (no authentication)（sub）
+# GET Subscribe contract elements (no authentication)（sub）
 
-**Source:** [Subscribe contract elements  (no authentication)（sub）](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-18ef189bb24)
+**Source:**
+[Subscribe contract elements (no authentication)（sub）](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-18ef189bb24)
 
 **Category:** Orders and Accounts WebSocket Interfaces
 
@@ -8,83 +9,88 @@
 
 Required (Private Endpoint)
 
-### public.$contract\_code.contract\_elements (Subscribe contract elements (no authentication)（sub）)
+### public.$contract_code.contract_elements (Subscribe contract elements (no authentication)（sub）)
 
 Signature verification: Yes
 
 Interface permission: Read
 
-Rate Limit: For public interface to get market data such as Get Kline data, Get Market Data Overview, Get Contract Information,Get market in-depth data, Get premium index Kline, Get real-time forecast capital rate kline, Get basis data, Get the last Trade of a Contract and so on： For websocket: The rate limit for “req” request is 50 times at once. No limit for “sub” request as the data will be pushed by sever voluntarily.
+Rate Limit: For public interface to get market data such as Get Kline data, Get
+Market Data Overview, Get Contract Information,Get market in-depth data, Get
+premium index Kline, Get real-time forecast capital rate kline, Get basis data,
+Get the last Trade of a Contract and so on： For websocket: The rate limit for
+“req” request is 50 times at once. No limit for “sub” request as the data will
+be pushed by sever voluntarily.
 
 Interface description: Check the latest contract elements information
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.hbdm.com/swap-notification |
-| Online (preferred by aws customers) | wss://api.hbdm.vn/swap-notification |
+| Environment                         | Address                              |
+| ----------------------------------- | ------------------------------------ |
+| Online                              | wss://api.hbdm.com/swap-notification |
+| Online (preferred by aws customers) | wss://api.hbdm.vn/swap-notification  |
 
 #### Request Parameter
 
-| Field Name | Type | Description |
-| --- | --- | --- |
-| op | string | Required； Operator Name，value for unsubscribe is Sub/Unsubscribe ; |
-| cid | string | Optional; ID Client requests unique ID |
-| topic | string | Required；Sub/Unsubscribe Topic Name, format: orders.$contract\_code; For parameter details please check req Subscribe Parameter |
+| Field Name | Type   | Description                                                                                                                     |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| op         | string | Required； Operator Name，value for unsubscribe is Sub/Unsubscribe ;                                                            |
+| cid        | string | Optional; ID Client requests unique ID                                                                                          |
+| topic      | string | Required；Sub/Unsubscribe Topic Name, format: orders.$contract_code; For parameter details please check req Subscribe Parameter |
 
 #### Rule description
 
-| Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
-| public.$contract\_code.contract\_elements | public.$contract\_code.contract\_elements | Allowed (single contract) |
-| public.\*.contract\_elements | public.\*.contract\_elements | Allowed (all contracts) |
+| Subscribe(sub)                          | Unsubscribe( unsub )                    | Rule                      |
+| --------------------------------------- | --------------------------------------- | ------------------------- |
+| public.$contract_code.contract_elements | public.$contract_code.contract_elements | Allowed (single contract) |
+| public.\*.contract_elements             | public.\*.contract_elements             | Allowed (all contracts)   |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| op | string | true | Required； Operator Name，value for unsubscribe is Sub/Unsubscribe ; |  |  |
-| cid | string | false | Optional; ID Client requests unique ID |  |  |
-| topic | string | true | Required；Sub/Unsubscribe Topic Name, format: orders.$contract\_code; For parameter details please check req Subscribe Parameter |  |  |
+| Parameter | Data Type | Required | Description                                                                                                                     | Value Range | Default Value |
+| --------- | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------- |
+| op        | string    | true     | Required； Operator Name，value for unsubscribe is Sub/Unsubscribe ;                                                            |             |               |
+| cid       | string    | false    | Optional; ID Client requests unique ID                                                                                          |             |               |
+| topic     | string    | true     | Required；Sub/Unsubscribe Topic Name, format: orders.$contract_code; For parameter details please check req Subscribe Parameter |             |               |
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| op | string | true | op |  |
-| topic | string | true | topic |  |
-| ts | long | true |  |  |
-| DATA\_START | object array | true |  |  |
-| contract\_code | string | true | BTC... |  |
-| instrument\_index\_code | string | true | index |  |
-| real\_time\_settlement | int | true | Whether to enable real-time settlement: 0: No; 1: Yes |  |
-| transfer\_profit\_ratio | Number | true | transfer profit ratio |  |
-| min\_level | int | true | min level |  |
-| max\_level | int | true | max level |  |
-| CONTRACT\_INFOS\_START |  | false |  |  |
-| contract\_code |  | false |  |  |
-| delivery\_time | string | true | delivery time（When the contract does not need to be delivered, the field value is an empty string），millesecond timestamp |  |
-| create\_date | string | true | Listing Date | eg "20190808" |
-| contract\_status | int | true | Contract Status | contract status ： 0: Delisting,1: Listing,2: Pending Listing,3: Suspension,4: Suspending of Listing,6: Delivering,8: Delivered |
-| settlement\_date | string | true |  |  |
-| CONTRACT\_INFOS\_START |  | false |  |  |
-| open\_order\_limit | int | true | open order limit |  |
-| offset\_order\_limit | int | true | offset order limit |  |
-| long\_position\_limit | int | true | long position limit |  |
-| short\_position\_limit | int | true | short position limit |  |
-| price\_tick | string | true | price tick |  |
-| instrument\_value | string | true | instrument value |  |
-| settle\_period | int | true | settle period |  |
-| funding\_rate\_cap | int | true | funding rate cap |  |
-| funding\_rate\_floor | int | true | funding rate floor |  |
-| hig\_normal\_limit | int | true | hig normal limit |  |
-| min\_normal\_limit | int | true | min normal limit |  |
-| hig\_open\_limit | int | true | hig open limit |  |
-| min\_open\_limit | int | true | min open limit |  |
-| hig\_trade\_limit | int | true | hig trade limit |  |
-| min\_trade\_limit | int | true | min trade limit |  |
-| DATA\_END |  | false |  |  |
+| Parameter             | Data Type    | Required | Description                                                                                                                 | Value Range                                                                                                                     |
+| --------------------- | ------------ | -------- | --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| op                    | string       | true     | op                                                                                                                          |                                                                                                                                 |
+| topic                 | string       | true     | topic                                                                                                                       |                                                                                                                                 |
+| ts                    | long         | true     |                                                                                                                             |                                                                                                                                 |
+| DATA_START            | object array | true     |                                                                                                                             |                                                                                                                                 |
+| contract_code         | string       | true     | BTC...                                                                                                                      |                                                                                                                                 |
+| instrument_index_code | string       | true     | index                                                                                                                       |                                                                                                                                 |
+| real_time_settlement  | int          | true     | Whether to enable real-time settlement: 0: No; 1: Yes                                                                       |                                                                                                                                 |
+| transfer_profit_ratio | Number       | true     | transfer profit ratio                                                                                                       |                                                                                                                                 |
+| min_level             | int          | true     | min level                                                                                                                   |                                                                                                                                 |
+| max_level             | int          | true     | max level                                                                                                                   |                                                                                                                                 |
+| CONTRACT_INFOS_START  |              | false    |                                                                                                                             |                                                                                                                                 |
+| contract_code         |              | false    |                                                                                                                             |                                                                                                                                 |
+| delivery_time         | string       | true     | delivery time（When the contract does not need to be delivered, the field value is an empty string），millesecond timestamp |                                                                                                                                 |
+| create_date           | string       | true     | Listing Date                                                                                                                | eg "20190808"                                                                                                                   |
+| contract_status       | int          | true     | Contract Status                                                                                                             | contract status ： 0: Delisting,1: Listing,2: Pending Listing,3: Suspension,4: Suspending of Listing,6: Delivering,8: Delivered |
+| settlement_date       | string       | true     |                                                                                                                             |                                                                                                                                 |
+| CONTRACT_INFOS_START  |              | false    |                                                                                                                             |                                                                                                                                 |
+| open_order_limit      | int          | true     | open order limit                                                                                                            |                                                                                                                                 |
+| offset_order_limit    | int          | true     | offset order limit                                                                                                          |                                                                                                                                 |
+| long_position_limit   | int          | true     | long position limit                                                                                                         |                                                                                                                                 |
+| short_position_limit  | int          | true     | short position limit                                                                                                        |                                                                                                                                 |
+| price_tick            | string       | true     | price tick                                                                                                                  |                                                                                                                                 |
+| instrument_value      | string       | true     | instrument value                                                                                                            |                                                                                                                                 |
+| settle_period         | int          | true     | settle period                                                                                                               |                                                                                                                                 |
+| funding_rate_cap      | int          | true     | funding rate cap                                                                                                            |                                                                                                                                 |
+| funding_rate_floor    | int          | true     | funding rate floor                                                                                                          |                                                                                                                                 |
+| hig_normal_limit      | int          | true     | hig normal limit                                                                                                            |                                                                                                                                 |
+| min_normal_limit      | int          | true     | min normal limit                                                                                                            |                                                                                                                                 |
+| hig_open_limit        | int          | true     | hig open limit                                                                                                              |                                                                                                                                 |
+| min_open_limit        | int          | true     | min open limit                                                                                                              |                                                                                                                                 |
+| hig_trade_limit       | int          | true     | hig trade limit                                                                                                             |                                                                                                                                 |
+| min_trade_limit       | int          | true     | min trade limit                                                                                                             |                                                                                                                                 |
+| DATA_END              |              | false    |                                                                                                                             |                                                                                                                                 |
 
 #### Subscription Example
 
@@ -100,7 +106,7 @@ Interface description: Check the latest contract elements information
 
 "topic":
 
-"public.BTC-USD.contract\_elements"
+"public.BTC-USD.contract_elements"
 
 }
 
@@ -118,7 +124,7 @@ Interface description: Check the latest contract elements information
 
 "topic":
 
-"public.BTC-USD.contract\_elements"
+"public.BTC-USD.contract_elements"
 
 "ts":
 
@@ -144,7 +150,7 @@ Interface description: Check the latest contract elements information
 
 "topic":
 
-"public.XRP-USD.contract\_elements"
+"public.XRP-USD.contract_elements"
 
 "ts":
 
@@ -152,111 +158,111 @@ Interface description: Check the latest contract elements information
 
 "data":{
 
-"contract\_code":
+"contract_code":
 
 "XRP"
 
-"settle\_period":
+"settle_period":
 
 8
 
-"instrument\_index\_code":
+"instrument_index_code":
 
 "XRP-USD"
 
-"price\_tick":
+"price_tick":
 
 "0.010000"
 
-"instrument\_value":
+"instrument_value":
 
 "10"
 
-"min\_level":
+"min_level":
 
 "1"
 
-"max\_level":
+"max_level":
 
 "75"
 
-"real\_time\_settlement":
+"real_time_settlement":
 
 0
 
-"transfer\_profit\_ratio":
+"transfer_profit_ratio":
 
 0
 
-"open\_order\_limit":
+"open_order_limit":
 
 "10001.000000000000000000"
 
-"offset\_order\_limit":
+"offset_order_limit":
 
 "20001.000000000000000000"
 
-"long\_position\_limit":
+"long_position_limit":
 
 "80001"
 
-"short\_position\_limit":
+"short_position_limit":
 
 "8002"
 
-"funding\_rate\_cap":
+"funding_rate_cap":
 
 "0.0071"
 
-"funding\_rate\_floor":
+"funding_rate_floor":
 
 "-0.0072"
 
-"hig\_normal\_limit":
+"hig_normal_limit":
 
 "999999.99"
 
-"min\_normal\_limit":
+"min_normal_limit":
 
 "999999.99"
 
-"hig\_open\_limit":
+"hig_open_limit":
 
 "999999.99"
 
-"min\_open\_limit":
+"min_open_limit":
 
 "999999.99"
 
-"hig\_trade\_limit":
+"hig_trade_limit":
 
 "999999.99"
 
-"min\_trade\_limit":
+"min_trade_limit":
 
 "999999.99"
 
-"contract\_infos":\[
+"contract_infos":\[
 
 0:{
 
-"contract\_code":
+"contract_code":
 
 "XRP-USD"
 
-"settlement\_date":
+"settlement_date":
 
 "1715428800000"
 
-"delivery\_time":
+"delivery_time":
 
 ""
 
-"create\_date":
+"create_date":
 
 "20230324"
 
-"contract\_status":
+"contract_status":
 
 1
 
@@ -278,7 +284,7 @@ Interface description: Check the latest contract elements information
 
 "topic":
 
-"public.BTC-USD.contract\_elements"
+"public.BTC-USD.contract_elements"
 
 "cid":
 

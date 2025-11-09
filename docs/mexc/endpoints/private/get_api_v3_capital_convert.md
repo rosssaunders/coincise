@@ -49,48 +49,47 @@ get {{api_url}}/api/v3/capital/convert?timestamp={{timestamp}}&signature={{signa
                 }
             ]
         }
-    ],  
+    ],
     "totalRecords": 4,
     "page": 1,
     "totalPageNum": 1
 }
 ```
 
--   **GET** `/api/v3/capital/convert`  
-    
+- **GET** `/api/v3/capital/convert`
 
-**Permission:** SPOT\_DEAL\_READ
+**Permission:** SPOT_DEAL_READ
 
 **Weight(IP):** 1
 
 Parameters:
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| startTime | long | NO | startTime |
-| endTime | long | NO | endTime |
-| page | int | NO | page,default 1 |
-| limit | int | NO | limit,default 1; max 1000 |
-| timestamp | string | YES | timestamp |
-| signature | string | YES | signature |
+| Name      | Type   | Mandatory | Description               |
+| --------- | ------ | --------- | ------------------------- |
+| startTime | long   | NO        | startTime                 |
+| endTime   | long   | NO        | endTime                   |
+| page      | int    | NO        | page,default 1            |
+| limit     | int    | NO        | limit,default 1; max 1000 |
+| timestamp | string | YES       | timestamp                 |
+| signature | string | YES       | signature                 |
 
 Response:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| totalConvert | string | Convert MX amount(Deducted commission fee) |
-| totalFee | string | Total fee amount |
-| convertTime | long | Convert time |
-| convertDetails | object | Convert details |
-| id | string | Convert id |
-| convert | string | Convert mx |
-| fee | string | fee amount |
-| amount | string | amount |
-| time | long | Convert time |
-| asset | string | asset |
-| page | int | page |
-| totalRecords | int | totalRecords |
-| totalPage | int | totalPage |
+| Name           | Type   | Description                                |
+| -------------- | ------ | ------------------------------------------ |
+| totalConvert   | string | Convert MX amount(Deducted commission fee) |
+| totalFee       | string | Total fee amount                           |
+| convertTime    | long   | Convert time                               |
+| convertDetails | object | Convert details                            |
+| id             | string | Convert id                                 |
+| convert        | string | Convert mx                                 |
+| fee            | string | fee amount                                 |
+| amount         | string | amount                                     |
+| time           | long   | Convert time                               |
+| asset          | string | asset                                      |
+| page           | int    | page                                       |
+| totalRecords   | int    | totalRecords                               |
+| totalPage      | int    | totalPage                                  |
 
 ---
 

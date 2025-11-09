@@ -1,6 +1,7 @@
 # GET Query Index Kline Data
 
-**Source:** [Query Index Kline Data](https://www.htx.com/en-us/opend/newApiPages/?id=28c2eaf2-77ae-11ed-9966-0242ac110003)
+**Source:**
+[Query Index Kline Data](https://www.htx.com/en-us/opend/newApiPages/?id=28c2eaf2-77ae-11ed-9966-0242ac110003)
 
 **Category:** Future Market Data interface
 
@@ -16,40 +17,41 @@ Signature verification: No
 
 Interface permission: Read
 
-Rate Limit: all products(futures, coin margined swap, usdt margined Contracts ) 800 times/second for one IP at most
+Rate Limit: all products(futures, coin margined swap, usdt margined Contracts )
+800 times/second for one IP at most
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | true | index symbol |  | Case-Insenstive.Both uppercase and lowercase are supported..e.g."BTC-USD","ETH-USD"... |
-| period | string | true | kline type |  | 1min, 5min, 15min, 30min, 60min,4hour,1day, 1mon |
-| size | integer | true | data size |  | \[1,2000\] |
+| Parameter | Data Type | Required | Description  | Value Range | Default Value                                                                          |
+| --------- | --------- | -------- | ------------ | ----------- | -------------------------------------------------------------------------------------- |
+| symbol    | string    | true     | index symbol |             | Case-Insenstive.Both uppercase and lowercase are supported..e.g."BTC-USD","ETH-USD"... |
+| period    | string    | true     | kline type   |             | 1min, 5min, 15min, 30min, 60min,4hour,1day, 1mon                                       |
+| size      | integer   | true     | data size    |             | \[1,2000\]                                                                             |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| ch | string | true | data channel |  |
-| DATA\_START |  | false | object |  |
-| id | decimal | true | index kline id,the same as kline timestamp, kline start timestamp |  |
-| vol | decimal | true | Trade Volume(Cont.) The value is 0 |  |
-| count | decimal | true | Order Quantity The value is 0 |  |
-| open | decimal | true | Opening Index Price |  |
-| close | decimal | true | Closing Index Price, the price in the last kline is the latest order price |  |
-| low | decimal | true | Lowest Index Price |  |
-| high | decimal | true | Highest Index Price |  |
-| amount | decimal | true | Trade Amount(Coin), The value is 0. ) |  |
-| DATA\_END |  | false |  |  |
-| status | string | true | process status |  |
-| ts | long | true | timestamp of the response of the server |  |
+| Parameter  | Data Type | Required | Description                                                                | Value Range |
+| ---------- | --------- | -------- | -------------------------------------------------------------------------- | ----------- |
+| ch         | string    | true     | data channel                                                               |             |
+| DATA_START |           | false    | object                                                                     |             |
+| id         | decimal   | true     | index kline id,the same as kline timestamp, kline start timestamp          |             |
+| vol        | decimal   | true     | Trade Volume(Cont.) The value is 0                                         |             |
+| count      | decimal   | true     | Order Quantity The value is 0                                              |             |
+| open       | decimal   | true     | Opening Index Price                                                        |             |
+| close      | decimal   | true     | Closing Index Price, the price in the last kline is the latest order price |             |
+| low        | decimal   | true     | Lowest Index Price                                                         |             |
+| high       | decimal   | true     | Highest Index Price                                                        |             |
+| amount     | decimal   | true     | Trade Amount(Coin), The value is 0. )                                      |             |
+| DATA_END   |           | false    |                                                                            |             |
+| status     | string    | true     | process status                                                             |             |
+| ts         | long      | true     | timestamp of the response of the server                                    |             |
 
 #### Request example
 

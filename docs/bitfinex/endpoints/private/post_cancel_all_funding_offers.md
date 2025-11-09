@@ -4,34 +4,38 @@
 
 post https://api.bitfinex.com/v2/auth/w/funding/offer/cancel/all
 
-Cancel all of your current funding offers. Can also be used to only cancel offers in the specified currency.
+Cancel all of your current funding offers. Can also be used to only cancel
+offers in the specified currency.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
+/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+theme, base, components, utilities; @layer utilities;
 
 > 📘
-> 
-> ### 
-> 
+>
+> ###
+>
 > Currency
-> 
+>
 > [](#currency)
-> 
-> Specifying a currency is optional. If the currency param is omitted, all open offers will be cancelled.
+>
+> Specifying a currency is optional. If the currency param is omitted, all open
+> offers will be cancelled.
 
 **Response data**
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| \[0\] | MTS | Int | Millisecond Time Stamp of the update |
-| \[1\] | TYPE | String | Purpose of notification ('foc\_all-req' (funding offer cancel all request)) |
-| 
-\[ . . . \]
+| Index | Field | Type   | Description                                                                |
+| ----- | ----- | ------ | -------------------------------------------------------------------------- |
+| \[0\] | MTS   | Int    | Millisecond Time Stamp of the update                                       |
+| \[1\] | TYPE  | String | Purpose of notification ('foc_all-req' (funding offer cancel all request)) |
 
- |
-| \[6\] | STATUS | String | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
-| \[7\] | TEXT | String | Text of the notification |
+| \[ . . . \]
 
-td:has(div.placeholders) { background-color: #ebebeb; } .placeholders { height: 10px; text-align: center; font-size: 16px; line-height: 8px; }
+| | \[6\] | STATUS | String | Status of the notification; it may vary over time
+(SUCCESS, ERROR, FAILURE, ...) | | \[7\] | TEXT | String | Text of the
+notification |
+
+td:has(div.placeholders) { background-color: #ebebeb; } .placeholders { height:
+10px; text-align: center; font-size: 16px; line-height: 8px; }
 
 **Ratelimit**: 90 req/min
 
@@ -45,7 +49,7 @@ Currency for which to cancel all offers (USD, BTC, UST ...)
 
 Responses
 
-# 
+#
 
 200
 
@@ -55,7 +59,7 @@ Response body
 
 array
 
-# 
+#
 
 400
 
@@ -67,7 +71,7 @@ object
 
 Updated 5 months ago
 
-* * *
+---
 
 Language
 
@@ -101,7 +105,8 @@ RESPONSE
 
 Examples
 
-Click `Try It!` to start a request and see the response here! Or choose an example:
+Click `Try It!` to start a request and see the response here! Or choose an
+example:
 
 application/json
 
@@ -109,10 +114,10 @@ application/json
 
 Updated 5 months ago
 
-* * *
+---
 
 ---
-Section: Margin Funding
-Source: https://docs.bitfinex.com/reference/rest-auth-cancel-all-funding-offers
-Path: /v2/auth/w/funding/offer/cancel/all
-Method: POST
+
+Section: Margin Funding Source:
+https://docs.bitfinex.com/reference/rest-auth-cancel-all-funding-offers Path:
+/v2/auth/w/funding/offer/cancel/all Method: POST

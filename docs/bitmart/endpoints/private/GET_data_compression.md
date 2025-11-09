@@ -10,15 +10,24 @@ Required (Private Endpoint)
 
 ## Data Compression
 
-Only when the market data is returned after subscription, the remote service will compress the data and return it to the client. The remote service returns data in two formats, Binary format and Text format. When the binary format is returned, the data has been compressed by the remote service and the client needs to decompress it.
+Only when the market data is returned after subscription, the remote service
+will compress the data and return it to the client. The remote service returns
+data in two formats, Binary format and Text format. When the binary format is
+returned, the data has been compressed by the remote service and the client
+needs to decompress it.
 
 #### Compression Introduction
 
-zlib is a library for data compression, developed by Jean-loup Gailly and Mark Adler. The first version (v0.9) was published on May 1, 1995. zlib uses the abstract DEFLATE algorithm, originally written for the libpng library, and later generally used by many software. This library is free. [Official link http://zlib.net/](http://zlib.net/)
+zlib is a library for data compression, developed by Jean-loup Gailly and Mark
+Adler. The first version (v0.9) was published on May 1, 1995. zlib uses the
+abstract DEFLATE algorithm, originally written for the libpng library, and later
+generally used by many software. This library is free.
+[Official link http://zlib.net/](http://zlib.net/)
 
 #### Decompression Example
 
-For more and more complete programming codes, please refer to the [Quick Start API](/en/quick/#python-quick-start)
+For more and more complete programming codes, please refer to the
+[Quick Start API](/en/quick/#python-quick-start)
 
 > Python
 

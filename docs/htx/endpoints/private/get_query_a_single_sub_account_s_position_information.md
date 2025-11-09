@@ -1,6 +1,7 @@
 # GET Query a single sub-account's position information
 
-**Source:** [Query a single sub-account's position information](https://www.htx.com/en-us/opend/newApiPages/?id=5d518e1a-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Query a single sub-account's position information](https://www.htx.com/en-us/opend/newApiPages/?id=5d518e1a-77b6-11ed-9966-0242ac110003)
 
 **Category:** Swap Account Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /swap-api/v1/swap\_sub\_position\_info (Query a single sub-account's position information)
+### /swap-api/v1/swap_sub_position_info (Query a single sub-account's position information)
 
 Request type: POST
 
@@ -18,54 +19,54 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | Case-Insenstive.Both uppercase and lowercase are supported.e.g. "BTC-USD" |  |  |
-| sub\_uid | long | true | sub-account UID |  |  |
+| Parameter     | Data Type | Required | Description                                                               | Value Range | Default Value |
+| ------------- | --------- | -------- | ------------------------------------------------------------------------- | ----------- | ------------- |
+| contract_code | string    | false    | Case-Insenstive.Both uppercase and lowercase are supported.e.g. "BTC-USD" |             |               |
+| sub_uid       | long      | true     | sub-account UID                                                           |             |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | the handling result of requests | "ok" , "error" |
-| ts | long | true | the create time point of response, unit: ms |  |
-| DATA\_START |  | false |  |  |
-| symbol | string | true | type code | "BTC","ETH"... |
-| contract\_code | string | true | contract code | "BTC-USD" ... |
-| volume | decimal | true | open interest |  |
-| available | decimal | true | available positions to close |  |
-| frozen | decimal | true | amount of frozen positions |  |
-| cost\_open | decimal | true | average price of open positions |  |
-| cost\_hold | decimal | true | average price of positions |  |
-| profit\_unreal | decimal | true | unrealized profits and losses |  |
-| profit\_rate | decimal | true | profit rate |  |
-| profit | decimal | true | profits |  |
-| position\_margin | decimal | true | position margin |  |
-| lever\_rate | int | true | leverage ratios |  |
-| direction | string | true | transaction direction of positions | "buy":long "sell":short |
-| last\_price | decimal | true | Latest price |  |
-| adl\_risk\_percent | decimal | false | The risk level of the current position being forced to reduce the position by adl | 1、2、3、4、5 |
-| liq\_px | string | true | Estimated liquidation price |  |
-| new\_risk\_rate | bigdecimal | true | new risk rate |  |
-| trade\_partition | string | true | trade partition |  |
-| DATA\_END |  | false |  |  |
+| Parameter        | Data Type  | Required | Description                                                                       | Value Range             |
+| ---------------- | ---------- | -------- | --------------------------------------------------------------------------------- | ----------------------- |
+| status           | string     | true     | the handling result of requests                                                   | "ok" , "error"          |
+| ts               | long       | true     | the create time point of response, unit: ms                                       |                         |
+| DATA_START       |            | false    |                                                                                   |                         |
+| symbol           | string     | true     | type code                                                                         | "BTC","ETH"...          |
+| contract_code    | string     | true     | contract code                                                                     | "BTC-USD" ...           |
+| volume           | decimal    | true     | open interest                                                                     |                         |
+| available        | decimal    | true     | available positions to close                                                      |                         |
+| frozen           | decimal    | true     | amount of frozen positions                                                        |                         |
+| cost_open        | decimal    | true     | average price of open positions                                                   |                         |
+| cost_hold        | decimal    | true     | average price of positions                                                        |                         |
+| profit_unreal    | decimal    | true     | unrealized profits and losses                                                     |                         |
+| profit_rate      | decimal    | true     | profit rate                                                                       |                         |
+| profit           | decimal    | true     | profits                                                                           |                         |
+| position_margin  | decimal    | true     | position margin                                                                   |                         |
+| lever_rate       | int        | true     | leverage ratios                                                                   |                         |
+| direction        | string     | true     | transaction direction of positions                                                | "buy":long "sell":short |
+| last_price       | decimal    | true     | Latest price                                                                      |                         |
+| adl_risk_percent | decimal    | false    | The risk level of the current position being forced to reduce the position by adl | 1、2、3、4、5           |
+| liq_px           | string     | true     | Estimated liquidation price                                                       |                         |
+| new_risk_rate    | bigdecimal | true     | new risk rate                                                                     |                         |
+| trade_partition  | string     | true     | trade partition                                                                   |                         |
+| DATA_END         |            | false    |                                                                                   |                         |
 
 #### Request example
 
 {
 
-"contract\_code":
+"contract_code":
 
 "BTC-USD"
 
-"lever\_rate":
+"lever_rate":
 
 10
 
@@ -89,7 +90,7 @@ Interface permission: Read
 
 "THETA"
 
-"contract\_code":
+"contract_code":
 
 "THETA-USD"
 
@@ -105,27 +106,27 @@ Interface permission: Read
 
 0
 
-"cost\_open":
+"cost_open":
 
 0.62995
 
-"cost\_hold":
+"cost_hold":
 
 0.62995
 
-"profit\_unreal":
+"profit_unreal":
 
 \-0.0166228057147171
 
-"profit\_rate":
+"profit_rate":
 
 \-0.01047153645998604
 
-"lever\_rate":
+"lever_rate":
 
 20
 
-"position\_margin":
+"position_margin":
 
 1.586596433331218
 
@@ -137,23 +138,23 @@ Interface permission: Read
 
 \-0.0166228057147171
 
-"last\_price":
+"last_price":
 
 0.63028
 
-"adl\_risk\_percent":
+"adl_risk_percent":
 
 "3"
 
-"liq\_px":
+"liq_px":
 
 "9980"
 
-"new\_risk\_rate":
+"new_risk_rate":
 
 ""
 
-"trade\_partition":
+"trade_partition":
 
 ""
 

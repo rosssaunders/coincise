@@ -1,6 +1,7 @@
 # GET [Isolated] Query User’s Position Information
 
-**Source:** [[Isolated] Query User’s Position Information](https://www.htx.com/en-us/opend/newApiPages/?id=8cb81b5a-77b5-11ed-9966-0242ac110003)
+**Source:**
+[[Isolated] Query User’s Position Information](https://www.htx.com/en-us/opend/newApiPages/?id=8cb81b5a-77b5-11ed-9966-0242ac110003)
 
 **Category:** Swap Account Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /linear-swap-api/v1/swap\_position\_info (\[Isolated\] Query User’s Position Information)
+### /linear-swap-api/v1/swap_position_info (\[Isolated\] Query User’s Position Information)
 
 Request type: POST
 
@@ -16,56 +17,63 @@ Signature verification: Yes
 
 Interface permission: Read
 
-Rate Limit: Generally, the private interface rate limit of API key is at most 144 times every 3 seconds for each UID (Trade Interface: at most 72 times every 3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is shared by all the altcoins contracts delivered by different date).
+Rate Limit: Generally, the private interface rate limit of API key is at most
+144 times every 3 seconds for each UID (Trade Interface: at most 72 times every
+3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is
+shared by all the altcoins contracts delivered by different date).
 
 Interface description: The interface only supports cross margin mode.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USDT" |  |  |
+| Parameter     | Data Type | Required | Description                                                                 | Value Range | Default Value |
+| ------------- | --------- | -------- | --------------------------------------------------------------------------- | ----------- | ------------- |
+| contract_code | string    | false    | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USDT" |             |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request Processing Result | "ok" , "error" |
-| DATA\_START |  | false |  |  |
-| symbol | string | true | Variety code | "BTC","ETH"... |
-| contract\_code | string | true | contract code | e.g. "BTC-USDT" |
-| volume | decimal | true | Position quantity |  |
-| available | decimal | true | Available position can be closed |  |
-| frozen | decimal | true | frozen |  |
-| cost\_open | decimal | true | Opening average price |  |
-| cost\_hold | decimal | true | Average price of position |  |
-| profit\_unreal | decimal | true | Unrealized profit and loss |  |
-| profit\_rate | decimal | true | Profit rate |  |
-| profit | decimal | true | profit |  |
-| margin\_asset | string | true | Margin Asset |  |
-| position\_margin | decimal | true | Position margin |  |
-| lever\_rate | int | true | Leverage rate |  |
-| direction | string | true | transaction direction of positions | "buy":long "sell":short |
-| last\_price | decimal | true | Latest price |  |
-| margin\_mode | string | true | margin mode | isolated : "isolated" |
-| margin\_account | string | true | margin account | "BTC-USDT"... |
-| position\_mode | string | true | position mode | single\_side，dual\_side |
-| withdraw\_available | decimal | false | Not the same account is empty, the unified account is the margin amount for position adjustmen |  |
-| risk\_rate | decimal | false | margin rate |  |
-| liquidation\_price | decimal | false | Estimated liquidation price |  |
-| adl\_risk\_percent | decimal | false | The risk level of the current position being forced to reduce the position by “adl\_risk\_percent” | 1、2、3、4、5 |
-| DATA\_END |  | false |  |  |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
+| Parameter          | Data Type | Required | Description                                                                                      | Value Range             |
+| ------------------ | --------- | -------- | ------------------------------------------------------------------------------------------------ | ----------------------- |
+| status             | string    | true     | Request Processing Result                                                                        | "ok" , "error"          |
+| DATA_START         |           | false    |                                                                                                  |                         |
+| symbol             | string    | true     | Variety code                                                                                     | "BTC","ETH"...          |
+| contract_code      | string    | true     | contract code                                                                                    | e.g. "BTC-USDT"         |
+| volume             | decimal   | true     | Position quantity                                                                                |                         |
+| available          | decimal   | true     | Available position can be closed                                                                 |                         |
+| frozen             | decimal   | true     | frozen                                                                                           |                         |
+| cost_open          | decimal   | true     | Opening average price                                                                            |                         |
+| cost_hold          | decimal   | true     | Average price of position                                                                        |                         |
+| profit_unreal      | decimal   | true     | Unrealized profit and loss                                                                       |                         |
+| profit_rate        | decimal   | true     | Profit rate                                                                                      |                         |
+| profit             | decimal   | true     | profit                                                                                           |                         |
+| margin_asset       | string    | true     | Margin Asset                                                                                     |                         |
+| position_margin    | decimal   | true     | Position margin                                                                                  |                         |
+| lever_rate         | int       | true     | Leverage rate                                                                                    |                         |
+| direction          | string    | true     | transaction direction of positions                                                               | "buy":long "sell":short |
+| last_price         | decimal   | true     | Latest price                                                                                     |                         |
+| margin_mode        | string    | true     | margin mode                                                                                      | isolated : "isolated"   |
+| margin_account     | string    | true     | margin account                                                                                   | "BTC-USDT"...           |
+| position_mode      | string    | true     | position mode                                                                                    | single_side，dual_side  |
+| withdraw_available | decimal   | false    | Not the same account is empty, the unified account is the margin amount for position adjustmen   |                         |
+| risk_rate          | decimal   | false    | margin rate                                                                                      |                         |
+| liquidation_price  | decimal   | false    | Estimated liquidation price                                                                      |                         |
+| adl_risk_percent   | decimal   | false    | The risk level of the current position being forced to reduce the position by “adl_risk_percent” | 1、2、3、4、5           |
+| DATA_END           |           | false    |                                                                                                  |                         |
+| ts                 | long      | true     | Time of Respond Generation, Unit: Millisecond                                                    |                         |
 
 Notes:  
-If there are symbols in the settlement or delivery period,error code 1080(1080 In settlement or delivery. Unable to get positions of some contracts.) will return without request parameters. It's suggested to query the position info with request parameters to avoid raising the error code and not being able to query the position.
+If there are symbols in the settlement or delivery period,error code 1080(1080
+In settlement or delivery. Unable to get positions of some contracts.) will
+return without request parameters. It's suggested to query the position info
+with request parameters to avoid raising the error code and not being able to
+query the position.
 
 #### Request example
 
@@ -89,7 +97,7 @@ If there are symbols in the settlement or delivery period,error code 1080(1080 I
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 
@@ -105,27 +113,27 @@ If there are symbols in the settlement or delivery period,error code 1080(1080 I
 
 0
 
-"cost\_open":
+"cost_open":
 
 13068
 
-"cost\_hold":
+"cost_hold":
 
 13068
 
-"profit\_unreal":
+"profit_unreal":
 
 0
 
-"profit\_rate":
+"profit_rate":
 
 0
 
-"lever\_rate":
+"lever_rate":
 
 10
 
-"position\_margin":
+"position_margin":
 
 1.3068
 
@@ -137,27 +145,27 @@ If there are symbols in the settlement or delivery period,error code 1080(1080 I
 
 0
 
-"last\_price":
+"last_price":
 
 13068
 
-"margin\_asset":
+"margin_asset":
 
 "USDT"
 
-"margin\_mode":
+"margin_mode":
 
 "isolated"
 
-"margin\_account":
+"margin_account":
 
 "BTC-USDT"
 
-"position\_mode":
+"position_mode":
 
-"dual\_side"
+"dual_side"
 
-"adl\_risk\_percent":
+"adl_risk_percent":
 
 "3"
 

@@ -11,8 +11,6 @@ import * as acornWalk from "acorn-walk"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const readFile = promisify(fs.readFile)
-const writeFile = promisify(fs.writeFile)
-const mkdir = promisify(fs.mkdir)
 const exists = promisify(fs.exists)
 
 const CCXT_REPO = "https://github.com/ccxt/ccxt.git"

@@ -8,7 +8,7 @@ Cancel Plan order
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   POST /api/v2/spot/trade/cancel-plan-order
+- POST /api/v2/spot/trade/cancel-plan-order
 
 Request Example
 
@@ -18,10 +18,10 @@ curl -X POST "https://api.bitget.com/api/v2/spot/trade/cancel-plan-order" \  -H 
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| orderId | String | No | Either 'orderId' or 'clientOid' is required. 
-| clientOid | String | No | Either 'orderId' or 'clientOid' is required. 
+| Parameter | Type   | Required | Description                                  |
+| :-------- | :----- | :------- | :------------------------------------------- |
+| orderId   | String | No       | Either 'orderId' or 'clientOid' is required. |
+| clientOid | String | No       | Either 'orderId' or 'clientOid' is required. |
 
 Response Example
 
@@ -31,8 +31,8 @@ Response Example
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| result | String | Result is success or failure
+| Parameter | Type   | Description                  |
+| :-------- | :----- | :--------------------------- |
+| result    | String | Result is success or failure |
 
 > **Source:** https://www.bitget.com/api-doc/spot/plan/Cancel-Plan-Order

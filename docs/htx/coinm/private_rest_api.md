@@ -544,7 +544,6 @@ rate limits, more details are as below:
   Optimal 10 and Optimal 20, opponent_ioc, lightning_ioc, optimal_5_ioc,
   optimal_10_ioc，optimal_20_ioc，opponent_fok，lightning_fok，optimal_5_fok，optimal_10_fok，optimal_20_fok,etc.
 - The response header returned by HTTP request:
-
   - When placing order by using the four prohibited order price types during the
     prohibition period, the message header returned by interface will include
     the field:
@@ -558,7 +557,6 @@ rate limits, more details are as below:
   counted separately. The calculation period is 10 min/time(The start time
   starts at 00:00 and the end time is 00:10. Every 10 minutes is a cycle.).
 - Definition of Indicators：
-
   - Order Cancellation Ratio =Total number of invalid cancellation / Total
     number of placed orders (all types of orders placed via API)
   - Total number of placed order: Total number of placed orders refers to all
@@ -583,7 +581,6 @@ rate limits, more details are as below:
   reduce order cancellation rate and cancellation amount during peak periods to
   avoid frequent triggering of API restriction mechanism.Suggestions of reducing
   order cancellation rate are as below:
-
   - 1\. Set orders’ price to BBO prices as close as possible;
   - 2\. Prolong the interval properly between each order placement and
     cancellation;

@@ -1,10 +1,12 @@
 # POST / Redeem
 
-Source: [https://www.okx.com/docs-v5/en/#financial-product-sol-staking-post-redeem](https://www.okx.com/docs-v5/en/#financial-product-sol-staking-post-redeem)
+Source:
+[https://www.okx.com/docs-v5/en/#financial-product-sol-staking-post-redeem](https://www.okx.com/docs-v5/en/#financial-product-sol-staking-post-redeem)
 
 ### POST / Redeem
 
-Only the assets in the funding account can be used. If your OKSOL is in your trading account, you can make funding transfer first.  
+Only the assets in the funding account can be used. If your OKSOL is in your
+trading account, you can make funding transfer first.
 
 #### Rate Limit: 2 requests per second
 
@@ -18,9 +20,9 @@ Only the assets in the funding account can be used. If your OKSOL is in your tra
 
 #### Request Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| amt | String | Yes | Redeeming amount |
+| Parameter | Type   | Required | Description      |
+| --------- | ------ | -------- | ---------------- |
+| amt       | String | Yes      | Redeeming amount |
 
 #### Response Parameters
 

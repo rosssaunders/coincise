@@ -59,11 +59,9 @@ const extractNetworkConnectivity = async (page, turndownService) => {
 
     // Find the Overview section
     const h1Sections = document.querySelectorAll("h1")
-    let capturing = false
 
     for (const h1 of h1Sections) {
       if (h1.textContent.trim() === "Overview") {
-        capturing = true
         content.appendChild(h1.cloneNode(true))
 
         let currentElement = h1
@@ -110,11 +108,9 @@ const extractAuthentication = async (page, turndownService) => {
 
     // Find Authentication section
     const h1Sections = document.querySelectorAll("h1")
-    let capturing = false
 
     for (const h1 of h1Sections) {
       if (h1.textContent.trim() === "Authentication") {
-        capturing = true
         content.appendChild(h1.cloneNode(true))
 
         let currentElement = h1

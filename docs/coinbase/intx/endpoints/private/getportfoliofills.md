@@ -14,15 +14,15 @@ Returns all of the fills for a given portfolio.
 
 ## Parameters
 
-| Name | In | Type | Required | Description |
-|------|----|------|----------|-------------|
-| portfolio | path | string | Yes | Identifies the portfolio by UUID (e.g., `892e8c7c-e979-4cad-b61b-55a197932cf1`) or portfolio ID (e.g., `5189861793641175`) |
-| order_id | query | string | No | A specific order for which to fetch fills identified by order ID |
-| client_order_id | query | string | No | Fetch fills for all orders with the given client order ID |
-| undefined | undefined | string | No |  |
-| undefined | undefined | string | No |  |
-| undefined | undefined | string | No |  |
-| undefined | undefined | string | No |  |
+| Name            | In        | Type   | Required | Description                                                                                                                |
+| --------------- | --------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| portfolio       | path      | string | Yes      | Identifies the portfolio by UUID (e.g., `892e8c7c-e979-4cad-b61b-55a197932cf1`) or portfolio ID (e.g., `5189861793641175`) |
+| order_id        | query     | string | No       | A specific order for which to fetch fills identified by order ID                                                           |
+| client_order_id | query     | string | No       | Fetch fills for all orders with the given client order ID                                                                  |
+| undefined       | undefined | string | No       |                                                                                                                            |
+| undefined       | undefined | string | No       |                                                                                                                            |
+| undefined       | undefined | string | No       |                                                                                                                            |
+| undefined       | undefined | string | No       |                                                                                                                            |
 
 ## Authentication
 
@@ -45,4 +45,5 @@ Invalid attribute
 
 ## Documentation
 
-For more details, see the [INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).
+For more details, see the
+[INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).

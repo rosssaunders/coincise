@@ -1,10 +1,11 @@
 # Retrieve details for a vault
 
-**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:**
+https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
 `POST` `https://api.hyperliquid.xyz/info`
 
-#### 
+####
 
 [](#headers-8)
 
@@ -22,7 +23,7 @@ String
 
 "application/json"
 
-#### 
+####
 
 [](#request-body-10)
 
@@ -44,13 +45,15 @@ vaultAddress\*
 
 String
 
-Address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.
+Address in 42-character hexadecimal format; e.g.
+0x0000000000000000000000000000000000000000.
 
 user
 
 String
 
-Address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.
+Address in 42-character hexadecimal format; e.g.
+0x0000000000000000000000000000000000000000.
 
 200: OK
 
@@ -116,5 +119,5 @@ Copy
   },
   "allowDeposits": true,
   "alwaysCloseOnWithdraw": false
-}  
+}
 ```

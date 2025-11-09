@@ -1,6 +1,7 @@
 # GET Subscribe Market Detail Data
 
-**Source:** [Subscribe Market Detail Data](https://www.htx.com/en-us/opend/newApiPages/?id=5d514672-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Subscribe Market Detail Data](https://www.htx.com/en-us/opend/newApiPages/?id=5d514672-77b6-11ed-9966-0242ac110003)
 
 **Category:** WebSocket Market Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### market.$contract\_code.detail (Subscribe Market Detail Data)
+### market.$contract_code.detail (Subscribe Market Detail Data)
 
 Signature verification: Yes
 
@@ -16,46 +17,46 @@ Interface permission: Read
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.hbdm.com/swap-ws |
-| Online (preferred by aws customers) | wss://api.hbdm.vn/swap-ws |
+| Environment                         | Address                    |
+| ----------------------------------- | -------------------------- |
+| Online                              | wss://api.hbdm.com/swap-ws |
+| Online (preferred by aws customers) | wss://api.hbdm.vn/swap-ws  |
 
 #### Request Parameter
 
 | Field Name | Type | Description |
-| --- | --- | --- |
+| ---------- | ---- | ----------- |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
+| -------------- | -------------------- | ---- |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | swap code |  | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USD" |
+| Parameter     | Data Type | Required | Description | Value Range | Default Value                                                              |
+| ------------- | --------- | -------- | ----------- | ----------- | -------------------------------------------------------------------------- |
+| contract_code | string    | true     | swap code   |             | Case-Insenstive.Both uppercase and lowercase are supported..e.g. "BTC-USD" |
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| ch | string | true | Data channel，Format： market.$contract\_code.detail |  |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| TICK\_START |  | false |  |  |
-| id | long | true | ID |  |
-| mrid | long | true | Order ID |  |
-| open | decimal | true | Open Price |  |
-| close | decimal | true | Clos Price, the price from the latest kline is the last order price |  |
-| high | decimal | true | High Price |  |
-| low | decimal | true | Low Price |  |
-| amount | decimal | true | Trade Amount(Coins), Trade amount(Coin)=SUM(quantity(cont.)\*face value/ order price. Sum of both buy and sell sides |  |
-| vol | decimal | true | Trade volume(Cont.)， the sum volume of both buy and sell sides |  |
-| count | decimal | true | fulfilled order quantity. Sum of both buy and sell sides |  |
-| ask | array | true | Sell,\[price(Ask price), vol(Ask orders (cont.) )\] |  |
-| bid | array | true | Buy,\[price(Bid price), vol(Bid orders(Cont.))\] |  |
-| TICK\_END |  | false |  |  |
+| Parameter  | Data Type | Required | Description                                                                                                          | Value Range |
+| ---------- | --------- | -------- | -------------------------------------------------------------------------------------------------------------------- | ----------- |
+| ch         | string    | true     | Data channel，Format： market.$contract_code.detail                                                                  |             |
+| ts         | long      | true     | Time of Respond Generation, Unit: Millisecond                                                                        |             |
+| TICK_START |           | false    |                                                                                                                      |             |
+| id         | long      | true     | ID                                                                                                                   |             |
+| mrid       | long      | true     | Order ID                                                                                                             |             |
+| open       | decimal   | true     | Open Price                                                                                                           |             |
+| close      | decimal   | true     | Clos Price, the price from the latest kline is the last order price                                                  |             |
+| high       | decimal   | true     | High Price                                                                                                           |             |
+| low        | decimal   | true     | Low Price                                                                                                            |             |
+| amount     | decimal   | true     | Trade Amount(Coins), Trade amount(Coin)=SUM(quantity(cont.)\*face value/ order price. Sum of both buy and sell sides |             |
+| vol        | decimal   | true     | Trade volume(Cont.)， the sum volume of both buy and sell sides                                                      |             |
+| count      | decimal   | true     | fulfilled order quantity. Sum of both buy and sell sides                                                             |             |
+| ask        | array     | true     | Sell,\[price(Ask price), vol(Ask orders (cont.) )\]                                                                  |             |
+| bid        | array     | true     | Buy,\[price(Bid price), vol(Bid orders(Cont.))\]                                                                     |             |
+| TICK_END   |           | false    |                                                                                                                      |             |
 
 #### Subscription Example
 
@@ -63,7 +64,7 @@ Interface permission: Read
 
 "sub":
 
-"market.btc-usd.estimated\_rate.1min"
+"market.btc-usd.estimated_rate.1min"
 
 "id":
 
@@ -85,7 +86,7 @@ Interface permission: Read
 
 "subbed":
 
-"market.BTC-USD.depth.size\_20.high\_freq"
+"market.BTC-USD.depth.size_20.high_freq"
 
 "ts":
 

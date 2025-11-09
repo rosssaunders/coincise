@@ -14,9 +14,9 @@ Returns all eligible recipients for withdrawal.
 
 ## Parameters
 
-| Name | In | Type | Required | Description |
-|------|----|------|----------|-------------|
-| recipient_type | query | string | No | Filter by recipient type |
+| Name           | In    | Type   | Required | Description              |
+| -------------- | ----- | ------ | -------- | ------------------------ |
+| recipient_type | query | string | No       | Filter by recipient type |
 
 ## Authentication
 
@@ -43,4 +43,5 @@ Authentication error
 
 ## Documentation
 
-For more details, see the [INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).
+For more details, see the
+[INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).

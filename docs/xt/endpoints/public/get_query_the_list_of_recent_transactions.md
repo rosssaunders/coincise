@@ -1,6 +1,7 @@
 # GET Query the list of recent transactions
 
-Source: [https://doc.xt.com/docs/spot/Market/QueryRecentTransactions](https://doc.xt.com/docs/spot/Market/QueryRecentTransactions)
+Source:
+[https://doc.xt.com/docs/spot/Market/QueryRecentTransactions](https://doc.xt.com/docs/spot/Market/QueryRecentTransactions)
 
 # Query the list of recent transactions
 
@@ -9,10 +10,10 @@ Source: [https://doc.xt.com/docs/spot/Market/QueryRecentTransactions](https://do
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | true |  | trading pair |  |
-| limit | number | false | 200 |  | 1~1000 |
+| name   | type   | mandatory | default | description  | ranges |
+| ------ | ------ | --------- | ------- | ------------ | ------ |
+| symbol | string | true      |         | trading pair |        |
+| limit  | number | false     | 200     |              | 1~1000 |
 
 #### **Limit Flow Rules**[​](#limit-flow-rules "Direct link to limit-flow-rules")
 

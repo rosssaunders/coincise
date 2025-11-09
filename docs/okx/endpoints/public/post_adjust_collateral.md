@@ -1,6 +1,7 @@
 # POST / Adjust collateral
 
-Source: [https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-post-adjust-collateral](https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-post-adjust-collateral)
+Source:
+[https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-post-adjust-collateral](https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-post-adjust-collateral)
 
 ### POST / Adjust collateral
 
@@ -17,13 +18,14 @@ Source: [https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-post-ad
 #### Request Parameters
 
 | **Parameters** | **Types** | **Required** | **Description** |
-| --- | --- | --- | --- |
-| type | String | Yes | Operation type  
+| -------------- | --------- | ------------ | --------------- |
+| type           | String    | Yes          | Operation type  |
+
 `add`: Add collateral  
-`reduce`: Reduce collateral |
-| collateralCcy | String | Yes | Collateral currency, e.g. `BTC` |
-| collateralAmt | String | Yes | Collateral amount |
+`reduce`: Reduce collateral | | collateralCcy | String | Yes | Collateral
+currency, e.g. `BTC` | | collateralAmt | String | Yes | Collateral amount |
 
 #### Response Parameters
 
-code = `0` means your request has been accepted (It doesn't mean the request has been successfully handled.)
+code = `0` means your request has been accepted (It doesn't mean the request has
+been successfully handled.)

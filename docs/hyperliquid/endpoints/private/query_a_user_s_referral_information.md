@@ -1,10 +1,11 @@
 # Query a user's referral information
 
-**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:**
+https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
 `POST` `https://api.hyperliquid.xyz/info`
 
-#### 
+####
 
 [](#headers-12)
 
@@ -22,7 +23,7 @@ String
 
 "application/json"
 
-#### 
+####
 
 [](#request-body-14)
 
@@ -95,4 +96,5 @@ Copy
 }
 ```
 
-Note that rewardHistory is for legacy rewards. Claimed rewards are now returned in nonFundingLedgerUpdate
+Note that rewardHistory is for legacy rewards. Claimed rewards are now returned
+in nonFundingLedgerUpdate

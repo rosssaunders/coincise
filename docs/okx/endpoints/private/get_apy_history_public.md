@@ -1,6 +1,7 @@
 # GET / APY history (Public)
 
-Source: [https://www.okx.com/docs-v5/en/#financial-product-sol-staking-get-apy-history-public](https://www.okx.com/docs-v5/en/#financial-product-sol-staking-get-apy-history-public)
+Source:
+[https://www.okx.com/docs-v5/en/#financial-product-sol-staking-get-apy-history-public](https://www.okx.com/docs-v5/en/#financial-product-sol-staking-get-apy-history-public)
 
 ### GET / APY history (Public)
 
@@ -16,14 +17,14 @@ Public endpoints don't need authorization.
 
 #### Request Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| days | String | Yes | Get the days of APY(Annual percentage yield) history record in the past  
-No more than 365 days |
+| Parameter             | Type   | Required | Description                                                             |
+| --------------------- | ------ | -------- | ----------------------------------------------------------------------- |
+| days                  | String | Yes      | Get the days of APY(Annual percentage yield) history record in the past |
+| No more than 365 days |
 
 #### Response Parameters
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| rate | String | APY(Annual percentage yield), e.g. `0.01` represents `1%` |
-| ts | String | Data time, Unix timestamp format in milliseconds, e.g. `1597026383085` |
+| Parameter | Type   | Description                                                            |
+| --------- | ------ | ---------------------------------------------------------------------- |
+| rate      | String | APY(Annual percentage yield), e.g. `0.01` represents `1%`              |
+| ts        | String | Data time, Unix timestamp format in milliseconds, e.g. `1597026383085` |

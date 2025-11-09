@@ -1,6 +1,7 @@
 # GET Market Ticker
 
-**Source:** [Market Ticker](https://www.htx.com/en-us/opend/newApiPages/?id=7ec538cf-7773-11ed-9966-0242ac110003)
+**Source:**
+[Market Ticker](https://www.htx.com/en-us/opend/newApiPages/?id=7ec538cf-7773-11ed-9966-0242ac110003)
 
 **Category:** Websocket Market Data
 
@@ -16,55 +17,55 @@ Interface description: Retrieve the market ticker,data is pushed every 100ms.
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.huobi.pro/ws |
+| Environment                         | Address                    |
+| ----------------------------------- | -------------------------- |
+| Online                              | wss://api.huobi.pro/ws     |
 | Online (preferred by aws customers) | wss://api-aws.huobi.pro/ws |
 
 #### Request Parameter
 
-| Field Name | Type | Description |
-| --- | --- | --- |
-| ch | string | Required； Operator Name， sub、unsub; |
-| params | string | parameters |
-| cid | string | request id |
+| Field Name | Type   | Description                            |
+| ---------- | ------ | -------------------------------------- |
+| ch         | string | Required； Operator Name， sub、unsub; |
+| params     | string | parameters                             |
+| cid        | string | request id                             |
 
 #### Rule description
 
-| Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
-| "market.btcusdt.mbp.refresh.20" | "market.btcusdt.mbp.refresh.20" | Allowed |
-| "market.btcusdt.mbp.refresh.20","market.ethusdt.mbp.refresh.20","market.htxusdt.mbp.refresh.20" | "market.btcusdt.mbp.refresh.20","market.ethusdt.mbp.refresh.20","market.htxusdt.mbp.refresh.20" | Allowed |
-| "market.btcusdt.mbp.refresh.20","market.ethusdt.mbp.refresh.20","market.htxusdt.mbp.refresh.20" | "market.bnbusdt.mbp.5" | Not Allowed |
+| Subscribe(sub)                                                                                  | Unsubscribe( unsub )                                                                            | Rule        |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------- |
+| "market.btcusdt.mbp.refresh.20"                                                                 | "market.btcusdt.mbp.refresh.20"                                                                 | Allowed     |
+| "market.btcusdt.mbp.refresh.20","market.ethusdt.mbp.refresh.20","market.htxusdt.mbp.refresh.20" | "market.btcusdt.mbp.refresh.20","market.ethusdt.mbp.refresh.20","market.htxusdt.mbp.refresh.20" | Allowed     |
+| "market.btcusdt.mbp.refresh.20","market.ethusdt.mbp.refresh.20","market.htxusdt.mbp.refresh.20" | "market.bnbusdt.mbp.5"                                                                          | Not Allowed |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| symbol | Array | false | The trading symbol to query | All supported trading symbol, e.g. btcusdt, bccbtc.Refer to /v1/common/symbols |  |
-| cid | string | false | Current request's ID |  |  |
+| Parameter | Data Type | Required | Description                 | Value Range                                                                    | Default Value |
+| --------- | --------- | -------- | --------------------------- | ------------------------------------------------------------------------------ | ------------- |
+| symbol    | Array     | false    | The trading symbol to query | All supported trading symbol, e.g. btcusdt, bccbtc.Refer to /v1/common/symbols |               |
+| cid       | string    | false    | Current request's ID        |                                                                                |               |
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| ch | string | false | Data belonged channel，Format：market.$symbol.ticker |  |
-| ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| TICK\_START | object | false |  |  |
-| amount | float | false | Accumulated trading volume of last 24 hours (rotating 24h), in base currency |  |
-| count | integer | false | The number of completed trades (rotating 24h) |  |
-| open | float | false | The opening price of last 24 hours (rotating 24h) |  |
-| close | float | false | The last price of last 24 hours (rotating 24h) |  |
-| low | float | false | The lowest price of last 24 hours (rotating 24h) |  |
-| high | float | false | The highest price of last 24 hours (rotating 24h) |  |
-| vol | float | false | Accumulated trading value of last 24 hours (rotating 24h), in quote currency |  |
-| bid | float | false | Best bid price |  |
-| bidSize | float | false | Best bid size |  |
-| ask | float | false | Best ask price |  |
-| askSize | float | false | Best ask size |  |
-| lastPrice | float | false | Last traded price |  |
-| lastSize | float | false | Last traded size |  |
-| TICK\_END |  | false |  |  |
+| Parameter  | Data Type | Required | Description                                                                  | Value Range |
+| ---------- | --------- | -------- | ---------------------------------------------------------------------------- | ----------- |
+| ch         | string    | false    | Data belonged channel，Format：market.$symbol.ticker                         |             |
+| ts         | long      | false    | Time of Respond Generation, Unit: Millisecond                                |             |
+| TICK_START | object    | false    |                                                                              |             |
+| amount     | float     | false    | Accumulated trading volume of last 24 hours (rotating 24h), in base currency |             |
+| count      | integer   | false    | The number of completed trades (rotating 24h)                                |             |
+| open       | float     | false    | The opening price of last 24 hours (rotating 24h)                            |             |
+| close      | float     | false    | The last price of last 24 hours (rotating 24h)                               |             |
+| low        | float     | false    | The lowest price of last 24 hours (rotating 24h)                             |             |
+| high       | float     | false    | The highest price of last 24 hours (rotating 24h)                            |             |
+| vol        | float     | false    | Accumulated trading value of last 24 hours (rotating 24h), in quote currency |             |
+| bid        | float     | false    | Best bid price                                                               |             |
+| bidSize    | float     | false    | Best bid size                                                                |             |
+| ask        | float     | false    | Best ask price                                                               |             |
+| askSize    | float     | false    | Best ask size                                                                |             |
+| lastPrice  | float     | false    | Last traded price                                                            |             |
+| lastSize   | float     | false    | Last traded size                                                             |             |
+| TICK_END   |           | false    |                                                                              |             |
 
 #### Subscription Example
 

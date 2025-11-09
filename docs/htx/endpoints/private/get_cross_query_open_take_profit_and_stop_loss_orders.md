@@ -1,6 +1,7 @@
 # GET [Cross]Query Open Take-profit and Stop-loss Orders
 
-**Source:** [[Cross]Query Open Take-profit and Stop-loss Orders](https://www.htx.com/en-us/opend/newApiPages/?id=8cb880ff-77b5-11ed-9966-0242ac110003)
+**Source:**
+[[Cross]Query Open Take-profit and Stop-loss Orders](https://www.htx.com/en-us/opend/newApiPages/?id=8cb880ff-77b5-11ed-9966-0242ac110003)
 
 **Category:** Swap Strategy Order Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /linear-swap-api/v1/swap\_cross\_tpsl\_openorders (\[Cross\]Query Open Take-profit and Stop-loss Orders)
+### /linear-swap-api/v1/swap_cross_tpsl_openorders (\[Cross\]Query Open Take-profit and Stop-loss Orders)
 
 Request type: POST
 
@@ -16,69 +17,76 @@ Signature verification: Yes
 
 Interface permission: Read
 
-Rate Limit: Generally, the private interface rate limit of API key is at most 144 times every 3 seconds for each UID (Trade Interface: at most 72 times every 3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is shared by all the altcoins contracts delivered by different date).
+Rate Limit: Generally, the private interface rate limit of API key is at most
+144 times every 3 seconds for each UID (Trade Interface: at most 72 times every
+3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is
+shared by all the altcoins contracts delivered by different date).
 
-Interface description: This interface only supports cross margin mode. The request parameter "contract\_code" supports the contract code of futures, in that the format is BTC-USDT-210625. when all of pair and contract\_code filled in, the contract\_code is the preferred; when no one filled in, return all data in cross mode.
+Interface description: This interface only supports cross margin mode. The
+request parameter "contract_code" supports the contract code of futures, in that
+the format is BTC-USDT-210625. when all of pair and contract_code filled in, the
+contract_code is the preferred; when no one filled in, return all data in cross
+mode.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | contract code | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |  |
-| pair | string | false | pair | BTC-USDT |  |
-| page\_index | int | false | page index. 1 by default |  |  |
-| page\_size | int | false | page size.20 by default. 50 at most |  |  |
-| trade\_type | int | false | trade type(Default:all) | 0:all,3: buy short,4: sell long |  |
+| Parameter     | Data Type | Required | Description                         | Value Range                                         | Default Value |
+| ------------- | --------- | -------- | ----------------------------------- | --------------------------------------------------- | ------------- |
+| contract_code | string    | false    | contract code                       | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |               |
+| pair          | string    | false    | pair                                | BTC-USDT                                            |               |
+| page_index    | int       | false    | page index. 1 by default            |                                                     |               |
+| page_size     | int       | false    | page size.20 by default. 50 at most |                                                     |               |
+| trade_type    | int       | false    | trade type(Default:all)             | 0:all,3: buy short,4: sell long                     |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | status | "ok", "error" |
-| DATA\_START | object | true |  | dictionary |
-| total\_page | int | true | total page |  |
-| total\_size | int | true | total size |  |
-| current\_page | int | true | current page |  |
-| ORDERS\_START | object array | true |  |  |
-| symbol | string | true | symbol |  |
-| contract\_code | string | true | contract code | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... |
-| margin\_mode | string | true | margin mode | cross, isolated |
-| margin\_account | string | true | margin account | such as “USDT”，“BTC-USDT” |
-| volume | decimal | true | Numbers of orders (volume) |  |
-| order\_type | int | true | Order type: 1. Quotation; 2. Cancelled order |  |
-| tpsl\_order\_type | string | true | Order type(take-profit order/stop-loss order) | “tp”:take-profit order；"sl"stop-loss order |
-| direction | string | true | direction | "buy", "sell" |
-| order\_id | long | true | order id |  |
-| order\_id\_str | string | true | order id in string |  |
-| order\_source | string | true | order source | system、web、api、m、risk、settlement、ios、android、windows、mac、trigger |
-| trigger\_type | string | true | trigger type: ge, le |  |
-| trigger\_price | decimal | true | trigger price |  |
-| price\_protect | booleanint | false | price protection, default is false. This parameter is only required when setting tp/sl | true or false |
-| created\_at | long | true | created time |  |
-| order\_price\_type | string | true | order price type | market，limit, optimal\_5, optimal\_10, optimal\_20 |
-| order\_price | decimal | true | order price |  |
-| status | int | true | status: | 1.Not Activated, 2.Ready to submit the orders, 3.Submitting the orders, 4.Submit the orders success, 5.Submit the orders failed, 6.Orders cancelled, 8.Cancelled order not found, 9.Orders cancelling, 10.Failed, 11.Expired |
-| source\_order\_id | string | true | Order id of source limit order (the field will have a value only when the order placed is a take-profit and stop-loss order; it is used to indicate that a certain limit order that triggered current take-profit and stop-loss order.) |  |
-| relation\_tpsl\_order\_id | string | true | related take-profit and stop loss order id（The field will have a value when users set take-profit and stop loss order stimulatenously, otherwise, the value will be "-1".） |  |
-| contract\_type | string | true | contract type | swap, this\_week, next\_week, quarter, next\_quarter |
-| pair | string | true | pair | such as: “BTC-USDT” |
-| business\_type | string | true | business type | futures, swap |
-| ORDERS\_END |  | false |  |  |
-| DATA\_END |  | false |  |  |
-| ts | long | true | Time of Respond Generation，Unit: Millisecond |  |
+| Parameter              | Data Type    | Required | Description                                                                                                                                                                                                                             | Value Range                                                                                                                                                                                                                  |
+| ---------------------- | ------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| status                 | string       | true     | status                                                                                                                                                                                                                                  | "ok", "error"                                                                                                                                                                                                                |
+| DATA_START             | object       | true     |                                                                                                                                                                                                                                         | dictionary                                                                                                                                                                                                                   |
+| total_page             | int          | true     | total page                                                                                                                                                                                                                              |                                                                                                                                                                                                                              |
+| total_size             | int          | true     | total size                                                                                                                                                                                                                              |                                                                                                                                                                                                                              |
+| current_page           | int          | true     | current page                                                                                                                                                                                                                            |                                                                                                                                                                                                                              |
+| ORDERS_START           | object array | true     |                                                                                                                                                                                                                                         |                                                                                                                                                                                                                              |
+| symbol                 | string       | true     | symbol                                                                                                                                                                                                                                  |                                                                                                                                                                                                                              |
+| contract_code          | string       | true     | contract code                                                                                                                                                                                                                           | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ...                                                                                                                                                                          |
+| margin_mode            | string       | true     | margin mode                                                                                                                                                                                                                             | cross, isolated                                                                                                                                                                                                              |
+| margin_account         | string       | true     | margin account                                                                                                                                                                                                                          | such as “USDT”，“BTC-USDT”                                                                                                                                                                                                   |
+| volume                 | decimal      | true     | Numbers of orders (volume)                                                                                                                                                                                                              |                                                                                                                                                                                                                              |
+| order_type             | int          | true     | Order type: 1. Quotation; 2. Cancelled order                                                                                                                                                                                            |                                                                                                                                                                                                                              |
+| tpsl_order_type        | string       | true     | Order type(take-profit order/stop-loss order)                                                                                                                                                                                           | “tp”:take-profit order；"sl"stop-loss order                                                                                                                                                                                  |
+| direction              | string       | true     | direction                                                                                                                                                                                                                               | "buy", "sell"                                                                                                                                                                                                                |
+| order_id               | long         | true     | order id                                                                                                                                                                                                                                |                                                                                                                                                                                                                              |
+| order_id_str           | string       | true     | order id in string                                                                                                                                                                                                                      |                                                                                                                                                                                                                              |
+| order_source           | string       | true     | order source                                                                                                                                                                                                                            | system、web、api、m、risk、settlement、ios、android、windows、mac、trigger                                                                                                                                                   |
+| trigger_type           | string       | true     | trigger type: ge, le                                                                                                                                                                                                                    |                                                                                                                                                                                                                              |
+| trigger_price          | decimal      | true     | trigger price                                                                                                                                                                                                                           |                                                                                                                                                                                                                              |
+| price_protect          | booleanint   | false    | price protection, default is false. This parameter is only required when setting tp/sl                                                                                                                                                  | true or false                                                                                                                                                                                                                |
+| created_at             | long         | true     | created time                                                                                                                                                                                                                            |                                                                                                                                                                                                                              |
+| order_price_type       | string       | true     | order price type                                                                                                                                                                                                                        | market，limit, optimal_5, optimal_10, optimal_20                                                                                                                                                                             |
+| order_price            | decimal      | true     | order price                                                                                                                                                                                                                             |                                                                                                                                                                                                                              |
+| status                 | int          | true     | status:                                                                                                                                                                                                                                 | 1.Not Activated, 2.Ready to submit the orders, 3.Submitting the orders, 4.Submit the orders success, 5.Submit the orders failed, 6.Orders cancelled, 8.Cancelled order not found, 9.Orders cancelling, 10.Failed, 11.Expired |
+| source_order_id        | string       | true     | Order id of source limit order (the field will have a value only when the order placed is a take-profit and stop-loss order; it is used to indicate that a certain limit order that triggered current take-profit and stop-loss order.) |                                                                                                                                                                                                                              |
+| relation_tpsl_order_id | string       | true     | related take-profit and stop loss order id（The field will have a value when users set take-profit and stop loss order stimulatenously, otherwise, the value will be "-1".）                                                            |                                                                                                                                                                                                                              |
+| contract_type          | string       | true     | contract type                                                                                                                                                                                                                           | swap, this_week, next_week, quarter, next_quarter                                                                                                                                                                            |
+| pair                   | string       | true     | pair                                                                                                                                                                                                                                    | such as: “BTC-USDT”                                                                                                                                                                                                          |
+| business_type          | string       | true     | business type                                                                                                                                                                                                                           | futures, swap                                                                                                                                                                                                                |
+| ORDERS_END             |              | false    |                                                                                                                                                                                                                                         |                                                                                                                                                                                                                              |
+| DATA_END               |              | false    |                                                                                                                                                                                                                                         |                                                                                                                                                                                                                              |
+| ts                     | long         | true     | Time of Respond Generation，Unit: Millisecond                                                                                                                                                                                           |                                                                                                                                                                                                                              |
 
 #### Request example
 
 {
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 
@@ -86,15 +94,15 @@ Interface description: This interface only supports cross margin mode. The reque
 
 "BTC-USDT"
 
-"page\_index":
+"page_index":
 
 1
 
-"page\_size":
+"page_size":
 
 50
 
-"trade\_type":
+"trade_type":
 
 0
 
@@ -116,11 +124,11 @@ Interface description: This interface only supports cross margin mode. The reque
 
 0:{
 
-"contract\_type":
+"contract_type":
 
-"this\_week"
+"this_week"
 
-"business\_type":
+"business_type":
 
 "futures"
 
@@ -132,15 +140,15 @@ Interface description: This interface only supports cross margin mode. The reque
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-211210"
 
-"margin\_mode":
+"margin_mode":
 
 "cross"
 
-"margin\_account":
+"margin_account":
 
 "USDT"
 
@@ -148,7 +156,7 @@ Interface description: This interface only supports cross margin mode. The reque
 
 1
 
-"order\_type":
+"order_type":
 
 1
 
@@ -156,51 +164,51 @@ Interface description: This interface only supports cross margin mode. The reque
 
 "sell"
 
-"order\_id":
+"order_id":
 
 918816985859559400
 
-"order\_id\_str":
+"order_id_str":
 
 "918816985859559425"
 
-"order\_source":
+"order_source":
 
 "api"
 
-"trigger\_type":
+"trigger_type":
 
 "le"
 
-"trigger\_price":
+"trigger_price":
 
 40000
 
-"order\_price":
+"order_price":
 
 0
 
-"created\_at":
+"created_at":
 
 1639104640223
 
-"order\_price\_type":
+"order_price_type":
 
-"optimal\_5"
+"optimal_5"
 
 "status":
 
 2
 
-"tpsl\_order\_type":
+"tpsl_order_type":
 
 "sl"
 
-"source\_order\_id":
+"source_order_id":
 
 NULL
 
-"relation\_tpsl\_order\_id":
+"relation_tpsl_order_id":
 
 "918816985859559424"
 
@@ -208,11 +216,11 @@ NULL
 
 1:{
 
-"contract\_type":
+"contract_type":
 
-"this\_week"
+"this_week"
 
-"business\_type":
+"business_type":
 
 "futures"
 
@@ -224,15 +232,15 @@ NULL
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-211210"
 
-"margin\_mode":
+"margin_mode":
 
 "cross"
 
-"margin\_account":
+"margin_account":
 
 "USDT"
 
@@ -240,7 +248,7 @@ NULL
 
 1
 
-"order\_type":
+"order_type":
 
 1
 
@@ -248,51 +256,51 @@ NULL
 
 "sell"
 
-"order\_id":
+"order_id":
 
 918816985859559400
 
-"order\_id\_str":
+"order_id_str":
 
 "918816985859559424"
 
-"order\_source":
+"order_source":
 
 "api"
 
-"trigger\_type":
+"trigger_type":
 
 "ge"
 
-"trigger\_price":
+"trigger_price":
 
 50000
 
-"order\_price":
+"order_price":
 
 0
 
-"created\_at":
+"created_at":
 
 1639104640223
 
-"order\_price\_type":
+"order_price_type":
 
-"optimal\_5"
+"optimal_5"
 
 "status":
 
 2
 
-"tpsl\_order\_type":
+"tpsl_order_type":
 
 "tp"
 
-"source\_order\_id":
+"source_order_id":
 
 NULL
 
-"relation\_tpsl\_order\_id":
+"relation_tpsl_order_id":
 
 "918816985859559425"
 
@@ -300,15 +308,15 @@ NULL
 
 \]
 
-"total\_page":
+"total_page":
 
 1
 
-"current\_page":
+"current_page":
 
 1
 
-"total\_size":
+"total_size":
 
 2
 

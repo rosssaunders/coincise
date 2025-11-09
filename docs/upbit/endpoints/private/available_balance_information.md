@@ -2,8 +2,9 @@
 
 **Check the proper endpoint based on your region.**
 
-The base\_url differs by country/region. Make sure to specify the correct region value for your environment.  
-  
+The base_url differs by country/region. Make sure to specify the correct region
+value for your environment.
+
 \- Singapore (sg): https://sg-api.upbit.com  
 \- Indonesia (id): https://id-api.upbit.com  
 \- Thailand (th): https://th-api.upbit.com
@@ -11,46 +12,44 @@ The base\_url differs by country/region. Make sure to specify the correct region
 Available withdrawal information includes the following key items.
 
 | Key Items | Related Key Response Fields |
-| --- | --- |
+| --------- | --------------------------- |
+
 | **Currency Information:**  
 Withdrawal fee, withdrawal and  
 wallet status | `currency.withdraw_fee`,  
 `currency.wallet_state`,  
-`currency.wallet_support` |
-| **Currency Balance** | `account.balance`,`account.locked`,  
-`account.avg_buy_price` |
-| **Withdrawal Limits:**  
+`currency.wallet_support` | | **Currency Balance** |
+`account.balance`,`account.locked`,  
+`account.avg_buy_price` | | **Withdrawal Limits:**  
 Per transaction / Daily / Remaining  
 limits | `withdraw_limit.onetime`,  
 `withdraw_limit.daily`,  
 `withdraw_limit.remaining_daily`,  
 `withdraw_limit.minimum`,  
-`withdraw_limit.can_withdraw` |
-| **Withdrawal-related Account  
+`withdraw_limit.can_withdraw` | | **Withdrawal-related Account  
 Information:**  
 Fee level, verification status | `member_level.fee_level`,  
 `member_level.bank_account_verified`,  
 `member_level.locked`,  
 `member_level.wallet_locked` |
 
-  
-
 Revision History
 
-| Version | Date | Changes |
-| --- | --- | --- |
-| v1.0.7 | 2023-05-23 | [Addition of `net_type` field](https://global-docs.upbit.com/changelog/net_type#/) |
+| Version | Date       | Changes                                                                            |
+| ------- | ---------- | ---------------------------------------------------------------------------------- |
+| v1.0.7  | 2023-05-23 | [Addition of `net_type` field](https://global-docs.upbit.com/changelog/net_type#/) |
 
 Rate Limit
 
-Up to 30 calls per second are allowed. This is measured on an account basis and request counts are shared within the exchange 'default' group.
-
-  
+Up to 30 calls per second are allowed. This is measured on an account basis and
+request counts are shared within the exchange 'default' group.
 
 API Key Permission
 
-This API requires [authentication](auth), and the API Key must have \[View Withdrawals\] permission enabled.  
-If you encounter a permission error (out\_of\_scope), please verify your permission settings in the API Key Management page.
+This API requires [authentication](auth), and the API Key must have \[View
+Withdrawals\] permission enabled.  
+If you encounter a permission error (out_of_scope), please verify your
+permission settings in the API Key Management page.
 
 currency
 
@@ -61,17 +60,18 @@ required
 Currency code to query.  
 A filter parameter used to narrow down results by currency code.
 
-net\_type
+net_type
 
 string
 
 required
 
 Blockchain network identifier used for deposits and withdrawals.  
-After registering a withdrawal address, call the List Withdrawal Allowed Addresses API to check the available "net\_type" values for each address.  
+After registering a withdrawal address, call the List Withdrawal Allowed
+Addresses API to check the available "net_type" values for each address.  
 For digital assets, this is a required field.
 
-# 
+#
 
 200
 
@@ -79,7 +79,7 @@ Object of withdrawal policy
 
 object
 
-member\_level
+member_level
 
 object
 
@@ -87,7 +87,7 @@ required
 
 User security level information
 
-security\_level
+security_level
 
 integer
 
@@ -95,7 +95,7 @@ required
 
 Security level of the account.
 
-fee\_level
+fee_level
 
 integer
 
@@ -103,7 +103,7 @@ required
 
 Fee level of the account.
 
-email\_verified
+email_verified
 
 boolean
 
@@ -111,7 +111,7 @@ required
 
 Indicates whether email verification has been completed.
 
-identity\_auth\_verified
+identity_auth_verified
 
 boolean
 
@@ -119,7 +119,7 @@ required
 
 Indicates whether identity verification has been completed.
 
-bank\_account\_verified
+bank_account_verified
 
 boolean
 
@@ -135,7 +135,7 @@ required
 
 Indicates whether the account is protected (locked).
 
-wallet\_locked
+wallet_locked
 
 boolean
 
@@ -159,7 +159,7 @@ required
 
 Currency code.
 
-withdraw\_fee
+withdraw_fee
 
 string
 
@@ -167,7 +167,7 @@ required
 
 Fee amount for the withdrawal.
 
-is\_coin
+is_coin
 
 boolean
 
@@ -175,7 +175,7 @@ required
 
 Indicates whether the asset is a digital asset.
 
-wallet\_state
+wallet_state
 
 string
 
@@ -183,23 +183,27 @@ enum
 
 required
 
-Indicates whether deposit and withdrawal support has ever been provided for each asset. For the current deposit/withdrawal availability, please refer to the wallet\_support field.
+Indicates whether deposit and withdrawal support has ever been provided for each
+asset. For the current deposit/withdrawal availability, please refer to the
+wallet_support field.
 
--   `working`: Deposit/withdrawal available
--   `unsupported`: Deposit/withdrawal not supported
+- `working`: Deposit/withdrawal available
+- `unsupported`: Deposit/withdrawal not supported
 
 `working` `unsupported`
 
-wallet\_support
+wallet_support
 
 array of strings
 
 required
 
 Deposit and withdrawal availability for the specified currency.  
-If deposits are available, "deposit" will be included; if withdrawals are available, "withdraw" will be included. An empty list indicates that both deposit and withdrawal are unavailable.
+If deposits are available, "deposit" will be included; if withdrawals are
+available, "withdraw" will be included. An empty list indicates that both
+deposit and withdrawal are unavailable.
 
-wallet\_support\*
+wallet_support\*
 
 account
 
@@ -235,7 +239,7 @@ required
 
 Amount or quantity locked by pending orders or trades.
 
-avg\_buy\_price
+avg_buy_price
 
 string
 
@@ -243,7 +247,7 @@ required
 
 Average buy price of the asset.
 
-avg\_buy\_price\_modified
+avg_buy_price_modified
 
 boolean
 
@@ -251,17 +255,17 @@ required
 
 Indicates whether the average buy price has been modified.
 
-unit\_currency
+unit_currency
 
 string
 
 required
 
-Currency unit used as the basis for avg\_buy\_price.
+Currency unit used as the basis for avg_buy_price.
 
 \[Example\]: SGD, BTC
 
-withdraw\_limit
+withdraw_limit
 
 object
 
@@ -293,7 +297,7 @@ required
 
 Daily withdrawal limit for the asset. (Deprecated)
 
-remaining\_daily
+remaining_daily
 
 string
 
@@ -301,7 +305,7 @@ required
 
 Remaining daily withdrawal limit. (Deprecated)
 
-remaining\_daily\_fiat
+remaining_daily_fiat
 
 string
 
@@ -309,7 +313,7 @@ required
 
 Integrated daily remaining withdrawal limit (fiat basis).
 
-fiat\_currency
+fiat_currency
 
 string
 
@@ -329,26 +333,27 @@ integer
 
 Number of decimal places allowed for withdrawal amounts.
 
-withdraw\_delayed\_fiat
+withdraw_delayed_fiat
 
 string
 
 Amount restricted from withdrawal due to the withdrawal delay system.
 
-can\_withdraw
+can_withdraw
 
 boolean
 
 Indicates whether withdrawal is currently supported for the currency.  
-To check if withdrawal is available, verify that "withdraw" is present in currency.wallet\_support.
+To check if withdrawal is available, verify that "withdraw" is present in
+currency.wallet_support.
 
-remaining\_daily\_sgd
+remaining_daily_sgd
 
 string
 
 Integrated daily remaining withdrawal limit in SGD. (deprecated)
 
-# 
+#
 
 400
 
@@ -378,7 +383,7 @@ Message describing the cause of the error.
 
 Updated 16 days ago
 
-* * *
+---
 
 ShellPythonJavaNode
 
@@ -418,7 +423,7 @@ xxxxxxxxxx
 
 2
 
-  "member\_level": {
+"member_level": {
 
 3
 
@@ -450,11 +455,11 @@ xxxxxxxxxx
 
 10
 
-  },
+},
 
 11
 
-  "currency": {
+"currency": {
 
 12
 
@@ -490,11 +495,11 @@ xxxxxxxxxx
 
 20
 
-  },
+},
 
 21
 
-  "account": {
+"account": {
 
 22
 
@@ -522,11 +527,11 @@ xxxxxxxxxx
 
 28
 
-  },
+},
 
 29
 
-  "withdraw\_limit": {
+"withdraw_limit": {
 
 30
 
@@ -574,7 +579,7 @@ xxxxxxxxxx
 
 41
 
-  }
+}
 
 42
 
@@ -582,8 +587,9 @@ xxxxxxxxxx
 
 Updated 16 days ago
 
-* * *
+---
 
 ---
 
-**Source:** [available-balance-information](https://global-docs.upbit.com/reference/available-balance-information)
+**Source:**
+[available-balance-information](https://global-docs.upbit.com/reference/available-balance-information)

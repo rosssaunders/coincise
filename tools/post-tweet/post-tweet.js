@@ -1,5 +1,4 @@
 import { TwitterApi } from "twitter-api-v2"
-import { execSync } from "child_process"
 
 /**
  * Post tweet when a Twitter summary PR is merged

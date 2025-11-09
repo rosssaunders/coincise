@@ -1,6 +1,7 @@
 # GET the Last 24h Market Summary
 
-**Source:** [Get the Last 24h Market Summary](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4a2cd-7773-11ed-9966-0242ac110003)
+**Source:**
+[Get the Last 24h Market Summary](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4a2cd-7773-11ed-9966-0242ac110003)
 
 **Category:** Market Data
 
@@ -16,39 +17,40 @@ Signature verification: No
 
 Rate Limit: 4,500 5 minutes
 
-Interface description: This endpoint retrieves the summary of trading in the market for the last 24 hours.
+Interface description: This endpoint retrieves the summary of trading in the
+market for the last 24 hours.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | false | The trading symbol to query | Refer to /v1/common/symbols |  |
+| Parameter | Data Type | Required | Description                 | Value Range                 | Default Value |
+| --------- | --------- | -------- | --------------------------- | --------------------------- | ------------- |
+| symbol    | string    | false    | The trading symbol to query | Refer to /v1/common/symbols |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | false | Request Processing Result "ok","error" |  |
-| ch | string | false | Data belonged channel，Format： market.$symbol.detail |  |
-| ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| TICK\_START | object | false |  |  |
-| id | integer | false | The internal identity |  |
-| amount | float | false | The aggregated trading volume in USDT of last 24 hours (rotating 24h) |  |
-| count | integer | false | The number of completed trades of last 24 hours (rotating 24h) |  |
-| open | float | false | The opening price of last 24 hours (rotating 24h) |  |
-| close | float | false | The closing price of last 24 hours (rotating 24h) |  |
-| low | float | false | The lowest price of last 24 hours (rotating 24h) |  |
-| high | float | false | The highest price of last 24 hours (rotating 24h) |  |
-| vol | float | false | The trading volume in base currency of last 24 hours (rotating 24h) |  |
-| version | integer | false | Internal data |  |
-| TICK\_END |  | false |  |  |
+| Parameter  | Data Type | Required | Description                                                           | Value Range |
+| ---------- | --------- | -------- | --------------------------------------------------------------------- | ----------- |
+| status     | string    | false    | Request Processing Result "ok","error"                                |             |
+| ch         | string    | false    | Data belonged channel，Format： market.$symbol.detail                 |             |
+| ts         | long      | false    | Time of Respond Generation, Unit: Millisecond                         |             |
+| TICK_START | object    | false    |                                                                       |             |
+| id         | integer   | false    | The internal identity                                                 |             |
+| amount     | float     | false    | The aggregated trading volume in USDT of last 24 hours (rotating 24h) |             |
+| count      | integer   | false    | The number of completed trades of last 24 hours (rotating 24h)        |             |
+| open       | float     | false    | The opening price of last 24 hours (rotating 24h)                     |             |
+| close      | float     | false    | The closing price of last 24 hours (rotating 24h)                     |             |
+| low        | float     | false    | The lowest price of last 24 hours (rotating 24h)                      |             |
+| high       | float     | false    | The highest price of last 24 hours (rotating 24h)                     |             |
+| vol        | float     | false    | The trading volume in base currency of last 24 hours (rotating 24h)   |             |
+| version    | integer   | false    | Internal data                                                         |             |
+| TICK_END   |           | false    |                                                                       |             |
 
 #### Request example
 

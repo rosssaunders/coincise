@@ -1,6 +1,7 @@
 # GET Query funding rate
 
-**Source:** [Query funding rate](https://www.htx.com/en-us/opend/newApiPages/?id=5d516b86-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Query funding rate](https://www.htx.com/en-us/opend/newApiPages/?id=5d516b86-77b6-11ed-9966-0242ac110003)
 
 **Category:** Reference Data
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /swap-api/v1/swap\_funding\_rate (Query funding rate)
+### /swap-api/v1/swap_funding_rate (Query funding rate)
 
 Request type: GET
 
@@ -18,32 +19,32 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | contract code | Case-Insenstive."BTC-USD" ... |  |
+| Parameter     | Data Type | Required | Description   | Value Range                   | Default Value |
+| ------------- | --------- | -------- | ------------- | ----------------------------- | ------------- |
+| contract_code | string    | true     | contract code | Case-Insenstive."BTC-USD" ... |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | false | response status | "ok" , "error" |
-| ts | long | false | response timestamp.unit:millionSeconds. |  |
-| DICT>(ATTRS：DATA\_START |  | false |  |  |
-| symbol | string | false | symbol | "BTC","ETH"... |
-| contract\_code | string | false | contract code | eg:"BTC-USD" |
-| fee\_asset | string | false | fee asset | eg:"BTC","ETH"... |
-| funding\_time | string | false | current funding time |  |
-| funding\_rate | string | false | current funding rate（Updated once a minute） |  |
-| estimated\_rate | string | false | (Deprecated, default is null) |  |
-| next\_funding\_time | string | false | (Deprecated, default is null) |  |
-| DICT\_END |  | false |  |  |
+| Parameter               | Data Type | Required | Description                                   | Value Range       |
+| ----------------------- | --------- | -------- | --------------------------------------------- | ----------------- |
+| status                  | string    | false    | response status                               | "ok" , "error"    |
+| ts                      | long      | false    | response timestamp.unit:millionSeconds.       |                   |
+| DICT>(ATTRS：DATA_START |           | false    |                                               |                   |
+| symbol                  | string    | false    | symbol                                        | "BTC","ETH"...    |
+| contract_code           | string    | false    | contract code                                 | eg:"BTC-USD"      |
+| fee_asset               | string    | false    | fee asset                                     | eg:"BTC","ETH"... |
+| funding_time            | string    | false    | current funding time                          |                   |
+| funding_rate            | string    | false    | current funding rate（Updated once a minute） |                   |
+| estimated_rate          | string    | false    | (Deprecated, default is null)                 |                   |
+| next_funding_time       | string    | false    | (Deprecated, default is null)                 |                   |
+| DICT_END                |           | false    |                                               |                   |
 
 #### Request example
 
@@ -61,11 +62,11 @@ Interface permission: Read
 
 "data":{
 
-"funding\_rate":
+"funding_rate":
 
 "0.000100000000000000"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT"
 
@@ -73,19 +74,19 @@ Interface permission: Read
 
 "BTC"
 
-"fee\_asset":
+"fee_asset":
 
 "BTC"
 
-"funding\_time":
+"funding_time":
 
 "1603699200000"
 
-"estimated\_rate":
+"estimated_rate":
 
 "null"
 
-"next\_funding\_time":
+"next_funding_time":
 
 "null"
 

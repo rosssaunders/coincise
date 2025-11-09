@@ -1,6 +1,7 @@
 # GET Query information on Tiered Adjustment Factor
 
-**Source:** [Query information on Tiered Adjustment Factor](https://www.htx.com/en-us/opend/newApiPages/?id=5d516401-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Query information on Tiered Adjustment Factor](https://www.htx.com/en-us/opend/newApiPages/?id=5d516401-77b6-11ed-9966-0242ac110003)
 
 **Category:** Reference Data
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /swap-api/v1/swap\_adjustfactor (Query information on Tiered Adjustment Factor)
+### /swap-api/v1/swap_adjustfactor (Query information on Tiered Adjustment Factor)
 
 Request type: GET
 
@@ -18,36 +19,36 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | false | Case-Insenstive.e.g. "BTC-USD" |  |  |
+| Parameter     | Data Type | Required | Description                    | Value Range | Default Value |
+| ------------- | --------- | -------- | ------------------------------ | ----------- | ------------- |
+| contract_code | string    | false    | Case-Insenstive.e.g. "BTC-USD" |             |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request Processing Result | "ok" , "error" |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
-| DATA\_START |  | false |  |  |
-| symbol | string | true | symbol | "BTC","ETH"... |
-| contract\_code | string | true | Contract Code | e.g. "BTC-USD" |
-| LIST\_START |  | false |  |  |
-| lever\_rate | int | true | Leverage |  |
-| LADDERS\_START |  | false |  |  |
-| min\_size | decimal | true | Min net position limit |  |
-| max\_size | decimal | true | Max net position limit |  |
-| ladder | int | true | Tier |  |
-| adjust\_factor | decimal | true | Adjustment Factor |  |
-| LADDERS\_END |  | false |  |  |
-| LIST\_END |  | false |  |  |
-| DATA\_END |  | false |  |  |
+| Parameter     | Data Type | Required | Description                                   | Value Range    |
+| ------------- | --------- | -------- | --------------------------------------------- | -------------- |
+| status        | string    | true     | Request Processing Result                     | "ok" , "error" |
+| ts            | long      | true     | Time of Respond Generation, Unit: Millisecond |                |
+| DATA_START    |           | false    |                                               |                |
+| symbol        | string    | true     | symbol                                        | "BTC","ETH"... |
+| contract_code | string    | true     | Contract Code                                 | e.g. "BTC-USD" |
+| LIST_START    |           | false    |                                               |                |
+| lever_rate    | int       | true     | Leverage                                      |                |
+| LADDERS_START |           | false    |                                               |                |
+| min_size      | decimal   | true     | Min net position limit                        |                |
+| max_size      | decimal   | true     | Max net position limit                        |                |
+| ladder        | int       | true     | Tier                                          |                |
+| adjust_factor | decimal   | true     | Adjustment Factor                             |                |
+| LADDERS_END   |           | false    |                                               |                |
+| LIST_END      |           | false    |                                               |                |
+| DATA_END      |           | false    |                                               |                |
 
 #### Request example
 
@@ -71,7 +72,7 @@ Interface permission: Read
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC-USD"
 
@@ -79,7 +80,7 @@ Interface permission: Read
 
 0:{
 
-"lever\_rate":
+"lever_rate":
 
 125
 
@@ -91,15 +92,15 @@ Interface permission: Read
 
 0
 
-"min\_size":
+"min_size":
 
 0
 
-"max\_size":
+"max_size":
 
 1999
 
-"adjust\_factor":
+"adjust_factor":
 
 0.65
 
@@ -111,15 +112,15 @@ Interface permission: Read
 
 1
 
-"min\_size":
+"min_size":
 
 2000
 
-"max\_size":
+"max_size":
 
 9999
 
-"adjust\_factor":
+"adjust_factor":
 
 0.8
 
@@ -131,15 +132,15 @@ Interface permission: Read
 
 2
 
-"min\_size":
+"min_size":
 
 10000
 
-"max\_size":
+"max_size":
 
 NULL
 
-"adjust\_factor":
+"adjust_factor":
 
 0.85
 

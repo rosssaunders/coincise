@@ -1,6 +1,7 @@
 # GET Contract Price Limitation
 
-**Source:** [Get Contract Price Limitation](https://www.htx.com/en-us/opend/newApiPages/?id=28c2d41e-77ae-11ed-9966-0242ac110003)
+**Source:**
+[Get Contract Price Limitation](https://www.htx.com/en-us/opend/newApiPages/?id=28c2d41e-77ae-11ed-9966-0242ac110003)
 
 **Category:** Reference Data
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /api/v1/contract\_price\_limit (Get Contract Price Limitation)
+### /api/v1/contract_price_limit (Get Contract Price Limitation)
 
 Request type: GET
 
@@ -16,39 +17,44 @@ Signature verification: No
 
 Interface permission: Read
 
-Rate Limit: the rate limit is 120 times every 3 seconds at most for each IP (this 120 times every 3 seconds public interface rate limit is shared by all the requests from that IP of non-marketing information, like above)
+Rate Limit: the rate limit is 120 times every 3 seconds at most for each IP
+(this 120 times every 3 seconds public interface rate limit is shared by all the
+requests from that IP of non-marketing information, like above)
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | false | Case-Insenstive.Both uppercase and lowercase are supported.e.g."BTC","ETH"... |  |  |
-| contract\_type | string | false | Contract Type ("this\_week","next\_week","quarter", "next\_quarter") |  |  |
-| contract\_code | string | false | BTC180914 ... |  |  |
+| Parameter     | Data Type | Required | Description                                                                   | Value Range | Default Value |
+| ------------- | --------- | -------- | ----------------------------------------------------------------------------- | ----------- | ------------- |
+| symbol        | string    | false    | Case-Insenstive.Both uppercase and lowercase are supported.e.g."BTC","ETH"... |             |               |
+| contract_type | string    | false    | Contract Type ("this_week","next_week","quarter", "next_quarter")             |             |               |
+| contract_code | string    | false    | BTC180914 ...                                                                 |             |               |
 
 Notes:  
-If not any parameter is filled, the interface returns the price limitation data of all currently available contracts. If the contract\_code is filled in, query by the contract\_code; The contract\_type parameter needs to together with symbol, and can't get contract data only by contract\_type
+If not any parameter is filled, the interface returns the price limitation data
+of all currently available contracts. If the contract_code is filled in, query
+by the contract_code; The contract_type parameter needs to together with symbol,
+and can't get contract data only by contract_type
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | Request Processing Result | "ok" ,"error" |
-| DATA\_START |  | false |  |  |
-| symbol | string | true | Variety code | "BTC","ETH" ... |
-| high\_limit | decimal | true | Highest Buying Price |  |
-| low\_limit | decimal | true | Lowest Selling Price |  |
-| contract\_code | string | true | Contract Code | eg "BTC180914" ... |
-| contract\_type | string | true | Contract Type | "this\_week","next\_week","quarter" ,"next\_quarter" |
-| DATA\_END |  | false |  |  |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
+| Parameter     | Data Type | Required | Description                                   | Value Range                                       |
+| ------------- | --------- | -------- | --------------------------------------------- | ------------------------------------------------- |
+| status        | string    | true     | Request Processing Result                     | "ok" ,"error"                                     |
+| DATA_START    |           | false    |                                               |                                                   |
+| symbol        | string    | true     | Variety code                                  | "BTC","ETH" ...                                   |
+| high_limit    | decimal   | true     | Highest Buying Price                          |                                                   |
+| low_limit     | decimal   | true     | Lowest Selling Price                          |                                                   |
+| contract_code | string    | true     | Contract Code                                 | eg "BTC180914" ...                                |
+| contract_type | string    | true     | Contract Type                                 | "this_week","next_week","quarter" ,"next_quarter" |
+| DATA_END      |           | false    |                                               |                                                   |
+| ts            | long      | true     | Time of Respond Generation, Unit: Millisecond |                                                   |
 
 #### Request example
 
@@ -72,19 +78,19 @@ If not any parameter is filled, the interface returns the price limitation data 
 
 "BTC"
 
-"contract\_code":
+"contract_code":
 
 "BTC210813"
 
-"contract\_type":
+"contract_type":
 
-"this\_week"
+"this_week"
 
-"high\_limit":
+"high_limit":
 
 46365.84
 
-"low\_limit":
+"low_limit":
 
 44547.58
 

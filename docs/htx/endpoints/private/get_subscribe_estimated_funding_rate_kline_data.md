@@ -1,6 +1,7 @@
 # GET Subscribe Estimated Funding Rate Kline Data
 
-**Source:** [Subscribe Estimated Funding Rate Kline Data](https://www.htx.com/en-us/opend/newApiPages/?id=5d514e8d-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Subscribe Estimated Funding Rate Kline Data](https://www.htx.com/en-us/opend/newApiPages/?id=5d514e8d-77b6-11ed-9966-0242ac110003)
 
 **Category:** WebSocket Index and Basis Interface
 
@@ -16,44 +17,44 @@ Interface permission: Read
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.hbdm.com/ws\_index |
-| Online (preferred by aws customers) | wss://api.hbdm.vn/ws\_index |
+| Environment                         | Address                     |
+| ----------------------------------- | --------------------------- |
+| Online                              | wss://api.hbdm.com/ws_index |
+| Online (preferred by aws customers) | wss://api.hbdm.vn/ws_index  |
 
 #### Request Parameter
 
 | Field Name | Type | Description |
-| --- | --- | --- |
+| ---------- | ---- | ----------- |
 
 #### Rule description
 
 | Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
+| -------------- | -------------------- | ---- |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | contract code | Case-Insenstive.Both uppercase and lowercase are supported.."BTC-USD","ETH-USD"… |  |
-| period | string | true | index symbol | 1min, 5min, 15min, 30min, 60min,4hour,1day, 1week, 1mon |  |
+| Parameter     | Data Type | Required | Description   | Value Range                                                                      | Default Value |
+| ------------- | --------- | -------- | ------------- | -------------------------------------------------------------------------------- | ------------- |
+| contract_code | string    | true     | contract code | Case-Insenstive.Both uppercase and lowercase are supported.."BTC-USD","ETH-USD"… |               |
+| period        | string    | true     | index symbol  | 1min, 5min, 15min, 30min, 60min,4hour,1day, 1week, 1mon                          |               |
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| ch | string | true | Data channel，Format： market.period" |  |
-| TICK\_START | object array | true |  |  |
-| id | long | true | kline id,the same as kline timestamp |  |
-| vol | string | true | Trade volume(Cont.). The value is 0. |  |
-| count | string | true | count. The value is 0. |  |
-| open | string | true | open price |  |
-| close | string | true | close price |  |
-| low | string | true | low price |  |
-| high | string | true | high price |  |
-| amount | string | true | amount based on coins. |  |
-| TICK\_END |  | false |  |  |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
+| Parameter  | Data Type    | Required | Description                                   | Value Range |
+| ---------- | ------------ | -------- | --------------------------------------------- | ----------- |
+| ch         | string       | true     | Data channel，Format： market.period"         |             |
+| TICK_START | object array | true     |                                               |             |
+| id         | long         | true     | kline id,the same as kline timestamp          |             |
+| vol        | string       | true     | Trade volume(Cont.). The value is 0.          |             |
+| count      | string       | true     | count. The value is 0.                        |             |
+| open       | string       | true     | open price                                    |             |
+| close      | string       | true     | close price                                   |             |
+| low        | string       | true     | low price                                     |             |
+| high       | string       | true     | high price                                    |             |
+| amount     | string       | true     | amount based on coins.                        |             |
+| TICK_END   |              | false    |                                               |             |
+| ts         | long         | true     | Time of Respond Generation, Unit: Millisecond |             |
 
 #### Subscription Example
 
@@ -61,7 +62,7 @@ Interface permission: Read
 
 "req":
 
-"market.BTC-USD.estimated\_rate.1min"
+"market.BTC-USD.estimated_rate.1min"
 
 "id":
 
@@ -91,7 +92,7 @@ Interface permission: Read
 
 "subbed":
 
-"market.btc-usd.estimated\_rate.1min"
+"market.btc-usd.estimated_rate.1min"
 
 "ts":
 
@@ -105,7 +106,7 @@ Interface permission: Read
 
 "ch":
 
-"market.BTC-USD.estimated\_rate.1min"
+"market.BTC-USD.estimated_rate.1min"
 
 "ts":
 
@@ -155,7 +156,7 @@ Interface permission: Read
 
 "unsub":
 
-"market.btc-usd.estimated\_rate.1min"
+"market.btc-usd.estimated_rate.1min"
 
 "id":
 

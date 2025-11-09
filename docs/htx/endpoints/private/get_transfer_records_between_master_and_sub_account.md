@@ -1,6 +1,7 @@
 # GET transfer records between master and sub account
 
-**Source:** [Get transfer records between master and sub account](https://www.htx.com/en-us/opend/newApiPages/?id=28c30a22-77ae-11ed-9966-0242ac110003)
+**Source:**
+[Get transfer records between master and sub account](https://www.htx.com/en-us/opend/newApiPages/?id=28c30a22-77ae-11ed-9966-0242ac110003)
 
 **Category:** Future Account Interface
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /api/v1/contract\_master\_sub\_transfer\_record (Get transfer records between master and sub account)
+### /api/v1/contract_master_sub_transfer_record (Get transfer records between master and sub account)
 
 Request type: POST
 
@@ -16,45 +17,48 @@ Signature verification: Yes
 
 Interface permission: Read
 
-Rate Limit: the private interface rate limit of API key is at most 72 times every 3 seconds for each UID (Trade Interface: at most 36 times every 3 seconds. Read Interface: at most 36 times every 3 seconds) (this rate limit is shared by all the altcoins contracts delivered by different date).
+Rate Limit: the private interface rate limit of API key is at most 72 times
+every 3 seconds for each UID (Trade Interface: at most 36 times every 3 seconds.
+Read Interface: at most 36 times every 3 seconds) (this rate limit is shared by
+all the altcoins contracts delivered by different date).
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | true | symbol | Case-Insenstive.Both uppercase and lowercase are supported."BTC","ETH"... |  |
-| transfer\_type | string | false | All by default【multiple types need to be joined with ';'】 | 34:transfer to sub account 35:transfer from sub account |  |
-| create\_date | int | true | days | days need to be less than or equal to 90 |  |
-| page\_index | int | false | 1 by default |  |  |
-| page\_size | int | false | 20 by default.less than or equal to 50. | \[1-50\] |  |
+| Parameter     | Data Type | Required | Description                                                 | Value Range                                                               | Default Value |
+| ------------- | --------- | -------- | ----------------------------------------------------------- | ------------------------------------------------------------------------- | ------------- |
+| symbol        | string    | true     | symbol                                                      | Case-Insenstive.Both uppercase and lowercase are supported."BTC","ETH"... |               |
+| transfer_type | string    | false    | All by default【multiple types need to be joined with ';'】 | 34:transfer to sub account 35:transfer from sub account                   |               |
+| create_date   | int       | true     | days                                                        | days need to be less than or equal to 90                                  |               |
+| page_index    | int       | false    | 1 by default                                                |                                                                           |               |
+| page_size     | int       | false    | 20 by default.less than or equal to 50.                     | \[1-50\]                                                                  |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | true | respone status | "ok" , "error" |
-| ts | long | true | response millionseconds. |  |
-| DATA\_START | object | true |  |  |
-| TRANSFER\_RECORD\_START | objectarray | true |  |  |
-| id | long | true | transfer id |  |
-| ts | long | true | create timestamp |  |
-| symbol | string | true | symbol | "BTC","ETH"... |
-| sub\_uid | string | true | subaccount uid |  |
-| sub\_account\_name | string | true | subaccount name |  |
-| transfer\_type | int | true | transfer type | transfer from subaccount：35，transfer to subaccount:34 |
-| amount | decimal | true | amount |  |
-| TRANSFER\_RECORD\_END |  | false |  |  |
-| total\_page | int | true | total page |  |
-| current\_page | int | true | current page |  |
-| total\_size | int | true | total size |  |
-| DATA\_END |  | false |  |  |
+| Parameter             | Data Type   | Required | Description              | Value Range                                             |
+| --------------------- | ----------- | -------- | ------------------------ | ------------------------------------------------------- |
+| status                | string      | true     | respone status           | "ok" , "error"                                          |
+| ts                    | long        | true     | response millionseconds. |                                                         |
+| DATA_START            | object      | true     |                          |                                                         |
+| TRANSFER_RECORD_START | objectarray | true     |                          |                                                         |
+| id                    | long        | true     | transfer id              |                                                         |
+| ts                    | long        | true     | create timestamp         |                                                         |
+| symbol                | string      | true     | symbol                   | "BTC","ETH"...                                          |
+| sub_uid               | string      | true     | subaccount uid           |                                                         |
+| sub_account_name      | string      | true     | subaccount name          |                                                         |
+| transfer_type         | int         | true     | transfer type            | transfer from subaccount：35，transfer to subaccount:34 |
+| amount                | decimal     | true     | amount                   |                                                         |
+| TRANSFER_RECORD_END   |             | false    |                          |                                                         |
+| total_page            | int         | true     | total page               |                                                         |
+| current_page          | int         | true     | current page             |                                                         |
+| total_size            | int         | true     | total size               |                                                         |
+| DATA_END              |             | false    |                          |                                                         |
 
 #### Request example
 
@@ -64,19 +68,19 @@ Rate Limit: the private interface rate limit of API key is at most 72 times ever
 
 "BTC"
 
-"transfer\_type":
+"transfer_type":
 
 "34"
 
-"create\_date":
+"create_date":
 
 30
 
-"page\_index":
+"page_index":
 
 1
 
-"page\_size":
+"page_size":
 
 20
 
@@ -94,19 +98,19 @@ Rate Limit: the private interface rate limit of API key is at most 72 times ever
 
 "data":{
 
-"total\_page":
+"total_page":
 
 1
 
-"current\_page":
+"current_page":
 
 1
 
-"total\_size":
+"total_size":
 
 2
 
-"transfer\_record":\[
+"transfer_record":\[
 
 0:{
 
@@ -118,7 +122,7 @@ Rate Limit: the private interface rate limit of API key is at most 72 times ever
 
 "ADA"
 
-"transfer\_type":
+"transfer_type":
 
 34
 
@@ -130,11 +134,11 @@ Rate Limit: the private interface rate limit of API key is at most 72 times ever
 
 1604309247860
 
-"sub\_uid":
+"sub_uid":
 
 "123456789"
 
-"sub\_account\_name":
+"sub_account_name":
 
 "tom"
 
@@ -150,7 +154,7 @@ Rate Limit: the private interface rate limit of API key is at most 72 times ever
 
 "ADA"
 
-"transfer\_type":
+"transfer_type":
 
 34
 
@@ -162,11 +166,11 @@ Rate Limit: the private interface rate limit of API key is at most 72 times ever
 
 1604301623314
 
-"sub\_uid":
+"sub_uid":
 
 "123456789"
 
-"sub\_account\_name":
+"sub_account_name":
 
 "tom"
 

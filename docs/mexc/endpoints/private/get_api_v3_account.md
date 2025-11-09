@@ -22,10 +22,9 @@
 }
 ```
 
--   **GET** `/api/v3/account`  
-    
+- **GET** `/api/v3/account`
 
-**Permission:** SPOT\_ACCOUNT\_READ
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 10
 
@@ -33,25 +32,25 @@ Get current account information,rate limit:2 times/s.
 
 Parameters:
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| recvWindow | long | NO |  |
-| timestamp | long | YES |  |
+| Name       | Type | Mandatory | Description |
+| ---------- | ---- | --------- | ----------- |
+| recvWindow | long | NO        |             |
+| timestamp  | long | YES       |             |
 
 Response:
 
-| Name | Description |
-| --- | --- |
-| canTrade | Can Trade |
-| canWithdraw | Can Withdraw |
-| canDeposit | Can Deposit |
-| updateTime | Update Time |
-| accountType | Account type |
-| balances | Balance |
-| asset | Asset coin |
-| free | Available coin |
-| locked | Forzen coin |
-| permissions | Permission |
+| Name        | Description    |
+| ----------- | -------------- |
+| canTrade    | Can Trade      |
+| canWithdraw | Can Withdraw   |
+| canDeposit  | Can Deposit    |
+| updateTime  | Update Time    |
+| accountType | Account type   |
+| balances    | Balance        |
+| asset       | Asset coin     |
+| free        | Available coin |
+| locked      | Forzen coin    |
+| permissions | Permission     |
 
 ---
 

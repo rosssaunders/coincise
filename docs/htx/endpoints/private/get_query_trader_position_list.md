@@ -1,6 +1,7 @@
 # GET Query trader position list
 
-**Source:** [Query trader position list](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-19126c2c390)
+**Source:**
+[Query trader position list](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-19126c2c390)
 
 **Category:** Future Copy Trade
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /copytrading/trader/position\_list (Query trader position list)
+### /copytrading/trader/position_list (Query trader position list)
 
 Request type: GET
 
@@ -16,44 +17,45 @@ Signature verification: Yes
 
 Interface permission: Trade
 
-Rate Limit: A single user requests all copytrading interfaces 18 times per second.
+Rate Limit: A single user requests all copytrading interfaces 18 times per
+second.
 
 Interface description: Query trader position list
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
 | Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
+| --------- | --------- | -------- | ----------- | ----------- | ------------- |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| tid | string | true | request id |  |
-| DATA\_START |  | true |  |  |
-| POSITIONS\_START | array | true |  |  |
-| margin\_mode | string | true | margin mode | isolated，cross |
-| position\_side | string | true | position side | long, short |
-| lever | string | true | lever |  |
-| open\_avg\_price | string | true | Average open price |  |
-| position\_margin | string | true |  |  |
-| margin\_rate | string | true |  |  |
-| volume | string | true | Quantity of positions |  |
-| liquidation\_price | string | true | liquidation price |  |
-| unreal\_profit | string | true | unreal profit |  |
-| profit | string | true | Profit and loss |  |
-| profit\_rate | string | true | Profit and loss Rate |  |
-| contract\_code | String | true | Trading pair |  |
-| POSITIONS\_END |  | false |  |  |
-| DATA\_END |  | false |  |  |
-| code | Long | true |  |  |
+| Parameter         | Data Type | Required | Description           | Value Range     |
+| ----------------- | --------- | -------- | --------------------- | --------------- |
+| tid               | string    | true     | request id            |                 |
+| DATA_START        |           | true     |                       |                 |
+| POSITIONS_START   | array     | true     |                       |                 |
+| margin_mode       | string    | true     | margin mode           | isolated，cross |
+| position_side     | string    | true     | position side         | long, short     |
+| lever             | string    | true     | lever                 |                 |
+| open_avg_price    | string    | true     | Average open price    |                 |
+| position_margin   | string    | true     |                       |                 |
+| margin_rate       | string    | true     |                       |                 |
+| volume            | string    | true     | Quantity of positions |                 |
+| liquidation_price | string    | true     | liquidation price     |                 |
+| unreal_profit     | string    | true     | unreal profit         |                 |
+| profit            | string    | true     | Profit and loss       |                 |
+| profit_rate       | string    | true     | Profit and loss Rate  |                 |
+| contract_code     | String    | true     | Trading pair          |                 |
+| POSITIONS_END     |           | false    |                       |                 |
+| DATA_END          |           | false    |                       |                 |
+| code              | Long      | true     |                       |                 |
 
 #### Request example
 
@@ -79,15 +81,15 @@ Interface description: Query trader position list
 
 "5"
 
-"position\_side":
+"position_side":
 
 "long"
 
-"contract\_code":
+"contract_code":
 
 "DOT-USDT"
 
-"open\_avg\_price":
+"open_avg_price":
 
 "10"
 
@@ -95,19 +97,19 @@ Interface description: Query trader position list
 
 "1"
 
-"margin\_mode":
+"margin_mode":
 
 "isolated"
 
-"position\_margin":
+"position_margin":
 
 "2.994"
 
-"margin\_rate":
+"margin_rate":
 
 "0.066800267201068804"
 
-"unreal\_profit":
+"unreal_profit":
 
 "0"
 
@@ -115,11 +117,11 @@ Interface description: Query trader position list
 
 "0"
 
-"profit\_rate":
+"profit_rate":
 
 "0"
 
-"liquidation\_price":
+"liquidation_price":
 
 "7.206"
 
@@ -131,15 +133,15 @@ Interface description: Query trader position list
 
 "5"
 
-"position\_side":
+"position_side":
 
 "short"
 
-"contract\_code":
+"contract_code":
 
 "DOT-USDT"
 
-"open\_avg\_price":
+"open_avg_price":
 
 "9.999"
 
@@ -147,19 +149,19 @@ Interface description: Query trader position list
 
 "1"
 
-"margin\_mode":
+"margin_mode":
 
 "isolated"
 
-"position\_margin":
+"position_margin":
 
 "1.9938006"
 
-"margin\_rate":
+"margin_rate":
 
 "0.100361270465293918"
 
-"unreal\_profit":
+"unreal_profit":
 
 "-0.001"
 
@@ -167,11 +169,11 @@ Interface description: Query trader position list
 
 "-0.001"
 
-"profit\_rate":
+"profit_rate":
 
 "-0.0005000500050005"
 
-"liquidation\_price":
+"liquidation_price":
 
 "11.7928006"
 

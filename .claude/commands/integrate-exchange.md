@@ -60,44 +60,48 @@ special handling:
 
 ```javascript
 const expandResponseButtons = () => {
-  const buttons = Array.from(document.querySelectorAll('button'));
+  const buttons = Array.from(document.querySelectorAll("button"))
   const responseButtons = buttons.filter(btn => {
-    const text = btn.textContent;
-    return /^\s*\d{3}\s/.test(text) &&
-           (text.includes('Success') || text.includes('error') || text.includes('Error'));
-  });
+    const text = btn.textContent
+    return (
+      /^\s*\d{3}\s/.test(text) &&
+      (text.includes("Success") ||
+        text.includes("error") ||
+        text.includes("Error"))
+    )
+  })
 
   responseButtons.forEach(btn => {
     try {
-      const isExpanded = btn.getAttribute('aria-expanded');
-      if (isExpanded !== 'true') {
-        btn.click();
+      const isExpanded = btn.getAttribute("aria-expanded")
+      if (isExpanded !== "true") {
+        btn.click()
       }
     } catch (e) {
-      console.error('Error clicking response button:', e);
+      console.error("Error clicking response button:", e)
     }
-  });
-};
+  })
+}
 
 // In your extraction logic:
 const endpoints = await page.evaluate(async () => {
-  expandResponseButtons();
+  expandResponseButtons()
 
   // CRITICAL: Wait for DOM to update after clicking
-  await new Promise(resolve => setTimeout(resolve, 1500));
+  await new Promise(resolve => setTimeout(resolve, 1500))
 
   // Now extract with updated DOM...
-  const results = { public: [], private: [] };
+  const results = { public: [], private: [] }
   // ... extraction logic
-  return results;
-});
+  return results
+})
 ```
 
 4. **Redocly uses `data-section-id` for navigation** - Use these attributes to
    locate endpoint sections:
 
 ```javascript
-const operations = document.querySelectorAll('[data-section-id]');
+const operations = document.querySelectorAll("[data-section-id]")
 ```
 
 ### 2. Create Venue Folder Structure
@@ -318,11 +322,14 @@ Check for the presence of authentication headers in the endpoint content:
 
 ```javascript
 // Example from Backpack integration
-const hasXApiKey = content.includes('X-API-KEY') || content.includes('X-API-Key');
-const hasXSignature = content.includes('X-SIGNATURE') || content.includes('X-Signature');
-const hasXTimestamp = content.includes('X-TIMESTAMP') || content.includes('X-Timestamp');
-const hasAuthHeaders = hasXApiKey || hasXSignature || hasXTimestamp;
-const isPublic = !hasAuthHeaders;
+const hasXApiKey =
+  content.includes("X-API-KEY") || content.includes("X-API-Key")
+const hasXSignature =
+  content.includes("X-SIGNATURE") || content.includes("X-Signature")
+const hasXTimestamp =
+  content.includes("X-TIMESTAMP") || content.includes("X-Timestamp")
+const hasAuthHeaders = hasXApiKey || hasXSignature || hasXTimestamp
+const isPublic = !hasAuthHeaders
 ```
 
 **Exchange-Specific Patterns:**
@@ -344,17 +351,19 @@ identical classification logic:
 ```javascript
 // ❌ WRONG: Different logic in different places
 // Primary method
-const isPublic = !content.includes('authentication required');
+const isPublic = !content.includes("authentication required")
 
 // Fallback method
-const isPublic = parentSection && parentSection.textContent.toLowerCase().includes('public');
+const isPublic =
+  parentSection && parentSection.textContent.toLowerCase().includes("public")
 
 // ✅ CORRECT: Same logic everywhere
 // Both primary and fallback use:
-const hasAuthHeaders = content.includes('X-API-KEY') ||
-                      content.includes('X-SIGNATURE') ||
-                      content.includes('X-TIMESTAMP');
-const isPublic = !hasAuthHeaders;
+const hasAuthHeaders =
+  content.includes("X-API-KEY") ||
+  content.includes("X-SIGNATURE") ||
+  content.includes("X-TIMESTAMP")
+const isPublic = !hasAuthHeaders
 ```
 
 **Source URL Extraction**
@@ -364,15 +373,15 @@ proper URL from heading links:
 
 ```javascript
 // Extract link from heading
-const link = heading.querySelector('a[href]');
-let sourceUrl = 'https://docs.exchange.com';
-let operationId = endpointPath;
+const link = heading.querySelector("a[href]")
+let sourceUrl = "https://docs.exchange.com"
+let operationId = endpointPath
 
 if (link) {
-  const href = link.getAttribute('href');
-  if (href && href.startsWith('#')) {
-    sourceUrl = `https://docs.exchange.com/${href}`;
-    operationId = href.replace('#', '');
+  const href = link.getAttribute("href")
+  if (href && href.startsWith("#")) {
+    sourceUrl = `https://docs.exchange.com/${href}`
+    operationId = href.replace("#", "")
   }
 }
 
@@ -384,7 +393,7 @@ const endpoint = {
   sourceUrl, // Proper URL like: https://docs.backpack.exchange/#tag/Assets/operation/get_assets
   content,
   isPublic
-};
+}
 ```
 
 **IMPORTANT: Handling Complex HTML Tables**
@@ -634,19 +643,21 @@ jobs:
 
 **Use Chrome DevTools MCP for Efficient Investigation**
 
-When debugging extraction issues or understanding documentation structure, Chrome
-DevTools MCP is more efficient than Playwright for interactive investigation:
+When debugging extraction issues or understanding documentation structure,
+Chrome DevTools MCP is more efficient than Playwright for interactive
+investigation:
 
 ```javascript
 // Navigate to the docs
-mcp__chrome-devtools__navigate_page({ url: "https://docs.exchange.com" })
+mcp__chrome - devtools__navigate_page({ url: "https://docs.exchange.com" })
 
 // Take a snapshot (faster than Playwright for simple checks)
-mcp__chrome-devtools__take_snapshot()
+mcp__chrome - devtools__take_snapshot()
 
 // Evaluate JavaScript to understand structure
-mcp__chrome-devtools__evaluate_script({
-  function: `() => {
+mcp__chrome -
+  devtools__evaluate_script({
+    function: `() => {
     // Check if endpoint has auth headers
     const section = document.querySelector('[data-section-id="operation/get_assets"]');
     const html = section ? section.innerHTML : '';
@@ -656,7 +667,7 @@ mcp__chrome-devtools__evaluate_script({
       sectionLength: html.length
     };
   }`
-})
+  })
 ```
 
 **Add Comprehensive Debug Logging**
@@ -673,7 +684,7 @@ const endpoint = {
   content,
   isPublic,
   _debug: {
-    hasResponseSchema: content.includes('Response Schema'),
+    hasResponseSchema: content.includes("Response Schema"),
     contentLength: content.length,
     hasXApiKey,
     hasXSignature,
@@ -681,17 +692,24 @@ const endpoint = {
     hasAuthHeaders,
     isPublic
   }
-};
+}
 
 // Log first endpoint for debugging
 if (results.private.length === 1 && results.public.length === 0) {
-  console.log('📝 Debug first endpoint:', JSON.stringify({
-    operationId: endpoint.operationId,
-    sourceUrl: endpoint.sourceUrl,
-    method: endpoint.method,
-    path: endpoint.path,
-    debug: endpoint._debug
-  }, null, 2));
+  console.log(
+    "📝 Debug first endpoint:",
+    JSON.stringify(
+      {
+        operationId: endpoint.operationId,
+        sourceUrl: endpoint.sourceUrl,
+        method: endpoint.method,
+        path: endpoint.path,
+        debug: endpoint._debug
+      },
+      null,
+      2
+    )
+  )
 }
 ```
 
@@ -760,9 +778,9 @@ act -W .github/workflows/{exchange-name}-docs-update.yml -j update-docs --contai
   the documentation site
 - **File Naming:** Follow the convention `{http_method}_{endpoint_name}.md` for
   endpoints
-- **Multiple Extraction Paths:** If you implement primary and fallback extraction
-  methods, ensure BOTH use identical classification logic (auth headers, source
-  URL extraction, etc.)
+- **Multiple Extraction Paths:** If you implement primary and fallback
+  extraction methods, ensure BOTH use identical classification logic (auth
+  headers, source URL extraction, etc.)
 - **Section Boundaries:** Implement multiple boundary detection strategies to
   prevent over-extraction (heading changes, link patterns, text matching)
 - **Documentation File Protection:** NEVER modify files in `docs/` directory

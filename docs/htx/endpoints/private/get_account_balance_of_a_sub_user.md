@@ -1,6 +1,7 @@
 # GET Account Balance of a Sub-User
 
-**Source:** [Get Account Balance of a Sub-User](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4b62b-7773-11ed-9966-0242ac110003)
+**Source:**
+[Get Account Balance of a Sub-User](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4b62b-7773-11ed-9966-0242ac110003)
 
 **Category:** Sub-account Management
 
@@ -18,38 +19,39 @@ Interface permission: Read
 
 Rate Limit: 20times/2s
 
-Interface description: This endpoint returns the balance of a sub-user specified by sub-uid.
+Interface description: This endpoint returns the balance of a sub-user specified
+by sub-uid.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| sub-uid | long | false | Sub user UID |  |  |
+| Parameter | Data Type | Required | Description  | Value Range | Default Value |
+| --------- | --------- | -------- | ------------ | ----------- | ------------- |
+| sub-uid   | long      | false    | Sub user UID |             |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | false | status "OK" or "Error" |  |
-| DATA\_START | object | false |  |  |
-| id | long | false | account's ID |  |
-| type | string | false | The type of this account: spot, margin, otc, point,super-margin |  |
-| LIST\_START | string | false |  |  |
-| currency | object | false | The currency of this balance |  |
-| type | string | false | The balance type: trade, frozen, loan, interest, lock, bank |  |
-| balance | string | false | The balance in the main currency unit |  |
-| debt | string | false | Invalid field |  |
-| available | string | false | Invalid field |  |
-| LIST\_END | decimal | false |  |  |
-| symbol |  | false |  |  |
-| DATA\_END | string | false |  |  |
+| Parameter  | Data Type | Required | Description                                                     | Value Range |
+| ---------- | --------- | -------- | --------------------------------------------------------------- | ----------- |
+| status     | string    | false    | status "OK" or "Error"                                          |             |
+| DATA_START | object    | false    |                                                                 |             |
+| id         | long      | false    | account's ID                                                    |             |
+| type       | string    | false    | The type of this account: spot, margin, otc, point,super-margin |             |
+| LIST_START | string    | false    |                                                                 |             |
+| currency   | object    | false    | The currency of this balance                                    |             |
+| type       | string    | false    | The balance type: trade, frozen, loan, interest, lock, bank     |             |
+| balance    | string    | false    | The balance in the main currency unit                           |             |
+| debt       | string    | false    | Invalid field                                                   |             |
+| available  | string    | false    | Invalid field                                                   |             |
+| LIST_END   | decimal   | false    |                                                                 |             |
+| symbol     |           | false    |                                                                 |             |
+| DATA_END   | string    | false    |                                                                 |             |
 
 #### Request example
 

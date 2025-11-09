@@ -1,30 +1,44 @@
 ---
 name: web-investigation
-description: Investigate website structure and debug web scraping using Chrome DevTools MCP. Use when analyzing documentation frameworks, debugging extraction issues, understanding HTML structure, investigating why web content isn't being captured correctly, or exploring API documentation sites. Covers Redocly, Swagger UI, and other modern documentation frameworks.
-allowed-tools: mcp__chrome-devtools__navigate_page, mcp__chrome-devtools__take_snapshot, mcp__chrome-devtools__evaluate_script, Read, Grep, Glob
+description:
+  Investigate website structure and debug web scraping using Chrome DevTools
+  MCP. Use when analyzing documentation frameworks, debugging extraction issues,
+  understanding HTML structure, investigating why web content isn't being
+  captured correctly, or exploring API documentation sites. Covers Redocly,
+  Swagger UI, and other modern documentation frameworks.
+allowed-tools:
+  mcp__chrome-devtools__navigate_page, mcp__chrome-devtools__take_snapshot,
+  mcp__chrome-devtools__evaluate_script, Read, Grep, Glob
 ---
 
 # Web Investigation with Chrome DevTools MCP
 
-This skill provides workflows for investigating website structure, debugging web scraping issues, and understanding documentation frameworks using Chrome DevTools MCP.
+This skill provides workflows for investigating website structure, debugging web
+scraping issues, and understanding documentation frameworks using Chrome
+DevTools MCP.
 
 ## When to Use This Skill
 
 Activate this skill when you need to:
 
-- **Understand website structure** - Analyze how content is organized and rendered
+- **Understand website structure** - Analyze how content is organized and
+  rendered
 - **Debug extraction issues** - Investigate why content isn't being captured
-- **Identify documentation frameworks** - Determine if site uses Redocly, Swagger UI, etc.
-- **Check authentication patterns** - Find how endpoints indicate authentication requirements
-- **Verify HTML structure** - Confirm selectors and element attributes before extraction
-- **Investigate dynamic content** - Check if content requires interaction (clicks, waits, etc.)
+- **Identify documentation frameworks** - Determine if site uses Redocly,
+  Swagger UI, etc.
+- **Check authentication patterns** - Find how endpoints indicate authentication
+  requirements
+- **Verify HTML structure** - Confirm selectors and element attributes before
+  extraction
+- **Investigate dynamic content** - Check if content requires interaction
+  (clicks, waits, etc.)
 
 ## Core Investigation Workflow
 
 ### 1. Navigate to the Target URL
 
 ```javascript
-mcp__chrome-devtools__navigate_page({ url: "https://docs.example.com" })
+mcp__chrome - devtools__navigate_page({ url: "https://docs.example.com" })
 ```
 
 ### 2. Take Initial Snapshot (for simple checks)
@@ -32,24 +46,28 @@ mcp__chrome-devtools__navigate_page({ url: "https://docs.example.com" })
 For quick structure overview:
 
 ```javascript
-mcp__chrome-devtools__take_snapshot()
+mcp__chrome - devtools__take_snapshot()
 ```
 
-**Note**: Snapshots can be very large (>25,000 tokens). Only use when you need full accessibility tree. For targeted investigation, use `evaluate_script` instead.
+**Note**: Snapshots can be very large (>25,000 tokens). Only use when you need
+full accessibility tree. For targeted investigation, use `evaluate_script`
+instead.
 
 ### 3. Targeted Investigation with evaluate_script
 
-This is the primary investigation method - faster and more focused than snapshots:
+This is the primary investigation method - faster and more focused than
+snapshots:
 
 ```javascript
-mcp__chrome-devtools__evaluate_script({
-  function: `() => {
+mcp__chrome -
+  devtools__evaluate_script({
+    function: `() => {
     // Your investigation code here
     return {
       // Return structured data about what you found
     };
   }`
-})
+  })
 ```
 
 ## Common Investigation Patterns
@@ -57,8 +75,9 @@ mcp__chrome-devtools__evaluate_script({
 ### Pattern 1: Identify Documentation Framework
 
 ```javascript
-mcp__chrome-devtools__evaluate_script({
-  function: `() => {
+mcp__chrome -
+  devtools__evaluate_script({
+    function: `() => {
     const body = document.body.innerHTML;
 
     // Check for Redocly
@@ -77,7 +96,7 @@ mcp__chrome-devtools__evaluate_script({
       bodyClassList: document.body.className
     };
   }`
-})
+  })
 ```
 
 ### Pattern 2: Check Authentication Header Patterns
@@ -85,8 +104,9 @@ mcp__chrome-devtools__evaluate_script({
 **Example from Backpack Integration:**
 
 ```javascript
-mcp__chrome-devtools__evaluate_script({
-  function: `() => {
+mcp__chrome -
+  devtools__evaluate_script({
+    function: `() => {
     // Check both public and private endpoints
     const publicSection = document.querySelector('[data-section-id="tag/Markets/operation/get_markets"]');
     const privateSection = document.querySelector('[data-section-id="tag/Account/operation/get_account"]');
@@ -109,10 +129,11 @@ mcp__chrome-devtools__evaluate_script({
       }
     };
   }`
-})
+  })
 ```
 
 **Use this to**:
+
 - Determine how to classify endpoints (public vs private)
 - Identify which headers indicate authentication
 - Understand exchange-specific patterns
@@ -122,8 +143,9 @@ mcp__chrome-devtools__evaluate_script({
 **Example from Backpack Integration (Response Buttons):**
 
 ```javascript
-mcp__chrome-devtools__evaluate_script({
-  function: `() => {
+mcp__chrome -
+  devtools__evaluate_script({
+    function: `() => {
     // Find expandable buttons (200, 400, 500 response codes)
     const buttons = Array.from(document.querySelectorAll('button'));
     const responseButtons = buttons.filter(btn => {
@@ -139,10 +161,11 @@ mcp__chrome-devtools__evaluate_script({
       ariaExpandedStates: responseButtons.map(b => b.getAttribute('aria-expanded'))
     };
   }`
-})
+  })
 ```
 
 **Use this to**:
+
 - Detect if response schemas are hidden
 - Determine if buttons need to be clicked
 - Understand interaction requirements
@@ -150,8 +173,9 @@ mcp__chrome-devtools__evaluate_script({
 ### Pattern 4: Analyze Section Structure
 
 ```javascript
-mcp__chrome-devtools__evaluate_script({
-  function: `() => {
+mcp__chrome -
+  devtools__evaluate_script({
+    function: `() => {
     // Find all sections with IDs or data attributes
     const sections = document.querySelectorAll('[data-section-id], [id]');
 
@@ -168,10 +192,11 @@ mcp__chrome-devtools__evaluate_script({
       sections: sectionInfo
     };
   }`
-})
+  })
 ```
 
 **Use this to**:
+
 - Understand content organization
 - Identify section boundaries
 - Plan extraction selectors
@@ -181,8 +206,9 @@ mcp__chrome-devtools__evaluate_script({
 **Example from Backpack Integration:**
 
 ```javascript
-mcp__chrome-devtools__evaluate_script({
-  function: `() => {
+mcp__chrome -
+  devtools__evaluate_script({
+    function: `() => {
     // Find sections that are operations (endpoints)
     const operations = document.querySelectorAll('[data-section-id]');
 
@@ -214,10 +240,11 @@ mcp__chrome-devtools__evaluate_script({
       examples: operationInfo
     };
   }`
-})
+  })
 ```
 
 **Use this to**:
+
 - Verify extraction selectors work
 - Understand endpoint structure
 - Test source URL extraction logic
@@ -225,8 +252,9 @@ mcp__chrome-devtools__evaluate_script({
 ### Pattern 6: Extract Table Structure
 
 ```javascript
-mcp__chrome-devtools__evaluate_script({
-  function: `() => {
+mcp__chrome -
+  devtools__evaluate_script({
+    function: `() => {
     const tables = document.querySelectorAll('table');
     const firstTable = tables[0];
 
@@ -248,10 +276,11 @@ mcp__chrome-devtools__evaluate_script({
       firstRowHTML: firstRow?.outerHTML?.substring(0, 200)
     };
   }`
-})
+  })
 ```
 
 **Use this to**:
+
 - Check if tables need cleaning before extraction
 - Understand table structure
 - Verify GFM conversion will work
@@ -261,6 +290,7 @@ mcp__chrome-devtools__evaluate_script({
 ### Redocly Framework
 
 **Identifying characteristics**:
+
 - Uses `data-section-id` attributes
 - Expandable response sections (buttons with status codes)
 - Operations have `tag/.../operation/...` patterns
@@ -269,16 +299,17 @@ mcp__chrome-devtools__evaluate_script({
 
 ```javascript
 // Check if Redocly
-const isRedocly = !!document.querySelector('[data-section-id]');
+const isRedocly = !!document.querySelector("[data-section-id]")
 
 // Find endpoint sections
-const endpoints = document.querySelectorAll('[data-section-id*="operation"]');
+const endpoints = document.querySelectorAll('[data-section-id*="operation"]')
 
 // Check for expandable buttons
-const hasExpandableResponses = !!document.querySelector('button[aria-expanded]');
+const hasExpandableResponses = !!document.querySelector("button[aria-expanded]")
 ```
 
 **Common issues**:
+
 - Response schemas hidden behind buttons → Need to click to expand
 - DOM updates are async → Must wait after clicking
 - Nested section structure → Need proper selectors
@@ -286,6 +317,7 @@ const hasExpandableResponses = !!document.querySelector('button[aria-expanded]')
 ### Swagger UI Framework
 
 **Identifying characteristics**:
+
 - Contains `.swagger-ui` class
 - Uses `.opblock` for operations
 - Interactive try-it-out features
@@ -294,10 +326,10 @@ const hasExpandableResponses = !!document.querySelector('button[aria-expanded]')
 
 ```javascript
 // Check if Swagger UI
-const isSwagger = !!document.querySelector('.swagger-ui');
+const isSwagger = !!document.querySelector(".swagger-ui")
 
 // Find operations
-const operations = document.querySelectorAll('.opblock');
+const operations = document.querySelectorAll(".opblock")
 ```
 
 ## Debugging Checklist
@@ -338,11 +370,12 @@ This is a real example of how this skill was used:
 
 ```javascript
 // 1. Navigate to docs
-mcp__chrome-devtools__navigate_page({ url: "https://docs.backpack.exchange" })
+mcp__chrome - devtools__navigate_page({ url: "https://docs.backpack.exchange" })
 
 // 2. Check a known public endpoint
-mcp__chrome-devtools__evaluate_script({
-  function: `() => {
+mcp__chrome -
+  devtools__evaluate_script({
+    function: `() => {
     const section = document.querySelector('[data-section-id="tag/Markets/operation/get_markets"]');
     const html = section?.innerHTML || '';
     return {
@@ -351,12 +384,13 @@ mcp__chrome-devtools__evaluate_script({
       hasXTimestamp: html.includes('X-TIMESTAMP')
     };
   }`
-})
+  })
 // Result: All false → Public endpoint has NO auth headers
 
 // 3. Check a known private endpoint
-mcp__chrome-devtools__evaluate_script({
-  function: `() => {
+mcp__chrome -
+  devtools__evaluate_script({
+    function: `() => {
     const section = document.querySelector('[data-section-id="tag/Account/operation/get_account"]');
     const html = section?.innerHTML || '';
     return {
@@ -365,11 +399,12 @@ mcp__chrome-devtools__evaluate_script({
       hasXTimestamp: html.includes('X-TIMESTAMP')
     };
   }`
-})
+  })
 // Result: All true → Private endpoint HAS auth headers
 ```
 
-**Solution**: Classification logic should check for auth headers, not text searches.
+**Solution**: Classification logic should check for auth headers, not text
+searches.
 
 ## Best Practices
 
@@ -382,4 +417,5 @@ mcp__chrome-devtools__evaluate_script({
 
 ## Version History
 
-- **v1.0** (2025-01-02): Initial version based on Backpack Exchange integration learnings
+- **v1.0** (2025-01-02): Initial version based on Backpack Exchange integration
+  learnings

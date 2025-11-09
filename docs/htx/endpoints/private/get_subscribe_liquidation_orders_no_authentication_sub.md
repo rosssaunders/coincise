@@ -1,6 +1,7 @@
 # GET Subscribe Liquidation Orders (no authentication) (sub)
 
-**Source:** [Subscribe Liquidation Orders (no authentication) (sub)](https://www.htx.com/en-us/opend/newApiPages/?id=5d51592a-77b6-11ed-9966-0242ac110003)
+**Source:**
+[Subscribe Liquidation Orders (no authentication) (sub)](https://www.htx.com/en-us/opend/newApiPages/?id=5d51592a-77b6-11ed-9966-0242ac110003)
 
 **Category:** Orders and Accounts WebSocket Interfaces
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### public.$contract\_code.liquidation\_orders (Subscribe Liquidation Orders (no authentication) (sub))
+### public.$contract_code.liquidation_orders (Subscribe Liquidation Orders (no authentication) (sub))
 
 Signature verification: Yes
 
@@ -16,54 +17,54 @@ Interface permission: Read
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.hbdm.com/swap-notification |
-| Online (preferred by aws customers) | wss://api.hbdm.vn/swap-notification |
+| Environment                         | Address                              |
+| ----------------------------------- | ------------------------------------ |
+| Online                              | wss://api.hbdm.com/swap-notification |
+| Online (preferred by aws customers) | wss://api.hbdm.vn/swap-notification  |
 
 #### Request Parameter
 
-| Field Name | Type | Description |
-| --- | --- | --- |
-| op | string | Required;Operator Name，value for unsubscribe is unsub; |
-| cid | string | Optional; Client requests unique ID |
-| topic | string | Subscribe topic name，Require subscribe public.$contract\_code.liquidation\_orders Subscribe/unsubscribe the data of a given coin; when the $contract\_code value is \*, it stands for subscribing/unsubscribing the data of all coins，; |
+| Field Name | Type   | Description                                                                                                                                                                                                                            |
+| ---------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| op         | string | Required;Operator Name，value for unsubscribe is unsub;                                                                                                                                                                                |
+| cid        | string | Optional; Client requests unique ID                                                                                                                                                                                                    |
+| topic      | string | Subscribe topic name，Require subscribe public.$contract_code.liquidation_orders Subscribe/unsubscribe the data of a given coin; when the $contract_code value is \*, it stands for subscribing/unsubscribing the data of all coins，; |
 
 #### Rule description
 
-| Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
-| public.\*.liquidation\_orders | public.\*.liquidation\_orders | Allowed |
-| public.contract\_code1.liquidation\_orders | public.\*.liquidation\_orders | Allowed |
-| public.contract\_code1.liquidation\_orders | public.contract\_code1.liquidation\_orders | Allowed |
-| public.contract\_code1.liquidation\_orders | public.contract\_code2.liquidation\_orders | Not Allowed |
-| public.\*.liquidation\_orders | public.contract\_code1.liquidation\_orders | Not Allowed |
+| Subscribe(sub)                           | Unsubscribe( unsub )                     | Rule        |
+| ---------------------------------------- | ---------------------------------------- | ----------- |
+| public.\*.liquidation_orders             | public.\*.liquidation_orders             | Allowed     |
+| public.contract_code1.liquidation_orders | public.\*.liquidation_orders             | Allowed     |
+| public.contract_code1.liquidation_orders | public.contract_code1.liquidation_orders | Allowed     |
+| public.contract_code1.liquidation_orders | public.contract_code2.liquidation_orders | Not Allowed |
+| public.\*.liquidation_orders             | public.contract_code1.liquidation_orders | Not Allowed |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| op | string | true | Required； Operator Name，required subscribe value is sub |  |  |
-| cid | string | false | Optional; ID Client requests unique ID |  |  |
-| topic | string | true | Required；Topic name format: public.$contract\_code.liquidation\_orders. contract\_code is case-insenstive.Both uppercase and lowercase are supported.e.g. "BTC-USD" |  |  |
+| Parameter | Data Type | Required | Description                                                                                                                                                       | Value Range | Default Value |
+| --------- | --------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------- |
+| op        | string    | true     | Required； Operator Name，required subscribe value is sub                                                                                                         |             |               |
+| cid       | string    | false    | Optional; ID Client requests unique ID                                                                                                                            |             |               |
+| topic     | string    | true     | Required；Topic name format: public.$contract_code.liquidation_orders. contract_code is case-insenstive.Both uppercase and lowercase are supported.e.g. "BTC-USD" |             |               |
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| op | string | true | value: 'notify'; |  |
-| topic | string | true | topic subscribed |  |
-| ts | long | true | Time of Respond Generation，Unit：Millisecond |  |
-| DATA\_START | array object | true |  |  |
-| symbol | string | true | Coin |  |
-| contract\_code | string | true | swap code E.G.: "BTC-USD" |  |
-| direction | string | true | Long or short |  |
-| offset | string | true | Open or close |  |
-| volume | decimal | true | liquidation volume (cotn) |  |
-| amount | decimal | true | liquidation amount (token) |  |
-| price | decimal | true | bankruptcy price |  |
-| created\_at | long | true | Order Creation Time |  |
-| DATA\_END |  | false |  |  |
+| Parameter     | Data Type    | Required | Description                                   | Value Range |
+| ------------- | ------------ | -------- | --------------------------------------------- | ----------- |
+| op            | string       | true     | value: 'notify';                              |             |
+| topic         | string       | true     | topic subscribed                              |             |
+| ts            | long         | true     | Time of Respond Generation，Unit：Millisecond |             |
+| DATA_START    | array object | true     |                                               |             |
+| symbol        | string       | true     | Coin                                          |             |
+| contract_code | string       | true     | swap code E.G.: "BTC-USD"                     |             |
+| direction     | string       | true     | Long or short                                 |             |
+| offset        | string       | true     | Open or close                                 |             |
+| volume        | decimal      | true     | liquidation volume (cotn)                     |             |
+| amount        | decimal      | true     | liquidation amount (token)                    |             |
+| price         | decimal      | true     | bankruptcy price                              |             |
+| created_at    | long         | true     | Order Creation Time                           |             |
+| DATA_END      |              | false    |                                               |             |
 
 #### Subscription Example
 
@@ -97,7 +98,7 @@ Interface permission: Read
 
 "topic":
 
-"public.BTC-USD.liquidation\_orders"
+"public.BTC-USD.liquidation_orders"
 
 "ts":
 
@@ -119,7 +120,7 @@ Interface permission: Read
 
 "topic":
 
-"public.BTC-USD.liquidation\_orders"
+"public.BTC-USD.liquidation_orders"
 
 "ts":
 
@@ -129,7 +130,7 @@ Interface permission: Read
 
 0:{
 
-"contract\_code":
+"contract_code":
 
 "BTC-USD"
 
@@ -153,7 +154,7 @@ Interface permission: Read
 
 17102.9
 
-"created\_at":
+"created_at":
 
 1606381842485
 
@@ -177,7 +178,7 @@ Interface permission: Read
 
 "topic":
 
-"public.BTC-USD.liquidation\_orders"
+"public.BTC-USD.liquidation_orders"
 
 "cid":
 

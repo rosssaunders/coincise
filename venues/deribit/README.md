@@ -1,10 +1,13 @@
 # Deribit API Documentation Extraction
 
-This directory contains the extraction scripts for Deribit cryptocurrency exchange API documentation.
+This directory contains the extraction scripts for Deribit cryptocurrency
+exchange API documentation.
 
 ## Overview
 
-Deribit is a cryptocurrency derivatives exchange offering futures, options, and perpetual contracts on Bitcoin and Ethereum. Their API uses JSON-RPC 2.0 protocol over WebSocket and HTTP.
+Deribit is a cryptocurrency derivatives exchange offering futures, options, and
+perpetual contracts on Bitcoin and Ethereum. Their API uses JSON-RPC 2.0
+protocol over WebSocket and HTTP.
 
 ## Documentation Source
 
@@ -17,8 +20,10 @@ Deribit is a cryptocurrency derivatives exchange offering futures, options, and 
 ### extractGeneral.js
 
 Extracts core documentation sections:
+
 - `rate_limits.md` - Rate limiting rules and policies
-- `authentication.md` - API authentication methods (OAuth, client credentials, signatures)
+- `authentication.md` - API authentication methods (OAuth, client credentials,
+  signatures)
 - `network_connectivity.md` - Connection endpoints and infrastructure
 - `error_codes.md` - JSON-RPC error codes
 - `response_formats.md` - JSON-RPC 2.0 response structure
@@ -27,6 +32,7 @@ Extracts core documentation sections:
 ### extractEndpoints.js
 
 Extracts individual endpoint documentation into separate files:
+
 - Public endpoints → `docs/deribit/endpoints/public/`
 - Private endpoints → `docs/deribit/endpoints/private/`
 
@@ -51,8 +57,11 @@ pnpm run extract:all
 ## Documentation Structure
 
 Deribit uses JSON-RPC style endpoints:
-- Public endpoints: `/public/{method}` (e.g., `/public/get_time`, `/public/get_ticker`)
-- Private endpoints: `/private/{method}` (e.g., `/private/buy`, `/private/get_account_summary`)
+
+- Public endpoints: `/public/{method}` (e.g., `/public/get_time`,
+  `/public/get_ticker`)
+- Private endpoints: `/private/{method}` (e.g., `/private/buy`,
+  `/private/get_account_summary`)
 
 ## Notes
 

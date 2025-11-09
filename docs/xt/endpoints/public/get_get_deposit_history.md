@@ -1,6 +1,7 @@
 # GET Get deposit history
 
-Source: [https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetDepositHistory](https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetDepositHistory)
+Source:
+[https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetDepositHistory](https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetDepositHistory)
 
 # Get history records of deposit
 
@@ -8,24 +9,24 @@ Source: [https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetDepositHistory](http
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| currency | string | true | N/A | Currency name, from **Get supported currencies for deposit/withdrawal** API |  |
-| chain | string | true | N/A | Transfer network, from **Get supported currencies for deposit/withdrawal** API |  |
-| status | string | false | N/A | Deposit status | SUBMIT, REVIEW, AUDITED, PENDING, SUCCESS, FAIL, CANCEL |
-| fromId | long | false | N/A | Start ID (e.g. `6216559590087220004`) |  |
-| direction | string | false | NEXT | Query direction | PREV, NEXT |
-| limit | int | false | 10 | Limit number, max 200 | 1 ≤ limit ≤ 200 |
-| startTime | long | false | N/A | Start time for filtering deposit list (timestamp in ms) |  |
-| endTime | long | false | N/A | End time for filtering deposit list (timestamp in ms) |  |
+| name      | type   | mandatory | default | description                                                                    | ranges                                                  |
+| --------- | ------ | --------- | ------- | ------------------------------------------------------------------------------ | ------------------------------------------------------- |
+| currency  | string | true      | N/A     | Currency name, from **Get supported currencies for deposit/withdrawal** API    |                                                         |
+| chain     | string | true      | N/A     | Transfer network, from **Get supported currencies for deposit/withdrawal** API |                                                         |
+| status    | string | false     | N/A     | Deposit status                                                                 | SUBMIT, REVIEW, AUDITED, PENDING, SUCCESS, FAIL, CANCEL |
+| fromId    | long   | false     | N/A     | Start ID (e.g. `6216559590087220004`)                                          |                                                         |
+| direction | string | false     | NEXT    | Query direction                                                                | PREV, NEXT                                              |
+| limit     | int    | false     | 10      | Limit number, max 200                                                          | 1 ≤ limit ≤ 200                                         |
+| startTime | long   | false     | N/A     | Start time for filtering deposit list (timestamp in ms)                        |                                                         |
+| endTime   | long   | false     | N/A     | End time for filtering deposit list (timestamp in ms)                          |                                                         |
 
 ### Notes[​](#notes "Direct link to Notes")
 
 This endpoint retrieves the historical deposit records of a user.
 
--   Supports pagination using `fromId` and `direction`.
--   Status values reference: [depositWithdrawStatus](#depositWithdrawStatus).
--   Some currencies require **memo/tag** to be filled when depositing.
+- Supports pagination using `fromId` and `direction`.
+- Status values reference: [depositWithdrawStatus](#depositWithdrawStatus).
+- Some currencies require **memo/tag** to be filled when depositing.
 
 ### Response Example[​](#response-example "Direct link to Response Example")
 

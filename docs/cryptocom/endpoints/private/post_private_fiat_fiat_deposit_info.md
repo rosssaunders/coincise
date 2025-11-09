@@ -1,6 +1,7 @@
 # POST private/fiat/fiat-deposit-info
 
-**Source:** [private/fiat/fiat-deposit-info](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-fiat-fiat-deposit-info)
+**Source:**
+[private/fiat/fiat-deposit-info](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-fiat-fiat-deposit-info)
 
 ## Authentication
 
@@ -92,72 +93,69 @@ Required (Private Endpoint)
   }
 ```
 
-Retrieves fiat deposit information for the authenticated user. Returns bank details for depositing fiat currency with optional payment network filtering.
+Retrieves fiat deposit information for the authenticated user. Returns bank
+details for depositing fiat currency with optional payment network filtering.
 
 ### Request Params
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| id | string | Y | Unique request identifier |
-| method | string | Y | "private/fiat/fiat-deposit-info" |
-| params | object | N | Request parameters |
-| nonce | number | Y | Unix timestamp in milliseconds |
+| Field  | Type   | Required | Description                      |
+| ------ | ------ | -------- | -------------------------------- |
+| id     | string | Y        | Unique request identifier        |
+| method | string | Y        | "private/fiat/fiat-deposit-info" |
+| params | object | N        | Request parameters               |
+| nonce  | number | Y        | Unix timestamp in milliseconds   |
 
-  
-****params**** consists of:  
+\***\*params\*\*** consists of:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| payment\_networks | string | N | Comma-separated list of payment networks to filter by |
+| Field            | Type   | Required | Description                                           |
+| ---------------- | ------ | -------- | ----------------------------------------------------- |
+| payment_networks | string | N        | Comma-separated list of payment networks to filter by |
 
 ### Response Params
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| id | string | N | Echo back the request identifier from the original request |
-| method | string | Y | Method invoked |
-| code | number | Y | 0 for success; otherwise, see error details |
-| msg | string | N | Response message |
-| data | object | Y | See below |
+| Field  | Type   | Required | Description                                                |
+| ------ | ------ | -------- | ---------------------------------------------------------- |
+| id     | string | N        | Echo back the request identifier from the original request |
+| method | string | Y        | Method invoked                                             |
+| code   | number | Y        | 0 for success; otherwise, see error details                |
+| msg    | string | N        | Response message                                           |
+| data   | object | Y        | See below                                                  |
 
-  
-****data**** consists of:  
+\***\*data\*\*** consists of:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| deposit\_info\_list | deposit\_info\_list array | Y | List of deposit information |
+| Field             | Type                    | Required | Description                 |
+| ----------------- | ----------------------- | -------- | --------------------------- |
+| deposit_info_list | deposit_info_list array | Y        | List of deposit information |
 
-  
-****deposit\_info\_list**** consists of:  
+\***\*deposit_info_list\*\*** consists of:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| payment\_network | string | Y | Payment network identifier |
-| currency | string | Y | Currency code |
-| bank\_details | bank\_details | Y | Bank details object |
+| Field           | Type         | Required | Description                |
+| --------------- | ------------ | -------- | -------------------------- |
+| payment_network | string       | Y        | Payment network identifier |
+| currency        | string       | Y        | Currency code              |
+| bank_details    | bank_details | Y        | Bank details object        |
 
-  
-****bank\_details**** consists of:  
+\***\*bank_details\*\*** consists of:
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| account\_holder\_name | string | N | Account holder name |
-| bank\_name | string | N | Bank name |
-| bank\_address | string | N | Bank address |
-| bank\_country | string | N | Bank country |
-| routing\_number | string | N | Bank routing number |
-| account\_number | string | N | Bank account number |
-| recipient\_name | string | N | Recipient name |
-| recipient\_address | string | N | Recipient address |
-| bic\_code | string | N | Bank Identifier Code (SWIFT code) |
-| iban\_code | string | N | International Bank Account Number |
-| reference\_code | string | N | Reference code for the deposit |
-| sort\_code | string | N | UK bank sort code |
-| cubix\_partner\_name | string | N | Cubix partner name |
-| cubix\_account\_name | string | N | Cubix account name |
-| cubix\_account\_id | string | N | Cubix account ID |
-| cubix\_account\_number | string | N | Last 4 digits of Cubix account number |
-| meta | object | N | Additional metadata |
+| Field                | Type   | Required | Description                           |
+| -------------------- | ------ | -------- | ------------------------------------- |
+| account_holder_name  | string | N        | Account holder name                   |
+| bank_name            | string | N        | Bank name                             |
+| bank_address         | string | N        | Bank address                          |
+| bank_country         | string | N        | Bank country                          |
+| routing_number       | string | N        | Bank routing number                   |
+| account_number       | string | N        | Bank account number                   |
+| recipient_name       | string | N        | Recipient name                        |
+| recipient_address    | string | N        | Recipient address                     |
+| bic_code             | string | N        | Bank Identifier Code (SWIFT code)     |
+| iban_code            | string | N        | International Bank Account Number     |
+| reference_code       | string | N        | Reference code for the deposit        |
+| sort_code            | string | N        | UK bank sort code                     |
+| cubix_partner_name   | string | N        | Cubix partner name                    |
+| cubix_account_name   | string | N        | Cubix account name                    |
+| cubix_account_id     | string | N        | Cubix account ID                      |
+| cubix_account_number | string | N        | Last 4 digits of Cubix account number |
+| meta                 | object | N        | Additional metadata                   |
 
 ### Applies To
 

@@ -1,6 +1,8 @@
-You can compare the network latency between two domain api.huobi.pro and api-aws.huobi.pro, and then choose the better one for you.
+You can compare the network latency between two domain api.huobi.pro and
+api-aws.huobi.pro, and then choose the better one for you.
 
-In general, the domain api-aws.huobi.pro is optimized for AWS client, the latency will be lower.
+In general, the domain api-aws.huobi.pro is optimized for AWS client, the
+latency will be lower.
 
 **REST API**
 
@@ -28,6 +30,8 @@ In general, the domain api-aws.huobi.pro is optimized for AWS client, the latenc
 
 Please initiate API calls with non-China IP.
 
-It is not recommended to use proxy to access HTX API because it will introduce high latency and low stability.
+It is not recommended to use proxy to access HTX API because it will introduce
+high latency and low stability.
 
-It is recommended to access HTX API from AWS Japan for better stability. If your server is in China mainland, it may be not stable.
+It is recommended to access HTX API from AWS Japan for better stability. If your
+server is in China mainland, it may be not stable.

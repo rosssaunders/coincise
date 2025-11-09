@@ -6,25 +6,26 @@ post https://api.bitfinex.com/v2/auth/r/ext/invoice/payments
 
 Retrieve invoice and payment data
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
+/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+theme, base, components, utilities; @layer utilities;
 
-#### 
+####
 
 Response data
 
 [](#response-data)
 
-| Term | Type | Description |
-| --- | --- | --- |
-| PAYMENT\_HASH | string | Payment hash |
-| CREATED\_AT | int | Invoice created timestamp in milliseconds |
-| INVOICE\_EXPIRY | int | Optional, invoice expired timestamp in milliseconds |
-| INVOICE | string | LNX invoice |
-| RECIPIENT\_PUB\_KEY | string | Recipient public key |
-| MEMO | string | Optional, invoice memo |
-| AMOUNT | number | Amount in satoshis |
-| BFX\_AMOUNT | string | Amount in BTC |
-| STATUS | string | Invoice/payment status |
+| Term              | Type   | Description                                         |
+| ----------------- | ------ | --------------------------------------------------- |
+| PAYMENT_HASH      | string | Payment hash                                        |
+| CREATED_AT        | int    | Invoice created timestamp in milliseconds           |
+| INVOICE_EXPIRY    | int    | Optional, invoice expired timestamp in milliseconds |
+| INVOICE           | string | LNX invoice                                         |
+| RECIPIENT_PUB_KEY | string | Recipient public key                                |
+| MEMO              | string | Optional, invoice memo                              |
+| AMOUNT            | number | Amount in satoshis                                  |
+| BFX_AMOUNT        | string | Amount in BTC                                       |
+| STATUS            | string | Invoice/payment status                              |
 
 Body Params
 
@@ -34,7 +35,8 @@ string
 
 required
 
-Query action, use one of getPaymentsByUser, getInvoicesByUser, getInvoiceById, getPaymentById
+Query action, use one of getPaymentsByUser, getInvoicesByUser, getInvoiceById,
+getPaymentById
 
 query
 
@@ -48,7 +50,7 @@ query object
 
 Responses
 
-# 
+#
 
 200
 
@@ -58,7 +60,7 @@ Response body
 
 json
 
-# 
+#
 
 400
 
@@ -70,7 +72,7 @@ object
 
 Updated 5 months ago
 
-* * *
+---
 
 Language
 
@@ -104,7 +106,8 @@ RESPONSE
 
 Examples
 
-Click `Try It!` to start a request and see the response here! Or choose an example:
+Click `Try It!` to start a request and see the response here! Or choose an
+example:
 
 application/json
 
@@ -112,10 +115,10 @@ application/json
 
 Updated 5 months ago
 
-* * *
+---
 
 ---
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/lnx-invoice-payments
-Path: /v2/auth/r/ext/invoice/payments
-Method: POST
+
+Section: Account Actions Source:
+https://docs.bitfinex.com/reference/lnx-invoice-payments Path:
+/v2/auth/r/ext/invoice/payments Method: POST

@@ -1,6 +1,7 @@
 # GET Get 24h statistics ticker
 
-Source: [https://doc.xt.com/docs/spot/Market/Get24hStatisticsTicker](https://doc.xt.com/docs/spot/Market/Get24hStatisticsTicker)
+Source:
+[https://doc.xt.com/docs/spot/Market/Get24hStatisticsTicker](https://doc.xt.com/docs/spot/Market/Get24hStatisticsTicker)
 
 # Get 24h statistics ticker
 
@@ -8,11 +9,11 @@ Source: [https://doc.xt.com/docs/spot/Market/Get24hStatisticsTicker](https://doc
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | false |  | trading pair eg:btc\_usdt |  |
-| symbols | array | false |  | Collection of trading pairs. Priority is higher than symbol. eg: btc\_usdt,eth\_usdt |  |
-| tags | string | false |  | Set of tags, separated by commas, currently only supports spot |  |
+| name    | type   | mandatory | default | description                                                                        | ranges |
+| ------- | ------ | --------- | ------- | ---------------------------------------------------------------------------------- | ------ |
+| symbol  | string | false     |         | trading pair eg:btc_usdt                                                           |        |
+| symbols | array  | false     |         | Collection of trading pairs. Priority is higher than symbol. eg: btc_usdt,eth_usdt |        |
+| tags    | string | false     |         | Set of tags, separated by commas, currently only supports spot                     |        |
 
 #### **Limit Flow Rules**[​](#limit-flow-rules "Direct link to limit-flow-rules")
 

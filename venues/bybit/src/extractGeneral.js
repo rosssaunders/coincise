@@ -40,7 +40,9 @@ const writeFile = (filePath, content) => {
 const extractPageContent = async (page, turndownService) => {
   const html = await page.evaluate(() => {
     // Get the main content area (excluding navigation)
-    const main = document.querySelector('main, article, .main-content, [role="main"]')
+    const main = document.querySelector(
+      'main, article, .main-content, [role="main"]'
+    )
     if (!main) {
       return document.body.innerHTML
     }
@@ -62,7 +64,10 @@ const extractNetworkConnectivity = async (page, turndownService) => {
   })
 
   const markdown = await extractPageContent(page, turndownService)
-  return markdown || "# Network Connectivity\n\nPlease refer to the Bybit API documentation for network connectivity information.\n"
+  return (
+    markdown ||
+    "# Network Connectivity\n\nPlease refer to the Bybit API documentation for network connectivity information.\n"
+  )
 }
 
 /**
@@ -79,27 +84,29 @@ const extractAuthentication = async (page, turndownService) => {
 
   const html = await page.evaluate(() => {
     const content = document.createElement("div")
-    const main = document.querySelector('main, article, .main-content, [role="main"]')
-    
+    const main = document.querySelector(
+      'main, article, .main-content, [role="main"]'
+    )
+
     if (!main) {
       return "<h1>Authentication</h1><p>Please refer to the Bybit API documentation for authentication details.</p>"
     }
 
     // Get all elements from main content
-    const elements = Array.from(main.querySelectorAll('*'))
+    const elements = Array.from(main.querySelectorAll("*"))
     let capturing = false
 
     for (const element of elements) {
       const text = element.textContent.toLowerCase()
-      
+
       // Start capturing when we find authentication-related content
       if (
-        (element.tagName === "H1" || 
-         element.tagName === "H2" || 
-         element.tagName === "H3") &&
-        (text.includes("authentication") || 
-         text.includes("api key") || 
-         text.includes("signature"))
+        (element.tagName === "H1" ||
+          element.tagName === "H2" ||
+          element.tagName === "H3") &&
+        (text.includes("authentication") ||
+          text.includes("api key") ||
+          text.includes("signature"))
       ) {
         capturing = true
         content.appendChild(element.cloneNode(true))
@@ -109,11 +116,13 @@ const extractAuthentication = async (page, turndownService) => {
       // Stop at major section changes
       if (capturing && (element.tagName === "H1" || element.tagName === "H2")) {
         const nextText = element.textContent.toLowerCase()
-        if (!nextText.includes("authentication") && 
-            !nextText.includes("api key") && 
-            !nextText.includes("signature") &&
-            !nextText.includes("request") &&
-            !nextText.includes("header")) {
+        if (
+          !nextText.includes("authentication") &&
+          !nextText.includes("api key") &&
+          !nextText.includes("signature") &&
+          !nextText.includes("request") &&
+          !nextText.includes("header")
+        ) {
           break
         }
       }
@@ -123,7 +132,10 @@ const extractAuthentication = async (page, turndownService) => {
       }
     }
 
-    return content.innerHTML || "<h1>Authentication</h1><p>Please refer to the Bybit API documentation for authentication details.</p>"
+    return (
+      content.innerHTML ||
+      "<h1>Authentication</h1><p>Please refer to the Bybit API documentation for authentication details.</p>"
+    )
   })
 
   const markdown = turndownService.turndown(html)
@@ -142,7 +154,10 @@ const extractRateLimits = async (page, turndownService) => {
   })
 
   const markdown = await extractPageContent(page, turndownService)
-  return markdown || "# Rate Limits\n\nPlease refer to the Bybit API documentation for rate limit information.\n"
+  return (
+    markdown ||
+    "# Rate Limits\n\nPlease refer to the Bybit API documentation for rate limit information.\n"
+  )
 }
 
 /**
@@ -157,7 +172,10 @@ const extractErrorCodes = async (page, turndownService) => {
   })
 
   const markdown = await extractPageContent(page, turndownService)
-  return markdown || "# Error Codes\n\nPlease refer to the Bybit API documentation for error code information.\n"
+  return (
+    markdown ||
+    "# Error Codes\n\nPlease refer to the Bybit API documentation for error code information.\n"
+  )
 }
 
 /**
@@ -174,22 +192,27 @@ const extractResponseFormats = async (page, turndownService) => {
 
   const html = await page.evaluate(() => {
     const content = document.createElement("div")
-    const main = document.querySelector('main, article, .main-content, [role="main"]')
-    
+    const main = document.querySelector(
+      'main, article, .main-content, [role="main"]'
+    )
+
     if (!main) {
       return "<h1>Response Formats</h1><p>All responses from the Bybit API follow standard JSON format.</p>"
     }
 
     // Get the first few sections which typically describe response structure
-    const elements = Array.from(main.querySelectorAll('h1, h2, h3, p, ul, ol, pre, code, table'))
-    let count = 0
-    
+    const elements = Array.from(
+      main.querySelectorAll("h1, h2, h3, p, ul, ol, pre, code, table")
+    )
+
     for (const element of elements.slice(0, 20)) {
       content.appendChild(element.cloneNode(true))
-      count++
     }
 
-    return content.innerHTML || "<h1>Response Formats</h1><p>All responses from the Bybit API follow standard JSON format.</p>"
+    return (
+      content.innerHTML ||
+      "<h1>Response Formats</h1><p>All responses from the Bybit API follow standard JSON format.</p>"
+    )
   })
 
   const markdown = turndownService.turndown(html)

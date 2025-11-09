@@ -8,7 +8,7 @@ Margin transaction records
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/tax/margin-record
+- GET /api/v2/tax/margin-record
 
 Request Example
 
@@ -18,14 +18,14 @@ curl "https://api.bitget.com/api/v2/tax/margin-record?startTime=1686128558000&en
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| marginType | String | No | Leverage type<br><code>isolated</code>: Isolated margin<br><code>crossed</code>: Cross margin(default) 
-| coin | String | No | Default all coin type 
-| startTime | String | Yes | Start time (time stamp in milliseconds) 
-| endTime | String | Yes | The maximum interval between startTime and endTime (time stamp in milliseconds) is 30 days. 
-| limit | String | No | Default: 500, maximum: 500 
-| idLessThan | String | No | The last recorded ID 
+| Parameter  | Type   | Required | Description                                                                                            |
+| :--------- | :----- | :------- | :----------------------------------------------------------------------------------------------------- |
+| marginType | String | No       | Leverage type<br><code>isolated</code>: Isolated margin<br><code>crossed</code>: Cross margin(default) |
+| coin       | String | No       | Default all coin type                                                                                  |
+| startTime  | String | Yes      | Start time (time stamp in milliseconds)                                                                |
+| endTime    | String | Yes      | The maximum interval between startTime and endTime (time stamp in milliseconds) is 30 days.            |
+| limit      | String | No       | Default: 500, maximum: 500                                                                             |
+| idLessThan | String | No       | The last recorded ID                                                                                   |
 
 Response example
 
@@ -35,15 +35,16 @@ Response example
 
 ### Response parameters[​](#response-parameters "Direct link to Response parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| id | String | Record id 
-| coin | String | Coin 
-| symbol | String | Trade pair 
-| marginTaxType | String | transfer_in: Inbound transfer<br>transfer_out: Outbound transfer<br>borrow: Borrowings<br>repay: Repayment<br>liquidation_fee: Liquidation fee<br>compensate: Risk fund compensation for collateral shortfall<br>deal_in: Margin buy<br>deal_out: Margin sell<br>interest_repay: Interest repayment<br>confiscated: Deducted for collateral shortfall<br>exchange_in: Conversion profit<br>exchange_out: Conversion profit 
-| amount | String | Quantity 
-| fee | String | Transaction fee 
-| total | String | Total accounts 
-| ts | String | Record generation time, Unix millisecond timestamps
+| Parameter     | Type   | Description                                                                                                                                                                                                                                                                                                                                                                                                                |
+| :------------ | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id            | String | Record id                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| coin          | String | Coin                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| symbol        | String | Trade pair                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| marginTaxType | String | transfer_in: Inbound transfer<br>transfer_out: Outbound transfer<br>borrow: Borrowings<br>repay: Repayment<br>liquidation_fee: Liquidation fee<br>compensate: Risk fund compensation for collateral shortfall<br>deal_in: Margin buy<br>deal_out: Margin sell<br>interest_repay: Interest repayment<br>confiscated: Deducted for collateral shortfall<br>exchange_in: Conversion profit<br>exchange_out: Conversion profit |
+| amount        | String | Quantity                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| fee           | String | Transaction fee                                                                                                                                                                                                                                                                                                                                                                                                            |
+| total         | String | Total accounts                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ts            | String | Record generation time, Unix millisecond timestamps                                                                                                                                                                                                                                                                                                                                                                        |
 
-> **Source:** https://www.bitget.com/api-doc/common/tax/Get-Margin-Account-Record
+> **Source:**
+> https://www.bitget.com/api-doc/common/tax/Get-Margin-Account-Record

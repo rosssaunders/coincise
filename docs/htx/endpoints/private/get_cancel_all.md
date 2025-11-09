@@ -1,6 +1,7 @@
 # GET Cancel All
 
-**Source:** [Cancel All](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-195894f0cf6)
+**Source:**
+[Cancel All](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-195894f0cf6)
 
 **Category:** Orders
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /v5/trade/cancel\_all\_orders (Cancel All)
+### /v5/trade/cancel_all_orders (Cancel All)
 
 Request type: POST
 
@@ -16,37 +17,40 @@ Signature verification: Yes
 
 Interface permission: Trade
 
-Rate Limit: Generally, the private interface rate limit of API key is at most 144 times every 3 seconds for each UID (Trade Interface: at most 72 times every 3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is shared by all the altcoins contracts delivered by different date).
+Rate Limit: Generally, the private interface rate limit of API key is at most
+144 times every 3 seconds for each UID (Trade Interface: at most 72 times every
+3 seconds. Read Interface: at most 72 times every 3 seconds) (this rate limit is
+shared by all the altcoins contracts delivered by different date).
 
 Interface description: Cancel all open orders.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
-| Online | https://api.hbdm.com |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
+| Online                              | https://api.hbdm.com |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | String | false | Symbol |  |  |
-| side | String | false | Order side | buy; sell |  |
-| position\_side | String | false | Position side | long: going long; short: going short; both: One-way mode |  |
+| Parameter     | Data Type | Required | Description   | Value Range                                              | Default Value |
+| ------------- | --------- | -------- | ------------- | -------------------------------------------------------- | ------------- |
+| contract_code | String    | false    | Symbol        |                                                          |               |
+| side          | String    | false    | Order side    | buy; sell                                                |               |
+| position_side | String    | false    | Position side | long: going long; short: going short; both: One-way mode |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| order\_id | String | true | Order ID |  |
-| client\_order\_id | String | true | Your order ID |  |
+| Parameter       | Data Type | Required | Description   | Value Range |
+| --------------- | --------- | -------- | ------------- | ----------- |
+| order_id        | String    | true     | Order ID      |             |
+| client_order_id | String    | true     | Your order ID |             |
 
 #### Request example
 
 {
 
-"contract\_code":
+"contract_code":
 
 "BTC-USDT-241115"
 
@@ -54,7 +58,7 @@ Interface description: Cancel all open orders.
 
 "buy"
 
-"position\_side":
+"position_side":
 
 "long"
 
@@ -74,7 +78,7 @@ Interface description: Cancel all open orders.
 
 0:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854624317231104"
 
@@ -86,7 +90,7 @@ Interface description: Cancel all open orders.
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854624317231104"
 
@@ -94,7 +98,7 @@ Interface description: Cancel all open orders.
 
 1:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854624434671616"
 
@@ -106,7 +110,7 @@ Interface description: Cancel all open orders.
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854624434671616"
 
@@ -114,7 +118,7 @@ Interface description: Cancel all open orders.
 
 2:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854624824741888"
 
@@ -126,7 +130,7 @@ Interface description: Cancel all open orders.
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854624824741888"
 
@@ -134,7 +138,7 @@ Interface description: Cancel all open orders.
 
 3:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854624686329856"
 
@@ -146,7 +150,7 @@ Interface description: Cancel all open orders.
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854624686329856"
 
@@ -154,7 +158,7 @@ Interface description: Cancel all open orders.
 
 4:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854624258510848"
 
@@ -166,7 +170,7 @@ Interface description: Cancel all open orders.
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854624258510848"
 
@@ -174,7 +178,7 @@ Interface description: Cancel all open orders.
 
 5:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854624380145664"
 
@@ -186,7 +190,7 @@ Interface description: Cancel all open orders.
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854624380145664"
 
@@ -194,7 +198,7 @@ Interface description: Cancel all open orders.
 
 6:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854624497586176"
 
@@ -206,7 +210,7 @@ Interface description: Cancel all open orders.
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854624497586176"
 
@@ -214,7 +218,7 @@ Interface description: Cancel all open orders.
 
 7:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854624556306432"
 
@@ -226,7 +230,7 @@ Interface description: Cancel all open orders.
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854624556306432"
 
@@ -234,7 +238,7 @@ Interface description: Cancel all open orders.
 
 8:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854624971542528"
 
@@ -246,7 +250,7 @@ Interface description: Cancel all open orders.
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854624971542528"
 
@@ -254,7 +258,7 @@ Interface description: Cancel all open orders.
 
 9:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854625118343168"
 
@@ -266,7 +270,7 @@ Interface description: Cancel all open orders.
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854625118343168"
 
@@ -274,7 +278,7 @@ Interface description: Cancel all open orders.
 
 10:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854624615026688"
 
@@ -286,7 +290,7 @@ Interface description: Cancel all open orders.
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854624615026688"
 
@@ -294,7 +298,7 @@ Interface description: Cancel all open orders.
 
 11:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329849524702072832"
 
@@ -306,7 +310,7 @@ Interface description: Cancel all open orders.
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329849524702072832"
 
@@ -314,7 +318,7 @@ Interface description: Cancel all open orders.
 
 12:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854624753438720"
 
@@ -326,7 +330,7 @@ Interface description: Cancel all open orders.
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854624753438720"
 
@@ -334,7 +338,7 @@ Interface description: Cancel all open orders.
 
 13:{
 
-"client\_order\_id":
+"client_order_id":
 
 "1329854624896045056"
 
@@ -346,7 +350,7 @@ Interface description: Cancel all open orders.
 
 "成功"
 
-"order\_id":
+"order_id":
 
 "1329854624896045056"
 

@@ -2,7 +2,6 @@ import { launchBrowser, configurePage } from "../../shared/puppeteer.js"
 import TurndownService from "turndown"
 import { gfm, tables, strikethrough } from "turndown-plugin-gfm"
 import fs from "fs"
-import path from "path"
 import { getConfig } from "./config.js"
 import process from "process"
 import { formatMarkdown } from "../../shared/format-markdown.js"
@@ -577,20 +576,6 @@ function convertToMarkdown(html) {
   return turndownService.turndown(html)
 }
 
-// Generic heading demotion utility (descending order)
-const demoteHeadings = dom => {
-  for (let level = 6; level >= 1; level--) {
-    const selector = `h${level}`
-    if (level < 6) {
-      const headings = dom.window.document.querySelectorAll(selector)
-      headings.forEach(heading => {
-        const newHeading = dom.window.document.createElement(`h${level + 1}`)
-        newHeading.textContent = heading.textContent
-        heading.parentNode.replaceChild(newHeading, heading)
-      })
-    }
-  }
-}
 
 async function main() {
   let browser
@@ -610,7 +595,7 @@ async function main() {
       type = "publicWebSocket"
     }
 
-    const { urls, outputConfig, title } = getConfig(type)
+    const { urls, outputConfig } = getConfig(type)
 
     console.log(`\x1b[34m%s\x1b[0m`, `📚 Generating ${type} API documentation`)
 
@@ -758,7 +743,6 @@ async function main() {
         const { method, path, isPublic } = extractEndpointInfo(markdown)
 
         let outputPath
-        let displayPath
 
         // Check if this is an endpoint or core documentation
         if (method && path) {
@@ -799,7 +783,6 @@ async function main() {
           )
 
           outputPath = `${targetDir}/${finalFilename}`
-          displayPath = `endpoints/${isPublic ? "public" : "private"}/${finalFilename}`
 
           if (isPublic) {
             publicCount++
@@ -817,7 +800,6 @@ async function main() {
           const filename = `${sanitizedName}.md`
 
           outputPath = `${coreDir}/${filename}`
-          displayPath = `core/${filename}`
           coreCount++
 
           console.log(`  📚 Core:    ${sectionName} → ${filename}`)

@@ -2,7 +2,8 @@
 
 **Title:** Close positions
 
-**Source:** [Close positions](https://docs.digifinex.com/en-ww/spot/v3/rest.html#close-positions)
+**Source:**
+[Close positions](https://docs.digifinex.com/en-ww/spot/v3/rest.html#close-positions)
 
 ## Authentication
 
@@ -14,15 +15,15 @@ Required (Private Endpoint)
 
 ### HTTP Request
 
--   POST `https://openapi.digifinex.com/v3/margin/position/close`
+- POST `https://openapi.digifinex.com/v3/margin/position/close`
 
 ### Request Parameters
 
 说明：以市场价格平掉仓位
 
-| Field | Request Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | str | true | Symbol Name |
+| Field  | Request Type | Mandatory | Description |
+| ------ | ------------ | --------- | ----------- |
+| symbol | str          | true      | Symbol Name |
 
 > Response:
 
@@ -37,5 +38,5 @@ Required (Private Endpoint)
 ### Response Content
 
 | Field | Mandatory | Request Type | Description |
-| --- | --- | --- | --- |
-| code | true | int | Status |
+| ----- | --------- | ------------ | ----------- |
+| code  | true      | int          | Status      |

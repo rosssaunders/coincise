@@ -1,6 +1,7 @@
 # POST / Close position
 
-Source: [https://www.okx.com/docs-v5/en/#order-book-trading-signal-bot-trading-post-close-position](https://www.okx.com/docs-v5/en/#order-book-trading-signal-bot-trading-post-close-position)
+Source:
+[https://www.okx.com/docs-v5/en/#order-book-trading-signal-bot-trading-post-close-position](https://www.okx.com/docs-v5/en/#order-book-trading-signal-bot-trading-post-close-position)
 
 ### POST / Close position
 
@@ -18,13 +19,13 @@ Close the position of an instrument via a market order.
 
 #### Request Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| algoId | String | Yes | Algo ID |
-| instId | String | Yes | Instrument ID |
+| Parameter | Type   | Required | Description   |
+| --------- | ------ | -------- | ------------- |
+| algoId    | String | Yes      | Algo ID       |
+| instId    | String | Yes      | Instrument ID |
 
 #### Response Parameters
 
 | **Parameter** | **Type** | **Description** |
-| --- | --- | --- |
-| algoId | String | Algo ID |
+| ------------- | -------- | --------------- |
+| algoId        | String   | Algo ID         |

@@ -1,6 +1,7 @@
 # POST private/advanced/get-open-orders
 
-**Source:** [private/advanced/get-open-orders](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-advanced-get-open-orders)
+**Source:**
+[private/advanced/get-open-orders](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-advanced-get-open-orders)
 
 ## Authentication
 
@@ -123,9 +124,9 @@ Gets all **open** orders for OTO/OTOCO orders for a particular instrument.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | N | e.g. BTCUSD. Omit for 'all' |
+| Name            | Type   | Required | Description                 |
+| --------------- | ------ | -------- | --------------------------- |
+| instrument_name | string | N        | e.g. BTCUSD. Omit for 'all' |
 
 ### Applies To
 
@@ -139,37 +140,35 @@ POST
 
 An array, consisting of:
 
-| Name | Type | Description |
-| --- | --- | --- |
-| account\_id | string | Account ID |
-| order\_id | string of number | Order ID |
-| client\_oid | string | Client Order ID |
-| order\_type | string | `LIMIT`, `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` |
-| time\_in\_force | string | `GOOD_TILL_CANCEL` |
-| side | string | `BUY` or `SELL` |
-| exec\_inst | array | `POST_ONLY` |
-| quantity | string | Quantity specified in the order |
-| limit\_price | string | Limit price specified in the order |
-| order\_value | string | Order value |
-| maker\_fee\_rate | string | User's maker fee rate |
-| taker\_fee\_rate | string | User's taker fee rate |
-| avg\_price | string | Average price |
-| cumulative\_quantity | string | Cumulative executed quantity |
-| cumulative\_value | string | Cumulative executed value |
-| cumulative\_fee | string | Cumulative executed fee |
-| status | string | Order status:  
+| Name                | Type             | Description                                                            |
+| ------------------- | ---------------- | ---------------------------------------------------------------------- |
+| account_id          | string           | Account ID                                                             |
+| order_id            | string of number | Order ID                                                               |
+| client_oid          | string           | Client Order ID                                                        |
+| order_type          | string           | `LIMIT`, `STOP_LOSS`, `STOP_LIMIT`, `TAKE_PROFIT`, `TAKE_PROFIT_LIMIT` |
+| time_in_force       | string           | `GOOD_TILL_CANCEL`                                                     |
+| side                | string           | `BUY` or `SELL`                                                        |
+| exec_inst           | array            | `POST_ONLY`                                                            |
+| quantity            | string           | Quantity specified in the order                                        |
+| limit_price         | string           | Limit price specified in the order                                     |
+| order_value         | string           | Order value                                                            |
+| maker_fee_rate      | string           | User's maker fee rate                                                  |
+| taker_fee_rate      | string           | User's taker fee rate                                                  |
+| avg_price           | string           | Average price                                                          |
+| cumulative_quantity | string           | Cumulative executed quantity                                           |
+| cumulative_value    | string           | Cumulative executed value                                              |
+| cumulative_fee      | string           | Cumulative executed fee                                                |
+| status              | string           | Order status:                                                          |
+
 \- `NEW`  
 \- `PENDING`  
-\- `ACTIVE` |
-| update\_user\_id | string | Updated user |
-| order\_date | string | Order creation date |
-| create\_time | number | Order creation timestamp |
-| create\_time\_ns | string | Order creation timestamp (nanosecond) |
-| update\_time | number | Order update timestamp |
-| instrument\_name | string | e.g. BTCUSD |
-| fee\_instrument\_name | string | Currency used for the fees |
-| list\_id | number | List id of OTO/OTOCO |
-| contingency\_type | string | `OTO` or `OTOCO` |
-| leg\_id | number | Leg id of OTO/OTOCO orders |
+\- `ACTIVE` | | update_user_id | string | Updated user | | order_date | string |
+Order creation date | | create_time | number | Order creation timestamp | |
+create_time_ns | string | Order creation timestamp (nanosecond) | | update_time
+| number | Order update timestamp | | instrument_name | string | e.g. BTCUSD | |
+fee_instrument_name | string | Currency used for the fees | | list_id | number |
+List id of OTO/OTOCO | | contingency_type | string | `OTO` or `OTOCO` | | leg_id
+| number | Leg id of OTO/OTOCO orders |
 
-Note: To detect a 'partial filled' status, look for `status` as `ACTIVE` and `cumulative_quantity` > 0.
+Note: To detect a 'partial filled' status, look for `status` as `ACTIVE` and
+`cumulative_quantity` > 0.

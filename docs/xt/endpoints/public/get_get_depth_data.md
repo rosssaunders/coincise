@@ -1,6 +1,7 @@
 # GET Get depth data
 
-Source: [https://doc.xt.com/docs/spot/Market/GetDepthData](https://doc.xt.com/docs/spot/Market/GetDepthData)
+Source:
+[https://doc.xt.com/docs/spot/Market/GetDepthData](https://doc.xt.com/docs/spot/Market/GetDepthData)
 
 # Get depth data
 
@@ -8,10 +9,10 @@ Source: [https://doc.xt.com/docs/spot/Market/GetDepthData](https://doc.xt.com/do
 
 ### Parameters[​](#parameters "Direct link to Parameters")
 
-| name | type | mandatory | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | true |  | trading pair eg:btc\_usdt |  |
-| limit | number | false | 100 | minimum number of queries is 100 | 1~500 |
+| name   | type   | mandatory | default | description                      | ranges |
+| ------ | ------ | --------- | ------- | -------------------------------- | ------ |
+| symbol | string | true      |         | trading pair eg:btc_usdt         |        |
+| limit  | number | false     | 100     | minimum number of queries is 100 | 1~500  |
 
 #### **Limit Flow Rules**[​](#limit-flow-rules "Direct link to limit-flow-rules")
 

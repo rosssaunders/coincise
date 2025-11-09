@@ -1,6 +1,7 @@
 # GET [General] Query a Batch of Trade Records of a Contract
 
-**Source:** [[General] Query a Batch of Trade Records of a Contract](https://www.htx.com/en-us/opend/newApiPages/?id=8cb81024-77b5-11ed-9966-0242ac110003)
+**Source:**
+[[General] Query a Batch of Trade Records of a Contract](https://www.htx.com/en-us/opend/newApiPages/?id=8cb81024-77b5-11ed-9966-0242ac110003)
 
 **Category:** Swap Market Data interface
 
@@ -16,44 +17,52 @@ Signature verification: No
 
 Interface permission: Read
 
-Rate Limit: For public interface to get market data such as Get Kline data, Get Market Data Overview, Get Contract Information,Get market in-depth data, Get premium index Kline, Get real-time forecast capital rate kline, Get basis data, Get the last Trade of a Contract and so on： （1）For restful interfaces, products, (future, coin margined swap, usdt margined Contracts)800 times/second for one IP at most
+Rate Limit: For public interface to get market data such as Get Kline data, Get
+Market Data Overview, Get Contract Information,Get market in-depth data, Get
+premium index Kline, Get real-time forecast capital rate kline, Get basis data,
+Get the last Trade of a Contract and so on： （1）For restful interfaces,
+products, (future, coin margined swap, usdt margined Contracts)800 times/second
+for one IP at most
 
-Interface description: The interface supports cross margin mode and isolated margin mode. The request parameter "contract\_code" supports the contract code of futures, in that the format is BTC-USDT-210625; and supports contract type: BTC-USDT, BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ.
+Interface description: The interface supports cross margin mode and isolated
+margin mode. The request parameter "contract_code" supports the contract code of
+futures, in that the format is BTC-USDT-210625; and supports contract type:
+BTC-USDT, BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ.
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.hbdm.com |
-| Online (preferred by aws customers) | https://api.hbdm.vn |
+| Environment                         | Address              |
+| ----------------------------------- | -------------------- |
+| Online                              | https://api.hbdm.com |
+| Online (preferred by aws customers) | https://api.hbdm.vn  |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| contract\_code | string | true | contract code or contract type | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... or BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ |  |
-| size | int | true | Number of Trading Records Acquisition | \[1, 2000\] |  |
+| Parameter     | Data Type | Required | Description                           | Value Range                                                                                               | Default Value |
+| ------------- | --------- | -------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------- |
+| contract_code | string    | true     | contract code or contract type        | swap: "BTC-USDT"... , future: "BTC-USDT-210625" ... or BTC-USDT-CW, BTC-USDT-NW, BTC-USDT-CQ, BTC-USDT-NQ |               |
+| size          | int       | true     | Number of Trading Records Acquisition | \[1, 2000\]                                                                                               |               |
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| ch | string | true | Data belonged channel，Format： market.$contract\_code.trade.detail |  |
-| DATA\_START | object array | true |  |  |
-| DATA\_START | object array | true |  |  |
-| amount | decimal | true | Quantity(Cont.). Sum of both buy and sell sides |  |
-| direction | string | true | The direction to buy or sell is the direction of the taker (active transaction) |  |
-| id | long | true | Unique Transaction Id(symbol level) |  |
-| price | decimal | true | Price |  |
-| ts | long | true | Order Creation Time |  |
-| quantity | decimal | true | trading quantity(coin) |  |
-| trade\_turnover | decimal | true | trade turnover(quoted currency) |  |
-| DATA\_END |  | false |  |  |
-| id | long | true | Unique Order Id(symbol level). |  |
-| ts | long | true | Latest transaction time |  |
-| DATA\_END |  | false |  |  |
-| status | string | true |  | "ok"，"error" |
-| ts | long | true | Time of Respond Generation, Unit: Millisecond |  |
+| Parameter      | Data Type    | Required | Description                                                                     | Value Range   |
+| -------------- | ------------ | -------- | ------------------------------------------------------------------------------- | ------------- |
+| ch             | string       | true     | Data belonged channel，Format： market.$contract_code.trade.detail              |               |
+| DATA_START     | object array | true     |                                                                                 |               |
+| DATA_START     | object array | true     |                                                                                 |               |
+| amount         | decimal      | true     | Quantity(Cont.). Sum of both buy and sell sides                                 |               |
+| direction      | string       | true     | The direction to buy or sell is the direction of the taker (active transaction) |               |
+| id             | long         | true     | Unique Transaction Id(symbol level)                                             |               |
+| price          | decimal      | true     | Price                                                                           |               |
+| ts             | long         | true     | Order Creation Time                                                             |               |
+| quantity       | decimal      | true     | trading quantity(coin)                                                          |               |
+| trade_turnover | decimal      | true     | trade turnover(quoted currency)                                                 |               |
+| DATA_END       |              | false    |                                                                                 |               |
+| id             | long         | true     | Unique Order Id(symbol level).                                                  |               |
+| ts             | long         | true     | Latest transaction time                                                         |               |
+| DATA_END       |              | false    |                                                                                 |               |
+| status         | string       | true     |                                                                                 | "ok"，"error" |
+| ts             | long         | true     | Time of Respond Generation, Unit: Millisecond                                   |               |
 
 #### Request example
 
@@ -101,7 +110,7 @@ Interface description: The interface supports cross margin mode and isolated mar
 
 0.002
 
-"trade\_turnover":
+"trade_turnover":
 
 26.1626
 

@@ -8,7 +8,7 @@ Get VIP fee rate
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
-*   GET /api/v2/mix/market/vip-fee-rate
+- GET /api/v2/mix/market/vip-fee-rate
 
 Request Example
 
@@ -28,14 +28,14 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| &gt; level | String | VIP level 
-| &gt; dealAmount | String | Total trading volume of the last 30 days, USDT 
-| &gt; assetAmount | String | Total assets, USDT 
-| &gt; takerFeeRate | String | Taker rate, '0.000425' means 4.25 with four decimal places ahead 
-| &gt; makerFeeRate | String | Maker rate, '0.00006' means 0.6 with four decimal places ahead 
-| &gt; btcWithdrawAmount | String | 24-hour withdrawal limit (BTC) 
-| &gt; usdtWithdrawAmount | String | 24-hour withdrawal limit (USDT)
+| Parameter               | Type   | Description                                                      |
+| :---------------------- | :----- | :--------------------------------------------------------------- |
+| &gt; level              | String | VIP level                                                        |
+| &gt; dealAmount         | String | Total trading volume of the last 30 days, USDT                   |
+| &gt; assetAmount        | String | Total assets, USDT                                               |
+| &gt; takerFeeRate       | String | Taker rate, '0.000425' means 4.25 with four decimal places ahead |
+| &gt; makerFeeRate       | String | Maker rate, '0.00006' means 0.6 with four decimal places ahead   |
+| &gt; btcWithdrawAmount  | String | 24-hour withdrawal limit (BTC)                                   |
+| &gt; usdtWithdrawAmount | String | 24-hour withdrawal limit (USDT)                                  |
 
 > **Source:** https://www.bitget.com/api-doc/contract/market/Get-VIP-Fee-Rate

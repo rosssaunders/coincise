@@ -2,31 +2,39 @@
 
 Note on 1-Second Candles (Tick Candles) Data Retention
 
-The 1-second candle API provides data for up to **3 months**, based on the time of the request. If you request data beyond this period, the response may return an empty list or fewer items than the requested count. To check the available period, use the to parameter when making the query.
+The 1-second candle API provides data for up to **3 months**, based on the time
+of the request. If you request data beyond this period, the response may return
+an empty list or fewer items than the requested count. To check the available
+period, use the to parameter when making the query.
 
 Candles are created only when trades occur within the given time interval.
 
-If no trades occur between the start and end time of a candle, it will not be created and therefore will not appear in the API response. For example, a 1-Second candle with `candle_date_time = 2024-08-31T22:25:00` will not be created if no trades occur between 22:25:00 (inclusive) and 22:25:01 (exclusive).
+If no trades occur between the start and end time of a candle, it will not be
+created and therefore will not appear in the API response. For example, a
+1-Second candle with `candle_date_time = 2024-08-31T22:25:00` will not be
+created if no trades occur between 22:25:00 (inclusive) and 22:25:01
+(exclusive).
 
 **Check the proper endpoint based on your region.**
 
-The examples in this page is written using Singapore fiat code(SGD). Set the quote currency to match your region. The base\_url differs by country/region. Make sure to specify the correct region value for your environment.  
-  
+The examples in this page is written using Singapore fiat code(SGD). Set the
+quote currency to match your region. The base_url differs by country/region.
+Make sure to specify the correct region value for your environment.
+
 \- Singapore (sg): https://sg-api.upbit.com  
 \- Indonesia (id): https://id-api.upbit.com  
 \- Thailand (th): https://th-api.upbit.com
 
-  
-
 Revision History
 
-| Version | Date | Changes |
-| --- | --- | --- |
-| v1.1.8 | 2024-10-30 | [Addition of `List Second Candles`](https://global-docs.upbit.com/changelog/year_sec_candles#/) |
+| Version | Date       | Changes                                                                                         |
+| ------- | ---------- | ----------------------------------------------------------------------------------------------- |
+| v1.1.8  | 2024-10-30 | [Addition of `List Second Candles`](https://global-docs.upbit.com/changelog/year_sec_candles#/) |
 
 Rate Limit
 
-Up to 10 calls per second are allowed. This is measured on an IP basis and request counts are shared within the exchange 'candle' group.
+Up to 10 calls per second are allowed. This is measured on an IP basis and
+request counts are shared within the exchange 'candle' group.
 
 market
 
@@ -41,16 +49,20 @@ to
 string
 
 End time of the query period.  
-Candles earlier than the specified time will be retrieved. If omitted, the latest candles are returned based on the request time.
+Candles earlier than the specified time will be retrieved. If omitted, the
+latest candles are returned based on the request time.
 
-Accepts ISO 8601 datetime format. You must perform URL encoding to ensure proper handling of spaces and special characters.
+Accepts ISO 8601 datetime format. You must perform URL encoding to ensure proper
+handling of spaces and special characters.
 
 \[Example\]  
 2025-06-24T04:56:53Z  
 2025-06-24 04:56:53  
 2025-06-24T13:56:53+08:00
 
-Second candles support queries only for up to the last 3 months from the request time. If you specify a time earlier than that, the response will return an empty array.
+Second candles support queries only for up to the last 3 months from the request
+time. If you specify a time earlier than that, the response will return an empty
+array.
 
 count
 
@@ -62,7 +74,7 @@ Number of candles to retrieve.
 Supports up to 200 candles.  
 Default: 1.
 
-# 
+#
 
 200
 
@@ -80,7 +92,7 @@ required
 
 Trading pair code representing the market.
 
-candle\_date\_time\_utc
+candle_date_time_utc
 
 string
 
@@ -88,15 +100,16 @@ required
 
 Start time of the candle period in UTC.
 
-opening\_price
+opening_price
 
 double
 
 required
 
-The opening price of the candle, representing the first trading price during the candle period.
+The opening price of the candle, representing the first trading price during the
+candle period.
 
-high\_price
+high_price
 
 double
 
@@ -104,7 +117,7 @@ required
 
 The highest trading price, recorded during the candle period.
 
-low\_price
+low_price
 
 double
 
@@ -112,13 +125,14 @@ required
 
 The lowest trading price. recorded during the candle period.
 
-trade\_price
+trade_price
 
 double
 
 required
 
-The closing price of the candle, representing the last trading price during the candle period.
+The closing price of the candle, representing the last trading price during the
+candle period.
 
 timestamp
 
@@ -128,23 +142,25 @@ required
 
 The timestamp (in milliseconds) when the last tick of the candle was recorded.
 
-candle\_acc\_trade\_price
+candle_acc_trade_price
 
 double
 
 required
 
-The total trade amount (in the quoted currency) accumulated during the candle period.
+The total trade amount (in the quoted currency) accumulated during the candle
+period.
 
-candle\_acc\_trade\_volume
+candle_acc_trade_volume
 
 double
 
 required
 
-The total traded volume (in the base asset) accumulated during the candle period.
+The total traded volume (in the base asset) accumulated during the candle
+period.
 
-# 
+#
 
 400
 
@@ -172,7 +188,7 @@ required
 
 Message describing the cause of the error.
 
-# 
+#
 
 404
 
@@ -202,7 +218,7 @@ Message describing the cause of the error.
 
 Updated about 1 month ago
 
-* * *
+---
 
 ShellPythonJavaNode
 
@@ -234,7 +250,7 @@ xxxxxxxxxx
 
 2
 
-  {
+{
 
 3
 
@@ -274,7 +290,7 @@ xxxxxxxxxx
 
 12
 
-  }
+}
 
 13
 
@@ -282,8 +298,9 @@ xxxxxxxxxx
 
 Updated about 1 month ago
 
-* * *
+---
 
 ---
 
-**Source:** [seconds-candles](https://global-docs.upbit.com/reference/seconds-candles)
+**Source:**
+[seconds-candles](https://global-docs.upbit.com/reference/seconds-candles)

@@ -1,6 +1,7 @@
 # GET / Maximum collateral redeem amount
 
-Source: [https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-get-maximum-collateral-redeem-amount](https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-get-maximum-collateral-redeem-amount)
+Source:
+[https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-get-maximum-collateral-redeem-amount](https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-get-maximum-collateral-redeem-amount)
 
 ### GET / Maximum collateral redeem amount
 
@@ -16,13 +17,13 @@ Source: [https://www.okx.com/docs-v5/en/#financial-product-flexible-loan-get-max
 
 #### Request Parameters
 
-| **Parameters** | **Types** | **Required** | **Description** |
-| --- | --- | --- | --- |
-| ccy | String | Yes | Collateral currency, e.g. `USDT` |
+| **Parameters** | **Types** | **Required** | **Description**                  |
+| -------------- | --------- | ------------ | -------------------------------- |
+| ccy            | String    | Yes          | Collateral currency, e.g. `USDT` |
 
 #### Response Parameters
 
-| **Parameter** | **Type** | **Description** |
-| --- | --- | --- |
-| ccy | String | Collateral currency, e.g. `USDT` |
-| maxRedeemAmt | String | Maximum collateral redeem amount |
+| **Parameter** | **Type** | **Description**                  |
+| ------------- | -------- | -------------------------------- |
+| ccy           | String   | Collateral currency, e.g. `USDT` |
+| maxRedeemAmt  | String   | Maximum collateral redeem amount |

@@ -1,6 +1,7 @@
 # POST Cancel Order (SIGNED)
 
-**Source:** [Cancel Order (SIGNED)](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[Cancel Order (SIGNED)](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -26,15 +27,16 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{   "symbol":"ETHUSDT",   "order_id": "220906179559421" }' https://api-cloud-v2.bitmart.com/contract/private/cancel-order`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| symbol | String | Yes | Symbol of the contract(like BTCUSDT),（If not submitted order\_id and client\_order\_id, cancel all orders under the symbol） |
-| order\_id | String | No | Order ID |
-| client\_order\_id | String | No | Client-defined OrderId |
+| Field           | Type   | Required? | Description                                                                                                                |
+| --------------- | ------ | --------- | -------------------------------------------------------------------------------------------------------------------------- |
+| symbol          | String | Yes       | Symbol of the contract(like BTCUSDT),（If not submitted order_id and client_order_id, cancel all orders under the symbol） |
+| order_id        | String | No        | Order ID                                                                                                                   |
+| client_order_id | String | No        | Client-defined OrderId                                                                                                     |
 
 #### Response Data
 
-If code value is 1000, it means the order cancellation is successfully submitted, cancellation results will be pushed by websocket service.
+If code value is 1000, it means the order cancellation is successfully
+submitted, cancellation results will be pushed by websocket service.
 
 > Response
 

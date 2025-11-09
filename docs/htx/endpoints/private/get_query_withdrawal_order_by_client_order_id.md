@@ -1,6 +1,7 @@
 # GET Query withdrawal order by client order id
 
-**Source:** [Query withdrawal order by client order id](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4f198-7773-11ed-9966-0242ac110003)
+**Source:**
+[Query withdrawal order by client order id](https://www.htx.com/en-us/opend/newApiPages/?id=7ec4f198-7773-11ed-9966-0242ac110003)
 
 **Category:** Wallet (Deposits and Withdrawals)
 
@@ -18,42 +19,45 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| clientOrderId | string | false | client order id (max 32 char) |  |  |
+| Parameter     | Data Type | Required | Description                   | Value Range | Default Value |
+| ------------- | --------- | -------- | ----------------------------- | ----------- | ------------- |
+| clientOrderId | string    | false    | client order id (max 32 char) |             |               |
 
 Notes:  
-query the information of withdrawal order, which submitted by api interface. (it will return the information of withdrawal order which submitted with client order id. in the other it will return the null that withdrawal order submitted without with client order id)
+query the information of withdrawal order, which submitted by api interface. (it
+will return the information of withdrawal order which submitted with client
+order id. in the other it will return the null that withdrawal order submitted
+without with client order id)
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status > | stirng | false | status code |  |
-| DATA\\ \_START | long | false |  |  |
-| address | string | false | address |  |
-| client-order-id | string | false | client order id |  |
-| address-tag | string | false | address tag |  |
-| amount | decimal | false | amount |  |
-| chain | string | false | chain |  |
-| created-at | long | false | created at |  |
-| currency | string | false | currency |  |
-| error-code | string | false | error code |  |
-| error-msg | string | false | error msg |  |
-| fee | decimal | false | fee |  |
-| id | long | false | ID |  |
-| state | string | false | state |  |
-| tx-hash | string | false | transmit hash |  |
-| type | string | false | type |  |
-| updated-at | long | false | updated at |  |
-| DATA\_END | long | false |  |  |
+| Parameter       | Data Type | Required | Description     | Value Range |
+| --------------- | --------- | -------- | --------------- | ----------- |
+| status >        | stirng    | false    | status code     |             |
+| DATA\\ \_START  | long      | false    |                 |             |
+| address         | string    | false    | address         |             |
+| client-order-id | string    | false    | client order id |             |
+| address-tag     | string    | false    | address tag     |             |
+| amount          | decimal   | false    | amount          |             |
+| chain           | string    | false    | chain           |             |
+| created-at      | long      | false    | created at      |             |
+| currency        | string    | false    | currency        |             |
+| error-code      | string    | false    | error code      |             |
+| error-msg       | string    | false    | error msg       |             |
+| fee             | decimal   | false    | fee             |             |
+| id              | long      | false    | ID              |             |
+| state           | string    | false    | state           |             |
+| tx-hash         | string    | false    | transmit hash   |             |
+| type            | string    | false    | type            |             |
+| updated-at      | long      | false    | updated at      |             |
+| DATA_END        | long      | false    |                 |             |
 
 #### Request example
 

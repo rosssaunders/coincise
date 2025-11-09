@@ -1,6 +1,7 @@
 # POST / Set instruments
 
-Source: [https://www.okx.com/docs-v5/en/#order-book-trading-signal-bot-trading-post-set-instruments](https://www.okx.com/docs-v5/en/#order-book-trading-signal-bot-trading-post-set-instruments)
+Source:
+[https://www.okx.com/docs-v5/en/#order-book-trading-signal-bot-trading-post-set-instruments](https://www.okx.com/docs-v5/en/#order-book-trading-signal-bot-trading-post-set-instruments)
 
 ### POST / Set instruments
 
@@ -16,14 +17,14 @@ Source: [https://www.okx.com/docs-v5/en/#order-book-trading-signal-bot-trading-p
 
 #### Request Parameters
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| algoId | String | Yes | Algo ID |
-| instIds | Array of strings | Yes | Instrument IDs. When `includeAll` is `true`, it is ignored |
-| includeAll | Boolean | Yes | Whether to include all USDT-margined contract.The default value is `false`. `true`: include `false` : exclude |
+| Parameter  | Type             | Required | Description                                                                                                   |
+| ---------- | ---------------- | -------- | ------------------------------------------------------------------------------------------------------------- |
+| algoId     | String           | Yes      | Algo ID                                                                                                       |
+| instIds    | Array of strings | Yes      | Instrument IDs. When `includeAll` is `true`, it is ignored                                                    |
+| includeAll | Boolean          | Yes      | Whether to include all USDT-margined contract.The default value is `false`. `true`: include `false` : exclude |
 
 #### Response Parameters
 
 | **Parameter** | **Type** | **Description** |
-| --- | --- | --- |
-| algoId | String | Algo ID |
+| ------------- | -------- | --------------- |
+| algoId        | String   | Algo ID         |

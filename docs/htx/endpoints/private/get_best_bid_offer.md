@@ -1,6 +1,7 @@
 # GET Best Bid/Offer
 
-**Source:** [Best Bid/Offer](https://www.htx.com/en-us/opend/newApiPages/?id=7ec5333f-7773-11ed-9966-0242ac110003)
+**Source:**
+[Best Bid/Offer](https://www.htx.com/en-us/opend/newApiPages/?id=7ec5333f-7773-11ed-9966-0242ac110003)
 
 **Category:** Websocket Market Data
 
@@ -12,53 +13,54 @@ Required (Private Endpoint)
 
 Signature verification: No
 
-Interface description: User can receive BBO (Best Bid/Offer) update in tick by tick mode.
+Interface description: User can receive BBO (Best Bid/Offer) update in tick by
+tick mode.
 
 #### Subscription Address
 
-| Environment | Address |
-| --- | --- |
-| Online | wss://api.huobi.pro/ws |
+| Environment                         | Address                    |
+| ----------------------------------- | -------------------------- |
+| Online                              | wss://api.huobi.pro/ws     |
 | Online (preferred by aws customers) | wss://api-aws.huobi.pro/ws |
 
 #### Request Parameter
 
-| Field Name | Type | Description |
-| --- | --- | --- |
-| ch | string | Required； Operator Name， sub、unsub; |
-| params | string | parameters |
-| cid | string | request id |
+| Field Name | Type   | Description                            |
+| ---------- | ------ | -------------------------------------- |
+| ch         | string | Required； Operator Name， sub、unsub; |
+| params     | string | parameters                             |
+| cid        | string | request id                             |
 
 #### Rule description
 
-| Subscribe(sub) | Unsubscribe( unsub ) | Rule |
-| --- | --- | --- |
-| "market.btcusdt.bbo" | "market.btcusdt.bbo" | Allowed |
-| "market.btcusdt.bbo","market.ethusdt.bbo","market.htxusdt.bbo" | "market.btcusdt.bbo","market.ethusdt.bbo","market.htxusdt.bbo" | Allowed |
-| "market.btcusdt.bbo","market.ethusdt.bbo","market.htxusdt.bbo" | "market.bnbusdt.bbo" | Not Allowed |
+| Subscribe(sub)                                                 | Unsubscribe( unsub )                                           | Rule        |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | ----------- |
+| "market.btcusdt.bbo"                                           | "market.btcusdt.bbo"                                           | Allowed     |
+| "market.btcusdt.bbo","market.ethusdt.bbo","market.htxusdt.bbo" | "market.btcusdt.bbo","market.ethusdt.bbo","market.htxusdt.bbo" | Allowed     |
+| "market.btcusdt.bbo","market.ethusdt.bbo","market.htxusdt.bbo" | "market.bnbusdt.bbo"                                           | Not Allowed |
 
 #### Subscription Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| symbol | Array | false | Trading symbol | Refer to GET /v1/common/symbols |  |
-| cid | string | false | Current request's ID |  |  |
+| Parameter | Data Type | Required | Description          | Value Range                     | Default Value |
+| --------- | --------- | -------- | -------------------- | ------------------------------- | ------------- |
+| symbol    | Array     | false    | Trading symbol       | Refer to GET /v1/common/symbols |               |
+| cid       | string    | false    | Current request's ID |                                 |               |
 
 #### Data Update
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| ch | string | false | Data belonged channel，Format：market.$symbol.kline.$period |  |
-| ts | long | false | Time of Respond Generation, Unit: Millisecond |  |
-| DATA\_START | object | false |  |  |
-| symbol | string | false | Trading symbol |  |
-| quoteTime | long | false | Quote time |  |
-| bid | float | false | Best bid |  |
-| bidSize | float | false | Best bid size |  |
-| ask | float | false | Best ask |  |
-| askSize | float | false | Best ask size |  |
-| seqId | int | false | Sequence number |  |
-| DATA\_END |  | false |  |  |
+| Parameter  | Data Type | Required | Description                                                 | Value Range |
+| ---------- | --------- | -------- | ----------------------------------------------------------- | ----------- |
+| ch         | string    | false    | Data belonged channel，Format：market.$symbol.kline.$period |             |
+| ts         | long      | false    | Time of Respond Generation, Unit: Millisecond               |             |
+| DATA_START | object    | false    |                                                             |             |
+| symbol     | string    | false    | Trading symbol                                              |             |
+| quoteTime  | long      | false    | Quote time                                                  |             |
+| bid        | float     | false    | Best bid                                                    |             |
+| bidSize    | float     | false    | Best bid size                                               |             |
+| ask        | float     | false    | Best ask                                                    |             |
+| askSize    | float     | false    | Best ask size                                               |             |
+| seqId      | int       | false    | Sequence number                                             |             |
+| DATA_END   |           | false    |                                                             |             |
 
 #### Subscription Example
 

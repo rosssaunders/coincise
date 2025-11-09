@@ -2,7 +2,9 @@
 
 ## Get index composition history
 
-Retrieves a history of index composition records in a descending time order. The results are an array of index composition data recorded at different "timestamps".
+Retrieves a history of index composition records in a descending time order. The
+results are an array of index composition data recorded at different
+"timestamps".
 
 **Operation ID:** getIndexCompositionHistory
 
@@ -14,12 +16,12 @@ Retrieves a history of index composition records in a descending time order. The
 
 ## Parameters
 
-| Name | In | Type | Required | Description |
-|------|----|------|----------|-------------|
-| index | path | string | Yes | Identifies the index by name (e.g., `COIN50`) |
-| time_from | query | string | No | Filters look back history for returned data (accepts an ISO 8601 timestamp format) |
-| result_limit | query | integer | No | The number of results to return (defaults to 5) |
-| result_offset | query | integer | No | The number of results from the beginning to skip past |
+| Name          | In    | Type    | Required | Description                                                                        |
+| ------------- | ----- | ------- | -------- | ---------------------------------------------------------------------------------- |
+| index         | path  | string  | Yes      | Identifies the index by name (e.g., `COIN50`)                                      |
+| time_from     | query | string  | No       | Filters look back history for returned data (accepts an ISO 8601 timestamp format) |
+| result_limit  | query | integer | No       | The number of results to return (defaults to 5)                                    |
+| result_offset | query | integer | No       | The number of results from the beginning to skip past                              |
 
 ## Authentication
 
@@ -41,4 +43,5 @@ Authentication error
 
 ## Documentation
 
-For more details, see the [INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).
+For more details, see the
+[INTX API Documentation](https://docs.cdp.coinbase.com/api-reference/international-exchange-api/rest-api/introduction).

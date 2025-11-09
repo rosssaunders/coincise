@@ -1,6 +1,7 @@
 # POST private/get-instrument-fee-rate
 
-**Source:** [private/get-instrument-fee-rate](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-instrument-fee-rate)
+**Source:**
+[private/get-instrument-fee-rate](https://exchange-docs.crypto.com/exchange/v1/rest-ws/index.html#private-get-instrument-fee-rate)
 
 ## Authentication
 
@@ -40,17 +41,17 @@ Get the instrument fee rate.
 
 ### Request Params
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | Y | e.g. BTC\_USD, BTCUSD-PERP |
+| Name            | Type   | Required | Description               |
+| --------------- | ------ | -------- | ------------------------- |
+| instrument_name | string | Y        | e.g. BTC_USD, BTCUSD-PERP |
 
 ### Response Attributes
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| instrument\_name | string | Y | e.g. BTC\_USD |
-| effective\_maker\_rate\_bps | string | Y | maker rate in bps |
-| effective\_taker\_rate\_bps | string | Y | taker rate in bps |
+| Name                     | Type   | Required | Description       |
+| ------------------------ | ------ | -------- | ----------------- |
+| instrument_name          | string | Y        | e.g. BTC_USD      |
+| effective_maker_rate_bps | string | Y        | maker rate in bps |
+| effective_taker_rate_bps | string | Y        | taker rate in bps |
 
 ### Applies To
 

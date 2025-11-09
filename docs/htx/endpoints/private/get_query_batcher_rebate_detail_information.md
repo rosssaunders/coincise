@@ -1,6 +1,7 @@
 # GET Query batcher rebate detail information
 
-**Source:** [Query batcher rebate detail information](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-197ca28067c)
+**Source:**
+[Query batcher rebate detail information](https://www.htx.com/en-us/opend/newApiPages/?id=8cb89359-77b5-11ed-9966-197ca28067c)
 
 **Category:** Referral
 
@@ -8,7 +9,7 @@
 
 Required (Private Endpoint)
 
-### /v2/invitee/rebate/batcher\_rebate/detail (Query batcher rebate detail information)
+### /v2/invitee/rebate/batcher_rebate/detail (Query batcher rebate detail information)
 
 Request type: GET
 
@@ -18,41 +19,41 @@ Interface permission: Read
 
 #### Request Address
 
-| Environment | Address |
-| --- | --- |
-| Online | https://api.huobi.pro |
+| Environment                         | Address                   |
+| ----------------------------------- | ------------------------- |
+| Online                              | https://api.huobi.pro     |
 | Online (preferred by aws customers) | https://api-aws.huobi.pro |
 
 #### Request Parameter
 
-| Parameter | Data Type | Required | Description | Value Range | Default Value |
-| --- | --- | --- | --- | --- | --- |
-| inviteeUidList | String | false | Query the uid of the invitee |  |  |
+| Parameter      | Data Type | Required | Description                  | Value Range | Default Value |
+| -------------- | --------- | -------- | ---------------------------- | ----------- | ------------- |
+| inviteeUidList | String    | false    | Query the uid of the invitee |             |               |
 
 Notes: Remarks: m1: inviter m2: invitee kn: nth level in multi-level link
 
 #### Response Parameter
 
-| Parameter | Data Type | Required | Description | Value Range |
-| --- | --- | --- | --- | --- |
-| status | string | false |  | ok , "error" |
-| DATA\_START | object | true |  |  |
-| invitee\_uid | Integer | false | Query the uid of the invitee |  |
-| invitee\_type | string | true | Invitee type. 0: Invitee, 1: partner, 1: Invitee + partner |  |
-| invitee\_rebate\_rate\_spot\_m2 | string | true |  |  |
-| invitee\_rebate\_rate\_contract\_m2 |  | true |  |  |
-| invitee\_rebate\_rate\_partner\_spot |  | true |  |  |
-| invitee\_rebate\_rate\_partner\_contract |  | true |  |  |
-| join\_time\_m2 | string | true | The time to create the commission. Note: If invite\_type = 2, there will be two times to create the commission, such as 10000000 (direct customer), 20000000 (partner) |  |
-| join\_time\_partner |  | true |  |  |
-| Invitee\_total\_commission\_usdt | string | true | Invitee Total rebate amount, amount of USDT |  |
-| Invitee\_total\_commission\_trx | string | true | Invitee Total rebate amount, amount of TRX |  |
-| Invitee\_total\_commission\_htx | string | true | Invitee Total rebate amount, amount of HTX |  |
-| partner\_total\_commission\_usdt | string | true | partner Total rebate amount, amount of USDT |  |
-| partner\_total\_commission\_trx | string | true | partner Total rebate amount, amount of TRX |  |
-| partner\_total\_commission\_htx | string | true | partner Total rebate amount, amount of HTX |  |
-| DATA\_END |  | true |  |  |
-| ts | long | true |  |  |
+| Parameter                            | Data Type | Required | Description                                                                                                                                                           | Value Range  |
+| ------------------------------------ | --------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| status                               | string    | false    |                                                                                                                                                                       | ok , "error" |
+| DATA_START                           | object    | true     |                                                                                                                                                                       |              |
+| invitee_uid                          | Integer   | false    | Query the uid of the invitee                                                                                                                                          |              |
+| invitee_type                         | string    | true     | Invitee type. 0: Invitee, 1: partner, 1: Invitee + partner                                                                                                            |              |
+| invitee_rebate_rate_spot_m2          | string    | true     |                                                                                                                                                                       |              |
+| invitee_rebate_rate_contract_m2      |           | true     |                                                                                                                                                                       |              |
+| invitee_rebate_rate_partner_spot     |           | true     |                                                                                                                                                                       |              |
+| invitee_rebate_rate_partner_contract |           | true     |                                                                                                                                                                       |              |
+| join_time_m2                         | string    | true     | The time to create the commission. Note: If invite_type = 2, there will be two times to create the commission, such as 10000000 (direct customer), 20000000 (partner) |              |
+| join_time_partner                    |           | true     |                                                                                                                                                                       |              |
+| Invitee_total_commission_usdt        | string    | true     | Invitee Total rebate amount, amount of USDT                                                                                                                           |              |
+| Invitee_total_commission_trx         | string    | true     | Invitee Total rebate amount, amount of TRX                                                                                                                            |              |
+| Invitee_total_commission_htx         | string    | true     | Invitee Total rebate amount, amount of HTX                                                                                                                            |              |
+| partner_total_commission_usdt        | string    | true     | partner Total rebate amount, amount of USDT                                                                                                                           |              |
+| partner_total_commission_trx         | string    | true     | partner Total rebate amount, amount of TRX                                                                                                                            |              |
+| partner_total_commission_htx         | string    | true     | partner Total rebate amount, amount of HTX                                                                                                                            |              |
+| DATA_END                             |           | true     |                                                                                                                                                                       |              |
+| ts                                   | long      | true     |                                                                                                                                                                       |              |
 
 #### Request example
 
@@ -80,59 +81,59 @@ Notes: Remarks: m1: inviter m2: invitee kn: nth level in multi-level link
 
 0:{
 
-"invitee\_uid":
+"invitee_uid":
 
 413069986
 
-"invitee\_type":
+"invitee_type":
 
 0
 
-"invitee\_rebate\_rate\_spot\_m2":
+"invitee_rebate_rate_spot_m2":
 
 0.2
 
-"invitee\_rebate\_rate\_contract\_m2":
+"invitee_rebate_rate_contract_m2":
 
 0.1
 
-"invitee\_rebate\_rate\_partner\_spot":
+"invitee_rebate_rate_partner_spot":
 
 NULL
 
-"invitee\_rebate\_rate\_partner\_contract":
+"invitee_rebate_rate_partner_contract":
 
 NULL
 
-"join\_time\_m2":
+"join_time_m2":
 
 1724657374000
 
-"join\_time\_partner":
+"join_time_partner":
 
 NULL
 
-"invitee\_total\_commission\_usdt":
+"invitee_total_commission_usdt":
 
 0
 
-"invitee\_total\_commission\_htx":
+"invitee_total_commission_htx":
 
 0
 
-"invitee\_total\_commission\_trx":
+"invitee_total_commission_trx":
 
 0
 
-"partner\_total\_commission\_usdt":
+"partner_total_commission_usdt":
 
 0
 
-"partner\_total\_commission\_htx":
+"partner_total_commission_htx":
 
 0
 
-"partner\_total\_commission\_trx":
+"partner_total_commission_trx":
 
 0
 

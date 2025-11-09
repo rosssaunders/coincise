@@ -6,34 +6,35 @@ post https://api.bitfinex.com/v2/auth/w/token
 
 Generates an auth token that could be used for api requests
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
+/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+theme, base, components, utilities; @layer utilities;
 
 > 📘
-> 
-> ### 
-> 
+>
+> ###
+>
 > Caps
-> 
+>
 > [](#caps)
-> 
+>
 > Available caps are:
-> 
-> -   a - account
-> -   o - orders
-> -   f - funding
-> -   s - settings
-> -   w - wallets
-> -   wd - withdraw -- writePermission: true is required for wd permission
-> -   bp - bfxpay
+>
+> - a - account
+> - o - orders
+> - f - funding
+> - s - settings
+> - w - wallets
+> - wd - withdraw -- writePermission: true is required for wd permission
+> - bp - bfxpay
 
-#### 
+####
 
 Response data
 
 [](#response-data)
 
-| Index | Term | Type | Description |
-| --- | --- | --- | --- |
+| Index | Term  | Type   | Description                    |
+| ----- | ----- | ------ | ------------------------------ |
 | \[0\] | TOKEN | string | Generated authentication token |
 
 Body Params
@@ -76,7 +77,7 @@ token write permission for the caps
 
 truefalse
 
-\_cust\_ip
+\_cust_ip
 
 string
 
@@ -84,7 +85,7 @@ user's ip address
 
 Responses
 
-# 
+#
 
 200
 
@@ -94,7 +95,7 @@ Response body
 
 array of strings
 
-# 
+#
 
 400
 
@@ -106,7 +107,7 @@ object
 
 Updated 4 months ago
 
-* * *
+---
 
 Language
 
@@ -146,15 +147,15 @@ curl \--request POST \\
 
 7
 
-  "scope": "api",
+"scope": "api",
 
 8
 
-  "ttl": 120,
+"ttl": 120,
 
 9
 
-  "writePermission": false
+"writePermission": false
 
 10
 
@@ -170,7 +171,8 @@ RESPONSE
 
 Examples
 
-Click `Try It!` to start a request and see the response here! Or choose an example:
+Click `Try It!` to start a request and see the response here! Or choose an
+example:
 
 application/json
 
@@ -178,10 +180,10 @@ application/json
 
 Updated 4 months ago
 
-* * *
+---
 
 ---
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/generate-token
-Path: /v2/auth/w/token
+
+Section: Account Actions Source:
+https://docs.bitfinex.com/reference/generate-token Path: /v2/auth/w/token
 Method: POST

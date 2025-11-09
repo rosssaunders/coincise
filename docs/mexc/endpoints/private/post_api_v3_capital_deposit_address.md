@@ -25,31 +25,31 @@ post /api/v3/capital/deposit/address?coin=EOS&network=EOS&timestamp={{timestamp}
 ]
 ```
 
--   **POST** `/api/v3/capital/deposit/address`  
-    
+- **POST** `/api/v3/capital/deposit/address`
 
-**Permission:** SPOT\_WITHDRAW\_WRITE
+**Permission:** SPOT_WITHDRAW_WRITE
 
 **Weight(IP):** 1
 
 Parameters:
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| coin | string | YES | coin |
-| network | string | YES | deposit network |
-| timestamp | string | YES | timestamp |
-| signature | string | YES | signature |
+| Name      | Type   | Mandatory | Description     |
+| --------- | ------ | --------- | --------------- |
+| coin      | string | YES       | coin            |
+| network   | string | YES       | deposit network |
+| timestamp | string | YES       | timestamp       |
+| signature | string | YES       | signature       |
 
 Response:
 
-| Name | Description |
-| --- | --- |
+| Name    | Description     |
+| ------- | --------------- |
 | address | deposit address |
-| coin | coin |
-| memo | memo |
-| network | network |
+| coin    | coin            |
+| memo    | memo            |
+| network | network         |
 
 ---
 
-**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#generate-deposit-address-supporting-network
+**Source:**
+https://mexcdevelop.github.io/apidocs/spot_v3_en#generate-deposit-address-supporting-network
