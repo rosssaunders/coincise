@@ -35,7 +35,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request GET \2    --url 'https://{region}-api.upbit.com/v1/deposits/coin_address?currency=BTC&net_type=BTC' \3    --header 'Authorization: Bearer {JWT_TOKEN}' \4    --header 'Accept: application/json'5​
+xxxxxxxxxx1curl --request GET     --url 'https://{region}-api.upbit.com/v1/deposits/coin_address?currency=BTC&net_type=BTC'     --header 'Authorization: Bearer {JWT_TOKEN}'     --header 'Accept: application/json'5​
 ```
 
 ## Response Parameters
@@ -46,5 +46,3 @@ xxxxxxxxxx1curl --request GET \2    --url 'https://{region}-api.upbit.com/v1/dep
 | net_type | string | null | Deposit network type. Blockchain network identifier defined and used by Upbit. |
 | deposit_address | string | Deposit address for the digital asset. |
 | secondary_address | string | null | Secondary withdrawal address (e.g., Destination Tag, Memo, Message). For some digital assets, deposits and withdrawals require a secondary address such as a Destination Tag, Memo, or Message. If the deposit address of the receiving exchange includes a secondary address, you must provide this field when submitting a withdrawal request. |
-| name | string | Name identifying the error. |
-| message | string | Message describing the cause of the error. |

@@ -39,7 +39,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request GET \2 --url 'https://{region}-api.upbit.com/v1/deposits?currency=SGD' \3 --header 'Authorization: Bearer {JWT_TOKEN}' \4 --header 'accept: application/json'5​
+xxxxxxxxxx1curl --request GET  --url 'https://{region}-api.upbit.com/v1/deposits?currency=SGD'  --header 'Authorization: Bearer {JWT_TOKEN}'  --header 'accept: application/json'5​
 ```
 
 ## Response Parameters
@@ -57,5 +57,11 @@ xxxxxxxxxx1curl --request GET \2 --url 'https://{region}-api.upbit.com/v1/deposi
 | amount | string | Amount of fiat currency to be deposited. |
 | fee | string | Deposit fee. |
 | transaction_type | string | Deposit type.  default: General deposit internal: Internal deposit (between Upbit accounts)  default internal |
-| name | string | Name identifying the error. |
-| message | string | Message describing the cause of the error. |
+
+## Response Example
+
+### Success Response (200 OK)
+
+```json
+[2  {3    "type": "deposit", "uuid": "94332e99-3a87-4a35-ad98-28b0c969f830", "currency": "SGD", "net_type": null, "txid": "BKD-2000-12-29-aeked29c05eadac293b4214994", "state": "ACCEPTED", "created_at": "2025-07-04T15:00:00", "done_at": "2025-07-04T15:00:10", "amount": "100000.0", "fee": "0.0", "transaction_type": "default"14  }15]
+```

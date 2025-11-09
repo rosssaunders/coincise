@@ -34,7 +34,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request GET \2--url 'https://{region}-api.upbit.com/v1/order?uuid=9ca023a5-851b-4fec-9f0a-48cd83c2eaae' \3--header 'Authorization: Bearer {JWT_TOKEN}' \4--header 'accept: application/json'5​
+xxxxxxxxxx1curl --request GET --url 'https://{region}-api.upbit.com/v1/order?uuid=9ca023a5-851b-4fec-9f0a-48cd83c2eaae' --header 'Authorization: Bearer {JWT_TOKEN}' --header 'accept: application/json'5​
 ```
 
 ## Response Parameters
@@ -63,5 +63,11 @@ xxxxxxxxxx1curl --request GET \2--url 'https://{region}-api.upbit.com/v1/order?u
 | trades_count | integer | Number of trades executed for the order. |
 | funds | string | Trade execution amount. |
 | trend | string | Trade price trend.  up: Trade executed by "buy order" down: Trade executed by "sell order"  up down |
-| name | string | Name identifying the error. |
-| message | string | Message describing the cause of the error. |
+
+## Response Example
+
+### Success Response (200 OK)
+
+```json
+{2  "market": "SGD-BTC", "uuid": "9ca023a5-851b-4fec-9f0a-48cd83c2eaae", "side": "ask", "ord_type": "limit", "price": "153559.00", "state": "done", "created_at": "2025-07-04T15:00:00", "volume": "1.0", "remaining_volume": "0", "executed_volume": "1.0", "reserved_fee": "0", "remaining_fee": "0", "paid_fee": "383.8975", "locked": "0", "prevented_volume": "0", "prevented_locked": "0", "trades_count": 1, "trades": [20    {21      "market": "SGD-BTC", "uuid": "9e8f8eba-7050-4837-8969-cfc272cbe083", "price": "153559.00", "volume": "1.0", "funds": "153559.00", "trend": "down", "created_at": "2025-07-04T15:00:00", "side": "ask"29    }30  ]31}
+```

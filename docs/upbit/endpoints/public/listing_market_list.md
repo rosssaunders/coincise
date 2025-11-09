@@ -1,283 +1,53 @@
-# Listing Market List
+# GET /v1/market/all
 
-**Check the proper endpoint based on your region.**
+**Source:** [listing-market-list](https://global-docs.upbit.com/reference/listing-market-list)
 
-The examples in this page is written using Singapore fiat code(SGD). Set the
-quote currency to match your region. The base_url differs by country/region.
-Make sure to specify the correct region value for your environment.
+## Description
 
-\- Singapore (sg): https://sg-api.upbit.com  
-\- Indonesia (id): https://id-api.upbit.com  
-\- Thailand (th): https://th-api.upbit.com
+Retrieves the list of all trading pairs supported by Upbit.
 
-The order availability information for a market includes the following key
-fields.
+The order availability information for a market includes the following key fields.
 
-| Key Items            | Related Response Fields |
-| -------------------- | ----------------------- |
-| Applicable Fee Rates | `bid_fee`,              |
+## Authentication
 
-`ask_fee`,  
-`maker_bid_fee`,`maker_ask_fee` | | Supported Order Sides and Types |
-`market.order_sides`,  
-`market.bid_types`  
-`market.ask_types` | | Base Asset, Quote Asset and  
-Minimum/Maximum Order Amount | `market.bid`,  
-`market.ask`,  
-`market.max_total` | | Available Balances of  
-Base Asset and Quote Asset | `bid_account`,`ask_account` |
+Not Required (Public Endpoint)
 
-`market.order_types` is deprecated.
+## Rate Limit
 
-The order_types field is planned to be deprecated. After deprecation, this field
-will be removed from responses. If you are currently using this field, please
-switch to the alternative fields `ask_types` and `bid_types`.
+Up to 30 calls per second are allowed.
 
-Revision History
+This is measured on an IP basis and request counts are shared within the exchange.
 
-| Version | Date       | Changes                        |
-| ------- | ---------- | ------------------------------ |
-| v1.1.1  | 2024-04-22 | [Addition of `ord_type: best,` |
+## HTTP Request
 
-Addition of `time_in_force` parameter  
-(All Markets)](https://global-docs.upbit.com/changelog/new_ord_type_expand#/) |
-| v1.1.1 | 2024-04-04 | [Addition of `ord_type: best,`  
-Addition of `time_in_force` parameter  
-(BTC Market Upbit Indonesia and Thailand)](https://global-docs.upbit.com/changelog/ioc_fok_btc#/) |
-| v1.1.1 | 2024-02-26 | [Addition of `ord_type: best,`  
-Addition of `time_in_force` parameter  
-(THB, IDR Market Upbit Indonesia and Thailand)](https://global-docs.upbit.com/changelog/id_th_iocfok_226#/) |
-| v1.1.1 | 2023-10-27 | [Addition of `ord_type: best,`  
-Addition of `time_in_force` parameter  
-(Upbit Singapore only)](https://global-docs.upbit.com/changelog/sg_iocfok#/) | |
-v1.0.6 | 2022-10-14 | [Deprecation of `market.order_types,`  
-Addition of `ask_types` and `bid_types` fields](https://global-docs.upbit.com/changelog/notice-changes-of-open-api-from-oct-14#/) |
+`GET /v1/market/all`
 
-Rate Limit
+## Request Parameters
 
-Up to 30 calls per second are allowed. This is measured on an account basis and
-request counts are shared within the exchange 'default' group.
+### Query Parameters
 
-API Key Permission
+| Parameter | Type | Required | Description |
+| --------- | ---- | -------- | ----------- |
+| is_details | boolean | No | Whether to include detailed information in the query. If true, the response includes detail fields such as caution or warning designation. Default: false. |
 
-This API requires [authentication](auth) and must use an API Key with the \[View
-Orders\] permission enabled.  
-If you encounter an out_of_scope permission error, please verify your API Key
-permissions via the API Key Management page.
+## Request Example
 
-is_details
+```bash
+xxxxxxxxxx1curl --request GET      --url https://region-api.upbit.com/v1/market/all      --header 'accept: application/json'
+```
 
-boolean
+## Response Parameters
 
-Whether to include detailed information in the query. If true, the response
-includes detail fields such as caution or warning designation. Default: false.
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| market | string | Trading pair code representing the market. |
+| english_name | string | English name of the digital asset. |
+| market_warning | string | Trading pair warning Information.  NONE (Not applicable) CAUTION(Investment warning) |
 
-truetruefalse
+## Response Example
 
-#
+### Success Response (200 OK)
 
-200
-
-List of trading pairs
-
-array of objects
-
-object
-
-market
-
-string
-
-required
-
-Trading pair code representing the market.
-
-english_name
-
-string
-
-required
-
-English name of the digital asset.
-
-market_warning
-
-string
-
-Trading pair warning Information.
-
-- `NONE` (Not applicable)
-- `CAUTION`(Investment warning)
-
-#
-
-400
-
-error object
-
-object
-
-error
-
-object
-
-name
-
-number
-
-required
-
-Name identifying the error.
-
-message
-
-string
-
-required
-
-Message describing the cause of the error.
-
-Updated about 1 month ago
-
----
-
-ShellPythonJavaNode
-
-Base URL
-
-https://region\-api.upbit.com/v1/market/all
-
-xxxxxxxxxx
-
-1
-
-curl \--request GET \\
-
-2
-
-     \--url https://region-api.upbit.com/v1/market/all \\
-
-3
-
-     \--header 'accept: application/json'
-
-xxxxxxxxxx
-
-27
-
-1
-
-\[
-
-2
-
-{
-
-3
-
-    "market": "SGD-ETH",
-
-4
-
-    "english\_name": "Ethereum",
-
-5
-
-    "market\_warning": "NONE"
-
-6
-
-},
-
-7
-
-{
-
-8
-
-    "market": "SGD-XRP",
-
-9
-
-    "english\_name": "XRP",
-
-10
-
-    "market\_warning": "NONE"
-
-11
-
-},
-
-12
-
-{
-
-13
-
-    "market": "SGD-BTC",
-
-14
-
-    "english\_name": "Bitcoin",
-
-15
-
-    "market\_warning": "NONE"
-
-16
-
-},
-
-17
-
-{
-
-18
-
-    "market": "SGD-USDT",
-
-19
-
-    "english\_name": "Tether",
-
-20
-
-    "market\_warning": "NONE"
-
-21
-
-},
-
-22
-
-{
-
-23
-
-    "market": "SGD-SOL",
-
-24
-
-    "english\_name": "Solana",
-
-25
-
-    "market\_warning": "NONE"
-
-26
-
-}
-
-27
-
-\]
-
-Updated about 1 month ago
-
----
-
----
-
-**Source:**
-[listing-market-list](https://global-docs.upbit.com/reference/listing-market-list)
+```json
+[2  {3    "market": "SGD-ETH", "english_name": "Ethereum", "market_warning": "NONE"6  }, {8    "market": "SGD-XRP", "english_name": "XRP", "market_warning": "NONE"11  }, {13    "market": "SGD-BTC", "english_name": "Bitcoin", "market_warning": "NONE"16  }, {18    "market": "SGD-USDT", "english_name": "Tether", "market_warning": "NONE"21  }, {23    "market": "SGD-SOL", "english_name": "Solana", "market_warning": "NONE"26  }27]
+```

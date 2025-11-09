@@ -40,33 +40,13 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx141curl --request POST \2  --url 'https://{region}-api.upbit.com/v1/orders/cancel_and_new' \3  --header 'Authorization: Bearer {JWT_TOKEN}' \4  --header 'Accept: application/json' \5  --header 'Content-Type: application/json' \6  --data '7{8"prev_order_uuid": "d098ceaf-6811-4df8-97f2-b7e01aefc03f",9"new_ord_type": "limit",10"new_price": "153559",11"new_volume": "1"12}13'14​
+xxxxxxxxxx141curl --request POST   --url 'https://{region}-api.upbit.com/v1/orders/cancel_and_new'   --header 'Authorization: Bearer {JWT_TOKEN}'   --header 'Accept: application/json'   --header 'Content-Type: application/json'   --data '7{8"prev_order_uuid": "d098ceaf-6811-4df8-97f2-b7e01aefc03f",9"new_ord_type": "limit",10"new_price": "153559",11"new_volume": "1"12}13'14​
 ```
 
-## Response Parameters
+## Response Example
 
-| Parameter | Type | Description |
-| --------- | ---- | ----------- |
-| market | string | Trading pair code representing the market. |
-| uuid | string | Unique identifier of the order to be canceled. |
-| side | string | Side of order to be canceled: "ask" (sell), "bid" (buy). ask bid |
-| ord_type | string | Order type to be canceled. limit price market best |
-| price | string | Order unit price or total amount. For limit orders, this is the unit price. For market buy orders, this is the total purchase amount. |
-| state | string | Order status to be canceled  wait: Waiting for execution watch: Scheduled order done: Execution completed cancel: Order cancelled  wait watch done cancel |
-| created_at | string | Order creation time in UTC. |
-| volume | string | Amount or quantity of the order to be canceled. |
-| remaining_volume | string | Remaining volume of the order to be canceled. |
-| executed_volume | string | Executed volume of the order to be canceled. |
-| reserved_fee | string | Fee amount reserved for the order to be canceled. |
-| remaining_fee | string | Remaining fee amount of the order to be canceled. |
-| paid_fee | string | Used fee of the order to be canceled |
-| locked | string | Cost in use for the trade of the order to be canceled. |
-| prevented_volume | string | Quantity of the order to be canceled due to Self-Match Prevention. |
-| prevented_locked | string | Assets released from the order to be canceled due to Self-Match Prevention. Remaining assets from an order canceled due to the Self-Match Prevention setting.  For buy orders: Cancelled amount For sell orders: Cancelled quantity |
-| smp_type | string | Self-Match Prevention (SMP) mode applied in the response. reduce cancel_maker cancel_taker |
-| trades_count | integer | Number of executions for the order to be canceled. |
-| time_in_force | string | Order execution policy as applied in the response. fok ioc post_only |
-| new_order_uuid | string | Unique identifier for the newly created order. |
-| new_order_identifier | string | Client-specified identifier for the newly created order. |
-| name | string | Name identifying the error. |
-| message | string | Message describing the cause of the error. |
+### Success Response (200 OK)
+
+```json
+{2  "uuid": "d098ceaf-6811-4df8-97f2-b7e01aefc03f", "side": "bid", "ord_type": "limit", "price": "153559.00", "state": "wait", "market": "SGD-BTC", "created_at": "2025-07-04T15:00:00", "volume": "1.0", "remaining_volume": "1.0", "executed_volume": "0", "reserved_fee": "383.8975", "remaining_fee": "383.8975", "paid_fee": "0", "locked": "153942.8975", "prevented_volume": "0", "prevented_locked": "0", "trades_count": 0, "new_order_uuid": "4b07aa31-4747-485c-8bce-ac5495e4a639"20}
+```

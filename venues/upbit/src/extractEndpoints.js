@@ -157,9 +157,10 @@ const extractEndpointData = async (page, url) => {
       // Check if this is a 200 response section (skip error responses)
       const parent = form.closest('[class*="AccordionPanel"]')
       if (parent) {
-        const statusCode = parent.querySelector('[class*="HTTPStatus"]')
+        // Look for status code in the accordion label
+        const label = parent.querySelector('[class*="APIResponseSchemaPicker-label"]')
         // Only process 200-level responses
-        if (statusCode && !statusCode.textContent.includes('200')) {
+        if (label && !label.textContent.includes('200')) {
           continue
         }
       }
@@ -193,28 +194,25 @@ const extractEndpointData = async (page, url) => {
     for (const block of codeBlocks) {
       let text = block.textContent.trim()
       
-      // Skip very short blocks or duplicates
-      if (text.length < 10 || seenCode.has(text)) continue
+      // Skip very short blocks
+      if (text.length < 10) continue
       
       // Skip blocks that are just line numbers or single values
       if (text.match(/^[\d\s]+$/)) continue
       if (text.match(/^["'][^"']+["']$/)) continue
       
       // Clean up code - remove line number prefixes and escape sequences
-      text = text.replace(/^x+\d+/gm, '')  // Remove "xxxxxxxxxx1" prefixes
-      text = text.replace(/\\\d+/g, '')     // Remove "\2", "\3" escape sequences
-      text = text.replace(/^\d+$/gm, '')    // Remove standalone line numbers
-      // Remove line numbers at start of lines with content
-      text = text.split('\n').map(line => {
-        if (line.trim().match(/^\d+$/)) return ''
-        return line.replace(/^\d+\s+/, '')
-      }).filter(line => line).join('\n')
+      text = text.replace(/^x+\d+\s+\d+/gm, '')  // Remove "xxxxxxxxxx54 1" prefix
+      text = text.replace(/\\\d+/g, '')           // Remove "\2", "\3" escape sequences
+      text = text.replace(/\s+\d+\s+(?=[{])/g, ' ')  // Remove " 2  " before {
+      text = text.replace(/,\d+\s+/g, ', ')       // Remove line numbers after commas
       text = text.trim()
       
+      // NOW check for duplicates and length after cleaning
       if (text.length < 10 || seenCode.has(text)) continue
       seenCode.add(text)
       
-      // Determine language
+      // Determine language based on cleaned text
       let lang = 'bash'
       if (text.startsWith('{') || text.startsWith('[')) {
         lang = 'json'

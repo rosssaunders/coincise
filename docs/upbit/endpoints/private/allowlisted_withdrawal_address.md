@@ -25,7 +25,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request GET \2--url 'https://{region}-api.upbit.com/v1/withdraws/coin_addresses' \3--header 'Authorization: Bearer {JWT_TOKEN}' \4--header 'Accept: application/json'5​
+xxxxxxxxxx1curl --request GET --url 'https://{region}-api.upbit.com/v1/withdraws/coin_addresses' --header 'Authorization: Bearer {JWT_TOKEN}' --header 'Accept: application/json'5​
 ```
 
 ## Response Parameters
@@ -42,3 +42,11 @@ xxxxxxxxxx1curl --request GET \2--url 'https://{region}-api.upbit.com/v1/withdra
 | beneficiary_type | string | null | Type of receiving wallet.(Only Singapore)  individual: Individual wallet corporate: Corporate wallet |
 | exchange_name | string | null | Name of the exchange where the withdrawal address is registered.(Only Singapore) |
 | wallet_type | string | null | Type of individual wallet.(Only Singapore) |
+
+## Response Example
+
+### Success Response (200 OK)
+
+```json
+[2  {3    "currency": "BTC", "net_type": "BTC", "network_name": "Bitcoin", "withdraw_address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa", "secondary_address": null, "beneficiary_name": "John", "beneficiary_company_name": null, "beneficiary_type": "individual", "exchange_name": "Binance", "wallet_type": null13  }, {15    "currency": "ETH", "net_type": "ETH", "network_name": "Ethereum", "withdraw_address": "0x1234615148db0926d76bde31d420abcd5439484fd", "secondary_address": null, "beneficiary_name": "John", "beneficiary_company_name": null, "beneficiary_type": null, "exchange_name": null, "wallet_type": "MetaMask"25  }26]
+```

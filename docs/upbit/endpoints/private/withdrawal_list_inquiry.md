@@ -39,7 +39,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx1curl --request GET \2    --url 'https://{region}-api.upbit.com/v1/withdraws?currency=XRP&state=DONE' \3    --header 'Authorization: Bearer {JWT_TOKEN}' \4    --header 'Accept: application/json'5​
+xxxxxxxxxx1curl --request GET     --url 'https://{region}-api.upbit.com/v1/withdraws?currency=XRP&state=DONE'     --header 'Authorization: Bearer {JWT_TOKEN}'     --header 'Accept: application/json'5​
 ```
 
 ## Response Parameters
@@ -58,5 +58,11 @@ xxxxxxxxxx1curl --request GET \2    --url 'https://{region}-api.upbit.com/v1/wit
 | fee | string | Fee amount for the withdrawal. |
 | transaction_type | string | Withdrawal type. The available values are as follows:  default: General withdrawal internal: Internal (between Upbit accounts)  default internal |
 | is_cancelable | boolean | Indicates whether the withdrawal can be cancelled. |
-| name | string | Name identifying the error. |
-| message | string | Message describing the cause of the error. |
+
+## Response Example
+
+### Success Response (200 OK)
+
+```json
+[2  {3    "type": "withdraw", "uuid": "9f432943-54e0-40b7-825f-b6fec8b42b79", "currency": "XRP", "net_type": "XRP", "txid": "98c15999f0bdc4ae0e8a-ed35868bb0c204fe6ec29e4058a3451e-88636d1040f4baddf943274ce37cf9cc", "state": "DONE", "created_at": "2025-07-04T15:00:00", "done_at": "2025-07-04T15:00:20", "amount": "10.00", "fee": "0.0", "transaction_type": "default", "is_cancelable": false15  }16]
+```

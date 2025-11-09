@@ -34,7 +34,7 @@ This is measured on an IP basis and request counts are shared within the exchang
 ## Request Example
 
 ```bash
-xxxxxxxxxx111curl --request POST \2  --url 'https://{region}-api.upbit.com/v1/deposits/generate_coin_address' \3  --header 'Authorization: Bearer {JWT_TOKEN}' \4  --header 'Content-Type: application/json' \5  --data '6{7"currency": "BTC",8"net_type": "BTC"9}10'11​
+xxxxxxxxxx111curl --request POST   --url 'https://{region}-api.upbit.com/v1/deposits/generate_coin_address'   --header 'Authorization: Bearer {JWT_TOKEN}'   --header 'Content-Type: application/json'   --data '6{7"currency": "BTC",8"net_type": "BTC"9}10'11​
 ```
 
 ## Response Parameters
@@ -45,6 +45,3 @@ xxxxxxxxxx111curl --request POST \2  --url 'https://{region}-api.upbit.com/v1/de
 | net_type | string | null | Deposit network type. Blockchain network identifier defined and used by Upbit. |
 | deposit_address | string | Deposit address for the digital asset. |
 | secondary_address | string | null | Secondary withdrawal address (e.g., Destination Tag, Memo, Message). For some digital assets, deposits and withdrawals require a secondary address such as a Destination Tag, Memo, or Message. If the deposit address of the receiving exchange includes a secondary address, you must provide this field when submitting a withdrawal request. |
-| success | boolean | Indicates whether the deposit address was created successfully. |
-| message | string | Message regarding the deposit address creation request. |
-| name | string | Name identifying the error. |
