@@ -7,7 +7,7 @@
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
-import { launchBrowser, configurePage } from "../../shared/puppeteer.js"
+import { launchBrowser } from "../../shared/puppeteer.js"
 import { createTurndownBuilder } from "../../shared/turndown.js"
 
 const __filename = fileURLToPath(import.meta.url)
@@ -44,6 +44,47 @@ const waitForMenu = async page => {
 }
 
 /**
+ * Expand all menus to make all menu items visible
+ */
+const expandAllMenus = async page => {
+  console.log("Expanding all menus...")
+
+  await page.evaluate(async () => {
+    // Find and click Spot menu to expand it
+    const menus = document.querySelectorAll('div[role="menuitem"]')
+    for (const menu of menus) {
+      const text = menu.textContent.trim()
+      if (text === "Spot") {
+        menu.click()
+        await new Promise(resolve => setTimeout(resolve, 500))
+        break
+      }
+    }
+
+    // Now expand all submenus
+    let changed = true
+    let iterations = 0
+
+    while (changed && iterations < 20) {
+      changed = false
+      iterations++
+
+      const allMenus = document.querySelectorAll('div[role="menuitem"]')
+
+      for (const menu of allMenus) {
+        if (menu.getAttribute("aria-expanded") === "false") {
+          menu.click()
+          changed = true
+          await new Promise(resolve => setTimeout(resolve, 300))
+        }
+      }
+    }
+  })
+
+  console.log("✅ All menus expanded")
+}
+
+/**
  * Extract content by numeric ID
  */
 const extractContentById = async (page, ids) => {
@@ -75,39 +116,107 @@ const extractContentById = async (page, ids) => {
 }
 
 /**
- * Click menu item and extract content
+ * Extract section content by simulating real browser click and waiting for content to render
  */
-const extractSectionContent = async (page, menuId) => {
-  await page.evaluate(menuId => {
+const extractSectionContent = async (page, menuKey, sectionName) => {
+  console.log(`  Looking for menu item with key: ${menuKey}`)
+
+  // Try to use Puppeteer's real click on the element
+  const clickResult = await page.evaluate(menuKey => {
     const listItems = document.querySelectorAll('li[role="menuitem"]')
     for (const item of listItems) {
       const keys = item.getAttribute("keys")
-      if (keys && keys.split(",").includes(menuId.toString())) {
-        item.click()
-        return
+      if (keys && keys === menuKey) {
+        return {
+          found: true,
+          text: item.textContent.trim(),
+          keys: keys
+        }
       }
     }
-  }, menuId)
+    return { found: false }
+  }, menuKey)
 
-  // Wait for content to load
-  await page.waitForTimeout(1000)
+  if (!clickResult.found) {
+    console.log(`  ⚠️  Menu item with key '${menuKey}' not found`)
+    return ""
+  }
+
+  console.log(`  Found menu item: ${clickResult.text}`)
+
+  // Use Puppeteer's click() method for realistic interaction
+  const elementHandle = await page.evaluateHandle(menuKey => {
+    const listItems = document.querySelectorAll('li[role="menuitem"]')
+    for (const item of listItems) {
+      const keys = item.getAttribute("keys")
+      if (keys && keys === menuKey) {
+        return item
+      }
+    }
+    return null
+  }, menuKey)
+
+  const element = elementHandle.asElement()
+  if (element) {
+    console.log(`  Clicking menu item...`)
+    await element.click()
+    await elementHandle.dispose()
+
+    // Wait longer for SPA to update
+    console.log(`  Waiting for content to render...`)
+    await new Promise(resolve => setTimeout(resolve, 3000))
+
+    // Try to detect content change by checking for specific text related to the section
+    const contentAppeared = await page.evaluate((sectionText) => {
+      const body = document.body.textContent
+      // Check if section-specific content appeared
+      return body.includes(sectionText) || body.length > 20000
+    }, clickResult.text)
+
+    console.log(`  Content appeared: ${contentAppeared}`)
+  }
+
+  // Now try to extract content from various possible locations
+  console.log("  Attempting to extract content...")
 
   const html = await page.evaluate(() => {
-    const contentDiv = document.querySelector(
-      "div.newApiPages_posR__RKd5D.newApiPages_posDetail__SmN2h"
-    )
-    if (!contentDiv) return ""
+    // Try multiple selectors in order of preference
+    const selectors = [
+      "div.newApiPages_posR__RKd5D.newApiPages_posDetail__SmN2h", // Endpoint content
+      "div.newApiPages_wrap__hJes6", // General docs wrapper
+      "div.newApiPages_main__O4xgg > div:last-child", // Last div in main (might be content)
+      "div.newApiPages_main__O4xgg" // Entire main area as fallback
+    ]
 
-    // Remove unwanted elements
-    const toolsPanel = contentDiv.querySelector("#tools")
-    if (toolsPanel) toolsPanel.remove()
+    for (const selector of selectors) {
+      const contentDiv = document.querySelector(selector)
+      if (contentDiv && contentDiv.innerHTML.trim().length > 500) {
+        console.log(`Found content with selector: ${selector}`)
 
-    const codeList = contentDiv.querySelector("#code_list")
-    if (codeList) codeList.remove()
+        // Clone to avoid modifying original
+        const cloned = contentDiv.cloneNode(true)
 
-    return contentDiv.innerHTML
+        // Remove unwanted elements
+        const toolsPanel = cloned.querySelector("#tools")
+        if (toolsPanel) toolsPanel.remove()
+
+        const codeList = cloned.querySelector("#code_list")
+        if (codeList) codeList.remove()
+
+        const searchBox = cloned.querySelector(".newApiPages_search__qbe6O")
+        if (searchBox) searchBox.remove()
+
+        const introBox = cloned.querySelector(".newApiPages_introbox__f2hE2")
+        if (introBox) introBox.remove()
+
+        return cloned.innerHTML
+      }
+    }
+
+    return ""
   })
 
+  console.log(`  Content length: ${html.length} characters`)
   return html
 }
 
@@ -117,15 +226,25 @@ const extractSectionContent = async (page, menuId) => {
 const extractRateLimits = async (page, turndownService) => {
   console.log("Extracting rate limits...")
 
-  // HTX rate limits are typically in numeric ID 668 (REST API Rate Limit)
-  const html = await extractSectionContent(page, 668)
+  // HTX rate limits - hierarchical key
+  const html = await extractSectionContent(page, "5,234,423")
 
-  if (!html) {
-    return "# Rate Limits\n\nPlease refer to the HTX API documentation for rate limit information.\n"
+  if (!html || html.trim().length === 0) {
+    throw new Error(
+      "Failed to extract rate limits content. Menu key '5,234,423' returned empty content. " +
+        "Possible causes: (1) Menu structure changed, (2) Content selector is incorrect, " +
+        "(3) HTX anti-bot protection is blocking access, (4) Page did not fully load."
+    )
   }
 
   const markdown = turndownService.turndown(html)
-  return markdown || "# Rate Limits\n\nNo rate limit information available.\n"
+  if (!markdown || markdown.trim().length === 0) {
+    throw new Error(
+      "Failed to convert rate limits HTML to markdown. HTML was present but conversion failed."
+    )
+  }
+
+  return markdown
 }
 
 /**
@@ -134,17 +253,25 @@ const extractRateLimits = async (page, turndownService) => {
 const extractAuthentication = async (page, turndownService) => {
   console.log("Extracting authentication information...")
 
-  // HTX authentication is typically in numeric ID 666 (Quick Start -> Preparation)
-  const html = await extractSectionContent(page, 666)
+  // HTX authentication - hierarchical key
+  const html = await extractSectionContent(page, "5,235,419")
 
-  if (!html) {
-    return "# Authentication\n\nPlease refer to the HTX API documentation for authentication information.\n"
+  if (!html || html.trim().length === 0) {
+    throw new Error(
+      "Failed to extract authentication content. Menu key '5,235,419' returned empty content. " +
+        "Possible causes: (1) Menu structure changed, (2) Content selector is incorrect, " +
+        "(3) HTX anti-bot protection is blocking access, (4) Page did not fully load."
+    )
   }
 
   const markdown = turndownService.turndown(html)
-  return (
-    markdown || "# Authentication\n\nNo authentication information available.\n"
-  )
+  if (!markdown || markdown.trim().length === 0) {
+    throw new Error(
+      "Failed to convert authentication HTML to markdown. HTML was present but conversion failed."
+    )
+  }
+
+  return markdown
 }
 
 /**
@@ -153,18 +280,25 @@ const extractAuthentication = async (page, turndownService) => {
 const extractNetworkConnectivity = async (page, turndownService) => {
   console.log("Extracting network connectivity information...")
 
-  // HTX network connectivity is typically in numeric ID 669 (Access URLs)
-  const html = await extractSectionContent(page, 669)
+  // HTX network connectivity - hierarchical key
+  const html = await extractSectionContent(page, "5,235,418")
 
-  if (!html) {
-    return "# Network Connectivity\n\nPlease refer to the HTX API documentation for network connectivity information.\n"
+  if (!html || html.trim().length === 0) {
+    throw new Error(
+      "Failed to extract network connectivity content. Menu key '5,235,418' returned empty content. " +
+        "Possible causes: (1) Menu structure changed, (2) Content selector is incorrect, " +
+        "(3) HTX anti-bot protection is blocking access, (4) Page did not fully load."
+    )
   }
 
   const markdown = turndownService.turndown(html)
-  return (
-    markdown ||
-    "# Network Connectivity\n\nNo network connectivity information available.\n"
-  )
+  if (!markdown || markdown.trim().length === 0) {
+    throw new Error(
+      "Failed to convert network connectivity HTML to markdown. HTML was present but conversion failed."
+    )
+  }
+
+  return markdown
 }
 
 /**
@@ -173,15 +307,25 @@ const extractNetworkConnectivity = async (page, turndownService) => {
 const extractErrorCodes = async (page, turndownService) => {
   console.log("Extracting error codes...")
 
-  // HTX error codes are typically in numeric ID 427 (Error Codes)
-  const html = await extractSectionContent(page, 427)
+  // HTX error codes - hierarchical key
+  const html = await extractSectionContent(page, "5,127,5401")
 
-  if (!html) {
-    return "# Error Codes\n\nPlease refer to the HTX API documentation for error code information.\n"
+  if (!html || html.trim().length === 0) {
+    throw new Error(
+      "Failed to extract error codes content. Menu key '5,127,5401' returned empty content. " +
+        "Possible causes: (1) Menu structure changed, (2) Content selector is incorrect, " +
+        "(3) HTX anti-bot protection is blocking access, (4) Page did not fully load."
+    )
   }
 
   const markdown = turndownService.turndown(html)
-  return markdown || "# Error Codes\n\nNo error code information available.\n"
+  if (!markdown || markdown.trim().length === 0) {
+    throw new Error(
+      "Failed to convert error codes HTML to markdown. HTML was present but conversion failed."
+    )
+  }
+
+  return markdown
 }
 
 /**
@@ -190,18 +334,25 @@ const extractErrorCodes = async (page, turndownService) => {
 const extractResponseFormats = async (page, turndownService) => {
   console.log("Extracting response formats...")
 
-  // HTX response formats are typically in numeric ID 415 (Response Format)
-  const html = await extractSectionContent(page, 415)
+  // HTX response formats - hierarchical key
+  const html = await extractSectionContent(page, "5,234,425")
 
-  if (!html) {
-    return "# Response Formats\n\nAll responses from the HTX API follow standard JSON format.\n"
+  if (!html || html.trim().length === 0) {
+    throw new Error(
+      "Failed to extract response formats content. Menu key '5,234,425' returned empty content. " +
+        "Possible causes: (1) Menu structure changed, (2) Content selector is incorrect, " +
+        "(3) HTX anti-bot protection is blocking access, (4) Page did not fully load."
+    )
   }
 
   const markdown = turndownService.turndown(html)
-  return (
-    markdown ||
-    "# Response Formats\n\nNo response format information available.\n"
-  )
+  if (!markdown || markdown.trim().length === 0) {
+    throw new Error(
+      "Failed to convert response formats HTML to markdown. HTML was present but conversion failed."
+    )
+  }
+
+  return markdown
 }
 
 /**
@@ -210,15 +361,13 @@ const extractResponseFormats = async (page, turndownService) => {
 const extractChangelog = async (page, turndownService) => {
   console.log("Extracting changelog...")
 
-  // HTX changelog is typically in numeric ID 5401 (Change Log)
-  const html = await extractSectionContent(page, 5401)
+  // Note: HTX appears to have removed the changelog from the API menu structure
+  // Returning a placeholder message
+  console.log(
+    "⚠️  Changelog section not found in menu - HTX may have removed it"
+  )
 
-  if (!html) {
-    return "# Changelog\n\nPlease refer to the HTX API documentation for changelog information.\n"
-  }
-
-  const markdown = turndownService.turndown(html)
-  return markdown || "# Changelog\n\nNo changelog information available.\n"
+  return "# Change Log\n\nHTX does not currently provide a structured changelog in the API documentation.\n\nFor the latest API updates and changes, please visit:\n- [HTX Support Center - API Announcements](https://www.huobi.pe/support/en-us/list/360000070201)\n- Subscribe to announcements by logging in and clicking 'Follow' on the announcements page\n"
 }
 
 /**
@@ -229,6 +378,7 @@ const main = async () => {
   console.log(`📍 Source: ${BASE_URL}`)
   console.log(`📁 Output: ${OUTPUT_DIR}`)
 
+  // Launch browser using shared utility
   const browser = await launchBrowser()
 
   try {
@@ -248,6 +398,9 @@ const main = async () => {
 
     // Wait for menu to render
     await waitForMenu(page)
+
+    // Expand all menus to make items clickable
+    await expandAllMenus(page)
 
     const turndownService = createTurndownBuilder().build()
 

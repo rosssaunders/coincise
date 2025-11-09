@@ -7,7 +7,7 @@
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
-import { launchBrowser, configurePage } from "../../shared/puppeteer.js"
+import { launchBrowser } from "../../shared/puppeteer.js"
 import { createTurndownBuilder } from "../../shared/turndown.js"
 
 const __filename = fileURLToPath(import.meta.url)
@@ -63,6 +63,47 @@ const waitForMenu = async page => {
 }
 
 /**
+ * Expand all menus to make all menu items visible
+ */
+const expandAllMenus = async page => {
+  console.log("Expanding all menus...")
+
+  await page.evaluate(async () => {
+    // Find and click Spot menu to expand it
+    const menus = document.querySelectorAll('div[role="menuitem"]')
+    for (const menu of menus) {
+      const text = menu.textContent.trim()
+      if (text === "Spot") {
+        menu.click()
+        await new Promise(resolve => setTimeout(resolve, 500))
+        break
+      }
+    }
+
+    // Now expand all submenus
+    let changed = true
+    let iterations = 0
+
+    while (changed && iterations < 20) {
+      changed = false
+      iterations++
+
+      const allMenus = document.querySelectorAll('div[role="menuitem"]')
+
+      for (const menu of allMenus) {
+        if (menu.getAttribute("aria-expanded") === "false") {
+          menu.click()
+          changed = true
+          await new Promise(resolve => setTimeout(resolve, 300))
+        }
+      }
+    }
+  })
+
+  console.log("✅ All menus expanded")
+}
+
+/**
  * Extract all endpoint menu items
  */
 const extractEndpointMenuItems = async page => {
@@ -98,23 +139,37 @@ const extractEndpointMenuItems = async page => {
 }
 
 /**
- * Click menu item by GUID and extract content
+ * Navigate to endpoint URL by GUID and extract content
  */
 const extractEndpointContent = async (page, guid) => {
-  // Click the menu item
-  await page.evaluate(guid => {
-    const listItems = document.querySelectorAll('li[role="menuitem"]')
-    for (const item of listItems) {
-      const keys = item.getAttribute("keys")
-      if (keys && keys.includes(guid)) {
-        item.click()
-        return
-      }
-    }
-  }, guid)
+  // Navigate directly to the endpoint URL
+  const endpointUrl = `${BASE_URL}?id=${guid}`
+  console.log(`  Navigating to: ${endpointUrl}`)
 
-  // Wait for content to load
-  await page.waitForTimeout(2000)
+  try {
+    await page.goto(endpointUrl, { waitUntil: "networkidle0", timeout: 30000 })
+    console.log(`  ✅ Page loaded`)
+  } catch (error) {
+    console.log(`  ⚠️  Navigation timeout or error: ${error.message}`)
+    // Continue anyway, content might still be there
+  }
+
+  // Wait for content div to have actual content
+  console.log("  Waiting for content to load...")
+  try {
+    await page.waitForFunction(
+      () => {
+        const contentDiv = document.querySelector(
+          "div.newApiPages_posR__RKd5D.newApiPages_posDetail__SmN2h"
+        )
+        return contentDiv && contentDiv.innerHTML.trim().length > 100
+      },
+      { timeout: 10000 }
+    )
+    console.log("  ✅ Content loaded")
+  } catch (e) {
+    console.log("  ⚠️  Timeout waiting for content to load")
+  }
 
   const html = await page.evaluate(async () => {
     const contentDiv = document.querySelector(
@@ -408,6 +463,9 @@ const main = async () => {
     // Wait for menu to render
     await waitForMenu(page)
 
+    // Expand all menus to make endpoint items visible
+    await expandAllMenus(page)
+
     const turndownService = createTurndownBuilder().build()
 
     // Ensure output directories exist
@@ -420,10 +478,14 @@ const main = async () => {
     console.log(`\n📊 Found ${endpoints.length} endpoint menu items`)
 
     if (endpoints.length === 0) {
-      console.warn(
-        "\n⚠️  Warning: No endpoints were found. The documentation structure may have changed."
+      throw new Error(
+        "No endpoints were found in the menu. " +
+          "Possible causes: (1) Menu structure changed - GUID detection is not finding endpoint keys, " +
+          "(2) Menu selector 'li[role=\"menuitem\"]' is incorrect, " +
+          "(3) HTX anti-bot protection is blocking access, " +
+          "(4) Page did not fully load. " +
+          "Expected to find menu items with 'keys' attributes containing GUID format (with hyphens)."
       )
-      process.exit(0)
     }
 
     let publicCount = 0
@@ -440,9 +502,12 @@ const main = async () => {
       try {
         const content = await extractEndpointContent(page, endpoint.guid)
 
-        if (!content) {
-          console.warn(`  ⚠️  No content found for ${endpoint.text}`)
-          continue
+        if (!content || content.trim().length === 0) {
+          throw new Error(
+            `Failed to extract content for endpoint "${endpoint.text}" (GUID: ${endpoint.guid}). ` +
+              `Possible causes: (1) Content selector 'div.newApiPages_posR__RKd5D.newApiPages_posDetail__SmN2h' is incorrect, ` +
+              `(2) Menu item click did not load content, (3) Content takes longer than 2s to load.`
+          )
         }
 
         const result = processEndpoint(endpoint, content, turndownService)
@@ -454,7 +519,7 @@ const main = async () => {
         }
 
         // Add a small delay between requests
-        await page.waitForTimeout(500)
+        await new Promise(resolve => setTimeout(resolve, 500))
       } catch (error) {
         console.error(`  ❌ Error processing ${endpoint.text}:`, error.message)
       }

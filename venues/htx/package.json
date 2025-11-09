@@ -5,7 +5,7 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "extract:general": "node src/extractGeneral.js",
+    "extract:general": "node src/extractGeneral_clicks.js",
     "extract:endpoints": "node src/extractEndpoints.js",
     "extract:all": "npm run extract:general && npm run extract:endpoints",
     "start": "node src/index.js",
