@@ -56,6 +56,11 @@ jobs:
       - name: Run DigiFinex scraper - WebSocket API (GitHub)
         run: pnpm run extract:websocket-github
 
+
+      - name: Format documentation
+        run: |
+          cd ../..
+          ./formatdocs.sh docs/digifinex/
       - name: Check for changes
         id: git-check
         run: |

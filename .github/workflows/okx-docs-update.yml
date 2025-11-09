@@ -51,9 +51,14 @@ jobs:
       - name: Extract all OKX API documentation
         run: pnpm run extract:all
         # This extracts:
-        # - Core documentation (rate_limits, authentication, network_connectivity, 
+        # - Core documentation (rate_limits, authentication, network_connectivity,
         #   error_codes, response_formats, change_log)
         # - All individual endpoints (public and private)
+
+      - name: Format documentation
+        run: |
+          cd ../..
+          ./formatdocs.sh docs/okx/
 
       - name: Check for changes
         id: git-check

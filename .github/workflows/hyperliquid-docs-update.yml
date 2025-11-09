@@ -40,7 +40,7 @@ jobs:
           pnpm run extract:all
 
       - name: Format documentation
-        run: ./formatdocs.sh
+        run: ./formatdocs.sh docs/hyperliquid/
 
       - name: Check for changes
         id: git-check

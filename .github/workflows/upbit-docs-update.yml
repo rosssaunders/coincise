@@ -45,7 +45,7 @@ jobs:
       - name: Format documentation
         run: |
           cd ../..
-          ./formatdocs.sh
+          ./formatdocs.sh docs/upbit/
 
       - name: Check for changes
         id: git-check

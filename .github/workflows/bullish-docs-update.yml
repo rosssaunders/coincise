@@ -50,6 +50,11 @@ jobs:
       - name: Run Bullish documentation extraction
         run: pnpm run extract:all
 
+
+      - name: Format documentation
+        run: |
+          cd ../..
+          ./formatdocs.sh docs/bullish/
       - name: Check for changes
         id: git-check
         run: |

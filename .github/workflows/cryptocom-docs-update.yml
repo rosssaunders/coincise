@@ -50,6 +50,11 @@ jobs:
       - name: Run Crypto.com scraper
         run: pnpm run extract:all
 
+
+      - name: Format documentation
+        run: |
+          cd ../..
+          ./formatdocs.sh docs/cryptocom/
       - name: Check for changes
         id: git-check
         run: |

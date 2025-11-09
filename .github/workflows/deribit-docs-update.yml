@@ -40,7 +40,7 @@ jobs:
           node src/extractEndpoints.js
 
       - name: Format documentation
-        run: ./formatdocs.sh
+        run: ./formatdocs.sh docs/deribit/
 
       - name: Check for changes
         id: git-check

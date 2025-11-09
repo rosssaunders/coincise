@@ -42,6 +42,11 @@ jobs:
       - name: Run Bybit documentation extraction
         run: pnpm run extract:all
 
+
+      - name: Format documentation
+        run: |
+          cd ../..
+          ./formatdocs.sh docs/bybit/
       - name: Check for changes
         id: git-check
         run: |
