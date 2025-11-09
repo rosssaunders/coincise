@@ -1,46 +1,54 @@
-# GET Withdraw
+# GET /v4/withdraw
 
-Source:
-[https://doc.xt.com/docs/spot/Deposit&Withdrawal/Withdraw](https://doc.xt.com/docs/spot/Deposit&Withdrawal/Withdraw)
+**Source:** [https://doc.xt.com/docs/spot/Deposit&Withdrawal/Withdraw](https://doc.xt.com/docs/spot/Deposit&Withdrawal/Withdraw)
 
-# Withdraw
+## Description
 
-### Description[​](#description "Direct link to Description")
+This endpoint retrieves operations on the resource.
 
-**POST** `/v4/withdraw`
+## Authentication
 
----
+Required (Private Endpoint)
 
-### Note[​](#note "Direct link to Note")
+## Rate Limit
 
-- The parameters are placed in the **body** in JSON format.
+-   1/s/apikey
 
----
+## HTTP Request
 
-### Limit Rule[​](#limit-rule "Direct link to Limit Rule")
+`POST /v4/withdraw`
 
-- 1/s/apikey
+## Request Parameters
 
----
+| Name | Type | Required | Default | Description | Ranges |
+| --- | --- | --- | --- | --- | --- |
+| currency | string | Yes | — | Currency name, obtained from `Get supported currencies for deposit/withdraw` |  |
+| chain | string | No | — | Transfer network, obtained from `Get supported currencies for deposit/withdraw` |  |
+| clientOrderId | string | No | — | Custom Client ID, RegEx: `^[a-zA-Z0-9_]{4,32}$` |  |
+| amount | number | Yes | — | Withdrawal amount, including fees |  |
+| address | string | No | — | Withdrawal address |  |
+| memo | string | No | — | Memo, required for EOS-like chains |  |
+| toAccountId | number | No | — | Receiving user ID |  |
 
-### Parameters[​](#parameters "Direct link to Parameters")
+## Request Example
 
-| Name          | Type   | Mandatory | Default | Description                                                                     | Ranges |
-| ------------- | ------ | --------- | ------- | ------------------------------------------------------------------------------- | ------ |
-| currency      | string | Yes       | —       | Currency name, obtained from `Get supported currencies for deposit/withdraw`    |        |
-| chain         | string | No        | —       | Transfer network, obtained from `Get supported currencies for deposit/withdraw` |        |
-| clientOrderId | string | No        | —       | Custom Client ID, RegEx: `^[a-zA-Z0-9_]{4,32}$`                                 |        |
-| amount        | number | Yes       | —       | Withdrawal amount, including fees                                               |        |
-| address       | string | No        | —       | Withdrawal address                                                              |        |
-| memo          | string | No        | —       | Memo, required for EOS-like chains                                              |        |
-| toAccountId   | number | No        | —       | Receiving user ID                                                               |        |
-
----
-
-### Request Example[​](#request-example "Direct link to Request Example")
-
+```bash
+  curl --location --request POST 'https://sapi.xt.com/v4/withdraw' \    --header 'accept: */*' \    --header 'Content-Type: application/json' \    --header 'validate-algorithms: HmacSHA256' \    --header 'validate-recvwindow: 60000' \    --header 'validate-appkey: xxxxxxxxxx' \    --header 'validate-timestamp: xxxxxxxxxx' \    --header 'validate-signature: xxxxxxxxxx' \    --data '{        "currency": "XT",        "chain": "XT Smart Chain",        "amount": 10,        "address": "xxxxxxxxxx"    }'
 ```
+
+## Response Parameters
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| currency | string | - |
+| chain | string | - |
+| amount | number | - |
+| address | string | - |
+| memo | string | - |
+
+
+## Response Example
+
+```json
 {  "currency": "zb",  "chain": "Ethereum",  "amount": 1000,  "address": "0xfa3abfa50eb2006f5be7831658b17aca240d8526",  "memo": ""}
 ```
-
-[Edit this page](https://github.com/facebook/docusaurus/edit/main/website/docs/spot/Deposit&Withdrawal/withdraw.mdx)

@@ -1,26 +1,38 @@
-# GET Get client ip
+# GET /v4/public/client
 
-Source:
-[https://doc.xt.com/docs/spot/Market/GetClientIp](https://doc.xt.com/docs/spot/Market/GetClientIp)
+**Source:** [https://doc.xt.com/docs/spot/Market/GetClientIp](https://doc.xt.com/docs/spot/Market/GetClientIp)
 
-# Get client ip
+## Description
 
-**Type:** GET **Description:** `/v4/public/client`
+This endpoint retrieves operations on /v4/public/client.
 
-### Request Example[​](#request-example "Direct link to Request Example")
+## Authentication
 
-Request
+Not Required (Public Endpoint)
 
-```
+## HTTP Request
+
+`GET /v4/public/client`
+
+## Request Example
+
+```bash
   curl --location --request GET 'https://sapi.xt.com/v4/public/client' \    --header 'accept: */*' \    --header 'Content-Type: application/json' \
 ```
 
-### Response Example[​](#response-example "Direct link to Response Example")
+## Response Parameters
 
-Response
+| Parameter | Type | Description |
+| --- | --- | --- |
+| rc | number | - |
+| mc | string | - |
+| ma | array | - |
+| result | object | - |
+| result.ip | string | - |
 
-```
+
+## Response Example
+
+```json
 {  "rc": 0,  "mc": "SUCCESS",  "ma": [],  "result": {    "ip": "192.168.1.1"  }}
 ```
-
-[Edit this page](https://github.com/facebook/docusaurus/edit/main/website/docs/spot/Market/clientInfo.mdx)
