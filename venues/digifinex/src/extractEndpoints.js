@@ -97,10 +97,7 @@ const extractEndpoints = async (page, turndownService) => {
       let content = h2.outerHTML
 
       // Collect content until the next H1 or H2
-      while (
-        currentElement &&
-        !["H1", "H2"].includes(currentElement.tagName)
-      ) {
+      while (currentElement && !["H1", "H2"].includes(currentElement.tagName)) {
         content += currentElement.outerHTML
 
         // Look for HTTP Request section
@@ -162,7 +159,7 @@ const extractEndpoints = async (page, turndownService) => {
         // Determine if public or private based on authentication requirements and endpoint characteristics
         const contentLower = content.toLowerCase()
         const titleLower = title.toLowerCase()
-        
+
         // Check for explicit authentication headers
         const hasAccessKey =
           contentLower.includes("access-key") ||
@@ -190,7 +187,7 @@ const extractEndpoints = async (page, turndownService) => {
           "withdraw",
           "deposit"
         ]
-        
+
         // Keywords that indicate public endpoints (market data)
         const publicKeywords = [
           "ping",
@@ -208,32 +205,44 @@ const extractEndpoints = async (page, turndownService) => {
           "common",
           "trades" // Public recent trades, not mytrades
         ]
-        
+
         // Check if endpoint path or title contains private keywords
         const hasPrivateKeywords = privateKeywords.some(
-          keyword => titleLower.includes(keyword) || endpointPath.includes(keyword)
+          keyword =>
+            titleLower.includes(keyword) || endpointPath.includes(keyword)
         )
-        
+
         // Check if it's explicitly a public endpoint
         const hasPublicKeywords = publicKeywords.some(
-          keyword => titleLower.includes(keyword) || endpointPath.includes(keyword)
+          keyword =>
+            titleLower.includes(keyword) || endpointPath.includes(keyword)
         )
-        
+
         // Additional check: endpoints with "order" but not public market "orderbook"
-        const hasOrderOperations = 
+        const hasOrderOperations =
           (titleLower.includes("order") || endpointPath.includes("order")) &&
           !titleLower.includes("orderbook") &&
           !titleLower.includes("order_book") &&
           !titleLower.includes("order book")
-        
+
         // Endpoints that modify state (POST, PUT, DELETE) are usually private
-        const isModifyingEndpoint = ["POST", "PUT", "DELETE", "PATCH"].includes(method)
+        const isModifyingEndpoint = ["POST", "PUT", "DELETE", "PATCH"].includes(
+          method
+        )
 
         // Determine if public: must have public keywords and no private keywords,
         // or be GET with no private indicators and no order operations
-        const isPublic = 
-          (hasPublicKeywords && !hasPrivateKeywords && !hasOrderOperations && !isModifyingEndpoint) ||
-          (!hasAccessKey && !hasSignature && !hasTimestamp && !hasPrivateKeywords && !hasOrderOperations && !isModifyingEndpoint)
+        const isPublic =
+          (hasPublicKeywords &&
+            !hasPrivateKeywords &&
+            !hasOrderOperations &&
+            !isModifyingEndpoint) ||
+          (!hasAccessKey &&
+            !hasSignature &&
+            !hasTimestamp &&
+            !hasPrivateKeywords &&
+            !hasOrderOperations &&
+            !isModifyingEndpoint)
 
         const endpoint = {
           method,
