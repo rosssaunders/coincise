@@ -52,23 +52,23 @@ Shared utilities are imported from `venues/shared/` (puppeteer.js, turndown.js).
 1. Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 2. Extract all documentation:
 
 ```bash
-npm run extract:all
+pnpm run extract:all
 ```
 
 3. Or run specific extractors:
 
 ```bash
 # Extract core documentation
-npm run extract:general
+pnpm run extract:general
 
 # Extract endpoint documentation
-npm run extract:endpoints
+pnpm run extract:endpoints
 ```
 
 ## Documentation Sources

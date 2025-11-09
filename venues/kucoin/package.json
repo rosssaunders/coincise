@@ -6,7 +6,7 @@
   "scripts": {
     "extract:general": "node src/extractGeneral.js",
     "extract:endpoints": "node src/extractEndpoints.js",
-    "extract:all": "npm run extract:general && npm run extract:endpoints",
+    "extract:all": "pnpm run extract:general && pnpm run extract:endpoints",
     "start": "node src/index.js",
     "extract:rate-limit": "node src/index.js --rate-limit"
   },

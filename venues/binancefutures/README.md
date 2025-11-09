@@ -12,7 +12,7 @@ Extracts and processes Binance Futures API documentation (USD-M, COIN-M, Options
 ## Installation
 
 ```bash
-npm install
+pnpm install
 ```
 
 ## Usage
@@ -20,7 +20,7 @@ npm install
 ### Extract All Documentation
 
 ```bash
-npm run extract:all
+pnpm run extract:all
 ```
 
 This will:
@@ -31,7 +31,7 @@ This will:
 
 **General Documentation:**
 ```bash
-npm run extract:general
+pnpm run extract:general
 ```
 
 This extracts core documentation sections for all three futures types:
@@ -44,7 +44,7 @@ This extracts core documentation sections for all three futures types:
 
 **Endpoint Documentation:**
 ```bash
-npm run extract:endpoints
+pnpm run extract:endpoints
 ```
 
 This splits existing monolithic documentation into individual REST endpoint files for all three types.

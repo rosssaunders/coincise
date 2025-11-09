@@ -21,20 +21,18 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install venue dependencies
-        run: |
-          cd venues/backpack
-          npm install
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
-      - name: Install shared dependencies
-        run: |
-          cd venues/shared
-          npm install
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Extract documentation
         run: |
           cd venues/backpack
-          npm run extract:all
+          pnpm run extract:all
 
       - name: Format documentation
         run: ./formatdocs.sh

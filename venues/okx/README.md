@@ -43,23 +43,23 @@ docs/okx/
 1. Install dependencies:
 
    ```bash
-   npm install
+   pnpm install
    ```
 
 2. Extract all documentation:
 
    ```bash
-   npm run extract:all
+   pnpm run extract:all
    ```
 
 3. Extract specific sections:
 
    ```bash
    # Extract core documentation files only
-   npm run extract:general
+   pnpm run extract:general
 
    # Extract individual endpoints only
-   npm run extract:endpoints
+   pnpm run extract:endpoints
    ```
 
 ## Extraction Process

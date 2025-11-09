@@ -10,7 +10,7 @@ Extracts and processes Binance Spot API documentation from the official Binance 
 ## Installation
 
 ```bash
-npm install
+pnpm install
 ```
 
 ## Usage
@@ -18,14 +18,14 @@ npm install
 ### Extract All Documentation
 
 ```bash
-npm run extract:all
+pnpm run extract:all
 ```
 
 ### Extract Specific Sections
 
 **General Documentation:**
 ```bash
-npm run extract:general
+pnpm run extract:general
 ```
 
 This extracts core documentation sections into separate files:
@@ -38,7 +38,7 @@ This extracts core documentation sections into separate files:
 
 **Endpoint Documentation:**
 ```bash
-npm run extract:endpoints  # Extract individual REST endpoint files
+pnpm run extract:endpoints  # Extract individual REST endpoint files
 ```
 
 This extracts each REST API endpoint into its own markdown file in the `endpoints/` directory, organized into `public/` and `private/` subdirectories.

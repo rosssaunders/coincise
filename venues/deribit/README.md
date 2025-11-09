@@ -36,16 +36,16 @@ Each endpoint is saved as `{method}_{endpoint_name}.md`
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Extract general documentation
-npm run extract:general
+pnpm run extract:general
 
 # Extract endpoint documentation
-npm run extract:endpoints
+pnpm run extract:endpoints
 
 # Extract everything
-npm run extract:all
+pnpm run extract:all
 ```
 
 ## Documentation Structure

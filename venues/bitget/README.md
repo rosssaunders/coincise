@@ -38,23 +38,23 @@ bitget/
 1. Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 2. Run specific extractors:
 
 ```bash
 # Extract Common API documentation
-npm run extract:common
+pnpm run extract:common
 
 # Extract Spot API documentation
-npm run extract:spot
+pnpm run extract:spot
 
 # Extract Futures API documentation
-npm run extract:future
+pnpm run extract:future
 
 # Extract Change Log
-npm run extract:change_log
+pnpm run extract:change_log
 ```
 
 ## Output Structure

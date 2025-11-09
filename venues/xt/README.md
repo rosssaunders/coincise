@@ -22,7 +22,7 @@ Extracts core documentation sections:
 - Change log
 
 ```bash
-npm run extract:general
+pnpm run extract:general
 ```
 
 ### Extract Endpoint Documentation
@@ -36,7 +36,7 @@ Extracts individual endpoint documentation for:
 - Transfer endpoints
 
 ```bash
-npm run extract:endpoints
+pnpm run extract:endpoints
 ```
 
 ### Extract All
@@ -44,7 +44,7 @@ npm run extract:endpoints
 Runs both general and endpoint extraction:
 
 ```bash
-npm run extract:all
+pnpm run extract:all
 ```
 
 ## Output Structure

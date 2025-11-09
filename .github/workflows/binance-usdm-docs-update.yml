@@ -27,28 +27,26 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install shared dependencies
-        run: |
-          cd venues/shared
-          npm install
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
-      - name: Install venue dependencies
-        run: |
-          cd venues/binancefutures
-          npm install
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Extract general documentation
         run: |
           cd venues/binancefutures
-          npm run extract:general
+          pnpm run extract:general
 
       - name: Extract USD-M endpoints
         run: |
           cd venues/binancefutures
-          npm run extract:endpoints:usdm:public:rest
-          npm run extract:endpoints:usdm:private:rest
-          npm run extract:endpoints:usdm:public:ws
-          npm run extract:endpoints:usdm:private:ws
+          pnpm run extract:endpoints:usdm:public:rest
+          pnpm run extract:endpoints:usdm:private:rest
+          pnpm run extract:endpoints:usdm:public:ws
+          pnpm run extract:endpoints:usdm:private:ws
 
       - name: Format documentation
         run: ./formatdocs.sh
@@ -62,7 +60,7 @@ jobs:
         if: steps.git-check.outputs.changes == 'true'
         id: ai-summary
         run: |
-          SUMMARY=$(cd tools/ai-pr-summary && npm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
+          SUMMARY=$(cd tools/ai-pr-summary && pnpm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
           echo "summary<<EOF" >> $GITHUB_OUTPUT
           echo "$SUMMARY" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT

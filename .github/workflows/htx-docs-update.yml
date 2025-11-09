@@ -28,46 +28,44 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install venue dependencies
-        run: |
-          cd venues/htx
-          npm install
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
-      - name: Install shared dependencies
-        run: |
-          cd venues/shared
-          npm install
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Extract standardized documentation
         run: |
           cd venues/htx
-          npm run extract:all
+          pnpm run extract:all
 
       - name: Extract legacy documentation (Spot APIs)
         continue-on-error: true
         run: |
           cd venues/htx
-          npm run privaterestspot
-          npm run publicrestspot
-          npm run privatewebsocketspot
-          npm run publicwebsocketspot
-          npm run fixspot
+          pnpm run privaterestspot
+          pnpm run publicrestspot
+          pnpm run privatewebsocketspot
+          pnpm run publicwebsocketspot
+          pnpm run fixspot
 
       - name: Extract legacy documentation (USDT-M Futures)
         continue-on-error: true
         run: |
           cd venues/htx
-          npm run privaterestusdtm
-          npm run publicrestusdtm
-          npm run privatewebsocketusdtm
-          npm run publicwebsocketusdtm
+          pnpm run privaterestusdtm
+          pnpm run publicrestusdtm
+          pnpm run privatewebsocketusdtm
+          pnpm run publicwebsocketusdtm
 
       - name: Extract legacy documentation (Coin-M Futures)
         continue-on-error: true
         run: |
           cd venues/htx
-          npm run privaterestcoinm
-          npm run publicrestcoinm
+          pnpm run privaterestcoinm
+          pnpm run publicrestcoinm
 
       - name: Format documentation
         run: ./formatdocs.sh
@@ -87,8 +85,8 @@ jobs:
         run: |
           # Generate AI summary using the AI PR summary tool (max diff length: 15000)
           cd tools/ai-pr-summary
-          npm install
-          SUMMARY=$(npm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
+          pnpm install
+          SUMMARY=$(pnpm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
           # Escape the summary for GitHub Actions
           echo "summary<<EOF" >> $GITHUB_OUTPUT
           echo "$SUMMARY" >> $GITHUB_OUTPUT

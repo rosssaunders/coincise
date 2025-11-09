@@ -43,7 +43,7 @@ You are tasked with upgrading all npm dependencies across the Coincise monorepo.
 ## Important notes:
 
 - Use `npm update` for patch and minor updates (respects semver)
-- Use `npm install <package>@latest` for major version updates (only with user
+- Use `pnpm install <package>@latest` for major version updates (only with user
   confirmation)
 - After all updates, recommend running the test suite or build scripts
 - Be cautious with major version updates and mention potential breaking changes

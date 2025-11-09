@@ -17,7 +17,7 @@ Updates all dependencies across all JavaScript projects to their latest versions
 **What it does:**
 - Finds all package.json files (excluding node_modules)
 - Runs `npm update` to update within semver ranges (e.g., `^7.1.2` stays within `^7.x.x`)
-- Runs `npm install` to update package-lock.json files
+- Runs `pnpm install` to update package-lock.json files
 - Handles projects with missing dependencies gracefully
 - Provides detailed progress reporting
 
@@ -65,7 +65,7 @@ Bumps all dependencies to their absolute latest versions across all JavaScript p
 
 ## Requirements
 
-- Node.js and npm installed
+- Node.js and pnpm installed
 - For `bump-dependencies.sh`: `npm-check-updates` will be installed automatically if not present
 
 ## Output

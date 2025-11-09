@@ -510,7 +510,7 @@ const endpoints = await page.evaluate(() => {
   "scripts": {
     "extract:general": "node src/extractGeneral.js",
     "extract:endpoints": "node src/extractEndpoints.js",
-    "extract:all": "npm run extract:general && npm run extract:endpoints"
+    "extract:all": "pnpm run extract:general && pnpm run extract:endpoints"
   },
   "dependencies": {
     "turndown": "^7.1.2",
@@ -524,7 +524,7 @@ const endpoints = await page.evaluate(() => {
 
 ```bash
 cd venues/{exchange-name}
-npm install
+pnpm install
 ```
 
 ### 6. Create README.md
@@ -546,7 +546,7 @@ Document:
 
 ```bash
 cd venues/{exchange-name}
-npm run extract:general
+pnpm run extract:general
 ```
 
 **Verify the output:**
@@ -559,7 +559,7 @@ npm run extract:general
 **Run endpoint extraction:**
 
 ```bash
-npm run extract:endpoints
+pnpm run extract:endpoints
 ```
 
 **Verify endpoint files:**
@@ -599,12 +599,12 @@ jobs:
       - name: Install dependencies
         run: |
           cd venues/{exchange-name}
-          npm install
+          pnpm install
 
       - name: Extract documentation
         run: |
           cd venues/{exchange-name}
-          npm run extract:all
+          pnpm run extract:all
 
       - name: Format documentation
         run: ./formatdocs.sh
