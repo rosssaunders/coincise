@@ -433,55 +433,307 @@ endpoint path/function \`\`\`
 - Public endpoints in \`public/\` subfolder
 - Private endpoints in \`private/\` subfolder
 
-### Endpoint File Template
+### Endpoint File Format Specification
 
-Each endpoint file should contain:
+All endpoint documentation files must follow this standardized format to ensure
+consistency for both human readers and LLM consumption.
+
+#### Required Structure
+
+Each endpoint file MUST contain the following sections in this order:
+
+1. **Title (H1)** - HTTP Method and endpoint path
+2. **Source Link** - Link to original API documentation
+3. **Description** - Clear explanation of endpoint functionality
+4. **Authentication** - Whether authentication is required
+5. **Rate Limit** - Rate limiting information
+6. **HTTP Request** - HTTP method and path
+7. **Request Parameters** - All request parameters in table format
+8. **Request Example** - Example request(s)
+9. **Response Parameters** - All response fields in table format
+10. **Response Example** - Example response(s)
+11. **Error Responses** (if applicable) - Common errors
+12. **Notes** (if applicable) - Additional information
+
+#### Formatting Rules
+
+**1. Heading Hierarchy**
+
+- Use H1 (`#`) for the main title only
+- Use H2 (`##`) for major sections (Description, Authentication, Request, Response, etc.)
+- Use H3 (`###`) for subsections (Parameters, Example, Success Response, etc.)
+- Use H4 (`####`) or deeper only when absolutely necessary for nested content
+- Maintain consistent heading levels throughout the document
+- Never skip heading levels (e.g., don't go from H2 to H4)
+
+**2. Parameter Tables**
+
+All request and response parameters MUST be documented using GitHub Flavored
+Markdown tables with the following columns:
+
+For **Request Parameters**:
+
+```markdown
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| symbol | string | Yes | Trading pair (e.g., BTCUSDT) |
+| limit | integer | No | Number of results (default: 100, max: 1000) |
+```
+
+For **Response Parameters**:
+
+```markdown
+| Parameter | Type | Description |
+| --- | --- | --- |
+| code | string | Response code (00000 for success) |
+| data | object | Response data object |
+| data.orderId | string | Unique order identifier |
+| data.status | string | Order status (e.g., FILLED, PARTIAL, CANCELLED) |
+```
+
+**Table Guidelines:**
+
+- Use consistent column alignment separators (`| --- |`)
+- Use dot notation for nested fields (e.g., `data.orderId`)
+- Include type information (string, integer, boolean, object, array)
+- Specify if parameter is required/optional (for requests)
+- Include default values and constraints where applicable
+- Use descriptive text in the Description column
+- For enums, list possible values in the description
+
+**3. JSON Code Blocks**
+
+All JSON examples MUST be tagged with the language identifier:
+
+````markdown
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "data": {
+    "orderId": "123456789",
+    "symbol": "BTCUSDT",
+    "status": "FILLED"
+  }
+}
+```
+````
+
+**Never use untagged code blocks for JSON:**
+
+```markdown
+❌ BAD:
+\`\`\`
+{"code": "00000"}
+\`\`\`
+
+✅ GOOD:
+\`\`\`json
+{"code": "00000"}
+\`\`\`
+```
+
+**4. Rate Limit Documentation**
+
+Rate limits should be documented in one of two ways:
+
+**Option 1: Inline Section**
+
+```markdown
+## Rate Limit
+
+**Weight:** 1
+
+**Rate Limit Rule:** IP-based
+
+**Limits:**
+- 1200 requests per minute per IP
+- 10 orders per second per account
+```
+
+**Option 2: Link to Global Documentation**
+
+```markdown
+## Rate Limit
+
+**Weight:** 5
+
+See [Rate Limits](/docs/{exchange}/rate_limits.md) for complete rate limiting rules.
+```
+
+Choose the approach that best fits the venue's documentation structure. Use
+inline documentation for simple, endpoint-specific limits. Use links for
+complex rate limiting systems that apply across multiple endpoints.
+
+**5. Authentication Section**
+
+Clearly indicate authentication requirements:
+
+```markdown
+## Authentication
+
+Required (Private Endpoint)
+
+API Key Permissions: This endpoint requires the "trade" permission.
+```
+
+Or:
+
+```markdown
+## Authentication
+
+Not Required (Public Endpoint)
+```
+
+#### Complete Endpoint Template
 
 \`\`\`\`markdown
+# {HTTP_METHOD} {endpoint_path}
 
-# {HTTP Method} {Endpoint Path}
+**Source:** [Original Documentation Title](https://original-url.com)
 
 ## Description
 
-Brief description of what the endpoint does
+Clear, concise description of what this endpoint does and when to use it.
+Include any important behavioral notes or prerequisites.
 
 ## Authentication
 
-Required/Not Required
+Required/Not Required (Private/Public Endpoint)
+
+Additional authentication details if needed (API key permissions, scopes, etc.)
 
 ## Rate Limit
 
-Weight or limit information
+**Weight:** {weight_value}
 
-## Request
+**Rate Limit Rule:** {IP/UID/API_Key}
 
-### Parameters
+Inline rate limit details OR link to global rate limit documentation.
 
-- Parameter details
-- Required/Optional
-- Types and constraints
+## HTTP Request
 
-### Example
+\`{HTTP_METHOD} {endpoint_path}\`
 
-\`\`\`http {request example} \`\`\`
+## Request Parameters
 
-## Response
+### Path Parameters
 
-### Success Response
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| paramName | type | Yes/No | Description with constraints |
 
-\`\`\`json {success response example} \`\`\`
+### Query Parameters
 
-### Error Responses
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| paramName | type | Yes/No | Description with constraints |
 
-Common error codes and their meanings
+### Body Parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| paramName | type | Yes/No | Description with constraints |
+
+## Request Example
+
+\`\`\`http
+GET /api/v1/endpoint?param=value HTTP/1.1
+Host: api.exchange.com
+X-API-Key: your-api-key
+\`\`\`
+
+Or for cURL:
+
+\`\`\`bash
+curl -X GET "https://api.exchange.com/api/v1/endpoint?param=value" \\
+  -H "X-API-Key: your-api-key"
+\`\`\`
+
+## Response Parameters
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| code | string | Response code |
+| message | string | Response message |
+| data | object | Response data container |
+| data.field1 | string | Description of field1 |
+| data.field2 | integer | Description of field2 |
+| data.nested | object | Nested object description |
+| data.nested.subfield | string | Description of nested field |
+
+## Response Example
+
+### Success Response (200 OK)
+
+\`\`\`json
+{
+  "code": "00000",
+  "message": "success",
+  "data": {
+    "field1": "value1",
+    "field2": 12345,
+    "nested": {
+      "subfield": "nested_value"
+    }
+  }
+}
+\`\`\`
+
+### Error Response (4xx/5xx)
+
+\`\`\`json
+{
+  "code": "40001",
+  "message": "Invalid parameter",
+  "data": null
+}
+\`\`\`
+
+## Error Codes
+
+Common error codes for this endpoint:
+
+| Code | Message | Description |
+| --- | --- | --- |
+| 40001 | Invalid parameter | One or more parameters are invalid |
+| 40003 | Authentication failed | API key is invalid or missing |
+| 42001 | Insufficient balance | Account balance too low |
+
+See [Error Codes](/docs/{exchange}/error_codes.md) for complete error code reference.
 
 ## Notes
 
-- Additional information
-- Edge cases
-- Best practices
+- Additional important information
+- Edge cases and special behaviors
+- Best practices and recommendations
+- Warnings about deprecated features
 
 \`\`\` <!-- End of markdown template --> \`\`\`\`
+
+#### Format Validation Checklist
+
+Before committing endpoint documentation, verify:
+
+- [ ] Title uses H1 with HTTP method and path
+- [ ] Source link is present and valid
+- [ ] Heading hierarchy is correct (H1 → H2 → H3, no skipped levels)
+- [ ] All parameters documented in GFM tables
+- [ ] Request parameters include Required column
+- [ ] Response parameters use dot notation for nested fields
+- [ ] All JSON blocks tagged with \`\`\`json
+- [ ] Rate limit documented (inline or linked)
+- [ ] Authentication requirements clearly stated
+- [ ] At least one request example provided
+- [ ] At least one response example provided
+- [ ] Error responses documented (if applicable)
+- [ ] No untagged code blocks
+- [ ] Tables properly formatted with alignment separators
+
+#### Examples
+
+See [Endpoint Format Examples](.github/examples/endpoint-format-example.md) for
+complete examples showing correct and incorrect formatting patterns.
 
 ### Documentation Guidelines
 
