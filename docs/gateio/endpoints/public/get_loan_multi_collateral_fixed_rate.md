@@ -1,6 +1,7 @@
 # GET /loan/multi_collateral/fixed_rate
 
-**Source:** [/loan/multi_collateral/fixed_rate](https://www.gate.io/docs/developers/apiv4/en/#getmulticollateralfixrate-responses)
+**Source:**
+[/loan/multi_collateral/fixed_rate](https://www.gate.io/docs/developers/apiv4/en/#getmulticollateralfixrate-responses)
 
 ## Authentication
 

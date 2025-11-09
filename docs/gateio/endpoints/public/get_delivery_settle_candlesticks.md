@@ -1,6 +1,7 @@
 # GET /delivery/{settle}/candlesticks
 
-**Source:** [/delivery/{settle}/candlesticks](https://www.gate.io/docs/developers/apiv4/en/#listdeliverycandlesticks-parameters)
+**Source:**
+[/delivery/{settle}/candlesticks](https://www.gate.io/docs/developers/apiv4/en/#listdeliverycandlesticks-parameters)
 
 ## Authentication
 

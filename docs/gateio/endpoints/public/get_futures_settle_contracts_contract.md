@@ -1,6 +1,7 @@
 # GET /futures/{settle}/contracts/{contract}
 
-**Source:** [/futures/{settle}/contracts/{contract}](https://www.gate.io/docs/developers/apiv4/en/#getfuturescontract-parameters)
+**Source:**
+[/futures/{settle}/contracts/{contract}](https://www.gate.io/docs/developers/apiv4/en/#getfuturescontract-parameters)
 
 ## Authentication
 

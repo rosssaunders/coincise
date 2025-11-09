@@ -1,6 +1,7 @@
 # GET /earn/uni/chart
 
-**Source:** [/earn/uni/chart](https://www.gate.io/docs/developers/apiv4/en/#listunichart-parameters)
+**Source:**
+[/earn/uni/chart](https://www.gate.io/docs/developers/apiv4/en/#listunichart-parameters)
 
 ## Authentication
 

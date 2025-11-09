@@ -1,6 +1,7 @@
 # GET /options/expirations
 
-**Source:** [/options/expirations](https://www.gate.io/docs/developers/apiv4/en/#listoptionsexpirations-parameters)
+**Source:**
+[/options/expirations](https://www.gate.io/docs/developers/apiv4/en/#listoptionsexpirations-parameters)
 
 ## Authentication
 

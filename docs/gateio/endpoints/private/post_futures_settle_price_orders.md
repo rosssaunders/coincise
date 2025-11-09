@@ -1,6 +1,7 @@
 # POST /futures/{settle}/price_orders
 
-**Source:** [/futures/{settle}/price_orders](https://www.gate.io/docs/developers/apiv4/en/#createpricetriggeredorder-parameters)
+**Source:**
+[/futures/{settle}/price_orders](https://www.gate.io/docs/developers/apiv4/en/#createpricetriggeredorder-parameters)
 
 ## Authentication
 

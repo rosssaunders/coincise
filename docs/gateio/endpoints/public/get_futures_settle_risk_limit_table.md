@@ -1,6 +1,7 @@
 # GET /futures/{settle}/risk_limit_table
 
-**Source:** [/futures/{settle}/risk_limit_table](https://www.gate.io/docs/developers/apiv4/en/#getfuturesrisklimittable-parameters)
+**Source:**
+[/futures/{settle}/risk_limit_table](https://www.gate.io/docs/developers/apiv4/en/#getfuturesrisklimittable-parameters)
 
 ## Authentication
 

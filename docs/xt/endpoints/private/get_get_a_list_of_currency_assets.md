@@ -1,6 +1,7 @@
 # GET /v4/balances
 
-**Source:** [https://doc.xt.com/docs/spot/Balance/GetBalances](https://doc.xt.com/docs/spot/Balance/GetBalances)
+**Source:**
+[https://doc.xt.com/docs/spot/Balance/GetBalances](https://doc.xt.com/docs/spot/Balance/GetBalances)
 
 ## Description
 
@@ -12,7 +13,7 @@ Required (Private Endpoint)
 
 ## Rate Limit
 
--   10 requests/second/apikey
+- 10 requests/second/apikey
 
 ## HTTP Request
 
@@ -20,9 +21,9 @@ Required (Private Endpoint)
 
 ## Request Parameters
 
-| Name | Type | Required | Default | Description | Ranges |
-| --- | --- | --- | --- | --- | --- |
-| currencies | string | No | N/A | List of currencies, comma separated, e.g. `usdt,btc` |  |
+| Name       | Type   | Required | Default | Description                                          | Ranges |
+| ---------- | ------ | -------- | ------- | ---------------------------------------------------- | ------ |
+| currencies | string | No       | N/A     | List of currencies, comma separated, e.g. `usdt,btc` |        |
 
 ## Request Example
 
@@ -33,5 +34,22 @@ Required (Private Endpoint)
 ## Response Example
 
 ```json
-{  "rc": 0,  "mc": "string",  "ma": [{}],  "result": {    "totalBtcAmount": 0,    "assets": [      {        "currency": "string",
+{
+  "rc": 0,
+  "mc": "string",
+  "ma": [{}],
+  "result": {
+    "totalBtcAmount": 0,
+    "assets": [
+      {
+        "currency": "string",
+        "currencyId": 0,
+        "frozenAmount": 0,
+        "availableAmount": 0,
+        "totalAmount": 0,
+        "convertBtcAmount": 0
+      }
+    ]
+  }
+}
 ```

@@ -1,6 +1,7 @@
 # GET /v4/public/client
 
-**Source:** [https://doc.xt.com/docs/spot/Market/GetClientIp](https://doc.xt.com/docs/spot/Market/GetClientIp)
+**Source:**
+[https://doc.xt.com/docs/spot/Market/GetClientIp](https://doc.xt.com/docs/spot/Market/GetClientIp)
 
 ## Description
 
@@ -22,17 +23,23 @@ Not Required (Public Endpoint)
 
 ## Response Parameters
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| rc | number | - |
-| mc | string | - |
-| ma | array | - |
-| result | object | - |
-| result.ip | string | - |
-
+| Parameter | Type   | Description |
+| --------- | ------ | ----------- |
+| rc        | number | -           |
+| mc        | string | -           |
+| ma        | array  | -           |
+| result    | object | -           |
+| result.ip | string | -           |
 
 ## Response Example
 
 ```json
-{  "rc": 0,  "mc": "SUCCESS",  "ma": [],  "result": {    "ip": "192.168.1.1"  }}
+{
+  "rc": 0,
+  "mc": "SUCCESS",
+  "ma": [],
+  "result": {
+    "ip": "192.168.1.1"
+  }
+}
 ```

@@ -1,6 +1,7 @@
 # PUT /v4/order/{orderId}
 
-**Source:** [https://doc.xt.com/docs/spot/Order/UpdateOrderLimit](https://doc.xt.com/docs/spot/Order/UpdateOrderLimit)
+**Source:**
+[https://doc.xt.com/docs/spot/Order/UpdateOrderLimit](https://doc.xt.com/docs/spot/Order/UpdateOrderLimit)
 
 ## Description
 
@@ -20,14 +21,22 @@ Required (Private Endpoint)
 
 ## Request Parameters
 
-| name | type | Required | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| orderId | number | Yes |  | order ID |  |
-| price | number | Yes |  | Price |  |
-| quantity | number | Yes |  | Quantity |  |
+| name     | type   | Required | default | description | ranges |
+| -------- | ------ | -------- | ------- | ----------- | ------ |
+| orderId  | number | Yes      |         | order ID    |        |
+| price    | number | Yes      |         | Price       |        |
+| quantity | number | Yes      |         | Quantity    |        |
 
 ## Response Example
 
 ```json
-{  "rc": 0,  "mc": "string",  "ma": [{}],  "result": {    "orderId": "6216559590087220004",
+{
+  "rc": 0,
+  "mc": "string",
+  "ma": [{}],
+  "result": {
+    "orderId": "6216559590087220004",
+    "modifyId": "407329711723834560"
+  }
+}
 ```

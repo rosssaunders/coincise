@@ -1,6 +1,7 @@
 # GET /v4/public/ticker
 
-**Source:** [https://doc.xt.com/docs/spot/Market/FullTicker](https://doc.xt.com/docs/spot/Market/FullTicker)
+**Source:**
+[https://doc.xt.com/docs/spot/Market/FullTicker](https://doc.xt.com/docs/spot/Market/FullTicker)
 
 ## Description
 
@@ -21,11 +22,11 @@ Not Required (Public Endpoint)
 
 ## Request Parameters
 
-| Name | Type | Required | Default | Description | Ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | No | N/A | Trading pair, e.g. `btc_usdt` | \- |
-| symbols | array | No | N/A | Collection of trading pairs. Priority is higher than symbol, e.g. `btc_usdt,eth_usdt` | \- |
-| tags | string | No | N/A | Set of tags, separated by commas. Currently only supports `spot` | \- |
+| Name    | Type   | Required | Default | Description                                                                           | Ranges |
+| ------- | ------ | -------- | ------- | ------------------------------------------------------------------------------------- | ------ |
+| symbol  | string | No       | N/A     | Trading pair, e.g. `btc_usdt`                                                         | \-     |
+| symbols | array  | No       | N/A     | Collection of trading pairs. Priority is higher than symbol, e.g. `btc_usdt,eth_usdt` | \-     |
+| tags    | string | No       | N/A     | Set of tags, separated by commas. Currently only supports `spot`                      | \-     |
 
 ## Request Example
 
@@ -36,5 +37,48 @@ Not Required (Public Endpoint)
 ## Response Example
 
 ```json
-{          "s": "btc_usdt",
+{
+  "rc": 0,
+  "mc": "SUCCESS",
+  "ma": [],
+  "result": [
+<<<<<<< Updated upstream
+    {
+      "s": "btc_usdt",
+      "t": 1662444879425,
+      "cv": "0.00",
+      "cr": "0.0000",
+      "o": "200.00",
+      "l": "200.00",
+      "h": "200.00",
+      "c": "200.00",
+      "q": "0.002",
+      "v": "0.40",
+      "ap": null,
+      "aq": null,
+      "bp": null,
+      "bq": null
+    }
+  ]
+}
+=======
+        {
+          "s": "btc_usdt",
+          "t": 1662444879425,
+          "cv": "0.00",
+          "cr": "0.0000",
+          "o": "200.00",
+          "l": "200.00",
+          "h": "200.00",
+          "c": "200.00",
+          "q": "0.002",
+          "v": "0.40",
+          "ap": null,
+          "aq": null,
+          "bp": null,
+          "bq": null
+          }
+      ]
+  }
+>>>>>>> Stashed changes
 ```

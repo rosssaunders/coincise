@@ -1,6 +1,7 @@
 # GET /loan/collateral/total_amount
 
-**Source:** [/loan/collateral/total_amount](https://www.gate.io/docs/developers/apiv4/en/#getusertotalamount-responses)
+**Source:**
+[/loan/collateral/total_amount](https://www.gate.io/docs/developers/apiv4/en/#getusertotalamount-responses)
 
 ## Authentication
 

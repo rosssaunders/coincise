@@ -21,7 +21,7 @@ please use Websocket incremental feed after retrieving the OrderBook.
 | Parameter | Required | Type   | Description                                                                                                        |
 | --------- | -------- | ------ | ------------------------------------------------------------------------------------------------------------------ |
 | symbol    | optional | string | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
-|  |
+|           |
 
 ## Responses
 

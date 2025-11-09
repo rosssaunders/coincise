@@ -1,6 +1,7 @@
 # POST /loan/collateral/orders
 
-**Source:** [/loan/collateral/orders](https://www.gate.io/docs/developers/apiv4/en/#createcollateralloan-parameters)
+**Source:**
+[/loan/collateral/orders](https://www.gate.io/docs/developers/apiv4/en/#createcollateralloan-parameters)
 
 ## Authentication
 

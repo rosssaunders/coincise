@@ -1,6 +1,7 @@
 # GET /spot/price_orders/{order_id}
 
-**Source:** [/spot/price_orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getspotpricetriggeredorder-parameters)
+**Source:**
+[/spot/price_orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getspotpricetriggeredorder-parameters)
 
 ## Authentication
 

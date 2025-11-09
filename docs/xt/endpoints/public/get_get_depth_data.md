@@ -1,6 +1,7 @@
 # GET /v4/public/depth
 
-**Source:** [https://doc.xt.com/docs/spot/Market/GetDepthData](https://doc.xt.com/docs/spot/Market/GetDepthData)
+**Source:**
+[https://doc.xt.com/docs/spot/Market/GetDepthData](https://doc.xt.com/docs/spot/Market/GetDepthData)
 
 ## Description
 
@@ -20,10 +21,10 @@ Not Required (Public Endpoint)
 
 ## Request Parameters
 
-| name | type | Required | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | Yes |  | trading pair eg:btc\_usdt |  |
-| limit | number | No | 100 | minimum number of queries is 100 | 1~500 |
+| name   | type   | Required | default | description                      | ranges |
+| ------ | ------ | -------- | ------- | -------------------------------- | ------ |
+| symbol | string | Yes      |         | trading pair eg:btc_usdt         |        |
+| limit  | number | No       | 100     | minimum number of queries is 100 | 1~500  |
 
 ## Request Example
 
@@ -34,5 +35,19 @@ Not Required (Public Endpoint)
 ## Response Example
 
 ```json
-{  "rc": 0,  "mc": "SUCCESS",  "ma": [],  "result": {    "timestamp": 1662445330524,
+{
+  "rc": 0,
+  "mc": "SUCCESS",
+  "ma": [],
+  "result": {
+    "timestamp": 1662445330524,
+    "lastUpdateId": 137333589606963580,
+    "bids": [
+      ["200.0000", "0.996000"],
+      ["100.0000", "0.001000"],
+      ["20.0000", "10.000000"]
+    ],
+    "asks": []
+  }
+}
 ```

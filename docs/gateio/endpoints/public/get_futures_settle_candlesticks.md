@@ -1,6 +1,7 @@
 # GET /futures/{settle}/candlesticks
 
-**Source:** [/futures/{settle}/candlesticks](https://www.gate.io/docs/developers/apiv4/en/#listfuturescandlesticks-parameters)
+**Source:**
+[/futures/{settle}/candlesticks](https://www.gate.io/docs/developers/apiv4/en/#listfuturescandlesticks-parameters)
 
 ## Authentication
 

@@ -28,4 +28,4 @@ supports withdrawal.
 | --------- | -------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | code      | required | string |                                                                                                                                                                         |
 | data      | required | string | The size of the position that can be deposited. If it is USDT-margin, it represents the amount of USDT. If it is coin-margin, this value represents the number of coins |
-|  |
+|           |
