@@ -143,6 +143,10 @@ All endpoint documentation must follow a consistent format. See `AGENTS.md` for 
 9. Response Parameters (in GFM table)
 10. Response Example (with `json` tag)
 
+**Examples:**
+See [Endpoint Format Examples](.github/examples/endpoint-format-example.md) for
+complete examples showing correct and incorrect formatting patterns.
+
 ## Additional Resources
 
 - See `AGENTS.md` for comprehensive coding guidelines

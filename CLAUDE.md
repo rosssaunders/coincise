@@ -740,6 +740,11 @@ Before committing endpoint documentation, verify:
 - [ ] No untagged code blocks
 - [ ] Tables properly formatted with alignment separators
 
+#### Examples
+
+See [Endpoint Format Examples](.github/examples/endpoint-format-example.md) for
+complete examples showing correct and incorrect formatting patterns.
+
 ### Documentation Guidelines
 
 - Each file should focus on a single functional area
