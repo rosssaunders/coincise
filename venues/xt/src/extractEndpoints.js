@@ -95,6 +95,10 @@ const extractResponseParameters = content => {
 
   // Remove inline comments (e.g., //symbol)
   jsonText = jsonText.replace(/\/\/.*$/gm, "")
+  // Remove git conflict markers
+  jsonText = jsonText.replace(/<<<<<<< Updated upstream\s*/g, "")
+  jsonText = jsonText.replace(/^=======\s*$/gm, "")
+  jsonText = jsonText.replace(/^>>>>>>> [^\s]+\s*$/gm, "")
 
   try {
     const jsonObj = JSON.parse(jsonText)
@@ -133,6 +137,7 @@ const extractResponseParameters = content => {
 
 /**
  * Post-process markdown content to conform to standard format
+ * Returns an object with the processed content and extracted path
  */
 const postProcessMarkdown = (markdown, method, path, isPrivate) => {
   let processed = markdown
@@ -143,8 +148,9 @@ const postProcessMarkdown = (markdown, method, path, isPrivate) => {
   // Remove "Edit this page" links
   processed = processed.replace(/\[Edit this page\]\([^)]+\)/g, "")
 
-  // Remove horizontal rules
+  // Remove horizontal rules (both --- and * * * formats)
   processed = processed.replace(/^---+$/gm, "")
+  processed = processed.replace(/^\* \* \*$/gm, "")
 
   // Fix section headings and standardize structure
   const sections = []
@@ -183,6 +189,7 @@ const postProcessMarkdown = (markdown, method, path, isPrivate) => {
   let requestExample = ""
   let responseParams = ""
   let responseExample = ""
+  let extractedPath = path // Track the extracted path
 
   sections.forEach(section => {
     const heading = section.title.toLowerCase()
@@ -216,6 +223,7 @@ const postProcessMarkdown = (markdown, method, path, isPrivate) => {
         )
         if (pathMatch) {
           httpRequest = `\`${pathMatch[1]} ${pathMatch[2]}\``
+          extractedPath = pathMatch[2] // Store the extracted path
         }
       }
     } else if (
@@ -241,6 +249,10 @@ const postProcessMarkdown = (markdown, method, path, isPrivate) => {
       // Remove inline comments and clean up trailing whitespace
       responseExample = responseExample.replace(/,?\s*\/\/.*$/gm, ",")
       responseExample = responseExample.replace(/,(\s*[\]}])/g, "$1")
+      // Remove git conflict markers (but preserve content after them on the same line)
+      responseExample = responseExample.replace(/<<<<<<< Updated upstream\s*/g, "")
+      responseExample = responseExample.replace(/^=======\s*$/gm, "")
+      responseExample = responseExample.replace(/^>>>>>>> [^\s]+\s*$/gm, "")
     }
   })
 
@@ -313,7 +325,176 @@ const postProcessMarkdown = (markdown, method, path, isPrivate) => {
     output += responseExample + "\n\n"
   }
 
-  return output.trim()
+  return {
+    content: output.trim(),
+    extractedPath: extractedPath
+  }
+}
+
+/**
+ * Extract all endpoints from the XT.com documentation
+ */
+const extractEndpoints = async (page, turndownService) => {
+  console.log("Extracting endpoint information...")
+
+  // Navigate to the main spot trading page
+  await page.goto(
+    `${BASE_URL}/Access%20Description/BasicInformationOfTheInterface`,
+    {
+      waitUntil: "networkidle2",
+      timeout: 30000
+    }
+  )
+
+  // Wait for the sidebar to be populated
+  await page.waitForSelector(".menu__list", { timeout: 10000 })
+
+  // Expand all collapsed categories
+  await page.evaluate(() => {
+    const collapsedItems = document.querySelectorAll(
+      ".menu__list-item--collapsed"
+    )
+    collapsedItems.forEach(item => {
+      const link = item.querySelector("a")
+      if (link) link.click()
+    })
+  })
+
+  // Wait for expansion
+  await new Promise(resolve => setTimeout(resolve, 1000))
+
+  // Get all endpoint links from the sidebar
+  const endpointLinks = await page.evaluate(() => {
+    const getAllMenuItems = listElement => {
+      const items = []
+      const directChildren = Array.from(listElement.children)
+
+      directChildren.forEach(child => {
+        if (child.classList.contains("menu__list-item")) {
+          const link = child.querySelector(":scope > .menu__link, :scope > a")
+          const nestedList = child.querySelector(":scope > ul")
+
+          if (link) {
+            items.push({
+              text: link.textContent.trim(),
+              href: link.href
+            })
+          }
+
+          if (nestedList) {
+            const children = getAllMenuItems(nestedList)
+            items.push(...children)
+          }
+        }
+      })
+
+      return items
+    }
+
+    const mainMenu = document.querySelector(".menu__list")
+    const allItems = mainMenu ? getAllMenuItems(mainMenu) : []
+
+    // Filter to get only endpoint pages (exclude general documentation)
+    return allItems.filter(item => {
+      if (!item.href) return false
+
+      // Must be in Balance, Deposit&Withdrawal, Market, Order, Trade, or Transfer sections
+      const isEndpointSection =
+        item.href.includes("/Balance/") ||
+        item.href.includes("/Deposit&Withdrawal/") ||
+        item.href.includes("/Market/") ||
+        item.href.includes("/Order/") ||
+        item.href.includes("/Trade/") ||
+        item.href.includes("/Transfer/")
+
+      return isEndpointSection
+    })
+  })
+
+  console.log(`Found ${endpointLinks.length} endpoints to extract`)
+
+  const endpoints = []
+
+  // Extract each endpoint
+  for (const link of endpointLinks) {
+    console.log(`  Processing: ${link.text}...`)
+
+    try {
+      await page.goto(link.href, {
+        waitUntil: "networkidle2",
+        timeout: 30000
+      })
+
+      const endpointData = await page.evaluate(url => {
+        const article = document.querySelector(
+          'article, main, [class*="docMainContainer"]'
+        )
+        if (!article) return null
+
+        // Clone the article to avoid modifying the original
+        const clone = article.cloneNode(true)
+
+        // Remove navigation elements, TOC, etc.
+        const elementsToRemove = clone.querySelectorAll(
+          '.table-of-contents, [class*="tocCollapsible"], nav, .pagination-nav, [class*="lastUpdated"]'
+        )
+        elementsToRemove.forEach(el => el.remove())
+
+        // Extract HTTP method and path from the page content
+        const content = clone.innerHTML
+        const textContent = clone.textContent
+
+        let method = "GET" // Default
+        let path = null
+
+        // Look for the Type field which contains the actual HTTP method
+        // Format: Type: post Description: /v4/order
+        const typeMatch = textContent.match(/Type:?\s+(get|post|put|delete)/i)
+        if (typeMatch) {
+          method = typeMatch[1].toUpperCase()
+        }
+
+        // Look for the path in the Description field or in the content
+        // Multiple possible formats:
+        // 1. Description: /v4/public/ticker
+        // 2. **GET** `/v4/public/ticker`
+        // 3. Type: GET Description: /v4/order
+        const pathMatch =
+          textContent.match(/Description:?\s+(\/v4\/[^\s\n]+)/) ||
+          textContent.match(/\*\*(?:GET|POST|PUT|DELETE)\*\*\s+`(\/v4\/[^`]+)`/)
+
+        if (pathMatch) {
+          path = pathMatch[1].trim()
+        }
+
+        return {
+          content: content,
+          method: method,
+          path: path,
+          sourceUrl: url
+        }
+      }, link.href)
+
+      if (endpointData) {
+        const markdown = turndownService.turndown(endpointData.content)
+
+        endpoints.push({
+          name: link.text,
+          method: endpointData.method,
+          path: endpointData.path,
+          sourceUrl: endpointData.sourceUrl,
+          content: markdown
+        })
+      }
+
+      // Polite delay between requests
+      await new Promise(resolve => setTimeout(resolve, REQUEST_DELAY_MS))
+    } catch (error) {
+      console.error(`  Error extracting ${link.text}:`, error.message)
+    }
+  }
+
+  return endpoints
 }
 
 /**
@@ -338,23 +519,26 @@ const writeEndpoints = endpoints => {
     const filePath = path.join(dir, filename)
 
     // Post-process the markdown content
-    const processedContent = postProcessMarkdown(
+    const processed = postProcessMarkdown(
       endpoint.content,
       endpoint.method,
       endpoint.path,
       isPrivate
     )
 
+    // Use extracted path if original path was not available
+    const finalPath = endpoint.path || processed.extractedPath
+
     // Build the final document with proper H1 title
-    const title = endpoint.path
-      ? `# ${endpoint.method} ${endpoint.path}`
+    const title = finalPath
+      ? `# ${endpoint.method} ${finalPath}`
       : `# ${endpoint.method} ${endpoint.name}`
 
     const contentWithMetadata = `${title}
 
 **Source:** [${endpoint.sourceUrl}](${endpoint.sourceUrl})
 
-${processedContent}`
+${processed.content}`
 
     writeFile(filePath, contentWithMetadata)
 
