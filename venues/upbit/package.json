@@ -13,7 +13,7 @@
     "extract:service": "node src/index.js config/service.json",
     "extract:quotation": "node src/index.js config/quotation.json",
     "extract:websocket": "node src/index.js config/websocket.json",
-    "extract:all": "npm run extract:assets && npm run extract:order && npm run extract:withdrawal && npm run extract:deposit && npm run extract:service && npm run extract:quotation && npm run extract:websocket",
+    "extract:all": "pnpm run extract:assets && pnpm run extract:order && pnpm run extract:withdrawal && pnpm run extract:deposit && pnpm run extract:service && pnpm run extract:quotation && pnpm run extract:websocket",
     "extract:changelog": "node src/index.js config/private.json",
     "format": "node -e \"import('../../shared/format-markdown.js').then(({formatMarkdown}) => formatMarkdown('../../docs/upbit/change_log.md'))\""
   },
