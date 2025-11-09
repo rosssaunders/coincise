@@ -1,6 +1,7 @@
 # GET /v4/public/wallet/support/currency
 
-**Source:** [https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetSupportedCurrencies](https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetSupportedCurrencies)
+**Source:**
+[https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetSupportedCurrencies](https://doc.xt.com/docs/spot/Deposit&Withdrawal/GetSupportedCurrencies)
 
 ## Description
 
@@ -16,9 +17,9 @@ Not Required (Public Endpoint)
 
 ## Request Parameters
 
-| name | type | Required | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| – | – | No | N/A | No parameters required | – |
+| name | type | Required | default | description            | ranges |
+| ---- | ---- | -------- | ------- | ---------------------- | ------ |
+| –    | –    | No       | N/A     | No parameters required | –      |
 
 ## Request Example
 
@@ -29,5 +30,47 @@ Not Required (Public Endpoint)
 ## Response Example
 
 ```json
-{  "rc": 0,  "mc": "string",  "ma": [{}],  "result": [    {      "currency": "BTC",
+{
+  "rc": 0,
+  "mc": "string",
+  "ma": [{}],
+  "result": [
+    {
+      "currency": "BTC",
+      "supportChains": [
+        {
+          "chain": "Bitcoin",
+          "depositEnabled": true,
+          "withdrawEnabled": true,
+          "contract": "futureAddress",
+          "depositMinAmount": 1,
+          "depositFeeRate": 0.2,
+          "depositConfirmations": 2,
+          "withdrawMinAmount": 10,
+          "withdrawPrecision": 4,
+          "withdrawFeeAmount": 0.2,
+          "withdrawFeeCurrency": "btc"
+        }
+      ]
+    },
+    {
+      "currency": "ETH",
+      "supportChains": [
+        {
+          "chain": "Ethereum",
+          "depositEnabled": true,
+          "withdrawEnabled": true,
+          "contract": "futureAddress",
+          "depositMinAmount": 1,
+          "depositFeeRate": 0.2,
+          "depositConfirmations": 2,
+          "withdrawMinAmount": 10,
+          "withdrawPrecision": 4,
+          "withdrawFeeAmount": 0.2,
+          "withdrawFeeCurrency": "eth"
+        }
+      ]
+    }
+  ]
+}
 ```

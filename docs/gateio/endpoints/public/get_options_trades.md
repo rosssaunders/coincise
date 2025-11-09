@@ -1,6 +1,7 @@
 # GET /options/trades
 
-**Source:** [/options/trades](https://www.gate.io/docs/developers/apiv4/en/#listoptionstrades-parameters)
+**Source:**
+[/options/trades](https://www.gate.io/docs/developers/apiv4/en/#listoptionstrades-parameters)
 
 ## Authentication
 

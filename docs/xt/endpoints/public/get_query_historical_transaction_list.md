@@ -1,6 +1,7 @@
 # GET /v4/public/trade/history
 
-**Source:** [https://doc.xt.com/docs/spot/Market/QueryHistoricalTransactions](https://doc.xt.com/docs/spot/Market/QueryHistoricalTransactions)
+**Source:**
+[https://doc.xt.com/docs/spot/Market/QueryHistoricalTransactions](https://doc.xt.com/docs/spot/Market/QueryHistoricalTransactions)
 
 ## Description
 
@@ -20,12 +21,12 @@ Not Required (Public Endpoint)
 
 ## Request Parameters
 
-| name | type | Required | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | Yes |  | trading pair |  |
-| limit | number | No | 200 |  | 1~1000 |
-| direction | string | Yes |  | query direction | PREV - previous page, NEXT - next page |
-| fromId | number | No |  | Start ID, e.g. 6216559590087220004 |  |
+| name      | type   | Required | default | description                        | ranges                                 |
+| --------- | ------ | -------- | ------- | ---------------------------------- | -------------------------------------- |
+| symbol    | string | Yes      |         | trading pair                       |                                        |
+| limit     | number | No       | 200     |                                    | 1~1000                                 |
+| direction | string | Yes      |         | query direction                    | PREV - previous page, NEXT - next page |
+| fromId    | number | No       |         | Start ID, e.g. 6216559590087220004 |                                        |
 
 ## Request Example
 
@@ -36,5 +37,19 @@ Not Required (Public Endpoint)
 ## Response Example
 
 ```json
-{  "rc": 0,  "mc": "string",  "ma": [{}],  "result": [    {      "i": 0,
+{
+  "rc": 0,
+  "mc": "string",
+  "ma": [{}],
+  "result": [
+    {
+      "i": 0,
+      "t": 0,
+      "p": "string",
+      "q": "string",
+      "v": "string",
+      "b": true
+    }
+  ]
+}
 ```

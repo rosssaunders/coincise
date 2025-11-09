@@ -1,6 +1,7 @@
 # GET /loan/collateral/currencies
 
-**Source:** [/loan/collateral/currencies](https://www.gate.io/docs/developers/apiv4/en/#listcollateralcurrencies-parameters)
+**Source:**
+[/loan/collateral/currencies](https://www.gate.io/docs/developers/apiv4/en/#listcollateralcurrencies-parameters)
 
 ## Authentication
 

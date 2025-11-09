@@ -1,6 +1,7 @@
 # GET /v4/public/ticker/24h
 
-**Source:** [https://doc.xt.com/docs/spot/Market/Get24hStatisticsTicker](https://doc.xt.com/docs/spot/Market/Get24hStatisticsTicker)
+**Source:**
+[https://doc.xt.com/docs/spot/Market/Get24hStatisticsTicker](https://doc.xt.com/docs/spot/Market/Get24hStatisticsTicker)
 
 ## Description
 
@@ -21,11 +22,11 @@ Not Required (Public Endpoint)
 
 ## Request Parameters
 
-| name | type | Required | default | description | ranges |
-| --- | --- | --- | --- | --- | --- |
-| symbol | string | No |  | trading pair eg:btc\_usdt |  |
-| symbols | array | No |  | Collection of trading pairs. Priority is higher than symbol. eg: btc\_usdt,eth\_usdt |  |
-| tags | string | No |  | Set of tags, separated by commas, currently only supports spot |  |
+| name    | type   | Required | default | description                                                                        | ranges |
+| ------- | ------ | -------- | ------- | ---------------------------------------------------------------------------------- | ------ |
+| symbol  | string | No       |         | trading pair eg:btc_usdt                                                           |        |
+| symbols | array  | No       |         | Collection of trading pairs. Priority is higher than symbol. eg: btc_usdt,eth_usdt |        |
+| tags    | string | No       |         | Set of tags, separated by commas, currently only supports spot                     |        |
 
 ## Request Example
 
@@ -36,5 +37,23 @@ Not Required (Public Endpoint)
 ## Response Example
 
 ```json
-{  "rc": 0,  "mc": "SUCCESS",  "ma": [],  "result": [    {      "s": "btc_usdt",
+{
+  "rc": 0,
+  "mc": "SUCCESS",
+  "ma": [],
+  "result": [
+    {
+      "s": "btc_usdt",
+      "t": 1661856036925,
+      "cv": "0.0000",
+      "cr": "0.00",
+      "o": "9000.0000",
+      "l": "9000.0000",
+      "h": "9000.0000",
+      "c": "9000.0000",
+      "q": "0.0136",
+      "v": "122.9940"
+    }
+  ]
+}
 ```

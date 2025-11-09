@@ -1,6 +1,7 @@
 # GET /options/accounts
 
-**Source:** [/options/accounts](https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccount-responses)
+**Source:**
+[/options/accounts](https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccount-responses)
 
 ## Authentication
 

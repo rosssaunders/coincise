@@ -1,6 +1,7 @@
 # GET /margin/account_book
 
-**Source:** [/margin/account_book](https://www.gate.io/docs/developers/apiv4/en/#listisolatedmarginaccountbook-parameters)
+**Source:**
+[/margin/account_book](https://www.gate.io/docs/developers/apiv4/en/#listisolatedmarginaccountbook-parameters)
 
 ## Authentication
 

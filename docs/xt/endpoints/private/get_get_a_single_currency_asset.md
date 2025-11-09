@@ -1,6 +1,7 @@
 # GET /v4/balance
 
-**Source:** [https://doc.xt.com/docs/spot/Balance/GetSingleCurrencyAsset](https://doc.xt.com/docs/spot/Balance/GetSingleCurrencyAsset)
+**Source:**
+[https://doc.xt.com/docs/spot/Balance/GetSingleCurrencyAsset](https://doc.xt.com/docs/spot/Balance/GetSingleCurrencyAsset)
 
 ## Description
 
@@ -16,9 +17,9 @@ Required (Private Endpoint)
 
 ## Request Parameters
 
-| Name | Type | Required | Default | Description | Ranges |
-| --- | --- | --- | --- | --- | --- |
-| currency | string | Yes | N/A | Example: usdt | \- |
+| Name     | Type   | Required | Default | Description   | Ranges |
+| -------- | ------ | -------- | ------- | ------------- | ------ |
+| currency | string | Yes      | N/A     | Example: usdt | \-     |
 
 ## Request Example
 
@@ -29,5 +30,17 @@ Required (Private Endpoint)
 ## Response Example
 
 ```json
-{  "rc": 0,  "mc": "string",  "ma": [    {}  ],  "result": {    "currency": "usdt",
+{
+  "rc": 0,
+  "mc": "string",
+  "ma": [{}],
+  "result": {
+    "currency": "usdt",
+    "currencyId": 0,
+    "frozenAmount": 0,
+    "availableAmount": 0,
+    "totalAmount": 0,
+    "convertBtcAmount": 0
+  }
+}
 ```

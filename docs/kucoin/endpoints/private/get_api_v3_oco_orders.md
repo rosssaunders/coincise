@@ -23,10 +23,10 @@ additional entries after the first page.
 | startAt     | optional | integer | Start time (milliseconds)                          |
 | endAt       | optional | integer | End time (milliseconds)                            |
 | orderIds    | optional | string  | Specify orderId collection, up to 500 orders       |
-|  |
+|             |
 | pageSize    | optional | integer | Size per page, minimum value 10, maximum value 500 |
 | currentPage | optional | integer | Page number, minimum value 1                       |
-|  |
+|             |
 
 ## Responses
 

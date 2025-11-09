@@ -1,6 +1,7 @@
 # PATCH /earn/uni/lends
 
-**Source:** [/earn/uni/lends](https://www.gate.io/docs/developers/apiv4/en/#changeunilend-parameters)
+**Source:**
+[/earn/uni/lends](https://www.gate.io/docs/developers/apiv4/en/#changeunilend-parameters)
 
 ## Authentication
 

@@ -1,6 +1,7 @@
 # GET /loan/multi_collateral/currency_quota
 
-**Source:** [/loan/multi_collateral/currency_quota](https://www.gate.io/docs/developers/apiv4/en/#listusercurrencyquota-parameters)
+**Source:**
+[/loan/multi_collateral/currency_quota](https://www.gate.io/docs/developers/apiv4/en/#listusercurrencyquota-parameters)
 
 ## Authentication
 

@@ -1,6 +1,7 @@
 # POST /futures/{settle}/positions/{contract}/margin
 
-**Source:** [/futures/{settle}/positions/{contract}/margin](https://www.gate.io/docs/developers/apiv4/en/#updatepositionmargin-parameters)
+**Source:**
+[/futures/{settle}/positions/{contract}/margin](https://www.gate.io/docs/developers/apiv4/en/#updatepositionmargin-parameters)
 
 ## Authentication
 

@@ -1,6 +1,7 @@
 # POST /earn/dual/orders
 
-**Source:** [/earn/dual/orders](https://www.gate.io/docs/developers/apiv4/en/#placedualorder-parameters)
+**Source:**
+[/earn/dual/orders](https://www.gate.io/docs/developers/apiv4/en/#placedualorder-parameters)
 
 ## Authentication
 

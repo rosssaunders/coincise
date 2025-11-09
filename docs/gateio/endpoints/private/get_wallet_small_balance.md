@@ -1,6 +1,7 @@
 # GET /wallet/small_balance
 
-**Source:** [/wallet/small_balance](https://www.gate.io/docs/developers/apiv4/en/#listsmallbalance-responses)
+**Source:**
+[/wallet/small_balance](https://www.gate.io/docs/developers/apiv4/en/#listsmallbalance-responses)
 
 ## Authentication
 

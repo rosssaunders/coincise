@@ -1,6 +1,7 @@
 # GET /account/debit_fee
 
-**Source:** [/account/debit_fee](https://www.gate.io/docs/developers/apiv4/en/#getdebitfee-responses)
+**Source:**
+[/account/debit_fee](https://www.gate.io/docs/developers/apiv4/en/#getdebitfee-responses)
 
 ## Authentication
 

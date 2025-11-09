@@ -1,6 +1,7 @@
 # POST /futures/{settle}/dual_mode
 
-**Source:** [/futures/{settle}/dual_mode](https://www.gate.io/docs/developers/apiv4/en/#setdualmode-parameters)
+**Source:**
+[/futures/{settle}/dual_mode](https://www.gate.io/docs/developers/apiv4/en/#setdualmode-parameters)
 
 ## Authentication
 

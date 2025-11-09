@@ -1,6 +1,7 @@
 # GET /options/settlements
 
-**Source:** [/options/settlements](https://www.gate.io/docs/developers/apiv4/en/#listoptionssettlements-parameters)
+**Source:**
+[/options/settlements](https://www.gate.io/docs/developers/apiv4/en/#listoptionssettlements-parameters)
 
 ## Authentication
 

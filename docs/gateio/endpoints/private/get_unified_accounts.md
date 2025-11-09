@@ -1,6 +1,7 @@
 # GET /unified/accounts
 
-**Source:** [/unified/accounts](https://www.gate.io/docs/developers/apiv4/en/#listunifiedaccounts-parameters)
+**Source:**
+[/unified/accounts](https://www.gate.io/docs/developers/apiv4/en/#listunifiedaccounts-parameters)
 
 ## Authentication
 
