@@ -1,8 +1,0 @@
-{
-  "title": "BingX Standard Futures API - Base Information",
-  "urls": ["https://bingx-api.github.io/docs/#/en-us/standard/base-info.html"],
-  "outputConfig": {
-    "docsDir": "../../docs/bingx/standard_futures",
-    "outputFileName": "base_info.md"
-  }
-}

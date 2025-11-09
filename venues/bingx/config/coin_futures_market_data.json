@@ -1,9 +1,0 @@
-{
-  "title": "BingX Coin-Futures API - Market Data",
-  "urls": ["https://bingx-api.github.io/docs/#/en-us/cswap/market-api.html"],
-  "outputConfig": {
-    "docsDir": "../../docs/bingx/coin_futures",
-    "outputFileName": "market_data.md"
-  }
-}
-

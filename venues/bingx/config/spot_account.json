@@ -1,8 +1,0 @@
-{
-  "title": "BingX Spot API - Account",
-  "urls": ["https://bingx-api.github.io/docs/#/en-us/spot/account-api.html"],
-  "outputConfig": {
-    "docsDir": "../../docs/bingx/spot",
-    "outputFileName": "account.md"
-  }
-}
