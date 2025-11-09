@@ -56,7 +56,7 @@ const generateFilename = (method, path) => {
 /**
  * Extract all endpoints from the documentation
  */
-const extractEndpoints = async (page) => {
+const extractEndpoints = async page => {
   console.log("Extracting endpoint information...")
 
   const endpoints = await page.evaluate(async () => {
@@ -227,7 +227,7 @@ const extractEndpoints = async (page) => {
     // Look for HTTP method tags and endpoint paths
     const operations = document.querySelectorAll("[data-section-id]")
 
-    operations.forEach((operation) => {
+    operations.forEach(operation => {
       try {
         // The operation element itself has the data-section-id - that's how we found it!
         let operationId = operation.getAttribute("data-section-id")

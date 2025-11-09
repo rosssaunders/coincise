@@ -1,6 +1,7 @@
 # GET /earn/uni/interest_status/{currency}
 
-**Source:** [/earn/uni/interest_status/{currency}](https://www.gate.io/docs/developers/apiv4/en/#getuniintereststatus-parameters)
+**Source:**
+[/earn/uni/interest_status/{currency}](https://www.gate.io/docs/developers/apiv4/en/#getuniintereststatus-parameters)
 
 ## Authentication
 

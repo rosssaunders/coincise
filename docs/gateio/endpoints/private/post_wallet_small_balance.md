@@ -1,6 +1,7 @@
 # POST /wallet/small_balance
 
-**Source:** [/wallet/small_balance](https://www.gate.io/docs/developers/apiv4/en/#convertsmallbalance-parameters)
+**Source:**
+[/wallet/small_balance](https://www.gate.io/docs/developers/apiv4/en/#convertsmallbalance-parameters)
 
 ## Authentication
 

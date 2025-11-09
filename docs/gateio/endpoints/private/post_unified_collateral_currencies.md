@@ -1,6 +1,7 @@
 # POST /unified/collateral_currencies
 
-**Source:** [/unified/collateral_currencies](https://www.gate.io/docs/developers/apiv4/en/#setunifiedcollateral-parameters)
+**Source:**
+[/unified/collateral_currencies](https://www.gate.io/docs/developers/apiv4/en/#setunifiedcollateral-parameters)
 
 ## Authentication
 

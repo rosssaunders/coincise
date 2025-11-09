@@ -1,6 +1,7 @@
 # POST /futures/{settle}/countdown_cancel_all
 
-**Source:** [/futures/{settle}/countdown_cancel_all](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelallfutures-parameters)
+**Source:**
+[/futures/{settle}/countdown_cancel_all](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelallfutures-parameters)
 
 ## Authentication
 

@@ -1,6 +1,7 @@
 # DELETE /spot/orders/{order_id}
 
-**Source:** [/spot/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#cancelorder-parameters)
+**Source:**
+[/spot/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#cancelorder-parameters)
 
 ## Authentication
 

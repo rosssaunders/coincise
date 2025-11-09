@@ -1,6 +1,7 @@
 # GET /futures/{settle}/liq_orders
 
-**Source:** [/futures/{settle}/liq_orders](https://www.gate.io/docs/developers/apiv4/en/#listliquidatedorders-parameters)
+**Source:**
+[/futures/{settle}/liq_orders](https://www.gate.io/docs/developers/apiv4/en/#listliquidatedorders-parameters)
 
 ## Authentication
 

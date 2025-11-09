@@ -56,7 +56,7 @@ const generateFilename = (method, path) => {
 /**
  * Extract all endpoints from the documentation
  */
-const extractEndpoints = async (page) => {
+const extractEndpoints = async page => {
   console.log("Extracting endpoint information...")
 
   const endpoints = await page.evaluate(baseUrl => {

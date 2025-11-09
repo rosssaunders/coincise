@@ -1,6 +1,7 @@
 # GET /options/order_book
 
-**Source:** [/options/order_book](https://www.gate.io/docs/developers/apiv4/en/#listoptionsorderbook-parameters)
+**Source:**
+[/options/order_book](https://www.gate.io/docs/developers/apiv4/en/#listoptionsorderbook-parameters)
 
 ## Authentication
 

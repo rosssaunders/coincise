@@ -24,7 +24,7 @@ endpoint.
 | startTime   | optional | integer | The start and end times are not restricted. If the start time is empty or less than 1680278400000, the default value is set to 1680278400000 (April 1, 2023, 00:00:00) |
 | endTime     | optional | integer | End time                                                                                                                                                               |
 | currentPage | optional | integer | Current query page, with a starting value of 1. Default:1                                                                                                              |
-|  |
+|             |
 | pageSize    | optional | integer | Number of results per page. Default is 50, minimum is 10, maximum is 500                                                                                               |
 
 ## Responses

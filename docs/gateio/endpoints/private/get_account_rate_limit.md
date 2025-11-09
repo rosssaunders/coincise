@@ -1,6 +1,7 @@
 # GET /account/rate_limit
 
-**Source:** [/account/rate_limit](https://www.gate.io/docs/developers/apiv4/en/#getaccountratelimit-responses)
+**Source:**
+[/account/rate_limit](https://www.gate.io/docs/developers/apiv4/en/#getaccountratelimit-responses)
 
 ## Authentication
 

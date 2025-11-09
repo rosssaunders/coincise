@@ -1,6 +1,7 @@
 # GET /unified/transferable
 
-**Source:** [/unified/transferable](https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferable-parameters)
+**Source:**
+[/unified/transferable](https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferable-parameters)
 
 ## Authentication
 

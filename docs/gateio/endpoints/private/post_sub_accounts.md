@@ -1,6 +1,7 @@
 # POST /sub_accounts
 
-**Source:** [/sub_accounts](https://www.gate.io/docs/developers/apiv4/en/#createsubaccounts-parameters)
+**Source:**
+[/sub_accounts](https://www.gate.io/docs/developers/apiv4/en/#createsubaccounts-parameters)
 
 ## Authentication
 

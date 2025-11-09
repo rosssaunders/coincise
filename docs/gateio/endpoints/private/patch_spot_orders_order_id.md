@@ -1,6 +1,7 @@
 # PATCH /spot/orders/{order_id}
 
-**Source:** [/spot/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#amendorder-parameters)
+**Source:**
+[/spot/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#amendorder-parameters)
 
 ## Authentication
 

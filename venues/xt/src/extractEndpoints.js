@@ -81,155 +81,239 @@ const isPrivateEndpoint = content => {
 }
 
 /**
- * Extract all endpoints from the documentation
+ * Extract response parameters from JSON example
  */
-const extractEndpoints = async (page, turndownService) => {
-  console.log("Extracting endpoint information...")
-
-  // Navigate to the main spot trading page
-  await page.goto(
-    `${BASE_URL}/Access%20Description/BasicInformationOfTheInterface`,
-    {
-      waitUntil: "networkidle2",
-      timeout: 30000
-    }
+const extractResponseParameters = content => {
+  // Find the response example section - use simpler regex that works with template literals
+  const responseMatch = content.match(
+    /Response Example[^`]*```[^\n]*\n([\s\S]*?)```/i
   )
+  if (!responseMatch) return null
 
-  // Wait for the sidebar to be populated
-  await page.waitForSelector(".menu__list", { timeout: 10000 })
+  const originalJson = responseMatch[1]
+  let jsonText = originalJson.trim()
 
-  // Expand all collapsed categories
-  await page.evaluate(() => {
-    const collapsedItems = document.querySelectorAll(
-      ".menu__list-item--collapsed"
-    )
-    collapsedItems.forEach(item => {
-      const link = item.querySelector("a")
-      if (link) link.click()
-    })
-  })
+  // Remove inline comments (e.g., //symbol)
+  jsonText = jsonText.replace(/\/\/.*$/gm, "")
 
-  // Wait for expansion
-  await new Promise(resolve => setTimeout(resolve, 1000))
+  try {
+    const jsonObj = JSON.parse(jsonText)
+    const params = []
 
-  // Get all endpoint links from the sidebar
-  const endpointLinks = await page.evaluate(() => {
-    const getAllMenuItems = listElement => {
-      const items = []
-      const directChildren = Array.from(listElement.children)
+    const extractParams = (obj, prefix = "") => {
+      for (const key in obj) {
+        const fullKey = prefix ? `${prefix}.${key}` : key
+        const value = obj[key]
+        const type = Array.isArray(value) ? "array" : typeof value
 
-      directChildren.forEach(child => {
-        if (child.classList.contains("menu__list-item")) {
-          const link = child.querySelector(":scope > .menu__link, :scope > a")
-          const nestedList = child.querySelector(":scope > ul")
-
-          if (link) {
-            items.push({
-              text: link.textContent.trim(),
-              href: link.href
-            })
-          }
-
-          if (nestedList) {
-            const children = getAllMenuItems(nestedList)
-            items.push(...children)
-          }
+        // Determine description from inline comments if available (restrict to same line)
+        let description = ""
+        const commentMatch = originalJson.match(
+          new RegExp(`"${key}"[^\\n]*//\\s*(.+?)$`, "m")
+        )
+        if (commentMatch) {
+          description = commentMatch[1].trim()
         }
-      })
 
-      return items
+        params.push({ param: fullKey, type, description })
+
+        // Recursively extract nested objects (but not arrays)
+        if (value && typeof value === "object" && !Array.isArray(value)) {
+          extractParams(value, fullKey)
+        }
+      }
     }
 
-    const mainMenu = document.querySelector(".menu__list")
-    const allItems = mainMenu ? getAllMenuItems(mainMenu) : []
+    extractParams(jsonObj)
+    return params
+  } catch (e) {
+    return null
+  }
+}
 
-    // Filter to get only endpoint pages (exclude general documentation)
+/**
+ * Post-process markdown content to conform to standard format
+ */
+const postProcessMarkdown = (markdown, method, path, isPrivate) => {
+  let processed = markdown
 
-    return allItems.filter(item => {
-      if (!item.href) return false
+  // Remove navigation anchors like [​](#description "Direct link to Description")
+  processed = processed.replace(/\[​\]\(#[^)]+\)/g, "")
 
-      // Must be in Balance, Deposit&Withdrawal, Market, Order, Trade, or Transfer sections
-      const isEndpointSection =
-        item.href.includes("/Balance/") ||
-        item.href.includes("/Deposit&Withdrawal/") ||
-        item.href.includes("/Market/") ||
-        item.href.includes("/Order/") ||
-        item.href.includes("/Trade/") ||
-        item.href.includes("/Transfer/")
+  // Remove "Edit this page" links
+  processed = processed.replace(/\[Edit this page\]\([^)]+\)/g, "")
 
-      return isEndpointSection
-    })
+  // Remove horizontal rules
+  processed = processed.replace(/^---+$/gm, "")
+
+  // Fix section headings and standardize structure
+  const sections = []
+  let currentSection = { title: "", content: "" }
+
+  const lines = processed.split("\n")
+  let i = 0
+
+  while (i < lines.length) {
+    const line = lines[i]
+
+    // Check if this is a heading
+    if (line.match(/^#{1,6}\s+/)) {
+      if (currentSection.content.trim()) {
+        sections.push({ ...currentSection })
+      }
+      currentSection = { title: line, content: "" }
+    } else {
+      currentSection.content += line + "\n"
+    }
+    i++
+  }
+
+  if (currentSection.content.trim() || currentSection.title) {
+    sections.push(currentSection)
+  }
+
+  // Rebuild document in standard format
+  let output = ""
+
+  // Process sections and reorder/rename them
+  let description = ""
+  let rateLimit = ""
+  let httpRequest = path ? `\`${method} ${path}\`` : ""
+  let requestParams = ""
+  let requestExample = ""
+  let responseParams = ""
+  let responseExample = ""
+
+  sections.forEach(section => {
+    const heading = section.title.toLowerCase()
+    let content = section.content.trim()
+
+    if (
+      heading.includes("description") ||
+      heading.includes("full ticker") ||
+      heading.includes("submit order") ||
+      heading.includes("query") ||
+      heading.includes("cancel")
+    ) {
+      // Extract description - clean up any path/method info
+      if (content) {
+        // Remove Type and Description fields that show the path
+        content = content.replace(/\*\*Type:?\*\*[^\n]*\n?/gi, "")
+        content = content.replace(/\*\*Description:?\*\*[^\n]*\n?/gi, "")
+        content = content.replace(
+          /\*\*(GET|POST|PUT|DELETE|PATCH)\*\*\s+`[^`]+`\s*/gi,
+          ""
+        )
+        content = content.trim()
+        if (content) {
+          description = content
+        }
+      }
+      // Try to extract HTTP request from description if not already found
+      if (!httpRequest && section.content) {
+        const pathMatch = section.content.match(
+          /\*\*([A-Z]+)\*\*\s+`(\/v4\/[^`]+)`/
+        )
+        if (pathMatch) {
+          httpRequest = `\`${pathMatch[1]} ${pathMatch[2]}\``
+        }
+      }
+    } else if (
+      heading.includes("limit") ||
+      heading.includes("flow rule") ||
+      heading.includes("remark")
+    ) {
+      rateLimit = content
+    } else if (heading.includes("parameter") && !heading.includes("example")) {
+      requestParams = content
+    } else if (heading.includes("request") && heading.includes("example")) {
+      // Remove "Request" label that sometimes appears
+      content = content.replace(/^Request\s*\n+/i, "")
+      requestExample = content
+      // Remove untagged code blocks and add bash tag
+      requestExample = requestExample.replace(/```\s*\n/g, "```bash\n")
+    } else if (heading.includes("response") && heading.includes("example")) {
+      // Remove "Response" label that sometimes appears
+      content = content.replace(/^Response\s*\n+/i, "")
+      responseExample = content
+      // Remove untagged code blocks and add json tag, also remove inline comments
+      responseExample = responseExample.replace(/```\s*\n/g, "```json\n")
+      // Remove inline comments and clean up trailing whitespace
+      responseExample = responseExample.replace(/,?\s*\/\/.*$/gm, ",")
+      responseExample = responseExample.replace(/,(\s*[\]}])/g, "$1")
+    }
   })
 
-  console.log(`Found ${endpointLinks.length} endpoints to extract`)
+  // Add Description section
+  if (description) {
+    output += "## Description\n\n"
+    output += description + "\n\n"
+  } else {
+    output += "## Description\n\n"
+    output += `This endpoint ${method === "GET" ? "retrieves" : "performs"} operations on ${path || "the resource"}.\n\n`
+  }
 
-  const endpoints = []
+  // Add Authentication section
+  output += "## Authentication\n\n"
+  output += isPrivate
+    ? "Required (Private Endpoint)\n\n"
+    : "Not Required (Public Endpoint)\n\n"
 
-  // Extract each endpoint
-  for (const link of endpointLinks) {
-    console.log(`  Processing: ${link.text}...`)
+  // Add Rate Limit section
+  if (rateLimit) {
+    output += "## Rate Limit\n\n"
+    output += rateLimit + "\n\n"
+  }
 
-    try {
-      await page.goto(link.href, {
-        waitUntil: "networkidle2",
-        timeout: 30000
+  // Add HTTP Request section
+  if (httpRequest) {
+    output += "## HTTP Request\n\n"
+    output += httpRequest + "\n\n"
+  }
+
+  // Add Request Parameters section
+  if (requestParams) {
+    output += "## Request Parameters\n\n"
+    // Fix table headers to include "Required" column
+    let params = requestParams
+    // Check if the table has "mandatory" or "Mandatory" and replace with "Required"
+    params = params.replace(/\|\s*mandatory\s*\|/gi, "| Required |")
+    params = params.replace(/\|\s*true\s*\|/g, "| Yes |")
+    params = params.replace(/\|\s*false\s*\|/g, "| No |")
+    output += params + "\n\n"
+  }
+
+  // Add Request Example section
+  if (requestExample) {
+    output += "## Request Example\n\n"
+    output += requestExample + "\n\n"
+  }
+
+  // Try to extract response parameters from the response example
+  if (responseExample && !responseParams) {
+    const extractedParams = extractResponseParameters(processed)
+    if (extractedParams && extractedParams.length > 0) {
+      responseParams = "| Parameter | Type | Description |\n"
+      responseParams += "| --- | --- | --- |\n"
+      extractedParams.forEach(p => {
+        responseParams += `| ${p.param} | ${p.type} | ${p.description || "-"} |\n`
       })
-
-      const endpointData = await page.evaluate(url => {
-        const article = document.querySelector(
-          'article, main, [class*="docMainContainer"]'
-        )
-        if (!article) return null
-
-        // Clone the article to avoid modifying the original
-        const clone = article.cloneNode(true)
-
-        // Remove navigation elements, TOC, etc.
-        const elementsToRemove = clone.querySelectorAll(
-          '.table-of-contents, [class*="tocCollapsible"], nav, .pagination-nav, [class*="lastUpdated"]'
-        )
-        elementsToRemove.forEach(el => el.remove())
-
-        // Extract HTTP method from the page content
-        const content = clone.innerHTML
-        let method = "GET" // Default
-
-        // Look for the Type field which contains the actual HTTP method
-        // Two formats:
-        // 1. <p><strong>Type:</strong> post <strong>Description:</strong> /v4/order</p>
-        // 2. <p><strong>Type</strong> POST</p>
-        const textContent = clone.textContent
-        const typeMatch = textContent.match(/Type:?\s+(get|post|put|delete)/i)
-        if (typeMatch) {
-          method = typeMatch[1].toUpperCase()
-        }
-
-        return {
-          content: content,
-          method: method,
-          sourceUrl: url
-        }
-      }, link.href)
-
-      if (endpointData) {
-        const markdown = turndownService.turndown(endpointData.content)
-
-        endpoints.push({
-          name: link.text,
-          method: endpointData.method,
-          sourceUrl: endpointData.sourceUrl,
-          content: markdown
-        })
-      }
-
-      // Polite delay between requests
-      await new Promise(resolve => setTimeout(resolve, REQUEST_DELAY_MS))
-    } catch (error) {
-      console.error(`  Error extracting ${link.text}:`, error.message)
     }
   }
 
-  return endpoints
+  // Add Response Parameters section
+  if (responseParams) {
+    output += "## Response Parameters\n\n"
+    output += responseParams + "\n\n"
+  }
+
+  // Add Response Example section
+  if (responseExample) {
+    output += "## Response Example\n\n"
+    output += responseExample + "\n\n"
+  }
+
+  return output.trim()
 }
 
 /**
@@ -253,12 +337,24 @@ const writeEndpoints = endpoints => {
     const filename = generateFilename(endpoint.method, endpoint.name)
     const filePath = path.join(dir, filename)
 
-    // Add source URL and method to the content
-    const contentWithMetadata = `# ${endpoint.method} ${endpoint.name}
+    // Post-process the markdown content
+    const processedContent = postProcessMarkdown(
+      endpoint.content,
+      endpoint.method,
+      endpoint.path,
+      isPrivate
+    )
 
-Source: [${endpoint.sourceUrl}](${endpoint.sourceUrl})
+    // Build the final document with proper H1 title
+    const title = endpoint.path
+      ? `# ${endpoint.method} ${endpoint.path}`
+      : `# ${endpoint.method} ${endpoint.name}`
 
-${endpoint.content}`
+    const contentWithMetadata = `${title}
+
+**Source:** [${endpoint.sourceUrl}](${endpoint.sourceUrl})
+
+${processedContent}`
 
     writeFile(filePath, contentWithMetadata)
 

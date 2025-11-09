@@ -1,6 +1,7 @@
 # POST /loan/multi_collateral/mortgage
 
-**Source:** [/loan/multi_collateral/mortgage](https://www.gate.io/docs/developers/apiv4/en/#operatemulticollateral-parameters)
+**Source:**
+[/loan/multi_collateral/mortgage](https://www.gate.io/docs/developers/apiv4/en/#operatemulticollateral-parameters)
 
 ## Authentication
 

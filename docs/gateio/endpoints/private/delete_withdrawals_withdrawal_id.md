@@ -1,6 +1,7 @@
 # DELETE /withdrawals/{withdrawal_id}
 
-**Source:** [/withdrawals/{withdrawal_id}](https://www.gate.io/docs/developers/apiv4/en/#cancelwithdrawal-parameters)
+**Source:**
+[/withdrawals/{withdrawal_id}](https://www.gate.io/docs/developers/apiv4/en/#cancelwithdrawal-parameters)
 
 ## Authentication
 

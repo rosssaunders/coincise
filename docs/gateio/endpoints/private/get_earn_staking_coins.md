@@ -1,6 +1,7 @@
 # GET /earn/staking/coins
 
-**Source:** [/earn/staking/coins](https://www.gate.io/docs/developers/apiv4/en/#findcoin-parameters)
+**Source:**
+[/earn/staking/coins](https://www.gate.io/docs/developers/apiv4/en/#findcoin-parameters)
 
 ## Authentication
 

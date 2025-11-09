@@ -1,6 +1,7 @@
 # GET /margin/uni/estimate_rate
 
-**Source:** [/margin/uni/estimate_rate](https://www.gate.io/docs/developers/apiv4/en/#getisolatedmarginuniestimaterate-parameters)
+**Source:**
+[/margin/uni/estimate_rate](https://www.gate.io/docs/developers/apiv4/en/#getisolatedmarginuniestimaterate-parameters)
 
 ## Authentication
 
