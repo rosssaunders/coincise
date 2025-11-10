@@ -29,7 +29,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: venues/coinbase/intx
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Install Puppeteer browsers
         working-directory: venues/coinbase/intx
