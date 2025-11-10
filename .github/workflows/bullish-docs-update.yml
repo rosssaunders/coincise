@@ -31,18 +31,9 @@ jobs:
           node-version: '24'
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Install dependencies
+        uses: pnpm/action-setup@v4      - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Install Puppeteer browsers
-        run: pnpm exec puppeteer browsers install chrome
 
-
-          popd
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
       - name: Install Puppeteer browsers
         run: pnpm exec puppeteer browsers install chrome
 
