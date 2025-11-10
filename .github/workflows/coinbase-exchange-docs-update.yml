@@ -47,7 +47,7 @@ jobs:
 
       - name: Format documentation
         run: |
-          cd ../..
+          cd ../../..
           ./formatdocs.sh docs/coinbase/exchange/
 
       - name: Check for changes
