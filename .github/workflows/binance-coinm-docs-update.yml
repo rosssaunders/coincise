@@ -1,4 +1,4 @@
-name: Update Binance COIN-M Futures Documentation
+name: Binance COIN-M Futures Docs Update
 
 on:
   schedule:
@@ -25,31 +25,24 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10.20.0
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Install Puppeteer browsers
+        run: pnpm exec puppeteer browsers install chrome
 
-      - name: Extract general documentation
+
+      - name: Extract all documentation
         run: |
           cd venues/binancefutures
-          pnpm run extract:general
-
-      - name: Extract COIN-M endpoints
-        run: |
-          cd venues/binancefutures
-          pnpm run extract:endpoints:coinm:public:rest
-          pnpm run extract:endpoints:coinm:private:rest
-          pnpm run extract:endpoints:coinm:public:ws
-          pnpm run extract:endpoints:coinm:private:ws
+          pnpm run extract:all
 
       - name: Format documentation
-        run: ./formatdocs.sh
+        run: ./formatdocs.sh docs/binance/coinm/
 
       - name: Check for changes
         id: git-check

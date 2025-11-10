@@ -1,6 +1,7 @@
 # GET /delivery/{settle}/tickers
 
-**Source:** [/delivery/{settle}/tickers](https://www.gate.io/docs/developers/apiv4/en/#listdeliverytickers-parameters)
+**Source:**
+[/delivery/{settle}/tickers](https://www.gate.io/docs/developers/apiv4/en/#listdeliverytickers-parameters)
 
 ## Authentication
 

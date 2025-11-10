@@ -1,6 +1,7 @@
 # GET /spot/orders/{order_id}
 
-**Source:** [/spot/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getorder-parameters)
+**Source:**
+[/spot/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getorder-parameters)
 
 ## Authentication
 

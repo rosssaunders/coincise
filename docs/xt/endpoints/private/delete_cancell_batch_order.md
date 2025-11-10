@@ -1,33 +1,45 @@
-# DELETE Cancell batch order
+# DELETE /v4/batch-order
 
-Source:
+**Source:**
 [https://doc.xt.com/docs/spot/Order/CancelBatchOrder](https://doc.xt.com/docs/spot/Order/CancelBatchOrder)
 
-# Cancell batch order
+## Description
 
-**Type:** DELETE **Description:** `/v4/batch-order`
+This endpoint performs operations on /v4/batch-order.
 
-### Parameters[​](#parameters "Direct link to Parameters")
+## Authentication
 
-| name          | type   | mandatory | default | description                              | ranges |
-| ------------- | ------ | --------- | ------- | ---------------------------------------- | ------ |
-| clientBatchId | string | false     |         | client batch id                          |        |
-| orderIds      | array  | true      |         | 6216559590087220004, 6216559590087220005 |        |
+Required (Private Endpoint)
+
+## HTTP Request
+
+`DELETE /v4/batch-order`
+
+## Request Parameters
+
+| name          | type   | Required | default | description                              | ranges |
+| ------------- | ------ | -------- | ------- | ---------------------------------------- | ------ |
+| clientBatchId | string | No       |         | client batch id                          |        |
+| orderIds      | array  | Yes      |         | 6216559590087220004, 6216559590087220005 |        |
 
 > Note: The parameters should be placed in the request body in the form of JSON.
 
-### Parameters Example[​](#parameters-example "Direct link to Parameters Example")
+## Response Parameters
 
+| Parameter | Type   | Description |
+| --------- | ------ | ----------- |
+| rc        | number | -           |
+| mc        | string | -           |
+| ma        | array  | -           |
+| result    | object | -           |
+
+## Response Example
+
+```json
+{
+  "rc": 0,
+  "mc": "string",
+  "ma": [{}],
+  "result": {}
+}
 ```
-curl --location --request DELETE 'https://sapi.xt.com/v4/batch-order?orderIds=xxxxxx,xxxxxx,xxxxxx' \--header 'accept: */*' \--header 'Content-Type: application/json' \--header 'validate-algorithms: HmacSHA256' \--header 'validate-recvwindow: 60000' \--header 'validate-appkey: xxxxxxxxxx' \--header 'validate-timestamp: xxxxxxxxxx' \--header 'validate-signature: xxxxxxxxxx'
-```
-
-### Response Example[​](#response-example "Direct link to Response Example")
-
-Response
-
-```
-{  "rc": 0,  "mc": "string",  "ma": [{}],  "result": {}}
-```
-
-[Edit this page](https://github.com/facebook/docusaurus/edit/main/website/docs/spot/Order/batchOrderDel.mdx)

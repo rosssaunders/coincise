@@ -28,20 +28,17 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: '24'
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10.20.0
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-          popd
+      - name: Install Puppeteer browsers
+        run: pnpm exec puppeteer browsers install chrome
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
 
       - name: Run DigiFinex scraper - General Documentation
         run: pnpm run extract:general
@@ -52,6 +49,11 @@ jobs:
       - name: Run DigiFinex scraper - WebSocket API (GitHub)
         run: pnpm run extract:websocket-github
 
+
+      - name: Format documentation
+        run: |
+          cd ../..
+          ./formatdocs.sh docs/digifinex/
       - name: Check for changes
         id: git-check
         run: |

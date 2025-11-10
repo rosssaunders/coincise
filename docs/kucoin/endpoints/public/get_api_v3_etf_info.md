@@ -18,7 +18,7 @@ This interface returns leveraged token information.
 | Parameter | Required | Type   | Description                                  |
 | --------- | -------- | ------ | -------------------------------------------- |
 | currency  | optional | string | ETF Currency: If empty, query all currencies |
-|  |
+|           |
 
 ## Responses
 

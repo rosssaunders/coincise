@@ -1,6 +1,7 @@
 # PUT /unified/unified_mode
 
-**Source:** [/unified/unified_mode](https://www.gate.io/docs/developers/apiv4/en/#setunifiedmode-parameters)
+**Source:**
+[/unified/unified_mode](https://www.gate.io/docs/developers/apiv4/en/#setunifiedmode-parameters)
 
 ## Authentication
 

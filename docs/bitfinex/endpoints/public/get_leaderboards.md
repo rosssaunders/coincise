@@ -38,8 +38,7 @@ Available Time Frames
 
 Available Symbols
 
-|  |
-|  |
+| | | |
 
 |
 

@@ -1,28 +1,52 @@
-# GET Get server time
+# GET /v4/public/time
 
-Source:
+**Source:**
 [https://doc.xt.com/docs/spot/Market/GetServerTime](https://doc.xt.com/docs/spot/Market/GetServerTime)
 
-# Get server time
+## Description
 
-**Type:** GET **Description:** `/v4/public/time`
+This endpoint retrieves operations on /v4/public/time.
 
----
+## Authentication
 
-### Request Examples[​](#request-examples "Direct link to Request Examples")
+Not Required (Public Endpoint)
 
-Request
+## HTTP Request
 
-```
+`GET /v4/public/time`
+
+## Request Example
+
+````bash
   curl --location --request GET 'https://sapi.xt.com/v4/public/time' \    --header 'accept: */*' \    --header 'Content-Type: application/json' \
-```
-
+```bash
 Response Example
 
 Response
 
-```
+```bash
 {  "rc": 0,  "mc": "SUCCESS",  "ma": [],  "result": {    "serverTime": 1662435658062  }}
-```
+````
 
-[Edit this page](https://github.com/facebook/docusaurus/edit/main/website/docs/spot/Market/serverInfo.mdx)
+## Response Parameters
+
+| Parameter         | Type   | Description |
+| ----------------- | ------ | ----------- |
+| rc                | number | -           |
+| mc                | string | -           |
+| ma                | array  | -           |
+| result            | object | -           |
+| result.serverTime | number | -           |
+
+## Response Example
+
+```json
+{
+  "rc": 0,
+  "mc": "SUCCESS",
+  "ma": [],
+  "result": {
+    "serverTime": 1662435658062
+  }
+}
+```

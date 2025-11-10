@@ -1,6 +1,7 @@
 # GET /spot/order_book
 
-**Source:** [/spot/order_book](https://www.gate.io/docs/developers/apiv4/en/#listorderbook-parameters)
+**Source:**
+[/spot/order_book](https://www.gate.io/docs/developers/apiv4/en/#listorderbook-parameters)
 
 ## Authentication
 

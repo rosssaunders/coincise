@@ -1,37 +1,53 @@
-# GET Get depth data
+# GET /v4/public/depth
 
-Source:
+**Source:**
 [https://doc.xt.com/docs/spot/Market/GetDepthData](https://doc.xt.com/docs/spot/Market/GetDepthData)
 
-# Get depth data
+## Description
 
-**Type:** GET **Description:** `/v4/public/depth`
+This endpoint retrieves operations on /v4/public/depth.
 
-### Parameters[​](#parameters "Direct link to Parameters")
+## Authentication
 
-| name   | type   | mandatory | default | description                      | ranges |
-| ------ | ------ | --------- | ------- | -------------------------------- | ------ |
-| symbol | string | true      |         | trading pair eg:btc_usdt         |        |
-| limit  | number | false     | 100     | minimum number of queries is 100 | 1~500  |
+Not Required (Public Endpoint)
 
-#### **Limit Flow Rules**[​](#limit-flow-rules "Direct link to limit-flow-rules")
+## Rate Limit
 
 10/s/ip
 
-### Request Example[​](#request-example "Direct link to Request Example")
+## HTTP Request
 
-Request
+`GET /v4/public/depth`
 
-```
+## Request Parameters
+
+| name   | type   | Required | default | description                      | ranges |
+| ------ | ------ | -------- | ------- | -------------------------------- | ------ |
+| symbol | string | Yes      |         | trading pair eg:btc_usdt         |        |
+| limit  | number | No       | 100     | minimum number of queries is 100 | 1~500  |
+
+## Request Example
+
+```bash
   curl --location --request GET 'https://sapi.xt.com/v4/public/depth?symbol=XT_USDT&limit=100' \    --header 'accept: */*' \    --header 'Content-Type: application/json' \
 ```
 
-### Response Example[​](#response-example "Direct link to Response Example")
+## Response Example
 
-Response
-
+```json
+{
+  "rc": 0,
+  "mc": "SUCCESS",
+  "ma": [],
+  "result": {
+    "timestamp": 1662445330524,
+    "lastUpdateId": 137333589606963580,
+    "bids": [
+      ["200.0000", "0.996000"],
+      ["100.0000", "0.001000"],
+      ["20.0000", "10.000000"]
+    ],
+    "asks": []
+  }
+}
 ```
-{  "rc": 0,  "mc": "SUCCESS",  "ma": [],  "result": {    "timestamp": 1662445330524, // timestamp    "lastUpdateId": 137333589606963580, // last update ID    "bids": [      ["200.0000", "0.996000"],      ["100.0000", "0.001000"],      ["20.0000", "10.000000"]    ], // bids [price, order quantity]    "asks": [] // asks [price, order quantity]  }}
-```
-
-[Edit this page](https://github.com/facebook/docusaurus/edit/main/website/docs/spot/Market/depth.mdx)

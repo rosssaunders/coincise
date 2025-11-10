@@ -1,6 +1,7 @@
 # GET /spot/batch_fee
 
-**Source:** [/spot/batch_fee](https://www.gate.io/docs/developers/apiv4/en/#getbatchspotfee-parameters)
+**Source:**
+[/spot/batch_fee](https://www.gate.io/docs/developers/apiv4/en/#getbatchspotfee-parameters)
 
 ## Authentication
 

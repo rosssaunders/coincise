@@ -1,6 +1,7 @@
 # GET /options/underlyings
 
-**Source:** [/options/underlyings](https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyings-responses)
+**Source:**
+[/options/underlyings](https://www.gate.io/docs/developers/apiv4/en/#listoptionsunderlyings-responses)
 
 ## Authentication
 

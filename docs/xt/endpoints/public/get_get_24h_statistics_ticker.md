@@ -1,57 +1,59 @@
-# GET Get 24h statistics ticker
+# GET /v4/public/ticker/24h
 
-Source:
+**Source:**
 [https://doc.xt.com/docs/spot/Market/Get24hStatisticsTicker](https://doc.xt.com/docs/spot/Market/Get24hStatisticsTicker)
 
-# Get 24h statistics ticker
+## Description
 
-**Type:** GET **Description:** `/v4/public/ticker/24h`
+This endpoint retrieves operations on /v4/public/ticker/24h.
 
-### Parameters[​](#parameters "Direct link to Parameters")
+## Authentication
 
-| name    | type   | mandatory | default | description                                                                        | ranges |
-| ------- | ------ | --------- | ------- | ---------------------------------------------------------------------------------- | ------ |
-| symbol  | string | false     |         | trading pair eg:btc_usdt                                                           |        |
-| symbols | array  | false     |         | Collection of trading pairs. Priority is higher than symbol. eg: btc_usdt,eth_usdt |        |
-| tags    | string | false     |         | Set of tags, separated by commas, currently only supports spot                     |        |
+Not Required (Public Endpoint)
 
-#### **Limit Flow Rules**[​](#limit-flow-rules "Direct link to limit-flow-rules")
+## Rate Limit
 
 1.  single symbol: `10/s/ip`
 2.  multiple symbols: `10/s/ip`
 
-### Request Example[​](#request-example "Direct link to Request Example")
+## HTTP Request
 
-Request
+`GET /v4/public/ticker/24h`
 
-```
+## Request Parameters
+
+| name    | type   | Required | default | description                                                                        | ranges |
+| ------- | ------ | -------- | ------- | ---------------------------------------------------------------------------------- | ------ |
+| symbol  | string | No       |         | trading pair eg:btc_usdt                                                           |        |
+| symbols | array  | No       |         | Collection of trading pairs. Priority is higher than symbol. eg: btc_usdt,eth_usdt |        |
+| tags    | string | No       |         | Set of tags, separated by commas, currently only supports spot                     |        |
+
+## Request Example
+
+```bash
   curl --location --request GET 'https://sapi.xt.com/v4/public/ticker/24h?symbol=XT_USDT' \    --header 'accept: */*' \    --header 'Content-Type: application/json' \
 ```
 
-### Response Example[​](#response-example "Direct link to Response Example")
+## Response Example
 
-Response
-
-```
+```json
 {
   "rc": 0,
   "mc": "SUCCESS",
   "ma": [],
   "result": [
     {
-      "s": "btc_usdt",         //symbol
-      "t": 1661856036925,      //time
-      "cv": "0.0000",          //price change value
-      "cr": "0.00",            //price change rate
-      "o": "9000.0000",        //open price
-      "l": "9000.0000",        //lowest price
-      "h": "9000.0000",        //highest price
-      "c": "9000.0000",        //close price
-      "q": "0.0136",           //transaction quantity
-      "v": "122.9940"          //transaction volume
+      "s": "btc_usdt",
+      "t": 1661856036925,
+      "cv": "0.0000",
+      "cr": "0.00",
+      "o": "9000.0000",
+      "l": "9000.0000",
+      "h": "9000.0000",
+      "c": "9000.0000",
+      "q": "0.0136",
+      "v": "122.9940"
     }
   ]
 }
 ```
-
-[Edit this page](https://github.com/facebook/docusaurus/edit/main/website/docs/spot/Market/ticker24h.mdx)

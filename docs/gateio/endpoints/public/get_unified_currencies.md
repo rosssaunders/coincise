@@ -1,6 +1,7 @@
 # GET /unified/currencies
 
-**Source:** [/unified/currencies](https://www.gate.io/docs/developers/apiv4/en/#listunifiedcurrencies-parameters)
+**Source:**
+[/unified/currencies](https://www.gate.io/docs/developers/apiv4/en/#listunifiedcurrencies-parameters)
 
 ## Authentication
 
