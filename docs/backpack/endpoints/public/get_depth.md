@@ -13,10 +13,10 @@ Retrieves the order book depth for a given market symbol.
 
 ##### query Parameters
 
-| Parameter | Required | Type   | Description                                                 |
-| --------- | -------- | ------ | ----------------------------------------------------------- |
-| symbol    | required | string |                                                             |
-| limit     | optional | string | Limit on the number of price levels to return on each side. |
+| Parameter | Required | Type   | Description                                                                   |
+| --------- | -------- | ------ | ----------------------------------------------------------------------------- |
+| symbol    | required | string |                                                                               |
+| limit     | optional | string | Limit on the number of price levels to return on each side. Defaults to 1000. |
 
 ### Responses
 
