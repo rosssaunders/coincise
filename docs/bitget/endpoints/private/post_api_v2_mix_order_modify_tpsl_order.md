@@ -8,7 +8,7 @@ Modify the stop-profit and stop-loss plan order
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   POST /api/v2/mix/order/modify-tpsl-order
+- POST /api/v2/mix/order/modify-tpsl-order
 
 Request Example
 
@@ -18,22 +18,25 @@ curl -X POST "https://api.bitget.com/api/v2/mix/order/modify-tpsl-order" \   -H 
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| orderId | String | No | Take profit and stop loss order number, 'orderId' and 'clientOid' must provide one |
-| clientOid | String | No | Take profit and stop loss client order number, 'orderId' and 'clientOid' must provide one |
-| marginCoin | String | Yes | Margin currency |
-| productType | String | Yes | Product type  
+| Parameter   | Type   | Required | Description                                                                               |
+| :---------- | :----- | :------- | :---------------------------------------------------------------------------------------- |
+| orderId     | String | No       | Take profit and stop loss order number, 'orderId' and 'clientOid' must provide one        |
+| clientOid   | String | No       | Take profit and stop loss client order number, 'orderId' and 'clientOid' must provide one |
+| marginCoin  | String | Yes      | Margin currency                                                                           |
+| productType | String | Yes      | Product type                                                                              |
+
 `USDT-FUTURES` USDT-M Futures  
 `COIN-FUTURES` Coin-M Futures  
-`USDC-FUTURES` USDC-M Futures |
-| symbol | String | Yes | Trading pair, e.g. ETHUSDT |
-| triggerPrice | String | Yes | trigger price |
-| triggerType | String | No | Trigger type (fill\_price (transaction price) mark\_price (mark price) |
-| executePrice | String | No | Execution price (if it is 0 or not filled in, it means market price execution. If it is greater than 0, it means limit price execution. When planType (stop-profit and stop-loss type) is moving\_plan (moving take-profit and stop-loss), it is not filled in and is fixed to the market price. implement.) |
-| size | String | Yes | Order quantity  
-For the position take profit and position stop loss orders, the size should be `"size":""` |
-| rangeRate | String | No | callback range |
+`USDC-FUTURES` USDC-M Futures | | symbol | String | Yes | Trading pair, e.g.
+ETHUSDT | | triggerPrice | String | Yes | trigger price | | triggerType | String
+| No | Trigger type (fill_price (transaction price) mark_price (mark price) | |
+executePrice | String | No | Execution price (if it is 0 or not filled in, it
+means market price execution. If it is greater than 0, it means limit price
+execution. When planType (stop-profit and stop-loss type) is moving_plan (moving
+take-profit and stop-loss), it is not filled in and is fixed to the market
+price. implement.) | | size | String | Yes | Order quantity  
+For the position take profit and position stop loss orders, the size should be
+`"size":""` | | rangeRate | String | No | callback range |
 
 Response Example
 
@@ -43,9 +46,9 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| orderId | String | Trigger order ID |
+| Parameter | Type   | Description                 |
+| :-------- | :----- | :-------------------------- |
+| orderId   | String | Trigger order ID            |
 | clientOid | String | Customized trigger order ID |
 
 > **Source:** https://www.bitget.com/api-doc/contract/plan/Modify-Tpsl-Order

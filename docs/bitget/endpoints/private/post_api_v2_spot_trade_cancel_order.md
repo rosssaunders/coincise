@@ -8,7 +8,7 @@ Cancel Order
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   POST /api/v2/spot/trade/cancel-order
+- POST /api/v2/spot/trade/cancel-order
 
 Request Example
 
@@ -18,17 +18,17 @@ curl -X POST "https://api.bitget.com/api/v2/spot/trade/cancel-order" \   -H "ACC
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair name, e.g. BTCUSDT  
-it is not required when tpslType is `tpsl` |
-| tpslType | String | No | order type, deafult:`normal`  
+| Parameter                                  | Type   | Required | Description                     |
+| :----------------------------------------- | :----- | :------- | :------------------------------ |
+| symbol                                     | String | Yes      | Trading pair name, e.g. BTCUSDT |
+| it is not required when tpslType is `tpsl` |
+| tpslType                                   | String | No       | order type, deafult:`normal`    |
+
 `normal` spot order  
-`tpsl` spot tpsl order |
-| orderId | String | No | Order ID  
+`tpsl` spot tpsl order | | orderId | String | No | Order ID  
 Either orderId or clientOid is required  
-it's required when tpslType is `tpsl` |
-| clientOid | String | No | Client Order ID  
+it's required when tpslType is `tpsl` | | clientOid | String | No | Client Order
+ID  
 Either orderId or clientOid is required |
 
 Response Example
@@ -39,9 +39,9 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| orderId | String | Order ID |
+| Parameter | Type   | Description     |
+| :-------- | :----- | :-------------- |
+| orderId   | String | Order ID        |
 | clientOid | String | Client Order ID |
 
 > **Source:** https://www.bitget.com/api-doc/spot/trade/Cancel-Order

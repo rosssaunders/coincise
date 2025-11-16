@@ -8,7 +8,7 @@ Get order fill history
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/mix/order/fill-history
+- GET /api/v2/mix/order/fill-history
 
 Request Example
 
@@ -18,25 +18,29 @@ curl "https://api.bitget.com/api/v2/mix/order/fill-history?productType=usdt-futu
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| orderId | String | No | Order ID  
-Either orderId or clientOid is required. If both are entered, orderId prevails. |
-| symbol | String | No | Trading pair, e.g. ETHUSDT |
-| productType | String | Yes | Product type  
+| Parameter                                                                       | Type   | Required | Description                |
+| :------------------------------------------------------------------------------ | :----- | :------- | :------------------------- |
+| orderId                                                                         | String | No       | Order ID                   |
+| Either orderId or clientOid is required. If both are entered, orderId prevails. |
+| symbol                                                                          | String | No       | Trading pair, e.g. ETHUSDT |
+| productType                                                                     | String | Yes      | Product type               |
+
 `USDT-FUTURES` USDT-M Futures  
 `COIN-FUTURES` Coin-M Futures  
 `USDC-FUTURES` USDC-M Futures  
-It does not support to query the data in demo trading |
-| startTime | String | No | Start timestamp  
+It does not support to query the data in demo trading | | startTime | String |
+No | Start timestamp  
 Unix timestamp in milliseconds format, e.g. 1597026383085  
-(The maximum time span supported is a week. The default end time is a week if no value is set for the end time. )  
-(For Managed Sub-Account, the StartTime cannot be earlier than the binding time) |
-| endTime | String | No | End timestamp  
+(The maximum time span supported is a week. The default end time is a week if no
+value is set for the end time. )  
+(For Managed Sub-Account, the StartTime cannot be earlier than the binding time)
+| | endTime | String | No | End timestamp  
 Unix timestamp in milliseconds format, e.g. 1597026383085  
-(The maximum time span supported is a week. The default start time is a week ago if no value is set for the start time. ) |
-| idLessThan | String | No | Requests the content on the page before this ID (older data), the value input should be the endId of the corresponding interface. |
-| limit | String | No | Number of queries: Maximum: 100, default: 100 |
+(The maximum time span supported is a week. The default start time is a week ago
+if no value is set for the start time. ) | | idLessThan | String | No | Requests
+the content on the page before this ID (older data), the value input should be
+the endId of the corresponding interface. | | limit | String | No | Number of
+queries: Maximum: 100, default: 100 |
 
 Response Example
 
@@ -46,40 +50,43 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| endId | String | Last query ended order ID |
-| fillList | List<Object\> | Order list |
-| \>symbol | String | Trading pair |
-| \>marginCoin | String | Margin Coin |
-| \>tradeId | String | Transaction ID |
-| \>orderId | String | order id |
-| \>price | String | deal price |
-| \>baseVolume | String | Amount of coins traded |
-| \>feeDetail | String | Transaction fee |
-| \>\>deduction | String | Whether or not to deduct (vouchers) |
-| \>\>feeCoin | String | Crypto ticker |
-| \>\>totalDeductionFee | String | Total transaction fee discount |
-| \>\>totalFee | String | Total transaction fee |
-| \>side | String | Direction  
-Buy; Sell |
-| \>quoteVolume | String | Trading amount in quoting coin |
-| \>profit | String | profit |
-| \>enterPointSource | String | Order source  
+| Parameter             | Type          | Description                         |
+| :-------------------- | :------------ | :---------------------------------- |
+| endId                 | String        | Last query ended order ID           |
+| fillList              | List<Object\> | Order list                          |
+| \>symbol              | String        | Trading pair                        |
+| \>marginCoin          | String        | Margin Coin                         |
+| \>tradeId             | String        | Transaction ID                      |
+| \>orderId             | String        | order id                            |
+| \>price               | String        | deal price                          |
+| \>baseVolume          | String        | Amount of coins traded              |
+| \>feeDetail           | String        | Transaction fee                     |
+| \>\>deduction         | String        | Whether or not to deduct (vouchers) |
+| \>\>feeCoin           | String        | Crypto ticker                       |
+| \>\>totalDeductionFee | String        | Total transaction fee discount      |
+| \>\>totalFee          | String        | Total transaction fee               |
+| \>side                | String        | Direction                           |
+| Buy; Sell             |
+| \>quoteVolume         | String        | Trading amount in quoting coin      |
+| \>profit              | String        | profit                              |
+| \>enterPointSource    | String        | Order source                        |
+
 WEB: Orders created on the website  
 API: Orders created on API  
 SYS: System managed orders, usually generated by forced liquidation logic  
 ANDROID: Orders created on the Android app  
-IOS: Orders created on the iOS app |
-| \>tradeSide | String | Direction  
+IOS: Orders created on the iOS app | | \>tradeSide | String | Direction  
 `close`: Close (open and close mode)  
 `open`: Open (open and close mode)  
 `reduce_close_long`: Liquidate partial long positions for hedge position mode  
-`reduce_close_short`：Liquidate partial short positions for hedge position mode  
+`reduce_close_short`：Liquidate partial short positions for hedge position
+mode  
 `burst_close_long`：Liquidate long positions for hedge position mode  
 `burst_close_short`：Liquidate short positions for hedge position mode  
-`offset_close_long`：Liquidate partial long positions for netting for hedge position mode  
-`offset_close_short`：Liquidate partial short positions for netting for hedge position mode  
+`offset_close_long`：Liquidate partial long positions for netting for hedge
+position mode  
+`offset_close_short`：Liquidate partial short positions for netting for hedge
+position mode  
 `delivery_close_long`：Delivery long positions for hedge position mode  
 `delivery_close_short`：Delivery short positions for hedge position mode  
 `dte_sys_adl_close_long`：ADL close long position for hedge position mode  
@@ -92,15 +99,14 @@ IOS: Orders created on the iOS app |
 `burst_sell_single`：Liquidate partial positions, sell, one way position mode  
 `delivery_sell_single`：Delivery sell, one way position mode  
 `delivery_buy_single`：Delivery buy, one way position mode  
-`dte_sys_adl_buy_in_single_side_mode`：ADL close position, buy, one way position mode  
-`dte_sys_adl_sell_in_single_side_mode`：ADL close position, sell, one way position mode |
-| \>posMode | String | Position mode  
-one\_way\_mode: one-way position  
-hedge\_mode: two-way position |
-| \>tradeScope | String | Trader tag  
+`dte_sys_adl_buy_in_single_side_mode`：ADL close position, buy, one way position
+mode  
+`dte_sys_adl_sell_in_single_side_mode`：ADL close position, sell, one way
+position mode | | \>posMode | String | Position mode  
+one_way_mode: one-way position  
+hedge_mode: two-way position | | \>tradeScope | String | Trader tag  
 taker: Taker  
-maker: Maker |
-| \>cTime | String | Date of transaction  
+maker: Maker | | \>cTime | String | Date of transaction  
 endId  
 String  
 The final order ID.  

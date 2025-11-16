@@ -8,7 +8,7 @@ Modify the auto-transfer account type of deposit
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   POST /api/v2/spot/wallet/modify-deposit-account
+- POST /api/v2/spot/wallet/modify-deposit-account
 
 Request Example
 
@@ -18,15 +18,16 @@ curl -X POST "https://api.bitget.com/api/v2/spot/wallet/modify-deposit-account" 
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| accountType | String | Yes | Account type  
+| Parameter   | Type   | Required | Description  |
+| :---------- | :----- | :------- | :----------- |
+| accountType | String | Yes      | Account type |
+
 `spot`: Spot account  
 `funding`: funding account  
 `coin-futures`: Coin-M futures account  
 `usdt-futures`: USDT-M futures account  
-`usdc-futures`: USDC-M futures account |
-| coin | String | Yes | Currency of transfer |
+`usdc-futures`: USDC-M futures account | | coin | String | Yes | Currency of
+transfer |
 
 Response Example
 
@@ -36,8 +37,8 @@ Response Example
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| data | String | success/fail |
+| Parameter | Type   | Description  |
+| :-------- | :----- | :----------- |
+| data      | String | success/fail |
 
 > **Source:** https://www.bitget.com/api-doc/spot/account/Modify-Deposit-Account

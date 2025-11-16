@@ -8,7 +8,7 @@ This interface cannot be used when the users have an open position or an order
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   POST /api/v2/mix/account/set-margin-mode
+- POST /api/v2/mix/account/set-margin-mode
 
 Request Example
 
@@ -18,15 +18,15 @@ curl -X POST "https://api.bitget.com/api/v2/mix/account/set-margin-mode" \   -H 
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair. e.g. BTCUSDT |
-| productType | String | Yes | Product type  
+| Parameter   | Type   | Required | Description                |
+| :---------- | :----- | :------- | :------------------------- |
+| symbol      | String | Yes      | Trading pair. e.g. BTCUSDT |
+| productType | String | Yes      | Product type               |
+
 `USDT-FUTURES` USDT-M Futures  
 `COIN-FUTURES` Coin-M Futures  
-`USDC-FUTURES` USDC-M Futures |
-| marginCoin | String | Yes | Margin coin, must be capitalized |
-| marginMode | String | Yes | Margin mode.  
+`USDC-FUTURES` USDC-M Futures | | marginCoin | String | Yes | Margin coin, must
+be capitalized | | marginMode | String | Yes | Margin mode.  
 `isolated`: isolated margin mode  
 `crossed`: crossed margin mode |
 
@@ -38,13 +38,14 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| symbol | String | Trading pair name |
-| marginCoin | String | Margin coin |
-| longLeverage | String | Leverage of long positions |
+| Parameter    | Type   | Description                 |
+| :----------- | :----- | :-------------------------- |
+| symbol       | String | Trading pair name           |
+| marginCoin   | String | Margin coin                 |
+| longLeverage | String | Leverage of long positions  |
 | shortLeveage | String | Leverage of short positions |
-| marginMode | String | Margin mode.  
+| marginMode   | String | Margin mode.                |
+
 `isolated`: isolated margin mode  
 `crossed`: crossed margin mode |
 

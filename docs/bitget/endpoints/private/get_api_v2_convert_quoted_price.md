@@ -8,7 +8,7 @@ Get Quoted Price
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/convert/quoted-price
+- GET /api/v2/convert/quoted-price
 
 Request Example
 
@@ -18,12 +18,12 @@ curl "https://api.bitget.com/api/v2/convert/quoted-price?fromCoin=USDT&fromCoinS
 
 ### request parameters[​](#request-parameters "Direct link to request parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| fromCoin | String | Yes | Quote currency |
-| fromCoinSize | String | No | Number of coins to inquire about fromCoinSz and toCoinSz are only allowed to be passed in at the same time. |
-| toCoin | String | Yes | Target currency |
-| toCoinSize | String | No | Number of target coins fromCoinSz and toCoinSz are only allowed to be passed in at the same time. |
+| Parameter    | Type   | Required | Description                                                                                                 |
+| :----------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------- |
+| fromCoin     | String | Yes      | Quote currency                                                                                              |
+| fromCoinSize | String | No       | Number of coins to inquire about fromCoinSz and toCoinSz are only allowed to be passed in at the same time. |
+| toCoin       | String | Yes      | Target currency                                                                                             |
+| toCoinSize   | String | No       | Number of target coins fromCoinSz and toCoinSz are only allowed to be passed in at the same time.           |
 
 Response Example
 
@@ -33,15 +33,15 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| fromCoin | String | Quote currency |
-| fromCoinSize | String | Number of currencies |
-| cnvtPrice | String | Swap price  
-Flash price = Quote currency price / Target currency price |
-| toCoin | String | Target currency |
-| toCoinSize | String | Number of target currencies |
-| traceId | String | RFQ id |
-| fee | String | Transaction fee |
+| Parameter                                                  | Type   | Description                 |
+| :--------------------------------------------------------- | :----- | :-------------------------- |
+| fromCoin                                                   | String | Quote currency              |
+| fromCoinSize                                               | String | Number of currencies        |
+| cnvtPrice                                                  | String | Swap price                  |
+| Flash price = Quote currency price / Target currency price |
+| toCoin                                                     | String | Target currency             |
+| toCoinSize                                                 | String | Number of target currencies |
+| traceId                                                    | String | RFQ id                      |
+| fee                                                        | String | Transaction fee             |
 
 > **Source:** https://www.bitget.com/api-doc/common/convert/Get-Quoted-Price

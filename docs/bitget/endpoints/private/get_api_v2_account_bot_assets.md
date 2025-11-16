@@ -6,7 +6,7 @@ Bot account
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/account/bot-assets
+- GET /api/v2/account/bot-assets
 
 Request Example
 
@@ -16,9 +16,10 @@ curl "https://api.bitget.com/api/v2/account/bot-assets?accountType=futures" \  -
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| accountType | String | No | bot account type  
+| Parameter   | Type   | Required | Description      |
+| :---------- | :----- | :------- | :--------------- |
+| accountType | String | No       | bot account type |
+
 futures  
 spot |
 
@@ -30,14 +31,14 @@ Response Example
 
 ### Response parameters[​](#response-parameters "Direct link to Response parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| data | List<Object\> | assetsList |
-| \> coin | String | coin |
-| \> available | String | available |
-| \> equity | String | account assets |
-| \> bonus | String | trading bonuses |
-| \> frozen | String | in orders |
-| \> usdtValue | String | USDT values |
+| Parameter    | Type          | Description     |
+| :----------- | :------------ | :-------------- |
+| data         | List<Object\> | assetsList      |
+| \> coin      | String        | coin            |
+| \> available | String        | available       |
+| \> equity    | String        | account assets  |
+| \> bonus     | String        | trading bonuses |
+| \> frozen    | String        | in orders       |
+| \> usdtValue | String        | USDT values     |
 
 > **Source:** https://www.bitget.com/api-doc/common/account/Bot-Assets

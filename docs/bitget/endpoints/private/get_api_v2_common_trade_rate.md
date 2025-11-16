@@ -8,7 +8,7 @@ Get Trade Rate
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/common/trade-rate
+- GET /api/v2/common/trade-rate
 
 Request Example
 
@@ -18,10 +18,11 @@ curl "https://api.bitget.com/api/v2/common/trade-rate?symbol=BTCUSDT&business=mi
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair name, e.g. BTCUSDT |
-| businessType | String | Yes | Business type  
+| Parameter    | Type   | Required | Description                     |
+| :----------- | :----- | :------- | :------------------------------ |
+| symbol       | String | Yes      | Trading pair name, e.g. BTCUSDT |
+| businessType | String | Yes      | Business type                   |
+
 mix contract  
 spot Spot  
 margin leverage |
@@ -34,11 +35,11 @@ Response Example
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| makerRate | String | Pending Order Handling Rates  
-Fractional form, i.e., 0.0002 for two parts per million |
-| takerFeeRate | String | Taking Order Handling Rates  
-Fractional form, i.e., 0.0002 for two parts per million |
+| Parameter                                               | Type   | Description                  |
+| :------------------------------------------------------ | :----- | :--------------------------- |
+| makerRate                                               | String | Pending Order Handling Rates |
+| Fractional form, i.e., 0.0002 for two parts per million |
+| takerFeeRate                                            | String | Taking Order Handling Rates  |
+| Fractional form, i.e., 0.0002 for two parts per million |
 
 > **Source:** https://www.bitget.com/api-doc/common/public/Get-Trade-Rate

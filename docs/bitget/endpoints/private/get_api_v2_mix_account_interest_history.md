@@ -8,7 +8,7 @@ Get USDT-M futures Interest history
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/mix/account/interest-history
+- GET /api/v2/mix/account/interest-history
 
 Request Example
 
@@ -18,17 +18,17 @@ curl "https://api.bitget.com/api/v2/mix/account/interest-history?productType=usd
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| coin | String | No | coin |
-| productType | String | Yes | Product type  
-`USDT-FUTURES` USDT professional futures |
-| idLessThan | String | No | Requests the content on the page before this ID (older data), the value input should be the endId of the corresponding interface. |
-| startTime | String | No | Start timestamp  
-Unix timestamp in milliseconds format, e.g. 1597026383085 |
-| endTime | String | No | End timestamp  
-Unix timestamp in milliseconds format, e.g. 1597026383085 |
-| limit | String | No | Number of queries: Default: 20, maximum: 100 |
+| Parameter                                                 | Type   | Required | Description                                                                                                                       |
+| :-------------------------------------------------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| coin                                                      | String | No       | coin                                                                                                                              |
+| productType                                               | String | Yes      | Product type                                                                                                                      |
+| `USDT-FUTURES` USDT professional futures                  |
+| idLessThan                                                | String | No       | Requests the content on the page before this ID (older data), the value input should be the endId of the corresponding interface. |
+| startTime                                                 | String | No       | Start timestamp                                                                                                                   |
+| Unix timestamp in milliseconds format, e.g. 1597026383085 |
+| endTime                                                   | String | No       | End timestamp                                                                                                                     |
+| Unix timestamp in milliseconds format, e.g. 1597026383085 |
+| limit                                                     | String | No       | Number of queries: Default: 20, maximum: 100                                                                                      |
 
 Response Example
 
@@ -38,19 +38,19 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| nextSettleTime | String | Next interest payment time |
-| borrowAmount | String | Current USDT-M Futures debt |
-| borrowLimit | String | Loan limit |
-| interestList | List<Object\> | interest data |
-| \>coin | String | Coin |
-| \>liability | String | Total debt |
-| \>interestFreeLimit | String | Interest-free amount |
-| \>interestLimit | String | Interest-accruing amount |
-| \>hourInterestRate | String | Hourly interest rate |
-| \>interset | String | interset |
-| \>cTime | String | create time |
-| endId | String | This is used when 'idLessThan' is set as a range. |
+| Parameter           | Type          | Description                                       |
+| :------------------ | :------------ | :------------------------------------------------ |
+| nextSettleTime      | String        | Next interest payment time                        |
+| borrowAmount        | String        | Current USDT-M Futures debt                       |
+| borrowLimit         | String        | Loan limit                                        |
+| interestList        | List<Object\> | interest data                                     |
+| \>coin              | String        | Coin                                              |
+| \>liability         | String        | Total debt                                        |
+| \>interestFreeLimit | String        | Interest-free amount                              |
+| \>interestLimit     | String        | Interest-accruing amount                          |
+| \>hourInterestRate  | String        | Hourly interest rate                              |
+| \>interset          | String        | interset                                          |
+| \>cTime             | String        | create time                                       |
+| endId               | String        | This is used when 'idLessThan' is set as a range. |
 
 > **Source:** https://www.bitget.com/api-doc/contract/account/Interest-History

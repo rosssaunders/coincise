@@ -8,7 +8,7 @@ Get the record of last 100 transactions
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/mix/market/fills
+- GET /api/v2/mix/market/fills
 
 Request Example
 
@@ -18,14 +18,15 @@ curl "https://api.bitget.com/api/v2/mix/market/fills?symbol=BTCUSDT&productType=
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair |
-| productType | String | Yes | Product type  
+| Parameter   | Type   | Required | Description  |
+| :---------- | :----- | :------- | :----------- |
+| symbol      | String | Yes      | Trading pair |
+| productType | String | Yes      | Product type |
+
 `USDT-FUTURES` USDT-M Futures  
 `COIN-FUTURES` Coin-M Futures  
-`USDC-FUTURES` USDC-M Futures |
-| limit | String | No | Number of queries: Default: 100, maximum: 100 |
+`USDC-FUTURES` USDC-M Futures | | limit | String | No | Number of queries:
+Default: 100, maximum: 100 |
 
 Response Example
 
@@ -35,13 +36,13 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| \>\> tradeId | String | Transaction ID |
-| \>\> price | String | Price |
-| \>\> size | String | Quantity |
-| \>\> side | String | Direction |
-| \>\> ts | String | Milliseconds format of current data timestamp Unix, e.g. 1597026383085 |
-| \>\> symbol | String | Trading Pair name e.g. ETHUSDT |
+| Parameter    | Type   | Description                                                            |
+| :----------- | :----- | :--------------------------------------------------------------------- |
+| \>\> tradeId | String | Transaction ID                                                         |
+| \>\> price   | String | Price                                                                  |
+| \>\> size    | String | Quantity                                                               |
+| \>\> side    | String | Direction                                                              |
+| \>\> ts      | String | Milliseconds format of current data timestamp Unix, e.g. 1597026383085 |
+| \>\> symbol  | String | Trading Pair name e.g. ETHUSDT                                         |
 
 > **Source:** https://www.bitget.com/api-doc/contract/market/Get-Recent-Fills

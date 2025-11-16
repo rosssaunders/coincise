@@ -1,6 +1,7 @@
 # Get Order Fill Details
 
-Speed limit is 10 times/s for average users. Frequency limit imposed according to user ID
+Speed limit is 10 times/s for average users. Frequency limit imposed according
+to user ID
 
 ### Description[​](#description "Direct link to Description")
 
@@ -8,7 +9,7 @@ Get order fill details
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/mix/order/fills
+- GET /api/v2/mix/order/fills
 
 Request Example
 
@@ -18,21 +19,24 @@ curl "https://api.bitget.com/api/v2/mix/order/fills?productType=usdt-futures" \ 
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| orderId | String | No | Order ID |
-| symbol | String | No | Trading pair, e.g. ETHUSDT |
-| productType | String | Yes | Product type  
+| Parameter   | Type   | Required | Description                |
+| :---------- | :----- | :------- | :------------------------- |
+| orderId     | String | No       | Order ID                   |
+| symbol      | String | No       | Trading pair, e.g. ETHUSDT |
+| productType | String | Yes      | Product type               |
+
 `USDT-FUTURES` USDT-M Futures  
 `COIN-FUTURES` Coin-M Futures  
-`USDC-FUTURES` USDC-M Futures |
-| idLessThan | String | No | Requests the content on the page before the `tradeId` (older data). |
-| startTime | String | No | Start time (time stamp in milliseconds)  
-(The maximum time span supported is three months. The default end time is three months if no value is set for the end time. )  
-(For Managed Sub-Account, the StartTime cannot be earlier than the binding time) |
-| endTime | String | No | End time (time stamp in milliseconds)  
-(The maximum time span supported is three months. The default start time is three months ago if no value is set for the start time. ) |
-| limit | String | No | Number of queries: Default: 100, maximum: 100 |
+`USDC-FUTURES` USDC-M Futures | | idLessThan | String | No | Requests the
+content on the page before the `tradeId` (older data). | | startTime | String |
+No | Start time (time stamp in milliseconds)  
+(The maximum time span supported is three months. The default end time is three
+months if no value is set for the end time. )  
+(For Managed Sub-Account, the StartTime cannot be earlier than the binding time)
+| | endTime | String | No | End time (time stamp in milliseconds)  
+(The maximum time span supported is three months. The default start time is
+three months ago if no value is set for the start time. ) | | limit | String |
+No | Number of queries: Default: 100, maximum: 100 |
 
 Response Example
 
@@ -42,39 +46,40 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| fillList | List<Object\> | Transaction details |
-| \>tradeId | String | Transaction id |
-| \>symbol | String | Trading pair |
-| \>orderId | String | Order no. |
-| \>price | String | Order price |
-| \>baseVolume | String | Amount of coins traded |
-| \>feeDetail | String | Transaction fee |
-| \>\>deduction | String | Whether or not to deduct (vouchers) |
-| \>\>feeCoin | String | Crypto ticker |
-| \>\>totalDeductionFee | String | Total transaction fee discount |
-| \>\>totalFee | String | Total transaction fee |
-| \>side | String | Type of transaction  
+| Parameter             | Type          | Description                         |
+| :-------------------- | :------------ | :---------------------------------- |
+| fillList              | List<Object\> | Transaction details                 |
+| \>tradeId             | String        | Transaction id                      |
+| \>symbol              | String        | Trading pair                        |
+| \>orderId             | String        | Order no.                           |
+| \>price               | String        | Order price                         |
+| \>baseVolume          | String        | Amount of coins traded              |
+| \>feeDetail           | String        | Transaction fee                     |
+| \>\>deduction         | String        | Whether or not to deduct (vouchers) |
+| \>\>feeCoin           | String        | Crypto ticker                       |
+| \>\>totalDeductionFee | String        | Total transaction fee discount      |
+| \>\>totalFee          | String        | Total transaction fee               |
+| \>side                | String        | Type of transaction                 |
+
 buy: Buy  
-sell: Sell |
-| \>quoteVolume | String | Trading amount in quote currency |
-| \>profit | String | Profit |
-| \>enterPointSource | String | Order source  
+sell: Sell | | \>quoteVolume | String | Trading amount in quote currency | |
+\>profit | String | Profit | | \>enterPointSource | String | Order source  
 WEB: Orders created on the website  
 API: Orders created on API  
 SYS: System managed orders, usually generated by forced liquidation logic  
 ANDROID: Orders created on the Android app  
-IOS: Orders created on the iOS app |
-| \>tradeSide | String | Direction  
+IOS: Orders created on the iOS app | | \>tradeSide | String | Direction  
 `close`: Close (open and close mode)  
 `open`: Open (open and close mode)  
 `reduce_close_long`: Liquidate partial long positions for hedge position mode  
-`reduce_close_short`：Liquidate partial short positions for hedge position mode  
+`reduce_close_short`：Liquidate partial short positions for hedge position
+mode  
 `burst_close_long`：Liquidate long positions for hedge position mode  
 `burst_close_short`：Liquidate short positions for hedge position mode  
-`offset_close_long`：Liquidate partial long positions for netting for hedge position mode  
-`offset_close_short`：Liquidate partial short positions for netting for hedge position mode  
+`offset_close_long`：Liquidate partial long positions for netting for hedge
+position mode  
+`offset_close_short`：Liquidate partial short positions for netting for hedge
+position mode  
 `delivery_close_long`：Delivery long positions for hedge position mode  
 `delivery_close_short`：Delivery short positions for hedge position mode  
 `dte_sys_adl_close_long`：ADL close long position for hedge position mode  
@@ -87,20 +92,19 @@ IOS: Orders created on the iOS app |
 `burst_sell_single`：Liquidate partial positions, sell, one way position mode  
 `delivery_sell_single`：Delivery sell, one way position mode  
 `delivery_buy_single`：Delivery buy, one way position mode  
-`dte_sys_adl_buy_in_single_side_mode`：ADL close position, buy, one way position mode  
-`dte_sys_adl_sell_in_single_side_mode`：ADL close position, sell, one way position mode |
-| \>posMode | String | Position mode  
+`dte_sys_adl_buy_in_single_side_mode`：ADL close position, buy, one way position
+mode  
+`dte_sys_adl_sell_in_single_side_mode`：ADL close position, sell, one way
+position mode | | \>posMode | String | Position mode  
 `one_way_mode`: one-way position  
-`hedge_mode`: two-way position |
-| \>tradeScope | String | Trader tag  
+`hedge_mode`: two-way position | | \>tradeScope | String | Trader tag  
 taker: Taker  
-maker: Maker |
-| \>cTime | String | Date of transaction  
+maker: Maker | | \>cTime | String | Date of transaction  
 endId  
 String  
 The final order ID.  
-This is used when idLessThan/idGreaterThan is set as a range. |
-| endId | String | The final Transaction ID.  
+This is used when idLessThan/idGreaterThan is set as a range. | | endId | String
+| The final Transaction ID.  
 This is used when idLessThan/idGreaterThan is set as a range. |
 
 > **Source:** https://www.bitget.com/api-doc/contract/trade/Get-Order-Fills

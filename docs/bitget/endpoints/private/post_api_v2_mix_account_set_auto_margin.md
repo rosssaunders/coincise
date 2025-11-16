@@ -8,7 +8,7 @@ Adjust isolated position auto margin
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   POST /api/v2/mix/account/set-auto-margin
+- POST /api/v2/mix/account/set-auto-margin
 
 Request Example
 
@@ -18,14 +18,15 @@ curl -X POST "https://api.bitget.com/api/v2/mix/account/set-auto-margin" \   -H 
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair |
-| autoMargin | String | Yes | Auto margin flag  
+| Parameter  | Type   | Required | Description      |
+| :--------- | :----- | :------- | :--------------- |
+| symbol     | String | Yes      | Trading pair     |
+| autoMargin | String | Yes      | Auto margin flag |
+
 `on` auto margin on  
-`off` auto margin off |
-| marginCoin | String | Yes | Margin coin must be capitalized |
-| holdSide | String | Yes | Position direction (no need in cross margin mode).  
+`off` auto margin off | | marginCoin | String | Yes | Margin coin must be
+capitalized | | holdSide | String | Yes | Position direction (no need in cross
+margin mode).  
 long – long position; short – short position |
 
 Response Example
@@ -36,8 +37,8 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| code | String | ‘00000’: success; others: fail |
+| Parameter | Type   | Description                    |
+| :-------- | :----- | :----------------------------- |
+| code      | String | ‘00000’: success; others: fail |
 
 > **Source:** https://www.bitget.com/api-doc/contract/account/Set-Auto-Margin

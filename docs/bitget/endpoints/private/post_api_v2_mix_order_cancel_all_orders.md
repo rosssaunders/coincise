@@ -6,7 +6,7 @@ Rate limit: 10 req/sec/UID
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   POST /api/v2/mix/order/cancel-all-orders
+- POST /api/v2/mix/order/cancel-all-orders
 
 Request Example
 
@@ -16,15 +16,16 @@ curl -X POST "https://api.bitget.com/api/v2/mix/order/cancel-all-orders" \  -H "
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| productType | String | Yes | Product type  
+| Parameter   | Type   | Required | Description  |
+| :---------- | :----- | :------- | :----------- |
+| productType | String | Yes      | Product type |
+
 `USDT-FUTURES` USDT-M Futures  
 `COIN-FUTURES` Coin-M Futures  
-`USDC-FUTURES` USDC-M Futures |
-| marginCoin | String | No | Margin coin, must be capitalized |
-| requestTime | String | No | request Time Unix millisecond timestamp |
-| receiveWindow | String | No | valid window period Unix millisecond timestamp Unix millisecond timestamp |
+`USDC-FUTURES` USDC-M Futures | | marginCoin | String | No | Margin coin, must
+be capitalized | | requestTime | String | No | request Time Unix millisecond
+timestamp | | receiveWindow | String | No | valid window period Unix millisecond
+timestamp Unix millisecond timestamp |
 
 Response Example
 
@@ -34,15 +35,15 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| successList | List<Object\> | The collection of successfully cancelled orders. |
-| \>orderId | String | Order ID |
-| \>clientOid | String | Customize order ID |
+| Parameter   | Type          | Description                                        |
+| :---------- | :------------ | :------------------------------------------------- |
+| successList | List<Object\> | The collection of successfully cancelled orders.   |
+| \>orderId   | String        | Order ID                                           |
+| \>clientOid | String        | Customize order ID                                 |
 | failureList | List<Object\> | The collection of unsuccessfully cancelled orders. |
-| \>orderId | String | Order ID |
-| \>clientOid | String | Customize order ID |
-| \>errorMsg | String | Failure reason |
-| \>errorCode | String | Error code |
+| \>orderId   | String        | Order ID                                           |
+| \>clientOid | String        | Customize order ID                                 |
+| \>errorMsg  | String        | Failure reason                                     |
+| \>errorCode | String        | Error code                                         |
 
 > **Source:** https://www.bitget.com/api-doc/contract/trade/Cancel-All-Orders

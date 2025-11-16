@@ -8,7 +8,7 @@ Convert
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   POST /api/v2/convert/trade
+- POST /api/v2/convert/trade
 
 Request Example
 
@@ -18,14 +18,14 @@ curl -X POST "https://api.bitget.com/api/v2/convert/trade" \   -H "ACCESS-KEY:**
 
 ### request parameters[​](#request-parameters "Direct link to request parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| fromCoin | String | Yes | Quote currency |
-| fromCoinSize | String | Yes | Number of currencies |
-| cnvtPrice | String | Yes | Results obtained by request for quotation |
-| toCoin | String | Yes | Target currency |
-| toCoinSize | String | Yes | Number of target currencies converted |
-| traceId | String | Yes | RFQ id, valid for 8 seconds |
+| Parameter    | Type   | Required | Description                               |
+| :----------- | :----- | :------- | :---------------------------------------- |
+| fromCoin     | String | Yes      | Quote currency                            |
+| fromCoinSize | String | Yes      | Number of currencies                      |
+| cnvtPrice    | String | Yes      | Results obtained by request for quotation |
+| toCoin       | String | Yes      | Target currency                           |
+| toCoinSize   | String | Yes      | Number of target currencies converted     |
+| traceId      | String | Yes      | RFQ id, valid for 8 seconds               |
 
 Response Example
 
@@ -35,11 +35,11 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| toCoin | String | Switch |
-| toCoinSize | String | Coin swap amount |
-| cnvtPrice | String | Swap price |
-| ts | String | Conversion time, Unix millisecond timestamps |
+| Parameter  | Type   | Description                                  |
+| :--------- | :----- | :------------------------------------------- |
+| toCoin     | String | Switch                                       |
+| toCoinSize | String | Coin swap amount                             |
+| cnvtPrice  | String | Swap price                                   |
+| ts         | String | Conversion time, Unix millisecond timestamps |
 
 > **Source:** https://www.bitget.com/api-doc/common/convert/Trade

@@ -9,7 +9,7 @@ Get Sub-accounts Assets(only return the sub-accounts which assets > 0).
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/spot/account/subaccount-assets
+- GET /api/v2/spot/account/subaccount-assets
 
 Request Example
 
@@ -19,12 +19,12 @@ curl "https://api.bitget.com/api/v2/spot/account/subaccount-assets" \   -H "ACCE
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| idLessThan | String | No | Cursor ID  
-Pagination cursor. Do not pass it in the first request. For subsequent requests, pass the last ID returned previously.. |
-| limit | String | No | The number of sub-accounts returned per page.  
-The default value is 10, and the maximum value is 50. |
+| Parameter                                                                                                               | Type   | Required | Description                                   |
+| :---------------------------------------------------------------------------------------------------------------------- | :----- | :------- | :-------------------------------------------- |
+| idLessThan                                                                                                              | String | No       | Cursor ID                                     |
+| Pagination cursor. Do not pass it in the first request. For subsequent requests, pass the last ID returned previously.. |
+| limit                                                                                                                   | String | No       | The number of sub-accounts returned per page. |
+| The default value is 10, and the maximum value is 50.                                                                   |
 
 Response Example
 
@@ -34,17 +34,17 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| id | String | Cursor ID |
-| userId | String | User ID |
-| assetsList | Array | List of spot assets |
-| \> coin | String | Token name |
-| \> available | String | Available assets |
-| \> limitAvailable | String | Restricted availability  
-For spot copy trading |
-| \> frozen | String | Assets frozen |
-| \> locked | String | Assets locked |
-| \> uTime | string | update time, Unix, ms |
+| Parameter             | Type   | Description             |
+| :-------------------- | :----- | :---------------------- |
+| id                    | String | Cursor ID               |
+| userId                | String | User ID                 |
+| assetsList            | Array  | List of spot assets     |
+| \> coin               | String | Token name              |
+| \> available          | String | Available assets        |
+| \> limitAvailable     | String | Restricted availability |
+| For spot copy trading |
+| \> frozen             | String | Assets frozen           |
+| \> locked             | String | Assets locked           |
+| \> uTime              | string | update time, Unix, ms   |
 
 > **Source:** https://www.bitget.com/api-doc/spot/account/Get-Subaccount-Assets

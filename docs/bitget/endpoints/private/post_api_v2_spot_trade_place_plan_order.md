@@ -6,9 +6,14 @@ Frequency limit: 20 times/1s (UID)
 
 Place plan order
 
+- **API Broker rebate identifier**:  
+  The following code block needs to be added to the HTTP Header of the request.
+
+  > "X-CHANNEL-API-CODE":"your-channel-api-code"
+
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   POST /api/v2/spot/trade/place-plan-order
+- POST /api/v2/spot/trade/place-plan-order
 
 Request Example
 
@@ -18,30 +23,27 @@ curl -X POST "https://api.bitget.com/api/v2/spot/trade/place-plan-order" \  -H "
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair name, e.g. BTCUSDT |
-| side | String | Yes | Direction  
+| Parameter | Type   | Required | Description                     |
+| :-------- | :----- | :------- | :------------------------------ |
+| symbol    | String | Yes      | Trading pair name, e.g. BTCUSDT |
+| side      | String | Yes      | Direction                       |
+
 `buy`: Buy  
-`sell`: Sell |
-| triggerPrice | String | Yes | Trigger price |
-| orderType | String | Yes | Order type  
+`sell`: Sell | | triggerPrice | String | Yes | Trigger price | | orderType |
+String | Yes | Order type  
 `limit`: Limit orders  
-`market`: Market orders |
-| executePrice | String | No | Execution price  
-it's required when `orderType`\=`limit` |
-| planType | String | No | Order type  
+`market`: Market orders | | executePrice | String | No | Execution price  
+it's required when `orderType`\=`limit` | | planType | String | No | Order
+type  
 `amount`: By amount of the order(base coin)  
 `total`: By trading volume of the order(quote coin)  
-The default value is `amount` |
-| size | String | Yes | Quantity to buy  
+The default value is `amount` | | size | String | Yes | Quantity to buy  
 If `planType`\=`amount`, it is the base coin.  
-If `planType`\=`total`, it is the quote coin. |
-| triggerType | String | Yes | Trigger type  
+If `planType`\=`total`, it is the quote coin. | | triggerType | String | Yes |
+Trigger type  
 `fill_price`: filled price  
-`mark_price`: mark price |
-| clientOid | String | No | Client customized ID |
-| stpMode | String | No | STP Mode, default `none`  
+`mark_price`: mark price | | clientOid | String | No | Client customized ID | |
+stpMode | String | No | STP Mode, default `none`  
 `none` not setting STP  
 `cancel_taker` cancel taker order  
 `cancel_maker` cancel maker order  
@@ -55,9 +57,9 @@ Response Example
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| orderId | String | Order ID |
+| Parameter | Type   | Description          |
+| :-------- | :----- | :------------------- |
+| orderId   | String | Order ID             |
 | clientOid | String | Client customized ID |
 
 > **Source:** https://www.bitget.com/api-doc/spot/plan/Place-Plan-Order

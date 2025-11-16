@@ -8,7 +8,7 @@ Get account information
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/spot/account/info
+- GET /api/v2/spot/account/info
 
 Request Example
 
@@ -19,8 +19,8 @@ curl "https://api.bitget.com/api/v2/spot/account/info" \   -H "ACCESS-KEY:******
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
 | Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| N/A |  |  |  |
+| :-------- | :--- | :------- | :---------- |
+| N/A       |      |          |             |
 
 Response Example
 
@@ -30,14 +30,15 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| userId | String | User ID |
-| inviterId | String | Inviter's user ID |
+| Parameter   | Type   | Description             |
+| :---------- | :----- | :---------------------- |
+| userId      | String | User ID                 |
+| inviterId   | String | Inviter's user ID       |
 | channelCode | String | Affiliate referral code |
-| channel | String | Affiliate |
-| ips | String | IP whitelist |
-| authorities | Array | Permissions  
+| channel     | String | Affiliate               |
+| ips         | String | IP whitelist            |
+| authorities | Array  | Permissions             |
+
 Read only  
 coor: futures orders  
 cpor: futures holdings  
@@ -60,9 +61,8 @@ chow: subaccount manage
 p2p: P2P  
 pllw: Pledge Loan Write  
 pllr: Pledge Loan Read  
-taxw: Tax Read and Write |
-| parentId | Int | Main account user ID |
-| traderType | String | trader: Is trader, not\_trader: not trader |
-| regisTime | String | Register time |
+taxw: Tax Read and Write | | parentId | Int | Main account user ID | |
+traderType | String | trader: Is trader, not_trader: not trader | | regisTime |
+String | Register time |
 
 > **Source:** https://www.bitget.com/api-doc/spot/account/Get-Account-Info

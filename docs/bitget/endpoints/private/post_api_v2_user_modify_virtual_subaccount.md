@@ -8,7 +8,7 @@ Modify the virtual sub-account
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   POST /api/v2/user/modify-virtual-subaccount
+- POST /api/v2/user/modify-virtual-subaccount
 
 Request Example
 
@@ -18,14 +18,14 @@ curl -X POST "https://api.bitget.com/api/v2/user/modify-virtual-subaccount" \   
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| subAccountUid | String | Yes | Sub-account Uid |
-| permList | List<String\> | Yes | Permissions  
-spot\_trade Spot trade  
-contract\_trade Futures trade read-write  
-read Read permissions |
-| status | String | Yes | Sub-account status  
+| Parameter     | Type          | Required | Description     |
+| :------------ | :------------ | :------- | :-------------- |
+| subAccountUid | String        | Yes      | Sub-account Uid |
+| permList      | List<String\> | Yes      | Permissions     |
+
+spot_trade Spot trade  
+contract_trade Futures trade read-write  
+read Read permissions | | status | String | Yes | Sub-account status  
 normal Normal  
 freeze Freeze |
 
@@ -37,10 +37,12 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| result | String | Edit result  
+| Parameter | Type   | Description |
+| :-------- | :----- | :---------- |
+| result    | String | Edit result |
+
 `success` Success  
 `failure` Failure |
 
-> **Source:** https://www.bitget.com/api-doc/common/vsubaccount/Modify-Virtual-Subaccount
+> **Source:**
+> https://www.bitget.com/api-doc/common/vsubaccount/Modify-Virtual-Subaccount

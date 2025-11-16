@@ -4,14 +4,15 @@ Rate limit: 10 req/sec/IP
 
 ### Description[​](#description "Direct link to Description")
 
-Get Market Trades  
+Get Market Trades
 
--   The time interval between startTime and endTime should not exceed 7 days.
--   It supports to get the data within 90days. You can download the older data on our [web](https://www.bitget.com/data-download)
+- The time interval between startTime and endTime should not exceed 7 days.
+- It supports to get the data within 90days. You can download the older data on
+  our [web](https://www.bitget.com/data-download)
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/spot/market/fills-history
+- GET /api/v2/spot/market/fills-history
 
 Request Example
 
@@ -21,15 +22,15 @@ curl "https://api.bitget.com/api/v2/spot/market/fills-history?symbol=BTCUSDT&lim
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair name, e.g. BTCUSDT |
-| limit | String | No | number of data returned. Default: 500, maximum: 1000 |
-| idLessThan | String | No | Order ID, returns records less than the specified 'tradeId'. |
-| startTime | String | No | startTime, Unix millisecond timestamp e.g. 1690196141868  
-startTime and endTime should be within 7days. |
-| endTime | String | No | endTime, Unix millisecond timestamp e.g. 1690196141868  
-startTime and endTime should be within 7days. |
+| Parameter                                     | Type   | Required | Description                                                  |
+| :-------------------------------------------- | :----- | :------- | :----------------------------------------------------------- |
+| symbol                                        | String | Yes      | Trading pair name, e.g. BTCUSDT                              |
+| limit                                         | String | No       | number of data returned. Default: 500, maximum: 1000         |
+| idLessThan                                    | String | No       | Order ID, returns records less than the specified 'tradeId'. |
+| startTime                                     | String | No       | startTime, Unix millisecond timestamp e.g. 1690196141868     |
+| startTime and endTime should be within 7days. |
+| endTime                                       | String | No       | endTime, Unix millisecond timestamp e.g. 1690196141868       |
+| startTime and endTime should be within 7days. |
 
 Response Example
 
@@ -39,17 +40,16 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| symbol | String | Trading pair |
-| tradeId | String | Order ID  
-Descending |
-| side | String | Direction  
+| Parameter  | Type   | Description  |
+| :--------- | :----- | :----------- |
+| symbol     | String | Trading pair |
+| tradeId    | String | Order ID     |
+| Descending |
+| side       | String | Direction    |
+
 `Buy`  
-`Sell` |
-| price | String | Order price |
-| size | String | Filled quantity |
-| ts | String | Transaction time(second level)  
+`Sell` | | price | String | Order price | | size | String | Filled quantity | |
+ts | String | Transaction time(second level)  
 Unix millisecond timestamp, e.g. 1744275603000 |
 
 > **Source:** https://www.bitget.com/api-doc/spot/market/Get-Market-Trades

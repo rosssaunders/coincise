@@ -8,7 +8,7 @@ Modify Plan Order
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   POST /api/v2/spot/trade/modify-plan-order
+- POST /api/v2/spot/trade/modify-plan-order
 
 Request Example
 
@@ -18,16 +18,16 @@ curl -X POST "https://api.bitget.com/api/v2/spot/trade/modify-plan-order" \  -H 
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| orderId | String | No | Either 'orderId' or 'clientOid' is required. |
-| clientOid | String | No | Either 'orderId' or 'clientOid' is required. |
-| triggerPrice | String | Yes | Trigger price |
-| orderType | String | Yes | Order type  
+| Parameter    | Type   | Required | Description                                  |
+| :----------- | :----- | :------- | :------------------------------------------- |
+| orderId      | String | No       | Either 'orderId' or 'clientOid' is required. |
+| clientOid    | String | No       | Either 'orderId' or 'clientOid' is required. |
+| triggerPrice | String | Yes      | Trigger price                                |
+| orderType    | String | Yes      | Order type                                   |
+
 limit: Limit price  
-market: Market price |
-| executePrice | String | No | Execution price, cannot be null if orderType=limit |
-| size | String | Yes | Quantity to buy  
+market: Market price | | executePrice | String | No | Execution price, cannot be
+null if orderType=limit | | size | String | Yes | Quantity to buy  
 If planType=amount, the quote currency is the base coin.  
 If planType=total, the quote currency is the quote coin. |
 
@@ -39,9 +39,9 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| orderId | String | Order ID |
+| Parameter | Type   | Description          |
+| :-------- | :----- | :------------------- |
+| orderId   | String | Order ID             |
 | clientOid | String | Client customized ID |
 
 > **Source:** https://www.bitget.com/api-doc/spot/plan/Modify-Plan-Order

@@ -8,7 +8,7 @@ p2p transaction records
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/tax/p2p-record
+- GET /api/v2/tax/p2p-record
 
 Request Example
 
@@ -18,13 +18,13 @@ curl "https://api.bitget.com/api/v2/tax/p2p-record?startTime=1686128558000&endTi
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| coin | String | No | Default all coin type |
-| startTime | String | Yes | Start time (time stamp in milliseconds) |
-| endTime | String | Yes | The maximum interval between startTime and endTime (time stamp in milliseconds) is 30 days. |
-| limit | String | No | Default: 500, maximum: 500 |
-| idLessThan | String | No | The last recorded ID |
+| Parameter  | Type   | Required | Description                                                                                 |
+| :--------- | :----- | :------- | :------------------------------------------------------------------------------------------ |
+| coin       | String | No       | Default all coin type                                                                       |
+| startTime  | String | Yes      | Start time (time stamp in milliseconds)                                                     |
+| endTime    | String | Yes      | The maximum interval between startTime and endTime (time stamp in milliseconds) is 30 days. |
+| limit      | String | No       | Default: 500, maximum: 500                                                                  |
+| idLessThan | String | No       | The last recorded ID                                                                        |
 
 Response example
 
@@ -34,15 +34,15 @@ Response example
 
 ### Response parameters[​](#response-parameters "Direct link to Response parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| id | String | Record id lastEndId |
-| coin | String | Coin |
-| p2pTaxType | String | p2p taxation types  
-transfer\_in Inbound transfer  
-transfer\_out Outbound transfer  
+| Parameter  | Type   | Description         |
+| :--------- | :----- | :------------------ |
+| id         | String | Record id lastEndId |
+| coin       | String | Coin                |
+| p2pTaxType | String | p2p taxation types  |
+
+transfer_in Inbound transfer  
+transfer_out Outbound transfer  
 sell Sell  
-buy Buy |
-| balance | String | Quantity |
+buy Buy | | balance | String | Quantity |
 
 > **Source:** https://www.bitget.com/api-doc/common/tax/Get-P2P-Account-Record

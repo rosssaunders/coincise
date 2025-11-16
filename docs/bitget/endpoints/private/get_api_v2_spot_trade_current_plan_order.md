@@ -8,25 +8,25 @@ Get Current Plan Orders
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/spot/trade/current-plan-order
+- GET /api/v2/spot/trade/current-plan-order
 
 Request Example
 
 ```
-curl "https://api.bitget.com/api/v2/spot/trade/current-plan-order?symbol=BTCUSDT&limit=10" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" 
+curl "https://api.bitget.com/api/v2/spot/trade/current-plan-order?symbol=BTCUSDT&limit=10" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | No | Trading pair, e.g. BTCUSDT |
-| limit | String | No | Default is 20 Max is 100 |
-| idLessThan | String | No | Requests the content on the page before this ID (older data), the value input should be the orderId of the corresponding interface. |
-| startTime | String | No | The start time of the record for the query. Unix millisecond timestamp, e.g. 1690196141868  
-The `startTime` and `endTime` should be within 90 days. |
-| endTime | String | No | The end time of the record for the query. Unix millisecond timestamp, e.g. 1690196141868  
-The `startTime` and `endTime` should be within 90 days. |
+| Parameter                                               | Type   | Required | Description                                                                                                                         |
+| :------------------------------------------------------ | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| symbol                                                  | String | No       | Trading pair, e.g. BTCUSDT                                                                                                          |
+| limit                                                   | String | No       | Default is 20 Max is 100                                                                                                            |
+| idLessThan                                              | String | No       | Requests the content on the page before this ID (older data), the value input should be the orderId of the corresponding interface. |
+| startTime                                               | String | No       | The start time of the record for the query. Unix millisecond timestamp, e.g. 1690196141868                                          |
+| The `startTime` and `endTime` should be within 90 days. |
+| endTime                                                 | String | No       | The end time of the record for the query. Unix millisecond timestamp, e.g. 1690196141868                                            |
+| The `startTime` and `endTime` should be within 90 days. |
 
 Response Example
 
@@ -36,36 +36,33 @@ Response Example
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| orderId | String | Order ID |
-| clientOid | String | Client customized ID |
-| symbol | String | Trading pair |
-| triggerPrice | String | Trigger price |
-| orderType | String | Order type  
+| Parameter    | Type   | Description          |
+| :----------- | :----- | :------------------- |
+| orderId      | String | Order ID             |
+| clientOid    | String | Client customized ID |
+| symbol       | String | Trading pair         |
+| triggerPrice | String | Trigger price        |
+| orderType    | String | Order type           |
+
 `limit`: limit order  
-`market`: market order |
-| executePrice | String | Execution price |
-| planType | String | Order type  
+`market`: market order | | executePrice | String | Execution price | | planType
+| String | Order type  
 `amount`: By amount of the order  
-`total`: By trading volume of the order |
-| size | String | Quantity to buy  
+`total`: By trading volume of the order | | size | String | Quantity to buy  
 If `placeType`\=`amount`, the quote currency is the base coin.  
-If `placeType`\=`total`, the quote currency is the quote coin. |
-| status | String | Order status  
+If `placeType`\=`total`, the quote currency is the quote coin. | | status |
+String | Order status  
 `live`: not triggered  
-`executing`: order placing |
-| side | String | Direction `buy` or `sell` |
-| triggerType | String | Trigger type  
+`executing`: order placing | | side | String | Direction `buy` or `sell` | |
+triggerType | String | Trigger type  
 `fill_price`: filled price  
-`mark_price`: mark price |
-| enterPointSource | String | Order source  
+`mark_price`: mark price | | enterPointSource | String | Order source  
 `WEB`: Orders created on the website  
 `API`: Orders created on API  
 `SYS`: System managed orders, usually generated by forced liquidation logic  
 `ANDROID`: Orders created on the Android app  
-`IOS`: Orders created on the iOS app |
-| cTime | String | Creation time, Unix millisecond timestamp, e.g. 1690196141868 |
-| uTime | String | Update time, Unix millisecond timestamp, e.g. 1690196141868 |
+`IOS`: Orders created on the iOS app | | cTime | String | Creation time, Unix
+millisecond timestamp, e.g. 1690196141868 | | uTime | String | Update time, Unix
+millisecond timestamp, e.g. 1690196141868 |
 
 > **Source:** https://www.bitget.com/api-doc/spot/plan/Get-Current-Plan-Order

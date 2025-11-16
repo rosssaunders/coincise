@@ -6,7 +6,7 @@ Rate limit: 5 req/sec/UID
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/spot/account/deduct-info
+- GET /api/v2/spot/account/deduct-info
 
 Request Example
 
@@ -17,7 +17,7 @@ curl "https://api.bitget.com/api/v2/spot/account/deduct-info" \   -H "ACCESS-KEY
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
 | Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
+| :-------- | :--- | :------- | :---------- |
 
 Response Example
 
@@ -27,8 +27,8 @@ Response Example
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| deduct | String | on / off |
+| Parameter | Type   | Description |
+| :-------- | :----- | :---------- |
+| deduct    | String | on / off    |
 
 > **Source:** https://www.bitget.com/api-doc/spot/account/Get-Deduct-Info
