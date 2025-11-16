@@ -4,6 +4,16 @@ Copy Page
 
 # Change Log
 
+##### 2025.11.14[#](#20251114)
+
+\[Add\] [Broker Fast API Service](/docs-new/rest/broker/api-broker/fast-api)
+Verify A Token (WIP)
+
+\[Modify\]
+[Get Apikey Info](/docs-new/rest/account-info/account-funding/get-apikey-info)
+Added new fields in the response "parentUid", "region", "kycStatus", "expiredAt"
+and "thirdPartyApp"
+
 ##### 2025.10.24[#](#20251024)
 
 \[Margin Add\]
@@ -623,7 +633,7 @@ Added the tradeType response parameter.
 
 \[Add\] **The new version of the API documentation is now online.**
 
-Modified at 16 days ago
+Modified at 1 day ago
 
 [
 
@@ -642,6 +652,8 @@ Market Making Incentive Scheme
 [LLMs.txt](/docs-new/llms.txt)
 
 On this page
+
+[2025.11.14](#20251114)
 
 [2025.10.24](#20251024)
 

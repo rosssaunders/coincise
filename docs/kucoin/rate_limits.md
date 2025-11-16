@@ -117,7 +117,7 @@ Maximum number of batch subscriptions at a time: 100 topics
 
 400 topics (there is no such restriction for Futures)
 
-Modified at 5 months ago
+Modified at 2025-06-18 10:20:43
 
 [
 
@@ -134,31 +134,3 @@ Change Log
 ](/docs-new/change-log)
 
 [LLMs.txt](/docs-new/llms.txt)
-
-On this page
-
-[Rest Rate Limit](#rest-rate-limit)
-
-[1\. Resource Pool:](#1-resource-pool)
-
-[2\. Weight:](#2-weight)
-
-[3\. Request Header:](#3-request-header)
-
-[4\. Public Endpoint Rate Limit:](#4-public-endpoint-rate-limit)
-
-[5\. Private Endpoint Rate Limit](#5-private-endpoint-rate-limit)
-
-[5\. Private Endpoint Rate Limit](#5-private-endpoint-rate-limit-1)
-
-[Websocket Rate Limit](#websocket-rate-limit)
-
-[1\. Number of Connections](#1-number-of-connections)
-
-[2\. Connection Times](#2-connection-times)
-
-[3\. Number of Uplink Messages](#3-number-of-uplink-messages)
-
-[4\. Topic Subscription Limit](#4-topic-subscription-limit)
-
-[5\. Subscription limit for each connection](#5-subscription-limit-for-each-connection)

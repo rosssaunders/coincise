@@ -18,7 +18,7 @@ This interface can query all Margin symbols that have active orders.
 | Parameter | Required | Type   | Description                                                        |
 | --------- | -------- | ------ | ------------------------------------------------------------------ |
 | tradeType | required | string | Cross Margin: MARGIN_TRADE, Isolated Margin: MARGIN_ISOLATED_TRADE |
-|           |
+|  |
 
 ## Responses
 
