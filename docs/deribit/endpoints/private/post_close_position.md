@@ -90,8 +90,8 @@ The fill condition of the linked order (Only for linked order types), default:
   subtracted/added to the secondary order will be rounded down to the contract
   size.
 
-| |   ›    ›  primary*order_id | string | Unique order identifier | |
-  ›  trades | array of \_object* | | |   ›    ›  trade*id | string | Unique (per
+| |   ›    ›  primary_order_id | string | Unique order identifier | |
+  ›  trades | array of _object_ | | |   ›    ›  trade_id | string | Unique (per
 currency) trade identifier | |   ›    ›  tick_direction | integer | Direction of
 the "tick" (`0` = Plus Tick, `1` = Zero-Plus Tick, `2` = Minus Tick, `3` =
 Zero-Minus Tick). | |   ›    ›  fee_currency | string | Currency, i.e `"BTC"`,
@@ -116,11 +116,11 @@ base currency | |   ›    ›  combo_id | string | Optional field conta
 instrument name if the trade is a combo trade | |   ›    ›  matching_id | string
 | Always `null` | |   ›    ›  order_type | string | Order type: `"limit`,
 `"market"`, or `"liquidation"` | |   ›    ›  trade_allocations | array of
-\_object* | List of allocations for Block RFQ pre-allocation. Each allocation
+_object_ | List of allocations for Block RFQ pre-allocation. Each allocation
 specifies `user_id`, `amount`, and `fee` for the allocated part of the trade.
 For broker client allocations, a `client_info` object will be included. | |
   ›    ›    ›  amount | number | Amount allocated to this user. | |
-  ›    ›    ›  client*info | \_object* | Optional client allocation info for
+  ›    ›    ›  client_info | _object_ | Optional client allocation info for
 brokers. | |   ›    ›    ›    ›  client_id | integer | ID of a client; available
 to broker. Represents a group of users under a common name. | |
   ›    ›    ›    ›  client_link_id | integer | ID assigned to a single user in a

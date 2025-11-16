@@ -35,12 +35,12 @@ Execution instruction of the quote. Default - `any_part_of`
 - `"any_part_of (APO)"` - The quote can be filled either partially or fully,
   with the filled amount potentially being less than the Block RFQ amount.
 
-| |   ›  expires*at | integer | The timestamp when the quote expires
+| |   ›  expires_at | integer | The timestamp when the quote expires
 (milliseconds since the Unix epoch), equal to the earliest expiry of placed
 quotes | |   ›  last_update_timestamp | integer | Timestamp of the last update
 of the quote (milliseconds since the UNIX epoch) | |   ›  makers | array of
 string | Maker of the quote | |   ›  price | number | Price of a quote | | bids
-| array of \_object* | | |   ›  amount | number | This value multiplied by the
+| array of _object_ | | |   ›  amount | number | This value multiplied by the
 ratio of a leg gives trade size on that leg. | |   ›  execution_instruction |
 string |
 
@@ -53,7 +53,7 @@ Execution instruction of the quote. Default - `any_part_of`
 - `"any_part_of (APO)"` - The quote can be filled either partially or fully,
   with the filled amount potentially being less than the Block RFQ amount.
 
-| |   ›  expires*at | integer | The timestamp when the quote expires
+| |   ›  expires_at | integer | The timestamp when the quote expires
 (milliseconds since the Unix epoch), equal to the earliest expiry of placed
 quotes | |   ›  last_update_timestamp | integer | Timestamp of the last update
 of the quote (milliseconds since the UNIX epoch) | |   ›  makers | array of
@@ -64,41 +64,41 @@ was created (milliseconds since the Unix epoch) | | disclosed | boolean |
 Indicates whether the RFQ was created as non-anonymous, meaning taker and maker
 aliases are visible to counterparties. | | expiration_timestamp | integer | The
 timestamp when the Block RFQ will expire (milliseconds since the UNIX epoch) | |
-hedge | \_object* | | |   ›  amount | integer | It represents the requested
-hedge leg size. For perpetual and inverse futures the amount is in USD units.
-For options and linear futures and it is the underlying base currency coin. | |
-  ›  direction | string | Direction: `buy`, or `sell` | |   ›  instrument*name |
+hedge | _object_ | | |   ›  amount | integer | It represents the requested hedge
+leg size. For perpetual and inverse futures the amount is in USD units. For
+options and linear futures and it is the underlying base currency coin. | |
+  ›  direction | string | Direction: `buy`, or `sell` | |   ›  instrument_name |
 string | Unique instrument identifier | |   ›  price | number | Price for a
 hedge leg | | included_in_taker_rating | boolean | Indicates whether the RFQ is
 included in the taker's rating calculation. Present only for closed RFQs created
 by the requesting taker. | | index_prices | array of number | A list of index
 prices for the underlying instrument(s) at the time of trade execution. | |
 label | string | User defined label for the Block RFQ (maximum 64 characters) |
-| legs | array of \_object* | | |   ›  direction | string | Direction: `buy`, or
-`sell` | |   ›  instrument*name | string | Unique instrument identifier | |
+| legs | array of _object_ | | |   ›  direction | string | Direction: `buy`, or
+`sell` | |   ›  instrument_name | string | Unique instrument identifier | |
   ›  ratio | integer | Ratio of amount between legs | | makers | array of string
 | List of targeted Block RFQ makers | | mark_price | number | The mark price for
 the instrument | | min_trade_amount | number | Minimum amount for trading | |
 role | string | Role of the user in Block RFQ | | state | string | State of the
 Block RFQ | | taker | string | Taker alias. Present only when `disclosed` is
 `true`. | | taker_rating | string | Rating of the taker | | trade_allocations |
-array of \_object* | List of allocations for Block RFQ pre-allocation. Allows to
+array of _object_ | List of allocations for Block RFQ pre-allocation. Allows to
 split amount between different (sub)accounts or broker clients. Each allocation
 must specify either `user_id` (for direct allocation) or `client_info` object
 (for broker allocation), and amount. Visible only to the taker. | |   ›  amount
-| number | Amount allocated to this user or client. | |   ›  client*info |
-\_object* | Client allocation info for brokers. | |   ›    ›  client*id |
-integer | ID of a client; available to broker. Represents a group of users under
-a common name. | |   ›    ›  client_link_id | integer | ID assigned to a single
+| number | Amount allocated to this user or client. | |   ›  client_info |
+_object_ | Client allocation info for brokers. | |   ›    ›  client_id | integer
+| ID of a client; available to broker. Represents a group of users under a
+common name. | |   ›    ›  client_link_id | integer | ID assigned to a single
 user in a client; available to broker. | |   ›    ›  name | string | Name of the
 linked user within the client; available to broker. | |   ›  user_id | integer |
 User ID to allocate part of the RFQ amount. For brokers the User ID is
-obstructed. | | trade_trigger | \_object* | Contains information about the trade
-trigger state | |   ›  cancel*reason | string | Reason for cancellation, present
+obstructed. | | trade_trigger | _object_ | Contains information about the trade
+trigger state | |   ›  cancel_reason | string | Reason for cancellation, present
 only when state is cancelled | |   ›  direction | string | Direction of the
 trade trigger | |   ›  price | number | Price of the trade trigger | |
   ›  state | string | Trade trigger state: `"untriggered"` or `"cancelled"` | |
-trades | array of \_object* | | |   ›  amount | number | Trade amount. For
+trades | array of _object_ | | |   ›  amount | number | Trade amount. For
 options, linear futures, linear perpetuals and spots the amount is denominated
 in the underlying base currency coin. The inverse perpetuals and inverse futures
 are denominated in USD units. | |   ›  direction | string | Direction: `buy`, or
