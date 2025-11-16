@@ -148,7 +148,7 @@ Blockchain network name shown to users in Upbit.
 
 \-Thailand [Wallet Status](https://th.upbit.com/service_center/wallet_status)
 
-Updated 16 days ago
+Updated 1 day ago
 
 ---
 
@@ -392,7 +392,7 @@ xxxxxxxxxx
 
 \]
 
-Updated 16 days ago
+Updated 1 day ago
 
 ---
 
