@@ -34,4 +34,4 @@ Content-Type: request body(application/json)
 | insetTime      | datetime | Creation time    |
 
 > **Source:**
-> [https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html](https://bingx-api.github.io/docs/#/en-us/spot/wallet-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/common/wallet-api.html](https://bingx-api.github.io/docs/#/en-us/common/wallet-api.html)

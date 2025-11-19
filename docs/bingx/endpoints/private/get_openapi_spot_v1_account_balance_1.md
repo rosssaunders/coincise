@@ -31,4 +31,4 @@ Content-Type: request body(application/json)
 | balances       | Array | Asset list, element fields refer to the following table |
 
 > **Source:**
-> [https://bingx-api.github.io/docs/#/en-us/spot/account-api.html](https://bingx-api.github.io/docs/#/en-us/spot/account-api.html)
+> [https://bingx-api.github.io/docs/#/en-us/common/account-api.html](https://bingx-api.github.io/docs/#/en-us/common/account-api.html)

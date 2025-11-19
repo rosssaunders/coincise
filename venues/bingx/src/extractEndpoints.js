@@ -76,12 +76,12 @@ const generateFilename = (method, path) => {
 
 /**
  * Process H2 section and extract endpoint details
- * This function is based on the existing BingX extraction logic in index.js
+ * Collects the H2 and all its siblings until the next H2
  */
-const processH2Section = async (sectionElement, sourceUrl) => {
-  return await sectionElement.evaluate(
-    async (section, url) => {
-      // Helper to process tables
+const processH2Section = async (h2Element, sourceUrl) => {
+  return await h2Element.evaluate(
+    async (h2, url) => {
+      // Helper to process tables (merge header and body tables)
       const processTable = (container) => {
         if (!container) return null;
 
@@ -95,6 +95,7 @@ const processH2Section = async (sectionElement, sourceUrl) => {
 
         if (!thead || !tbody) return null;
 
+        // Merge: insert thead from headerTable into bodyTable
         bodyTable.insertBefore(thead, tbody);
         headerTable.remove();
 
@@ -180,120 +181,145 @@ const processH2Section = async (sectionElement, sourceUrl) => {
         return bodyTable;
       };
 
-      // Create output container
+      // Collect all siblings after the H2 until we hit the next H2
+      const sectionElements = [];
+      let sibling = h2.nextElementSibling;
+      while (sibling && sibling.tagName !== "H2") {
+        sectionElements.push(sibling);
+        sibling = sibling.nextElementSibling;
+      }
+
+      // Now process the isolated section elements
       const detailDiv = document.createElement("div");
 
-      // Extract heading
-      const heading = section.querySelector("h2");
-      if (heading) {
-        const h2 = document.createElement("h2");
-        h2.textContent = heading.textContent.trim();
-        detailDiv.appendChild(h2);
-        heading.remove();
-      }
+      // Add heading
+      const h2Elem = document.createElement("h2");
+      h2Elem.textContent = h2.textContent.trim();
+      detailDiv.appendChild(h2Elem);
 
-      // Extract HTTP method and path
-      section.querySelectorAll("p.item-code-content").forEach((p) => {
-        if (
-          p &&
-          (p.textContent.trim().startsWith("POST") ||
-            p.textContent.trim().startsWith("GET"))
-        ) {
-          const methodPath = document.createElement("p");
-          methodPath.textContent = p.textContent.trim();
-          detailDiv.appendChild(methodPath);
-          p.remove();
-        }
-      });
-
-      // Extract rate limiting info
-      section.querySelectorAll("div").forEach((div) => {
-        const buttonChild = Array.from(div.children).find(
-          (child) => child.tagName === "BUTTON"
-        );
-        if (
-          buttonChild &&
-          div.textContent.trim().startsWith("rate limitation by UID")
-        ) {
-          const rateLimitText = document.createElement("p");
-          rateLimitText.textContent = div.textContent.trim();
-          detailDiv.appendChild(rateLimitText);
-          div.remove();
-        }
-
-        const aLink = Array.from(div.children).find(
-          (child) => child.tagName === "A"
-        );
-        if (aLink && div.textContent.trim().startsWith("API KEY permission")) {
-          const authText = document.createElement("p");
-          authText.textContent = div.textContent.trim();
-          detailDiv.appendChild(authText);
-          div.remove();
-        }
-      });
-
-      // Extract content-type
-      section.querySelectorAll("label").forEach((label) => {
-        if (label && label.textContent.trim() === "Content-Type:") {
-          const nextLabel = label.nextElementSibling;
-          if (nextLabel) {
-            nextLabel.querySelectorAll("button").forEach((button) => {
-              if (button && button.textContent.trim().startsWith("Form")) {
-                button.remove();
-              }
-            });
-
-            const contentTypeText = document.createElement("p");
-            contentTypeText.textContent =
-              label.textContent.trim() + nextLabel.textContent.trim();
-            detailDiv.appendChild(contentTypeText);
-
-            nextLabel.remove();
-            label.remove();
+      // Extract HTTP method and path from sectionElements
+      for (const elem of sectionElements) {
+        const codeContentP = elem.querySelector ? elem.querySelector("p.item-code-content") : null;
+        if (codeContentP) {
+          const text = codeContentP.textContent.trim();
+          if (
+            text.startsWith("POST") ||
+            text.startsWith("GET") ||
+            text.startsWith("DELETE") ||
+            text.startsWith("PUT")
+          ) {
+            const methodPath = document.createElement("p");
+            methodPath.textContent = text;
+            detailDiv.appendChild(methodPath);
           }
         }
-      });
-
-      // Add description section
-      const contentDiv = section.querySelector(".el-collapse-item__content");
-      if (contentDiv) {
-        const descriptionTitle = document.createElement("h3");
-        descriptionTitle.textContent = "Description";
-        detailDiv.appendChild(descriptionTitle);
-        detailDiv.appendChild(contentDiv);
       }
 
-      // Process request parameters tab
-      const requestTab = section.querySelector("#tab-request");
-      if (requestTab) {
-        requestTab.click();
-        await new Promise((resolve) => setTimeout(resolve, 100));
+      // Extract rate limiting info
+      for (const elem of sectionElements) {
+        if (elem.querySelectorAll) {
+          elem.querySelectorAll("div").forEach((div) => {
+            const buttonChild = Array.from(div.children).find(
+              (child) => child.tagName === "BUTTON"
+            );
+            if (
+              buttonChild &&
+              div.textContent.trim().startsWith("rate limitation by UID")
+            ) {
+              const rateLimitText = document.createElement("p");
+              rateLimitText.textContent = div.textContent.trim();
+              detailDiv.appendChild(rateLimitText);
+            }
 
-        const requestPanel = section.querySelector("#pane-request");
-        if (requestPanel) {
-          const h3 = document.createElement("h3");
-          h3.textContent = "Request Parameters";
-          detailDiv.appendChild(h3);
-
-          const table = processTable(requestPanel);
-          if (table) detailDiv.appendChild(table);
+            const aLink = Array.from(div.children).find(
+              (child) => child.tagName === "A"
+            );
+            if (aLink && div.textContent.trim().startsWith("API KEY permission")) {
+              const authText = document.createElement("p");
+              authText.textContent = div.textContent.trim();
+              detailDiv.appendChild(authText);
+            }
+          });
         }
       }
 
-      // Process response parameters tab
-      const responseTab = section.querySelector("#tab-response");
-      if (responseTab) {
-        responseTab.click();
-        await new Promise((resolve) => setTimeout(resolve, 100));
+      // Extract content-type
+      for (const elem of sectionElements) {
+        if (elem.querySelectorAll) {
+          elem.querySelectorAll("label").forEach((label) => {
+            if (label && label.textContent.trim() === "Content-Type:") {
+              const nextLabel = label.nextElementSibling;
+              if (nextLabel) {
+                const buttonTexts = [];
+                nextLabel.querySelectorAll("button").forEach((button) => {
+                  if (!button.textContent.trim().startsWith("Form")) {
+                    buttonTexts.push(button.textContent.trim());
+                  }
+                });
 
-        const responsePanel = section.querySelector("#pane-response");
-        if (responsePanel) {
-          const h3 = document.createElement("h3");
-          h3.textContent = "Response Parameters";
-          detailDiv.appendChild(h3);
+                if (buttonTexts.length > 0) {
+                  const contentTypeText = document.createElement("p");
+                  contentTypeText.textContent =
+                    label.textContent.trim() + " " + buttonTexts.join(" ");
+                  detailDiv.appendChild(contentTypeText);
+                }
+              }
+            }
+          });
+        }
+      }
 
-          const table = processTable(responsePanel);
-          if (table) detailDiv.appendChild(table);
+      // Add description section
+      for (const elem of sectionElements) {
+        if (elem.querySelector) {
+          const contentDiv = elem.querySelector(".el-collapse-item__content");
+          if (contentDiv) {
+            const descriptionTitle = document.createElement("h3");
+            descriptionTitle.textContent = "Description";
+            detailDiv.appendChild(descriptionTitle);
+            detailDiv.appendChild(contentDiv.cloneNode(true));
+            break;
+          }
+        }
+      }
+
+      // Process request parameters tab - work with original DOM
+      for (const elem of sectionElements) {
+        const requestTab = elem.querySelector ? elem.querySelector("#tab-request") : null;
+        if (requestTab) {
+          requestTab.click();
+          await new Promise((resolve) => setTimeout(resolve, 100));
+
+          const requestPanel = elem.querySelector("#pane-request");
+          if (requestPanel) {
+            const h3 = document.createElement("h3");
+            h3.textContent = "Request Parameters";
+            detailDiv.appendChild(h3);
+
+            const table = processTable(requestPanel);
+            if (table) detailDiv.appendChild(table);
+          }
+          break;
+        }
+      }
+
+      // Process response parameters tab - work with original DOM
+      for (const elem of sectionElements) {
+        const responseTab = elem.querySelector ? elem.querySelector("#tab-response") : null;
+        if (responseTab) {
+          responseTab.click();
+          await new Promise((resolve) => setTimeout(resolve, 100));
+
+          const responsePanel = elem.querySelector("#pane-response");
+          if (responsePanel) {
+            const h3 = document.createElement("h3");
+            h3.textContent = "Response Parameters";
+            detailDiv.appendChild(h3);
+
+            const table = processTable(responsePanel);
+            if (table) detailDiv.appendChild(table);
+          }
+          break;
         }
       }
 
@@ -322,28 +348,15 @@ const extractEndpointsFromUrl = async (page, url, turndownService) => {
   await page.waitForSelector(".app-content", { timeout: 10000 });
 
   // Find all H2 sections (endpoints)
-  const sections = await page.$$(".app-content h2");
-  console.log(`  Found ${sections.length} potential endpoints`);
+  const h2Elements = await page.$$(".app-content h2");
+  console.log(`  Found ${h2Elements.length} potential endpoints`);
 
   const endpoints = [];
 
-  for (const sectionHeading of sections) {
+  for (const h2Element of h2Elements) {
     try {
-      // Get the section container
-      const sectionContainer = await page.evaluateHandle(
-        (h2) => {
-          // Find the parent that contains this H2 and all its content
-          let parent = h2.parentElement;
-          while (parent && !parent.classList.contains("section-container")) {
-            parent = parent.parentElement;
-          }
-          return parent || h2.parentElement;
-        },
-        sectionHeading
-      );
-
-      // Extract the HTML for this section
-      const html = await processH2Section(sectionContainer, url);
+      // Extract the HTML for this section (H2 + all siblings until next H2)
+      const html = await processH2Section(h2Element, url);
       const markdown = turndownService.turndown(html);
 
       // Parse the markdown to extract endpoint info
@@ -384,6 +397,8 @@ const extractEndpointsFromUrl = async (page, url, turndownService) => {
           markdown,
           isPublic,
         });
+      } else {
+        console.warn(`  ⚠️  Could not extract method/path from section`);
       }
     } catch (error) {
       console.warn(`  ⚠️  Error processing section:`, error.message);
