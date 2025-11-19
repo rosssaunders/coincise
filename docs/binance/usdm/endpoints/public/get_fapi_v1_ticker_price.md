@@ -1,4 +1,4 @@
-# Symbol Price Ticker(Deprecated)
+## Symbol Price Ticker(Deprecated)
 
 ### API Description
 
@@ -15,34 +15,32 @@ GET `/fapi/v1/ticker/price`
 
 ### Request Parameters
 
-| Name   | Type   | Mandatory | Description |
-| ------ | ------ | --------- | ----------- |
-| symbol | STRING | NO        |             |
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| symbol | STRING | NO |  |
 
-> - If the symbol is not sent, prices for all symbols will be returned in an
->   array.
+> -   If the symbol is not sent, prices for all symbols will be returned in an array.
 
 ### Response Example
 
-```json
+```
 {
   "symbol": "BTCUSDT",
   "price": "6000.01",
-  "time": 1589437530011 // Transaction time
+  "time": 1589437530011   // Transaction time
 }
 ```
 
 > OR
 
-```json
+```
 [
-  {
-    "symbol": "BTCUSDT",
-    "price": "6000.01",
-    "time": 1589437530011
-  }
+	{
+  		"symbol": "BTCUSDT",
+  		"price": "6000.01",
+  		"time": 1589437530011
+	}
 ]
 ```
 
-> Source:
-> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker)
+> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker)

@@ -1,4 +1,4 @@
-# Test Connectivity
+## Test Connectivity
 
 ### API Description
 
@@ -18,9 +18,8 @@ NONE
 
 ### Response Example
 
-```json
+```
 {}
 ```
 
-> Source:
-> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api)
+> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api)

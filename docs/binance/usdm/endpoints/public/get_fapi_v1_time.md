@@ -1,4 +1,4 @@
-# Check Server Time
+## Check Server Time
 
 ### API Description
 
@@ -18,11 +18,10 @@ NONE
 
 ### Response Example
 
-```json
+```
 {
   "serverTime": 1499827319559
 }
 ```
 
-> Source:
-> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time)
+> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time)
