@@ -233,7 +233,16 @@ const processEndpoints = (endpoints, turndownService) => {
 
     // Create a DOM for adjusting headings
     const dom = new JSDOM(endpoint.html)
-    adjustHeadingLevels(dom.window.document)
+    const document = dom.window.document
+    adjustHeadingLevels(document)
+
+    // Pre-process code blocks to preserve newlines
+    const codeBlocks = document.querySelectorAll("pre code, code")
+    for (const block of codeBlocks) {
+        // Replace <br> with newlines
+        block.innerHTML = block.innerHTML.replace(/<br\s*\/?>/gi, "\n")
+    }
+
     const adjustedHtml = dom.serialize()
 
     // Convert to markdown

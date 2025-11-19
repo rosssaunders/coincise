@@ -18,5 +18,4 @@ Test connectivity to the Rest API.
 {}
 ```
 
-> Source:
-> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints)
+> Source: [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints)
