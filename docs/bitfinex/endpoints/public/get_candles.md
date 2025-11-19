@@ -1,6 +1,8 @@
 # Candles
 
-get https://api-pub.bitfinex.com/v2/candles/{candle}/{section}
+get
+
+https://api-pub.bitfinex.com/v2/candles/{candle}/{section}
 
 The Candles endpoint provides OCHL (Open, Close, High, Low) and volume data for the specified funding currency or trading pair. The endpoint provides the last 100 candles by default, but a limit and a start and/or end timestamp can be specified.
 

@@ -1,6 +1,8 @@
 # Trades
 
-get https://api-pub.bitfinex.com/v2/trades/{symbol}/hist
+get
+
+https://api-pub.bitfinex.com/v2/trades/{symbol}/hist
 
 The trades endpoint allows the retrieval of past public trades and includes details such as price, size, and time. Optional parameters can be used to limit the number of results; you can specify a start and end timestamp, a limit, and a sorting method.
 

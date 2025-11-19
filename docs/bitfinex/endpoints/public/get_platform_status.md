@@ -1,6 +1,8 @@
 # Platform Status
 
-get https://api-pub.bitfinex.com/v2/platform/status
+get
+
+https://api-pub.bitfinex.com/v2/platform/status
 
 Get the current status of the platform, “Operative” or “Maintenance”. Maintenance periods generally last for a few minutes to a couple of hours and may be necessary from time to time during infrastructure upgrades.
 

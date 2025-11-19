@@ -1,6 +1,8 @@
 # Derivatives Status
 
-get https://api-pub.bitfinex.com/v2/status/deriv
+get
+
+https://api-pub.bitfinex.com/v2/status/deriv
 
 Endpoint used to receive different types of platform information - currently supports derivatives pair status only.
 

@@ -1,6 +1,8 @@
 # Retrieve Orders
 
-post https://api.bitfinex.com/v2/auth/r/orders
+post
+
+https://api.bitfinex.com/v2/auth/r/orders
 
 Gets all the current user's active orders.
 

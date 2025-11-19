@@ -1,6 +1,8 @@
 # Configs
 
-get https://api-pub.bitfinex.com/v2/conf/pub:{Action}:{Object}:{Detail}
+get
+
+https://api-pub.bitfinex.com/v2/conf/pub:{Action}:{Object}:{Detail}
 
 Fetch site configuration data
 

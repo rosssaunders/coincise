@@ -1,6 +1,8 @@
 # Liquidations
 
-get https://api-pub.bitfinex.com/v2/liquidations/hist
+get
+
+https://api-pub.bitfinex.com/v2/liquidations/hist
 
 Endpoint to retrieve liquidations. By default it will retrieve the most recent liquidations, but time-specific data can be retrieved using timestamps.
 

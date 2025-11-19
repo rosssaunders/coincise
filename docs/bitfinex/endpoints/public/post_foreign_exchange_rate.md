@@ -1,6 +1,8 @@
 # Foreign Exchange Rate
 
-post https://api-pub.bitfinex.com/v2/calc/fx
+post
+
+https://api-pub.bitfinex.com/v2/calc/fx
 
 Calculate the exchange rate between two currencies
 

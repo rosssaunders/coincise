@@ -1,6 +1,8 @@
 # Ticker
 
-get https://api-pub.bitfinex.com/v2/ticker/{symbol}
+get
+
+https://api-pub.bitfinex.com/v2/ticker/{symbol}
 
 The ticker endpoint provides a high level overview of the state of the market for a specified pair. It shows the current best bid and ask, the last traded price, as well as information on the daily volume and price movement over the last day.
 

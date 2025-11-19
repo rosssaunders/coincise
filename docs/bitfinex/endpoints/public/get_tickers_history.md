@@ -1,6 +1,8 @@
 # Tickers History
 
-get https://api-pub.bitfinex.com/v2/tickers/hist
+get
+
+https://api-pub.bitfinex.com/v2/tickers/hist
 
 History of recent trading tickers. Provides historic data of the best bid and ask at an hourly interval.
 

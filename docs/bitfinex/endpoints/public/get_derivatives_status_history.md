@@ -1,6 +1,8 @@
 # Derivatives Status History
 
-get https://api-pub.bitfinex.com/v2/status/deriv/{key}/hist
+get
+
+https://api-pub.bitfinex.com/v2/status/deriv/{key}/hist
 
 Endpoint used to receive different types of historical platform information - currently supports derivatives pair status only.
 

@@ -1,6 +1,8 @@
 # Leaderboards
 
-get https://api-pub.bitfinex.com/v2/rankings/{Key}:{Time\_Frame}:{Symbol}/{Section}
+get
+
+https://api-pub.bitfinex.com/v2/rankings/{Key}:{Time\_Frame}:{Symbol}/{Section}
 
 The leaderboards endpoint allows you to retrieve leaderboard standings for unrealized profit (period delta), unrealized profit (inception), volume, and realized profit.
 

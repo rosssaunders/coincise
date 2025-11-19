@@ -1,6 +1,8 @@
 # Tickers
 
-get https://api-pub.bitfinex.com/v2/tickers
+get
+
+https://api-pub.bitfinex.com/v2/tickers
 
 The tickers endpoint provides a high level overview of the state of the market. It shows the current best bid and ask, the last traded price, as well as information on the daily volume and price movement over the last day. The endpoint can retrieve multiple tickers with a single query.
 

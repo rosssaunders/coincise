@@ -1,6 +1,8 @@
 # Stats
 
-get https://api-pub.bitfinex.com/v2/stats1/{key}:{size}:{sym\_platform}:{side\_pair}/{section}
+get
+
+https://api-pub.bitfinex.com/v2/stats1/{key}:{size}:{sym\_platform}:{side\_pair}/{section}
 
 The Stats endpoint provides various statistics on a specified trading pair or funding currency. Use the available keys to specify which statistic you wish to retrieve.
 

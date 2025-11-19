@@ -1,6 +1,8 @@
 # Retrieve Orders (by symbol)
 
-post https://api.bitfinex.com/v2/auth/r/orders/{symbol}
+post
+
+https://api.bitfinex.com/v2/auth/r/orders/{symbol}
 
 Gets all the current user's active orders by trading pair symbol (e.g. tBTCUSD, tLTCBTC, ...).
 

@@ -2,7 +2,9 @@
 
 # Funding Statistics
 
-get https://api-pub.bitfinex.com/v2/funding/stats/{symbol}/hist
+get
+
+https://api-pub.bitfinex.com/v2/funding/stats/{symbol}/hist
 
 Get a list of the most recent funding data for the given currency: FRR, average period, total amount provided, total amount used
 

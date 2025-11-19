@@ -1,6 +1,8 @@
 # Book
 
-get https://api-pub.bitfinex.com/v2/book/{symbol}/{precision}
+get
+
+https://api-pub.bitfinex.com/v2/book/{symbol}/{precision}
 
 The Public Books endpoint allows you to keep track of the state of Bitfinex order books on a price aggregated basis with customizable precision. Raw books can be retrieved by using precision R0.
 

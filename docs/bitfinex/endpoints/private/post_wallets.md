@@ -1,6 +1,8 @@
 # Wallets
 
-post https://api.bitfinex.com/v2/auth/r/wallets
+post
+
+https://api.bitfinex.com/v2/auth/r/wallets
 
 Returns an array of all the current user's wallets.
 

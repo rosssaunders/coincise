@@ -1,6 +1,8 @@
 # Virtual Asset Service Providers
 
-get https://api.bitfinex.com/v2/ext/vasps
+get
+
+https://api.bitfinex.com/v2/ext/vasps
 
 Returns a list of VASP names along with their respective ID
 

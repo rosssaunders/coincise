@@ -1,6 +1,8 @@
 # Market Average Price
 
-post https://api-pub.bitfinex.com/v2/calc/trade/avg
+post
+
+https://api-pub.bitfinex.com/v2/calc/trade/avg
 
 Calculate the average execution price for Trading or rate for Margin funding.
 
