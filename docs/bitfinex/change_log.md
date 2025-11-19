@@ -2,61 +2,31 @@
 
 # Changelog
 
-/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
-
-# 
-
 v2024-10-16
-
-[](#v2024-10-16)
 
 Added [Virtual Asset Service Providers](/reference/virtual-asset-service-providers) endpoint.
 
-# 
-
 v2019-08-19
-
-[](#v2019-08-19)
 
 Upgrade rest end point: [https://api.bitfinex.com/v2/auth/r/positions/audit](https://api.bitfinex.com/v2/auth/r/positions/audit) ([https://docs.bitfinex.com/v2/reference#positions-audit](/reference#positions-audit))  
 Fields added: TYPE, COLLATERAL, COLLATERAL\_MIN and META
 
-# 
-
 v2018-06-21
-
-[](#v2018-06-21)
 
 Support for more granular filtering (`trading-tBTCUSD`, `funding-fUSD`, ...)  
 [https://docs.bitfinex.com/v2/docs/ws-auth#section-channel-filters](/docs/ws-auth#section-channel-filters)
 
-# 
-
 v2018-06-08
-
-[](#v2018-06-08)
 
 Support for TIF (Time-In-Force) for order submission and update via Websocket (`oc` and `ou` messages). This first version only support a datetime format ('2020-01-01 10:45:23')
 
-# 
-
 v2018-06-06
-
-[](#v2018-06-06)
 
 Performance increase on order cancellation via Websocket (`oc` message)
 
-# 
-
 v2018-04-19
 
-[](#v2018-04-19)
-
-## 
-
 1\. New RESTv2 ledger entries endpoint
-
-[](#1-new-restv2-ledger-entries-endpoint)
 
 Account ledger entries (wallet movements) are now accessible via a POST request on `/v2/auth/r/ledgers/{currency}/hist`:
 
@@ -89,11 +59,7 @@ request.post({
 */
 ```
 
-## 
-
 2\. New RESTv2 exchange rate endpoint
-
-[](#2-new-restv2-exchange-rate-endpoint)
 
 The real-time exchange rate between any two currencies is now accessible via a POST request on `/v2/calc/fx`:
 
@@ -115,11 +81,7 @@ request.post({
 */
 ```
 
-## 
-
 3\. New RESTv2 user settings manipulation endpoints
-
-[](#3-new-restv2-user-settings-manipulation-endpoints)
 
 Users settings can now be read, modified, and deleted via POST requests:
 
@@ -174,11 +136,7 @@ request.post({
 })
 ```
 
-## 
-
 4\. Added WSv2 order flag support
-
-[](#4-added-wsv2-order-flag-support)
 
 Orders now contain a 'flags' field which can be used to modify execution behaviour. This replaces the old `hidden` and `postonly` boolean fields; if multiple flags need to be active on an order, they can be added together (logical AND). For more details, see the [annoucement blog post](https://medium.com/bitfinex/bitfinex-api-dev-update-april-ee10d59f75c2).
 
@@ -213,11 +171,7 @@ Order.flags = {
 }
 ```
 
-## 
-
 5\. Added WSv2 timestamp flag
-
-[](#5-added-wsv2-timestamp-flag)
 
 When sending the WebSocket `conf` request, you may apply the new timestamp flag of value 32768. Once received, the timestamp will appended to every array sent by the server.
 
@@ -225,11 +179,7 @@ Just like order flags, the timestamp flag can be summed with other conf flags.
 
 All available conf flags can be found [here](/docs/ws-general#section-available-options)
 
-## 
-
 6\. Added WSv2 atomic order updates
-
-[](#6-added-wsv2-atomic-order-updates)
 
 You may now update an order via the WebSocket API in-place. You can change an order’s price, amount, change an amount with a given delta, alter group IDs, and change the trailing price delta. Prior to this, changes to an order were applied by cancelling & submitting a new order (orders were immutable).
 
@@ -272,11 +222,7 @@ o.update({ delta: '0.1', price: '6500' })
 o.update({ priceTrailing: '45' })
 ```
 
-## 
-
 7\. Added WSv2 offer submission
-
-[](#7-added-wsv2-offer-submission)
 
 You may now submit an offer via the WebSocket API to receive or provide funding. A few examples:
 
@@ -306,11 +252,7 @@ ws.send(JSON.stringify([
 ]))
 ```
 
-## 
-
 8\. Added WSv2 notification broadcasts
-
-[](#8-added-wsv2-notification-broadcasts)
 
 Users can now broadcast custom notifications via the WebSocket v2 API, with the only requirement being that the notification type must begin with ‘ucm’. Notifications broadcast by a user are echo’ed out from all other active API connections, and have no limitations on payload or internal structure.
 
@@ -329,25 +271,13 @@ w1.send(JSON.stringify([
 ]))
 ```
 
-# 
-
 v2017-03-28
-
-[](#v2017-03-28)
 
 *Release Date: Saturday 1 April 2017 (~4pm UTC)*
 
-## 
-
 1\. WebSocket changes
 
-[](#1-websocket-changes)
-
-### 
-
 "mis", "miu", "fis", "fiu", "bs", "bu"
-
-[](#mis-miu-fis-fiu-bs-bu)
 
 "mis", "fis", "bs": will not be sent anymore  
 "fiu", "miu": will change the protocol to be more granular.  
@@ -452,11 +382,7 @@ they will be split in multiple messages containing the information of the pair/c
 ]
 ```
 
-### 
-
 "ps", "pu", "ws", "wu"
-
-[](#ps-pu-ws-wu)
 
 These messages do not change the format but they gain the ability to send the calculation values (liquidation price, available balance) equal to "null" meaning that the new calculated value is not yet available.
 
@@ -485,11 +411,7 @@ These messages do not change the format but they gain the ability to send the ca
 ]
 ```
 
-### 
-
 "calc" input message
-
-[](#calc-input-message)
 
 This message will be used by UI and bot clients to trigger specific calculations, so we don't end up in calculating data that is not needed (i.e right now the UI receives margin calculation informations also for pairs that are not visualised)
 
@@ -513,29 +435,19 @@ This message will be used by UI and bot clients to trigger specific calculations
 > 
 > NOTE
 > 
-> [](#note)
+> 
 > 
 > Calculations are on demand, so no more streaming of unnecessary data.  
 > Websocket server allows up to 30 calculations per batch. If the client sends too many concurrent requests (or tries to spam) requests, it will receive an error and potentially a disconnection.  
 > The Websocket server performs a maximum of 8 calculations per second (per client)
 
-## 
-
 1\. REST changes
 
-[](#1-rest-changes)
-
-### 
-
 "/auth/r/margin/SYMBOL", "/auth/r/funding/SYMBOL"
-
-[](#authrmarginsymbol-authrfundingsymbol)
 
 These two endpoints will be granular per symbol
 
 Example: `/auth/r/trading/tBTCUSD` `/auth/r/funding/fUSD`
-
-Updated 5 months ago
 
 * * *
 

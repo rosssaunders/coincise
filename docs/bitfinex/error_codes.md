@@ -1,10 +1,6 @@
 # Error Codes
 
-## 
-
 Error/Info Codes
-
-[](#errorinfo-codes)
 
 | Event | Code | Description |
 | --- | --- | --- |

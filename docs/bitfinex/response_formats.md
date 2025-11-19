@@ -4,13 +4,7 @@
 
 # Abbreviation Glossary
 
-/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer theme, base, components, utilities; @layer utilities;
-
-## 
-
 Abbreviation Glossary
-
-[](#abbreviation-glossary)
 
 Below you can find all the message types that the API will send
 
@@ -57,11 +51,7 @@ Below you can find all the message types that the API will send
 | hfts | historical funding trade snapshot |
 | uac | user custom price alert |
 
-## 
-
 Error/Info Codes
-
-[](#errorinfo-codes)
 
 | Event | Code | Description |
 | --- | --- | --- |
@@ -88,11 +78,7 @@ Error/Info Codes
 | EVT\_RESYNC\_STOP | 20061 | Websocket server resync complete. please reconnect |
 | EVT\_INFO | 5000 | Info message |
 
-## 
-
 Order Status
-
-[](#order-status)
 
 | Status | Description |
 | --- | --- |
@@ -113,8 +99,6 @@ Order Status
 | RSN\_DUST was: ACTIVE (note: POSCLOSE) | Dust Amount Position Closed using the Close button (with a market order). |
 | RSN\_PAUSE | Order canceled during moments of pause in the order book. (This is usually for AMPL orders that are placed during the rebase period). |
 | RSN\_BOOK\_SLIP was: PARTIALLY FILLED @ xxxx | This happens an order would move the market too significantly. The order is partially executed and the remainder is canceled to avoid further slippage. |
-
-Updated about 1 month ago
 
 * * *
 
