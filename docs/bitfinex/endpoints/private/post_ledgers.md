@@ -1,78 +1,57 @@
 # Ledgers
 
-# Ledgers
-
 post https://api.bitfinex.com/v2/auth/r/ledgers/{Currency}/hist
 
-View your past ledger entries. Most recent entries are returned by default, but
-a timestamp can be used to retrieve time-specific data.
+View your past ledger entries. Most recent entries are returned by default, but a timestamp can be used to retrieve time-specific data.
 
 The endpoint returns data up to 6 years old.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
-theme, base, components, utilities; @layer utilities;
-
 > 🚧
->
-> ###
->
+> 
+> ### 
+> 
 > Retrieve all ledgers
->
-> [](#retrieve-all-ledgers)
->
-> The currency param can be omitted to return a ledger including all currencies.
-> The path for this call is 'v2/auth/r/ledgers/hist'.
-
-###
+> 
+> 
+> 
+> The currency param can be omitted to return a ledger including all currencies. The path for this call is 'v2/auth/r/ledgers/hist'.
 
 Response data
 
-[](#response-data)
-
-| Index     | Field        | Type                                 | Description                                                       |
-| --------- | ------------ | ------------------------------------ | ----------------------------------------------------------------- |
-| \[0...n\] | LEDGER_ENTRY | [Ledger entry](#ledger-entry-arrays) | Each index contains one of the `n` current user's ledger entries. |
-
-####
+| Index | Field | Type | Description |
+| --- | --- | --- | --- |
+| [0...n] | LEDGER\_ENTRY | [Ledger entry](#ledger-entry-arrays) | Each index contains one of the `n` current user's ledger entries. |
 
 Ledger entry arrays
 
-[](#ledger-entry-arrays)
-
-| Index | Field       | Type             | Description                                                                                        |
-| ----- | ----------- | ---------------- | -------------------------------------------------------------------------------------------------- |
-| \[0\] | ID          | int              | Ledger identifier                                                                                  |
-| \[1\] | CURRENCY    | string           | The symbol of the currency (e.g. "BTC")                                                            |
-| \[2\] | WALLET      | string (or null) | Returns the relevant wallet for the ledger entry ('exchange', 'margin', 'funding', 'contribution') |
-| \[3\] | MTS         | int              | Timestamp in milliseconds                                                                          |
-| \[5\] | AMOUNT      | float            | Amount changed                                                                                     |
-| \[6\] | BALANCE     | float            | Balance after change                                                                               |
-| \[8\] | DESCRIPTION | string           | Description of ledger transaction                                                                  |
-
-####
+| Index | Field | Type | Description |
+| --- | --- | --- | --- |
+| [0] | ID | int | Ledger identifier |
+| [1] | CURRENCY | string | The symbol of the currency (e.g. "BTC") |
+| [2] | WALLET | string (or null) | Returns the relevant wallet for the ledger entry ('exchange', 'margin', 'funding', 'contribution') |
+| [3] | MTS | int | Timestamp in milliseconds |
+| [5] | AMOUNT | float | Amount changed |
+| [6] | BALANCE | float | Balance after change |
+| [8] | DESCRIPTION | string | Description of ledger transaction |
 
 Possible values for the 'category' filter
 
-[](#possible-values-for-the-category-filter)
+This table shows the possible values for the 'category' body param. The table shows the filter followed by the int value that should be entered in the 'category' param to activate the filter.
 
-This table shows the possible values for the 'category' body param. The table
-shows the filter followed by the int value that should be entered in the
-'category' param to activate the filter.
-
-| Filter                                    | Int Value | Filter                        | Int Value | Filter                                | Int Value |
-| ----------------------------------------- | --------- | ----------------------------- | --------- | ------------------------------------- | --------- |
-| exchange                                  | 5         | canceled withdrawal           | 105       | withdrawal fee                        | 254       |
-| position modified, closed, or liquidated  | 22        | trading fee                   | 201       | withdrawal express fee                | 255       |
-| position claim                            | 23        | trading rebate                | 202       | miner fee                             | 258       |
-| position transfer                         | 25        | hidden order fee              | 204       | staking payment                       | 262       |
-| position swap                             | 26        | otc trade fee                 | 207       | adjustment                            | 401       |
-| position funding cost or interest charged | 27        | swap fee                      | 222       | expense                               | 501       |
-| margin / swap / interest payment          | 28        | claiming fee                  | 224       | currency conversion / computation fee | 905       |
-| derivatives funding event                 | 29        | used margin funding charge    | 226       | monthly profit payment                | 907       |
-| settlement                                | 31        | unused margin funding fee     | 228       | losses                                | 911       |
-| transfer                                  | 51        | earned fee / affiliate rebate | 241       |                                       |           |
-| deposit                                   | 101       | ETHFX loyalty fee             | 243       |                                       |           |
-| withdrawal                                | 104       | deposit fee                   | 251       |                                       |           |
+| Filter | Int Value | Filter | Int Value | Filter | Int Value |
+| --- | --- | --- | --- | --- | --- |
+| exchange | 5 | canceled withdrawal | 105 | withdrawal fee | 254 |
+| position modified, closed, or liquidated | 22 | trading fee | 201 | withdrawal express fee | 255 |
+| position claim | 23 | trading rebate | 202 | miner fee | 258 |
+| position transfer | 25 | hidden order fee | 204 | staking payment | 262 |
+| position swap | 26 | otc trade fee | 207 | adjustment | 401 |
+| position funding cost or interest charged | 27 | swap fee | 222 | expense | 501 |
+| margin / swap / interest payment | 28 | claiming fee | 224 | currency conversion / computation fee | 905 |
+| derivatives funding event | 29 | used margin funding charge | 226 | monthly profit payment | 907 |
+| settlement | 31 | unused margin funding fee | 228 | losses | 911 |
+| transfer | 51 | earned fee / affiliate rebate | 241 |  |  |
+| deposit | 101 | ETHFX loyalty fee | 243 |  |  |
+| withdrawal | 104 | deposit fee | 251 |  |  |
 
 **Ratelimit**: 90 req/min
 
@@ -84,9 +63,7 @@ string
 
 required
 
-Currency (BTC, ...) For an up-to-date listing of supported currencies see:
-[https://api.bitfinex.com/v2/conf/pub:map:currency:label](https://api.bitfinex.com/v2/conf/pub:map:currency:label)
-(Can be omitted to retrieve Ledgers for all currencies)
+Currency (BTC, ...) For an up-to-date listing of supported currencies see: [https://api.bitfinex.com/v2/conf/pub:map:currency:label](https://api.bitfinex.com/v2/conf/pub:map:currency:label) (Can be omitted to retrieve Ledgers for all currencies)
 
 Body Params
 
@@ -94,8 +71,7 @@ category
 
 int32
 
-Allows you to filter the ledger response using an int value. For a list of
-possible values, see the table below.
+Allows you to filter the ledger response using an int value. For a list of possible values, see the table below.
 
 start
 
@@ -123,74 +99,16 @@ Wallet name e.g. exchange, margin, funding
 
 Responses
 
-#
-
-200
-
-200
-
-Response body
-
-json
-
-#
-
-400
-
-400
-
-Response body
-
-object
-
-Updated 5 months ago
-
----
-
-Language
-
-ShellNodeRubyPHPPython
-
-cURL Request
-
-Examples
-
-xxxxxxxxxx
-
-1
-
 curl \--request POST \\
-
-2
 
      \--url https://api.bitfinex.com/v2/auth/r/ledgers/Currency/hist \\
 
-3
-
      \--header 'accept: application/json' \\
-
-4
 
      \--header 'content-type: application/json'
 
-Try It!
-
-RESPONSE
-
-Examples
-
-Click `Try It!` to start a request and see the response here! Or choose an
-example:
-
-application/json
-
-200 - Result400 - Result
-
-Updated 5 months ago
-
 ---
-
----
-
-Section: Orders Source: https://docs.bitfinex.com/reference/rest-auth-ledgers
-Path: /v2/auth/r/ledgers/Currency/hist Method: POST
+Section: Orders
+Source: https://docs.bitfinex.com/reference/rest-auth-ledgers
+Path: /v2/auth/r/ledgers/Currency/hist
+Method: POST

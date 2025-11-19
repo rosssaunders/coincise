@@ -146,11 +146,38 @@ const extractEndpointContent = async (page, endpointUrl, turndownService) => {
     // Clone to avoid modifying original
     const clone = main.cloneNode(true)
 
-    // Remove navigation elements
+    // Remove unwanted elements
     const elementsToRemove = clone.querySelectorAll(
-      'nav, aside, .sidebar, .table-of-contents, .pagination, .jump-to, [class*="Navigation"]'
+      'nav, aside, .sidebar, .table-of-contents, .pagination, .jump-to, [class*="Navigation"], ' +
+      'style, script, link, meta, iframe, noscript, ' +
+      '.code-block-wrapper, .copy-button, button, ' +
+      '[class*="Try"], [class*="Example"], [class*="Response"], [class*="RESPONSE"], ' +
+      '[class*="Language"], [class*="Updated"], [class*="CodeBlock"]'
     )
     elementsToRemove.forEach(el => el.remove())
+
+    // Remove any remaining style tags by content
+    const allElements = clone.querySelectorAll('*')
+    allElements.forEach(el => {
+      // Remove elements that only contain CSS
+      const text = el.textContent.trim()
+      if (text.match(/^[@.][\w-]+\s*\{|\/\*!|tailwindcss/)) {
+        el.remove()
+      }
+    })
+
+    // Remove style attributes from all elements
+    clone.querySelectorAll('[style]').forEach(el => el.removeAttribute('style'))
+
+    // Remove class attributes to avoid CSS-in-content issues
+    clone.querySelectorAll('[class]').forEach(el => el.removeAttribute('class'))
+
+    // Remove empty paragraphs and divs
+    clone.querySelectorAll('p, div').forEach(el => {
+      if (!el.textContent.trim() && !el.querySelector('table, ul, ol, pre, code')) {
+        el.remove()
+      }
+    })
 
     // Try to extract HTTP method and path from code blocks
     let method = null
@@ -182,7 +209,83 @@ const extractEndpointContent = async (page, endpointUrl, turndownService) => {
     }
   })
 
-  const markdown = turndownService.turndown(html)
+  let markdown = turndownService.turndown(html)
+
+  // Post-process markdown to clean up issues
+  const lines = markdown.split('\n')
+  const cleanedLines = []
+  const seenH1 = new Set()
+  let inCodeBlock = false
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i]
+
+    // Track code block state
+    if (line.trim().startsWith('```')) {
+      inCodeBlock = !inCodeBlock
+    }
+
+    // Skip processing inside code blocks
+    if (!inCodeBlock) {
+      // Remove CSS/style content
+      if (line.match(/\/\*!|@layer|tailwindcss|^[@.][\w-]+\s*\{/)) {
+        continue
+      }
+
+      // Remove broken table rows (just | or | with spaces)
+      if (line.match(/^\s*\|\s*$/)) {
+        continue
+      }
+
+      // Remove lines that are just numbers (from code examples)
+      if (line.match(/^\s*\d+\s*$/)) {
+        continue
+      }
+
+      // Remove duplicate H1 headings (normalize whitespace for comparison)
+      if (line.startsWith('# ')) {
+        const normalizedHeading = line.replace(/\s+/g, ' ').trim()
+        if (seenH1.has(normalizedHeading)) {
+          continue
+        }
+        seenH1.add(normalizedHeading)
+      }
+
+      // Remove empty headings (just # with spaces)
+      if (line.match(/^#{1,6}\s*$/)) {
+        continue
+      }
+
+      // Remove separator lines like [ . . . ]
+      if (line.match(/^\s*\[\s*\.\s*\.\s*\.\s*\]\s*$/)) {
+        continue
+      }
+
+      // Clean up escaped brackets
+      line = line.replace(/\\\[/g, '[').replace(/\\\]/g, ']')
+
+      // Remove empty anchor links
+      line = line.replace(/\[\]\([^)]*\)/g, '')
+
+      // Remove "xxxxxxxxxx" placeholder text
+      if (line.trim() === 'xxxxxxxxxx') {
+        continue
+      }
+
+      // Remove "Language" lines that appear before code blocks
+      if (line.trim() === 'Language') {
+        continue
+      }
+    }
+
+    cleanedLines.push(line)
+  }
+
+  markdown = cleanedLines
+    .join('\n')
+    // Remove multiple consecutive empty lines
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
 
   return {
     markdown,
@@ -249,9 +352,10 @@ const processEndpoints = async (page, endpoints, turndownService) => {
       const method = httpMethod || "get"
       const filename = generateFilename(method, endpoint.title)
 
-      const fullMarkdown = `# ${endpoint.title}
+      // Check if markdown already starts with the title heading
+      const hasTitle = markdown.startsWith(`# ${endpoint.title}`)
 
-${markdown}
+      const fullMarkdown = `${hasTitle ? '' : `# ${endpoint.title}\n\n`}${markdown}
 
 ---
 Section: ${endpoint.section}
