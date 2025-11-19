@@ -29,8 +29,18 @@ curl -X POST "https://api.bitget.com/api/v2/convert/trade" \   -H "ACCESS-KEY:**
 
 Response Example
 
-```
-{    "code": "00000",    "data": {        "ts": "1688527221603",        "cnvtPrice": "0.00052268",        "toCoinSize": "0.23206967",        "toCoin": "ETH"    },    "msg": "success",    "requestTime": 1627293612502}
+```json
+{
+  "code": "00000",
+  "data": {
+    "ts": "1688527221603",
+    "cnvtPrice": "0.00052268",
+    "toCoinSize": "0.23206967",
+    "toCoin": "ETH"
+  },
+  "msg": "success",
+  "requestTime": 1627293612502
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

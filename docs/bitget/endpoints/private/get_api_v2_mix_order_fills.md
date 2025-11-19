@@ -36,8 +36,40 @@ curl "https://api.bitget.com/api/v2/mix/order/fills?productType=usdt-futures" \ 
 
 Response Example
 
-```
-{    "code": "00000",    "data": {        "fillList": [            {                "tradeId": "123",                "symbol": "ethusdt",                "orderId": "121212",                "price": "1900",                "baseVolume": "1",                "feeDetail": [                    {                        "deduction": "yes",                        "feeCoin": "BGB",                        "totalDeductionFee": "-0.017118519726",                        "totalFee": "-0.017118519726"                    }                ],                "side": "buy",                "quoteVolume": "1902",                "profit": "102",                "enterPointSource": "api",                "tradeSide": "close",                "posMode": "hedge_mode",                "tradeScope": "taker",                "cTime": "1627293509612"            }        ],        "endId": "123"    },    "msg": "success",    "requestTime": 1627293504612}
+```json
+{
+  "code": "00000",
+  "data": {
+    "fillList": [
+      {
+        "tradeId": "123",
+        "symbol": "ethusdt",
+        "orderId": "121212",
+        "price": "1900",
+        "baseVolume": "1",
+        "feeDetail": [
+          {
+            "deduction": "yes",
+            "feeCoin": "BGB",
+            "totalDeductionFee": "-0.017118519726",
+            "totalFee": "-0.017118519726"
+          }
+        ],
+        "side": "buy",
+        "quoteVolume": "1902",
+        "profit": "102",
+        "enterPointSource": "api",
+        "tradeSide": "close",
+        "posMode": "hedge_mode",
+        "tradeScope": "taker",
+        "cTime": "1627293509612"
+      }
+    ],
+    "endId": "123"
+  },
+  "msg": "success",
+  "requestTime": 1627293504612
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

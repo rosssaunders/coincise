@@ -53,8 +53,24 @@ one-way position: (buy: long position, sell: short position) |
 
 Response Example
 
-```
-{  "code": "00000",  "data": [    {      "orderId": "xxxxxxxx",      "stopSurplusClientOid": "xxxxxxxx",      "stopLossClientOid": "xxxxxxxx"    },    {      "orderId": "xxxxxxxx",      "stopSurplusClientOid": "xxxxxxxx",      "stopLossClientOid": "xxxxxxxx"    }  ],  "msg": "success",  "requestTime": 1627293504612}
+```json
+{
+  "code": "00000",
+  "data": [
+    {
+      "orderId": "xxxxxxxx",
+      "stopSurplusClientOid": "xxxxxxxx",
+      "stopLossClientOid": "xxxxxxxx"
+    },
+    {
+      "orderId": "xxxxxxxx",
+      "stopSurplusClientOid": "xxxxxxxx",
+      "stopLossClientOid": "xxxxxxxx"
+    }
+  ],
+  "msg": "success",
+  "requestTime": 1627293504612
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

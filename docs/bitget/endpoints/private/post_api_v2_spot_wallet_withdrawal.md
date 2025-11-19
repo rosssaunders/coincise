@@ -59,8 +59,16 @@ The decimal places of withdrawal amount will be returned by the [Get Coin Info](
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": {        "orderId": "123",        "clientOid": "123"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695808949356,
+  "data": {
+    "orderId": "123",
+    "clientOid": "123"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

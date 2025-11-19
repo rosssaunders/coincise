@@ -22,8 +22,29 @@ N/A
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1703831563264,    "data": {        "coinList": [            {                "coin": "SEAM",                "available": "0.00303329",                "bgbEstAmount": "0.03794680",                "precision": "8",                "feeDetail": [                    {                        "feeRate": "0.02",                        "fee": "0.00075893"                    }                ],                "cTime": "1703831563514"            }        ]    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1703831563264,
+  "data": {
+    "coinList": [
+      {
+        "coin": "SEAM",
+        "available": "0.00303329",
+        "bgbEstAmount": "0.03794680",
+        "precision": "8",
+        "feeDetail": [
+          {
+            "feeRate": "0.02",
+            "fee": "0.00075893"
+          }
+        ],
+        "cTime": "1703831563514"
+      }
+    ]
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

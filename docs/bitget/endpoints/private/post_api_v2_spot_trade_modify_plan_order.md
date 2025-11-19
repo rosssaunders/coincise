@@ -33,8 +33,16 @@ If planType=total, the quote currency is the quote coin. |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1668134576535,    "data": {        "orderId": "121211212122",        "clientOid": "121211212122"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1668134576535,
+  "data": {
+    "orderId": "121211212122",
+    "clientOid": "121211212122"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

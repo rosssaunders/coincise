@@ -28,8 +28,52 @@ curl "https://api.bitget.com/api/v2/mix/market/contracts?productType=usdt-future
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695793701269,    "data": [        {            "symbol": "BTCUSDT",            "baseCoin": "BTC",            "quoteCoin": "USDT",            "buyLimitPriceRatio": "0.9",            "sellLimitPriceRatio": "0.9",            "feeRateUpRatio": "0.1",            "makerFeeRate": "0.0004",            "takerFeeRate": "0.0006",            "openCostUpRatio": "0.1",            "supportMarginCoins": [                "USDT"            ],            "minTradeNum": "0.01",            "priceEndStep": "1",            "volumePlace": "2",            "pricePlace": "1",            "sizeMultiplier": "0.01",            "symbolType": "perpetual",            "minTradeUSDT": "5",            "maxSymbolOrderNum": "999999",            "maxProductOrderNum": "999999",            "maxPositionNum": "150",            "symbolStatus": "normal",            "offTime": "-1",            "limitOpenTime": "-1",            "deliveryTime": "",            "deliveryStartTime": "",            "launchTime": "",            "fundInterval": "8",            "minLever": "1",            "maxLever": "125",            "posLimit": "0.05",            "maintainTime": "1680165535278",            "maxMarketOrderQty": "220",            "maxOrderQty": "1200"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695793701269,
+  "data": [
+    {
+      "symbol": "BTCUSDT",
+      "baseCoin": "BTC",
+      "quoteCoin": "USDT",
+      "buyLimitPriceRatio": "0.9",
+      "sellLimitPriceRatio": "0.9",
+      "feeRateUpRatio": "0.1",
+      "makerFeeRate": "0.0004",
+      "takerFeeRate": "0.0006",
+      "openCostUpRatio": "0.1",
+      "supportMarginCoins": [
+        "USDT"
+      ],
+      "minTradeNum": "0.01",
+      "priceEndStep": "1",
+      "volumePlace": "2",
+      "pricePlace": "1",
+      "sizeMultiplier": "0.01",
+      "symbolType": "perpetual",
+      "minTradeUSDT": "5",
+      "maxSymbolOrderNum": "999999",
+      "maxProductOrderNum": "999999",
+      "maxPositionNum": "150",
+      "symbolStatus": "normal",
+      "offTime": "-1",
+      "limitOpenTime": "-1",
+      "deliveryTime": "",
+      "deliveryStartTime": "",
+      "launchTime": "",
+      "fundInterval": "8",
+      "minLever": "1",
+      "maxLever": "125",
+      "posLimit": "0.05",
+      "maintainTime": "1680165535278",
+      "maxMarketOrderQty": "220",
+      "maxOrderQty": "1200",
+      "isRwa": "YES"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
@@ -82,6 +126,9 @@ Specifically refers to USDT as in ETHUSDT |
 This refers to the maximum allowed quantity when placing an order using the base coin |
 | \> maxOrderQty | String | Maximum order quantity for a single limit order  
 This refers to the maximum allowed quantity when placing an order using the base coin |
+| \> isRwa | String | Is this an RWA Symbol  
+`YES`  
+`NO` |
 | \> openTime | String | This field has been deprecated |
 
 > **Source:** https://www.bitget.com/api-doc/contract/market/Get-All-Symbols-Contracts

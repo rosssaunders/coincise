@@ -30,8 +30,22 @@ When only `assetType` is entered without coin, results of all eligible coins are
 
 Response Example
 
-```
-{    "code": "00000",    "message": "success",    "requestTime": 1695808949356,    "data": [        {            "coin": "usdt",            "available": "0",            "frozen": "0",            "locked": "0",            "limitAvailable": "0",            "uTime": "1622697148"        }    ]}
+```json
+{
+  "code": "00000",
+  "message": "success",
+  "requestTime": 1695808949356,
+  "data": [
+    {
+      "coin": "usdt",
+      "available": "0",
+      "frozen": "0",
+      "locked": "0",
+      "limitAvailable": "0",
+      "uTime": "1622697148"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

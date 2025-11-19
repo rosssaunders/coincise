@@ -4,7 +4,7 @@ Frequency limit: 10 times/1s (uid)
 
 ### Description[​](#description "Direct link to Description")
 
-Get estimated open count per UID
+The result for the estimated openable quantity does not include current positions and existing orders.
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
@@ -33,8 +33,15 @@ default 20 |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695812285073,    "data": {        "size": "0.47"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695812285073,
+  "data": {
+    "size": "0.47"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

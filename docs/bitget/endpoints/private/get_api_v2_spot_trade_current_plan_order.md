@@ -30,8 +30,34 @@ The `startTime` and `endTime` should be within 90 days. |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1668134581005,    "data": {        "nextFlag": false,        "idLessThan": "1",        "orderList": [            {                "orderId": "121211212122",                "clientOid": "121211212122",                "symbol": "TRXUSDT",                "size": "151",                "executePrice": "0.041572",                "triggerPrice": "0.041572",                "status": "not_trigger",                "orderType": "limit",                "side": "buy",                "planType":"amount",                "triggerType": "fill_price",                "enterPointSource": "API",                "uTime": "1668134576563",                "cTime": "1668134576563"            }        ]    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1668134581005,
+  "data": {
+    "nextFlag": false,
+    "idLessThan": "1",
+    "orderList": [
+      {
+        "orderId": "121211212122",
+        "clientOid": "121211212122",
+        "symbol": "TRXUSDT",
+        "size": "151",
+        "executePrice": "0.041572",
+        "triggerPrice": "0.041572",
+        "status": "not_trigger",
+        "orderType": "limit",
+        "side": "buy",
+        "planType": "amount",
+        "triggerType": "fill_price",
+        "enterPointSource": "API",
+        "uTime": "1668134576563",
+        "cTime": "1668134576563"
+      }
+    ]
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

@@ -32,8 +32,29 @@ Unix timestamp in milliseconds format, e.g. 1597026383085 |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1725875190690,    "data": {        "nextSettleTime": "1725876300000",        "borrowAmount": "0",        "borrowLimit": "600000",        "interestList": [            {                "coin": "USDT",                "liability": "100",                "interestFreeLimit": "100",                "interestLimit": "500",                "hourInterestRate": "0.12",                "interest": "0.12",                "cTime": "1725848567893"            }         ],        "endId": "xxxxxxxxxxxxxxx"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1725875190690,
+  "data": {
+    "nextSettleTime": "1725876300000",
+    "borrowAmount": "0",
+    "borrowLimit": "600000",
+    "interestList": [
+      {
+        "coin": "USDT",
+        "liability": "100",
+        "interestFreeLimit": "100",
+        "interestLimit": "500",
+        "hourInterestRate": "0.12",
+        "interest": "0.12",
+        "cTime": "1725848567893"
+      }
+    ],
+    "endId": "xxxxxxxxxxxxxxx"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

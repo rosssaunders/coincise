@@ -24,8 +24,15 @@ curl "https://api.bitget.com/api/v2/public/time"
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1688008631614,    "data": {        "serverTime": "1688008631614"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1688008631614,
+  "data": {
+    "serverTime": "1688008631614"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

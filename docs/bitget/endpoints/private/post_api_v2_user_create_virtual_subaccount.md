@@ -24,8 +24,33 @@ curl -X POST "https://api.bitget.com/api/v2/user/create-virtual-subaccount" \   
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1682660169412,    "data": {        "failureList": [            {                "subaAccountName": "****@*****.com"            }        ],        "successList": [            {                "subaAccountUid": "**********",                "subaAccountName": "****@*****.com",                "status": "normal",                "label": "",                "permList": [                    "contract_trade",                    "spot_trade"                ],                "cTime": "1682660169573",                "uTime": "1682660169573"            }        ]    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1682660169412,
+  "data": {
+    "failureList": [
+      {
+        "subaAccountName": "****@*****.com"
+      }
+    ],
+    "successList": [
+      {
+        "subaAccountUid": "**********",
+        "subaAccountName": "****@*****.com",
+        "status": "normal",
+        "label": "",
+        "permList": [
+          "contract_trade",
+          "spot_trade"
+        ],
+        "cTime": "1682660169573",
+        "uTime": "1682660169573"
+      }
+    ]
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

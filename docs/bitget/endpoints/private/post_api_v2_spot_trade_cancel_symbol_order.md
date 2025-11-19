@@ -24,8 +24,15 @@ curl -X POST "https://api.bitget.com/api/v2/spot/trade/cancel-symbol-order" \   
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1698313139948,    "data": {        "symbol": "BGBUSDT"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1698313139948,
+  "data": {
+    "symbol": "BGBUSDT"
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

@@ -30,8 +30,32 @@ The default value is 100 |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1681195810516,    "data": {        "merchantList": [            {                "registerTime": "1678674575000",                "nickName": "test1",                "isOnline": "no",                "avgPaymentTime": "0",                "avgReleaseTime": "0",                "totalTrades": "0",                "totalBuy": "0",                "totalSell": "0",                "totalCompletionRate": "0",                "trades30d": "8",                "sell30d": "4",                "buy30d": "4",                "completionRate30d": "0.8"            }        ],        "minMerchantId": "1"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1681195810516,
+  "data": {
+    "merchantList": [
+      {
+        "registerTime": "1678674575000",
+        "nickName": "test1",
+        "isOnline": "no",
+        "avgPaymentTime": "0",
+        "avgReleaseTime": "0",
+        "totalTrades": "0",
+        "totalBuy": "0",
+        "totalSell": "0",
+        "totalCompletionRate": "0",
+        "trades30d": "8",
+        "sell30d": "4",
+        "buy30d": "4",
+        "completionRate30d": "0.8"
+      }
+    ],
+    "minMerchantId": "1"
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

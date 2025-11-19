@@ -29,8 +29,30 @@ freeze Freeze |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1656589586807,    "data": {        "endId": 51,        "subAccountList": [            {                "subAccountUid": "********",                "subAccountName": "****@*****.com",                "status": "normal",                "permList": [                    "read",                    "spot_trade",                    "contract_trade"                ],                "label": "mySub01",                "cTime": "1653287983475",                "uTime": "1682660169573"            }        ]    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1656589586807,
+  "data": {
+    "endId": 51,
+    "subAccountList": [
+      {
+        "subAccountUid": "********",
+        "subAccountName": "****@*****.com",
+        "status": "normal",
+        "permList": [
+          "read",
+          "spot_trade",
+          "contract_trade"
+        ],
+        "label": "mySub01",
+        "cTime": "1653287983475",
+        "uTime": "1682660169573"
+      }
+    ]
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

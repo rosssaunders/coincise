@@ -31,8 +31,20 @@ track\_plan: trailing stop order |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1710813939206,    "data": [        {            "orderId": "xxxxxxxxxxxxx",            "price": "0.4188",            "type": "limit",            "status": "success"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1710813939206,
+  "data": [
+    {
+      "orderId": "xxxxxxxxxxxxx",
+      "price": "0.4188",
+      "type": "limit",
+      "status": "success"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

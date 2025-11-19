@@ -53,8 +53,16 @@ For close short, fill in "Sell"; tradeSide should be "Close" |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695806875837,    "data": {        "clientOid": "121211212122",        "orderId": "1"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695806875837,
+  "data": {
+    "clientOid": "121211212122",
+    "orderId": "1"
+  }
+}
 ```
 
 ### Return Parameter[​](#return-parameter "Direct link to Return Parameter")

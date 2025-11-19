@@ -34,8 +34,15 @@ hedge\_mode: hedge mode |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "data": {        "posMode": "one_way_mode"    },    "requestTime": 1627293445916}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "data": {
+    "posMode": "one_way_mode"
+  },
+  "requestTime": 1627293445916
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

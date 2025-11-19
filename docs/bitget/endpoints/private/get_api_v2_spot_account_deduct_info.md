@@ -21,8 +21,15 @@ curl "https://api.bitget.com/api/v2/spot/account/deduct-info" \   -H "ACCESS-KEY
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": {        "deduct": "on"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695808949356,
+  "data": {
+    "deduct": "on"
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

@@ -27,8 +27,21 @@ curl "https://api.bitget.com/api/v2/convert/quoted-price?fromCoin=USDT&fromCoinS
 
 Response Example
 
-```
-{    "code": "00000",    "data": {        "fee": "0",        "fromCoinSize": 100,        "fromCoin": "USDT",        "cnvtPrice": "0.0005226794534969",        "toCoinSize": "0.23206967",        "toCoin": "ETH",        "traceId": "1"    },    "msg": "success",    "requestTime": 1627293612502}
+```json
+{
+  "code": "00000",
+  "data": {
+    "fee": "0",
+    "fromCoinSize": 100,
+    "fromCoin": "USDT",
+    "cnvtPrice": "0.0005226794534969",
+    "toCoinSize": "0.23206967",
+    "toCoin": "ETH",
+    "traceId": "1"
+  },
+  "msg": "success",
+  "requestTime": 1627293612502
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

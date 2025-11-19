@@ -44,8 +44,16 @@ It's unquie. If you set duplicate clientOid, it will return the result of existi
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1683875302853,    "data": {        "transferId": "123456",        "clientOid": "x123"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1683875302853,
+  "data": {
+    "transferId": "123456",
+    "clientOid": "x123"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

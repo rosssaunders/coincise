@@ -28,8 +28,21 @@ curl "https://api.bitget.com/api/v2/mix/market/open-interest?symbol=BTCUSDT&prod
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695796780343,    "data": {        "openInterestList": [            {                "symbol": "BTCUSDT",                "size": "34278.06"            }        ],        "ts": "1695796781616"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695796780343,
+  "data": {
+    "openInterestList": [
+      {
+        "symbol": "BTCUSDT",
+        "size": "34278.06"
+      }
+    ],
+    "ts": "1695796781616"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

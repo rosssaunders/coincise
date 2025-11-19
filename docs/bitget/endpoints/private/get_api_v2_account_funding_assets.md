@@ -20,8 +20,20 @@ curl "https://api.bitget.com/api/v2/account/funding-assets" \  -H "ACCESS-KEY:yo
 
 Response Example
 
-```
-{  "code": "00000",  "msg": "success",  "requestTime": 1712129301188,  "data": [    {      "coin": "USDT",      "available": "326",      "frozen": "",      "usdtValue": "326"    }  ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1712129301188,
+  "data": [
+    {
+      "coin": "USDT",
+      "available": "326",
+      "frozen": "",
+      "usdtValue": "326"
+    }
+  ]
+}
 ```
 
 ### Response parameters[​](#response-parameters "Direct link to Response parameters")

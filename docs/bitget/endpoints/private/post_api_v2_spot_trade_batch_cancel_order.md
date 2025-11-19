@@ -33,8 +33,27 @@ If multiple mode , the symbol in orderlist is not allow be null, and the symbol 
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "121211212122"            }        ],        "failureList": [            {                "orderId": "121211212122",                "clientOid": "xxx001",                "errorMsg": "duplicate clientOrderId"            }        ]    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695808949356,
+  "data": {
+    "successList": [
+      {
+        "orderId": "121211212122",
+        "clientOid": "121211212122"
+      }
+    ],
+    "failureList": [
+      {
+        "orderId": "121211212122",
+        "clientOid": "xxx001",
+        "errorMsg": "duplicate clientOrderId"
+      }
+    ]
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

@@ -40,8 +40,39 @@ The interval between the `startTime` and the `endTime` should be <= 30 days |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695809161807,    "data": {        "bills": [            {                "billId": "1",                "symbol": "BTCUSDT",                "amount": "-0.004992",                "fee": "0",                "feeByCoupon": "",                "businessType": "contract_settle_fee",                "coin": "USDT",                "balance":"232.21",                "cTime": "1695715200654"            },            {                "billId": "2",                "symbol": "ETHUSDT",                "amount": "0",                "fee": "-0.222012",                "feeByCoupon": "",                "businessType": "open_long",                "coin": "USDT",                "balance":"232.21",                "cTime": "1695714563516"            }        ],        "endId": "2"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695809161807,
+  "data": {
+    "bills": [
+      {
+        "billId": "1",
+        "symbol": "BTCUSDT",
+        "amount": "-0.004992",
+        "fee": "0",
+        "feeByCoupon": "",
+        "businessType": "contract_settle_fee",
+        "coin": "USDT",
+        "balance": "232.21",
+        "cTime": "1695715200654"
+      },
+      {
+        "billId": "2",
+        "symbol": "ETHUSDT",
+        "amount": "0",
+        "fee": "-0.222012",
+        "feeByCoupon": "",
+        "businessType": "open_long",
+        "coin": "USDT",
+        "balance": "232.21",
+        "cTime": "1695714563516"
+      }
+    ],
+    "endId": "2"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

@@ -28,8 +28,16 @@ margin leverage |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1683875302853,    "data": {        "makerFeeRate": "0.0002",        "takerFeeRate": "0.0006"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1683875302853,
+  "data": {
+    "makerFeeRate": "0.0002",
+    "takerFeeRate": "0.0006"
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

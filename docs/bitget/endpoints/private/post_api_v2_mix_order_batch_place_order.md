@@ -7,6 +7,11 @@
 
 -   Supports TP/SL feature. If the current underlying asset does not exist in the position, it is intended to preset the TP/SL. If the current underlying exists in the position, it is intended to modify the TP/SL
 -   Ignore the `tradeSide` parameter when position mode is in `one-way-mode`
+-   **API Broker rebate identifier**:  
+    The following code block needs to be added to the HTTP Header of the request.
+    
+    > "X-CHANNEL-API-CODE":"your-channel-api-code"
+    
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
@@ -70,8 +75,21 @@ No stop-loss is set if the field is empty. |
 
 Response Example
 
-```
-{    "code": "00000",    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "BITGET#121211212122"            }        ],        "failureList": []    },    "msg": "success",    "requestTime": 1627293504612}
+```json
+{
+  "code": "00000",
+  "data": {
+    "successList": [
+      {
+        "orderId": "121211212122",
+        "clientOid": "BITGET#121211212122"
+      }
+    ],
+    "failureList": []
+  },
+  "msg": "success",
+  "requestTime": 1627293504612
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

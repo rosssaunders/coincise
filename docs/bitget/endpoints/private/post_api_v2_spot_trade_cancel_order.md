@@ -33,8 +33,16 @@ Either orderId or clientOid is required |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1234567891234,    "data": {        "orderId": "121211212122",        "clientOid": "xx001"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1234567891234,
+  "data": {
+    "orderId": "121211212122",
+    "clientOid": "xx001"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

@@ -27,8 +27,43 @@ curl "https://api.bitget.com/api/v2/mix/account/accounts?productType=USDT-FUTURE
 
 Response Example
 
-```
-{    "code": "00000",    "data": [        {            "marginCoin": "USDT",            "locked": "0.31876482",            "available": "10575.26735771",            "crossedMaxAvailable": "10580.56434289",            "isolatedMaxAvailable": "10580.56434289",            "maxTransferOut": "10572.92904289",            "accountEquity": "10582.90265771",            "usdtEquity": "10582.902657719473",            "btcEquity": "0.204885807029",            "crossedRiskRate": "0",            "unrealizedPL": "",            "coupon": "0",            "unionTotalMagin": "111,1",            "unionAvailable": "1111.1",            "unionMm": "111",            "assetList": [                {                    "coin": "BTC",                    "balance": "1.2",                    "available": "1.2"                }            ],            "isolatedMargin": "23.43",            "crossedMargin": "34.34",            "crossedUnrealizedPL":"23",            "isolatedUnrealizedPL":"0",            "assetMode": "union"        }    ],    "msg": "success",    "requestTime": 1630901215622}
+```json
+{
+  "code": "00000",
+  "data": [
+    {
+      "marginCoin": "USDT",
+      "locked": "0.31876482",
+      "available": "10575.26735771",
+      "crossedMaxAvailable": "10580.56434289",
+      "isolatedMaxAvailable": "10580.56434289",
+      "maxTransferOut": "10572.92904289",
+      "accountEquity": "10582.90265771",
+      "usdtEquity": "10582.902657719473",
+      "btcEquity": "0.204885807029",
+      "crossedRiskRate": "0",
+      "unrealizedPL": "",
+      "coupon": "0",
+      "unionTotalMagin": "111,1",
+      "unionAvailable": "1111.1",
+      "unionMm": "111",
+      "assetList": [
+        {
+          "coin": "BTC",
+          "balance": "1.2",
+          "available": "1.2"
+        }
+      ],
+      "isolatedMargin": "23.43",
+      "crossedMargin": "34.34",
+      "crossedUnrealizedPL": "23",
+      "isolatedUnrealizedPL": "0",
+      "assetMode": "union"
+    }
+  ],
+  "msg": "success",
+  "requestTime": 1630901215622
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

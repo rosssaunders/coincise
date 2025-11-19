@@ -37,8 +37,30 @@ Unix timestamp in milliseconds format, e.g. 1597026383085
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695865481335,    "data": [        {            "tradeId": "1",            "price": "26372.5",            "size": "9.25",            "side": "Sell",            "ts": "1695865151000",            "symbol": "BTCUSDT"        },        {            "tradeId": "2",            "price": "26383",            "size": "12.12",            "side": "Buy",            "ts": "1695865115000",            "symbol": "BTCUSDT"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695865481335,
+  "data": [
+    {
+      "tradeId": "1",
+      "price": "26372.5",
+      "size": "9.25",
+      "side": "Sell",
+      "ts": "1695865151000",
+      "symbol": "BTCUSDT"
+    },
+    {
+      "tradeId": "2",
+      "price": "26383",
+      "size": "12.12",
+      "side": "Buy",
+      "ts": "1695865115000",
+      "symbol": "BTCUSDT"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

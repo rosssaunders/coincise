@@ -22,8 +22,20 @@ N/A
 
 Response Example
 
-```
-{    "code": "00000",    "data": [        {            "coin": "ETH",            "available": "0.9994",            "maxAmount": "5",            "minAmount": "0.0005"        }    ],    "msg": "success",    "requestTime": 1627293612502}
+```json
+{
+  "code": "00000",
+  "data": [
+    {
+      "coin": "ETH",
+      "available": "0.9994",
+      "maxAmount": "5",
+      "minAmount": "0.0005"
+    }
+  ],
+  "msg": "success",
+  "requestTime": 1627293612502
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

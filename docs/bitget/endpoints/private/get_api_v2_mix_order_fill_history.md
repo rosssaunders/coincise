@@ -40,8 +40,41 @@ Unix timestamp in milliseconds format, e.g. 1597026383085
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1699267238892,    "data": {        "fillList": [            {                "tradeId": "xxxx",                "symbol": "ETHUSDT",                "marginCoin": "USDT",                "orderId": "xxxx",                "price": "1801.33",                "baseVolume": "0.02",                "feeDetail": [                    {                        "deduction": "no",                        "feeCoin": "USDT",                        "totalDeductionFee": "0",                        "totalFee": "-0.02161596"                    }                ],                "side": "sell",                "quoteVolume": "36.0266",                "profit": "0.0252",                "enterPointSource": "ios",                "tradeSide": "sell_single",                "posMode": "one_way_mode",                "tradeScope": "taker",                "cTime": "1698730804882"            }        ],        "endId": "123456789"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1699267238892,
+  "data": {
+    "fillList": [
+      {
+        "tradeId": "xxxx",
+        "symbol": "ETHUSDT",
+        "marginCoin": "USDT",
+        "orderId": "xxxx",
+        "price": "1801.33",
+        "baseVolume": "0.02",
+        "feeDetail": [
+          {
+            "deduction": "no",
+            "feeCoin": "USDT",
+            "totalDeductionFee": "0",
+            "totalFee": "-0.02161596"
+          }
+        ],
+        "side": "sell",
+        "quoteVolume": "36.0266",
+        "profit": "0.0252",
+        "enterPointSource": "ios",
+        "tradeSide": "sell_single",
+        "posMode": "one_way_mode",
+        "tradeScope": "taker",
+        "cTime": "1698730804882"
+      }
+    ],
+    "endId": "123456789"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

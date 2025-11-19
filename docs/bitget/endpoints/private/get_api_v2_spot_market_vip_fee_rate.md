@@ -22,8 +22,23 @@ N/A
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1675759699382,    "data": [        {            "level": 1,            "dealAmount": "1000000",            "assetAmount": "50000",            "takerFeeRate": "0",            "makerFeeRate": "0",            "btcWithdrawAmount": "300",            "usdtWithdrawAmount": "5000000"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1675759699382,
+  "data": [
+    {
+      "level": 1,
+      "dealAmount": "1000000",
+      "assetAmount": "50000",
+      "takerFeeRate": "0",
+      "makerFeeRate": "0",
+      "btcWithdrawAmount": "300",
+      "usdtWithdrawAmount": "5000000"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

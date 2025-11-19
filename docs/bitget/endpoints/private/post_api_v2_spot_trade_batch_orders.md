@@ -6,6 +6,12 @@ Frequency limit: 5 times/1s (UID)Trader frequency limit: 1 times/1s (UID)
 
 Place Orders in Batch
 
+-   **API Broker rebate identifier**:  
+    The following code block needs to be added to the HTTP Header of the request.
+    
+    > "X-CHANNEL-API-CODE":"your-channel-api-code"
+    
+
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 -   POST /api/v2/spot/trade/batch-orders
@@ -62,8 +68,27 @@ The decimal places of price and the price step can be returned by the [Get Symbo
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1666336231317,    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "1"            }        ],        "failureList": [            {                "orderId": "121211212122",                "clientOid": "1",                "errorMsg": "clientOrderId duplicate"            }        ]    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1666336231317,
+  "data": {
+    "successList": [
+      {
+        "orderId": "121211212122",
+        "clientOid": "1"
+      }
+    ],
+    "failureList": [
+      {
+        "orderId": "121211212122",
+        "clientOid": "1",
+        "errorMsg": "clientOrderId duplicate"
+      }
+    ]
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

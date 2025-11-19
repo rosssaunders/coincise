@@ -60,8 +60,24 @@ The interval between startTime and endTime must not exceed 90 days. |
 
 Response Example
 
-```
-{    "code": "00000",    "message": "success",    "requestTime": 1695808949356,    "data": [        {            "cTime": "1622697148",            "coin": "usdt",            "groupType": "deposit",            "businessType": "transfer-in",            "size": "1",            "balance": "1",            "fees": "0",            "billId": "1291"        }    ]}
+```json
+{
+  "code": "00000",
+  "message": "success",
+  "requestTime": 1695808949356,
+  "data": [
+    {
+      "cTime": "1622697148",
+      "coin": "usdt",
+      "groupType": "deposit",
+      "businessType": "transfer-in",
+      "size": "1",
+      "balance": "1",
+      "fees": "0",
+      "billId": "1291"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

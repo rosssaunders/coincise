@@ -30,8 +30,19 @@ You can get the chain names via [Get Coin Info](https://www.bitget.com/api-doc/s
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1683875302853,    "data": {        "address": "xxx",        "chain": "BTC-Bitcoin",        "coin": "BTC",        "tag": "",        "url": "https://btc.com/xxx"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1683875302853,
+  "data": {
+    "address": "xxx",
+    "chain": "BTC-Bitcoin",
+    "coin": "BTC",
+    "tag": "",
+    "url": "https://btc.com/xxx"
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

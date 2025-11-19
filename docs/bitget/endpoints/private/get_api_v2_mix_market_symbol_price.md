@@ -28,8 +28,21 @@ curl "https://api.bitget.com/api/v2/mix/market/symbol-price?productType=usdt-fut
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695793384294,    "data": [        {            "symbol": "BTCUSDT",            "price": "26242",            "indexPrice": "34867",            "markPrice": "25555",            "ts": "1695793390482"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695793384294,
+  "data": [
+    {
+      "symbol": "BTCUSDT",
+      "price": "26242",
+      "indexPrice": "34867",
+      "markPrice": "25555",
+      "ts": "1695793390482"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

@@ -36,8 +36,29 @@ curl -X POST "https://api.bitget.com/api/v2/user/batch-create-subaccount-and-api
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1682662465346,    "data": [        {            "subAccountUid": "***********",            "subAccountName": "*****@*******.com",            "label": "1681808312065",            "subAccountApiKey": "xx_xxx",            "secretKey": "XXXXXXXXXXXXXXX",            "permList": [                "spot_trade",                "margin_trade",                "contract_trade"            ],            "ipList": [                "127.0.0.1"            ]        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1682662465346,
+  "data": [
+    {
+      "subAccountUid": "***********",
+      "subAccountName": "*****@*******.com",
+      "label": "1681808312065",
+      "subAccountApiKey": "xx_xxx",
+      "secretKey": "XXXXXXXXXXXXXXX",
+      "permList": [
+        "spot_trade",
+        "margin_trade",
+        "contract_trade"
+      ],
+      "ipList": [
+        "127.0.0.1"
+      ]
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

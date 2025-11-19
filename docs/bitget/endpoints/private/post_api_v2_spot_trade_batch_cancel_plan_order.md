@@ -25,8 +25,27 @@ If no value is set, all spot trigger orders will be cancelled. |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1683876261117,    "data": {        "successList":[{            "orderId": "121211212122",            "clientOid": "121211212122"        }],        "failureList":[{            "orderId": "121211212122",            "clientOid": "121211212122",            "errorMsg": "failure"        }]    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1683876261117,
+  "data": {
+    "successList": [
+      {
+        "orderId": "121211212122",
+        "clientOid": "121211212122"
+      }
+    ],
+    "failureList": [
+      {
+        "orderId": "121211212122",
+        "clientOid": "121211212122",
+        "errorMsg": "failure"
+      }
+    ]
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

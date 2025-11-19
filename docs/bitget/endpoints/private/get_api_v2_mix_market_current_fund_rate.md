@@ -28,8 +28,22 @@ curl "https://api.bitget.com/api/v2/mix/market/current-fund-rate?symbol=BTCUSDT&
 
 Response Example
 
-```
-{  "code": "00000",  "msg": "success",  "requestTime": 1743054548546,  "data": [    {      "symbol": "BTCUSDT",      "fundingRate": "0.000068",      "fundingRateInterval": "8",      "nextUpdate": "1743062400000",      "minFundingRate": "-0.003",      "maxFundingRate": "0.003"    }  ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1743054548546,
+  "data": [
+    {
+      "symbol": "BTCUSDT",
+      "fundingRate": "0.000068",
+      "fundingRateInterval": "8",
+      "nextUpdate": "1743062400000",
+      "minFundingRate": "-0.003",
+      "maxFundingRate": "0.003"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

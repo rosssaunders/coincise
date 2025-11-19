@@ -28,8 +28,27 @@ The maximum interval between startTime and endTime is 90 days. |
 
 Response Example
 
-```
-{    "code": "00000",    "data": {        "dataList": [            {                "id": "1",                "ts": "1688527512229",                "cnvtPrice": "0.00052268",                "fee": "0",                "fromCoinSize": 100,                "fromCoin": "USDT",                "toCoinSize": "0.23206967",                "toCoin": "ETH"            }        ],        "endId": "1"    },    "msg": "success",    "requestTime": 1627293612502}
+```json
+{
+  "code": "00000",
+  "data": {
+    "dataList": [
+      {
+        "id": "1",
+        "ts": "1688527512229",
+        "cnvtPrice": "0.00052268",
+        "fee": "0",
+        "fromCoinSize": 100,
+        "fromCoin": "USDT",
+        "toCoinSize": "0.23206967",
+        "toCoin": "ETH"
+      }
+    ],
+    "endId": "1"
+  },
+  "msg": "success",
+  "requestTime": 1627293612502
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

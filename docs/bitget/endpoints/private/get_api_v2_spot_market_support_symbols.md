@@ -22,8 +22,22 @@ N/A
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1656589586807,    "data": {        "spotList": ["BTCUSDT","ETHUSDT"],        "futureList": ["BTCUSDT","ETHUSDT"]    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1656589586807,
+  "data": {
+    "spotList": [
+      "BTCUSDT",
+      "ETHUSDT"
+    ],
+    "futureList": [
+      "BTCUSDT",
+      "ETHUSDT"
+    ]
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

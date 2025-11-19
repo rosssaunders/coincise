@@ -24,8 +24,20 @@ curl "https://api.bitget.com/api/v2/spot/trade/plan-sub-order?planOrderId=xxxxxx
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1710813939206,    "data": [        {            "orderId": "xxxxxxxxxxxxx",            "price": "0.4188",            "type": "limit",            "status": "success"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1710813939206,
+  "data": [
+    {
+      "orderId": "xxxxxxxxxxxxx",
+      "price": "0.4188",
+      "type": "limit",
+      "status": "success"
+    }
+  ]
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

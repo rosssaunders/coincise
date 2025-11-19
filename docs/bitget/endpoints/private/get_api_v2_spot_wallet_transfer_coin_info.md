@@ -39,8 +39,17 @@ curl "https://api.bitget.com/api/v2/spot/wallet/transfer-coin-info?fromType=isol
 
 Response Example
 
-```
-{    "code":"00000",    "msg":"success",    "requestTime":1683875302853,    "data":[        "BTC",        "USDT",        "ETH"    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1683875302853,
+  "data": [
+    "BTC",
+    "USDT",
+    "ETH"
+  ]
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

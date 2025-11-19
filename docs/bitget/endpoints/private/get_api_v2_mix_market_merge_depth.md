@@ -37,8 +37,38 @@ When the actual depth does not meet the limit, return according to the actual ge
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695870963008,    "data": {        "asks": [            [                26347.5,                0.25            ],            [                26348.0,                0.16            ]        ],        "bids": [            [                26346.5,                0.16            ],            [                26346.0,                0.32            ]        ],        "ts": "1695870968804",        "scale": "0.1",        "precision": "scale0",        "isMaxPrecision": "NO"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695870963008,
+  "data": {
+    "asks": [
+      [
+        26347.5,
+        0.25
+      ],
+      [
+        26348,
+        0.16
+      ]
+    ],
+    "bids": [
+      [
+        26346.5,
+        0.16
+      ],
+      [
+        26346,
+        0.32
+      ]
+    ],
+    "ts": "1695870968804",
+    "scale": "0.1",
+    "precision": "scale0",
+    "isMaxPrecision": "NO"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

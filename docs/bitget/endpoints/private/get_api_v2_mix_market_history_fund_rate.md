@@ -30,8 +30,24 @@ curl "https://api.bitget.com/api/v2/mix/market/history-fund-rate?symbol=BTCUSDT&
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695796546319,    "data": [        {            "symbol": "BTCUSDT",            "fundingRate": "0.0005",            "fundingTime": "1695776400000"        },        {            "symbol": "BTCUSDT",            "fundingRate": "0.000013",            "fundingTime": "1695715200000"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695796546319,
+  "data": [
+    {
+      "symbol": "BTCUSDT",
+      "fundingRate": "0.0005",
+      "fundingTime": "1695776400000"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "fundingRate": "0.000013",
+      "fundingTime": "1695715200000"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

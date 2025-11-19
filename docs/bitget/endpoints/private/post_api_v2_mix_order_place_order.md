@@ -12,6 +12,11 @@
 -   When in `hedge Mode`, if a limit close order is occupying a position, and a subsequent market close order (its quantity plus the limit order's quantity) exceeds the total position size, it will not report an insufficient position error. It also won't cancel the limit order that's occupying the position. Instead, the quantity of the limit close order will be preserved, and the market order will close only the quantity remaining after subtracting the limit order's quantity from the total position size. For example: If you have a position of 100, a limit order occupies 70, and you then place a market close order for 50, it will not report an insufficient position error, nor will it cancel the occupying limit order to execute the market order. Instead, it will directly close a quantity of 30.
 -   When in `hedge Mode`,if the existing quantity is equal to the limit close position order of the held position, a newly added close position order will automatically cancel the limit order that has occupied the position.
 -   For elite traders, please strictly adhere to the list of trading pairs specified in the [Available trading pairs and parameters for elite traders](https://www.bitget.com/zh-CN/support/articles/12560603808895) when placing orders using the Copy Trading API Key. Trading pairs outside the announced list are not available for copy trading.
+-   **API Broker rebate identifier**:  
+    The following code block needs to be added to the HTTP Header of the request.
+    
+    > "X-CHANNEL-API-CODE":"your-channel-api-code"
+    
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
@@ -75,8 +80,16 @@ No stop-loss is set if the field is empty. |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695806875837,    "data": {        "clientOid": "121211212122",        "orderId": "121211212122"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695806875837,
+  "data": {
+    "clientOid": "121211212122",
+    "orderId": "121211212122"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

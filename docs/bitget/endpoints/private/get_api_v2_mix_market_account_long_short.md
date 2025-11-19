@@ -34,8 +34,26 @@ curl "https://api.bitget.com/api/v2/mix/market/account-long-short?symbol=BTCUSDT
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1656589586807,    "data": [        {            "longAccountRatio": "0.01",            "shortAccountRatio": "0.12",            "longShortAccountRatio": "1.2",            "ts": "1714020600000"        },        {            "longAccountRatio": "0.01",            "shortAccountRatio": "0.12",            "longShortAccountRatio": "1.2",            "ts": "1714020600000"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1656589586807,
+  "data": [
+    {
+      "longAccountRatio": "0.01",
+      "shortAccountRatio": "0.12",
+      "longShortAccountRatio": "1.2",
+      "ts": "1714020600000"
+    },
+    {
+      "longAccountRatio": "0.01",
+      "shortAccountRatio": "0.12",
+      "longShortAccountRatio": "1.2",
+      "ts": "1714020600000"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

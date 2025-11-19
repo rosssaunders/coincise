@@ -70,8 +70,22 @@ Returns English if the language chosen is not supported |
 
 Response Example
 
-```
-{  "code": "00000",  "msg": "success",  "requestTime": 1688008631614,  "data": [    {      "annId": "1",      "annTitle": "test0629",      "annDesc": "Latest announcement",      "cTime": "1688008040000",      "language": "zh_CN",      "annUrl": "https://www.bitget.com/zh_CN/support/articles/23685"    }  ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1688008631614,
+  "data": [
+    {
+      "annId": "1",
+      "annTitle": "test0629",
+      "annDesc": "Latest announcement",
+      "cTime": "1688008040000",
+      "language": "zh_CN",
+      "annUrl": "https://www.bitget.com/zh_CN/support/articles/23685"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

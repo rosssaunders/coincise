@@ -24,8 +24,22 @@ spot |
 
 Response Example
 
-```
-{  "code": "00000",  "msg": "success",  "requestTime": 1712131247803,  "data": [    {      "coin": "USDT",      "available": "84.61136285",      "equity": "140.94936285",      "bonus": "0",      "frozen": "0",      "usdtValue": "140.949362850622"    }  ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1712131247803,
+  "data": [
+    {
+      "coin": "USDT",
+      "available": "84.61136285",
+      "equity": "140.94936285",
+      "bonus": "0",
+      "frozen": "0",
+      "usdtValue": "140.949362850622"
+    }
+  ]
+}
 ```
 
 ### Response parameters[​](#response-parameters "Direct link to Response parameters")

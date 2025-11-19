@@ -26,8 +26,27 @@ curl -X GET "https://api.bitget.com/api/v2/user/virtual-subaccount-apikey-list?s
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1682661432874,    "data": [        {            "subAccountUid": "1",            "label": "1682396356594",            "subAccountApiKey": "xx_xxx",            "permList": [                "spot_trade",                "margin_trade",                "contract_trade"            ],            "ipList": [                "127.0.0.1"            ]        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1682661432874,
+  "data": [
+    {
+      "subAccountUid": "1",
+      "label": "1682396356594",
+      "subAccountApiKey": "xx_xxx",
+      "permList": [
+        "spot_trade",
+        "margin_trade",
+        "contract_trade"
+      ],
+      "ipList": [
+        "127.0.0.1"
+      ]
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

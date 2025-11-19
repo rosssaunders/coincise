@@ -54,8 +54,16 @@ If there was a SL value and a 0 is filled in the filled, the existing SL will be
 
 Response Example
 
-```
-{    "code": "00000",    "data": {        "orderId": "121212121212",        "clientOid": "BITGET#121212121212"    },    "msg": "success",    "requestTime": 1627293504612}
+```json
+{
+  "code": "00000",
+  "data": {
+    "orderId": "121212121212",
+    "clientOid": "BITGET#121212121212"
+  },
+  "msg": "success",
+  "requestTime": 1627293504612
+}
 ```
 
 ### Return Parameter[​](#return-parameter "Direct link to Return Parameter")

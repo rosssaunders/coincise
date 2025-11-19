@@ -28,8 +28,27 @@ The default value is 20 and the maximum value is 100 |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1654507973411,    "data": [        {            "orderId": "1",            "tradeId": "1",            "coin": "USDT",            "size": "10.00000000",            "status": "success",            "toAddress": "0x51xxx",            "dest": "on_chain",            "chain": "erc20",            "fromAddress": "0x52xxx",            "cTime": "1653290769222",            "uTime": "1653290769222"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1654507973411,
+  "data": [
+    {
+      "orderId": "1",
+      "tradeId": "1",
+      "coin": "USDT",
+      "size": "10.00000000",
+      "status": "success",
+      "toAddress": "0x51xxx",
+      "dest": "on_chain",
+      "chain": "erc20",
+      "fromAddress": "0x52xxx",
+      "cTime": "1653290769222",
+      "uTime": "1653290769222"
+    }
+  ]
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

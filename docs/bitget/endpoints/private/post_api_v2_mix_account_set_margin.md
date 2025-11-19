@@ -32,8 +32,13 @@ long – long position; short – short position |
 
 Response Example
 
-```
-{    "code": "00000",    "data": "",    "msg": "success",    "requestTime": 1627293357336}
+```json
+{
+  "code": "00000",
+  "data": "",
+  "msg": "success",
+  "requestTime": 1627293357336
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

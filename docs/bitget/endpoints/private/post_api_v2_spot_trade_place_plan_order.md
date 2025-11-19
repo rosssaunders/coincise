@@ -6,6 +6,12 @@ Frequency limit: 20 times/1s (UID)
 
 Place plan order
 
+-   **API Broker rebate identifier**:  
+    The following code block needs to be added to the HTTP Header of the request.
+    
+    > "X-CHANNEL-API-CODE":"your-channel-api-code"
+    
+
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 -   POST /api/v2/spot/trade/place-plan-order
@@ -49,8 +55,16 @@ If `planType`\=`total`, it is the quote coin. |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1668134576535,    "data": {        "orderId": "121211212122",        "clientOid": "121211212122"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1668134576535,
+  "data": {
+    "orderId": "121211212122",
+    "clientOid": "121211212122"
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

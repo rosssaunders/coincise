@@ -24,8 +24,26 @@ curl "https://api.bitget.com/api/v2/spot/account/info" \   -H "ACCESS-KEY:******
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": {        "userId": "**********",        "inviterId": "**********",        "ips": "127.0.0.1",        "authorities": [            "trade",            "readonly"        ],        "parentId": 1,        "traderType": "trader",        "channelCode": "XXX",        "channel": "YYY",        "regisTime":"1246566789345"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695808949356,
+  "data": {
+    "userId": "**********",
+    "inviterId": "**********",
+    "ips": "127.0.0.1",
+    "authorities": [
+      "trade",
+      "readonly"
+    ],
+    "parentId": 1,
+    "traderType": "trader",
+    "channelCode": "XXX",
+    "channel": "YYY",
+    "regisTime": "1246566789345"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

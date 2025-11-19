@@ -24,8 +24,38 @@ curl "https://api.bitget.com/api/v2/spot/public/coins"
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695799900330,    "data": [        {            "coinId": "1",            "coin": "BTC",            "transfer": "true",            "chains": [                {                    "chain": "BTC",                    "needTag": "false",                    "withdrawable": "true",                    "rechargeable": "true",                    "withdrawFee": "0.005",                    "extraWithdrawFee": "0",                    "depositConfirm": "1",                    "withdrawConfirm": "1",                    "minDepositAmount": "0.001",                    "minWithdrawAmount": "0.001",                    "browserUrl": "https://blockchair.com/bitcoin/testnet/transaction/",                    "contractAddress": "0xdac17f958d2ee523a2206206994597c13d831ec7",                    "withdrawStep": "0",                    "withdrawMinScale": "8",                    "congestion":"normal"                }            ]        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695799900330,
+  "data": [
+    {
+      "coinId": "1",
+      "coin": "BTC",
+      "transfer": "true",
+      "chains": [
+        {
+          "chain": "BTC",
+          "needTag": "false",
+          "withdrawable": "true",
+          "rechargeable": "true",
+          "withdrawFee": "0.005",
+          "extraWithdrawFee": "0",
+          "depositConfirm": "1",
+          "withdrawConfirm": "1",
+          "minDepositAmount": "0.001",
+          "minWithdrawAmount": "0.001",
+          "browserUrl": "https://blockchair.com/bitcoin/testnet/transaction/",
+          "contractAddress": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+          "withdrawStep": "0",
+          "withdrawMinScale": "8",
+          "congestion": "normal"
+        }
+      ]
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

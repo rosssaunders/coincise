@@ -52,8 +52,16 @@ curl -X POST "https://api.bitget.com/api/v2/spot/wallet/transfer" \   -H "ACCESS
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1683875302853,    "data": {        "transferId": "123456",        "clientOid": "x123"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1683875302853,
+  "data": {
+    "transferId": "123456",
+    "clientOid": "x123"
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

@@ -36,8 +36,24 @@ Up to 30, if not then ip whitelist is set to empty. |
 
 Response Example
 
-```
-{  "code": "00000",  "msg": "success",  "requestTime": 1682660169412,  "data": {    "subAccountUid": "1",    "label": "test1_account",    "subAccountApiKey": "xx_xxx",    "secretKey": "xxx",    "permList": [      "spot_trade"    ],    "ipList": [      "127.0.0.1"    ]  }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1682660169412,
+  "data": {
+    "subAccountUid": "1",
+    "label": "test1_account",
+    "subAccountApiKey": "xx_xxx",
+    "secretKey": "xxx",
+    "permList": [
+      "spot_trade"
+    ],
+    "ipList": [
+      "127.0.0.1"
+    ]
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

@@ -32,8 +32,19 @@ curl -X POST "https://api.bitget.com/api/v2/mix/account/set-margin-mode" \   -H 
 
 Response Example
 
-```
-{    "code": "00000",    "data": {        "symbol": "BTCUSDT",        "marginCoin": "USDT",        "longLeverage": "25",        "shortLeverage": "20",        "marginMode": "isolated"    },    "msg": "success",    "requestTime": 1627293445916}
+```json
+{
+  "code": "00000",
+  "data": {
+    "symbol": "BTCUSDT",
+    "marginCoin": "USDT",
+    "longLeverage": "25",
+    "shortLeverage": "20",
+    "marginMode": "isolated"
+  },
+  "msg": "success",
+  "requestTime": 1627293445916
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

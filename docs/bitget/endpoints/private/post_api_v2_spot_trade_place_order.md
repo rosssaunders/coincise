@@ -6,6 +6,11 @@ Rate limit: 1 request/second/UID for **copy trading traders**
 ### Description[​](#description "Direct link to Description")
 
 -   Place Order
+-   **API Broker rebate identifier**:  
+    The following code block needs to be added to the HTTP Header of the request.
+    
+    > "X-CHANNEL-API-CODE":"your-channel-api-code"
+    
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
@@ -69,8 +74,16 @@ The decimal places of price and the price step can be returned by the [Get Symbo
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": {        "orderId": "1001",        "clientOid": "121211212122"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695808949356,
+  "data": {
+    "orderId": "1001",
+    "clientOid": "121211212122"
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

@@ -36,8 +36,27 @@ It's required when `orderIdList` is set |
 
 Response Example
 
-```
-{    "code": "00000",    "data": {        "successList": [            {                "orderId": "121211212122",                "clientOid": "BITGET#121211212122"            }        ],        "failureList": [            {                "orderId": "232",                "clientOid": "321342",                "errorMsg": "notExistend"            }        ]    },    "msg": "success",    "requestTime": 1627293504612}
+```json
+{
+  "code": "00000",
+  "data": {
+    "successList": [
+      {
+        "orderId": "121211212122",
+        "clientOid": "BITGET#121211212122"
+      }
+    ],
+    "failureList": [
+      {
+        "orderId": "232",
+        "clientOid": "321342",
+        "errorMsg": "notExistend"
+      }
+    ]
+  },
+  "msg": "success",
+  "requestTime": 1627293504612
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

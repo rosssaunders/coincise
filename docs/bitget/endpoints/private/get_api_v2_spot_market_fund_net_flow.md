@@ -24,8 +24,34 @@ curl "https://api.bitget.com/api/v2/spot/market/fund-net-flow?symbol=BTCUSDT"
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1656589586807,    "data": [        {            "netFlow": "-1.1",            "ts": "1713942000000"        },        {            "netFlow": "-1.1",            "ts": "1713942000000"        },        {            "netFlow": "-1.1",            "ts": "1713942000000"        },        {            "netFlow": "-1.1",            "ts": "1713942000000"        },        {            "netFlow": "-1.1",            "ts": "1713942000000"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1656589586807,
+  "data": [
+    {
+      "netFlow": "-1.1",
+      "ts": "1713942000000"
+    },
+    {
+      "netFlow": "-1.1",
+      "ts": "1713942000000"
+    },
+    {
+      "netFlow": "-1.1",
+      "ts": "1713942000000"
+    },
+    {
+      "netFlow": "-1.1",
+      "ts": "1713942000000"
+    },
+    {
+      "netFlow": "-1.1",
+      "ts": "1713942000000"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

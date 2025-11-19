@@ -28,8 +28,44 @@ curl "https://api.bitget.com/api/v2/mix/position/all-position?productType=USDT-F
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 21312312312321,    "data": [        {            "marginCoin": "USDT",            "symbol": "BTCUSDT",            "holdSide": "long",            "openDelegateSize": "0.01",            "marginSize": "9.6695050093373343",            "available": "0.01",            "locked": "0.09",            "total": "0.01",            "leverage": "20",            "achievedProfits": "0",            "openPriceAvg": "25000",            "marginMode": "isolated",            "posMode": "hedge_mode",            "unrealizedPL": "1",            "liquidationPrice": "24144.1124161806977798",            "keepMarginRate": "0.004",            "markPrice": "25100",            "breakEvenPrice": "24778.97",            "totalFee": "1.45",            "deductedFee": "0.388",            "takeProfit": "3",            "stopLoss": "2",            "takeProfitId": "11111111",            "stopLossId": "11111111",            "marginRatio": "0.1082149545822005",            "assetMode":"single",            "cTime": "1691382137448",            "uTime": "1691382137999"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 21312312312321,
+  "data": [
+    {
+      "marginCoin": "USDT",
+      "symbol": "BTCUSDT",
+      "holdSide": "long",
+      "openDelegateSize": "0.01",
+      "marginSize": "9.6695050093373343",
+      "available": "0.01",
+      "locked": "0.09",
+      "total": "0.01",
+      "leverage": "20",
+      "achievedProfits": "0",
+      "openPriceAvg": "25000",
+      "marginMode": "isolated",
+      "posMode": "hedge_mode",
+      "unrealizedPL": "1",
+      "liquidationPrice": "24144.1124161806977798",
+      "keepMarginRate": "0.004",
+      "markPrice": "25100",
+      "breakEvenPrice": "24778.97",
+      "totalFee": "1.45",
+      "deductedFee": "0.388",
+      "takeProfit": "3",
+      "stopLoss": "2",
+      "takeProfitId": "11111111",
+      "stopLossId": "11111111",
+      "marginRatio": "0.1082149545822005",
+      "assetMode": "single",
+      "cTime": "1691382137448",
+      "uTime": "1691382137999"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

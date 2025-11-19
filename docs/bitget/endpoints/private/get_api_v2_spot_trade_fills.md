@@ -32,8 +32,34 @@ The interval between startTime and endTime must not exceed 90 days. |
 
 Response Example
 
-```
-{  "code": "00000",  "msg": "success",  "requestTime": 1695865274510,  "data": [    {      "userId": "**********",      "symbol": "BTCUSDT",      "orderId": "12345678910",      "tradeId": "12345678910",      "orderType": "market",      "side": "buy",      "priceAvg": "13000",      "size": "0.0007",      "amount": "9.1",      "feeDetail": {        "deduction": "no",        "feeCoin": "BTC",        "totalDeductionFee": "",        "totalFee": "-0.0000007"      },      "tradeScope": "taker",      "cTime": "1695865232579",      "uTime": "1695865233027"    }  ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695865274510,
+  "data": [
+    {
+      "userId": "**********",
+      "symbol": "BTCUSDT",
+      "orderId": "12345678910",
+      "tradeId": "12345678910",
+      "orderType": "market",
+      "side": "buy",
+      "priceAvg": "13000",
+      "size": "0.0007",
+      "amount": "9.1",
+      "feeDetail": {
+        "deduction": "no",
+        "feeCoin": "BTC",
+        "totalDeductionFee": "",
+        "totalFee": "-0.0000007"
+      },
+      "tradeScope": "taker",
+      "cTime": "1695865232579",
+      "uTime": "1695865233027"
+    }
+  ]
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

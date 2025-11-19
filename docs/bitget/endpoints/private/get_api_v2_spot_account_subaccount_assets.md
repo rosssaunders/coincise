@@ -28,8 +28,42 @@ The default value is 10, and the maximum value is 50. |
 
 Response Example
 
-```
-{  "code": "00000",  "message": "success",  "requestTime": 1695808949356,  "data": [    {      "id": 1111,      "userId": 1234567890,      "assetsList": [        {          "coin": "BTC",          "available": "1.1",          "limitAvailable": "12.1",          "frozen": "0",          "locked": "1.1",          "uTime": "1337654897651"        }      ]    },    {      "id": 2222,      "userId": 1234567890,      "assetsList": [        {          "coin": "ETH",          "available": "12.1",          "limitAvailable": "12.1",          "frozen": "0",          "locked": "1.1",          "uTime": "1337654897651"        }      ]    }  ]}
+```json
+{
+  "code": "00000",
+  "message": "success",
+  "requestTime": 1695808949356,
+  "data": [
+    {
+      "id": 1111,
+      "userId": 1234567890,
+      "assetsList": [
+        {
+          "coin": "BTC",
+          "available": "1.1",
+          "limitAvailable": "12.1",
+          "frozen": "0",
+          "locked": "1.1",
+          "uTime": "1337654897651"
+        }
+      ]
+    },
+    {
+      "id": 2222,
+      "userId": 1234567890,
+      "assetsList": [
+        {
+          "coin": "ETH",
+          "available": "12.1",
+          "limitAvailable": "12.1",
+          "frozen": "0",
+          "locked": "1.1",
+          "uTime": "1337654897651"
+        }
+      ]
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

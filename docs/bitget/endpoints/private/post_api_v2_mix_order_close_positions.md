@@ -32,8 +32,30 @@ curl -X POST "https://api.bitget.com/api/v2/mix/order/close-positions" \  -H "AC
 
 Response Example
 
-```
-{    "code": "00000",     "data": {        "successList": [            {                "orderId": "123",                 "clientOid": "xxxxx",                "symbol": "BTCUSDT"            }        ],         "failureList": [            {                "orderId": "1234",                 "clientOid": "321",                 "symbol": "BTCUSDT",                "errorMsg": "xxx",                 "errorCode": "xxxx"            }        ]    },     "msg": "success",     "requestTime": 1627293504612}
+```json
+{
+  "code": "00000",
+  "data": {
+    "successList": [
+      {
+        "orderId": "123",
+        "clientOid": "xxxxx",
+        "symbol": "BTCUSDT"
+      }
+    ],
+    "failureList": [
+      {
+        "orderId": "1234",
+        "clientOid": "321",
+        "symbol": "BTCUSDT",
+        "errorMsg": "xxx",
+        "errorCode": "xxxx"
+      }
+    ]
+  },
+  "msg": "success",
+  "requestTime": 1627293504612
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

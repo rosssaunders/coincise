@@ -22,8 +22,32 @@ N/A
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695794449789,    "data": [        {            "level": "1",            "dealAmount": "100000",            "assetAmount": "50000",            "takerFeeRate": "0.0006",            "makerFeeRate": "0.0004",            "btcWithdrawAmount": "300",            "usdtWithdrawAmount": "5000000"        },        {            "level": "2",            "dealAmount": "200000",            "assetAmount": "500000",            "takerFeeRate": "0.0006",            "makerFeeRate": "0.0004",            "btcWithdrawAmount": "300",            "usdtWithdrawAmount": "5000000"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695794449789,
+  "data": [
+    {
+      "level": "1",
+      "dealAmount": "100000",
+      "assetAmount": "50000",
+      "takerFeeRate": "0.0006",
+      "makerFeeRate": "0.0004",
+      "btcWithdrawAmount": "300",
+      "usdtWithdrawAmount": "5000000"
+    },
+    {
+      "level": "2",
+      "dealAmount": "200000",
+      "assetAmount": "500000",
+      "takerFeeRate": "0.0006",
+      "makerFeeRate": "0.0004",
+      "btcWithdrawAmount": "300",
+      "usdtWithdrawAmount": "5000000"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

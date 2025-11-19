@@ -31,8 +31,24 @@ curl "https://api.bitget.com/api/v2/tax/margin-record?startTime=1686128558000&en
 
 Response example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1687259242290,    "data": [        {            "id": "1",            "coin": "USDT",            "marginTaxType": "transfer_in",            "amount": "13333",            "fee": "0",            "total": "13333",            "symbol": "BTCUSDT",            "ts": "1686129284474"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1687259242290,
+  "data": [
+    {
+      "id": "1",
+      "coin": "USDT",
+      "marginTaxType": "transfer_in",
+      "amount": "13333",
+      "fee": "0",
+      "total": "13333",
+      "symbol": "BTCUSDT",
+      "ts": "1686129284474"
+    }
+  ]
+}
 ```
 
 ### Response parameters[​](#response-parameters "Direct link to Response parameters")

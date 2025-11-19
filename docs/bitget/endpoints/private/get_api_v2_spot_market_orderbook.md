@@ -26,8 +26,35 @@ curl "https://api.bitget.com/api/v2/spot/market/orderbook?symbol=BTCUSDT&type=st
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1698303884579,    "data": {        "asks": [            [                "34567.15",                "0.0131"            ],            [                "34567.25",                "0.0144"            ]        ],        "bids": [            [                "34567",                "0.2917"            ],            [                "34566.85",                "0.0145"            ]        ],        "ts": "1698303884584"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1698303884579,
+  "data": {
+    "asks": [
+      [
+        "34567.15",
+        "0.0131"
+      ],
+      [
+        "34567.25",
+        "0.0144"
+      ]
+    ],
+    "bids": [
+      [
+        "34567",
+        "0.2917"
+      ],
+      [
+        "34566.85",
+        "0.0145"
+      ]
+    ],
+    "ts": "1698303884584"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

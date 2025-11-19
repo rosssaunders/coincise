@@ -39,8 +39,25 @@ If an empty value is passed, the existing permissions of this API Key will be re
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1682660169412,    "data": {        "subAccountUid": "1",        "label": "sub api",        "subAccountApiKey": "xx_xxx",        "secretKey": "xxx",        "permList": [            "spot_trade",            "contract_trade"        ],        "ipList": [            "127.0.0.1"        ]    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1682660169412,
+  "data": {
+    "subAccountUid": "1",
+    "label": "sub api",
+    "subAccountApiKey": "xx_xxx",
+    "secretKey": "xxx",
+    "permList": [
+      "spot_trade",
+      "contract_trade"
+    ],
+    "ipList": [
+      "127.0.0.1"
+    ]
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

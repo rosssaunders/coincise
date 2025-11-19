@@ -44,8 +44,36 @@ moving\_plan trailing order |
 
 Response Example
 
-```
-{    "code": "00000",    "data": {        "successList": [            {                "orderId": "121212121212",                "clientOid": "123"            },            {                "orderId": "123",                "clientOid": ""            }        ],        "failureList": [            {                "orderId": "3",                "clientOid": "123",                "errorMsg": "notExistend"            },            {                "orderId": "21221",                "clientOid": "",                "errorMsg": "notExistend"            }        ]    },    "msg": "success",    "requestTime": 1627293504612}
+```json
+{
+  "code": "00000",
+  "data": {
+    "successList": [
+      {
+        "orderId": "121212121212",
+        "clientOid": "123"
+      },
+      {
+        "orderId": "123",
+        "clientOid": ""
+      }
+    ],
+    "failureList": [
+      {
+        "orderId": "3",
+        "clientOid": "123",
+        "errorMsg": "notExistend"
+      },
+      {
+        "orderId": "21221",
+        "clientOid": "",
+        "errorMsg": "notExistend"
+      }
+    ]
+  },
+  "msg": "success",
+  "requestTime": 1627293504612
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

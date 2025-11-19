@@ -6,6 +6,12 @@ Rate limit: 10 req/sec/UID
 
 The interface for placing an trigger or trailing stop order with TP/SL setting feature.
 
+-   **API Broker rebate identifier**:  
+    The following code block needs to be added to the HTTP Header of the request.
+    
+    > "X-CHANNEL-API-CODE":"your-channel-api-code"
+    
+
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 -   POST /api/v2/mix/order/place-plan-order
@@ -93,8 +99,16 @@ For close short, "side" fill in "sell"; "tradeSide" should be "close" |
 
 Response Example
 
-```
-{    "code": "00000",    "data": {        "orderId": "121212121212",        "clientOid": "BITGET#121212121212"    },    "msg": "success",    "requestTime": 1627293504612}
+```json
+{
+  "code": "00000",
+  "data": {
+    "orderId": "121212121212",
+    "clientOid": "BITGET#121212121212"
+  },
+  "msg": "success",
+  "requestTime": 1627293504612
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

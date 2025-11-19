@@ -57,8 +57,32 @@ Request data before this end time (the maximum time query range is 90 days) |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695795362764,    "data": [        [            "1691299500000",            "29803",            "29803",            "29803",            "29803",            "0",            "0"        ],        [            "1691299800000",            "29803",            "29803",            "29803",            "29803",            "0",            "0"        ]    ]  }
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695795362764,
+  "data": [
+    [
+      "1691299500000",
+      "29803",
+      "29803",
+      "29803",
+      "29803",
+      "0",
+      "0"
+    ],
+    [
+      "1691299800000",
+      "29803",
+      "29803",
+      "29803",
+      "29803",
+      "0",
+      "0"
+    ]
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

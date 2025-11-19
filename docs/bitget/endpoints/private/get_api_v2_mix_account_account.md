@@ -29,8 +29,34 @@ curl "https://api.bitget.com/api/v2/mix/account/account?symbol=btcusdt&productTy
 
 Response Example
 
-```
-{  "code": "00000",  "data": {    "marginCoin": "USDT",    "locked": "0",    "available": "13168.86110692",    "crossedMaxAvailable": "13168.86110692",    "isolatedMaxAvailable": "13168.86110692",    "maxTransferOut": "13168.86110692",    "accountEquity": "13178.86110692",    "usdtEquity": "13178.861106922",    "btcEquity": "0.344746495477",    "crossedRiskRate": "0",    "crossedMarginLeverage": "20",    "isolatedLongLever": "20",    "isolatedShortLever": "20",    "marginMode": "crossed",    "posMode": "hedge_mode",    "unrealizedPL": "",    "coupon": "0",    "crossedUnrealizedPL":"23",    "isolatedUnrealizedPL":"0",    "assetMode": "union"  },  "msg": "success",  "requestTime": 1627292199523}
+```json
+{
+  "code": "00000",
+  "data": {
+    "marginCoin": "USDT",
+    "locked": "0",
+    "available": "13168.86110692",
+    "crossedMaxAvailable": "13168.86110692",
+    "isolatedMaxAvailable": "13168.86110692",
+    "maxTransferOut": "13168.86110692",
+    "accountEquity": "13178.86110692",
+    "usdtEquity": "13178.861106922",
+    "btcEquity": "0.344746495477",
+    "crossedRiskRate": "0",
+    "crossedMarginLeverage": "20",
+    "isolatedLongLever": "20",
+    "isolatedShortLever": "20",
+    "marginMode": "crossed",
+    "posMode": "hedge_mode",
+    "unrealizedPL": "",
+    "coupon": "0",
+    "crossedUnrealizedPL": "23",
+    "isolatedUnrealizedPL": "0",
+    "assetMode": "union"
+  },
+  "msg": "success",
+  "requestTime": 1627292199523
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

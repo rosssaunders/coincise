@@ -27,8 +27,22 @@ curl "https://api.bitget.com/api/v2/mix/market/isolated-borrow-rate?symbol=BTCUS
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1656589586807,    "data": [        {            "ts": "1713942000000",            "borrowRate": "-0.96"        },        {            "ts": "1713942000000",            "borrowRate": "-0.96"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1656589586807,
+  "data": [
+    {
+      "ts": "1713942000000",
+      "borrowRate": "-0.96"
+    },
+    {
+      "ts": "1713942000000",
+      "borrowRate": "-0.96"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

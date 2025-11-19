@@ -50,8 +50,49 @@ Unix timestamp in milliseconds format, e.g. 1597026383085
 
 Response Example
 
-```
-{    "code": "00000",    "data": {        "entrustedList": [            {                "planType": "normal_plan",                "symbol": "ethusdt",                "size": "1",                "orderId": "123",                "executeOrderId": "123456",                "clientOid": "",                "planStatus": "executed",                "price": "1990",                "executePrice": "1990",                "priceAvg": "1999.2",                "baseVolume": "1",                "callbackRatio": "",                "triggerPrice": "1989",                "triggerType": "fill_price",                "side": "buy",                "posSide": "long",                "marginCoin": "usdt",                "marginMode": "crossed",                "enterPointSource": "api",                "tradeSide": "open",                "posMode": "hedge_mode",                "orderType": "limit",                "cTime": "1627293504612",                "uTime": "",                "stopSurplusExecutePrice": "2001",                "stopSurplusTriggerPrice": "2002",                "stopSurplusTriggerType": "fill_price",                "stopLossExecutePrice": "1800",                "stopLossTriggerPrice": "1820",                "stopLossTriggerType": "fill_price"            }        ],        "endId": "123"    },    "msg": "success",    "requestTime": 1627293504612}
+```json
+{
+  "code": "00000",
+  "data": {
+    "entrustedList": [
+      {
+        "planType": "normal_plan",
+        "symbol": "ethusdt",
+        "size": "1",
+        "orderId": "123",
+        "executeOrderId": "123456",
+        "clientOid": "",
+        "planStatus": "executed",
+        "price": "1990",
+        "executePrice": "1990",
+        "priceAvg": "1999.2",
+        "baseVolume": "1",
+        "callbackRatio": "",
+        "triggerPrice": "1989",
+        "triggerType": "fill_price",
+        "side": "buy",
+        "posSide": "long",
+        "marginCoin": "usdt",
+        "marginMode": "crossed",
+        "enterPointSource": "api",
+        "tradeSide": "open",
+        "posMode": "hedge_mode",
+        "orderType": "limit",
+        "cTime": "1627293504612",
+        "uTime": "",
+        "stopSurplusExecutePrice": "2001",
+        "stopSurplusTriggerPrice": "2002",
+        "stopSurplusTriggerType": "fill_price",
+        "stopLossExecutePrice": "1800",
+        "stopLossTriggerPrice": "1820",
+        "stopLossTriggerType": "fill_price"
+      }
+    ],
+    "endId": "123"
+  },
+  "msg": "success",
+  "requestTime": 1627293504612
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

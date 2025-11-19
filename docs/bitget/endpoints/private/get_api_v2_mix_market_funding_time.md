@@ -28,8 +28,19 @@ curl "https://api.bitget.com/api/v2/mix/market/funding-time?symbol=BTCUSDT&produ
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695796425096,    "data": [        {            "symbol": "BTCUSDT",            "nextFundingTime": "1695801600000",            "ratePeriod": "8"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695796425096,
+  "data": [
+    {
+      "symbol": "BTCUSDT",
+      "nextFundingTime": "1695801600000",
+      "ratePeriod": "8"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

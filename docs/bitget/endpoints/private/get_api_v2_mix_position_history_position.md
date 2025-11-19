@@ -36,8 +36,36 @@ timestampis Unix time in milliseconds，for example 1597026383085
 
 Response
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1312312312321,    "data": {        "list":[{            "positionId": "xxxxxxxxxxx",            "marginCoin": "USDT",            "symbol": "BTCUSDT",            "holdSide": "long",            "openAvgPrice": "32000",            "closeAvgPrice": "32500",            "marginMode": "isolated",            "openTotalPos": "0.01",            "closeTotalPos": "0.01",            "pnl": "14.1",            "netProfit": "12.1",            "totalFunding": "0.1",            "openFee": "0.01",            "closeFee": "0.01",            "posMode": "one_way_mode",            "ctime": "1988824171000",            "utime": "1988824171000"        }],        "endId":"23423432423423234"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1312312312321,
+  "data": {
+    "list": [
+      {
+        "positionId": "xxxxxxxxxxx",
+        "marginCoin": "USDT",
+        "symbol": "BTCUSDT",
+        "holdSide": "long",
+        "openAvgPrice": "32000",
+        "closeAvgPrice": "32500",
+        "marginMode": "isolated",
+        "openTotalPos": "0.01",
+        "closeTotalPos": "0.01",
+        "pnl": "14.1",
+        "netProfit": "12.1",
+        "totalFunding": "0.1",
+        "openFee": "0.01",
+        "closeFee": "0.01",
+        "posMode": "one_way_mode",
+        "ctime": "1988824171000",
+        "utime": "1988824171000"
+      }
+    ],
+    "endId": "23423432423423234"
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

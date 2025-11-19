@@ -29,8 +29,24 @@ curl "https://api.bitget.com/api/v2/mix/market/oi-limit?productType=usdt-futures
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1741596239587,    "data": [        {            "symbol": "BTCUSDT",            "notionalValue": "100000",            "totalNotionalValue": "200000"        },        {            "symbol": "BCHUSDT",            "notionalValue": "100000",            "totalNotionalValue": "200000"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1741596239587,
+  "data": [
+    {
+      "symbol": "BTCUSDT",
+      "notionalValue": "100000",
+      "totalNotionalValue": "200000"
+    },
+    {
+      "symbol": "BCHUSDT",
+      "notionalValue": "100000",
+      "totalNotionalValue": "200000"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

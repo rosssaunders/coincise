@@ -25,8 +25,30 @@ curl "https://api.bitget.com/api/v2/spot/market/fills?symbol=BTCUSDT&limit=100"
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": [        {            "symbol": "BFTUSDT",            "tradeId": "1",            "side": "buy",            "price": "2.38735",            "size": "2470.6224",            "ts": "1622097282536"        },        {            "symbol": "BFTUSDT",            "tradeId": "2",            "side": "sell",            "price": "2.38649",            "size": "3239.7976",            "ts": "1622097280642"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695808949356,
+  "data": [
+    {
+      "symbol": "BFTUSDT",
+      "tradeId": "1",
+      "side": "buy",
+      "price": "2.38735",
+      "size": "2470.6224",
+      "ts": "1622097282536"
+    },
+    {
+      "symbol": "BFTUSDT",
+      "tradeId": "2",
+      "side": "sell",
+      "price": "2.38649",
+      "size": "3239.7976",
+      "ts": "1622097280642"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

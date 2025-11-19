@@ -25,8 +25,34 @@ If the field is left blank, all trading pair information will be returned by def
 
 Response Example
 
-```
-{  "code": "00000",  "msg": "success",  "requestTime": 1744276707885,  "data": [    {      "symbol": "BTCUSDT",      "baseCoin": "BTC",      "quoteCoin": "USDT",      "minTradeAmount": "0",      "maxTradeAmount": "900000000000000000000",      "takerFeeRate": "0.002",      "makerFeeRate": "0.002",      "pricePrecision": "2",      "quantityPrecision": "6",      "quotePrecision": "8",      "status": "online",      "minTradeUSDT": "1",      "buyLimitPriceRatio": "0.05",      "sellLimitPriceRatio": "0.05",      "areaSymbol": "no",      "orderQuantity": "200",      "openTime": "1532454360000",      "offTime": ""    }  ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1744276707885,
+  "data": [
+    {
+      "symbol": "BTCUSDT",
+      "baseCoin": "BTC",
+      "quoteCoin": "USDT",
+      "minTradeAmount": "0",
+      "maxTradeAmount": "900000000000000000000",
+      "takerFeeRate": "0.002",
+      "makerFeeRate": "0.002",
+      "pricePrecision": "2",
+      "quantityPrecision": "6",
+      "quotePrecision": "8",
+      "status": "online",
+      "minTradeUSDT": "1",
+      "buyLimitPriceRatio": "0.05",
+      "sellLimitPriceRatio": "0.05",
+      "areaSymbol": "no",
+      "orderQuantity": "200",
+      "openTime": "1532454360000",
+      "offTime": ""
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

@@ -225,6 +225,31 @@ const extractEndpoint = async (page, url, turndownService) => {
       // Convert to markdown
       let markdown = turndownService.turndown(cleanHtml)
 
+      // Format JSON code blocks
+      markdown = markdown.replace(/```\s*\n?\s*(\{[\s\S]*?\})\s*\n?```/g, (match, json) => {
+        try {
+          // Try to parse and pretty-print the JSON
+          const parsed = JSON.parse(json)
+          return '```json\n' + JSON.stringify(parsed, null, 2) + '\n```'
+        } catch (e) {
+          // If parsing fails, return original but add json language tag
+          return '```json\n' + json + '\n```'
+        }
+      })
+
+      // Also handle code blocks without language tags that contain JSON-like content
+      markdown = markdown.replace(/```\s*\n?\s*(\{[^`]*\})\s*\n?```/g, (match, json) => {
+        // Skip if already processed
+        if (match.includes('```json')) return match
+
+        try {
+          const parsed = JSON.parse(json)
+          return '```json\n' + JSON.stringify(parsed, null, 2) + '\n```'
+        } catch (e) {
+          return match
+        }
+      })
+
       // Ensure the document starts with an H1 if it doesn't have one
       if (!markdown.startsWith("# ")) {
         markdown = `# ${result.title}\n\n${markdown}`

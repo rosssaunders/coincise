@@ -51,8 +51,94 @@ ownerAndCompetitior:query all advertisement |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1696930053072,    "data": {        "advList": [            {                "advId": "1",                "advNo": "1",                "side": "buy",                "advSize": "0.6",                "size": "0",                "coin": "BTC",                "price": "155570.9",                "coinPrecision": "36",                "fiat": "CNY",                "fiatPrecision": "2",                "fiatSymbol": "￥",                "status": "online",                "hide": "no",                "maxTradeAmount": "93342.54",                "minTradeAmount": "100",                "payDuration": "4",                "turnoverNum": "8",                "turnoverRate": "1.00",                "label": null,                "userLimitList": {                    "minCompleteNum": "0",                    "maxCompleteNum": "0",                    "placeOrderNum": "0",                    "allowMerchantPlace": "no",                    "completeRate30d": "0",                    "country": ""                },                "paymentMethodList": [                    {                        "paymentMethod": "Bank Card",                        "paymentId": "11",                        "paymentInfo": [                            {                                "name": "Bank Card",                                "required": true,                                "type": "txt"                            }                        ]                    },                    {                        "paymentMethod": "WeChat",                        "paymentId": "12",                        "paymentInfo": [                            {                                "name": "Payment code",                                "required": true,                                "type": "file"                            },                            {                                "name": "WeChatAccount",                                "required": true,                                "type": "txt"                            }                        ]                    },                    {                        "paymentMethod": "Alipay",                        "paymentId": "13",                        "paymentInfo": [                            {                                "name": "AlipayAccount",                                "required": true,                                "type": "txt"                            },                            {                                "name": "Payment code",                                "required": true,                                "type": "file"                            }                        ]                    }                ],                "merchantCertifiedList": [],                "utime": "1696733724267",                "ctime": "1696733724267"            }        ],        "minAdvId": "1"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1696930053072,
+  "data": {
+    "advList": [
+      {
+        "advId": "1",
+        "advNo": "1",
+        "side": "buy",
+        "advSize": "0.6",
+        "size": "0",
+        "coin": "BTC",
+        "price": "155570.9",
+        "coinPrecision": "36",
+        "fiat": "CNY",
+        "fiatPrecision": "2",
+        "fiatSymbol": "￥",
+        "status": "online",
+        "hide": "no",
+        "maxTradeAmount": "93342.54",
+        "minTradeAmount": "100",
+        "payDuration": "4",
+        "turnoverNum": "8",
+        "turnoverRate": "1.00",
+        "label": null,
+        "userLimitList": {
+          "minCompleteNum": "0",
+          "maxCompleteNum": "0",
+          "placeOrderNum": "0",
+          "allowMerchantPlace": "no",
+          "completeRate30d": "0",
+          "country": ""
+        },
+        "paymentMethodList": [
+          {
+            "paymentMethod": "Bank Card",
+            "paymentId": "11",
+            "paymentInfo": [
+              {
+                "name": "Bank Card",
+                "required": true,
+                "type": "txt"
+              }
+            ]
+          },
+          {
+            "paymentMethod": "WeChat",
+            "paymentId": "12",
+            "paymentInfo": [
+              {
+                "name": "Payment code",
+                "required": true,
+                "type": "file"
+              },
+              {
+                "name": "WeChatAccount",
+                "required": true,
+                "type": "txt"
+              }
+            ]
+          },
+          {
+            "paymentMethod": "Alipay",
+            "paymentId": "13",
+            "paymentInfo": [
+              {
+                "name": "AlipayAccount",
+                "required": true,
+                "type": "txt"
+              },
+              {
+                "name": "Payment code",
+                "required": true,
+                "type": "file"
+              }
+            ]
+          }
+        ],
+        "merchantCertifiedList": [],
+        "utime": "1696733724267",
+        "ctime": "1696733724267"
+      }
+    ],
+    "minAdvId": "1"
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

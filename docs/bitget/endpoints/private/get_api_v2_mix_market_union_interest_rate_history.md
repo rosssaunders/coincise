@@ -24,8 +24,32 @@ curl "https://api.bitget.com/api/v2/mix/market/union-interest-rate-history?coin=
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1725948522731,    "data": {        "coin": "USDT",        "historyInterestRateList": [            {                "ts": "1723533015946",                "annualInterestRate": "0.02555",                "dailyInterestRate": "0.00007"            },            {                "ts": "1723446615946",                "annualInterestRate": "0.02555",                "dailyInterestRate": "0.00007"            },            {                "ts": "1723360215946",                "annualInterestRate": "0.02555",                "dailyInterestRate": "0.00007"            }        ]    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1725948522731,
+  "data": {
+    "coin": "USDT",
+    "historyInterestRateList": [
+      {
+        "ts": "1723533015946",
+        "annualInterestRate": "0.02555",
+        "dailyInterestRate": "0.00007"
+      },
+      {
+        "ts": "1723446615946",
+        "annualInterestRate": "0.02555",
+        "dailyInterestRate": "0.00007"
+      },
+      {
+        "ts": "1723360215946",
+        "annualInterestRate": "0.02555",
+        "dailyInterestRate": "0.00007"
+      }
+    ]
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

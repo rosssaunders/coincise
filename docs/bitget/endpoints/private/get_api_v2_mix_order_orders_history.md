@@ -59,8 +59,46 @@ Unix timestamp in milliseconds format, e.g. 1597026383085
 
 Response Example
 
-```
-{    "code": "00000",    "data": {        "entrustedList": [            {                "symbol": "ethusdt",                "size": "100",                "orderId": "123",                "clientOid": "12321",                "baseVolume": "12.1",                "fee": "-0.00854",                "price": "1900",                "priceAvg": "1903",                "status": "filled",                "side": "buy",                "force": "gtc",                "totalProfits": "0",                "posSide": "long",                "marginCoin": "usdt",                "quoteVolume": "22001.21",                "leverage": "20",                "marginMode": "crossed",                "enterPointSource": "api",                "tradeSide": "open",                "posMode": "hedge_mode",                "posAvg": "",                "orderType": "limit",                "orderSource": "normal",                "cTime": "1627293504612",                "uTime": "1627293505612",                "presetStopSurplusPrice": "2001",                "presetStopLossPrice": "1800"            }        ],        "endId": "123"    },    "msg": "success",    "requestTime": 1627293504612}
+```json
+{
+  "code": "00000",
+  "data": {
+    "entrustedList": [
+      {
+        "symbol": "ethusdt",
+        "size": "100",
+        "orderId": "123",
+        "clientOid": "12321",
+        "baseVolume": "12.1",
+        "fee": "-0.00854",
+        "price": "1900",
+        "priceAvg": "1903",
+        "status": "filled",
+        "side": "buy",
+        "force": "gtc",
+        "totalProfits": "0",
+        "posSide": "long",
+        "marginCoin": "usdt",
+        "quoteVolume": "22001.21",
+        "leverage": "20",
+        "marginMode": "crossed",
+        "enterPointSource": "api",
+        "tradeSide": "open",
+        "posMode": "hedge_mode",
+        "posAvg": "",
+        "orderType": "limit",
+        "orderSource": "normal",
+        "cTime": "1627293504612",
+        "uTime": "1627293505612",
+        "presetStopSurplusPrice": "2001",
+        "presetStopLossPrice": "1800"
+      }
+    ],
+    "endId": "123"
+  },
+  "msg": "success",
+  "requestTime": 1627293504612
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

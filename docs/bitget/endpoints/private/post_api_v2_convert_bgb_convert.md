@@ -24,7 +24,7 @@ curl -X POST "https://api.bitget.com/api/v2/convert/bgb-convert" \   -H "ACCESS-
 
 Response Example
 
-```
+```json
 {  "code": "00000",  "data": {    "orderList": [   {        "coin": "EOS",        "orderId": "1233431213"   },   {        "coin": "GROK",        "orderId": "1233431213"   }          ],   }  "msg": "success",  "requestTime": 1627293612502}
 ```
 

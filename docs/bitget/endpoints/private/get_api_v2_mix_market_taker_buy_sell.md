@@ -34,8 +34,24 @@ curl "https://api.bitget.com/api/v2/mix/market/taker-buy-sell?symbol=BTCUSDT"
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1656589586807,    "data": [        {            "buyVolume": "0.01",            "sellVolume": "0.12",            "ts": "1714020600000"        },        {            "buyVolume": "0.01",            "sellVolume": "0.12",            "ts": "1714020600000"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1656589586807,
+  "data": [
+    {
+      "buyVolume": "0.01",
+      "sellVolume": "0.12",
+      "ts": "1714020600000"
+    },
+    {
+      "buyVolume": "0.01",
+      "sellVolume": "0.12",
+      "ts": "1714020600000"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

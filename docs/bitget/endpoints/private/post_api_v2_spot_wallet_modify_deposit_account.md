@@ -30,8 +30,13 @@ curl -X POST "https://api.bitget.com/api/v2/spot/wallet/modify-deposit-account" 
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1683875302853,    "data": "success"}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1683875302853,
+  "data": "success"
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

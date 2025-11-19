@@ -29,8 +29,24 @@ The maximum interval between startTime and endTime is 30 days. |
 
 Response example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1687257612262,    "data": [        {            "id": "1",            "coin": "AIBB",            "spotTaxType": "Interest",            "amount": "6018333.33333333",            "fee": "0",            "balance": "468575833.33333306",            "bizOrderId": "1333333333333333333",            "ts": "1686128884851"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1687257612262,
+  "data": [
+    {
+      "id": "1",
+      "coin": "AIBB",
+      "spotTaxType": "Interest",
+      "amount": "6018333.33333333",
+      "fee": "0",
+      "balance": "468575833.33333306",
+      "bizOrderId": "1333333333333333333",
+      "ts": "1686128884851"
+    }
+  ]
+}
 ```
 
 ### Response parameters[​](#response-parameters "Direct link to Response parameters")

@@ -25,8 +25,15 @@ curl -X POST "https://api.bitget.com/api/v2/spot/trade/cancel-plan-order" \  -H 
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1668134497496,    "data": {        "result":"success"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1668134497496,
+  "data": {
+    "result": "success"
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

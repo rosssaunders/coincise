@@ -32,8 +32,54 @@ Under normal circumstances, the accuracy corresponding to 0/1/2/3 is based on th
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695808949356,    "data": {        "asks": [            [                "38084.5",                "0.0039"            ],            [                "38085.7",                "0.0018"            ],            [                "38086.7",                "0.0310"            ],            [                "38088.2",                "0.5303"            ]        ],        "bids": [            [                "38073.7",                "0.4993000000000000"            ],            [                "38073.4",                "0.4500"            ],            [                "38073.3",                "0.1179"            ],            [                "38071.5",                "0.2162"            ]        ],        "ts": "1622102974025",        "scale":"0.1",        "precision":"scale0",        "isMaxPrecision":"YES"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695808949356,
+  "data": {
+    "asks": [
+      [
+        "38084.5",
+        "0.0039"
+      ],
+      [
+        "38085.7",
+        "0.0018"
+      ],
+      [
+        "38086.7",
+        "0.0310"
+      ],
+      [
+        "38088.2",
+        "0.5303"
+      ]
+    ],
+    "bids": [
+      [
+        "38073.7",
+        "0.4993000000000000"
+      ],
+      [
+        "38073.4",
+        "0.4500"
+      ],
+      [
+        "38073.3",
+        "0.1179"
+      ],
+      [
+        "38071.5",
+        "0.2162"
+      ]
+    ],
+    "ts": "1622102974025",
+    "scale": "0.1",
+    "precision": "scale0",
+    "isMaxPrecision": "YES"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

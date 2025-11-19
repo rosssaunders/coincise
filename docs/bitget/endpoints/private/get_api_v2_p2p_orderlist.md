@@ -44,8 +44,55 @@ en-US: English |
 
 Response Example
 
-```
-{  "code": "00000",  "msg": "success",  "requestTime": 1681201761390,  "data": {    "orderList": [      {        "orderId": "1",        "orderNo": "1",        "advNo": "1",        "price": "1",        "count": "11",        "side": "buy",        "fiat": "USD",        "coin": "USDT",        "withdrawTime": "",        "representTime": "",        "paymentTime": "",        "releaseTime": "",        "amount": "11",        "buyerRealName": "",        "sellerRealName": "兰州",        "status": "cancelled",        "paymentInfo": {          "paymethodName": "paypal",          "paymethodId": "1",          "paymethodInfo": [            {              "name": "繁体中文",              "required": "yes",              "type": "number",              "value": "11****"            },            {              "name": "繁体中文",              "required": "yes",              "type": "file",              "value": "http://abc.x.com/otc/images/20230116/1.jpg"            }          ]        },        "utime": "1696732368875",        "ctime": "1681111722251"      }    ],    "minOrderId": "1"  }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1681201761390,
+  "data": {
+    "orderList": [
+      {
+        "orderId": "1",
+        "orderNo": "1",
+        "advNo": "1",
+        "price": "1",
+        "count": "11",
+        "side": "buy",
+        "fiat": "USD",
+        "coin": "USDT",
+        "withdrawTime": "",
+        "representTime": "",
+        "paymentTime": "",
+        "releaseTime": "",
+        "amount": "11",
+        "buyerRealName": "",
+        "sellerRealName": "兰州",
+        "status": "cancelled",
+        "paymentInfo": {
+          "paymethodName": "paypal",
+          "paymethodId": "1",
+          "paymethodInfo": [
+            {
+              "name": "繁体中文",
+              "required": "yes",
+              "type": "number",
+              "value": "11****"
+            },
+            {
+              "name": "繁体中文",
+              "required": "yes",
+              "type": "file",
+              "value": "http://abc.x.com/otc/images/20230116/1.jpg"
+            }
+          ]
+        },
+        "utime": "1696732368875",
+        "ctime": "1681111722251"
+      }
+    ],
+    "minOrderId": "1"
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

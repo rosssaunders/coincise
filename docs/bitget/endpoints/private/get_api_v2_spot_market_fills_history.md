@@ -33,8 +33,30 @@ startTime and endTime should be within 7days. |
 
 Response Example
 
-```
-{  "code": "00000",  "msg": "success",  "requestTime": 1744275754521,  "data": [    {      "symbol": "ETHUSDT",      "tradeId": "1294151170843025500",      "side": "Buy",      "price": "1592.58",      "size": "2.1982",      "ts": "1744275603000"    },    {      "symbol": "ETHUSDT",      "tradeId": "1294151170834636801",      "side": "Sell",      "price": "1592.57",      "size": "0.0045",      "ts": "1744275603000"    }  ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1744275754521,
+  "data": [
+    {
+      "symbol": "ETHUSDT",
+      "tradeId": "1294151170843025500",
+      "side": "Buy",
+      "price": "1592.58",
+      "size": "2.1982",
+      "ts": "1744275603000"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "tradeId": "1294151170834636801",
+      "side": "Sell",
+      "price": "1592.57",
+      "size": "0.0045",
+      "ts": "1744275603000"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

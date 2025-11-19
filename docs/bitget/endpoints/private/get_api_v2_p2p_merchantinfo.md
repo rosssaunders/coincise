@@ -22,8 +22,32 @@ N/A
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1681194805204,    "data": {        "registerTime": "1672039640000",        "nickName": "lz",        "merchantId": "1",        "avgPaymentTime": "172695",        "avgReleaseTime": "33009",        "totalTrades": "2",        "totalBuy": "1",        "totalSell": "0",        "totalCompletionRate": "1",        "trades30d": "12",        "sell30d": "4",        "buy30d": "8",        "completionRate30d": "0.71",        "kycStatus": true,        "emailBindStatus": true,        "mobileBindStatus": true,        "email": "******@*****.com",        "mobile": "18*34"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1681194805204,
+  "data": {
+    "registerTime": "1672039640000",
+    "nickName": "lz",
+    "merchantId": "1",
+    "avgPaymentTime": "172695",
+    "avgReleaseTime": "33009",
+    "totalTrades": "2",
+    "totalBuy": "1",
+    "totalSell": "0",
+    "totalCompletionRate": "1",
+    "trades30d": "12",
+    "sell30d": "4",
+    "buy30d": "8",
+    "completionRate30d": "0.71",
+    "kycStatus": true,
+    "emailBindStatus": true,
+    "mobileBindStatus": true,
+    "email": "******@*****.com",
+    "mobile": "18*34"
+  }
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

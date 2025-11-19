@@ -27,8 +27,34 @@ curl "https://api.bitget.com/api/v2/spot/trade/orderInfo?orderId=1234567890" \  
 
 Response Example
 
-```
-{  "code": "00000",  "msg": "success",  "requestTime": 1695865476577,  "data": [    {      "userId": "**********",      "symbol": "BTCUSDT",      "orderId": "121211212122",      "clientOid": "121211212122",      "price": "0",      "size": "10.0000000000000000",      "orderType": "market",      "side": "buy",      "status": "filled",      "priceAvg": "13000.0000000000000000",      "baseVolume": "0.0007000000000000",      "quoteVolume": "9.1000000000000000",      "enterPointSource": "API",      "feeDetail": "{\"BGB\":{\"deduction\":true,\"feeCoinCode\":\"BGB\",\"totalDeductionFee\":-0.0041,\"totalFee\":-0.0041},\"newFees\":{\"c\":0,\"d\":0,\"deduction\":false,\"r\":-0.112079256,\"t\":-0.112079256,\"totalDeductionFee\":0}}",      "orderSource": "market",      "cancelReason": "",      "cTime": "1695865232127",      "uTime": "1695865233051"    }  ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695865476577,
+  "data": [
+    {
+      "userId": "**********",
+      "symbol": "BTCUSDT",
+      "orderId": "121211212122",
+      "clientOid": "121211212122",
+      "price": "0",
+      "size": "10.0000000000000000",
+      "orderType": "market",
+      "side": "buy",
+      "status": "filled",
+      "priceAvg": "13000.0000000000000000",
+      "baseVolume": "0.0007000000000000",
+      "quoteVolume": "9.1000000000000000",
+      "enterPointSource": "API",
+      "feeDetail": "{\"BGB\":{\"deduction\":true,\"feeCoinCode\":\"BGB\",\"totalDeductionFee\":-0.0041,\"totalFee\":-0.0041},\"newFees\":{\"c\":0,\"d\":0,\"deduction\":false,\"r\":-0.112079256,\"t\":-0.112079256,\"totalDeductionFee\":0}}",
+      "orderSource": "market",
+      "cancelReason": "",
+      "cTime": "1695865232127",
+      "uTime": "1695865233051"
+    }
+  ]
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

@@ -28,8 +28,30 @@ curl "https://api.bitget.com/api/v2/mix/market/query-position-lever?symbol=BTCUS
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1695796884470,    "data": [        {            "symbol": "BTCUSDT",            "level": "1",            "startUnit": "0",            "endUnit": "50000",            "leverage": "125",            "keepMarginRate": "0.004"        },        {            "symbol": "BTCUSDT",            "level": "2",            "startUnit": "50000",            "endUnit": "200000",            "leverage": "100",            "keepMarginRate": "0.005"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695796884470,
+  "data": [
+    {
+      "symbol": "BTCUSDT",
+      "level": "1",
+      "startUnit": "0",
+      "endUnit": "50000",
+      "leverage": "125",
+      "keepMarginRate": "0.004"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "level": "2",
+      "startUnit": "50000",
+      "endUnit": "200000",
+      "leverage": "100",
+      "keepMarginRate": "0.005"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

@@ -28,8 +28,21 @@ curl "https://api.bitget.com/api/v2/tax/p2p-record?startTime=1686128558000&endTi
 
 Response example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1687260620793,    "data": [      {        "id": "152526631",        "coin": "USDT",        "p2pTaxType": "transfer-in",        "balance": "1",        "ts": "1755846320684"      }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1687260620793,
+  "data": [
+    {
+      "id": "152526631",
+      "coin": "USDT",
+      "p2pTaxType": "transfer-in",
+      "balance": "1",
+      "ts": "1755846320684"
+    }
+  ]
+}
 ```
 
 ### Response parameters[​](#response-parameters "Direct link to Response parameters")

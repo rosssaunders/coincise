@@ -25,8 +25,26 @@ curl "https://api.bitget.com/api/v2/spot/market/fund-flow?symbol=BTCUSDT&period=
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1656589586807,    "data": {        "whaleBuyVolume": "50.901579",        "dolphinBuyVolume": "1.506897",        "fishBuyVolume": "0.529853",        "whaleSellVolume": "50.635982",        "dolphinSellVolume": "1.429034",        "fishSellVolume": "0.344032",        "whaleBuyRatio": "50.901579",        "dolphinBuyRatio": "1.506897",        "fishBuyRatio": "0.529853",        "whaleSellRatio": "50.635982",        "dolphinSellRatio": "1.429034",        "fishSellRatio": "0.344032"    }}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1656589586807,
+  "data": {
+    "whaleBuyVolume": "50.901579",
+    "dolphinBuyVolume": "1.506897",
+    "fishBuyVolume": "0.529853",
+    "whaleSellVolume": "50.635982",
+    "dolphinSellVolume": "1.429034",
+    "fishSellVolume": "0.344032",
+    "whaleBuyRatio": "50.901579",
+    "dolphinBuyRatio": "1.506897",
+    "fishBuyRatio": "0.529853",
+    "whaleSellRatio": "50.635982",
+    "dolphinSellRatio": "1.429034",
+    "fishSellRatio": "0.344032"
+  }
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

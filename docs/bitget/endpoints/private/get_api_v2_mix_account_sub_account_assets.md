@@ -27,8 +27,50 @@ curl "https://api.bitget.com/api/v2/mix/account/sub-account-assets?productType=U
 
 Response Example
 
-```
-{    "code": "00000",    "data": [        {            "userId": 1234567890,            "assetList": [                {                    "marginCoin": "USDT",                    "locked": "0",                    "available": "23.123",                    "crossedMaxAvailable": "23.123",                    "isolatedMaxAvailable": "23.123",                    "maxTransferOut": "23.123",                    "accountEquity": "23.123",                    "usdtEquity": "23.123",                    "btcEquity": "0.001403612744",                    "unrealizedPL": "0",                    "coupon": ""                }            ]        },        {            "userId": 1234567890,            "assetList": [                {                    "marginCoin": "USDT",                    "locked": "0",                    "available": "11",                    "crossedMaxAvailable": "11",                    "isolatedMaxAvailable": "11",                    "maxTransferOut": "11",                    "accountEquity": "11",                    "usdtEquity": "11",                    "btcEquity": "0.000667722189",                    "unrealizedPL": "0",                    "coupon": ""                }            ]        }    ],    "msg": "success",    "requestTime": 1630901215622}
+```json
+{
+  "code": "00000",
+  "data": [
+    {
+      "userId": 1234567890,
+      "assetList": [
+        {
+          "marginCoin": "USDT",
+          "locked": "0",
+          "available": "23.123",
+          "crossedMaxAvailable": "23.123",
+          "isolatedMaxAvailable": "23.123",
+          "maxTransferOut": "23.123",
+          "accountEquity": "23.123",
+          "usdtEquity": "23.123",
+          "btcEquity": "0.001403612744",
+          "unrealizedPL": "0",
+          "coupon": ""
+        }
+      ]
+    },
+    {
+      "userId": 1234567890,
+      "assetList": [
+        {
+          "marginCoin": "USDT",
+          "locked": "0",
+          "available": "11",
+          "crossedMaxAvailable": "11",
+          "isolatedMaxAvailable": "11",
+          "maxTransferOut": "11",
+          "accountEquity": "11",
+          "usdtEquity": "11",
+          "btcEquity": "0.000667722189",
+          "unrealizedPL": "0",
+          "coupon": ""
+        }
+      ]
+    }
+  ],
+  "msg": "success",
+  "requestTime": 1630901215622
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

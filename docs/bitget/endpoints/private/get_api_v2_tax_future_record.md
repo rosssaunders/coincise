@@ -32,8 +32,23 @@ curl "https://api.bitget.com/api/v2/tax/future-record?startTime=1686128558000&en
 
 Response example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1687257612262,    "data": [        {            "id": "1",            "symbol": "TRXUSDT",            "marginCoin": "USDT",            "futureTaxType": "close_long",            "amount": "0.10545",            "fee": "-0.02134863",            "ts": "1679909309766"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1687257612262,
+  "data": [
+    {
+      "id": "1",
+      "symbol": "TRXUSDT",
+      "marginCoin": "USDT",
+      "futureTaxType": "close_long",
+      "amount": "0.10545",
+      "fee": "-0.02134863",
+      "ts": "1679909309766"
+    }
+  ]
+}
 ```
 
 ### Response parameters[​](#response-parameters "Direct link to Response parameters")

@@ -21,8 +21,38 @@ curl "https://api.bitget.com/api/v2/account/all-account-balance" \  -H "ACCESS-K
 
 Response example
 
-```
-{  "code": "00000",  "msg": "success",  "requestTime": 1712129301188,  "data": [    {      "accountType": "spot",      "usdtBalance": "326883.9190752508"    },    {      "accountType": "futures",      "usdtBalance": "280108.503808983783"    },    {      "accountType": "funding",      "usdtBalance": "0"    },    {      "accountType": "earn",      "usdtBalance": "142313.7"    },    {      "accountType": "bots",      "usdtBalance": "210.585022843422"    },    {      "accountType": "margin",      "usdtBalance": "54616.35774218"    }  ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1712129301188,
+  "data": [
+    {
+      "accountType": "spot",
+      "usdtBalance": "326883.9190752508"
+    },
+    {
+      "accountType": "futures",
+      "usdtBalance": "280108.503808983783"
+    },
+    {
+      "accountType": "funding",
+      "usdtBalance": "0"
+    },
+    {
+      "accountType": "earn",
+      "usdtBalance": "142313.7"
+    },
+    {
+      "accountType": "bots",
+      "usdtBalance": "210.585022843422"
+    },
+    {
+      "accountType": "margin",
+      "usdtBalance": "54616.35774218"
+    }
+  ]
+}
 ```
 
 ### Response parameters[​](#response-parameters "Direct link to Response parameters")

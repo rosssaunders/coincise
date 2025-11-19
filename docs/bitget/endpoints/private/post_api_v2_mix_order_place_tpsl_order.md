@@ -6,6 +6,12 @@ Speed limit is 10 times/s (UID)
 
 Place a stop-profit and stop-loss plan order
 
+-   **API Broker rebate identifier**:  
+    The following code block needs to be added to the HTTP Header of the request.
+    
+    > "X-CHANNEL-API-CODE":"your-channel-api-code"
+    
+
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 -   POST /api/v2/mix/order/place-tpsl-order
@@ -55,8 +61,16 @@ It's required only in `planType` is moving\_plan |
 
 Response Example
 
-```
-{    "code": "00000",    "data": {        "orderId": "121212121212",        "clientOid": "BITGET#1627293504612"    },    "msg": "success",    "requestTime": 1627293504612}
+```json
+{
+  "code": "00000",
+  "data": {
+    "orderId": "121212121212",
+    "clientOid": "BITGET#1627293504612"
+  },
+  "msg": "success",
+  "requestTime": 1627293504612
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

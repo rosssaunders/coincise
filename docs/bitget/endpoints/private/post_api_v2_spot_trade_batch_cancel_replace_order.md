@@ -43,8 +43,20 @@ The decimal places of price and the price step can be returned by the [Get Symbo
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1725341809524,    "data": [        {            "orderId": "xxxxxxxxxxxxxxxxxxxxxx",            "clientOid": null,            "success": "failure",            "msg": "xxxxxx"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1725341809524,
+  "data": [
+    {
+      "orderId": "xxxxxxxxxxxxxxxxxxxxxx",
+      "clientOid": null,
+      "success": "failure",
+      "msg": "xxxxxx"
+    }
+  ]
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

@@ -37,8 +37,26 @@ The interval between startTime and endTime must not exceed 90 days. |
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1700556280430,    "data": [        {            "coin": "USDT",            "status": "Successful",            "toType": "usdt_futures",            "fromType": "spot",            "size": "1020.00000000",            "ts": "1691476360467",            "clientOid": "xxxx",            "transferId": "xxxx",            "fromUserId": "xxxx",            "toUserId": "xxxx"        }    ]}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1700556280430,
+  "data": [
+    {
+      "coin": "USDT",
+      "status": "Successful",
+      "toType": "usdt_futures",
+      "fromType": "spot",
+      "size": "1020.00000000",
+      "ts": "1691476360467",
+      "clientOid": "xxxx",
+      "transferId": "xxxx",
+      "fromUserId": "xxxx",
+      "toUserId": "xxxx"
+    }
+  ]
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

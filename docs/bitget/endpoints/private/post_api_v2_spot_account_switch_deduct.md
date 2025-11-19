@@ -22,8 +22,13 @@ curl -X POST "https://api.bitget.com/api/v2/spot/account/switch-deduct" \   -H "
 
 Response Example
 
-```
-{    "code": "00000",    "msg": "success",    "requestTime": 1683875302853,    "data": true}
+```json
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1683875302853,
+  "data": true
+}
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")

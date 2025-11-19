@@ -35,8 +35,16 @@ If both are present, orderId prevails. |
 
 Response Example
 
-```
-{    "code": "00000",    "data": {        "orderId": "123",        "clientOid": ""    },    "msg": "success",    "requestTime": 1627293504612}
+```json
+{
+  "code": "00000",
+  "data": {
+    "orderId": "123",
+    "clientOid": ""
+  },
+  "msg": "success",
+  "requestTime": 1627293504612
+}
 ```
 
 ### Return Parameter[​](#return-parameter "Direct link to Return Parameter")

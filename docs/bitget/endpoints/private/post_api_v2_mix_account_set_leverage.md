@@ -46,8 +46,20 @@ Isolated margin mode: For one-way positions, the holdSide parameter does not nee
 
 Response Example
 
-```
-{  "code": "00000",  "data": {    "symbol": "BTCUSDT",    "marginCoin": "USDT",    "longLeverage": "25",    "shortLeverage": "20",    "crossMarginLeverage": "20",    "marginMode": "crossed"  },  "msg": "success",  "requestTime": 1627293049406}
+```json
+{
+  "code": "00000",
+  "data": {
+    "symbol": "BTCUSDT",
+    "marginCoin": "USDT",
+    "longLeverage": "25",
+    "shortLeverage": "20",
+    "crossMarginLeverage": "20",
+    "marginMode": "crossed"
+  },
+  "msg": "success",
+  "requestTime": 1627293049406
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")

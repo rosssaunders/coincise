@@ -43,8 +43,26 @@ max:1000 |
 
 Response Example
 
-```
-{    "code": "00000",    "data": [        {            "coin": "btc",            "status": "Successful",            "toType": "usdt_futures",            "toSymbol": "",            "fromType": "spot",            "fromSymbol": "BTC/USD",            "size": "1000.00000000",            "ts": "1631070374488",            "clientOid": "1",            "transferId": "1"        }    ],    "msg": "success",    "requestTime": 1631608142260}
+```json
+{
+  "code": "00000",
+  "data": [
+    {
+      "coin": "btc",
+      "status": "Successful",
+      "toType": "usdt_futures",
+      "toSymbol": "",
+      "fromType": "spot",
+      "fromSymbol": "BTC/USD",
+      "size": "1000.00000000",
+      "ts": "1631070374488",
+      "clientOid": "1",
+      "transferId": "1"
+    }
+  ],
+  "msg": "success",
+  "requestTime": 1631608142260
+}
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
