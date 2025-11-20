@@ -32,13 +32,12 @@ Command for action
 
 ### Content-Type: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/TradingAccountTransferRequest"
-}
-```
+| Field      | Type   | Required | Description                                                                                                                                |
+| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| timestamp  | string | Yes      | unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string<br>**Example:** `"1621490985000"`        |
+| nonce      | string | Yes      | the nonce is a client side incremented unsigned 64 bit integer expressed as string<br>**Example:** `"123456789"`                           |
+| authorizer | string | Yes      | JWT authorizer you obtain along with the [JWT token](#overview--generate-a-jwt-token)<br>**Example:** `"03E02367E8C900000500000000000000"` |
+| command    | object | Yes      |                                                                                                                                            |
 
 ## Responses
 
@@ -46,13 +45,10 @@ Command for action
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/TradingAccountTransferResponse"
-}
-```
+| Field     | Type   | Required | Description                             |
+| --------- | ------ | -------- | --------------------------------------- |
+| message   | string | Yes      | message                                 |
+| requestId | string | Yes      | <br>**Example:** `"197735387747975680"` |
 
 ### 400 - Bad Request
 
@@ -61,13 +57,11 @@ result in the following response:
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/BadOrderEntryResponse"
-}
-```
+| Field         | Type    | Required | Description                                                         |
+| ------------- | ------- | -------- | ------------------------------------------------------------------- |
+| message       | string  | Yes      | message<br>**Example:** `"Missing signature header"`                |
+| errorCode     | integer | Yes      | unique error code<br>**Example:** `6029`                            |
+| errorCodeName | string  | Yes      | unique error code name<br>**Example:** `"MISSING_SIGNATURE_HEADER"` |
 
 ### 401 - Not Authenticated
 

@@ -20,13 +20,10 @@ Get Current Exchange Time
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/CurrentExchangeTimeResponse"
-}
-```
+| Field     | Type   | Required | Description                                                                                                                         |
+| --------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| timestamp | string | Yes      | unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string<br>**Example:** `"1621490985000"` |
+| datetime  | string | Yes      | ISO 8601 with millisecond as string<br>**Example:** `"2025-05-20T01:01:01.000Z"`                                                    |
 
 ### 429 - Too Many Requests
 

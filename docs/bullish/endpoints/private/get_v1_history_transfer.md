@@ -9,8 +9,7 @@ Get historical transfers.
 - [supports pagination](#overview--pagination-support)
 - filtering on `createdAtDatetime` and `createdAtTimestamp` requires additional
   keywords, [see filtering support](#overview--filtering-support)
-- On a single query request you can retrieve data over a 7 day window, with the
-  data available for the last 90 days
+- Only the last 90 days of data is available for querying
 
 **Operation ID**: get-transfer-history
 
@@ -38,15 +37,73 @@ Get historical transfers.
 
 **Content-Type**: application/json
 
-**Schema**:
-
 ```json
 {
   "type": "array",
   "minItems": 0,
   "maxItems": 25,
   "items": {
-    "$ref": "#/components/schemas/SubAccountTransferResponse"
+    "description": "Get account transfer history",
+    "type": "string",
+    "properties": {
+      "requestId": {
+        "description": "unique identifier of the transfer request",
+        "type": "string",
+        "example": "1"
+      },
+      "toTradingAccountId": {
+        "description": "unique trading account ID",
+        "type": "string",
+        "example": "111000000000001",
+        "properties": {}
+      },
+      "fromTradingAccountId": {
+        "description": "sender's trading account",
+        "type": "string",
+        "example": "121000000000001"
+      },
+      "assetSymbol": {
+        "type": "string",
+        "description": "asset symbol as denoted in the world",
+        "example": "BTC",
+        "properties": {}
+      },
+      "quantity": {
+        "description": "see [asset value](#overview--price-and-quantity-precision) format",
+        "type": "string",
+        "example": "1.00000000",
+        "properties": {}
+      },
+      "status": {
+        "description": "transfer status [CLOSED/OPEN/REJECTED]",
+        "type": "string",
+        "example": "CLOSED"
+      },
+      "statusReasonCode": {
+        "description": "status reason code",
+        "type": "string",
+        "example": "6002"
+      },
+      "statusReason": {
+        "description": "readable status reason",
+        "type": "string",
+        "example": "Executed"
+      },
+      "createdAtTimestamp": {
+        "type": "string",
+        "format": "string",
+        "example": "1621490985000",
+        "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string",
+        "properties": {}
+      },
+      "createdAtDatetime": {
+        "type": "string",
+        "format": "date-time",
+        "example": "2025-05-20T01:01:01.000Z",
+        "description": "ISO 8601 with millisecond as string",
+        "properties": {}
+      }
+    }
   }
 }
 ```

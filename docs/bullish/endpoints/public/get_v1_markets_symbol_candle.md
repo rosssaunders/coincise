@@ -35,15 +35,66 @@ Get Current OHLCV Candle by Market Symbol
 
 **Content-Type**: application/json
 
-**Schema**:
-
 ```json
 {
   "type": "array",
   "minItems": 1,
   "maxItems": 25,
   "items": {
-    "$ref": "#/components/schemas/OHLCVCandle"
+    "type": "object",
+    "properties": {
+      "open": {
+        "description": "see [asset value](#overview--price-and-quantity-precision) format",
+        "type": "string",
+        "example": "1.00000000",
+        "properties": {}
+      },
+      "high": {
+        "description": "see [asset value](#overview--price-and-quantity-precision) format",
+        "type": "string",
+        "example": "1.00000000",
+        "properties": {}
+      },
+      "low": {
+        "description": "see [asset value](#overview--price-and-quantity-precision) format",
+        "type": "string",
+        "example": "1.00000000",
+        "properties": {}
+      },
+      "close": {
+        "description": "see [asset value](#overview--price-and-quantity-precision) format",
+        "type": "string",
+        "example": "1.00000000",
+        "properties": {}
+      },
+      "volume": {
+        "description": "see [asset value](#overview--price-and-quantity-precision) format",
+        "type": "string",
+        "example": "1.00000000",
+        "properties": {}
+      },
+      "createdAtTimestamp": {
+        "type": "string",
+        "format": "string",
+        "example": "1621490985000",
+        "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string",
+        "properties": {}
+      },
+      "createdAtDatetime": {
+        "type": "string",
+        "format": "date-time",
+        "example": "2025-05-20T01:01:01.000Z",
+        "description": "ISO 8601 with millisecond as string",
+        "properties": {}
+      },
+      "publishedAtTimestamp": {
+        "type": "string",
+        "format": "string",
+        "example": "1621490985000",
+        "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string",
+        "properties": {}
+      }
+    }
   }
 }
 ```

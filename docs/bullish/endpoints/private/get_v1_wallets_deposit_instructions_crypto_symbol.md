@@ -38,13 +38,43 @@ see
 
 **Content-Type**: application/json
 
-**Schema**:
-
 ```json
 {
   "type": "array",
   "items": {
-    "$ref": "#/components/schemas/CustodyCryptoDepositInstructions"
+    "type": "object",
+    "required": ["network", "symbol", "address"],
+    "properties": {
+      "network": {
+        "type": "string",
+        "example": "ETH",
+        "description": "the network of the native coin or token, e.g. BTC, ETH, SOL",
+        "properties": {}
+      },
+      "symbol": {
+        "type": "string",
+        "example": "USDC",
+        "description": "symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB",
+        "properties": {}
+      },
+      "memo": {
+        "type": "string",
+        "example": "925891241",
+        "description": "memo or destination tag used during deposit to help identify account to credit funds to",
+        "properties": {}
+      },
+      "address": {
+        "type": "string",
+        "example": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02",
+        "description": "an address on the given network",
+        "properties": {}
+      }
+    },
+    "example": {
+      "network": "ETH",
+      "symbol": "USDC",
+      "address": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02"
+    }
   }
 }
 ```

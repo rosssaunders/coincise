@@ -43,8 +43,6 @@ Requires
 
 ### Content-Type: application/json
 
-**Schema**:
-
 ```json
 {
   "discriminator": {
@@ -71,8 +69,6 @@ Requires
 
 **Content-Type**: application/json
 
-**Schema**:
-
 ```json
 {
   "oneOf": [
@@ -93,46 +89,38 @@ result in the following response:
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/BadOtcTradeEntryResponse"
-}
-```
+| Field         | Type    | Required | Description            |
+| ------------- | ------- | -------- | ---------------------- |
+| message       | string  | Yes      | message                |
+| errorCode     | integer | Yes      | unique error code      |
+| errorCodeName | string  | Yes      | unique error code name |
 
 ### 401 - Unauthorized. Either API details are missing or invalid
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/BadOtcTradeEntryResponse"
-}
-```
+| Field         | Type    | Required | Description            |
+| ------------- | ------- | -------- | ---------------------- |
+| message       | string  | Yes      | message                |
+| errorCode     | integer | Yes      | unique error code      |
+| errorCodeName | string  | Yes      | unique error code name |
 
 ### 403 - Forbidden- You do not have access to the requested resource
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/BadOtcTradeEntryResponse"
-}
-```
+| Field         | Type    | Required | Description            |
+| ------------- | ------- | -------- | ---------------------- |
+| message       | string  | Yes      | message                |
+| errorCode     | integer | Yes      | unique error code      |
+| errorCodeName | string  | Yes      | unique error code name |
 
 ### 500 - Internal Server Error
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/BadOtcTradeEntryResponse"
-}
-```
+| Field         | Type    | Required | Description            |
+| ------------- | ------- | -------- | ---------------------- |
+| message       | string  | Yes      | message                |
+| errorCode     | integer | Yes      | unique error code      |
+| errorCodeName | string  | Yes      | unique error code name |

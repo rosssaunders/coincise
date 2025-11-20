@@ -20,13 +20,44 @@ Retrieves the index price of all supported assets
 
 **Content-Type**: application/json
 
-**Schema**:
-
 ```json
 {
   "type": "array",
   "items": {
-    "$ref": "#/components/schemas/IndexPrice"
+    "type": "object",
+    "required": [
+      "assetSymbol",
+      "price",
+      "updatedAtDatetime",
+      "updatedAtTimestamp"
+    ],
+    "properties": {
+      "assetSymbol": {
+        "type": "string",
+        "description": "asset symbol as denoted in the world",
+        "example": "BTC",
+        "properties": {}
+      },
+      "price": {
+        "description": "Asset price in USD",
+        "example": "66100.0000",
+        "type": "string"
+      },
+      "updatedAtDatetime": {
+        "type": "string",
+        "format": "date-time",
+        "example": "2025-05-20T01:01:01.000Z",
+        "description": "ISO 8601 with millisecond as string",
+        "properties": {}
+      },
+      "updatedAtTimestamp": {
+        "type": "string",
+        "format": "int64",
+        "example": "1621490985000",
+        "description": "number of milliseconds since EPOCH as string",
+        "properties": {}
+      }
+    }
   }
 }
 ```

@@ -7,14 +7,13 @@
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
-import https from "https"
 import process from "process"
 import { formatMarkdown } from "../../shared/format-markdown.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const SPEC_URL = "https://api.exchange.bullish.com/docs/v2/open-api/api-doc.yml"
+const SPEC_URL = "https://raw.githubusercontent.com/bullish-exchange/api-docs/master/src/trading-api/current/bullish-trading-api.yml"
 const OUTPUT_DIR = path.resolve(__dirname, "../../../docs/bullish")
 const PUBLIC_DIR = path.join(OUTPUT_DIR, "endpoints", "public")
 const PRIVATE_DIR = path.join(OUTPUT_DIR, "endpoints", "private")
@@ -39,29 +38,14 @@ const writeFile = async (filePath, content) => {
 /**
  * Download OpenAPI spec
  */
-const downloadSpec = () => {
-  return new Promise((resolve, reject) => {
-    console.log(`Downloading OpenAPI spec from ${SPEC_URL}...`)
-    https
-      .get(SPEC_URL, res => {
-        let data = ""
-        res.on("data", chunk => {
-          data += chunk
-        })
-        res.on("end", () => {
-          try {
-            const spec = JSON.parse(data)
-            console.log("✅ OpenAPI spec downloaded successfully")
-            resolve(spec)
-          } catch (err) {
-            reject(new Error(`Failed to parse OpenAPI spec: ${err.message}`))
-          }
-        })
-      })
-      .on("error", err => {
-        reject(new Error(`Failed to download OpenAPI spec: ${err.message}`))
-      })
-  })
+/**
+ * Read local OpenAPI spec
+ */
+const readLocalSpec = () => {
+  const specPath = path.resolve(__dirname, "../bullish-api-doc.json")
+  console.log(`Reading OpenAPI spec from ${specPath}...`)
+  const content = fs.readFileSync(specPath, "utf8")
+  return JSON.parse(content)
 }
 
 /**
@@ -99,6 +83,105 @@ const isAuthRequired = operation => {
 }
 
 /**
+ * Resolve $ref in schema
+ */
+const resolveSchema = (schema, spec) => {
+  if (!schema) return schema
+
+  // Handle $ref
+  if (schema.$ref) {
+    const refPath = schema.$ref.replace(/^#\//, "").split("/")
+    let resolved = spec
+    for (const part of refPath) {
+      resolved = resolved?.[part]
+    }
+    // Recursively resolve the found schema
+    return resolveSchema(resolved, spec)
+  }
+
+  // Handle arrays
+  if (schema.type === "array" && schema.items) {
+    return {
+      ...schema,
+      items: resolveSchema(schema.items, spec)
+    }
+  }
+
+  // Handle objects with properties
+  if (schema.properties) {
+    const resolvedProperties = {}
+    for (const [key, value] of Object.entries(schema.properties)) {
+      resolvedProperties[key] = resolveSchema(value, spec)
+    }
+    return {
+      ...schema,
+      properties: resolvedProperties
+    }
+  }
+
+  // Handle allOf (merge properties)
+  if (schema.allOf) {
+    let mergedSchema = {}
+    for (const item of schema.allOf) {
+      const resolvedItem = resolveSchema(item, spec)
+      mergedSchema = {
+        ...mergedSchema,
+        ...resolvedItem,
+        properties: {
+          ...mergedSchema.properties,
+          ...resolvedItem.properties
+        }
+      }
+    }
+    delete mergedSchema.allOf
+    return mergedSchema
+  }
+
+  return schema
+}
+
+/**
+ * Convert JSON schema to markdown table
+ */
+const schemaToMarkdownTable = (schema, requiredFields = []) => {
+  if (!schema || !schema.properties) {
+    return "```json\n" + JSON.stringify(schema, null, 2) + "\n```\n\n"
+  }
+
+  let markdown = "| Field | Type | Required | Description |\n"
+  markdown += "|-------|------|----------|-------------|\n"
+
+  for (const [fieldName, fieldSchema] of Object.entries(schema.properties)) {
+    const isRequired = requiredFields.includes(fieldName) ? "Yes" : "No"
+    let type = fieldSchema.type || "object"
+    
+    // Handle array types
+    if (type === "array" && fieldSchema.items) {
+      const itemType = fieldSchema.items.type || "object"
+      type = `array[${itemType}]`
+    }
+
+    // Get description and example
+    const description = fieldSchema.description || ""
+    const example = fieldSchema.example !== undefined 
+      ? `<br>**Example:** \`${JSON.stringify(fieldSchema.example)}\``
+      : ""
+    
+    // Handle deprecated fields
+    const deprecated = fieldSchema.deprecated ? " ⚠️ *Deprecated*" : ""
+    
+    const fullDescription = (description + example + deprecated)
+      .replace(/\n/g, " ")
+      .replace(/\|/g, "\\|")
+
+    markdown += `| ${fieldName} | ${type} | ${isRequired} | ${fullDescription} |\n`
+  }
+
+  markdown += "\n"
+  return markdown
+}
+
+/**
  * Format parameter information
  */
 const formatParameters = parameters => {
@@ -128,7 +211,7 @@ const formatParameters = parameters => {
 /**
  * Format request body information
  */
-const formatRequestBody = requestBody => {
+const formatRequestBody = (requestBody, spec) => {
   if (!requestBody) {
     return ""
   }
@@ -148,10 +231,8 @@ const formatRequestBody = requestBody => {
       markdown += `### Content-Type: ${contentType}\n\n`
 
       if (content.schema) {
-        markdown += "**Schema**:\n\n"
-        markdown += "```json\n"
-        markdown += JSON.stringify(content.schema, null, 2)
-        markdown += "\n```\n\n"
+        const resolvedSchema = resolveSchema(content.schema, spec)
+        markdown += schemaToMarkdownTable(resolvedSchema, resolvedSchema.required || [])
       }
 
       if (content.example) {
@@ -169,7 +250,7 @@ const formatRequestBody = requestBody => {
 /**
  * Format response information
  */
-const formatResponses = responses => {
+const formatResponses = (responses, spec) => {
   if (!responses) {
     return ""
   }
@@ -184,10 +265,8 @@ const formatResponses = responses => {
         markdown += `**Content-Type**: ${contentType}\n\n`
 
         if (content.schema) {
-          markdown += "**Schema**:\n\n"
-          markdown += "```json\n"
-          markdown += JSON.stringify(content.schema, null, 2)
-          markdown += "\n```\n\n"
+          const resolvedSchema = resolveSchema(content.schema, spec)
+          markdown += schemaToMarkdownTable(resolvedSchema, resolvedSchema.required || [])
         }
 
         if (content.example) {
@@ -206,7 +285,7 @@ const formatResponses = responses => {
 /**
  * Extract endpoint documentation
  */
-const extractEndpoint = (endpointPath, method, operation) => {
+const extractEndpoint = (endpointPath, method, operation, spec) => {
   const methodUpper = method.toUpperCase()
   const summary = operation.summary || ""
   const description = operation.description || ""
@@ -246,12 +325,12 @@ const extractEndpoint = (endpointPath, method, operation) => {
 
   // Request Body
   if (operation.requestBody) {
-    markdown += formatRequestBody(operation.requestBody)
+    markdown += formatRequestBody(operation.requestBody, spec)
   }
 
   // Responses
   if (operation.responses) {
-    markdown += formatResponses(operation.responses)
+    markdown += formatResponses(operation.responses, spec)
   }
 
   return {
@@ -277,7 +356,7 @@ const processEndpoints = async spec => {
     for (const method of methods) {
       if (pathItem[method]) {
         const operation = pathItem[method]
-        const endpoint = extractEndpoint(endpointPath, method, operation)
+        const endpoint = extractEndpoint(endpointPath, method, operation, spec)
 
         // Determine output directory
         const outputDir = endpoint.isPublic ? PUBLIC_DIR : PRIVATE_DIR
@@ -310,8 +389,8 @@ const main = async () => {
     ensureDir(PUBLIC_DIR)
     ensureDir(PRIVATE_DIR)
 
-    // Download OpenAPI spec
-    const spec = await downloadSpec()
+    // Read local OpenAPI spec
+    const spec = readLocalSpec()
 
     // Process all endpoints
     await processEndpoints(spec)

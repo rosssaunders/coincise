@@ -31,13 +31,67 @@ header
 
 **Content-Type**: application/json
 
-**Schema**:
-
 ```json
 {
   "type": "array",
   "items": {
-    "$ref": "#/components/schemas/CustodyFiatDepositInstructions"
+    "type": "object",
+    "properties": {
+      "network": {
+        "type": "string",
+        "example": "SWIFT",
+        "description": "the network that the account belongs to and the transaction will be performed on SWIFT, ABA or SEPA"
+      },
+      "symbol": {
+        "type": "string",
+        "example": "USD",
+        "description": "the currency associated with the account, e.g. USD, EUR"
+      },
+      "accountNumber": {
+        "type": "string",
+        "description": "bank account number",
+        "example": "9873481227",
+        "properties": {}
+      },
+      "name": {
+        "type": "string",
+        "example": "Bullish (GI) Limited",
+        "description": "official Bullish account holder name"
+      },
+      "physicalAddress": {
+        "type": "string",
+        "example": "26/F, The Centrium, 60 Wyndham Street, Central, Hong Kong",
+        "description": "bullish entity's physical address for the bank account"
+      },
+      "memo": {
+        "type": "string",
+        "example": "8VZPKSGPA",
+        "description": "client specific reference to identify which account desposits should be allocated to on the exhange"
+      },
+      "bank": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Silvergate Bank",
+            "description": "name of bank",
+            "properties": {}
+          },
+          "physicalAddress": {
+            "type": "string",
+            "description": "physical location of bank",
+            "example": "4250 Executive Square Suite 300 La Jolla, CA 92037",
+            "properties": {}
+          },
+          "routingCode": {
+            "type": "string",
+            "description": "routing code of bank",
+            "example": "322286803",
+            "properties": {}
+          }
+        }
+      }
+    }
   }
 }
 ```

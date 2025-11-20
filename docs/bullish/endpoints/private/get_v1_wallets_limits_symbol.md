@@ -38,13 +38,11 @@ see
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/CustodyLimits"
-}
-```
+| Field          | Type   | Required | Description                                                                                                                                                                                                  |
+| -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| symbol         | string | No       | symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB<br>**Example:** `"USDC"`                                                                                                                        |
+| available      | string | No       | remaining limit on amount of coin or token that could be withdrawn now, in units of the symbol itself, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei)<br>**Example:** `"20000.0"`          |
+| twentyFourHour | string | No       | limit on amount of coin or token that can be withdrawn over a 24 hour period, in units of the symbol itself, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei)<br>**Example:** `"1000000.00"` |
 
 ### 429 - Too Many Requests
 

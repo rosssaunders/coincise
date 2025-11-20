@@ -31,13 +31,107 @@ Get derivatives positions
 
 **Content-Type**: application/json
 
-**Schema**:
-
 ```json
 {
   "type": "array",
   "items": {
-    "$ref": "#/components/schemas/DerivativesPositionResponse"
+    "description": "Derivatives Position of one market for the trading account",
+    "type": "string",
+    "properties": {
+      "tradingAccountId": {
+        "description": "unique trading account ID",
+        "type": "string",
+        "example": "111000000000001",
+        "properties": {}
+      },
+      "symbol": {
+        "type": "string",
+        "description": "market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market",
+        "example": "BTCUSDC",
+        "properties": {}
+      },
+      "side": {
+        "type": "string",
+        "example": "BUY",
+        "enum": ["BUY", "SELL"],
+        "properties": {}
+      },
+      "quantity": {
+        "description": "see [asset value](#overview--price-and-quantity-precision) format",
+        "type": "string",
+        "example": "1.00000000",
+        "properties": {}
+      },
+      "notional": {
+        "description": "see [asset value](#overview--price-and-quantity-precision) format",
+        "type": "string",
+        "example": "1.0000",
+        "properties": {}
+      },
+      "entryNotional": {
+        "description": "see [asset value](#overview--price-and-quantity-precision) format",
+        "type": "string",
+        "example": "1.0000",
+        "properties": {}
+      },
+      "mtmPnl": {
+        "description": "see [asset value](#overview--price-and-quantity-precision) format",
+        "type": "string",
+        "example": "1.0000",
+        "properties": {}
+      },
+      "reportedMtmPnl": {
+        "description": "see [asset value](#overview--price-and-quantity-precision) format",
+        "type": "string",
+        "example": "1.0000",
+        "properties": {}
+      },
+      "reportedFundingPnl": {
+        "description": "see [asset value](#overview--price-and-quantity-precision) format",
+        "type": "string",
+        "example": "1.0000",
+        "properties": {}
+      },
+      "realizedPnl": {
+        "description": "see [asset value](#overview--price-and-quantity-precision) format",
+        "type": "string",
+        "example": "1.0000",
+        "properties": {}
+      },
+      "settlementAssetSymbol": {
+        "description": "Settlement Asset Symbol",
+        "type": "string",
+        "example": "USDC"
+      },
+      "createdAtDatetime": {
+        "type": "string",
+        "format": "date-time",
+        "example": "2025-05-20T01:01:01.000Z",
+        "description": "ISO 8601 with millisecond as string",
+        "properties": {}
+      },
+      "createdAtTimestamp": {
+        "type": "string",
+        "format": "string",
+        "example": "1621490985000",
+        "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string",
+        "properties": {}
+      },
+      "updatedAtDatetime": {
+        "type": "string",
+        "format": "date-time",
+        "example": "2025-05-20T01:01:01.000Z",
+        "description": "ISO 8601 with millisecond as string",
+        "properties": {}
+      },
+      "updatedAtTimestamp": {
+        "type": "string",
+        "format": "string",
+        "example": "1621490985000",
+        "description": "unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string",
+        "properties": {}
+      }
+    }
   }
 }
 ```

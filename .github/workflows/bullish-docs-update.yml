@@ -39,6 +39,18 @@ jobs:
       - name: Install Puppeteer browsers
         run: pnpm exec puppeteer browsers install chrome
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Python dependencies
+        run: pip install pyyaml
+
+      - name: Download and convert Bullish OpenAPI spec
+        run: |
+          cd ../..
+          python3 fetch_spec.py
 
       - name: Run Bullish documentation extraction
         run: pnpm run extract:all

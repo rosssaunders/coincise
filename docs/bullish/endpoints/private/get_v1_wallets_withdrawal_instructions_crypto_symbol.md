@@ -28,11 +28,10 @@ see
 
 ## Parameters
 
-| Parameter | In    | Type   | Required | Description |
-| --------- | ----- | ------ | -------- | ----------- |
-|           |       | string | No       |             |
-| symbol    | path  | string | Yes      |             |
-| signed    | query | string | No       |             |
+| Parameter | In   | Type   | Required | Description |
+| --------- | ---- | ------ | -------- | ----------- |
+|           |      | string | No       |             |
+| symbol    | path | string | Yes      |             |
 
 ## Responses
 
@@ -40,13 +39,63 @@ see
 
 **Content-Type**: application/json
 
-**Schema**:
-
 ```json
 {
   "type": "array",
   "items": {
-    "$ref": "#/components/schemas/CustodyCryptoWithdrawalInstructions"
+    "type": "object",
+    "required": [
+      "network",
+      "symbol",
+      "address",
+      "fee",
+      "label",
+      "destinationId"
+    ],
+    "properties": {
+      "network": {
+        "type": "string",
+        "example": "ETH",
+        "description": "the network of the native coin or token, e.g. BTC, ETH, SOL",
+        "properties": {}
+      },
+      "symbol": {
+        "type": "string",
+        "example": "USDC",
+        "description": "symbol representing coin or token, e.g. USDC, BTC, ETH, SHIB",
+        "properties": {}
+      },
+      "address": {
+        "type": "string",
+        "example": "0xb0a64d976972d87b0783eeb1ff88306cd1891f02",
+        "description": "an address on the given network",
+        "properties": {}
+      },
+      "fee": {
+        "type": "string",
+        "example": "3.00",
+        "description": "withdrawal fee charged in units of symbol, not in smaller denominations (e.g. BTC not Satoshi, ETH not Wei)",
+        "properties": {}
+      },
+      "memo": {
+        "type": "string",
+        "example": "MZAXEMRXA",
+        "description": "memo or destination tag that will be used as a reference on transaction",
+        "properties": {}
+      },
+      "label": {
+        "type": "string",
+        "example": "Our cold wallet",
+        "description": "descriptive label of destination provided by user",
+        "properties": {}
+      },
+      "destinationId": {
+        "type": "string",
+        "example": "1560ec0b406c0d909bb9f5f827dd6aa14a1f638884f33a2a3134878102e78038",
+        "description": "destination id provided by bullish that uniquely identifies a whitelisted address or account",
+        "properties": {}
+      }
+    }
   }
 }
 ```

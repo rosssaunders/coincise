@@ -7,8 +7,7 @@
 Get historical hourly funding rate for the requested perpetual market
 
 - [supports pagination](#overview--pagination-support)
-- On a single query request you can retrieve data over a 7 day window, with the
-  data available for the last 90 days
+- Only the last 90 days of data is available for querying
 
 **Operation ID**: market-data-get-funding-rate-history-by-market-symbol
 
@@ -32,15 +31,26 @@ Get historical hourly funding rate for the requested perpetual market
 
 **Content-Type**: application/json
 
-**Schema**:
-
 ```json
 {
   "type": "array",
   "minItems": 0,
   "maxItems": 100,
   "items": {
-    "$ref": "#/components/schemas/FundingRateHistoryResponse"
+    "description": "Hourly Funding Rate History of one market",
+    "type": "array",
+    "properties": {
+      "fundingRate": {
+        "description": "funding rate for this hour",
+        "type": "string",
+        "example": "0.1"
+      },
+      "updatedAtDatetime": {
+        "description": "date time of the last funding rate update for the hour",
+        "type": "string",
+        "example": "2024-09-16T12:59:59.000Z"
+      }
+    }
   }
 }
 ```

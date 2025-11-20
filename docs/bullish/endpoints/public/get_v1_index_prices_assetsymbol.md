@@ -20,13 +20,12 @@ Retrieves the index price of a specified asset
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/IndexPrice"
-}
-```
+| Field              | Type   | Required | Description                                                                      |
+| ------------------ | ------ | -------- | -------------------------------------------------------------------------------- |
+| assetSymbol        | string | Yes      | asset symbol as denoted in the world<br>**Example:** `"BTC"`                     |
+| price              | string | Yes      | Asset price in USD<br>**Example:** `"66100.0000"`                                |
+| updatedAtDatetime  | string | Yes      | ISO 8601 with millisecond as string<br>**Example:** `"2025-05-20T01:01:01.000Z"` |
+| updatedAtTimestamp | string | Yes      | number of milliseconds since EPOCH as string<br>**Example:** `"1621490985000"`   |
 
 ### 404 - Not found
 

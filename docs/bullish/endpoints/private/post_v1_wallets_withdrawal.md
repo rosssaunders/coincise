@@ -88,13 +88,12 @@ withdrawal request
 
 ### Content-Type: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/CustodyApiEcdsaWithdrawalRequest"
-}
-```
+| Field      | Type   | Required | Description                                                                                                                                |
+| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| timestamp  | string | Yes      | unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string<br>**Example:** `"1621490985000"`        |
+| nonce      | string | Yes      | a UUID withdrawal nonce to protect against replay attacks<br>**Example:** `"1628376611"`                                                   |
+| authorizer | string | Yes      | JWT authorizer you obtain along with the [JWT token](#overview--generate-a-jwt-token)<br>**Example:** `"03E02367E8C900000500000000000000"` |
+| command    | object | Yes      |                                                                                                                                            |
 
 ## Responses
 
@@ -102,13 +101,11 @@ withdrawal request
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/CustodyApiWithdrawalResponse"
-}
-```
+| Field                | Type    | Required | Description                                                                                                                                                       |
+| -------------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| statusReason         | string  | No       | status reason, describes why withdrawal challenge is in a specific state<br>**Example:** `"Withdrawal accepted"`                                                  |
+| statusReasonCode     | integer | No       | status reason code, see [details](#overview--error--rejection-codes)<br>**Example:** `1001`                                                                       |
+| custodyTransactionId | string  | No       | unique identifier for tracking a withdrawal during signing and in history<br>**Example:** `"DB:9e6304a08c9cc2a33e6bc6429a088eae2a6b940c8e312aede3a3780257b9b979"` |
 
 ### 429 - Too Many Requests
 

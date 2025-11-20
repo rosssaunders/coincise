@@ -32,13 +32,17 @@ header
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/AssetAccount"
-}
-```
+| Field              | Type   | Required | Description                                                                                                                         |
+| ------------------ | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| tradingAccountId   | string | Yes      | unique trading account ID<br>**Example:** `"111000000000001"`                                                                       |
+| assetId            | string | Yes      | unique asset ID<br>**Example:** `"1"`                                                                                               |
+| assetSymbol        | string | Yes      | asset symbol as denoted in the world<br>**Example:** `"BTC"`                                                                        |
+| availableQuantity  | string | Yes      | see [asset value](#overview--price-and-quantity-precision) format<br>**Example:** `"1.00000000"`                                    |
+| borrowedQuantity   | string | Yes      | see [asset value](#overview--price-and-quantity-precision) format<br>**Example:** `"1.00000000"`                                    |
+| lockedQuantity     | string | Yes      | see [asset value](#overview--price-and-quantity-precision) format<br>**Example:** `"1.00000000"`                                    |
+| loanedQuantity     | string | Yes      | see [asset value](#overview--price-and-quantity-precision) format<br>**Example:** `"1.00000000"`                                    |
+| updatedAtDatetime  | string | Yes      | ISO 8601 with millisecond as string<br>**Example:** `"2025-05-20T01:01:01.000Z"`                                                    |
+| updatedAtTimestamp | string | Yes      | unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string<br>**Example:** `"1621490985000"` |
 
 ### 401 - Not Authenticated
 

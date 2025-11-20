@@ -40,13 +40,16 @@ new AMM instruction
 
 ### Content-Type: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/CreateAMMInstructionCommandV3"
-}
-```
+| Field            | Type   | Required | Description                                                                                               |
+| ---------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------- |
+| commandType      | string | Yes      | The command type, it must be 'V3CreateAMMInstruction'                                                     |
+| symbol           | string | Yes      | market symbol. Eg `BTCUSDC` for SPOT and `BTC-USDC-PERP` for PERPETUAL market<br>**Example:** `"BTCUSDC"` |
+| baseQuantity     | string | Yes      | see [asset value](#overview--price-and-quantity-precision) format<br>**Example:** `"1.00000000"`          |
+| quoteQuantity    | string | Yes      | see [asset value](#overview--price-and-quantity-precision) format<br>**Example:** `"1.00000000"`          |
+| upperBound       | string | Yes      | upper bound of price range, in quote currency                                                             |
+| lowerBound       | string | Yes      | lower bound of price range, in quote currency                                                             |
+| feeTierId        | string | Yes      | unique fee tier ID, see [Get Market By Symbol](#get-/v1/markets/-symbol-)<br>**Example:** `"1"`           |
+| tradingAccountId | string | Yes      | unique trading account ID<br>**Example:** `"111000000000001"`                                             |
 
 ## Responses
 
@@ -54,13 +57,11 @@ new AMM instruction
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/CreateAMMInstructionCommandResponseV3"
-}
-```
+| Field         | Type   | Required | Description                             |
+| ------------- | ------ | -------- | --------------------------------------- |
+| message       | string | Yes      | message                                 |
+| requestId     | string | Yes      | <br>**Example:** `"197735387747975680"` |
+| instructionId | string | Yes      | <br>**Example:** `"297735387747975680"` |
 
 ### 400 - Bad Request
 
@@ -69,13 +70,11 @@ result in the following response:
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/BadOrderEntryResponse"
-}
-```
+| Field         | Type    | Required | Description                                                         |
+| ------------- | ------- | -------- | ------------------------------------------------------------------- |
+| message       | string  | Yes      | message<br>**Example:** `"Missing signature header"`                |
+| errorCode     | integer | Yes      | unique error code<br>**Example:** `6029`                            |
+| errorCodeName | string  | Yes      | unique error code name<br>**Example:** `"MISSING_SIGNATURE_HEADER"` |
 
 ### 401 - Not Authenticated
 

@@ -17,16 +17,12 @@ understand how to enable MMP for your trading accounts.
   `mmpTriggered` TOPIC within the
   [Private Data WebSocket](#overview--private-data-websocket-authenticated).
 
-To update/amend your MMP configs, please use the ResetMMPCommandV1 to reset the
-MMP configurations, followed by setting up a new MMP config via setMMPCommandV1
+To update/amend your MMP configs ,please use the resetMMPCommandV1 to reset the
+MMP configurations , followed by setting up a new MMP config via setMMPCommandV1
 per underlying asset symbol.
 
-Notes:
-
-- MMP is only applicable for Options [Orders created](#post-/v2/orders) with the
-  `isMMP` flag set to `true`.
-- ResetMMPCommandV1 will trigger only when there are no `isMMP=true` open orders
-  on the account
+Note: MMP is only applicable for Options [Orders created](#post-/v2/orders) with
+the `isMMP` flag set to `true`.
 
 **Operation ID**: set-mmp-config
 
@@ -51,8 +47,6 @@ Notes:
 
 ### Content-Type: application/json
 
-**Schema**:
-
 ```json
 {
   "oneOf": [
@@ -71,8 +65,6 @@ Notes:
 ### 200 - Status OK. This means a command was successfully acknowledged.
 
 **Content-Type**: application/json
-
-**Schema**:
 
 ```json
 {

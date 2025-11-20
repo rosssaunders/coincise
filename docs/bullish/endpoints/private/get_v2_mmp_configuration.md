@@ -32,13 +32,11 @@ instructions, see the [Filtering Support](#overview--filtering-support) section.
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/GetMmpConfigurationResponse"
-}
-```
+| Field             | Type          | Required | Description                                                                                                                                                                                                                            |
+| ----------------- | ------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| tradingAccountId  | string        | Yes      | unique trading account ID<br>**Example:** `"111000000000001"`                                                                                                                                                                          |
+| message           | string        | Yes      | If there are no market maker protection configurations setup for this trading account or for the provided optional symbol under the same trading account, this field will be returned as "No mmp config setup".<br>**Example:** `null` |
+| mmpConfigurations | array[object] | Yes      | A list of market maker protection configurations that the user has setup for each underlying asset symbol under the trading account provided. Supports filtering of symbol.                                                            |
 
 ### 400 - Bad Request
 

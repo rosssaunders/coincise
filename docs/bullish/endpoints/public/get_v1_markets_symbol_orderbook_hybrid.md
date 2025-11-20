@@ -28,13 +28,13 @@ Get Order Book by Market Symbol
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/OrderBook"
-}
-```
+| Field          | Type          | Required | Description                                                                                                                         |
+| -------------- | ------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| bids           | array[object] | Yes      | bids                                                                                                                                |
+| asks           | array[object] | Yes      | asks                                                                                                                                |
+| datetime       | string        | Yes      | ISO 8601 with millisecond as string<br>**Example:** `"2025-05-20T01:01:01.000Z"`                                                    |
+| timestamp      | string        | Yes      | unsigned 64 bit integer value which is the number of milliseconds since EPOCH expressed as string<br>**Example:** `"1621490985000"` |
+| sequenceNumber | integer       | Yes      | an incremented unique identifier of the order book snapshot<br>**Example:** `999`                                                   |
 
 ### 404 - Resource Not Found
 

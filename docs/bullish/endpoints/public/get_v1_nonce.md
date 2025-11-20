@@ -24,13 +24,10 @@ microseconds.
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/Nonce"
-}
-```
+| Field      | Type    | Required | Description                                       |
+| ---------- | ------- | -------- | ------------------------------------------------- |
+| lowerBound | integer | Yes      | lower bound of nonce range<br>**Example:** `8455` |
+| upperBound | integer | Yes      | upper bound of nonce range<br>**Example:** `9455` |
 
 ### 401 - Not Authenticated
 

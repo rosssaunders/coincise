@@ -26,13 +26,11 @@ login request body
 
 ### Content-Type: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/LoginRequest"
-}
-```
+| Field        | Type   | Required | Description                                                                                                                |
+| ------------ | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| publicKey    | string | No       | <br>**Example:** `"PUB_R1_6PTdfWbXvXWQduhcCiRooGHTVpriu15xMqfr7EDq6sWLDj7NjS"`                                             |
+| signature    | string | No       | <br>**Example:** `"SIG_R1_K35d5hSY5FbNoJwrCfmH6QvPG7m9XmhL2mgWYcSB7q2hKJ2mv39Luck9WBJroSB635ZAXhdg36TYG7QJX1fTidbsMvyE8N"` |
+| loginPayload | object | No       |                                                                                                                            |
 
 ## Responses
 
@@ -40,13 +38,10 @@ login request body
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/LoginResponse"
-}
-```
+| Field      | Type   | Required | Description                                                                                                                                       |
+| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| authorizer | string | Yes      | JWT authorizer you obtain along with the [JWT token](#overview--generate-a-jwt-token)<br>**Example:** `"03E02367E8C900000500000000000000"`        |
+| token      | string | Yes      | JWT token<br>**Example:** `"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2FuZGVlcCByYWtocmEifQ.wyVq6PlKaldWXtu-jz2hJCvkGl1lM2S7HUKCH8LnXp0"` |
 
 ### 400 - Bad Request
 

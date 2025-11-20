@@ -55,8 +55,6 @@ Requires
 
 ### Content-Type: application/json
 
-**Schema**:
-
 ```json
 {
   "oneOf": [
@@ -94,8 +92,6 @@ Requires
 
 **Content-Type**: application/json
 
-**Schema**:
-
 ```json
 {
   "oneOf": [
@@ -119,13 +115,11 @@ result in the following response:
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/BadOrderEntryResponse"
-}
-```
+| Field         | Type    | Required | Description                                                         |
+| ------------- | ------- | -------- | ------------------------------------------------------------------- |
+| message       | string  | Yes      | message<br>**Example:** `"Missing signature header"`                |
+| errorCode     | integer | Yes      | unique error code<br>**Example:** `6029`                            |
+| errorCodeName | string  | Yes      | unique error code name<br>**Example:** `"MISSING_SIGNATURE_HEADER"` |
 
 ### 401 - Not Authenticated
 

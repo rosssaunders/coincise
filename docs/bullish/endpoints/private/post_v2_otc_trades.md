@@ -37,13 +37,15 @@ body. Prices do not require strict precision. Eg. for asset precision of 4 -
 
 ### Content-Type: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/CreateOtcTradeCommand"
-}
-```
+| Field            | Type          | Required | Description                                                                                                                                                                                                                     |
+| ---------------- | ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| commandType      | string        | Yes      | Specifies the command type and must be ‘V1CreateOtcTrade’ to indicate the submission of an OTC trade.                                                                                                                           |
+| clientOtcTradeId | string        | No       | unique numeric (i64) identifier generated on the client side expressed as a string value<br>**Example:** `"20050900225"`                                                                                                        |
+| sharedMatchKey   | string        | Yes      | Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value<br>**Example:** `"cfBtcXrpMatch001"` |
+| tradingAccountId | string        | Yes      | unique trading account ID<br>**Example:** `"111000000000001"`                                                                                                                                                                   |
+| isTaker          | boolean       | Yes      | <br>**Example:** `true`                                                                                                                                                                                                         |
+| remarks          | string        | No       | text field for client’s internal reference to a trade, max length is 255 characters<br>**Example:** `"first otc trade with xyz client"`                                                                                         |
+| trades           | array[object] | Yes      | all trades for the OTC trade                                                                                                                                                                                                    |
 
 ## Responses
 
@@ -54,13 +56,13 @@ OTC trade, query [Get Trade by ID](#get-/v2/otc-trades/-otcTradeId-) using
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/CreateOtcTradeResponse"
-}
-```
+| Field            | Type   | Required | Description                                                                                                                                                                                                                     |
+| ---------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| message          | string | Yes      | message indicating the status of the request<br>**Example:** `"Command acknowledged - CreateOtcTrade"`                                                                                                                          |
+| requestId        | string | Yes      | <br>**Example:** `"197735387747975680"`                                                                                                                                                                                         |
+| otcTradeId       | string | Yes      | unique numeric (i64) identifier generated on Bullish side expressed as a string value<br>**Example:** `"200000000000000098"`                                                                                                    |
+| clientOtcTradeId | string | No       | unique numeric (i64) identifier generated on the client side expressed as a string value<br>**Example:** `"20050900225"`                                                                                                        |
+| sharedMatchKey   | string | Yes      | Unique shared key that is agreed between the two customers to represent their OTC trade to be matched on Bullish's OTC Clearing Facility. Must be a 12 to 64 characters alphanumeric value<br>**Example:** `"cfBtcXrpMatch001"` |
 
 ### 400 - Bad Request
 
@@ -69,46 +71,38 @@ result in the following response:
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/BadOtcTradeEntryResponse"
-}
-```
+| Field         | Type    | Required | Description            |
+| ------------- | ------- | -------- | ---------------------- |
+| message       | string  | Yes      | message                |
+| errorCode     | integer | Yes      | unique error code      |
+| errorCodeName | string  | Yes      | unique error code name |
 
 ### 401 - Unauthorized. Either API details are missing or invalid
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/BadOtcTradeEntryResponse"
-}
-```
+| Field         | Type    | Required | Description            |
+| ------------- | ------- | -------- | ---------------------- |
+| message       | string  | Yes      | message                |
+| errorCode     | integer | Yes      | unique error code      |
+| errorCodeName | string  | Yes      | unique error code name |
 
 ### 403 - Forbidden- You do not have access to the requested resource
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/BadOtcTradeEntryResponse"
-}
-```
+| Field         | Type    | Required | Description            |
+| ------------- | ------- | -------- | ---------------------- |
+| message       | string  | Yes      | message                |
+| errorCode     | integer | Yes      | unique error code      |
+| errorCodeName | string  | Yes      | unique error code name |
 
 ### 500 - Internal Server Error
 
 **Content-Type**: application/json
 
-**Schema**:
-
-```json
-{
-  "$ref": "#/components/schemas/BadOtcTradeEntryResponse"
-}
-```
+| Field         | Type    | Required | Description            |
+| ------------- | ------- | -------- | ---------------------- |
+| message       | string  | Yes      | message                |
+| errorCode     | integer | Yes      | unique error code      |
+| errorCodeName | string  | Yes      | unique error code name |
