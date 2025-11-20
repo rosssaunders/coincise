@@ -98,6 +98,83 @@ const getAllEndpoints = () => {
 }
 
 /**
+ * Detect language from code content
+ */
+const detectLanguage = code => {
+  const trimmed = code.trim()
+  
+  // Check for HTTP requests
+  if (/^(GET|POST|PUT|DELETE|PATCH)\s+\//.test(trimmed)) {
+    return 'bash'
+  }
+  
+  // Check for Python
+  if (/^(from|import)\s+/.test(trimmed) || 
+      /\bdef\s+\w+\(/.test(trimmed) ||
+      /\bprint\(/.test(trimmed) ||
+      /session\s*=\s*HTTP\(/.test(trimmed)) {
+    return 'python'
+  }
+  
+  // Check for JavaScript/Node.js
+  if (/^(const|let|var)\s+/.test(trimmed) ||
+      /require\(['"']/.test(trimmed) ||
+      /=>\s*{/.test(trimmed) ||
+      /\.then\(/.test(trimmed) ||
+      /\.catch\(/.test(trimmed)) {
+    return 'javascript'
+  }
+  
+  // Check for JSON
+  if ((trimmed.startsWith('{') || trimmed.startsWith('[')) && 
+      (trimmed.includes('"') || trimmed.includes(':'))) {
+    return 'json'
+  }
+  
+  return null
+}
+
+/**
+ * Format code blocks in markdown content
+ */
+const formatJsonInMarkdown = content => {
+  // Handle code blocks
+  content = content.replace(/```([^\n]*)\n([\s\S]*?)```/g, (match, lang, code) => {
+    const trimmedLang = lang.trim()
+    const trimmedCode = code.trim()
+    
+    // If already has a valid language tag, keep it
+    if (trimmedLang && trimmedLang !== 'json') {
+      return match
+    }
+    
+    // Detect language
+    const detectedLang = detectLanguage(trimmedCode)
+    
+    if (!detectedLang) {
+      return match
+    }
+    
+    // For JSON, try to parse and format
+    if (detectedLang === 'json') {
+      try {
+        const parsed = JSON.parse(trimmedCode)
+        const formatted = JSON.stringify(parsed, null, 2)
+        return '```json\n' + formatted + '\n```'
+      } catch (e) {
+        // Not valid JSON, return as is
+        return match
+      }
+    }
+    
+    // For other languages, just add the tag
+    return '```' + detectedLang + '\n' + code + '```'
+  })
+  
+  return content
+}
+
+/**
  * Extract endpoint documentation from a page
  */
 const extractEndpoint = async (page, turndownService, url) => {
@@ -185,6 +262,28 @@ const extractEndpoint = async (page, turndownService, url) => {
 
     // Convert HTML to Markdown
     let markdown = turndownService.turndown(endpointInfo.content)
+
+    // Format JSON blocks in the markdown
+    markdown = formatJsonInMarkdown(markdown)
+
+    // Clean up navigation junk from the bottom
+    // Remove "Previous/Next" navigation links
+    markdown = markdown.replace(/\[\s*Previous\s*[\s\S]*?\]\([^\)]+\)\[\s*Next\s*[\s\S]*?\]\([^\)]+\)/g, '')
+    
+    // Remove table of contents at the bottom (list of anchor links)
+    markdown = markdown.replace(/^-\s+\[.*?\]\(#.*?\)\s*$/gm, '')
+    
+    // Remove breadcrumb navigation (list items with empty or /docs/ links)
+    markdown = markdown.replace(/^-\s+\[\]\(\/docs\/\)\s*$/gm, '')
+    markdown = markdown.replace(/^-\s+[A-Za-z\s()0-9]+\s*$/gm, '')
+    
+    // Remove "On this page" text
+    markdown = markdown.replace(/^On this page\s*$/gm, '')
+    
+    // Clean up excessive blank lines
+    markdown = markdown.replace(/\n{3,}/g, '\n\n')
+    markdown = markdown.trim()
+
 
     // Determine if public or private based on authentication
     // The category from config is a hint, but we verify with actual auth headers

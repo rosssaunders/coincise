@@ -1,22 +1,6 @@
-# GET /v5/user/query-api
-
-**Source:**
-[Get API Key Information](https://bybit-exchange.github.io/docs/v5/user/apikey-info)
-
-## Authentication
-
-Required (Private Endpoint)
-
-- [](/docs/)
-- User
-- Get API Key Information
-
-On this page
-
 # Get API Key Information
 
-Get the information of the api key. Use the api key pending to be checked to
-call the endpoint. Both **master and sub user's api key** are applicable.
+Get the information of the api key. Use the api key pending to be checked to call the endpoint. Both **master and sub user's api key** are applicable.
 
 tip
 
@@ -32,88 +16,120 @@ None
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter                                | Type     | Comments                                                                                                                                      |
-| :--------------------------------------- | :------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| id                                       | string   | Unique ID. Internal use                                                                                                                       |
-| note                                     | string   | The remark                                                                                                                                    |
-| apiKey                                   | string   | Api key                                                                                                                                       |
-| readOnly                                 | integer  | `0`：Read and Write. `1`：Read only                                                                                                           |
-| secret                                   | string   | Always `""`                                                                                                                                   |
-| permissions                              | Object   | The types of permission                                                                                                                       |
-| \> ContractTrade                         | array    | Permission of contract trade `Order`, `Position`                                                                                              |
-| \> Spot                                  | array    | Permission of spot `SpotTrade`                                                                                                                |
-| \> Wallet                                | array    | Permission of wallet `AccountTransfer`, `SubMemberTransfer`(master account), `SubMemberTransferList`(sub account), `Withdraw`(master account) |
-| \> Options                               | array    | Permission of USDC Contract. It supports trade option and USDC perpetual. `OptionsTrade`                                                      |
-| \> Derivatives                           | array    | - Unified account has this permission by default `DerivativesTrade`                                                                           |
-| - For classic account, it is always `[]` |
-| \> Exchange                              | array    | Permission of convert `ExchangeHistory`                                                                                                       |
-| \> Earn                                  | array    | Permission of earn product `Earn`                                                                                                             |
-| \> NFT                                   | array    | Deprecated, always `[]`                                                                                                                       |
-| \> BlockTrade                            | array    | Permission of blocktrade. Not applicable to subaccount, always `[]`                                                                           |
-| \> Affiliate                             | array    | Permission of Affiliate. Only affiliate can have this permission, otherwise always `[]`                                                       |
-| \> CopyTrading                           | array    | Always `[]` as Master Trader account just use `ContractTrade` to start CopyTrading                                                            |
-| ips                                      | array    | IP bound                                                                                                                                      |
-| type                                     | integer  | The type of api key. `1`：personal, `2`：connected to the third-party app                                                                     |
-| deadlineDay                              | integer  | The remaining valid days of api key. Only for those api key with no IP bound or the password has been changed                                 |
-| expiredAt                                | datetime | The expiry day of the api key. Only for those api key with no IP bound or the password has been changed                                       |
-| createdAt                                | datetime | The create day of the api key                                                                                                                 |
-| unified                                  | integer  | deprecated field                                                                                                                              |
-| uta                                      | integer  | Whether the account to which the account upgrade to unified trade account. `0`：regular account; `1`：unified trade account                   |
-| userID                                   | integer  | User ID                                                                                                                                       |
-| inviterID                                | integer  | Inviter ID (the UID of the account which invited this account to the platform)                                                                |
-| [vipLevel](/docs/v5/enum#viplevel)       | string   | VIP Level                                                                                                                                     |
-| mktMakerLevel                            | string   | Market maker level                                                                                                                            |
-| affiliateID                              | integer  | Affiliate Id. `0` represents that there is no binding relationship.                                                                           |
-| rsaPublicKey                             | string   | Rsa public key                                                                                                                                |
-| isMaster                                 | boolean  | If this api key belongs to master account or not                                                                                              |
-| parentUid                                | string   | The main account uid. Returns `"0"` when the endpoint is called by main account                                                               |
-| kycLevel                                 | string   | Personal account kyc level. `LEVEL_DEFAULT`, `LEVEL_1`， `LEVEL_2`                                                                            |
-| kycRegion                                | string   | Personal account kyc region                                                                                                                   |
+| Parameter | Type | Comments |
+| :-- | :-- | --- |
+| id | string | Unique ID. Internal use |
+| note | string | The remark |
+| apiKey | string | Api key |
+| readOnly | integer | `0`：Read and Write. `1`：Read only |
+| secret | string | Always `""` |
+| permissions | Object | The types of permission |
+| \> ContractTrade | array | Permission of contract trade `Order`, `Position` |
+| \> Spot | array | Permission of spot `SpotTrade` |
+| \> Wallet | array | Permission of wallet `AccountTransfer`, `SubMemberTransfer`(master account), `SubMemberTransferList`(sub account), `Withdraw`(master account) |
+| \> Options | array | Permission of USDC Contract. It supports trade option and USDC perpetual. `OptionsTrade` |
+| \> Derivatives | array | -   Unified account has this permission by default `DerivativesTrade`
+-   For classic account, it is always `[]` |
+| \> Exchange | array | Permission of convert `ExchangeHistory` |
+| \> Earn | array | Permission of earn product `Earn` |
+| \> NFT | array | Deprecated, always `[]` |
+| \> BlockTrade | array | Permission of blocktrade. Not applicable to subaccount, always `[]` |
+| \> Affiliate | array | Permission of Affiliate. Only affiliate can have this permission, otherwise always `[]` |
+| \> CopyTrading | array | Always `[]` as Master Trader account just use `ContractTrade` to start CopyTrading |
+| ips | array | IP bound |
+| type | integer | The type of api key. `1`：personal, `2`：connected to the third-party app |
+| deadlineDay | integer | The remaining valid days of api key. Only for those api key with no IP bound or the password has been changed |
+| expiredAt | datetime | The expiry day of the api key. Only for those api key with no IP bound or the password has been changed |
+| createdAt | datetime | The create day of the api key |
+| unified | integer | deprecated field |
+| uta | integer | Whether the account to which the account upgrade to unified trade account. `0`：regular account; `1`：unified trade account |
+| userID | integer | User ID |
+| inviterID | integer | Inviter ID (the UID of the account which invited this account to the platform) |
+| [vipLevel](/docs/v5/enum#viplevel) | string | VIP Level |
+| mktMakerLevel | string | Market maker level |
+| affiliateID | integer | Affiliate Id. `0` represents that there is no binding relationship. |
+| rsaPublicKey | string | Rsa public key |
+| isMaster | boolean | If this api key belongs to master account or not |
+| parentUid | string | The main account uid. Returns `"0"` when the endpoint is called by main account |
+| kycLevel | string | Personal account kyc level. `LEVEL_DEFAULT`, `LEVEL_1`， `LEVEL_2` |
+| kycRegion | string | Personal account kyc region |
 
 [RUN >>](/docs/api-explorer/v5/user/apikey-info)
 
----
+* * *
 
 ### Request Example[​](#request-example "Direct link to heading")
 
-- HTTP
-- Python
-- Node.js
+-   Node.js
 
-```
+```bash
 GET /v5/user/query-api HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676430842094X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXX
 ```
 
-```
+```python
 from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_key="xxxxxxxxxxxxxxxxxx",    api_secret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",)print(session.get_api_key_information())
 ```
 
-```
+```javascript
 const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getQueryApiKey()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
 
+```json
+{
+  "retCode": 0,
+  "retMsg": "",
+  "result": {
+    "id": "13770661",
+    "note": "readwrite api key",
+    "apiKey": "XXXXXX",
+    "readOnly": 0,
+    "secret": "",
+    "permissions": {
+      "ContractTrade": [
+        "Order",
+        "Position"
+      ],
+      "Spot": [
+        "SpotTrade"
+      ],
+      "Wallet": [
+        "AccountTransfer",
+        "SubMemberTransfer"
+      ],
+      "Options": [
+        "OptionsTrade"
+      ],
+      "Derivatives": [],
+      "CopyTrading": [],
+      "BlockTrade": [],
+      "Exchange": [],
+      "NFT": [],
+      "Affiliate": [],
+      "Earn": []
+    },
+    "ips": [
+      "*"
+    ],
+    "type": 1,
+    "deadlineDay": 66,
+    "expiredAt": "2023-12-22T07:20:25Z",
+    "createdAt": "2022-10-16T02:24:40Z",
+    "unified": 0,
+    "uta": 0,
+    "userID": 24617703,
+    "inviterID": 0,
+    "vipLevel": "No VIP",
+    "mktMakerLevel": "0",
+    "affiliateID": 0,
+    "rsaPublicKey": "",
+    "isMaster": true,
+    "parentUid": "0",
+    "kycLevel": "LEVEL_DEFAULT",
+    "kycRegion": ""
+  },
+  "retExtInfo": {},
+  "time": 1697525990798
+}
 ```
-{    "retCode": 0,    "retMsg": "",    "result": {        "id": "13770661",        "note": "readwrite api key",        "apiKey": "XXXXXX",        "readOnly": 0,        "secret": "",        "permissions": {            "ContractTrade": [                "Order",                "Position"            ],            "Spot": [                "SpotTrade"            ],            "Wallet": [                "AccountTransfer",                "SubMemberTransfer"            ],            "Options": [                "OptionsTrade"            ],            "Derivatives": [],            "CopyTrading": [],            "BlockTrade": [],            "Exchange": [],            "NFT": [],            "Affiliate": [],            "Earn": []        },        "ips": [            "*"        ],        "type": 1,        "deadlineDay": 66,        "expiredAt": "2023-12-22T07:20:25Z",        "createdAt": "2022-10-16T02:24:40Z",        "unified": 0,        "uta": 0,        "userID": 24617703,        "inviterID": 0,        "vipLevel": "No VIP",        "mktMakerLevel": "0",        "affiliateID": 0,        "rsaPublicKey": "",        "isMaster": true,        "parentUid": "0",        "kycLevel": "LEVEL_DEFAULT",        "kycRegion": ""    },    "retExtInfo": {},    "time": 1697525990798}
-```
-
-[
-
-Previous
-
-Freeze Sub UID
-
-](/docs/v5/user/froze-subuid)[
-
-Next
-
-Get Sub Account All API Keys
-
-](/docs/v5/user/list-sub-apikeys)
-
-- [HTTP Request](#http-request)
-- [Request Parameters](#request-parameters)
-- [Response Parameters](#response-parameters)
-- [Request Example](#request-example)
-- [Response Example](#response-example)
