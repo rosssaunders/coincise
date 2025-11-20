@@ -4,35 +4,39 @@
 GET /api/v3/ticker/24hr
 ```
 
-24 hour rolling window price change statistics. **Careful** when accessing this with no symbol.
+24 hour rolling window price change statistics. **Careful** when accessing this
+with no symbol.
 
 **Weight:**
 
-| Parameter | Symbols Provided | Weight |
-| --- | --- | --- |
-| symbol | 1 | 2 |
-| symbol parameter is omitted | 80 |
-| symbols | 1-20 | 2 |
-| 21-100 | 40 |
-| 101 or more | 80 |
-| symbols parameter is omitted | 80 |
+| Parameter                    | Symbols Provided | Weight |
+| ---------------------------- | ---------------- | ------ |
+| symbol                       | 1                | 2      |
+| symbol parameter is omitted  | 80               |
+| symbols                      | 1-20             | 2      |
+| 21-100                       | 40               |
+| 101 or more                  | 80               |
+| symbols parameter is omitted | 80               |
 
 **Parameters:**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | NO | Parameter symbol and symbols cannot be used in combination.  
-If neither parameter is sent, tickers for all symbols will be returned in an array.  
-  
+| Name   | Type   | Mandatory | Description                                                 |
+| ------ | ------ | --------- | ----------------------------------------------------------- |
+| symbol | STRING | NO        | Parameter symbol and symbols cannot be used in combination. |
+
+If neither parameter is sent, tickers for all symbols will be returned in an
+array.
+
 Examples of accepted format for the symbols parameter: \["BTCUSDT","BNBUSDT"\]  
 or  
-%5B%22BTCUSDT%22,%22BNBUSDT%22%5D |
-| symbols | STRING | NO |
-| type | ENUM | NO | Supported values: FULL or MINI.  
-If none provided, the default is FULL |
-| symbolStatus | ENUM | NO | Filters for symbols that have this `tradingStatus`.  
-For a single symbol, a status mismatch returns error `-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.  
-For multiple or all symbols, non-matching ones are simply excluded from the response.  
+%5B%22BTCUSDT%22,%22BNBUSDT%22%5D | | symbols | STRING | NO | | type | ENUM | NO
+| Supported values: FULL or MINI.  
+If none provided, the default is FULL | | symbolStatus | ENUM | NO | Filters for
+symbols that have this `tradingStatus`.  
+For a single symbol, a status mismatch returns error
+`-1220 SYMBOL_DOES_NOT_MATCH_STATUS`.  
+For multiple or all symbols, non-matching ones are simply excluded from the
+response.  
 Valid values: `TRADING`, `HALT`, `BREAK` |
 
 **Data Source:** Memory
@@ -149,4 +153,5 @@ OR
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints)
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints)

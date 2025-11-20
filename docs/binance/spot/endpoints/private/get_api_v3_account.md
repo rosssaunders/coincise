@@ -1,4 +1,4 @@
-## Account information (USER\_DATA)​
+## Account information (USER_DATA)​
 
 ```
 GET /api/v3/account
@@ -10,13 +10,13 @@ Get current account information.
 
 **Parameters:**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| omitZeroBalances | BOOLEAN | NO | When set to `true`, emits only the non-zero balances of an account.  
-Default value: `false` |
-| recvWindow | DECIMAL | NO | The value cannot be greater than `60000`.  
-Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
-| timestamp | LONG | YES |  |
+| Name                                                                                                     | Type    | Mandatory | Description                                                         |
+| -------------------------------------------------------------------------------------------------------- | ------- | --------- | ------------------------------------------------------------------- |
+| omitZeroBalances                                                                                         | BOOLEAN | NO        | When set to `true`, emits only the non-zero balances of an account. |
+| Default value: `false`                                                                                   |
+| recvWindow                                                                                               | DECIMAL | NO        | The value cannot be greater than `60000`.                           |
+| Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| timestamp                                                                                                | LONG    | YES       |                                                                     |
 
 **Data Source:** Memory => Database
 
@@ -61,4 +61,5 @@ Supports up to three decimal places of precision (e.g., 6000.346) so that micros
 }
 ```
 
-> Source: [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints)
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints)

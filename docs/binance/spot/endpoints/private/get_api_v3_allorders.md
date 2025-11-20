@@ -1,4 +1,4 @@
-## All orders (USER\_DATA)​
+## All orders (USER_DATA)​
 
 ```
 GET /api/v3/allOrders
@@ -12,23 +12,25 @@ Get all account orders; active, canceled, or filled.
 
 **Parameters:**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | YES |  |
-| orderId | LONG | NO |  |
-| startTime | LONG | NO |  |
-| endTime | LONG | NO |  |
-| limit | INT | NO | Default: 500; Maximum: 1000. |
-| recvWindow | DECIMAL | NO | The value cannot be greater than `60000`.  
-Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
-| timestamp | LONG | YES |  |
+| Name                                                                                                     | Type    | Mandatory | Description                               |
+| -------------------------------------------------------------------------------------------------------- | ------- | --------- | ----------------------------------------- |
+| symbol                                                                                                   | STRING  | YES       |                                           |
+| orderId                                                                                                  | LONG    | NO        |                                           |
+| startTime                                                                                                | LONG    | NO        |                                           |
+| endTime                                                                                                  | LONG    | NO        |                                           |
+| limit                                                                                                    | INT     | NO        | Default: 500; Maximum: 1000.              |
+| recvWindow                                                                                               | DECIMAL | NO        | The value cannot be greater than `60000`. |
+| Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| timestamp                                                                                                | LONG    | YES       |                                           |
 
 **Notes:**
 
--   If `orderId` is set, it will get orders >= that `orderId`. Otherwise most recent orders are returned.
--   For some historical orders `cummulativeQuoteQty` will be < 0, meaning the data is not available at this time.
--   If `startTime` and/or `endTime` provided, `orderId` is not required.
--   The time between `startTime` and `endTime` can't be longer than 24 hours.
+- If `orderId` is set, it will get orders >= that `orderId`. Otherwise most
+  recent orders are returned.
+- For some historical orders `cummulativeQuoteQty` will be < 0, meaning the data
+  is not available at this time.
+- If `startTime` and/or `endTime` provided, `orderId` is not required.
+- The time between `startTime` and `endTime` can't be longer than 24 hours.
 
 **Response:**
 
@@ -59,6 +61,9 @@ Supports up to three decimal places of precision (e.g., 6000.346) so that micros
 ]
 ```
 
-**Note:** The payload above does not show all fields that can appear. Please refer to [Conditional fields in Order Responses](/docs/binance-spot-api-docs/rest-api/trading-endpoints#conditional-fields-in-order-responses).
+**Note:** The payload above does not show all fields that can appear. Please
+refer to
+[Conditional fields in Order Responses](/docs/binance-spot-api-docs/rest-api/trading-endpoints#conditional-fields-in-order-responses).
 
-> Source: [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints)
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints)
