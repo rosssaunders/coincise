@@ -2,7 +2,8 @@
 
 ### API Description
 
-Query for all convertible token pairs and the tokens’ respective upper/lower limits
+Query for all convertible token pairs and the tokens’ respective upper/lower
+limits
 
 ### HTTP Request
 
@@ -14,14 +15,15 @@ GET `/fapi/v1/convert/exchangeInfo`
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| fromAsset | STRING | EITHER OR BOTH | User spends coin |
-| toAsset | STRING | EITHER OR BOTH | User receives coin |
+| Name      | Type   | Mandatory      | Description        |
+| --------- | ------ | -------------- | ------------------ |
+| fromAsset | STRING | EITHER OR BOTH | User spends coin   |
+| toAsset   | STRING | EITHER OR BOTH | User receives coin |
 
-> -   User needs to supply either or both of the input parameter
-> -   If not defined for both fromAsset and toAsset, only partial token pairs will be returned
-> -   Asset BNFCR is only available to convert for MICA region users.
+> - User needs to supply either or both of the input parameter
+> - If not defined for both fromAsset and toAsset, only partial token pairs will
+>   be returned
+> - Asset BNFCR is only available to convert for MICA region users.
 
 ### Response Example
 
@@ -38,4 +40,5 @@ GET `/fapi/v1/convert/exchangeInfo`
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/convert](https://developers.binance.com/docs/derivatives/usds-margined-futures/convert)
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/convert](https://developers.binance.com/docs/derivatives/usds-margined-futures/convert)
