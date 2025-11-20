@@ -8,7 +8,7 @@ Get account margin information (like P/L, Swaps, Margin Balance, Tradable
 Balance and others). Use different keys (base, SYMBOL, sym_all) to retrieve
 different kinds of data.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -96,7 +96,7 @@ td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
 > The v2 Margin Info endpoint is limited to margin trading and does not provide
 > information related to derivatives trading.
 
-Path Params
+[](#path-params)Path Params
 
 key
 
@@ -106,7 +106,7 @@ required
 
 "base" | SYMBOL | sym_all
 
-Body Params
+[](#body-params)Body Params
 
 RAW_BODY
 
@@ -116,7 +116,7 @@ Defaults to {}
 
 {}
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -124,7 +124,7 @@ Responses
 
 200
 
-Response body
+[](#restauthinfomargin-string-response-body)Response body
 
 json
 
@@ -134,7 +134,7 @@ json
 
 400
 
-Response body
+[](#restauthinfomargin-object-response-body)Response body
 
 object
 
@@ -174,7 +174,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

@@ -7,7 +7,7 @@ get https://api-pub.bitfinex.com/v2/status/deriv/{key}/hist
 Endpoint used to receive different types of historical platform information -
 currently supports derivatives pair status only.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -64,7 +64,7 @@ td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
 
 <table><tbody><tr><td style="font-weight: 600;">Rate Limit:</td><td style="text-align: right;">90 reqs/min (requests per minute)</td></tr></tbody></table>
 
-Path Params
+[](#path-params)Path Params
 
 key
 
@@ -77,7 +77,7 @@ Defaults to tBTCF0:USTF0
 The key of the pairs to obtain history information. (e.g. tBTCF0:USTF0,
 tETHF0:USTF0, ...)
 
-Query Params
+[](#query-params)Query Params
 
 sort
 
@@ -105,7 +105,7 @@ int32
 
 Number of records in response (max. 5000).
 
-Response
+[](#response-schemas)Response
 
 #
 
@@ -113,7 +113,7 @@ Response
 
 200
 
-Response body
+[](#restpublicderivativesstatushistory-string-response-body)Response body
 
 json
 
@@ -143,7 +143,7 @@ curl \--request GET \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

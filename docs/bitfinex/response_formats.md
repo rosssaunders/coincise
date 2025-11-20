@@ -4,7 +4,7 @@
 
 # Abbreviation Glossary
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ##
@@ -115,7 +115,7 @@ Order Status
 | RSN_PAUSE                                  | Order canceled during moments of pause in the order book. (This is usually for AMPL orders that are placed during the rebase period).                                                                                                                                      |
 | RSN_BOOK_SLIP was: PARTIALLY FILLED @ xxxx | This happens an order would move the market too significantly. The order is partially executed and the remainder is canceled to avoid further slippage.                                                                                                                    |
 
-Updated 23 days ago
+Updated about 1 month ago
 
 ---
 

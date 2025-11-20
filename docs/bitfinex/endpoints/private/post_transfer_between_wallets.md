@@ -7,7 +7,7 @@ post https://api.bitfinex.com/v2/auth/w/transfer
 Transfer funds between wallets. This endpoint can also be used to convert USDT
 to USDT0 for derivatives trading.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ####
@@ -69,7 +69,7 @@ td:has(div.placeholders) { background-color: #ebebeb; } .placeholders { height:
 > wallet. If the destination is 'margin' and the currency_to is 'USTF0', the
 > funds will end up in the derivatives wallet.
 
-Body Params
+[](#body-params)Body Params
 
 from
 
@@ -145,7 +145,7 @@ instead of api credentials
 
 tfaToken object
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -153,7 +153,7 @@ Responses
 
 200
 
-Response body
+[](#restauthtransfer-string-response-body)Response body
 
 json
 
@@ -163,7 +163,7 @@ json
 
 400
 
-Response body
+[](#restauthtransfer-object-response-body)Response body
 
 object
 
@@ -237,7 +237,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

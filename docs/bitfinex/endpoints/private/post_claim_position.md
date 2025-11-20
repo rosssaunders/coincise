@@ -11,7 +11,7 @@ the position at a profit) and/or funds (BTC or USD) in your Margin Wallet (net
 of any outstanding financing charges) to satisfy some or all of the outstanding
 financing associated with your position.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -86,7 +86,7 @@ td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
 
 **Ratelimit**: 90 req/min
 
-Body Params
+[](#body-params)Body Params
 
 id
 
@@ -104,7 +104,7 @@ Defaults to "0.001"
 
 Optional amount, used to perform a partial claim.
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -112,7 +112,7 @@ Responses
 
 200
 
-Response body
+[](#restauthpositionclaim-string-response-body)Response body
 
 json
 
@@ -122,7 +122,7 @@ json
 
 400
 
-Response body
+[](#restauthpositionclaim-object-response-body)Response body
 
 object
 
@@ -178,7 +178,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

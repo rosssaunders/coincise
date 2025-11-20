@@ -7,7 +7,7 @@ post https://api.bitfinex.com/v2/auth/r/movements/{Currency}/hist
 View your past deposits/withdrawals. Currency can be specified to retrieve
 movements specific to that currency.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ####
@@ -62,7 +62,7 @@ td:has(div.placeholders) { background-color: #ebebeb; } .placeholders { height:
 
 **Ratelimit**: 90 req/min
 
-Path Params
+[](#path-params)Path Params
 
 Currency
 
@@ -74,7 +74,7 @@ Currency (BTC, ...). For an up-to-date listing of supported currencies see:
 [https://api.bitfinex.com/v2/conf/pub:map:currency:label](https://api.bitfinex.com/v2/conf/pub:map:currency:label) -
 Currency param can be omitted to retrieve recent movements for all currencies.
 
-Body Params
+[](#body-params)Body Params
 
 start
 
@@ -112,7 +112,7 @@ string
 
 Optional deposit address filter
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -120,7 +120,7 @@ Responses
 
 200
 
-Response body
+[](#restauthmovements-string-response-body)Response body
 
 json
 
@@ -130,11 +130,11 @@ json
 
 400
 
-Response body
+[](#restauthmovements-object-response-body)Response body
 
 object
 
-Updated 3 months ago
+Updated 4 months ago
 
 ---
 
@@ -166,7 +166,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 
@@ -177,7 +177,7 @@ application/json
 
 200 - Result400 - Result
 
-Updated 3 months ago
+Updated 4 months ago
 
 ---
 

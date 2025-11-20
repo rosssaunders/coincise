@@ -6,7 +6,7 @@ post https://api-pub.bitfinex.com/v2/calc/trade/avg
 
 Calculate the average execution price for Trading or rate for Margin funding.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -41,7 +41,7 @@ For funding currency symbols (ex. fUSD)
 
 <table><tbody><tr><td style="font-weight: 600;">Rate Limit:</td><td style="text-align: right;">90 reqs/min (requests per minute)</td></tr></tbody></table>
 
-Query Params
+[](#query-params)Query Params
 
 symbol
 
@@ -75,7 +75,7 @@ string
 
 Limit rate/price (ex. "1000.5").
 
-Response
+[](#response-schemas)Response
 
 #
 
@@ -83,7 +83,7 @@ Response
 
 200
 
-Response body
+[](#restpublicmarketaverageprice-string-response-body)Response body
 
 json
 
@@ -113,7 +113,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

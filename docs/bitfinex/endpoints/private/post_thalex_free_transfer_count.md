@@ -7,7 +7,7 @@ post https://api.bitfinex.com/v2/auth/r/ext/wallets/transfers/free/count
 Get information about free transfers and their renewal. Users are eligible for
 two free deposits every 24 hours.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ####
@@ -23,7 +23,7 @@ Response data
 | withdrawals.available | Integer | Number of free withdrawals available |
 | withdrawals.resetsAt  | Integer |                                      | null | Timestamp at which the number of free withdrawals resets (defaults to null if not available) |
 
-Body Params
+[](#body-params)Body Params
 
 Provider
 
@@ -35,7 +35,7 @@ Defaults to thalex
 
 Specify the provider ('thalex')
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -43,7 +43,7 @@ Responses
 
 200
 
-Response body
+[](#thalexfreetransfercount-object-response-body)Response body
 
 object
 
@@ -83,7 +83,7 @@ string
 
 500
 
-Response body
+[](#thalexfreetransfercount-array-response-body)Response body
 
 array
 
@@ -137,7 +137,7 @@ curl \--request POST \\
 
 '
 
-RESPONSE
+Response
 
 Examples
 

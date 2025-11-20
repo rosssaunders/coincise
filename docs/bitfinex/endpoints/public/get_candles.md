@@ -9,7 +9,7 @@ the specified funding currency or trading pair. The endpoint provides the last
 100 candles by default, but a limit and a start and/or end timestamp can be
 specified.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -95,7 +95,7 @@ Aggregate funding currency candles
 
 <table><tbody><tr><td style="font-weight: 600;">Rate Limit:</td><td style="text-align: right;">30 reqs/min (requests per minute)</td></tr></tbody></table>
 
-Path Params
+[](#path-params)Path Params
 
 candle
 
@@ -118,7 +118,7 @@ Defaults to hist
 
 Available values: "last", "hist".
 
-Query Params
+[](#query-params)Query Params
 
 sort
 
@@ -146,7 +146,7 @@ int32
 
 Number of records in response (max. 10000).
 
-Response
+[](#response-schemas)Response
 
 #
 
@@ -154,7 +154,7 @@ Response
 
 200
 
-Response body
+[](#restpubliccandles-string-response-body)Response body
 
 json
 
@@ -184,7 +184,7 @@ curl \--request GET \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

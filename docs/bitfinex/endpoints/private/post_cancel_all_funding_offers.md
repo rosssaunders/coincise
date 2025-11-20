@@ -7,7 +7,7 @@ post https://api.bitfinex.com/v2/auth/w/funding/offer/cancel/all
 Cancel all of your current funding offers. Can also be used to only cancel
 offers in the specified currency.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 > 📘
@@ -39,7 +39,7 @@ td:has(div.placeholders) { background-color: #ebebeb; } .placeholders { height:
 
 **Ratelimit**: 90 req/min
 
-Body Params
+[](#body-params)Body Params
 
 currency
 
@@ -47,7 +47,7 @@ string
 
 Currency for which to cancel all offers (USD, BTC, UST ...)
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -55,7 +55,7 @@ Responses
 
 200
 
-Response body
+[](#restauthcancelallfundingoffers-array-response-body)Response body
 
 array
 
@@ -65,7 +65,7 @@ array
 
 400
 
-Response body
+[](#restauthcancelallfundingoffers-object-response-body)Response body
 
 object
 
@@ -101,7 +101,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

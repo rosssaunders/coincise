@@ -9,7 +9,7 @@ ask at an hourly interval.
 
 Historic data goes back 1 year.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -34,7 +34,7 @@ Response Fields
 td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
 10px; text-align: center; font-size: 16px; line-height: 8px; }
 
-Query Params
+[](#query-params)Query Params
 
 symbols
 
@@ -77,7 +77,7 @@ Defaults to -1
 
 +1: sort in ascending order | -1: sort in descending order (by MTS field).
 
-Response
+[](#response-schemas)Response
 
 #
 
@@ -85,7 +85,7 @@ Response
 
 200
 
-Response body
+[](#restpublictickershistory-string-response-body)Response body
 
 json
 
@@ -115,7 +115,7 @@ curl \--request GET \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

@@ -6,7 +6,7 @@ post https://api.bitfinex.com/v2/auth/calc/order/avail
 
 Calculate the balance available for orders/offers
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 **Fields**
@@ -17,7 +17,7 @@ theme, base, components, utilities; @layer utilities;
 
 **Ratelimit**: 90 req/min
 
-Body Params
+[](#body-params)Body Params
 
 symbol
 
@@ -54,7 +54,7 @@ string
 
 Leverage that you want to use in calculating the max order amount (DERIV only)
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -62,7 +62,7 @@ Responses
 
 200
 
-Response body
+[](#restauthcalcorderavail-string-response-body)Response body
 
 json
 
@@ -72,7 +72,7 @@ json
 
 400
 
-Response body
+[](#restauthcalcorderavail-object-response-body)Response body
 
 object
 
@@ -108,7 +108,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

@@ -6,7 +6,7 @@ post https://api.bitfinex.com/v2/auth/w/deriv/collateral/set
 
 Update the amount of collateral assigned to a derivative position
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 Sets the amount of collateral, applied to the active derivative position, for
@@ -22,7 +22,7 @@ the given symbol.
 
 **Ratelimit**: 90 req/min
 
-Body Params
+[](#body-params)Body Params
 
 symbol
 
@@ -40,7 +40,7 @@ Defaults to 1150.61
 
 The amount of collateral to apply to the open position
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -48,7 +48,7 @@ Responses
 
 200
 
-Response body
+[](#restauthderivposcollateralset-array-response-body)Response body
 
 array of arrays of integers
 
@@ -60,7 +60,7 @@ array of integers
 
 400
 
-Response body
+[](#restauthderivposcollateralset-object-response-body)Response body
 
 object
 
@@ -70,7 +70,7 @@ object
 
 500
 
-Response body
+[](#restauthderivposcollateralset-string-response-body)Response body
 
 Collateral amount is too large / small
 
@@ -78,7 +78,7 @@ Symbol does not support derivatives
 
 No active positions for the given symbol
 
-Updated 3 months ago
+Updated 4 months ago
 
 ---
 
@@ -136,7 +136,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 
@@ -148,7 +148,7 @@ application/json
 200 - Result400 - Result500 - Collateral amount is too large / small500 - Symbol
 does not support derivatives500 - No active positions for the given symbol
 
-Updated 3 months ago
+Updated 4 months ago
 
 ---
 

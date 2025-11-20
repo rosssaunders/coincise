@@ -15,7 +15,7 @@ The Increase Position feature requires a verified or paper trading account. Full
 verification is required to use the increase position feature to open a long
 position on pairs with a fiat quote currency.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 > 🚧
@@ -82,7 +82,7 @@ td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
 
 **Ratelimit**: 90 req/min
 
-Body Params
+[](#body-params)Body Params
 
 symbol
 
@@ -104,7 +104,7 @@ Defaults to 123
 
 Amount of the position. (positive for long, negative for short)
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -112,7 +112,7 @@ Responses
 
 200
 
-Response body
+[](#restauthpositionincrease-string-response-body)Response body
 
 json
 
@@ -122,7 +122,7 @@ json
 
 400
 
-Response body
+[](#restauthpositionincrease-object-response-body)Response body
 
 object
 
@@ -184,7 +184,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

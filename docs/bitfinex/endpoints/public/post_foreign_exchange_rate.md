@@ -6,7 +6,7 @@ post https://api-pub.bitfinex.com/v2/calc/fx
 
 Calculate the exchange rate between two currencies
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -23,7 +23,7 @@ Response Fields
 
 <table><tbody><tr><td style="font-weight: 600;">Rate Limit:</td><td style="text-align: right;">90 reqs/min (requests per minute)</td></tr></tbody></table>
 
-Body Params
+[](#body-params)Body Params
 
 ccy1
 
@@ -45,7 +45,7 @@ Defaults to USD
 
 2nd currency (quote currency).
 
-Response
+[](#response-schemas)Response
 
 #
 
@@ -53,7 +53,7 @@ Response
 
 200
 
-Response body
+[](#restpublicforeignexchangerate-array-response-body)Response body
 
 array of numbers
 
@@ -115,7 +115,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

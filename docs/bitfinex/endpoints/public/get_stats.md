@@ -9,7 +9,7 @@ The Stats endpoint provides various statistics on a specified trading pair or
 funding currency. Use the available keys to specify which statistic you wish to
 retrieve.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -61,7 +61,7 @@ Available keys description
 
 <table><tbody><tr><td style="font-weight: 600;">Rate Limit:</td><td style="text-align: right;">15 reqs/min (requests per minute)</td></tr></tbody></table>
 
-Path Params
+[](#path-params)Path Params
 
 key
 
@@ -120,7 +120,7 @@ Defaults to hist
 
 Available values: "last", "hist".
 
-Query Params
+[](#query-params)Query Params
 
 sort
 
@@ -148,7 +148,7 @@ int32
 
 Number of records in response (max. 10000).
 
-Response
+[](#response-schemas)Response
 
 #
 
@@ -156,7 +156,7 @@ Response
 
 200
 
-Response body
+[](#restpublicstats-string-response-body)Response body
 
 json
 
@@ -186,7 +186,7 @@ curl \--request GET \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

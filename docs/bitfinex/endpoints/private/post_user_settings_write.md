@@ -6,7 +6,7 @@ post https://api.bitfinex.com/v2/auth/w/settings/set
 
 Allows you to create custom settings by creating key: value pairs.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 **Body Fields**
@@ -26,7 +26,7 @@ theme, base, components, utilities; @layer utilities;
 
 **Ratelimit**: 90 req/min
 
-Body Params
+[](#body-params)Body Params
 
 RAW_BODY
 
@@ -36,7 +36,7 @@ Defaults to {}
 
 {}
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -44,7 +44,7 @@ Responses
 
 200
 
-Response body
+[](#restauthsettingsset-string-response-body)Response body
 
 json
 
@@ -54,7 +54,7 @@ json
 
 400
 
-Response body
+[](#restauthsettingsset-object-response-body)Response body
 
 object
 
@@ -94,7 +94,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

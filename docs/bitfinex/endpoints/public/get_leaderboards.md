@@ -9,7 +9,7 @@ The leaderboards endpoint allows you to retrieve leaderboard standings for
 unrealized profit (period delta), unrealized profit (inception), volume, and
 realized profit.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 > 📘
@@ -38,7 +38,8 @@ Available Time Frames
 
 Available Symbols
 
-| | | |
+|  |
+|  |
 
 |
 
@@ -105,7 +106,7 @@ tGLOBAL:USD
 
 **Ratelimit**: 90 req/min
 
-Path Params
+[](#path-params)Path Params
 
 Key
 
@@ -150,7 +151,7 @@ Defaults to hist
 
 Available values: "hist"
 
-Query Params
+[](#query-params)Query Params
 
 sort
 
@@ -184,7 +185,7 @@ Defaults to 125
 
 Number of records (Max: 10000)
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -192,7 +193,7 @@ Responses
 
 200
 
-Response body
+[](#restpublicrankings-string-response-body)Response body
 
 json
 
@@ -202,7 +203,7 @@ json
 
 400
 
-Response body
+[](#restpublicrankings-object-response-body)Response body
 
 object
 
@@ -232,7 +233,7 @@ curl \--request GET \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

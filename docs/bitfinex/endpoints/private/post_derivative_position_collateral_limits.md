@@ -7,7 +7,7 @@ post https://api.bitfinex.com/v2/auth/calc/deriv/collateral/limits
 Calculate the minimum and maximum collateral that can be assigned to your
 derivative position.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 When adjusting collateral on a derivative position, the system can sometimes
@@ -38,7 +38,7 @@ and maximum values.
 
 **Ratelimit**: 90 req/min
 
-Body Params
+[](#body-params)Body Params
 
 symbol
 
@@ -48,7 +48,7 @@ Defaults to tBTCF0:USTF0
 
 The derivative symbol, e.g. tBTCF0:USTF0
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -56,7 +56,7 @@ Responses
 
 200
 
-Response body
+[](#restauthcalcderivcollaterallimits-array-response-body)Response body
 
 array of numbers
 
@@ -66,7 +66,7 @@ array of numbers
 
 400
 
-Response body
+[](#restauthcalcderivcollaterallimits-object-response-body)Response body
 
 object
 
@@ -122,7 +122,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

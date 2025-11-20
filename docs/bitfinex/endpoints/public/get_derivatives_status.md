@@ -7,7 +7,7 @@ get https://api-pub.bitfinex.com/v2/status/deriv
 Endpoint used to receive different types of platform information - currently
 supports derivatives pair status only.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -65,7 +65,7 @@ td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
 
 <table><tbody><tr><td style="font-weight: 600;">Rate Limit:</td><td style="text-align: right;">90 reqs/min (requests per minute)</td></tr></tbody></table>
 
-Query Params
+[](#query-params)Query Params
 
 keys
 
@@ -76,7 +76,7 @@ Defaults to tBTCF0:USTF0,tETHF0:USTF0
 The key or keys (separate by commas) of the pairs to fetch status information.
 To fetch information for all pairs use the key value 'ALL'.
 
-Response
+[](#response-schemas)Response
 
 #
 
@@ -84,7 +84,7 @@ Response
 
 200
 
-Response body
+[](#restpublicderivativesstatus-string-response-body)Response body
 
 json
 
@@ -114,7 +114,7 @@ curl \--request GET \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

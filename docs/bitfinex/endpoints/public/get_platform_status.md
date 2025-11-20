@@ -15,7 +15,7 @@ events 20060/20061. For more information about Websockets please see
 For more information on REST Public endpoint example code structure please see
 [https://docs.bitfinex.com/v2/docs/rest-public](/docs/rest-public).
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -44,7 +44,7 @@ Response Fields
 
 <table><tbody><tr><td style="font-weight: 600;">Rate Limit:</td><td style="text-align: right;">30 reqs/min (requests per minute)</td></tr></tbody></table>
 
-Response
+[](#response-schemas)Response
 
 #
 
@@ -52,7 +52,7 @@ Response
 
 200
 
-Response body
+[](#restpublicplatformstatus-array-response-body)Response body
 
 array of integers
 
@@ -82,7 +82,7 @@ curl \--request GET \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

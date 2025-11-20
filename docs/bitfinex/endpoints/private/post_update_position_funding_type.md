@@ -6,7 +6,7 @@ post https://api.bitfinex.com/v2/auth/w/position/update/funding/type
 
 Update the funding type of a given position
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -29,7 +29,7 @@ notification description |
 td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
 10px; text-align: center; font-size: 16px; line-height: 8px; }
 
-Body Params
+[](#body-params)Body Params
 
 symbol
 
@@ -43,17 +43,17 @@ integer
 
 Provide the desired funding type setting (0 for daily and 1 for term funding)
 
-Response
+[](#response-schemas)Response
 
 #
 
 200
 
-Response body
+[](#post-newendpoint-string-response-body)Response body
 
 json
 
-Updated 3 months ago
+Updated 4 months ago
 
 ---
 
@@ -83,7 +83,7 @@ curl \--request POST \\
 
      \--header 'accept: application/json'
 
-RESPONSE
+Response
 
 Examples
 
@@ -93,7 +93,7 @@ application/json
 
 200 - New Example
 
-Updated 3 months ago
+Updated 4 months ago
 
 ---
 

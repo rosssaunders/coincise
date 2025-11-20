@@ -6,7 +6,7 @@ post https://api.bitfinex.com/v2/auth/r/wallets
 
 Returns an array of all the current user's wallets.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -39,7 +39,7 @@ Wallet arrays
 
 <table><tbody><tr><td style="font-weight: 600;">Rate Limit:</td><td style="text-align: right;">90 reqs/min (requests per minute)</td></tr></tbody></table>
 
-Body Params
+[](#body-params)Body Params
 
 RAW_BODY
 
@@ -49,7 +49,7 @@ Defaults to {}
 
 {}
 
-Response
+[](#response-schemas)Response
 
 #
 
@@ -57,7 +57,7 @@ Response
 
 200
 
-Response body
+[](#restauthwallets-string-response-body)Response body
 
 json
 
@@ -95,7 +95,7 @@ curl \--request POST \\
 
      \--data '{}'
 
-RESPONSE
+Response
 
 Examples
 

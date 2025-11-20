@@ -8,7 +8,7 @@ The Public Books endpoint allows you to keep track of the state of Bitfinex
 order books on a price aggregated basis with customizable precision. Raw books
 can be retrieved by using precision R0.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -77,7 +77,7 @@ For funding currency symbols (ex. fUSD)
 
 <table><tbody><tr><td style="font-weight: 600;">Rate Limit:</td><td style="text-align: right;">240 reqs/min (requests per minute)</td></tr></tbody></table>
 
-Path Params
+[](#path-params)Path Params
 
 symbol
 
@@ -99,7 +99,7 @@ Defaults to P0
 
 Level of price aggregation (P0, P1, P2, P3, P4 and R0).
 
-Query Params
+[](#query-params)Query Params
 
 len
 
@@ -109,7 +109,7 @@ Defaults to 25
 
 Number of price points ("1", "25", "100").
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -117,7 +117,7 @@ Responses
 
 200
 
-Response body
+[](#restpublicbook-string-response-body)Response body
 
 json
 
@@ -127,7 +127,7 @@ json
 
 500
 
-Response body
+[](#restpublicbook-array-response-body)Response body
 
 array
 
@@ -157,7 +157,7 @@ curl \--request GET \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

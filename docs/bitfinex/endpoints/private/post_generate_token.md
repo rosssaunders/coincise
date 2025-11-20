@@ -6,7 +6,7 @@ post https://api.bitfinex.com/v2/auth/w/token
 
 Generates an auth token that could be used for api requests
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 > 📘
@@ -37,7 +37,7 @@ Response data
 | ----- | ----- | ------ | ------------------------------ |
 | \[0\] | TOKEN | string | Generated authentication token |
 
-Body Params
+[](#body-params)Body Params
 
 scope
 
@@ -83,7 +83,7 @@ string
 
 user's ip address
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -91,7 +91,7 @@ Responses
 
 200
 
-Response body
+[](#generatetoken-array-response-body)Response body
 
 array of strings
 
@@ -101,11 +101,11 @@ array of strings
 
 400
 
-Response body
+[](#generatetoken-object-response-body)Response body
 
 object
 
-Updated 4 months ago
+Updated 5 months ago
 
 ---
 
@@ -167,7 +167,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 
@@ -178,7 +178,7 @@ application/json
 
 200 - Result400 - Result
 
-Updated 4 months ago
+Updated 5 months ago
 
 ---
 

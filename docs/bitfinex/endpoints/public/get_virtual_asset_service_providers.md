@@ -6,7 +6,7 @@ get https://api.bitfinex.com/v2/ext/vasps
 
 Returns a list of VASP names along with their respective ID
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 > 📘
@@ -47,7 +47,7 @@ VASP objects (index \[0...n\])
 | id   | String | VASP ID     |
 | name | String | VASP name   |
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -55,7 +55,7 @@ Responses
 
 200
 
-Response body
+[](#virtualassetserviceproviders-string-response-body)Response body
 
 json
 
@@ -65,7 +65,7 @@ json
 
 400
 
-Response body
+[](#virtualassetserviceproviders-object-response-body)Response body
 
 object
 
@@ -95,7 +95,7 @@ curl \--request GET \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

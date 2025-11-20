@@ -6,7 +6,7 @@ get https://api-pub.bitfinex.com/v2/conf/pub:{Action}:{Object}:{Detail}
 
 Fetch site configuration data
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ####
@@ -93,7 +93,7 @@ pub:list:pair:exchange,pub:list:pair:margin
 
 **Ratelimit**: 90 req/min
 
-Path Params
+[](#path-params)Path Params
 
 Action
 
@@ -141,7 +141,7 @@ A **list:currency** request can optionally use the following **detail** value:
 A **info:tx** request requires the following **detail** value:  
 'status'.
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -149,7 +149,7 @@ Responses
 
 200
 
-Response body
+[](#restpublicconf-string-response-body)Response body
 
 pub:map:currency:sym
 
@@ -195,7 +195,7 @@ pub:map:currency:tx:fee
 
 400
 
-Response body
+[](#restpublicconf-array-response-body)Response body
 
 array
 
@@ -225,7 +225,7 @@ curl \--request GET \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

@@ -6,7 +6,7 @@ post https://api.bitfinex.com/v2/auth/w/ext/wallets/withdrawals/request
 
 Withdraw from Thalex to Bitfinex
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ####
@@ -27,7 +27,7 @@ Response data
 | status      | string  | Withdrawal status                         |
 | fee         | string  | Fee charged for the withdrawal            |
 
-Body Params
+[](#body-params)Body Params
 
 provider
 
@@ -65,7 +65,7 @@ Provide a tfaToken object to validate the request with U2F 2FA
 
 tfaToken object
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -73,7 +73,7 @@ Responses
 
 200
 
-Response body
+[](#thalexwithdrawalrequest-object-response-body)Response body
 
 object
 
@@ -123,7 +123,7 @@ string
 
 500
 
-Response body
+[](#thalexwithdrawalrequest-array-response-body)Response body
 
 array
 
@@ -177,7 +177,7 @@ curl \--request POST \\
 
 '
 
-RESPONSE
+Response
 
 Examples
 

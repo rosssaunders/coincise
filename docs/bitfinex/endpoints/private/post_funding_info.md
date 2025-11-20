@@ -6,7 +6,7 @@ post https://api.bitfinex.com/v2/auth/r/info/funding/{key}
 
 Get account funding info
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ####
@@ -36,7 +36,7 @@ Funding info array (Index \[3\])
 
 **Ratelimit**: 90 req/min
 
-Path Params
+[](#path-params)Path Params
 
 key
 
@@ -46,7 +46,7 @@ required
 
 SYMBOL
 
-Body Params
+[](#body-params)Body Params
 
 RAW_BODY
 
@@ -56,7 +56,7 @@ Defaults to {}
 
 {}
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -64,7 +64,7 @@ Responses
 
 200
 
-Response body
+[](#restauthinfofunding-array-response-body)Response body
 
 array
 
@@ -74,7 +74,7 @@ array
 
 400
 
-Response body
+[](#restauthinfofunding-object-response-body)Response body
 
 object
 
@@ -114,7 +114,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

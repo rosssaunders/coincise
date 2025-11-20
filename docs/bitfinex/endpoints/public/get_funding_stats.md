@@ -7,7 +7,7 @@ get https://api-pub.bitfinex.com/v2/funding/stats/{symbol}/hist
 Get a list of the most recent funding data for the given currency: FRR, average
 period, total amount provided, total amount used
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -42,7 +42,7 @@ b { font-weight: 600 } td:has(div.placeholders) { background-color: #ebebeb }
 .placeholders { height: 10px; text-align: center; font-size: 16px; line-height:
 8px; }
 
-Path Params
+[](#path-params)Path Params
 
 symbol
 
@@ -54,7 +54,7 @@ Defaults to fUSD
 
 The symbol you want information about. (e.g. fUSD, fBTC, fETH, ...)
 
-Query Params
+[](#query-params)Query Params
 
 start
 
@@ -76,7 +76,7 @@ int32
 
 Number of records in response (max. 250).
 
-Response
+[](#response-schemas)Response
 
 #
 
@@ -84,7 +84,7 @@ Response
 
 200
 
-Response body
+[](#restpublicfundingstats-string-response-body)Response body
 
 json
 
@@ -106,7 +106,7 @@ curl https://api-pub.bitfinex.com/v2/funding/stats/fUSD/hist
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

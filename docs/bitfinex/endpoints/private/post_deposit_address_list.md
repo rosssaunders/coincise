@@ -6,7 +6,7 @@ post https://api.bitfinex.com/v2/auth/r/deposit/address/all
 
 Retrieve all deposit addresses for a specific currency.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 > 📘
@@ -43,7 +43,7 @@ Deposit address arrays (Index \[4\])**Ratelimit**: 10 req/min
 
 [](#deposit-address-arrays-index-4ratelimit-10-reqmin)
 
-Body Params
+[](#body-params)Body Params
 
 method
 
@@ -68,7 +68,7 @@ int32
 
 Number of items per page, should be between 20-100, default is 20
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -76,7 +76,7 @@ Responses
 
 200
 
-Response body
+[](#depositaddressall-string-response-body)Response body
 
 json
 
@@ -86,7 +86,7 @@ json
 
 400
 
-Response body
+[](#depositaddressall-object-response-body)Response body
 
 object
 
@@ -122,7 +122,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

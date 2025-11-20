@@ -7,7 +7,7 @@ post https://api.bitfinex.com/v2/auth/r/positions/hist
 Returns data on past positions. Timestamps can be used to retrieve results for a
 specific time period.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ####
@@ -50,7 +50,7 @@ td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
 
 **Ratelimit**: 90 req/min
 
-Body Params
+[](#body-params)Body Params
 
 start
 
@@ -76,7 +76,7 @@ integer
 
 Position id (can be passed to retrieve a specific position)
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -84,7 +84,7 @@ Responses
 
 200
 
-Response body
+[](#restauthpositionshist-string-response-body)Response body
 
 json
 
@@ -94,11 +94,11 @@ json
 
 400
 
-Response body
+[](#restauthpositionshist-object-response-body)Response body
 
 object
 
-Updated 2 months ago
+Updated 3 months ago
 
 ---
 
@@ -130,7 +130,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 
@@ -141,7 +141,7 @@ application/json
 
 200 - Result400 - Result
 
-Updated 2 months ago
+Updated 3 months ago
 
 ---
 

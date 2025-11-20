@@ -9,7 +9,7 @@ for a specified pair. It shows the current best bid and ask, the last traded
 price, as well as information on the daily volume and price movement over the
 last day.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -65,7 +65,7 @@ td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
 
 <table><tbody><tr><td style="font-weight: 600;">Rate Limit:</td><td style="text-align: right;">90 reqs/min (requests per minute)</td></tr></tbody></table>
 
-Path Params
+[](#path-params)Path Params
 
 symbol
 
@@ -77,7 +77,7 @@ Defaults to tBTCUSD
 
 The symbol you want information about. (e.g. tBTCUSD, tETHUSD, fUSD, fBTC)
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -85,7 +85,7 @@ Responses
 
 200
 
-Response body
+[](#restpublicticker-string-response-body)Response body
 
 json
 
@@ -95,7 +95,7 @@ json
 
 500
 
-Response body
+[](#restpublicticker-array-response-body)Response body
 
 array
 
@@ -125,7 +125,7 @@ curl \--request GET \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

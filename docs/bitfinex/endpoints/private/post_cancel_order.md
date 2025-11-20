@@ -6,7 +6,7 @@ post https://api.bitfinex.com/v2/auth/w/order/cancel
 
 Cancels one of the current user's orders.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 Users can cancel their margin, exchange and derivative orders by providing their
@@ -115,7 +115,7 @@ td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
 
 <table><tbody><tr><td style="font-weight: 600;">Rate Limit:</td><td style="text-align: right;">90 reqs/min (requests per minute)</td></tr></tbody></table>
 
-Body Params
+[](#body-params)Body Params
 
 id
 
@@ -140,7 +140,7 @@ date
 
 An YYYY-MM-DD date to provide along with an order's CID.
 
-Response
+[](#response-schemas)Response
 
 #
 
@@ -148,7 +148,7 @@ Response
 
 200
 
-Response body
+[](#restauthcancelorder-array-response-body)Response body
 
 array
 
@@ -182,7 +182,7 @@ curl \--request POST \\
 
      \--header 'accept: application/json'
 
-RESPONSE
+Response
 
 Examples
 

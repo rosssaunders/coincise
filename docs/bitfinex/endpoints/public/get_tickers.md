@@ -9,7 +9,7 @@ It shows the current best bid and ask, the last traded price, as well as
 information on the daily volume and price movement over the last day. The
 endpoint can retrieve multiple tickers with a single query.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 > 📘
@@ -92,7 +92,7 @@ td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
 
 <table><tbody><tr><td style="font-weight: 600;">Rate Limit:</td><td style="text-align: right;">30 reqs/min (requests per minute)</td></tr></tbody></table>
 
-Query Params
+[](#query-params)Query Params
 
 symbols
 
@@ -105,7 +105,7 @@ Defaults to ALL
 The symbols you want information about as a comma separated list, or ALL for
 every symbol (examples of possible symbols: tBTCUSD, tETHUSD, fUSD, fBTC, ...).
 
-Response
+[](#response-schemas)Response
 
 #
 
@@ -113,7 +113,7 @@ Response
 
 200
 
-Response body
+[](#restpublictickers-string-response-body)Response body
 
 json
 
@@ -143,7 +143,7 @@ curl \--request GET \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

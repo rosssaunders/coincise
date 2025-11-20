@@ -8,7 +8,7 @@ Allows you to read custom settings by providing a key. You can set or adjust
 these settings using the [User Settings Write](/reference#user-settings-set)
 endpoint.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 **Body Fields**
@@ -26,7 +26,7 @@ theme, base, components, utilities; @layer utilities;
 
 **Ratelimit**: 90 req/min
 
-Body Params
+[](#body-params)Body Params
 
 keys
 
@@ -40,7 +40,7 @@ keys\*
 
 ADD string
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -48,7 +48,7 @@ Responses
 
 200
 
-Response body
+[](#restauthsettings-string-response-body)Response body
 
 json
 
@@ -58,7 +58,7 @@ json
 
 400
 
-Response body
+[](#restauthsettings-object-response-body)Response body
 
 object
 
@@ -94,7 +94,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

@@ -6,7 +6,7 @@ post https://api.bitfinex.com/v2/auth/w/withdraw
 
 Allows you to request a withdrawal from one of your wallets.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 > 📘
@@ -116,7 +116,7 @@ String | Payment ID (if relevant) | | \[4\] | WALLET | String | Sending wallet |
 td:has(div.placeholders) { background-color: #ebebeb; } .placeholders { height:
 10px; text-align: center; font-size: 16px; line-height: 8px; }
 
-Body Params
+[](#body-params)Body Params
 
 wallet
 
@@ -240,7 +240,7 @@ Destination entity corporate name for travel rule purpose. (use either
 dest_firstname + dest_lastname or dest_corp_name, not required if
 beneficiary_self = true)
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -248,7 +248,7 @@ Responses
 
 200
 
-Response body
+[](#restauthwithdraw-array-response-body)Response body
 
 array
 
@@ -258,7 +258,7 @@ array
 
 400
 
-Response body
+[](#restauthwithdraw-object-response-body)Response body
 
 object
 
@@ -332,7 +332,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

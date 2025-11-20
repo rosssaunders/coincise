@@ -8,7 +8,7 @@ Send Multiple order-related operations. Please note the sent object has only one
 property with a value of an array of arrays detailing each order operation. (Max
 75 operations per request)
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 > ❗️
@@ -74,7 +74,7 @@ theme, base, components, utilities; @layer utilities;
 
 **Ratelimit**: 90 req/min
 
-Body Params
+[](#body-params)Body Params
 
 type
 
@@ -196,7 +196,7 @@ Defaults to 1
 
 Cancel all open orders if value is set to: 1
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -204,7 +204,7 @@ Responses
 
 200
 
-Response body
+[](#restauthordermulti-string-response-body)Response body
 
 json
 
@@ -214,7 +214,7 @@ json
 
 400
 
-Response body
+[](#restauthordermulti-object-response-body)Response body
 
 object
 
@@ -316,7 +316,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

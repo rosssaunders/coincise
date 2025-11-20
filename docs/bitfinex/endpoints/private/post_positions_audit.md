@@ -7,7 +7,7 @@ post https://api.bitfinex.com/v2/auth/r/positions/audit
 Return an audit of your positions. You latest positions will be retrieved by
 default, but ID's can be specified to retrieve an audit for specific positions.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ####
@@ -58,7 +58,7 @@ td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
 
 **Ratelimit**: 90 req/min
 
-Body Params
+[](#body-params)Body Params
 
 id
 
@@ -100,7 +100,7 @@ int32
 
 Number of records (Max 250)
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -108,7 +108,7 @@ Responses
 
 200
 
-Response body
+[](#restauthpositionsaudit-array-response-body)Response body
 
 array of arrays
 
@@ -120,7 +120,7 @@ array
 
 400
 
-Response body
+[](#restauthpositionsaudit-object-response-body)Response body
 
 object
 
@@ -198,7 +198,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

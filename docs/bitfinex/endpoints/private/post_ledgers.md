@@ -9,7 +9,7 @@ a timestamp can be used to retrieve time-specific data.
 
 The endpoint returns data up to 6 years old.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 > 🚧
@@ -76,7 +76,7 @@ shows the filter followed by the int value that should be entered in the
 
 **Ratelimit**: 90 req/min
 
-Path Params
+[](#path-params)Path Params
 
 Currency
 
@@ -88,7 +88,7 @@ Currency (BTC, ...) For an up-to-date listing of supported currencies see:
 [https://api.bitfinex.com/v2/conf/pub:map:currency:label](https://api.bitfinex.com/v2/conf/pub:map:currency:label)
 (Can be omitted to retrieve Ledgers for all currencies)
 
-Body Params
+[](#body-params)Body Params
 
 category
 
@@ -121,7 +121,7 @@ string
 
 Wallet name e.g. exchange, margin, funding
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -129,7 +129,7 @@ Responses
 
 200
 
-Response body
+[](#restauthledgers-string-response-body)Response body
 
 json
 
@@ -139,7 +139,7 @@ json
 
 400
 
-Response body
+[](#restauthledgers-object-response-body)Response body
 
 object
 
@@ -175,7 +175,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

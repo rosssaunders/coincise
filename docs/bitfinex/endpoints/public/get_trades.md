@@ -9,7 +9,7 @@ details such as price, size, and time. Optional parameters can be used to limit
 the number of results; you can specify a start and end timestamp, a limit, and a
 sorting method.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ###
@@ -49,7 +49,7 @@ For funding currency symbols (ex. fUSD)
 
 <table><tbody><tr><td style="font-weight: 600;">Rate Limit:</td><td style="text-align: right;">15 reqs/min (requests per minute)</td></tr></tbody></table>
 
-Path Params
+[](#path-params)Path Params
 
 symbol
 
@@ -61,7 +61,7 @@ Defaults to tBTCUSD
 
 The symbol you want information about. (e.g. tBTCUSD, tETHUSD, fUSD, fBTC)
 
-Query Params
+[](#query-params)Query Params
 
 limit
 
@@ -93,7 +93,7 @@ int64
 If end is given, only records with MTS <= end (milliseconds) will be given as
 response.
 
-Response
+[](#response-schemas)Response
 
 #
 
@@ -101,7 +101,7 @@ Response
 
 200
 
-Response body
+[](#restpublictrades-string-response-body)Response body
 
 json
 
@@ -131,7 +131,7 @@ curl \--request GET \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

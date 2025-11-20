@@ -6,7 +6,7 @@ post https://api.bitfinex.com/v2/auth/r/ext/invoice/payments
 
 Retrieve invoice and payment data
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ####
@@ -27,7 +27,7 @@ Response data
 | BFX_AMOUNT        | string | Amount in BTC                                       |
 | STATUS            | string | Invoice/payment status                              |
 
-Body Params
+[](#body-params)Body Params
 
 action
 
@@ -48,7 +48,7 @@ Query params
 
 query object
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -56,7 +56,7 @@ Responses
 
 200
 
-Response body
+[](#lnxinvoicepayments-string-response-body)Response body
 
 json
 
@@ -66,7 +66,7 @@ json
 
 400
 
-Response body
+[](#lnxinvoicepayments-object-response-body)Response body
 
 object
 
@@ -102,7 +102,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

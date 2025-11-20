@@ -6,7 +6,7 @@ post https://api.bitfinex.com/v2/auth/r/movements/info
 
 Detailed information about the deposit/withdrawal
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ####
@@ -64,7 +64,7 @@ td:has(div.placeholders) { background-color: #ebebeb; } .placeholders { height:
 
 **Ratelimit**: 90 req/min
 
-Body Params
+[](#body-params)Body Params
 
 id
 
@@ -74,7 +74,7 @@ required
 
 deposit/withdrawal ids
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -82,7 +82,7 @@ Responses
 
 200
 
-Response body
+[](#movementinfo-array-response-body)Response body
 
 array
 
@@ -92,7 +92,7 @@ array
 
 400
 
-Response body
+[](#movementinfo-object-response-body)Response body
 
 object
 
@@ -128,7 +128,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

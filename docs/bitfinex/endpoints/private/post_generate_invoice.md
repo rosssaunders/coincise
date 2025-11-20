@@ -6,7 +6,7 @@ post https://api.bitfinex.com/v2/auth/w/deposit/invoice
 
 Generates a Lightning Network deposit invoice
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 > ❗️
@@ -39,7 +39,7 @@ Response data
 td:has(div.placeholders) { background-color: #ebebeb; } .placeholders { height:
 10px; text-align: center; font-size: 16px; line-height: 8px; }
 
-Body Params
+[](#body-params)Body Params
 
 wallet
 
@@ -73,7 +73,7 @@ Defaults to 0
 
 Amount that you wish to deposit (in BTC; min 0.000001, max 0.02)
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -81,7 +81,7 @@ Responses
 
 200
 
-Response body
+[](#restauthdepositinvoice-string-response-body)Response body
 
 json
 
@@ -91,7 +91,7 @@ json
 
 400
 
-Response body
+[](#restauthdepositinvoice-object-response-body)Response body
 
 object
 
@@ -157,7 +157,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

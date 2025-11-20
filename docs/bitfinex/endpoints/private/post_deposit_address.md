@@ -7,7 +7,7 @@ post https://api.bitfinex.com/v2/auth/w/deposit/address
 Retrieve your deposit address or generate a new deposit address for a specific
 currency and wallet.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 > 📘
@@ -85,7 +85,7 @@ td:has(div.placeholders) { background-color: #ebebeb; } .placeholders { height:
 
 **Ratelimit**: 10 req/min
 
-Body Params
+[](#body-params)Body Params
 
 wallet
 
@@ -120,7 +120,7 @@ Defaults to 0
 Input 1 to generate a new deposit address (old addresses remain valid). Defaults
 to 0 if omitted, which will return the existing deposit address
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -128,7 +128,7 @@ Responses
 
 200
 
-Response body
+[](#restauthdepositaddress-array-response-body)Response body
 
 array
 
@@ -138,7 +138,7 @@ array
 
 400
 
-Response body
+[](#restauthdepositaddress-object-response-body)Response body
 
 object
 
@@ -204,7 +204,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 

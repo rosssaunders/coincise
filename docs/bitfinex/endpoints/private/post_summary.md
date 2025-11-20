@@ -7,7 +7,7 @@ post https://api.bitfinex.com/v2/auth/r/summary
 Provides an overview of the different fee rates for the account as well as the
 LEO discount level and the average amount of LEO held over the last 30 days.
 
-/\*! tailwindcss v4.1.16 | MIT License | https://tailwindcss.com \*/ @layer
+/\*! tailwindcss v4.1.17 | MIT License | https://tailwindcss.com \*/ @layer
 theme, base, components, utilities; @layer utilities;
 
 ####
@@ -127,7 +127,7 @@ td:has(div.placeholders) { background-color: #ebebeb } .placeholders { height:
 
 **Ratelimit**: 90 req/min
 
-Body Params
+[](#body-params)Body Params
 
 RAW_BODY
 
@@ -137,7 +137,7 @@ Defaults to {}
 
 {}
 
-Responses
+[](#response-schemas)Responses
 
 #
 
@@ -145,7 +145,7 @@ Responses
 
 200
 
-Response body
+[](#restauthsummary-string-response-body)Response body
 
 json
 
@@ -155,7 +155,7 @@ json
 
 400
 
-Response body
+[](#restauthsummary-object-response-body)Response body
 
 object
 
@@ -195,7 +195,7 @@ curl \--request POST \\
 
 Try It!
 
-RESPONSE
+Response
 
 Examples
 
