@@ -1,7 +1,6 @@
 # GET Get Trading Pairs List (V1)
 
-**Source:**
-[Get Trading Pairs List (V1)](https://developer-pro.bitmart.com/en/spot/)
+**Source:** [Get Trading Pairs List (V1)](https://developer-pro.bitmart.com/en/spot/)
 
 **API Type:** Spot
 
@@ -33,14 +32,26 @@ None
 
 > Response
 
-`{   "code": 1000,   "trace":"886fb6ae-456b-4654-b4e0-d681ac05cea1",   "message": "OK",   "data": {     "symbols": [        "BMX_ETH",        "XLM_ETH",        "MOBI_ETH"     ]   } }`
+```json
+{
+  "code": 1000,
+  "trace": "886fb6ae-456b-4654-b4e0-d681ac05cea1",
+  "message": "OK",
+  "data": {
+    "symbols": [
+      "BMX_ETH",
+      "XLM_ETH",
+      "MOBI_ETH"
+    ]
+  }
+}
+```
 
-| Field   | Type | Description            |
-| ------- | ---- | ---------------------- |
+| Field | Type | Description |
+| --- | --- | --- |
 | symbols | List | Array of trading pairs |
 
 ##### Note
 
-- Returns an array of trading pairs
-- "BMX_ETH" it means that the base currency of this trading pair is BMX, and the
-  quote currency is ETH
+-   Returns an array of trading pairs
+-   "BMX\_ETH" it means that the base currency of this trading pair is BMX, and the quote currency is ETH

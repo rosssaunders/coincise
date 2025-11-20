@@ -1,7 +1,6 @@
 # GET Get Position Mode (KEYED)
 
-**Source:**
-[Get Position Mode (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:** [Get Position Mode (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -27,17 +26,25 @@ See [Detailed Rate Limit](#rate-limit)
 
 None
 
-`curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}' https://api-cloud-v2.bitmart.com/contract/private/get-position-mode`
+`curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  https://api-cloud-v2.bitmart.com/contract/private/get-position-mode`
 
 #### Response Data
 
 > Response
 
-`{   "code": 1000,   "trace": "0cc6f4c4-8b8c-4253-8e90-8d3195aa109c",   "message": "Ok",   "data": {     "position_mode":"one_way_mode"   } }`
+```json
+{
+  "code": 1000,
+  "trace": "0cc6f4c4-8b8c-4253-8e90-8d3195aa109c",
+  "message": "Ok",
+  "data": {
+    "position_mode": "one_way_mode"
+  }
+}
+```
 
-| Field         | Type   | Description   |
-| ------------- | ------ | ------------- |
-| position_mode | String | Position Mode |
-
+| Field | Type | Description |
+| --- | --- | --- |
+| position\_mode | String | Position Mode  
 \-`hedge_mode`  
 \-`one_way_mode` |

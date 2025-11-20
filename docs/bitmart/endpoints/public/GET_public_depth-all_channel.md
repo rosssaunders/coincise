@@ -1,7 +1,6 @@
 # GET 【Public】Depth-All Channel
 
-**Source:**
-[【Public】Depth-All Channel](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:** [【Public】Depth-All Channel](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -22,21 +21,35 @@ Return depth data, each push is the full data
 
 > Request
 
-`{   "action":"subscribe",   "args":["futures/depthAll20:BTCUSDT@200ms"] }`
+```json
+{
+  "action": "subscribe",
+  "args": [
+    "futures/depthAll20:BTCUSDT@200ms"
+  ]
+}
+```
 
 Message Format:
 
-`{"action":"subscribe","args":["<channel:symbol><@speed>"]}`
+```json
+{
+  "action": "subscribe",
+  "args": [
+    "<channel:symbol><@speed>"
+  ]
+}
+```
 
-- channel: Channel name, such as`futures/depthAll20`
-- symbol: Trading pair, such as`BTCUSDT`
-- speed: Update speed, support `200ms` or `100ms`
+-   channel: Channel name, such as`futures/depthAll20`
+-   symbol: Trading pair, such as`BTCUSDT`
+-   speed: Update speed, support `200ms` or `100ms`
 
 Parameters Channel Name List
 
-| Channel Name       | Description            |
-| ------------------ | ---------------------- |
-| futures/depthAll5  | 5 Level Depth Channel  |
+| Channel Name | Description |
+| --- | --- |
+| futures/depthAll5 | 5 Level Depth Channel |
 | futures/depthAll20 | 20 Level Depth Channel |
 | futures/depthAll50 | 50 Level Depth Channel |
 
@@ -44,25 +57,44 @@ Parameters Channel Name List
 
 > Response
 
-`{     "data": {         "symbol": "BTCUSDT",         "asks": [             {                 "price": "70294.4",                 "vol": "455"             }         ],         "bids": [             {                 "price": "70293.9",                 "vol": "1856"             }         ],         "ms_t": 1730399750402     },     "group": "futures/depthAll20:BTCUSDT@200ms" }`
+```json
+{
+  "data": {
+    "symbol": "BTCUSDT",
+    "asks": [
+      {
+        "price": "70294.4",
+        "vol": "455"
+      }
+    ],
+    "bids": [
+      {
+        "price": "70293.9",
+        "vol": "1856"
+      }
+    ],
+    "ms_t": 1730399750402
+  },
+  "group": "futures/depthAll20:BTCUSDT@200ms"
+}
+```
 
 Return data description:
 
-| Field  | Type   | Description                              |
-| ------ | ------ | ---------------------------------------- |
+| Field | Type | Description |
+| --- | --- | --- |
 | symbol | String | Symbol of the contract（like `BTCUSDT`） |
-| asks   | List   | Asks Depth Array                         |
-| bids   | List   | Bids Depth Array                         |
-| ms_t   | Long   | Data push timestamp (in millisecond)     |
+| asks | List | Asks Depth Array |
+| bids | List | Bids Depth Array |
+| ms\_t | Long | Data push timestamp (in millisecond) |
 
 **Instruction** Description of the `asks` `bids` details field:
 
-| Field | Type   | Description |
-| ----- | ------ | ----------- |
-| price | String | price       |
-| vol   | String | volume      |
+| Field | Type | Description |
+| --- | --- | --- |
+| price | String | price |
+| vol | String | volume |
 
-An example of the array of depths values: {"price":"20159.6","vol":"7284"}.
-price field is the price, and vol field is the quantity.
+An example of the array of depths values: {"price":"20159.6","vol":"7284"}. price field is the price, and vol field is the quantity.
 
----
+* * *

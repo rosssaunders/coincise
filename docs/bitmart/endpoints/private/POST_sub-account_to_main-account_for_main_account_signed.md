@@ -1,7 +1,6 @@
 # POST Sub-Account to Main-Account (For Main Account) (SIGNED)
 
-**Source:**
-[Sub-Account to Main-Account (For Main Account) (SIGNED)](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:** [Sub-Account to Main-Account (For Main Account) (SIGNED)](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -25,19 +24,26 @@ See [Detailed Rate Limit](#rate-limit)
 
 > Request
 
-`` curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'  -X POST -d '{     "requestNo":"4e2adcff-2122-1ce7-2557-4f65d2ce1ca2",     "amount":"1",     "currency":"USDT",     "subAccount":"subAccountName@xxx.com" }' https://api-cloud-v2.bitmart.com/account/contract/sub-account/main/v1/sub-to-main` ``
+`` curl  -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{     "requestNo":"4e2adcff-2122-1ce7-2557-4f65d2ce1ca2",     "amount":"1",     "currency":"USDT",     "subAccount":"subAccountName@xxx.com" }' https://api-cloud-v2.bitmart.com/account/contract/sub-account/main/v1/sub-to-main` ``
 
-| Field      | Type   | Required? | Description                           |
-| ---------- | ------ | --------- | ------------------------------------- |
-| requestNo  | String | Yes       | UUID,unique identifier, max length 64 |
-| amount     | String | Yes       | Transfer amount                       |
-| currency   | String | Yes       | Currently only `USDT` is supported    |
-| subAccount | String | Yes       | Sub-Account username                  |
+| Field | Type | Required? | Description |
+| --- | --- | --- | --- |
+| requestNo | String | Yes | UUID,unique identifier, max length 64 |
+| amount | String | Yes | Transfer amount |
+| currency | String | Yes | Currently only `USDT` is supported |
+| subAccount | String | Yes | Sub-Account username |
 
 #### Response Data
 
 > Response
 
-`{   "message": "OK",   "code": 1000,   "trace": "c1e4e99ff0ec452f8b8bc5f1eb38d733.76.16861963186213159",   "data": {} }`
+```json
+{
+  "message": "OK",
+  "code": 1000,
+  "trace": "c1e4e99ff0ec452f8b8bc5f1eb38d733.76.16861963186213159",
+  "data": {}
+}
+```
 
 If code value is 1000,it means the transfer is successful.

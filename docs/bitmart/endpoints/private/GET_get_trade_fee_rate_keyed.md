@@ -1,7 +1,6 @@
 # GET Get Trade Fee Rate (KEYED)
 
-**Source:**
-[Get Trade Fee Rate (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:** [Get Trade Fee Rate (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -27,18 +26,29 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/contract/private/trade-fee-rate?symbol=BTCUSDT`
 
-| Field  | Type   | Required? | Description                          |
-| ------ | ------ | --------- | ------------------------------------ |
-| symbol | String | Yes       | Symbol of the contract(like BTCUSDT) |
+| Field | Type | Required? | Description |
+| --- | --- | --- | --- |
+| symbol | String | Yes | Symbol of the contract(like BTCUSDT) |
 
 #### Response Data
 
 > Response
 
-`{   "code": 1000,   "message": "Ok",   "data": {     "symbol": "BTCUSDT",     "taker_fee_rate": "0.0006",     "maker_fee_rate": "0.0002"   },   "trace": "638d5048-ad21-4a4b-1234-d0756fbfc7ba" }`
+```json
+{
+  "code": 1000,
+  "message": "Ok",
+  "data": {
+    "symbol": "BTCUSDT",
+    "taker_fee_rate": "0.0006",
+    "maker_fee_rate": "0.0002"
+  },
+  "trace": "638d5048-ad21-4a4b-1234-d0756fbfc7ba"
+}
+```
 
-| Field          | Type   | Description            |
-| -------------- | ------ | ---------------------- |
-| symbol         | String | Symbol of the contract |
-| taker_fee_rate | String | Taker fee rate         |
-| maker_fee_rate | String | Maker fee rate         |
+| Field | Type | Description |
+| --- | --- | --- |
+| symbol | String | Symbol of the contract |
+| taker\_fee\_rate | String | Taker fee rate |
+| maker\_fee\_rate | String | Maker fee rate |

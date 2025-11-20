@@ -47,12 +47,25 @@ const cleanFilename = filename => {
 /**
  * Extract endpoints from a page
  */
+/**
+ * Extract endpoints from a page
+ */
 const extractEndpoints = async (page, sourceUrl, apiType) => {
   console.log(`\n🔍 Extracting endpoints from ${apiType} API...`)
 
+  const GENERAL_DOC_TITLES = [
+    "About recvWindow, timestamp",
+    "API Key Permission Settings",
+    "API Library",
+    "Data Compression",
+    "Deposit Address (KEYED)",
+    "FAQ",
+    "Format"
+  ]
+
   const endpoints = await page.evaluate(
-    (srcUrl, type) => {
-      const results = { public: [], private: [] }
+    (srcUrl, type, generalTitles) => {
+      const results = { public: [], private: [], general: [] }
 
       // Find all h2 elements that represent endpoints
       const headings = Array.from(document.querySelectorAll("h2"))
@@ -100,6 +113,18 @@ const extractEndpoints = async (page, sourceUrl, apiType) => {
 
         // Skip if no substantial content
         if (contentHtml.length < 100) {
+          continue
+        }
+
+        // Check if this is a general documentation section
+        if (generalTitles.includes(headingText)) {
+          results.general.push({
+            title: headingText,
+            content: contentHtml,
+            sourceUrl: srcUrl,
+            apiType: type,
+            isGeneral: true
+          })
           continue
         }
 
@@ -170,7 +195,8 @@ const extractEndpoints = async (page, sourceUrl, apiType) => {
       return results
     },
     sourceUrl,
-    apiType
+    apiType,
+    GENERAL_DOC_TITLES
   )
 
   return endpoints
@@ -179,19 +205,63 @@ const extractEndpoints = async (page, sourceUrl, apiType) => {
 /**
  * Generate markdown content for an endpoint
  */
+/**
+ * Format JSON strings in markdown
+ */
+const formatJsonInMarkdown = markdown => {
+  const lines = markdown.split("\n")
+  const formattedLines = lines.map(line => {
+    const trimmed = line.trim()
+    // Check for potential JSON wrapped in backticks or plain
+    const jsonMatch = trimmed.match(/^`?(\{.*\})`?$/)
+
+    if (jsonMatch) {
+      try {
+        const potentialJson = jsonMatch[1]
+        const parsed = JSON.parse(potentialJson)
+        const formatted = JSON.stringify(parsed, null, 2)
+        return "```json\n" + formatted + "\n```"
+      } catch (e) {
+        // Not valid JSON, return original line
+        return line
+      }
+    }
+    return line
+  })
+
+  return formattedLines.join("\n")
+}
+
+/**
+ * Generate markdown content for an endpoint
+ */
 const generateEndpointMarkdown = (endpoint, turndownService) => {
+  let markdown = ""
+
+  if (endpoint.isGeneral) {
+    markdown = `# ${endpoint.title}\n\n`
+    markdown += `**Source:** [${endpoint.title}](${endpoint.sourceUrl})\n\n`
+    markdown += `**API Type:** ${endpoint.apiType}\n\n`
+
+    // Convert HTML content to markdown
+    const contentMarkdown = turndownService.turndown(endpoint.content)
+    markdown += formatJsonInMarkdown(contentMarkdown)
+
+    return markdown
+  }
+
   const authStatus = endpoint.isPublic
     ? "Not Required (Public Endpoint)"
     : "Required (Private Endpoint)"
 
-  let markdown = `# ${endpoint.method} ${endpoint.title}\n\n`
+  markdown = `# ${endpoint.method} ${endpoint.title}\n\n`
   markdown += `**Source:** [${endpoint.title}](${endpoint.sourceUrl})\n\n`
   markdown += `**API Type:** ${endpoint.apiType}\n\n`
   markdown += `## Authentication\n\n${authStatus}\n\n`
 
   // Convert HTML content to markdown
   const contentMarkdown = turndownService.turndown(endpoint.content)
-  markdown += contentMarkdown
+  markdown += formatJsonInMarkdown(contentMarkdown)
 
   return markdown
 }
@@ -202,6 +272,7 @@ const generateEndpointMarkdown = (endpoint, turndownService) => {
 const saveEndpoints = (endpoints, turndownService, apiType) => {
   const publicDir = path.join(OUTPUT_DIR, "public")
   const privateDir = path.join(OUTPUT_DIR, "private")
+  const rootDir = path.resolve(OUTPUT_DIR, "..")
 
   ensureDir(publicDir)
   ensureDir(privateDir)
@@ -209,6 +280,9 @@ const saveEndpoints = (endpoints, turndownService, apiType) => {
   console.log(`\n📝 Saving ${apiType} endpoints...`)
   console.log(`   Public endpoints: ${endpoints.public.length}`)
   console.log(`   Private endpoints: ${endpoints.private.length}`)
+  if (endpoints.general && endpoints.general.length > 0) {
+    console.log(`   General docs: ${endpoints.general.length}`)
+  }
 
   // Save public endpoints
   for (const endpoint of endpoints.public) {
@@ -226,6 +300,17 @@ const saveEndpoints = (endpoints, turndownService, apiType) => {
     const markdown = generateEndpointMarkdown(endpoint, turndownService)
     writeFile(filepath, markdown)
     console.log(`   ✅ ${filename}`)
+  }
+
+  // Save general docs
+  if (endpoints.general) {
+    for (const endpoint of endpoints.general) {
+      const filename = `${cleanFilename(endpoint.title)}.md`
+      const filepath = path.join(rootDir, filename)
+      const markdown = generateEndpointMarkdown(endpoint, turndownService)
+      writeFile(filepath, markdown)
+      console.log(`   ✅ ${filename} (General)`)
+    }
   }
 }
 
