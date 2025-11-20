@@ -14,9 +14,9 @@ GET `/dapi/v1/constituents`
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | YES |  |
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | YES       |             |
 
 ### Response Example
 
@@ -45,4 +45,5 @@ GET `/dapi/v1/constituents`
 }
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Constituents](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Constituents)
+> Source:
+> [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Constituents](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Constituents)

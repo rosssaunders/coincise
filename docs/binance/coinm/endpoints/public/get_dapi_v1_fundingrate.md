@@ -14,14 +14,14 @@ GET `/dapi/v1/fundingRate`
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | YES |  |
-| startTime | LONG | NO | Timestamp in ms to get funding rate from INCLUSIVE. |
-| endTime | LONG | NO | Timestamp in ms to get funding rate until INCLUSIVE. |
-| limit | INT | NO | Default 100; max 1000 |
+| Name      | Type   | Mandatory | Description                                          |
+| --------- | ------ | --------- | ---------------------------------------------------- |
+| symbol    | STRING | YES       |                                                      |
+| startTime | LONG   | NO        | Timestamp in ms to get funding rate from INCLUSIVE.  |
+| endTime   | LONG   | NO        | Timestamp in ms to get funding rate until INCLUSIVE. |
+| limit     | INT    | NO        | Default 100; max 1000                                |
 
-> -   empty array will be returned for delivery symbols.
+> - empty array will be returned for delivery symbols.
 
 ### Response Example
 
@@ -29,7 +29,7 @@ GET `/dapi/v1/fundingRate`
 [
 	{
 		"symbol": "BTCUSD_PERP",
-  		"fundingTime": 1596038400000,	
+  		"fundingTime": 1596038400000,
   		"fundingRate": "-0.00300000"
   	},
  	{
@@ -40,4 +40,5 @@ GET `/dapi/v1/fundingRate`
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Rate-History-of-Perpetual-Futures](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Rate-History-of-Perpetual-Futures)
+> Source:
+> [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Rate-History-of-Perpetual-Futures](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Rate-History-of-Perpetual-Futures)

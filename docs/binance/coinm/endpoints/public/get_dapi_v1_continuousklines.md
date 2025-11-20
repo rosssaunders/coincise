@@ -2,12 +2,13 @@
 
 ### API Description
 
-Kline/candlestick bars for a specific contract type. Klines are uniquely identified by their open time.
+Kline/candlestick bars for a specific contract type. Klines are uniquely
+identified by their open time.
 
-> -   Contract type:
->     -   PERPETUAL
->     -   CURRENT\_QUARTER
->     -   NEXT\_QUARTER
+> - Contract type:
+>   - PERPETUAL
+>   - CURRENT_QUARTER
+>   - NEXT_QUARTER
 
 ### HTTP Request
 
@@ -17,30 +18,34 @@ GET `/dapi/v1/continuousKlines`
 
 based on parameter `LIMIT`
 
-| LIMIT | weight |
-| --- | --- |
-| \[1,100) | 1 |
-| \[100, 500) | 2 |
-| \[500, 1000\] | 5 |
+| LIMIT         | weight |
+| ------------- | ------ |
+| \[1,100)      | 1      |
+| \[100, 500)   | 2      |
+| \[500, 1000\] | 5      |
 
 > 1000 | 10
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| pair | STRING | YES |  |
-| contractType | ENUM | YES |  |
-| interval | ENUM | YES |  |
-| startTime | LONG | NO |  |
-| endTime | LONG | NO |  |
-| limit | INT | NO | Default 500; max 1500. |
+| Name         | Type   | Mandatory | Description            |
+| ------------ | ------ | --------- | ---------------------- |
+| pair         | STRING | YES       |                        |
+| contractType | ENUM   | YES       |                        |
+| interval     | ENUM   | YES       |                        |
+| startTime    | LONG   | NO        |                        |
+| endTime      | LONG   | NO        |                        |
+| limit        | INT    | NO        | Default 500; max 1500. |
 
-> -   The difference between `startTime` and `endTime` can only be up to 200 days
-> -   Between `startTime` and `endTime`, the most recent `limit` data from `endTime` will be returned:
->     -   If `startTime` and `endTime` are not sent, current timestamp will be set as `endTime`, and the most recent data will be returned.
->     -   If `startTime` is sent only, the timestamp of 200 days after `startTime` will be set as `endTime`(up to the current time)
->     -   If `endTime` is sent only, the timestamp of 200 days before `endTime` will be set as `startTime`
+> - The difference between `startTime` and `endTime` can only be up to 200 days
+> - Between `startTime` and `endTime`, the most recent `limit` data from
+>   `endTime` will be returned:
+>   - If `startTime` and `endTime` are not sent, current timestamp will be set
+>     as `endTime`, and the most recent data will be returned.
+>   - If `startTime` is sent only, the timestamp of 200 days after `startTime`
+>     will be set as `endTime`(up to the current time)
+>   - If `endTime` is sent only, the timestamp of 200 days before `endTime` will
+>     be set as `startTime`
 
 ### Response Example
 
@@ -63,4 +68,5 @@ based on parameter `LIMIT`
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data)
+> Source:
+> [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data)

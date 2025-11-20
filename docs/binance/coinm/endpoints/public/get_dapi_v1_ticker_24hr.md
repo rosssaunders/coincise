@@ -10,18 +10,20 @@ GET `/dapi/v1/ticker/24hr`
 
 ### Request Weight
 
-**1** for a single symbol, **40** when the symbol parameter is omitted **Careful** when accessing this with no symbol.
+**1** for a single symbol, **40** when the symbol parameter is omitted
+**Careful** when accessing this with no symbol.
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | NO |  |
-| pair | STRING | NO |  |
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | NO        |             |
+| pair   | STRING | NO        |             |
 
-> -   Symbol and pair cannot be sent together
-> -   If a pair is sent,tickers for all symbols of the pair will be returned
-> -   If either a pair or symbol is sent, tickers for all symbols of all pairs will be returned
+> - Symbol and pair cannot be sent together
+> - If a pair is sent,tickers for all symbols of the pair will be returned
+> - If either a pair or symbol is sent, tickers for all symbols of all pairs
+>   will be returned
 
 ### Response Example
 
@@ -44,9 +46,10 @@ GET `/dapi/v1/ticker/24hr`
 	  	"closeTime": 1591256718418,
 	  	"firstId": 600507, // First tradeId
 	  	"lastId": 697803,  // Last tradeId
-	  	"count": 97297    // Trade count  	
+	  	"count": 97297    // Trade count
   	}
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics)
+> Source:
+> [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics)
