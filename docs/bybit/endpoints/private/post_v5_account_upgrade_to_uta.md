@@ -2,16 +2,32 @@
 
 Upgrade Guidance
 
-Check your current account status by calling this [Get Account Info](/docs/v5/account/account-info)
+Check your current account status by calling this
+[Get Account Info](/docs/v5/account/account-info)
 
--   if unifiedMarginStatus=1, then it is Classic account, you can call below upgrade endpoint to [UTA2.0](/docs/v5/acct-mode#uta-20) Pro. Check [Get Account Info](/docs/v5/account/account-info) after a while and if unifiedMarginStatus=6, then the account has successfully upgraded to [UTA2.0](/docs/v5/acct-mode#uta-20) Pro.
-    
--   if unifiedMarginStatus=3, then it is [UTA1.0](/docs/v5/acct-mode#uta-10), and you have to head to the website to click "upgrade" to upgrade to [UTA2.0](/docs/v5/acct-mode#uta-20) first, or you can call the below endpoint to upgrade to [UTA2.0](/docs/v5/acct-mode#uta-20). Check [Get Account Info](/docs/v5/account/account-info) after a while and if unifiedMarginStatus=5, then the account has successfully upgraded to [UTA2.0](/docs/v5/acct-mode#uta-20).
-    
--   if unifiedMarginStatus=4, then it is [UTA1.0](/docs/v5/acct-mode#uta-10) Pro, and you can call the below endpoint to upgrade to [UTA2.0](/docs/v5/acct-mode#uta-20) Pro. Check [Get Account Info](/docs/v5/account/account-info) after a while and if unifiedMarginStatus=6, then the account has successfully upgraded to [UTA2.0](/docs/v5/acct-mode#uta-20) Pro.
-    
--   if unifiedMarginStatus=5, then it is [UTA2.0](/docs/v5/acct-mode#uta-20), you can call below upgrade endpoint to [UTA2.0](/docs/v5/acct-mode#uta-20) Pro. Check [Get Account Info](/docs/v5/account/account-info) after a while and if unifiedMarginStatus=6, then the account has successfully upgraded to [UTA2.0](/docs/v5/acct-mode#uta-20) Pro.
-    
+- if unifiedMarginStatus=1, then it is Classic account, you can call below
+  upgrade endpoint to [UTA2.0](/docs/v5/acct-mode#uta-20) Pro. Check
+  [Get Account Info](/docs/v5/account/account-info) after a while and if
+  unifiedMarginStatus=6, then the account has successfully upgraded to
+  [UTA2.0](/docs/v5/acct-mode#uta-20) Pro.
+- if unifiedMarginStatus=3, then it is [UTA1.0](/docs/v5/acct-mode#uta-10), and
+  you have to head to the website to click "upgrade" to upgrade to
+  [UTA2.0](/docs/v5/acct-mode#uta-20) first, or you can call the below endpoint
+  to upgrade to [UTA2.0](/docs/v5/acct-mode#uta-20). Check
+  [Get Account Info](/docs/v5/account/account-info) after a while and if
+  unifiedMarginStatus=5, then the account has successfully upgraded to
+  [UTA2.0](/docs/v5/acct-mode#uta-20).
+- if unifiedMarginStatus=4, then it is [UTA1.0](/docs/v5/acct-mode#uta-10) Pro,
+  and you can call the below endpoint to upgrade to
+  [UTA2.0](/docs/v5/acct-mode#uta-20) Pro. Check
+  [Get Account Info](/docs/v5/account/account-info) after a while and if
+  unifiedMarginStatus=6, then the account has successfully upgraded to
+  [UTA2.0](/docs/v5/acct-mode#uta-20) Pro.
+- if unifiedMarginStatus=5, then it is [UTA2.0](/docs/v5/acct-mode#uta-20), you
+  can call below upgrade endpoint to [UTA2.0](/docs/v5/acct-mode#uta-20) Pro.
+  Check [Get Account Info](/docs/v5/account/account-info) after a while and if
+  unifiedMarginStatus=6, then the account has successfully upgraded to
+  [UTA2.0](/docs/v5/acct-mode#uta-20) Pro.
 
 important
 
@@ -19,24 +35,34 @@ Banned users cannot upgrade the account to Unified Account
 
 info
 
-You can upgrade the normal acct to unified acct without closing positions now, but please note belows:
+You can upgrade the normal acct to unified acct without closing positions now,
+but please note belows:
 
 1.  Please avoid upgrading during these period:
 
-|  |  |
-| :-- | :-- |
+|            |                                        |
+| :--------- | :------------------------------------- |
 | every hour | 50th minute to 5th minute of next hour |
 
-2.  Please ensure: there is no open orders when upgrade from [UTA2.0](/docs/v5/acct-mode#uta-20) to [UTA2.0](/docs/v5/acct-mode#uta-20) Pro  
-      
-    Regaring the conditions that upgrade [UTA1.0](/docs/v5/acct-mode#uta-10) Pro to [UTA2.0](/docs/v5/acct-mode#uta-20) Pro, please ensure:
+2.  Please ensure: there is no open orders when upgrade from
+    [UTA2.0](/docs/v5/acct-mode#uta-20) to [UTA2.0](/docs/v5/acct-mode#uta-20)
+    Pro
+    Regaring the conditions that upgrade [UTA1.0](/docs/v5/acct-mode#uta-10) Pro
+    to [UTA2.0](/docs/v5/acct-mode#uta-20) Pro, please ensure:
 
--   There is no open orders regardless of order types;
--   All inverse contract positions must keep consistent with the margin mode of Unified account. If it is Portfolio Margin mode, you either close inverse positions or switch unified account margin mode to cross or isolated margin mode.
--   Cannot have hedge mode inverse futures positions, which is not supported in [UTA2.0](/docs/v5/acct-mode#uta-20)
--   **Cannot have TPSL order either**
+- There is no open orders regardless of order types;
+- All inverse contract positions must keep consistent with the margin mode of
+  Unified account. If it is Portfolio Margin mode, you either close inverse
+  positions or switch unified account margin mode to cross or isolated margin
+  mode.
+- Cannot have hedge mode inverse futures positions, which is not supported in
+  [UTA2.0](/docs/v5/acct-mode#uta-20)
+- **Cannot have TPSL order either**
 
-3.  During the account upgrade process, the data of **Rest API/Websocket stream** may be inaccurate due to the fact that the account-related asset data is in the processing state. It is recommended to query and use it after the upgrade is completed.
+3.  During the account upgrade process, the data of **Rest API/Websocket
+    stream** may be inaccurate due to the fact that the account-related asset
+    data is in the processing state. It is recommended to query and use it after
+    the upgrade is completed.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -48,20 +74,20 @@ None
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| unifiedUpdateStatus | string | Upgrade status. `FAIL`,`PROCESS`,`SUCCESS` |
-| unifiedUpdateMsg | Object | If `PROCESS`,`SUCCESS`, it returns `null` |
-| \> msg | array | Error message array. Only `FAIL` will have this field |
+| Parameter           | Type   | Comments                                              |
+| :------------------ | :----- | ----------------------------------------------------- |
+| unifiedUpdateStatus | string | Upgrade status. `FAIL`,`PROCESS`,`SUCCESS`            |
+| unifiedUpdateMsg    | Object | If `PROCESS`,`SUCCESS`, it returns `null`             |
+| \> msg              | array  | Error message array. Only `FAIL` will have this field |
 
 [RUN >>](/docs/api-explorer/v5/account/upgrade-unified-account)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   .Net
--   Node.js
+- .Net
+- Node.js
 
 ```bash
 POST /v5/account/upgrade-to-uta HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672125123533X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{}
@@ -84,7 +110,20 @@ using bybit.net.api;using bybit.net.api.ApiServiceImp;using bybit.net.api.Models
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .upgradeToUnifiedAccount()    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "xxxxxxxxxxxxxxxxxx",
+  secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+})
+client
+  .upgradeToUnifiedAccount()
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

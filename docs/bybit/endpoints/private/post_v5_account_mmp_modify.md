@@ -4,28 +4,44 @@ info
 
 ## What is MMP?[​](#what-is-mmp "Direct link to heading")
 
-*Market Maker Protection* (MMP) is an automated mechanism designed to protect market makers (MM) against liquidity risks and over-exposure in the market. It prevents simultaneous trade executions on quotes provided by the MM within a short time span. The MM can automatically pull their quotes if the number of contracts traded for an underlying asset exceeds the configured threshold within a certain time frame. Once MMP is triggered, any pre-existing MMP orders will be **automatically cancelled**, and new orders tagged as MMP will be **rejected** for a specific duration — known as the frozen period — so that MM can reassess the market and modify the quotes.
+_Market Maker Protection_ (MMP) is an automated mechanism designed to protect
+market makers (MM) against liquidity risks and over-exposure in the market. It
+prevents simultaneous trade executions on quotes provided by the MM within a
+short time span. The MM can automatically pull their quotes if the number of
+contracts traded for an underlying asset exceeds the configured threshold within
+a certain time frame. Once MMP is triggered, any pre-existing MMP orders will be
+**automatically cancelled**, and new orders tagged as MMP will be **rejected**
+for a specific duration — known as the frozen period — so that MM can reassess
+the market and modify the quotes.
 
 ## How to enable MMP[​](#how-to-enable-mmp "Direct link to heading")
 
-Send an email to Bybit ([financial.inst@bybit.com](mailto:financial.inst@bybit.com)) or contact your business development (BD) manager to apply for MMP. After processed, the default settings are as below table:
+Send an email to Bybit
+([financial.inst@bybit.com](mailto:financial.inst@bybit.com)) or contact your
+business development (BD) manager to apply for MMP. After processed, the default
+settings are as below table:
 
-| Parameter | Type | Comments | Default value |
-| :-- | :-- | :-- | --- |
-| baseCoin | string | Base coin | BTC |
-| window | string | Time window (millisecond) | 5000 |
-| frozenPeriod | string | Frozen period (millisecond) | 100 |
-| qtyLimit | string | Quantity limit | 100 |
-| deltaLimit | string | Delta limit | 100 |
+| Parameter    | Type   | Comments                    | Default value |
+| :----------- | :----- | :-------------------------- | ------------- |
+| baseCoin     | string | Base coin                   | BTC           |
+| window       | string | Time window (millisecond)   | 5000          |
+| frozenPeriod | string | Frozen period (millisecond) | 100           |
+| qtyLimit     | string | Quantity limit              | 100           |
+| deltaLimit   | string | Delta limit                 | 100           |
 
 ## Applicable[​](#applicable "Direct link to heading")
 
-Effective for **options** only. When you place an `option` order, set `mmp`\=true, which means you mark this order as a mmp order.
+Effective for **options** only. When you place an `option` order, set
+`mmp`\=true, which means you mark this order as a mmp order.
 
 ## Some points to note[​](#some-points-to-note "Direct link to heading")
 
-1.  Only maker order qty and delta will be counted into `qtyLimit` and `deltaLimit`.
-2.  `qty_limit` is the sum of absolute value of qty of each trade executions. `delta_limit` is the absolute value of the sum of qty\*delta. If any of these reaches or exceeds the limit amount, the account's market maker protection will be triggered.
+1.  Only maker order qty and delta will be counted into `qtyLimit` and
+    `deltaLimit`.
+2.  `qty_limit` is the sum of absolute value of qty of each trade executions.
+    `delta_limit` is the absolute value of the sum of qty\*delta. If any of
+    these reaches or exceeds the limit amount, the account's market maker
+    protection will be triggered.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -33,13 +49,13 @@ POST `/v5/account/mmp-modify`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| baseCoin | **true** | string | Base coin, uppercase only |
-| window | **true** | string | Time window (ms) |
+| Parameter    | Required | Type   | Comments                                                                        |
+| :----------- | :------- | :----- | ------------------------------------------------------------------------------- |
+| baseCoin     | **true** | string | Base coin, uppercase only                                                       |
+| window       | **true** | string | Time window (ms)                                                                |
 | frozenPeriod | **true** | string | Frozen period (ms). "0" means the trade will remain frozen until manually reset |
-| qtyLimit | **true** | string | Trade qty limit (positive and up to 2 decimal places) |
-| deltaLimit | **true** | string | Delta limit (positive and up to 2 decimal places) |
+| qtyLimit     | **true** | string | Trade qty limit (positive and up to 2 decimal places)                           |
+| deltaLimit   | **true** | string | Delta limit (positive and up to 2 decimal places)                               |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -47,7 +63,7 @@ None
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 POST /v5/account/mmp-modify HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1675833524616X-BAPI-RECV-WINDOW: 50000Content-Type: application/json{    "baseCoin": "ETH",    "window": "5000",    "frozenPeriod": "100000",    "qtyLimit": "50",    "deltaLimit": "20"}
@@ -58,7 +74,26 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .setMMP({        baseCoin: 'ETH',        window: '5000',        frozenPeriod: '100000',        qtyLimit: '50',        deltaLimit: '20',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "xxxxxxxxxxxxxxxxxx",
+  secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+})
+client
+  .setMMP({
+    baseCoin: "ETH",
+    window: "5000",
+    frozenPeriod: "100000",
+    qtyLimit: "50",
+    deltaLimit: "20"
+  })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

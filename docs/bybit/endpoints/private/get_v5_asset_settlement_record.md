@@ -8,44 +8,46 @@ GET `/v5/asset/settlement-record`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [category](/docs/v5/enum#category) | **true** | string | Product type-   [UTA2.0](/docs/v5/acct-mode#uta-20): `linear`(USDC contract)
--   [UTA1.0](/docs/v5/acct-mode#uta-10): `linear`(USDC contract) |
-| symbol | false | string | Symbol name, like `BTCPERP`, uppercase only |
-| startTime | false | integer | The start timestamp (ms)
--   startTime and endTime are not passed, return 30 days by default
--   Only startTime is passed, return range between startTime and startTime + 30 days
--   Only endTime is passed, return range between endTime-30 days and endTime
--   If both are passed, the rule is endTime - startTime <= 30 days
+| Parameter                                                      | Required | Type    | Comments                                                                   |
+| :------------------------------------------------------------- | :------- | :------ | -------------------------------------------------------------------------- |
+| [category](/docs/v5/enum#category)                             | **true** | string  | Product type- [UTA2.0](/docs/v5/acct-mode#uta-20): `linear`(USDC contract) |
+| - [UTA1.0](/docs/v5/acct-mode#uta-10): `linear`(USDC contract) |
+| symbol                                                         | false    | string  | Symbol name, like `BTCPERP`, uppercase only                                |
+| startTime                                                      | false    | integer | The start timestamp (ms)                                                   |
 
- |
-| endTime | false | integer | The end time. timestamp (ms) |
-| limit | false | integer | Limit for data size per page. \[`1`, `50`\]. Default: `20` |
-| cursor | false | string | Cursor. Use the `nextPageCursor` token from the response to retrieve the next page of the result set |
+- startTime and endTime are not passed, return 30 days by default
+- Only startTime is passed, return range between startTime and startTime + 30
+  days
+- Only endTime is passed, return range between endTime-30 days and endTime
+- If both are passed, the rule is endTime - startTime <= 30 days
+
+| | endTime | false | integer | The end time. timestamp (ms) | | limit | false |
+integer | Limit for data size per page. \[`1`, `50`\]. Default: `20` | | cursor
+| false | string | Cursor. Use the `nextPageCursor` token from the response to
+retrieve the next page of the result set |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| category | string | Product type |
-| list | array | Object |
-| \> symbol | string | Symbol name |
-| \> side | string | `Buy`,`Sell` |
-| \> size | string | Position size |
-| \> sessionAvgPrice | string | Settlement price |
-| \> markPrice | string | Mark price |
-| \> realisedPnl | string | Realised PnL |
-| \> createdTime | string | Created time (ms) |
-| nextPageCursor | string | Refer to the `cursor` request parameter |
+| Parameter          | Type   | Comments                                |
+| :----------------- | :----- | --------------------------------------- |
+| category           | string | Product type                            |
+| list               | array  | Object                                  |
+| \> symbol          | string | Symbol name                             |
+| \> side            | string | `Buy`,`Sell`                            |
+| \> size            | string | Position size                           |
+| \> sessionAvgPrice | string | Settlement price                        |
+| \> markPrice       | string | Mark price                              |
+| \> realisedPnl     | string | Realised PnL                            |
+| \> createdTime     | string | Created time (ms)                       |
+| nextPageCursor     | string | Refer to the `cursor` request parameter |
 
 [RUN >>](/docs/api-explorer/v5/asset/settlement)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/asset/settlement-record?category=linear HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672284883483X-BAPI-RECV-WINDOW: 5000
@@ -56,7 +58,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getSettlementRecords({ category: 'linear' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "xxxxxxxxxxxxxxxxxx",
+  secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+})
+client
+  .getSettlementRecords({ category: "linear" })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
