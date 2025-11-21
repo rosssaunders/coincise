@@ -1,22 +1,24 @@
 # Thalex Withdrawal Request
 
-post https://api.bitfinex.com/v2/auth/w/ext/wallets/withdrawals/request
+post
+
+https://api.bitfinex.com/v2/auth/w/ext/wallets/withdrawals/request
 
 Withdraw from Thalex to Bitfinex
 
 Response data
 
-| Key | Type | Description |
-| --- | --- | --- |
-| type | String | Specifies the transfer type: "withdrawal" |
-| addressDest | String | Specifies the address for the transaction |
-| amount | String | Amount of the withdrawal |
-| ccy | String | Currency withdrawn |
-| createdAt | Integer | Withdrawal creation timestamp |
-| updatedAt | Integer | Withdrawal update timestamp |
-| id | string | Withdrawal id |
-| status | string | Withdrawal status |
-| fee | string | Fee charged for the withdrawal |
+| Key         | Type    | Description                               |
+| ----------- | ------- | ----------------------------------------- |
+| type        | String  | Specifies the transfer type: "withdrawal" |
+| addressDest | String  | Specifies the address for the transaction |
+| amount      | String  | Amount of the withdrawal                  |
+| ccy         | String  | Currency withdrawn                        |
+| createdAt   | Integer | Withdrawal creation timestamp             |
+| updatedAt   | Integer | Withdrawal update timestamp               |
+| id          | string  | Withdrawal id                             |
+| status      | string  | Withdrawal status                         |
+| fee         | string  | Fee charged for the withdrawal            |
 
 Body Params
 
@@ -68,14 +70,14 @@ curl \--request POST \\
 
 {
 
-  "provider": "thalex"
+"provider": "thalex"
 
 }
 
 '
 
 ---
-Section: Thalex Derivatives
-Source: https://docs.bitfinex.com/reference/thalex-withdrawal-request
-Path: /v2/auth/w/ext/wallets/withdrawals/request
-Method: POST
+
+Section: Thalex Derivatives Source:
+https://docs.bitfinex.com/reference/thalex-withdrawal-request Path:
+/v2/auth/w/ext/wallets/withdrawals/request Method: POST

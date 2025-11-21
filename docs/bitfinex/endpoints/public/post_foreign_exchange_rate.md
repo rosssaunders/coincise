@@ -8,11 +8,11 @@ Calculate the exchange rate between two currencies
 
 Response Fields
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| [0] | CURRENT\_RATE | float | Exchange rate |
+| Index | Field        | Type  | Description   |
+| ----- | ------------ | ----- | ------------- |
+| [0]   | CURRENT_RATE | float | Exchange rate |
 
-* * *
+---
 
 <table><tbody><tr><td>Rate Limit:</td><td>90 reqs/min (requests per minute)</td></tr></tbody></table>
 
@@ -52,16 +52,16 @@ curl \--request POST \\
 
 {
 
-  "ccy1": "BTC",
+"ccy1": "BTC",
 
-  "ccy2": "USD"
+"ccy2": "USD"
 
 }
 
 '
 
 ---
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-foreign-exchange-rate
-Path: /v2/calc/fx
-Method: POST
+
+Section: General Source:
+https://docs.bitfinex.com/reference/rest-public-foreign-exchange-rate Path:
+/v2/calc/fx Method: POST

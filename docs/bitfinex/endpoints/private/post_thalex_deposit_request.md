@@ -1,22 +1,24 @@
 # Thalex Deposit Request
 
-post https://api.bitfinex.com/v2/auth/w/ext/wallets/deposits/request
+post
+
+https://api.bitfinex.com/v2/auth/w/ext/wallets/deposits/request
 
 Deposit to Thalex from Bitfinex
 
 Response data
 
-| Key | Type | Description |
-| --- | --- | --- |
-| type | String | Specifies the transfer type: "deposit" |
-| addressDest | String | Specifies the address for the transaction |
-| amount | String | Amount of the deposit |
-| ccy | String | Currency deposited |
-| createdAt | Integer | Deposit creation timestamp |
-| updatedAt | Integer | Deposit update timestamp |
-| id | string | Deposit id |
-| status | string | Deposit status |
-| fee | string | Fee charged for the deposit |
+| Key         | Type    | Description                               |
+| ----------- | ------- | ----------------------------------------- |
+| type        | String  | Specifies the transfer type: "deposit"    |
+| addressDest | String  | Specifies the address for the transaction |
+| amount      | String  | Amount of the deposit                     |
+| ccy         | String  | Currency deposited                        |
+| createdAt   | Integer | Deposit creation timestamp                |
+| updatedAt   | Integer | Deposit update timestamp                  |
+| id          | string  | Deposit id                                |
+| status      | string  | Deposit status                            |
+| fee         | string  | Fee charged for the deposit               |
 
 Body Params
 
@@ -63,7 +65,7 @@ curl \--request POST \\
      \--header 'accept: application/json'
 
 ---
-Section: Thalex Derivatives
-Source: https://docs.bitfinex.com/reference/thalex-deposit-request
-Path: /v2/auth/w/ext/wallets/deposits/request
-Method: POST
+
+Section: Thalex Derivatives Source:
+https://docs.bitfinex.com/reference/thalex-deposit-request Path:
+/v2/auth/w/ext/wallets/deposits/request Method: POST

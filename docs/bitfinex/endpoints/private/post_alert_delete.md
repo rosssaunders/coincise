@@ -1,6 +1,8 @@
 # Alert Delete
 
-post https://api.bitfinex.com/v2/auth/w/alert/price:{symbol}:{price}/del
+post
+
+https://api.bitfinex.com/v2/auth/w/alert/price:{symbol}:{price}/del
 
 Delete an active alert.
 
@@ -26,7 +28,7 @@ Defaults to 600
 
 Body Params
 
-RAW\_BODY
+RAW_BODY
 
 json
 
@@ -47,7 +49,7 @@ curl \--request POST \\
      \--data '{}'
 
 ---
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-alert-del
-Path: /v2/auth/w/alert/price:tBTCUSD:600/del
-Method: POST
+
+Section: Account Actions Source:
+https://docs.bitfinex.com/reference/rest-auth-alert-del Path:
+/v2/auth/w/alert/price:tBTCUSD:600/del Method: POST

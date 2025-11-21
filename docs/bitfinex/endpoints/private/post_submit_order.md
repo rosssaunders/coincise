@@ -1,6 +1,8 @@
 # Submit Order
 
-post https://api.bitfinex.com/v2/auth/w/order/submit
+post
+
+https://api.bitfinex.com/v2/auth/w/order/submit
 
 Submits an order on a trading pair (e.g. BTCUSD, LTCBTC, ...).
 
@@ -120,7 +122,137 @@ IS_POST_ONLY (0 if false, 1 if true), $F33 = Leverage (int), aff_code:
 
 <table><tbody><tr><td>Rate Limit:</td><td>90 reqs/min (requests per minute)</td></tr></tbody></table>
 
+Body Params
+
+type
+
+string
+
+required
+
+Defaults to EXCHANGE LIMIT
+
+The type of the order (see list above).
+
+symbol
+
+string
+
+required
+
+Defaults to tBTCUSD
+
+The trading pair symbol to submit the order on.
+
+amount
+
+string
+
+required
+
+Defaults to 0.1
+
+Amount of order (positive for buy, negative for sell).
+
+price
+
+string
+
+required
+
+Defaults to 10000
+
+Price of the order.
+
+lev
+
+int32
+
+Set the leverage for a derivative order, supported by derivative symbol orders
+only. The value should be between 1 and 100 inclusive. If omitted the default
+leverage value of 10 will be used.
+
+price_trailing
+
+string
+
+The trailing price for a trailing stop order.
+
+price_aux_limit
+
+string
+
+Auxiliary Limit price (only for STOP LIMIT).
+
+price_oco_stop
+
+string
+
+OCO (One-Cancels-Other) stop price.
+
+gid
+
+integer
+
+Group ID for the order. (int45)
+
+cid
+
+integer
+
+Client Order ID; should be unique in the day (UTC+0). (int45)
+
+flags
+
+int32
+
+The sum of all order flags (see
+[https://docs.bitfinex.com/docs/flag-values](/docs/flag-values)).
+
+tif
+
+string
+
+Time-In-Force: datetime for automatic order cancellation (e.g. 2020-01-15
+10:45:23).
+
+meta
+
+object
+
+Object to pass order meta data. Options: 'aff_code' (to pass affiliate codes),
+'make_visible' (to toggle visible on hit for hidden orders), 'protect_selfmatch'
+(to cancel submitted order if it would match with one of your own orders).
+Example: meta: {aff_code: "AFF_CODE_HERE", make_visible: 1}
+
+Response
+
+curl \--request POST \\
+
+     \--url https://api.bitfinex.com/v2/auth/w/order/submit \\
+
+     \--header 'Content-Type: application/json' \\
+
+     \--header 'accept: application/json' \\
+
+     \--data '
+
+{
+
+"type": "EXCHANGE LIMIT",
+
+"symbol": "tBTCUSD",
+
+"amount": "0.1",
+
+"price": "10000"
+
+}
+
+'
+
 ---
 
 Section: Orders Source:
-https://docs.bitfinex.com/reference/rest-auth-submit-order
+https://docs.bitfinex.com/reference/rest-auth-submit-order Path:
+/v2/auth/w/order/submit Method: POST

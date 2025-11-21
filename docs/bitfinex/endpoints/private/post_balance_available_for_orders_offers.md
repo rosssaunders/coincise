@@ -1,14 +1,16 @@
 # Balance Available for Orders/Offers
 
-post https://api.bitfinex.com/v2/auth/calc/order/avail
+post
+
+https://api.bitfinex.com/v2/auth/calc/order/avail
 
 Calculate the balance available for orders/offers
 
 **Fields**
 
-| Fields | Type | Description |
-| --- | --- | --- |
-| AMOUNT\_AVAIL | float | Amount available for order/offer |
+| Fields       | Type  | Description                      |
+| ------------ | ----- | -------------------------------- |
+| AMOUNT_AVAIL | float | Amount available for order/offer |
 
 **Ratelimit**: 90 req/min
 
@@ -26,7 +28,8 @@ dir
 
 int32
 
-Direction of the order (1 for by, -1 for sell) (Mandatory for EXCHANGE and MARGIN type, not used for FUNDING)
+Direction of the order (1 for by, -1 for sell) (Mandatory for EXCHANGE and
+MARGIN type, not used for FUNDING)
 
 rate
 
@@ -61,7 +64,7 @@ curl \--request POST \\
      \--header 'content-type: application/json'
 
 ---
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-calc-order-avail
-Path: /v2/auth/calc/order/avail
-Method: POST
+
+Section: Account Actions Source:
+https://docs.bitfinex.com/reference/rest-auth-calc-order-avail Path:
+/v2/auth/calc/order/avail Method: POST

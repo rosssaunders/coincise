@@ -1,19 +1,23 @@
 # Update Position Funding Type
 
-post https://api.bitfinex.com/v2/auth/w/position/update/funding/type
+post
+
+https://api.bitfinex.com/v2/auth/w/position/update/funding/type
 
 Update the funding type of a given position
 
 Response Fields
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| [0] | MTS | int | Seconds epoch timestamp of notification |
-| [1] | TYPE | string | Notification's type ("puft-req") |
+| Index | Field | Type   | Description                             |
+| ----- | ----- | ------ | --------------------------------------- |
+| [0]   | MTS   | int    | Seconds epoch timestamp of notification |
+| [1]   | TYPE  | string | Notification's type ("puft-req")        |
+
 [ . . . ]
 
-| [6] | STATUS | string | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
-| [7] | TEXT | string | Additional notification description |
+| [6] | STATUS | string | Status of the notification; it may vary over time
+(SUCCESS, ERROR, FAILURE, ...) | | [7] | TEXT | string | Additional notification
+description |
 
 Body Params
 
@@ -40,7 +44,7 @@ curl \--request POST \\
      \--header 'accept: application/json'
 
 ---
-Section: Positions
-Source: https://docs.bitfinex.com/reference/update-position-funding-type
-Path: /v2/auth/w/position/update/funding/type
-Method: POST
+
+Section: Positions Source:
+https://docs.bitfinex.com/reference/update-position-funding-type Path:
+/v2/auth/w/position/update/funding/type Method: POST

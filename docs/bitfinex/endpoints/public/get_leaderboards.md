@@ -4,19 +4,23 @@ get
 
 https://api-pub.bitfinex.com/v2/rankings/{Key}:{Time\_Frame}:{Symbol}/{Section}
 
-The leaderboards endpoint allows you to retrieve leaderboard standings for unrealized profit (period delta), unrealized profit (inception), volume, and realized profit.
+The leaderboards endpoint allows you to retrieve leaderboard standings for
+unrealized profit (period delta), unrealized profit (inception), volume, and
+realized profit.
 
 > 📘
-> 
-> ### 
-> 
+>
+> ###
+>
 > Leaderboard Competitions
-> 
-> 
-> 
-> The [Configs Endpoint](https://dash.readme.io/project/bitfinex/v2/refs/rest-public-conf) can be used to retrieve a list of all competitions shown on our [Leaderboards](https://leaderboard.bitfinex.com/).
-> 
-> The endpoint can be called like this: [https://api-pub.bitfinex.com/v2/conf/pub:list:competitions](https://api-pub.bitfinex.com/v2/conf/pub:list:competitions)
+>
+> The
+> [Configs Endpoint](https://dash.readme.io/project/bitfinex/v2/refs/rest-public-conf)
+> can be used to retrieve a list of all competitions shown on our
+> [Leaderboards](https://leaderboard.bitfinex.com/).
+>
+> The endpoint can be called like this:
+> [https://api-pub.bitfinex.com/v2/conf/pub:list:competitions](https://api-pub.bitfinex.com/v2/conf/pub:list:competitions)
 
 Key
 
@@ -26,7 +30,7 @@ Available Symbols
 
 | --- | --- | --- |
 
-"plu\_diff" - (Unrealised Profit (Period Delta))
+"plu_diff" - (Unrealised Profit (Period Delta))
 
 "1w", "1M"
 
@@ -37,8 +41,8 @@ tGLOBAL:USD
 "3h" - for specific pairs  
 "1w", "1M" - for tGLOBAL:USD
 
--   Trading Pairs (e.g. tBTCUSD, tETHUSD)
--   tGLOBAL:USD
+- Trading Pairs (e.g. tBTCUSD, tETHUSD)
+- tGLOBAL:USD
 
 "plr" - (Realized Profit)
 
@@ -50,18 +54,18 @@ tGLOBAL:USD
 
 "3h", "1w", "1M"
 
--   Trading Pairs (e.g. tBTCUSD, tETHUSD)
--   tGLOBAL:USD
+- Trading Pairs (e.g. tBTCUSD, tETHUSD)
+- tGLOBAL:USD
 
 **Response Details**
 
-| Fields | Type | Description |
-| --- | --- | --- |
-| MTS | int | millisecond timestamp |
-| USERNAME | string | Username |
-| RANKING | int | Place on leaderboard |
-| VALUE | float | Value of volume, unrealized profit, or realized profit |
-| TWITTER\_HANDLE | string | Shows the user's Twitter handle (if available) |
+| Fields         | Type   | Description                                            |
+| -------------- | ------ | ------------------------------------------------------ |
+| MTS            | int    | millisecond timestamp                                  |
+| USERNAME       | string | Username                                               |
+| RANKING        | int    | Place on leaderboard                                   |
+| VALUE          | float  | Value of volume, unrealized profit, or realized profit |
+| TWITTER_HANDLE | string | Shows the user's Twitter handle (if available)         |
 
 **Ratelimit**: 90 req/min
 
@@ -75,9 +79,10 @@ required
 
 Defaults to vol
 
-Allowed values: "plu\_diff" for unrealized profit (period delta); "plu" for unrealized profit (inception); "vol" for volume; "plr" for realized profit
+Allowed values: "plu_diff" for unrealized profit (period delta); "plu" for
+unrealized profit (inception); "vol" for volume; "plr" for realized profit
 
-Time\_Frame
+Time_Frame
 
 string
 
@@ -85,7 +90,8 @@ required
 
 Defaults to 3h
 
-Available values: "3h", "1w", "1M" - see table below for available time frames per key
+Available values: "3h", "1w", "1M" - see table below for available time frames
+per key
 
 Symbol
 
@@ -95,7 +101,8 @@ required
 
 Defaults to tBTCUSD
 
-The symbol you want information about. (e.g. tBTCUSD, tETHUSD, tGLOBAL:USD) - see table below for available symbols per key
+The symbol you want information about. (e.g. tBTCUSD, tETHUSD, tGLOBAL:USD) -
+see table below for available symbols per key
 
 Section
 
@@ -152,7 +159,8 @@ curl \--request GET \\
      \--header 'accept: application/json'
 
 ---
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-rankings
-Path: /v2/rankings/vol:3h:tBTCUSD/hist?sort=-1&start=null&end=null&limit=125
-Method: GET
+
+Section: General Source:
+https://docs.bitfinex.com/reference/rest-public-rankings Path:
+/v2/rankings/vol:3h:tBTCUSD/hist?sort=-1&start=null&end=null&limit=125 Method:
+GET
