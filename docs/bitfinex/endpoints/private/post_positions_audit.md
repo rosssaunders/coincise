@@ -1,6 +1,10 @@
-# Positions Audit
+# POST /v2/auth/r/positions/audit
 
-post https://api.bitfinex.com/v2/auth/r/positions/audit
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-positions-audit](https://docs.bitfinex.com/reference/rest-auth-positions-audit)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/positions/audit
 
 Return an audit of your positions. You latest positions will be retrieved by default, but ID's can be specified to retrieve an audit for specific positions.
 
@@ -20,18 +24,10 @@ Position audit entry arrays (index [0...n])
 | [3] | BASE\_PRICE | Float | Base price of the position. (Average traded price of the previous orders of the position) |
 | [4] | FUNDING | Float | Funding amount |
 | [5] | FUNDING\_TYPE | Int | 0 for daily, 1 for term. |
-[ . . . ]
-
 | [11] | POSITION\_ID | Int64 | Position ID |
 | [12] | MTS\_CREATE | Int | Millisecond timestamp of creation |
 | [13] | MTS\_UPDATE | Int | Millisecond timestamp of update |
-
-[ . . . ]
-
 | [15] | TYPE | Int | Identifies the type of position: 'null' = Margin position, 1 = Derivatives position |
-
-[ . . . ]
-
 | [17] | COLLATERAL | Float | The amount of collateral applied to the open position |
 | [18] | COLLATERAL\_MIN | Float | The minimum amount of collateral required for the position |
 | [19] | META | JSON String | Additional meta information about the position |
@@ -99,9 +95,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: Positions
-Source: https://docs.bitfinex.com/reference/rest-auth-positions-audit
-Path: /v2/auth/r/positions/audit
-Method: POST

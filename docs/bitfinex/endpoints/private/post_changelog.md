@@ -1,6 +1,10 @@
-# Changelog
+# POST /v2/auth/r/audit/hist
 
-post https://api.bitfinex.com/v2/auth/r/audit/hist
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-audit-hist](https://docs.bitfinex.com/reference/rest-auth-audit-hist)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/audit/hist
 
 Retrieve account changelog.
 
@@ -15,12 +19,7 @@ Changelog array (Index [0...n])
 | Index | Field | Type | Description |
 | --- | --- | --- | --- |
 | [0] | MTS\_CREATE | Int | Millisecond timestamp of change |
-[ . . . ]
-
 | [2] | LOG | String | Log entry |
-
-[ . . . ]
-
 | [5] | IP | String | IP address for logged change |
 | [6] | USER\_AGENT | Object | Browser info |
 
@@ -55,9 +54,3 @@ curl \--request POST \\
      \--header 'accept: application/json' \\
 
      \--header 'content-type: application/json'
-
----
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-audit-hist
-Path: /v2/auth/r/audit/hist
-Method: POST

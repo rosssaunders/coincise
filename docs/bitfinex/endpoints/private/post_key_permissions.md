@@ -1,6 +1,10 @@
-# Key Permissions
+# POST /v2/auth/r/permissions
 
-post https://api.bitfinex.com/v2/auth/r/permissions
+**Source:** [https://docs.bitfinex.com/reference/key-permissions](https://docs.bitfinex.com/reference/key-permissions)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/permissions
 
 Retrieve current api key/token permissions
 
@@ -41,9 +45,3 @@ curl \--request POST \\
      \--header 'content-type: application/json' \\
 
      \--data '{}'
-
----
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/key-permissions
-Path: /v2/auth/r/permissions
-Method: POST

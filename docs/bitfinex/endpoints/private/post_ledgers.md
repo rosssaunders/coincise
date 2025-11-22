@@ -1,6 +1,10 @@
-# Ledgers
+# POST /v2/auth/r/ledgers/{Currency}/hist
 
-post https://api.bitfinex.com/v2/auth/r/ledgers/{Currency}/hist
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-ledgers](https://docs.bitfinex.com/reference/rest-auth-ledgers)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/ledgers/{Currency}/hist
 
 View your past ledger entries. Most recent entries are returned by default, but a timestamp can be used to retrieve time-specific data.
 
@@ -106,9 +110,3 @@ curl \--request POST \\
      \--header 'accept: application/json' \\
 
      \--header 'content-type: application/json'
-
----
-Section: Orders
-Source: https://docs.bitfinex.com/reference/rest-auth-ledgers
-Path: /v2/auth/r/ledgers/Currency/hist
-Method: POST

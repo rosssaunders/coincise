@@ -1,6 +1,10 @@
-# Withdrawal
+# POST /v2/auth/w/withdraw
 
-post https://api.bitfinex.com/v2/auth/w/withdraw
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-withdraw](https://docs.bitfinex.com/reference/rest-auth-withdraw)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/withdraw
 
 Allows you to request a withdrawal from one of your wallets.
 
@@ -64,8 +68,6 @@ Response data
 | [0] | MTS | int | Seconds epoch timestamp of notification |
 | [1] | TYPE | string | Notification's type ("acc\_wd-req") |
 | [2] | MESSAGE\_ID | int | Unique notification's ID |
-[ . . . ]
-
 | [4] | WITHDRAWAL\_ARRAY | [Withdrawal array](#withdrawal-array-index-4) | An array containing your withdrawal data |
 | [5] | CODE | int | W.I.P. (work in progress) |
 | [6] | STATUS | string | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
@@ -76,15 +78,10 @@ Withdrawal array (Index [4])
 | Index | Field | Type | Description |
 | --- | --- | --- | --- |
 | [0] | WITHDRAWAL\_ID | Int | Unique Withdrawal ID (0 or null if the withdrawal was unsuccessful) |
-[ . . . ]
-
 | [2] | METHOD | String | Method of withdrawal |
 | [3] | PAYMENT\_ID | String | Payment ID (if relevant) |
 | [4] | WALLET | String | Sending wallet |
 | [5] | AMOUNT | Int | Amount of the withdrawal |
-
-[ . . . ]
-
 | [8] | WITHDRAWAL\_FEE | Int | Fee on withdrawal |
 
 Body Params
@@ -224,9 +221,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-withdraw
-Path: /v2/auth/w/withdraw
-Method: POST

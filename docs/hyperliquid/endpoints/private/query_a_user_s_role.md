@@ -1,13 +1,8 @@
-# Query a user's role
+# POST /info
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
 `POST` `https://api.hyperliquid.xyz/info`
-
-####
-
-[](#headers-10)
 
 Headers
 
@@ -22,10 +17,6 @@ Content-Type\*
 String
 
 "application/json"
-
-####
-
-[](#request-body-12)
 
 Request Body
 
@@ -45,8 +36,7 @@ user\*
 
 String
 
-Address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000.
+Address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.
 
 User
 
@@ -58,32 +48,22 @@ Subaccount
 
 Missing
 
-Copy
-
-```
+```json
 {"role":"user"} # "missing", "user", "agent", "vault", or "subAccount"
 ```
 
-Copy
-
-```
+```json
 {"role":"agent", "data": {"user": "0x..."}}
 ```
 
-Copy
-
-```
+```json
 {"role":"vault"}
 ```
 
-Copy
-
-```
+```json
 {"role":"subAccount", "data":{"master":"0x..."}}
 ```
 
-Copy
-
-```
+```json
 {"role":"missing"}
 ```

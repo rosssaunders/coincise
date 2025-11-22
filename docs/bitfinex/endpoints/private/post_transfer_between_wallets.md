@@ -1,6 +1,10 @@
-# Transfer Between Wallets
+# POST /v2/auth/w/transfer
 
-post https://api.bitfinex.com/v2/auth/w/transfer
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-transfer](https://docs.bitfinex.com/reference/rest-auth-transfer)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/transfer
 
 Transfer funds between wallets. This endpoint can also be used to convert USDT to USDT0 for derivatives trading.
 
@@ -11,8 +15,6 @@ Response data
 | [0] | MTS | int | Seconds epoch timestamp of notification |
 | [1] | TYPE | string | Notification's type ("on-req") |
 | [2] | MESSAGE\_ID | int | Unique notification's ID |
-[ . . . ]
-
 | [4] | TRANSFER\_ARRAY | [TRANSFER\_ARRAY](#transfer-array-index-4) | An array containing details of the transfer/conversion |
 | [5] | CODE | int | W.I.P. (work in progress) |
 | [6] | STATUS | string | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
@@ -25,13 +27,8 @@ Transfer array (index [4])
 | [0] | MTS\_UPDATED | Int | Millisecond Time Stamp of the update |
 | [1] | WALLET\_FROM | String | Starting wallet |
 | [2] | WALLET\_TO | String | Destination wallet |
-[ . . . ]
-
 | [4] | CURRENCY | String | Currency |
 | [5] | CURRENCY\_TO | String | Currency converted to |
-
-[ . . . ]
-
 | [7] | AMOUNT | Int | Amount of Transfer |
 
 > 📘
@@ -139,9 +136,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-transfer
-Path: /v2/auth/w/transfer
-Method: POST

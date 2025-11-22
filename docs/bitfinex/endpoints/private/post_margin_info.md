@@ -1,6 +1,10 @@
-# Margin Info
+# POST /v2/auth/r/info/margin/{key}
 
-post https://api.bitfinex.com/v2/auth/r/info/margin/{key}
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-info-margin](https://docs.bitfinex.com/reference/rest-auth-info-margin)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/info/margin/{key}
 
 Get account margin information (like P/L, Swaps, Margin Balance, Tradable Balance and others). Use different keys (base, SYMBOL, sym\_all) to retrieve different kinds of data.
 
@@ -89,9 +93,3 @@ curl \--request POST \\
      \--header 'content-type: application/json' \\
 
      \--data '{}'
-
----
-Section: Positions
-Source: https://docs.bitfinex.com/reference/rest-auth-info-margin
-Path: /v2/auth/r/info/margin/key
-Method: POST

@@ -1,6 +1,10 @@
-# Generate Token
+# POST /v2/auth/w/token
 
-post https://api.bitfinex.com/v2/auth/w/token
+**Source:** [https://docs.bitfinex.com/reference/generate-token](https://docs.bitfinex.com/reference/generate-token)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/token
 
 Generates an auth token that could be used for api requests
 
@@ -95,9 +99,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/generate-token
-Path: /v2/auth/w/token
-Method: POST

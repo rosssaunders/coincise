@@ -1,6 +1,10 @@
-# Alert List
+# POST /v2/auth/r/alerts
 
-post https://api.bitfinex.com/v2/auth/r/alerts
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-alerts](https://docs.bitfinex.com/reference/rest-auth-alerts)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/alerts
 
 Retrieve a list of active price alerts.
 
@@ -43,9 +47,3 @@ curl \--request POST \\
      \--header 'content-type: application/json' \\
 
      \--data '{}'
-
----
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-alerts
-Path: /v2/auth/r/alerts
-Method: POST

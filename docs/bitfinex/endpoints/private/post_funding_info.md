@@ -1,6 +1,10 @@
-# Funding Info
+# POST /v2/auth/r/info/funding/{key}
 
-post https://api.bitfinex.com/v2/auth/r/info/funding/{key}
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-info-funding](https://docs.bitfinex.com/reference/rest-auth-info-funding)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/info/funding/{key}
 
 Get account funding info
 
@@ -54,9 +58,3 @@ curl \--request POST \\
      \--header 'content-type: application/json' \\
 
      \--data '{}'
-
----
-Section: Margin Funding
-Source: https://docs.bitfinex.com/reference/rest-auth-info-funding
-Path: /v2/auth/r/info/funding/key
-Method: POST

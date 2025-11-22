@@ -1,6 +1,10 @@
-# LNX Invoice Payments
+# POST /v2/auth/r/ext/invoice/payments
 
-post https://api.bitfinex.com/v2/auth/r/ext/invoice/payments
+**Source:** [https://docs.bitfinex.com/reference/lnx-invoice-payments](https://docs.bitfinex.com/reference/lnx-invoice-payments)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/ext/invoice/payments
 
 Retrieve invoice and payment data
 
@@ -47,9 +51,3 @@ curl \--request POST \\
      \--header 'accept: application/json' \\
 
      \--header 'content-type: application/json'
-
----
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/lnx-invoice-payments
-Path: /v2/auth/r/ext/invoice/payments
-Method: POST

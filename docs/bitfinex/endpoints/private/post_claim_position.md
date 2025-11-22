@@ -1,6 +1,10 @@
-# Claim Position
+# POST /v2/auth/w/position/claim
 
-post https://api.bitfinex.com/v2/auth/w/position/claim
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-position-claim](https://docs.bitfinex.com/reference/rest-auth-position-claim)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/position/claim
 
 The claim feature allows the use of funds you have in your Margin Wallet to settle a leveraged position as an exchange buy or sale. Claiming some or all of a position requires that you have enough partially realized P/L (you've reduced the position at a profit) and/or funds (BTC or USD) in your Margin Wallet (net of any outstanding financing charges) to satisfy some or all of the outstanding financing associated with your position.
 
@@ -11,8 +15,6 @@ Response fields
 | [0] | MTS | int | Seconds epoch timestamp of notification |
 | [1] | TYPE | string | Notification's type ("on-req") |
 | [2] | MESSAGE\_ID | int | Unique notification's ID |
-[ . . . ]
-
 | [4] | DATA | [Claim Array](#claim-array)[] | An array containing info on the position claim |
 | [5] | CODE | int | W.I.P. (work in progress) |
 | [6] | STATUS | string | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
@@ -28,17 +30,10 @@ Claim array
 | [3] | BASE\_PRICE | float | Base price of the position. (Average traded price of the previous orders of the position) |
 | [4] | MARGIN\_FUNDING | float | The amount of funding being used for this position. |
 | [5] | MARGIN\_FUNDING\_TYPE | int | 0 for daily, 1 for term. |
-[ . . . ]
-
 | [11] | POSITION\_ID | int | position identifier |
 | [12] | MTS\_CREATE | time | Timestamp of creation (millis) |
 | [13] | MTS\_UPDATE | time | Timestamp of last update (millis) |
-
-[ . . . ]
-
 | [15] | POS\_TYPE | int | Type of Position (0 for margin, 1 for deriv) |
-
-[ . . . ]
 
 | [17] | COLLATERAL | float | Position collateral |
 | [18] | MIN\_COLLATERAL | float | Min Collateral Required |
@@ -93,9 +88,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: Positions
-Source: https://docs.bitfinex.com/reference/rest-auth-position-claim
-Path: /v2/auth/w/position/claim
-Method: POST

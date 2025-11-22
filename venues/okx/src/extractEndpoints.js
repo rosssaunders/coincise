@@ -77,7 +77,6 @@ const extractEndpoints = async page => {
       if (!methodMatch) return
 
       const method = methodMatch[1].toUpperCase()
-      const endpointPath = methodMatch[2].trim()
 
       // Get content until next H3 or major heading
       let content = h3.outerHTML
@@ -89,6 +88,36 @@ const extractEndpoints = async page => {
         }
         content += sibling.outerHTML
         sibling = sibling.nextElementSibling
+      }
+
+      // Extract actual API path from HTTP Request section
+      let endpointPath = methodMatch[2].trim() // fallback to H3 text
+      let currentSibling = h3.nextElementSibling
+
+      while (currentSibling) {
+        if (["H1", "H2", "H3"].includes(currentSibling.tagName)) {
+          break
+        }
+
+        // Look for "HTTP Request" heading (H4)
+        if (currentSibling.tagName === "H4" && currentSibling.textContent.includes("HTTP Request")) {
+          // The next element should contain the actual path
+          const pathElement = currentSibling.nextElementSibling
+          if (pathElement && pathElement.tagName === "P") {
+            const code = pathElement.querySelector("code")
+            if (code) {
+              const httpRequestText = code.textContent.trim()
+              // Extract path from "GET /api/v5/market/books" format
+              const pathMatch = httpRequestText.match(/^(GET|POST|PUT|DELETE|PATCH)\s+(.+)$/i)
+              if (pathMatch) {
+                endpointPath = pathMatch[2].trim()
+              }
+            }
+          }
+          break
+        }
+
+        currentSibling = currentSibling.nextElementSibling
       }
 
       // Remove dark boxes, highlights, and example blockquotes

@@ -1,4 +1,6 @@
-# Leaderboards
+# GET /v2/rankings/{Key}:{Time_Frame}:{Symbol}/{Section}
+
+**Source:** [https://docs.bitfinex.com/reference/rest-public-rankings](https://docs.bitfinex.com/reference/rest-public-rankings)
 
 get
 
@@ -150,9 +152,3 @@ curl \--request GET \\
      \--url 'https://api-pub.bitfinex.com/v2/rankings/vol:3h:tBTCUSD/hist?sort=-1&start=null&end=null&limit=125' \\
 
      \--header 'accept: application/json'
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-rankings
-Path: /v2/rankings/vol:3h:tBTCUSD/hist?sort=-1&start=null&end=null&limit=125
-Method: GET

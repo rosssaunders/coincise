@@ -1,6 +1,10 @@
-# Cancel All Funding Offers
+# POST /v2/auth/w/funding/offer/cancel/all
 
-post https://api.bitfinex.com/v2/auth/w/funding/offer/cancel/all
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-cancel-all-funding-offers](https://docs.bitfinex.com/reference/rest-auth-cancel-all-funding-offers)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/funding/offer/cancel/all
 
 Cancel all of your current funding offers. Can also be used to only cancel offers in the specified currency.
 
@@ -20,8 +24,6 @@ Cancel all of your current funding offers. Can also be used to only cancel offer
 | --- | --- | --- | --- |
 | [0] | MTS | Int | Millisecond Time Stamp of the update |
 | [1] | TYPE | String | Purpose of notification ('foc\_all-req' (funding offer cancel all request)) |
-[ . . . ]
-
 | [6] | STATUS | String | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
 | [7] | TEXT | String | Text of the notification |
 
@@ -44,9 +46,3 @@ curl \--request POST \\
      \--header 'accept: application/json' \\
 
      \--header 'content-type: application/json'
-
----
-Section: Margin Funding
-Source: https://docs.bitfinex.com/reference/rest-auth-cancel-all-funding-offers
-Path: /v2/auth/w/funding/offer/cancel/all
-Method: POST

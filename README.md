@@ -66,10 +66,12 @@ these APIs can take full advantage of AI.
 | <img src="assets/icons/bitmart.png" alt="Bitmart" height="16" style="vertical-align: middle;">              | Bitmart           | [Spot API](docs/bitmart/spot_api.md)                                               | 2025-06-01   |
 | <img src="assets/icons/bitmart.png" alt="Bitmart" height="16" style="vertical-align: middle;">              | Bitmart           | [Contract API](docs/bitmart/contract_api.md)                                       | 2025-06-01   |
 | <img src="assets/icons/bitmart.png" alt="Bitmart" height="16" style="vertical-align: middle;">              | Bitmart           | [Futures API](docs/bitmart/futures_api.md)                                         | 2025-06-01   |
+| <img src="assets/icons/bitfinex.png" alt="Bitfinex" height="16" style="vertical-align: middle;">            | Bitfinex          | [API Documentation](docs/bitfinex/)                                                | 2025-11-22   |
 | <img src="assets/icons/deribit.png" alt="Deribit" height="16" style="vertical-align: middle;">              | Deribit           | [Private Account API](docs/deribit/private_account_api.md)                         | 2025-03-31   |
 | <img src="assets/icons/deribit.png" alt="Deribit" height="16" style="vertical-align: middle;">              | Deribit           | [Private Block Combo Trading API](docs/deribit/private_block_combo_trading_api.md) | 2025-03-31   |
 | <img src="assets/icons/deribit.png" alt="Deribit" height="16" style="vertical-align: middle;">              | Deribit           | [Private Trading API](docs/deribit/private_trading_api.md)                         | 2025-03-31   |
 | <img src="assets/icons/deribit.png" alt="Deribit" height="16" style="vertical-align: middle;">              | Deribit           | [Public API](docs/deribit/public_api.md)                                           | 2025-03-31   |
+| <img src="assets/icons/digifinex.jpg" alt="Digifinex" height="16" style="vertical-align: middle;">          | Digifinex         | [API Documentation](docs/digifinex/)                                               | 2025-11-22   |
 | <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;">                    | MEXC Spot         | [Private REST API](docs/mexc/spot/private_rest_api.md)                             | 2025-04-11   |
 | <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;">                    | MEXC Spot         | [Public REST API](docs/mexc/spot/public_rest_api.md)                               | 2025-04-11   |
 | <img src="assets/icons/mexc.png" alt="MEXC" height="16" style="vertical-align: middle;">                    | MEXC Spot         | [Private WebSocket API](docs/mexc/spot/private_websocket_api.md)                   | 2025-04-11   |
@@ -96,6 +98,7 @@ these APIs can take full advantage of AI.
 | <img src="assets/icons/kucoin.jpg" alt="KuCoin" height="16" style="vertical-align: middle;">                | KuCoin Margin     | [WebSocket API](docs/kucoin/ws/margin_api.md)                                      | 2025-04-26   |
 | <img src="assets/icons/kucoinfutures.jpg" alt="KuCoin Futures" height="16" style="vertical-align: middle;"> | KuCoin Futures    | [REST API](docs/kucoin/rest/futures_api.md)                                        | 2025-04-26   |
 | <img src="assets/icons/kucoinfutures.jpg" alt="KuCoin Futures" height="16" style="vertical-align: middle;"> | KuCoin Futures    | [WebSocket API](docs/kucoin/ws/futures_api.md)                                     | 2025-04-26   |
+| <img src="assets/icons/upbit.jpg" alt="Upbit" height="16" style="vertical-align: middle;">                  | Upbit             | [API Documentation](docs/upbit/)                                                   | 2025-11-22   |
 | <img src="assets/icons/xt.jpg" alt="XT.com" height="16" style="vertical-align: middle;">                    | XT.com Spot       | [API Documentation](docs/xt/)                                                      | 2025-11-03   |
 
 ## LLMs.txt
@@ -134,12 +137,3 @@ Example:
 ## Contributing
 
 Feel free to submit PRs for missing crypto venues or endpoints.
-
-## Integration into Cursor
-
-Adding each Doc into Cursor is currently a manual process and is unfortunately
-time consuming. There is an open feature request for this which is tracked here:
-https://forum.cursor.com/t/feature-request-bulk-documentation-import-for-cursor-ai/47539
-
-Once this feature is available in Cursor, I'll add support for adding the docs
-into this repo.

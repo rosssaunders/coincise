@@ -1,6 +1,10 @@
-# Funding Auto-renew
+# POST /v2/auth/w/funding/auto
 
-post https://api.bitfinex.com/v2/auth/w/funding/auto
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-funding-auto-renew](https://docs.bitfinex.com/reference/rest-auth-funding-auto-renew)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/funding/auto
 
 Activate or deactivate auto-renew. Allows you to specify the currency, amount, rate, and period.
 
@@ -11,8 +15,6 @@ Response array
 | [0] | MTS | int | Seconds epoch timestamp of notification |
 | [1] | TYPE | string | Notification's type ("fa-req") |
 | [2] | MESSAGE\_ID | int | Unique notification's ID |
-[ . . . ]
-
 | [4] | FUNDING\_OFFER\_ARRAY | [FUNDING\_OFFER\_ARRAY](#funding-offer-array-index-4) | An array containing data for the funding offer |
 | [5] | CODE | int | W.I.P. (work in progress) |
 | [6] | STATUS | string | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
@@ -98,9 +100,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: Margin Funding
-Source: https://docs.bitfinex.com/reference/rest-auth-funding-auto-renew
-Path: /v2/auth/w/funding/auto
-Method: POST

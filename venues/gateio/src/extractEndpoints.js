@@ -45,6 +45,147 @@ const sanitizeFilename = (name) => {
 };
 
 /**
+ * Detect code block language
+ */
+const detectCodeLanguage = (code) => {
+  const trimmed = code.trim();
+
+  // Check for JSON
+  if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+    try {
+      JSON.parse(trimmed);
+      return "json";
+    } catch (e) {
+      if (
+        trimmed.includes('"') &&
+        (trimmed.includes(":") || trimmed.includes(","))
+      ) {
+        return "json";
+      }
+    }
+  }
+
+  // Check for Python
+  if (
+    /^(import|from)\s+/.test(trimmed) ||
+    /\bdef\s+\w+\(/.test(trimmed) ||
+    /\bprint\(/.test(trimmed)
+  ) {
+    return "python";
+  }
+
+  // Check for JavaScript/TypeScript
+  if (
+    /^(const|let|var)\s+/.test(trimmed) ||
+    /require\(['"']/.test(trimmed) ||
+    /^import\s+.*from/.test(trimmed) ||
+    /=>\s*{/.test(trimmed)
+  ) {
+    return "javascript";
+  }
+
+  // Check for shell/bash
+  if (/^(curl|wget|http|GET|POST|PUT|DELETE|PATCH)\s+/i.test(trimmed)) {
+    return "bash";
+  }
+
+  return null;
+};
+
+/**
+ * Clean up markdown content and tag code blocks
+ */
+const cleanMarkdown = (content) => {
+  const lines = content.split("\n");
+  const cleanedLines = [];
+  let inCodeBlock = false;
+  let codeBlockContent = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+
+    // Handle code block detection and language tagging
+    if (line.trim().startsWith("```")) {
+      if (!inCodeBlock) {
+        // Starting a code block
+        inCodeBlock = true;
+        codeBlockContent = [];
+        if (line.trim() === "```") {
+          cleanedLines.push(line);
+        } else {
+          cleanedLines.push(line);
+        }
+      } else {
+        // Closing a code block
+        inCodeBlock = false;
+
+        // If the opening was untagged, detect language and add it
+        const openingLineIndex =
+          cleanedLines.length - codeBlockContent.length - 1;
+        if (
+          openingLineIndex >= 0 &&
+          cleanedLines[openingLineIndex].trim() === "```"
+        ) {
+          const codeContent = codeBlockContent.join("\n");
+          const detectedLang = detectCodeLanguage(codeContent);
+          if (detectedLang) {
+            cleanedLines[openingLineIndex] = "```" + detectedLang;
+          }
+        }
+
+        cleanedLines.push(line);
+        codeBlockContent = [];
+      }
+      continue;
+    }
+
+    // Track code block content for language detection
+    if (inCodeBlock) {
+      codeBlockContent.push(line);
+      cleanedLines.push(line);
+      continue;
+    }
+
+    // Skip processing inside code blocks
+    if (!inCodeBlock) {
+      // Remove anchor links from headings like ## [#](#anchor) Text
+      line = line.replace(/^(#{1,6})\s*\[#\]\([^)]*\)\s*/, "$1 ");
+
+      // Remove standalone anchor links like [#](#anchor)
+      if (line.match(/^\s*\[#\]\([^)]*\)\s*$/)) {
+        continue;
+      }
+
+      // Clean up inline anchor links
+      line = line.replace(/\[#\]\([^)]*\)/g, "");
+
+      // Clean up escaped brackets
+      line = line.replace(/\\\[/g, "[").replace(/\\\]/g, "]");
+
+      // Remove empty headings (just # with spaces)
+      if (line.match(/^#{1,6}\s*$/)) {
+        continue;
+      }
+
+      // Remove lines that are just "Source:" without content
+      if (line.trim() === "**Source:**") {
+        // Check if next line is a link, if not skip this line
+        if (i + 1 < lines.length && !lines[i + 1].trim().startsWith("[")) {
+          continue;
+        }
+      }
+    }
+
+    cleanedLines.push(line);
+  }
+
+  return cleanedLines
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+};
+
+/**
  * Generate filename from HTTP method and endpoint path
  */
 const generateFilename = (method, path) => {
@@ -205,6 +346,9 @@ const processEndpoint = (endpoint, turndownService, isPublic) => {
   // Convert HTML to Markdown
   let markdown = turndownService.turndown(content);
 
+  // Clean markdown to remove artifacts and tag code blocks
+  markdown = cleanMarkdown(markdown);
+
   // Create standard header
   const header = `# ${method} ${endpointPath}\n\n**Source:** [${title}](${sourceUrl})\n\n## Authentication\n\n${isPublic ? "Not Required (Public Endpoint)" : "Required (Private Endpoint)"}\n\n`;
 
@@ -248,7 +392,9 @@ const main = async () => {
     // Wait for content to render
     await page.waitForSelector("h1", { timeout: 10000 });
 
-    const turndownService = createTurndownBuilder().build();
+    const turndownService = createTurndownBuilder()
+      .withTablesWithoutHeaders()
+      .build();
 
     // Ensure output directories exist
     ensureDir(path.join(OUTPUT_DIR, "public"));
