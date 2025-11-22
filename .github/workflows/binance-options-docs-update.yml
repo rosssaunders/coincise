@@ -80,6 +80,7 @@ jobs:
 
             Please review the changes and merge if they look correct.
           branch: 'docs/binance-options-update'
+          base: 'main'
           delete-branch: true
           token: ${{ secrets.PAT_GITHUB }}
           reviewers: '@rosssaunders'
