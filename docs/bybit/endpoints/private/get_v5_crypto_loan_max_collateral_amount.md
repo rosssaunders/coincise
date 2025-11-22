@@ -1,12 +1,13 @@
 # GET /v5/crypto-loan/max-collateral-amount
 
-**Source:** [Get Max. Allowed Collateral Reduction Amount](https://bybit-exchange.github.io/docs/v5/crypto-loan/reduce-max-collateral-amt)
+**Source:**
+[Get Max. Allowed Collateral Reduction Amount](https://bybit-exchange.github.io/docs/v5/crypto-loan/reduce-max-collateral-amt)
 
 ## Authentication
 
 Required (Private Endpoint)
 
--   Get Max. Allowed Collateral Reduction Amount
+- Get Max. Allowed Collateral Reduction Amount
 
 # Get Max. Allowed Collateral Reduction Amount
 
@@ -20,19 +21,19 @@ GET `/v5/crypto-loan/max-collateral-amount`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| orderId | **true** | string | Loan coin ID |
+| Parameter | Required | Type   | Comments     |
+| :-------- | :------- | :----- | ------------ |
+| orderId   | **true** | string | Loan coin ID |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
+| Parameter           | Type   | Comments                         |
+| :------------------ | :----- | -------------------------------- |
 | maxCollateralAmount | string | Max. reduction collateral amount |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/crypto-loan/max-collateral-amount?orderId=1794267532472646144 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728634289933X-BAPI-RECV-WINDOW: 5000
@@ -43,7 +44,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getMaxAllowedReductionCollateralAmount({ orderId: '1794267532472646144' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "xxxxxxxxxxxxxxxxxx",
+  secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+})
+client
+  .getMaxAllowedReductionCollateralAmount({ orderId: "1794267532472646144" })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

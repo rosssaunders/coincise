@@ -1,12 +1,14 @@
 # Get Sub UID List (Unlimited)
 
-This API is applicable to the client who has over 10k sub accounts. Use **master user's api key** **only**.
+This API is applicable to the client who has over 10k sub accounts. Use **master
+user's api key** **only**.
 
 tip
 
-The API key must have one of the below permissions in order to call this endpoint..
+The API key must have one of the below permissions in order to call this
+endpoint..
 
--   master API key: "Account Transfer", "Subaccount Transfer", "Withdrawal"
+- master API key: "Account Transfer", "Subaccount Transfer", "Withdrawal"
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -14,36 +16,35 @@ GET `/v5/user/submembers`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| pageSize | false | string | Data size per page. Return up to 100 records per request |
-| nextCursor | false | string | Cursor. Use the `nextCursor` token from the response to retrieve the next page of the result set |
+| Parameter  | Required | Type   | Comments                                                                                         |
+| :--------- | :------- | :----- | ------------------------------------------------------------------------------------------------ |
+| pageSize   | false    | string | Data size per page. Return up to 100 records per request                                         |
+| nextCursor | false    | string | Cursor. Use the `nextCursor` token from the response to retrieve the next page of the result set |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| subMembers | array | Object |
-| \> uid | string | Sub user Id |
-| \> username | string | Username |
+| Parameter     | Type    | Comments                                              |
+| :------------ | :------ | ----------------------------------------------------- |
+| subMembers    | array   | Object                                                |
+| \> uid        | string  | Sub user Id                                           |
+| \> username   | string  | Username                                              |
 | \> memberType | integer | `1`: standard sub account, `6`: custodial sub account |
-| \> status | integer | The status of the user account
--   `1`: normal
--   `2`: login banned
--   `4`: frozen
+| \> status     | integer | The status of the user account                        |
 
- |
-| \> accountMode | integer | The account mode of the user account
+- `1`: normal
+- `2`: login banned
+- `4`: frozen
 
--   `1`: Classic Account
--   `3`: UTA1.0
--   `4`: UTA1.0 Pro
--   `5`: UTA2.0
--   `6`: UTA2.0 Pro
+| | \> accountMode | integer | The account mode of the user account
 
- |
-| \> remark | string | The remark |
-| nextCursor | string | The next page cursor value. "0" means no more pages |
+- `1`: Classic Account
+- `3`: UTA1.0
+- `4`: UTA1.0 Pro
+- `5`: UTA2.0
+- `6`: UTA2.0 Pro
+
+| | \> remark | string | The remark | | nextCursor | string | The next page
+cursor value. "0" means no more pages |
 
 ### Request Example[​](#request-example "Direct link to heading")
 

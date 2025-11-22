@@ -12,24 +12,24 @@ GET `/v5/spot-margin-trade/collateral`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| currency | false | string | Coin name, uppercase only |
+| Parameter | Required | Type   | Comments                  |
+| :-------- | :------- | :----- | ------------------------- |
+| currency  | false    | string | Coin name, uppercase only |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| list | array | Object |
-| \> currency | string | Coin name |
-| \> collateralRatioList | array | Object |
-| \>> maxQty | string | Upper limit(in coin) of the tiered range, `""` means positive infinity |
-| \>> minQty | string | lower limit(in coin) of the tiered range |
-| \>> collateralRatio | string | Collateral ratio |
+| Parameter              | Type   | Comments                                                               |
+| :--------------------- | :----- | ---------------------------------------------------------------------- |
+| list                   | array  | Object                                                                 |
+| \> currency            | string | Coin name                                                              |
+| \> collateralRatioList | array  | Object                                                                 |
+| \>> maxQty             | string | Upper limit(in coin) of the tiered range, `""` means positive infinity |
+| \>> minQty             | string | lower limit(in coin) of the tiered range                               |
+| \>> collateralRatio    | string | Collateral ratio                                                       |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/spot-margin-trade/collateral?currency=BTC HTTP/1.1Host: api-testnet.bybit.com

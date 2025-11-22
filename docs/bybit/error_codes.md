@@ -432,6 +432,7 @@ On this page
 |  131215  | Amount error                                                                                                                                                 |
 |  131216  | Query balance error                                                                                                                                          |
 |  131217  | Risk check error                                                                                                                                             |
+|  131226  | Due to security reasons, we are unable to proceed with the current action. Should you have any enquiries, please reach out to our Customer Support           |
 |  131227  | subaccount do not have universal transfer permission                                                                                                         |
 |  131228  | your balance is not enough. Please check transfer safe amount                                                                                                |
 |  131229  | Due to compliance requirements, the current currency is not allowed to transfer                                                                              |
