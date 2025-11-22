@@ -95,13 +95,6 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
-      - name: Close duplicate PRs
-        if: steps.git-check.outputs.changes == 'true'
-        run: |
-          $GITHUB_WORKSPACE/.github/scripts/close-duplicate-prs.sh "HTX API Documentation Update"
-        env:
-          GH_TOKEN: ${{ secrets.PAT_GITHUB }}
-
       - name: Create Pull Request
         if: steps.git-check.outputs.changes == 'true'
         uses: peter-evans/create-pull-request@v7
