@@ -16,13 +16,17 @@ PR_TITLE_PATTERN="$1"
 
 echo "Checking for existing open PRs matching pattern: '$PR_TITLE_PATTERN'"
 
+# Escape special regex characters in the title pattern for safe use in jq
+# This prevents regex injection
+ESCAPED_PATTERN=$(printf '%s' "$PR_TITLE_PATTERN" | sed 's/[.[\^$*+?(){}|]/\\&/g')
+
 # Use GitHub CLI to find open PRs with the auto-docs-update label and matching title
 # The jq query filters PRs by title pattern (case-insensitive)
 EXISTING_PRS=$(gh pr list \
   --state open \
   --label "auto-docs-update" \
   --json number,title \
-  --jq ".[] | select(.title | test(\"$PR_TITLE_PATTERN\"; \"i\")) | .number")
+  --jq ".[] | select(.title | test(\"$ESCAPED_PATTERN\"; \"i\")) | .number")
 
 if [ -z "$EXISTING_PRS" ]; then
   echo "No existing open PRs found matching pattern."
