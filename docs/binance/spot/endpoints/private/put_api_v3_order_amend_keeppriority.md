@@ -6,9 +6,12 @@ PUT /api/v3/order/amend/keepPriority
 
 Reduce the quantity of an existing open order.
 
-This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS` filter.
+This adds 0 orders to the `EXCHANGE_MAX_ORDERS` filter and the `MAX_NUM_ORDERS`
+filter.
 
-Read [Order Amend Keep Priority FAQ](/docs/binance-spot-api-docs/faqs/order_amend_keep_priority) to learn more.
+Read
+[Order Amend Keep Priority FAQ](/docs/binance-spot-api-docs/faqs/order_amend_keep_priority)
+to learn more.
 
 **Weight**: 4
 
@@ -16,18 +19,20 @@ Read [Order Amend Keep Priority FAQ](/docs/binance-spot-api-docs/faqs/order_amen
 
 **Parameters:**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | YES |  |
-| orderId | LONG | NO\* | `orderId` or `origClientOrderId` must be sent |
-| origClientOrderId | STRING | NO\* | `orderId` or `origClientOrderId` must be sent |
-| newClientOrderId | STRING | NO\* | The new client order ID for the order after being amended.  
+| Name              | Type   | Mandatory | Description                                                |
+| ----------------- | ------ | --------- | ---------------------------------------------------------- |
+| symbol            | STRING | YES       |                                                            |
+| orderId           | LONG   | NO\*      | `orderId` or `origClientOrderId` must be sent              |
+| origClientOrderId | STRING | NO\*      | `orderId` or `origClientOrderId` must be sent              |
+| newClientOrderId  | STRING | NO\*      | The new client order ID for the order after being amended. |
+
 If not sent, one will be randomly generated.  
-It is possible to reuse the current clientOrderId by sending it as the `newClientOrderId`. |
-| newQty | DECIMAL | YES | `newQty` must be greater than 0 and less than the order's quantity. |
-| recvWindow | DECIMAL | NO | The value cannot be greater than `60000`.  
-Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
-| timestamp | LONG | YES |  |
+It is possible to reuse the current clientOrderId by sending it as the
+`newClientOrderId`. | | newQty | DECIMAL | YES | `newQty` must be greater than 0
+and less than the order's quantity. | | recvWindow | DECIMAL | NO | The value
+cannot be greater than `60000`.  
+Supports up to three decimal places of precision (e.g., 6000.346) so that
+microseconds may be specified. | | timestamp | LONG | YES | |
 
 **Data Source**: Matching Engine
 
@@ -109,6 +114,9 @@ Response for an order that is part of an Order list:
 }
 ```
 
-**Note:** The payloads above do not show all fields that can appear. Please refer to [Conditional fields in Order Responses](/docs/binance-spot-api-docs/rest-api/trading-endpoints#conditional-fields-in-order-responses).
+**Note:** The payloads above do not show all fields that can appear. Please
+refer to
+[Conditional fields in Order Responses](/docs/binance-spot-api-docs/rest-api/trading-endpoints#conditional-fields-in-order-responses).
 
-> Source: [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints)
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints)

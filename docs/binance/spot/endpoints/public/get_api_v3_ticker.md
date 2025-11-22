@@ -4,29 +4,41 @@
 GET /api/v3/ticker
 ```
 
-**Note:** This endpoint is different from the `GET /api/v3/ticker/24hr` endpoint.
+**Note:** This endpoint is different from the `GET /api/v3/ticker/24hr`
+endpoint.
 
-The window used to compute statistics will be no more than 59999ms from the requested `windowSize`.
+The window used to compute statistics will be no more than 59999ms from the
+requested `windowSize`.
 
-`openTime` for `/api/v3/ticker` always starts on a minute, while the `closeTime` is the current time of the request. As such, the effective window will be up to 59999ms wider than `windowSize`.
+`openTime` for `/api/v3/ticker` always starts on a minute, while the `closeTime`
+is the current time of the request. As such, the effective window will be up to
+59999ms wider than `windowSize`.
 
-E.g. If the `closeTime` is 1641287867099 (January 04, 2022 09:17:47:099 UTC) , and the `windowSize` is `1d`. the `openTime` will be: 1641201420000 (January 3, 2022, 09:17:00)
+E.g. If the `closeTime` is 1641287867099 (January 04, 2022 09:17:47:099 UTC) ,
+and the `windowSize` is `1d`. the `openTime` will be: 1641201420000 (January 3,
+2022, 09:17:00)
 
 **Weight:**
 
-4 for each requested symbol regardless of windowSize.  
-  
-The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+4 for each requested symbol regardless of windowSize.
+
+The weight for this request will cap at 200 once the number of `symbols` in the
+request is more than 50.
 
 **Parameters:**
 
-|  |
-| 
-symbol | STRING | YES | Either symbol or symbols must be providedExamples of accepted format for the symbols parameter:["BTCUSDT","BNBUSDT"]or%5B%22BTCUSDT%22,%22BNBUSDT%22%5DThe maximum number of symbols allowed in a request is 100.
-symbols
-windowSize | ENUM | NO | Defaults to 1d if no parameter providedSupported windowSize values:1m,2m....59m for minutes1h, 2h....23h - for hours1d...7d - for daysUnits cannot be combined (e.g. 1d2h is not allowed)
-type | ENUM | NO | Supported values: FULL or MINI.If none provided, the default is FULL
-symbolStatus | ENUM | NO | Filters for symbols that have this tradingStatus.For a single symbol, a status mismatch returns error -1220 SYMBOL_DOES_NOT_MATCH_STATUS.For multiple symbols, non-matching ones are simply excluded from the response.Valid values: TRADING, HALT, BREAK |
+| | | symbol | STRING | YES | Either symbol or symbols must be providedExamples
+of accepted format for the symbols
+parameter:["BTCUSDT","BNBUSDT"]or%5B%22BTCUSDT%22,%22BNBUSDT%22%5DThe maximum
+number of symbols allowed in a request is 100. symbols windowSize | ENUM | NO |
+Defaults to 1d if no parameter providedSupported windowSize values:1m,2m....59m
+for minutes1h, 2h....23h - for hours1d...7d - for daysUnits cannot be combined
+(e.g. 1d2h is not allowed) type | ENUM | NO | Supported values: FULL or MINI.If
+none provided, the default is FULL symbolStatus | ENUM | NO | Filters for
+symbols that have this tradingStatus.For a single symbol, a status mismatch
+returns error -1220 SYMBOL_DOES_NOT_MATCH_STATUS.For multiple symbols,
+non-matching ones are simply excluded from the response.Valid values: TRADING,
+HALT, BREAK |
 
 **Data Source:** Database
 
@@ -156,4 +168,5 @@ When using `symbols`:
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints)
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints)

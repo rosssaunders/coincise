@@ -1,4 +1,4 @@
-## Query Commission Rates (USER\_DATA)​
+## Query Commission Rates (USER_DATA)​
 
 ```
 GET /api/v3/account/commission
@@ -10,9 +10,9 @@ Get current account commission rates.
 
 **Parameters:**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | YES |  |
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | YES       |             |
 
 **Data Source:** Database
 
@@ -48,4 +48,5 @@ Get current account commission rates.
 }
 ```
 
-> Source: [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints)
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints)

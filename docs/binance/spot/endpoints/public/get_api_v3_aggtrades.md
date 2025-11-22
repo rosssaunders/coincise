@@ -4,21 +4,23 @@
 GET /api/v3/aggTrades
 ```
 
-Get compressed, aggregate trades. Trades that fill at the time, from the same taker order, with the same price will have the quantity aggregated.
+Get compressed, aggregate trades. Trades that fill at the time, from the same
+taker order, with the same price will have the quantity aggregated.
 
 **Weight:** 4
 
 **Parameters:**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | YES |  |
-| fromId | LONG | NO | ID to get aggregate trades from INCLUSIVE. |
-| startTime | LONG | NO | Timestamp in ms to get aggregate trades from INCLUSIVE. |
-| endTime | LONG | NO | Timestamp in ms to get aggregate trades until INCLUSIVE. |
-| limit | INT | NO | Default: 500; Maximum: 1000. |
+| Name      | Type   | Mandatory | Description                                              |
+| --------- | ------ | --------- | -------------------------------------------------------- |
+| symbol    | STRING | YES       |                                                          |
+| fromId    | LONG   | NO        | ID to get aggregate trades from INCLUSIVE.               |
+| startTime | LONG   | NO        | Timestamp in ms to get aggregate trades from INCLUSIVE.  |
+| endTime   | LONG   | NO        | Timestamp in ms to get aggregate trades until INCLUSIVE. |
+| limit     | INT    | NO        | Default: 500; Maximum: 1000.                             |
 
--   If fromId, startTime, and endTime are not sent, the most recent aggregate trades will be returned.
+- If fromId, startTime, and endTime are not sent, the most recent aggregate
+  trades will be returned.
 
 **Data Source:** Database
 
@@ -39,4 +41,5 @@ Get compressed, aggregate trades. Trades that fill at the time, from the same ta
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints)
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints)
