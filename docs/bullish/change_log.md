@@ -2,6 +2,11 @@
 
 ## 2025 Changes
 
+- November
+  - Removed deprecated fields `maxPriceLimit`, `minPriceLimit`, `maxCostLimit`,
+    `minCostLimit`, `makerFee`, `takerFee` from [Get Markets](#tag--market-data)
+  - new REST API -
+    [Get Unconfirmed OTC Trade](#get-/v2/otc-trades/unconfirmed-trade)
 - October
   - new fields in V1CancelAllOrders -
     [V1CancelAllOrders](#post-/v2/command-cancellations)
