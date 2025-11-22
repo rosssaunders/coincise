@@ -36,5 +36,5 @@ Retrieves the interest accrual history for flexible loans over the past 30 days.
 | ccy           | String   | Loan currency, e.g. `BTC`                                                                     |
 | loan          | String   | Loan when calculated interest                                                                 |
 | interest      | String   | Interest                                                                                      |
-| interestRate  | String   | Hourly APY, e.g. `0.01` represents `1%`                                                       |
+| interestRate  | String   | APY, e.g. `0.01` represents `1%`                                                              |
 | ts            | String   | Timestamp to calculated interest, Unix timestamp format in milliseconds, e.g. `1597026383085` |

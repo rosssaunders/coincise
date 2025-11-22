@@ -39,8 +39,8 @@ Default is `2` | | ccy | String | No | Loan currency, e.g. `BTC` |
 2\. If master account did not assign anything, then "0"  
 3\. "" if shared between master and sub-account | | records | Array of objects |
 Details for currencies | | \> ccy | String | Loan currency, e.g. `BTC` | | \>
-rate | String | Current daily rate | | \> loanQuota | String | Borrow limit of
-master account  
+rate | String | Current daily borrowing rate | | \> loanQuota | String | Borrow
+limit of master account  
 If loan allocation has been assigned, then it is the borrow limit of the current
 trading account | | \> surplusLmt | String | Available amount across all
 sub-accounts  
@@ -69,5 +69,5 @@ amount for current account (Within the locked quota)
 Only applicable to `VIP loans`~Deprecated | | \> usedLoan | String | ~Borrowed
 amount for current account  
 Only applicable to `VIP loans`~Deprecated | | \> avgRate | String | ~Average
-(hour) interest of already borrowed coin  
+hourly interest of borrowed coin  
 only applicable to `VIP loans`~Deprecated |

@@ -80,15 +80,19 @@ It will be posted to `algoClOrdId` when placing TP/SL order once the general
 order is filled completely. | | \> newTpTriggerPx | String | Conditional |
 Take-profit trigger price.  
 Either the take profit trigger price or order price is 0, it means that the take
-profit is deleted. | | \> newTpOrdPx | String | Conditional | Take-profit order
-price  
+profit is deleted. | | \> newTpTriggerRatio | String | Conditional | Take profit
+trigger ratio, 0.3 represents 30%  
+Only applicable to FUTURES and SWAP. | | \> newTpOrdPx | String | Conditional |
+Take-profit order price  
 If the price is -1, take-profit will be executed at the market price. | | \>
 newTpOrdKind | String | No | TP order kind  
 `condition`  
 `limit` | | \> newSlTriggerPx | String | Conditional | Stop-loss trigger price  
 Either the stop loss trigger price or order price is 0, it means that the stop
-loss is deleted. | | \> newSlOrdPx | String | Conditional | Stop-loss order
-price  
+loss is deleted. | | \> newSlTriggerRatio | String | Conditional | Stop profit
+trigger ratio, 0.3 represents 30%  
+Only applicable to FUTURES and SWAP. | | \> newSlOrdPx | String | Conditional |
+Stop-loss order price  
 If the price is -1, stop-loss will be executed at the market price. | | \>
 newTpTriggerPxType | String | Conditional | Take-profit trigger price type  
 `last`: last price  

@@ -32,5 +32,5 @@ Only returned records after December 14, 2021.
 | --------- | ------ | ----------------------------------------------------------------- |
 | ccy       | String | Currency, e.g. `BTC`                                              |
 | amt       | String | ~Lending amount~(deprecated)                                      |
-| rate      | String | Lending annual interest rate                                      |
+| rate      | String | Annual borrowing interest rate                                    |
 | ts        | String | Time, Unix timestamp format in milliseconds, e.g. `1597026383085` |

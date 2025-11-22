@@ -131,12 +131,16 @@ It will be posted to `algoClOrdId` when placing TP/SL order once the general
 order is filled completely. | | \> tpOrdKind | String | TP order kind  
 `condition`  
 `limit` | | \> tpTriggerPx | String | Take-profit trigger price. | | \>
-tpTriggerPxType | String | Take-profit trigger price type.  
+tpTriggerRatio | String | Take profit trigger ratio, 0.3 represents 30%  
+Only applicable to FUTURES and SWAP. | | \> tpTriggerPxType | String |
+Take-profit trigger price type.  
 `last`: last price  
 `index`: index price  
 `mark`: mark price | | \> tpOrdPx | String | Take-profit order price. | | \>
-slTriggerPx | String | Stop-loss trigger price. | | \> slTriggerPxType | String
-| Stop-loss trigger price type.  
+slTriggerPx | String | Stop-loss trigger price. | | \> slTriggerRatio | String |
+Stop profit trigger ratio, 0.3 represents 30%  
+Only applicable to FUTURES and SWAP. | | \> slTriggerPxType | String | Stop-loss
+trigger price type.  
 `last`: last price  
 `index`: index price  
 `mark`: mark price | | \> slOrdPx | String | Stop-loss order price. | | \> sz |

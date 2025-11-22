@@ -39,6 +39,7 @@ Retrieve historical market data for OKX.
 `1`: Trade history  
 `2`: 1-minute candlestick  
 `3`: Funding rate  
+`5`: 5000-level orderbook (from Nov 1, 2025)  
 `6`: 50-level orderbook | | instType | String | Yes | Instrument type  
 `SPOT`  
 `FUTURES`  
@@ -98,5 +99,5 @@ specified by the end is returned
 When converting Unix timestamps to dates, the following timezone conventions are
 applied to all timestamp fields (begin, end, dateRangeStart, dateRangeEnd,
 dataTs):  
-• **Orderbook data** (module 6): UTC+0  
+• **Orderbook data** (modules 5, 6): UTC+0  
 • **All other data modules** (modules 1, 2, 3): UTC+8

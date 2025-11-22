@@ -77,7 +77,10 @@ SL/TP orders info
 Applicable to `Futures mode/Multi-currency margin/Portfolio margin` | | \>
 newTpTriggerPx | String | No | Take-profit trigger price  
 If you fill in this parameter, you should fill in the take-profit order price as
-well. | | \> newTpTriggerPxType | String | No | Take-profit trigger price type  
+well. | | \> newTpTriggerRatio | String | No | Take profit trigger ratio, 0.3
+represents 30%  
+Only applicable to FUTURES and SWAP. | | \> newTpTriggerPxType | String | No |
+Take-profit trigger price type  
 `last`: last price  
 `index`: index price  
 `mark`: mark price  
@@ -88,7 +91,10 @@ as well.
 If the price is `-1`, take-profit will be executed at the market price. | | \>
 newSlTriggerPx | String | No | Stop-loss trigger price  
 If you fill in this parameter, you should fill in the stop-loss order price. | |
-\> newSlTriggerPxType | String | No | Stop-loss trigger price type  
+\> newSlTriggerRatio | String | No | Stop profit trigger ratio, 0.3 represents
+30%  
+Only applicable to FUTURES and SWAP. | | \> newSlTriggerPxType | String | No |
+Stop-loss trigger price type  
 `last`: last price  
 `index`: index price  
 `mark`: mark price  

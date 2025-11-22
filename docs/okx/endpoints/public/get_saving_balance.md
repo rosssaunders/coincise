@@ -23,12 +23,12 @@ Source:
 
 #### Response Parameters
 
-| Parameter  | Type   | Description                      |
-| ---------- | ------ | -------------------------------- |
-| ccy        | String | Currency                         |
-| amt        | String | Currency amount                  |
-| earnings   | String | Currency earnings                |
-| rate       | String | Lending rate                     |
-| loanAmt    | String | Lending amount                   |
-| pendingAmt | String | Pending amount                   |
-| redemptAmt | String | ~Redempting amount~ (Deprecated) |
+| Parameter  | Type   | Description                                     |
+| ---------- | ------ | ----------------------------------------------- |
+| ccy        | String | Currency                                        |
+| amt        | String | Currency amount                                 |
+| earnings   | String | Currency earnings                               |
+| rate       | String | Minimum annual lending rate configured by users |
+| loanAmt    | String | Lending amount                                  |
+| pendingAmt | String | Pending amount                                  |
+| redemptAmt | String | ~Redempting amount~ (Deprecated)                |

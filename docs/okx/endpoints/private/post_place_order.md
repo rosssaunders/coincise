@@ -116,7 +116,10 @@ It will be posted to `algoClOrdId` when placing TP/SL order once the general
 order is filled completely. | | \> tpTriggerPx | String | Conditional |
 Take-profit trigger price  
 For condition TP order, if you fill in this parameter, you should fill in the
-take-profit order price as well. | | \> tpOrdPx | String | Conditional |
+take-profit order price as well. | | \> tpTriggerRatio | String | Conditional |
+Take profit trigger ratio, 0.3 represents 30%  
+Only one of `tpTriggerPx` and `tpTriggerPct` can be passed  
+Only applicable to FUTURES and SWAP. | | \> tpOrdPx | String | Conditional |
 Take-profit order price
 
 For condition TP order, if you fill in this parameter, you should fill in the
@@ -130,7 +133,11 @@ tpOrdKind | String | No | TP order kind
 The default is `condition` | | \> slTriggerPx | String | Conditional | Stop-loss
 trigger price  
 If you fill in this parameter, you should fill in the stop-loss order price. | |
-\> slOrdPx | String | Conditional | Stop-loss order price  
+\> slTriggerRatio | String | Conditional | Stop profit trigger ratio, 0.3
+represents 30%  
+Only one of `slTriggerPx` and `slTriggerPct` can be passed  
+Only applicable to FUTURES and SWAP. | | \> slOrdPx | String | Conditional |
+Stop-loss order price  
 If you fill in this parameter, you should fill in the stop-loss trigger price.  
 If the price is -1, stop-loss will be executed at the market price. | | \>
 tpTriggerPxType | String | No | Take-profit trigger price type  

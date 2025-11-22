@@ -63,7 +63,9 @@ of objects | Details of fiat fee rate | | \> ccy | String | Fiat currency. | |
 
 Remarks:  
 The fee rate like maker and taker: positive number, which means the rate of
-rebate; negative number, which means the rate of commission.
+rebate; negative number, which means the rate of commission.  
+Exception: The values for delivery and exercise are positive numbers,
+representing the commission rate.
 
 USDⓈ represent the stablecoin besides USDT
 

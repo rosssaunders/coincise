@@ -50,8 +50,8 @@ per request. The maximum is `100`. The default is `100`. |
 | mgnMode                           | String | Margin mode                    |
 
 `cross`  
-`isolated` | | interest | String | Interest | | interestRate | String | Interest
-rate (in hour) | | liab | String | Liability | | totalLiab | String | Total
-liability for current account | | interestFreeLiab | String | Interest-free
-liability for current account | | ts | String | Timestamp for interest accrued,
-Unix timestamp format in milliseconds, e.g. `1597026383085` |
+`isolated` | | interest | String | Interest accrued | | interestRate | String |
+Hourly borrowing interest rate | | liab | String | Liability | | totalLiab |
+String | Total liability for current account | | interestFreeLiab | String |
+Interest-free liability for current account | | ts | String | Timestamp for
+interest accrued, Unix timestamp format in milliseconds, e.g. `1597026383085` |

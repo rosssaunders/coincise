@@ -25,12 +25,13 @@ Source:
 `redeem` | | status | String | No | Status  
 `pending`  
 `success`  
-`failed` | | after | String | No | Pagination of data to return records earlier
-than the `requestTime`. The value passed is the corresponding `timestamp` | |
-before | String | No | Pagination of data to return records newer than the
-`requestTime`. The value passed is the corresponding `timestamp` | | limit |
-String | No | Number of results per request. The default is `100`. The maximum
-is `100`. |
+`failed`  
+`cancelled` | | after | String | No | Pagination of data to return records
+earlier than the `requestTime`. The value passed is the corresponding
+`timestamp` | | before | String | No | Pagination of data to return records
+newer than the `requestTime`. The value passed is the corresponding `timestamp`
+| | limit | String | No | Number of results per request. The default is `100`.
+The maximum is `100`. |
 
 #### Response Parameters
 
@@ -43,9 +44,10 @@ is `100`. |
 Redeeming amount | | status | String | Status  
 `pending`  
 `success`  
-`failed` | | requestTime | String | Request time of make purchase/redeem, Unix
-timestamp format in milliseconds, e.g. `1597026383085` | | completedTime |
-String | Completed time of redeem settlement, Unix timestamp format in
-milliseconds, e.g. `1597026383085` | | estCompletedTime | String | Estimated
-completed time of redeem settlement, Unix timestamp format in milliseconds, e.g.
-`1597026383085` |
+`failed`  
+`cancelled` | | ordId | String | Order ID | | requestTime | String | Request
+time of make purchase/redeem, Unix timestamp format in milliseconds, e.g.
+`1597026383085` | | completedTime | String | Completed time of redeem
+settlement, Unix timestamp format in milliseconds, e.g. `1597026383085` | |
+estCompletedTime | String | Estimated completed time of redeem settlement, Unix
+timestamp format in milliseconds, e.g. `1597026383085` |

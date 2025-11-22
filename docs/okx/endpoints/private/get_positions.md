@@ -65,11 +65,14 @@ negative `pos` means short position. For `MARGIN`, `pos` is always positive,
 `posCcy` being base currency means long position, `posCcy` being quote currency
 means short position.) | | pos | String | Quantity of positions. In the isolated
 margin mode, when doing manual transfers, a position with pos of `0` will be
-generated after the deposit is transferred | | baseBal | String | ~Base currency
-balance, only applicable to `MARGIN`（Quick Margin Mode）~(Deprecated) | |
-quoteBal | String | ~Quote currency balance, only applicable to `MARGIN`（Quick
-Margin Mode）~(Deprecated) | | baseBorrowed | String | ~Base currency amount
-already borrowed, only applicable to MARGIN(Quick Margin Mode）~(Deprecated) | |
+generated after the deposit is transferred | | hedgedPos | String | Hedged
+position size  
+Only return for accounts in delta neutral strategy, stgyType:1. Return "" for
+accounts in general strategy. | | baseBal | String | ~Base currency balance,
+only applicable to `MARGIN`（Quick Margin Mode）~(Deprecated) | | quoteBal |
+String | ~Quote currency balance, only applicable to `MARGIN`（Quick Margin
+Mode）~(Deprecated) | | baseBorrowed | String | ~Base currency amount already
+borrowed, only applicable to MARGIN(Quick Margin Mode）~(Deprecated) | |
 baseInterest | String | ~Base Interest, undeducted interest that has been
 incurred, only applicable to MARGIN(Quick Margin Mode）~(Deprecated) | |
 quoteBorrowed | String | ~Quote currency amount already borrowed, only

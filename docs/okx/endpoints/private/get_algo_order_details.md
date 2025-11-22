@@ -111,7 +111,10 @@ to 32 characters.
 It will be posted to algoClOrdId when placing TP/SL order once the general order
 is filled completely. | | \> tpTriggerPx | String | Take-profit trigger price  
 If you fill in this parameter, you should fill in the take-profit order price as
-well. | | \> tpTriggerPxType | String | Take-profit trigger price type  
+well. | | \> tpTriggerRatio | String | Take profit trigger ratio, 0.3 represents
+30%  
+Only applicable to FUTURES and SWAP. | | \> tpTriggerPxType | String |
+Take-profit trigger price type  
 `last`: last price  
 `index`: index price  
 `mark`: mark price | | \> tpOrdPx | String | Take-profit order price  
@@ -120,7 +123,9 @@ as well.
 If the price is `-1`, take-profit will be executed at the market price. | | \>
 slTriggerPx | String | Stop-loss trigger price  
 If you fill in this parameter, you should fill in the stop-loss order price. | |
-\> slTriggerPxType | String | Stop-loss trigger price type  
+\> slTriggerRatio | String | Stop profit trigger ratio, 0.3 represents 30%  
+Only applicable to FUTURES and SWAP. | | \> slTriggerPxType | String | Stop-loss
+trigger price type  
 `last`: last price  
 `index`: index price  
 `mark`: mark price | | \> slOrdPx | String | Stop-loss order price  

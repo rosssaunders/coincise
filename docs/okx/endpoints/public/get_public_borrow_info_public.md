@@ -28,6 +28,6 @@ Authentication is not required for this public endpoint.
 | ccy       | String | Currency, e.g. `BTC`                                      |
 | avgAmt    | String | ~24H average borrowing amount~(deprecated)                |
 | avgAmtUsd | String | ~24H average borrowing amount in `USD` value~(deprecated) |
-| avgRate   | String | 24H average lending rate                                  |
-| preRate   | String | Last annual interest rate                                 |
-| estRate   | String | Next estimate annual interest rate                        |
+| avgRate   | String | 24-hours average annual borrowing rate                    |
+| preRate   | String | Last annual borrowing interest rate                       |
+| estRate   | String | Next estimate annual borrowing interest rate              |

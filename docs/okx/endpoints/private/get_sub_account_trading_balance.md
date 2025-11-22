@@ -80,12 +80,20 @@ USD
 Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin` | | upl |
 String | Cross-margin info of unrealized profit and loss at the account level in
 `USD`  
-Applicable to `Multi-currency margin`/`Portfolio margin` | | details | Array of
-objects | Detailed asset information in all currencies | | \> ccy | String |
-Currency | | \> eq | String | Equity of currency | | \> cashBal | String | Cash
-balance | | \> uTime | String | Update time of currency balance information,
-Unix timestamp format in milliseconds, e.g. `1597026383085` | | \> isoEq |
-String | Isolated margin equity of currency  
+Applicable to `Multi-currency margin`/`Portfolio margin` | | delta | String |
+Delta (USD) | | deltaLever | String | Delta neutral strategy account level delta
+leverage  
+deltaLever = delta / totalEq | | deltaNeutralStatus | String | Delta risk
+status  
+`0`: normal  
+`1`: transfer restricted  
+`2`: delta reducing - cancel all pending orders if delta is greater than 5000
+USD, only one delta reducing order allowed per index (spot, futures, swap) | |
+details | Array of objects | Detailed asset information in all currencies | | \>
+ccy | String | Currency | | \> eq | String | Equity of currency | | \> cashBal |
+String | Cash balance | | \> uTime | String | Update time of currency balance
+information, Unix timestamp format in milliseconds, e.g. `1597026383085` | | \>
+isoEq | String | Isolated margin equity of currency  
 Applicable to `Futures mode`/`Multi-currency margin`/`Portfolio margin` | | \>
 availEq | String | Available equity of currency  
 Applicable to `Futures mode`/`Multi-currency margin`/`Portfolio margin` | | \>

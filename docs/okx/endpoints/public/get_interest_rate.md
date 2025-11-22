@@ -25,7 +25,7 @@ Get the user's current leveraged currency borrowing market interest rate
 
 #### Response Parameters
 
-| Parameter    | Type   | Description          |
-| ------------ | ------ | -------------------- |
-| interestRate | String | hourly interest rate |
-| ccy          | String | currency             |
+| Parameter    | Type   | Description                    |
+| ------------ | ------ | ------------------------------ |
+| interestRate | String | Hourly borrowing interest rate |
+| ccy          | String | Currency                       |
