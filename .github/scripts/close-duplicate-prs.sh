@@ -17,8 +17,9 @@ PR_TITLE_PATTERN="$1"
 echo "Checking for existing open PRs matching pattern: '$PR_TITLE_PATTERN'"
 
 # Escape special regex characters in the title pattern for safe use in jq
-# This prevents regex injection
-ESCAPED_PATTERN=$(printf '%s' "$PR_TITLE_PATTERN" | sed 's/[.[\^$*+?(){}|]/\\&/g')
+# This prevents regex injection by escaping all regex metacharacters
+# Note: ] and [ must be first/early in the character class to avoid issues
+ESCAPED_PATTERN=$(printf '%s' "$PR_TITLE_PATTERN" | sed 's/[][\\.^$*+?(){}|]/\\&/g')
 
 # Use GitHub CLI to find open PRs with the auto-docs-update label and matching title
 # The jq query filters PRs by title pattern (case-insensitive)
