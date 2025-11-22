@@ -29,13 +29,23 @@ if [ -z "$EXISTING_PRS" ]; then
   exit 0
 fi
 
-# Close each existing PR
+# Close each existing PR and track failures
 echo "Found existing open PRs: $EXISTING_PRS"
+FAILED_PRS=""
 for PR_NUMBER in $EXISTING_PRS; do
   echo "Closing PR #$PR_NUMBER..."
-  gh pr close "$PR_NUMBER" --comment "Closing this PR as a new documentation update is being created. Changes will be included in the new PR if still relevant." || {
+  if ! gh pr close "$PR_NUMBER" --comment "Closing this PR as a new documentation update is being created. Changes will be included in the new PR if still relevant."; then
     echo "Warning: Failed to close PR #$PR_NUMBER"
-  }
+    FAILED_PRS="$FAILED_PRS $PR_NUMBER"
+  fi
 done
 
-echo "Finished closing duplicate PRs."
+# Report summary
+if [ -n "$FAILED_PRS" ]; then
+  echo "Failed to close PRs:$FAILED_PRS"
+  echo "Some PRs could not be closed, but continuing with workflow."
+  # Don't exit with error to allow workflow to continue
+  exit 0
+fi
+
+echo "Successfully closed all duplicate PRs."

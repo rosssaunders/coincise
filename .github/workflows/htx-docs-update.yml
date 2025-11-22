@@ -98,7 +98,7 @@ jobs:
       - name: Close duplicate PRs
         if: steps.git-check.outputs.changes == 'true'
         run: |
-          .github/scripts/close-duplicate-prs.sh "HTX API Documentation Update"
+          $GITHUB_WORKSPACE/.github/scripts/close-duplicate-prs.sh "HTX API Documentation Update"
         env:
           GH_TOKEN: ${{ secrets.PAT_GITHUB }}
 

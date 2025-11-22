@@ -50,7 +50,7 @@ jobs:
       - name: Close duplicate PRs
         if: steps.git-check.outputs.changes == 'true'
         run: |
-          .github/scripts/close-duplicate-prs.sh "Update Coinbase INTX API Documentation"
+          $GITHUB_WORKSPACE/.github/scripts/close-duplicate-prs.sh "Update Coinbase INTX API Documentation"
         env:
           GH_TOKEN: ${{ secrets.PAT_GITHUB }}
 

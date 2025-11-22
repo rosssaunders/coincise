@@ -78,8 +78,7 @@ jobs:
       - name: Close duplicate PRs
         if: steps.git-check.outputs.changes == 'true'
         run: |
-          cd ../..  # Move back to root directory
-          .github/scripts/close-duplicate-prs.sh "Bitfinex API Documentation Update"
+          $GITHUB_WORKSPACE/.github/scripts/close-duplicate-prs.sh "Bitfinex API Documentation Update"
         env:
           GH_TOKEN: ${{ secrets.PAT_GITHUB }}
 
