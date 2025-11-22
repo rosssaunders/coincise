@@ -116,10 +116,10 @@ const extractEndpoint = async (page, turndownService, operationId) => {
     timeout: 90000
   })
 
-  await page.waitForSelector("#content", { timeout: 90000 })
+  await page.waitForSelector('main[role="main"]', { timeout: 90000 })
 
   const endpointData = await page.evaluate(() => {
-    const content = document.querySelector("#content")
+    const content = document.querySelector('main[role="main"]')
     const title = document.querySelector("#page-title, h1")
 
     // Check if this is a 404 page

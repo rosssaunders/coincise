@@ -12,80 +12,15 @@ on:
 
 jobs:
   update-docs:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    defaults:
-      run:
-        working-directory: venues/okx
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Fetch all history for git diff
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Install Puppeteer browsers
-        run: pnpm exec puppeteer browsers install chrome
-
-
-      - name: Extract all OKX API documentation
-        run: pnpm run extract:all
-        # This extracts:
-        # - Core documentation (rate_limits, authentication, network_connectivity,
-        #   error_codes, response_formats, change_log)
-        # - All individual endpoints (public and private)
-
-      - name: Format documentation
-        run: |
-          cd ../..
-          ./formatdocs.sh docs/okx/
-
-      - name: Check for changes
-        id: git-check
-        run: |
-          cd ../..  # Move back to root directory for git operations
-          # Explicitly add the docs/okx directory to staging
-          git add docs/okx
-          # Check if there are any changes
-          git diff --staged --quiet || echo "changes=true" >> $GITHUB_OUTPUT
-
-      - name: Generate AI PR Summary
-        if: steps.git-check.outputs.changes == 'true'
-        id: ai-summary
-        run: |
-          cd ../..  # Move back to root directory for git operations
-          # Generate AI summary using the AI PR summary tool (max diff length: 15000)
-          SUMMARY=$(cd tools/ai-pr-summary && pnpm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
-          # Escape the summary for GitHub Actions
-          echo "summary<<EOF" >> $GITHUB_OUTPUT
-          echo "$SUMMARY" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
-      - name: Create Pull Request
-        if: steps.git-check.outputs.changes == 'true'
-        uses: peter-evans/create-pull-request@v7
-        with:
-          commit-message: "docs: update OKX API documentation in standardized format"
-          title: "OKX API Documentation Update - Standardized Format"
-          branch: "okx-docs-update"
-          base: "main"
-          delete-branch: true
-          token: ${{ secrets.PAT_GITHUB }}
-          body: ${{ steps.ai-summary.outputs.summary }}
-          reviewers: "@rosssaunders"
-          labels: "auto-docs-update"
+    uses: ./.github/workflows/reusable-docs-update.yml
+    with:
+      venue_name: 'OKX'
+      docs_dir: 'docs/okx/'
+      install_command: 'cd venues/okx && pnpm install --frozen-lockfile'
+      puppeteer_command: 'cd venues/okx && pnpm exec puppeteer browsers install chrome'
+      extract_command: 'cd venues/okx && pnpm run extract:all'
+      pr_branch: 'okx-docs-update'
+      pr_title: 'OKX API Documentation Update - Standardized Format'
+    secrets:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}

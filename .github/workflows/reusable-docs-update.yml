@@ -1,0 +1,173 @@
+name: Reusable Docs Update
+
+on:
+  workflow_call:
+    inputs:
+      venue_name:
+        required: true
+        type: string
+        description: 'Name of the venue (e.g., Binance Spot)'
+      extract_command:
+        required: false
+        type: string
+        default: 'pnpm run extract:all'
+        description: 'Command to run extraction'
+      format_command:
+        required: false
+        type: string
+        default: './formatdocs.sh'
+        description: 'Command to run formatting'
+      docs_dir:
+        required: true
+        type: string
+        description: 'Directory of the generated docs (e.g., docs/binance/spot/)'
+      pr_branch:
+        required: true
+        type: string
+        description: 'Branch name for the PR'
+      pr_title:
+        required: false
+        type: string
+        description: 'Title of the PR'
+      pr_body_template:
+        required: false
+        type: string
+        description: 'Template for the PR body'
+      pr_reviewers:
+        required: false
+        type: string
+        default: '@rosssaunders'
+        description: 'PR reviewers'
+      pr_labels:
+        required: false
+        type: string
+        default: 'auto-docs-update'
+        description: 'PR labels'
+      install_command:
+        required: false
+        type: string
+        default: 'pnpm install --frozen-lockfile'
+        description: 'Command to install dependencies'
+      puppeteer_command:
+        required: false
+        type: string
+        default: 'pnpm exec puppeteer browsers install chrome'
+        description: 'Command to install Puppeteer browsers'
+      node_version:
+        required: false
+        type: string
+        default: '24'
+        description: 'Node.js version'
+      python_version:
+        required: false
+        type: string
+        description: 'Python version (if needed)'
+      install_python_dependencies_command:
+        required: false
+        type: string
+        description: 'Command to install Python dependencies'
+      working_directory:
+        required: false
+        type: string
+        default: '.'
+        description: 'Working directory for the job'
+    secrets:
+      OPENAI_API_KEY:
+        required: true
+      PAT_GITHUB:
+        required: true
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node_version: ${{ inputs.node_version }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Python
+        if: ${{ inputs.python_version != '' }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python_version }}
+
+      - name: Install dependencies
+        run: ${{ inputs.install_command }}
+
+      - name: Install Python dependencies
+        if: ${{ inputs.install_python_dependencies_command != '' }}
+        run: ${{ inputs.install_python_dependencies_command }}
+
+      - name: Install Puppeteer browsers
+        run: ${{ inputs.puppeteer_command }}
+
+      - name: Extract documentation
+        run: ${{ inputs.extract_command }}
+
+      - name: Format documentation
+        run: ${{ inputs.format_command }} ${{ inputs.docs_dir }}
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          # If working directory is not root, we might need to adjust paths or assume git commands work from root if checkout was at root.
+          # But actions/checkout checks out to GITHUB_WORKSPACE.
+          # If working_directory is set, commands run there.
+          # git diff needs to be run relative to the repo root or correctly path-ed.
+          # If we are in a subdir, we might need to cd back or use absolute paths.
+          # However, most workflows use relative paths from root.
+          # Let's assume we run this from root or the user handles it in extract_command.
+          # But wait, if working_directory is set to a venue dir, git diff might fail if it expects root paths.
+          # The safest is to run git diff from root.
+          
+          # If we are not in root, cd to root.
+          if [ "${{ inputs.working_directory }}" != "." ]; then
+            cd ${{ github.workspace }}
+          fi
+          
+          git diff --exit-code ${{ inputs.docs_dir }} || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Generate AI PR Summary
+        if: steps.git-check.outputs.changes == 'true'
+        id: ai-summary
+        uses: ./.github/actions/ai-pr-summary
+        with:
+          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Create Pull Request
+        if: steps.git-check.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "docs: update ${{ inputs.venue_name }} API documentation"
+          title: ${{ inputs.pr_title || format('Update {0} API Documentation', inputs.venue_name) }}
+          body: |
+            Automated update of ${{ inputs.venue_name }} API documentation.
+
+            This PR was automatically generated by the documentation extraction workflow.
+
+            ${{ inputs.pr_body_template }}
+
+            ${{ steps.ai-summary.outputs.summary }}
+
+            Please review the changes and merge if they look correct.
+          branch: ${{ inputs.pr_branch }}
+          delete-branch: true
+          token: ${{ secrets.PAT_GITHUB }}
+          reviewers: ${{ inputs.pr_reviewers }}
+          labels: ${{ inputs.pr_labels }}
