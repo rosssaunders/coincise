@@ -1,0 +1,40 @@
+name: 'Generate AI PR Summary'
+description: 'Generates a PR summary using OpenAI'
+inputs:
+  openai_api_key:
+    description: 'OpenAI API Key'
+    required: true
+outputs:
+  summary:
+    description: 'The generated summary'
+    value: ${{ steps.generate-summary.outputs.summary }}
+runs:
+  using: "composite"
+  steps:
+    - name: Install dependencies for AI summary tool
+      shell: bash
+      run: |
+        cd tools/ai-pr-summary
+        pnpm install
+
+    - name: Generate AI Summary
+      id: generate-summary
+      shell: bash
+      env:
+        OPENAI_API_KEY: ${{ inputs.openai_api_key }}
+      run: |
+        # Generate AI summary using the AI PR summary tool (max diff length: 15000)
+        # We assume we are at repo root or can access tools/ from here.
+        # Using github.workspace to be safe if possible, but standard cd should work from root.
+        
+        SUMMARY=$(cd tools/ai-pr-summary && pnpm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
+        
+        # If SUMMARY is empty (e.g. script failed or no output), provide a fallback
+        if [ -z "$SUMMARY" ]; then
+          SUMMARY="Automated update of API documentation."
+        fi
+
+        # Escape the summary for GitHub Actions
+        echo "summary<<EOF" >> $GITHUB_OUTPUT
+        echo "$SUMMARY" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT

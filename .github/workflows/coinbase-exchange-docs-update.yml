@@ -11,85 +11,14 @@ on:
 
 jobs:
   update-docs:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    defaults:
-      run:
-        working-directory: venues/coinbase/exchange
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Fetch all history for git diff
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-      - name: Install Puppeteer browsers
-        run: pnpm exec puppeteer browsers install chrome
-
-
-      - name: Extract general documentation
-        run: pnpm run extract:general
-
-      - name: Extract endpoint documentation
-        run: pnpm run extract:endpoints
-
-      - name: Format documentation
-        run: |
-          cd ../../..
-          ./formatdocs.sh docs/coinbase/exchange/
-
-      - name: Check for changes
-        id: git-check
-        run: |
-          cd ../../../  # Move back to root directory for git operations
-          # Verify docs directory exists
-          if [ -d "docs/coinbase" ]; then
-            # Explicitly add the docs/coinbase directory to staging
-            git add docs/coinbase
-            # Check if there are any changes
-            git diff --staged --quiet || echo "changes=true" >> $GITHUB_OUTPUT
-          else
-            echo "Warning: docs/coinbase directory not found"
-            mkdir -p docs/coinbase
-            echo "Created docs/coinbase directory"
-          fi
-
-      - name: Generate AI PR Summary
-        if: steps.git-check.outputs.changes == 'true'
-        id: ai-summary
-        run: |
-          cd ../../../  # Move back to root directory for git operations
-          # Generate AI summary using the AI PR summary tool (max diff length: 15000)
-          SUMMARY=$(cd tools/ai-pr-summary && pnpm run generate-pr-summary ../../ 15000 2>/dev/null | sed -n '/---PR_SUMMARY_START---/,/---PR_SUMMARY_END---/p' | sed '1d;$d')
-          # Escape the summary for GitHub Actions
-          echo "summary<<EOF" >> $GITHUB_OUTPUT
-          echo "$SUMMARY" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
-      - name: Create Pull Request
-        if: steps.git-check.outputs.changes == 'true'
-        uses: peter-evans/create-pull-request@v7
-        with:
-          commit-message: "docs: update Coinbase Exchange API documentation"
-          title: "Coinbase Exchange API Documentation Update"
-          branch: "coinbase-exchange-docs-update"
-          base: "main"
-          delete-branch: true
-          token: ${{ secrets.PAT_GITHUB }}
-          body: ${{ steps.ai-summary.outputs.summary }}
-          reviewers: "@rosssaunders"
-          labels: "auto-docs-update"
+    uses: ./.github/workflows/reusable-docs-update.yml
+    with:
+      venue_name: 'Coinbase Exchange'
+      docs_dir: 'docs/coinbase/exchange/'
+      install_command: 'cd venues/coinbase/exchange && pnpm install --frozen-lockfile'
+      puppeteer_command: 'cd venues/coinbase/exchange && pnpm exec puppeteer browsers install chrome'
+      extract_command: 'cd venues/coinbase/exchange && pnpm run extract:general && pnpm run extract:endpoints'
+      pr_branch: 'coinbase-exchange-docs-update'
+    secrets:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
