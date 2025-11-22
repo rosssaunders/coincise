@@ -49,6 +49,13 @@ jobs:
         run: |
           git diff --exit-code docs/mexc/ || echo "changes=true" >> $GITHUB_OUTPUT
 
+      - name: Close duplicate PRs
+        if: steps.git-check.outputs.changes == 'true'
+        run: |
+          .github/scripts/close-duplicate-prs.sh "Update MEXC Exchange API Documentation"
+        env:
+          GH_TOKEN: ${{ secrets.PAT_GITHUB }}
+
       - name: Create Pull Request
         if: steps.git-check.outputs.changes == 'true'
         uses: peter-evans/create-pull-request@v5

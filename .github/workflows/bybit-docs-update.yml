@@ -70,6 +70,14 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
+      - name: Close duplicate PRs
+        if: steps.git-check.outputs.changes == 'true'
+        run: |
+          cd ../..  # Move back to root directory
+          .github/scripts/close-duplicate-prs.sh "Bybit API Documentation Update"
+        env:
+          GH_TOKEN: ${{ secrets.PAT_GITHUB }}
+
       - name: Create Pull Request
         if: steps.git-check.outputs.changes == 'true'
         uses: peter-evans/create-pull-request@v7
