@@ -60,4 +60,5 @@ jobs:
 
             Please review the changes and merge if they look correct.
           branch: "docs/deribit-update"
+          base: "main"
           delete-branch: true

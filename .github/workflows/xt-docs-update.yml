@@ -59,4 +59,5 @@ jobs:
 
             Please review the changes and merge if they look correct.
           branch: "docs/xt-update"
+          base: "main"
           delete-branch: true

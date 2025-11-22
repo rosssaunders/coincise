@@ -65,4 +65,5 @@ jobs:
 
             Please review the changes and merge if they look correct.
           branch: 'docs/bitmart-update'
+          base: 'main'
           delete-branch: true
