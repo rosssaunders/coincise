@@ -8,25 +8,28 @@ Price change statistics for a trading day.
 
 **Weight:**
 
-4 for each requested symbol.  
-  
-The weight for this request will cap at 200 once the number of `symbols` in the request is more than 50.
+4 for each requested symbol.
+
+The weight for this request will cap at 200 once the number of `symbols` in the
+request is more than 50.
 
 **Parameters:**
 
-|  |
-| 
-symbol | STRING | YES | Either symbol or symbols must be providedExamples of accepted format for the symbols parameter:["BTCUSDT","BNBUSDT"]or%5B%22BTCUSDT%22,%22BNBUSDT%22%5DThe maximum number of symbols allowed in a request is 100.
-symbols
-timeZone | STRING | NO | Default: 0 (UTC)
-type | ENUM | NO | Supported values: FULL or MINI.If none provided, the default is FULL
-symbolStatus | ENUM | NO | Filters for symbols that have this tradingStatus.For a single symbol, a status mismatch returns error -1220 SYMBOL_DOES_NOT_MATCH_STATUS.For multiple symbols, non-matching ones are simply excluded from the response.Valid values: TRADING, HALT, BREAK |
+| | | symbol | STRING | YES | Either symbol or symbols must be providedExamples
+of accepted format for the symbols
+parameter:["BTCUSDT","BNBUSDT"]or%5B%22BTCUSDT%22,%22BNBUSDT%22%5DThe maximum
+number of symbols allowed in a request is 100. symbols timeZone | STRING | NO |
+Default: 0 (UTC) type | ENUM | NO | Supported values: FULL or MINI.If none
+provided, the default is FULL symbolStatus | ENUM | NO | Filters for symbols
+that have this tradingStatus.For a single symbol, a status mismatch returns
+error -1220 SYMBOL_DOES_NOT_MATCH_STATUS.For multiple symbols, non-matching ones
+are simply excluded from the response.Valid values: TRADING, HALT, BREAK |
 
 **Notes:**
 
--   Supported values for `timeZone`:
-    -   Hours and minutes (e.g. `-1:00`, `05:45`)
-    -   Only hours (e.g. `0`, `8`, `4`)
+- Supported values for `timeZone`:
+  - Hours and minutes (e.g. `-1:00`, `05:45`)
+  - Only hours (e.g. `0`, `8`, `4`)
 
 **Data Source:** Database
 
@@ -152,4 +155,5 @@ With `symbols`:
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints)
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints)

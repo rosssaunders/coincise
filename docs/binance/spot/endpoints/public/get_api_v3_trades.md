@@ -10,10 +10,10 @@ Get recent trades.
 
 **Parameters:**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | YES |  |
-| limit | INT | NO | Default: 500; Maximum: 1000. |
+| Name   | Type   | Mandatory | Description                  |
+| ------ | ------ | --------- | ---------------------------- |
+| symbol | STRING | YES       |                              |
+| limit  | INT    | NO        | Default: 500; Maximum: 1000. |
 
 **Data Source:** Memory
 
@@ -33,4 +33,5 @@ Get recent trades.
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints)
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints)

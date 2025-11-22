@@ -1,4 +1,4 @@
-## Query Order list (USER\_DATA)​
+## Query Order list (USER_DATA)​
 
 ```
 GET /api/v3/orderList
@@ -10,15 +10,15 @@ Retrieves a specific order list based on provided optional parameters.
 
 **Parameters:**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| orderListId | LONG | NO\* | Query order list by `orderListId`.  
-`orderListId` or `origClientOrderId` must be provided. |
-| origClientOrderId | STRING | NO\* | Query order list by `listClientOrderId`.  
-`orderListId` or `origClientOrderId` must be provided. |
-| recvWindow | DECIMAL | NO | The value cannot be greater than `60000`.  
-Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
-| timestamp | LONG | YES |  |
+| Name                                                                                                     | Type    | Mandatory | Description                               |
+| -------------------------------------------------------------------------------------------------------- | ------- | --------- | ----------------------------------------- |
+| orderListId                                                                                              | LONG    | NO\*      | Query order list by `orderListId`.        |
+| `orderListId` or `origClientOrderId` must be provided.                                                   |
+| origClientOrderId                                                                                        | STRING  | NO\*      | Query order list by `listClientOrderId`.  |
+| `orderListId` or `origClientOrderId` must be provided.                                                   |
+| recvWindow                                                                                               | DECIMAL | NO        | The value cannot be greater than `60000`. |
+| Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| timestamp                                                                                                | LONG    | YES       |                                           |
 
 **Data Source:** Database
 
@@ -48,4 +48,5 @@ Supports up to three decimal places of precision (e.g., 6000.346) so that micros
 }
 ```
 
-> Source: [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints)
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints)

@@ -4,18 +4,19 @@
 DELETE /api/v3/openOrders
 ```
 
-Cancels all active orders on a symbol. This includes orders that are part of an order list.
+Cancels all active orders on a symbol. This includes orders that are part of an
+order list.
 
 **Weight:** 1
 
 **Parameters:**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | YES |  |
-| recvWindow | DECIMAL | NO | The value cannot be greater than `60000`.  
-Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
-| timestamp | LONG | YES |  |
+| Name                                                                                                     | Type    | Mandatory | Description                               |
+| -------------------------------------------------------------------------------------------------------- | ------- | --------- | ----------------------------------------- |
+| symbol                                                                                                   | STRING  | YES       |                                           |
+| recvWindow                                                                                               | DECIMAL | NO        | The value cannot be greater than `60000`. |
+| Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| timestamp                                                                                                | LONG    | YES       |                                           |
 
 **Data Source:** Matching Engine
 
@@ -124,4 +125,5 @@ Supports up to three decimal places of precision (e.g., 6000.346) so that micros
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints)
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints)

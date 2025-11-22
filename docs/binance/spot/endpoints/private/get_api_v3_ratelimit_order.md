@@ -1,4 +1,4 @@
-## Query Unfilled Order Count (USER\_DATA)​
+## Query Unfilled Order Count (USER_DATA)​
 
 ```
 GET /api/v3/rateLimit/order
@@ -10,11 +10,11 @@ Displays the user's unfilled order count for all intervals.
 
 **Parameters:**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| recvWindow | DECIMAL | NO | The value cannot be greater than `60000`.  
-Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
-| timestamp | LONG | YES |  |
+| Name                                                                                                     | Type    | Mandatory | Description                               |
+| -------------------------------------------------------------------------------------------------------- | ------- | --------- | ----------------------------------------- |
+| recvWindow                                                                                               | DECIMAL | NO        | The value cannot be greater than `60000`. |
+| Supports up to three decimal places of precision (e.g., 6000.346) so that microseconds may be specified. |
+| timestamp                                                                                                | LONG    | YES       |                                           |
 
 **Data Source:** Memory
 
@@ -39,4 +39,5 @@ Supports up to three decimal places of precision (e.g., 6000.346) so that micros
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints)
+> Source:
+> [https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints](https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints)
