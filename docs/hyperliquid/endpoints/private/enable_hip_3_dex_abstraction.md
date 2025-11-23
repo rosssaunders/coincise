@@ -47,7 +47,7 @@ Object
 
 {
 
-"type": "userEnableDexAbstraction",
+"type": "userDexAbstraction",
 
 "hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead),
 
