@@ -1,4 +1,6 @@
-# Virtual Asset Service Providers
+# GET /v2/ext/vasps
+
+**Source:** [https://docs.bitfinex.com/reference/virtual-asset-service-providers](https://docs.bitfinex.com/reference/virtual-asset-service-providers)
 
 get
 
@@ -40,9 +42,3 @@ curl \--request GET \\
      \--url https://api.bitfinex.com/v2/ext/vasps \\
 
      \--header 'accept: application/json'
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/virtual-asset-service-providers
-Path: /v2/ext/vasps
-Method: GET

@@ -1,6 +1,10 @@
-# Alert Set
+# POST /v2/auth/w/alert/set
 
-post https://api.bitfinex.com/v2/auth/w/alert/set
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-alert-set](https://docs.bitfinex.com/reference/rest-auth-alert-set)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/alert/set
 
 Sets up a price alert at the given value
 
@@ -57,9 +61,3 @@ curl \--request POST \\
      \--header 'accept: application/json' \\
 
      \--header 'content-type: application/json'
-
----
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-alert-set
-Path: /v2/auth/w/alert/set
-Method: POST

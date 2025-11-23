@@ -1,6 +1,10 @@
-# Funding Trades
+# POST /v2/auth/r/funding/trades/{Symbol}/hist
 
-post https://api.bitfinex.com/v2/auth/r/funding/trades/{Symbol}/hist
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-funding-trades-hist](https://docs.bitfinex.com/reference/rest-auth-funding-trades-hist)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/funding/trades/{Symbol}/hist
 
 Get funding trades for offered funding. Can be used to request funding trades for a specific currency or to retrieve trades for all currencies at once.
 
@@ -21,7 +25,6 @@ Funding trade arrays (Index [0...n])
 | [4] | AMOUNT | Float | Amount the offer is for |
 | [5] | RATE | Float | Rate of the offer (percentage expressed as decimal number i.e. 1% = 0.01) |
 | [6] | PERIOD | Int | Period of the offer |
-[ . . . ]
 
 **Ratelimit**: 90 req/min
 
@@ -64,9 +67,3 @@ curl \--request POST \\
      \--header 'accept: application/json' \\
 
      \--header 'content-type: application/json'
-
----
-Section: Margin Funding
-Source: https://docs.bitfinex.com/reference/rest-auth-funding-trades-hist
-Path: /v2/auth/r/funding/trades/Symbol/hist
-Method: POST

@@ -1,4 +1,6 @@
-# Trades
+# GET /v2/trades/{symbol}/hist
+
+**Source:** [https://docs.bitfinex.com/reference/rest-public-trades](https://docs.bitfinex.com/reference/rest-public-trades)
 
 get
 
@@ -29,7 +31,8 @@ For funding currency symbols (ex. fUSD)
 
 * * *
 
-<table><tbody><tr><td>Rate Limit:</td><td>15 reqs/min (requests per minute)</td></tr></tbody></table>
+| --- | --- |
+| Rate Limit: | 15 reqs/min (requests per minute) |
 
 Path Params
 
@@ -80,9 +83,3 @@ curl \--request GET \\
      \--url 'https://api-pub.bitfinex.com/v2/trades/tBTCUSD/hist?limit=125&sort=-1' \\
 
      \--header 'accept: application/json'
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-trades
-Path: /v2/trades/tBTCUSD/hist?limit=125&sort=-1
-Method: GET

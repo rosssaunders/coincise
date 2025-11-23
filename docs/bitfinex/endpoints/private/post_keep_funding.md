@@ -1,6 +1,10 @@
-# Keep Funding
+# POST /v2/auth/w/funding/keep
 
-post https://api.bitfinex.com/v2/auth/w/funding/keep
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-keep-funding](https://docs.bitfinex.com/reference/rest-auth-keep-funding)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/funding/keep
 
 Toggle to keep funding taken. Specify loan for unused funding and credit for used funding.
 
@@ -20,8 +24,6 @@ Response array
 | --- | --- | --- | --- |
 | [0] | MTS | Int | Millisecond Time Stamp of the update |
 | [1] | TYPE | String | Purpose of notification ('fk-req' (funding keep request)) |
-[ . . . ]
-
 | [6] | STATUS | String | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
 | [7] | TEXT | String | Text of the notification |
 
@@ -54,9 +56,3 @@ curl \--request POST \\
      \--header 'Content-Type: application/json' \\
 
      \--header 'accept: application/json'
-
----
-Section: Margin Funding
-Source: https://docs.bitfinex.com/reference/rest-auth-keep-funding
-Path: /v2/auth/w/funding/keep
-Method: POST

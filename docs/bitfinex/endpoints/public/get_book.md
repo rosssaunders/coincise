@@ -1,4 +1,6 @@
-# Book
+# GET /v2/book/{symbol}/{precision}
+
+**Source:** [https://docs.bitfinex.com/reference/rest-public-book](https://docs.bitfinex.com/reference/rest-public-book)
 
 get
 
@@ -46,7 +48,8 @@ For funding currency symbols (ex. fUSD)
 
 * * *
 
-<table><tbody><tr><td>Rate Limit:</td><td>240 reqs/min (requests per minute)</td></tr></tbody></table>
+| --- | --- |
+| Rate Limit: | 240 reqs/min (requests per minute) |
 
 Path Params
 
@@ -87,9 +90,3 @@ curl \--request GET \\
      \--url 'https://api-pub.bitfinex.com/v2/book/tBTCUSD/P0?len=25' \\
 
      \--header 'accept: application/json'
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-book
-Path: /v2/book/tBTCUSD/P0?len=25
-Method: GET

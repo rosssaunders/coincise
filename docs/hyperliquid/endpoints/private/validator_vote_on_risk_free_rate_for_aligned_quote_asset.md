@@ -1,11 +1,6 @@
 # Validator vote on risk-free rate for aligned quote asset
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
-
-####
-
-[](#headers-21)
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
 Headers
 
@@ -20,10 +15,6 @@ Content-Type\*
 String
 
 "application/json"
-
-####
-
-[](#request-body-17)
 
 Request Body
 
@@ -56,8 +47,6 @@ signature\*
 Object
 
 200: OK Successful Response
-
-Copy
 
 ```
 {'status': 'ok', 'response': {'type': 'default'}}

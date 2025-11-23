@@ -1,6 +1,10 @@
-# Thalex Withdrawal Request
+# POST /v2/auth/w/ext/wallets/withdrawals/request
 
-post https://api.bitfinex.com/v2/auth/w/ext/wallets/withdrawals/request
+**Source:** [https://docs.bitfinex.com/reference/thalex-withdrawal-request](https://docs.bitfinex.com/reference/thalex-withdrawal-request)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/ext/wallets/withdrawals/request
 
 Withdraw from Thalex to Bitfinex
 
@@ -73,9 +77,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: Thalex Derivatives
-Source: https://docs.bitfinex.com/reference/thalex-withdrawal-request
-Path: /v2/auth/w/ext/wallets/withdrawals/request
-Method: POST

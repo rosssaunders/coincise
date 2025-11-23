@@ -1,4 +1,6 @@
-# Foreign Exchange Rate
+# POST /v2/calc/fx
+
+**Source:** [https://docs.bitfinex.com/reference/rest-public-foreign-exchange-rate](https://docs.bitfinex.com/reference/rest-public-foreign-exchange-rate)
 
 post
 
@@ -14,7 +16,8 @@ Response Fields
 
 * * *
 
-<table><tbody><tr><td>Rate Limit:</td><td>90 reqs/min (requests per minute)</td></tr></tbody></table>
+| --- | --- |
+| Rate Limit: | 90 reqs/min (requests per minute) |
 
 Body Params
 
@@ -59,9 +62,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-foreign-exchange-rate
-Path: /v2/calc/fx
-Method: POST

@@ -1,4 +1,6 @@
-# Configs
+# GET /v2/conf/pub:{Action}:{Object}:{Detail}
+
+**Source:** [https://docs.bitfinex.com/reference/rest-public-conf](https://docs.bitfinex.com/reference/rest-public-conf)
 
 get
 
@@ -118,9 +120,3 @@ curl \--request GET \\
      \--url https://api-pub.bitfinex.com/v2/conf/pub:list:pair:exchange \\
 
      \--header 'accept: application/json'
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-conf
-Path: /v2/conf/pub:list:pair:exchange
-Method: GET

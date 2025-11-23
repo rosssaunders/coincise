@@ -1,6 +1,10 @@
-# User Settings Write
+# POST /v2/auth/w/settings/set
 
-post https://api.bitfinex.com/v2/auth/w/settings/set
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-settings-set](https://docs.bitfinex.com/reference/rest-auth-settings-set)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/settings/set
 
 Allows you to create custom settings by creating key: value pairs.
 
@@ -44,9 +48,3 @@ curl \--request POST \\
      \--header 'content-type: application/json' \\
 
      \--data '{}'
-
----
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-settings-set
-Path: /v2/auth/w/settings/set
-Method: POST

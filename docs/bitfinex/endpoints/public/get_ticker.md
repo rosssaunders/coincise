@@ -1,4 +1,6 @@
-# Ticker
+# GET /v2/ticker/{symbol}
+
+**Source:** [https://docs.bitfinex.com/reference/rest-public-ticker](https://docs.bitfinex.com/reference/rest-public-ticker)
 
 get
 
@@ -38,13 +40,12 @@ Response Fields (funding currencies, ex. fUSD)
 | [10] | VOLUME | float | Daily volume |
 | [11] | HIGH | float | Daily high |
 | [12] | LOW | float | Daily low |
-[ . . . ]
-
 | [15] | FRR\_AMOUNT\_AVAILABLE | float | The amount of funding that is available at the Flash Return Rate |
 
 * * *
 
-<table><tbody><tr><td>Rate Limit:</td><td>90 reqs/min (requests per minute)</td></tr></tbody></table>
+| --- | --- |
+| Rate Limit: | 90 reqs/min (requests per minute) |
 
 Path Params
 
@@ -65,9 +66,3 @@ curl \--request GET \\
      \--url https://api-pub.bitfinex.com/v2/ticker/tBTCUSD \\
 
      \--header 'accept: application/json'
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-ticker
-Path: /v2/ticker/tBTCUSD
-Method: GET

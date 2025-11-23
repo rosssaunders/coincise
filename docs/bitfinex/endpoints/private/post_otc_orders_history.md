@@ -1,6 +1,10 @@
-# OTC Orders History
+# POST /v2/auth/r/orders/otc/{Symbol}/hist
 
-post https://api.bitfinex.com/v2/auth/r/orders/otc/{Symbol}/hist
+**Source:** [https://docs.bitfinex.com/reference/otc-orders-history](https://docs.bitfinex.com/reference/otc-orders-history)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/orders/otc/{Symbol}/hist
 
 Returns historic OTC orders.
 
@@ -18,19 +22,11 @@ OTC order arrays
 | [1] | SYMBOL | string | Pair (tBTCUSD, …) |
 | [2] | MTS\_CREATE | int | Millisecond timestamp of creation |
 | [3] | MTS\_UPDATE | int | Millisecond timestamp of update |
-[ . . . ]
-
 | [5] | INITIATOR | int | Order initiator, 0 means counter party initiated order, 1 means user initiated the order |
 | [6] | INITIATOR\_NICKNAME | string | Nickname of the initiator |
 | [7] | COUNTER\_PARTY\_NICKNAME | string | Nickname of the counter party user |
-
-[ . . . ]
-
 | [9] | AMOUNT | float | Positive means buy, negative means sell |
 | [10] | PRICE | float | Order price |
-
-[ . . . ]
-
 | [12] | STATUS | string | OTC order status, available statuses are: PENDING, CANCELED, REJECTED, COMPLETED |
 | [13] | TIF | int | Millisecond timestamp of automatic trade cancelation |
 
@@ -87,9 +83,3 @@ curl \--request POST \\
      \--header 'content-type: application/json' \\
 
      \--data '{"limit":25}'
-
----
-Section: Orders
-Source: https://docs.bitfinex.com/reference/otc-orders-history
-Path: /v2/auth/r/orders/otc/Symbol/hist
-Method: POST

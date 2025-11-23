@@ -1,6 +1,10 @@
-# Funding Offers History
+# POST /v2/auth/r/funding/offers/{Symbol}/hist
 
-post https://api.bitfinex.com/v2/auth/r/funding/offers/{Symbol}/hist
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-funding-offers-hist](https://docs.bitfinex.com/reference/rest-auth-funding-offers-hist)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/funding/offers/{Symbol}/hist
 
 Get past inactive funding offers.
 
@@ -21,23 +25,13 @@ Funding offers history entry arrays (Index [0...n])
 | [4] | AMOUNT | Float | Amount the offer is for |
 | [5] | AMOUNT\_ORIG | Float | Amount the offer was entered with originally |
 | [6] | TYPE | String | Offer type ('LIMIT') |
-[ . . . ]
-
 | [9] | FLAGS | Object | Future params object (stay tuned) |
 | [10] | STATUS | String | Offer Status: EXECUTED, CANCELED |
-
-[ . . . ]
-
 | [14] | RATE | Float | Rate of the offer (percentage expressed as decimal number i.e. 1% = 0.01) |
 | [15] | PERIOD | Int | Period of the offer |
 | [16] | NOTIFY | Int | 0 if false, 1 if true |
 | [17] | HIDDEN | Int | 0 if false, 1 if true |
-
-[ . . . ]
-
 | [19] | RENEW | Int | 0 if false, 1 if true |
-
-[ . . . ]
 
 **Ratelimit**: 90 req/min
 
@@ -84,9 +78,3 @@ curl \--request POST \\
      \--header 'content-type: application/json' \\
 
      \--data '{"limit":25}'
-
----
-Section: Margin Funding
-Source: https://docs.bitfinex.com/reference/rest-auth-funding-offers-hist
-Path: /v2/auth/r/funding/offers/Symbol/hist
-Method: POST

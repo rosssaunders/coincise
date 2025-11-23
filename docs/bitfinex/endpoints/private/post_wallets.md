@@ -1,4 +1,6 @@
-# Wallets
+# POST /v2/auth/r/wallets
+
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-wallets](https://docs.bitfinex.com/reference/rest-auth-wallets)
 
 post
 
@@ -26,7 +28,8 @@ Wallet arrays
 
 * * *
 
-<table><tbody><tr><td>Rate Limit:</td><td>90 reqs/min (requests per minute)</td></tr></tbody></table>
+| --- | --- |
+| Rate Limit: | 90 reqs/min (requests per minute) |
 
 Body Params
 
@@ -49,9 +52,3 @@ curl \--request POST \\
      \--header 'accept: application/json' \\
 
      \--data '{}'
-
----
-Section: Wallets
-Source: https://docs.bitfinex.com/reference/rest-auth-wallets
-Path: /v2/auth/r/wallets
-Method: POST

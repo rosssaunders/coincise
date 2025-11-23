@@ -1,4 +1,6 @@
-# Candles
+# GET /v2/candles/{candle}/{section}
+
+**Source:** [https://docs.bitfinex.com/reference/rest-public-candles](https://docs.bitfinex.com/reference/rest-public-candles)
 
 get
 
@@ -64,7 +66,8 @@ Aggregate funding currency candles
 
 * * *
 
-<table><tbody><tr><td>Rate Limit:</td><td>30 reqs/min (requests per minute)</td></tr></tbody></table>
+| --- | --- |
+| Rate Limit: | 30 reqs/min (requests per minute) |
 
 Path Params
 
@@ -121,9 +124,3 @@ curl \--request GET \\
      \--url https://api-pub.bitfinex.com/v2/candles/trade%3A1m%3AtBTCUSD/hist \\
 
      \--header 'accept: application/json'
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-candles
-Path: /v2/candles/trade%3A1m%3AtBTCUSD/hist
-Method: GET

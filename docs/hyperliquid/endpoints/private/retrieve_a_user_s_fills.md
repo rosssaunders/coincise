@@ -1,15 +1,10 @@
-# Retrieve a user's fills
+# POST /info
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
 `POST` `https://api.hyperliquid.xyz/info`
 
 Returns at most 2000 most recent fills
-
-####
-
-[](#headers-3)
 
 Headers
 
@@ -24,10 +19,6 @@ Content-Type\*
 String
 
 "application/json"
-
-####
-
-[](#request-body-3)
 
 Request Body
 
@@ -47,22 +38,17 @@ user\*
 
 String
 
-Address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000.
+Address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.
 
 aggregateByTime
 
 bool
 
-When true, partial fills are combined when a crossing order gets filled by
-multiple different resting orders. Resting orders filled by multiple crossing
-orders are only aggregated if in the same block.
+When true, partial fills are combined when a crossing order gets filled by multiple different resting orders. Resting orders filled by multiple crossing orders are only aggregated if in the same block.
 
 200: OK
 
-Copy
-
-```
+```json
 [
     // Perp fill
     {
@@ -82,7 +68,7 @@ Copy
         "builderFee": "0.01", // this is optional and will not be present if 0
         "tid": 118906512037719
     },
-    // Spot fill - note the difference in the "coin" format. Refer to
+    // Spot fill - note the difference in the "coin" format. Refer to 
     // https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/asset-ids
     // for more information on how spot asset IDs work
     {

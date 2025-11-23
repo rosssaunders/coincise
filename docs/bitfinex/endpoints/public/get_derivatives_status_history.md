@@ -1,4 +1,6 @@
-# Derivatives Status History
+# GET /v2/status/deriv/{key}/hist
+
+**Source:** [https://docs.bitfinex.com/reference/rest-public-derivatives-status-history](https://docs.bitfinex.com/reference/rest-public-derivatives-status-history)
 
 get
 
@@ -11,41 +13,22 @@ Response Fields
 | Index | Field | Type | Description |
 | --- | --- | --- | --- |
 | [0] | MTS | int | Millisecond epoch timestamp |
-[ . . . ]
-
 | [2] | DERIV\_PRICE | float | Derivative book mid price |
 | [3] | SPOT\_PRICE | float | Book mid price of the underlying Bitfinex spot trading pair |
-
-[ . . . ]
-
 | [5] | INSURANCE\_FUND\_BALANCE | float | The balance available to the liquidation engine to absorb losses |
-
-[ . . . ]
-
 | [7] | NEXT\_FUNDING\_EVT\_MTS | int | Millisecond timestamp of next funding event |
 | [8] | NEXT\_FUNDING\_ACCRUED | float | Current accrued funding for next 8h period |
 | [9] | NEXT\_FUNDING\_STEP | int | Incremental accrual counter |
-
-[ . . . ]
-
 | [11] | CURRENT\_FUNDING | float | Funding applied in the current 8h period |
-
-[ . . . ]
-
 | [14] | MARK\_PRICE | float | Price based on the BFX Composite Index |
-
-[ . . . ]
-
 | [17] | OPEN\_INTEREST | float | Total number of outstanding derivative contracts |
-
-[ . . . ]
-
 | [21] | CLAMP\_MIN | float | Range in the average spread that does not require a funding payment |
 | [22] | CLAMP\_MAX | float | Funding payment cap |
 
 * * *
 
-<table><tbody><tr><td>Rate Limit:</td><td>90 reqs/min (requests per minute)</td></tr></tbody></table>
+| --- | --- |
+| Rate Limit: | 90 reqs/min (requests per minute) |
 
 Path Params
 
@@ -92,9 +75,3 @@ curl \--request GET \\
      \--url https://api-pub.bitfinex.com/v2/status/deriv/tBTCF0%3AUSTF0/hist \\
 
      \--header 'accept: application/json'
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-derivatives-status-history
-Path: /v2/status/deriv/tBTCF0%3AUSTF0/hist
-Method: GET

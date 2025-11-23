@@ -54,6 +54,106 @@ const generateFilename = (method, path) => {
 }
 
 /**
+ * Detect code block language
+ */
+const detectCodeLanguage = code => {
+  const trimmed = code.trim()
+
+  // Check for JSON
+  if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+    try {
+      JSON.parse(trimmed)
+      return 'json'
+    } catch (e) {
+      if (trimmed.includes('"') && (trimmed.includes(':') || trimmed.includes(','))) {
+        return 'json'
+      }
+    }
+  }
+
+  // Check for Python
+  if (/^(import|from)\s+/.test(trimmed) ||
+      /\bdef\s+\w+\(/.test(trimmed) ||
+      /\bprint\(/.test(trimmed)) {
+    return 'python'
+  }
+
+  // Check for JavaScript/TypeScript
+  if (/^(const|let|var)\s+/.test(trimmed) ||
+      /require\(['"']/.test(trimmed) ||
+      /^import\s+.*from/.test(trimmed) ||
+      /=>\s*{/.test(trimmed)) {
+    return 'javascript'
+  }
+
+  // Check for shell/bash
+  if (/^(curl|wget|http|GET|POST|PUT|DELETE|PATCH)\s+/i.test(trimmed)) {
+    return 'bash'
+  }
+
+  return null
+}
+
+/**
+ * Clean up markdown content and tag code blocks
+ */
+const cleanMarkdown = content => {
+  const lines = content.split('\n')
+  const cleanedLines = []
+  let inCodeBlock = false
+  let codeBlockContent = []
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i]
+
+    // Handle code block detection and language tagging
+    if (line.trim().startsWith('```')) {
+      if (!inCodeBlock) {
+        // Starting a code block
+        inCodeBlock = true
+        codeBlockContent = []
+        if (line.trim() === '```') {
+          cleanedLines.push(line)
+        } else {
+          cleanedLines.push(line)
+        }
+      } else {
+        // Closing a code block
+        inCodeBlock = false
+
+        // If the opening was untagged, detect language and add it
+        const openingLineIndex = cleanedLines.length - codeBlockContent.length - 1
+        if (openingLineIndex >= 0 && cleanedLines[openingLineIndex].trim() === '```') {
+          const codeContent = codeBlockContent.join('\n')
+          const detectedLang = detectCodeLanguage(codeContent)
+          if (detectedLang) {
+            cleanedLines[openingLineIndex] = '```' + detectedLang
+          }
+        }
+
+        cleanedLines.push(line)
+        codeBlockContent = []
+      }
+      continue
+    }
+
+    // Track code block content for language detection
+    if (inCodeBlock) {
+      codeBlockContent.push(line)
+      cleanedLines.push(line)
+      continue
+    }
+
+    cleanedLines.push(line)
+  }
+
+  return cleanedLines
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+}
+
+/**
  * Determine if endpoint requires authentication
  */
 const isPrivateEndpoint = (title, content) => {
@@ -182,8 +282,10 @@ const main = async () => {
     // Wait for content to load
     await page.waitForSelector(".content", { timeout: 30000 })
 
-    // Create turndown service
-    const turndownService = createTurndownBuilder().build()
+    // Create turndown service with table support
+    const turndownService = createTurndownBuilder()
+      .withTablesWithoutHeaders()
+      .build()
 
     // Ensure output directories exist
     ensureDir(path.join(OUTPUT_DIR, "public"))
@@ -212,7 +314,20 @@ const main = async () => {
 
       for (const endpoint of endpoints) {
         const markdown = turndownService.turndown(endpoint.html)
-        const fullMarkdown = `${markdown}\n\n---\n\n**Source:** ${BASE_URL}#${endpoint.id}\n`
+        const cleanedMarkdown = cleanMarkdown(markdown)
+
+        // Remove the H1 from content since we'll add our own
+        const contentWithoutH1 = cleanedMarkdown.replace(/^#\s+[^\n]+\n*/m, '')
+
+        // Create H1 with HTTP method and path
+        const h1 = `# ${endpoint.method} ${endpoint.path}`
+
+        const fullMarkdown = `${h1}
+
+**Source:** ${BASE_URL}#${endpoint.id}
+
+${contentWithoutH1}
+`
 
         const isPrivate = isPrivateEndpoint(
           endpoint.title,

@@ -1,13 +1,8 @@
-# Query a user's HIP-3 DEX abstraction state
+# POST /info
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
 `POST` `https://api.hyperliquid.xyz/info`
-
-####
-
-[](#headers-18)
 
 Headers
 
@@ -22,10 +17,6 @@ Content-Type\*
 String
 
 "application/json"
-
-####
-
-[](#request-body-20)
 
 Request Body
 
@@ -48,8 +39,6 @@ String
 hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.
 
 200: OK
-
-Copy
 
 ```
 true

@@ -1,6 +1,10 @@
-# Balance Available for Orders/Offers
+# POST /v2/auth/calc/order/avail
 
-post https://api.bitfinex.com/v2/auth/calc/order/avail
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-calc-order-avail](https://docs.bitfinex.com/reference/rest-auth-calc-order-avail)
+
+post
+
+https://api.bitfinex.com/v2/auth/calc/order/avail
 
 Calculate the balance available for orders/offers
 
@@ -59,9 +63,3 @@ curl \--request POST \\
      \--header 'accept: application/json' \\
 
      \--header 'content-type: application/json'
-
----
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-calc-order-avail
-Path: /v2/auth/calc/order/avail
-Method: POST

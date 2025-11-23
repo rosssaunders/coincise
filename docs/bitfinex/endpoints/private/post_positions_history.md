@@ -1,6 +1,10 @@
-# Positions History
+# POST /v2/auth/r/positions/hist
 
-post https://api.bitfinex.com/v2/auth/r/positions/hist
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-positions-hist](https://docs.bitfinex.com/reference/rest-auth-positions-hist)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/positions/hist
 
 Returns data on past positions. Timestamps can be used to retrieve results for a specific time period.
 
@@ -20,13 +24,9 @@ Position history entry arrays (Index [0...n])
 | [3] | BASE\_PRICE | float | Base price of the position. (Average traded price of the previous orders of the position) |
 | [4] | FUNDING | float | Funding amount |
 | [5] | FUNDING\_TYPE | int | 0 for daily, 1 for term. |
-[ . . . ]
-
 | [11] | POSITION\_ID | int | Position identifier |
 | [12] | MTS\_CREATE | int | Timestamp of creation (millis) |
 | [13] | MTS\_UPDATE | int | Timestamp of last update (millis) |
-
-[ . . . ]
 
 **Ratelimit**: 90 req/min
 
@@ -65,9 +65,3 @@ curl \--request POST \\
      \--header 'accept: application/json' \\
 
      \--header 'content-type: application/json'
-
----
-Section: Positions
-Source: https://docs.bitfinex.com/reference/rest-auth-positions-hist
-Path: /v2/auth/r/positions/hist
-Method: POST

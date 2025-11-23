@@ -156,7 +156,7 @@ const processEndpointPage = async (page, url, turndownService, type) => {
   // console.log(`  Processing ${url}...`)
   try {
     await page.goto(url, { waitUntil: "networkidle2", timeout: 30000 })
-    
+
     const html = await page.evaluate(() => {
       const content = document.querySelector(".theme-doc-markdown.markdown")
       return content ? content.innerHTML : ""
@@ -170,7 +170,7 @@ const processEndpointPage = async (page, url, turndownService, type) => {
     const dom = new JSDOM(html)
     const document = dom.window.document
     adjustHeadingLevels(document)
-    
+
     // Pre-process code blocks to preserve newlines
     const codeBlocks = document.querySelectorAll("pre code, code")
     for (const block of codeBlocks) {
@@ -180,6 +180,23 @@ const processEndpointPage = async (page, url, turndownService, type) => {
 
     const cleanedHtml = dom.serialize()
     const markdown = turndownService.turndown(cleanedHtml)
+
+    // Skip general documentation pages that are not actual endpoints
+    // These pages contain examples of endpoints but are not endpoint definitions
+    const isGeneralDoc =
+      markdown.includes("Endpoint Security") ||
+      markdown.includes("Timing security") ||
+      markdown.includes("Public Endpoints Info") ||
+      markdown.includes("SIGNED Endpoint Examples for") ||
+      markdown.includes("Request issues") ||
+      markdown.includes("Error Codes") ||
+      url.includes("/general-info") ||
+      url.includes("/error-code")
+
+    if (isGeneralDoc) {
+      // console.log(`  ⚠️  Skipping general documentation page: ${url}`)
+      return false
+    }
 
     const methodPath = extractMethodAndPath(markdown)
     if (!methodPath) {

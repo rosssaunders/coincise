@@ -1,6 +1,10 @@
-# Funding Close
+# POST /v2/auth/w/funding/close
 
-post https://api.bitfinex.com/v2/auth/w/funding/close
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-funding-close](https://docs.bitfinex.com/reference/rest-auth-funding-close)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/funding/close
 
 Return Taken "Used" or "Unused" funding.
 
@@ -10,11 +14,7 @@ Response data
 | --- | --- | --- | --- |
 | [0] | MTS | Int | Millisecond Time Stamp of the update |
 | [1] | TYPE | String | Purpose of notification ('on-req', 'oc-req', 'uca', 'fon-req', 'foc-req') |
-[ . . . ]
-
 | [6] | STATUS | String | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
-
-[ . . . ]
 
 > 🚧
 > 
@@ -47,9 +47,3 @@ curl \--request POST \\
      \--header 'accept: application/json' \\
 
      \--header 'content-type: application/json'
-
----
-Section: Margin Funding
-Source: https://docs.bitfinex.com/reference/rest-auth-funding-close
-Path: /v2/auth/w/funding/close
-Method: POST

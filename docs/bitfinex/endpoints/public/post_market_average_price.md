@@ -1,4 +1,6 @@
-# Market Average Price
+# POST /v2/calc/trade/avg
+
+**Source:** [https://docs.bitfinex.com/reference/rest-public-market-average-price](https://docs.bitfinex.com/reference/rest-public-market-average-price)
 
 post
 
@@ -24,7 +26,8 @@ For funding currency symbols (ex. fUSD)
 
 * * *
 
-<table><tbody><tr><td>Rate Limit:</td><td>90 reqs/min (requests per minute)</td></tr></tbody></table>
+| --- | --- |
+| Rate Limit: | 90 reqs/min (requests per minute) |
 
 Query Params
 
@@ -67,9 +70,3 @@ curl \--request POST \\
      \--url 'https://api-pub.bitfinex.com/v2/calc/trade/avg?symbol=tBTCUSD&amount=1.123' \\
 
      \--header 'accept: application/json'
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-market-average-price
-Path: /v2/calc/trade/avg?symbol=tBTCUSD&amount=1.123
-Method: POST

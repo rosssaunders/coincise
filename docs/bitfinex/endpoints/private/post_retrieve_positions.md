@@ -1,6 +1,10 @@
-# Retrieve Positions
+# POST /v2/auth/r/positions
 
-post https://api.bitfinex.com/v2/auth/r/positions
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-positions](https://docs.bitfinex.com/reference/rest-auth-positions)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/positions
 
 Get active positions
 
@@ -24,18 +28,10 @@ Positions Array
 | [7] | PL\_PERC | float | Profit & loss percentage |
 | [8] | PRICE\_LIQ | float | Liquidation price |
 | [9] | LEVERAGE | float | Leverage used for the position |
-[ . . . ]
-
 | [11] | POSITION\_ID | int | Position ID |
 | [12] | MTS\_CREATE | int | Millisecond timestamp of creation |
 | [13] | MTS\_UPDATE | int | Millisecond timestamp of update |
-
-[ . . . ]
-
 | [15] | TYPE | int | Identifies the type of position: 0 = Margin position, 1 = Derivatives position |
-
-[ . . . ]
-
 | [17] | COLLATERAL | float | Position collateral |
 | [18] | COLLATERAL\_MIN | float | Min Collateral Required |
 | [19] | META | JSON str | Meta data about the position |
@@ -63,9 +59,3 @@ curl \--request POST \\
      \--header 'content-type: application/json' \\
 
      \--data '{}'
-
----
-Section: Positions
-Source: https://docs.bitfinex.com/reference/rest-auth-positions
-Path: /v2/auth/r/positions
-Method: POST

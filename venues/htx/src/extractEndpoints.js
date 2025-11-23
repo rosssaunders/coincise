@@ -338,6 +338,17 @@ const isPublicEndpoint = (content, title, category) => {
 
   const contentLower = content.toLowerCase()
 
+  // Check for explicit signature verification status
+  // "Signature verification: No" means the endpoint is public
+  if (contentLower.includes("signature verification: no")) {
+    return true
+  }
+
+  // "Signature verification: Yes" means the endpoint is private
+  if (contentLower.includes("signature verification: yes")) {
+    return false
+  }
+
   // Check for authentication requirements in content
   const hasApiKey =
     contentLower.includes("api-key") ||

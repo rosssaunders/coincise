@@ -46,6 +46,166 @@ const sanitizeFilename = name => {
 }
 
 /**
+ * Detect code block language
+ */
+const detectCodeLanguage = code => {
+  const trimmed = code.trim()
+
+  // Check for JSON
+  if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+    try {
+      JSON.parse(trimmed)
+      return 'json'
+    } catch (e) {
+      if (trimmed.includes('"') && (trimmed.includes(':') || trimmed.includes(','))) {
+        return 'json'
+      }
+    }
+  }
+
+  // Check for Python
+  if (/^(import|from)\s+/.test(trimmed) ||
+      /\bdef\s+\w+\(/.test(trimmed) ||
+      /\bprint\(/.test(trimmed)) {
+    return 'python'
+  }
+
+  // Check for JavaScript/TypeScript
+  if (/^(const|let|var)\s+/.test(trimmed) ||
+      /require\(['"']/.test(trimmed) ||
+      /^import\s+.*from/.test(trimmed) ||
+      /=>\s*{/.test(trimmed)) {
+    return 'javascript'
+  }
+
+  // Check for shell/bash
+  if (/^(curl|wget|http|GET|POST|PUT|DELETE|PATCH)\s+/i.test(trimmed)) {
+    return 'bash'
+  }
+
+  return null
+}
+
+/**
+ * Clean up markdown content - remove GitBook artifacts and tag code blocks
+ */
+const cleanMarkdown = content => {
+  const lines = content.split('\n')
+  const cleanedLines = []
+  let inCodeBlock = false
+  let codeBlockContent = []
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i]
+
+    // Handle code block detection and language tagging
+    if (line.trim().startsWith('```')) {
+      if (!inCodeBlock) {
+        // Starting a code block
+        inCodeBlock = true
+        codeBlockContent = []
+        if (line.trim() === '```') {
+          cleanedLines.push(line)
+        } else {
+          cleanedLines.push(line)
+        }
+      } else {
+        // Closing a code block
+        inCodeBlock = false
+
+        // If the opening was untagged, detect language and add it
+        const openingLineIndex = cleanedLines.length - codeBlockContent.length - 1
+        if (openingLineIndex >= 0 && cleanedLines[openingLineIndex].trim() === '```') {
+          const codeContent = codeBlockContent.join('\n')
+          const detectedLang = detectCodeLanguage(codeContent)
+          if (detectedLang) {
+            cleanedLines[openingLineIndex] = '```' + detectedLang
+          }
+        }
+
+        cleanedLines.push(line)
+        codeBlockContent = []
+      }
+      continue
+    }
+
+    // Track code block content for language detection
+    if (inCodeBlock) {
+      codeBlockContent.push(line)
+      cleanedLines.push(line)
+      continue
+    }
+
+    // Skip processing inside code blocks
+    if (!inCodeBlock) {
+      // Remove GitBook artifacts
+
+      // Remove empty heading markers (####)
+      if (line.match(/^#{2,6}\s*$/)) {
+        continue
+      }
+
+      // Remove GitBook anchor links like [](#headers)
+      if (line.match(/^\[\]\(#[^)]*\)$/)) {
+        continue
+      }
+
+      // Remove "Copy" text that appears before code blocks
+      if (line.trim() === 'Copy') {
+        continue
+      }
+
+      // Remove lines that are just numbers
+      if (line.match(/^\s*\d+\s*$/)) {
+        continue
+      }
+
+      // Clean up anchor links inline
+      line = line.replace(/\[\]\(#[^)]*\)/g, '')
+    }
+
+    cleanedLines.push(line)
+  }
+
+  return cleanedLines
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+}
+
+/**
+ * Extract HTTP method and path from content
+ */
+const extractMethodAndPath = content => {
+  // Look for patterns like "`POST` `https://api.hyperliquid.xyz/info`"
+  const match = content.match(/`(GET|POST|PUT|DELETE|PATCH)`\s+`([^`]+)`/i)
+  if (match) {
+    const method = match[1].toUpperCase()
+    const fullUrl = match[2]
+
+    // Extract path from URL
+    try {
+      const url = new URL(fullUrl)
+      return {
+        method,
+        path: url.pathname
+      }
+    } catch (e) {
+      // If URL parsing fails, try to extract path manually
+      const pathMatch = fullUrl.match(/https?:\/\/[^/]+(\/[^?\s]*)/)
+      if (pathMatch) {
+        return {
+          method,
+          path: pathMatch[1]
+        }
+      }
+    }
+  }
+
+  return null
+}
+
+/**
  * Extract endpoints from Info endpoint page
  */
 const extractInfoEndpoints = async (page, turndownService) => {
@@ -83,10 +243,14 @@ const extractInfoEndpoints = async (page, turndownService) => {
     return results
   }, url)
 
-  return endpoints.map(endpoint => ({
-    ...endpoint,
-    content: turndownService.turndown(endpoint.content)
-  }))
+  return endpoints.map(endpoint => {
+    const markdown = turndownService.turndown(endpoint.content)
+    const cleanedContent = cleanMarkdown(markdown)
+    return {
+      ...endpoint,
+      content: cleanedContent
+    }
+  })
 }
 
 /**
@@ -127,10 +291,14 @@ const extractExchangeEndpoints = async (page, turndownService) => {
     return results
   }, url)
 
-  return endpoints.map(endpoint => ({
-    ...endpoint,
-    content: turndownService.turndown(endpoint.content)
-  }))
+  return endpoints.map(endpoint => {
+    const markdown = turndownService.turndown(endpoint.content)
+    const cleanedContent = cleanMarkdown(markdown)
+    return {
+      ...endpoint,
+      content: cleanedContent
+    }
+  })
 }
 
 /**
@@ -152,10 +320,13 @@ const extractWebSocketEndpoints = async (page, turndownService) => {
     return ""
   })
 
+  const markdown = turndownService.turndown(content)
+  const cleanedContent = cleanMarkdown(markdown)
+
   return [
     {
       name: "WebSocket API",
-      content: turndownService.turndown(content),
+      content: cleanedContent,
       sourceUrl: url
     }
   ]
@@ -218,7 +389,16 @@ const saveEndpoint = (endpoint, category) => {
   const filename = `${sanitizeFilename(endpoint.name)}.md`
   const outputPath = path.join(OUTPUT_DIR, "endpoints", category, filename)
 
-  const content = `# ${endpoint.name}
+  // Extract HTTP method and path from content
+  const methodPath = extractMethodAndPath(endpoint.content)
+
+  // Create H1 heading - prefer method/path format if available
+  let h1Heading = endpoint.name
+  if (methodPath) {
+    h1Heading = `${methodPath.method} ${methodPath.path}`
+  }
+
+  const content = `# ${h1Heading}
 
 **Source:** ${endpoint.sourceUrl}
 
@@ -235,7 +415,9 @@ const main = async () => {
   const page = await browser.newPage()
   await configurePage(page)
 
-  const turndownService = createTurndownBuilder().build()
+  const turndownService = createTurndownBuilder()
+    .withTablesWithoutHeaders()
+    .build()
 
   try {
     ensureDir(OUTPUT_DIR)
