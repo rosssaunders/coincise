@@ -6,7 +6,7 @@
   "main": "ai-pr-summary.js",
   "scripts": {
     "generate-pr-summary": "node generate-pr-summary.js",
-    "generate-twitter-summary": "node generate-twitter-summary.js"
+    "generate-twitter-summary": "node ai-x-post.js"
   },
   "dependencies": {
     "openai": "^5.22.0"

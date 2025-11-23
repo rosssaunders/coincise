@@ -8,6 +8,9 @@ on:
 
 jobs:
   update-docs:
+    permissions:
+      contents: write
+      pull-requests: write
     uses: ./.github/workflows/reusable-docs-update.yml
     with:
       venue_name: 'Bitmart'
