@@ -1,6 +1,10 @@
-# Generate Invoice
+# POST /v2/auth/w/deposit/invoice
 
-post https://api.bitfinex.com/v2/auth/w/deposit/invoice
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-deposit-invoice](https://docs.bitfinex.com/reference/rest-auth-deposit-invoice)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/deposit/invoice
 
 Generates a Lightning Network deposit invoice
 
@@ -20,8 +24,6 @@ Response data
 | --- | --- | --- | --- |
 | [0] | INVOICE\_HASH | String | Hashed invoice |
 | [1] | INVOICE | String | Requested invoice |
-[ . . . ]
-
 | [4] | AMOUNT | String | Amount of invoice |
 
 Body Params
@@ -79,9 +81,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-deposit-invoice
-Path: /v2/auth/w/deposit/invoice
-Method: POST

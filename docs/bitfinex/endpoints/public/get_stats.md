@@ -1,4 +1,6 @@
-# Stats
+# GET /v2/stats1/{key}:{size}:{sym_platform}:{side_pair}/{section}
+
+**Source:** [https://docs.bitfinex.com/reference/rest-public-stats](https://docs.bitfinex.com/reference/rest-public-stats)
 
 get
 
@@ -41,7 +43,8 @@ Available keys description
 
 * * *
 
-<table><tbody><tr><td>Rate Limit:</td><td>15 reqs/min (requests per minute)</td></tr></tbody></table>
+| --- | --- |
+| Rate Limit: | 15 reqs/min (requests per minute) |
 
 Path Params
 
@@ -128,9 +131,3 @@ curl \--request GET \\
      \--url https://api-pub.bitfinex.com/v2/stats1/pos.size:1m:tBTCUSD:long/hist \\
 
      \--header 'accept: application/json'
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-stats
-Path: /v2/stats1/pos.size:1m:tBTCUSD:long/hist
-Method: GET

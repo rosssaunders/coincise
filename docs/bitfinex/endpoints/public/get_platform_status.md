@@ -1,4 +1,6 @@
-# Platform Status
+# GET /v2/platform/status
+
+**Source:** [https://docs.bitfinex.com/reference/rest-public-platform-status](https://docs.bitfinex.com/reference/rest-public-platform-status)
 
 get
 
@@ -28,18 +30,5 @@ Response Fields
 
 * * *
 
-<table><tbody><tr><td>Rate Limit:</td><td>30 reqs/min (requests per minute)</td></tr></tbody></table>
-
-Response
-
-curl \--request GET \\
-
-     \--url https://api-pub.bitfinex.com/v2/platform/status \\
-
-     \--header 'accept: application/json'
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-platform-status
-Path: /v2/platform/status
-Method: GET
+| --- | --- |
+| Rate Limit: | 30 reqs/min (requests per minute) |

@@ -1,13 +1,8 @@
-# Query aligned quote token status
+# POST /info
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
 `POST` `https://api.hyperliquid.xyz/info`
-
-####
-
-[](#headers-19)
 
 Headers
 
@@ -22,10 +17,6 @@ Content-Type\*
 String
 
 "application/json"
-
-####
-
-[](#request-body-21)
 
 Request Body
 
@@ -49,9 +40,7 @@ token index
 
 200: OK
 
-Copy
-
-```
+```json
 {
     "isAligned": true,
     "firstAlignedTime": 1758949452538,

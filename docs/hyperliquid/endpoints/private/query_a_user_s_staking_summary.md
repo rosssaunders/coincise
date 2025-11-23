@@ -1,13 +1,8 @@
-# Query a user's staking summary
+# POST /info
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
 `POST` `https://api.hyperliquid.xyz/info`
-
-####
-
-[](#headers-15)
 
 Headers
 
@@ -22,10 +17,6 @@ Content-Type\*
 String
 
 "application/json"
-
-####
-
-[](#request-body-17)
 
 Request Body
 
@@ -49,9 +40,7 @@ hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.
 
 200: OK
 
-Copy
-
-```
+```json
 {
     "delegated": "12060.16529862",
     "undelegated": "0.0",

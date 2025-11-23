@@ -1,6 +1,10 @@
-# Active Funding Offers
+# POST /v2/auth/r/funding/offers/{Symbol}
 
-post https://api.bitfinex.com/v2/auth/r/funding/offers/{Symbol}
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-funding-offers](https://docs.bitfinex.com/reference/rest-auth-funding-offers)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/funding/offers/{Symbol}
 
 Get active funding offers. A path param can be used to retrieve offers in a particular currency. All offers are returned if no currency is specified.
 
@@ -21,23 +25,13 @@ Active funding offers entry arrays (index [0...n]
 | [4] | AMOUNT | Float | Amount of the offer |
 | [5] | AMOUNT\_ORIG | Float | Amount of the offer when it was first created |
 | [6] | TYPE | String | "LIMIT, ..." |
-[ . . . ]
-
 | [9] | FLAGS | Object | Future params object (stay tuned) |
 | [10] | STATUS | String | Offer Status: ACTIVE, PARTIALLY FILLED |
-
-[ . . . ]
-
 | [14] | RATE | Float | Rate of the offer (percentage expressed as decimal number i.e. 1% = 0.01) |
 | [15] | PERIOD | Int | Period of the offer |
 | [16] | NOTIFY | Int | 0 if false, 1 if true |
 | [17] | HIDDEN | Int | null if false, 1 if true |
-
-[ . . . ]
-
 | [19] | RENEW | Int | 0 if false, 1 if true |
-
-[ . . . ]
 
 **Ratelimit**: 90 req/min
 
@@ -72,9 +66,3 @@ curl \--request POST \\
      \--header 'content-type: application/json' \\
 
      \--data '{}'
-
----
-Section: Margin Funding
-Source: https://docs.bitfinex.com/reference/rest-auth-funding-offers
-Path: /v2/auth/r/funding/offers/Symbol
-Method: POST

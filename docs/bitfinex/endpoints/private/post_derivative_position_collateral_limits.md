@@ -1,6 +1,10 @@
-# Derivative Position Collateral Limits
+# POST /v2/auth/calc/deriv/collateral/limits
 
-post https://api.bitfinex.com/v2/auth/calc/deriv/collateral/limits
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-calc-deriv-collateral-limits](https://docs.bitfinex.com/reference/rest-auth-calc-deriv-collateral-limits)
+
+post
+
+https://api.bitfinex.com/v2/auth/calc/deriv/collateral/limits
 
 Calculate the minimum and maximum collateral that can be assigned to your derivative position.
 
@@ -54,9 +58,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: Positions
-Source: https://docs.bitfinex.com/reference/rest-auth-calc-deriv-collateral-limits
-Path: /v2/auth/calc/deriv/collateral/limits
-Method: POST

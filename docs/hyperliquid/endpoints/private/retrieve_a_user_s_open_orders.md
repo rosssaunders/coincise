@@ -1,15 +1,10 @@
-# Retrieve a user's open orders
+# POST /info
 
-**Source:**
-https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
 `POST` `https://api.hyperliquid.xyz/info`
 
 See a user's open orders
-
-####
-
-[](#headers-1)
 
 Headers
 
@@ -24,10 +19,6 @@ Content-Type\*
 String
 
 "application/json"
-
-####
-
-[](#request-body-1)
 
 Request Body
 
@@ -47,21 +38,17 @@ user\*
 
 String
 
-Address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000.
+Address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.
 
 dex
 
 String
 
-Perp dex name. Defaults to the empty string which represents the first perp dex.
-Spot open orders are only included with the first perp dex.
+Perp dex name. Defaults to the empty string which represents the first perp dex. Spot open orders are only included with the first perp dex.
 
 200: OK Successful R
 
-Copy
-
-```
+```json
 [
     {
         "coin": "BTC",

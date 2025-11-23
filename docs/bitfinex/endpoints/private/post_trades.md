@@ -1,6 +1,10 @@
-# Trades
+# POST /v2/auth/r/trades/hist
 
-post https://api.bitfinex.com/v2/auth/r/trades/hist
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-trades](https://docs.bitfinex.com/reference/rest-auth-trades)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/trades/hist
 
 Retrieve your trades. Your most recent trades will be retrieved by default, but a timestamp can be used to retrieve time-specific data.
 
@@ -33,7 +37,8 @@ Response Fields
 
 * * *
 
-<table><tbody><tr><td>Rate Limit:</td><td>90 reqs/min (requests per minute)</td></tr></tbody></table>
+| --- | --- |
+| Rate Limit: | 90 reqs/min (requests per minute) |
 
 Body Params
 
@@ -70,9 +75,3 @@ curl \--request POST \\
      \--header 'Content-Type: application/json' \\
 
      \--header 'accept: application/json'
-
----
-Section: Orders
-Source: https://docs.bitfinex.com/reference/rest-auth-trades
-Path: /v2/auth/r/trades/hist
-Method: POST

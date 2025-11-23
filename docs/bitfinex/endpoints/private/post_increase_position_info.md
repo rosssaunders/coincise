@@ -1,6 +1,10 @@
-# Increase Position Info
+# POST /v2/auth/r/position/increase/info
 
-post https://api.bitfinex.com/v2/auth/r/position/increase/info
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-increase-position-info](https://docs.bitfinex.com/reference/rest-auth-increase-position-info)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/position/increase/info
 
 Returns information relevant to the increase position endpoint.
 
@@ -10,8 +14,6 @@ Returns information relevant to the increase position endpoint.
 | --- | --- | --- | --- |
 | [0] | POSITION INFO | [Position Info Array](#position-info-index-0) | Position info |
 | [1] | BALANCE INFO | [Balance Info Array](#balance-info-index-1) | Array of info with base currency balance, tradable balance data, and available funding |
-[ . . . ]
-
 | [4] | FUNDING INFO | [Funding Info Array](#funding-info-index-4) | Array with data on funding required |
 | [5] | FUNDING CURRENCY INFO | [Funding Currency Info Array](#funding-currency-info-index-5) | Array with additional info on funding required |
 
@@ -96,9 +98,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: Positions
-Source: https://docs.bitfinex.com/reference/rest-auth-increase-position-info
-Path: /v2/auth/r/position/increase/info
-Method: POST

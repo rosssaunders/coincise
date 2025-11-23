@@ -1,6 +1,6 @@
-# Funding Stats
+# GET /v2/funding/stats/{symbol}/hist
 
-# Funding Statistics
+**Source:** [https://docs.bitfinex.com/reference/rest-public-funding-stats](https://docs.bitfinex.com/reference/rest-public-funding-stats)
 
 get
 
@@ -13,18 +13,10 @@ Response Fields
 | Index | Field | Type | Description |
 | --- | --- | --- | --- |
 | [0] | MTS | int | Milliseconds epoch timestamp |
-[ . . . ]
-
 | [3] | FRR | float | 1/365th of Flash Return Rate (To get the daily rate, use: **rate x 365**. To get the daily rate as percentage use: **rate x 365 x 100**. To get APR as percentage use **rate x 100 x 365 x 365**.) |
 | [4] | AVG\_PERIOD | float | Average period for funding provided |
-
-[ . . . ]
-
 | [7] | FUNDING\_AMOUNT | float | Total funding provided |
 | [8] | FUNDING\_AMOUNT\_USED | float | Total funding provided that is used in positions |
-
-[ . . . ]
-
 | [11] | FUNDING\_BELOW\_THRESHOLD | float | Sum of open funding offers < 0.75% |
 
 Path Params
@@ -64,9 +56,3 @@ Response
 Request
 
 curl https://api-pub.bitfinex.com/v2/funding/stats/fUSD/hist
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-funding-stats
-Path: /v2/funding/stats/fUSD/hist
-

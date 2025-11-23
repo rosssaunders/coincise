@@ -1,6 +1,10 @@
-# Order Multi-OP
+# POST /v2/auth/w/order/multi
 
-post https://api.bitfinex.com/v2/auth/w/order/multi
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-order-multi](https://docs.bitfinex.com/reference/rest-auth-order-multi)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/order/multi
 
 Send Multiple order-related operations. Please note the sent object has only one property with a value of an array of arrays detailing each order operation. (Max 75 operations per request)
 
@@ -219,9 +223,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: Orders
-Source: https://docs.bitfinex.com/reference/rest-auth-order-multi
-Path: /v2/auth/w/order/multi
-Method: POST

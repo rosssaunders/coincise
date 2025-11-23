@@ -1,4 +1,6 @@
-# Liquidations
+# GET /v2/liquidations/hist
+
+**Source:** [https://docs.bitfinex.com/reference/rest-public-liquidations](https://docs.bitfinex.com/reference/rest-public-liquidations)
 
 get
 
@@ -10,29 +12,19 @@ Request Fields
 
 | Index | Field | Type | Description |
 | --- | --- | --- | --- |
-[ . . . ]
-
 | [1] | POS\_ID | int | Position ID |
 | [2] | MTS | int | Millisecond epoch timestamp |
-
-[ . . . ]
-
 | [4] | SYMBOL | string | Trading pair (e.g. tBTCUSD, ...) |
 | [5] | AMOUNT | float | Size of the position. Positive values means a long position, negative values means a short position. |
 | [6] | BASE\_PRICE | float | The price at which user entered the position |
-
-[ . . . ]
-
 | [8] | IS\_MATCH | int | 0: initial liquidation trigger | 1: market execution |
 | [9] | IS\_MARKET\_SOLD | int | 0: position acquired by the system | 1: direct sell into the market |
-
-[ . . . ]
-
 | [11] | PRICE\_ACQUIRED | float | The price at which the position has been acquired |
 
 * * *
 
-<table><tbody><tr><td>Rate Limit:</td><td>3 reqs/min (requests per minute)</td></tr></tbody></table>
+| --- | --- |
+| Rate Limit: | 3 reqs/min (requests per minute) |
 
 Query Params
 
@@ -67,9 +59,3 @@ curl \--request GET \\
      \--url https://api-pub.bitfinex.com/v2/liquidations/hist \\
 
      \--header 'accept: application/json'
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-liquidations
-Path: /v2/liquidations/hist
-Method: GET

@@ -1,6 +1,10 @@
-# Deposit Address
+# POST /v2/auth/w/deposit/address
 
-post https://api.bitfinex.com/v2/auth/w/deposit/address
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-deposit-address](https://docs.bitfinex.com/reference/rest-auth-deposit-address)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/deposit/address
 
 Retrieve your deposit address or generate a new deposit address for a specific currency and wallet.
 
@@ -21,8 +25,6 @@ Response data
 | [0] | MTS | int | Seconds epoch timestamp of notification |
 | [1] | TYPE | string | Notification's type ("on-req") |
 | [2] | MESSAGE\_ID | int | Unique notification's ID |
-[ . . . ]
-
 | [4] | DEPOSIT\_ADDRESS\_ARRAY | [Deposit address array](#deposit-address-arrays-index-4) | An array containing deposit adddress data |
 | [5] | CODE | int | W.I.P. (work in progress) |
 | [6] | STATUS | string | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
@@ -32,13 +34,8 @@ Deposit address arrays (Index [4])
 
 | Index | Field | Type | Description |
 | --- | --- | --- | --- |
-[ . . . ]
-
 | [1] | METHOD | String | Method of deposit |
 | [2] | CURRENCY\_CODE | String | Currency code of new address |
-
-[ . . . ]
-
 | [4] | ADDRESS | String | Deposit address (instead of the address, this field will show Tag/Memo/Payment\_ID for currencies that require it) |
 | [5] | POOL\_ADDRESS | String | Pool address (for currencies that require a Tag/Memo/Payment\_ID) |
 
@@ -107,9 +104,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-deposit-address
-Path: /v2/auth/w/deposit/address
-Method: POST

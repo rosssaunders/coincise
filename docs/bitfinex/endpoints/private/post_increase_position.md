@@ -1,6 +1,10 @@
-# Increase Position
+# POST /v2/auth/w/position/increase
 
-post https://api.bitfinex.com/v2/auth/w/position/increase
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-position-increase](https://docs.bitfinex.com/reference/rest-auth-position-increase)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/position/increase
 
 Essentially a reverse of the [Claim Position](/reference#rest-auth-position-claim) feature, the Increase Position feature allows you to create a new position using the funds in your margin wallet. For more information about this feature, please look to the [Increase Position article](https://support.bitfinex.com/hc/en-us/articles/900004477903-Increase-Position) on our knowledge base.
 
@@ -25,8 +29,6 @@ Response Fields
 | [0] | MTS | int | Seconds epoch timestamp of notification |
 | [1] | TYPE | string | Notification's type ("pmi-req") |
 | [2] | MESSAGE\_ID | int | Unique notification's ID |
-[ . . . ]
-
 | [4] | DATA | [Position increase array](#position-increase-array)[] | An array containing info on the position increase |
 | [5] | CODE | int | W.I.P. (work in progress) |
 | [6] | STATUS | string | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
@@ -37,12 +39,8 @@ Position increase array
 | Index | Field | Type | Description |
 | --- | --- | --- | --- |
 | [0] | SYMBOL | string | Pair (tBTCUSD, …) |
-[ . . . ]
-
 | [2] | AMOUNT | float | Size of the position. Positive for long, negative for short positions |
 | [3] | BASE\_PRICE | float | Base price of the position (average of all trades related to the position) |
-
-[ . . . ]
 
 **Ratelimit**: 90 req/min
 
@@ -89,9 +87,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: Positions
-Source: https://docs.bitfinex.com/reference/rest-auth-position-increase
-Path: /v2/auth/w/position/increase
-Method: POST

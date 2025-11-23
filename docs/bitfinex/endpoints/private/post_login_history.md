@@ -1,6 +1,10 @@
-# Login History
+# POST /v2/auth/r/logins/hist
 
-post https://api.bitfinex.com/v2/auth/r/logins/hist
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-logins-hist](https://docs.bitfinex.com/reference/rest-auth-logins-hist)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/logins/hist
 
 Retrieve a list of past logins.
 
@@ -15,16 +19,8 @@ Login info arrays (index [0...n])
 | Index | Field | Type | Description |
 | --- | --- | --- | --- |
 | [0] | ID | Int | Login ID |
-[ . . . ]
-
 | [2] | TIME | Int | Millisecond timestamp of login |
-
-[ . . . ]
-
 | [4] | IP | String | IP address of login |
-
-[ . . . ]
-
 | [7] | EXTRA\_INFO | Object | Object with extra information |
 
 **Ratelimit**: 90 req/min
@@ -58,9 +54,3 @@ curl \--request POST \\
      \--header 'accept: application/json' \\
 
      \--header 'content-type: application/json'
-
----
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-logins-hist
-Path: /v2/auth/r/logins/hist
-Method: POST

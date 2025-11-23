@@ -112,10 +112,13 @@ Key features:
 
 EOF
 
-    # Find all markdown files in docs directory and group by exchange
-    declare -A exchanges
+    # Find all markdown files in docs directory, sort them, and process
+    # Using a simpler approach compatible with bash 3.2 (no associative arrays)
     
-    while IFS= read -r -d '' file; do
+    current_exchange=""
+    
+    # Find files, sort them to group by exchange, and process line by line
+    find "$DOCS_DIR" -name "*.md" -type f | sort | while read -r file; do
         # Get relative path from docs directory
         rel_path="${file#$DOCS_DIR/}"
         
@@ -127,45 +130,43 @@ EOF
             continue
         fi
         
-        # Store file in exchange array
-        if [[ -z "${exchanges[$exchange]:-}" ]]; then
-            exchanges[$exchange]="$rel_path"
-        else
-            exchanges[$exchange]="${exchanges[$exchange]}|$rel_path"
+        # If we encountered a new exchange, print the header
+        if [[ "$exchange" != "$current_exchange" ]]; then
+            # Capitalize first letter using python (reliable on macos)
+            exchange_cap=$(echo "$exchange" | python3 -c "import sys; print(sys.stdin.read().strip().capitalize())")
+            
+            echo "" >> "$temp_file"
+            echo "### $exchange_cap" >> "$temp_file"
+            echo "" >> "$temp_file"
+            current_exchange="$exchange"
         fi
-    done < <(find "$DOCS_DIR" -name "*.md" -type f -print0)
-    
-    # Sort exchanges alphabetically
-    for exchange in $(printf '%s\n' "${!exchanges[@]}" | sort); do
-        echo "" >> "$temp_file"
-        echo "### ${exchange^}" >> "$temp_file"
-        echo "" >> "$temp_file"
         
-        # Split files for this exchange and sort them
-        IFS='|' read -ra files <<< "${exchanges[$exchange]}"
+        # Create a descriptive name from the file path
+        filename=$(basename "$file" .md)
+        subdir=$(dirname "$file" | cut -d'/' -f2-)
         
-        # Sort files and process them
-        printf '%s\n' "${files[@]}" | sort | while read -r file; do
-            # Create a descriptive name from the file path
-            filename=$(basename "$file" .md)
-            subdir=$(dirname "$file" | cut -d'/' -f2-)
+        # Create a readable title
+        if [[ "$subdir" == "$exchange" ]]; then
+            # File is directly in exchange directory
+            title=$(echo "$filename" | sed 's/_/ /g' | sed 's/\b\w/\u&/g')
+        else
+            # File is in subdirectory
+            # Remove exchange name from subdir path if it starts with it (to avoid redundancy)
+            subdir_clean=$(echo "$subdir" | sed "s/^$exchange\///" | sed 's/_/ /g' | sed 's/\b\w/\u&/g')
+            title_clean=$(echo "$filename" | sed 's/_/ /g' | sed 's/\b\w/\u&/g')
             
-            # Create a readable title
-            if [[ "$subdir" == "$exchange" ]]; then
-                # File is directly in exchange directory
-                title=$(echo "$filename" | sed 's/_/ /g' | sed 's/\b\w/\u&/g')
+            # If subdir is same as exchange (happens with dirname logic sometimes), just use filename
+            if [[ "$subdir" == "$DOCS_DIR/$exchange" || "$subdir" == "$exchange" ]]; then
+                 title="$title_clean"
             else
-                # File is in subdirectory
-                subdir_clean=$(echo "$subdir" | sed 's/_/ /g' | sed 's/\b\w/\u&/g')
-                title_clean=$(echo "$filename" | sed 's/_/ /g' | sed 's/\b\w/\u&/g')
-                title="$subdir_clean - $title_clean"
+                 title="$subdir_clean - $title_clean"
             fi
-            
-            # Generate the URL
-            url="$BASE_URL/docs/$file"
-            
-            echo "- [$title]($url)" >> "$temp_file"
-        done
+        fi
+        
+        # Generate the URL
+        url="$BASE_URL/docs/$rel_path"
+        
+        echo "- [$title]($url)" >> "$temp_file"
     done
     
     # Add additional sections

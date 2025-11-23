@@ -1,6 +1,10 @@
-# Positions Snapshot
+# POST /v2/auth/r/positions/snap
 
-post https://api.bitfinex.com/v2/auth/r/positions/snap
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-positions-snap](https://docs.bitfinex.com/reference/rest-auth-positions-snap)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/positions/snap
 
 Returns position snapshots of user positions between the specified start and end perimiters. Snapshots are taken daily.
 
@@ -20,13 +24,9 @@ Position snapshot entry arrays (index [0...n])
 | [3] | BASE\_PRICE | float | Base price of the position. (Average traded price of the previous orders of the position) |
 | [4] | FUNDING | float | Funding amount |
 | [5] | FUNDING\_TYPE | int | 0 for daily, 1 for term. |
-[ . . . ]
-
 | [11] | POSITION\_ID | int | Position identifier |
 | [12] | MTS\_CREATE | int | Timestamp of creation (millis) |
 | [13] | MTS\_UPDATE | int | Timestamp of last update (millis) |
-
-[ . . . ]
 
 **Ratelimit**: 90 req/min
 
@@ -65,9 +65,3 @@ curl \--request POST \\
      \--header 'accept: application/json' \\
 
      \--header 'content-type: application/json'
-
----
-Section: Positions
-Source: https://docs.bitfinex.com/reference/rest-auth-positions-snap
-Path: /v2/auth/r/positions/snap
-Method: POST

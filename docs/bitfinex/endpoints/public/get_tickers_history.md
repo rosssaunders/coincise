@@ -1,4 +1,6 @@
-# Tickers History
+# GET /v2/tickers/hist
+
+**Source:** [https://docs.bitfinex.com/reference/rest-public-tickers-history](https://docs.bitfinex.com/reference/rest-public-tickers-history)
 
 get
 
@@ -14,12 +16,7 @@ Response Fields
 | --- | --- | --- | --- |
 | [0] | SYMBOL | string | The symbol of the requested ticker history data |
 | [1] | BID | float | Price of last highest bid |
-[ . . . ]
-
 | [3] | ASK | float | Price of last lowest ask |
-
-[ . . . ]
-
 | [12] | MTS | int | Millisecond epoch timestamp |
 
 Query Params
@@ -69,9 +66,3 @@ curl \--request GET \\
      \--url 'https://api-pub.bitfinex.com/v2/tickers/hist?symbols=ALL&limit=100&sort=-1' \\
 
      \--header 'accept: application/json'
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-tickers-history
-Path: /v2/tickers/hist?symbols=ALL&limit=100&sort=-1
-Method: GET

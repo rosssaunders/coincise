@@ -1,6 +1,10 @@
-# Derivative Position Collateral
+# POST /v2/auth/w/deriv/collateral/set
 
-post https://api.bitfinex.com/v2/auth/w/deriv/collateral/set
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-deriv-pos-collateral-set](https://docs.bitfinex.com/reference/rest-auth-deriv-pos-collateral-set)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/deriv/collateral/set
 
 Update the amount of collateral assigned to a derivative position
 
@@ -55,9 +59,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: Positions
-Source: https://docs.bitfinex.com/reference/rest-auth-deriv-pos-collateral-set
-Path: /v2/auth/w/deriv/collateral/set
-Method: POST

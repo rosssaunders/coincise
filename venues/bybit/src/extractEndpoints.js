@@ -102,20 +102,20 @@ const getAllEndpoints = () => {
  */
 const detectLanguage = code => {
   const trimmed = code.trim()
-  
+
   // Check for HTTP requests
   if (/^(GET|POST|PUT|DELETE|PATCH)\s+\//.test(trimmed)) {
     return 'bash'
   }
-  
+
   // Check for Python
-  if (/^(from|import)\s+/.test(trimmed) || 
+  if (/^(from|import)\s+/.test(trimmed) ||
       /\bdef\s+\w+\(/.test(trimmed) ||
       /\bprint\(/.test(trimmed) ||
       /session\s*=\s*HTTP\(/.test(trimmed)) {
     return 'python'
   }
-  
+
   // Check for JavaScript/Node.js
   if (/^(const|let|var)\s+/.test(trimmed) ||
       /require\(['"']/.test(trimmed) ||
@@ -124,13 +124,22 @@ const detectLanguage = code => {
       /\.catch\(/.test(trimmed)) {
     return 'javascript'
   }
-  
-  // Check for JSON
-  if ((trimmed.startsWith('{') || trimmed.startsWith('[')) && 
-      (trimmed.includes('"') || trimmed.includes(':'))) {
-    return 'json'
+
+  // Check for JSON - improved detection
+  // Try to parse as JSON first (most reliable)
+  if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+    try {
+      JSON.parse(trimmed)
+      return 'json'
+    } catch (e) {
+      // If it looks like JSON but fails to parse, still tag it as json
+      // This handles malformed JSON that should still be highlighted as JSON
+      if (trimmed.includes('"') && (trimmed.includes(':') || trimmed.includes(','))) {
+        return 'json'
+      }
+    }
   }
-  
+
   return null
 }
 

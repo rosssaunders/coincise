@@ -1,6 +1,10 @@
-# Thalex Deposit Request
+# POST /v2/auth/w/ext/wallets/deposits/request
 
-post https://api.bitfinex.com/v2/auth/w/ext/wallets/deposits/request
+**Source:** [https://docs.bitfinex.com/reference/thalex-deposit-request](https://docs.bitfinex.com/reference/thalex-deposit-request)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/ext/wallets/deposits/request
 
 Deposit to Thalex from Bitfinex
 
@@ -61,9 +65,3 @@ curl \--request POST \\
      \--header 'Content-Type: application/json' \\
 
      \--header 'accept: application/json'
-
----
-Section: Thalex Derivatives
-Source: https://docs.bitfinex.com/reference/thalex-deposit-request
-Path: /v2/auth/w/ext/wallets/deposits/request
-Method: POST

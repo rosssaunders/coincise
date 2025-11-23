@@ -125,6 +125,47 @@ const extractEndpointsFromPage = async (page, pageUrl) => {
 }
 
 /**
+ * Detect programming language from code content
+ */
+const detectCodeLanguage = code => {
+  const trimmed = code.trim()
+
+  // Check for JSON
+  if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+    try {
+      JSON.parse(trimmed)
+      return 'json'
+    } catch (e) {
+      // If it looks like JSON but fails to parse, still tag it as json
+      if (trimmed.includes('"') && (trimmed.includes(':') || trimmed.includes(','))) {
+        return 'json'
+      }
+    }
+  }
+
+  // Check for shell/bash commands
+  if (/^(curl|wget|http|GET|POST|PUT|DELETE|PATCH)\s+/i.test(trimmed)) {
+    return 'bash'
+  }
+
+  // Check for Python
+  if (/^(import|from)\s+/.test(trimmed) ||
+      /\bdef\s+\w+\(/.test(trimmed) ||
+      /\bprint\(/.test(trimmed)) {
+    return 'python'
+  }
+
+  // Check for JavaScript/Node.js
+  if (/^(const|let|var)\s+/.test(trimmed) ||
+      /require\(['"']/.test(trimmed) ||
+      /=>\s*{/.test(trimmed)) {
+    return 'javascript'
+  }
+
+  return null
+}
+
+/**
  * Extract content from an endpoint page
  */
 const extractEndpointContent = async (page, endpointUrl, turndownService) => {
@@ -139,9 +180,48 @@ const extractEndpointContent = async (page, endpointUrl, turndownService) => {
 
   const { html, httpMethod, apiPath } = await page.evaluate(() => {
     const main = document.querySelector(
-      'main, article, .content-body, [role="main"]'
+      'main, article, .content-body, [role="main"], .SuperHubReference-article-wrapper3MpzTHD_pHxT'
     )
     if (!main) return { html: "", httpMethod: null, apiPath: null }
+
+    // Extract HTTP method and API path from the page header
+    // Bitfinex shows "METHOD https://full-url" at the top of each endpoint page
+    let method = null
+    let path = null
+
+    const walker = document.createTreeWalker(
+      main,
+      NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT,
+      null
+    )
+
+    // Scan through nodes looking for method followed by URL
+    while (walker.nextNode() && !method) {
+      const node = walker.currentNode
+      const text = node.textContent.trim()
+
+      // Look for method and URL in a single text node
+      const match = text.match(/^(GET|POST|PUT|DELETE|PATCH)\s+(https?:\/\/[^\s]+)/i)
+      if (match) {
+        method = match[1].toUpperCase()
+        // Extract the URL
+        const urlMatch = match[2].match(/^(https?:\/\/[^)\s]+)/)
+        const apiUrl = urlMatch ? urlMatch[1] : match[2]
+
+        // Extract just the path from the URL
+        try {
+          const url = new URL(apiUrl)
+          path = decodeURIComponent(url.pathname)
+        } catch (e) {
+          // If URL parsing fails, try to extract path manually
+          const pathMatch = apiUrl.match(/https?:\/\/[^/]+(\/[^?\s]*)/)
+          if (pathMatch) {
+            path = decodeURIComponent(pathMatch[1])
+          }
+        }
+        break
+      }
+    }
 
     // Clone to avoid modifying original
     const clone = main.cloneNode(true)
@@ -179,28 +259,21 @@ const extractEndpointContent = async (page, endpointUrl, turndownService) => {
       }
     })
 
-    // Try to extract HTTP method and path from code blocks
-    let method = null
-    let path = null
-
-    const codeBlocks = clone.querySelectorAll("pre, code")
-    for (const code of codeBlocks) {
-      const text = code.textContent
-
-      // Look for HTTP method
-      const methodMatch = text.match(/\b(GET|POST|PUT|DELETE|PATCH)\b/)
-      if (methodMatch && !method) {
-        method = methodMatch[1]
+    // Remove table rows that only contain separator text like "[ . . . ]"
+    clone.querySelectorAll('tr').forEach(tr => {
+      const text = tr.textContent.trim()
+      if (text.match(/^\[\s*\.\s*\.\s*\.\s*\]$/)) {
+        tr.remove()
       }
+    })
 
-      // Look for API path
-      const pathMatch = text.match(/\/v\d+\/[^\s\n"']+/)
-      if (pathMatch && !path) {
-        path = pathMatch[0]
+    // Remove paragraphs that only contain separator text like "[ . . . ]"
+    clone.querySelectorAll('p').forEach(p => {
+      const text = p.textContent.trim()
+      if (text.match(/^\[\s*\.\s*\.\s*\.\s*\]$/)) {
+        p.remove()
       }
-
-      if (method && path) break
-    }
+    })
 
     return {
       html: clone.innerHTML,
@@ -211,18 +284,55 @@ const extractEndpointContent = async (page, endpointUrl, turndownService) => {
 
   let markdown = turndownService.turndown(html)
 
-  // Post-process markdown to clean up issues
+  // Post-process markdown to clean up issues and tag code blocks
   const lines = markdown.split('\n')
   const cleanedLines = []
   const seenH1 = new Set()
   let inCodeBlock = false
+  let codeBlockContent = []
 
   for (let i = 0; i < lines.length; i++) {
     let line = lines[i]
 
-    // Track code block state
+    // Handle code block detection and language tagging
     if (line.trim().startsWith('```')) {
-      inCodeBlock = !inCodeBlock
+      if (!inCodeBlock) {
+        // Starting a code block
+        inCodeBlock = true
+        codeBlockContent = []
+        // Check if it already has a language tag
+        if (line.trim() === '```') {
+          // No language tag yet, we'll add it when we close the block
+          cleanedLines.push(line)
+        } else {
+          // Already has a language tag
+          cleanedLines.push(line)
+        }
+      } else {
+        // Closing a code block
+        inCodeBlock = false
+
+        // If the opening was untagged, detect language and add it
+        const openingLineIndex = cleanedLines.length - codeBlockContent.length - 1
+        if (openingLineIndex >= 0 && cleanedLines[openingLineIndex].trim() === '```') {
+          const codeContent = codeBlockContent.join('\n')
+          const detectedLang = detectCodeLanguage(codeContent)
+          if (detectedLang) {
+            cleanedLines[openingLineIndex] = '```' + detectedLang
+          }
+        }
+
+        cleanedLines.push(line)
+        codeBlockContent = []
+      }
+      continue
+    }
+
+    // Track code block content for language detection
+    if (inCodeBlock) {
+      codeBlockContent.push(line)
+      cleanedLines.push(line)
+      continue
     }
 
     // Skip processing inside code blocks
@@ -257,7 +367,7 @@ const extractEndpointContent = async (page, endpointUrl, turndownService) => {
       }
 
       // Remove separator lines like [ . . . ]
-      if (line.match(/^\s*\[\s*\.\s*\.\s*\.\s*\]\s*$/)) {
+      if (line.match(/^\s*\[\s*\.\s*\.\s*\]\s*$/)) {
         continue
       }
 
@@ -352,16 +462,29 @@ const processEndpoints = async (page, endpoints, turndownService) => {
       const method = httpMethod || "get"
       const filename = generateFilename(method, endpoint.title)
 
-      // Check if markdown already starts with the title heading
-      const hasTitle = markdown.startsWith(`# ${endpoint.title}`)
+      // Create proper H1 heading with HTTP method and path
+      let h1Heading = endpoint.title
+      if (httpMethod && apiPath) {
+        h1Heading = `${httpMethod} ${apiPath}`
+      } else if (httpMethod) {
+        h1Heading = `${httpMethod} ${endpoint.title}`
+      }
 
-      const fullMarkdown = `${hasTitle ? '' : `# ${endpoint.title}\n\n`}${markdown}
+      // Check if markdown already starts with any H1 heading
+      const hasH1 = markdown.match(/^#\s+/)
 
----
-Section: ${endpoint.section}
-Source: ${BASE_URL}${endpoint.url}
-${apiPath ? `Path: ${apiPath}` : ""}
-${httpMethod ? `Method: ${httpMethod}` : ""}
+      // Remove the old H1 if it exists and is just the title
+      let cleanedMarkdown = markdown
+      if (hasH1) {
+        // Remove the first H1 line
+        cleanedMarkdown = markdown.replace(/^#\s+[^\n]+\n*/m, '')
+      }
+
+      const fullMarkdown = `# ${h1Heading}
+
+**Source:** [${BASE_URL}${endpoint.url}](${BASE_URL}${endpoint.url})
+
+${cleanedMarkdown}
 `
 
       const category = isPublic ? "public" : "private"
@@ -394,8 +517,10 @@ const extractEndpoints = async () => {
     const page = await browser.newPage()
     await configurePage(page)
 
-    // Create turndown service
-    const turndownService = createTurndownBuilder().build()
+    // Create turndown service with table support
+    const turndownService = createTurndownBuilder()
+      .withTablesWithoutHeaders()
+      .build()
 
     // Extract endpoints from both public and authenticated pages
     console.log("\nExtracting endpoint list from REST Public page...")

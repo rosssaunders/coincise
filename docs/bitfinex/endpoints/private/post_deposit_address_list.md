@@ -1,6 +1,10 @@
-# Deposit Address List
+# POST /v2/auth/r/deposit/address/all
 
-post https://api.bitfinex.com/v2/auth/r/deposit/address/all
+**Source:** [https://docs.bitfinex.com/reference/deposit-address-all](https://docs.bitfinex.com/reference/deposit-address-all)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/deposit/address/all
 
 Retrieve all deposit addresses for a specific currency.
 
@@ -56,9 +60,3 @@ curl \--request POST \\
      \--header 'accept: application/json' \\
 
      \--header 'content-type: application/json'
-
----
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/deposit-address-all
-Path: /v2/auth/r/deposit/address/all
-Method: POST

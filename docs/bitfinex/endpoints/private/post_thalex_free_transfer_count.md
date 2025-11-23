@@ -1,6 +1,10 @@
-# Thalex Free Transfer Count
+# POST /v2/auth/r/ext/wallets/transfers/free/count
 
-post https://api.bitfinex.com/v2/auth/r/ext/wallets/transfers/free/count
+**Source:** [https://docs.bitfinex.com/reference/thalex-free-transfer-count](https://docs.bitfinex.com/reference/thalex-free-transfer-count)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/ext/wallets/transfers/free/count
 
 Get information about free transfers and their renewal. Users are eligible for two free deposits every 24 hours.
 
@@ -44,9 +48,3 @@ curl \--request POST \\
 }
 
 '
-
----
-Section: Thalex Derivatives
-Source: https://docs.bitfinex.com/reference/thalex-free-transfer-count
-Path: /v2/auth/r/ext/wallets/transfers/free/count
-Method: POST

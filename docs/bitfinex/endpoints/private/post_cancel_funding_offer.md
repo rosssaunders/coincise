@@ -1,6 +1,10 @@
-# Cancel Funding Offer
+# POST /v2/auth/w/funding/offer/cancel
 
-post https://api.bitfinex.com/v2/auth/w/funding/offer/cancel
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-cancel-funding-offer](https://docs.bitfinex.com/reference/rest-auth-cancel-funding-offer)
+
+post
+
+https://api.bitfinex.com/v2/auth/w/funding/offer/cancel
 
 Cancels an existing Funding Offer based on the offer ID entered.
 
@@ -21,8 +25,6 @@ Response data
 | [0] | MTS | int | Seconds epoch timestamp of notification |
 | [1] | TYPE | string | Notification's type ("on-req") |
 | [2] | MESSAGE\_ID | int | Unique notification's ID |
-[ . . . ]
-
 | [4] | FUNDING\_OFFER\_ARRAY | [FUNDING\_OFFER\_ARRAY](#funding-offer-array-index-4) | An array containing only the new offer |
 | [5] | CODE | int | W.I.P. (work in progress) |
 | [6] | STATUS | string | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
@@ -39,20 +41,12 @@ Funding offer array (Index [4])
 | [4] | AMOUNT | Float | Current amount of the offer |
 | [5] | AMOUNT\_ORIGINAL | Float | Amount of the initial offer |
 | [6] | OFFER\_TYPE | String | Offer Type |
-[ . . . ]
-
 | [9] | FLAGS | Int | Flags active on the offer; see https://docs.bitfinex.com/v2/docs/flag-values |
 | [10] | OFFER\_STATUS | String | Offer Status: ACTIVE, EXECUTED, PARTIALLY FILLED, CANCELED |
-
-[ . . . ]
-
 | [14] | RATE | Float | Rate of the offer (percentage expressed as decimal number i.e. 1% = 0.01) |
 | [15] | PERIOD | Int | Period of the offer |
 | [16] | NOTIFY | Boolean | True / false |
 | [17] | HIDDEN | Int | 0 if false, 1 if true |
-
-[ . . . ]
-
 | [19] | RENEW | Boolean | True / false |
 
 **Ratelimit**: 90 req/min
@@ -76,9 +70,3 @@ curl \--request POST \\
      \--header 'accept: application/json' \\
 
      \--header 'content-type: application/json'
-
----
-Section: Margin Funding
-Source: https://docs.bitfinex.com/reference/rest-auth-cancel-funding-offer
-Path: /v2/auth/w/funding/offer/cancel
-Method: POST

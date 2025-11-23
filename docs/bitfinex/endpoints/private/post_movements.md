@@ -1,6 +1,10 @@
-# Movements
+# POST /v2/auth/r/movements/{Currency}/hist
 
-post https://api.bitfinex.com/v2/auth/r/movements/{Currency}/hist
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-movements](https://docs.bitfinex.com/reference/rest-auth-movements)
+
+post
+
+https://api.bitfinex.com/v2/auth/r/movements/{Currency}/hist
 
 View your past deposits/withdrawals. Currency can be specified to retrieve movements specific to that currency.
 
@@ -17,27 +21,13 @@ Movement arrays (Index [0...n])
 | [0] | ID | String | Movement identifier |
 | [1] | CURRENCY | String | The symbol of the currency (ex. "BTC") |
 | [2] | CURRENCY\_NAME | String | The extended name of the currency (ex. "BITCOIN") |
-[ . . . ]
-
 | [5] | MTS\_STARTED | Int | Movement started at |
 | [6] | MTS\_UPDATED | Int | Movement last updated at |
-
-[ . . . ]
-
 | [9] | STATUS | String | Current status |
-
-[ . . . ]
-
 | [12] | AMOUNT | String | Amount of funds moved (positive for deposits, negative for withdrawals) |
 | [13] | FEES | String | Tx Fees applied |
-
-[ . . . ]
-
 | [16] | DESTINATION\_ADDRESS | String | Destination address |
 | [17] | PAYMENT\_ID | String | Payment ID (if relevant) |
-
-[ . . . ]
-
 | [20] | TRANSACTION\_ID | String | Transaction identifier |
 | [21] | WITHDRAW\_TRANSACTION\_NOTE | String | Optional personal withdraw transaction note |
 
@@ -96,9 +86,3 @@ curl \--request POST \\
      \--header 'accept: application/json' \\
 
      \--header 'content-type: application/json'
-
----
-Section: Account Actions
-Source: https://docs.bitfinex.com/reference/rest-auth-movements
-Path: /v2/auth/r/movements/Currency/hist
-Method: POST

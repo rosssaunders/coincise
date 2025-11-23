@@ -1,4 +1,6 @@
-# Tickers
+# GET /v2/tickers
+
+**Source:** [https://docs.bitfinex.com/reference/rest-public-tickers](https://docs.bitfinex.com/reference/rest-public-tickers)
 
 get
 
@@ -54,13 +56,12 @@ For funding currency symbols (ex. fUSD)
 | [11] | VOLUME | float | Daily volume |
 | [12] | HIGH | float | Daily high |
 | [13] | LOW | float | Daily low |
-[ . . . ]
-
 | [16] | FRR\_AMOUNT\_AVAILABLE | float | The amount of funding that is available at the Flash Return Rate |
 
 * * *
 
-<table><tbody><tr><td>Rate Limit:</td><td>30 reqs/min (requests per minute)</td></tr></tbody></table>
+| --- | --- |
+| Rate Limit: | 30 reqs/min (requests per minute) |
 
 Query Params
 
@@ -81,9 +82,3 @@ curl \--request GET \\
      \--url 'https://api-pub.bitfinex.com/v2/tickers?symbols=ALL' \\
 
      \--header 'accept: application/json'
-
----
-Section: General
-Source: https://docs.bitfinex.com/reference/rest-public-tickers
-Path: /v2/tickers?symbols=ALL
-Method: GET

@@ -1,12 +1,12 @@
-# POST /v2/auth/w/order/update
+# POST /v2/auth/w/order/submit
 
-**Source:** [https://docs.bitfinex.com/reference/rest-auth-update-order](https://docs.bitfinex.com/reference/rest-auth-update-order)
+**Source:** [https://docs.bitfinex.com/reference/rest-auth-submit-order](https://docs.bitfinex.com/reference/rest-auth-submit-order)
 
 post
 
-https://api.bitfinex.com/v2/auth/w/order/update
+https://api.bitfinex.com/v2/auth/w/order/submit
 
-Updates an existing order, can be used to update margin, exchange, and derivative orders.
+Submits an order on a trading pair (e.g. BTCUSD, LTCBTC, ...).
 
 Response Fields
 
@@ -14,10 +14,10 @@ This endpoint returns a notification.
 
 | Index | Field | Type | Description |
 | --- | --- | --- | --- |
-| [0] | MTS | int | Milliseconds epoch timestamp of notification |
-| [1] | TYPE | string | Notification's type ("ou-req") |
+| [0] | MTS | int | Seconds epoch timestamp of notification |
+| [1] | TYPE | string | Notification's type ("on-req") |
 | [2] | MESSAGE\_ID | int | Unique notification's ID |
-| [4] | DATA | [Order](#order-objects) | The order that has been updated |
+| [4] | DATA | [Order](#order-objects)[] | An array containing only the new order |
 | [5] | CODE | int | W.I.P. (work in progress) |
 | [6] | STATUS | string | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
 | [7] | TEXT | string | Additional notification description |
@@ -73,6 +73,16 @@ Order data array
 > 
 > ### 
 > 
+> meta: {aff\_code: ...}
+> 
+> 
+> 
+> API orders can now pass an affiliate code through which you can earn rebates. To learn more about these rebates and our affiliate program, please look at the relevant [announcement](https://blog.bitfinex.com/announcements/the-revolution-continues/) and [knowledge base article](https://support.bitfinex.com/hc/en-us/articles/360036965234-The-Bitfinex-Affiliate-Program).
+
+> 🚧
+> 
+> ### 
+> 
 > meta: {protect\_selfmatch: 1}
 > 
 > 
@@ -86,21 +96,35 @@ Order data array
 | --- | --- |
 | Rate Limit: | 90 reqs/min (requests per minute) |
 
-  
-
 Body Params
 
-id
+type
 
-int64
+string
 
 required
 
-The ID of the order to update (can be retrieved by calling the [Retrieve Orders](/reference#rest-auth-retrieve-orders) and the [Retrieve Orders (by symbol)](/reference#rest-auth-retrieve-orders-by-symbol) endpoints).
+Defaults to EXCHANGE LIMIT
+
+The type of the order (see list above).
+
+symbol
+
+string
+
+required
+
+Defaults to tBTCUSD
+
+The trading pair symbol to submit the order on.
 
 amount
 
 string
+
+required
+
+Defaults to 0.1
 
 Amount of order (positive for buy, negative for sell).
 
@@ -108,31 +132,11 @@ price
 
 string
 
+required
+
+Defaults to 10000
+
 Price of the order.
-
-cid
-
-int64
-
-Client Order ID; should be unique in the day (UTC+0).
-
-cid\_date
-
-string
-
-`YYYY-MM-DD` Date of Client Order ID.
-
-gid
-
-int64
-
-Group ID for the order.
-
-flags
-
-int32
-
-The sum of all order flags (see [https://docs.bitfinex.com/docs/flag-values](/docs/flag-values)).
 
 lev
 
@@ -140,11 +144,11 @@ int32
 
 Set the leverage for a derivative order, supported by derivative symbol orders only. The value should be between 1 and 100 inclusive. If omitted the default leverage value of 10 will be used.
 
-delta
+price\_trailing
 
 string
 
-The delta to apply to the amount value.
+The trailing price for a trailing stop order.
 
 price\_aux\_limit
 
@@ -152,11 +156,29 @@ string
 
 Auxiliary Limit price (only for STOP LIMIT).
 
-price\_trailing
+price\_oco\_stop
 
 string
 
-The trailing price for a trailing stop order.
+OCO (One-Cancels-Other) stop price.
+
+gid
+
+integer
+
+Group ID for the order. (int45)
+
+cid
+
+integer
+
+Client Order ID; should be unique in the day (UTC+0). (int45)
+
+flags
+
+int32
+
+The sum of all order flags (see [https://docs.bitfinex.com/docs/flag-values](/docs/flag-values)).
 
 tif
 
@@ -174,8 +196,24 @@ Response
 
 curl \--request POST \\
 
-     \--url https://api.bitfinex.com/v2/auth/w/order/update \\
+     \--url https://api.bitfinex.com/v2/auth/w/order/submit \\
 
      \--header 'Content-Type: application/json' \\
 
-     \--header 'accept: application/json'
+     \--header 'accept: application/json' \\
+
+     \--data '
+
+{
+
+  "type": "EXCHANGE LIMIT",
+
+  "symbol": "tBTCUSD",
+
+  "amount": "0.1",
+
+  "price": "10000"
+
+}
+
+'
