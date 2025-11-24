@@ -20,7 +20,7 @@
   "author": "Coincise",
   "license": "MIT",
   "dependencies": {
-    "turndown": "^7.1.2",
+    "turndown": "^7.2.2",
     "turndown-plugin-gfm": "^1.0.2"
   },
   "engines": {

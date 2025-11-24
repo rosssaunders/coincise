@@ -14,8 +14,8 @@
     "jsdom": "27.0.0",
     "node-fetch": "^3.3.2",
     "prettier": "^3.6.2",
-    "puppeteer": "^24.22.0",
-    "turndown": "^7.2.1",
+    "puppeteer": "^24.31.0",
+    "turndown": "^7.2.2",
     "turndown-plugin-gfm": "^1.0.2",
     "widdershins": "^4.0.1"
   },

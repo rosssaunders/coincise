@@ -8,6 +8,6 @@
     "create-twitter-pr": "node create-twitter-summary-pr.js"
   },
   "dependencies": {
-    "openai": "^5.22.0"
+    "openai": "^5.23.2"
   }
 }

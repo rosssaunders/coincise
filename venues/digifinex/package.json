@@ -11,10 +11,10 @@
     "extract:all": "pnpm run extract:general && pnpm run extract:endpoints && pnpm run extract:websocket-github"
   },
   "dependencies": {
-    "turndown": "^7.2.1",
-    "turndown-plugin-gfm": "^1.0.2",
-    "puppeteer": "^24.22.0",
-    "prettier": "^3.6.2"
+    "prettier": "^3.6.2",
+    "puppeteer": "^24.31.0",
+    "turndown": "^7.2.2",
+    "turndown-plugin-gfm": "^1.0.2"
   },
   "author": "",
   "license": "ISC"

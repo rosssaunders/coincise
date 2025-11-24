@@ -7,11 +7,11 @@
   },
   "dependencies": {
     "acorn": "^8.15.0",
-    "ccxt": "^4.5.5",
-    "jsdom": "^27.0.0",
+    "ccxt": "^4.5.21",
+    "jsdom": "^27.2.0",
     "json5": "^2.2.3",
     "puppeteer": "24.22.0",
-    "turndown": "^7.2.1",
+    "turndown": "^7.2.2",
     "turndown-plugin-gfm": "^1.0.2"
   },
   "type": "module",

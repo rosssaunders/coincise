@@ -9,6 +9,6 @@
     "generate-twitter-summary": "node ai-x-post.js"
   },
   "dependencies": {
-    "openai": "^5.22.0"
+    "openai": "^5.23.2"
   }
 }
