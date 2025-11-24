@@ -14,21 +14,21 @@ GET `/futures/data/globalLongShortAccountRatio`
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| pair | STRING | YES | BTCUSD |
-| period | ENUM | YES | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
-| limit | LONG | NO | Default 30,Max 500 |
-| startTime | LONG | NO |  |
-| endTime | LONG | NO |  |
+| Name      | Type   | Mandatory | Description                                     |
+| --------- | ------ | --------- | ----------------------------------------------- |
+| pair      | STRING | YES       | BTCUSD                                          |
+| period    | ENUM   | YES       | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
+| limit     | LONG   | NO        | Default 30,Max 500                              |
+| startTime | LONG   | NO        |                                                 |
+| endTime   | LONG   | NO        |                                                 |
 
-> -   If startTime and endTime are not sent, the most recent data is returned.
-> -   Only the data of the latest 30 days is available.
+> - If startTime and endTime are not sent, the most recent data is returned.
+> - Only the data of the latest 30 days is available.
 
 ### Response Example
 
 ```
-[  
+[
    {
 	  "pair": "BTCUSD",
 	  "longShortRatio": "0.1960",
@@ -39,11 +39,12 @@ GET `/futures/data/globalLongShortAccountRatio`
    {
      "pair": "BTCUSD",
 	  "longShortRatio": "1.9559",
-	  "longAccount": "0.6617",  
-	  "shortAccount": "0.3382",  
+	  "longAccount": "0.6617",
+	  "shortAccount": "0.3382",
 	  "timestamp": 1583139900000
 	}
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Long-Short-Ratio](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Long-Short-Ratio)
+> Source:
+> [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Long-Short-Ratio](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Long-Short-Ratio)

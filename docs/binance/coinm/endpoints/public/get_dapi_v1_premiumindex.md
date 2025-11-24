@@ -14,10 +14,10 @@ GET `/dapi/v1/premiumIndex`
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | NO |  |
-| pair | STRING | NO |  |
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | NO        |             |
+| pair   | STRING | NO        |             |
 
 ### Response Example
 
@@ -37,17 +37,18 @@ GET `/dapi/v1/premiumIndex`
   		"time": 1596094042000
   	},
  	{
- 		"symbol": "BTCUSD_200925",	
+ 		"symbol": "BTCUSD_200925",
  		"pair": "BTCUSD",
   		"markPrice": "12077.01343750",
   		"indexPrice": "10979.10312500",
   		"estimatedSettlePrice": "10981.74168236",
   		"lastFundingRate": "",
-  		"interestRate": "",	
+  		"interestRate": "",
   		"nextFundingTime": 0,
   		"time": 1596094042000
   	}
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-and-Mark-Price](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-and-Mark-Price)
+> Source:
+> [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-and-Mark-Price](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-and-Mark-Price)

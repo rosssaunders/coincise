@@ -14,22 +14,22 @@ GET `/futures/data/basis`
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| pair | STRING | YES | BTCUSD |
-| contractType | ENUM | YES | CURRENT\_QUARTER, NEXT\_QUARTER, PERPETUAL |
-| period | ENUM | YES | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
-| limit | LONG | NO | Default 30,Max 500 |
-| startTime | LONG | NO |  |
-| endTime | LONG | NO |  |
+| Name         | Type   | Mandatory | Description                                     |
+| ------------ | ------ | --------- | ----------------------------------------------- |
+| pair         | STRING | YES       | BTCUSD                                          |
+| contractType | ENUM   | YES       | CURRENT_QUARTER, NEXT_QUARTER, PERPETUAL        |
+| period       | ENUM   | YES       | "5m","15m","30m","1h","2h","4h","6h","12h","1d" |
+| limit        | LONG   | NO        | Default 30,Max 500                              |
+| startTime    | LONG   | NO        |                                                 |
+| endTime      | LONG   | NO        |                                                 |
 
-> -   If startTime and endTime are not sent, the most recent data is returned.
-> -   Only the data of the latest 30 days is available.
+> - If startTime and endTime are not sent, the most recent data is returned.
+> - Only the data of the latest 30 days is available.
 
 ### Response Example
 
 ```
-[  
+[
    {
         "indexPrice": "29269.93972727",
         "contractType": "CURRENT_QUARTER",
@@ -43,4 +43,5 @@ GET `/futures/data/basis`
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Basis](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Basis)
+> Source:
+> [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Basis](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Basis)

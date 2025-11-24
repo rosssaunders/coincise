@@ -14,9 +14,9 @@ GET `/dapi/v1/openInterest`
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | YES |  |
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | YES       |             |
 
 ### Response Example
 
@@ -30,4 +30,5 @@ GET `/dapi/v1/openInterest`
 }
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Open-Interest](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Open-Interest)
+> Source:
+> [https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Open-Interest](https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Open-Interest)
