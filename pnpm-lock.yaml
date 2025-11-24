@@ -248,8 +248,8 @@ importers:
         specifier: 27.0.0
         version: 27.0.0
       puppeteer:
-        specifier: 24.22.0
-        version: 24.22.0
+        specifier: ^24.31.0
+        version: 24.31.0
       turndown:
         specifier: 7.2.1
         version: 7.2.1
@@ -269,8 +269,8 @@ importers:
   venues/deribit:
     dependencies:
       puppeteer:
-        specifier: ^21.11.0
-        version: 21.11.0
+        specifier: ^24.31.0
+        version: 24.31.0
       turndown:
         specifier: ^7.2.2
         version: 7.2.2
@@ -442,8 +442,8 @@ importers:
         specifier: ^3.6.2
         version: 3.6.2
       puppeteer:
-        specifier: 24.22.0
-        version: 24.22.0
+        specifier: ^24.31.0
+        version: 24.31.0
       turndown:
         specifier: ^7.2.2
         version: 7.2.2
