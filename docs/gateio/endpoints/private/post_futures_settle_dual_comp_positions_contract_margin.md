@@ -1,7 +1,6 @@
 # POST /futures/{settle}/dual_comp/positions/{contract}/margin
 
-**Source:**
-[/futures/{settle}/dual_comp/positions/{contract}/margin](https://www.gate.io/docs/developers/apiv4/en/#updatedualmodepositionmargin-parameters)
+**Source:** [/futures/{settle}/dual_comp/positions/{contract}/margin](https://www.gate.io/docs/developers/apiv4/en/#updatedualmodepositionmargin-parameters)
 
 ## Authentication
 
@@ -36,7 +35,7 @@ _Update position margin in dual mode_
 
 > 200 Response
 
-```
+```json
 [
   {
     "user": 10000,

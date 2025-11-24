@@ -1,7 +1,6 @@
 # POST /earn/dual/orders
 
-**Source:**
-[/earn/dual/orders](https://www.gate.io/docs/developers/apiv4/en/#placedualorder-parameters)
+**Source:** [/earn/dual/orders](https://www.gate.io/docs/developers/apiv4/en/#placedualorder-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Place Dual Investment order_
 
 > Body parameter
 
-```
+```json
 {
   "plan_id": "176",
   "amount": "1",

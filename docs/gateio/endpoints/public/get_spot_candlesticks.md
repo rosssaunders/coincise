@@ -1,7 +1,6 @@
 # GET /spot/candlesticks
 
-**Source:**
-[/spot/candlesticks](https://www.gate.io/docs/developers/apiv4/en/#listcandlesticks-parameters)
+**Source:** [/spot/candlesticks](https://www.gate.io/docs/developers/apiv4/en/#listcandlesticks-parameters)
 
 ## Authentication
 
@@ -50,7 +49,7 @@ limit when specifying from, to and interval
 
 > 200 Response
 
-```
+```json
 [
   [
     "1539852480",

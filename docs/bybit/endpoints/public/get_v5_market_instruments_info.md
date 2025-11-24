@@ -167,8 +167,6 @@ GET `/v5/market/instruments-info`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 GET /v5/market/instruments-info?category=linear&symbol=BTCUSDT HTTP/1.1Host: api-testnet.bybit.com
 ```
@@ -189,8 +187,6 @@ import com.bybit.api.client.domain.CategoryType;import com.bybit.api.client.doma
 const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,});client    .getInstrumentsInfo({        category: 'linear',        symbol: 'BTCUSDT',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
--   Node.js
-
 ```bash
 GET /v5/market/instruments-info?category=option&symbol=ETH-3JAN23-1250-P HTTP/1.1Host: api-testnet.bybit.com
 ```
@@ -210,8 +206,6 @@ import com.bybit.api.client.domain.CategoryType;import com.bybit.api.client.doma
 ```javascript
 const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,});client  .getInstrumentsInfo({    category: 'option',    symbol: 'ETH-3JAN23-1250-P',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
-
--   Node.js
 
 ```bash
 GET /v5/market/instruments-info?category=spot&symbol=BTCUSDT HTTP/1.1Host: api-testnet.bybit.com

@@ -4,13 +4,14 @@ Frequency limit: 5 times/1s (User ID)
 
 ### Description[​](#description "Direct link to Description")
 
-Only supports API Key calls from the main account, and the API Key needs to be bound to an IP address
+Only supports API Key calls from the main account, and the API Key needs to be
+bound to an IP address
 
 Modify the virtual sub-account or general sub-account API Key
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   POST /api/v2/user/modify-virtual-subaccount-apikey
+- POST /api/v2/user/modify-virtual-subaccount-apikey
 
 Request Example
 
@@ -20,22 +21,24 @@ curl -X POST "https://api.bitget.com/api/v2/user/modify-virtual-subaccount-apike
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| subAccountUid | String | Yes | Sub-account uid |
-| passphrase | String | Yes | Passcode English letters of 8−32 characters + numbers |
-| label | String | Yes | Note Length 20 |
-| ipList | List<String\> | No | ip whitelist  
-Up to 30, if not then ip whitelist is set to empty. |
-| permList | List<String\> | No | Sub-account permissions  
+| Parameter                                           | Type          | Required | Description                                           |
+| :-------------------------------------------------- | :------------ | :------- | :---------------------------------------------------- |
+| subAccountUid                                       | String        | Yes      | Sub-account uid                                       |
+| passphrase                                          | String        | Yes      | Passcode English letters of 8−32 characters + numbers |
+| label                                               | String        | Yes      | Note Length 20                                        |
+| ipList                                              | List<String\> | No       | ip whitelist                                          |
+| Up to 30, if not then ip whitelist is set to empty. |
+| permList                                            | List<String\> | No       | Sub-account permissions                               |
+
 `spot_trade`: Spot trade  
 `margin_trade`: Spot Marign trade  
 `contract_trade`: Futures trade read-write  
 `transfer`:Wallet transfer  
 `read`: Read permissions  
-If this parameter is not passed, it will be ignored, and the existing permissions will be retained  
-If an empty value is passed, the existing permissions of this API Key will be removed |
-| subAccountApiKey | Yes | String | Sub-account ApiKey |
+If this parameter is not passed, it will be ignored, and the existing
+permissions will be retained  
+If an empty value is passed, the existing permissions of this API Key will be
+removed | | subAccountApiKey | Yes | String | Sub-account ApiKey |
 
 Response Example
 
@@ -49,31 +52,27 @@ Response Example
     "label": "sub api",
     "subAccountApiKey": "xx_xxx",
     "secretKey": "xxx",
-    "permList": [
-      "spot_trade",
-      "contract_trade"
-    ],
-    "ipList": [
-      "127.0.0.1"
-    ]
+    "permList": ["spot_trade", "contract_trade"],
+    "ipList": ["127.0.0.1"]
   }
 }
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| subAccountUid | String | Sub-account uid |
-| subAccountApiKey | String | Sub-account apikey |
-| secretKey | String | secretKey |
-| permList | List | Sub-account permissions  
+| Parameter        | Type   | Description             |
+| :--------------- | :----- | :---------------------- |
+| subAccountUid    | String | Sub-account uid         |
+| subAccountApiKey | String | Sub-account apikey      |
+| secretKey        | String | secretKey               |
+| permList         | List   | Sub-account permissions |
+
 `spot_trade`: Spot trade  
 `margin_trade`: Spot Marign trade  
 `contract_trade`: Futures trade read-write  
 `transfer`:Wallet transfer  
-`read`: Read permissions |
-| label | String | Sub-account apikey note |
-| ipList | List | Sub-account apikey ip whitelist |
+`read`: Read permissions | | label | String | Sub-account apikey note | | ipList
+| List | Sub-account apikey ip whitelist |
 
-> **Source:** https://www.bitget.com/api-doc/common/vsubaccount/Modify-Virtual-Subaccount-ApiKey
+> **Source:**
+> https://www.bitget.com/api-doc/common/vsubaccount/Modify-Virtual-Subaccount-ApiKey

@@ -42,8 +42,6 @@ GET `/v5/market/historical-volatility`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 GET /v5/market/historical-volatility?category=option&baseCoin=ETH&period=30 HTTP/1.1Host: api-testnet.bybit.com
 ```

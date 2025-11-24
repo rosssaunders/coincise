@@ -38,8 +38,6 @@ POST `/v5/asset/exchange/quote-apply`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 POST /v5/asset/exchange/quote-apply HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1720071077014X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXXContent-Type: application/jsonContent-Length: 172{    "requestId": "test-00002",    "fromCoin": "ETH",    "toCoin": "BTC",    "accountType": "eb_convert_funding",    "requestCoin": "ETH",    "requestAmount": "0.1",    "paramType": "opFrom",    "paramValue": "broker-id-001"}
 ```
@@ -49,7 +47,7 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .requestConvertQuote({    requestId: 'test-00002',    fromCoin: 'ETH',    toCoin: 'BTC',    accountType: 'eb_convert_funding',    requestCoin: 'ETH',    requestAmount: '0.1',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .requestConvertQuote({    requestId: 'test-00002',    fromCoin: 'ETH',    toCoin: 'BTC',    accountType: 'eb_convert_funding',    requestCoin: 'ETH',    requestAmount: '0.1',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

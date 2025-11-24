@@ -1,6 +1,7 @@
 # POST /v2/auth/w/ext/wallets/withdrawals/request
 
-**Source:** [https://docs.bitfinex.com/reference/thalex-withdrawal-request](https://docs.bitfinex.com/reference/thalex-withdrawal-request)
+**Source:**
+[https://docs.bitfinex.com/reference/thalex-withdrawal-request](https://docs.bitfinex.com/reference/thalex-withdrawal-request)
 
 post
 
@@ -10,17 +11,17 @@ Withdraw from Thalex to Bitfinex
 
 Response data
 
-| Key | Type | Description |
-| --- | --- | --- |
-| type | String | Specifies the transfer type: "withdrawal" |
-| addressDest | String | Specifies the address for the transaction |
-| amount | String | Amount of the withdrawal |
-| ccy | String | Currency withdrawn |
-| createdAt | Integer | Withdrawal creation timestamp |
-| updatedAt | Integer | Withdrawal update timestamp |
-| id | string | Withdrawal id |
-| status | string | Withdrawal status |
-| fee | string | Fee charged for the withdrawal |
+| Key         | Type    | Description                               |
+| ----------- | ------- | ----------------------------------------- |
+| type        | String  | Specifies the transfer type: "withdrawal" |
+| addressDest | String  | Specifies the address for the transaction |
+| amount      | String  | Amount of the withdrawal                  |
+| ccy         | String  | Currency withdrawn                        |
+| createdAt   | Integer | Withdrawal creation timestamp             |
+| updatedAt   | Integer | Withdrawal update timestamp               |
+| id          | string  | Withdrawal id                             |
+| status      | string  | Withdrawal status                         |
+| fee         | string  | Fee charged for the withdrawal            |
 
 Body Params
 
@@ -72,7 +73,7 @@ curl \--request POST \\
 
 {
 
-  "provider": "thalex"
+"provider": "thalex"
 
 }
 

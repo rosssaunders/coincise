@@ -1,6 +1,7 @@
 # GET 【Public】Trade Channel
 
-**Source:** [【Public】Trade Channel](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[【Public】Trade Channel](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -24,9 +25,7 @@ Get trade data
 ```json
 {
   "action": "subscribe",
-  "args": [
-    "futures/trade:BTCUSDT"
-  ]
+  "args": ["futures/trade:BTCUSDT"]
 }
 ```
 
@@ -35,16 +34,13 @@ Message Format:
 ```json
 {
   "action": "subscribe",
-  "args": [
-    "<channel:symbol>",
-    "<channel:symbol>"
-  ]
+  "args": ["<channel:symbol>", "<channel:symbol>"]
 }
 ```
 
--   actions: `subscribe`
--   channel: Channel name `futures/trade`, fixed value
--   symbol: Trading pair, such as `BTCUSDT`
+- actions: `subscribe`
+- channel: Channel name `futures/trade`, fixed value
+- symbol: Trading pair, such as `BTCUSDT`
 
 ### Response
 
@@ -68,21 +64,21 @@ Message Format:
 
 Return data description:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| symbol | String | symbol |
-| deal\_price | String | deal price |
-| trade\_id | Long | trade id |
-| deal\_vol | String | deal vol |
-| way | Int | Trading type  
-\-`1`\=buy\_open\_long sell\_open\_short  
-\-`2`\=buy\_open\_long sell\_close\_long  
-\-`3`\=buy\_close\_short sell\_open\_short  
-\-`4`\=buy\_close\_short sell\_close\_long  
-\-`5`\=sell\_open\_short buy\_open\_long  
-\-`6`\=sell\_open\_short buy\_close\_short  
-\-`7`\=sell\_close\_long buy\_open\_long  
-\-`8`\=sell\_close\_long buy\_close\_short |
-| m | Bool | \-`true`\=buyer is maker  
-\-`false`\=seller is maker |
-| created\_at | String | transaction create time(ms) |
+| Field      | Type   | Description  |
+| ---------- | ------ | ------------ |
+| symbol     | String | symbol       |
+| deal_price | String | deal price   |
+| trade_id   | Long   | trade id     |
+| deal_vol   | String | deal vol     |
+| way        | Int    | Trading type |
+
+\-`1`\=buy_open_long sell_open_short  
+\-`2`\=buy_open_long sell_close_long  
+\-`3`\=buy_close_short sell_open_short  
+\-`4`\=buy_close_short sell_close_long  
+\-`5`\=sell_open_short buy_open_long  
+\-`6`\=sell_open_short buy_close_short  
+\-`7`\=sell_close_long buy_open_long  
+\-`8`\=sell_close_long buy_close_short | | m | Bool | \-`true`\=buyer is maker  
+\-`false`\=seller is maker | | created_at | String | transaction create time(ms)
+|

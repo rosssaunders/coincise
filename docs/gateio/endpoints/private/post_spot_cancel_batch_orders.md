@@ -1,7 +1,6 @@
 # POST /spot/cancel_batch_orders
 
-**Source:**
-[/spot/cancel_batch_orders](https://www.gate.io/docs/developers/apiv4/en/#cancelbatchorders-parameters)
+**Source:** [/spot/cancel_batch_orders](https://www.gate.io/docs/developers/apiv4/en/#cancelbatchorders-parameters)
 
 ## Authentication
 
@@ -18,7 +17,7 @@ request
 
 > Body parameter
 
-```
+```json
 [
   {
     "currency_pair": "BTC_USDT",
@@ -41,7 +40,7 @@ request
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency_pair": "BTC_USDT",

@@ -1,7 +1,6 @@
 # GET /futures/{settle}/price_orders/{order_id}
 
-**Source:**
-[/futures/{settle}/price_orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getpricetriggeredorder-parameters)
+**Source:** [/futures/{settle}/price_orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getpricetriggeredorder-parameters)
 
 ## Authentication
 
@@ -34,7 +33,7 @@ _Query single auto order details_
 
 > 200 Response
 
-```
+```json
 {
   "initial": {
     "contract": "BTC_USDT",

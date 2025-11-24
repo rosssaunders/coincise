@@ -20,8 +20,6 @@ None
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 GET /v5/asset/withdraw/vasp/list HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1715067106163X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXX
 ```
@@ -31,7 +29,7 @@ GET /v5/asset/withdraw/vasp/list HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-K
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getExchangeEntities()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .getExchangeEntities()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

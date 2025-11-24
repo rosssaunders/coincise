@@ -1,4 +1,4 @@
-## /private/get_affiliate_program_info
+# GET /private/get\_affiliate\_program\_info
 
 Retrieves user\`s affiliates count, payouts and link.
 
@@ -8,18 +8,16 @@ This is a private method; it can only be used after authentication.
 
 ### Parameters
 
-_This method takes no parameters_
+*This method takes no parameters*
 
 ### Response
 
-| Name                      | Type     | Description                         |
-| ------------------------- | -------- | ----------------------------------- |
-| id                        | integer  | The id that was sent in the request |
-| jsonrpc                   | string   | The JSON-RPC version (2.0)          |
-| result                    | _object_ |                                     |
-|   ›  is_enabled           | boolean  | Status of affiliate program         |
-|   ›  link                 | string   | Affiliate link                      |
-|   ›  number_of_affiliates | number   | Number of affiliates                |
-|   ›  received             | _object_ |                                     |
-|   ›    ›  btc             | number   | Total payout received in BTC        |
-|   ›    ›  eth             | number   | Total payout received in ETH        |
+| Name | Type | Description |
+| --- | --- | --- |
+| id | integer | The id that was sent in the request |
+| jsonrpc | string | The JSON-RPC version (2.0) result object |
+| result.is_enabled | boolean | Status of affiliate program |
+| result.link | string | Affiliate link |
+| result.number_of_affiliates | number | Number of affiliates result.received object |
+| result.received.btc | number | Total payout received in BTC |
+| result.received.eth | number | Total payout received in ETH |

@@ -1,7 +1,6 @@
 # GET /margin/transferable
 
-**Source:**
-[/margin/transferable](https://www.gate.io/docs/developers/apiv4/en/#getisolatedmargintransferable-parameters)
+**Source:** [/margin/transferable](https://www.gate.io/docs/developers/apiv4/en/#getisolatedmargintransferable-parameters)
 
 ## Authentication
 
@@ -27,7 +26,7 @@ _Get maximum transferable amount for isolated margin_
 
 > 200 Response
 
-```
+```json
 {
   "currency": "ETH",
   "currency_pair": "ETH_USDT",

@@ -42,8 +42,6 @@ The unit of value, e.g., BTCUSD(inverse) is USD, BTCUSDT(linear) is BTC |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 GET /v5/market/open-interest?category=inverse&symbol=BTCUSD&intervalTime=5min&startTime=1669571100000&endTime=1669571400000 HTTP/1.1Host: api-testnet.bybit.com
 ```

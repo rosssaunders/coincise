@@ -1,7 +1,6 @@
 # GET /wallet/push
 
-**Source:**
-[/wallet/push](https://www.gate.io/docs/developers/apiv4/en/#listpushorders-parameters)
+**Source:** [/wallet/push](https://www.gate.io/docs/developers/apiv4/en/#listpushorders-parameters)
 
 ## Authentication
 
@@ -31,7 +30,7 @@ _Get UID transfer history_
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": 111,

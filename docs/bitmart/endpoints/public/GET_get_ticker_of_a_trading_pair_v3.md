@@ -1,6 +1,7 @@
 # GET Get Ticker of a Trading Pair (V3)
 
-**Source:** [Get Ticker of a Trading Pair (V3)](https://developer-pro.bitmart.com/en/spot/)
+**Source:**
+[Get Ticker of a Trading Pair (V3)](https://developer-pro.bitmart.com/en/spot/)
 
 **API Type:** Spot
 
@@ -26,9 +27,9 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl https://api-cloud.bitmart.com/spot/quotation/v3/ticker?symbol=BTC_USDT`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| symbol | String | Yes | Trading pair (e.g. BMX\_USDT) |
+| Field  | Type   | Required? | Description                  |
+| ------ | ------ | --------- | ---------------------------- |
+| symbol | String | Yes       | Trading pair (e.g. BMX_USDT) |
 
 #### Response Data
 
@@ -57,21 +58,23 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| symbol | String | Trading pair |
-| last | String | Latest price |
-| v\_24h | String | 24-hour trade volume in base currency |
-| qv\_24h | String | 24-hour trade volume in quote currency |
-| open\_24h | String | 24-hour open price |
-| high\_24h | String | 24-hour highest price |
-| low\_24h | String | 24-hour lowest price |
-| fluctuation | String | 24-hour price change |
-| bid\_px | String | top buy price |
-| bid\_sz | String | Size of top buy order |
-| ask\_px | String | top sell price |
-| ask\_sz | String | Size of top sell order |
-| ts | String | Time of generation(in milliseconds) |
+| Field       | Type   | Description                            |
+| ----------- | ------ | -------------------------------------- |
+| symbol      | String | Trading pair                           |
+| last        | String | Latest price                           |
+| v_24h       | String | 24-hour trade volume in base currency  |
+| qv_24h      | String | 24-hour trade volume in quote currency |
+| open_24h    | String | 24-hour open price                     |
+| high_24h    | String | 24-hour highest price                  |
+| low_24h     | String | 24-hour lowest price                   |
+| fluctuation | String | 24-hour price change                   |
+| bid_px      | String | top buy price                          |
+| bid_sz      | String | Size of top buy order                  |
+| ask_px      | String | top sell price                         |
+| ask_sz      | String | Size of top sell order                 |
+| ts          | String | Time of generation(in milliseconds)    |
 
-1.If no corresponding trading pair is found, this trading pair has been delisted.  
-2.For frequent query needs, we recommend using this endpoint to obtain aggregated ticker for a single trading pair.
+1.If no corresponding trading pair is found, this trading pair has been
+delisted.  
+2.For frequent query needs, we recommend using this endpoint to obtain
+aggregated ticker for a single trading pair.

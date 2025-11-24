@@ -1,7 +1,6 @@
 # GET /futures/{settle}/position_close
 
-**Source:**
-[/futures/{settle}/position_close](https://www.gate.io/docs/developers/apiv4/en/#listpositionclose-parameters)
+**Source:** [/futures/{settle}/position_close](https://www.gate.io/docs/developers/apiv4/en/#listpositionclose-parameters)
 
 ## Authentication
 
@@ -52,7 +51,7 @@ time format is a Unix timestamp
 
 > 200 Response
 
-```
+```json
 [
   {
     "time": 1546487347,

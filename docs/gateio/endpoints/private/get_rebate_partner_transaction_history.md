@@ -1,7 +1,6 @@
 # GET /rebate/partner/transaction_history
 
-**Source:**
-[/rebate/partner/transaction_history](https://www.gate.io/docs/developers/apiv4/en/#partnertransactionhistory-parameters)
+**Source:** [/rebate/partner/transaction_history](https://www.gate.io/docs/developers/apiv4/en/#partnertransactionhistory-parameters)
 
 ## Authentication
 
@@ -33,7 +32,7 @@ Record query time range cannot exceed 30 days
 
 > 200 Response
 
-```
+```json
 {
   "total": 15,
   "list": [

@@ -1,7 +1,6 @@
 # GET /delivery/{settle}/my_trades
 
-**Source:**
-[/delivery/{settle}/my_trades](https://www.gate.io/docs/developers/apiv4/en/#getmydeliverytrades-parameters)
+**Source:** [/delivery/{settle}/my_trades](https://www.gate.io/docs/developers/apiv4/en/#getmydeliverytrades-parameters)
 
 ## Authentication
 
@@ -40,7 +39,7 @@ _Query personal trading records_
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": 121234231,

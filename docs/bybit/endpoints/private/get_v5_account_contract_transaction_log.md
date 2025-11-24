@@ -65,8 +65,6 @@ GET `/v5/account/contract-transaction-log`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 GET /v5/account/contract-transaction-log?limit=1&symbol=BTCUSD HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1714035117255X-BAPI-RECV-WINDOW: 5000
 ```
@@ -76,7 +74,7 @@ GET /v5/account/contract-transaction-log?limit=1&symbol=BTCUSD HTTP/1.1Host: api
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getClassicTransactionLogs({    limit: 1,    symbol: 'BTCUSD',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .getClassicTransactionLogs({    limit: 1,    symbol: 'BTCUSD',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

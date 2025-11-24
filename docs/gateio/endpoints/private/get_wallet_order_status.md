@@ -1,7 +1,6 @@
 # GET /wallet/order_status
 
-**Source:**
-[/wallet/order_status](https://www.gate.io/docs/developers/apiv4/en/#gettransferorderstatus-parameters)
+**Source:** [/wallet/order_status](https://www.gate.io/docs/developers/apiv4/en/#gettransferorderstatus-parameters)
 
 ## Authentication
 
@@ -30,7 +29,7 @@ returned by the transfer interface
 
 > 200 Response
 
-```
+```json
 {
   "tx_id": "59636381286",
   "status": "SUCCESS"

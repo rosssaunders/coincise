@@ -8,7 +8,7 @@ Get a list of Convert Bgb Currencies
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/convert/bgb-convert-coin-list
+- GET /api/v2/convert/bgb-convert-coin-list
 
 Request Example
 
@@ -49,15 +49,16 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| coin | String | Token name |
-| available | String | Currency accounts available |
-| bgbEstAmount | String | Expected number of BGB redeemable |
-| precision | String | bgb scale |
-| feeDetail | String | fee detail |
-| \> feeRate | String | fee rate |
-| \> fee | String | fee |
-| cTime | String | Currently Time (time stamp in milliseconds) |
+| Parameter    | Type   | Description                                 |
+| :----------- | :----- | :------------------------------------------ |
+| coin         | String | Token name                                  |
+| available    | String | Currency accounts available                 |
+| bgbEstAmount | String | Expected number of BGB redeemable           |
+| precision    | String | bgb scale                                   |
+| feeDetail    | String | fee detail                                  |
+| \> feeRate   | String | fee rate                                    |
+| \> fee       | String | fee                                         |
+| cTime        | String | Currently Time (time stamp in milliseconds) |
 
-> **Source:** https://www.bitget.com/api-doc/common/bgb-convert/Get-BGB-Convert-Coins
+> **Source:**
+> https://www.bitget.com/api-doc/common/bgb-convert/Get-BGB-Convert-Coins

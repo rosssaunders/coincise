@@ -1,7 +1,6 @@
 # GET /earn/staking/eth2/rate_records
 
-**Source:**
-[/earn/staking/eth2/rate_records](https://www.gate.io/docs/developers/apiv4/en/#ratelisteth2-responses)
+**Source:** [/earn/staking/eth2/rate_records](https://www.gate.io/docs/developers/apiv4/en/#ratelisteth2-responses)
 
 ## Authentication
 
@@ -19,7 +18,7 @@ Query ETH earnings rate records for the last 31 days
 
 > 200 Response
 
-```
+```json
 [
   {
     "date_time": 1690348815,

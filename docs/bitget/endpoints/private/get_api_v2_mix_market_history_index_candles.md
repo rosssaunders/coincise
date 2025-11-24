@@ -4,11 +4,12 @@ Frequency limit: 20 times/1s (IP)
 
 ### Description[​](#description "Direct link to Description")
 
-Query the historical K-line data of contract index price, and return a maximum of 200 pieces of data.
+Query the historical K-line data of contract index price, and return a maximum
+of 200 pieces of data.
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/mix/market/history-index-candles
+- GET /api/v2/mix/market/history-index-candles
 
 Request Example
 
@@ -18,14 +19,15 @@ curl "https://api.bitget.com/api/v2/mix/market/history-index-candles?symbol=BTCU
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair |
-| productType | String | Yes | Product type  
+| Parameter   | Type   | Required | Description  |
+| :---------- | :----- | :------- | :----------- |
+| symbol      | String | Yes      | Trading pair |
+| productType | String | Yes      | Product type |
+
 `USDT-FUTURES` USDT-M Futures  
 `COIN-FUTURES` Coin-M Futures  
-`USDC-FUTURES` USDC-M Futures |
-| granularity | String | Yes | K-line particle size  
+`USDC-FUTURES` USDC-M Futures | | granularity | String | Yes | K-line particle
+size  
 \- 1m(1 minute)  
 \- 3m(3 minutes)  
 \- 5m(5 minutes)  
@@ -44,16 +46,18 @@ curl "https://api.bitget.com/api/v2/mix/market/history-index-candles?symbol=BTCU
 \- 1Dutc (UTC 1-day line)  
 \- 3Dutc (UTC 3-day line)  
 \- 1Wutc (UTC weekly line)  
-\- 1Mutc (UTC monthly line) |
-| startTime | String | No | The start time is to query the k-lines after this time  
-According to the different time granularity, the corresponding time unit must be rounded down to be queried.  
+\- 1Mutc (UTC monthly line) | | startTime | String | No | The start time is to
+query the k-lines after this time  
+According to the different time granularity, the corresponding time unit must be
+rounded down to be queried.  
 The millisecond format of the Unix timestamp, such as 1672410780000  
-Request data after this start time (the maximum time query range is 90 days) |
-| endTime | String | No | The end time is to query the k-lines before this time  
-According to the different time granularity, the corresponding time unit must be rounded down to be queried.  
+Request data after this start time (the maximum time query range is 90 days) | |
+endTime | String | No | The end time is to query the k-lines before this time  
+According to the different time granularity, the corresponding time unit must be
+rounded down to be queried.  
 The millisecond format of the Unix timestamp, such as 1672410780000  
-Request data before this end time (the maximum time query range is 90 days) |
-| limit | String | No | Default: 100, maximum: 200 |
+Request data before this end time (the maximum time query range is 90 days) | |
+limit | String | No | Default: 100, maximum: 200 |
 
 Response Example
 
@@ -63,38 +67,23 @@ Response Example
   "msg": "success",
   "requestTime": 1695795177323,
   "data": [
-    [
-      "1691328900000",
-      "29803",
-      "29803",
-      "29803",
-      "29803",
-      "0",
-      "0"
-    ],
-    [
-      "1691329200000",
-      "29803",
-      "29803",
-      "29803",
-      "29803",
-      "0",
-      "0"
-    ]
+    ["1691328900000", "29803", "29803", "29803", "29803", "0", "0"],
+    ["1691329200000", "29803", "29803", "29803", "29803", "0", "0"]
   ]
 }
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
+| Parameter  | Type   | Description                                               |
+| :--------- | :----- | :-------------------------------------------------------- |
 | index\[0\] | String | Milliseconds format of timestamp Unix, e.g. 1597026383085 |
-| index\[1\] | String | Entry price |
-| index\[2\] | String | Highest price |
-| index\[3\] | String | Lowest price |
-| index\[4\] | String | Exit price(Only include the finished K line data) |
-| index\[5\] | String | Trading volume of the base coin |
-| index\[6\] | String | Trading volume of quote currency |
+| index\[1\] | String | Entry price                                               |
+| index\[2\] | String | Highest price                                             |
+| index\[3\] | String | Lowest price                                              |
+| index\[4\] | String | Exit price(Only include the finished K line data)         |
+| index\[5\] | String | Trading volume of the base coin                           |
+| index\[6\] | String | Trading volume of quote currency                          |
 
-> **Source:** https://www.bitget.com/api-doc/contract/market/Get-History-Index-Candle-Data
+> **Source:**
+> https://www.bitget.com/api-doc/contract/market/Get-History-Index-Candle-Data

@@ -56,6 +56,17 @@ export const createTurndownBuilder = () => {
     },
 
     /**
+     * Add a custom Turndown rule
+     * @param {string} ruleName - Name of the rule
+     * @param {Object} ruleDefinition - Rule definition with filter and replacement
+     * @returns {Object} The builder object for chaining
+     */
+    withCustomRule(ruleName, ruleDefinition) {
+      service.addRule(ruleName, ruleDefinition)
+      return this
+    },
+
+    /**
      * Build and return the configured TurndownService
      * @returns {TurndownService} Configured Turndown service
      */

@@ -1,7 +1,6 @@
 # POST /loan/multi_collateral/orders
 
-**Source:**
-[/loan/multi_collateral/orders](https://www.gate.io/docs/developers/apiv4/en/#createmulticollateral-parameters)
+**Source:** [/loan/multi_collateral/orders](https://www.gate.io/docs/developers/apiv4/en/#createmulticollateral-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Place multi-currency collateral order_
 
 > Body parameter
 
-```
+```json
 {
   "order_id": 1721387470,
   "order_type": "fixed",
@@ -59,7 +58,7 @@ _Place multi-currency collateral order_
 
 > 200 Response
 
-```
+```json
 {
   "order_id": 10005578
 }

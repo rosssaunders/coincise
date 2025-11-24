@@ -1,7 +1,6 @@
 # GET /margin/uni/loans
 
-**Source:**
-[/margin/uni/loans](https://www.gate.io/docs/developers/apiv4/en/#listisolateduniloans-parameters)
+**Source:** [/margin/uni/loans](https://www.gate.io/docs/developers/apiv4/en/#listisolateduniloans-parameters)
 
 ## Authentication
 
@@ -29,7 +28,7 @@ _Query loans_
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency": "USDT",

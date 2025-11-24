@@ -1,7 +1,6 @@
 # GET /delivery/{settle}/trades
 
-**Source:**
-[/delivery/{settle}/trades](https://www.gate.io/docs/developers/apiv4/en/#listdeliverytrades-parameters)
+**Source:** [/delivery/{settle}/trades](https://www.gate.io/docs/developers/apiv4/en/#listdeliverytrades-parameters)
 
 ## Authentication
 
@@ -43,7 +42,7 @@ are more than `limit`, only `limit` number will be returned.
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": 121234231,

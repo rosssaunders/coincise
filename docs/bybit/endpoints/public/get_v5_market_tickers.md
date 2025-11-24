@@ -121,8 +121,6 @@ GET `/v5/market/tickers`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 GET /v5/market/tickers?category=inverse&symbol=BTCUSD HTTP/1.1Host: api-testnet.bybit.com
 ```
@@ -143,8 +141,6 @@ import com.bybit.api.client.domain.CategoryType;import com.bybit.api.client.doma
 const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,});client    .getTickers({        category: 'inverse',        symbol: 'BTCUSDT',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
--   Node.js
-
 ```bash
 GET /v5/market/tickers?category=option&symbol=BTC-30DEC22-18000-C HTTP/1.1Host: api-testnet.bybit.com
 ```
@@ -164,8 +160,6 @@ import com.bybit.api.client.domain.CategoryType;import com.bybit.api.client.doma
 ```javascript
 const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,});client  .getTickers({    category: 'option',    symbol: 'BTC-30DEC22-18000-C',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
-
--   Node.js
 
 ```bash
 GET /v5/market/tickers?category=spot&symbol=BTCUSDT HTTP/1.1Host: api-testnet.bybit.com

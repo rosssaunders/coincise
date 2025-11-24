@@ -275,20 +275,31 @@ const extractEndpoint = async (page, turndownService, url) => {
     // Format JSON blocks in the markdown
     markdown = formatJsonInMarkdown(markdown)
 
+    // Clean up UI junk
+    // Remove tab navigation markers (Shell/Python/Java/Node, etc.)
+    markdown = markdown.replace(/^-\s*(Shell|Python|Java|Node\.?js?|JavaScript|Ruby|Go|PHP|C#|cURL)\s*$/gmi, '')
+    markdown = markdown.replace(/^(Shell|Python|Java|Node\.?js?|JavaScript|Ruby|Go|PHP|C#|cURL)\s*$/gm, '')
+
+    // Remove placeholder API credentials
+    markdown = markdown.replace(/key:\s*["']x{10,}["']/gi, 'key: "YOUR_API_KEY"')
+    markdown = markdown.replace(/secret:\s*["']x{10,}["']/gi, 'secret: "YOUR_API_SECRET"')
+    markdown = markdown.replace(/apiKey:\s*["']x{10,}["']/gi, 'apiKey: "YOUR_API_KEY"')
+    markdown = markdown.replace(/apiSecret:\s*["']x{10,}["']/gi, 'apiSecret: "YOUR_API_SECRET"')
+
     // Clean up navigation junk from the bottom
     // Remove "Previous/Next" navigation links
     markdown = markdown.replace(/\[\s*Previous\s*[\s\S]*?\]\([^\)]+\)\[\s*Next\s*[\s\S]*?\]\([^\)]+\)/g, '')
-    
+
     // Remove table of contents at the bottom (list of anchor links)
     markdown = markdown.replace(/^-\s+\[.*?\]\(#.*?\)\s*$/gm, '')
-    
+
     // Remove breadcrumb navigation (list items with empty or /docs/ links)
     markdown = markdown.replace(/^-\s+\[\]\(\/docs\/\)\s*$/gm, '')
     markdown = markdown.replace(/^-\s+[A-Za-z\s()0-9]+\s*$/gm, '')
-    
+
     // Remove "On this page" text
     markdown = markdown.replace(/^On this page\s*$/gm, '')
-    
+
     // Clean up excessive blank lines
     markdown = markdown.replace(/\n{3,}/g, '\n\n')
     markdown = markdown.trim()

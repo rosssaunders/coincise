@@ -1,7 +1,6 @@
 # POST /futures/{settle}/price_orders
 
-**Source:**
-[/futures/{settle}/price_orders](https://www.gate.io/docs/developers/apiv4/en/#createpricetriggeredorder-parameters)
+**Source:** [/futures/{settle}/price_orders](https://www.gate.io/docs/developers/apiv4/en/#createpricetriggeredorder-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Create price-triggered order_
 
 > Body parameter
 
-```
+```json
 {
   "initial": {
     "contract": "BTC_USDT",
@@ -137,7 +136,7 @@ in requests
 
 > 201 Response
 
-```
+```json
 {
   "id": 1432329
 }

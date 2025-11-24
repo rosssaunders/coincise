@@ -1,7 +1,6 @@
 # POST /spot/orders
 
-**Source:**
-[/spot/orders](https://www.gate.io/docs/developers/apiv4/en/#createorder-parameters)
+**Source:** [/spot/orders](https://www.gate.io/docs/developers/apiv4/en/#createorder-parameters)
 
 ## Authentication
 
@@ -58,7 +57,7 @@ Set `stp_act` to determine the self-trade prevention strategy to use
 
 > Body parameter
 
-```
+```json
 {
   "text": "t-abc123",
   "currency_pair": "BTC_USDT",
@@ -184,7 +183,7 @@ order fields RESULT: No clearing information FULL: Full mode (default)
 
 > ACK response body example
 
-```
+```json
 {
   "id": "12332324",
   "text": "t-123456",
@@ -194,7 +193,7 @@ order fields RESULT: No clearing information FULL: Full mode (default)
 
 > RESULT response body example
 
-```
+```json
 {
   "id": "12332324",
   "text": "t-123456",
@@ -223,7 +222,7 @@ order fields RESULT: No clearing information FULL: Full mode (default)
 
 > FULL response body example
 
-```
+```json
 {
   "id": "1852454420",
   "text": "t-abc123",

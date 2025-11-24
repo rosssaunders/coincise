@@ -1,7 +1,6 @@
 # GET /futures/{settle}/orders
 
-**Source:**
-[/futures/{settle}/orders](https://www.gate.io/docs/developers/apiv4/en/#listfuturesorders-parameters)
+**Source:** [/futures/{settle}/orders](https://www.gate.io/docs/developers/apiv4/en/#listfuturesorders-parameters)
 
 ## Authentication
 
@@ -43,7 +42,7 @@ _Query futures order list_
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": 15675394,

@@ -1,7 +1,6 @@
 # GET /delivery/{settle}/contracts
 
-**Source:**
-[/delivery/{settle}/contracts](https://www.gate.io/docs/developers/apiv4/en/#listdeliverycontracts-parameters)
+**Source:** [/delivery/{settle}/contracts](https://www.gate.io/docs/developers/apiv4/en/#listdeliverycontracts-parameters)
 
 ## Authentication
 
@@ -32,7 +31,7 @@ _Query all futures contracts_
 
 > 200 Response
 
-```
+```json
 [
   {
     "name": "BTC_USDT_20200814",

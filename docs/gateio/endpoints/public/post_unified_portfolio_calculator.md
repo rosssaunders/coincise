@@ -1,7 +1,6 @@
 # POST /unified/portfolio_calculator
 
-**Source:**
-[/unified/portfolio_calculator](https://www.gate.io/docs/developers/apiv4/en/#calculateportfoliomargin-parameters)
+**Source:** [/unified/portfolio_calculator](https://www.gate.io/docs/developers/apiv4/en/#calculateportfoliomargin-parameters)
 
 ## Authentication
 
@@ -24,7 +23,7 @@ contracts, options, and spot markets. Market orders are not included.
 
 > Body parameter
 
-```
+```json
 {
   "spot_balances": [
     {
@@ -115,7 +114,7 @@ contracts, options, and spot markets. Market orders are not included.
 
 > 200 Response
 
-```
+```json
 {
   "maintain_margin_total": "0.000000000000",
   "initial_margin_total": "0.000000000000",

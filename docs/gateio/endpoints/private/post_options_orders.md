@@ -1,7 +1,6 @@
 # POST /options/orders
 
-**Source:**
-[/options/orders](https://www.gate.io/docs/developers/apiv4/en/#createoptionsorder-parameters)
+**Source:** [/options/orders](https://www.gate.io/docs/developers/apiv4/en/#createoptionsorder-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Create an options order_
 
 > Body parameter
 
-```
+```json
 {
   "size": -1,
   "iceberg": 0,
@@ -79,7 +78,7 @@ _Create an options order_
 
 > 201 Response
 
-```
+```json
 {
   "status": "finished",
   "size": -1,

@@ -1,7 +1,6 @@
 # GET /rebate/partner/sub_list
 
-**Source:**
-[/rebate/partner/sub_list](https://www.gate.io/docs/developers/apiv4/en/#partnersublist-parameters)
+**Source:** [/rebate/partner/sub_list](https://www.gate.io/docs/developers/apiv4/en/#partnersublist-parameters)
 
 ## Authentication
 
@@ -30,7 +29,7 @@ Including sub-agents, direct customers, and indirect customers
 
 > 200 Response
 
-```
+```json
 {
   "total": 3,
   "list": [

@@ -1,7 +1,6 @@
 # GET /unified/currencies
 
-**Source:**
-[/unified/currencies](https://www.gate.io/docs/developers/apiv4/en/#listunifiedcurrencies-parameters)
+**Source:** [/unified/currencies](https://www.gate.io/docs/developers/apiv4/en/#listunifiedcurrencies-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _List of loan currencies supported by unified account_
 
 > 200 Response
 
-```
+```json
 [
   {
     "name": "BTC",

@@ -1,7 +1,6 @@
 # GET /earn/dual/orders
 
-**Source:**
-[/earn/dual/orders](https://www.gate.io/docs/developers/apiv4/en/#listdualorders-parameters)
+**Source:** [/earn/dual/orders](https://www.gate.io/docs/developers/apiv4/en/#listdualorders-parameters)
 
 ## Authentication
 
@@ -29,7 +28,7 @@ _Dual Investment order list_
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": 373,

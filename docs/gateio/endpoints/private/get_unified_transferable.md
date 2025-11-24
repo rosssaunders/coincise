@@ -1,7 +1,6 @@
 # GET /unified/transferable
 
-**Source:**
-[/unified/transferable](https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferable-parameters)
+**Source:** [/unified/transferable](https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferable-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Query maximum transferable amount for unified account_
 
 > 200 Response
 
-```
+```json
 {
   "currency": "ETH",
   "amount": "10000"

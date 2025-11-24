@@ -1,7 +1,6 @@
 # POST /options/mmp/reset
 
-**Source:**
-[/options/mmp/reset](https://www.gate.io/docs/developers/apiv4/en/#resetoptionsmmp-parameters)
+**Source:** [/options/mmp/reset](https://www.gate.io/docs/developers/apiv4/en/#resetoptionsmmp-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _MMP Reset_
 
 > Body parameter
 
-```
+```json
 {
   "underlying": "BTC_USDT"
 }
@@ -35,7 +34,7 @@ _MMP Reset_
 
 > 200 Response
 
-```
+```json
 {
   "underlying": "BTC_USDT",
   "window": 5000,

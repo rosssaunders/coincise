@@ -1,7 +1,6 @@
 # GET /loan/multi_collateral/orders
 
-**Source:**
-[/loan/multi_collateral/orders](https://www.gate.io/docs/developers/apiv4/en/#listmulticollateralorders-parameters)
+**Source:** [/loan/multi_collateral/orders](https://www.gate.io/docs/developers/apiv4/en/#listmulticollateralorders-parameters)
 
 ## Authentication
 
@@ -29,7 +28,7 @@ _Query multi-currency collateral order list_
 
 > 200 Response
 
-```
+```json
 [
   {
     "order_id": "10005578",

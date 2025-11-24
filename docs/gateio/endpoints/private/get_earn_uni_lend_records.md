@@ -1,7 +1,6 @@
 # GET /earn/uni/lend_records
 
-**Source:**
-[/earn/uni/lend_records](https://www.gate.io/docs/developers/apiv4/en/#listunilendrecords-parameters)
+**Source:** [/earn/uni/lend_records](https://www.gate.io/docs/developers/apiv4/en/#listunilendrecords-parameters)
 
 ## Authentication
 
@@ -50,7 +49,7 @@ time format is a Unix timestamp
 
 > 200 Response
 
-```
+```json
 [
   {
     "type": "lend",

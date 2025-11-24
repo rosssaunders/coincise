@@ -1,7 +1,6 @@
 # POST /loan/collateral/orders
 
-**Source:**
-[/loan/collateral/orders](https://www.gate.io/docs/developers/apiv4/en/#createcollateralloan-parameters)
+**Source:** [/loan/collateral/orders](https://www.gate.io/docs/developers/apiv4/en/#createcollateralloan-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Place collateral loan order_
 
 > Body parameter
 
-```
+```json
 {
   "collateral_amount": "1",
   "collateral_currency": "BTC",
@@ -41,7 +40,7 @@ _Place collateral loan order_
 
 > 200 Response
 
-```
+```json
 {
   "order_id": 10005578
 }

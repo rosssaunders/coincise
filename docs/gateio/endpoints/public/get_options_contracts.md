@@ -1,7 +1,6 @@
 # GET /options/contracts
 
-**Source:**
-[/options/contracts](https://www.gate.io/docs/developers/apiv4/en/#listoptionscontracts-parameters)
+**Source:** [/options/contracts](https://www.gate.io/docs/developers/apiv4/en/#listoptionscontracts-parameters)
 
 ## Authentication
 
@@ -27,7 +26,7 @@ _List all contracts for specified underlying and expiration date_
 
 > 200 Response
 
-```
+```json
 [
   {
     "name": "BTC_USDT-20211130-65000-C",

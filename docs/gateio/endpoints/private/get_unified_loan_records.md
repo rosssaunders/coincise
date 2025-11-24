@@ -1,7 +1,6 @@
 # GET /unified/loan_records
 
-**Source:**
-[/unified/loan_records](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloanrecords-parameters)
+**Source:** [/unified/loan_records](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloanrecords-parameters)
 
 ## Authentication
 
@@ -29,7 +28,7 @@ _Query loan records_
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": 16442,

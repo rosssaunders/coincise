@@ -1,7 +1,6 @@
 # GET /futures/{settle}/accounts
 
-**Source:**
-[/futures/{settle}/accounts](https://www.gate.io/docs/developers/apiv4/en/#listfuturesaccounts-parameters)
+**Source:** [/futures/{settle}/accounts](https://www.gate.io/docs/developers/apiv4/en/#listfuturesaccounts-parameters)
 
 ## Authentication
 
@@ -33,7 +32,7 @@ _Get futures account_
 
 > 200 Response
 
-```
+```json
 {
   "user": 1666,
   "currency": "USDT",

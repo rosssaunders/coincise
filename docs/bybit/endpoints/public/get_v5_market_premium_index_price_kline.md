@@ -42,8 +42,6 @@ GET `/v5/market/premium-index-price-kline`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 GET /v5/market/premium-index-price-kline?category=linear&symbol=BTCUSDT&interval=D&start=1652112000000&end=1652544000000 HTTP/1.1Host: api-testnet.bybit.com
 ```

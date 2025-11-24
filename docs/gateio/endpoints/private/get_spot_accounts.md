@@ -1,7 +1,6 @@
 # GET /spot/accounts
 
-**Source:**
-[/spot/accounts](https://www.gate.io/docs/developers/apiv4/en/#listspotaccounts-parameters)
+**Source:** [/spot/accounts](https://www.gate.io/docs/developers/apiv4/en/#listspotaccounts-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _List spot trading accounts_
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency": "ETH",

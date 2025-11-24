@@ -23,8 +23,6 @@ None
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 POST /v5/position/confirm-pending-mmr HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1698051123673X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 53{    "category": "linear",    "symbol": "BTCUSDT"}
 ```

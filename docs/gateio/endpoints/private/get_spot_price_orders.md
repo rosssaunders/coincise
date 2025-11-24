@@ -1,7 +1,6 @@
 # GET /spot/price_orders
 
-**Source:**
-[/spot/price_orders](https://www.gate.io/docs/developers/apiv4/en/#listspotpricetriggeredorders-parameters)
+**Source:** [/spot/price_orders](https://www.gate.io/docs/developers/apiv4/en/#listspotpricetriggeredorders-parameters)
 
 ## Authentication
 
@@ -40,7 +39,7 @@ _Query running auto order list_
 
 > 200 Response
 
-```
+```json
 [
   {
     "trigger": {

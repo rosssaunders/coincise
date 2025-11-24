@@ -2,7 +2,12 @@
 
 ### API Description
 
-Query the symbol-level ADL risk rating. The ADL risk rating measures the likelihood of ADL during liquidation, and the rating takes into account the insurance fund balance, position concentration on the symbol, order book depth, price volatility, average leverage, unrealized PnL, and margin utilization at the symbol level. The rating can be high, medium and low, and is updated every 30 minutes.
+Query the symbol-level ADL risk rating. The ADL risk rating measures the
+likelihood of ADL during liquidation, and the rating takes into account the
+insurance fund balance, position concentration on the symbol, order book depth,
+price volatility, average leverage, unrealized PnL, and margin utilization at
+the symbol level. The rating can be high, medium and low, and is updated every
+30 minutes.
 
 ### HTTP Request
 
@@ -14,9 +19,9 @@ GET `/fapi/v1/symbolAdlRisk`
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | NO |  |
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | NO        |             |
 
 ### Response Example
 
@@ -47,4 +52,5 @@ GET `/fapi/v1/symbolAdlRisk`
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk)
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk)

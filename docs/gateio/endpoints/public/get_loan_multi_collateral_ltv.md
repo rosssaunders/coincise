@@ -1,7 +1,6 @@
 # GET /loan/multi_collateral/ltv
 
-**Source:**
-[/loan/multi_collateral/ltv](https://www.gate.io/docs/developers/apiv4/en/#getmulticollateralltv-responses)
+**Source:** [/loan/multi_collateral/ltv](https://www.gate.io/docs/developers/apiv4/en/#getmulticollateralltv-responses)
 
 ## Authentication
 
@@ -19,7 +18,7 @@ Multi-currency collateral ratio is fixed, independent of currency
 
 > 200 Response
 
-```
+```json
 {
   "init_ltv": "0.7",
   "alert_ltv": "0.8",

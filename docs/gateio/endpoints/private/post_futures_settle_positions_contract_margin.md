@@ -1,7 +1,6 @@
 # POST /futures/{settle}/positions/{contract}/margin
 
-**Source:**
-[/futures/{settle}/positions/{contract}/margin](https://www.gate.io/docs/developers/apiv4/en/#updatepositionmargin-parameters)
+**Source:** [/futures/{settle}/positions/{contract}/margin](https://www.gate.io/docs/developers/apiv4/en/#updatepositionmargin-parameters)
 
 ## Authentication
 
@@ -35,7 +34,7 @@ _Update position margin_
 
 > 200 Response
 
-```
+```json
 {
   "user": 10000,
   "contract": "BTC_USDT",

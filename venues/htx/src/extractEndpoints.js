@@ -281,17 +281,69 @@ const extractEndpointContent = async (page, guid) => {
             await new Promise(resolve => setTimeout(resolve, 100))
 
             const jsonText = await navigator.clipboard.readText()
-            if (jsonText) {
-              const codeBlock = document.createElement("pre")
-              const code = document.createElement("code")
-              code.textContent = jsonText
-              codeBlock.appendChild(code)
-              jsonView.parentNode.replaceChild(codeBlock, jsonView)
+            if (jsonText && jsonText.trim().length > 0) {
+              // Properly format the JSON
+              try {
+                const parsed = JSON.parse(jsonText)
+                const formatted = JSON.stringify(parsed, null, 2)
+                const codeBlock = document.createElement("pre")
+                const code = document.createElement("code")
+                code.setAttribute("class", "language-json")
+                code.textContent = formatted
+                codeBlock.appendChild(code)
+                jsonView.parentNode.replaceChild(codeBlock, jsonView)
+                continue
+              } catch (parseError) {
+                // If JSON parsing fails, use raw text
+                const codeBlock = document.createElement("pre")
+                const code = document.createElement("code")
+                code.setAttribute("class", "language-json")
+                code.textContent = jsonText
+                codeBlock.appendChild(code)
+                jsonView.parentNode.replaceChild(codeBlock, jsonView)
+                continue
+              }
             }
           } catch (e) {
             console.warn("Could not copy JSON from clipboard:", e)
           }
         }
+      }
+
+      // Fallback: extract JSON from the react-json-view structure
+      try {
+        const jsonObject = {}
+        const objectContent = jsonView.querySelector('.object-content')
+        if (objectContent) {
+          const keyValues = objectContent.querySelectorAll('.object-key-val')
+          keyValues.forEach(kv => {
+            const keySpan = kv.querySelector('.object-key')
+            const valueSpan = kv.querySelector('.variable-value, .object-value')
+            if (keySpan && valueSpan) {
+              const key = keySpan.textContent.replace(/[":]/g, '').trim()
+              let value = valueSpan.textContent.trim()
+              // Try to parse value as JSON
+              try {
+                value = JSON.parse(value)
+              } catch {
+                // Keep as string
+              }
+              jsonObject[key] = value
+            }
+          })
+
+          const formatted = JSON.stringify(jsonObject, null, 2)
+          const codeBlock = document.createElement("pre")
+          const code = document.createElement("code")
+          code.setAttribute("class", "language-json")
+          code.textContent = formatted
+          codeBlock.appendChild(code)
+          jsonView.parentNode.replaceChild(codeBlock, jsonView)
+        }
+      } catch (e) {
+        console.warn("Could not extract JSON from react-json-view:", e)
+        // Last resort: remove the jsonView element
+        jsonView.remove()
       }
     }
 
@@ -477,7 +529,37 @@ const main = async () => {
     // Expand all menus to make endpoint items visible
     await expandAllMenus(page)
 
-    const turndownService = createTurndownBuilder().build()
+    const turndownService = createTurndownBuilder()
+      .withCustomRule("htx-empty-tables", {
+        filter: node => {
+          if (node.nodeName !== "TABLE") return false
+          const rows = Array.from(node.querySelectorAll("tr"))
+          // Check if table has only header row or is completely empty
+          return rows.length <= 1
+        },
+        replacement: () => {
+          // Remove empty tables entirely
+          return ""
+        }
+      })
+      .withCustomRule("htx-json-code", {
+        filter: node => {
+          return (
+            node.nodeName === "PRE" &&
+            node.querySelector("code") &&
+            node.textContent.trim().startsWith("{")
+          )
+        },
+        replacement: (content, node) => {
+          const codeContent = node.textContent.trim()
+          // Check if it looks like JSON
+          if (codeContent.startsWith("{") || codeContent.startsWith("[")) {
+            return "\n```json\n" + codeContent + "\n```\n"
+          }
+          return "\n```\n" + codeContent + "\n```\n"
+        }
+      })
+      .build()
 
     // Ensure output directories exist
     ensureDir(path.join(OUTPUT_DIR, "public"))

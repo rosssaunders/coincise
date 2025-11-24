@@ -1,7 +1,6 @@
 # GET /futures/{settle}/candlesticks
 
-**Source:**
-[/futures/{settle}/candlesticks](https://www.gate.io/docs/developers/apiv4/en/#listfuturescandlesticks-parameters)
+**Source:** [/futures/{settle}/candlesticks](https://www.gate.io/docs/developers/apiv4/en/#listfuturescandlesticks-parameters)
 
 ## Authentication
 
@@ -56,7 +55,7 @@ limit when specifying `from`, `to` and `interval`
 
 > 200 Response
 
-```
+```json
 [
   {
     "t": 1539852480,

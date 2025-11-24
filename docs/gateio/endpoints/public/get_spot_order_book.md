@@ -1,7 +1,6 @@
 # GET /spot/order_book
 
-**Source:**
-[/spot/order_book](https://www.gate.io/docs/developers/apiv4/en/#listorderbook-parameters)
+**Source:** [/spot/order_book](https://www.gate.io/docs/developers/apiv4/en/#listorderbook-parameters)
 
 ## Authentication
 
@@ -32,7 +31,7 @@ sorted from low to high
 
 > 200 Response
 
-```
+```json
 {
   "id": 123456,
   "current": 1623898993123,

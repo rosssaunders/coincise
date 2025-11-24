@@ -1,10 +1,12 @@
 # POST /exchange
 
-**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:**
+https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
 `POST` `https://api.hyperliquid.xyz/exchange`
 
-Send spot assets to another address. This transfer does not touch the EVM bridge. The signature format is human readable for wallet interfaces.
+Send spot assets to another address. This transfer does not touch the EVM
+bridge. The signature format is human readable for wallet interfaces.
 
 Headers
 
@@ -36,9 +38,13 @@ Object
 
 "type": "spotSend",
 
-"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead), "signatureChainId": the id of the chain used when signing in hexadecimal format; e.g. "0xa4b1" for Arbitrum,
+"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead),
+"signatureChainId": the id of the chain used when signing in hexadecimal format;
+e.g. "0xa4b1" for Arbitrum,
 
-"destination": address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000, "token": tokenName:tokenId; e.g. "PURR:0xc4bf3f870c0e9465323c0b6ed28096c2",
+"destination": address in 42-character hexadecimal format; e.g.
+0x0000000000000000000000000000000000000000, "token": tokenName:tokenId; e.g.
+"PURR:0xc4bf3f870c0e9465323c0b6ed28096c2",
 
 "amount": amount of token to send as a string, e.g. "0.01",
 

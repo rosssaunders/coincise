@@ -1,7 +1,6 @@
 # GET /loan/multi_collateral/fixed_rate
 
-**Source:**
-[/loan/multi_collateral/fixed_rate](https://www.gate.io/docs/developers/apiv4/en/#getmulticollateralfixrate-responses)
+**Source:** [/loan/multi_collateral/fixed_rate](https://www.gate.io/docs/developers/apiv4/en/#getmulticollateralfixrate-responses)
 
 ## Authentication
 
@@ -17,7 +16,7 @@ _Query currency's 7-day and 30-day fixed interest rates_
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency": "BTC",

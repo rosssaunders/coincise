@@ -38,8 +38,6 @@ None
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 POST /v5/position/set-leverage HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672281605082X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "linear",    "symbol": "BTCUSDT",    "buyLeverage": "6",    "sellLeverage": "6"}
 ```
@@ -53,7 +51,7 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .setLeverage({        category: 'linear',        symbol: 'BTCUSDT',        buyLeverage: '6',        sellLeverage: '6',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: "YOUR_API_KEY",    secret: "YOUR_API_SECRET",});client    .setLeverage({        category: 'linear',        symbol: 'BTCUSDT',        buyLeverage: '6',        sellLeverage: '6',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

@@ -1,7 +1,6 @@
 # GET /rebate/broker/commission_history
 
-**Source:**
-[/rebate/broker/commission_history](https://www.gate.io/docs/developers/apiv4/en/#rebatebrokercommissionhistory-parameters)
+**Source:** [/rebate/broker/commission_history](https://www.gate.io/docs/developers/apiv4/en/#rebatebrokercommissionhistory-parameters)
 
 ## Authentication
 
@@ -32,7 +31,7 @@ Record query time range cannot exceed 30 days
 
 > 200 Response
 
-```
+```json
 {
   "list": [
     {

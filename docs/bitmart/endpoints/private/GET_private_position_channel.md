@@ -1,6 +1,7 @@
 # GET 【Private】Position Channel
 
-**Source:** [【Private】Position Channel](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[【Private】Position Channel](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -25,9 +26,7 @@ Get Position Data
 ```json
 {
   "action": "subscribe",
-  "args": [
-    "futures/position"
-  ]
+  "args": ["futures/position"]
 }
 ```
 
@@ -36,14 +35,12 @@ Message Format:
 ```json
 {
   "action": "subscribe",
-  "args": [
-    "<channel>"
-  ]
+  "args": ["<channel>"]
 }
 ```
 
--   actions: `subscribe`
--   channel: Channel name `futures/position`, fixed value
+- actions: `subscribe`
+- channel: Channel name `futures/position`, fixed value
 
 ### Response
 
@@ -74,24 +71,20 @@ Message Format:
 
 Return data description:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| symbol | String | Contract pair (e.g. BTCUSDT) |
-| hold\_volume | String | Number of positions |
-| position\_type | Int | Position type  
+| Field         | Type   | Description                  |
+| ------------- | ------ | ---------------------------- |
+| symbol        | String | Contract pair (e.g. BTCUSDT) |
+| hold_volume   | String | Number of positions          |
+| position_type | Int    | Position type                |
+
 \-`1`\=long  
-\-`2`\=short |
-| open\_type | Int | Open position type  
+\-`2`\=short | | open_type | Int | Open position type  
 \-`1`\=isolated  
-\-`2`\=cross |
-| frozen\_volume | String | Frozen volume |
-| close\_volume | String | Close volume |
-| hold\_avg\_price | String | Average price of a position |
-| close\_avg\_price | String | Average close price |
-| open\_avg\_price | String | Average opening price |
-| liquidate\_price | String | Liquidation price |
-| create\_time | Long | Position created timestamp (ms) |
-| update\_time | Long | Position updated timestamp (ms) |
-| position\_mode | String | Position mode  
+\-`2`\=cross | | frozen_volume | String | Frozen volume | | close_volume |
+String | Close volume | | hold_avg_price | String | Average price of a position
+| | close_avg_price | String | Average close price | | open_avg_price | String |
+Average opening price | | liquidate_price | String | Liquidation price | |
+create_time | Long | Position created timestamp (ms) | | update_time | Long |
+Position updated timestamp (ms) | | position_mode | String | Position mode  
 \-`hedge_mode`  
 \-`one_way_mode` |

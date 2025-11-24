@@ -35,8 +35,6 @@ GET `/v5/market/insurance`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 GET /v5/market/insurance?coin=USDT HTTP/1.1Host: api-testnet.bybit.com
 ```

@@ -1,7 +1,6 @@
 # GET /earn/uni/chart
 
-**Source:**
-[/earn/uni/chart](https://www.gate.io/docs/developers/apiv4/en/#listunichart-parameters)
+**Source:** [/earn/uni/chart](https://www.gate.io/docs/developers/apiv4/en/#listunichart-parameters)
 
 ## Authentication
 
@@ -28,7 +27,7 @@ _UniLoan currency annualized trend chart_
 
 > 200 Response
 
-```
+```json
 [
   {
     "time": 1719705600,

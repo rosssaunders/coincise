@@ -1,7 +1,6 @@
 # POST /wallet/sub_account_transfers
 
-**Source:**
-[/wallet/sub_account_transfers](https://www.gate.io/docs/developers/apiv4/en/#transferwithsubaccount-parameters)
+**Source:** [/wallet/sub_account_transfers](https://www.gate.io/docs/developers/apiv4/en/#transferwithsubaccount-parameters)
 
 ## Authentication
 
@@ -19,7 +18,7 @@ account is used
 
 > Body parameter
 
-```
+```json
 {
   "sub_account": "10002",
   "sub_account_type": "spot",
@@ -49,7 +48,7 @@ account is used
 
 > 200 Response
 
-```
+```json
 {
   "tx_id": 59636381286
 }

@@ -26,10 +26,10 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl https://api-cloud-v2.bitmart.com/contract/public/market-trade?symbol=BTCUSDT&limit=100`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| symbol | String | Yes | Symbol of the contract(like BTCUSDT) |
-| limit | Long | No | Count(Default 50; max 100;) |
+| Field  | Type   | Required? | Description                          |
+| ------ | ------ | --------- | ------------------------------------ |
+| symbol | String | Yes       | Symbol of the contract(like BTCUSDT) |
+| limit  | Long   | No        | Count(Default 50; max 100;)          |
 
 #### Response Data
 
@@ -61,11 +61,11 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| symbol | String | Symbol |
-| price | String | Trade price |
-| qty | String | Trade value - coin |
-| quote\_qty | String | Trade value - USDT |
-| time | Long | Market trade time stamp |
-| is\_buyer\_maker | Bool | True if Buyer of the trade is maker |
+| Field          | Type   | Description                         |
+| -------------- | ------ | ----------------------------------- |
+| symbol         | String | Symbol                              |
+| price          | String | Trade price                         |
+| qty            | String | Trade value - coin                  |
+| quote_qty      | String | Trade value - USDT                  |
+| time           | Long   | Market trade time stamp             |
+| is_buyer_maker | Bool   | True if Buyer of the trade is maker |

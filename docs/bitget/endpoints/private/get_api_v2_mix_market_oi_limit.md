@@ -8,7 +8,7 @@ Interface is used to get future contract OI Limit.
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/mix/market/oi-limit
+- GET /api/v2/mix/market/oi-limit
 
 Request Example
 
@@ -18,10 +18,11 @@ curl "https://api.bitget.com/api/v2/mix/market/oi-limit?productType=usdt-futures
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | No | Trading pair, based on the symbolName, i.e. BTCUSDT |
-| productType | String | Yes | Product type  
+| Parameter   | Type   | Required | Description                                         |
+| :---------- | :----- | :------- | :-------------------------------------------------- |
+| symbol      | String | No       | Trading pair, based on the symbolName, i.e. BTCUSDT |
+| productType | String | Yes      | Product type                                        |
+
 `USDT-FUTURES` USDT-M Futures  
 `COIN-FUTURES` Coin-M Futures  
 `USDC-FUTURES` USDC-M Futures  
@@ -51,10 +52,10 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| \> symbol | String | Product name |
-| \> notionalValue | String | Individual User Position Notional Value |
+| Parameter             | Type   | Description                                          |
+| :-------------------- | :----- | :--------------------------------------------------- |
+| \> symbol             | String | Product name                                         |
+| \> notionalValue      | String | Individual User Position Notional Value              |
 | \> totalNotionalValue | String | Sub-account and Main-account Position Notional Value |
 
 > **Source:** https://www.bitget.com/api-doc/contract/market/Get-Contracts-Oi

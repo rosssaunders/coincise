@@ -8,7 +8,7 @@ Get Trade data support symbols
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/spot/market/support-symbols
+- GET /api/v2/spot/market/support-symbols
 
 Request Example
 
@@ -28,23 +28,17 @@ Response Example
   "msg": "success",
   "requestTime": 1656589586807,
   "data": {
-    "spotList": [
-      "BTCUSDT",
-      "ETHUSDT"
-    ],
-    "futureList": [
-      "BTCUSDT",
-      "ETHUSDT"
-    ]
+    "spotList": ["BTCUSDT", "ETHUSDT"],
+    "futureList": ["BTCUSDT", "ETHUSDT"]
   }
 }
 ```
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| spotList | List | Spot data symbols |
+| Parameter  | Type | Description          |
+| :--------- | :--- | :------------------- |
+| spotList   | List | Spot data symbols    |
 | futureList | List | Futures data symbols |
 
 > **Source:** https://www.bitget.com/api-doc/common/apidata/Get-Big-Data-Symbol

@@ -1,7 +1,6 @@
 # POST /flash_swap/orders
 
-**Source:**
-[/flash_swap/orders](https://www.gate.io/docs/developers/apiv4/en/#createflashswaporder-parameters)
+**Source:** [/flash_swap/orders](https://www.gate.io/docs/developers/apiv4/en/#createflashswaporder-parameters)
 
 ## Authentication
 
@@ -18,7 +17,7 @@ preview result
 
 > Body parameter
 
-```
+```json
 {
   "preview_id": "4564564",
   "sell_currency": "BTC",
@@ -46,7 +45,7 @@ preview result
 
 > 201 Response
 
-```
+```json
 {
   "id": 54646,
   "create_time": 1651116876378,

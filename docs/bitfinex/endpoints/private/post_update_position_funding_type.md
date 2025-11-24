@@ -1,6 +1,7 @@
 # POST /v2/auth/w/position/update/funding/type
 
-**Source:** [https://docs.bitfinex.com/reference/update-position-funding-type](https://docs.bitfinex.com/reference/update-position-funding-type)
+**Source:**
+[https://docs.bitfinex.com/reference/update-position-funding-type](https://docs.bitfinex.com/reference/update-position-funding-type)
 
 post
 
@@ -10,12 +11,12 @@ Update the funding type of a given position
 
 Response Fields
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| [0] | MTS | int | Seconds epoch timestamp of notification |
-| [1] | TYPE | string | Notification's type ("puft-req") |
-| [6] | STATUS | string | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
-| [7] | TEXT | string | Additional notification description |
+| Index | Field  | Type   | Description                                                                      |
+| ----- | ------ | ------ | -------------------------------------------------------------------------------- |
+| [0]   | MTS    | int    | Seconds epoch timestamp of notification                                          |
+| [1]   | TYPE   | string | Notification's type ("puft-req")                                                 |
+| [6]   | STATUS | string | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
+| [7]   | TEXT   | string | Additional notification description                                              |
 
 Body Params
 

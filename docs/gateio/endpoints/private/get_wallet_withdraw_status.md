@@ -1,7 +1,6 @@
 # GET /wallet/withdraw_status
 
-**Source:**
-[/wallet/withdraw_status](https://www.gate.io/docs/developers/apiv4/en/#listwithdrawstatus-parameters)
+**Source:** [/wallet/withdraw_status](https://www.gate.io/docs/developers/apiv4/en/#listwithdrawstatus-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Query withdrawal status_
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency": "GT",

@@ -1,7 +1,6 @@
 # GET /spot/tickers
 
-**Source:**
-[/spot/tickers](https://www.gate.io/docs/developers/apiv4/en/#listtickers-parameters)
+**Source:** [/spot/tickers](https://www.gate.io/docs/developers/apiv4/en/#listtickers-parameters)
 
 ## Authentication
 
@@ -38,7 +37,7 @@ all information
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency_pair": "BTC3L_USDT",

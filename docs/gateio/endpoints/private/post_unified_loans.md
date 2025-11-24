@@ -1,7 +1,6 @@
 # POST /unified/loans
 
-**Source:**
-[/unified/loans](https://www.gate.io/docs/developers/apiv4/en/#createunifiedloan-parameters)
+**Source:** [/unified/loans](https://www.gate.io/docs/developers/apiv4/en/#createunifiedloan-parameters)
 
 ## Authentication
 
@@ -24,7 +23,7 @@ For repayment, use `repaid_all=true` to repay all available amounts
 
 > Body parameter
 
-```
+```json
 {
   "currency": "BTC",
   "amount": "0.1",
@@ -59,7 +58,7 @@ For repayment, use `repaid_all=true` to repay all available amounts
 
 > 200 Response
 
-```
+```json
 {
   "tran_id": 9527
 }

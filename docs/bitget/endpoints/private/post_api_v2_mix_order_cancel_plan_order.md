@@ -4,13 +4,14 @@ Speed limit is 10 times/s (UID)
 
 ### Description[​](#description "Direct link to Description")
 
-Interface for cancelling trigger orders, can be used to cancel by 'productType', 'symbol' and/or trigger ID list.
+Interface for cancelling trigger orders, can be used to cancel by 'productType',
+'symbol' and/or trigger ID list.
 
 All orders that fall under that'productType' and 'symbol' will be cancelled.
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   POST /api/v2/mix/order/cancel-plan-order
+- POST /api/v2/mix/order/cancel-plan-order
 
 Request Example
 
@@ -20,27 +21,27 @@ curl -X POST "https://api.bitget.com/api/v2/mix/order/cancel-plan-order" \   -H 
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| orderIdList | List | No | Trigger order id list.  
-If it is passed, symbol must not be null and must be aligned with symbol/productType/planType. |
-| \>orderId | String | No | Trigger order ID  
-Either orderId or clientOid is required. If both are entered, orderId prevails. |
-| \>clientOid | String | No | Customized trigger order ID  
-Either orderId or clientOid is required. If both are entered, triggerId prevails. |
-| symbol | String | No | Trading pair, e.g. ETHUSDT |
-| productType | String | Yes | Product type  
+| Parameter                                                                                      | Type   | Required | Description                 |
+| :--------------------------------------------------------------------------------------------- | :----- | :------- | :-------------------------- |
+| orderIdList                                                                                    | List   | No       | Trigger order id list.      |
+| If it is passed, symbol must not be null and must be aligned with symbol/productType/planType. |
+| \>orderId                                                                                      | String | No       | Trigger order ID            |
+| Either orderId or clientOid is required. If both are entered, orderId prevails.                |
+| \>clientOid                                                                                    | String | No       | Customized trigger order ID |
+| Either orderId or clientOid is required. If both are entered, triggerId prevails.              |
+| symbol                                                                                         | String | No       | Trading pair, e.g. ETHUSDT  |
+| productType                                                                                    | String | Yes      | Product type                |
+
 `USDT-FUTURES` USDT-M Futures  
 `COIN-FUTURES` Coin-M Futures  
-`USDC-FUTURES` USDC-M Futures |
-| marginCoin | String | No | Margin coin must be capitalized |
-| planType | String | No | Trigger order type  
-normal\_plan plan order(default)  
-profit\_plan batch profit order  
-loss\_plan batch loss order  
-pos\_profit position profit order  
-pos\_loss position loss order  
-moving\_plan trailing order |
+`USDC-FUTURES` USDC-M Futures | | marginCoin | String | No | Margin coin must be
+capitalized | | planType | String | No | Trigger order type  
+normal_plan plan order(default)  
+profit_plan batch profit order  
+loss_plan batch loss order  
+pos_profit position profit order  
+pos_loss position loss order  
+moving_plan trailing order |
 
 Response Example
 
@@ -78,14 +79,14 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| successList | List<Object\> | The collection of successfully cancelled orders. |
-| \> orderId | String | Order ID |
-| \> clientOid | String | Customize order ID |
-| failureList | List<Object\> | The collection of unsuccessfully cancelled orders. |
-| \> orderId | String | Order ID |
-| \> clientOid | String | Customize order ID |
-| \>errorMsg | String | Failure reason |
+| Parameter    | Type          | Description                                        |
+| :----------- | :------------ | :------------------------------------------------- |
+| successList  | List<Object\> | The collection of successfully cancelled orders.   |
+| \> orderId   | String        | Order ID                                           |
+| \> clientOid | String        | Customize order ID                                 |
+| failureList  | List<Object\> | The collection of unsuccessfully cancelled orders. |
+| \> orderId   | String        | Order ID                                           |
+| \> clientOid | String        | Customize order ID                                 |
+| \>errorMsg   | String        | Failure reason                                     |
 
 > **Source:** https://www.bitget.com/api-doc/contract/plan/Cancel-Plan-Order

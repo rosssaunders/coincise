@@ -1,7 +1,6 @@
 # GET /earn/uni/currencies/{currency}
 
-**Source:**
-[/earn/uni/currencies/{currency}](https://www.gate.io/docs/developers/apiv4/en/#getunicurrency-parameters)
+**Source:** [/earn/uni/currencies/{currency}](https://www.gate.io/docs/developers/apiv4/en/#getunicurrency-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Query single lending currency details_
 
 > 200 Response
 
-```
+```json
 {
   "currency": "AE",
   "min_lend_amount": "100",

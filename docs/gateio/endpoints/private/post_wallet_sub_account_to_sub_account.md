@@ -1,7 +1,6 @@
 # POST /wallet/sub_account_to_sub_account
 
-**Source:**
-[/wallet/sub_account_to_sub_account](https://www.gate.io/docs/developers/apiv4/en/#subaccounttosubaccount-parameters)
+**Source:** [/wallet/sub_account_to_sub_account](https://www.gate.io/docs/developers/apiv4/en/#subaccounttosubaccount-parameters)
 
 ## Authentication
 
@@ -19,7 +18,7 @@ Key to perform the operation
 
 > Body parameter
 
-```
+```json
 {
   "currency": "usdt",
   "sub_account_from": "10001",
@@ -50,7 +49,7 @@ Key to perform the operation
 
 > 200 Response
 
-```
+```json
 {
   "tx_id": 59636381286
 }

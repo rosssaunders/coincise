@@ -1,7 +1,6 @@
 # GET /options/positions
 
-**Source:**
-[/options/positions](https://www.gate.io/docs/developers/apiv4/en/#listoptionspositions-parameters)
+**Source:** [/options/positions](https://www.gate.io/docs/developers/apiv4/en/#listoptionspositions-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _List user's positions of specified underlying_
 
 > 200 Response
 
-```
+```json
 [
   {
     "user": 11027586,

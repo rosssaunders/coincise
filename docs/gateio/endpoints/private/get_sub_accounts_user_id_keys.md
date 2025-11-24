@@ -1,7 +1,6 @@
 # GET /sub_accounts/{user_id}/keys
 
-**Source:**
-[/sub_accounts/{user_id}/keys](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountkeys-parameters)
+**Source:** [/sub_accounts/{user_id}/keys](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountkeys-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _List all API key pairs of the sub-account_
 
 > 200 Response
 
-```
+```json
 [
   {
     "state": 1,

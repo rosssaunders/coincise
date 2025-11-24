@@ -1,7 +1,6 @@
 # POST /spot/price_orders
 
-**Source:**
-[/spot/price_orders](https://www.gate.io/docs/developers/apiv4/en/#createspotpricetriggeredorder-parameters)
+**Source:** [/spot/price_orders](https://www.gate.io/docs/developers/apiv4/en/#createspotpricetriggeredorder-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Create price-triggered order_
 
 > Body parameter
 
-```
+```json
 {
   "trigger": {
     "price": "100",
@@ -120,7 +119,7 @@ currency (the currency being traded), such as `BTC` in `BTC_USDT` When `type` is
 
 > 201 Response
 
-```
+```json
 {
   "id": 1432329
 }

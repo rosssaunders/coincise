@@ -65,8 +65,6 @@ POST `/v5/user/update-sub-api`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 POST /v5/user/update-sub-api HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676431795752X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "readOnly": 0,    "ips": "*",    "permissions": {            "ContractTrade": [],            "Spot": [                "SpotTrade"            ],            "Wallet": [                "AccountTransfer"            ],            "Options": [],            "CopyTrading": [],            "BlockTrade": [],            "Exchange": [],            "NFT": []        }}
 ```
@@ -76,7 +74,7 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .updateSubApiKey({    readOnly: 0,    ips: ['*'],    permissions: {      ContractTrade: [],      Spot: ['SpotTrade'],      Wallet: ['AccountTransfer'],      Options: [],      Derivatives: [],      CopyTrading: [],      BlockTrade: [],      Exchange: [],      NFT: [],    },  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .updateSubApiKey({    readOnly: 0,    ips: ['*'],    permissions: {      ContractTrade: [],      Spot: ['SpotTrade'],      Wallet: ['AccountTransfer'],      Options: [],      Derivatives: [],      CopyTrading: [],      BlockTrade: [],      Exchange: [],      NFT: [],    },  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

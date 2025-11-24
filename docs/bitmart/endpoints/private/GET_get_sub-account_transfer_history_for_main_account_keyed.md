@@ -1,6 +1,7 @@
 # GET Get Sub-Account Transfer History (For Main Account) (KEYED)
 
-**Source:** [Get Sub-Account Transfer History (For Main Account) (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[Get Sub-Account Transfer History (For Main Account) (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -26,10 +27,10 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/account/contract/sub-account/main/v1/transfer-list?subAccount=subAccountName@xxx.com&limit=10`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| subAccount | String | Yes | Sub-Account username |
-| limit | Int | Yes | Recent N records, allowed range\[1,100\] |
+| Field      | Type   | Required? | Description                              |
+| ---------- | ------ | --------- | ---------------------------------------- |
+| subAccount | String | Yes       | Sub-Account username                     |
+| limit      | Int    | Yes       | Recent N records, allowed range\[1,100\] |
 
 #### Response Data
 
@@ -54,14 +55,14 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| fromAccount | String | Transfer out Sub-Account username |
-| fromWalletType | String | Transfer out wallet type  
-\-`future`\=futures wallet |
-| toAccount | String | Transfer to Sub-Account username |
-| toWalletType | String | Transfer to wallet type  
-\-`future`\=futures wallet |
-| currency | String | currency |
-| amount | String | Transfer amount |
-| submissionTime | Long | The request timestamp is accurate to seconds(UTC-0) |
+| Field                      | Type   | Description                                         |
+| -------------------------- | ------ | --------------------------------------------------- |
+| fromAccount                | String | Transfer out Sub-Account username                   |
+| fromWalletType             | String | Transfer out wallet type                            |
+| \-`future`\=futures wallet |
+| toAccount                  | String | Transfer to Sub-Account username                    |
+| toWalletType               | String | Transfer to wallet type                             |
+| \-`future`\=futures wallet |
+| currency                   | String | currency                                            |
+| amount                     | String | Transfer amount                                     |
+| submissionTime             | Long   | The request timestamp is accurate to seconds(UTC-0) |

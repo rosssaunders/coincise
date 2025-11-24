@@ -1,7 +1,6 @@
 # DELETE /withdrawals/{withdrawal_id}
 
-**Source:**
-[/withdrawals/{withdrawal_id}](https://www.gate.io/docs/developers/apiv4/en/#cancelwithdrawal-parameters)
+**Source:** [/withdrawals/{withdrawal_id}](https://www.gate.io/docs/developers/apiv4/en/#cancelwithdrawal-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Cancel withdrawal with specified ID_
 
 > 202 Response
 
-```
+```json
 {
   "id": "210496",
   "timestamp": "1542000000",

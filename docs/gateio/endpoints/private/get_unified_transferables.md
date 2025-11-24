@@ -1,7 +1,6 @@
 # GET /unified/transferables
 
-**Source:**
-[/unified/transferables](https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferables-parameters)
+**Source:** [/unified/transferables](https://www.gate.io/docs/developers/apiv4/en/#getunifiedtransferables-parameters)
 
 ## Authentication
 
@@ -28,7 +27,7 @@ currencies will change_
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency": "BTC",

@@ -1,7 +1,6 @@
 # GET /futures/{settle}/index_constituents/{index}
 
-**Source:**
-[/futures/{settle}/index_constituents/{index}](https://www.gate.io/docs/developers/apiv4/en/#getindexconstituents-parameters)
+**Source:** [/futures/{settle}/index_constituents/{index}](https://www.gate.io/docs/developers/apiv4/en/#getindexconstituents-parameters)
 
 ## Authentication
 
@@ -34,7 +33,7 @@ _Query index constituents_
 
 > 200 Response
 
-```
+```json
 {
   "index": "BTC_USDT",
   "constituents": [

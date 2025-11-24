@@ -1,7 +1,6 @@
 # PUT /sub_accounts/{user_id}/keys/{key}
 
-**Source:**
-[/sub_accounts/{user_id}/keys/{key}](https://www.gate.io/docs/developers/apiv4/en/#updatesubaccountkeys-parameters)
+**Source:** [/sub_accounts/{user_id}/keys/{key}](https://www.gate.io/docs/developers/apiv4/en/#updatesubaccountkeys-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Update sub-account API key pair_
 
 > Body parameter
 
-```
+```json
 {
   "mode": 1,
   "name": "spot",

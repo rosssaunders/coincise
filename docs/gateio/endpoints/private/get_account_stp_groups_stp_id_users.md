@@ -1,7 +1,6 @@
 # GET /account/stp_groups/{stp_id}/users
 
-**Source:**
-[/account/stp_groups/{stp_id}/users](https://www.gate.io/docs/developers/apiv4/en/#liststpgroupsusers-parameters)
+**Source:** [/account/stp_groups/{stp_id}/users](https://www.gate.io/docs/developers/apiv4/en/#liststpgroupsusers-parameters)
 
 ## Authentication
 
@@ -29,7 +28,7 @@ in the current STP group
 
 > 200 Response
 
-```
+```json
 [
   {
     "user_id": 10000,

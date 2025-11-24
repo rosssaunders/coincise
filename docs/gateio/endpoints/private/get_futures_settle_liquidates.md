@@ -1,7 +1,6 @@
 # GET /futures/{settle}/liquidates
 
-**Source:**
-[/futures/{settle}/liquidates](https://www.gate.io/docs/developers/apiv4/en/#listliquidates-parameters)
+**Source:** [/futures/{settle}/liquidates](https://www.gate.io/docs/developers/apiv4/en/#listliquidates-parameters)
 
 ## Authentication
 
@@ -51,7 +50,7 @@ time format is a Unix timestamp
 
 > 200 Response
 
-```
+```json
 [
   {
     "time": 1548654951,

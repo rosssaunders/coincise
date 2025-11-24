@@ -1,7 +1,6 @@
 # GET /loan/multi_collateral/currency_quota
 
-**Source:**
-[/loan/multi_collateral/currency_quota](https://www.gate.io/docs/developers/apiv4/en/#listusercurrencyquota-parameters)
+**Source:** [/loan/multi_collateral/currency_quota](https://www.gate.io/docs/developers/apiv4/en/#listusercurrencyquota-parameters)
 
 ## Authentication
 
@@ -27,7 +26,7 @@ _Query user's collateral and borrowing currency quota information_
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency": "BTC",

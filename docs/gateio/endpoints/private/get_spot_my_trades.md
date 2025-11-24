@@ -1,7 +1,6 @@
 # GET /spot/my_trades
 
-**Source:**
-[/spot/my_trades](https://www.gate.io/docs/developers/apiv4/en/#listmytrades-parameters)
+**Source:** [/spot/my_trades](https://www.gate.io/docs/developers/apiv4/en/#listmytrades-parameters)
 
 ## Authentication
 
@@ -50,7 +49,7 @@ is 100,0, that is, limit \* (page - 1) <= 100,0.
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": "1232893232",

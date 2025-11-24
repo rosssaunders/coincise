@@ -1,7 +1,6 @@
 # GET /margin/uni/currency_pairs/{currency_pair}
 
-**Source:**
-[/margin/uni/currency_pairs/{currency_pair}](https://www.gate.io/docs/developers/apiv4/en/#getisolatedunicurrencypair-parameters)
+**Source:** [/margin/uni/currency_pairs/{currency_pair}](https://www.gate.io/docs/developers/apiv4/en/#getisolatedunicurrencypair-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Get lending market details_
 
 > 200 Response
 
-```
+```json
 {
   "currency_pair": "AE_USDT",
   "base_min_borrow_amount": "100",

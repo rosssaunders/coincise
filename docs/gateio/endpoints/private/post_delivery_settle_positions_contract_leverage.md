@@ -1,7 +1,6 @@
 # POST /delivery/{settle}/positions/{contract}/leverage
 
-**Source:**
-[/delivery/{settle}/positions/{contract}/leverage](https://www.gate.io/docs/developers/apiv4/en/#updatedeliverypositionleverage-parameters)
+**Source:** [/delivery/{settle}/positions/{contract}/leverage](https://www.gate.io/docs/developers/apiv4/en/#updatedeliverypositionleverage-parameters)
 
 ## Authentication
 
@@ -34,7 +33,7 @@ _Update position leverage_
 
 > 200 Response
 
-```
+```json
 {
   "user": 10000,
   "contract": "BTC_USDT",

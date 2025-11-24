@@ -1,7 +1,6 @@
 # GET /wallet/fee
 
-**Source:**
-[/wallet/fee](https://www.gate.io/docs/developers/apiv4/en/#gettradefee-parameters)
+**Source:** [/wallet/fee](https://www.gate.io/docs/developers/apiv4/en/#gettradefee-parameters)
 
 ## Authentication
 
@@ -48,7 +47,7 @@ currencies are the same.
 
 > 200 Response
 
-```
+```json
 {
   "user_id": 10001,
   "taker_fee": "0.002",

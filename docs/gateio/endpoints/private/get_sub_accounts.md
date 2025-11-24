@@ -1,7 +1,6 @@
 # GET /sub_accounts
 
-**Source:**
-[/sub_accounts](https://www.gate.io/docs/developers/apiv4/en/#listsubaccounts-parameters)
+**Source:** [/sub_accounts](https://www.gate.io/docs/developers/apiv4/en/#listsubaccounts-parameters)
 
 ## Authentication
 
@@ -33,7 +32,7 @@ queried by default.
 
 > 200 Response
 
-```
+```json
 [
   {
     "remark": "remark",

@@ -1,7 +1,6 @@
 # POST /unified/leverage/user_currency_setting
 
-**Source:**
-[/unified/leverage/user_currency_setting](https://www.gate.io/docs/developers/apiv4/en/#setuserleveragecurrencysetting-parameters)
+**Source:** [/unified/leverage/user_currency_setting](https://www.gate.io/docs/developers/apiv4/en/#setuserleveragecurrencysetting-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Set loan currency leverage_
 
 > Body parameter
 
-```
+```json
 {
   "currency": "BTC",
   "leverage": "3"

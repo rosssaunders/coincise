@@ -1,7 +1,6 @@
 # GET /options/accounts
 
-**Source:**
-[/options/accounts](https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccount-responses)
+**Source:** [/options/accounts](https://www.gate.io/docs/developers/apiv4/en/#listoptionsaccount-responses)
 
 ## Authentication
 
@@ -17,7 +16,7 @@ _Query account information_
 
 > 200 Response
 
-```
+```json
 {
   "user": 666,
   "currency": "USDT",

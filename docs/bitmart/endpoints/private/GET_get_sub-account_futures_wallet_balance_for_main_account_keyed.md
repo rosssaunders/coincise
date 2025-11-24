@@ -1,6 +1,7 @@
 # GET Get Sub-Account Futures Wallet Balance (For Main Account) (KEYED)
 
-**Source:** [Get Sub-Account Futures Wallet Balance (For Main Account) (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[Get Sub-Account Futures Wallet Balance (For Main Account) (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -26,10 +27,10 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/account/contract/sub-account/main/v1/wallet?subAccount=subAccount1@xxx.com&currency=USDT`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| subAccount | String | Yes | Sub-Account username |
-| currency | String | No | currency |
+| Field      | Type   | Required? | Description          |
+| ---------- | ------ | --------- | -------------------- |
+| subAccount | String | Yes       | Sub-Account username |
+| currency   | String | No        | currency             |
 
 #### Response Data
 
@@ -53,11 +54,11 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| currency | String | Token symbol, e.g., 'BTC' |
-| name | String | Token name, e.g., 'Bitcoin' |
-| available | String | Available Balance |
-| frozen | String | Frozen Balance |
+| Field     | Type   | Description                 |
+| --------- | ------ | --------------------------- |
+| currency  | String | Token symbol, e.g., 'BTC'   |
+| name      | String | Token name, e.g., 'Bitcoin' |
+| available | String | Available Balance           |
+| frozen    | String | Frozen Balance              |
 
 The return list contains only assets with a balance greater than 0.

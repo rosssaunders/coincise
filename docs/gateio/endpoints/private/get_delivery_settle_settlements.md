@@ -1,7 +1,6 @@
 # GET /delivery/{settle}/settlements
 
-**Source:**
-[/delivery/{settle}/settlements](https://www.gate.io/docs/developers/apiv4/en/#listdeliverysettlements-parameters)
+**Source:** [/delivery/{settle}/settlements](https://www.gate.io/docs/developers/apiv4/en/#listdeliverysettlements-parameters)
 
 ## Authentication
 
@@ -35,7 +34,7 @@ _Query settlement records_
 
 > 200 Response
 
-```
+```json
 [
   {
     "time": 1548654951,

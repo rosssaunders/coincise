@@ -8,7 +8,7 @@ Cancel order by symbol
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   POST /api/v2/spot/trade/cancel-symbol-order
+- POST /api/v2/spot/trade/cancel-symbol-order
 
 Request Example
 
@@ -18,9 +18,9 @@ curl -X POST "https://api.bitget.com/api/v2/spot/trade/cancel-symbol-order" \   
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair name, e.g. BTCUSDT |
+| Parameter | Type   | Required | Description                     |
+| :-------- | :----- | :------- | :------------------------------ |
+| symbol    | String | Yes      | Trading pair name, e.g. BTCUSDT |
 
 Response Example
 
@@ -37,8 +37,8 @@ Response Example
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| symbol | String | Cancelled symbol (This request is executed asynchronously. If you need to know the result, please query the Get History Orders endpoint.) |
+| Parameter | Type   | Description                                                                                                                               |
+| :-------- | :----- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol    | String | Cancelled symbol (This request is executed asynchronously. If you need to know the result, please query the Get History Orders endpoint.) |
 
 > **Source:** https://www.bitget.com/api-doc/spot/trade/Cancel-Symbol-Orders

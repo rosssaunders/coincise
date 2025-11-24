@@ -39,8 +39,6 @@ None
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```
 POST v5/order/disconnected-cancel-all HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1675852742375X-BAPI-RECV-WINDOW: 50000Content-Type: application/json{  "timeWindow": 40}
 ```
@@ -54,7 +52,7 @@ import com.bybit.api.client.config.BybitApiConfig;import com.bybit.api.client.do
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .setDisconnectCancelAllWindow('option', 40)    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: "YOUR_API_KEY",    secret: "YOUR_API_SECRET",});client    .setDisconnectCancelAllWindow('option', 40)    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

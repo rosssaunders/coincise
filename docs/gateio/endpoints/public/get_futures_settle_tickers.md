@@ -1,7 +1,6 @@
 # GET /futures/{settle}/tickers
 
-**Source:**
-[/futures/{settle}/tickers](https://www.gate.io/docs/developers/apiv4/en/#listfuturestickers-parameters)
+**Source:** [/futures/{settle}/tickers](https://www.gate.io/docs/developers/apiv4/en/#listfuturestickers-parameters)
 
 ## Authentication
 
@@ -34,7 +33,7 @@ _Get all futures trading statistics_
 
 > 200 Response
 
-```
+```json
 [
   {
     "contract": "BTC_USDT",

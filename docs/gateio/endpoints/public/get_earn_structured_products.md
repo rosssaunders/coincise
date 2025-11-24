@@ -1,7 +1,6 @@
 # GET /earn/structured/products
 
-**Source:**
-[/earn/structured/products](https://www.gate.io/docs/developers/apiv4/en/#liststructuredproducts-parameters)
+**Source:** [/earn/structured/products](https://www.gate.io/docs/developers/apiv4/en/#liststructuredproducts-parameters)
 
 ## Authentication
 
@@ -42,7 +41,7 @@ settlement `done`\-Completed
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": 3700,

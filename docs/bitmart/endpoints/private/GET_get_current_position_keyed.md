@@ -1,6 +1,7 @@
 # GET Get Current Position (KEYED)
 
-**Source:** [Get Current Position (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[Get Current Position (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -26,10 +27,11 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/contract/private/position?symbol=BTCUSDT`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| symbol | String | No | Symbol of the contract(like BTCUSDT) |
-| account | String | No | Trading account  
+| Field   | Type   | Required? | Description                          |
+| ------- | ------ | --------- | ------------------------------------ |
+| symbol  | String | No        | Symbol of the contract(like BTCUSDT) |
+| account | String | No        | Trading account                      |
+
 \-`futures`  
 \-`copy_trading` |
 
@@ -71,35 +73,31 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| leverage | String | Leverage multiplier |
-| symbol | String | Symbol of the contract |
-| current\_fee | String | Current position fees |
-| open\_timestamp | Long | Opening timestamp |
-| current\_value | String | Position value based on last price |
-| mark\_value | String | Position value based on mark price |
-| mark\_price | String | mark price |
-| position\_value | String | Position value based on entry price |
-| open\_avg\_price | String | Open average price |
-| close\_avg\_price | String | Close average price |
-| entry\_price | String | Average entry price of the position |
-| close\_vol | String | Close volume |
-| position\_cross | String | Margin calls to positions |
-| maintenance\_margin | String | Maintenance Margin |
-| margin\_type | String | Margin type of the position  
+| Field              | Type   | Description                         |
+| ------------------ | ------ | ----------------------------------- |
+| leverage           | String | Leverage multiplier                 |
+| symbol             | String | Symbol of the contract              |
+| current_fee        | String | Current position fees               |
+| open_timestamp     | Long   | Opening timestamp                   |
+| current_value      | String | Position value based on last price  |
+| mark_value         | String | Position value based on mark price  |
+| mark_price         | String | mark price                          |
+| position_value     | String | Position value based on entry price |
+| open_avg_price     | String | Open average price                  |
+| close_avg_price    | String | Close average price                 |
+| entry_price        | String | Average entry price of the position |
+| close_vol          | String | Close volume                        |
+| position_cross     | String | Margin calls to positions           |
+| maintenance_margin | String | Maintenance Margin                  |
+| margin_type        | String | Margin type of the position         |
+
 \-`Cross`  
-\-`Isolated` |
-| position\_mode | String | Position mode  
+\-`Isolated` | | position_mode | String | Position mode  
 \-`hedge_mode`  
-\-`one_way_mode` |
-| current\_amount | String | Current position amount |
-| unrealized\_value | String | Unrealized PnL |
-| realized\_value | String | Realized PnL |
-| position\_type | Int | position type  
+\-`one_way_mode` | | current_amount | String | Current position amount | |
+unrealized_value | String | Unrealized PnL | | realized_value | String |
+Realized PnL | | position_type | Int | position type  
 \-`1`\=long  
-\-`2`\=short |
-| account | String | Trading account  
+\-`2`\=short | | account | String | Trading account  
 \-`futures`  
-\-`copy_trading` |
-| timestamp | Long | Current timestamp(ms) |
+\-`copy_trading` | | timestamp | Long | Current timestamp(ms) |

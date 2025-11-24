@@ -38,8 +38,6 @@ GET `/v5/market/account-ratio`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 GET /v5/market/account-ratio?category=linear&symbol=BTCUSDT&period=1h&limit=2&startTime=1696089600000&endTime=1696262400000 HTTP/1.1Host: api-testnet.bybit.com
 ```

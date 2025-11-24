@@ -1,7 +1,6 @@
 # DELETE /futures/{settle}/price_orders/{order_id}
 
-**Source:**
-[/futures/{settle}/price_orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#cancelpricetriggeredorder-parameters)
+**Source:** [/futures/{settle}/price_orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#cancelpricetriggeredorder-parameters)
 
 ## Authentication
 
@@ -34,7 +33,7 @@ _Cancel single auto order_
 
 > 200 Response
 
-```
+```json
 {
   "initial": {
     "contract": "BTC_USDT",

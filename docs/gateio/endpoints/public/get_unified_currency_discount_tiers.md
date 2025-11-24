@@ -1,7 +1,6 @@
 # GET /unified/currency_discount_tiers
 
-**Source:**
-[/unified/currency_discount_tiers](https://www.gate.io/docs/developers/apiv4/en/#listcurrencydiscounttiers-responses)
+**Source:** [/unified/currency_discount_tiers](https://www.gate.io/docs/developers/apiv4/en/#listcurrencydiscounttiers-responses)
 
 ## Authentication
 
@@ -17,7 +16,7 @@ _Query unified account tiered_
 
 > 200 Response
 
-```
+```json
 [
   [
     {

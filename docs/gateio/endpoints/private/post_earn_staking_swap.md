@@ -1,7 +1,6 @@
 # POST /earn/staking/swap
 
-**Source:**
-[/earn/staking/swap](https://www.gate.io/docs/developers/apiv4/en/#swapstakingcoin-parameters)
+**Source:** [/earn/staking/swap](https://www.gate.io/docs/developers/apiv4/en/#swapstakingcoin-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _On-chain token swap for earned coins_
 
 > Body parameter
 
-```
+```json
 {
   "coin": "GT",
   "side": "0",
@@ -40,7 +39,7 @@ _On-chain token swap for earned coins_
 
 > 200 Response
 
-```
+```json
 {
   "id": 21000,
   "uid": 12345,

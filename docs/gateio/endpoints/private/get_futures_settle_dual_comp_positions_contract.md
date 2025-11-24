@@ -1,7 +1,6 @@
 # GET /futures/{settle}/dual_comp/positions/{contract}
 
-**Source:**
-[/futures/{settle}/dual_comp/positions/{contract}](https://www.gate.io/docs/developers/apiv4/en/#getdualmodeposition-parameters)
+**Source:** [/futures/{settle}/dual_comp/positions/{contract}](https://www.gate.io/docs/developers/apiv4/en/#getdualmodeposition-parameters)
 
 ## Authentication
 
@@ -34,7 +33,7 @@ _Get position information in dual mode_
 
 > 200 Response
 
-```
+```json
 [
   {
     "user": 10000,

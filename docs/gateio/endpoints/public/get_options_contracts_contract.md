@@ -1,7 +1,6 @@
 # GET /options/contracts/{contract}
 
-**Source:**
-[/options/contracts/{contract}](https://www.gate.io/docs/developers/apiv4/en/#getoptionscontract-parameters)
+**Source:** [/options/contracts/{contract}](https://www.gate.io/docs/developers/apiv4/en/#getoptionscontract-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Query specified contract details_
 
 > 200 Response
 
-```
+```json
 {
   "name": "BTC_USDT-20211130-65000-C",
   "tag": "WEEK",

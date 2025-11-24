@@ -1,7 +1,6 @@
 # GET /unified/estimate_rate
 
-**Source:**
-[/unified/estimate_rate](https://www.gate.io/docs/developers/apiv4/en/#getunifiedestimaterate-parameters)
+**Source:** [/unified/estimate_rate](https://www.gate.io/docs/developers/apiv4/en/#getunifiedestimaterate-parameters)
 
 ## Authentication
 
@@ -30,7 +29,7 @@ an empty string
 
 > 200 Response
 
-```
+```json
 {
   "BTC": "0.000002",
   "GT": "0.000001",

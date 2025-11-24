@@ -1,6 +1,7 @@
 # POST Cancel All Order(v4) (SIGNED)
 
-**Source:** [Cancel All Order(v4) (SIGNED)](https://developer-pro.bitmart.com/en/spot/)
+**Source:**
+[Cancel All Order(v4) (SIGNED)](https://developer-pro.bitmart.com/en/spot/)
 
 **API Type:** Spot
 
@@ -26,10 +27,11 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "symbol":"BTC_USDT",   "side":"buy" }' https://api-cloud.bitmart.com/spot/v4/cancel_all`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| symbol | String | No | Trading pair (e.g. BTC\_USDT) |
-| side | String | No | Order side  
+| Field  | Type   | Required? | Description                  |
+| ------ | ------ | --------- | ---------------------------- |
+| symbol | String | No        | Trading pair (e.g. BTC_USDT) |
+| side   | String | No        | Order side                   |
+
 \-`buy`  
 \-`sell` |
 

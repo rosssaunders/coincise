@@ -1,7 +1,6 @@
 # GET /flash_swap/orders/{order_id}
 
-**Source:**
-[/flash_swap/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getflashswaporder-parameters)
+**Source:** [/flash_swap/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getflashswaporder-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Query single flash swap order_
 
 > 200 Response
 
-```
+```json
 {
   "id": 54646,
   "create_time": 1651116876378,

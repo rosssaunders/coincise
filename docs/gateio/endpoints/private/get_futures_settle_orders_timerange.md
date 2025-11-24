@@ -1,7 +1,6 @@
 # GET /futures/{settle}/orders_timerange
 
-**Source:**
-[/futures/{settle}/orders_timerange](https://www.gate.io/docs/developers/apiv4/en/#getorderswithtimerange-parameters)
+**Source:** [/futures/{settle}/orders_timerange](https://www.gate.io/docs/developers/apiv4/en/#getorderswithtimerange-parameters)
 
 ## Authentication
 
@@ -50,7 +49,7 @@ time format is a Unix timestamp
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": 15675394,

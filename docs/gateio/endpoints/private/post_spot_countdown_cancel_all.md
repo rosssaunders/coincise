@@ -1,7 +1,6 @@
 # POST /spot/countdown_cancel_all
 
-**Source:**
-[/spot/countdown_cancel_all](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelallspot-parameters)
+**Source:** [/spot/countdown_cancel_all](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelallspot-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ automatic order cancellation function will be cancelled.
 
 > Body parameter
 
-```
+```json
 {
   "timeout": 30,
   "currency_pair": "BTC_USDT"
@@ -53,7 +52,7 @@ countdown
 
 > 200 Response
 
-```
+```json
 {
   "triggerTime": "1660039145000"
 }

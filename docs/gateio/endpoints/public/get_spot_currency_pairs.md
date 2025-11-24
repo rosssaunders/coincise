@@ -1,7 +1,6 @@
 # GET /spot/currency_pairs
 
-**Source:**
-[/spot/currency_pairs](https://www.gate.io/docs/developers/apiv4/en/#listcurrencypairs-responses)
+**Source:** [/spot/currency_pairs](https://www.gate.io/docs/developers/apiv4/en/#listcurrencypairs-responses)
 
 ## Authentication
 
@@ -17,7 +16,7 @@ _Query all supported currency pairs_
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": "ETH_USDT",

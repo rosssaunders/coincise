@@ -1,7 +1,6 @@
 # POST /spot/cross_liquidate_orders
 
-**Source:**
-[/spot/cross_liquidate_orders](https://www.gate.io/docs/developers/apiv4/en/#createcrossliquidateorder-parameters)
+**Source:** [/spot/cross_liquidate_orders](https://www.gate.io/docs/developers/apiv4/en/#createcrossliquidateorder-parameters)
 
 ## Authentication
 
@@ -19,7 +18,7 @@ currency balance - the amount of the currency in pending orders) / 0.998
 
 > Body parameter
 
-```
+```json
 {
   "currency_pair": "GT_USDT",
   "amount": "12",
@@ -62,7 +61,7 @@ information `FULL`: Full mode (default)
 
 > 201 Response
 
-```
+```json
 {
   "id": "1852454420",
   "text": "t-abc123",

@@ -8,7 +8,7 @@ Get transferable coin list
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/spot/wallet/transfer-coin-info
+- GET /api/v2/spot/wallet/transfer-coin-info
 
 Request Example
 
@@ -18,17 +18,18 @@ curl "https://api.bitget.com/api/v2/spot/wallet/transfer-coin-info?fromType=isol
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| fromType | String | Yes | Account type  
+| Parameter | Type   | Required | Description  |
+| :-------- | :----- | :------- | :----------- |
+| fromType  | String | Yes      | Account type |
+
 `spot`: Spot account  
 `p2p`: P2P account  
 `coin_futures`: Coin-M futures account  
 `usdt_futures`: USDT-M futures account  
 `usdc_futures`: USDC-M futures account  
 `crossed_margin`: Cross margin account  
-`isolated_margin`: Isolated margin account |
-| toType | String | Yes | Account type  
+`isolated_margin`: Isolated margin account | | toType | String | Yes | Account
+type  
 `spot`: Spot account  
 `p2p`: P2P account  
 `coin_futures`: Coin-M futures account  
@@ -44,18 +45,14 @@ Response Example
   "code": "00000",
   "msg": "success",
   "requestTime": 1683875302853,
-  "data": [
-    "BTC",
-    "USDT",
-    "ETH"
-  ]
+  "data": ["BTC", "USDT", "ETH"]
 }
 ```
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| data | List | transfer\_in and transfer\_out of accounts supports coins intersection. |
+| Parameter | Type | Description                                                           |
+| :-------- | :--- | :-------------------------------------------------------------------- |
+| data      | List | transfer_in and transfer_out of accounts supports coins intersection. |
 
 > **Source:** https://www.bitget.com/api-doc/spot/account/Get-Transfer-Coins

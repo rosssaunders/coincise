@@ -1,7 +1,6 @@
 # GET /futures/{settle}/fee
 
-**Source:**
-[/futures/{settle}/fee](https://www.gate.io/docs/developers/apiv4/en/#getfuturesfee-parameters)
+**Source:** [/futures/{settle}/fee](https://www.gate.io/docs/developers/apiv4/en/#getfuturesfee-parameters)
 
 ## Authentication
 
@@ -34,7 +33,7 @@ _Query futures market trading fee rates_
 
 > 200 Response
 
-```
+```json
 {
   "1INCH_USDT": {
     "taker_fee": "0.00025",

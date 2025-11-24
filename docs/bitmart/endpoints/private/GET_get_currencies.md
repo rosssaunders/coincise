@@ -26,9 +26,9 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl https://api-cloud.bitmart.com/account/v1/currencies?currencies=BTC,ETH,BMX`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| currencies | String | No | Single query, such as `BTC`; multiple queries, such as `BTC,ETH,BMX`, can have a maximum of 20. |
+| Field      | Type   | Required? | Description                                                                                     |
+| ---------- | ------ | --------- | ----------------------------------------------------------------------------------------------- |
+| currencies | String | No        | Single query, such as `BTC`; multiple queries, such as `BTC,ETH,BMX`, can have a maximum of 20. |
 
 #### Response Data
 
@@ -82,24 +82,26 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| currency | String | Token symbol, e.g., 'BTC' |
-| name | String | Token name, e.g., 'Bitcoin' |
-| contract\_address | String | Contract address |
-| network | String | network, e.g., 'ERC20' |
-| withdraw\_enabled | Boolean | Availability to withdraw  
-\- `true`\=available  
-\- `false`\=not available |
-| deposit\_enabled | Boolean | Availability to deposit  
-\- `true`\=available  
-\-`false`\=not available |
-| withdraw\_minsize | String | Minimum withdrawal amount |
-| withdraw\_minfee | String | Minimum withdrawal fee (After 2025-05-18, the field will be removed) |
-| withdraw\_fee | String | Withdrawal fee. The unit corresponds to the currency |
-| withdraw\_fee\_estimate | String | Withdrawal fee estimate. The unit is USD. |
+| Field            | Type    | Description                 |
+| ---------------- | ------- | --------------------------- |
+| currency         | String  | Token symbol, e.g., 'BTC'   |
+| name             | String  | Token name, e.g., 'Bitcoin' |
+| contract_address | String  | Contract address            |
+| network          | String  | network, e.g., 'ERC20'      |
+| withdraw_enabled | Boolean | Availability to withdraw    |
 
-1\. If the returned response does not contain the currency you need, the currency may have been removed.  
+\- `true`\=available  
+\- `false`\=not available | | deposit_enabled | Boolean | Availability to
+deposit  
+\- `true`\=available  
+\-`false`\=not available | | withdraw_minsize | String | Minimum withdrawal
+amount | | withdraw_minfee | String | Minimum withdrawal fee (After 2025-05-18,
+the field will be removed) | | withdraw_fee | String | Withdrawal fee. The unit
+corresponds to the currency | | withdraw_fee_estimate | String | Withdrawal fee
+estimate. The unit is USD. |
+
+1\. If the returned response does not contain the currency you need, the
+currency may have been removed.  
 2\. There are multiple USDT currencies. Note that:  
 \`currency\` = \`USDT\` default is OMNI network  
 \`currency\` = \`USDT-TRC20\` , is TRC20 network  

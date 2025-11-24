@@ -1,6 +1,7 @@
 # GET Get Position Mode (KEYED)
 
-**Source:** [Get Position Mode (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[Get Position Mode (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -43,8 +44,9 @@ None
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| position\_mode | String | Position Mode  
+| Field         | Type   | Description   |
+| ------------- | ------ | ------------- |
+| position_mode | String | Position Mode |
+
 \-`hedge_mode`  
 \-`one_way_mode` |

@@ -1,6 +1,7 @@
 # POST /info
 
-**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
+**Source:**
+https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
 `POST` `https://api.hyperliquid.xyz/info`
 
@@ -40,13 +41,15 @@ nSigFigs
 
 Number
 
-Optional field to aggregate levels to `nSigFigs` significant figures. Valid values are 2, 3, 4, 5, and `null`, which means full precision
+Optional field to aggregate levels to `nSigFigs` significant figures. Valid
+values are 2, 3, 4, 5, and `null`, which means full precision
 
 mantissa
 
 Number
 
-Optional field to aggregate levels. This field is only allowed if nSigFigs is 5. Accepts values of 1, 2 or 5.
+Optional field to aggregate levels. This field is only allowed if nSigFigs is 5.
+Accepts values of 1, 2 or 5.
 
 **Response**
 
@@ -67,7 +70,7 @@ Optional field to aggregate levels. This field is only allowed if nSigFigs is 5.
         "px": "113376.0",
         "sz": "4.13714",
         "n": 8
-      },
+      }
     ],
     [
       {

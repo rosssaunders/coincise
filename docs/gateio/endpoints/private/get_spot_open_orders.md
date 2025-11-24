@@ -1,7 +1,6 @@
 # GET /spot/open_orders
 
-**Source:**
-[/spot/open_orders](https://www.gate.io/docs/developers/apiv4/en/#listallopenorders-parameters)
+**Source:** [/spot/open_orders](https://www.gate.io/docs/developers/apiv4/en/#listallopenorders-parameters)
 
 ## Authentication
 
@@ -33,7 +32,7 @@ returned.
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency_pair": "ETH_BTC",

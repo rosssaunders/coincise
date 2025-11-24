@@ -1,7 +1,6 @@
 # DELETE /account/stp_groups/{stp_id}/users
 
-**Source:**
-[/account/stp_groups/{stp_id}/users](https://www.gate.io/docs/developers/apiv4/en/#deletestpgroupusers-parameters)
+**Source:** [/account/stp_groups/{stp_id}/users](https://www.gate.io/docs/developers/apiv4/en/#deletestpgroupusers-parameters)
 
 ## Authentication
 
@@ -32,7 +31,7 @@ _Delete users from the STP user group_
 
 > 200 Response
 
-```
+```json
 [
   {
     "user_id": 10000,

@@ -1,7 +1,6 @@
 # GET /wallet/sub_account_transfers
 
-**Source:**
-[/wallet/sub_account_transfers](https://www.gate.io/docs/developers/apiv4/en/#listsubaccounttransfers-parameters)
+**Source:** [/wallet/sub_account_transfers](https://www.gate.io/docs/developers/apiv4/en/#listsubaccounttransfers-parameters)
 
 ## Authentication
 
@@ -34,7 +33,7 @@ Record query time range cannot exceed 30 days
 
 > 200 Response
 
-```
+```json
 [
   {
     "timest": "1592809000",

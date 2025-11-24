@@ -1,7 +1,6 @@
 # GET /loan/collateral/ltv
 
-**Source:**
-[/loan/collateral/ltv](https://www.gate.io/docs/developers/apiv4/en/#getuserltvinfo-parameters)
+**Source:** [/loan/collateral/ltv](https://www.gate.io/docs/developers/apiv4/en/#getuserltvinfo-parameters)
 
 ## Authentication
 
@@ -27,7 +26,7 @@ _Query user's collateralization ratio and remaining borrowable currencies_
 
 > 200 Response
 
-```
+```json
 {
   "collateral_currency": "BTC",
   "borrow_currency": "USDT",

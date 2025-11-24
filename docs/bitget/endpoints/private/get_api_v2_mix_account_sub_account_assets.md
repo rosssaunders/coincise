@@ -4,11 +4,12 @@ Frequency limit: 1 time/10s (uid)
 
 ### Description[​](#description "Direct link to Description")
 
-Query the contract asset information of all sub-accounts. **ND Brokers are not allowed to call this endpoint**
+Query the contract asset information of all sub-accounts. **ND Brokers are not
+allowed to call this endpoint**
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/mix/account/sub-account-assets
+- GET /api/v2/mix/account/sub-account-assets
 
 Request Example
 
@@ -18,9 +19,10 @@ curl "https://api.bitget.com/api/v2/mix/account/sub-account-assets?productType=U
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| productType | String | Yes | Product type  
+| Parameter   | Type   | Required | Description  |
+| :---------- | :----- | :------- | :----------- |
+| productType | String | Yes      | Product type |
+
 `USDT-FUTURES` USDT-M Futures  
 `COIN-FUTURES` Coin-M Futures  
 `USDC-FUTURES` USDC-M Futures |
@@ -75,20 +77,21 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| \>userId | String | Sub account userId |
-| \>assetList | String | Collection of all futures assets under sub-accounts |
-| \>\>marginCoin | String | Margin coin |
-| \>\>locked | String | Locked quantity (margin coin) |
-| \>\>available | String | Available quantity in the account |
-| \>\>crossedMaxAvailable | String | Maximum available balance to open positions under the cross margin mode (margin coin) |
+| Parameter                | Type   | Description                                                                              |
+| :----------------------- | :----- | :--------------------------------------------------------------------------------------- |
+| \>userId                 | String | Sub account userId                                                                       |
+| \>assetList              | String | Collection of all futures assets under sub-accounts                                      |
+| \>\>marginCoin           | String | Margin coin                                                                              |
+| \>\>locked               | String | Locked quantity (margin coin)                                                            |
+| \>\>available            | String | Available quantity in the account                                                        |
+| \>\>crossedMaxAvailable  | String | Maximum available balance to open positions under the cross margin mode (margin coin)    |
 | \>\>isolatedMaxAvailable | String | Maximum available balance to open positions under the isolated margin mode (margin coin) |
-| \>\>maxTransferOut | String | Maximum transferable amount |
-| \>\>equity | String | Account equity (margin coin) |
-| \>\>usdtEquity | String | Account equity in USDT |
-| \>\>btcEquity | String | Account equity in BTC |
-| \>\>unrealizedPL | String | PnL of open positions |
-| \>\>coupon | String | Trading bonus |
+| \>\>maxTransferOut       | String | Maximum transferable amount                                                              |
+| \>\>equity               | String | Account equity (margin coin)                                                             |
+| \>\>usdtEquity           | String | Account equity in USDT                                                                   |
+| \>\>btcEquity            | String | Account equity in BTC                                                                    |
+| \>\>unrealizedPL         | String | PnL of open positions                                                                    |
+| \>\>coupon               | String | Trading bonus                                                                            |
 
-> **Source:** https://www.bitget.com/api-doc/contract/account/Get-Sub-Account-Contract-Assets
+> **Source:**
+> https://www.bitget.com/api-doc/contract/account/Get-Sub-Account-Contract-Assets

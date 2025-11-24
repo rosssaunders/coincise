@@ -1,7 +1,6 @@
 # POST /futures/{settle}/dual_comp/positions/{contract}/leverage
 
-**Source:**
-[/futures/{settle}/dual_comp/positions/{contract}/leverage](https://www.gate.io/docs/developers/apiv4/en/#updatedualmodepositionleverage-parameters)
+**Source:** [/futures/{settle}/dual_comp/positions/{contract}/leverage](https://www.gate.io/docs/developers/apiv4/en/#updatedualmodepositionleverage-parameters)
 
 ## Authentication
 
@@ -36,7 +35,7 @@ _Update position leverage in dual mode_
 
 > 200 Response
 
-```
+```json
 [
   {
     "user": 10000,

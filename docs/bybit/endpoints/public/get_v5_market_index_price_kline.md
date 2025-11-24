@@ -42,8 +42,6 @@ GET `/v5/market/index-price-kline`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 GET /v5/market/index-price-kline?category=inverse&symbol=BTCUSDZ22&interval=1&start=1670601600000&end=1670608800000&limit=2 HTTP/1.1Host: api-testnet.bybit.com
 ```

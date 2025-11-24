@@ -1,7 +1,6 @@
 # GET /options/my_trades
 
-**Source:**
-[/options/my_trades](https://www.gate.io/docs/developers/apiv4/en/#listmyoptionstrades-parameters)
+**Source:** [/options/my_trades](https://www.gate.io/docs/developers/apiv4/en/#listmyoptionstrades-parameters)
 
 ## Authentication
 
@@ -43,7 +42,7 @@ time format is a Unix timestamp
 
 > 200 Response
 
-```
+```json
 [
   {
     "underlying_price": "48000",

@@ -1,7 +1,6 @@
 # GET /futures/{settle}/contracts/{contract}
 
-**Source:**
-[/futures/{settle}/contracts/{contract}](https://www.gate.io/docs/developers/apiv4/en/#getfuturescontract-parameters)
+**Source:** [/futures/{settle}/contracts/{contract}](https://www.gate.io/docs/developers/apiv4/en/#getfuturescontract-parameters)
 
 ## Authentication
 
@@ -34,7 +33,7 @@ _Query single contract information_
 
 > 200 Response
 
-```
+```json
 {
   "name": "BTC_USDT",
   "type": "direct",

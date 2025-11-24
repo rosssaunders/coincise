@@ -1,6 +1,7 @@
 # POST Timed Cancel All Orders (SIGNED)
 
-**Source:** [Timed Cancel All Orders (SIGNED)](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[Timed Cancel All Orders (SIGNED)](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -26,14 +27,15 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{    "timeout":10,    "symbol":"BTCUSDT" }' https://api-cloud-v2.bitmart.com/contract/private/cancel-all-after`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| timeout | Int | Yes | The duration of canceling orders(second,minimum value: 5 seconds) 0:Canceling the setting |
-| symbol | String | Yes | Symbol of the contract(like BTCUSDT) |
+| Field   | Type   | Required? | Description                                                                               |
+| ------- | ------ | --------- | ----------------------------------------------------------------------------------------- |
+| timeout | Int    | Yes       | The duration of canceling orders(second,minimum value: 5 seconds) 0:Canceling the setting |
+| symbol  | String | Yes       | Symbol of the contract(like BTCUSDT)                                                      |
 
 #### Response Data
 
-If code value is 1000, it means the order cancellation is successfully submitted, cancellation results will be pushed by websocket service.
+If code value is 1000, it means the order cancellation is successfully
+submitted, cancellation results will be pushed by websocket service.
 
 > Response
 
@@ -50,8 +52,8 @@ If code value is 1000, it means the order cancellation is successfully submitted
 }
 ```
 
-| Field | type | Description |
-| --- | --- | --- |
-| result | Bool | Is the setting successful: true/false |
-| set\_time | Int | Set time, timestamp |
-| cancel\_time | Int | The first time of cancel, timestamp |
+| Field       | type | Description                           |
+| ----------- | ---- | ------------------------------------- |
+| result      | Bool | Is the setting successful: true/false |
+| set_time    | Int  | Set time, timestamp                   |
+| cancel_time | Int  | The first time of cancel, timestamp   |

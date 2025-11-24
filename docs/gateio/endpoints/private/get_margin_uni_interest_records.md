@@ -1,7 +1,6 @@
 # GET /margin/uni/interest_records
 
-**Source:**
-[/margin/uni/interest_records](https://www.gate.io/docs/developers/apiv4/en/#listisolateduniloaninterestrecords-parameters)
+**Source:** [/margin/uni/interest_records](https://www.gate.io/docs/developers/apiv4/en/#listisolateduniloaninterestrecords-parameters)
 
 ## Authentication
 
@@ -43,7 +42,7 @@ time format is a Unix timestamp
 
 > 200 Response
 
-```
+```json
 [
   {
     "status": 1,

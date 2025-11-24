@@ -1,7 +1,6 @@
 # POST /earn/structured/orders
 
-**Source:**
-[/earn/structured/orders](https://www.gate.io/docs/developers/apiv4/en/#placestructuredorder-parameters)
+**Source:** [/earn/structured/orders](https://www.gate.io/docs/developers/apiv4/en/#placestructuredorder-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Place Structured Product Order_
 
 > Body parameter
 
-```
+```json
 {
   "pid": "1",
   "amount": "0.5"

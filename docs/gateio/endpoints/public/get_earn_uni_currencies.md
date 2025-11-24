@@ -1,7 +1,6 @@
 # GET /earn/uni/currencies
 
-**Source:**
-[/earn/uni/currencies](https://www.gate.io/docs/developers/apiv4/en/#listunicurrencies-responses)
+**Source:** [/earn/uni/currencies](https://www.gate.io/docs/developers/apiv4/en/#listunicurrencies-responses)
 
 ## Authentication
 
@@ -17,7 +16,7 @@ _Query lending currency list_
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency": "AE",

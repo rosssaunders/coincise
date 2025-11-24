@@ -1,7 +1,6 @@
 # POST /spot/batch_orders
 
-**Source:**
-[/spot/batch_orders](https://www.gate.io/docs/developers/apiv4/en/#createbatchorders-parameters)
+**Source:** [/spot/batch_orders](https://www.gate.io/docs/developers/apiv4/en/#createbatchorders-parameters)
 
 ## Authentication
 
@@ -22,7 +21,7 @@ Batch order requirements:
 
 > Body parameter
 
-```
+```json
 [
   {
     "text": "t-abc123",
@@ -52,7 +51,7 @@ Batch order requirements:
 
 > 200 Response
 
-```
+```json
 [
   {
     "order_id": "12332324",

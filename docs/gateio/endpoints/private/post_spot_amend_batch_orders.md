@@ -1,7 +1,6 @@
 # POST /spot/amend_batch_orders
 
-**Source:**
-[/spot/amend_batch_orders](https://www.gate.io/docs/developers/apiv4/en/#amendbatchorders-parameters)
+**Source:** [/spot/amend_batch_orders](https://www.gate.io/docs/developers/apiv4/en/#amendbatchorders-parameters)
 
 ## Authentication
 
@@ -24,7 +23,7 @@ batch modification orders is consistent with the order list order.
 
 > Body parameter
 
-```
+```json
 [
   {
     "order_id": "121212",
@@ -50,7 +49,7 @@ batch modification orders is consistent with the order list order.
 
 > 200 Response
 
-```
+```json
 [
   {
     "order_id": "12332324",

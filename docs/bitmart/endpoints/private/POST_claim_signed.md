@@ -36,7 +36,7 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| currency | String | Currency |
-| amount | String | Current asset balance |
+| Field    | Type   | Description           |
+| -------- | ------ | --------------------- |
+| currency | String | Currency              |
+| amount   | String | Current asset balance |

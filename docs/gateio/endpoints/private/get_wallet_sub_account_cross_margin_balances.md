@@ -1,7 +1,6 @@
 # GET /wallet/sub_account_cross_margin_balances
 
-**Source:**
-[/wallet/sub_account_cross_margin_balances](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountcrossmarginbalances-parameters)
+**Source:** [/wallet/sub_account_cross_margin_balances](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountcrossmarginbalances-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Query sub-account cross margin account balance information_
 
 > 200 Response
 
-```
+```json
 [
   {
     "uid": "100000",

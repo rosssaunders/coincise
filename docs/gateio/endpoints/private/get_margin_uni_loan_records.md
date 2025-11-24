@@ -1,7 +1,6 @@
 # GET /margin/uni/loan_records
 
-**Source:**
-[/margin/uni/loan_records](https://www.gate.io/docs/developers/apiv4/en/#listisolateduniloanrecords-parameters)
+**Source:** [/margin/uni/loan_records](https://www.gate.io/docs/developers/apiv4/en/#listisolateduniloanrecords-parameters)
 
 ## Authentication
 
@@ -37,7 +36,7 @@ _Query loan records_
 
 > 200 Response
 
-```
+```json
 [
   {
     "type": "borrow",

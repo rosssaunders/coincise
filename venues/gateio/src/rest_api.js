@@ -124,7 +124,19 @@ function processSectionHtml(document, section, turndownService, baseUrl) {
   console.log(
     `Content extracted successfully for section: ${section}, length: ${content.length}`
   )
-  return turndownService.turndown(content)
+  let markdown = turndownService.turndown(content)
+
+  // Post-process: add json language tags to untagged code blocks that contain JSON
+  markdown = markdown.replace(/```\n(\{[\s\S]*?\}|\[[\s\S]*?\])\n```/g, (match, jsonContent) => {
+    // Check if it looks like JSON (starts with { or [)
+    const trimmed = jsonContent.trim()
+    if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+      return '```json\n' + jsonContent + '\n```'
+    }
+    return match
+  })
+
+  return markdown
 }
 
 // Function to load config from file

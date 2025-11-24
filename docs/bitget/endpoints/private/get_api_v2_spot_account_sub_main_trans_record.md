@@ -8,7 +8,7 @@ Get transfer record
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/spot/account/sub-main-trans-record
+- GET /api/v2/spot/account/sub-main-trans-record
 
 Request Example
 
@@ -18,22 +18,25 @@ curl "https://api.bitget.com/api/v2/spot/account/sub-main-trans-record?coin=USDT
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| coin | String | No | Token name |
-| role | String | No | Transfer out type(default：initiator)  
+| Parameter | Type   | Required | Description                           |
+| :-------- | :----- | :------- | :------------------------------------ |
+| coin      | String | No       | Token name                            |
+| role      | String | No       | Transfer out type(default：initiator) |
+
 `initiator` initiator  
-`receiver` receiver |
-| subUid | String | No | Sub-account UID  
-If empty, it only query the records that transfer from main account |
-| startTime | String | No | The start time of the billing history, i.e., getting the billing history after that timestamp  
-Unix millisecond timestamp, e.g. 1690196141868 |
-| endTime | String | No | The end time of the billing history, i.e., getting the billing history before that timestamp  
+`receiver` receiver | | subUid | String | No | Sub-account UID  
+If empty, it only query the records that transfer from main account | |
+startTime | String | No | The start time of the billing history, i.e., getting
+the billing history after that timestamp  
+Unix millisecond timestamp, e.g. 1690196141868 | | endTime | String | No | The
+end time of the billing history, i.e., getting the billing history before that
+timestamp  
 Unix millisecond timestamp, e.g. 1690196141868  
-The interval between startTime and endTime must not exceed 90 days. |
-| clientOid | String | No | Order ID customized by user |
-| limit | String | No | Number of results returned: Default: 100, maximum 100 |
-| idLessThan | String | No | Requests the content on the page before this ID (older data), the value input should be the transferId of the corresponding interface. |
+The interval between startTime and endTime must not exceed 90 days. | |
+clientOid | String | No | Order ID customized by user | | limit | String | No |
+Number of results returned: Default: 100, maximum 100 | | idLessThan | String |
+No | Requests the content on the page before this ID (older data), the value
+input should be the transferId of the corresponding interface. |
 
 Response Example
 
@@ -61,36 +64,35 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| coin | String | Token name |
-| status | String | Status of transfer  
+| Parameter | Type   | Description        |
+| :-------- | :----- | :----------------- |
+| coin      | String | Token name         |
+| status    | String | Status of transfer |
+
 Successful: Successful  
 Failed: Failed  
-Processing: Processing |
-| toType | String | Recipient account type  
+Processing: Processing | | toType | String | Recipient account type  
 spot: Spot account  
 p2p: P2P account  
-coin\_futures: Coin-M futures account  
-usdt\_futures: USDT-M futures account  
-usdc\_futures: USDC-M futures account  
-crossed\_margin: Cross margin account  
-isolated\_margin: Isolated margin account |
-| fromType | String | Sender account type  
+coin_futures: Coin-M futures account  
+usdt_futures: USDT-M futures account  
+usdc_futures: USDC-M futures account  
+crossed_margin: Cross margin account  
+isolated_margin: Isolated margin account | | fromType | String | Sender account
+type  
 spot: Spot account  
 p2p: P2P account  
-coin\_futures: Coin-M futures account  
-usdt\_futures: USDT-M futures account  
-usdc\_futures: USDC-M futures account  
-crossed\_margin: Cross margin account  
-isolated\_margin: Isolated margin account |
-| size | String | Quantity |
-| ts | String | Transfer time, Unix millisecond timestamp, e.g. 1690196141868 |
-| clientOid | String | Order ID customized by user |
-| transferId | String | Transfer order ID |
-| newTransferId | String | Transfer order ID  
-It is the same as the transferId in the main-sub account transfer response. |
-| fromUserId | String | the user ID who initiate the trasnfer ID |
-| toUserId | String | The user ID who receive the trnasfer |
+coin_futures: Coin-M futures account  
+usdt_futures: USDT-M futures account  
+usdc_futures: USDC-M futures account  
+crossed_margin: Cross margin account  
+isolated_margin: Isolated margin account | | size | String | Quantity | | ts |
+String | Transfer time, Unix millisecond timestamp, e.g. 1690196141868 | |
+clientOid | String | Order ID customized by user | | transferId | String |
+Transfer order ID | | newTransferId | String | Transfer order ID  
+It is the same as the transferId in the main-sub account transfer response. | |
+fromUserId | String | the user ID who initiate the trasnfer ID | | toUserId |
+String | The user ID who receive the trnasfer |
 
-> **Source:** https://www.bitget.com/api-doc/spot/account/Get-SubAccount-TransferRecords
+> **Source:**
+> https://www.bitget.com/api-doc/spot/account/Get-SubAccount-TransferRecords

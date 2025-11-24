@@ -1,7 +1,6 @@
 # GET /unified/loans
 
-**Source:**
-[/unified/loans](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloans-parameters)
+**Source:** [/unified/loans](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloans-parameters)
 
 ## Authentication
 
@@ -29,7 +28,7 @@ _Query loans_
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency": "USDT",

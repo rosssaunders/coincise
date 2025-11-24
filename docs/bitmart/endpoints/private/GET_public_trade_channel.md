@@ -1,6 +1,7 @@
 # GET 【Public】Trade Channel
 
-**Source:** [【Public】Trade Channel](https://developer-pro.bitmart.com/en/spot/)
+**Source:**
+[【Public】Trade Channel](https://developer-pro.bitmart.com/en/spot/)
 
 **API Type:** Spot
 
@@ -15,7 +16,8 @@ Get the latest real-time transaction data
 ### Pushing Rules
 
 1.  No user login required
-2.  After successful subscription, incremental trade messages will be pushed(Taker trade message)
+2.  After successful subscription, incremental trade messages will be
+    pushed(Taker trade message)
 3.  Push frequency: Push when changes
 
 ### Subscribe Request
@@ -25,9 +27,7 @@ Get the latest real-time transaction data
 ```json
 {
   "op": "subscribe",
-  "args": [
-    "spot/trade:BTC_USDT"
-  ]
+  "args": ["spot/trade:BTC_USDT"]
 }
 ```
 
@@ -36,13 +36,11 @@ Message Format:
 ```json
 {
   "op": "subscribe",
-  "args": [
-    "spot/trade:<symbol>"
-  ]
+  "args": ["spot/trade:<symbol>"]
 }
 ```
 
--   symbol: Trading pair, such as `BTC_USDT`
+- symbol: Trading pair, such as `BTC_USDT`
 
 ### Subscription successful
 
@@ -84,11 +82,11 @@ Message Format:
 
 Return data description:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| symbol | String | Trading pair, `BTC_USDT` |
-| side | String | Side of trade for taker order（`buy` or `sell`） |
-| price | String | Trade price for taker order |
-| size | String | Trade quantity for taker order |
-| s\_t | Long | Order execution time (Timestamp in seconds) (The field will be removed, please use the ms\_t field) |
-| ms\_t | Long | Order execution time (Timestamp in millisecond) |
+| Field  | Type   | Description                                                                                        |
+| ------ | ------ | -------------------------------------------------------------------------------------------------- |
+| symbol | String | Trading pair, `BTC_USDT`                                                                           |
+| side   | String | Side of trade for taker order（`buy` or `sell`）                                                   |
+| price  | String | Trade price for taker order                                                                        |
+| size   | String | Trade quantity for taker order                                                                     |
+| s_t    | Long   | Order execution time (Timestamp in seconds) (The field will be removed, please use the ms_t field) |
+| ms_t   | Long   | Order execution time (Timestamp in millisecond)                                                    |

@@ -75,8 +75,6 @@ POST `/v5/position/move-positions`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 POST /v5/position/move-positions HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1697447928051X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "fromUid": "100307601",    "toUid": "592324",    "list": [        {            "category": "spot",            "symbol": "BTCUSDT",            "price": "100",            "side": "Sell",            "qty": "0.01"        }    ]}
 ```

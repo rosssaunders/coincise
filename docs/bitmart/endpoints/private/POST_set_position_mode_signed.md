@@ -1,6 +1,7 @@
 # POST Set Position Mode (SIGNED)
 
-**Source:** [Set Position Mode (SIGNED)](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[Set Position Mode (SIGNED)](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -26,9 +27,10 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl   -H 'X-BM-KEY:{{AccessKey}}'  -H 'X-BM-TIMESTAMP:{{currentTime}}'  -H 'X-BM-SIGN:{{SIGN}}'   -X POST -d '{   "position_mode":"one_way_mode" }' https://api-cloud-v2.bitmart.com/contract/private/set-position-mode`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| position\_mode | String | Yes | Position Mode  
+| Field         | Type   | Required? | Description   |
+| ------------- | ------ | --------- | ------------- |
+| position_mode | String | Yes       | Position Mode |
+
 \-`hedge_mode`  
 \-`one_way_mode` |
 
@@ -47,8 +49,9 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| position\_mode | String | Position Mode  
+| Field         | Type   | Description   |
+| ------------- | ------ | ------------- |
+| position_mode | String | Position Mode |
+
 \-`hedge_mode`  
 \-`one_way_mode` |

@@ -1,7 +1,6 @@
 # POST /futures/{settle}/orders
 
-**Source:**
-[/futures/{settle}/orders](https://www.gate.io/docs/developers/apiv4/en/#createfuturesorder-parameters)
+**Source:** [/futures/{settle}/orders](https://www.gate.io/docs/developers/apiv4/en/#createfuturesorder-parameters)
 
 ## Authentication
 
@@ -36,7 +35,7 @@ _Place futures order_
 
 > Body parameter
 
-```
+```json
 {
   "contract": "BTC_USDT",
   "size": 6024,
@@ -148,7 +147,7 @@ self-trade prevention strategies
 
 > 201 Response
 
-```
+```json
 {
   "id": 15675394,
   "user": 100000,

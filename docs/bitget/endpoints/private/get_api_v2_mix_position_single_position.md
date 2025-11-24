@@ -4,28 +4,29 @@ Rate limit: 10 requests/sec/UID
 
 ### Description[​](#description "Direct link to Description")
 
-Returns position information of a single symbol, response including estimated liquidation price.
+Returns position information of a single symbol, response including estimated
+liquidation price.
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/mix/position/single-position
+- GET /api/v2/mix/position/single-position
 
 Request Example
 
 ```
-curl "https://api.bitget.com/api/v2/mix/position/single-position?symbol=BTCUSDT&productType=USDT-FUTURES&marginCoin=USDT" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" 
+curl "https://api.bitget.com/api/v2/mix/position/single-position?symbol=BTCUSDT&productType=USDT-FUTURES&marginCoin=USDT" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| productType | String | Yes | Product type  
+| Parameter   | Type   | Required | Description  |
+| :---------- | :----- | :------- | :----------- |
+| productType | String | Yes      | Product type |
+
 `USDT-FUTURES` USDT-M Futures  
 `COIN-FUTURES` Coin-M Futures  
-`USDC-FUTURES` USDC-M Futures |
-| symbol | String | Yes | Trading pair, e.g. BTCUSDT |
-| marginCoin | String | Yes | Margin coin, capitalized, e.g. USDT |
+`USDC-FUTURES` USDC-M Futures | | symbol | String | Yes | Trading pair, e.g.
+BTCUSDT | | marginCoin | String | Yes | Margin coin, capitalized, e.g. USDT |
 
 Response Example
 
@@ -68,43 +69,41 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| \>symbol | String | Trading pair name |
-| \>marginCoin | String | Margin coin |
-| \>holdSide | String | Position direction  
+| Parameter    | Type   | Description        |
+| :----------- | :----- | :----------------- |
+| \>symbol     | String | Trading pair name  |
+| \>marginCoin | String | Margin coin        |
+| \>holdSide   | String | Position direction |
+
 `long`: long position  
-`short`: short position |
-| \>openDelegateSize | String | Amount to be filled of the current order (base coin) |
-| \>marginSize | String | Margin amount (margin coin) |
-| \>available | String | Available amount for positions (base currency) |
-| \>locked | String | Frozen amount in the position (base currency) |
-| \>total | String | Total amount of all positions (available amount + locked amount) |
-| \>leverage | String | Leverage |
-| \>achievedProfits | String | Realized PnL(exclude funding fee and transaction fee) |
-| \>openPriceAvg | String | Average entry price |
-| \>marginMode | String | Margin mode  
+`short`: short position | | \>openDelegateSize | String | Amount to be filled of
+the current order (base coin) | | \>marginSize | String | Margin amount (margin
+coin) | | \>available | String | Available amount for positions (base currency)
+| | \>locked | String | Frozen amount in the position (base currency) | |
+\>total | String | Total amount of all positions (available amount + locked
+amount) | | \>leverage | String | Leverage | | \>achievedProfits | String |
+Realized PnL(exclude funding fee and transaction fee) | | \>openPriceAvg |
+String | Average entry price | | \>marginMode | String | Margin mode  
 `isolated`: isolated margin  
-`crossed`: cross margin |
-| \>posMode | String | Position mode  
+`crossed`: cross margin | | \>posMode | String | Position mode  
 `one_way_mode`: positions in one-way mode  
-`hedge_mode`: positions in hedge-mode |
-| \>unrealizedPL | String | Unrealized PnL |
-| \>liquidationPrice | String | Estimated liquidation price  
-If the value <= 0, it means the position is at low risk and there is no liquidation price at this time |
-| \>keepMarginRate | String | Tiered maintenance margin rate |
-| \>markPrice | String | Mark price |
-| \>marginRatio | String | Maintenance margin rate (MMR), 0.1 represents 10% |
-| \>breakEvenPrice | String | Position breakeven price |
-| \>totalFee | String | Funding fee, the accumulated value of funding fee during the position,The initial value is empty, indicating that no funding fee has been charged yet. |
-| \>deductedFee | String | Deducted transaction fees: transaction fees deducted during the position |
-| \>cTime | String | Creation time, timestamp, milliseconds |
-| \>assetMode | String | `single` : single asset mode  
-`union` multi-Assets mode |
-| \>uTime | String | Last updated time, timestamp, milliseconds |
-| \>autoMargin | String | Auto Margin  
+`hedge_mode`: positions in hedge-mode | | \>unrealizedPL | String | Unrealized
+PnL | | \>liquidationPrice | String | Estimated liquidation price  
+If the value <= 0, it means the position is at low risk and there is no
+liquidation price at this time | | \>keepMarginRate | String | Tiered
+maintenance margin rate | | \>markPrice | String | Mark price | | \>marginRatio
+| String | Maintenance margin rate (MMR), 0.1 represents 10% | |
+\>breakEvenPrice | String | Position breakeven price | | \>totalFee | String |
+Funding fee, the accumulated value of funding fee during the position,The
+initial value is empty, indicating that no funding fee has been charged yet. | |
+\>deductedFee | String | Deducted transaction fees: transaction fees deducted
+during the position | | \>cTime | String | Creation time, timestamp,
+milliseconds | | \>assetMode | String | `single` : single asset mode  
+`union` multi-Assets mode | | \>uTime | String | Last updated time, timestamp,
+milliseconds | | \>autoMargin | String | Auto Margin  
 `on` Auto Margin Call  
 `off` No Auto Margin Call  
  |
 
-> **Source:** https://www.bitget.com/api-doc/contract/position/get-single-position
+> **Source:**
+> https://www.bitget.com/api-doc/contract/position/get-single-position

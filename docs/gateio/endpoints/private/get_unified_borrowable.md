@@ -1,7 +1,6 @@
 # GET /unified/borrowable
 
-**Source:**
-[/unified/borrowable](https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowable-parameters)
+**Source:** [/unified/borrowable](https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowable-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Query maximum borrowable amount for unified account_
 
 > 200 Response
 
-```
+```json
 {
   "currency": "ETH",
   "amount": "10000"

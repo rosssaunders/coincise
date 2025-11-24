@@ -1,7 +1,6 @@
 # GET /delivery/{settle}/positions
 
-**Source:**
-[/delivery/{settle}/positions](https://www.gate.io/docs/developers/apiv4/en/#listdeliverypositions-parameters)
+**Source:** [/delivery/{settle}/positions](https://www.gate.io/docs/developers/apiv4/en/#listdeliverypositions-parameters)
 
 ## Authentication
 
@@ -32,7 +31,7 @@ _Get user position list_
 
 > 200 Response
 
-```
+```json
 [
   {
     "user": 10000,

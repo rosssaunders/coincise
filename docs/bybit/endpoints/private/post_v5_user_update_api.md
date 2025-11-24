@@ -68,8 +68,6 @@ POST `/v5/user/update-api`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 POST /v5/user/update-api HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676431264739X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXXContent-Type: application/json{    "readOnly": null,    "ips": "*",    "permissions": {            "ContractTrade": [                "Order",                "Position"            ],            "Spot": [                "SpotTrade"            ],            "Wallet": [                "AccountTransfer",                "SubMemberTransfer"            ],            "Options": [                "OptionsTrade"            ],            "CopyTrading": [                "CopyTrading"            ],            "BlockTrade": [],            "Exchange": [                "ExchangeHistory"            ],            "NFT": [                "NFTQueryProductList"            ]        }}
 ```
@@ -79,7 +77,7 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .updateMasterApiKey({    ips: ['*'],    permissions: {      ContractTrade: ['Order', 'Position'],      Spot: ['SpotTrade'],      Wallet: ['AccountTransfer', 'SubMemberTransfer'],      Options: ['OptionsTrade'],      Derivatives: ['DerivativesTrade'],      CopyTrading: ['CopyTrading'],      BlockTrade: [],      Exchange: ['ExchangeHistory'],      NFT: ['NFTQueryProductList'],    },  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .updateMasterApiKey({    ips: ['*'],    permissions: {      ContractTrade: ['Order', 'Position'],      Spot: ['SpotTrade'],      Wallet: ['AccountTransfer', 'SubMemberTransfer'],      Options: ['OptionsTrade'],      Derivatives: ['DerivativesTrade'],      CopyTrading: ['CopyTrading'],      BlockTrade: [],      Exchange: ['ExchangeHistory'],      NFT: ['NFTQueryProductList'],    },  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

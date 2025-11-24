@@ -1,7 +1,6 @@
 # GET /options/position_close
 
-**Source:**
-[/options/position_close](https://www.gate.io/docs/developers/apiv4/en/#listoptionspositionclose-parameters)
+**Source:** [/options/position_close](https://www.gate.io/docs/developers/apiv4/en/#listoptionspositionclose-parameters)
 
 ## Authentication
 
@@ -27,7 +26,7 @@ _List user's liquidation history of specified underlying_
 
 > 200 Response
 
-```
+```json
 [
   {
     "time": 1631764800,

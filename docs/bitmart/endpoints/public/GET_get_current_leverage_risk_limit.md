@@ -1,6 +1,7 @@
 # GET Get Current Leverage Risk Limit
 
-**Source:** [Get Current Leverage Risk Limit](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[Get Current Leverage Risk Limit](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -26,9 +27,9 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl https://api-cloud-v2.bitmart.com/contract/public/leverage-bracket?symbol=BTCUSDT`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| symbol | String | No | Symbol of the contract(like BTCUSDT) |
+| Field  | Type   | Required? | Description                          |
+| ------ | ------ | --------- | ------------------------------------ |
+| symbol | String | No        | Symbol of the contract(like BTCUSDT) |
 
 #### Response Data
 
@@ -131,11 +132,11 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| bracket | Int | Risk bracket / Margin tier |
-| initial\_leverage | Int | Maximum leverage in this bracket |
-| notional\_cap | String | Maximum notional value in this bracket |
-| notional\_floor | String | Minimum notional value in this bracket |
-| maint\_margin\_ratio | String | Maintenance margin ratio |
-| cum | String | Cumulative maintenance margin amount |
+| Field              | Type   | Description                            |
+| ------------------ | ------ | -------------------------------------- |
+| bracket            | Int    | Risk bracket / Margin tier             |
+| initial_leverage   | Int    | Maximum leverage in this bracket       |
+| notional_cap       | String | Maximum notional value in this bracket |
+| notional_floor     | String | Minimum notional value in this bracket |
+| maint_margin_ratio | String | Maintenance margin ratio               |
+| cum                | String | Cumulative maintenance margin amount   |

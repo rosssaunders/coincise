@@ -1,6 +1,7 @@
 # GET Get Deposit And Withdraw History (KEYED)
 
-**Source:** [Get Deposit And Withdraw History (KEYED)](https://developer-pro.bitmart.com/en/spot/)
+**Source:**
+[Get Deposit And Withdraw History (KEYED)](https://developer-pro.bitmart.com/en/spot/)
 
 **API Type:** Spot
 
@@ -28,15 +29,15 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud.bitmart.com/account/v2/deposit-withdraw/history?N=100&operation_type=withdraw&startTime=1739499865000`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| currency | String | No | Token symbol, e.g., 'BTC' |
-| operation\_type | String | Yes | type  
+| Field          | Type   | Required? | Description               |
+| -------------- | ------ | --------- | ------------------------- |
+| currency       | String | No        | Token symbol, e.g., 'BTC' |
+| operation_type | String | Yes       | type                      |
+
 \-`deposit`\=deposit  
-\-`withdraw`\=withdraw |
-| startTime | Long | No | Default: 90 days from current timestamp (milliseconds) |
-| endTime | Long | No | Default: present timestamp (milliseconds) |
-| N | Int | Yes | Recent N records (value range 1-1000) |
+\-`withdraw`\=withdraw | | startTime | Long | No | Default: 90 days from current
+timestamp (milliseconds) | | endTime | Long | No | Default: present timestamp
+(milliseconds) | | N | Int | Yes | Recent N records (value range 1-1000) |
 
 #### Response Data
 
@@ -67,31 +68,31 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| withdraw\_id | String | withdraw id |
-| deposit\_id | String | deposit id |
-| operation\_type | String | type  
+| Field          | Type   | Description |
+| -------------- | ------ | ----------- |
+| withdraw_id    | String | withdraw id |
+| deposit_id     | String | deposit id  |
+| operation_type | String | type        |
+
 \-`deposit`\=deposit  
-\-`withdraw`\=withdraw |
-| currency | String | Token symbol, e.g., 'BTC' |
-| apply\_time | Long | The request timestamp is accurate to milliseconds(UTC-0) |
-| arrival\_amount | String | Actual amount received |
-| fee | String | fee |
-| status | Int | status  
+\-`withdraw`\=withdraw | | currency | String | Token symbol, e.g., 'BTC' | |
+apply_time | Long | The request timestamp is accurate to milliseconds(UTC-0) | |
+arrival_amount | String | Actual amount received | | fee | String | fee | |
+status | Int | status  
 \- `0`\=Create  
 \- `1`\=Submitted, waiting for withdrawal  
 \- `2`\=Processing  
 \- `3`\=Done  
 \- `4`\=Cancel  
-\- `5`\=Fail |
-| address | String | Address |
-| address\_memo | String | Address tag |
-| tx\_id | String | Hash record |
+\- `5`\=Fail | | address | String | Address | | address_memo | String | Address
+tag | | tx_id | String | Hash record |
 
-1\. The deposit id has a value when \`operation\_type\` = 'deposit'. The withdraw id has a value when \`operation\_type\` = 'withdraw'.  
-2\. Tx\_id is an empty string before it is chained.  
-3\. Please notice the default startTime and endTime to make sure that time interval is within 0-90 days.  
-4\. If both startTime and endTime are sent, time between startTime and endTime must be less than 90 days.  
+1\. The deposit id has a value when \`operation_type\` = 'deposit'. The withdraw
+id has a value when \`operation_type\` = 'withdraw'.  
+2\. Tx_id is an empty string before it is chained.  
+3\. Please notice the default startTime and endTime to make sure that time
+interval is within 0-90 days.  
+4\. If both startTime and endTime are sent, time between startTime and endTime
+must be less than 90 days.
 
 This endpoint is not available for sub-account

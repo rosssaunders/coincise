@@ -1,6 +1,7 @@
 # GET Get Contract Assets (KEYED)
 
-**Source:** [Get Contract Assets (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[Get Contract Assets (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -64,11 +65,11 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| currency | String | Currency |
-| position\_deposit | String | Position margin |
-| frozen\_balance | String | Transaction freeze amount |
-| available\_balance | String | Available amount |
-| equity | String | Total equity |
-| unrealized | String | Unrealized P&L |
+| Field             | Type   | Description               |
+| ----------------- | ------ | ------------------------- |
+| currency          | String | Currency                  |
+| position_deposit  | String | Position margin           |
+| frozen_balance    | String | Transaction freeze amount |
+| available_balance | String | Available amount          |
+| equity            | String | Total equity              |
+| unrealized        | String | Unrealized P&L            |

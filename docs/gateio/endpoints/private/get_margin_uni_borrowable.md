@@ -1,7 +1,6 @@
 # GET /margin/uni/borrowable
 
-**Source:**
-[/margin/uni/borrowable](https://www.gate.io/docs/developers/apiv4/en/#getisolateduniborrowable-parameters)
+**Source:** [/margin/uni/borrowable](https://www.gate.io/docs/developers/apiv4/en/#getisolateduniborrowable-parameters)
 
 ## Authentication
 
@@ -27,7 +26,7 @@ _Query maximum borrowable amount by currency_
 
 > 200 Response
 
-```
+```json
 {
   "currency": "AE",
   "borrowable": "1123.344",

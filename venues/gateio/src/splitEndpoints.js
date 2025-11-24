@@ -181,31 +181,47 @@ const extractSourceUrl = (content) => {
 };
 
 /**
+ * Add JSON language tags to untagged code blocks
+ */
+const tagJsonCodeBlocks = (markdown) => {
+  // Replace untagged code blocks that contain JSON with tagged json blocks
+  return markdown.replace(/```\n(\{[\s\S]*?\}|\[[\s\S]*?\])\n```/g, (match, jsonContent) => {
+    // Check if it looks like JSON (starts with { or [)
+    const trimmed = jsonContent.trim();
+    if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+      return '```json\n' + jsonContent + '\n```';
+    }
+    return match;
+  });
+};
+
+/**
  * Process a single endpoint and save to file
  */
 const saveEndpoint = (endpoint) => {
   const { method, path: endpointPath, content } = endpoint;
-  
+
   // Determine if public or private
   const isPublic = isPublicEndpoint(content);
   const folder = isPublic ? "public" : "private";
-  
+
   // Extract source URL
   const sourceUrl = extractSourceUrl(content);
-  
+
   // Create header for the endpoint file
   const header = `# ${method} ${endpointPath}\n\n**Source:** [${endpointPath}](${sourceUrl})\n\n## Authentication\n\n${isPublic ? "Not Required (Public Endpoint)" : "Required (Private Endpoint)"}\n\n`;
-  
-  // Combine header with content
-  const finalContent = header + content;
-  
+
+  // Combine header with content and tag JSON blocks
+  let finalContent = header + content;
+  finalContent = tagJsonCodeBlocks(finalContent);
+
   // Generate filename
   const filename = generateFilename(method, endpointPath);
   const filePath = path.join(OUTPUT_DIR, folder, filename);
-  
+
   // Write file
   fs.writeFileSync(filePath, finalContent, "utf8");
-  
+
   return { filename, folder };
 };
 

@@ -1,7 +1,6 @@
 # GET /spot/currencies
 
-**Source:**
-[/spot/currencies](https://www.gate.io/docs/developers/apiv4/en/#listcurrencies-responses)
+**Source:** [/spot/currencies](https://www.gate.io/docs/developers/apiv4/en/#listcurrencies-responses)
 
 ## Authentication
 
@@ -21,7 +20,7 @@ status, identification, etc. of the chain
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency": "GT",

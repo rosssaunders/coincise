@@ -1,7 +1,6 @@
 # POST /delivery/{settle}/orders
 
-**Source:**
-[/delivery/{settle}/orders](https://www.gate.io/docs/developers/apiv4/en/#createdeliveryorder-parameters)
+**Source:** [/delivery/{settle}/orders](https://www.gate.io/docs/developers/apiv4/en/#createdeliveryorder-parameters)
 
 ## Authentication
 
@@ -17,7 +16,7 @@ Zero-fill orders cannot be retrieved 10 minutes after order cancellation
 
 > Body parameter
 
-```
+```json
 {
   "contract": "BTC_USDT",
   "size": 6024,
@@ -127,7 +126,7 @@ self-trade prevention strategies
 
 > 201 Response
 
-```
+```json
 {
   "id": 15675394,
   "user": 100000,

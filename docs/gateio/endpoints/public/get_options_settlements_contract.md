@@ -1,7 +1,6 @@
 # GET /options/settlements/{contract}
 
-**Source:**
-[/options/settlements/{contract}](https://www.gate.io/docs/developers/apiv4/en/#getoptionssettlement-parameters)
+**Source:** [/options/settlements/{contract}](https://www.gate.io/docs/developers/apiv4/en/#getoptionssettlement-parameters)
 
 ## Authentication
 
@@ -28,7 +27,7 @@ _Get specified contract settlement information_
 
 > 200 Response
 
-```
+```json
 {
   "time": 1598839200,
   "profit": "312.35",

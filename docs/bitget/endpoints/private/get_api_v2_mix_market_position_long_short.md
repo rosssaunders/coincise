@@ -8,7 +8,7 @@ Get Futures Active Long Short Position Data
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/mix/market/position-long-short
+- GET /api/v2/mix/market/position-long-short
 
 Request Example
 
@@ -18,10 +18,11 @@ curl "https://api.bitget.com/api/v2/mix/market/position-long-short?symbol=BTCUSD
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair |
-| period | String | No | \- default:5m, support:  
+| Parameter | Type   | Required | Description             |
+| :-------- | :----- | :------- | :---------------------- |
+| symbol    | String | Yes      | Trading pair            |
+| period    | String | No       | \- default:5m, support: |
+
 `5m`  
 `15m`  
 `30m`  
@@ -58,11 +59,11 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| longPositionRatio | String | Long Position Ratio |
-| shortPositionRatio | String | Short Position Ratio |
+| Parameter              | Type   | Description               |
+| :--------------------- | :----- | :------------------------ |
+| longPositionRatio      | String | Long Position Ratio       |
+| shortPositionRatio     | String | Short Position Ratio      |
 | longShortPositionRatio | String | Long Short Position Ratio |
-| ts | String | Millseconds time |
+| ts                     | String | Millseconds time          |
 
 > **Source:** https://www.bitget.com/api-doc/common/apidata/Position-Long-Short

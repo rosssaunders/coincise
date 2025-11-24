@@ -1,7 +1,6 @@
 # GET /futures/{settle}/positions/{contract}
 
-**Source:**
-[/futures/{settle}/positions/{contract}](https://www.gate.io/docs/developers/apiv4/en/#getposition-parameters)
+**Source:** [/futures/{settle}/positions/{contract}](https://www.gate.io/docs/developers/apiv4/en/#getposition-parameters)
 
 ## Authentication
 
@@ -34,7 +33,7 @@ _Get single position information_
 
 > 200 Response
 
-```
+```json
 {
   "user": 10000,
   "contract": "BTC_USDT",

@@ -1,7 +1,6 @@
 # GET /delivery/{settle}/orders/{order_id}
 
-**Source:**
-[/delivery/{settle}/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getdeliveryorder-parameters)
+**Source:** [/delivery/{settle}/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getdeliveryorder-parameters)
 
 ## Authentication
 
@@ -35,7 +34,7 @@ Zero-fill orders cannot be retrieved 10 minutes after order cancellation
 
 > 200 Response
 
-```
+```json
 {
   "id": 15675394,
   "user": 100000,

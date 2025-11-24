@@ -45,8 +45,6 @@ GET `/v5/user/get-member-type`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 GET /v5/user/get-member-type HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1686884973961X-BAPI-RECV-WINDOW: 5000Content-Type: application/json
 ```
@@ -56,7 +54,7 @@ GET /v5/user/get-member-type HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXX
 ```
 
 ```javascript
-// https://api.bybit.com/v5/user/get-member-typeconst { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getUIDWalletType({    memberIds: 'subUID1,subUID2',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+// https://api.bybit.com/v5/user/get-member-typeconst { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .getUIDWalletType({    memberIds: 'subUID1,subUID2',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

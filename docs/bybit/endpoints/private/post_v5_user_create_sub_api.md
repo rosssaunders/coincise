@@ -66,8 +66,6 @@ POST `/v5/user/create-sub-api`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 POST /v5/user/create-sub-api HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1676430005459X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "subuid": 53888000,    "note": "testxxx",    "readOnly": 0,    "permissions": {        "Wallet": [            "AccountTransfer"        ]    }}
 ```
@@ -77,7 +75,7 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .createSubUIDAPIKey({    subuid: 53888000,    note: 'testxxx',    readOnly: 0,    permissions: {      Wallet: ['AccountTransfer'],    },  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .createSubUIDAPIKey({    subuid: 53888000,    note: 'testxxx',    readOnly: 0,    permissions: {      Wallet: ['AccountTransfer'],    },  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

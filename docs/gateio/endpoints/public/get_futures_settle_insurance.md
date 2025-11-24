@@ -1,7 +1,6 @@
 # GET /futures/{settle}/insurance
 
-**Source:**
-[/futures/{settle}/insurance](https://www.gate.io/docs/developers/apiv4/en/#listfuturesinsuranceledger-parameters)
+**Source:** [/futures/{settle}/insurance](https://www.gate.io/docs/developers/apiv4/en/#listfuturesinsuranceledger-parameters)
 
 ## Authentication
 
@@ -34,7 +33,7 @@ _Futures market insurance fund history_
 
 > 200 Response
 
-```
+```json
 [
   {
     "t": 1543968000,

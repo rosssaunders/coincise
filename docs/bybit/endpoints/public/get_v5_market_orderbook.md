@@ -56,8 +56,6 @@ GET `/v5/market/orderbook`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 GET /v5/market/orderbook?category=spot&symbol=BTCUSDT HTTP/1.1Host: api-testnet.bybit.com
 ```

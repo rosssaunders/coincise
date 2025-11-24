@@ -1,7 +1,6 @@
 # GET /delivery/{settle}/risk_limit_tiers
 
-**Source:**
-[/delivery/{settle}/risk_limit_tiers](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryrisklimittiers-parameters)
+**Source:** [/delivery/{settle}/risk_limit_tiers](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryrisklimittiers-parameters)
 
 ## Authentication
 
@@ -40,7 +39,7 @@ takes effect empty.
 
 > 200 Response
 
-```
+```json
 [
   {
     "maintenance_rate": "0.01",

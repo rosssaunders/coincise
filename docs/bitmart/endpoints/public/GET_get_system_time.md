@@ -43,6 +43,6 @@ None
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| server\_time | Long | Current system time (timestamp, accuracy in milliseconds) |
+| Field       | Type | Description                                               |
+| ----------- | ---- | --------------------------------------------------------- |
+| server_time | Long | Current system time (timestamp, accuracy in milliseconds) |

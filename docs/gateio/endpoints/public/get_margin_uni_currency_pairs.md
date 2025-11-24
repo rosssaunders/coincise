@@ -1,7 +1,6 @@
 # GET /margin/uni/currency_pairs
 
-**Source:**
-[/margin/uni/currency_pairs](https://www.gate.io/docs/developers/apiv4/en/#listisolatedunicurrencypairs-responses)
+**Source:** [/margin/uni/currency_pairs](https://www.gate.io/docs/developers/apiv4/en/#listisolatedunicurrencypairs-responses)
 
 ## Authentication
 
@@ -17,7 +16,7 @@ _List lending markets_
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency_pair": "AE_USDT",

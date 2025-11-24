@@ -1,7 +1,6 @@
 # DELETE /delivery/{settle}/price_orders
 
-**Source:**
-[/delivery/{settle}/price_orders](https://www.gate.io/docs/developers/apiv4/en/#cancelpricetriggereddeliveryorderlist-parameters)
+**Source:** [/delivery/{settle}/price_orders](https://www.gate.io/docs/developers/apiv4/en/#cancelpricetriggereddeliveryorderlist-parameters)
 
 ## Authentication
 
@@ -33,7 +32,7 @@ _Cancel all auto orders_
 
 > 200 Response
 
-```
+```json
 [
   {
     "initial": {

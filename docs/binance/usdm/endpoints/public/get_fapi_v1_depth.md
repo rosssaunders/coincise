@@ -10,25 +10,26 @@ GET `/fapi/v1/depth`
 
 **Note**:
 
-> Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+> Retail Price Improvement(RPI) orders are not visible and excluded in the
+> response message.
 
 ### Request Weight
 
 Adjusted based on the limit:
 
-| Limit | Weight |
-| --- | --- |
-| 5, 10, 20, 50 | 2 |
-| 100 | 5 |
-| 500 | 10 |
-| 1000 | 20 |
+| Limit         | Weight |
+| ------------- | ------ |
+| 5, 10, 20, 50 | 2      |
+| 100           | 5      |
+| 500           | 10     |
+| 1000          | 20     |
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | YES |  |
-| limit | INT | NO | Default 500; Valid limits:\[5, 10, 20, 50, 100, 500, 1000\] |
+| Name   | Type   | Mandatory | Description                                                 |
+| ------ | ------ | --------- | ----------------------------------------------------------- |
+| symbol | STRING | YES       |                                                             |
+| limit  | INT    | NO        | Default 500; Valid limits:\[5, 10, 20, 50, 100, 500, 1000\] |
 
 ### Response Example
 
@@ -52,4 +53,5 @@ Adjusted based on the limit:
 }
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book)
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book)

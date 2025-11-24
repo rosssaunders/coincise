@@ -26,9 +26,9 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl -H 'X-BM-KEY:{{AccessKey}}'  https://api-cloud.bitmart.com/account/v1/withdraw/charge?currency=BTC`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| currency | String | Yes | Token symbol, e.g., 'BTC' |
+| Field    | Type   | Required? | Description               |
+| -------- | ------ | --------- | ------------------------- |
+| currency | String | Yes       | Token symbol, e.g., 'BTC' |
 
 #### Response Data
 
@@ -49,15 +49,17 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| today\_available\_withdraw\_BTC | String | Amount available for withdrawal today, unit: BTC |
-| min\_withdraw | String | Minimum withdrawal amount |
-| withdraw\_precision | Int | Withdrawal amount must be accurate to several decimal places. |
-| withdraw\_fee | String | Withdrawal fee |
-| withdraw\_Precision\_GeTen | Long | Withdrawal amount must be an integral multiple of this value. If it is null, it means there is no such requirement. |
+| Field                        | Type   | Description                                                                                                         |
+| ---------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------- |
+| today_available_withdraw_BTC | String | Amount available for withdrawal today, unit: BTC                                                                    |
+| min_withdraw                 | String | Minimum withdrawal amount                                                                                           |
+| withdraw_precision           | Int    | Withdrawal amount must be accurate to several decimal places.                                                       |
+| withdraw_fee                 | String | Withdrawal fee                                                                                                      |
+| withdraw_Precision_GeTen     | Long   | Withdrawal amount must be an integral multiple of this value. If it is null, it means there is no such requirement. |
 
 This interface is not available for sub-account
 
-1\. When \`withdraw\_precision\`=5, then the decimal point of the withdrawal amount cannot exceed 5 digits.  
-2\. When \`withdraw\_Precision\_GeTen\`=10, then the withdrawal amount must be an integral multiple of 10.
+1\. When \`withdraw_precision\`=5, then the decimal point of the withdrawal
+amount cannot exceed 5 digits.  
+2\. When \`withdraw_Precision_GeTen\`=10, then the withdrawal amount must be an
+integral multiple of 10.

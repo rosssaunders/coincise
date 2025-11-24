@@ -1,7 +1,6 @@
 # POST /loan/collateral/collaterals
 
-**Source:**
-[/loan/collateral/collaterals](https://www.gate.io/docs/developers/apiv4/en/#operatecollateral-parameters)
+**Source:** [/loan/collateral/collaterals](https://www.gate.io/docs/developers/apiv4/en/#operatecollateral-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Increase or redeem collateral_
 
 > Body parameter
 
-```
+```json
 {
   "collateral_amount": "1212",
   "collateral_currency": "BTC",

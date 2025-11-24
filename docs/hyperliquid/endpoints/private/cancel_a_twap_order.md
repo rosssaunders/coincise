@@ -1,6 +1,7 @@
 # POST /exchange
 
-**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:**
+https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
 `POST` `https://api.hyperliquid.xyz/exchange`
 
@@ -38,7 +39,7 @@ Object
 
 "t": Number
 
-} Meaning of keys: a is asset t is twap\_id
+} Meaning of keys: a is asset t is twap_id
 
 nonce\*
 
@@ -54,7 +55,8 @@ vaultAddress
 
 String
 
-If trading on behalf of a vault or subaccount, its address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
+If trading on behalf of a vault or subaccount, its address in 42-character
+hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
 
 expiresAfter
 
@@ -68,26 +70,26 @@ Timestamp in milliseconds
 
 ```json
 {
-   "status":"ok",
-   "response":{
-      "type":"twapCancel",
-      "data":{
-         "status": "success"
-      }
-   }
+  "status": "ok",
+  "response": {
+    "type": "twapCancel",
+    "data": {
+      "status": "success"
+    }
+  }
 }
 ```
 
 ```json
 {
-   "status":"ok",
-   "response":{
-      "type":"twapCancel",
-      "data":{
-         "status": {
-            "error": "TWAP was never placed, already canceled, or filled."
-         }
+  "status": "ok",
+  "response": {
+    "type": "twapCancel",
+    "data": {
+      "status": {
+        "error": "TWAP was never placed, already canceled, or filled."
       }
-   }
+    }
+  }
 }
 ```

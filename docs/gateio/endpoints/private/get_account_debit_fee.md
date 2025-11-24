@@ -1,7 +1,6 @@
 # GET /account/debit_fee
 
-**Source:**
-[/account/debit_fee](https://www.gate.io/docs/developers/apiv4/en/#getdebitfee-responses)
+**Source:** [/account/debit_fee](https://www.gate.io/docs/developers/apiv4/en/#getdebitfee-responses)
 
 ## Authentication
 
@@ -19,7 +18,7 @@ Query the GT fee deduction configuration for the current account
 
 > 200 Response
 
-```
+```json
 {
   "enabled": true
 }

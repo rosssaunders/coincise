@@ -1,7 +1,6 @@
 # GET /unified/loan_margin_tiers
 
-**Source:**
-[/unified/loan_margin_tiers](https://www.gate.io/docs/developers/apiv4/en/#listloanmargintiers-responses)
+**Source:** [/unified/loan_margin_tiers](https://www.gate.io/docs/developers/apiv4/en/#listloanmargintiers-responses)
 
 ## Authentication
 
@@ -17,7 +16,7 @@ _Query unified account tiered loan margin_
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency": "USDT",

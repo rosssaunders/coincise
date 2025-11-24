@@ -1,7 +1,6 @@
 # GET /margin/user/loan_margin_tiers
 
-**Source:**
-[/margin/user/loan_margin_tiers](https://www.gate.io/docs/developers/apiv4/en/#getisolatedusermargintier-parameters)
+**Source:** [/margin/user/loan_margin_tiers](https://www.gate.io/docs/developers/apiv4/en/#getisolatedusermargintier-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Query user's own leverage lending tiers in current market_
 
 > 200 Response
 
-```
+```json
 [
   {
     "tier_amount": "100",

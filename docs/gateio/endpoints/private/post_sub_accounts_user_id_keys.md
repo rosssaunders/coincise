@@ -1,7 +1,6 @@
 # POST /sub_accounts/{user_id}/keys
 
-**Source:**
-[/sub_accounts/{user_id}/keys](https://www.gate.io/docs/developers/apiv4/en/#createsubaccountkeys-parameters)
+**Source:** [/sub_accounts/{user_id}/keys](https://www.gate.io/docs/developers/apiv4/en/#createsubaccountkeys-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Create new sub-account API key pair_
 
 > Body parameter
 
-```
+```json
 {
   "mode": 1,
   "name": "spot",
@@ -85,7 +84,7 @@ _Create new sub-account API key pair_
 
 > 200 Response
 
-```
+```json
 {
   "state": 1,
   "name": "spot",

@@ -1,6 +1,7 @@
 # POST /v2/auth/w/alert/price:{symbol}:{price}/del
 
-**Source:** [https://docs.bitfinex.com/reference/rest-auth-alert-del](https://docs.bitfinex.com/reference/rest-auth-alert-del)
+**Source:**
+[https://docs.bitfinex.com/reference/rest-auth-alert-del](https://docs.bitfinex.com/reference/rest-auth-alert-del)
 
 post
 
@@ -30,7 +31,7 @@ Defaults to 600
 
 Body Params
 
-RAW\_BODY
+RAW_BODY
 
 json
 

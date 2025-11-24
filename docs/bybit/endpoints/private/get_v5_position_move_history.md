@@ -53,8 +53,6 @@ GET `/v5/position/move-history`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 GET /v5/position/move-history?limit=1&status=Filled HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1697523024244X-BAPI-RECV-WINDOW: 5000
 ```

@@ -8,24 +8,24 @@ Get account details with the given 'marginCoin' and 'productType'
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/mix/account/account
+- GET /api/v2/mix/account/account
 
 Request Example
 
 ```
-curl "https://api.bitget.com/api/v2/mix/account/account?symbol=btcusdt&productType=USDT-FUTURES&marginCoin=usdt" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" 
+curl "https://api.bitget.com/api/v2/mix/account/account?symbol=btcusdt&productType=USDT-FUTURES&marginCoin=usdt" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair |
-| productType | String | Yes | Product type  
+| Parameter   | Type   | Required | Description  |
+| :---------- | :----- | :------- | :----------- |
+| symbol      | String | Yes      | Trading pair |
+| productType | String | Yes      | Product type |
+
 `USDT-FUTURES` USDT-M Futures  
 `COIN-FUTURES` Coin-M Futures  
-`USDC-FUTURES` USDC-M Futures |
-| marginCoin | String | Yes | Margin coin |
+`USDC-FUTURES` USDC-M Futures | | marginCoin | String | Yes | Margin coin |
 
 Response Example
 
@@ -61,32 +61,30 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| \>marginCoin | String | Margin coin |
-| \>locked | String | Locked quantity (margin coin). Lockup will be triggered when there is a position to be closed. |
-| \>available | String | Available quantity in the account |
-| \>crossedMaxAvailable | String | Maximum available balance to open positions under the cross margin mode (margin coin) |
-| \>isolatedMaxAvailable | String | Maximum available balance to open positions under the isolated margin mode (margin coin) |
-| \>maxTransferOut | String | Maximum transferable amount |
-| \>accountEquity | String | Account equity (margin coin), including unrealized PnL (based on mark price) |
-| \>usdtEquity | String | Account equity in USDT |
-| \>btcEquity | String | Account equity in BTC |
-| \>crossedRiskRate | String | Risk ratio in cross margin mode |
-| \>crossedMarginLeverage | String | Leverage in cross margin mode |
-| \>isolatedLongLever | String | Leverage of long positions in isolated margin mode |
-| \>isolatedShortLever | String | Leverage of short positions in isolated margin mode |
-| \>marginMode | String | Margin mode.  
+| Parameter               | Type   | Description                                                                                    |
+| :---------------------- | :----- | :--------------------------------------------------------------------------------------------- |
+| \>marginCoin            | String | Margin coin                                                                                    |
+| \>locked                | String | Locked quantity (margin coin). Lockup will be triggered when there is a position to be closed. |
+| \>available             | String | Available quantity in the account                                                              |
+| \>crossedMaxAvailable   | String | Maximum available balance to open positions under the cross margin mode (margin coin)          |
+| \>isolatedMaxAvailable  | String | Maximum available balance to open positions under the isolated margin mode (margin coin)       |
+| \>maxTransferOut        | String | Maximum transferable amount                                                                    |
+| \>accountEquity         | String | Account equity (margin coin), including unrealized PnL (based on mark price)                   |
+| \>usdtEquity            | String | Account equity in USDT                                                                         |
+| \>btcEquity             | String | Account equity in BTC                                                                          |
+| \>crossedRiskRate       | String | Risk ratio in cross margin mode                                                                |
+| \>crossedMarginLeverage | String | Leverage in cross margin mode                                                                  |
+| \>isolatedLongLever     | String | Leverage of long positions in isolated margin mode                                             |
+| \>isolatedShortLever    | String | Leverage of short positions in isolated margin mode                                            |
+| \>marginMode            | String | Margin mode.                                                                                   |
+
 isolated – isolated margin mode;  
-crossed – cross margin mode |
-| \>posMode | String | Position mode  
-one\_way\_mode: one-way mode  
-hedge\_mode: hedge mode |
-| \>unrealizedPL | String | Unrealized PnL |
-| \>coupon | String | Trading bonus |
-| \>crossedUnrealizedPL | String | unrealizedPL for croessed |
-| \>isolatedUnrealizedPL | String | unrealizedPL for isolated |
-| \>assetMode | String | Assets mode  
+crossed – cross margin mode | | \>posMode | String | Position mode  
+one_way_mode: one-way mode  
+hedge_mode: hedge mode | | \>unrealizedPL | String | Unrealized PnL | | \>coupon
+| String | Trading bonus | | \>crossedUnrealizedPL | String | unrealizedPL for
+croessed | | \>isolatedUnrealizedPL | String | unrealizedPL for isolated | |
+\>assetMode | String | Assets mode  
 `union` Multi-assets mode  
 `single` Single-assets mode |
 

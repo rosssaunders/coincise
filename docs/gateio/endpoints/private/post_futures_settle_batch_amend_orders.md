@@ -1,7 +1,6 @@
 # POST /futures/{settle}/batch_amend_orders
 
-**Source:**
-[/futures/{settle}/batch_amend_orders](https://www.gate.io/docs/developers/apiv4/en/#amendbatchfutureorders-parameters)
+**Source:** [/futures/{settle}/batch_amend_orders](https://www.gate.io/docs/developers/apiv4/en/#amendbatchfutureorders-parameters)
 
 ## Authentication
 
@@ -17,7 +16,7 @@ Multiple different order IDs can be specified, maximum 10 orders per request
 
 > Body parameter
 
-```
+```json
 [
   {
     "order_id": 121212,
@@ -50,7 +49,7 @@ Multiple different order IDs can be specified, maximum 10 orders per request
 
 > 200 Response
 
-```
+```json
 [
   {
     "succeeded": true,

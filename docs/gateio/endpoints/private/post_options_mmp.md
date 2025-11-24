@@ -1,7 +1,6 @@
 # POST /options/mmp
 
-**Source:**
-[/options/mmp](https://www.gate.io/docs/developers/apiv4/en/#setoptionsmmp-parameters)
+**Source:** [/options/mmp](https://www.gate.io/docs/developers/apiv4/en/#setoptionsmmp-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _MMP Settings_
 
 > Body parameter
 
-```
+```json
 {
   "underlying": "BTC_USDT",
   "window": 5000,
@@ -43,7 +42,7 @@ _MMP Settings_
 
 > 200 Response
 
-```
+```json
 {
   "underlying": "BTC_USDT",
   "window": 5000,

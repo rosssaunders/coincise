@@ -1,6 +1,7 @@
 # POST /exchange
 
-**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:**
+https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
 `POST` `https://api.hyperliquid.xyz/exchange`
 
@@ -62,7 +63,8 @@ vaultAddress
 
 String
 
-If trading on behalf of a vault or subaccount, its address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
+If trading on behalf of a vault or subaccount, its address in 42-character
+hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
 
 expiresAfter
 
@@ -76,30 +78,28 @@ Timestamp in milliseconds
 
 ```json
 {
-   "status":"ok",
-   "response":{
-      "type":"cancel",
-      "data":{
-         "statuses":[
-            "success"
-         ]
-      }
-   }
+  "status": "ok",
+  "response": {
+    "type": "cancel",
+    "data": {
+      "statuses": ["success"]
+    }
+  }
 }
 ```
 
 ```json
 {
-   "status":"ok",
-   "response":{
-      "type":"cancel",
-      "data":{
-         "statuses":[
-            {
-               "error":"Order was never placed, already canceled, or filled."
-            }
-         ]
-      }
-   }
+  "status": "ok",
+  "response": {
+    "type": "cancel",
+    "data": {
+      "statuses": [
+        {
+          "error": "Order was never placed, already canceled, or filled."
+        }
+      ]
+    }
+  }
 }
 ```

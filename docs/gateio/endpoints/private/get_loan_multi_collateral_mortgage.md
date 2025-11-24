@@ -1,7 +1,6 @@
 # GET /loan/multi_collateral/mortgage
 
-**Source:**
-[/loan/multi_collateral/mortgage](https://www.gate.io/docs/developers/apiv4/en/#listmulticollateralrecords-parameters)
+**Source:** [/loan/multi_collateral/mortgage](https://www.gate.io/docs/developers/apiv4/en/#listmulticollateralrecords-parameters)
 
 ## Authentication
 
@@ -30,7 +29,7 @@ _Query collateral adjustment records_
 
 > 200 Response
 
-```
+```json
 [
   {
     "order_id": 10000417,

@@ -1,7 +1,6 @@
 # POST /loan/multi_collateral/repay
 
-**Source:**
-[/loan/multi_collateral/repay](https://www.gate.io/docs/developers/apiv4/en/#repaymulticollateralloan-parameters)
+**Source:** [/loan/multi_collateral/repay](https://www.gate.io/docs/developers/apiv4/en/#repaymulticollateralloan-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Multi-currency collateral repayment_
 
 > Body parameter
 
-```
+```json
 {
   "order_id": 10005578,
   "repay_items": [
@@ -47,7 +46,7 @@ _Multi-currency collateral repayment_
 
 > 200 Response
 
-```
+```json
 {
   "order_id": 10005679,
   "repaid_currencies": [

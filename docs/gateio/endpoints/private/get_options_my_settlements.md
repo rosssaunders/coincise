@@ -1,7 +1,6 @@
 # GET /options/my_settlements
 
-**Source:**
-[/options/my_settlements](https://www.gate.io/docs/developers/apiv4/en/#listmyoptionssettlements-parameters)
+**Source:** [/options/my_settlements](https://www.gate.io/docs/developers/apiv4/en/#listmyoptionssettlements-parameters)
 
 ## Authentication
 
@@ -43,7 +42,7 @@ time format is a Unix timestamp
 
 > 200 Response
 
-```
+```json
 [
   {
     "size": -1,

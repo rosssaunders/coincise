@@ -22,4 +22,5 @@ NONE
 {}
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api)
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api)

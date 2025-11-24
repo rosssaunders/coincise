@@ -40,8 +40,6 @@ GET `/v5/market/delivery-price`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 GET /v5/market/delivery-price?category=option&symbol=ETH-26DEC22-1400-C HTTP/1.1Host: api-testnet.bybit.com
 ```

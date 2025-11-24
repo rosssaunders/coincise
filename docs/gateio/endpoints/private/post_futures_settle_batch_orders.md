@@ -1,7 +1,6 @@
 # POST /futures/{settle}/batch_orders
 
-**Source:**
-[/futures/{settle}/batch_orders](https://www.gate.io/docs/developers/apiv4/en/#createbatchfuturesorder-parameters)
+**Source:** [/futures/{settle}/batch_orders](https://www.gate.io/docs/developers/apiv4/en/#createbatchfuturesorder-parameters)
 
 ## Authentication
 
@@ -31,7 +30,7 @@ _Place batch futures orders_
 
 > Body parameter
 
-```
+```json
 [
   {
     "contract": "BTC_USDT",
@@ -67,7 +66,7 @@ _Place batch futures orders_
 
 > 200 Response
 
-```
+```json
 [
   {
     "succeeded": true,

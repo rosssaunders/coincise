@@ -1,7 +1,6 @@
 # GET /unified/leverage/user_currency_config
 
-**Source:**
-[/unified/leverage/user_currency_config](https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencyconfig-parameters)
+**Source:** [/unified/leverage/user_currency_config](https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencyconfig-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Maximum and minimum currency leverage that can be set_
 
 > 200 Response
 
-```
+```json
 {
   "current_leverage": "2",
   "min_leverage": "0",

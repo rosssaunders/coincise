@@ -71,7 +71,6 @@ The acknowledgement of an amend order request indicates that the request was suc
 ### Request Example[​](#request-example "Direct link to heading")
 
 -   .Net
--   Node.js
 
 ```bash
 POST /v5/order/amend-batch HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672222935987X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "option",    "request": [        {            "symbol": "ETH-30DEC22-500-C",            "qty": null,            "price": null,            "orderIv": "6.8",            "orderId": "b551f227-7059-4fb5-a6a6-699c04dbd2f2"        },        {            "symbol": "ETH-30DEC22-700-C",            "qty": null,            "price": "650",            "orderIv": null,            "orderId": "fa6a595f-1a57-483f-b9d3-30e9c8235a52"        }    ]}
@@ -90,7 +89,7 @@ using bybit.net.api.ApiServiceImp;using bybit.net.api.Models.Trade;var order1 = 
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .batchAmendOrders('option', [        {            symbol: 'ETH-30DEC22-500-C',            orderIv: '6.8',            orderId: 'b551f227-7059-4fb5-a6a6-699c04dbd2f2',        },        {            symbol: 'ETH-30DEC22-700-C',            price: '650',            orderId: 'fa6a595f-1a57-483f-b9d3-30e9c8235a52',        },    ])    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: "YOUR_API_KEY",    secret: "YOUR_API_SECRET",});client    .batchAmendOrders('option', [        {            symbol: 'ETH-30DEC22-500-C',            orderIv: '6.8',            orderId: 'b551f227-7059-4fb5-a6a6-699c04dbd2f2',        },        {            symbol: 'ETH-30DEC22-700-C',            price: '650',            orderId: 'fa6a595f-1a57-483f-b9d3-30e9c8235a52',        },    ])    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

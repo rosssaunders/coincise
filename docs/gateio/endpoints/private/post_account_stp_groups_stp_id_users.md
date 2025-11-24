@@ -1,7 +1,6 @@
 # POST /account/stp_groups/{stp_id}/users
 
-**Source:**
-[/account/stp_groups/{stp_id}/users](https://www.gate.io/docs/developers/apiv4/en/#addstpgroupusers-parameters)
+**Source:** [/account/stp_groups/{stp_id}/users](https://www.gate.io/docs/developers/apiv4/en/#addstpgroupusers-parameters)
 
 ## Authentication
 
@@ -20,7 +19,7 @@ _Add users to the STP user group_
 
 > Body parameter
 
-```
+```json
 [
   1,
   2,
@@ -42,7 +41,7 @@ _Add users to the STP user group_
 
 > 200 Response
 
-```
+```json
 [
   {
     "user_id": 10000,

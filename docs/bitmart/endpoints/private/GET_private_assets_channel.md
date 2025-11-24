@@ -1,6 +1,7 @@
 # GET 【Private】Assets Channel
 
-**Source:** [【Private】Assets Channel](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[【Private】Assets Channel](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -24,11 +25,7 @@ Get asset balance change
 ```json
 {
   "action": "subscribe",
-  "args": [
-    "futures/asset:USDT",
-    "futures/asset:BTC",
-    "futures/asset:ETH"
-  ]
+  "args": ["futures/asset:USDT", "futures/asset:BTC", "futures/asset:ETH"]
 }
 ```
 
@@ -37,16 +34,14 @@ Message Format:
 ```json
 {
   "action": "subscribe",
-  "args": [
-    "<channel:currency>",
-    "<channel:currency>"
-  ]
+  "args": ["<channel:currency>", "<channel:currency>"]
 }
 ```
 
--   actions: `subscribe`
--   channel: Channel name `futures/asset`, fixed value
--   currency: Currency, such as `BTC`, asset types that support subscriptions are: USDT (U-native), BTC (coin-native), ETH (coin-native)
+- actions: `subscribe`
+- channel: Channel name `futures/asset`, fixed value
+- currency: Currency, such as `BTC`, asset types that support subscriptions are:
+  USDT (U-native), BTC (coin-native), ETH (coin-native)
 
 ### Response
 
@@ -66,9 +61,9 @@ Message Format:
 
 Return data description:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| currency | String | Currency |
-| available\_balance | String | Available Amount |
-| position\_deposit | String | Position Margin |
-| frozen\_balance | String | Transaction Frozen Amount |
+| Field             | Type   | Description               |
+| ----------------- | ------ | ------------------------- |
+| currency          | String | Currency                  |
+| available_balance | String | Available Amount          |
+| position_deposit  | String | Position Margin           |
+| frozen_balance    | String | Transaction Frozen Amount |

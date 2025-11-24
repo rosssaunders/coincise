@@ -48,8 +48,6 @@ POST `/v5/earn/place-order`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 POST /v5/earn/place-order HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1739936605822X-BAPI-RECV-WINDOW: 5000Content-Type: application/jsonContent-Length: 190{    "category": "FlexibleSaving",    "orderType": "Redeem",    "accountType": "FUND",    "amount": "0.35",    "coin": "BTC",    "productId": "430",    "orderLinkId": "btc-earn-001"}
 ```

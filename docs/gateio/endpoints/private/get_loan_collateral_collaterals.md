@@ -1,7 +1,6 @@
 # GET /loan/collateral/collaterals
 
-**Source:**
-[/loan/collateral/collaterals](https://www.gate.io/docs/developers/apiv4/en/#listcollateralrecords-parameters)
+**Source:** [/loan/collateral/collaterals](https://www.gate.io/docs/developers/apiv4/en/#listcollateralrecords-parameters)
 
 ## Authentication
 
@@ -31,7 +30,7 @@ _Query collateral adjustment records_
 
 > 200 Response
 
-```
+```json
 [
   {
     "order_id": 10000417,

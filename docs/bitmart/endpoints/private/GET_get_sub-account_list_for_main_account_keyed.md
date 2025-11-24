@@ -1,6 +1,7 @@
 # GET Get Sub-Account List (For Main Account) (KEYED)
 
-**Source:** [Get Sub-Account List (For Main Account) (KEYED)](https://developer-pro.bitmart.com/en/spot/)
+**Source:**
+[Get Sub-Account List (For Main Account) (KEYED)](https://developer-pro.bitmart.com/en/spot/)
 
 **API Type:** Spot
 
@@ -50,10 +51,11 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
+| Field       | Type   | Description          |
+| ----------- | ------ | -------------------- |
 | accountName | String | Sub-Account username |
-| status | Int | Account Status  
+| status      | Int    | Account Status       |
+
 \-`0`\=disabled in background  
 \-`1`\=normal  
 \-`2`\=frozen by main account |

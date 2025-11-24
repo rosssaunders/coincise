@@ -1,7 +1,6 @@
 # GET /options/mmp
 
-**Source:**
-[/options/mmp](https://www.gate.io/docs/developers/apiv4/en/#getoptionsmmp-parameters)
+**Source:** [/options/mmp](https://www.gate.io/docs/developers/apiv4/en/#getoptionsmmp-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _MMP Query._
 
 > 200 Response
 
-```
+```json
 [
   {
     "underlying": "BTC_USDT",

@@ -1,6 +1,7 @@
 # GET Get Account Futures Asset Transfer History (For Main/Sub Account) (KEYED)
 
-**Source:** [Get Account Futures Asset Transfer History (For Main/Sub Account) (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[Get Account Futures Asset Transfer History (For Main/Sub Account) (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -26,9 +27,9 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/account/contract/sub-account/v1/transfer-history?limit=10`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| limit | Int | Yes | Recent N records, allowed range\[1,100\] |
+| Field | Type | Required? | Description                              |
+| ----- | ---- | --------- | ---------------------------------------- |
+| limit | Int  | Yes       | Recent N records, allowed range\[1,100\] |
 
 #### Response Data
 
@@ -53,14 +54,14 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| fromAccount | String | Transfer out Sub-Account username |
-| fromWalletType | String | Transfer out wallet type  
-\-`future`\=futures wallet |
-| toAccount | String | Transfer to Sub-Account username |
-| toWalletType | String | Transfer to wallet type  
-\-`future`\=futures wallet |
-| currency | String | currency |
-| amount | String | Transfer amount |
-| submissionTime | Long | The request timestamp is accurate to seconds(UTC-0) |
+| Field                      | Type   | Description                                         |
+| -------------------------- | ------ | --------------------------------------------------- |
+| fromAccount                | String | Transfer out Sub-Account username                   |
+| fromWalletType             | String | Transfer out wallet type                            |
+| \-`future`\=futures wallet |
+| toAccount                  | String | Transfer to Sub-Account username                    |
+| toWalletType               | String | Transfer to wallet type                             |
+| \-`future`\=futures wallet |
+| currency                   | String | currency                                            |
+| amount                     | String | Transfer amount                                     |
+| submissionTime             | Long   | The request timestamp is accurate to seconds(UTC-0) |

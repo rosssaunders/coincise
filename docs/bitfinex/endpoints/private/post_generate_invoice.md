@@ -1,6 +1,7 @@
 # POST /v2/auth/w/deposit/invoice
 
-**Source:** [https://docs.bitfinex.com/reference/rest-auth-deposit-invoice](https://docs.bitfinex.com/reference/rest-auth-deposit-invoice)
+**Source:**
+[https://docs.bitfinex.com/reference/rest-auth-deposit-invoice](https://docs.bitfinex.com/reference/rest-auth-deposit-invoice)
 
 post
 
@@ -9,22 +10,22 @@ https://api.bitfinex.com/v2/auth/w/deposit/invoice
 Generates a Lightning Network deposit invoice
 
 > ❗️
-> 
-> ### 
-> 
+>
+> ###
+>
 > Creating a deposit address
-> 
-> 
-> 
-> If this is the first time you are generating an LNX invoice on your account, you will first need to create a deposit address. To do this, call w/deposit/address with { method: 'LNX', wallet: 'exchange' }
+>
+> If this is the first time you are generating an LNX invoice on your account,
+> you will first need to create a deposit address. To do this, call
+> w/deposit/address with { method: 'LNX', wallet: 'exchange' }
 
 Response data
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| [0] | INVOICE\_HASH | String | Hashed invoice |
-| [1] | INVOICE | String | Requested invoice |
-| [4] | AMOUNT | String | Amount of invoice |
+| Index | Field        | Type   | Description       |
+| ----- | ------------ | ------ | ----------------- |
+| [0]   | INVOICE_HASH | String | Hashed invoice    |
+| [1]   | INVOICE      | String | Requested invoice |
+| [4]   | AMOUNT       | String | Amount of invoice |
 
 Body Params
 
@@ -36,7 +37,8 @@ required
 
 Defaults to exchange
 
-Select the wallet that will receive the invoice payment. Currently only 'exchange' is available
+Select the wallet that will receive the invoice payment. Currently only
+'exchange' is available
 
 currency
 
@@ -46,7 +48,8 @@ required
 
 Defaults to LNX
 
-Select the currency for which you wish to generate an invoice. Currently only LNX (Bitcoin Lightning Network) is available.
+Select the currency for which you wish to generate an invoice. Currently only
+LNX (Bitcoin Lightning Network) is available.
 
 amount
 
@@ -72,11 +75,11 @@ curl \--request POST \\
 
 {
 
-  "wallet": "exchange",
+"wallet": "exchange",
 
-  "currency": "LNX",
+"currency": "LNX",
 
-  "amount": "0"
+"amount": "0"
 
 }
 

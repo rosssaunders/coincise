@@ -8,19 +8,19 @@ Get Plan Sub Order
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/spot/trade/plan-sub-order
+- GET /api/v2/spot/trade/plan-sub-order
 
 Request Example
 
 ```
-curl "https://api.bitget.com/api/v2/spot/trade/plan-sub-order?planOrderId=xxxxxxxxxxxxxxxxxx" \  -H "ACCESS-KEY:your apiKey" \    -H "ACCESS-SIGN:*" \    -H "ACCESS-PASSPHRASE:*" \    -H "ACCESS-TIMESTAMP:1659076670000" \    -H "locale:en-US" \    -H "Content-Type: application/json" 
+curl "https://api.bitget.com/api/v2/spot/trade/plan-sub-order?planOrderId=xxxxxxxxxxxxxxxxxx" \  -H "ACCESS-KEY:your apiKey" \    -H "ACCESS-SIGN:*" \    -H "ACCESS-PASSPHRASE:*" \    -H "ACCESS-TIMESTAMP:1659076670000" \    -H "locale:en-US" \    -H "Content-Type: application/json"
 ```
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| planOrderId | String | yes | Plan Order ID |
+| Parameter   | Type   | Required | Description   |
+| :---------- | :----- | :------- | :------------ |
+| planOrderId | String | yes      | Plan Order ID |
 
 Response Example
 
@@ -42,18 +42,18 @@ Response Example
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| orderId | boolean | Spot order ID |
-| price | String | Order price |
-| type | String | Order type  
+| Parameter | Type    | Description   |
+| :-------- | :------ | :------------ |
+| orderId   | boolean | Spot order ID |
+| price     | String  | Order price   |
+| type      | String  | Order type    |
+
 limit Limit price  
-market Market price |
-| status | String | Plan order trigger status  
+market Market price | | status | String | Plan order trigger status  
 success: trigger success  
 fail: trigger failed  
 cancelled: cancelled  
-in\_progress: trigger spot placing order  
-in\_progress\_tracking: tracking trigger |
+in_progress: trigger spot placing order  
+in_progress_tracking: tracking trigger |
 
 > **Source:** https://www.bitget.com/api-doc/spot/plan/Get-Plan-Sub-Order

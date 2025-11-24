@@ -1,7 +1,6 @@
 # DELETE /options/orders
 
-**Source:**
-[/options/orders](https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorders-parameters)
+**Source:** [/options/orders](https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorders-parameters)
 
 ## Authentication
 
@@ -35,7 +34,7 @@ _Cancel all orders with 'open' status_
 
 > 200 Response
 
-```
+```json
 [
   {
     "status": "finished",

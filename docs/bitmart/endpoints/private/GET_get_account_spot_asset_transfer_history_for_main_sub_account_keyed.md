@@ -1,6 +1,7 @@
 # GET Get Account Spot Asset Transfer History (For Main/Sub Account) (KEYED)
 
-**Source:** [Get Account Spot Asset Transfer History (For Main/Sub Account) (KEYED)](https://developer-pro.bitmart.com/en/spot/)
+**Source:**
+[Get Account Spot Asset Transfer History (For Main/Sub Account) (KEYED)](https://developer-pro.bitmart.com/en/spot/)
 
 **API Type:** Spot
 
@@ -26,11 +27,11 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud.bitmart.com/account/sub-account/v1/transfer-history?moveType=spot to spot`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| moveType | String | Yes | type  
-\-`spot to spot`\=Spot wallet transfer to spot wallet |
-| N | Int | Yes | Recent N records, allowed range\[1,100\] |
+| Field                                                 | Type   | Required? | Description                              |
+| ----------------------------------------------------- | ------ | --------- | ---------------------------------------- |
+| moveType                                              | String | Yes       | type                                     |
+| \-`spot to spot`\=Spot wallet transfer to spot wallet |
+| N                                                     | Int    | Yes       | Recent N records, allowed range\[1,100\] |
 
 #### Response Data
 
@@ -67,16 +68,16 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| fromAccount | String | Transfer out Sub-Account username |
-| fromWalletType | String | Transfer out wallet type  
-\-`spot`\=spot wallet |
-| toAccount | String | Transfer to Sub-Account username |
-| toWalletType | String | Transfer to wallet type  
-\-`spot`\=spot wallet |
-| currency | String | currency |
-| amount | String | Transfer amount |
-| submissionTime | Long | The request timestamp is accurate to seconds(UTC-0) |
+| Field                 | Type   | Description                                         |
+| --------------------- | ------ | --------------------------------------------------- |
+| fromAccount           | String | Transfer out Sub-Account username                   |
+| fromWalletType        | String | Transfer out wallet type                            |
+| \-`spot`\=spot wallet |
+| toAccount             | String | Transfer to Sub-Account username                    |
+| toWalletType          | String | Transfer to wallet type                             |
+| \-`spot`\=spot wallet |
+| currency              | String | currency                                            |
+| amount                | String | Transfer amount                                     |
+| submissionTime        | Long   | The request timestamp is accurate to seconds(UTC-0) |
 
 Note: Only the data for the last 3 months can be queried

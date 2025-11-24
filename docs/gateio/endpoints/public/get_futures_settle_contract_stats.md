@@ -1,7 +1,6 @@
 # GET /futures/{settle}/contract_stats
 
-**Source:**
-[/futures/{settle}/contract_stats](https://www.gate.io/docs/developers/apiv4/en/#listcontractstats-parameters)
+**Source:** [/futures/{settle}/contract_stats](https://www.gate.io/docs/developers/apiv4/en/#listcontractstats-parameters)
 
 ## Authentication
 
@@ -37,7 +36,7 @@ _Futures statistics_
 
 > 200 Response
 
-```
+```json
 [
   {
     "time": 1603865400,

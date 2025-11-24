@@ -1,7 +1,6 @@
 # POST /margin/auto_repay
 
-**Source:**
-[/margin/auto_repay](https://www.gate.io/docs/developers/apiv4/en/#setisolatedautorepay-parameters)
+**Source:** [/margin/auto_repay](https://www.gate.io/docs/developers/apiv4/en/#setisolatedautorepay-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Update user auto repayment settings_
 
 > 200 Response
 
-```
+```json
 {
   "status": "on"
 }

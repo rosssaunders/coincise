@@ -1,7 +1,6 @@
 # DELETE /spot/price_orders/{order_id}
 
-**Source:**
-[/spot/price_orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#cancelspotpricetriggeredorder-parameters)
+**Source:** [/spot/price_orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#cancelspotpricetriggeredorder-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Cancel single auto order_
 
 > 200 Response
 
-```
+```json
 {
   "trigger": {
     "price": "100",

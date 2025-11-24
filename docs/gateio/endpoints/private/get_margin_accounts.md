@@ -1,7 +1,6 @@
 # GET /margin/accounts
 
-**Source:**
-[/margin/accounts](https://www.gate.io/docs/developers/apiv4/en/#listisolatedmarginaccounts-parameters)
+**Source:** [/margin/accounts](https://www.gate.io/docs/developers/apiv4/en/#listisolatedmarginaccounts-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Margin account list_
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency_pair": "BTC_USDT",

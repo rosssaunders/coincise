@@ -1,7 +1,6 @@
 # POST /futures/{settle}/countdown_cancel_all
 
-**Source:**
-[/futures/{settle}/countdown_cancel_all](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelallfutures-parameters)
+**Source:** [/futures/{settle}/countdown_cancel_all](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelallfutures-parameters)
 
 ## Authentication
 
@@ -25,7 +24,7 @@ cancellation function will be disabled.
 
 > Body parameter
 
-```
+```json
 {
   "timeout": 30,
   "contract": "BTC_USDT"
@@ -60,7 +59,7 @@ countdown
 
 > 200 Response
 
-```
+```json
 {
   "triggerTime": "1660039145000"
 }

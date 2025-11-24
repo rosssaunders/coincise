@@ -1,7 +1,6 @@
 # GET /futures/{settle}/funding_rate
 
-**Source:**
-[/futures/{settle}/funding_rate](https://www.gate.io/docs/developers/apiv4/en/#listfuturesfundingratehistory-parameters)
+**Source:** [/futures/{settle}/funding_rate](https://www.gate.io/docs/developers/apiv4/en/#listfuturesfundingratehistory-parameters)
 
 ## Authentication
 
@@ -49,7 +48,7 @@ time format is a Unix timestamp
 
 > 200 Response
 
-```
+```json
 [
   {
     "t": 1543968000,

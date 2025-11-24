@@ -1,7 +1,6 @@
 # POST /loan/multi_collateral/mortgage
 
-**Source:**
-[/loan/multi_collateral/mortgage](https://www.gate.io/docs/developers/apiv4/en/#operatemulticollateral-parameters)
+**Source:** [/loan/multi_collateral/mortgage](https://www.gate.io/docs/developers/apiv4/en/#operatemulticollateral-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Add or withdraw collateral_
 
 > Body parameter
 
-```
+```json
 {
   "order_id": 10005578,
   "type": "append",
@@ -46,7 +45,7 @@ _Add or withdraw collateral_
 
 > 200 Response
 
-```
+```json
 {
   "order_id": 10005679,
   "collateral_currencies": [

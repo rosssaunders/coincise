@@ -1,7 +1,6 @@
 # GET /futures/{settle}/premium_index
 
-**Source:**
-[/futures/{settle}/premium_index](https://www.gate.io/docs/developers/apiv4/en/#listfuturespremiumindex-parameters)
+**Source:** [/futures/{settle}/premium_index](https://www.gate.io/docs/developers/apiv4/en/#listfuturespremiumindex-parameters)
 
 ## Authentication
 
@@ -51,7 +50,7 @@ limit when specifying from, to and interval
 
 > 200 Response
 
-```
+```json
 [
   {
     "t": 1539852480,

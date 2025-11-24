@@ -26,12 +26,12 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl https://api-cloud-v2.bitmart.com/contract/public/kline?symbol=BTCUSDT&step=5&start_time=1662518172&end_time=1662518172`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| symbol | String | Yes | Symbol of the contract(like BTCUSDT) |
-| step | Long | No | K-Line step, default is 1 minute. step: `1`, `3`, `5`, `15`, `30`, `60`, `120`, `240`, `360`, `720`, `1440`, `4320`, `10080` |
-| start\_time | Long | Yes | Start time(Timestamp in Seconds) |
-| end\_time | Long | Yes | End time(Timestamp in Seconds) |
+| Field      | Type   | Required? | Description                                                                                                                  |
+| ---------- | ------ | --------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| symbol     | String | Yes       | Symbol of the contract(like BTCUSDT)                                                                                         |
+| step       | Long   | No        | K-Line step, default is 1 minute. step: `1`, `3`, `5`, `15`, `30`, `60`, `120`, `240`, `360`, `720`, `1440`, `4320`, `10080` |
+| start_time | Long   | Yes       | Start time(Timestamp in Seconds)                                                                                             |
+| end_time   | Long   | Yes       | End time(Timestamp in Seconds)                                                                                               |
 
 #### Response Data
 
@@ -63,11 +63,11 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| timestamp | Long | Time Window |
-| open\_price | String | Opening Price |
-| close\_price | String | Closing Price |
-| high\_price | String | Highest Price |
-| low\_price | String | Lowest Price |
-| volume | String | Turnover |
+| Field       | Type   | Description   |
+| ----------- | ------ | ------------- |
+| timestamp   | Long   | Time Window   |
+| open_price  | String | Opening Price |
+| close_price | String | Closing Price |
+| high_price  | String | Highest Price |
+| low_price   | String | Lowest Price  |
+| volume      | String | Turnover      |

@@ -1,7 +1,6 @@
 # GET /futures/{settle}/my_trades_timerange
 
-**Source:**
-[/futures/{settle}/my_trades_timerange](https://www.gate.io/docs/developers/apiv4/en/#getmytradeswithtimerange-parameters)
+**Source:** [/futures/{settle}/my_trades_timerange](https://www.gate.io/docs/developers/apiv4/en/#getmytradeswithtimerange-parameters)
 
 ## Authentication
 
@@ -51,7 +50,7 @@ time format is a Unix timestamp
 
 > 200 Response
 
-```
+```json
 [
   {
     "trade_id": "121234231",

@@ -8,7 +8,7 @@ Get Order Info
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/spot/trade/orderInfo
+- GET /api/v2/spot/trade/orderInfo
 
 Request Example
 
@@ -18,12 +18,12 @@ curl "https://api.bitget.com/api/v2/spot/trade/orderInfo?orderId=1234567890" \  
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| orderId | String | No | Either Order ID or clientOids is required. |
-| clientOid | String | No | Either Client customized ID or orderId is required. |
-| requestTime | String | No | request Time Unix millisecond timestamp |
-| receiveWindow | String | No | valid window period Unix millisecond timestamp Unix millisecond timestamp |
+| Parameter     | Type   | Required | Description                                                               |
+| :------------ | :----- | :------- | :------------------------------------------------------------------------ |
+| orderId       | String | No       | Either Order ID or clientOids is required.                                |
+| clientOid     | String | No       | Either Client customized ID or orderId is required.                       |
+| requestTime   | String | No       | request Time Unix millisecond timestamp                                   |
+| receiveWindow | String | No       | valid window period Unix millisecond timestamp Unix millisecond timestamp |
 
 Response Example
 
@@ -59,59 +59,58 @@ Response Example
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| userId | String | Account id |
-| symbol | String | Trading pair name |
-| orderId | String | Order ID |
-| clientOid | String | Customized ID |
-| price | String | Order price |
-| size | String | Amount  
+| Parameter | Type   | Description       |
+| :-------- | :----- | :---------------- |
+| userId    | String | Account id        |
+| symbol    | String | Trading pair name |
+| orderId   | String | Order ID          |
+| clientOid | String | Customized ID     |
+| price     | String | Order price       |
+| size      | String | Amount            |
+
 Limit represents the number of base coins.  
 market-buy represents the number of quote coins.  
-market-sell represents the number of base coins. |
-| orderType | String | Order type  
+market-sell represents the number of base coins. | | orderType | String | Order
+type  
 limit Limit price  
-market Market price |
-| side | String | Direction |
-| status | String | Order status  
+market Market price | | side | String | Direction | | status | String | Order
+status  
 `live`: pending match  
 `partially_filled`: Partially filled  
 `filled`: All filled  
-`cancelled`: The order is cancelled |
-| priceAvg | String | Filled price |
-| baseVolume | String | Filled quantity (base coin) |
-| quoteVolume | String | Total trading amount (quote coin) |
-| enterPointSource | String | Client  
+`cancelled`: The order is cancelled | | priceAvg | String | Filled price | |
+baseVolume | String | Filled quantity (base coin) | | quoteVolume | String |
+Total trading amount (quote coin) | | enterPointSource | String | Client  
 WEB WEB Client  
 APP APP Client  
 API API Client  
 SYS SYS Client  
 ANDROID ANDROID Client  
-IOS IOS Client |
-| cTime | String | Creation time, Unix millisecond timestamp, e.g. 1690196141868 |
-| uTime | String | Update time, Unix millisecond timestamp, e.g. 1690196141868 |
-| orderSource | String | Order source  
+IOS IOS Client | | cTime | String | Creation time, Unix millisecond timestamp,
+e.g. 1690196141868 | | uTime | String | Update time, Unix millisecond timestamp,
+e.g. 1690196141868 | | orderSource | String | Order source  
 normal Normal order  
 market Market order  
-spot\_trader\_buy Elite spot trade to buy (elite traders)  
-spot\_follower\_buy Copy trade to buy (followers)  
-spot\_trader\_sell Elite spot trade to sell (elite traders)  
-spot\_follower\_sell Copy trade to sell (followers) |
-| feeDetail | String | Transaction fee breakdown |
-| \> newFees | String | Fee details for "newFees". |
-| \>\> c | String | Amount deducted by coupons, unit：currency obtained from the transaction. |
-| \>\> d | String | Amount deducted in BGB (Bitget Coin), unit：BGB |
-| \>\> r | String | If the BGB balance is insufficient to cover the fees, the remaining amount is deducted from the currency obtained from the transaction. |
-| \>\> t | String | The total fee amount to be paid, unit ：currency obtained from the transaction. |
-| \>\> deduction | String | Ignore. |
-| \>\> totalDeductionFee | String | Ignore. |
-| \> BGB | String | If there is no "newFees" field, this data represents earlier historical data. This key represents the currency used for fee deduction (it is not fixed; if BGB deduction is enabled, it's BGB, otherwise, it's the currency obtained from the transaction). |
-| \>\> deduction | String | Whether there is a fee deduction. |
-| \>\> feeCoinCode | String | Transaction fee coin code |
-| \>\> totalDeductionFee | String | Deduction amount unit： BGB |
-| \>\> totalFee | String | The total fee amount to be paid, unit：currency obtained from the transaction. |
-| cancelReason | String | Cancel reason  
+spot_trader_buy Elite spot trade to buy (elite traders)  
+spot_follower_buy Copy trade to buy (followers)  
+spot_trader_sell Elite spot trade to sell (elite traders)  
+spot_follower_sell Copy trade to sell (followers) | | feeDetail | String |
+Transaction fee breakdown | | \> newFees | String | Fee details for "newFees". |
+| \>\> c | String | Amount deducted by coupons, unit：currency obtained from the
+transaction. | | \>\> d | String | Amount deducted in BGB (Bitget Coin),
+unit：BGB | | \>\> r | String | If the BGB balance is insufficient to cover the
+fees, the remaining amount is deducted from the currency obtained from the
+transaction. | | \>\> t | String | The total fee amount to be paid,
+unit ：currency obtained from the transaction. | | \>\> deduction | String |
+Ignore. | | \>\> totalDeductionFee | String | Ignore. | | \> BGB | String | If
+there is no "newFees" field, this data represents earlier historical data. This
+key represents the currency used for fee deduction (it is not fixed; if BGB
+deduction is enabled, it's BGB, otherwise, it's the currency obtained from the
+transaction). | | \>\> deduction | String | Whether there is a fee deduction. |
+| \>\> feeCoinCode | String | Transaction fee coin code | | \>\>
+totalDeductionFee | String | Deduction amount unit： BGB | | \>\> totalFee |
+String | The total fee amount to be paid, unit：currency obtained from the
+transaction. | | cancelReason | String | Cancel reason  
 `normal_cancel`: Normal cancel  
 `stp_cancel`: Cancelled by STP |
 

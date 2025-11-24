@@ -1,7 +1,6 @@
 # GET /unified/accounts
 
-**Source:**
-[/unified/accounts](https://www.gate.io/docs/developers/apiv4/en/#listunifiedaccounts-parameters)
+**Source:** [/unified/accounts](https://www.gate.io/docs/developers/apiv4/en/#listunifiedaccounts-parameters)
 
 ## Authentication
 
@@ -34,7 +33,7 @@ For specific formulas, please refer to [Margin Formula](#margin-formula)
 
 > 200 Response
 
-```
+```json
 {
   "user_id": 10001,
   "locked": false,

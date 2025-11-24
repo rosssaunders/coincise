@@ -1,7 +1,6 @@
 # GET /unified/leverage/user_currency_setting
 
-**Source:**
-[/unified/leverage/user_currency_setting](https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencysetting-parameters)
+**Source:** [/unified/leverage/user_currency_setting](https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencysetting-parameters)
 
 ## Authentication
 
@@ -28,7 +27,7 @@ Get user currency leverage. If currency is not specified, query all currencies
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency": "BTC",

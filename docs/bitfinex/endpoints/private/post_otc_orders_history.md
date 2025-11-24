@@ -1,6 +1,7 @@
 # POST /v2/auth/r/orders/otc/{Symbol}/hist
 
-**Source:** [https://docs.bitfinex.com/reference/otc-orders-history](https://docs.bitfinex.com/reference/otc-orders-history)
+**Source:**
+[https://docs.bitfinex.com/reference/otc-orders-history](https://docs.bitfinex.com/reference/otc-orders-history)
 
 post
 
@@ -10,25 +11,25 @@ Returns historic OTC orders.
 
 Response data
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
+| Index   | Field | Type                           | Description                                                            |
+| ------- | ----- | ------------------------------ | ---------------------------------------------------------------------- |
 | [0...n] | ORDER | [OTC Order](#otc-order-arrays) | Each index contains one of the `n` current user's historic OTC orders. |
 
 OTC order arrays
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| [0] | ID | int | Order ID |
-| [1] | SYMBOL | string | Pair (tBTCUSD, …) |
-| [2] | MTS\_CREATE | int | Millisecond timestamp of creation |
-| [3] | MTS\_UPDATE | int | Millisecond timestamp of update |
-| [5] | INITIATOR | int | Order initiator, 0 means counter party initiated order, 1 means user initiated the order |
-| [6] | INITIATOR\_NICKNAME | string | Nickname of the initiator |
-| [7] | COUNTER\_PARTY\_NICKNAME | string | Nickname of the counter party user |
-| [9] | AMOUNT | float | Positive means buy, negative means sell |
-| [10] | PRICE | float | Order price |
-| [12] | STATUS | string | OTC order status, available statuses are: PENDING, CANCELED, REJECTED, COMPLETED |
-| [13] | TIF | int | Millisecond timestamp of automatic trade cancelation |
+| Index | Field                  | Type   | Description                                                                              |
+| ----- | ---------------------- | ------ | ---------------------------------------------------------------------------------------- |
+| [0]   | ID                     | int    | Order ID                                                                                 |
+| [1]   | SYMBOL                 | string | Pair (tBTCUSD, …)                                                                        |
+| [2]   | MTS_CREATE             | int    | Millisecond timestamp of creation                                                        |
+| [3]   | MTS_UPDATE             | int    | Millisecond timestamp of update                                                          |
+| [5]   | INITIATOR              | int    | Order initiator, 0 means counter party initiated order, 1 means user initiated the order |
+| [6]   | INITIATOR_NICKNAME     | string | Nickname of the initiator                                                                |
+| [7]   | COUNTER_PARTY_NICKNAME | string | Nickname of the counter party user                                                       |
+| [9]   | AMOUNT                 | float  | Positive means buy, negative means sell                                                  |
+| [10]  | PRICE                  | float  | Order price                                                                              |
+| [12]  | STATUS                 | string | OTC order status, available statuses are: PENDING, CANCELED, REJECTED, COMPLETED         |
+| [13]  | TIF                    | int    | Millisecond timestamp of automatic trade cancelation                                     |
 
 **Ratelimit**: 90 req/min
 

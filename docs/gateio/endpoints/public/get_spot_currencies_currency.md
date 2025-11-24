@@ -1,7 +1,6 @@
 # GET /spot/currencies/{currency}
 
-**Source:**
-[/spot/currencies/{currency}](https://www.gate.io/docs/developers/apiv4/en/#getcurrency-parameters)
+**Source:** [/spot/currencies/{currency}](https://www.gate.io/docs/developers/apiv4/en/#getcurrency-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Query single currency information_
 
 > 200 Response
 
-```
+```json
 {
   "currency": "GT",
   "name": "GateToken",

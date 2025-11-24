@@ -8,7 +8,7 @@ Cancel Orders in Batch
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   POST /api/v2/spot/trade/batch-cancel-order
+- POST /api/v2/spot/trade/batch-cancel-order
 
 Request Example
 
@@ -18,18 +18,20 @@ curl -X POST "https://api.bitget.com/api/v2/spot/trade/batch-cancel-order" \   -
 
 ### Request Parameter[​](#request-parameter "Direct link to Request Parameter")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | No | Trading pair name, e.g. BTCUSDT |
-| batchMode | String | No | Batch order mode  
+| Parameter | Type   | Required | Description                     |
+| :-------- | :----- | :------- | :------------------------------ |
+| symbol    | String | No       | Trading pair name, e.g. BTCUSDT |
+| batchMode | String | No       | Batch order mode                |
+
 `single` single currency mode, default single currency mode  
 `multiple` cross-currency mode.  
 If single mode , the symbol in orderlist will be ingor  
-If multiple mode , the symbol in orderlist is not allow be null, and the symbol in orderlist is required. symbol outside orderlist will be ingor |
-| orderList | Array | Yes | Order ID List ，maximum length: 50 |
-| \>symbol | String | No | Trading pair name, e.g. BTCUSDT |
-| \> orderId | String | No | Order ID. Either orderId or clientOid is required. |
-| \> clientOid | String | No | Client Order ID.Either clientOid or orderId is required. |
+If multiple mode , the symbol in orderlist is not allow be null, and the symbol
+in orderlist is required. symbol outside orderlist will be ingor | | orderList |
+Array | Yes | Order ID List ，maximum length: 50 | | \>symbol | String | No |
+Trading pair name, e.g. BTCUSDT | | \> orderId | String | No | Order ID. Either
+orderId or clientOid is required. | | \> clientOid | String | No | Client Order
+ID.Either clientOid or orderId is required. |
 
 Response Example
 
@@ -58,15 +60,15 @@ Response Example
 
 ### Response Parameter[​](#response-parameter "Direct link to Response Parameter")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| successList | Array | Successful order number |
-| \>orderId | String | Order ID |
-| \>clientOid | String | Client Order ID |
-| failureList | Array | Failed order number |
-| \>orderId | String | Order ID |
-| \>clientOid | String | Client Order ID |
-| \>errorMsg | String | Error information |
-| \>errorCode | String | Error code |
+| Parameter   | Type   | Description             |
+| :---------- | :----- | :---------------------- |
+| successList | Array  | Successful order number |
+| \>orderId   | String | Order ID                |
+| \>clientOid | String | Client Order ID         |
+| failureList | Array  | Failed order number     |
+| \>orderId   | String | Order ID                |
+| \>clientOid | String | Client Order ID         |
+| \>errorMsg  | String | Error information       |
+| \>errorCode | String | Error code              |
 
 > **Source:** https://www.bitget.com/api-doc/spot/trade/Batch-Cancel-Orders

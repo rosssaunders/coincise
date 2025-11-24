@@ -1,7 +1,6 @@
 # GET /delivery/{settle}/order_book
 
-**Source:**
-[/delivery/{settle}/order_book](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryorderbook-parameters)
+**Source:** [/delivery/{settle}/order_book](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryorderbook-parameters)
 
 ## Authentication
 
@@ -41,7 +40,7 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 
 > 200 Response
 
-```
+```json
 {
   "id": 123456,
   "current": 1623898993.123,

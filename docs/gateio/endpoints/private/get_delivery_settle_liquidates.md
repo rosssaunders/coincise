@@ -1,7 +1,6 @@
 # GET /delivery/{settle}/liquidates
 
-**Source:**
-[/delivery/{settle}/liquidates](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryliquidates-parameters)
+**Source:** [/delivery/{settle}/liquidates](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryliquidates-parameters)
 
 ## Authentication
 
@@ -35,7 +34,7 @@ _Query liquidation history_
 
 > 200 Response
 
-```
+```json
 [
   {
     "time": 1548654951,

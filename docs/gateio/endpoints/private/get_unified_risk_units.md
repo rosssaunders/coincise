@@ -1,7 +1,6 @@
 # GET /unified/risk_units
 
-**Source:**
-[/unified/risk_units](https://www.gate.io/docs/developers/apiv4/en/#getunifiedriskunits-responses)
+**Source:** [/unified/risk_units](https://www.gate.io/docs/developers/apiv4/en/#getunifiedriskunits-responses)
 
 ## Authentication
 
@@ -19,7 +18,7 @@ Get user risk unit details, only valid in portfolio margin mode
 
 > 200 Response
 
-```
+```json
 {
   "user_id": 0,
   "spot_hedge": true,

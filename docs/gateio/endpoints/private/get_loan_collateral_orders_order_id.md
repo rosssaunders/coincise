@@ -1,7 +1,6 @@
 # GET /loan/collateral/orders/{order_id}
 
-**Source:**
-[/loan/collateral/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getcollateralloanorderdetail-parameters)
+**Source:** [/loan/collateral/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getcollateralloanorderdetail-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Query single order details_
 
 > 200 Response
 
-```
+```json
 {
   "order_id": 10000421,
   "collateral_currency": "BTC",

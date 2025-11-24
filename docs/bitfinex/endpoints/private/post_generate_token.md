@@ -1,6 +1,7 @@
 # POST /v2/auth/w/token
 
-**Source:** [https://docs.bitfinex.com/reference/generate-token](https://docs.bitfinex.com/reference/generate-token)
+**Source:**
+[https://docs.bitfinex.com/reference/generate-token](https://docs.bitfinex.com/reference/generate-token)
 
 post
 
@@ -9,28 +10,26 @@ https://api.bitfinex.com/v2/auth/w/token
 Generates an auth token that could be used for api requests
 
 > 📘
-> 
-> ### 
-> 
+>
+> ###
+>
 > Caps
-> 
-> 
-> 
+>
 > Available caps are:
-> 
-> -   a - account
-> -   o - orders
-> -   f - funding
-> -   s - settings
-> -   w - wallets
-> -   wd - withdraw -- writePermission: true is required for wd permission
-> -   bp - bfxpay
+>
+> - a - account
+> - o - orders
+> - f - funding
+> - s - settings
+> - w - wallets
+> - wd - withdraw -- writePermission: true is required for wd permission
+> - bp - bfxpay
 
 Response data
 
-| Index | Term | Type | Description |
-| --- | --- | --- | --- |
-| [0] | TOKEN | string | Generated authentication token |
+| Index | Term  | Type   | Description                    |
+| ----- | ----- | ------ | ------------------------------ |
+| [0]   | TOKEN | string | Generated authentication token |
 
 Body Params
 
@@ -70,7 +69,7 @@ token write permission for the caps
 
 truefalse
 
-\_cust\_ip
+\_cust_ip
 
 string
 
@@ -90,11 +89,11 @@ curl \--request POST \\
 
 {
 
-  "scope": "api",
+"scope": "api",
 
-  "ttl": 120,
+"ttl": 120,
 
-  "writePermission": false
+"writePermission": false
 
 }
 

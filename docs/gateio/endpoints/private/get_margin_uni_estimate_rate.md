@@ -1,7 +1,6 @@
 # GET /margin/uni/estimate_rate
 
-**Source:**
-[/margin/uni/estimate_rate](https://www.gate.io/docs/developers/apiv4/en/#getisolatedmarginuniestimaterate-parameters)
+**Source:** [/margin/uni/estimate_rate](https://www.gate.io/docs/developers/apiv4/en/#getisolatedmarginuniestimaterate-parameters)
 
 ## Authentication
 
@@ -29,7 +28,7 @@ rates cannot be provided.
 
 > 200 Response
 
-```
+```json
 {
   "BTC": "0.000002",
   "GT": "0.000001"

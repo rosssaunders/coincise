@@ -1,7 +1,6 @@
 # GET /futures/{settle}/order_book
 
-**Source:**
-[/futures/{settle}/order_book](https://www.gate.io/docs/developers/apiv4/en/#listfuturesorderbook-parameters)
+**Source:** [/futures/{settle}/order_book](https://www.gate.io/docs/developers/apiv4/en/#listfuturesorderbook-parameters)
 
 ## Authentication
 
@@ -39,7 +38,7 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 
 > 200 Response
 
-```
+```json
 {
   "id": 123456,
   "current": 1623898993.123,

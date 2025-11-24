@@ -1,7 +1,6 @@
 # GET /wallet/deposits
 
-**Source:**
-[/wallet/deposits](https://www.gate.io/docs/developers/apiv4/en/#listdeposits-parameters)
+**Source:** [/wallet/deposits](https://www.gate.io/docs/developers/apiv4/en/#listdeposits-parameters)
 
 ## Authentication
 
@@ -32,7 +31,7 @@ Record query time range cannot exceed 30 days
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": "210496",

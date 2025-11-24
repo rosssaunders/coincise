@@ -4,39 +4,44 @@ Rate limit: 10 req/sec/UID
 
 ### Description[​](#description "Direct link to Description")
 
-Get Account bills(It only supports to get the data within 90days. The older data can be downloaded from web)
+Get Account bills(It only supports to get the data within 90days. The older data
+can be downloaded from web)
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/mix/account/bill
+- GET /api/v2/mix/account/bill
 
 Request Example
 
 ```
-curl "https://api.bitget.com/api/v2/mix/account/bill?productType=USDT-FUTURES" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json" 
+curl "https://api.bitget.com/api/v2/mix/account/bill?productType=USDT-FUTURES" \   -H "ACCESS-KEY:*******" \   -H "ACCESS-SIGN:*" \   -H "ACCESS-PASSPHRASE:*" \   -H "ACCESS-TIMESTAMP:1659076670000" \   -H "locale:en-US" \   -H "Content-Type: application/json"
 ```
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| productType | String | Yes | Product type  
+| Parameter   | Type   | Required | Description  |
+| :---------- | :----- | :------- | :----------- |
+| productType | String | Yes      | Product type |
+
 `USDT-FUTURES` USDT-M Futures  
 `COIN-FUTURES` Coin-M Futures  
-`USDC-FUTURES` USDC-M Futures |
-| coin | String | No | Currency  
-It's valid only when the `businessType` is "trans\_from\_exchange" or "trans\_to\_exchange" |
-| businessType | String | No | Business type |
-| onlyFunding | String | No | The following four types of non-financial businessType will be excluded.,default：no，  
+`USDC-FUTURES` USDC-M Futures | | coin | String | No | Currency  
+It's valid only when the `businessType` is "trans_from_exchange" or
+"trans_to_exchange" | | businessType | String | No | Business type | |
+onlyFunding | String | No | The following four types of non-financial
+businessType will be excluded.,default：no，  
 `yes`：excluded  
 `no`: included;  
-The following four businessType ：`append_margin`,`adjust_down_lever_append_margin`, `reduce_margin`, `auto_append_margin` |
-| idLessThan | String | No | Requests the content on the page before this ID (older data), the value input should be the endId of the corresponding interface. |
-| startTime | String | No | Start time, ms  
-The interval between the `startTime` and the `endTime` should be <= 30 days |
-| endTime | String | No | End time, ms  
-The interval between the `startTime` and the `endTime` should be <= 30 days |
-| limit | String | No | Page size, max 100, default 20 |
+The following four
+businessType ：`append_margin`,`adjust_down_lever_append_margin`,
+`reduce_margin`, `auto_append_margin` | | idLessThan | String | No | Requests
+the content on the page before this ID (older data), the value input should be
+the endId of the corresponding interface. | | startTime | String | No | Start
+time, ms  
+The interval between the `startTime` and the `endTime` should be <= 30 days | |
+endTime | String | No | End time, ms  
+The interval between the `startTime` and the `endTime` should be <= 30 days | |
+limit | String | No | Page size, max 100, default 20 |
 
 Response Example
 
@@ -77,71 +82,70 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| bills | Array | Bill list |
-| endId | String | The final transaction order ID.  
-This is used when idLessThan/idGreaterThan is set as a range. |
-| \>billId | String | Bill ID |
-| \>symbol | String | Symbol |
-| \>amount | String | Amount |
-| \>fee | String | Fee |
-| \>feeByCoupon | String | Fee paid by the coupon |
-| \>businessType | String | Business Type |
-| \>coin | String | Coin: USDT |
-| \>balance | String | Balance |
-| \>cTime | String | Created Time, ms |
+| Parameter                                                     | Type   | Description                     |
+| :------------------------------------------------------------ | :----- | :------------------------------ |
+| bills                                                         | Array  | Bill list                       |
+| endId                                                         | String | The final transaction order ID. |
+| This is used when idLessThan/idGreaterThan is set as a range. |
+| \>billId                                                      | String | Bill ID                         |
+| \>symbol                                                      | String | Symbol                          |
+| \>amount                                                      | String | Amount                          |
+| \>fee                                                         | String | Fee                             |
+| \>feeByCoupon                                                 | String | Fee paid by the coupon          |
+| \>businessType                                                | String | Business Type                   |
+| \>coin                                                        | String | Coin: USDT                      |
+| \>balance                                                     | String | Balance                         |
+| \>cTime                                                       | String | Created Time, ms                |
 
 `businessType` enumeration:  
 unknown: unknown  
-trans\_from\_exchange: transfer in from SPOT account  
-trans\_to\_exchange: transfer out to SPOT account  
-open\_long: open long  
-open\_short: open short  
-close\_long: close long  
-close\_short: close short  
-force\_close\_long: force close long (when burst)  
-force\_close\_short: force close short (when burst)  
-contract\_settle\_fee: funding fee  
-append\_margin: adjust margin  
-adjust\_down\_lever\_append\_margin: reduce leverage add margin  
-reduce\_margin: reduce margin  
-auto\_append\_margin: automatic margin call  
-cash\_gift\_issue: distribute coupon/gift/card  
-cash\_gift\_recycle: recycling coupon/gift/card  
-tracking\_follow\_pay: follower tracking order pay  
-tracking\_follow\_back: follower tracking order cashback  
-tracking\_trader\_income: tracking order income  
-burst\_long\_loss\_query: burst close long  
-burst\_short\_loss\_query: burst close short  
-trans\_from\_contract: transfer in from FUTURE account  
-trans\_to\_contract: transfer out to FUTURE account  
-trans\_from\_otc: transfer in from OCT account  
-trans\_to\_otc: transfer out to OCT account  
-buy: buy in one\_way\_mode  
-sell: sell in one\_way\_mode  
-force\_buy: force buy in one\_way\_mode  
-force\_sell: force sell in one\_way\_mode  
-burst\_buy: burst buy  
-burst\_sell: burst sell  
-bonus\_issue: bonus/coupon issue  
-bonus\_recycle: bonus/coupon recycle  
-bonus\_expired: bonus/coupon expired  
-delivery\_long: delivery future settle long  
-delivery\_short: delivery future settle short  
-trans\_from\_cross: transfer in from CROSS account  
-trans\_to\_cross: transfer out to CROSS account  
-trans\_from\_isolated: transfer in from ISOLATED account  
-trans\_to\_isolated: transfer out to ISOLATED account  
-risk\_captital\_user\_transfer：Insurance fund transfer at user end  
-user\_exchange\_buy：Exchange buy(multi-assets mode)  
-user\_exchange\_sell：Exchange sell(multi-assets mode)  
-settle\_interest：Interest Settlement
+trans_from_exchange: transfer in from SPOT account  
+trans_to_exchange: transfer out to SPOT account  
+open_long: open long  
+open_short: open short  
+close_long: close long  
+close_short: close short  
+force_close_long: force close long (when burst)  
+force_close_short: force close short (when burst)  
+contract_settle_fee: funding fee  
+append_margin: adjust margin  
+adjust_down_lever_append_margin: reduce leverage add margin  
+reduce_margin: reduce margin  
+auto_append_margin: automatic margin call  
+cash_gift_issue: distribute coupon/gift/card  
+cash_gift_recycle: recycling coupon/gift/card  
+tracking_follow_pay: follower tracking order pay  
+tracking_follow_back: follower tracking order cashback  
+tracking_trader_income: tracking order income  
+burst_long_loss_query: burst close long  
+burst_short_loss_query: burst close short  
+trans_from_contract: transfer in from FUTURE account  
+trans_to_contract: transfer out to FUTURE account  
+trans_from_otc: transfer in from OCT account  
+trans_to_otc: transfer out to OCT account  
+buy: buy in one_way_mode  
+sell: sell in one_way_mode  
+force_buy: force buy in one_way_mode  
+force_sell: force sell in one_way_mode  
+burst_buy: burst buy  
+burst_sell: burst sell  
+bonus_issue: bonus/coupon issue  
+bonus_recycle: bonus/coupon recycle  
+bonus_expired: bonus/coupon expired  
+delivery_long: delivery future settle long  
+delivery_short: delivery future settle short  
+trans_from_cross: transfer in from CROSS account  
+trans_to_cross: transfer out to CROSS account  
+trans_from_isolated: transfer in from ISOLATED account  
+trans_to_isolated: transfer out to ISOLATED account  
+risk_captital_user_transfer：Insurance fund transfer at user end  
+user_exchange_buy：Exchange buy(multi-assets mode)  
+user_exchange_sell：Exchange sell(multi-assets mode)  
+settle_interest：Interest Settlement
 
-  
-adl\_close\_long :Auto-Deleveraging closes long positions  
-adl\_close\_short : Auto-Deleveraging closes short positions  
-adl\_buy\_in\_single\_side\_mode :Auto-Deleveraging triggers buy orders  
-adl\_sell\_in\_single\_side\_mode :Auto-Deleveraging triggers sell orders
+adl_close_long :Auto-Deleveraging closes long positions  
+adl_close_short : Auto-Deleveraging closes short positions  
+adl_buy_in_single_side_mode :Auto-Deleveraging triggers buy orders  
+adl_sell_in_single_side_mode :Auto-Deleveraging triggers sell orders
 
 > **Source:** https://www.bitget.com/api-doc/contract/account/Get-Account-Bill

@@ -61,7 +61,6 @@ None
 ### Request Example[​](#request-example "Direct link to heading")
 
 -   .Net
--   Node.js
 
 ```bash
 POST /v5/account/upgrade-to-uta HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672125123533X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{}
@@ -84,7 +83,7 @@ using bybit.net.api;using bybit.net.api.ApiServiceImp;using bybit.net.api.Models
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .upgradeToUnifiedAccount()    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: "YOUR_API_KEY",    secret: "YOUR_API_SECRET",});client    .upgradeToUnifiedAccount()    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

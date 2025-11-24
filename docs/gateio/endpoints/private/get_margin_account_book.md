@@ -1,7 +1,6 @@
 # GET /margin/account_book
 
-**Source:**
-[/margin/account_book](https://www.gate.io/docs/developers/apiv4/en/#listisolatedmarginaccountbook-parameters)
+**Source:** [/margin/account_book](https://www.gate.io/docs/developers/apiv4/en/#listisolatedmarginaccountbook-parameters)
 
 ## Authentication
 
@@ -47,7 +46,7 @@ time format is a Unix timestamp
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": "123456",

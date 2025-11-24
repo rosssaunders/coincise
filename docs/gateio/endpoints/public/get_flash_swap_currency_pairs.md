@@ -1,7 +1,6 @@
 # GET /flash_swap/currency_pairs
 
-**Source:**
-[/flash_swap/currency_pairs](https://www.gate.io/docs/developers/apiv4/en/#listflashswapcurrencypair-parameters)
+**Source:** [/flash_swap/currency_pairs](https://www.gate.io/docs/developers/apiv4/en/#listflashswapcurrencypair-parameters)
 
 ## Authentication
 
@@ -35,7 +34,7 @@ GT, but it does not necessarily mean that GT can be sold to buy BTC.
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency_pair": "BTC_USDT",

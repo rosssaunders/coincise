@@ -1,7 +1,6 @@
 # GET /loan/multi_collateral/currencies
 
-**Source:**
-[/loan/multi_collateral/currencies](https://www.gate.io/docs/developers/apiv4/en/#listmulticollateralcurrencies-responses)
+**Source:** [/loan/multi_collateral/currencies](https://www.gate.io/docs/developers/apiv4/en/#listmulticollateralcurrencies-responses)
 
 ## Authentication
 
@@ -18,7 +17,7 @@ collateral_
 
 > 200 Response
 
-```
+```json
 {
   "loan_currencies": [
     {

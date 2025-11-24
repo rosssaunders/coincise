@@ -1,7 +1,6 @@
 # GET /wallet/sub_account_futures_balances
 
-**Source:**
-[/wallet/sub_account_futures_balances](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountfuturesbalances-parameters)
+**Source:** [/wallet/sub_account_futures_balances](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountfuturesbalances-parameters)
 
 ## Authentication
 
@@ -27,7 +26,7 @@ _Query sub-account perpetual futures account balance information_
 
 > 200 Response
 
-```
+```json
 [
   [
     {

@@ -1,7 +1,6 @@
 # GET /earn/uni/interests/{currency}
 
-**Source:**
-[/earn/uni/interests/{currency}](https://www.gate.io/docs/developers/apiv4/en/#getuniinterest-parameters)
+**Source:** [/earn/uni/interests/{currency}](https://www.gate.io/docs/developers/apiv4/en/#getuniinterest-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Query user's total interest income for specified currency_
 
 > 200 Response
 
-```
+```json
 {
   "currency": "AE",
   "interest": "123.345"

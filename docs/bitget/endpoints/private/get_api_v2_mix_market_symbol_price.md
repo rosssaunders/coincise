@@ -8,7 +8,7 @@ Get market/index/mark prices
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/mix/market/symbol-price
+- GET /api/v2/mix/market/symbol-price
 
 Request Example
 
@@ -18,10 +18,11 @@ curl "https://api.bitget.com/api/v2/mix/market/symbol-price?productType=usdt-fut
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair |
-| productType | String | Yes | Product type  
+| Parameter   | Type   | Required | Description  |
+| :---------- | :----- | :------- | :----------- |
+| symbol      | String | Yes      | Trading pair |
+| productType | String | Yes      | Product type |
+
 `USDT-FUTURES` USDT-M Futures  
 `COIN-FUTURES` Coin-M Futures  
 `USDC-FUTURES` USDC-M Futures |
@@ -47,13 +48,13 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| \> symbol | String | Trading pair name |
-| \> price | String | Latest price of the exchange |
-| \> indexPrice | String | Index price |
-| \> markPrice | String | Mark price |
-| \> ts | String | Milliseconds format of current data timestamp Unix, e.g.  
-1672410780000 |
+| Parameter     | Type   | Description                                              |
+| :------------ | :----- | :------------------------------------------------------- |
+| \> symbol     | String | Trading pair name                                        |
+| \> price      | String | Latest price of the exchange                             |
+| \> indexPrice | String | Index price                                              |
+| \> markPrice  | String | Mark price                                               |
+| \> ts         | String | Milliseconds format of current data timestamp Unix, e.g. |
+| 1672410780000 |
 
 > **Source:** https://www.bitget.com/api-doc/contract/market/Get-Symbol-Price

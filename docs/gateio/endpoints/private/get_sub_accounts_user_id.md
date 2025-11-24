@@ -1,7 +1,6 @@
 # GET /sub_accounts/{user_id}
 
-**Source:**
-[/sub_accounts/{user_id}](https://www.gate.io/docs/developers/apiv4/en/#getsubaccount-parameters)
+**Source:** [/sub_accounts/{user_id}](https://www.gate.io/docs/developers/apiv4/en/#getsubaccount-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Get sub-account_
 
 > 200 Response
 
-```
+```json
 {
   "remark": "remark",
   "login_name": "sub_account_for_trades",

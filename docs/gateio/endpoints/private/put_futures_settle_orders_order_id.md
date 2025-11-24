@@ -1,7 +1,6 @@
 # PUT /futures/{settle}/orders/{order_id}
 
-**Source:**
-[/futures/{settle}/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#amendfuturesorder-parameters)
+**Source:** [/futures/{settle}/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#amendfuturesorder-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Amend single order_
 
 > Body parameter
 
-```
+```json
 {
   "size": 100,
   "price": "54321"
@@ -66,7 +65,7 @@ order. After that, only order ID is accepted.
 
 > 200 Response
 
-```
+```json
 {
   "id": 15675394,
   "user": 100000,

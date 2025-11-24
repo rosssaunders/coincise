@@ -1,7 +1,6 @@
 # GET /options/tickers
 
-**Source:**
-[/options/tickers](https://www.gate.io/docs/developers/apiv4/en/#listoptionstickers-parameters)
+**Source:** [/options/tickers](https://www.gate.io/docs/developers/apiv4/en/#listoptionstickers-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Query options market ticker information_
 
 > 200 Response
 
-```
+```json
 [
   {
     "name": "BTC_USDT-20211130-65000-C",

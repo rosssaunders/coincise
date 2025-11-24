@@ -14,9 +14,9 @@ GET `/futures/data/delivery-price`
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| pair | STRING | YES | e.g BTCUSDT |
+| Name | Type   | Mandatory | Description |
+| ---- | ------ | --------- | ----------- |
+| pair | STRING | YES       | e.g BTCUSDT |
 
 ### Response Example
 
@@ -41,4 +41,5 @@ GET `/futures/data/delivery-price`
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price)
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Delivery-Price)

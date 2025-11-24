@@ -1,7 +1,6 @@
 # GET /unified/batch_borrowable
 
-**Source:**
-[/unified/batch_borrowable](https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowablelist-parameters)
+**Source:** [/unified/batch_borrowable](https://www.gate.io/docs/developers/apiv4/en/#getunifiedborrowablelist-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Batch query unified account maximum borrowable amount_
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency": "BTC",

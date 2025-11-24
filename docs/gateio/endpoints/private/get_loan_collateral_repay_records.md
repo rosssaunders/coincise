@@ -1,7 +1,6 @@
 # GET /loan/collateral/repay_records
 
-**Source:**
-[/loan/collateral/repay_records](https://www.gate.io/docs/developers/apiv4/en/#listrepayrecords-parameters)
+**Source:** [/loan/collateral/repay_records](https://www.gate.io/docs/developers/apiv4/en/#listrepayrecords-parameters)
 
 ## Authentication
 
@@ -32,7 +31,7 @@ _Query collateral loan repayment records_
 
 > 200 Response
 
-```
+```json
 [
   {
     "order_id": 10000425,

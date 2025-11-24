@@ -1,7 +1,6 @@
 # POST /futures/{settle}/dual_comp/positions/cross_mode
 
-**Source:**
-[/futures/{settle}/dual_comp/positions/cross_mode](https://www.gate.io/docs/developers/apiv4/en/#updatedualcomppositioncrossmode-parameters)
+**Source:** [/futures/{settle}/dual_comp/positions/cross_mode](https://www.gate.io/docs/developers/apiv4/en/#updatedualcomppositioncrossmode-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Switch Between Cross and Isolated Margin Modes Under Hedge Mode_
 
 > Body parameter
 
-```
+```json
 {
   "mode": "ISOLATED",
   "contract": "BTC_USDT"
@@ -45,7 +44,7 @@ _Switch Between Cross and Isolated Margin Modes Under Hedge Mode_
 
 > 200 Response
 
-```
+```json
 [
   {
     "user": 10000,

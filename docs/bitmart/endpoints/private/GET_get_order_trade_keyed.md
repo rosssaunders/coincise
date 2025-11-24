@@ -1,6 +1,7 @@
 # GET Get Order Trade (KEYED)
 
-**Source:** [Get Order Trade (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
+**Source:**
+[Get Order Trade (KEYED)](https://developer-pro.bitmart.com/en/futuresv2/)
 
 **API Type:** Futures
 
@@ -26,21 +27,26 @@ See [Detailed Rate Limit](#rate-limit)
 
 `curl -H 'X-BM-KEY:{{AccessKey}}' https://api-cloud-v2.bitmart.com/contract/private/trades?symbol=BTCUSDT&start_time=1662368173&end_time=1662368179`
 
-| Field | Type | Required? | Description |
-| --- | --- | --- | --- |
-| symbol | String | No | Symbol of the contract(like BTCUSDT) |
-| account | String | No | Trading account  
+| Field   | Type   | Required? | Description                          |
+| ------- | ------ | --------- | ------------------------------------ |
+| symbol  | String | No        | Symbol of the contract(like BTCUSDT) |
+| account | String | No        | Trading account                      |
+
 \-`futures`  
-\-`copy_trading` |
-| start\_time | Long | No | Start time(Timestamp in Seconds) |
-| end\_time | Long | No | End time(Timestamp in Seconds) |
+\-`copy_trading` | | start_time | Long | No | Start time(Timestamp in Seconds) |
+| end_time | Long | No | End time(Timestamp in Seconds) |
 
 ##### Note
 
--   If the time range `start_time` and `end_time` are not filled in, the default query is the data of the last 7 days
--   If the time range is filled in, `end_time` must be greater than the value of `start_time`, and the maximum query interval of `start_time` and `end_time` is 90 days
--   Each request returns a maximum of 200 records, and any records exceeding that will not be returned.
--   Supported query order types: `limit`, `market`, `liquidate`, `bankruptcy`, `adl`, `trailing`
+- If the time range `start_time` and `end_time` are not filled in, the default
+  query is the data of the last 7 days
+- If the time range is filled in, `end_time` must be greater than the value of
+  `start_time`, and the maximum query interval of `start_time` and `end_time` is
+  90 days
+- Each request returns a maximum of 200 records, and any records exceeding that
+  will not be returned.
+- Supported query order types: `limit`, `market`, `liquidate`, `bankruptcy`,
+  `adl`, `trailing`
 
 #### Response Data
 
@@ -70,31 +76,26 @@ See [Detailed Rate Limit](#rate-limit)
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| symbol | String | Symbol of the contract |
-| order\_id | String | Order ID |
-| trade\_id | String | Trade detail ID |
-| side | Int | Order side  
+| Field    | Type   | Description            |
+| -------- | ------ | ---------------------- |
+| symbol   | String | Symbol of the contract |
+| order_id | String | Order ID               |
+| trade_id | String | Trade detail ID        |
+| side     | Int    | Order side             |
+
 hedge mode  
-\-`1`\=buy\_open\_long  
-\-`2`\=buy\_close\_short  
-\-`3`\=sell\_close\_long  
-\-`4`\=sell\_open\_short  
+\-`1`\=buy_open_long  
+\-`2`\=buy_close_short  
+\-`3`\=sell_close_long  
+\-`4`\=sell_open_short  
 oneway mode  
 \-`1`\=buy  
 \-`2`\=buy(reduce only)  
 \-`3`\=sell(reduce only)  
-\-`4`\=sell |
-| price | String | Deal price |
-| vol | String | Deal vol |
-| profit | Boolean | Profitable or not |
-| exec\_type | String | Liquidity type  
+\-`4`\=sell | | price | String | Deal price | | vol | String | Deal vol | |
+profit | Boolean | Profitable or not | | exec_type | String | Liquidity type  
 \-`Taker`  
-\-`Maker` |
-| realised\_profit | String | realised profit |
-| paid\_fees | String | paid fees |
-| account | String | Trading account  
+\-`Maker` | | realised_profit | String | realised profit | | paid_fees | String
+| paid fees | | account | String | Trading account  
 \-`futures`  
-\-`copy_trading` |
-| create\_time | Long | Transaction create timestamp (ms) |
+\-`copy_trading` | | create_time | Long | Transaction create timestamp (ms) |

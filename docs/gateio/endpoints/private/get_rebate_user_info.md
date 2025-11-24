@@ -1,7 +1,6 @@
 # GET /rebate/user/info
 
-**Source:**
-[/rebate/user/info](https://www.gate.io/docs/developers/apiv4/en/#rebateuserinfo-responses)
+**Source:** [/rebate/user/info](https://www.gate.io/docs/developers/apiv4/en/#rebateuserinfo-responses)
 
 ## Authentication
 
@@ -17,7 +16,7 @@ _User obtains rebate information_
 
 > 200 Response
 
-```
+```json
 {
   "invite_uid": 987
 }

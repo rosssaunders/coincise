@@ -1,7 +1,6 @@
 # GET /spot/price_orders/{order_id}
 
-**Source:**
-[/spot/price_orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getspotpricetriggeredorder-parameters)
+**Source:** [/spot/price_orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getspotpricetriggeredorder-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Query single auto order details_
 
 > 200 Response
 
-```
+```json
 {
   "trigger": {
     "price": "100",

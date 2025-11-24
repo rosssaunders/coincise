@@ -1,7 +1,6 @@
 # GET /unified/interest_records
 
-**Source:**
-[/unified/interest_records](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloaninterestrecords-parameters)
+**Source:** [/unified/interest_records](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloaninterestrecords-parameters)
 
 ## Authentication
 
@@ -31,7 +30,7 @@ _Query interest deduction records_
 
 > 200 Response
 
-```
+```json
 [
   {
     "status": 1,

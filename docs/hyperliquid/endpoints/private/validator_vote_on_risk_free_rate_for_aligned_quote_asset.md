@@ -1,6 +1,7 @@
 # Validator vote on risk-free rate for aligned quote asset
 
-**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:**
+https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
 Headers
 

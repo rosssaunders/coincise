@@ -1,7 +1,6 @@
 # POST /account/stp_groups
 
-**Source:**
-[/account/stp_groups](https://www.gate.io/docs/developers/apiv4/en/#createstpgroup-parameters)
+**Source:** [/account/stp_groups](https://www.gate.io/docs/developers/apiv4/en/#createstpgroup-parameters)
 
 ## Authentication
 
@@ -17,7 +16,7 @@ Only the main account is allowed to create a new STP user group
 
 > Body parameter
 
-```
+```json
 {
   "name": "stp_name"
 }
@@ -40,7 +39,7 @@ Only the main account is allowed to create a new STP user group
 
 > 200 Response
 
-```
+```json
 {
   "id": 123435,
   "name": "group",

@@ -1,6 +1,7 @@
 # POST /exchange
 
-**Source:** https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
+**Source:**
+https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint
 
 `POST` `https://api.hyperliquid.xyz/exchange`
 
@@ -32,7 +33,8 @@ Object
 
 "type": "vaultTransfer",
 
-"vaultAddress": address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000, "isDeposit": boolean,
+"vaultAddress": address in 42-character hexadecimal format; e.g.
+0x0000000000000000000000000000000000000000, "isDeposit": boolean,
 
 "usd": number
 

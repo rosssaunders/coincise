@@ -1,7 +1,6 @@
 # GET /wallet/currency_chains
 
-**Source:**
-[/wallet/currency_chains](https://www.gate.io/docs/developers/apiv4/en/#listcurrencychains-parameters)
+**Source:** [/wallet/currency_chains](https://www.gate.io/docs/developers/apiv4/en/#listcurrencychains-parameters)
 
 ## Authentication
 
@@ -26,7 +25,7 @@ _Query chains supported for specified currency_
 
 > 200 Response
 
-```
+```json
 [
   {
     "chain": "ETH",

@@ -1,7 +1,6 @@
 # POST /sub_accounts
 
-**Source:**
-[/sub_accounts](https://www.gate.io/docs/developers/apiv4/en/#createsubaccounts-parameters)
+**Source:** [/sub_accounts](https://www.gate.io/docs/developers/apiv4/en/#createsubaccounts-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Create a new sub-account_
 
 > Body parameter
 
-```
+```json
 {
   "remark": "remark",
   "login_name": "sub_account_for_trades"
@@ -39,7 +38,7 @@ _Create a new sub-account_
 
 > 201 Response
 
-```
+```json
 {
   "remark": "remark",
   "login_name": "sub_account_for_trades",

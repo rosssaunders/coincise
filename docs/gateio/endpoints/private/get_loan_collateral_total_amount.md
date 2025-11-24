@@ -1,7 +1,6 @@
 # GET /loan/collateral/total_amount
 
-**Source:**
-[/loan/collateral/total_amount](https://www.gate.io/docs/developers/apiv4/en/#getusertotalamount-responses)
+**Source:** [/loan/collateral/total_amount](https://www.gate.io/docs/developers/apiv4/en/#getusertotalamount-responses)
 
 ## Authentication
 
@@ -17,7 +16,7 @@ _Query user's total borrowing and collateral amount_
 
 > 200 Response
 
-```
+```json
 {
   "borrow_amount": "11",
   "collateral_amount": "111"

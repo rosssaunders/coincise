@@ -1,7 +1,6 @@
 # POST /margin/uni/loans
 
-**Source:**
-[/margin/uni/loans](https://www.gate.io/docs/developers/apiv4/en/#createisolateduniloan-parameters)
+**Source:** [/margin/uni/loans](https://www.gate.io/docs/developers/apiv4/en/#createisolateduniloan-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Borrow or repay_
 
 > Body parameter
 
-```
+```json
 {
   "currency": "BTC",
   "amount": "0.1",

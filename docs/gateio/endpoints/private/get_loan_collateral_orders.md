@@ -1,7 +1,6 @@
 # GET /loan/collateral/orders
 
-**Source:**
-[/loan/collateral/orders](https://www.gate.io/docs/developers/apiv4/en/#listcollateralloanorders-parameters)
+**Source:** [/loan/collateral/orders](https://www.gate.io/docs/developers/apiv4/en/#listcollateralloanorders-parameters)
 
 ## Authentication
 
@@ -29,7 +28,7 @@ _Query collateral loan order list_
 
 > 200 Response
 
-```
+```json
 [
   {
     "order_id": 10000421,

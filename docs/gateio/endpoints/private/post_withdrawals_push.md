@@ -1,7 +1,6 @@
 # POST /withdrawals/push
 
-**Source:**
-[/withdrawals/push](https://www.gate.io/docs/developers/apiv4/en/#withdrawpushorder-parameters)
+**Source:** [/withdrawals/push](https://www.gate.io/docs/developers/apiv4/en/#withdrawpushorder-parameters)
 
 ## Authentication
 
@@ -17,7 +16,7 @@ Transfers between main spot accounts. Both parties cannot be sub-accounts
 
 > Body parameter
 
-```
+```json
 {
   "receive_uid": 12233,
   "currency": "USDT",
@@ -41,7 +40,7 @@ Transfers between main spot accounts. Both parties cannot be sub-accounts
 
 > 200 Response
 
-```
+```json
 {
   "id": 111
 }

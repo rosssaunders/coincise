@@ -1,7 +1,6 @@
 # GET /unified/unified_mode
 
-**Source:**
-[/unified/unified_mode](https://www.gate.io/docs/developers/apiv4/en/#getunifiedmode-responses)
+**Source:** [/unified/unified_mode](https://www.gate.io/docs/developers/apiv4/en/#getunifiedmode-responses)
 
 ## Authentication
 
@@ -24,7 +23,7 @@ Unified account mode:
 
 > 200 Response
 
-```
+```json
 {
   "mode": "portfolio",
   "settings": {

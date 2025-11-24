@@ -1,6 +1,7 @@
 # GET Get System Service Status
 
-**Source:** [Get System Service Status](https://developer-pro.bitmart.com/en/spot/)
+**Source:**
+[Get System Service Status](https://developer-pro.bitmart.com/en/spot/)
 
 **API Type:** Spot
 
@@ -58,16 +59,16 @@ None
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| title | String | System maintenance instructions title |
-| status | Long | System maintenance status  
+| Field  | Type   | Description                           |
+| ------ | ------ | ------------------------------------- |
+| title  | String | System maintenance instructions title |
+| status | Long   | System maintenance status             |
+
 \- `0`\=Waiting  
 \- `1`\=Working  
-\- `2`\=Completed |
-| service\_type | String | Service type  
+\- `2`\=Completed | | service_type | String | Service type  
 \- `spot`\=Spot API service  
 \- `contract`\=Contract API service  
-\- `account`\=Account API service |
-| start\_time | Long | System maintenance start time, UTC-0, timestamp accuracy in milliseconds |
-| end\_time | Long | System maintenance end time, UTC-0, timestamp accuracy in milliseconds |
+\- `account`\=Account API service | | start_time | Long | System maintenance
+start time, UTC-0, timestamp accuracy in milliseconds | | end_time | Long |
+System maintenance end time, UTC-0, timestamp accuracy in milliseconds |

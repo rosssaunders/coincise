@@ -1,7 +1,6 @@
 # GET /options/order_book
 
-**Source:**
-[/options/order_book](https://www.gate.io/docs/developers/apiv4/en/#listoptionsorderbook-parameters)
+**Source:** [/options/order_book](https://www.gate.io/docs/developers/apiv4/en/#listoptionsorderbook-parameters)
 
 ## Authentication
 
@@ -39,7 +38,7 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 
 > 200 Response
 
-```
+```json
 {
   "id": 123456,
   "current": 1623898993.123,

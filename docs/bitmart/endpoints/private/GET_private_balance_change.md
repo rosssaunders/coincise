@@ -1,6 +1,7 @@
 # GET 【Private】Balance Change
 
-**Source:** [【Private】Balance Change](https://developer-pro.bitmart.com/en/spot/)
+**Source:**
+[【Private】Balance Change](https://developer-pro.bitmart.com/en/spot/)
 
 **API Type:** Spot
 
@@ -15,7 +16,8 @@ Balance change push
 ### Pushing Rules
 
 1.  User login required
-2.  Qualified balance changes (recharge, withdrawal, transfer, transaction, BMX handling fee deduction)
+2.  Qualified balance changes (recharge, withdrawal, transfer, transaction, BMX
+    handling fee deduction)
 3.  Push frequency: Push when changes
 
 ### Subscribe Request
@@ -25,9 +27,7 @@ Balance change push
 ```json
 {
   "op": "subscribe",
-  "args": [
-    "spot/user/balance:BALANCE_UPDATE"
-  ]
+  "args": ["spot/user/balance:BALANCE_UPDATE"]
 }
 ```
 
@@ -36,13 +36,11 @@ Message Format:
 ```json
 {
   "op": "subscribe",
-  "args": [
-    "spot/user/balance:BALANCE_UPDATE"
-  ]
+  "args": ["spot/user/balance:BALANCE_UPDATE"]
 }
 ```
 
--   Includes changes in all currency balances
+- Includes changes in all currency balances
 
 ### Subscription successful
 
@@ -87,18 +85,18 @@ Message Format:
 
 Return data description:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| event\_type | string | Type for change  
+| Field      | Type   | Description     |
+| ---------- | ------ | --------------- |
+| event_type | string | Type for change |
+
 \-`TRANSACTION_COMPLETED`\=Trade  
 \-`ACCOUNT_RECHARGE`\=Recharge  
 \-`ACCOUNT_WITHDRAWAL`\=Withdraw  
 \-`ACCOUNT_TRANSFER`\=Transfer  
-\-`BMX_DEDUCTION`\=BMX handling fee deduction |
-| event\_time | string | Create time |
-| balance\_details | string | Detail |
-| \>ccy | string | Changing Balance Currency |
-| \>av\_bal | string | Available balance after change |
-| \>fz\_bal | string | Freeze balance after change |
+\-`BMX_DEDUCTION`\=BMX handling fee deduction | | event_time | string | Create
+time | | balance_details | string | Detail | | \>ccy | string | Changing Balance
+Currency | | \>av_bal | string | Available balance after change | | \>fz_bal |
+string | Freeze balance after change |
 
-**Notice：This data is displayed after decompression, [Refer to Data Compression for details](#data-compression)**
+**Notice：This data is displayed after decompression,
+[Refer to Data Compression for details](#data-compression)**

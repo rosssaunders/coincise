@@ -1,7 +1,6 @@
 # GET /earn/uni/rate
 
-**Source:**
-[/earn/uni/rate](https://www.gate.io/docs/developers/apiv4/en/#listunirate-responses)
+**Source:** [/earn/uni/rate](https://www.gate.io/docs/developers/apiv4/en/#listunirate-responses)
 
 ## Authentication
 
@@ -17,7 +16,7 @@ _Currency estimated annualized interest rate_
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency": "USDT",

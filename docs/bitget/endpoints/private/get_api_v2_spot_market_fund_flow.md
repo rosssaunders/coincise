@@ -8,7 +8,7 @@ Get spot fund flow
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/spot/market/fund-flow
+- GET /api/v2/spot/market/fund-flow
 
 Request Example
 
@@ -18,10 +18,10 @@ curl "https://api.bitget.com/api/v2/spot/market/fund-flow?symbol=BTCUSDT&period=
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pairs, BTCUSDT |
-| period | String | No | Query period: 15m(default),30m,1h,2h,4h,1d |
+| Parameter | Type   | Required | Description                                |
+| :-------- | :----- | :------- | :----------------------------------------- |
+| symbol    | String | Yes      | Trading pairs, BTCUSDT                     |
+| period    | String | No       | Query period: 15m(default),30m,1h,2h,4h,1d |
 
 Response Example
 
@@ -49,19 +49,19 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| whaleBuyVolume | String | Whale buy volume |
-| dolphinBuyVolume | String | Dolphin Buy Volume |
-| fishBuyVolume | String | Fish Buy Volume |
-| whaleSellVolume | String | Whale Sell Volume |
+| Parameter         | Type   | Description         |
+| :---------------- | :----- | :------------------ |
+| whaleBuyVolume    | String | Whale buy volume    |
+| dolphinBuyVolume  | String | Dolphin Buy Volume  |
+| fishBuyVolume     | String | Fish Buy Volume     |
+| whaleSellVolume   | String | Whale Sell Volume   |
 | dolphinSellVolume | String | Dolphin Sell Volume |
-| fishSellVolume | String | Fish Sell Volume |
-| whaleBuyRatio | String | Whale Buy Ratio |
-| dolphinBuyRatio | String | Dolphin Buy Ratio |
-| fishBuyRatio | String | Fish Buy Ratio |
-| whaleSellRatio | String | Whale Sell Ratio |
-| dolphinSellRatio | String | Dolphin Sell Ratio |
-| fishSellRatio | String | Fish Sell Ratio |
+| fishSellVolume    | String | Fish Sell Volume    |
+| whaleBuyRatio     | String | Whale Buy Ratio     |
+| dolphinBuyRatio   | String | Dolphin Buy Ratio   |
+| fishBuyRatio      | String | Fish Buy Ratio      |
+| whaleSellRatio    | String | Whale Sell Ratio    |
+| dolphinSellRatio  | String | Dolphin Sell Ratio  |
+| fishSellRatio     | String | Fish Sell Ratio     |
 
 > **Source:** https://www.bitget.com/api-doc/common/apidata/Get-Spot-Fund-Flow

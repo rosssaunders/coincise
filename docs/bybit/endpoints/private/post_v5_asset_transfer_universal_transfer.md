@@ -42,8 +42,6 @@ POST `/v5/asset/transfer/universal-transfer`
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
-
 ```bash
 POST /v5/asset/transfer/universal-transfer HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672189449697X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXContent-Type: application/json{    "transferId": "be7a2462-1138-4e27-80b1-62653f24925e",    "coin": "ETH",    "amount": "0.5",    "fromMemberId": 592334,    "toMemberId": 691355,    "fromAccountType": "CONTRACT",    "toAccountType": "UNIFIED"}
 ```
@@ -53,7 +51,7 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .createUniversalTransfer({    transferId: 'be7a2462-1138-4e27-80b1-62653f24925e',    coin: 'ETH',    amount: '0.5',    fromMemberId: 592334,    toMemberId: 691355,    fromAccountType: 'CONTRACT',    toAccountType: 'UNIFIED',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .createUniversalTransfer({    transferId: 'be7a2462-1138-4e27-80b1-62653f24925e',    coin: 'ETH',    amount: '0.5',    fromMemberId: 592334,    toMemberId: 691355,    fromAccountType: 'CONTRACT',    toAccountType: 'UNIFIED',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

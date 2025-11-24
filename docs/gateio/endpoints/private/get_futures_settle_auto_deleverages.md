@@ -1,7 +1,6 @@
 # GET /futures/{settle}/auto_deleverages
 
-**Source:**
-[/futures/{settle}/auto_deleverages](https://www.gate.io/docs/developers/apiv4/en/#listautodeleverages-parameters)
+**Source:** [/futures/{settle}/auto_deleverages](https://www.gate.io/docs/developers/apiv4/en/#listautodeleverages-parameters)
 
 ## Authentication
 
@@ -51,7 +50,7 @@ time format is a Unix timestamp
 
 > 200 Response
 
-```
+```json
 [
   {
     "time": 1675841679,

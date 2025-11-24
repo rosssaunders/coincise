@@ -4,11 +4,12 @@ Frequency limit: 1 times/1s (IP)
 
 ### Description[​](#description "Direct link to Description")
 
-The ratio of borrowed amount in the base currency (left) and borrowed amount in the quote currency (right) in isolated margin accounts, converted to USDT.
+The ratio of borrowed amount in the base currency (left) and borrowed amount in
+the quote currency (right) in isolated margin accounts, converted to USDT.
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/mix/market/isolated-borrow-rate
+- GET /api/v2/mix/market/isolated-borrow-rate
 
 Request Example
 
@@ -18,10 +19,11 @@ curl "https://api.bitget.com/api/v2/mix/market/isolated-borrow-rate?symbol=BTCUS
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair |
-| period | String | No | Default:`24h`, support:  
+| Parameter | Type   | Required | Description             |
+| :-------- | :----- | :------- | :---------------------- |
+| symbol    | String | Yes      | Trading pair            |
+| period    | String | No       | Default:`24h`, support: |
+
 `24h`  
 `30d` |
 
@@ -47,9 +49,10 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| borrowRate | String | borrow ratio |
-| ts | String | Millseconds time |
+| Parameter  | Type   | Description      |
+| :--------- | :----- | :--------------- |
+| borrowRate | String | borrow ratio     |
+| ts         | String | Millseconds time |
 
-> **Source:** https://www.bitget.com/api-doc/common/apidata/Margin-Iso-Borrow-Ratio
+> **Source:**
+> https://www.bitget.com/api-doc/common/apidata/Margin-Iso-Borrow-Ratio

@@ -1,7 +1,6 @@
 # GET /earn/uni/interest_records
 
-**Source:**
-[/earn/uni/interest_records](https://www.gate.io/docs/developers/apiv4/en/#listuniinterestrecords-parameters)
+**Source:** [/earn/uni/interest_records](https://www.gate.io/docs/developers/apiv4/en/#listuniinterestrecords-parameters)
 
 ## Authentication
 
@@ -42,7 +41,7 @@ time format is a Unix timestamp
 
 > 200 Response
 
-```
+```json
 [
   {
     "status": 1,

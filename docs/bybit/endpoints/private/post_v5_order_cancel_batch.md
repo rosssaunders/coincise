@@ -50,7 +50,6 @@ The acknowledgement of an cancel order request indicates that the request was su
 ### Request Example[​](#request-example "Direct link to heading")
 
 -   .Net
--   Node.js
 
 ```bash
 POST /v5/order/cancel-batch HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672223356634X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "spot",    "request": [        {            "symbol": "BTCUSDT",            "orderId": "1666800494330512128"        },        {            "symbol": "ATOMUSDT",            "orderLinkId": "1666800494330512129"        }    ]}
@@ -69,7 +68,7 @@ using bybit.net.api.ApiServiceImp;using bybit.net.api.Models.Trade;var order1 = 
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .batchCancelOrders('spot', [        {            "symbol": "BTCUSDT",            "orderId": "1666800494330512128"        },        {            "symbol": "ATOMUSDT",            "orderLinkId": "1666800494330512129"        },    ])    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: "YOUR_API_KEY",    secret: "YOUR_API_SECRET",});client    .batchCancelOrders('spot', [        {            "symbol": "BTCUSDT",            "orderId": "1666800494330512128"        },        {            "symbol": "ATOMUSDT",            "orderLinkId": "1666800494330512129"        },    ])    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

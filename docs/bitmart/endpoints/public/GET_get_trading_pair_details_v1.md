@@ -1,6 +1,7 @@
 # GET Get Trading Pair Details (V1)
 
-**Source:** [Get Trading Pair Details (V1)](https://developer-pro.bitmart.com/en/spot/)
+**Source:**
+[Get Trading Pair Details (V1)](https://developer-pro.bitmart.com/en/spot/)
 
 **API Type:** Spot
 
@@ -58,20 +59,21 @@ None
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| symbols | List | Array of trading pair details |
-| symbol | String | Trading pair name |
-| symbol\_id | Int | Trading pair id |
-| base\_currency | String | Base currency |
-| quote\_currency | String | Quote currency |
-| quote\_increment | String | The minimum order quantity is also the minimum order quantity increment |
-| base\_min\_size | String | Minimum order quantity |
-| price\_min\_precision | Number | Minimum price accuracy (decimal places), used to query k-line and depth |
-| price\_max\_precision | Number | Maximum price accuracy (decimal places), used to query k-line and depth |
-| expiration | String | Expiration time of trading pair |
-| min\_buy\_amount | String | Minimum order amount |
-| min\_sell\_amount | String | Minimum sell amount |
-| trade\_status | String | Trade Status  
+| Field               | Type   | Description                                                             |
+| ------------------- | ------ | ----------------------------------------------------------------------- |
+| symbols             | List   | Array of trading pair details                                           |
+| symbol              | String | Trading pair name                                                       |
+| symbol_id           | Int    | Trading pair id                                                         |
+| base_currency       | String | Base currency                                                           |
+| quote_currency      | String | Quote currency                                                          |
+| quote_increment     | String | The minimum order quantity is also the minimum order quantity increment |
+| base_min_size       | String | Minimum order quantity                                                  |
+| price_min_precision | Number | Minimum price accuracy (decimal places), used to query k-line and depth |
+| price_max_precision | Number | Maximum price accuracy (decimal places), used to query k-line and depth |
+| expiration          | String | Expiration time of trading pair                                         |
+| min_buy_amount      | String | Minimum order amount                                                    |
+| min_sell_amount     | String | Minimum sell amount                                                     |
+| trade_status        | String | Trade Status                                                            |
+
 \- `trading`\=is trading  
 \- `pre-trade`\=pre-open |

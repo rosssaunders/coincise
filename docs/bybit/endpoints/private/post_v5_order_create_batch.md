@@ -165,7 +165,6 @@ The acknowledgement of an place order request indicates that the request was suc
 ### Request Example[​](#request-example "Direct link to heading")
 
 -   .Net
--   Node.js
 
 ```bash
 POST /v5/order/create-batch HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672222064519X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "spot",    "request": [        {            "symbol": "BTCUSDT",            "side": "Buy",            "orderType": "Limit",            "isLeverage": 0,            "qty": "0.05",            "price": "30000",            "timeInForce": "GTC",            "orderLinkId": "spot-btc-03"        },        {            "symbol": "ATOMUSDT",            "side": "Sell",            "orderType": "Limit",            "isLeverage": 0,            "qty": "2",            "price": "12",            "timeInForce": "GTC",            "orderLinkId": "spot-atom-03"        }    ]}
@@ -188,7 +187,7 @@ using bybit.net.api.ApiServiceImp;using bybit.net.api.Models.Trade;var order1 = 
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .batchSubmitOrders('spot', [        {            "symbol": "BTCUSDT",            "side": "Buy",            "orderType": "Limit",            "isLeverage": 0,            "qty": "0.05",            "price": "30000",            "timeInForce": "GTC",            "orderLinkId": "spot-btc-03"        },        {            "symbol": "ATOMUSDT",            "side": "Sell",            "orderType": "Limit",            "isLeverage": 0,            "qty": "2",            "price": "12",            "timeInForce": "GTC",            "orderLinkId": "spot-atom-03"        },    ])        .then((response) => {        console.log(response);    })        .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: "YOUR_API_KEY",    secret: "YOUR_API_SECRET",});client    .batchSubmitOrders('spot', [        {            "symbol": "BTCUSDT",            "side": "Buy",            "orderType": "Limit",            "isLeverage": 0,            "qty": "0.05",            "price": "30000",            "timeInForce": "GTC",            "orderLinkId": "spot-btc-03"        },        {            "symbol": "ATOMUSDT",            "side": "Sell",            "orderType": "Limit",            "isLeverage": 0,            "qty": "2",            "price": "12",            "timeInForce": "GTC",            "orderLinkId": "spot-atom-03"        },    ])        .then((response) => {        console.log(response);    })        .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

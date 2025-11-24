@@ -1,7 +1,6 @@
 # POST /loan/collateral/repay
 
-**Source:**
-[/loan/collateral/repay](https://www.gate.io/docs/developers/apiv4/en/#repaycollateralloan-parameters)
+**Source:** [/loan/collateral/repay](https://www.gate.io/docs/developers/apiv4/en/#repaycollateralloan-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Collateral loan repayment_
 
 > Body parameter
 
-```
+```json
 {
   "order_id": 37438962,
   "repay_amount": "1000",
@@ -45,7 +44,7 @@ parameter cannot be greater than the remaining amount to be repaid by the user.
 
 > 200 Response
 
-```
+```json
 {
   "repaid_principal": "11",
   "repaid_interest": "111"

@@ -8,7 +8,7 @@ Get Futures Active Buy Sell Volume Data
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/mix/market/taker-buy-sell
+- GET /api/v2/mix/market/taker-buy-sell
 
 Request Example
 
@@ -18,10 +18,11 @@ curl "https://api.bitget.com/api/v2/mix/market/taker-buy-sell?symbol=BTCUSDT"
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair |
-| period | String | No | \- default:5m, support:  
+| Parameter | Type   | Required | Description             |
+| :-------- | :----- | :------- | :---------------------- |
+| symbol    | String | Yes      | Trading pair            |
+| period    | String | No       | \- default:5m, support: |
+
 `5m`  
 `15m`  
 `30m`  
@@ -56,10 +57,10 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
-| sellVolume | String | Sell Volume |
-| buyVolume | String | Buy volume |
-| ts | String | Millseconds time |
+| Parameter  | Type   | Description      |
+| :--------- | :----- | :--------------- |
+| sellVolume | String | Sell Volume      |
+| buyVolume  | String | Buy volume       |
+| ts         | String | Millseconds time |
 
 > **Source:** https://www.bitget.com/api-doc/common/apidata/Taker-Buy-Sell

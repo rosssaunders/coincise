@@ -1,7 +1,6 @@
 # POST /flash_swap/orders/preview
 
-**Source:**
-[/flash_swap/orders/preview](https://www.gate.io/docs/developers/apiv4/en/#previewflashswaporder-parameters)
+**Source:** [/flash_swap/orders/preview](https://www.gate.io/docs/developers/apiv4/en/#previewflashswaporder-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _Flash swap order preview_
 
 > Body parameter
 
-```
+```json
 {
   "sell_currency": "BTC",
   "sell_amount": "0.1",
@@ -48,7 +47,7 @@ between `sell_amount` and `buy_amount`
 
 > 200 Response
 
-```
+```json
 {
   "preview_id": "3453434",
   "sell_currency": "BTC",

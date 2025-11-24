@@ -1,7 +1,6 @@
 # GET /rebate/agency/commission_history
 
-**Source:**
-[/rebate/agency/commission_history](https://www.gate.io/docs/developers/apiv4/en/#agencycommissionshistory-parameters)
+**Source:** [/rebate/agency/commission_history](https://www.gate.io/docs/developers/apiv4/en/#agencycommissionshistory-parameters)
 
 ## Authentication
 
@@ -33,7 +32,7 @@ Record query time range cannot exceed 30 days
 
 > 200 Response
 
-```
+```json
 {
   "total": 100,
   "list": [

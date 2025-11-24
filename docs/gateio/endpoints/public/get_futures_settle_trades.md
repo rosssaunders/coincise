@@ -1,7 +1,6 @@
 # GET /futures/{settle}/trades
 
-**Source:**
-[/futures/{settle}/trades](https://www.gate.io/docs/developers/apiv4/en/#listfuturestrades-parameters)
+**Source:** [/futures/{settle}/trades](https://www.gate.io/docs/developers/apiv4/en/#listfuturestrades-parameters)
 
 ## Authentication
 
@@ -45,7 +44,7 @@ are more than `limit`, only `limit` number will be returned.
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": 121234231,

@@ -1,7 +1,6 @@
 # GET /spot/trades
 
-**Source:**
-[/spot/trades](https://www.gate.io/docs/developers/apiv4/en/#listtrades-parameters)
+**Source:** [/spot/trades](https://www.gate.io/docs/developers/apiv4/en/#listtrades-parameters)
 
 ## Authentication
 
@@ -50,7 +49,7 @@ No effect when `last_id` is not set.
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": "1232893232",

@@ -1,7 +1,6 @@
 # GET /unified/history_loan_rate
 
-**Source:**
-[/unified/history_loan_rate](https://www.gate.io/docs/developers/apiv4/en/#gethistoryloanrate-parameters)
+**Source:** [/unified/history_loan_rate](https://www.gate.io/docs/developers/apiv4/en/#gethistoryloanrate-parameters)
 
 ## Authentication
 
@@ -29,7 +28,7 @@ _Get historical lending rates_
 
 > 200 Response
 
-```
+```json
 {
   "currency": "USDT",
   "tier": "1",

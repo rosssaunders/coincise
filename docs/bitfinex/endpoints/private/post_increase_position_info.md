@@ -1,6 +1,7 @@
 # POST /v2/auth/r/position/increase/info
 
-**Source:** [https://docs.bitfinex.com/reference/rest-auth-increase-position-info](https://docs.bitfinex.com/reference/rest-auth-increase-position-info)
+**Source:**
+[https://docs.bitfinex.com/reference/rest-auth-increase-position-info](https://docs.bitfinex.com/reference/rest-auth-increase-position-info)
 
 post
 
@@ -10,50 +11,50 @@ Returns information relevant to the increase position endpoint.
 
 **Response Fields**
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| [0] | POSITION INFO | [Position Info Array](#position-info-index-0) | Position info |
-| [1] | BALANCE INFO | [Balance Info Array](#balance-info-index-1) | Array of info with base currency balance, tradable balance data, and available funding |
-| [4] | FUNDING INFO | [Funding Info Array](#funding-info-index-4) | Array with data on funding required |
-| [5] | FUNDING CURRENCY INFO | [Funding Currency Info Array](#funding-currency-info-index-5) | Array with additional info on funding required |
+| Index | Field                 | Type                                                          | Description                                                                            |
+| ----- | --------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| [0]   | POSITION INFO         | [Position Info Array](#position-info-index-0)                 | Position info                                                                          |
+| [1]   | BALANCE INFO          | [Balance Info Array](#balance-info-index-1)                   | Array of info with base currency balance, tradable balance data, and available funding |
+| [4]   | FUNDING INFO          | [Funding Info Array](#funding-info-index-4)                   | Array with data on funding required                                                    |
+| [5]   | FUNDING CURRENCY INFO | [Funding Currency Info Array](#funding-currency-info-index-5) | Array with additional info on funding required                                         |
 
 Position Info (Index [0])
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| [0] | MAX\_POS | float | Maximum position size for increase position on the pair |
-| [1] | CURRENT\_POS | float | Size of current position on the pair |
+| Index | Field       | Type  | Description                                             |
+| ----- | ----------- | ----- | ------------------------------------------------------- |
+| [0]   | MAX_POS     | float | Maximum position size for increase position on the pair |
+| [1]   | CURRENT_POS | float | Size of current position on the pair                    |
 
 Balance Info (Index [1])
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| [0] | BASE\_CURRENCY\_BALANCE | float | Current margin wallet balance in the base currency |
-| [1] | TRADABLE BALANCE INFO | [Tradable Balance Info Array](#tradable-balance-info-index1) | Array with total and current tradable balances for both currencies |
-| [2] | FUNDING\_AVAIL | float | Available funding below 0.75% (currency depends on the funding currency required for the entered amount) |
+| Index | Field                 | Type                                                         | Description                                                                                              |
+| ----- | --------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| [0]   | BASE_CURRENCY_BALANCE | float                                                        | Current margin wallet balance in the base currency                                                       |
+| [1]   | TRADABLE BALANCE INFO | [Tradable Balance Info Array](#tradable-balance-info-index1) | Array with total and current tradable balances for both currencies                                       |
+| [2]   | FUNDING_AVAIL         | float                                                        | Available funding below 0.75% (currency depends on the funding currency required for the entered amount) |
 
 Tradable Balance Info (Index[1])
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| [0] | TRADABLE\_BALANCE\_QUOTE\_CURRENCY | float | Tradable balance in the quote currency adjusted for open orders and positions |
-| [1] | TRADABLE\_BALANCE\_QUOTE\_TOTAL | float | Tradable balance in the quote currency non-adjusted |
-| [2] | TRADABLE\_BALANCE\_BASE\_CURRENCY | float | Tradable balance in the base currency adjusted for open orders and positions |
-| [3] | TRADABLE\_BALANCE\_BASE\_TOTAL | float | Tradable balance in the base currency non-adjusted |
+| Index | Field                           | Type  | Description                                                                   |
+| ----- | ------------------------------- | ----- | ----------------------------------------------------------------------------- |
+| [0]   | TRADABLE_BALANCE_QUOTE_CURRENCY | float | Tradable balance in the quote currency adjusted for open orders and positions |
+| [1]   | TRADABLE_BALANCE_QUOTE_TOTAL    | float | Tradable balance in the quote currency non-adjusted                           |
+| [2]   | TRADABLE_BALANCE_BASE_CURRENCY  | float | Tradable balance in the base currency adjusted for open orders and positions  |
+| [3]   | TRADABLE_BALANCE_BASE_TOTAL     | float | Tradable balance in the base currency non-adjusted                            |
 
 Funding Info (Index [4])
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| [0] | FUNDING\_VALUE | float | Value of funding required in opposite currency |
-| [1] | FUNDING\_REQUIRED | float | Funding required for a position of the specified amount |
+| Index | Field            | Type  | Description                                             |
+| ----- | ---------------- | ----- | ------------------------------------------------------- |
+| [0]   | FUNDING_VALUE    | float | Value of funding required in opposite currency          |
+| [1]   | FUNDING_REQUIRED | float | Funding required for a position of the specified amount |
 
 Funding Currency Info (Index [5])
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| [0] | FUNDING\_VALUE\_CURRENCY | string | Currency of the FUNDING\_VALUE field |
-| [1] | FUNDING\_REQUIRED\_CURRENCY | string | Currency of the FUNDING\_REQUIRED field |
+| Index | Field                     | Type   | Description                            |
+| ----- | ------------------------- | ------ | -------------------------------------- |
+| [0]   | FUNDING_VALUE_CURRENCY    | string | Currency of the FUNDING_VALUE field    |
+| [1]   | FUNDING_REQUIRED_CURRENCY | string | Currency of the FUNDING_REQUIRED field |
 
 **Ratelimit**: 90 req/min
 
@@ -91,9 +92,9 @@ curl \--request POST \\
 
 {
 
-  "symbol": "tBTCUSD",
+"symbol": "tBTCUSD",
 
-  "amount": "123"
+"amount": "123"
 
 }
 

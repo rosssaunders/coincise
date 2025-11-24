@@ -45,7 +45,6 @@ The acknowledgement of an cancel order request indicates that the request was su
 ### Request Example[​](#request-example "Direct link to heading")
 
 -   .Net
--   Node.js
 
 ```bash
 POST /v5/order/cancel HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672217376681X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{  "category": "linear",  "symbol": "BTCPERP",  "orderLinkId": null,  "orderId":"c6f055d9-7f21-4079-913d-e6523a9cfffa"}
@@ -60,11 +59,11 @@ import com.bybit.api.client.restApi.BybitApiTradeRestClient;import com.bybit.api
 ```
 
 ```
-using bybit.net.api.ApiServiceImp;using bybit.net.api.Models.Trade;BybitTradeService tradeService = new(apiKey: "xxxxxxxxxxxxxx", apiSecret: "xxxxxxxxxxxxxxxxxxxxx");var orderInfoString = await TradeService.CancelOrder(orderId: "1523347543495541248", category: Category.SPOT, symbol: "XRPUSDT");Console.WriteLine(orderInfoString);
+using bybit.net.api.ApiServiceImp;using bybit.net.api.Models.Trade;BybitTradeService tradeService = new(apikey: "YOUR_API_KEY", apisecret: "YOUR_API_SECRET");var orderInfoString = await TradeService.CancelOrder(orderId: "1523347543495541248", category: Category.SPOT, symbol: "XRPUSDT");Console.WriteLine(orderInfoString);
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .cancelOrder({        category: 'linear',        symbol: 'BTCPERP',        orderId: 'c6f055d9-7f21-4079-913d-e6523a9cfffa',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: "YOUR_API_KEY",    secret: "YOUR_API_SECRET",});client    .cancelOrder({        category: 'linear',        symbol: 'BTCPERP',        orderId: 'c6f055d9-7f21-4079-913d-e6523a9cfffa',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

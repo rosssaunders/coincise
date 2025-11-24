@@ -1,7 +1,6 @@
 # GET /wallet/saved_address
 
-**Source:**
-[/wallet/saved_address](https://www.gate.io/docs/developers/apiv4/en/#listsavedaddress-parameters)
+**Source:** [/wallet/saved_address](https://www.gate.io/docs/developers/apiv4/en/#listsavedaddress-parameters)
 
 ## Authentication
 
@@ -29,7 +28,7 @@ _Query withdrawal address whitelist_
 
 > 200 Response
 
-```
+```json
 [
   {
     "currency": "usdt",

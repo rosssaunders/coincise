@@ -4,11 +4,12 @@ Frequency limit: 1 times/1s (IP)
 
 ### Description[​](#description "Direct link to Description")
 
-The long-short position ratio for a specific coin in cross and isolated margin accounts.
+The long-short position ratio for a specific coin in cross and isolated margin
+accounts.
 
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
--   GET /api/v2/margin/market/long-short-ratio
+- GET /api/v2/margin/market/long-short-ratio
 
 Request Example
 
@@ -18,13 +19,13 @@ curl "https://api.bitget.com/api/v2/margin/market/long-short-ratio?symbol=BTCUSD
 
 ### Request Parameters[​](#request-parameters "Direct link to Request Parameters")
 
-| Parameter | Type | Required | Description |
-| :-- | :-- | :-- | :-- |
-| symbol | String | Yes | Trading pair |
-| period | String | No | Default:`24h`, support:  
+| Parameter | Type   | Required | Description             |
+| :-------- | :----- | :------- | :---------------------- |
+| symbol    | String | Yes      | Trading pair            |
+| period    | String | No       | Default:`24h`, support: |
+
 `24h`  
-`30d` |
-| coin | String | No | Base coin or quete coin, default: base coin |
+`30d` | | coin | String | No | Base coin or quete coin, default: base coin |
 
 Response Example
 
@@ -48,9 +49,9 @@ Response Example
 
 ### Response Parameters[​](#response-parameters "Direct link to Response Parameters")
 
-| Parameter | Type | Description |
-| :-- | :-- | :-- |
+| Parameter      | Type   | Description      |
+| :------------- | :----- | :--------------- |
 | longShortRatio | String | long short ratio |
-| ts | String | Millseconds time |
+| ts             | String | Millseconds time |
 
 > **Source:** https://www.bitget.com/api-doc/common/apidata/Margin-Ls-Ratio

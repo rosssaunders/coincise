@@ -63,7 +63,6 @@ The acknowledgement of an amend order request indicates that the request was suc
 ### Request Example[​](#request-example "Direct link to heading")
 
 -   .Net
--   Node.js
 
 ```bash
 POST /v5/order/amend HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672217108106X-BAPI-RECV-WINDOW: 5000Content-Type: application/json{    "category": "linear",    "symbol": "ETHPERP",    "orderLinkId": "linear-004",    "triggerPrice": "1145",    "qty": "0.15",    "price": "1050",    "takeProfit": "0",    "stopLoss": "0"}
@@ -78,11 +77,11 @@ import com.bybit.api.client.restApi.BybitApiTradeRestClient;import com.bybit.api
 ```
 
 ```
-using bybit.net.api.ApiServiceImp;using bybit.net.api.Models.Trade;BybitTradeService tradeService = new(apiKey: "xxxxxxxxxxxxxx", apiSecret: "xxxxxxxxxxxxxxxxxxxxx");var orderInfoString = await TradeService.AmendOrder(orderId: "1523347543495541248", category:Category.LINEAR, symbol: "XRPUSDT", price:"0.5", qty:"15");Console.WriteLine(orderInfoString);
+using bybit.net.api.ApiServiceImp;using bybit.net.api.Models.Trade;BybitTradeService tradeService = new(apikey: "YOUR_API_KEY", apisecret: "YOUR_API_SECRET");var orderInfoString = await TradeService.AmendOrder(orderId: "1523347543495541248", category:Category.LINEAR, symbol: "XRPUSDT", price:"0.5", qty:"15");Console.WriteLine(orderInfoString);
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .amendOrder({        category: 'linear',        symbol: 'ETHPERP',        orderLinkId: 'linear-004',        triggerPrice: '1145',        qty: '0.15',        price: '1050',        takeProfit: '0',        stopLoss: '0',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: "YOUR_API_KEY",    secret: "YOUR_API_SECRET",});client    .amendOrder({        category: 'linear',        symbol: 'ETHPERP',        orderLinkId: 'linear-004',        triggerPrice: '1145',        qty: '0.15',        price: '1050',        takeProfit: '0',        stopLoss: '0',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

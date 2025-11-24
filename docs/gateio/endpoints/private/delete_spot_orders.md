@@ -1,7 +1,6 @@
 # DELETE /spot/orders
 
-**Source:**
-[/spot/orders](https://www.gate.io/docs/developers/apiv4/en/#cancelorders-parameters)
+**Source:** [/spot/orders](https://www.gate.io/docs/developers/apiv4/en/#cancelorders-parameters)
 
 ## Authentication
 
@@ -51,7 +50,7 @@ When placing an order, different fields are returned based on the action_mode
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": "1852454420",

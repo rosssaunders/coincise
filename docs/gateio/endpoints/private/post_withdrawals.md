@@ -1,7 +1,6 @@
 # POST /withdrawals
 
-**Source:**
-[/withdrawals](https://www.gate.io/docs/developers/apiv4/en/#withdraw-parameters)
+**Source:** [/withdrawals](https://www.gate.io/docs/developers/apiv4/en/#withdraw-parameters)
 
 ## Authentication
 
@@ -18,7 +17,7 @@ charged
 
 > Body parameter
 
-```
+```json
 {
   "withdraw_order_id": "order_123456",
   "currency": "USDT",
@@ -58,7 +57,7 @@ SPOT: Main area PILOT: Innovation area
 
 > 200 Response
 
-```
+```json
 {
   "id": "210496",
   "timestamp": "1542000000",

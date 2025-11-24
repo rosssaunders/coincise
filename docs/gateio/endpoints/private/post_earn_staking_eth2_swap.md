@@ -1,7 +1,6 @@
 # POST /earn/staking/eth2/swap
 
-**Source:**
-[/earn/staking/eth2/swap](https://www.gate.io/docs/developers/apiv4/en/#swapeth2-parameters)
+**Source:** [/earn/staking/eth2/swap](https://www.gate.io/docs/developers/apiv4/en/#swapeth2-parameters)
 
 ## Authentication
 
@@ -15,7 +14,7 @@ _ETH2 swap_
 
 > Body parameter
 
-```
+```json
 {
   "side": "1",
   "amount": "1.5"

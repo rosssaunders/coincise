@@ -1,7 +1,6 @@
 # GET /spot/account_book
 
-**Source:**
-[/spot/account_book](https://www.gate.io/docs/developers/apiv4/en/#listspotaccountbook-parameters)
+**Source:** [/spot/account_book](https://www.gate.io/docs/developers/apiv4/en/#listspotaccountbook-parameters)
 
 ## Authentication
 
@@ -37,7 +36,7 @@ is 100,000, that is, limit \* (page - 1) <= 100,000.
 
 > 200 Response
 
-```
+```json
 [
   {
     "id": "123456",
