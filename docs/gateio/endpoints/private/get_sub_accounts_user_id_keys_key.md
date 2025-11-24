@@ -1,6 +1,7 @@
 # GET /sub_accounts/{user_id}/keys/{key}
 
-**Source:** [/sub_accounts/{user_id}/keys/{key}](https://www.gate.io/docs/developers/apiv4/en/#getsubaccountkey-parameters)
+**Source:**
+[/sub_accounts/{user_id}/keys/{key}](https://www.gate.io/docs/developers/apiv4/en/#getsubaccountkey-parameters)
 
 ## Authentication
 
@@ -54,10 +55,7 @@ _Get specific API key pair of the sub-account_
     }
   ],
   "mode": 1,
-  "ip_whitelist": [
-    "127.0.0.1",
-    "127.0.0.2"
-  ],
+  "ip_whitelist": ["127.0.0.1", "127.0.0.2"],
   "key": "75c3264105b74693d8cb5c7f1a8e2420",
   "created_at": 1663642892,
   "last_access": 1663642892,

@@ -1,6 +1,7 @@
 # POST /options/countdown_cancel_all
 
-**Source:** [/options/countdown_cancel_all](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelalloptions-parameters)
+**Source:**
+[/options/countdown_cancel_all](https://www.gate.io/docs/developers/apiv4/en/#countdowncancelalloptions-parameters)
 
 ## Authentication
 

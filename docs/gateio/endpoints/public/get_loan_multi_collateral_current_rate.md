@@ -1,6 +1,7 @@
 # GET /loan/multi_collateral/current_rate
 
-**Source:** [/loan/multi_collateral/current_rate](https://www.gate.io/docs/developers/apiv4/en/#getmulticollateralcurrentrate-parameters)
+**Source:**
+[/loan/multi_collateral/current_rate](https://www.gate.io/docs/developers/apiv4/en/#getmulticollateralcurrentrate-parameters)
 
 ## Authentication
 

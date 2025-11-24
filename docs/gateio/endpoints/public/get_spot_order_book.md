@@ -1,6 +1,7 @@
 # GET /spot/order_book
 
-**Source:** [/spot/order_book](https://www.gate.io/docs/developers/apiv4/en/#listorderbook-parameters)
+**Source:**
+[/spot/order_book](https://www.gate.io/docs/developers/apiv4/en/#listorderbook-parameters)
 
 ## Authentication
 
@@ -37,24 +38,12 @@ sorted from low to high
   "current": 1623898993123,
   "update": 1623898993121,
   "asks": [
-    [
-      "1.52",
-      "1.151"
-    ],
-    [
-      "1.53",
-      "1.218"
-    ]
+    ["1.52", "1.151"],
+    ["1.53", "1.218"]
   ],
   "bids": [
-    [
-      "1.17",
-      "201.863"
-    ],
-    [
-      "1.16",
-      "725.464"
-    ]
+    ["1.17", "201.863"],
+    ["1.16", "725.464"]
   ]
 }
 ```

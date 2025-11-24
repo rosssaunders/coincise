@@ -1,6 +1,7 @@
 # PUT /sub_accounts/{user_id}/keys/{key}
 
-**Source:** [/sub_accounts/{user_id}/keys/{key}](https://www.gate.io/docs/developers/apiv4/en/#updatesubaccountkeys-parameters)
+**Source:**
+[/sub_accounts/{user_id}/keys/{key}](https://www.gate.io/docs/developers/apiv4/en/#updatesubaccountkeys-parameters)
 
 ## Authentication
 
@@ -40,10 +41,7 @@ _Update sub-account API key pair_
       "name": "futures"
     }
   ],
-  "ip_whitelist": [
-    "127.0.0.1",
-    "127.0.0.2"
-  ]
+  "ip_whitelist": ["127.0.0.1", "127.0.0.2"]
 }
 ```
 

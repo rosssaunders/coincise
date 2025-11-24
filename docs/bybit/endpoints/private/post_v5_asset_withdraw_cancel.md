@@ -8,15 +8,15 @@ POST `/v5/asset/withdraw/cancel`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| id | **true** | string | Withdrawal ID |
+| Parameter | Required | Type   | Comments      |
+| :-------- | :------- | :----- | ------------- |
+| id        | **true** | string | Withdrawal ID |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| status | integer | `0`: fail. `1`: success |
+| Parameter | Type    | Comments                |
+| :-------- | :------ | ----------------------- |
+| status    | integer | `0`: fail. `1`: success |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -29,7 +29,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .cancelWithdrawal('10197')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .cancelWithdrawal("10197")
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

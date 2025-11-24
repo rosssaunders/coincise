@@ -215,6 +215,72 @@ const extractInfoEndpoints = async (page, turndownService) => {
   await page.goto(url, { waitUntil: "networkidle0", timeout: 60000 })
 
   const endpoints = await page.evaluate(pageUrl => {
+    // Transform div-based tables to standard HTML tables
+    const transformDivTables = () => {
+      const flattenCell = (cell) => {
+        const ps = cell.querySelectorAll('p')
+        ps.forEach(p => {
+          const span = document.createElement('span')
+          span.innerHTML = p.innerHTML + '<br>'
+          p.parentNode.replaceChild(span, p)
+        })
+        const divs = cell.querySelectorAll('div')
+        divs.forEach(div => {
+          const span = document.createElement('span')
+          span.innerHTML = div.innerHTML
+          div.parentNode.replaceChild(span, div)
+        })
+      }
+
+      const tables = document.querySelectorAll('div[role="table"]')
+      tables.forEach(divTable => {
+        const newTable = document.createElement('table')
+        const rowGroups = divTable.querySelectorAll('div[role="rowgroup"]')
+        rowGroups.forEach(group => {
+          const rows = group.querySelectorAll('div[role="row"]')
+          rows.forEach(row => {
+            const isHeader = row.querySelector('div[role="columnheader"]')
+            const tr = document.createElement('tr')
+            if (isHeader) {
+              const headers = row.querySelectorAll('div[role="columnheader"]')
+              headers.forEach(header => {
+                const th = document.createElement('th')
+                const tempDiv = document.createElement('div')
+                tempDiv.innerHTML = header.innerHTML
+                flattenCell(tempDiv)
+                th.innerHTML = tempDiv.innerHTML
+                tr.appendChild(th)
+              })
+              let thead = newTable.querySelector('thead')
+              if (!thead) {
+                thead = document.createElement('thead')
+                newTable.appendChild(thead)
+              }
+              thead.appendChild(tr)
+            } else {
+              const cells = row.querySelectorAll('div[role="cell"]')
+              cells.forEach(cell => {
+                const td = document.createElement('td')
+                const tempDiv = document.createElement('div')
+                tempDiv.innerHTML = cell.innerHTML
+                flattenCell(tempDiv)
+                td.innerHTML = tempDiv.innerHTML
+                tr.appendChild(td)
+              })
+              let tbody = newTable.querySelector('tbody')
+              if (!tbody) {
+                tbody = document.createElement('tbody')
+                newTable.appendChild(tbody)
+              }
+              tbody.appendChild(tr)
+            }
+          })
+        })
+        divTable.parentNode.replaceChild(newTable, divTable)
+      })
+    }
+    transformDivTables()
+
     const results = []
     const h2Headings = document.querySelectorAll("h2")
 
@@ -263,6 +329,72 @@ const extractExchangeEndpoints = async (page, turndownService) => {
   await page.goto(url, { waitUntil: "networkidle0", timeout: 60000 })
 
   const endpoints = await page.evaluate(pageUrl => {
+    // Transform div-based tables to standard HTML tables
+    const transformDivTables = () => {
+      const flattenCell = (cell) => {
+        const ps = cell.querySelectorAll('p')
+        ps.forEach(p => {
+          const span = document.createElement('span')
+          span.innerHTML = p.innerHTML + '<br>'
+          p.parentNode.replaceChild(span, p)
+        })
+        const divs = cell.querySelectorAll('div')
+        divs.forEach(div => {
+          const span = document.createElement('span')
+          span.innerHTML = div.innerHTML
+          div.parentNode.replaceChild(span, div)
+        })
+      }
+
+      const tables = document.querySelectorAll('div[role="table"]')
+      tables.forEach(divTable => {
+        const newTable = document.createElement('table')
+        const rowGroups = divTable.querySelectorAll('div[role="rowgroup"]')
+        rowGroups.forEach(group => {
+          const rows = group.querySelectorAll('div[role="row"]')
+          rows.forEach(row => {
+            const isHeader = row.querySelector('div[role="columnheader"]')
+            const tr = document.createElement('tr')
+            if (isHeader) {
+              const headers = row.querySelectorAll('div[role="columnheader"]')
+              headers.forEach(header => {
+                const th = document.createElement('th')
+                const tempDiv = document.createElement('div')
+                tempDiv.innerHTML = header.innerHTML
+                flattenCell(tempDiv)
+                th.innerHTML = tempDiv.innerHTML
+                tr.appendChild(th)
+              })
+              let thead = newTable.querySelector('thead')
+              if (!thead) {
+                thead = document.createElement('thead')
+                newTable.appendChild(thead)
+              }
+              thead.appendChild(tr)
+            } else {
+              const cells = row.querySelectorAll('div[role="cell"]')
+              cells.forEach(cell => {
+                const td = document.createElement('td')
+                const tempDiv = document.createElement('div')
+                tempDiv.innerHTML = cell.innerHTML
+                flattenCell(tempDiv)
+                td.innerHTML = tempDiv.innerHTML
+                tr.appendChild(td)
+              })
+              let tbody = newTable.querySelector('tbody')
+              if (!tbody) {
+                tbody = document.createElement('tbody')
+                newTable.appendChild(tbody)
+              }
+              tbody.appendChild(tr)
+            }
+          })
+        })
+        divTable.parentNode.replaceChild(newTable, divTable)
+      })
+    }
+    transformDivTables()
+
     const results = []
     const h2Headings = document.querySelectorAll("h2")
 
@@ -311,6 +443,71 @@ const extractWebSocketEndpoints = async (page, turndownService) => {
   await page.goto(url, { waitUntil: "networkidle0", timeout: 60000 })
 
   const content = await page.evaluate(() => {
+    // Transform div-based tables to standard HTML tables
+    const transformDivTables = () => {
+      const flattenCell = (cell) => {
+        const ps = cell.querySelectorAll('p')
+        ps.forEach(p => {
+          const span = document.createElement('span')
+          span.innerHTML = p.innerHTML + '<br>'
+          p.parentNode.replaceChild(span, p)
+        })
+        const divs = cell.querySelectorAll('div')
+        divs.forEach(div => {
+          const span = document.createElement('span')
+          span.innerHTML = div.innerHTML
+          div.parentNode.replaceChild(span, div)
+        })
+      }
+
+      const tables = document.querySelectorAll('div[role="table"]')
+      tables.forEach(divTable => {
+        const newTable = document.createElement('table')
+        const rowGroups = divTable.querySelectorAll('div[role="rowgroup"]')
+        rowGroups.forEach(group => {
+          const rows = group.querySelectorAll('div[role="row"]')
+          rows.forEach(row => {
+            const isHeader = row.querySelector('div[role="columnheader"]')
+            const tr = document.createElement('tr')
+            if (isHeader) {
+              const headers = row.querySelectorAll('div[role="columnheader"]')
+              headers.forEach(header => {
+                const th = document.createElement('th')
+                const tempDiv = document.createElement('div')
+                tempDiv.innerHTML = header.innerHTML
+                flattenCell(tempDiv)
+                th.innerHTML = tempDiv.innerHTML
+                tr.appendChild(th)
+              })
+              let thead = newTable.querySelector('thead')
+              if (!thead) {
+                thead = document.createElement('thead')
+                newTable.appendChild(thead)
+              }
+              thead.appendChild(tr)
+            } else {
+              const cells = row.querySelectorAll('div[role="cell"]')
+              cells.forEach(cell => {
+                const td = document.createElement('td')
+                const tempDiv = document.createElement('div')
+                tempDiv.innerHTML = cell.innerHTML
+                flattenCell(tempDiv)
+                td.innerHTML = tempDiv.innerHTML
+                tr.appendChild(td)
+              })
+              let tbody = newTable.querySelector('tbody')
+              if (!tbody) {
+                tbody = document.createElement('tbody')
+                newTable.appendChild(tbody)
+              }
+              tbody.appendChild(tr)
+            }
+          })
+        })
+        divTable.parentNode.replaceChild(newTable, divTable)
+      })
+    }
+    transformDivTables()
     const mainContent = document.querySelector(
       'main, article, [role="main"], .content'
     )
@@ -330,6 +527,196 @@ const extractWebSocketEndpoints = async (page, turndownService) => {
       sourceUrl: url
     }
   ]
+}
+
+/**
+ * Extract Error Codes
+ */
+const extractErrorCodes = async (page, turndownService) => {
+  console.log("Extracting Error Codes...")
+
+  const url = `${BASE_URL}/error-responses`
+  await page.goto(url, { waitUntil: "networkidle0", timeout: 60000 })
+
+  const content = await page.evaluate(() => {
+    // Transform div-based tables to standard HTML tables
+    const transformDivTables = () => {
+      const flattenCell = (cell) => {
+        const ps = cell.querySelectorAll('p')
+        ps.forEach(p => {
+          const span = document.createElement('span')
+          span.innerHTML = p.innerHTML + '<br>'
+          p.parentNode.replaceChild(span, p)
+        })
+        const divs = cell.querySelectorAll('div')
+        divs.forEach(div => {
+          const span = document.createElement('span')
+          span.innerHTML = div.innerHTML
+          div.parentNode.replaceChild(span, div)
+        })
+      }
+
+      const tables = document.querySelectorAll('div[role="table"]')
+      tables.forEach(divTable => {
+        const newTable = document.createElement('table')
+        const rowGroups = divTable.querySelectorAll('div[role="rowgroup"]')
+        rowGroups.forEach(group => {
+          const rows = group.querySelectorAll('div[role="row"]')
+          rows.forEach(row => {
+            const isHeader = row.querySelector('div[role="columnheader"]')
+            const tr = document.createElement('tr')
+            if (isHeader) {
+              const headers = row.querySelectorAll('div[role="columnheader"]')
+              headers.forEach(header => {
+                const th = document.createElement('th')
+                const tempDiv = document.createElement('div')
+                tempDiv.innerHTML = header.innerHTML
+                flattenCell(tempDiv)
+                th.innerHTML = tempDiv.innerHTML
+                tr.appendChild(th)
+              })
+              let thead = newTable.querySelector('thead')
+              if (!thead) {
+                thead = document.createElement('thead')
+                newTable.appendChild(thead)
+              }
+              thead.appendChild(tr)
+            } else {
+              const cells = row.querySelectorAll('div[role="cell"]')
+              cells.forEach(cell => {
+                const td = document.createElement('td')
+                const tempDiv = document.createElement('div')
+                tempDiv.innerHTML = cell.innerHTML
+                flattenCell(tempDiv)
+                td.innerHTML = tempDiv.innerHTML
+                tr.appendChild(td)
+              })
+              let tbody = newTable.querySelector('tbody')
+              if (!tbody) {
+                tbody = document.createElement('tbody')
+                newTable.appendChild(tbody)
+              }
+              tbody.appendChild(tr)
+            }
+          })
+        })
+        divTable.parentNode.replaceChild(newTable, divTable)
+      })
+    }
+    transformDivTables()
+    
+    const mainContent = document.querySelector(
+      'main, article, [role="main"], .content'
+    )
+    if (mainContent) {
+      return mainContent.innerHTML
+    }
+    return ""
+  })
+
+  const markdown = turndownService.turndown(content)
+  const cleanedContent = cleanMarkdown(markdown)
+
+  return {
+    name: "error_codes",
+    content: cleanedContent,
+    sourceUrl: url
+  }
+}
+
+/**
+ * Extract Notation
+ */
+const extractNotation = async (page, turndownService) => {
+  console.log("Extracting Notation...")
+
+  const url = `${BASE_URL}/notation`
+  await page.goto(url, { waitUntil: "networkidle0", timeout: 60000 })
+
+  const content = await page.evaluate(() => {
+    // Transform div-based tables to standard HTML tables
+    const transformDivTables = () => {
+      const flattenCell = (cell) => {
+        const ps = cell.querySelectorAll('p')
+        ps.forEach(p => {
+          const span = document.createElement('span')
+          span.innerHTML = p.innerHTML + '<br>'
+          p.parentNode.replaceChild(span, p)
+        })
+        const divs = cell.querySelectorAll('div')
+        divs.forEach(div => {
+          const span = document.createElement('span')
+          span.innerHTML = div.innerHTML
+          div.parentNode.replaceChild(span, div)
+        })
+      }
+
+      const tables = document.querySelectorAll('div[role="table"]')
+      tables.forEach(divTable => {
+        const newTable = document.createElement('table')
+        const rowGroups = divTable.querySelectorAll('div[role="rowgroup"]')
+        rowGroups.forEach(group => {
+          const rows = group.querySelectorAll('div[role="row"]')
+          rows.forEach(row => {
+            const isHeader = row.querySelector('div[role="columnheader"]')
+            const tr = document.createElement('tr')
+            if (isHeader) {
+              const headers = row.querySelectorAll('div[role="columnheader"]')
+              headers.forEach(header => {
+                const th = document.createElement('th')
+                const tempDiv = document.createElement('div')
+                tempDiv.innerHTML = header.innerHTML
+                flattenCell(tempDiv)
+                th.innerHTML = tempDiv.innerHTML
+                tr.appendChild(th)
+              })
+              let thead = newTable.querySelector('thead')
+              if (!thead) {
+                thead = document.createElement('thead')
+                newTable.appendChild(thead)
+              }
+              thead.appendChild(tr)
+            } else {
+              const cells = row.querySelectorAll('div[role="cell"]')
+              cells.forEach(cell => {
+                const td = document.createElement('td')
+                const tempDiv = document.createElement('div')
+                tempDiv.innerHTML = cell.innerHTML
+                flattenCell(tempDiv)
+                td.innerHTML = tempDiv.innerHTML
+                tr.appendChild(td)
+              })
+              let tbody = newTable.querySelector('tbody')
+              if (!tbody) {
+                tbody = document.createElement('tbody')
+                newTable.appendChild(tbody)
+              }
+              tbody.appendChild(tr)
+            }
+          })
+        })
+        divTable.parentNode.replaceChild(newTable, divTable)
+      })
+    }
+    transformDivTables()
+    
+    const mainContent = document.querySelector(
+      'main, article, [role="main"], .content'
+    )
+    if (mainContent) {
+      return mainContent.innerHTML
+    }
+    return ""
+  })
+
+  const markdown = turndownService.turndown(content)
+  const cleanedContent = cleanMarkdown(markdown)
+
+  return {
+    name: "response_formats",
+    content: cleanedContent,
+    sourceUrl: url
+  }
 }
 
 /**
@@ -417,6 +804,12 @@ const main = async () => {
 
   const turndownService = createTurndownBuilder()
     .withTablesWithoutHeaders()
+    .withCustomRule("keepBr", {
+      filter: "br",
+      replacement: function () {
+        return "<br>"
+      }
+    })
     .build()
 
   try {
@@ -431,11 +824,15 @@ const main = async () => {
       turndownService
     )
     const wsEndpoints = await extractWebSocketEndpoints(page, turndownService)
+    const errorCodes = await extractErrorCodes(page, turndownService)
+    const notation = await extractNotation(page, turndownService)
 
     const allEndpoints = [
       ...infoEndpoints,
       ...exchangeEndpoints,
-      ...wsEndpoints
+      ...wsEndpoints,
+      errorCodes,
+      notation
     ]
 
     console.log(`\nExtracted ${allEndpoints.length} total endpoints`)
@@ -445,6 +842,28 @@ const main = async () => {
 
     // Classify and save each endpoint
     allEndpoints.forEach(endpoint => {
+      if (endpoint.name === "error_codes") {
+        const content = `# Error Responses
+        
+**Source:** ${endpoint.sourceUrl}
+
+${endpoint.content}
+`
+        writeFile(path.join(OUTPUT_DIR, "error_codes.md"), content)
+        return
+      }
+
+      if (endpoint.name === "response_formats") {
+        const content = `# Response Formats
+        
+**Source:** ${endpoint.sourceUrl}
+
+${endpoint.content}
+`
+        writeFile(path.join(OUTPUT_DIR, "response_formats.md"), content)
+        return
+      }
+
       const category = classifyEndpoint(endpoint.name, endpoint.content)
       saveEndpoint(endpoint, category)
 

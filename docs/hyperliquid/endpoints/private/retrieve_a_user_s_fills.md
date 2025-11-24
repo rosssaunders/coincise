@@ -9,46 +9,17 @@ Returns at most 2000 most recent fills
 
 Headers
 
-Name
-
-Type
-
-Description
-
-Content-Type\*
-
-String
-
-"application/json"
+| Name               | Type       | Description            |
+| ------------------ | ---------- | ---------------------- |
+| Content-Type\*<br> | String<br> | "application/json"<br> |
 
 Request Body
 
-Name
-
-Type
-
-Description
-
-type\*
-
-String
-
-"userFills"
-
-user\*
-
-String
-
-Address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000.
-
-aggregateByTime
-
-bool
-
-When true, partial fills are combined when a crossing order gets filled by
-multiple different resting orders. Resting orders filled by multiple crossing
-orders are only aggregated if in the same block.
+| Name                | Type       | Description                                                                                                                                                                                                   |
+| ------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type\*<br>          | String<br> | "userFills"<br>                                                                                                                                                                                               |
+| user\*<br>          | String<br> | Address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.<br>                                                                                                              |
+| aggregateByTime<br> | bool<br>   | When true, partial fills are combined when a crossing order gets filled by multiple different resting orders. Resting orders filled by multiple crossing orders are only aggregated if in the same block.<br> |
 
 200: OK
 

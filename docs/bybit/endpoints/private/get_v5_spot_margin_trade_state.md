@@ -14,15 +14,15 @@ None
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| spotLeverage | string | Spot margin leverage. Returns `""` if the margin trade is turned off |
-| spotMarginMode | string | Spot margin status. `1`: on, `0`: off |
+| Parameter         | Type   | Comments                                                                      |
+| :---------------- | :----- | ----------------------------------------------------------------------------- |
+| spotLeverage      | string | Spot margin leverage. Returns `""` if the margin trade is turned off          |
+| spotMarginMode    | string | Spot margin status. `1`: on, `0`: off                                         |
 | effectiveLeverage | string | actual leverage ratio. Precision retains 2 decimal places, truncate downwards |
 
 [RUN >>](/docs/api-explorer/v5/spot-margin-uta/status)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -35,7 +35,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .getSpotMarginState()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .getSpotMarginState()
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

@@ -10,24 +10,24 @@ GET `/v5/ins-loan/repaid-history`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| startTime | false | integer | The start timestamp (ms) |
-| endTime | false | integer | The end timestamp (ms) |
-| limit | false | integer | Limit for data size. \[`1`, `100`\]. Default: `100` |
+| Parameter | Required | Type    | Comments                                            |
+| :-------- | :------- | :------ | --------------------------------------------------- |
+| startTime | false    | integer | The start timestamp (ms)                            |
+| endTime   | false    | integer | The end timestamp (ms)                              |
+| limit     | false    | integer | Limit for data size. \[`1`, `100`\]. Default: `100` |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| repayInfo | array | Object |
-| \> repayOrderId | string | Repaid order ID |
-| \> repaidTime | string | Repaid timestamp (ms) |
-| \> token | string | Repaid coin |
-| \> quantity | string | Repaid principle |
-| \> interest | string | Repaid interest |
+| Parameter       | Type   | Comments                                                       |
+| :-------------- | :----- | -------------------------------------------------------------- |
+| repayInfo       | array  | Object                                                         |
+| \> repayOrderId | string | Repaid order ID                                                |
+| \> repaidTime   | string | Repaid timestamp (ms)                                          |
+| \> token        | string | Repaid coin                                                    |
+| \> quantity     | string | Repaid principle                                               |
+| \> interest     | string | Repaid interest                                                |
 | \> businessType | string | Repaid type. `1`：normal repayment; `2`：repaid by liquidation |
-| \> status | string | `1`：success; `2`：fail |
+| \> status       | string | `1`：success; `2`：fail                                        |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -40,7 +40,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .getInstitutionalLendingRepayOrders({    limit: 100,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .getInstitutionalLendingRepayOrders({ limit: 100 })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

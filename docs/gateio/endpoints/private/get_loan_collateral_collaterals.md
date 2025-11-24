@@ -1,6 +1,7 @@
 # GET /loan/collateral/collaterals
 
-**Source:** [/loan/collateral/collaterals](https://www.gate.io/docs/developers/apiv4/en/#listcollateralrecords-parameters)
+**Source:**
+[/loan/collateral/collaterals](https://www.gate.io/docs/developers/apiv4/en/#listcollateralrecords-parameters)
 
 ## Authentication
 

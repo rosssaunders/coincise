@@ -1,6 +1,7 @@
 # GET /spot/currencies/{currency}
 
-**Source:** [/spot/currencies/{currency}](https://www.gate.io/docs/developers/apiv4/en/#getcurrency-parameters)
+**Source:**
+[/spot/currencies/{currency}](https://www.gate.io/docs/developers/apiv4/en/#getcurrency-parameters)
 
 ## Authentication
 

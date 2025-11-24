@@ -1,6 +1,7 @@
 # GET /margin/accounts
 
-**Source:** [/margin/accounts](https://www.gate.io/docs/developers/apiv4/en/#listisolatedmarginaccounts-parameters)
+**Source:**
+[/margin/accounts](https://www.gate.io/docs/developers/apiv4/en/#listisolatedmarginaccounts-parameters)
 
 ## Authentication
 

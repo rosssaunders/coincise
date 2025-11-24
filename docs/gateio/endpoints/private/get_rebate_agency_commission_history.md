@@ -1,6 +1,7 @@
 # GET /rebate/agency/commission_history
 
-**Source:** [/rebate/agency/commission_history](https://www.gate.io/docs/developers/apiv4/en/#agencycommissionshistory-parameters)
+**Source:**
+[/rebate/agency/commission_history](https://www.gate.io/docs/developers/apiv4/en/#agencycommissionshistory-parameters)
 
 ## Authentication
 

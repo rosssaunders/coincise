@@ -1,6 +1,7 @@
 # GET /unified/history_loan_rate
 
-**Source:** [/unified/history_loan_rate](https://www.gate.io/docs/developers/apiv4/en/#gethistoryloanrate-parameters)
+**Source:**
+[/unified/history_loan_rate](https://www.gate.io/docs/developers/apiv4/en/#gethistoryloanrate-parameters)
 
 ## Authentication
 

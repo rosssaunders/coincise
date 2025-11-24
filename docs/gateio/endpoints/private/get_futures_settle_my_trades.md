@@ -1,6 +1,7 @@
 # GET /futures/{settle}/my_trades
 
-**Source:** [/futures/{settle}/my_trades](https://www.gate.io/docs/developers/apiv4/en/#getmytrades-parameters)
+**Source:**
+[/futures/{settle}/my_trades](https://www.gate.io/docs/developers/apiv4/en/#getmytrades-parameters)
 
 ## Authentication
 

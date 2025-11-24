@@ -1,6 +1,7 @@
 # POST /spot/batch_orders
 
-**Source:** [/spot/batch_orders](https://www.gate.io/docs/developers/apiv4/en/#createbatchorders-parameters)
+**Source:**
+[/spot/batch_orders](https://www.gate.io/docs/developers/apiv4/en/#createbatchorders-parameters)
 
 ## Authentication
 

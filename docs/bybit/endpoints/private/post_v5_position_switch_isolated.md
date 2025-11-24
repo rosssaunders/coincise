@@ -1,12 +1,13 @@
 # POST /v5/position/switch-isolated
 
-**Source:** [Switch Cross/Isolated Margin](https://bybit-exchange.github.io/docs/v5/position/cross-isolate)
+**Source:**
+[Switch Cross/Isolated Margin](https://bybit-exchange.github.io/docs/v5/position/cross-isolate)
 
 ## Authentication
 
 Required (Private Endpoint)
 
--   Switch Cross/Isolated Margin
+- Switch Cross/Isolated Margin
 
 # Switch Cross/Isolated Margin
 
@@ -18,22 +19,23 @@ POST `/v5/position/switch-isolated`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [category](/docs/v5/enum#category) | **true** | string | Product type
--   [UTA2.0](/docs/v5/acct-mode#uta-20): not supported
--   [UTA1.0](/docs/v5/acct-mode#uta-10): `inverse`
--   Classic: `linear`(USDT Preps), `inverse`
+| Parameter                          | Required | Type   | Comments     |
+| :--------------------------------- | :------- | :----- | ------------ |
+| [category](/docs/v5/enum#category) | **true** | string | Product type |
 
- |
-| symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only |
-| tradeMode | **true** | integer | `0`: cross margin. `1`: isolated margin |
-| buyLeverage | **true** | string | The value must be equal to `sellLeverage` value |
-| sellLeverage | **true** | string | The value must be equal to `buyLeverage` value |
+- [UTA2.0](/docs/v5/acct-mode#uta-20): not supported
+- [UTA1.0](/docs/v5/acct-mode#uta-10): `inverse`
+- Classic: `linear`(USDT Preps), `inverse`
+
+| | symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only | |
+tradeMode | **true** | integer | `0`: cross margin. `1`: isolated margin | |
+buyLeverage | **true** | string | The value must be equal to `sellLeverage`
+value | | sellLeverage | **true** | string | The value must be equal to
+`buyLeverage` value |
 
 [RUN >>](/docs/api-explorer/v5/position/cross-isolate)
 
-* * *
+---
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -54,7 +56,26 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: "YOUR_API_KEY",    secret: "YOUR_API_SECRET",});client    .switchIsolatedMargin({        category: 'linear',        symbol: 'ETHUSDT',        tradeMode: 1,        buyLeverage: '10',        sellLeverage: '10',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .switchIsolatedMargin({
+    category: "linear",
+    symbol: "ETHUSDT",
+    tradeMode: 1,
+    buyLeverage: "10",
+    sellLeverage: "10"
+  })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

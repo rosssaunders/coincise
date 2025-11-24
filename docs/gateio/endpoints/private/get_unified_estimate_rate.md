@@ -1,6 +1,7 @@
 # GET /unified/estimate_rate
 
-**Source:** [/unified/estimate_rate](https://www.gate.io/docs/developers/apiv4/en/#getunifiedestimaterate-parameters)
+**Source:**
+[/unified/estimate_rate](https://www.gate.io/docs/developers/apiv4/en/#getunifiedestimaterate-parameters)
 
 ## Authentication
 

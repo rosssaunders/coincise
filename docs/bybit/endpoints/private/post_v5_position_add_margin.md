@@ -8,59 +8,56 @@ POST `/v5/position/add-margin`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [category](/docs/v5/enum#category) | **true** | string | Product type
--   [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10): `linear`, `inverse`
--   Classic account: `linear`, `inverse`
+| Parameter                          | Required | Type   | Comments     |
+| :--------------------------------- | :------- | :----- | ------------ |
+| [category](/docs/v5/enum#category) | **true** | string | Product type |
 
- |
-| symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only |
-| margin | **true** | string | Add or reduce. To add, then `10`; To reduce, then `-10`. Support up to 4 decimal |
-| [positionIdx](/docs/v5/enum#positionidx) | false | integer | Used to identify positions in different position modes. For hedge mode position, this param is **required**
+- [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10):
+  `linear`, `inverse`
+- Classic account: `linear`, `inverse`
 
--   `0`: one-way mode
--   `1`: hedge-mode Buy side
--   `2`: hedge-mode Sell side
+| | symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only | |
+margin | **true** | string | Add or reduce. To add, then `10`; To reduce, then
+`-10`. Support up to 4 decimal | | [positionIdx](/docs/v5/enum#positionidx) |
+false | integer | Used to identify positions in different position modes. For
+hedge mode position, this param is **required**
 
- |
+- `0`: one-way mode
+- `1`: hedge-mode Buy side
+- `2`: hedge-mode Sell side
+
+|
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| [category](/docs/v5/enum#category) | string | Product type |
-| symbol | string | Symbol name |
-| [positionIdx](/docs/v5/enum#positionidx) | integer | Position idx, used to identify positions in different position modes
--   `0`: One-Way Mode
--   `1`: Buy side of both side mode
--   `2`: Sell side of both side mode
+| Parameter                                | Type    | Comments                                                             |
+| :--------------------------------------- | :------ | -------------------------------------------------------------------- |
+| [category](/docs/v5/enum#category)       | string  | Product type                                                         |
+| symbol                                   | string  | Symbol name                                                          |
+| [positionIdx](/docs/v5/enum#positionidx) | integer | Position idx, used to identify positions in different position modes |
 
- |
-| riskId | integer | Risk limit ID |
-| riskLimitValue | string | Risk limit value |
-| size | string | Position size |
-| avgPrice | string | Average entry price |
-| liqPrice | string | Liquidation price |
-| bustPrice | string | Bankruptcy price |
-| markPrice | string | Last mark price |
-| positionValue | string | Position value |
-| leverage | string | Position leverage |
-| autoAddMargin | integer | Whether to add margin automatically. `0`: false, `1`: true |
-| [positionStatus](/docs/v5/enum#positionstatus) | String | Position status. `Normal`, `Liq`, `Adl` |
-| positionIM | string | Initial margin |
-| positionMM | string | Maintenance margin |
-| takeProfit | string | Take profit price |
-| stopLoss | string | Stop loss price |
-| trailingStop | string | Trailing stop (The distance from market price) |
-| unrealisedPnl | string | Unrealised PnL |
-| cumRealisedPnl | string | Cumulative realised pnl |
-| createdTime | string | Timestamp of the first time a position was created on this symbol (ms) |
-| updatedTime | string | Position updated timestamp (ms) |
+- `0`: One-Way Mode
+- `1`: Buy side of both side mode
+- `2`: Sell side of both side mode
+
+| | riskId | integer | Risk limit ID | | riskLimitValue | string | Risk limit
+value | | size | string | Position size | | avgPrice | string | Average entry
+price | | liqPrice | string | Liquidation price | | bustPrice | string |
+Bankruptcy price | | markPrice | string | Last mark price | | positionValue |
+string | Position value | | leverage | string | Position leverage | |
+autoAddMargin | integer | Whether to add margin automatically. `0`: false, `1`:
+true | | [positionStatus](/docs/v5/enum#positionstatus) | String | Position
+status. `Normal`, `Liq`, `Adl` | | positionIM | string | Initial margin | |
+positionMM | string | Maintenance margin | | takeProfit | string | Take profit
+price | | stopLoss | string | Stop loss price | | trailingStop | string |
+Trailing stop (The distance from market price) | | unrealisedPnl | string |
+Unrealised PnL | | cumRealisedPnl | string | Cumulative realised pnl | |
+createdTime | string | Timestamp of the first time a position was created on
+this symbol (ms) | | updatedTime | string | Position updated timestamp (ms) |
 
 [RUN >>](/docs/api-explorer/v5/position/manual-add-margin)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -77,7 +74,20 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: "YOUR_API_KEY",    secret: "YOUR_API_SECRET",});client    .addOrReduceMargin({        category: 'linear',        symbol: 'BTCUSDT',        margin: '10',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .addOrReduceMargin({ category: "linear", symbol: "BTCUSDT", margin: "10" })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

@@ -5,9 +5,10 @@ Use **master** user's api key\*\*.
 
 tip
 
-The API key must have one of the below permissions in order to call this endpoint
+The API key must have one of the below permissions in order to call this
+endpoint
 
--   master API key: "Account Transfer", "Subaccount Transfer", "Withdrawal"
+- master API key: "Account Transfer", "Subaccount Transfer", "Withdrawal"
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -15,9 +16,9 @@ POST `/v5/user/del-submember`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| subMemberId | **true** | string | Sub UID |
+| Parameter   | Required | Type   | Comments |
+| :---------- | :------- | :----- | -------- |
+| subMemberId | **true** | string | Sub UID  |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -34,7 +35,20 @@ POST /v5/user/del-submember HTTP/1.1Host: api.bybit.comX-BAPI-API-KEY: xxxxxxxxx
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .deleteSubMember({    subMemberId: 'subUID',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .deleteSubMember({ subMemberId: "subUID" })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

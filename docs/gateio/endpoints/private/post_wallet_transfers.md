@@ -1,6 +1,7 @@
 # POST /wallet/transfers
 
-**Source:** [/wallet/transfers](https://www.gate.io/docs/developers/apiv4/en/#transfer-parameters)
+**Source:**
+[/wallet/transfers](https://www.gate.io/docs/developers/apiv4/en/#transfer-parameters)
 
 ## Authentication
 

@@ -1,4 +1,7 @@
-Copy
+# Error Responses
+
+**Source:**
+https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/error-responses
 
 1.  [For developers](/hyperliquid-docs/for-developers)
 2.  [API](/hyperliquid-docs/for-developers/api)
@@ -10,114 +13,25 @@ batched request.
 
 Below is a list of possible batched error responses:
 
-Error source
-
-Error type
-
-Error string
-
-Order
-
-Tick
-
-Price must be divisible by tick size.
-
-Order
-
-MinTradeNtl
-
-Order must have minimum value of $10.
-
-Order
-
-MinTradeSpotNtl
-
-Order must have minimum value of 10 {quote_token}.
-
-Order
-
-PerpMargin
-
-Insufficient margin to place order.
-
-Order
-
-ReduceOnly
-
-Reduce only order would increase position.
-
-Order
-
-BadAloPx
-
-Post only order would have immediately matched, bbo was {bbo}.
-
-Order
-
-IocCancel
-
-Order could not immediately match against any resting orders.
-
-Order
-
-BadTriggerPx
-
-Invalid TP/SL price.
-
-Order
-
-MarketOrderNoLiquidity
-
-No liquidity available for market order.
-
-Order
-
-PositionIncreaseAtOpenInterestCap
-
-Order would increase open interest while open interest is capped
-
-Order
-
-PositionFlipAtOpenInterestCap
-
-Order would increase open interest while open interest is capped
-
-Order
-
-TooAggressiveAtOpenInterestCap
-
-Order rejected due to price more aggressive than oracle while at open interest
-cap
-
-Order
-
-OpenInterestIncrease
-
-Order would increase open interest too quickly
-
-Order
-
-InsufficientSpotBalance
-
-(Spot-only) Order has insufficient spot balance to trade
-
-Order
-
-Oracle
-
-Order price too far from oracle
-
-Order
-
-PerpMaxPosition
-
-Order would cause position to exceed margin tier limit at current leverage
-
-Cancel
-
-MissingOrder
-
-Order was never placed, already canceled, or filled.
+| Error source | Error type                            | Error string                                                                           |
+| ------------ | ------------------------------------- | -------------------------------------------------------------------------------------- |
+| Order<br>    | Tick<br>                              | Price must be divisible by tick size.<br>                                              |
+| Order<br>    | MinTradeNtl<br>                       | Order must have minimum value of $10.<br>                                              |
+| Order<br>    | MinTradeSpotNtl<br>                   | Order must have minimum value of 10 {quote_token}.<br>                                 |
+| Order<br>    | PerpMargin<br>                        | Insufficient margin to place order.<br>                                                |
+| Order<br>    | ReduceOnly<br>                        | Reduce only order would increase position.<br>                                         |
+| Order<br>    | BadAloPx<br>                          | Post only order would have immediately matched, bbo was {bbo}.<br>                     |
+| Order<br>    | IocCancel<br>                         | Order could not immediately match against any resting orders.<br>                      |
+| Order<br>    | BadTriggerPx<br>                      | Invalid TP/SL price.<br>                                                               |
+| Order<br>    | MarketOrderNoLiquidity<br>            | No liquidity available for market order.<br>                                           |
+| Order<br>    | PositionIncreaseAtOpenInterestCap<br> | Order would increase open interest while open interest is capped<br>                   |
+| Order<br>    | PositionFlipAtOpenInterestCap<br>     | Order would increase open interest while open interest is capped<br>                   |
+| Order<br>    | TooAggressiveAtOpenInterestCap<br>    | Order rejected due to price more aggressive than oracle while at open interest cap<br> |
+| Order<br>    | OpenInterestIncrease<br>              | Order would increase open interest too quickly<br>                                     |
+| Order<br>    | InsufficientSpotBalance<br>           | (Spot-only) Order has insufficient spot balance to trade<br>                           |
+| Order<br>    | Oracle<br>                            | Order price too far from oracle<br>                                                    |
+| Order<br>    | PerpMaxPosition<br>                   | Order would cause position to exceed margin tier limit at current leverage<br>         |
+| Cancel<br>   | MissingOrder<br>                      | Order was never placed, already canceled, or filled.<br>                               |
 
 Important: Some errors are a deterministic function of the payload itself, and
 these are instead returned earlier as part of pre-validation. In this case only

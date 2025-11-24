@@ -1,6 +1,7 @@
 # GET /loan/collateral/currencies
 
-**Source:** [/loan/collateral/currencies](https://www.gate.io/docs/developers/apiv4/en/#listcollateralcurrencies-parameters)
+**Source:**
+[/loan/collateral/currencies](https://www.gate.io/docs/developers/apiv4/en/#listcollateralcurrencies-parameters)
 
 ## Authentication
 
@@ -29,11 +30,7 @@ _Query supported borrowing and collateral currencies_
 [
   {
     "loan_currency": "BTC",
-    "collateral_currency": [
-      "BTC",
-      "ETH",
-      "GT"
-    ]
+    "collateral_currency": ["BTC", "ETH", "GT"]
   }
 ]
 ```

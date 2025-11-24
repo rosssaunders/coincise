@@ -1,6 +1,7 @@
 # GET /spot/time
 
-**Source:** [/spot/time](https://www.gate.io/docs/developers/apiv4/en/#getsystemtime-responses)
+**Source:**
+[/spot/time](https://www.gate.io/docs/developers/apiv4/en/#getsystemtime-responses)
 
 ## Authentication
 

@@ -5,47 +5,17 @@ https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endp
 
 Headers
 
-Name
-
-Type
-
-Description
-
-Content-Type\*
-
-String
-
-"application/json"
+| Name               | Type       | Description            |
+| ------------------ | ---------- | ---------------------- |
+| Content-Type\*<br> | String<br> | "application/json"<br> |
 
 Request Body
 
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "validatorL1Stream",
-
-"riskFreeRate": String // e.g. "0.04" for 4%
-
-}
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
+| Name            | Type       | Description                                                                                |
+| --------------- | ---------- | ------------------------------------------------------------------------------------------ |
+| action\*<br>    | Object<br> | {<br>"type": "validatorL1Stream",<br>"riskFreeRate": String // e.g. "0.04" for 4%<br>}<br> |
+| nonce\*<br>     | Number<br> | Recommended to use the current timestamp in milliseconds<br>                               |
+| signature\*<br> | Object<br> | <br>                                                                                       |
 
 200: OK Successful Response
 

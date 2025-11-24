@@ -1,6 +1,7 @@
 # GET /futures/{settle}/orders/{order_id}
 
-**Source:** [/futures/{settle}/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getfuturesorder-parameters)
+**Source:**
+[/futures/{settle}/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getfuturesorder-parameters)
 
 ## Authentication
 

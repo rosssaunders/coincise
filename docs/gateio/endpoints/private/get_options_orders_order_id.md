@@ -1,6 +1,7 @@
 # GET /options/orders/{order_id}
 
-**Source:** [/options/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getoptionsorder-parameters)
+**Source:**
+[/options/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getoptionsorder-parameters)
 
 ## Authentication
 

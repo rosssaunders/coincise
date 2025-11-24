@@ -1,6 +1,7 @@
 # POST /futures/{settle}/batch_cancel_orders
 
-**Source:** [/futures/{settle}/batch_cancel_orders](https://www.gate.io/docs/developers/apiv4/en/#cancelbatchfutureorders-parameters)
+**Source:**
+[/futures/{settle}/batch_cancel_orders](https://www.gate.io/docs/developers/apiv4/en/#cancelbatchfutureorders-parameters)
 
 ## Authentication
 
@@ -17,11 +18,7 @@ Multiple different order IDs can be specified, maximum 20 records per request
 > Body parameter
 
 ```json
-[
-  "1",
-  "2",
-  "3"
-]
+["1", "2", "3"]
 ```
 
 ### Parameters

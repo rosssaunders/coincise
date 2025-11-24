@@ -1,6 +1,7 @@
 # GET /futures/{settle}/fee
 
-**Source:** [/futures/{settle}/fee](https://www.gate.io/docs/developers/apiv4/en/#getfuturesfee-parameters)
+**Source:**
+[/futures/{settle}/fee](https://www.gate.io/docs/developers/apiv4/en/#getfuturesfee-parameters)
 
 ## Authentication
 

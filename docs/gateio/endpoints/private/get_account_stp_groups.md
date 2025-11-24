@@ -1,6 +1,7 @@
 # GET /account/stp_groups
 
-**Source:** [/account/stp_groups](https://www.gate.io/docs/developers/apiv4/en/#liststpgroups-parameters)
+**Source:**
+[/account/stp_groups](https://www.gate.io/docs/developers/apiv4/en/#liststpgroups-parameters)
 
 ## Authentication
 

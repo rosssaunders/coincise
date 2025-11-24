@@ -1,6 +1,7 @@
 # GET /options/positions
 
-**Source:** [/options/positions](https://www.gate.io/docs/developers/apiv4/en/#listoptionspositions-parameters)
+**Source:**
+[/options/positions](https://www.gate.io/docs/developers/apiv4/en/#listoptionspositions-parameters)
 
 ## Authentication
 

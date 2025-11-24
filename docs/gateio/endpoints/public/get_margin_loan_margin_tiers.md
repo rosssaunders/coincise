@@ -1,6 +1,7 @@
 # GET /margin/loan_margin_tiers
 
-**Source:** [/margin/loan_margin_tiers](https://www.gate.io/docs/developers/apiv4/en/#getisolatedmarketmargintier-parameters)
+**Source:**
+[/margin/loan_margin_tiers](https://www.gate.io/docs/developers/apiv4/en/#getisolatedmarketmargintier-parameters)
 
 ## Authentication
 

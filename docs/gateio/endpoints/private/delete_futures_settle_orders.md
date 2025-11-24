@@ -1,6 +1,7 @@
 # DELETE /futures/{settle}/orders
 
-**Source:** [/futures/{settle}/orders](https://www.gate.io/docs/developers/apiv4/en/#cancelfuturesorders-parameters)
+**Source:**
+[/futures/{settle}/orders](https://www.gate.io/docs/developers/apiv4/en/#cancelfuturesorders-parameters)
 
 ## Authentication
 

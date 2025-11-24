@@ -1,6 +1,7 @@
 # GET /margin/transferable
 
-**Source:** [/margin/transferable](https://www.gate.io/docs/developers/apiv4/en/#getisolatedmargintransferable-parameters)
+**Source:**
+[/margin/transferable](https://www.gate.io/docs/developers/apiv4/en/#getisolatedmargintransferable-parameters)
 
 ## Authentication
 

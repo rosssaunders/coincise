@@ -1,6 +1,7 @@
 # GET /rebate/partner/sub_list
 
-**Source:** [/rebate/partner/sub_list](https://www.gate.io/docs/developers/apiv4/en/#partnersublist-parameters)
+**Source:**
+[/rebate/partner/sub_list](https://www.gate.io/docs/developers/apiv4/en/#partnersublist-parameters)
 
 ## Authentication
 

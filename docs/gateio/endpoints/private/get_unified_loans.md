@@ -1,6 +1,7 @@
 # GET /unified/loans
 
-**Source:** [/unified/loans](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloans-parameters)
+**Source:**
+[/unified/loans](https://www.gate.io/docs/developers/apiv4/en/#listunifiedloans-parameters)
 
 ## Authentication
 

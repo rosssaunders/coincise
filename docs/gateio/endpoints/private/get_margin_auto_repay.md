@@ -1,6 +1,7 @@
 # GET /margin/auto_repay
 
-**Source:** [/margin/auto_repay](https://www.gate.io/docs/developers/apiv4/en/#getisolatedautorepaystatus-responses)
+**Source:**
+[/margin/auto_repay](https://www.gate.io/docs/developers/apiv4/en/#getisolatedautorepaystatus-responses)
 
 ## Authentication
 

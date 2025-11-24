@@ -1,6 +1,7 @@
 # POST /unified/loans
 
-**Source:** [/unified/loans](https://www.gate.io/docs/developers/apiv4/en/#createunifiedloan-parameters)
+**Source:**
+[/unified/loans](https://www.gate.io/docs/developers/apiv4/en/#createunifiedloan-parameters)
 
 ## Authentication
 

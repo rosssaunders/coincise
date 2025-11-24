@@ -1,6 +1,7 @@
 # GET /delivery/{settle}/position_close
 
-**Source:** [/delivery/{settle}/position_close](https://www.gate.io/docs/developers/apiv4/en/#listdeliverypositionclose-parameters)
+**Source:**
+[/delivery/{settle}/position_close](https://www.gate.io/docs/developers/apiv4/en/#listdeliverypositionclose-parameters)
 
 ## Authentication
 

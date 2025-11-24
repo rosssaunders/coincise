@@ -1,6 +1,7 @@
 # Set Collateral Coin
 
-You can decide whether the assets in the Unified account needs to be collateral coins.
+You can decide whether the assets in the Unified account needs to be collateral
+coins.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -8,14 +9,15 @@ POST `/v5/account/set-collateral-switch`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| coin | **true** | string | Coin name, uppercase only
--   You can get collateral coin from [here](/docs/v5/account/collateral-info)
--   USDT, USDC cannot be set
+| Parameter | Required | Type   | Comments                  |
+| :-------- | :------- | :----- | ------------------------- |
+| coin      | **true** | string | Coin name, uppercase only |
 
- |
-| collateralSwitch | **true** | string | `ON`: switch on collateral, `OFF`: switch off collateral |
+- You can get collateral coin from [here](/docs/v5/account/collateral-info)
+- USDT, USDC cannot be set
+
+| | collateralSwitch | **true** | string | `ON`: switch on collateral, `OFF`:
+switch off collateral |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -23,7 +25,7 @@ None
 
 [RUN >>](/docs/api-explorer/v5/account/set-collateral)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -36,7 +38,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .setCollateralCoin({    coin: 'BTC',    collateralSwitch: 'ON',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .setCollateralCoin({ coin: "BTC", collateralSwitch: "ON" })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

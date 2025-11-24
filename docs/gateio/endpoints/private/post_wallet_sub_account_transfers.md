@@ -1,6 +1,7 @@
 # POST /wallet/sub_account_transfers
 
-**Source:** [/wallet/sub_account_transfers](https://www.gate.io/docs/developers/apiv4/en/#transferwithsubaccount-parameters)
+**Source:**
+[/wallet/sub_account_transfers](https://www.gate.io/docs/developers/apiv4/en/#transferwithsubaccount-parameters)
 
 ## Authentication
 

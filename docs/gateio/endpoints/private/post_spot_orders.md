@@ -1,6 +1,7 @@
 # POST /spot/orders
 
-**Source:** [/spot/orders](https://www.gate.io/docs/developers/apiv4/en/#createorder-parameters)
+**Source:**
+[/spot/orders](https://www.gate.io/docs/developers/apiv4/en/#createorder-parameters)
 
 ## Authentication
 

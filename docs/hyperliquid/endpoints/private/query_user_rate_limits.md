@@ -7,24 +7,10 @@ https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
 Request Body
 
-Name
-
-Type
-
-Description
-
-user
-
-String
-
-Address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000
-
-type
-
-String
-
-userRateLimit
+| Name     | Type       | Description                                                                                     |
+| -------- | ---------- | ----------------------------------------------------------------------------------------------- |
+| user<br> | String<br> | Address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000<br> |
+| type<br> | String<br> | userRateLimit<br>                                                                               |
 
 200: OK A successful response
 

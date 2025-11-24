@@ -1,6 +1,7 @@
 # GET /rebate/partner/transaction_history
 
-**Source:** [/rebate/partner/transaction_history](https://www.gate.io/docs/developers/apiv4/en/#partnertransactionhistory-parameters)
+**Source:**
+[/rebate/partner/transaction_history](https://www.gate.io/docs/developers/apiv4/en/#partnertransactionhistory-parameters)
 
 ## Authentication
 

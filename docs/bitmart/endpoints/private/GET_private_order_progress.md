@@ -55,7 +55,7 @@ Message Format:
 - channel: Channel name, such as `spot/user/order`
 - symbol: Trading pair, such as `BTC_USDT`
 
-2.The order transaction progress of all trading pairs:
+  2.The order transaction progress of all trading pairs:
 
 - channel: Channel name, such as `spot/user/orders`
 - symbol: All Trading pair, fixed value: `ALL_SYMBOLS`

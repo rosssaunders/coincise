@@ -1,20 +1,24 @@
 # POST /v5/position/set-tpsl-mode
 
-**Source:** [Set TP/SL Mode](https://bybit-exchange.github.io/docs/v5/position/tpsl-mode)
+**Source:**
+[Set TP/SL Mode](https://bybit-exchange.github.io/docs/v5/position/tpsl-mode)
 
 ## Authentication
 
 Required (Private Endpoint)
 
--   Set TP/SL Mode (deprecated)
+- Set TP/SL Mode (deprecated)
 
 # Set TP/SL Mode
 
 tip
 
-*To some extent, this endpoint is **deprecated** because now tpsl is based on order level. This API was used for position level change before.*
+_To some extent, this endpoint is **deprecated** because now tpsl is based on
+order level. This API was used for position level change before._
 
-*However, you still can use it to set an implicit tpsl mode for a certain symbol because when you don't pass "tpslMode" in the place order or trading stop request, system will get the tpslMode by the default setting.*
+_However, you still can use it to set an implicit tpsl mode for a certain symbol
+because when you don't pass "tpslMode" in the place order or trading stop
+request, system will get the tpslMode by the default setting._
 
 Set TP/SL mode to Full or Partial
 
@@ -28,25 +32,26 @@ POST `/v5/position/set-tpsl-mode`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [category](/docs/v5/enum#category) | **true** | string | Product type
--   Unified account: `linear`, `inverse`
--   Classic account: `linear`, `inverse`. *Please note that `category` is **not** involved with business logic*
+| Parameter                          | Required | Type   | Comments     |
+| :--------------------------------- | :------- | :----- | ------------ |
+| [category](/docs/v5/enum#category) | **true** | string | Product type |
 
- |
-| symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only |
-| tpSlMode | **true** | string | TP/SL mode. `Full`,`Partial` |
+- Unified account: `linear`, `inverse`
+- Classic account: `linear`, `inverse`. _Please note that `category` is **not**
+  involved with business logic_
+
+| | symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only | |
+tpSlMode | **true** | string | TP/SL mode. `Full`,`Partial` |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| tpSlMode | string | `Full`,`Partial` |
+| Parameter | Type   | Comments         |
+| :-------- | :----- | ---------------- |
+| tpSlMode  | string | `Full`,`Partial` |
 
 [RUN >>](/docs/api-explorer/v5/position/tpsl-mode)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -63,7 +68,20 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: "YOUR_API_KEY",    secret: "YOUR_API_SECRET",});client    .setTPSLMode({        symbol: 'XRPUSDT',        category: 'linear',        tpSlMode: 'Full',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .setTPSLMode({ symbol: "XRPUSDT", category: "linear", tpSlMode: "Full" })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

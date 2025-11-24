@@ -1,6 +1,7 @@
 # GET /unified/leverage/user_currency_config
 
-**Source:** [/unified/leverage/user_currency_config](https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencyconfig-parameters)
+**Source:**
+[/unified/leverage/user_currency_config](https://www.gate.io/docs/developers/apiv4/en/#getuserleveragecurrencyconfig-parameters)
 
 ## Authentication
 

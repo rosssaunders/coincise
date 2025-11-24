@@ -1,6 +1,7 @@
 # GET /delivery/{settle}/liquidates
 
-**Source:** [/delivery/{settle}/liquidates](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryliquidates-parameters)
+**Source:**
+[/delivery/{settle}/liquidates](https://www.gate.io/docs/developers/apiv4/en/#listdeliveryliquidates-parameters)
 
 ## Authentication
 

@@ -1,6 +1,7 @@
 # GET /margin/uni/loans
 
-**Source:** [/margin/uni/loans](https://www.gate.io/docs/developers/apiv4/en/#listisolateduniloans-parameters)
+**Source:**
+[/margin/uni/loans](https://www.gate.io/docs/developers/apiv4/en/#listisolateduniloans-parameters)
 
 ## Authentication
 

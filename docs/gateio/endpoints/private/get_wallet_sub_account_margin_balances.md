@@ -1,6 +1,7 @@
 # GET /wallet/sub_account_margin_balances
 
-**Source:** [/wallet/sub_account_margin_balances](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountmarginbalances-parameters)
+**Source:**
+[/wallet/sub_account_margin_balances](https://www.gate.io/docs/developers/apiv4/en/#listsubaccountmarginbalances-parameters)
 
 ## Authentication
 

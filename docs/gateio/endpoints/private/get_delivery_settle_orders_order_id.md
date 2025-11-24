@@ -1,6 +1,7 @@
 # GET /delivery/{settle}/orders/{order_id}
 
-**Source:** [/delivery/{settle}/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getdeliveryorder-parameters)
+**Source:**
+[/delivery/{settle}/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getdeliveryorder-parameters)
 
 ## Authentication
 

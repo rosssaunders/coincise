@@ -1,6 +1,7 @@
 # DELETE /sub_accounts/{user_id}/keys/{key}
 
-**Source:** [/sub_accounts/{user_id}/keys/{key}](https://www.gate.io/docs/developers/apiv4/en/#deletesubaccountkeys-parameters)
+**Source:**
+[/sub_accounts/{user_id}/keys/{key}](https://www.gate.io/docs/developers/apiv4/en/#deletesubaccountkeys-parameters)
 
 ## Authentication
 

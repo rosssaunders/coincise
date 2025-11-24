@@ -1,6 +1,7 @@
 # GET /futures/{settle}/price_orders
 
-**Source:** [/futures/{settle}/price_orders](https://www.gate.io/docs/developers/apiv4/en/#listpricetriggeredorders-parameters)
+**Source:**
+[/futures/{settle}/price_orders](https://www.gate.io/docs/developers/apiv4/en/#listpricetriggeredorders-parameters)
 
 ## Authentication
 

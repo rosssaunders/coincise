@@ -10,58 +10,19 @@ available
 
 Headers
 
-Name
-
-Type
-
-Description
-
-Content-Type\*
-
-String
-
-"application/json"
+| Name               | Type       | Description            |
+| ------------------ | ---------- | ---------------------- |
+| Content-Type\*<br> | String<br> | "application/json"<br> |
 
 Request Body
 
-Name
-
-Type
-
-Description
-
-type\*
-
-String
-
-userFillsByTime
-
-user\*
-
-String
-
-Address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000.
-
-startTime\*
-
-int
-
-Start time in milliseconds, inclusive
-
-endTime
-
-int
-
-End time in milliseconds, inclusive. Defaults to current time.
-
-aggregateByTime
-
-bool
-
-When true, partial fills are combined when a crossing order gets filled by
-multiple different resting orders. Resting orders filled by multiple crossing
-orders are only aggregated if in the same block.
+| Name                | Type       | Description                                                                                                                                                                                                   |
+| ------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type\*<br>          | String<br> | userFillsByTime<br>                                                                                                                                                                                           |
+| user\*<br>          | String<br> | Address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.<br>                                                                                                              |
+| startTime\*<br>     | int<br>    | Start time in milliseconds, inclusive<br>                                                                                                                                                                     |
+| endTime<br>         | int<br>    | End time in milliseconds, inclusive. Defaults to current time.<br>                                                                                                                                            |
+| aggregateByTime<br> | bool<br>   | When true, partial fills are combined when a crossing order gets filled by multiple different resting orders. Resting orders filled by multiple crossing orders are only aggregated if in the same block.<br> |
 
 200: OK Number of fills is limited to 2000
 

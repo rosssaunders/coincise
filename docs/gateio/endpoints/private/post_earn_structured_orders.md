@@ -1,6 +1,7 @@
 # POST /earn/structured/orders
 
-**Source:** [/earn/structured/orders](https://www.gate.io/docs/developers/apiv4/en/#placestructuredorder-parameters)
+**Source:**
+[/earn/structured/orders](https://www.gate.io/docs/developers/apiv4/en/#placestructuredorder-parameters)
 
 ## Authentication
 

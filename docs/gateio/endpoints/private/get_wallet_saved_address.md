@@ -1,6 +1,7 @@
 # GET /wallet/saved_address
 
-**Source:** [/wallet/saved_address](https://www.gate.io/docs/developers/apiv4/en/#listsavedaddress-parameters)
+**Source:**
+[/wallet/saved_address](https://www.gate.io/docs/developers/apiv4/en/#listsavedaddress-parameters)
 
 ## Authentication
 

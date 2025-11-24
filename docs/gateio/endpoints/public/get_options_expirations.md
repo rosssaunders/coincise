@@ -1,6 +1,7 @@
 # GET /options/expirations
 
-**Source:** [/options/expirations](https://www.gate.io/docs/developers/apiv4/en/#listoptionsexpirations-parameters)
+**Source:**
+[/options/expirations](https://www.gate.io/docs/developers/apiv4/en/#listoptionsexpirations-parameters)
 
 ## Authentication
 
@@ -26,9 +27,7 @@ _List all expiration dates_
 > 200 Response
 
 ```json
-[
-  1637913600
-]
+[1637913600]
 ```
 
 ### Responses

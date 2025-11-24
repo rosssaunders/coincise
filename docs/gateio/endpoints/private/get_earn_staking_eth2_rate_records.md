@@ -1,6 +1,7 @@
 # GET /earn/staking/eth2/rate_records
 
-**Source:** [/earn/staking/eth2/rate_records](https://www.gate.io/docs/developers/apiv4/en/#ratelisteth2-responses)
+**Source:**
+[/earn/staking/eth2/rate_records](https://www.gate.io/docs/developers/apiv4/en/#ratelisteth2-responses)
 
 ## Authentication
 

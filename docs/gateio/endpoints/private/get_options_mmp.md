@@ -1,6 +1,7 @@
 # GET /options/mmp
 
-**Source:** [/options/mmp](https://www.gate.io/docs/developers/apiv4/en/#getoptionsmmp-parameters)
+**Source:**
+[/options/mmp](https://www.gate.io/docs/developers/apiv4/en/#getoptionsmmp-parameters)
 
 ## Authentication
 

@@ -10,14 +10,14 @@ None
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| timeSecond | string | Bybit server timestamp (sec) |
-| timeNano | string | Bybit server timestamp (nano) |
+| Parameter  | Type   | Comments                      |
+| :--------- | :----- | ----------------------------- |
+| timeSecond | string | Bybit server timestamp (sec)  |
+| timeNano   | string | Bybit server timestamp (nano) |
 
 [RUN >>](/docs/api-explorer/v5/market/time)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -38,7 +38,16 @@ import (    "context"    "fmt"    bybit "github.com/bybit-exchange/bybit.go.api"
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,});client  .getServerTime()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({ testnet: true })
+client
+  .getServerTime()
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

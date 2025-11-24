@@ -1,6 +1,7 @@
 # POST /withdrawals
 
-**Source:** [/withdrawals](https://www.gate.io/docs/developers/apiv4/en/#withdraw-parameters)
+**Source:**
+[/withdrawals](https://www.gate.io/docs/developers/apiv4/en/#withdraw-parameters)
 
 ## Authentication
 

@@ -9,38 +9,16 @@ Note that if the book is empty, the last trade price will be used as a fallback
 
 Headers
 
-Name
-
-Type
-
-Description
-
-Content-Type\*
-
-String
-
-"application/json"
+| Name               | Type       | Description            |
+| ------------------ | ---------- | ---------------------- |
+| Content-Type\*<br> | String<br> | "application/json"<br> |
 
 Request Body
 
-Name
-
-Type
-
-Description
-
-type\*
-
-String
-
-"allMids"
-
-dex
-
-String
-
-Perp dex name. Defaults to the empty string which represents the first perp dex.
-Spot mids are only included with the first perp dex..
+| Name       | Type       | Description                                                                                                                                |
+| ---------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| type\*<br> | String<br> | "allMids"<br>                                                                                                                              |
+| dex<br>    | String<br> | Perp dex name. Defaults to the empty string which represents the first perp dex. Spot mids are only included with the first perp dex..<br> |
 
 200: OK Successful Response
 

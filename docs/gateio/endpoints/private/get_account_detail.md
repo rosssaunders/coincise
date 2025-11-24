@@ -1,6 +1,7 @@
 # GET /account/detail
 
-**Source:** [/account/detail](https://www.gate.io/docs/developers/apiv4/en/#getaccountdetail-responses)
+**Source:**
+[/account/detail](https://www.gate.io/docs/developers/apiv4/en/#getaccountdetail-responses)
 
 ## Authentication
 
@@ -19,12 +20,8 @@ _Retrieve user account information_
 ```json
 {
   "user_id": 1667201533,
-  "ip_whitelist": [
-    "127.0.0.1"
-  ],
-  "currency_pairs": [
-    "USDT_BTC"
-  ],
+  "ip_whitelist": ["127.0.0.1"],
+  "currency_pairs": ["USDT_BTC"],
   "key": {
     "mode": 1
   },

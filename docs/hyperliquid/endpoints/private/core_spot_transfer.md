@@ -10,57 +10,17 @@ bridge. The signature format is human readable for wallet interfaces.
 
 Headers
 
-Name
-
-Type
-
-Description
-
-Content-Type\*
-
-String
-
-"application/json"
+| Name               | Type       | Description            |
+| ------------------ | ---------- | ---------------------- |
+| Content-Type\*<br> | String<br> | "application/json"<br> |
 
 Request Body
 
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "spotSend",
-
-"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead),
-"signatureChainId": the id of the chain used when signing in hexadecimal format;
-e.g. "0xa4b1" for Arbitrum,
-
-"destination": address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000, "token": tokenName:tokenId; e.g.
-"PURR:0xc4bf3f870c0e9465323c0b6ed28096c2",
-
-"amount": amount of token to send as a string, e.g. "0.01",
-
-"time": current timestamp in milliseconds as a Number, should match nonce
-
-}
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
+| Name            | Type       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| --------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| action\*<br>    | Object<br> | {<br>"type": "spotSend",<br>"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead), "signatureChainId": the id of the chain used when signing in hexadecimal format; e.g. "0xa4b1" for Arbitrum,<br>"destination": address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000, "token": tokenName:tokenId; e.g. "PURR:0xc4bf3f870c0e9465323c0b6ed28096c2",<br>"amount": amount of token to send as a string, e.g. "0.01",<br>"time": current timestamp in milliseconds as a Number, should match nonce<br>}<br> |
+| nonce\*<br>     | Number<br> | Recommended to use the current timestamp in milliseconds<br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| signature\*<br> | Object<br> | <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 200: OK Successful Response
 

@@ -1,6 +1,7 @@
 # GET /loan/multi_collateral/ltv
 
-**Source:** [/loan/multi_collateral/ltv](https://www.gate.io/docs/developers/apiv4/en/#getmulticollateralltv-responses)
+**Source:**
+[/loan/multi_collateral/ltv](https://www.gate.io/docs/developers/apiv4/en/#getmulticollateralltv-responses)
 
 ## Authentication
 

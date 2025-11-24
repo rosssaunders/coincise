@@ -8,22 +8,25 @@ POST `/v5/position/set-auto-add-margin`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [category](/docs/v5/enum#category) | **true** | string | Product type
--   [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10): `linear` (USDT Contract, USDC Contract)
--   Classic account: `linear` (USDT Perps)
+| Parameter                          | Required | Type   | Comments     |
+| :--------------------------------- | :------- | :----- | ------------ |
+| [category](/docs/v5/enum#category) | **true** | string | Product type |
 
- |
-| symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only |
-| autoAddMargin | **true** | integer | Turn on/off. `0`: off. `1`: on |
-| [positionIdx](/docs/v5/enum#positionidx) | false | integer | Used to identify positions in different position modes. For hedge mode position, this param is **required**
+- [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10):
+  `linear` (USDT Contract, USDC Contract)
+- Classic account: `linear` (USDT Perps)
 
--   `0`: one-way mode
--   `1`: hedge-mode Buy side
--   `2`: hedge-mode Sell side
+| | symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only | |
+autoAddMargin | **true** | integer | Turn on/off. `0`: off. `1`: on | |
+[positionIdx](/docs/v5/enum#positionidx) | false | integer | Used to identify
+positions in different position modes. For hedge mode position, this param is
+**required**
 
- |
+- `0`: one-way mode
+- `1`: hedge-mode Buy side
+- `2`: hedge-mode Sell side
+
+|
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -31,7 +34,7 @@ None
 
 [RUN >>](/docs/api-explorer/v5/position/auto-add-margin)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -48,7 +51,20 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: "YOUR_API_KEY",    secret: "YOUR_API_SECRET",});client    .setAutoAddMargin({        category: 'linear',        symbol: 'BTCUSDT',        autoAddMargin: 1,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .setAutoAddMargin({ category: "linear", symbol: "BTCUSDT", autoAddMargin: 1 })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

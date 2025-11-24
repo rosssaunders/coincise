@@ -1,12 +1,13 @@
 # Get Tickers
 
-Query for the latest price snapshot, best bid/ask price, and trading volume in the last 24 hours.
+Query for the latest price snapshot, best bid/ask price, and trading volume in
+the last 24 hours.
 
 > **Covers: Spot / USDT contract / USDC contract / Inverse contract / Option**
 
 info
 
-If category=*option*, `symbol` or `baseCoin` must be passed.
+If category=_option_, `symbol` or `baseCoin` must be passed.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -14,110 +15,111 @@ GET `/v5/market/tickers`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [category](/docs/v5/enum#category) | **true** | string | Product type. `spot`,`linear`,`inverse`,`option` |
-| [symbol](/docs/v5/enum#symbol) | false | string | Symbol name, like `BTCUSDT`, uppercase only |
-| baseCoin | false | string | Base coin, uppercase only. Apply to `option` **only** |
-| expDate | false | string | Expiry date. e.g., 25DEC22. Apply to `option` **only** |
+| Parameter                          | Required | Type   | Comments                                               |
+| :--------------------------------- | :------- | :----- | ------------------------------------------------------ |
+| [category](/docs/v5/enum#category) | **true** | string | Product type. `spot`,`linear`,`inverse`,`option`       |
+| [symbol](/docs/v5/enum#symbol)     | false    | string | Symbol name, like `BTCUSDT`, uppercase only            |
+| baseCoin                           | false    | string | Base coin, uppercase only. Apply to `option` **only**  |
+| expDate                            | false    | string | Expiry date. e.g., 25DEC22. Apply to `option` **only** |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
--   Linear/Inverse
+- Linear/Inverse
 
-| Parameter | Type | Comments |
-| --- | --- | --- |
-| category | string | Product type |
-| list | array | Object |
-| \> symbol | string | Symbol name |
-| \> lastPrice | string | Last price |
-| \> indexPrice | string | Index price |
-| \> markPrice | string | Mark price |
-| \> prevPrice24h | string | Market price 24 hours ago |
-| \> price24hPcnt | string | Percentage change of market price relative to 24h |
-| \> highPrice24h | string | The highest price in the last 24 hours |
-| \> lowPrice24h | string | The lowest price in the last 24 hours |
-| \> prevPrice1h | string | Market price an hour ago |
-| \> openInterest | string | Open interest size |
-| \> openInterestValue | string | Open interest value |
-| \> turnover24h | string | Turnover for 24h |
-| \> volume24h | string | Volume for 24h |
-| \> fundingRate | string | Funding rate |
-| \> nextFundingTime | string | Next funding time (ms) |
+| Parameter                 | Type   | Comments                                                          |
+| ------------------------- | ------ | ----------------------------------------------------------------- |
+| category                  | string | Product type                                                      |
+| list                      | array  | Object                                                            |
+| \> symbol                 | string | Symbol name                                                       |
+| \> lastPrice              | string | Last price                                                        |
+| \> indexPrice             | string | Index price                                                       |
+| \> markPrice              | string | Mark price                                                        |
+| \> prevPrice24h           | string | Market price 24 hours ago                                         |
+| \> price24hPcnt           | string | Percentage change of market price relative to 24h                 |
+| \> highPrice24h           | string | The highest price in the last 24 hours                            |
+| \> lowPrice24h            | string | The lowest price in the last 24 hours                             |
+| \> prevPrice1h            | string | Market price an hour ago                                          |
+| \> openInterest           | string | Open interest size                                                |
+| \> openInterestValue      | string | Open interest value                                               |
+| \> turnover24h            | string | Turnover for 24h                                                  |
+| \> volume24h              | string | Volume for 24h                                                    |
+| \> fundingRate            | string | Funding rate                                                      |
+| \> nextFundingTime        | string | Next funding time (ms)                                            |
 | \> predictedDeliveryPrice | string | Predicated delivery price. It has a value 30 mins before delivery |
-| \> basisRate | string | Basis rate |
-| \> basis | string | Basis |
-| \> deliveryFeeRate | string | Delivery fee rate |
-| \> deliveryTime | string | Delivery timestamp (ms), applicable to expiry futures only |
-| \> ask1Size | string | Best ask size |
-| \> bid1Price | string | Best bid price |
-| \> ask1Price | string | Best ask price |
-| \> bid1Size | string | Best bid size |
-| \> preOpenPrice | string | Estimated pre-market contract open price
+| \> basisRate              | string | Basis rate                                                        |
+| \> basis                  | string | Basis                                                             |
+| \> deliveryFeeRate        | string | Delivery fee rate                                                 |
+| \> deliveryTime           | string | Delivery timestamp (ms), applicable to expiry futures only        |
+| \> ask1Size               | string | Best ask size                                                     |
+| \> bid1Price              | string | Best bid price                                                    |
+| \> ask1Price              | string | Best ask price                                                    |
+| \> bid1Size               | string | Best bid size                                                     |
+| \> preOpenPrice           | string | Estimated pre-market contract open price                          |
 
- |
-| \> preQty | string | Estimated pre-market contract open qty-   The value is meaningless once the market opens |
-| \> [curPreListingPhase](/docs/v5/enum#curauctionphase) | string | The current pre-market contract phase |
-| \> fundingIntervalHour | string | Funding interval hour-   This value currently only supports whole hours |
-| \> fundingCap | string | Funding rate upper and lower limits |
-| \> basisRateYear | string | Annual basis rate-   Only for Futures,For Perpetual,it will return "" |
+| | \> preQty | string | Estimated pre-market contract open qty- The value is
+meaningless once the market opens | | \>
+[curPreListingPhase](/docs/v5/enum#curauctionphase) | string | The current
+pre-market contract phase | | \> fundingIntervalHour | string | Funding interval
+hour- This value currently only supports whole hours | | \> fundingCap | string
+| Funding rate upper and lower limits | | \> basisRateYear | string | Annual
+basis rate- Only for Futures,For Perpetual,it will return "" |
 
-| Parameter | Type | Comments |
-| --- | --- | --- |
-| category | string | Product type |
-| list | array | Object |
-| \> symbol | string | Symbol name |
-| \> bid1Price | string | Best bid price |
-| \> bid1Size | string | Best bid size |
-| \> bid1Iv | string | Best bid iv |
-| \> ask1Price | string | Best ask price |
-| \> ask1Size | string | Best ask size |
-| \> ask1Iv | string | Best ask iv |
-| \> lastPrice | string | Last price |
-| \> highPrice24h | string | The highest price in the last 24 hours |
-| \> lowPrice24h | string | The lowest price in the last 24 hours |
-| \> markPrice | string | Mark price |
-| \> indexPrice | string | Index price |
-| \> markIv | string | Mark price iv |
-| \> underlyingPrice | string | Underlying price |
-| \> openInterest | string | Open interest size |
-| \> turnover24h | string | Turnover for 24h |
-| \> volume24h | string | Volume for 24h |
-| \> totalVolume | string | Total volume |
-| \> totalTurnover | string | Total turnover |
-| \> delta | string | Delta |
-| \> gamma | string | Gamma |
-| \> vega | string | Vega |
-| \> theta | string | Theta |
+| Parameter                 | Type   | Comments                                                          |
+| ------------------------- | ------ | ----------------------------------------------------------------- |
+| category                  | string | Product type                                                      |
+| list                      | array  | Object                                                            |
+| \> symbol                 | string | Symbol name                                                       |
+| \> bid1Price              | string | Best bid price                                                    |
+| \> bid1Size               | string | Best bid size                                                     |
+| \> bid1Iv                 | string | Best bid iv                                                       |
+| \> ask1Price              | string | Best ask price                                                    |
+| \> ask1Size               | string | Best ask size                                                     |
+| \> ask1Iv                 | string | Best ask iv                                                       |
+| \> lastPrice              | string | Last price                                                        |
+| \> highPrice24h           | string | The highest price in the last 24 hours                            |
+| \> lowPrice24h            | string | The lowest price in the last 24 hours                             |
+| \> markPrice              | string | Mark price                                                        |
+| \> indexPrice             | string | Index price                                                       |
+| \> markIv                 | string | Mark price iv                                                     |
+| \> underlyingPrice        | string | Underlying price                                                  |
+| \> openInterest           | string | Open interest size                                                |
+| \> turnover24h            | string | Turnover for 24h                                                  |
+| \> volume24h              | string | Volume for 24h                                                    |
+| \> totalVolume            | string | Total volume                                                      |
+| \> totalTurnover          | string | Total turnover                                                    |
+| \> delta                  | string | Delta                                                             |
+| \> gamma                  | string | Gamma                                                             |
+| \> vega                   | string | Vega                                                              |
+| \> theta                  | string | Theta                                                             |
 | \> predictedDeliveryPrice | string | Predicated delivery price. It has a value 30 mins before delivery |
-| \> change24h | string | The change in the last 24 hous |
+| \> change24h              | string | The change in the last 24 hous                                    |
 
-| Parameter | Type | Comments |
-| --- | --- | --- |
-| category | string | Product type |
-| list | array | Object |
-| \> symbol | string | Symbol name |
-| \> bid1Price | string | Best bid price |
-| \> bid1Size | string | Best bid size |
-| \> ask1Price | string | Best ask price |
-| \> ask1Size | string | Best ask size |
-| \> lastPrice | string | Last price |
-| \> prevPrice24h | string | Market price 24 hours ago |
-| \> price24hPcnt | string | Percentage change of market price relative to 24h |
-| \> highPrice24h | string | The highest price in the last 24 hours |
-| \> lowPrice24h | string | The lowest price in the last 24 hours |
-| \> turnover24h | string | Turnover for 24h |
-| \> volume24h | string | Volume for 24h |
-| \> usdIndexPrice | string | USD index price
+| Parameter        | Type   | Comments                                          |
+| ---------------- | ------ | ------------------------------------------------- |
+| category         | string | Product type                                      |
+| list             | array  | Object                                            |
+| \> symbol        | string | Symbol name                                       |
+| \> bid1Price     | string | Best bid price                                    |
+| \> bid1Size      | string | Best bid size                                     |
+| \> ask1Price     | string | Best ask price                                    |
+| \> ask1Size      | string | Best ask size                                     |
+| \> lastPrice     | string | Last price                                        |
+| \> prevPrice24h  | string | Market price 24 hours ago                         |
+| \> price24hPcnt  | string | Percentage change of market price relative to 24h |
+| \> highPrice24h  | string | The highest price in the last 24 hours            |
+| \> lowPrice24h   | string | The lowest price in the last 24 hours             |
+| \> turnover24h   | string | Turnover for 24h                                  |
+| \> volume24h     | string | Volume for 24h                                    |
+| \> usdIndexPrice | string | USD index price                                   |
 
--   non-collateral margin coin returns ""
--   Only those trading pairs like "XXX/USDT" or "XXX/USDC" have the value
+- non-collateral margin coin returns ""
+- Only those trading pairs like "XXX/USDT" or "XXX/USDC" have the value
 
- |
+|
 
 [RUN >>](/docs/api-explorer/v5/market/tickers)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -138,7 +140,16 @@ import com.bybit.api.client.domain.CategoryType;import com.bybit.api.client.doma
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,});client    .getTickers({        category: 'inverse',        symbol: 'BTCUSDT',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({ testnet: true })
+client
+  .getTickers({ category: "inverse", symbol: "BTCUSDT" })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ```bash
@@ -158,7 +169,16 @@ import com.bybit.api.client.domain.CategoryType;import com.bybit.api.client.doma
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,});client  .getTickers({    category: 'option',    symbol: 'BTC-30DEC22-18000-C',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({ testnet: true })
+client
+  .getTickers({ category: "option", symbol: "BTC-30DEC22-18000-C" })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ```bash
@@ -178,7 +198,16 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.market.*
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,});client  .getTickers({    category: 'spot',    symbol: 'BTCUSDT',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({ testnet: true })
+client
+  .getTickers({ category: "spot", symbol: "BTCUSDT" })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

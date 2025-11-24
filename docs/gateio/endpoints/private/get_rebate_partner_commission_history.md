@@ -1,6 +1,7 @@
 # GET /rebate/partner/commission_history
 
-**Source:** [/rebate/partner/commission_history](https://www.gate.io/docs/developers/apiv4/en/#partnercommissionshistory-parameters)
+**Source:**
+[/rebate/partner/commission_history](https://www.gate.io/docs/developers/apiv4/en/#partnercommissionshistory-parameters)
 
 ## Authentication
 

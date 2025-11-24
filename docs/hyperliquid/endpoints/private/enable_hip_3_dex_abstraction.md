@@ -13,57 +13,17 @@ balance) when released from positions or open orders.
 
 Headers
 
-Name
-
-Type
-
-Description
-
-Content-Type\*
-
-String
-
-"application/json"
+| Name               | Type       | Description            |
+| ------------------ | ---------- | ---------------------- |
+| Content-Type\*<br> | String<br> | "application/json"<br> |
 
 Request Body
 
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "userDexAbstraction",
-
-"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead),
-
-"signatureChainId": the id of the chain used when signing in hexadecimal format;
-e.g. "0xa4b1" for Arbitrum,
-
-"user": address in 42-character hexadecimal format. Can be a sub-account of the
-user,
-
-"enabled": boolean,
-
-"nonce": current timestamp in milliseconds as a Number, should match nonce
-
-}
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
+| Name            | Type       | Description                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| --------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| action\*<br>    | Object<br> | {<br>"type": "userDexAbstraction",<br>"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead),<br>"signatureChainId": the id of the chain used when signing in hexadecimal format; e.g. "0xa4b1" for Arbitrum,<br>"user": address in 42-character hexadecimal format. Can be a sub-account of the user,<br>"enabled": boolean,<br>"nonce": current timestamp in milliseconds as a Number, should match nonce<br>}<br> |
+| nonce\*<br>     | Number<br> | Recommended to use the current timestamp in milliseconds<br>                                                                                                                                                                                                                                                                                                                                                                   |
+| signature\*<br> | Object<br> | <br>                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 200: OK Successful Response
 

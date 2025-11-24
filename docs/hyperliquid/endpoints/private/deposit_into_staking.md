@@ -10,51 +10,17 @@ staking for delegating to validators.
 
 Headers
 
-Name
-
-Value
-
-Content-Type\*
-
-`application/json`
+| Name               | Value                  |
+| ------------------ | ---------------------- |
+| Content-Type\*<br> | `application/json`<br> |
 
 Body
 
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "cDeposit",
-
-"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead),
-"signatureChainId": the id of the chain used when signing in hexadecimal format;
-e.g. "0xa4b1" for Arbitrum,
-
-"wei": amount of wei to transfer as a number,
-
-"nonce": current timestamp in milliseconds as a Number, must match nonce in
-outer request body
-
-}
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds, must match the nonce
-in the action Object above
-
-signature\*
-
-Object
+| Name            | Type       | Description                                                                                                                                                                                                                                                                                                                                                            |
+| --------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| action\*<br>    | Object<br> | {<br>"type": "cDeposit",<br>"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead), "signatureChainId": the id of the chain used when signing in hexadecimal format; e.g. "0xa4b1" for Arbitrum,<br>"wei": amount of wei to transfer as a number,<br>"nonce": current timestamp in milliseconds as a Number, must match nonce in outer request body<br>}<br> |
+| nonce\*<br>     | Number<br> | Recommended to use the current timestamp in milliseconds, must match the nonce in the action Object above<br>                                                                                                                                                                                                                                                          |
+| signature\*<br> | Object<br> | <br>                                                                                                                                                                                                                                                                                                                                                                   |
 
 Response
 

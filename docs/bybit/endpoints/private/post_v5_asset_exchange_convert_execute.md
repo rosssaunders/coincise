@@ -2,7 +2,8 @@
 
 info
 
-1.  The exchange is async; please check the final status by calling the query result API.
+1.  The exchange is async; please check the final status by calling the query
+    result API.
 2.  Make sure you confirm the quote before it expires.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
@@ -11,18 +12,18 @@ POST `/v5/asset/exchange/convert-execute`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
+| Parameter | Required | Type   | Comments                                                                                       |
+| :-------- | :------- | :----- | ---------------------------------------------------------------------------------------------- |
 | quoteTxId | **true** | string | The quote tx ID from [Request a Quote](/docs/v5/asset/convert/apply-quote#response-parameters) |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| quoteTxId | string | Quote transaction ID |
-| exchangeStatus | string | Exchange status-   init
+| Parameter      | Type   | Comments              |
+| :------------- | :----- | --------------------- |
+| quoteTxId      | string | Quote transaction ID  |
+| exchangeStatus | string | Exchange status- init |
 
--   failure |
+- failure |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -35,7 +36,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .confirmConvertQuote({    quoteTxId: '10100108106409343501030232064',  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .confirmConvertQuote({ quoteTxId: "10100108106409343501030232064" })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

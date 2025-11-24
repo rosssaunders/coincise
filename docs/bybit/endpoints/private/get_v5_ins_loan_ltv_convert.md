@@ -12,25 +12,25 @@ None
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| ltvInfo | array | Object |
-| \> ltv | string | Risk rate-   ltv is calculated in real time
--   If you have an INS loan, it is highly recommended to query this data every second. Liquidation occurs when it reachs 0.9 (90%) |
-| \> rst | string | Remaining liquidation time (UTC time in seconds). When it is not triggered, it is displayed as an empty string. |
-| \> parentUid | string | The designated Risk Unit ID that was used to bind with the INS loan |
-| \> subAccountUids | array | Bound user ID |
-| \> unpaidAmount | string | Total debt(USDT) |
-| \> unpaidInfo | array | Debt details |
-| \>> token | string | coin |
-| \>> unpaidQty | string | Unpaid principle |
-| \>> unpaidInterest | string | Useless field, please ignore this for now |
-| \> balance | string | Total asset (margin coins converted to USDT). Please read [here](https://www.bybit.com/en-US/help-center/s/article/Over-the-counter-OTC-Lending) to understand the calculation |
-| \> balanceInfo | array | Asset details |
-| \>> token | string | Margin coin |
-| \>> price | string | Margin coin price |
-| \>> qty | string | Margin coin quantity |
-| \>> convertedAmount | string | Margin conversion amount |
+| Parameter                                                                                                                        | Type   | Comments                                                                                                                                                                       |
+| :------------------------------------------------------------------------------------------------------------------------------- | :----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ltvInfo                                                                                                                          | array  | Object                                                                                                                                                                         |
+| \> ltv                                                                                                                           | string | Risk rate- ltv is calculated in real time                                                                                                                                      |
+| - If you have an INS loan, it is highly recommended to query this data every second. Liquidation occurs when it reachs 0.9 (90%) |
+| \> rst                                                                                                                           | string | Remaining liquidation time (UTC time in seconds). When it is not triggered, it is displayed as an empty string.                                                                |
+| \> parentUid                                                                                                                     | string | The designated Risk Unit ID that was used to bind with the INS loan                                                                                                            |
+| \> subAccountUids                                                                                                                | array  | Bound user ID                                                                                                                                                                  |
+| \> unpaidAmount                                                                                                                  | string | Total debt(USDT)                                                                                                                                                               |
+| \> unpaidInfo                                                                                                                    | array  | Debt details                                                                                                                                                                   |
+| \>> token                                                                                                                        | string | coin                                                                                                                                                                           |
+| \>> unpaidQty                                                                                                                    | string | Unpaid principle                                                                                                                                                               |
+| \>> unpaidInterest                                                                                                               | string | Useless field, please ignore this for now                                                                                                                                      |
+| \> balance                                                                                                                       | string | Total asset (margin coins converted to USDT). Please read [here](https://www.bybit.com/en-US/help-center/s/article/Over-the-counter-OTC-Lending) to understand the calculation |
+| \> balanceInfo                                                                                                                   | array  | Asset details                                                                                                                                                                  |
+| \>> token                                                                                                                        | string | Margin coin                                                                                                                                                                    |
+| \>> price                                                                                                                        | string | Margin coin price                                                                                                                                                              |
+| \>> qty                                                                                                                          | string | Margin coin quantity                                                                                                                                                           |
+| \>> convertedAmount                                                                                                              | string | Margin conversion amount                                                                                                                                                       |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -43,7 +43,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .getInstitutionalLendingLTVWithLadderConversionRate()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .getInstitutionalLendingLTVWithLadderConversionRate()
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -58,9 +71,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
         "ltv": "0.75",
         "rst": "",
         "parentUid": "xxxxx",
-        "subAccountUids": [
-          "60568258"
-        ],
+        "subAccountUids": ["60568258"],
         "unpaidAmount": "30",
         "unpaidInfo": [
           {

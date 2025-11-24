@@ -1,6 +1,7 @@
 # GET /spot/currency_pairs
 
-**Source:** [/spot/currency_pairs](https://www.gate.io/docs/developers/apiv4/en/#listcurrencypairs-responses)
+**Source:**
+[/spot/currency_pairs](https://www.gate.io/docs/developers/apiv4/en/#listcurrencypairs-responses)
 
 ## Authentication
 

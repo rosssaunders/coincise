@@ -1,6 +1,7 @@
 # POST /account/debit_fee
 
-**Source:** [/account/debit_fee](https://www.gate.io/docs/developers/apiv4/en/#setdebitfee-parameters)
+**Source:**
+[/account/debit_fee](https://www.gate.io/docs/developers/apiv4/en/#setdebitfee-parameters)
 
 ## Authentication
 

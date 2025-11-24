@@ -11,51 +11,18 @@ the cancel action.
 
 Headers
 
-Name
-
-Type
-
-Description
-
-Content-Type\*
-
-String
-
-"application/json"
+| Name               | Type       | Description            |
+| ------------------ | ---------- | ---------------------- |
+| Content-Type\*<br> | String<br> | "application/json"<br> |
 
 Request Body
 
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "noop"
-
-}
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
-
-expiresAfter
-
-Number
-
-Timestamp in milliseconds
+| Name             | Type       | Description                                                  |
+| ---------------- | ---------- | ------------------------------------------------------------ |
+| action\*<br>     | Object<br> | {<br>"type": "noop"<br>}<br>                                 |
+| nonce\*<br>      | Number<br> | Recommended to use the current timestamp in milliseconds<br> |
+| signature\*<br>  | Object<br> | <br>                                                         |
+| expiresAfter<br> | Number<br> | Timestamp in milliseconds<br>                                |
 
 200: OK Successful Response
 

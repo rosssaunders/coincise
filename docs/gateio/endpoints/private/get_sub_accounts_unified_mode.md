@@ -1,6 +1,7 @@
 # GET /sub_accounts/unified_mode
 
-**Source:** [/sub_accounts/unified_mode](https://www.gate.io/docs/developers/apiv4/en/#listunifiedmode-responses)
+**Source:**
+[/sub_accounts/unified_mode](https://www.gate.io/docs/developers/apiv4/en/#listunifiedmode-responses)
 
 ## Authentication
 

@@ -1,6 +1,7 @@
 # GET /rebate/user/sub_relation
 
-**Source:** [/rebate/user/sub_relation](https://www.gate.io/docs/developers/apiv4/en/#usersubrelation-parameters)
+**Source:**
+[/rebate/user/sub_relation](https://www.gate.io/docs/developers/apiv4/en/#usersubrelation-parameters)
 
 ## Authentication
 

@@ -1,6 +1,7 @@
 # GET /wallet/deposits
 
-**Source:** [/wallet/deposits](https://www.gate.io/docs/developers/apiv4/en/#listdeposits-parameters)
+**Source:**
+[/wallet/deposits](https://www.gate.io/docs/developers/apiv4/en/#listdeposits-parameters)
 
 ## Authentication
 

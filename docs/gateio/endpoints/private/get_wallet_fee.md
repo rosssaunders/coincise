@@ -1,6 +1,7 @@
 # GET /wallet/fee
 
-**Source:** [/wallet/fee](https://www.gate.io/docs/developers/apiv4/en/#gettradefee-parameters)
+**Source:**
+[/wallet/fee](https://www.gate.io/docs/developers/apiv4/en/#gettradefee-parameters)
 
 ## Authentication
 

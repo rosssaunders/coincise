@@ -1,19 +1,19 @@
-# GET /public/get\_supported\_index\_names
+# GET /public/get_supported_index_names
 
 Retrieves the identifiers of all supported Price Indexes
 
 ### Parameters
 
-| Parameter | Required | Type | Enum | Description |
-| --- | --- | --- | --- | --- |
-| type | false | string | all spot derivative | Type of a cryptocurrency price index |
+| Parameter | Required | Type   | Enum                | Description                          |
+| --------- | -------- | ------ | ------------------- | ------------------------------------ |
+| type      | false    | string | all spot derivative | Type of a cryptocurrency price index |
 
 ### Response
 
-| Name | Type | Description |
-| --- | --- | --- |
-| id | integer | The id that was sent in the request |
-| jsonrpc | string | The JSON-RPC version (2.0) result array of object |
+| Name                                   | Type    | Description                                                                               |
+| -------------------------------------- | ------- | ----------------------------------------------------------------------------------------- |
+| id                                     | integer | The id that was sent in the request                                                       |
+| jsonrpc                                | string  | The JSON-RPC version (2.0) result array of object                                         |
 | result[].future_combo_creation_enabled | boolean | Whether future combo creation is enabled for this index (only present when extended=true) |
-| result[].name | string | Index name |
+| result[].name                          | string  | Index name                                                                                |
 | result[].option_combo_creation_enabled | boolean | Whether option combo creation is enabled for this index (only present when extended=true) |

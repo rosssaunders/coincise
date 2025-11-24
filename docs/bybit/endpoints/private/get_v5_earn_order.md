@@ -1,12 +1,13 @@
 # GET /v5/earn/order
 
-**Source:** [Get Stake/Redeem Order History](https://bybit-exchange.github.io/docs/v5/earn/order-history)
+**Source:**
+[Get Stake/Redeem Order History](https://bybit-exchange.github.io/docs/v5/earn/order-history)
 
 ## Authentication
 
 Required (Private Endpoint)
 
--   Get Stake/Redeem Order History
+- Get Stake/Redeem Order History
 
 # Get Stake/Redeem Order History
 
@@ -20,39 +21,39 @@ GET `/v5/earn/order`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| category | **true** | string | `FlexibleSaving`,`OnChain`  
-**Remarks**: currently, only flexible savings and OnChain is supported |
-| orderId | false | string | Order ID.-   For category = `OnChain`, either orderId or orderLinkId is **required**
--   if both are passed, make sure they're matched, otherwise returning empty result |
-| orderLinkId | false | string | Order link ID  
-**Remarks**: Always return the latest one if order link id is ever reused when querying by orderLinkId only |
-| productId | false | string | Product ID |
-| startTime | false | integer | The start timestamp (ms).-   1\. If both are not provided, the default is to return data from the last 7 days.
--   2\. If both are provided, the difference between the endTime and startTime must be less than or equal to 7 days. |
-| endTime | false | integer | The endTime timestamp (ms) |
-| limit | false | integer | Limit for data size per page. Range: \[1, 100\]. Default: 50 |
-| cursor | false | string | Cursor, use the returned `nextPageCursor` to query data for the next page. |
+| Parameter                                                                                                          | Required | Type    | Comments                                                                                                     |
+| :----------------------------------------------------------------------------------------------------------------- | :------- | :------ | ------------------------------------------------------------------------------------------------------------ |
+| category                                                                                                           | **true** | string  | `FlexibleSaving`,`OnChain`                                                                                   |
+| **Remarks**: currently, only flexible savings and OnChain is supported                                             |
+| orderId                                                                                                            | false    | string  | Order ID.- For category = `OnChain`, either orderId or orderLinkId is **required**                           |
+| - if both are passed, make sure they're matched, otherwise returning empty result                                  |
+| orderLinkId                                                                                                        | false    | string  | Order link ID                                                                                                |
+| **Remarks**: Always return the latest one if order link id is ever reused when querying by orderLinkId only        |
+| productId                                                                                                          | false    | string  | Product ID                                                                                                   |
+| startTime                                                                                                          | false    | integer | The start timestamp (ms).- 1\. If both are not provided, the default is to return data from the last 7 days. |
+| - 2\. If both are provided, the difference between the endTime and startTime must be less than or equal to 7 days. |
+| endTime                                                                                                            | false    | integer | The endTime timestamp (ms)                                                                                   |
+| limit                                                                                                              | false    | integer | Limit for data size per page. Range: \[1, 100\]. Default: 50                                                 |
+| cursor                                                                                                             | false    | string  | Cursor, use the returned `nextPageCursor` to query data for the next page.                                   |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| nextPageCursor | string | Refer to the `cursor` request parameter |
-| list | array | Object |
-| \> coin | string | Coin name |
-| \> orderValue | string | amount |
-| \> orderType | string | `Redeem`, `Stake` |
-| \> orderId | string | Order ID |
-| \> orderLinkId | string | Order link ID |
-| \> status | string | Order status `Success`, `Fail`, `Pending` |
-| \> createdAt | string | Order created time, in milliseconds |
-| \> productId | string | Product ID |
-| \> updatedAt | string | Order updated time, in milliseconds |
-| \> swapOrderValue | string | Swap order value. Only for LST Onchain. |
+| Parameter             | Type   | Comments                                                |
+| :-------------------- | :----- | ------------------------------------------------------- |
+| nextPageCursor        | string | Refer to the `cursor` request parameter                 |
+| list                  | array  | Object                                                  |
+| \> coin               | string | Coin name                                               |
+| \> orderValue         | string | amount                                                  |
+| \> orderType          | string | `Redeem`, `Stake`                                       |
+| \> orderId            | string | Order ID                                                |
+| \> orderLinkId        | string | Order link ID                                           |
+| \> status             | string | Order status `Success`, `Fail`, `Pending`               |
+| \> createdAt          | string | Order created time, in milliseconds                     |
+| \> productId          | string | Product ID                                              |
+| \> updatedAt          | string | Order updated time, in milliseconds                     |
+| \> swapOrderValue     | string | Swap order value. Only for LST Onchain.                 |
 | \> estimateRedeemTime | string | Estimate redeem time, in milliseconds. Only for Onchain |
-| \> estimateStakeTime | string | Estimate stake time, in milliseconds. Only for Onchain |
+| \> estimateStakeTime  | string | Estimate stake time, in milliseconds. Only for Onchain  |
 
 ### Request Example[​](#request-example "Direct link to heading")
 

@@ -1,6 +1,7 @@
 # GET /spot/insurance_history
 
-**Source:** [/spot/insurance_history](https://www.gate.io/docs/developers/apiv4/en/#getspotinsurancehistory-parameters)
+**Source:**
+[/spot/insurance_history](https://www.gate.io/docs/developers/apiv4/en/#getspotinsurancehistory-parameters)
 
 ## Authentication
 

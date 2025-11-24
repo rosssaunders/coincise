@@ -1,6 +1,7 @@
 # Get API Key Information
 
-Get the information of the api key. Use the api key pending to be checked to call the endpoint. Both **master and sub user's api key** are applicable.
+Get the information of the api key. Use the api key pending to be checked to
+call the endpoint. Both **master and sub user's api key** are applicable.
 
 tip
 
@@ -16,47 +17,47 @@ None
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| id | string | Unique ID. Internal use |
-| note | string | The remark |
-| apiKey | string | Api key |
-| readOnly | integer | `0`：Read and Write. `1`：Read only |
-| secret | string | Always `""` |
-| permissions | Object | The types of permission |
-| \> ContractTrade | array | Permission of contract trade `Order`, `Position` |
-| \> Spot | array | Permission of spot `SpotTrade` |
-| \> Wallet | array | Permission of wallet `AccountTransfer`, `SubMemberTransfer`(master account), `SubMemberTransferList`(sub account), `Withdraw`(master account) |
-| \> Options | array | Permission of USDC Contract. It supports trade option and USDC perpetual. `OptionsTrade` |
-| \> Derivatives | array | -   Unified account has this permission by default `DerivativesTrade`
--   For classic account, it is always `[]` |
-| \> Exchange | array | Permission of convert `ExchangeHistory` |
-| \> Earn | array | Permission of earn product `Earn` |
-| \> NFT | array | Deprecated, always `[]` |
-| \> BlockTrade | array | Permission of blocktrade. Not applicable to subaccount, always `[]` |
-| \> Affiliate | array | Permission of Affiliate. Only affiliate can have this permission, otherwise always `[]` |
-| \> CopyTrading | array | Always `[]` as Master Trader account just use `ContractTrade` to start CopyTrading |
-| ips | array | IP bound |
-| type | integer | The type of api key. `1`：personal, `2`：connected to the third-party app |
-| deadlineDay | integer | The remaining valid days of api key. Only for those api key with no IP bound or the password has been changed |
-| expiredAt | datetime | The expiry day of the api key. Only for those api key with no IP bound or the password has been changed |
-| createdAt | datetime | The create day of the api key |
-| unified | integer | deprecated field |
-| uta | integer | Whether the account to which the account upgrade to unified trade account. `0`：regular account; `1`：unified trade account |
-| userID | integer | User ID |
-| inviterID | integer | Inviter ID (the UID of the account which invited this account to the platform) |
-| [vipLevel](/docs/v5/enum#viplevel) | string | VIP Level |
-| mktMakerLevel | string | Market maker level |
-| affiliateID | integer | Affiliate Id. `0` represents that there is no binding relationship. |
-| rsaPublicKey | string | Rsa public key |
-| isMaster | boolean | If this api key belongs to master account or not |
-| parentUid | string | The main account uid. Returns `"0"` when the endpoint is called by main account |
-| kycLevel | string | Personal account kyc level. `LEVEL_DEFAULT`, `LEVEL_1`， `LEVEL_2` |
-| kycRegion | string | Personal account kyc region |
+| Parameter                                | Type     | Comments                                                                                                                                      |
+| :--------------------------------------- | :------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| id                                       | string   | Unique ID. Internal use                                                                                                                       |
+| note                                     | string   | The remark                                                                                                                                    |
+| apiKey                                   | string   | Api key                                                                                                                                       |
+| readOnly                                 | integer  | `0`：Read and Write. `1`：Read only                                                                                                           |
+| secret                                   | string   | Always `""`                                                                                                                                   |
+| permissions                              | Object   | The types of permission                                                                                                                       |
+| \> ContractTrade                         | array    | Permission of contract trade `Order`, `Position`                                                                                              |
+| \> Spot                                  | array    | Permission of spot `SpotTrade`                                                                                                                |
+| \> Wallet                                | array    | Permission of wallet `AccountTransfer`, `SubMemberTransfer`(master account), `SubMemberTransferList`(sub account), `Withdraw`(master account) |
+| \> Options                               | array    | Permission of USDC Contract. It supports trade option and USDC perpetual. `OptionsTrade`                                                      |
+| \> Derivatives                           | array    | - Unified account has this permission by default `DerivativesTrade`                                                                           |
+| - For classic account, it is always `[]` |
+| \> Exchange                              | array    | Permission of convert `ExchangeHistory`                                                                                                       |
+| \> Earn                                  | array    | Permission of earn product `Earn`                                                                                                             |
+| \> NFT                                   | array    | Deprecated, always `[]`                                                                                                                       |
+| \> BlockTrade                            | array    | Permission of blocktrade. Not applicable to subaccount, always `[]`                                                                           |
+| \> Affiliate                             | array    | Permission of Affiliate. Only affiliate can have this permission, otherwise always `[]`                                                       |
+| \> CopyTrading                           | array    | Always `[]` as Master Trader account just use `ContractTrade` to start CopyTrading                                                            |
+| ips                                      | array    | IP bound                                                                                                                                      |
+| type                                     | integer  | The type of api key. `1`：personal, `2`：connected to the third-party app                                                                     |
+| deadlineDay                              | integer  | The remaining valid days of api key. Only for those api key with no IP bound or the password has been changed                                 |
+| expiredAt                                | datetime | The expiry day of the api key. Only for those api key with no IP bound or the password has been changed                                       |
+| createdAt                                | datetime | The create day of the api key                                                                                                                 |
+| unified                                  | integer  | deprecated field                                                                                                                              |
+| uta                                      | integer  | Whether the account to which the account upgrade to unified trade account. `0`：regular account; `1`：unified trade account                   |
+| userID                                   | integer  | User ID                                                                                                                                       |
+| inviterID                                | integer  | Inviter ID (the UID of the account which invited this account to the platform)                                                                |
+| [vipLevel](/docs/v5/enum#viplevel)       | string   | VIP Level                                                                                                                                     |
+| mktMakerLevel                            | string   | Market maker level                                                                                                                            |
+| affiliateID                              | integer  | Affiliate Id. `0` represents that there is no binding relationship.                                                                           |
+| rsaPublicKey                             | string   | Rsa public key                                                                                                                                |
+| isMaster                                 | boolean  | If this api key belongs to master account or not                                                                                              |
+| parentUid                                | string   | The main account uid. Returns `"0"` when the endpoint is called by main account                                                               |
+| kycLevel                                 | string   | Personal account kyc level. `LEVEL_DEFAULT`, `LEVEL_1`， `LEVEL_2`                                                                            |
+| kycRegion                                | string   | Personal account kyc region                                                                                                                   |
 
 [RUN >>](/docs/api-explorer/v5/user/apikey-info)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -69,7 +70,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .getQueryApiKey()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .getQueryApiKey()
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -85,20 +99,10 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
     "readOnly": 0,
     "secret": "",
     "permissions": {
-      "ContractTrade": [
-        "Order",
-        "Position"
-      ],
-      "Spot": [
-        "SpotTrade"
-      ],
-      "Wallet": [
-        "AccountTransfer",
-        "SubMemberTransfer"
-      ],
-      "Options": [
-        "OptionsTrade"
-      ],
+      "ContractTrade": ["Order", "Position"],
+      "Spot": ["SpotTrade"],
+      "Wallet": ["AccountTransfer", "SubMemberTransfer"],
+      "Options": ["OptionsTrade"],
       "Derivatives": [],
       "CopyTrading": [],
       "BlockTrade": [],
@@ -107,9 +111,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
       "Affiliate": [],
       "Earn": []
     },
-    "ips": [
-      "*"
-    ],
+    "ips": ["*"],
     "type": 1,
     "deadlineDay": 66,
     "expiredAt": "2023-12-22T07:20:25Z",

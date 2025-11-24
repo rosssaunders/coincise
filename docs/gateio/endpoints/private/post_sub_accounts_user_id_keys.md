@@ -1,6 +1,7 @@
 # POST /sub_accounts/{user_id}/keys
 
-**Source:** [/sub_accounts/{user_id}/keys](https://www.gate.io/docs/developers/apiv4/en/#createsubaccountkeys-parameters)
+**Source:**
+[/sub_accounts/{user_id}/keys](https://www.gate.io/docs/developers/apiv4/en/#createsubaccountkeys-parameters)
 
 ## Authentication
 
@@ -40,10 +41,7 @@ _Create new sub-account API key pair_
       "name": "futures"
     }
   ],
-  "ip_whitelist": [
-    "127.0.0.1",
-    "127.0.0.2"
-  ]
+  "ip_whitelist": ["127.0.0.1", "127.0.0.2"]
 }
 ```
 
@@ -111,10 +109,7 @@ _Create new sub-account API key pair_
       "read_only": false
     }
   ],
-  "ip_whitelist": [
-    "127.0.0.1",
-    "127.0.0.2"
-  ],
+  "ip_whitelist": ["127.0.0.1", "127.0.0.2"],
   "mode": 1,
   "secret": "cddcc6e5e78060e013860bdbe5e737830b96821c027664586fb38b411808f4fd",
   "key": "eb8815bf99d7bb5f8ad6497bdc4774a8",

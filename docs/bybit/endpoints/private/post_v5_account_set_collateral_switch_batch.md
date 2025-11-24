@@ -6,23 +6,24 @@ POST `/v5/account/set-collateral-switch-batch`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| request | **true** | array | Object |
-| \> coin | **true** | string | Coin name, uppercase only
--   You can get collateral coin from [here](/docs/v5/account/collateral-info)
--   USDT, USDC cannot be set
+| Parameter | Required | Type   | Comments                  |
+| :-------- | :------- | :----- | ------------------------- |
+| request   | **true** | array  | Object                    |
+| \> coin   | **true** | string | Coin name, uppercase only |
 
- |
-| \> collateralSwitch | **true** | string | `ON`: switch on collateral, `OFF`: switch off collateral |
+- You can get collateral coin from [here](/docs/v5/account/collateral-info)
+- USDT, USDC cannot be set
+
+| | \> collateralSwitch | **true** | string | `ON`: switch on collateral, `OFF`:
+switch off collateral |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| result | Object |  |
-| \> list | array | Object |
-| \>> coin | string | Coin name |
+| Parameter            | Type   | Comments                                                 |
+| :------------------- | :----- | -------------------------------------------------------- |
+| result               | Object |                                                          |
+| \> list              | array  | Object                                                   |
+| \>> coin             | string | Coin name                                                |
 | \>> collateralSwitch | string | `ON`: switch on collateral, `OFF`: switch off collateral |
 
 ### Request Example[​](#request-example "Direct link to heading")
@@ -36,7 +37,25 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .batchSetCollateralCoin({    request: [      {        coin: 'BTC',        collateralSwitch: 'ON',      },      {        coin: 'ETH',        collateralSwitch: 'OFF',      },    ],  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .batchSetCollateralCoin({
+    request: [
+      { coin: "BTC", collateralSwitch: "ON" },
+      { coin: "ETH", collateralSwitch: "OFF" }
+    ]
+  })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

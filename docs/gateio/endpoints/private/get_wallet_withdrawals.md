@@ -1,6 +1,7 @@
 # GET /wallet/withdrawals
 
-**Source:** [/wallet/withdrawals](https://www.gate.io/docs/developers/apiv4/en/#listwithdrawals-parameters)
+**Source:**
+[/wallet/withdrawals](https://www.gate.io/docs/developers/apiv4/en/#listwithdrawals-parameters)
 
 ## Authentication
 

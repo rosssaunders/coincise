@@ -1,6 +1,7 @@
 # GET /futures/{settle}/index_constituents/{index}
 
-**Source:** [/futures/{settle}/index_constituents/{index}](https://www.gate.io/docs/developers/apiv4/en/#getindexconstituents-parameters)
+**Source:**
+[/futures/{settle}/index_constituents/{index}](https://www.gate.io/docs/developers/apiv4/en/#getindexconstituents-parameters)
 
 ## Authentication
 
@@ -39,21 +40,15 @@ _Query index constituents_
   "constituents": [
     {
       "exchange": "Binance",
-      "symbols": [
-        "BTC_USDT"
-      ]
+      "symbols": ["BTC_USDT"]
     },
     {
       "exchange": "Gate.com",
-      "symbols": [
-        "BTC_USDT"
-      ]
+      "symbols": ["BTC_USDT"]
     },
     {
       "exchange": "Huobi",
-      "symbols": [
-        "BTC_USDT"
-      ]
+      "symbols": ["BTC_USDT"]
     }
   ]
 }

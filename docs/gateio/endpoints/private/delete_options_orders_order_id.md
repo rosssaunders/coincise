@@ -1,6 +1,7 @@
 # DELETE /options/orders/{order_id}
 
-**Source:** [/options/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorder-parameters)
+**Source:**
+[/options/orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#canceloptionsorder-parameters)
 
 ## Authentication
 

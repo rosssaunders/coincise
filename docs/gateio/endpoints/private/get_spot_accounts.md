@@ -1,6 +1,7 @@
 # GET /spot/accounts
 
-**Source:** [/spot/accounts](https://www.gate.io/docs/developers/apiv4/en/#listspotaccounts-parameters)
+**Source:**
+[/spot/accounts](https://www.gate.io/docs/developers/apiv4/en/#listspotaccounts-parameters)
 
 ## Authentication
 

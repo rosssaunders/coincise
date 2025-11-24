@@ -1,6 +1,7 @@
 # POST /futures/{settle}/dual_comp/positions/cross_mode
 
-**Source:** [/futures/{settle}/dual_comp/positions/cross_mode](https://www.gate.io/docs/developers/apiv4/en/#updatedualcomppositioncrossmode-parameters)
+**Source:**
+[/futures/{settle}/dual_comp/positions/cross_mode](https://www.gate.io/docs/developers/apiv4/en/#updatedualcomppositioncrossmode-parameters)
 
 ## Authentication
 

@@ -6,7 +6,8 @@ API key needs "Earn" permission
 
 note
 
-For Flexible Saving, fully redeemed position is also returned in the response For Onchain, only active position will be returned in the response
+For Flexible Saving, fully redeemed position is also returned in the response
+For Onchain, only active position will be returned in the response
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -14,29 +15,29 @@ GET `/v5/earn/position`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| category | **true** | string | `FlexibleSaving`,`OnChain` |
-| productId | false | string | Product ID |
-| coin | false | string | Coin name |
+| Parameter | Required | Type   | Comments                   |
+| :-------- | :------- | :----- | -------------------------- |
+| category  | **true** | string | `FlexibleSaving`,`OnChain` |
+| productId | false    | string | Product ID                 |
+| coin      | false    | string | Coin name                  |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| list | array | Object |
-| \> coin | string | Coin name |
-| \> productId | string | Product ID |
-| \> amount | string | Total staked amount |
-| \> totalPnl | string | Return the profit of the current position. Only has value in Onchain non-LST mode |
-| \> claimableYield | string | Yield accrues on an hourly basis and is distributed at 00:30 UTC daily. If you unstake your assets before yield distribution, any undistributed yield will be credited to your account along with your principal. Onchain products do not return values |
-| \> id | string | Position Id. Only for Onchain |
-| \> status | string | `Processing`,`Active`. Only for Onchain |
-| \> orderId | string | Order Id. Only for Onchain |
-| \> estimateRedeemTime | string | Estimate redeem time, in milliseconds. Only for Onchain |
-| \> estimateStakeTime | string | Estimate stake time, in milliseconds. Only for Onchain |
-| \> estimateInterestCalculationTime | string | Estimated Interest accrual time, in milliseconds. Only for Onchain |
-| \> settlementTime | string | Settlement time, in milliseconds. Only has value for Onchain `Fixed` product |
+| Parameter                          | Type   | Comments                                                                                                                                                                                                                                                |
+| :--------------------------------- | :----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| list                               | array  | Object                                                                                                                                                                                                                                                  |
+| \> coin                            | string | Coin name                                                                                                                                                                                                                                               |
+| \> productId                       | string | Product ID                                                                                                                                                                                                                                              |
+| \> amount                          | string | Total staked amount                                                                                                                                                                                                                                     |
+| \> totalPnl                        | string | Return the profit of the current position. Only has value in Onchain non-LST mode                                                                                                                                                                       |
+| \> claimableYield                  | string | Yield accrues on an hourly basis and is distributed at 00:30 UTC daily. If you unstake your assets before yield distribution, any undistributed yield will be credited to your account along with your principal. Onchain products do not return values |
+| \> id                              | string | Position Id. Only for Onchain                                                                                                                                                                                                                           |
+| \> status                          | string | `Processing`,`Active`. Only for Onchain                                                                                                                                                                                                                 |
+| \> orderId                         | string | Order Id. Only for Onchain                                                                                                                                                                                                                              |
+| \> estimateRedeemTime              | string | Estimate redeem time, in milliseconds. Only for Onchain                                                                                                                                                                                                 |
+| \> estimateStakeTime               | string | Estimate stake time, in milliseconds. Only for Onchain                                                                                                                                                                                                  |
+| \> estimateInterestCalculationTime | string | Estimated Interest accrual time, in milliseconds. Only for Onchain                                                                                                                                                                                      |
+| \> settlementTime                  | string | Settlement time, in milliseconds. Only has value for Onchain `Fixed` product                                                                                                                                                                            |
 
 ### Request Example[​](#request-example "Direct link to heading")
 

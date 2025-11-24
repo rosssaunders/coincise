@@ -12,34 +12,16 @@ Supported intervals: "1m", "3m", "5m", "15m", "30m", "1h", "2h", "4h", "8h",
 
 **Headers**
 
-Name
-
-Value
-
-Content-Type\*
-
-"application/json"
+| Name               | Value                  |
+| ------------------ | ---------------------- |
+| Content-Type\*<br> | "application/json"<br> |
 
 **Body**
 
-Name
-
-Type
-
-Description
-
-type\*
-
-String
-
-"candleSnapshot"
-
-req\*
-
-Object
-
-{"coin": <coin>, "interval": "15m", "startTime": <epoch millis>, "endTime":
-<epoch millis>}
+| Name       | Type       | Description                                                                                     |
+| ---------- | ---------- | ----------------------------------------------------------------------------------------------- |
+| type\*<br> | String<br> | "candleSnapshot"<br>                                                                            |
+| req\*<br>  | Object<br> | {"coin": <coin>, "interval": "15m", "startTime": <epoch millis>, "endTime": <epoch millis>}<br> |
 
 **Response**
 

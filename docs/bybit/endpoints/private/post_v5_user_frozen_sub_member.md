@@ -4,9 +4,10 @@ Freeze Sub UID. Use **master user's api key** **only**.
 
 tip
 
-The API key must have one of the below permissions in order to call this endpoint..
+The API key must have one of the below permissions in order to call this
+endpoint..
 
--   master API key: "Account Transfer", "Subaccount Transfer", "Withdrawal"
+- master API key: "Account Transfer", "Subaccount Transfer", "Withdrawal"
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -14,10 +15,10 @@ POST `/v5/user/frozen-sub-member`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| subuid | **true** | integer | Sub user Id |
-| frozen | **true** | integer | `0`：unfreeze, `1`：freeze |
+| Parameter | Required | Type    | Comments                   |
+| :-------- | :------- | :------ | -------------------------- |
+| subuid    | **true** | integer | Sub user Id                |
+| frozen    | **true** | integer | `0`：unfreeze, `1`：freeze |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -34,7 +35,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .setSubUIDFrozenState(53888001, 1)  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .setSubUIDFrozenState(53888001, 1)
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

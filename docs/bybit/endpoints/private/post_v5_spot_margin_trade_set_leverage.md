@@ -6,8 +6,10 @@ Set the user's maximum leverage in spot cross margin
 
 caution
 
-Your account needs to activate spot margin first; i.e., you must have finished the quiz on web / app.  
-The updated leverage must be less than or equal to the maximum leverage of the currency
+Your account needs to activate spot margin first; i.e., you must have finished
+the quiz on web / app.  
+The updated leverage must be less than or equal to the maximum leverage of the
+currency
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -15,14 +17,14 @@ POST `/v5/spot-margin-trade/set-leverage`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| leverage | **true** | string | Leverage. \[`2`, `10`\]. |
-| currency | false | string | Coin name, uppercase only |
+| Parameter | Required | Type   | Comments                  |
+| :-------- | :------- | :----- | ------------------------- |
+| leverage  | **true** | string | Leverage. \[`2`, `10`\].  |
+| currency  | false    | string | Coin name, uppercase only |
 
 [RUN >>](/docs/api-explorer/v5/spot-margin-uta/set-leverage)
 
-* * *
+---
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -39,7 +41,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .setSpotMarginLeverage('4')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .setSpotMarginLeverage("4")
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

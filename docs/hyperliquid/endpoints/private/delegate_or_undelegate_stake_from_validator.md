@@ -10,53 +10,17 @@ delegations to a particular validator have a lockup duration of 1 day.
 
 Headers
 
-Name
-
-Value
-
-Content-Type\*
-
-`application/json`
+| Name               | Value                  |
+| ------------------ | ---------------------- |
+| Content-Type\*<br> | `application/json`<br> |
 
 Body
 
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "tokenDelegate",
-
-"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead),
-"signatureChainId": the id of the chain used when signing in hexadecimal format;
-e.g. "0xa4b1" for Arbitrum,
-
-"validator": address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000, "isUndelegate": boolean,
-
-"wei": number,
-
-"nonce": current timestamp in milliseconds as a Number, must match nonce in
-outer request body
-
-}
-
-nonce\*
-
-number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
+| Name            | Type       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| --------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| action\*<br>    | Object<br> | {<br>"type": "tokenDelegate",<br>"hyperliquidChain": "Mainnet" (on testnet use "Testnet" instead), "signatureChainId": the id of the chain used when signing in hexadecimal format; e.g. "0xa4b1" for Arbitrum,<br>"validator": address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000, "isUndelegate": boolean,<br>"wei": number,<br>"nonce": current timestamp in milliseconds as a Number, must match nonce in outer request body<br>}<br> |
+| nonce\*<br>     | number<br> | Recommended to use the current timestamp in milliseconds<br>                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| signature\*<br> | Object<br> | <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 Response
 

@@ -1,6 +1,7 @@
 # GET /margin/funding_accounts
 
-**Source:** [/margin/funding_accounts](https://www.gate.io/docs/developers/apiv4/en/#listisolatedfundingaccounts-parameters)
+**Source:**
+[/margin/funding_accounts](https://www.gate.io/docs/developers/apiv4/en/#listisolatedfundingaccounts-parameters)
 
 ## Authentication
 

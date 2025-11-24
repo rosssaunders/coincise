@@ -1,6 +1,7 @@
 # GET /futures/{settle}/accounts
 
-**Source:** [/futures/{settle}/accounts](https://www.gate.io/docs/developers/apiv4/en/#listfuturesaccounts-parameters)
+**Source:**
+[/futures/{settle}/accounts](https://www.gate.io/docs/developers/apiv4/en/#listfuturesaccounts-parameters)
 
 ## Authentication
 

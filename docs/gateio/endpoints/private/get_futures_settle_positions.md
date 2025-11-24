@@ -1,6 +1,7 @@
 # GET /futures/{settle}/positions
 
-**Source:** [/futures/{settle}/positions](https://www.gate.io/docs/developers/apiv4/en/#listpositions-parameters)
+**Source:**
+[/futures/{settle}/positions](https://www.gate.io/docs/developers/apiv4/en/#listpositions-parameters)
 
 ## Authentication
 

@@ -1,6 +1,7 @@
 # GET /rebate/broker/transaction_history
 
-**Source:** [/rebate/broker/transaction_history](https://www.gate.io/docs/developers/apiv4/en/#rebatebrokertransactionhistory-parameters)
+**Source:**
+[/rebate/broker/transaction_history](https://www.gate.io/docs/developers/apiv4/en/#rebatebrokertransactionhistory-parameters)
 
 ## Authentication
 

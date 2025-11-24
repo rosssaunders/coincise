@@ -1,6 +1,7 @@
 # POST /futures/{settle}/orders
 
-**Source:** [/futures/{settle}/orders](https://www.gate.io/docs/developers/apiv4/en/#createfuturesorder-parameters)
+**Source:**
+[/futures/{settle}/orders](https://www.gate.io/docs/developers/apiv4/en/#createfuturesorder-parameters)
 
 ## Authentication
 

@@ -1,6 +1,7 @@
 # GET /spot/fee
 
-**Source:** [/spot/fee](https://www.gate.io/docs/developers/apiv4/en/#getfee-parameters)
+**Source:**
+[/spot/fee](https://www.gate.io/docs/developers/apiv4/en/#getfee-parameters)
 
 ## Authentication
 

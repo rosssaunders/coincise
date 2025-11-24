@@ -1,6 +1,7 @@
 # GET /spot/tickers
 
-**Source:** [/spot/tickers](https://www.gate.io/docs/developers/apiv4/en/#listtickers-parameters)
+**Source:**
+[/spot/tickers](https://www.gate.io/docs/developers/apiv4/en/#listtickers-parameters)
 
 ## Authentication
 

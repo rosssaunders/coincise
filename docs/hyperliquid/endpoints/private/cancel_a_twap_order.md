@@ -7,62 +7,19 @@ https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endp
 
 Headers
 
-Name
-
-Type
-
-Description
-
-Content-Type\*
-
-String
-
-"application/json"
+| Name               | Type       | Description            |
+| ------------------ | ---------- | ---------------------- |
+| Content-Type\*<br> | String<br> | "application/json"<br> |
 
 Request Body
 
-Name
-
-Type
-
-Description
-
-action\*
-
-Object
-
-{
-
-"type": "twapCancel",
-
-"a": Number,
-
-"t": Number
-
-} Meaning of keys: a is asset t is twap_id
-
-nonce\*
-
-Number
-
-Recommended to use the current timestamp in milliseconds
-
-signature\*
-
-Object
-
-vaultAddress
-
-String
-
-If trading on behalf of a vault or subaccount, its address in 42-character
-hexadecimal format; e.g. 0x0000000000000000000000000000000000000000
-
-expiresAfter
-
-Number
-
-Timestamp in milliseconds
+| Name             | Type       | Description                                                                                                                                        |
+| ---------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| action\*<br>     | Object<br> | {<br>"type": "twapCancel",<br>"a": Number,<br>"t": Number<br>} Meaning of keys: a is asset t is twap_id<br>                                        |
+| nonce\*<br>      | Number<br> | Recommended to use the current timestamp in milliseconds<br>                                                                                       |
+| signature\*<br>  | Object<br> | <br>                                                                                                                                               |
+| vaultAddress<br> | String<br> | If trading on behalf of a vault or subaccount, its address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000<br> |
+| expiresAfter<br> | Number<br> | Timestamp in milliseconds<br>                                                                                                                      |
 
 200: OK Successful Response
 

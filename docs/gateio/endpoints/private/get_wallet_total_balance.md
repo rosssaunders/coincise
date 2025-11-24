@@ -1,6 +1,7 @@
 # GET /wallet/total_balance
 
-**Source:** [/wallet/total_balance](https://www.gate.io/docs/developers/apiv4/en/#gettotalbalance-parameters)
+**Source:**
+[/wallet/total_balance](https://www.gate.io/docs/developers/apiv4/en/#gettotalbalance-parameters)
 
 ## Authentication
 

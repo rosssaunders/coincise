@@ -1,6 +1,7 @@
 # POST /spot/cross_liquidate_orders
 
-**Source:** [/spot/cross_liquidate_orders](https://www.gate.io/docs/developers/apiv4/en/#createcrossliquidateorder-parameters)
+**Source:**
+[/spot/cross_liquidate_orders](https://www.gate.io/docs/developers/apiv4/en/#createcrossliquidateorder-parameters)
 
 ## Authentication
 

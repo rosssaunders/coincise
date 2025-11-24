@@ -1,6 +1,12 @@
 # Confirm New Risk Limit
 
-It is only applicable when the user is marked as only reducing positions (please see the isReduceOnly field in the [Get Position Info](/docs/v5/position) interface). After the user actively adjusts the risk level, this interface is called to try to calculate the adjusted risk level, and if it passes (retCode=0), the system will remove the position reduceOnly mark. You are recommended to call [Get Position Info](/docs/v5/position) to check `isReduceOnly` field.
+It is only applicable when the user is marked as only reducing positions (please
+see the isReduceOnly field in the [Get Position Info](/docs/v5/position)
+interface). After the user actively adjusts the risk level, this interface is
+called to try to calculate the adjusted risk level, and if it passes
+(retCode=0), the system will remove the position reduceOnly mark. You are
+recommended to call [Get Position Info](/docs/v5/position) to check
+`isReduceOnly` field.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -8,14 +14,14 @@ POST `/v5/position/confirm-pending-mmr`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [category](/docs/v5/enum#category) | **true** | string | Product type
--   Unified account: `linear`, `inverse`
--   Classic account: `linear`, `inverse`
+| Parameter                          | Required | Type   | Comments     |
+| :--------------------------------- | :------- | :----- | ------------ |
+| [category](/docs/v5/enum#category) | **true** | string | Product type |
 
- |
-| symbol | **true** | string | Symbol name |
+- Unified account: `linear`, `inverse`
+- Classic account: `linear`, `inverse`
+
+| | symbol | **true** | string | Symbol name |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 

@@ -7,41 +7,17 @@ https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint
 
 **Headers**
 
-Name
-
-Value
-
-Content-Type\*
-
-"application/json"
+| Name               | Value                  |
+| ------------------ | ---------------------- |
+| Content-Type\*<br> | "application/json"<br> |
 
 **Body**
 
-Name
-
-Type
-
-Description
-
-type\*
-
-String
-
-"maxBuilderFee"
-
-user\*
-
-String
-
-Address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000.
-
-builder\*
-
-String
-
-Address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000.
+| Name          | Type       | Description                                                                                      |
+| ------------- | ---------- | ------------------------------------------------------------------------------------------------ |
+| type\*<br>    | String<br> | "maxBuilderFee"<br>                                                                              |
+| user\*<br>    | String<br> | Address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.<br> |
+| builder\*<br> | String<br> | Address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.<br> |
 
 **Response**
 

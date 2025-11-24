@@ -9,38 +9,16 @@ Returns at most 2000 most recent TWAP slice fills
 
 Headers
 
-Name
-
-Type
-
-Description
-
-Content-Type\*
-
-String
-
-"application/json"
+| Name               | Type       | Description            |
+| ------------------ | ---------- | ---------------------- |
+| Content-Type\*<br> | String<br> | "application/json"<br> |
 
 Request Body
 
-Name
-
-Type
-
-Description
-
-type\*
-
-String
-
-"userTwapSliceFills"
-
-user\*
-
-String
-
-Address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000.
+| Name       | Type       | Description                                                                                      |
+| ---------- | ---------- | ------------------------------------------------------------------------------------------------ |
+| type\*<br> | String<br> | "userTwapSliceFills"<br>                                                                         |
+| user\*<br> | String<br> | Address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.<br> |
 
 200: OK
 

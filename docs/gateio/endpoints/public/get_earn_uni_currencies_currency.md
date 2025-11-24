@@ -1,6 +1,7 @@
 # GET /earn/uni/currencies/{currency}
 
-**Source:** [/earn/uni/currencies/{currency}](https://www.gate.io/docs/developers/apiv4/en/#getunicurrency-parameters)
+**Source:**
+[/earn/uni/currencies/{currency}](https://www.gate.io/docs/developers/apiv4/en/#getunicurrency-parameters)
 
 ## Authentication
 

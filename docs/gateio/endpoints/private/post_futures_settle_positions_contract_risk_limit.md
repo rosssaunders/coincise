@@ -1,6 +1,7 @@
 # POST /futures/{settle}/positions/{contract}/risk_limit
 
-**Source:** [/futures/{settle}/positions/{contract}/risk_limit](https://www.gate.io/docs/developers/apiv4/en/#updatepositionrisklimit-parameters)
+**Source:**
+[/futures/{settle}/positions/{contract}/risk_limit](https://www.gate.io/docs/developers/apiv4/en/#updatepositionrisklimit-parameters)
 
 ## Authentication
 

@@ -9,38 +9,16 @@ Returns at most 2000 most recent historical orders
 
 Headers
 
-Name
-
-Type
-
-Description
-
-Content-Type\*
-
-String
-
-"application/json"
+| Name               | Type       | Description            |
+| ------------------ | ---------- | ---------------------- |
+| Content-Type\*<br> | String<br> | "application/json"<br> |
 
 Request Body
 
-Name
-
-Type
-
-Description
-
-type\*
-
-String
-
-"historicalOrders"
-
-user\*
-
-String
-
-Address in 42-character hexadecimal format; e.g.
-0x0000000000000000000000000000000000000000.
+| Name       | Type       | Description                                                                                      |
+| ---------- | ---------- | ------------------------------------------------------------------------------------------------ |
+| type\*<br> | String<br> | "historicalOrders"<br>                                                                           |
+| user\*<br> | String<br> | Address in 42-character hexadecimal format; e.g. 0x0000000000000000000000000000000000000000.<br> |
 
 200: OK
 

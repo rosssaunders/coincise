@@ -1,6 +1,7 @@
 # GET /spot/candlesticks
 
-**Source:** [/spot/candlesticks](https://www.gate.io/docs/developers/apiv4/en/#listcandlesticks-parameters)
+**Source:**
+[/spot/candlesticks](https://www.gate.io/docs/developers/apiv4/en/#listcandlesticks-parameters)
 
 ## Authentication
 

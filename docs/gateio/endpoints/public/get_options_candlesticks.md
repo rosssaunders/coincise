@@ -1,6 +1,7 @@
 # GET /options/candlesticks
 
-**Source:** [/options/candlesticks](https://www.gate.io/docs/developers/apiv4/en/#listoptionscandlesticks-parameters)
+**Source:**
+[/options/candlesticks](https://www.gate.io/docs/developers/apiv4/en/#listoptionscandlesticks-parameters)
 
 ## Authentication
 

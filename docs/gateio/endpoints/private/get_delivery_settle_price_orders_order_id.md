@@ -1,6 +1,7 @@
 # GET /delivery/{settle}/price_orders/{order_id}
 
-**Source:** [/delivery/{settle}/price_orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getpricetriggereddeliveryorder-parameters)
+**Source:**
+[/delivery/{settle}/price_orders/{order_id}](https://www.gate.io/docs/developers/apiv4/en/#getpricetriggereddeliveryorder-parameters)
 
 ## Authentication
 

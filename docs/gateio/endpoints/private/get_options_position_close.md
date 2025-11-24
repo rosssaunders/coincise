@@ -1,6 +1,7 @@
 # GET /options/position_close
 
-**Source:** [/options/position_close](https://www.gate.io/docs/developers/apiv4/en/#listoptionspositionclose-parameters)
+**Source:**
+[/options/position_close](https://www.gate.io/docs/developers/apiv4/en/#listoptionspositionclose-parameters)
 
 ## Authentication
 

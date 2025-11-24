@@ -1,6 +1,7 @@
 # POST /unified/collateral_currencies
 
-**Source:** [/unified/collateral_currencies](https://www.gate.io/docs/developers/apiv4/en/#setunifiedcollateral-parameters)
+**Source:**
+[/unified/collateral_currencies](https://www.gate.io/docs/developers/apiv4/en/#setunifiedcollateral-parameters)
 
 ## Authentication
 
@@ -17,14 +18,8 @@ _Set collateral currency_
 ```json
 {
   "collateral_type": 1,
-  "enable_list": [
-    "BTC",
-    "ETH"
-  ],
-  "disable_list": [
-    "SOL",
-    "GT"
-  ]
+  "enable_list": ["BTC", "ETH"],
+  "disable_list": ["SOL", "GT"]
 }
 ```
 

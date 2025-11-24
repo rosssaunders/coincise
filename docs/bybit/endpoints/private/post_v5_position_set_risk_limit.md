@@ -1,6 +1,8 @@
 # Set Risk Limit
 
-**Since bybit has launched auto risk limit on 12 March 2024, please click [here](https://announcements.bybit.com/en/article/risk-limit-update-transitioning-from-manual-to-auto-adjustment-bltf0fa535064561d9d/) to learn more, so it will not take effect even you set it successfully.**
+**Since bybit has launched auto risk limit on 12 March 2024, please click
+[here](https://announcements.bybit.com/en/article/risk-limit-update-transitioning-from-manual-to-auto-adjustment-bltf0fa535064561d9d/)
+to learn more, so it will not take effect even you set it successfully.**
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -8,34 +10,36 @@ POST `/v5/position/set-risk-limit`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [category](/docs/v5/enum#category) | **true** | string | Product type
--   Unified account: `linear`, `inverse`
--   Classic account: `linear`, `inverse`. *Please note that `category` is **not** involved with business logic*
+| Parameter                          | Required | Type   | Comments     |
+| :--------------------------------- | :------- | :----- | ------------ |
+| [category](/docs/v5/enum#category) | **true** | string | Product type |
 
- |
-| symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only |
-| riskId | **true** | integer | Risk limit ID |
-| [positionIdx](/docs/v5/enum#positionidx) | false | integer | Used to identify positions in different position modes. For hedge mode, it is **required**
+- Unified account: `linear`, `inverse`
+- Classic account: `linear`, `inverse`. _Please note that `category` is **not**
+  involved with business logic_
 
--   `0`: one-way mode
--   `1`: hedge-mode Buy side
--   `2`: hedge-mode Sell side
+| | symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only | |
+riskId | **true** | integer | Risk limit ID | |
+[positionIdx](/docs/v5/enum#positionidx) | false | integer | Used to identify
+positions in different position modes. For hedge mode, it is **required**
 
- |
+- `0`: one-way mode
+- `1`: hedge-mode Buy side
+- `2`: hedge-mode Sell side
+
+|
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| category | string | Product type |
-| riskId | integer | Risk limit ID |
-| riskLimitValue | string | The position limit value corresponding to this risk ID |
+| Parameter      | Type    | Comments                                               |
+| :------------- | :------ | ------------------------------------------------------ |
+| category       | string  | Product type                                           |
+| riskId         | integer | Risk limit ID                                          |
+| riskLimitValue | string  | The position limit value corresponding to this risk ID |
 
 [RUN >>](/docs/api-explorer/v5/position/set-risk-limit)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -52,7 +56,20 @@ import com.bybit.api.client.domain.*;import com.bybit.api.client.domain.position
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: "YOUR_API_KEY",    secret: "YOUR_API_SECRET",});client    .setRiskLimit({        category: 'linear',        symbol: 'BTCUSDT',        riskId: 4,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .setRiskLimit({ category: "linear", symbol: "BTCUSDT", riskId: 4 })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

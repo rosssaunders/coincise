@@ -1,6 +1,7 @@
 # POST /options/mmp/reset
 
-**Source:** [/options/mmp/reset](https://www.gate.io/docs/developers/apiv4/en/#resetoptionsmmp-parameters)
+**Source:**
+[/options/mmp/reset](https://www.gate.io/docs/developers/apiv4/en/#resetoptionsmmp-parameters)
 
 ## Authentication
 

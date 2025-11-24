@@ -1,6 +1,7 @@
 # POST /sub_accounts/{user_id}/lock
 
-**Source:** [/sub_accounts/{user_id}/lock](https://www.gate.io/docs/developers/apiv4/en/#locksubaccount-parameters)
+**Source:**
+[/sub_accounts/{user_id}/lock](https://www.gate.io/docs/developers/apiv4/en/#locksubaccount-parameters)
 
 ## Authentication
 

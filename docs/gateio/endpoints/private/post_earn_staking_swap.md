@@ -1,6 +1,7 @@
 # POST /earn/staking/swap
 
-**Source:** [/earn/staking/swap](https://www.gate.io/docs/developers/apiv4/en/#swapstakingcoin-parameters)
+**Source:**
+[/earn/staking/swap](https://www.gate.io/docs/developers/apiv4/en/#swapstakingcoin-parameters)
 
 ## Authentication
 

@@ -1,11 +1,12 @@
 # Bind Or Unbind UID
 
-For the institutional loan product, you can bind new UIDs to the risk unit or unbind UID from the risk unit.
+For the institutional loan product, you can bind new UIDs to the risk unit or
+unbind UID from the risk unit.
 
 info
 
--   The risk unit designated UID cannot be unbound.
--   The UID you want to bind must be upgraded to UTA Pro.
+- The risk unit designated UID cannot be unbound.
+- The UID you want to bind must be upgraded to UTA Pro.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -13,22 +14,24 @@ POST `/v5/ins-loan/association-uid`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| uid | **true** | string | UID-   **Bind**  
-    a) the key used must be from one of UIDs in the risk unit;  
+| Parameter | Required | Type   | Comments      |
+| :-------- | :------- | :----- | ------------- |
+| uid       | **true** | string | UID- **Bind** |
+
+    a) the key used must be from one of UIDs in the risk unit;
     b) input UID must not have an INS loan
--   **Unbind**  
-    a) the key used must be from one of UIDs in the risk unit;  
-    b) input UID cannot be the same as the UID used to access the API |
-| operate | **true** | string | `0`: bind, `1`: unbind |
+
+- **Unbind**  
+   a) the key used must be from one of UIDs in the risk unit;  
+   b) input UID cannot be the same as the UID used to access the API | | operate
+  | **true** | string | `0`: bind, `1`: unbind |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| uid | string | UID |
-| operate | string | `0`: bind, `1`: unbind |
+| Parameter | Type   | Comments               |
+| :-------- | :----- | ---------------------- |
+| uid       | string | UID                    |
+| operate   | string | `0`: bind, `1`: unbind |
 
 ### Request Example[​](#request-example "Direct link to heading")
 

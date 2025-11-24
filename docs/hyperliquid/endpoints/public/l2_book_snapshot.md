@@ -9,47 +9,18 @@ Returns at most 20 levels per side
 
 **Headers**
 
-Name
-
-Value
-
-Content-Type\*
-
-"application/json"
+| Name               | Value                  |
+| ------------------ | ---------------------- |
+| Content-Type\*<br> | "application/json"<br> |
 
 **Body**
 
-Name
-
-Type
-
-Description
-
-type\*
-
-String
-
-"l2Book"
-
-coin\*
-
-String
-
-coin
-
-nSigFigs
-
-Number
-
-Optional field to aggregate levels to `nSigFigs` significant figures. Valid
-values are 2, 3, 4, 5, and `null`, which means full precision
-
-mantissa
-
-Number
-
-Optional field to aggregate levels. This field is only allowed if nSigFigs is 5.
-Accepts values of 1, 2 or 5.
+| Name         | Type       | Description                                                                                                                                   |
+| ------------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| type\*<br>   | String<br> | "l2Book"<br>                                                                                                                                  |
+| coin\*<br>   | String<br> | coin<br>                                                                                                                                      |
+| nSigFigs<br> | Number<br> | Optional field to aggregate levels to `nSigFigs` significant figures. Valid values are 2, 3, 4, 5, and `null`, which means full precision<br> |
+| mantissa<br> | Number<br> | Optional field to aggregate levels. This field is only allowed if nSigFigs is 5. Accepts values of 1, 2 or 5.<br>                             |
 
 **Response**
 

@@ -1,12 +1,14 @@
 # Delete Master API Key
 
-Delete the api key of master account. Use the api key pending to be delete to call the endpoint. Use **master user's api key** **only**.
+Delete the api key of master account. Use the api key pending to be delete to
+call the endpoint. Use **master user's api key** **only**.
 
 tip
 
-The API key must have one of the below permissions in order to call this endpoint..
+The API key must have one of the below permissions in order to call this
+endpoint..
 
--   master API key: "Account Transfer", "Subaccount Transfer", "Withdrawal"
+- master API key: "Account Transfer", "Subaccount Transfer", "Withdrawal"
 
 danger
 
@@ -35,7 +37,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .deleteMasterApiKey()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .deleteMasterApiKey()
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

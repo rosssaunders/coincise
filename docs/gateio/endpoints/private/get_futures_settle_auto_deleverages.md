@@ -1,6 +1,7 @@
 # GET /futures/{settle}/auto_deleverages
 
-**Source:** [/futures/{settle}/auto_deleverages](https://www.gate.io/docs/developers/apiv4/en/#listautodeleverages-parameters)
+**Source:**
+[/futures/{settle}/auto_deleverages](https://www.gate.io/docs/developers/apiv4/en/#listautodeleverages-parameters)
 
 ## Authentication
 

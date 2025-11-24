@@ -1,6 +1,7 @@
 # GET /delivery/{settle}/contracts
 
-**Source:** [/delivery/{settle}/contracts](https://www.gate.io/docs/developers/apiv4/en/#listdeliverycontracts-parameters)
+**Source:**
+[/delivery/{settle}/contracts](https://www.gate.io/docs/developers/apiv4/en/#listdeliverycontracts-parameters)
 
 ## Authentication
 

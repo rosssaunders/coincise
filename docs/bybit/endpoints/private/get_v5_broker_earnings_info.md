@@ -73,7 +73,25 @@ GET /v5/broker/earnings-info?begin=20231129&end=20231129&uid=117894077 HTTP/1.1H
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: "YOUR_API_KEY",  secret: "YOUR_API_SECRET",});client  .getExchangeBrokerEarnings({    bizType: 'SPOT',    begin: '20231201',    end: '20231207',    limit: 1000,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "YOUR_API_KEY",
+  secret: "YOUR_API_SECRET"
+})
+client
+  .getExchangeBrokerEarnings({
+    bizType: "SPOT",
+    begin: "20231201",
+    end: "20231207",
+    limit: 1000
+  })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

@@ -1,6 +1,7 @@
 # POST /futures/{settle}/dual_comp/positions/{contract}/risk_limit
 
-**Source:** [/futures/{settle}/dual_comp/positions/{contract}/risk_limit](https://www.gate.io/docs/developers/apiv4/en/#updatedualmodepositionrisklimit-parameters)
+**Source:**
+[/futures/{settle}/dual_comp/positions/{contract}/risk_limit](https://www.gate.io/docs/developers/apiv4/en/#updatedualmodepositionrisklimit-parameters)
 
 ## Authentication
 

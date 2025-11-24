@@ -1,39 +1,40 @@
-# GET /public/get\_book\_summary\_by\_instrument
+# GET /public/get_book_summary_by_instrument
 
-Retrieves the summary information such as open interest, 24h volume, etc. for a specific instrument.
+Retrieves the summary information such as open interest, 24h volume, etc. for a
+specific instrument.
 
 ### Parameters
 
-| Parameter | Required | Type | Enum | Description |
-| --- | --- | --- | --- | --- |
-| instrument_name | true | string | Instrument name |  |
+| Parameter       | Required | Type   | Enum            | Description |
+| --------------- | -------- | ------ | --------------- | ----------- |
+| instrument_name | true     | string | Instrument name |             |
 
 ### Response
 
-| Name | Type | Description |
-| --- | --- | --- |
-| id | integer | The id that was sent in the request |
-| jsonrpc | string | The JSON-RPC version (2.0) result array of object |
-| result[].ask_price | number | The current best ask price, null if there aren't any asks |
-| result[].base_currency | string | Base currency |
-| result[].bid_price | number | The current best bid price, null if there aren't any bids |
-| result[].creation_timestamp | integer | The timestamp (milliseconds since the Unix epoch) |
-| result[].current_funding | number | Current funding (perpetual only) |
-| result[].estimated_delivery_price | number | Optional (only for derivatives). Estimated delivery price for the market. For more details, see Contract Specification > General Documentation > Expiration Price. |
-| result[].funding_8h | number | Funding 8h (perpetual only) |
-| result[].high | number | Price of the 24h highest trade |
-| result[].instrument_name | string | Unique instrument identifier |
-| result[].interest_rate | number | Interest rate used in implied volatility calculations (options only) |
-| result[].last | number | The price of the latest trade, null if there weren't any trades |
-| result[].low | number | Price of the 24h lowest trade, null if there weren't any trades |
-| result[].mark_iv | number | (Only for option) implied volatility for mark price |
-| result[].mark_price | number | The current instrument market price |
-| result[].mid_price | number | The average of the best bid and ask, null if there aren't any asks or bids |
-| result[].open_interest | number | Optional (only for derivatives). The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures and it is the underlying base currency coin. |
-| result[].price_change | number | 24-hour price change expressed as a percentage, null if there weren't any trades |
-| result[].quote_currency | string | Quote currency |
-| result[].underlying_index | string | Name of the underlying future, or 'index_price' (options only) |
-| result[].underlying_price | number | underlying price for implied volatility calculations (options only) |
-| result[].volume | number | The total 24h traded volume (in base currency) |
-| result[].volume_notional | number | Volume in quote currency (futures and spots only) |
-| result[].volume_usd | number | Volume in USD |
+| Name                              | Type    | Description                                                                                                                                                                                                                                             |
+| --------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id                                | integer | The id that was sent in the request                                                                                                                                                                                                                     |
+| jsonrpc                           | string  | The JSON-RPC version (2.0) result array of object                                                                                                                                                                                                       |
+| result[].ask_price                | number  | The current best ask price, null if there aren't any asks                                                                                                                                                                                               |
+| result[].base_currency            | string  | Base currency                                                                                                                                                                                                                                           |
+| result[].bid_price                | number  | The current best bid price, null if there aren't any bids                                                                                                                                                                                               |
+| result[].creation_timestamp       | integer | The timestamp (milliseconds since the Unix epoch)                                                                                                                                                                                                       |
+| result[].current_funding          | number  | Current funding (perpetual only)                                                                                                                                                                                                                        |
+| result[].estimated_delivery_price | number  | Optional (only for derivatives). Estimated delivery price for the market. For more details, see Contract Specification > General Documentation > Expiration Price.                                                                                      |
+| result[].funding_8h               | number  | Funding 8h (perpetual only)                                                                                                                                                                                                                             |
+| result[].high                     | number  | Price of the 24h highest trade                                                                                                                                                                                                                          |
+| result[].instrument_name          | string  | Unique instrument identifier                                                                                                                                                                                                                            |
+| result[].interest_rate            | number  | Interest rate used in implied volatility calculations (options only)                                                                                                                                                                                    |
+| result[].last                     | number  | The price of the latest trade, null if there weren't any trades                                                                                                                                                                                         |
+| result[].low                      | number  | Price of the 24h lowest trade, null if there weren't any trades                                                                                                                                                                                         |
+| result[].mark_iv                  | number  | (Only for option) implied volatility for mark price                                                                                                                                                                                                     |
+| result[].mark_price               | number  | The current instrument market price                                                                                                                                                                                                                     |
+| result[].mid_price                | number  | The average of the best bid and ask, null if there aren't any asks or bids                                                                                                                                                                              |
+| result[].open_interest            | number  | Optional (only for derivatives). The total amount of outstanding contracts in the corresponding amount units. For perpetual and inverse futures the amount is in USD units. For options and linear futures and it is the underlying base currency coin. |
+| result[].price_change             | number  | 24-hour price change expressed as a percentage, null if there weren't any trades                                                                                                                                                                        |
+| result[].quote_currency           | string  | Quote currency                                                                                                                                                                                                                                          |
+| result[].underlying_index         | string  | Name of the underlying future, or 'index_price' (options only)                                                                                                                                                                                          |
+| result[].underlying_price         | number  | underlying price for implied volatility calculations (options only)                                                                                                                                                                                     |
+| result[].volume                   | number  | The total 24h traded volume (in base currency)                                                                                                                                                                                                          |
+| result[].volume_notional          | number  | Volume in quote currency (futures and spots only)                                                                                                                                                                                                       |
+| result[].volume_usd               | number  | Volume in USD                                                                                                                                                                                                                                           |
