@@ -1,12 +1,14 @@
 # Get Open Interest
 
-Get the [open interest](https://www.bybit.com/en-US/help-center/s/article/Glossary-Bybit-Trading-Terms) of each symbol.
+Get the
+[open interest](https://www.bybit.com/en-US/help-center/s/article/Glossary-Bybit-Trading-Terms)
+of each symbol.
 
 > **Covers: USDT contract / USDC contract / Inverse contract**
 
 info
 
--   The upper limit time you can query is the launch time of the symbol.
+- The upper limit time you can query is the launch time of the symbol.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -14,35 +16,35 @@ GET `/v5/market/open-interest`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [category](/docs/v5/enum#category) | **true** | string | Product type. `linear`,`inverse` |
-| symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only |
-| [intervalTime](/docs/v5/enum#intervaltime) | **true** | string | Interval time. `5min`,`15min`,`30min`,`1h`,`4h`,`1d` |
-| startTime | false | integer | The start timestamp (ms) |
-| endTime | false | integer | The end timestamp (ms) |
-| limit | false | integer | Limit for data size per page. \[`1`, `200`\]. Default: `50` |
-| cursor | false | string | Cursor. Used to paginate |
+| Parameter                                  | Required | Type    | Comments                                                    |
+| :----------------------------------------- | :------- | :------ | ----------------------------------------------------------- |
+| [category](/docs/v5/enum#category)         | **true** | string  | Product type. `linear`,`inverse`                            |
+| symbol                                     | **true** | string  | Symbol name, like `BTCUSDT`, uppercase only                 |
+| [intervalTime](/docs/v5/enum#intervaltime) | **true** | string  | Interval time. `5min`,`15min`,`30min`,`1h`,`4h`,`1d`        |
+| startTime                                  | false    | integer | The start timestamp (ms)                                    |
+| endTime                                    | false    | integer | The end timestamp (ms)                                      |
+| limit                                      | false    | integer | Limit for data size per page. \[`1`, `200`\]. Default: `50` |
+| cursor                                     | false    | string  | Cursor. Used to paginate                                    |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| category | string | Product type |
-| symbol | string | Symbol name |
-| list | array | Object |
-| \> openInterest | string | Open interest. The value is the sum of both sides.  
-The unit of value, e.g., BTCUSD(inverse) is USD, BTCUSDT(linear) is BTC |
-| \> timestamp | string | The timestamp (ms) |
-| nextPageCursor | string | Used to paginate |
+| Parameter                                                               | Type   | Comments                                           |
+| :---------------------------------------------------------------------- | :----- | -------------------------------------------------- |
+| category                                                                | string | Product type                                       |
+| symbol                                                                  | string | Symbol name                                        |
+| list                                                                    | array  | Object                                             |
+| \> openInterest                                                         | string | Open interest. The value is the sum of both sides. |
+| The unit of value, e.g., BTCUSD(inverse) is USD, BTCUSDT(linear) is BTC |
+| \> timestamp                                                            | string | The timestamp (ms)                                 |
+| nextPageCursor                                                          | string | Used to paginate                                   |
 
 [RUN >>](/docs/api-explorer/v5/market/open-interest)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/market/open-interest?category=inverse&symbol=BTCUSD&intervalTime=5min&startTime=1669571100000&endTime=1669571400000 HTTP/1.1Host: api-testnet.bybit.com
@@ -61,7 +63,22 @@ import com.bybit.api.client.domain.CategoryType;import com.bybit.api.client.doma
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,});client    .getOpenInterest({        category: 'inverse',        symbol: 'BTCUSD',        intervalTime: '5min',        startTime: 1669571100000,        endTime: 1669571400000,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({ testnet: true })
+client
+  .getOpenInterest({
+    category: "inverse",
+    symbol: "BTCUSD",
+    intervalTime: "5min",
+    startTime: 1669571100000,
+    endTime: 1669571400000
+  })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

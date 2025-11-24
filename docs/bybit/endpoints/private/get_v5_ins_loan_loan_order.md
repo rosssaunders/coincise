@@ -8,96 +8,95 @@ GET `/v5/ins-loan/loan-order`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| orderId | false | string | Loan order ID. If not passed, returns all orders sorted by `loanTime` in descending order |
-| startTime | false | integer | The start timestamp (ms) |
-| endTime | false | integer | The end timestamp (ms) |
-| limit | false | integer | Limit for data size. \[`1`, `100`\], Default: `10` |
+| Parameter | Required | Type    | Comments                                                                                  |
+| :-------- | :------- | :------ | ----------------------------------------------------------------------------------------- |
+| orderId   | false    | string  | Loan order ID. If not passed, returns all orders sorted by `loanTime` in descending order |
+| startTime | false    | integer | The start timestamp (ms)                                                                  |
+| endTime   | false    | integer | The end timestamp (ms)                                                                    |
+| limit     | false    | integer | Limit for data size. \[`1`, `100`\], Default: `10`                                        |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| loanInfo | array | Object |
-| \> orderId | string | Loan order ID |
-| \> orderProductId | string | Product ID |
-| \> parentUid | string | The designated UID that was used to bind with the INS loan |
-| \> loanTime | string | Loan timestamp, in milliseconds |
-| \> loanCoin | string | Loan coin |
-| \> loanAmount | string | Loan amount |
-| \> unpaidAmount | string | Unpaid principal |
-| \> unpaidInterest | string | Unpaid interest |
-| \> repaidAmount | string | Repaid principal |
-| \> repaidInterest | string | Repaid interest |
-| \> interestRate | string | Daily interest rate |
-| \> status | string | `1`：outstanding; `2`：paid off |
-| \> leverage | string | The maximum leverage for this loan product |
-| \> supportSpot | string | Whether to support spot. `0`:false; `1`:true |
-| \> supportContract | string | Whether to support contract . `0`:false; `1`:true |
-| \> withdrawLine | string | Restrict line for withdrawal |
-| \> transferLine | string | Restrict line for transfer |
-| \> spotBuyLine | string | Restrict line for SPOT buy |
-| \> spotSellLine | string | Restrict line for SPOT sell |
-| \> contractOpenLine | string | Restrict line for USDT Perpetual open position |
-| \> deferredLiquidationLine | string | Line for deferred liquidation |
-| \> deferredLiquidationTime | string | Time for deferred liquidation |
-| \> reserveToken | string | Reserve token |
-| \> reserveQuantity | string | Reserve token qty |
-| \> liquidationLine | string | Line for liquidation |
-| \> stopLiquidationLine | string | Line for stop liquidation |
-| \> contractLeverage | string | The allowed default leverage for USDT Perpetual |
-| \> transferRatio | string | The transfer ratio for loan funds to transfer from Spot wallet to Contract wallet |
-| \> spotSymbols | array | The whitelist of spot trading pairs. If there is no whitelist, then "\[\]" |
-| \> contractSymbols | array | The whitelist of contract trading pairs
--   If `supportContract`\="0", then this is "\[\]"
--   If there is no whitelist, this is "\[\]"
+| Parameter                  | Type   | Comments                                                                          |
+| :------------------------- | :----- | --------------------------------------------------------------------------------- |
+| loanInfo                   | array  | Object                                                                            |
+| \> orderId                 | string | Loan order ID                                                                     |
+| \> orderProductId          | string | Product ID                                                                        |
+| \> parentUid               | string | The designated UID that was used to bind with the INS loan                        |
+| \> loanTime                | string | Loan timestamp, in milliseconds                                                   |
+| \> loanCoin                | string | Loan coin                                                                         |
+| \> loanAmount              | string | Loan amount                                                                       |
+| \> unpaidAmount            | string | Unpaid principal                                                                  |
+| \> unpaidInterest          | string | Unpaid interest                                                                   |
+| \> repaidAmount            | string | Repaid principal                                                                  |
+| \> repaidInterest          | string | Repaid interest                                                                   |
+| \> interestRate            | string | Daily interest rate                                                               |
+| \> status                  | string | `1`：outstanding; `2`：paid off                                                   |
+| \> leverage                | string | The maximum leverage for this loan product                                        |
+| \> supportSpot             | string | Whether to support spot. `0`:false; `1`:true                                      |
+| \> supportContract         | string | Whether to support contract . `0`:false; `1`:true                                 |
+| \> withdrawLine            | string | Restrict line for withdrawal                                                      |
+| \> transferLine            | string | Restrict line for transfer                                                        |
+| \> spotBuyLine             | string | Restrict line for SPOT buy                                                        |
+| \> spotSellLine            | string | Restrict line for SPOT sell                                                       |
+| \> contractOpenLine        | string | Restrict line for USDT Perpetual open position                                    |
+| \> deferredLiquidationLine | string | Line for deferred liquidation                                                     |
+| \> deferredLiquidationTime | string | Time for deferred liquidation                                                     |
+| \> reserveToken            | string | Reserve token                                                                     |
+| \> reserveQuantity         | string | Reserve token qty                                                                 |
+| \> liquidationLine         | string | Line for liquidation                                                              |
+| \> stopLiquidationLine     | string | Line for stop liquidation                                                         |
+| \> contractLeverage        | string | The allowed default leverage for USDT Perpetual                                   |
+| \> transferRatio           | string | The transfer ratio for loan funds to transfer from Spot wallet to Contract wallet |
+| \> spotSymbols             | array  | The whitelist of spot trading pairs. If there is no whitelist, then "\[\]"        |
+| \> contractSymbols         | array  | The whitelist of contract trading pairs                                           |
 
- |
-| \> supportUSDCContract | string | Whether to support USDC contract. `"0"`:false; `"1"`:true |
-| \> supportUSDCOptions | string | Whether to support Option. `"0"`:false; `"1"`:true |
-| \> supportMarginTrading | string | Whether to support Spot margin trading. `"0"`:false; `"1"`:true |
-| \> USDTPerpetualOpenLine | string | Restrict line to open USDT Perpetual position |
-| \> USDCContractOpenLine | string | Restrict line to open USDC Contract position |
-| \> USDCOptionsOpenLine | string | Restrict line to open Option position |
-| \> USDTPerpetualCloseLine | string | Restrict line to trade USDT Perpetual position |
-| \> USDCContractCloseLine | string | Restrict line to trade USDC Contract position |
-| \> USDCOptionsCloseLine | string | Restrict line to trade Option position |
-| \> USDCContractSymbols | array | The whitelist of USDC contract trading pairs
+- If `supportContract`\="0", then this is "\[\]"
+- If there is no whitelist, this is "\[\]"
 
--   If no whitelist symbols, it is `[]`, and you can trade any
--   If supportUSDCContract="0", it is `[]`
+| | \> supportUSDCContract | string | Whether to support USDC contract.
+`"0"`:false; `"1"`:true | | \> supportUSDCOptions | string | Whether to support
+Option. `"0"`:false; `"1"`:true | | \> supportMarginTrading | string | Whether
+to support Spot margin trading. `"0"`:false; `"1"`:true | | \>
+USDTPerpetualOpenLine | string | Restrict line to open USDT Perpetual position |
+| \> USDCContractOpenLine | string | Restrict line to open USDC Contract
+position | | \> USDCOptionsOpenLine | string | Restrict line to open Option
+position | | \> USDTPerpetualCloseLine | string | Restrict line to trade USDT
+Perpetual position | | \> USDCContractCloseLine | string | Restrict line to
+trade USDC Contract position | | \> USDCOptionsCloseLine | string | Restrict
+line to trade Option position | | \> USDCContractSymbols | array | The whitelist
+of USDC contract trading pairs
 
- |
-| \> USDCOptionsSymbols | array | The whitelist of Option symbols
+- If no whitelist symbols, it is `[]`, and you can trade any
+- If supportUSDCContract="0", it is `[]`
 
--   If no whitelisted, it is `[]`, and you can trade any
--   If supportUSDCOptions="0", it is `[]`
+| | \> USDCOptionsSymbols | array | The whitelist of Option symbols
 
- |
-| \> marginLeverage | string | The allowable maximum leverage for Spot margin |
-| \> USDTPerpetualLeverage | array | Object
+- If no whitelisted, it is `[]`, and you can trade any
+- If supportUSDCOptions="0", it is `[]`
 
--   If supportContract="0", it is `[]`
--   If no whitelist USDT perp symbols, it returns all trading symbols and leverage by default
--   If there are whitelist symbols, it return those whitelist data
+| | \> marginLeverage | string | The allowable maximum leverage for Spot margin
+| | \> USDTPerpetualLeverage | array | Object
 
- |
-| \>> symbol | string | Symbol name |
-| \>> leverage | string | Maximum leverage |
-| \> USDCContractLeverage | array | Object
+- If supportContract="0", it is `[]`
+- If no whitelist USDT perp symbols, it returns all trading symbols and leverage
+  by default
+- If there are whitelist symbols, it return those whitelist data
 
--   If supportUSDCContract="0", it is `[]`
--   If no whitelist USDC contract symbols, it returns all trading symbols and leverage by default
--   If there are whitelist symbols, it return those whitelist data
+| | \>> symbol | string | Symbol name | | \>> leverage | string | Maximum
+leverage | | \> USDCContractLeverage | array | Object
 
- |
-| \>> symbol | string | Symbol name |
-| \>> leverage | string | Maximum leverage |
+- If supportUSDCContract="0", it is `[]`
+- If no whitelist USDC contract symbols, it returns all trading symbols and
+  leverage by default
+- If there are whitelist symbols, it return those whitelist data
+
+| | \>> symbol | string | Symbol name | | \>> leverage | string | Maximum
+leverage |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/ins-loan/loan-order HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1678687874060X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXX
@@ -108,7 +107,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getInstitutionalLendingLoanOrders({    limit: 10,  })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "xxxxxxxxxxxxxxxxxx",
+  secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+})
+client
+  .getInstitutionalLendingLoanOrders({ limit: 10 })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

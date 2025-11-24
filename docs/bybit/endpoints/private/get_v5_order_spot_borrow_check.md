@@ -8,40 +8,50 @@ GET `/v5/order/spot-borrow-check`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [category](/docs/v5/enum#category) | **true** | string | Product type-   [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10): `spot` |
-| symbol | **true** | string | Symbol name |
-| side | **true** | string | Transaction side. `Buy`,`Sell` |
+| Parameter                          | Required | Type   | Comments                                                                                       |
+| :--------------------------------- | :------- | :----- | ---------------------------------------------------------------------------------------------- |
+| [category](/docs/v5/enum#category) | **true** | string | Product type- [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10): `spot` |
+| symbol                             | **true** | string | Symbol name                                                                                    |
+| side                               | **true** | string | Transaction side. `Buy`,`Sell`                                                                 |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| symbol | string | Symbol name, like `BTCUSDT`, uppercase only |
-| side | string | Side |
-| maxTradeQty | string | The maximum base coin qty can be traded
--   If spot margin trade on and symbol is margin trading pair, it returns available balance + max.borrowable quantity = min(The maximum quantity that a single user can borrow on the platform, The maximum quantity that can be borrowed calculated by IMR MMR of UTA account, The available quantity of the platform's capital pool)
--   Otherwise, it returns actual available balance
+| Parameter   | Type   | Comments                                    |
+| :---------- | :----- | ------------------------------------------- |
+| symbol      | string | Symbol name, like `BTCUSDT`, uppercase only |
+| side        | string | Side                                        |
+| maxTradeQty | string | The maximum base coin qty can be traded     |
 
- |
-| maxTradeAmount | string | The maximum quote coin amount can be traded
+- If spot margin trade on and symbol is margin trading pair, it returns
+  available balance + max.borrowable quantity = min(The maximum quantity that a
+  single user can borrow on the platform, The maximum quantity that can be
+  borrowed calculated by IMR MMR of UTA account, The available quantity of the
+  platform's capital pool)
+- Otherwise, it returns actual available balance
 
--   If spot margin trade on and symbol is margin trading pair, it returns available balance + max.borrowable amount = min(The maximum amount that a single user can borrow on the platform, The maximum amount that can be borrowed calculated by IMR MMR of UTA account, The available amount of the platform's capital pool)
--   Otherwise, it returns actual available balance
+| | maxTradeAmount | string | The maximum quote coin amount can be traded
 
- |
-| spotMaxTradeQty | string | No matter your Spot margin switch on or not, it always returns actual qty of base coin you can trade or you have (borrowable qty is not included), up to 4 decimals |
-| spotMaxTradeAmount | string | No matter your Spot margin switch on or not, it always returns actual amount of quote coin you can trade or you have (borrowable amount is not included), up to 8 decimals |
-| borrowCoin | string | Borrow coin |
+- If spot margin trade on and symbol is margin trading pair, it returns
+  available balance + max.borrowable amount = min(The maximum amount that a
+  single user can borrow on the platform, The maximum amount that can be
+  borrowed calculated by IMR MMR of UTA account, The available amount of the
+  platform's capital pool)
+- Otherwise, it returns actual available balance
+
+| | spotMaxTradeQty | string | No matter your Spot margin switch on or not, it
+always returns actual qty of base coin you can trade or you have (borrowable qty
+is not included), up to 4 decimals | | spotMaxTradeAmount | string | No matter
+your Spot margin switch on or not, it always returns actual amount of quote coin
+you can trade or you have (borrowable amount is not included), up to 8 decimals
+| | borrowCoin | string | Borrow coin |
 
 [RUN >>](/docs/api-explorer/v5/trade/query-spot-quota)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/order/spot-borrow-check?category=spot&symbol=BTCUSDT&side=Buy HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672228522214X-BAPI-RECV-WINDOW: 5000
@@ -56,7 +66,20 @@ import com.bybit.api.client.config.BybitApiConfig;import com.bybit.api.client.do
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,    key: 'xxxxxxxxxxxxxxxxxx',    secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client    .getSpotBorrowCheck('BTCUSDT', 'Buy')    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "xxxxxxxxxxxxxxxxxx",
+  secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+})
+client
+  .getSpotBorrowCheck("BTCUSDT", "Buy")
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

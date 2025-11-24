@@ -1,16 +1,19 @@
 # Get Funding Rate History
 
-Query for historical funding rates. Each symbol has a different funding interval. For example, if the interval is 8 hours and the current time is UTC 12, then it returns the last funding rate, which settled at UTC 8.
+Query for historical funding rates. Each symbol has a different funding
+interval. For example, if the interval is 8 hours and the current time is UTC
+12, then it returns the last funding rate, which settled at UTC 8.
 
-To query the funding rate interval, please refer to the [instruments-info](/docs/v5/market/instrument) endpoint.
+To query the funding rate interval, please refer to the
+[instruments-info](/docs/v5/market/instrument) endpoint.
 
 > **Covers: USDT and USDC perpetual / Inverse perpetual**
 
 info
 
--   Passing only `startTime` returns an error.
--   Passing only `endTime` returns 200 records up till `endTime`.
--   Passing neither returns 200 records up till the current time.
+- Passing only `startTime` returns an error.
+- Passing only `endTime` returns 200 records up till `endTime`.
+- Passing neither returns 200 records up till the current time.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -18,31 +21,31 @@ GET `/v5/market/funding/history`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [category](/docs/v5/enum#category) | **true** | string | Product type. `linear`,`inverse` |
-| symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only |
-| startTime | false | integer | The start timestamp (ms) |
-| endTime | false | integer | The end timestamp (ms) |
-| limit | false | integer | Limit for data size per page. \[`1`, `200`\]. Default: `200` |
+| Parameter                          | Required | Type    | Comments                                                     |
+| :--------------------------------- | :------- | :------ | ------------------------------------------------------------ |
+| [category](/docs/v5/enum#category) | **true** | string  | Product type. `linear`,`inverse`                             |
+| symbol                             | **true** | string  | Symbol name, like `BTCUSDT`, uppercase only                  |
+| startTime                          | false    | integer | The start timestamp (ms)                                     |
+| endTime                            | false    | integer | The end timestamp (ms)                                       |
+| limit                              | false    | integer | Limit for data size per page. \[`1`, `200`\]. Default: `200` |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| category | string | Product type |
-| list | array | Object |
-| \> symbol | string | Symbol name |
-| \> fundingRate | string | Funding rate |
+| Parameter               | Type   | Comments                    |
+| :---------------------- | :----- | --------------------------- |
+| category                | string | Product type                |
+| list                    | array  | Object                      |
+| \> symbol               | string | Symbol name                 |
+| \> fundingRate          | string | Funding rate                |
 | \> fundingRateTimestamp | string | Funding rate timestamp (ms) |
 
 [RUN >>](/docs/api-explorer/v5/market/history-fund-rate)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/market/funding/history?category=linear&symbol=ETHPERP&limit=1 HTTP/1.1Host: api-testnet.bybit.com
@@ -61,7 +64,16 @@ import com.bybit.api.client.domain.CategoryType;import com.bybit.api.client.doma
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,});client    .getFundingRateHistory({        category: 'linear',        symbol: 'ETHPERP',        limit: 1,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({ testnet: true })
+client
+  .getFundingRateHistory({ category: "linear", symbol: "ETHPERP", limit: 1 })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
