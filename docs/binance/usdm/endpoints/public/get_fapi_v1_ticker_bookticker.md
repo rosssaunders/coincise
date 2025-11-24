@@ -10,7 +10,8 @@ GET `/fapi/v1/ticker/bookTicker`
 
 **Note**:
 
-> Retail Price Improvement(RPI) orders are not visible and excluded in the response message.
+> Retail Price Improvement(RPI) orders are not visible and excluded in the
+> response message.
 
 ### Request Weight
 
@@ -19,12 +20,14 @@ GET `/fapi/v1/ticker/bookTicker`
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | NO |  |
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | NO        |             |
 
-> -   If the symbol is not sent, bookTickers for all symbols will be returned in an array.
-> -   The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from this endpoint, please ignore.
+> - If the symbol is not sent, bookTickers for all symbols will be returned in
+>   an array.
+> - The field `X-MBX-USED-WEIGHT-1M` in response header is not accurate from
+>   this endpoint, please ignore.
 
 ### Response Example
 
@@ -54,4 +57,5 @@ GET `/fapi/v1/ticker/bookTicker`
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker)
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker)

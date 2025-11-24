@@ -14,17 +14,17 @@ GET `/fapi/v1/indexInfo`
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | NO |  |
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | NO        |             |
 
-> -   Only for composite index symbols
+> - Only for composite index symbols
 
 ### Response Example
 
 ```
 [
-	{ 
+	{
 		"symbol": "DEFIUSDT",
 		"time": 1589437530011,    // Current time
 		"component": "baseAsset", //Component asset
@@ -46,4 +46,5 @@ GET `/fapi/v1/indexInfo`
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information)
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information)

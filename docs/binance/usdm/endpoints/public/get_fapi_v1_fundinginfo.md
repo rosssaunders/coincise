@@ -2,7 +2,8 @@
 
 ### API Description
 
-Query funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
+Query funding rate info for symbols that had FundingRateCap/ FundingRateFloor /
+fundingIntervalHours adjustment
 
 ### HTTP Request
 
@@ -28,4 +29,5 @@ GET `/fapi/v1/fundingInfo`
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info)
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info)
