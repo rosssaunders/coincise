@@ -1,6 +1,7 @@
 # POST /v2/calc/trade/avg
 
-**Source:** [https://docs.bitfinex.com/reference/rest-public-market-average-price](https://docs.bitfinex.com/reference/rest-public-market-average-price)
+**Source:**
+[https://docs.bitfinex.com/reference/rest-public-market-average-price](https://docs.bitfinex.com/reference/rest-public-market-average-price)
 
 post
 
@@ -12,22 +13,21 @@ Response Fields
 
 For trading pair symbols (ex. tBTCUSD)
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| [0] | PRICE\_AVG | float | Average price for amount bought or sold given the current order book (trading pairs only) |
-| [1] | AMOUNT | float | Amount traded or taken/provided in funding |
+| Index | Field     | Type  | Description                                                                               |
+| ----- | --------- | ----- | ----------------------------------------------------------------------------------------- |
+| [0]   | PRICE_AVG | float | Average price for amount bought or sold given the current order book (trading pairs only) |
+| [1]   | AMOUNT    | float | Amount traded or taken/provided in funding                                                |
 
 For funding currency symbols (ex. fUSD)
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| [0] | RATE\_AVG | float | Average rate for amount taken or provided given the current order book (funding currencies only) |
-| [1] | AMOUNT | float | Amount traded or taken/provided in funding |
+| Index | Field    | Type  | Description                                                                                      |
+| ----- | -------- | ----- | ------------------------------------------------------------------------------------------------ |
+| [0]   | RATE_AVG | float | Average rate for amount taken or provided given the current order book (funding currencies only) |
+| [1]   | AMOUNT   | float | Amount traded or taken/provided in funding                                                       |
 
-* * *
+---
 
-| --- | --- |
-| Rate Limit: | 90 reqs/min (requests per minute) |
+| --- | --- | | Rate Limit: | 90 reqs/min (requests per minute) |
 
 Query Params
 
@@ -57,7 +57,7 @@ int32
 
 Maximum period for margin funding (required for funding currencies).
 
-rate\_limit
+rate_limit
 
 string
 

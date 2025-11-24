@@ -1,34 +1,35 @@
 # GET /v2/status/deriv/{key}/hist
 
-**Source:** [https://docs.bitfinex.com/reference/rest-public-derivatives-status-history](https://docs.bitfinex.com/reference/rest-public-derivatives-status-history)
+**Source:**
+[https://docs.bitfinex.com/reference/rest-public-derivatives-status-history](https://docs.bitfinex.com/reference/rest-public-derivatives-status-history)
 
 get
 
 https://api-pub.bitfinex.com/v2/status/deriv/{key}/hist
 
-Endpoint used to receive different types of historical platform information - currently supports derivatives pair status only.
+Endpoint used to receive different types of historical platform information -
+currently supports derivatives pair status only.
 
 Response Fields
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| [0] | MTS | int | Millisecond epoch timestamp |
-| [2] | DERIV\_PRICE | float | Derivative book mid price |
-| [3] | SPOT\_PRICE | float | Book mid price of the underlying Bitfinex spot trading pair |
-| [5] | INSURANCE\_FUND\_BALANCE | float | The balance available to the liquidation engine to absorb losses |
-| [7] | NEXT\_FUNDING\_EVT\_MTS | int | Millisecond timestamp of next funding event |
-| [8] | NEXT\_FUNDING\_ACCRUED | float | Current accrued funding for next 8h period |
-| [9] | NEXT\_FUNDING\_STEP | int | Incremental accrual counter |
-| [11] | CURRENT\_FUNDING | float | Funding applied in the current 8h period |
-| [14] | MARK\_PRICE | float | Price based on the BFX Composite Index |
-| [17] | OPEN\_INTEREST | float | Total number of outstanding derivative contracts |
-| [21] | CLAMP\_MIN | float | Range in the average spread that does not require a funding payment |
-| [22] | CLAMP\_MAX | float | Funding payment cap |
+| Index | Field                  | Type  | Description                                                         |
+| ----- | ---------------------- | ----- | ------------------------------------------------------------------- |
+| [0]   | MTS                    | int   | Millisecond epoch timestamp                                         |
+| [2]   | DERIV_PRICE            | float | Derivative book mid price                                           |
+| [3]   | SPOT_PRICE             | float | Book mid price of the underlying Bitfinex spot trading pair         |
+| [5]   | INSURANCE_FUND_BALANCE | float | The balance available to the liquidation engine to absorb losses    |
+| [7]   | NEXT_FUNDING_EVT_MTS   | int   | Millisecond timestamp of next funding event                         |
+| [8]   | NEXT_FUNDING_ACCRUED   | float | Current accrued funding for next 8h period                          |
+| [9]   | NEXT_FUNDING_STEP      | int   | Incremental accrual counter                                         |
+| [11]  | CURRENT_FUNDING        | float | Funding applied in the current 8h period                            |
+| [14]  | MARK_PRICE             | float | Price based on the BFX Composite Index                              |
+| [17]  | OPEN_INTEREST          | float | Total number of outstanding derivative contracts                    |
+| [21]  | CLAMP_MIN              | float | Range in the average spread that does not require a funding payment |
+| [22]  | CLAMP_MAX              | float | Funding payment cap                                                 |
 
-* * *
+---
 
-| --- | --- |
-| Rate Limit: | 90 reqs/min (requests per minute) |
+| --- | --- | | Rate Limit: | 90 reqs/min (requests per minute) |
 
 Path Params
 
@@ -40,7 +41,8 @@ required
 
 Defaults to tBTCF0:USTF0
 
-The key of the pairs to obtain history information. (e.g. tBTCF0:USTF0, tETHF0:USTF0, ...)
+The key of the pairs to obtain history information. (e.g. tBTCF0:USTF0,
+tETHF0:USTF0, ...)
 
 Query Params
 
@@ -54,13 +56,15 @@ start
 
 int64
 
-If start is given, only records with MTS >= start (milliseconds) will be given as response.
+If start is given, only records with MTS >= start (milliseconds) will be given
+as response.
 
 end
 
 int64
 
-If end is given, only records with MTS <= end (milliseconds) will be given as response.
+If end is given, only records with MTS <= end (milliseconds) will be given as
+response.
 
 limit
 

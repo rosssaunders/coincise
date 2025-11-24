@@ -1,6 +1,7 @@
 # POST /v2/auth/w/ext/wallets/deposits/request
 
-**Source:** [https://docs.bitfinex.com/reference/thalex-deposit-request](https://docs.bitfinex.com/reference/thalex-deposit-request)
+**Source:**
+[https://docs.bitfinex.com/reference/thalex-deposit-request](https://docs.bitfinex.com/reference/thalex-deposit-request)
 
 post
 
@@ -10,17 +11,17 @@ Deposit to Thalex from Bitfinex
 
 Response data
 
-| Key | Type | Description |
-| --- | --- | --- |
-| type | String | Specifies the transfer type: "deposit" |
-| addressDest | String | Specifies the address for the transaction |
-| amount | String | Amount of the deposit |
-| ccy | String | Currency deposited |
-| createdAt | Integer | Deposit creation timestamp |
-| updatedAt | Integer | Deposit update timestamp |
-| id | string | Deposit id |
-| status | string | Deposit status |
-| fee | string | Fee charged for the deposit |
+| Key         | Type    | Description                               |
+| ----------- | ------- | ----------------------------------------- |
+| type        | String  | Specifies the transfer type: "deposit"    |
+| addressDest | String  | Specifies the address for the transaction |
+| amount      | String  | Amount of the deposit                     |
+| ccy         | String  | Currency deposited                        |
+| createdAt   | Integer | Deposit creation timestamp                |
+| updatedAt   | Integer | Deposit update timestamp                  |
+| id          | string  | Deposit id                                |
+| status      | string  | Deposit status                            |
+| fee         | string  | Fee charged for the deposit               |
 
 Body Params
 

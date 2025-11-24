@@ -1,6 +1,7 @@
 # POST /v2/auth/w/alert/set
 
-**Source:** [https://docs.bitfinex.com/reference/rest-auth-alert-set](https://docs.bitfinex.com/reference/rest-auth-alert-set)
+**Source:**
+[https://docs.bitfinex.com/reference/rest-auth-alert-set](https://docs.bitfinex.com/reference/rest-auth-alert-set)
 
 post
 
@@ -10,13 +11,13 @@ Sets up a price alert at the given value
 
 Response data
 
-| Index | Term | Type | Description |
-| --- | --- | --- | --- |
-| [0] | INFO | string | 'type:pair:price' |
-| [1] | TYPE | string | Alert type ('price') |
-| [2] | PAIR | string | Pair on which the price alert is active (tBTCUSD, tBTCUST, ...) |
-| [3] | PRICE | float | Alert price |
-| [4] | COUNTDOWN | int | This is set to 100 when the alert is placed. Each time the alert is triggered, this number will go down. When the countdown reaches 0, the alert gets removed. |
+| Index | Term      | Type   | Description                                                                                                                                                    |
+| ----- | --------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [0]   | INFO      | string | 'type:pair:price'                                                                                                                                              |
+| [1]   | TYPE      | string | Alert type ('price')                                                                                                                                           |
+| [2]   | PAIR      | string | Pair on which the price alert is active (tBTCUSD, tBTCUST, ...)                                                                                                |
+| [3]   | PRICE     | float  | Alert price                                                                                                                                                    |
+| [4]   | COUNTDOWN | int    | This is set to 100 when the alert is placed. Each time the alert is triggered, this number will go down. When the countdown reaches 0, the alert gets removed. |
 
 **Ratelimit**: 90 req/min
 
