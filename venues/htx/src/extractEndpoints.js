@@ -54,30 +54,56 @@ const generateFilename = (method, path) => {
 }
 
 /**
- * Wait for menu to load
+ * Wait for menu to load with retries
  */
 const waitForMenu = async page => {
   console.log("Waiting for menu element to load...")
-  try {
-    await page.waitForSelector("ul#sliderMenu.ant-menu", {
-      timeout: 30000,
-      visible: true
-    })
-    console.log("✅ Menu element loaded successfully")
-  } catch (error) {
-    console.log("⚠️  Menu selector timeout - checking if menu exists anyway...")
-    const menuExists = await page.evaluate(() => {
-      const menu = document.querySelector("ul#sliderMenu.ant-menu")
-      return menu ? { exists: true, visible: menu.offsetParent !== null } : null
-    })
-    console.log("Menu status:", menuExists)
-    if (!menuExists || !menuExists.exists) {
-      throw error
+  let menuLoaded = false
+  let retries = 0
+  const maxRetries = 3
+
+  while (!menuLoaded && retries < maxRetries) {
+    try {
+      await page.waitForSelector("ul#sliderMenu.ant-menu", {
+        timeout: 60000,
+        visible: true
+      })
+      console.log("✅ Menu element loaded successfully")
+      menuLoaded = true
+    } catch (error) {
+      retries++
+      console.log(`⚠️  Menu selector timeout (attempt ${retries}/${maxRetries}) - checking if menu exists anyway...`)
+      const menuExists = await page.evaluate(() => {
+        const menu = document.querySelector("ul#sliderMenu.ant-menu")
+        if (!menu) {
+          // Log what selectors ARE available for debugging
+          const allMenus = document.querySelectorAll('ul')
+          return {
+            exists: false,
+            visible: false,
+            totalUls: allMenus.length,
+            ulIds: Array.from(allMenus).map(ul => ul.id || 'no-id').slice(0, 10)
+          }
+        }
+        return { exists: true, visible: menu.offsetParent !== null }
+      })
+      console.log("Menu status:", menuExists)
+
+      if (menuExists && menuExists.exists) {
+        console.log("✅ Menu exists and will proceed anyway")
+        menuLoaded = true
+      } else if (retries >= maxRetries) {
+        console.error("❌ Menu not found after all retries. Available ul elements:", menuExists)
+        throw error
+      } else {
+        console.log(`⏳ Waiting 5 seconds before retry...`)
+        await new Promise(resolve => setTimeout(resolve, 5000))
+      }
     }
-    console.log("✅ Menu exists and will proceed anyway")
   }
+
   // Additional wait to ensure menu is fully interactive
-  await new Promise(resolve => setTimeout(resolve, 2000))
+  await new Promise(resolve => setTimeout(resolve, 3000))
 }
 
 /**
