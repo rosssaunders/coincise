@@ -1,6 +1,7 @@
 # POST /v2/calc/fx
 
-**Source:** [https://docs.bitfinex.com/reference/rest-public-foreign-exchange-rate](https://docs.bitfinex.com/reference/rest-public-foreign-exchange-rate)
+**Source:**
+[https://docs.bitfinex.com/reference/rest-public-foreign-exchange-rate](https://docs.bitfinex.com/reference/rest-public-foreign-exchange-rate)
 
 post
 
@@ -10,14 +11,13 @@ Calculate the exchange rate between two currencies
 
 Response Fields
 
-| Index | Field | Type | Description |
-| --- | --- | --- | --- |
-| [0] | CURRENT\_RATE | float | Exchange rate |
+| Index | Field        | Type  | Description   |
+| ----- | ------------ | ----- | ------------- |
+| [0]   | CURRENT_RATE | float | Exchange rate |
 
-* * *
+---
 
-| --- | --- |
-| Rate Limit: | 90 reqs/min (requests per minute) |
+| --- | --- | | Rate Limit: | 90 reqs/min (requests per minute) |
 
 Body Params
 
@@ -55,9 +55,9 @@ curl \--request POST \\
 
 {
 
-  "ccy1": "BTC",
+"ccy1": "BTC",
 
-  "ccy2": "USD"
+"ccy2": "USD"
 
 }
 
