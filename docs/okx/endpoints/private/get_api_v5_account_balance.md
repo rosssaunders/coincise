@@ -1,34 +1,33 @@
-# GET sub-account trading balance
+# GET /api/v5/account/balance
 
 Source:
-[https://www.okx.com/docs-v5/en/#sub-account-rest-api-get-sub-account-trading-balance](https://www.okx.com/docs-v5/en/#sub-account-rest-api-get-sub-account-trading-balance)
+[https://www.okx.com/docs-v5/en/#trading-account-rest-api-get-balance](https://www.okx.com/docs-v5/en/#trading-account-rest-api-get-balance)
 
-### Get sub-account trading balance
+### Get balance
 
-Query detailed balance info of Trading Account of a sub-account via the master
-account (applies to master accounts only)
+Retrieve a list of assets (with non-zero balance), remaining balance, and
+available amount in the trading account.
 
-#### Rate limit：6 requests per 2 seconds
+Interest-free quota and discount rates are public data and not displayed on the
+account interface.
+
+#### Rate Limit: 10 requests per 2 seconds
 
 #### Rate limit rule: User ID
 
 #### Permission: Read
 
-#### HTTP request
+#### HTTP Request
 
-`GET /api/v5/account/subaccount/balances`
-
-> Request sample
+`GET /api/v5/account/balance`
 
 #### Request Parameters
 
-| Parameter | Type   | Required | Description      |
-| --------- | ------ | -------- | ---------------- |
-| subAcct   | String | Yes      | Sub-account name |
+| **Parameters** | **Types** | **Required** | **Description**                                                                                         |
+| -------------- | --------- | ------------ | ------------------------------------------------------------------------------------------------------- |
+| ccy            | String    | No           | Single currency or multiple currencies (no more than 20) separated with comma, e.g. `BTC` or `BTC,ETH`. |
 
-> Returned result
-
-#### Response parameters
+#### Response Parameters
 
 | **Parameters**                                                          | **Types** | **Description**                                                                                |
 | ----------------------------------------------------------------------- | --------- | ---------------------------------------------------------------------------------------------- |
@@ -97,8 +96,10 @@ isoEq | String | Isolated margin equity of currency
 Applicable to `Futures mode`/`Multi-currency margin`/`Portfolio margin` | | \>
 availEq | String | Available equity of currency  
 Applicable to `Futures mode`/`Multi-currency margin`/`Portfolio margin` | | \>
-disEq | String | Discount equity of currency in `USD`. | | \> fixedBal | String
-| Frozen balance for `Dip Sniper` and `Peak Sniper` | | \> availBal | String |
+disEq | String | Discount equity of currency in `USD`.  
+Applicable to `Spot mode`(enabled spot
+borrow)/`Multi-currency margin`/`Portfolio margin` | | \> fixedBal | String |
+Frozen balance for `Dip Sniper` and `Peak Sniper` | | \> availBal | String |
 Available balance of currency | | \> frozenBal | String | Frozen balance of
 currency | | \> ordFrozen | String | Margin frozen for open orders  
 Applicable to `Spot mode`/`Futures mode`/`Multi-currency margin` | | \> liab |
@@ -115,7 +116,7 @@ Applicable to `Spot mode`/`Multi-currency margin`/`Portfolio margin` | | \>
 rewardBal | String | Trial fund balance | | \> isoLiab | String | Isolated
 liabilities of currency  
 Applicable to `Multi-currency margin`/`Portfolio margin` | | \> mgnRatio |
-String | Cross Maintenance margin ratio of currency  
+String | Cross maintenance margin ratio of currency  
 The index for measuring the risk of a certain asset in the account.  
 Applicable to `Futures mode` and when there is cross position | | \> imr |
 String | Cross initial margin requirement at the currency level  
@@ -213,4 +214,72 @@ Auto lend currency matched amount
 Return "0" when autoLendStatus is `unsupported/off/pending`. Return matched
 amount when autoLendStatus is `active` |
 
-"" will be returned for inapplicable fields with the current account level.
+- Regarding more parameter details, you can refer to product documentations
+  below:  
+  [Futures mode: cross margin trading](https://www.okx.com/help/iii-single-currency-margin-cross-margin-trading)  
+  [Multi-currency margin mode: cross margin trading](https://www.okx.com/help/iv-multi-currency-margin-mode-cross-margin-trading)  
+  [Multi-currency margin mode vs. Portfolio margin mode](https://www.okx.com/help/vi-multi-currency-margin-mode-vs-portfolio-margin-mode)
+
+"" will be returned for inapplicable fields under the current account level.
+
+The currency details will not be returned when cashBal and eq is both 0.
+
+Distribution of applicable fields under each account level are as follows:
+
+| **Parameters**        | **Spot mode** | **Futures mode** | **Multi-currency margin mode** | **Portfolio margin mode** |
+| --------------------- | ------------- | ---------------- | ------------------------------ | ------------------------- |
+| uTime                 | Yes           | Yes              | Yes                            | Yes                       |
+| totalEq               | Yes           | Yes              | Yes                            | Yes                       |
+| isoEq                 |               | Yes              | Yes                            | Yes                       |
+| adjEq                 | Yes           |                  | Yes                            | Yes                       |
+| availEq               |               |                  | Yes                            | Yes                       |
+| ordFroz               | Yes           |                  | Yes                            | Yes                       |
+| imr                   | Yes           |                  | Yes                            | Yes                       |
+| mmr                   | Yes           |                  | Yes                            | Yes                       |
+| borrowFroz            | Yes           |                  | Yes                            | Yes                       |
+| mgnRatio              | Yes           |                  | Yes                            | Yes                       |
+| notionalUsd           | Yes           |                  | Yes                            | Yes                       |
+| notionalUsdForSwap    |               |                  | Yes                            | Yes                       |
+| notionalUsdForFutures |               |                  | Yes                            | Yes                       |
+| notionalUsdForOption  | Yes           |                  | Yes                            | Yes                       |
+| notionalUsdForBorrow  | Yes           |                  | Yes                            | Yes                       |
+| upl                   |               |                  | Yes                            | Yes                       |
+| details               |               |                  | Yes                            | Yes                       |
+| \> ccy                | Yes           | Yes              | Yes                            | Yes                       |
+| \> eq                 | Yes           | Yes              | Yes                            | Yes                       |
+| \> cashBal            | Yes           | Yes              | Yes                            | Yes                       |
+| \> uTime              | Yes           | Yes              | Yes                            | Yes                       |
+| \> isoEq              |               | Yes              | Yes                            | Yes                       |
+| \> availEq            |               | Yes              | Yes                            | Yes                       |
+| \> disEq              | Yes           |                  | Yes                            | Yes                       |
+| \> availBal           | Yes           | Yes              | Yes                            | Yes                       |
+| \> frozenBal          | Yes           | Yes              | Yes                            | Yes                       |
+| \> ordFrozen          | Yes           | Yes              | Yes                            | Yes                       |
+| \> liab               | Yes           |                  | Yes                            | Yes                       |
+| \> upl                |               | Yes              | Yes                            | Yes                       |
+| \> uplLiab            |               |                  | Yes                            | Yes                       |
+| \> crossLiab          | Yes           |                  | Yes                            | Yes                       |
+| \> isoLiab            |               |                  | Yes                            | Yes                       |
+| \> mgnRatio           |               | Yes              |                                |                           |
+| \> interest           | Yes           |                  | Yes                            | Yes                       |
+| \> twap               | Yes           |                  | Yes                            | Yes                       |
+| \> maxLoan            | Yes           |                  | Yes                            | Yes                       |
+| \> eqUsd              | Yes           | Yes              | Yes                            | Yes                       |
+| \> borrowFroz         | Yes           |                  | Yes                            | Yes                       |
+| \> notionalLever      |               | Yes              |                                |                           |
+| \> stgyEq             | Yes           | Yes              | Yes                            | Yes                       |
+| \> isoUpl             |               | Yes              | Yes                            | Yes                       |
+| \> spotInUseAmt       |               |                  |                                | Yes                       |
+| \> spotIsoBal         | Yes           | Yes              |                                |                           |
+| \> imr                |               | Yes              |                                |                           |
+| \> mmr                |               | Yes              |                                |                           |
+| \> smtSyncEq          | Yes           | Yes              | Yes                            | Yes                       |
+| \> spotCopyTradingEq  | Yes           | Yes              | Yes                            | Yes                       |
+| \> spotBal            | Yes           | Yes              | Yes                            | Yes                       |
+| \> openAvgPx          | Yes           | Yes              | Yes                            | Yes                       |
+| \> accAvgPx           | Yes           | Yes              | Yes                            | Yes                       |
+| \> spotUpl            | Yes           | Yes              | Yes                            | Yes                       |
+| \> spotUplRatio       | Yes           | Yes              | Yes                            | Yes                       |
+| \> totalPnl           | Yes           | Yes              | Yes                            | Yes                       |
+| \> totalPnlRatio c    | Yes           | Yes              | Yes                            | Yes                       |
+| \> collateralEnabled  |               |                  | Yes                            |                           |

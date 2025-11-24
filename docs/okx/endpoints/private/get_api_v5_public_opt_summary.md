@@ -1,4 +1,4 @@
-# GET option market data
+# GET /api/v5/public/opt-summary
 
 Source:
 [https://www.okx.com/docs-v5/en/#public-data-rest-api-get-option-market-data](https://www.okx.com/docs-v5/en/#public-data-rest-api-get-option-market-data)
@@ -20,7 +20,7 @@ Retrieve option market data.
 | Parameter  | Type   | Required | Description                                                 |
 | ---------- | ------ | -------- | ----------------------------------------------------------- |
 | instFamily | String | Yes      | Instrument family, only applicable to `OPTION`              |
-|            |
+|  |
 | expTime    | String | No       | Contract expiry date, the format is "YYMMDD", e.g. "200527" |
 
 #### Response Parameters
