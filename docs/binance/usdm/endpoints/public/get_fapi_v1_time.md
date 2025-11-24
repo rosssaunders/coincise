@@ -24,4 +24,5 @@ NONE
 }
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time)
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time)

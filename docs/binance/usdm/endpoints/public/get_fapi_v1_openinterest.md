@@ -14,18 +14,19 @@ GET `/fapi/v1/openInterest`
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | YES |  |
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | YES       |             |
 
 ### Response Example
 
 ```
 {
-	"openInterest": "10659.509", 
+	"openInterest": "10659.509",
 	"symbol": "BTCUSDT",
 	"time": 1589437530011   // Transaction time
 }
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest)
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest)

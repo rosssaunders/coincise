@@ -14,12 +14,14 @@ GET `/fapi/v1/trades`
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | YES |  |
-| limit | INT | NO | Default 500; max 1000. |
+| Name   | Type   | Mandatory | Description            |
+| ------ | ------ | --------- | ---------------------- |
+| symbol | STRING | YES       |                        |
+| limit  | INT    | NO        | Default 500; max 1000. |
 
-> -   Market trades means trades filled in the order book. Only market trades will be returned, which means the insurance fund trades and ADL trades won't be returned.
+> - Market trades means trades filled in the order book. Only market trades will
+>   be returned, which means the insurance fund trades and ADL trades won't be
+>   returned.
 
 ### Response Example
 
@@ -37,4 +39,5 @@ GET `/fapi/v1/trades`
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List)
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List)

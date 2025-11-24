@@ -14,9 +14,9 @@ GET `/fapi/v1/insuranceBalance`
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| symbol | STRING | NO |  |
+| Name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | STRING | NO        |             |
 
 ### Response Example
 
@@ -103,4 +103,5 @@ pass symbol
 ]
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance)
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance](https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance)

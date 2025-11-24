@@ -1,4 +1,4 @@
-## Classic Portfolio Margin Account Information (USER\_DATA)
+## Classic Portfolio Margin Account Information (USER_DATA)
 
 ### API Description
 
@@ -14,13 +14,13 @@ GET `/fapi/v1/pmAccountInfo`
 
 ### Request Parameters
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| asset | STRING | YES |  |
-| recvWindow | LONG | NO |  |
-| timestamp | LONG | YES |  |
+| Name       | Type   | Mandatory | Description |
+| ---------- | ------ | --------- | ----------- |
+| asset      | STRING | YES       |             |
+| recvWindow | LONG   | NO        |             |
+| timestamp  | LONG   | YES       |             |
 
-> -   maxWithdrawAmount is for asset transfer out to the spot wallet.
+> - maxWithdrawAmount is for asset transfer out to the spot wallet.
 
 ### Response Example
 
@@ -32,4 +32,5 @@ GET `/fapi/v1/pmAccountInfo`
 }
 ```
 
-> Source: [https://developers.binance.com/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints](https://developers.binance.com/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints)
+> Source:
+> [https://developers.binance.com/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints](https://developers.binance.com/docs/derivatives/usds-margined-futures/portfolio-margin-endpoints)
