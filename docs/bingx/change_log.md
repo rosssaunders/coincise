@@ -1,5 +1,25 @@
 # Change Log
 
+2025-11-13
+
+Added Copy Trading Endpoints and USDT-M Perpetual Contract Endpoints
+
+- USDT-M Perp Futures: Added the Endpoint for Modify Order.
+- Copy Trading (USDT-M Perp Futures): Added the Endpoint for Personal Trading
+  Overview.
+- Copy Trading (USDT-M Perp Futures): Added the Endpoint for Querying Profit
+  Summary.
+- Copy Trading (USDT-M Perp Futures): Added the Endpoint for Querying Profit
+  Details.
+- Copy Trading (USDT-M Perp Futures): Added the Endpoint for Setting Commission
+  Rate.
+- Copy Trading (USDT-M Perp Futures): Added the Endpoint for Retrieving
+  Copy-Trading Pairs.
+- Copy Trading (Spot): Added the Endpoint for Personal Trading Overview.
+- Copy Trading (Spot): Added the Endpoint for Querying Historical Copy Trades.
+- Copy Trading (Spot): Added the Endpoint for Querying Profit Overview.
+- Copy Trading (Spot): Added the Endpoint for Querying Profit Details.
+
 2025-10-09
 
 Expected Release Date: October 16, 2025.This update will change the following

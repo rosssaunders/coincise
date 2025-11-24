@@ -1,13 +1,19 @@
 # Get Risk Limit
 
-Query for the [risk limit](https://www.bybit.com/en/help-center/article/Risk-Limit-Perpetual-and-Futures) margin parameters. This information is also displayed on the website [here](https://www.bybit.com/en/announcement-info/margin-parameters/).
+Query for the
+[risk limit](https://www.bybit.com/en/help-center/article/Risk-Limit-Perpetual-and-Futures)
+margin parameters. This information is also displayed on the website
+[here](https://www.bybit.com/en/announcement-info/margin-parameters/).
 
 > **Covers: USDT contract / USDC contract / Inverse contract**
 
 info
 
--   category=`linear` returns a data set of 15 symbols in each response. Please use the `cursor` param to get the next data set.
--   `symbol` support `Trading` status and `PreLaunch` [Pre-Market contracts](https://www.bybit.com/en/help-center/article/Introduction-to-Pre-Market-Perpetual) status trading pairs.
+- category=`linear` returns a data set of 15 symbols in each response. Please
+  use the `cursor` param to get the next data set.
+- `symbol` support `Trading` status and `PreLaunch`
+  [Pre-Market contracts](https://www.bybit.com/en/help-center/article/Introduction-to-Pre-Market-Perpetual)
+  status trading pairs.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -15,35 +21,35 @@ GET `/v5/market/risk-limit`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [category](/docs/v5/enum#category) | **true** | string | Product type. `linear`,`inverse` |
-| symbol | false | string | Symbol name, like `BTCUSDT`, uppercase only |
-| cursor | false | string | Cursor. Use the `nextPageCursor` token from the response to retrieve the next page of the data set |
+| Parameter                          | Required | Type   | Comments                                                                                           |
+| :--------------------------------- | :------- | :----- | -------------------------------------------------------------------------------------------------- |
+| [category](/docs/v5/enum#category) | **true** | string | Product type. `linear`,`inverse`                                                                   |
+| symbol                             | false    | string | Symbol name, like `BTCUSDT`, uppercase only                                                        |
+| cursor                             | false    | string | Cursor. Use the `nextPageCursor` token from the response to retrieve the next page of the data set |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| category | string | Product type |
-| list | array | Object |
-| \> id | integer | Risk ID |
-| \> symbol | string | Symbol name |
-| \> riskLimitValue | string | Position limit |
-| \> maintenanceMargin | number | Maintain margin rate |
-| \> initialMargin | number | Initial margin rate |
-| \> isLowestRisk | integer | `1`: true, `0`: false |
-| \> maxLeverage | string | Allowed max leverage |
-| \> mmDeduction | string | The maintenance margin deduction value when risk limit tier changed |
-| nextPageCursor | string | Refer to the `cursor` request parameter |
+| Parameter            | Type    | Comments                                                            |
+| :------------------- | :------ | ------------------------------------------------------------------- |
+| category             | string  | Product type                                                        |
+| list                 | array   | Object                                                              |
+| \> id                | integer | Risk ID                                                             |
+| \> symbol            | string  | Symbol name                                                         |
+| \> riskLimitValue    | string  | Position limit                                                      |
+| \> maintenanceMargin | number  | Maintain margin rate                                                |
+| \> initialMargin     | number  | Initial margin rate                                                 |
+| \> isLowestRisk      | integer | `1`: true, `0`: false                                               |
+| \> maxLeverage       | string  | Allowed max leverage                                                |
+| \> mmDeduction       | string  | The maintenance margin deduction value when risk limit tier changed |
+| nextPageCursor       | string  | Refer to the `cursor` request parameter                             |
 
 [RUN >>](/docs/api-explorer/v5/market/risk-limit)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/market/risk-limit?category=inverse&symbol=BTCUSD HTTP/1.1Host: api-testnet.bybit.com
@@ -62,7 +68,16 @@ import com.bybit.api.client.domain.CategoryType;import com.bybit.api.client.doma
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,});client    .getRiskLimit({        category: 'inverse',        symbol: 'BTCUSD',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({ testnet: true })
+client
+  .getRiskLimit({ category: "inverse", symbol: "BTCUSD" })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

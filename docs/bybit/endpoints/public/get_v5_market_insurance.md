@@ -1,11 +1,16 @@
 # Get Insurance Pool
 
-Query for Bybit [insurance pool](https://www.bybit.com/en/announcement-info/insurance-fund/) data (BTC/USDT/USDC etc)
+Query for Bybit
+[insurance pool](https://www.bybit.com/en/announcement-info/insurance-fund/)
+data (BTC/USDT/USDC etc)
 
 info
 
--   The isolated insurance pool balance is updated every 1 minute, and shared insurance pool balance is updated every 24 hours
--   Please note that you may receive data from the previous minute. This is due to multiple backend containers starting at different times, which may cause a slight delay. You can always rely on the latest minute data for accuracy.
+- The isolated insurance pool balance is updated every 1 minute, and shared
+  insurance pool balance is updated every 24 hours
+- Please note that you may receive data from the previous minute. This is due to
+  multiple backend containers starting at different times, which may cause a
+  slight delay. You can always rely on the latest minute data for accuracy.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -13,29 +18,29 @@ GET `/v5/market/insurance`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| coin | false | string | coin, uppercase only. Default: return all insurance coins |
+| Parameter | Required | Type   | Comments                                                  |
+| :-------- | :------- | :----- | --------------------------------------------------------- |
+| coin      | false    | string | coin, uppercase only. Default: return all insurance coins |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| updatedTime | string | Data updated time (ms) |
-| list | array | Object |
-| \> coin | string | Coin |
-| \> symbols | string | -   symbols with `"BTCUSDT,ETHUSDT,SOLUSDT"` mean these contracts are shared with one insurance pool
--   For an isolated insurance pool, it returns one contract |
-| \> balance | string | Balance |
-| \> value | string | USD value |
+| Parameter                                                 | Type   | Comments                                                                                           |
+| :-------------------------------------------------------- | :----- | -------------------------------------------------------------------------------------------------- |
+| updatedTime                                               | string | Data updated time (ms)                                                                             |
+| list                                                      | array  | Object                                                                                             |
+| \> coin                                                   | string | Coin                                                                                               |
+| \> symbols                                                | string | - symbols with `"BTCUSDT,ETHUSDT,SOLUSDT"` mean these contracts are shared with one insurance pool |
+| - For an isolated insurance pool, it returns one contract |
+| \> balance                                                | string | Balance                                                                                            |
+| \> value                                                  | string | USD value                                                                                          |
 
 [RUN >>](/docs/api-explorer/v5/market/insurance)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/market/insurance?coin=USDT HTTP/1.1Host: api-testnet.bybit.com
@@ -54,7 +59,16 @@ import com.bybit.api.client.domain.market.request.MarketDataRequest;import com.b
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,});client    .getInsurance({        coin: 'USDT',    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({ testnet: true })
+client
+  .getInsurance({ coin: "USDT" })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
