@@ -6,10 +6,13 @@ Query option historical volatility
 
 info
 
--   The data is hourly.
--   If both `startTime` and `endTime` are not specified, it will return the most recent 1 hours worth of data.
--   `startTime` and `endTime` are a pair of params. Either both are passed or they are not passed at all.
--   This endpoint can query the last 2 years worth of data, but make sure \[`endTime` - `startTime`\] <= 30 days.
+- The data is hourly.
+- If both `startTime` and `endTime` are not specified, it will return the most
+  recent 1 hours worth of data.
+- `startTime` and `endTime` are a pair of params. Either both are passed or they
+  are not passed at all.
+- This endpoint can query the last 2 years worth of data, but make sure
+  \[`endTime` - `startTime`\] <= 30 days.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -17,32 +20,32 @@ GET `/v5/market/historical-volatility`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| category | **true** | string | Product type. `option` |
-| baseCoin | false | string | Base coin, uppercase only. Default: return BTC data |
-| quoteCoin | false | string | Quote coin, `USD` or `USDT`. Default: return quoteCoin=USD |
-| [period](/docs/v5/enum#optionperiod) | false | integer | Period. If not specified, it will return data with a 7-day average by default |
-| startTime | false | integer | The start timestamp (ms) |
-| endTime | false | integer | The end timestamp (ms) |
+| Parameter                            | Required | Type    | Comments                                                                      |
+| :----------------------------------- | :------- | :------ | ----------------------------------------------------------------------------- |
+| category                             | **true** | string  | Product type. `option`                                                        |
+| baseCoin                             | false    | string  | Base coin, uppercase only. Default: return BTC data                           |
+| quoteCoin                            | false    | string  | Quote coin, `USD` or `USDT`. Default: return quoteCoin=USD                    |
+| [period](/docs/v5/enum#optionperiod) | false    | integer | Period. If not specified, it will return data with a 7-day average by default |
+| startTime                            | false    | integer | The start timestamp (ms)                                                      |
+| endTime                              | false    | integer | The end timestamp (ms)                                                        |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| category | string | Product type |
-| list | array | Object |
-| \> period | integer | Period |
-| \> value | string | Volatility |
-| \> time | string | Timestamp (ms) |
+| Parameter | Type    | Comments       |
+| :-------- | :------ | -------------- |
+| category  | string  | Product type   |
+| list      | array   | Object         |
+| \> period | integer | Period         |
+| \> value  | string  | Volatility     |
+| \> time   | string  | Timestamp (ms) |
 
 [RUN >>](/docs/api-explorer/v5/market/iv)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/market/historical-volatility?category=option&baseCoin=ETH&period=30 HTTP/1.1Host: api-testnet.bybit.com
@@ -57,7 +60,16 @@ import com.bybit.api.client.domain.CategoryType;import com.bybit.api.client.doma
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,});client    .getHistoricalVolatility({        category: 'option',        baseCoin: 'ETH',        period: 30,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({ testnet: true })
+client
+  .getHistoricalVolatility({ category: "option", baseCoin: "ETH", period: 30 })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

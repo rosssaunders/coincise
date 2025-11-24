@@ -1,6 +1,7 @@
 # Get Exchange Entity List
 
-This endpoint is particularly used for **kyc=KOR users**. When withdraw funds, you need to fill entity id.
+This endpoint is particularly used for **kyc=KOR users**. When withdraw funds,
+you need to fill entity id.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -12,15 +13,15 @@ None
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| vasp | array | Exchange entity info |
+| Parameter       | Type   | Comments                                                                                                               |
+| :-------------- | :----- | ---------------------------------------------------------------------------------------------------------------------- |
+| vasp            | array  | Exchange entity info                                                                                                   |
 | \> vaspEntityId | string | Receiver platform id. When transfer to Upbit or other exchanges that not in the list, please use vaspEntityId='others' |
-| \> vaspName | string | Receiver platform name |
+| \> vaspName     | string | Receiver platform name                                                                                                 |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/asset/withdraw/vasp/list HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1715067106163X-BAPI-RECV-WINDOW: 5000X-BAPI-SIGN: XXXXXX
@@ -31,7 +32,20 @@ GET /v5/asset/withdraw/vasp/list HTTP/1.1Host: api-testnet.bybit.comX-BAPI-API-K
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getExchangeEntities()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "xxxxxxxxxxxxxxxxxx",
+  secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+})
+client
+  .getExchangeEntities()
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

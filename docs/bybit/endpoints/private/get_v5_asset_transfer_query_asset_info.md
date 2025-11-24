@@ -10,30 +10,30 @@ GET `/v5/asset/transfer/query-asset-info`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [accountType](/docs/v5/enum#accounttype) | **true** | string | Account type. `SPOT` |
-| coin | false | string | Coin name, uppercase only |
+| Parameter                                | Required | Type   | Comments                  |
+| :--------------------------------------- | :------- | :----- | ------------------------- |
+| [accountType](/docs/v5/enum#accounttype) | **true** | string | Account type. `SPOT`      |
+| coin                                     | false    | string | Coin name, uppercase only |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| spot | Object |  |
-| \> status | string | account status. `ACCOUNT_STATUS_NORMAL`: normal, `ACCOUNT_STATUS_UNSPECIFIED`: banned |
-| \> assets | array | Object |
-| \>> coin | string | Coin |
-| \>> frozen | string | Freeze amount |
-| \>> free | string | Free balance |
-| \>> withdraw | string | Amount in withdrawing |
+| Parameter    | Type   | Comments                                                                              |
+| :----------- | :----- | ------------------------------------------------------------------------------------- |
+| spot         | Object |                                                                                       |
+| \> status    | string | account status. `ACCOUNT_STATUS_NORMAL`: normal, `ACCOUNT_STATUS_UNSPECIFIED`: banned |
+| \> assets    | array  | Object                                                                                |
+| \>> coin     | string | Coin                                                                                  |
+| \>> frozen   | string | Freeze amount                                                                         |
+| \>> free     | string | Free balance                                                                          |
+| \>> withdraw | string | Amount in withdrawing                                                                 |
 
 [RUN >>](/docs/api-explorer/v5/asset/asset-info)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/asset/transfer/query-asset-info?accountType=SPOT&coin=ETH HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672136538042X-BAPI-RECV-WINDOW: 5000
@@ -44,7 +44,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getAssetInfo({ accountType: 'FUND', coin: 'USDC' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "xxxxxxxxxxxxxxxxxx",
+  secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+})
+client
+  .getAssetInfo({ accountType: "FUND", coin: "USDC" })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

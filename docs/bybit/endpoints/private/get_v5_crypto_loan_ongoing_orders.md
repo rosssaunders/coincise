@@ -10,40 +10,41 @@ GET `/v5/crypto-loan/ongoing-orders`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| orderId | false | string | Loan order ID |
-| loanCurrency | false | string | Loan coin name |
-| collateralCurrency | false | string | Collateral coin name |
-| loanTermType | false | string | -   `1`: fixed term, when query this type, `loanTerm` must be filled
--   `2`: flexible term
-By default, query all types |
-| loanTerm | false | string | `7`, `14`, `30`, `90`, `180` days, working when `loanTermType`\=1 |
-| limit | false | string | Limit for data size per page. \[`1`, `100`\]. Default: `10` |
-| cursor | false | string | Cursor. Use the `nextPageCursor` token from the response to retrieve the next page of the result set |
+| Parameter          | Required | Type   | Comments                                                           |
+| :----------------- | :------- | :----- | ------------------------------------------------------------------ |
+| orderId            | false    | string | Loan order ID                                                      |
+| loanCurrency       | false    | string | Loan coin name                                                     |
+| collateralCurrency | false    | string | Collateral coin name                                               |
+| loanTermType       | false    | string | - `1`: fixed term, when query this type, `loanTerm` must be filled |
+
+- `2`: flexible term By default, query all types | | loanTerm | false | string |
+  `7`, `14`, `30`, `90`, `180` days, working when `loanTermType`\=1 | | limit |
+  false | string | Limit for data size per page. \[`1`, `100`\]. Default: `10` |
+  | cursor | false | string | Cursor. Use the `nextPageCursor` token from the
+  response to retrieve the next page of the result set |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| list | array | Object |
-| \> collateralAmount | string | Collateral amount |
-| \> collateralCurrency | string | Collateral coin |
-| \> currentLTV | string | Current LTV |
-| \> expirationTime | string | Loan maturity time, keeps `""` for flexible loan |
-| \> hourlyInterestRate | string | Hourly interest rate-   Flexible loan, it is real-time interest rate
--   Fixed term loan: it is fixed term interest rate |
-| \> loanCurrency | string | Loan coin |
-| \> loanTerm | string | Loan term, `7`, `14`, `30`, `90`, `180` days, keep `""` for flexible loan |
-| \> orderId | string | Loan order ID |
-| \> residualInterest | string | Unpaid interest |
-| \> residualPenaltyInterest | string | Unpaid penalty interest |
-| \> totalDebt | string | Unpaid principal |
-| nextPageCursor | string | Refer to the `cursor` request parameter |
+| Parameter                                         | Type   | Comments                                                                  |
+| :------------------------------------------------ | :----- | ------------------------------------------------------------------------- |
+| list                                              | array  | Object                                                                    |
+| \> collateralAmount                               | string | Collateral amount                                                         |
+| \> collateralCurrency                             | string | Collateral coin                                                           |
+| \> currentLTV                                     | string | Current LTV                                                               |
+| \> expirationTime                                 | string | Loan maturity time, keeps `""` for flexible loan                          |
+| \> hourlyInterestRate                             | string | Hourly interest rate- Flexible loan, it is real-time interest rate        |
+| - Fixed term loan: it is fixed term interest rate |
+| \> loanCurrency                                   | string | Loan coin                                                                 |
+| \> loanTerm                                       | string | Loan term, `7`, `14`, `30`, `90`, `180` days, keep `""` for flexible loan |
+| \> orderId                                        | string | Loan order ID                                                             |
+| \> residualInterest                               | string | Unpaid interest                                                           |
+| \> residualPenaltyInterest                        | string | Unpaid penalty interest                                                   |
+| \> totalDebt                                      | string | Unpaid principal                                                          |
+| nextPageCursor                                    | string | Refer to the `cursor` request parameter                                   |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/crypto-loan/ongoing-orders?orderId=1793683005081680384 HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1728630979731X-BAPI-RECV-WINDOW: 5000
@@ -54,7 +55,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getUnpaidLoanOrders({ orderId: '1793683005081680384' })  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "xxxxxxxxxxxxxxxxxx",
+  secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+})
+client
+  .getUnpaidLoanOrders({ orderId: "1793683005081680384" })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
