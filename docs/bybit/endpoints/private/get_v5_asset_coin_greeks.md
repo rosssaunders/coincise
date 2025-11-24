@@ -8,24 +8,24 @@ GET `/v5/asset/coin-greeks`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| baseCoin | false | string | Base coin, uppercase only. If not passed, all supported base coin greeks will be returned by default |
+| Parameter | Required | Type   | Comments                                                                                             |
+| :-------- | :------- | :----- | ---------------------------------------------------------------------------------------------------- |
+| baseCoin  | false    | string | Base coin, uppercase only. If not passed, all supported base coin greeks will be returned by default |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| list | array | Object |
-| \> baseCoin | string | Base coin. e.g.,`BTC`,`ETH`,`SOL` |
-| \> totalDelta | string | Delta value |
-| \> totalGamma | string | Gamma value |
-| \> totalVega | string | Vega value |
-| \> totalTheta | string | Theta value |
+| Parameter     | Type   | Comments                          |
+| :------------ | :----- | --------------------------------- |
+| list          | array  | Object                            |
+| \> baseCoin   | string | Base coin. e.g.,`BTC`,`ETH`,`SOL` |
+| \> totalDelta | string | Delta value                       |
+| \> totalGamma | string | Gamma value                       |
+| \> totalVega  | string | Vega value                        |
+| \> totalTheta | string | Theta value                       |
 
 [RUN >>](/docs/api-explorer/v5/account/coin-greeks)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 

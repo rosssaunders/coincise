@@ -1,6 +1,7 @@
 # Get Transferable Coin
 
-Query the transferable coin list between each [account type](/docs/v5/enum#accounttype)
+Query the transferable coin list between each
+[account type](/docs/v5/enum#accounttype)
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -8,20 +9,20 @@ GET `/v5/asset/transfer/query-transfer-coin-list`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
+| Parameter                                    | Required | Type   | Comments          |
+| :------------------------------------------- | :------- | :----- | ----------------- |
 | [fromAccountType](/docs/v5/enum#accounttype) | **true** | string | From account type |
-| [toAccountType](/docs/v5/enum#accounttype) | **true** | string | To account type |
+| [toAccountType](/docs/v5/enum#accounttype)   | **true** | string | To account type   |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| list | array | A list of coins (as strings) |
+| Parameter | Type  | Comments                     |
+| :-------- | :---- | ---------------------------- |
+| list      | array | A list of coins (as strings) |
 
 [RUN >>](/docs/api-explorer/v5/asset/transferable-coin)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -44,10 +45,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
   "retCode": 0,
   "retMsg": "success",
   "result": {
-    "list": [
-      "BTC",
-      "ETH"
-    ]
+    "list": ["BTC", "ETH"]
   },
   "retExtInfo": {},
   "time": 1672144322954

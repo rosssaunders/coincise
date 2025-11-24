@@ -12,37 +12,37 @@ GET `/v5/asset/exchange/query-convert-history`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [accountType](/docs/v5/enum#convertaccounttype) | false | string | Wallet type-   Supports passing multiple types, separated by comma e.g., `eb_convert_funding,eb_convert_uta`
--   Return all wallet types data if not passed |
-| index | false | integer | Page number-   started from 1
--   1st page by default |
-| limit | false | integer | Page size-   20 records by default
--   up to 100 records, return 100 when exceeds 100 |
+| Parameter                                        | Required | Type    | Comments                                                                                                   |
+| :----------------------------------------------- | :------- | :------ | ---------------------------------------------------------------------------------------------------------- |
+| [accountType](/docs/v5/enum#convertaccounttype)  | false    | string  | Wallet type- Supports passing multiple types, separated by comma e.g., `eb_convert_funding,eb_convert_uta` |
+| - Return all wallet types data if not passed     |
+| index                                            | false    | integer | Page number- started from 1                                                                                |
+| - 1st page by default                            |
+| limit                                            | false    | integer | Page size- 20 records by default                                                                           |
+| - up to 100 records, return 100 when exceeds 100 |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| list | array<object\> | Array of quotes |
-| \> [accountType](/docs/v5/enum#convertaccounttype) | string | Wallet type |
-| \> exchangeTxId | string | Exchange tx ID, same as quote tx ID |
-| \> userId | string | User ID |
-| \> fromCoin | string | From coin |
-| \> fromCoinType | string | From coin type. `crypto` |
-| \> toCoin | string | To coin |
-| \> toCoinType | string | To coin type. `crypto` |
-| \> fromAmount | string | From coin amount (amount to sell) |
-| \> toAmount | string | To coin amount (amount to buy according to exchange rate) |
-| \> exchangeStatus | string | Exchange status-   init
+| Parameter                                          | Type           | Comments                                                  |
+| :------------------------------------------------- | :------------- | --------------------------------------------------------- |
+| list                                               | array<object\> | Array of quotes                                           |
+| \> [accountType](/docs/v5/enum#convertaccounttype) | string         | Wallet type                                               |
+| \> exchangeTxId                                    | string         | Exchange tx ID, same as quote tx ID                       |
+| \> userId                                          | string         | User ID                                                   |
+| \> fromCoin                                        | string         | From coin                                                 |
+| \> fromCoinType                                    | string         | From coin type. `crypto`                                  |
+| \> toCoin                                          | string         | To coin                                                   |
+| \> toCoinType                                      | string         | To coin type. `crypto`                                    |
+| \> fromAmount                                      | string         | From coin amount (amount to sell)                         |
+| \> toAmount                                        | string         | To coin amount (amount to buy according to exchange rate) |
+| \> exchangeStatus                                  | string         | Exchange status- init                                     |
 
--   failure |
-| \> extInfo | object |  |
-| \>> paramType | string | This field is published when you send it in the [Request a Quote](/docs/v5/asset/convert/apply-quote) |
-| \>> paramValue | string | This field is published when you send it in the [Request a Quote](/docs/v5/asset/convert/apply-quote) |
-| \> convertRate | string | Exchange rate |
-| \> createdAt | string | Quote created time |
+- failure | | \> extInfo | object | | | \>> paramType | string | This field is
+  published when you send it in the
+  [Request a Quote](/docs/v5/asset/convert/apply-quote) | | \>> paramValue |
+  string | This field is published when you send it in the
+  [Request a Quote](/docs/v5/asset/convert/apply-quote) | | \> convertRate |
+  string | Exchange rate | | \> createdAt | string | Quote created time |
 
 ### Request Example[​](#request-example "Direct link to heading")
 

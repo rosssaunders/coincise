@@ -71,6 +71,8 @@
 - FOK - Fill or Kill
 - GTX - Good Till Crossing (Post Only)
 - GTD - Good Till Date
+- RPI - Retail Price Improvement(RPI order is post only and only be matched with
+  the order from APP or Web)
 
 **Working Type (workingType)**
 

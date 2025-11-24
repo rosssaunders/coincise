@@ -2,8 +2,10 @@
 
 info
 
--   The data can support up to past 1 months until T-1. To extract data from over a month ago, please contact your Relationship Manager
--   `begin` & `end` are either entered at the same time or not entered, and latest 7 days data are returned by default
+- The data can support up to past 1 months until T-1. To extract data from over
+  a month ago, please contact your Relationship Manager
+- `begin` & `end` are either entered at the same time or not entered, and latest
+  7 days data are returned by default
 
 > API rate limit: 10 req / sec
 
@@ -13,51 +15,52 @@ GET `/v5/broker/earnings-info`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| bizType | false | string | Business type. `SPOT`, `DERIVATIVES`, `OPTIONS`, `CONVERT` |
-| begin | false | string | Begin date, in the format of YYYYMMDD, e.g, 20231201, search the data from 1st Dec 2023 00:00:00 UTC (include) |
-| end | false | string | End date, in the format of YYYYMMDD, e.g, 20231201, search the data before 2nd Dec 2023 00:00:00 UTC (exclude) |
-| uid | false | string | 
--   To get results for a specific subaccount: Enter the subaccount UID
--   To get results for all subaccounts: Leave the field empty
+| Parameter | Required | Type   | Comments                                                                                                       |
+| :-------- | :------- | :----- | -------------------------------------------------------------------------------------------------------------- |
+| bizType   | false    | string | Business type. `SPOT`, `DERIVATIVES`, `OPTIONS`, `CONVERT`                                                     |
+| begin     | false    | string | Begin date, in the format of YYYYMMDD, e.g, 20231201, search the data from 1st Dec 2023 00:00:00 UTC (include) |
+| end       | false    | string | End date, in the format of YYYYMMDD, e.g, 20231201, search the data before 2nd Dec 2023 00:00:00 UTC (exclude) |
+| uid       | false    | string |
 
- |
-| limit | false | integer | Limit for data size per page. \[`1`, `1000`\]. Default: `1000` |
-| cursor | false | string | Cursor. Use the `nextPageCursor` token from the response to retrieve the next page of the result set |
+- To get results for a specific subaccount: Enter the subaccount UID
+- To get results for all subaccounts: Leave the field empty
+
+| | limit | false | integer | Limit for data size per page. \[`1`, `1000`\].
+Default: `1000` | | cursor | false | string | Cursor. Use the `nextPageCursor`
+token from the response to retrieve the next page of the result set |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| totalEarningCat | Object | Category statistics for total earning data |
-| \> spot | array | Object. Earning for Spot trading. If do not have any rebate, keep empty array |
-| \>> coin | string | Rebate coin name |
-| \>> earning | string | Rebate amount of the coin |
-| \> derivatives | array | Object. Earning for Derivatives trading. If do not have any rebate, keep empty array |
-| \>> coin | string | Rebate coin name |
-| \>> earning | string | Rebate amount of the coin |
-| \> options | array | Object. Earning for Option trading. If do not have any rebate, keep empty array |
-| \>> coin | string | Rebate coin name |
-| \>> earning | string | Rebate amount of the coin |
-| \> convert | array | Object. Earning for Convert trading. If do not have any rebate, keep empty array |
-| \>> coin | string | Rebate coin name |
-| \>> earning | string | Rebate amount of the coin |
-| \> total | array | Object. Sum earnings of all categories. If do not have any rebate, keep empty array |
-| \>> coin | string | Rebate coin name |
-| \>> earning | string | Rebate amount of the coin |
-| details | array | Object. Detailed trading information for each sub UID and each category |
-| \> userId | string | Sub UID |
-| \> bizType | string | Business type. `SPOT`, `DERIVATIVES`, `OPTIONS`, `CONVERT` |
-| \> symbol | string | Symbol name |
-| \> coin | string | Rebate coin name |
-| \> earning | string | Rebate amount |
-| \> markupEarning | string | Earning generated from markup fee rate |
-| \> baseFeeEarning | string | Earning generated from base fee rate |
-| \> orderId | string | Order ID |
-| \> execId | string | Trade ID |
-| \> execTime | string | Order execution timestamp (ms) |
-| nextPageCursor | string | Refer to the `cursor` request parameter |
+| Parameter         | Type   | Comments                                                                             |
+| :---------------- | :----- | ------------------------------------------------------------------------------------ |
+| totalEarningCat   | Object | Category statistics for total earning data                                           |
+| \> spot           | array  | Object. Earning for Spot trading. If do not have any rebate, keep empty array        |
+| \>> coin          | string | Rebate coin name                                                                     |
+| \>> earning       | string | Rebate amount of the coin                                                            |
+| \> derivatives    | array  | Object. Earning for Derivatives trading. If do not have any rebate, keep empty array |
+| \>> coin          | string | Rebate coin name                                                                     |
+| \>> earning       | string | Rebate amount of the coin                                                            |
+| \> options        | array  | Object. Earning for Option trading. If do not have any rebate, keep empty array      |
+| \>> coin          | string | Rebate coin name                                                                     |
+| \>> earning       | string | Rebate amount of the coin                                                            |
+| \> convert        | array  | Object. Earning for Convert trading. If do not have any rebate, keep empty array     |
+| \>> coin          | string | Rebate coin name                                                                     |
+| \>> earning       | string | Rebate amount of the coin                                                            |
+| \> total          | array  | Object. Sum earnings of all categories. If do not have any rebate, keep empty array  |
+| \>> coin          | string | Rebate coin name                                                                     |
+| \>> earning       | string | Rebate amount of the coin                                                            |
+| details           | array  | Object. Detailed trading information for each sub UID and each category              |
+| \> userId         | string | Sub UID                                                                              |
+| \> bizType        | string | Business type. `SPOT`, `DERIVATIVES`, `OPTIONS`, `CONVERT`                           |
+| \> symbol         | string | Symbol name                                                                          |
+| \> coin           | string | Rebate coin name                                                                     |
+| \> earning        | string | Rebate amount                                                                        |
+| \> markupEarning  | string | Earning generated from markup fee rate                                               |
+| \> baseFeeEarning | string | Earning generated from base fee rate                                                 |
+| \> orderId        | string | Order ID                                                                             |
+| \> execId         | string | Trade ID                                                                             |
+| \> execTime       | string | Order execution timestamp (ms)                                                       |
+| nextPageCursor    | string | Refer to the `cursor` request parameter                                              |
 
 ### Request Example[​](#request-example "Direct link to heading")
 

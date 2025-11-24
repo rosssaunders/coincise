@@ -4,7 +4,7 @@ Query the deposit address information of SUB account.
 
 info
 
--   Use master UID's api key **only**
+- Use master UID's api key **only**
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -12,28 +12,28 @@ GET `/v5/asset/deposit/query-sub-member-address`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| coin | **true** | string | Coin, uppercase only |
-| chainType | **true** | string | Please use the value of `chain` from [coin-info](/docs/v5/asset/coin-info) endpoint |
-| subMemberId | **true** | string | Sub user ID |
+| Parameter   | Required | Type   | Comments                                                                            |
+| :---------- | :------- | :----- | ----------------------------------------------------------------------------------- |
+| coin        | **true** | string | Coin, uppercase only                                                                |
+| chainType   | **true** | string | Please use the value of `chain` from [coin-info](/docs/v5/asset/coin-info) endpoint |
+| subMemberId | **true** | string | Sub user ID                                                                         |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| coin | string | Coin |
-| chains | array | Object |
-| \> chainType | string | Chain type |
-| \> addressDeposit | string | The address for deposit |
-| \> tagDeposit | string | Tag of deposit |
-| \> chain | string | Chain |
-| \> batchReleaseLimit | string | The deposit limit for this coin in this chain. `"-1"` means no limit |
-| \> contractAddress | string | The contract address of the coin. Only display last 6 characters, if there is no contract address, it shows `""` |
+| Parameter            | Type   | Comments                                                                                                         |
+| :------------------- | :----- | ---------------------------------------------------------------------------------------------------------------- |
+| coin                 | string | Coin                                                                                                             |
+| chains               | array  | Object                                                                                                           |
+| \> chainType         | string | Chain type                                                                                                       |
+| \> addressDeposit    | string | The address for deposit                                                                                          |
+| \> tagDeposit        | string | Tag of deposit                                                                                                   |
+| \> chain             | string | Chain                                                                                                            |
+| \> batchReleaseLimit | string | The deposit limit for this coin in this chain. `"-1"` means no limit                                             |
+| \> contractAddress   | string | The contract address of the coin. Only display last 6 characters, if there is no contract address, it shows `""` |
 
 [RUN >>](/docs/api-explorer/v5/asset/sub-deposit-addr)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 

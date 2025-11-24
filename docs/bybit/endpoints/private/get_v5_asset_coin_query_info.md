@@ -1,6 +1,7 @@
 # Get Coin Info
 
-Query coin information, including chain information, withdraw and deposit status.
+Query coin information, including chain information, withdraw and deposit
+status.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -8,35 +9,35 @@ GET `/v5/asset/coin/query-info`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| coin | false | string | Coin, uppercase only |
+| Parameter | Required | Type   | Comments             |
+| :-------- | :------- | :----- | -------------------- |
+| coin      | false    | string | Coin, uppercase only |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| rows | array | Object |
-| \> name | string | Coin name |
-| \> coin | string | Coin |
-| \> remainAmount | string | Maximum withdraw amount per transaction |
-| \> chains | array | Object |
-| \>> chain | string | Chain |
-| \>> chainType | string | Chain type |
-| \>> confirmation | string | Number of confirmations for deposit: Once this number is reached, your funds will be credited to your account and available for trading |
-| \>> withdrawFee | string | withdraw fee. *If withdraw fee is empty, It means that this coin does not support withdrawal* |
-| \>> depositMin | string | Min. deposit |
-| \>> withdrawMin | string | Min. withdraw |
-| \>> minAccuracy | string | The precision of withdraw or deposit |
-| \>> chainDeposit | string | The chain status of deposit. `0`: suspend. `1`: normal |
-| \>> chainWithdraw | string | The chain status of withdraw. `0`: suspend. `1`: normal |
-| \>> withdrawPercentageFee | string | The withdraw fee percentage. It is a real figure, e.g., 0.022 means 2.2% |
-| \>> contractAddress | string | Contract address. `""` means no contract address |
-| \>> safeConfirmNumber | string | Number of security confirmations: Once this number is reached, your USD equivalent worth funds will be fully unlocked and available for withdrawal. |
+| Parameter                 | Type   | Comments                                                                                                                                            |
+| :------------------------ | :----- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| rows                      | array  | Object                                                                                                                                              |
+| \> name                   | string | Coin name                                                                                                                                           |
+| \> coin                   | string | Coin                                                                                                                                                |
+| \> remainAmount           | string | Maximum withdraw amount per transaction                                                                                                             |
+| \> chains                 | array  | Object                                                                                                                                              |
+| \>> chain                 | string | Chain                                                                                                                                               |
+| \>> chainType             | string | Chain type                                                                                                                                          |
+| \>> confirmation          | string | Number of confirmations for deposit: Once this number is reached, your funds will be credited to your account and available for trading             |
+| \>> withdrawFee           | string | withdraw fee. _If withdraw fee is empty, It means that this coin does not support withdrawal_                                                       |
+| \>> depositMin            | string | Min. deposit                                                                                                                                        |
+| \>> withdrawMin           | string | Min. withdraw                                                                                                                                       |
+| \>> minAccuracy           | string | The precision of withdraw or deposit                                                                                                                |
+| \>> chainDeposit          | string | The chain status of deposit. `0`: suspend. `1`: normal                                                                                              |
+| \>> chainWithdraw         | string | The chain status of withdraw. `0`: suspend. `1`: normal                                                                                             |
+| \>> withdrawPercentageFee | string | The withdraw fee percentage. It is a real figure, e.g., 0.022 means 2.2%                                                                            |
+| \>> contractAddress       | string | Contract address. `""` means no contract address                                                                                                    |
+| \>> safeConfirmNumber     | string | Number of security confirmations: Once this number is reached, your USD equivalent worth funds will be fully unlocked and available for withdrawal. |
 
 [RUN >>](/docs/api-explorer/v5/asset/coin-info)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 

@@ -12,27 +12,27 @@ GET `/v5/crypto-loan/adjustment-history`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| orderId | false | string | Loan order ID |
-| adjustId | false | string | Collateral adjustment transaction ID |
-| collateralCurrency | false | string | Collateral coin name |
-| limit | false | string | Limit for data size per page. \[`1`, `100`\]. Default: `10` |
-| cursor | false | string | Cursor. Use the `nextPageCursor` token from the response to retrieve the next page of the result set |
+| Parameter          | Required | Type   | Comments                                                                                             |
+| :----------------- | :------- | :----- | ---------------------------------------------------------------------------------------------------- |
+| orderId            | false    | string | Loan order ID                                                                                        |
+| adjustId           | false    | string | Collateral adjustment transaction ID                                                                 |
+| collateralCurrency | false    | string | Collateral coin name                                                                                 |
+| limit              | false    | string | Limit for data size per page. \[`1`, `100`\]. Default: `10`                                          |
+| cursor             | false    | string | Cursor. Use the `nextPageCursor` token from the response to retrieve the next page of the result set |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| list | array | Object |
-| \> collateralCurrency | string | Collateral coin |
-| \> orderId | string | Loan order ID |
-| \> adjustId | string | Collateral adjustment transaction ID |
-| \> adjustTime | string | Adjust timestamp |
-| \> preLTV | string | LTV before the adjustment |
-| \> afterLTV | string | LTV after the adjustment |
-| \> direction | integer | The direction of adjustment, `0`: add collateral; `1`: reduce collateral |
-| nextPageCursor | string | Refer to the `cursor` request parameter |
+| Parameter             | Type    | Comments                                                                 |
+| :-------------------- | :------ | ------------------------------------------------------------------------ |
+| list                  | array   | Object                                                                   |
+| \> collateralCurrency | string  | Collateral coin                                                          |
+| \> orderId            | string  | Loan order ID                                                            |
+| \> adjustId           | string  | Collateral adjustment transaction ID                                     |
+| \> adjustTime         | string  | Adjust timestamp                                                         |
+| \> preLTV             | string  | LTV before the adjustment                                                |
+| \> afterLTV           | string  | LTV after the adjustment                                                 |
+| \> direction          | integer | The direction of adjustment, `0`: add collateral; `1`: reduce collateral |
+| nextPageCursor        | string  | Refer to the `cursor` request parameter                                  |
 
 ### Request Example[​](#request-example "Direct link to heading")
 

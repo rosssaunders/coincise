@@ -10,26 +10,26 @@ GET `/v5/asset/transfer/query-asset-info`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [accountType](/docs/v5/enum#accounttype) | **true** | string | Account type. `SPOT` |
-| coin | false | string | Coin name, uppercase only |
+| Parameter                                | Required | Type   | Comments                  |
+| :--------------------------------------- | :------- | :----- | ------------------------- |
+| [accountType](/docs/v5/enum#accounttype) | **true** | string | Account type. `SPOT`      |
+| coin                                     | false    | string | Coin name, uppercase only |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| spot | Object |  |
-| \> status | string | account status. `ACCOUNT_STATUS_NORMAL`: normal, `ACCOUNT_STATUS_UNSPECIFIED`: banned |
-| \> assets | array | Object |
-| \>> coin | string | Coin |
-| \>> frozen | string | Freeze amount |
-| \>> free | string | Free balance |
-| \>> withdraw | string | Amount in withdrawing |
+| Parameter    | Type   | Comments                                                                              |
+| :----------- | :----- | ------------------------------------------------------------------------------------- |
+| spot         | Object |                                                                                       |
+| \> status    | string | account status. `ACCOUNT_STATUS_NORMAL`: normal, `ACCOUNT_STATUS_UNSPECIFIED`: banned |
+| \> assets    | array  | Object                                                                                |
+| \>> coin     | string | Coin                                                                                  |
+| \>> frozen   | string | Freeze amount                                                                         |
+| \>> free     | string | Free balance                                                                          |
+| \>> withdraw | string | Amount in withdrawing                                                                 |
 
 [RUN >>](/docs/api-explorer/v5/asset/asset-info)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 

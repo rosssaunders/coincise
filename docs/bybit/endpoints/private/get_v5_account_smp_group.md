@@ -12,9 +12,9 @@ None
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| smpGroup | integer | Smp group ID. If the UID has no group, it is `0` by default |
+| Parameter | Type    | Comments                                                    |
+| :-------- | :------ | ----------------------------------------------------------- |
+| smpGroup  | integer | Smp group ID. If the UID has no group, it is `0` by default |
 
 ### Request Example[​](#request-example "Direct link to heading")
 

@@ -4,9 +4,10 @@ You can query up to six months borrowing interest rate of Margin trading.
 
 info
 
--   Need authentication, the api key needs "Spot" permission
+- Need authentication, the api key needs "Spot" permission
 
--   It is public data, i.e., different users get the same historical interest rate for the same VIP/Pro
+- It is public data, i.e., different users get the same historical interest rate
+  for the same VIP/Pro
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -14,25 +15,25 @@ GET `/v5/spot-margin-trade/interest-rate-history`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| currency | **true** | string | Coin name, uppercase only |
-| [vipLevel](/docs/v5/enum#viplevel) | false | string | Vip level-   Please note that "No VIP" should be passed like "No%20VIP" in the query string
--   If not passed, it returns your account's VIP level data |
-| startTime | false | integer | The start timestamp (ms)-   Either both time parameters are passed or neither is passed.
+| Parameter                                                 | Required | Type    | Comments                                                                                  |
+| :-------------------------------------------------------- | :------- | :------ | ----------------------------------------------------------------------------------------- |
+| currency                                                  | **true** | string  | Coin name, uppercase only                                                                 |
+| [vipLevel](/docs/v5/enum#viplevel)                        | false    | string  | Vip level- Please note that "No VIP" should be passed like "No%20VIP" in the query string |
+| - If not passed, it returns your account's VIP level data |
+| startTime                                                 | false    | integer | The start timestamp (ms)- Either both time parameters are passed or neither is passed.    |
 
--   Supports up to 30 days interval when both are passed |
-| endTime | false | integer | The end timestamp (ms) |
+- Supports up to 30 days interval when both are passed | | endTime | false |
+  integer | The end timestamp (ms) |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| list | array<object\> |  |
-| \> timestamp | long | timestamp |
-| \> currency | string | coin name |
-| \> hourlyBorrowRate | string | Hourly borrowing rate |
-| \> vipLevel | string | VIP/Pro level |
+| Parameter           | Type           | Comments              |
+| :------------------ | :------------- | --------------------- |
+| list                | array<object\> |                       |
+| \> timestamp        | long           | timestamp             |
+| \> currency         | string         | coin name             |
+| \> hourlyBorrowRate | string         | Hourly borrowing rate |
+| \> vipLevel         | string         | VIP/Pro level         |
 
 ### Request Example[​](#request-example "Direct link to heading")
 

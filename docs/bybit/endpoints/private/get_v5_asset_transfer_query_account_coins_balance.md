@@ -1,6 +1,7 @@
 # Get All Coins Balance
 
-You could get all coin balance of all account types under the master account, and sub account.
+You could get all coin balance of all account types under the master account,
+and sub account.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -8,32 +9,33 @@ GET `/v5/asset/transfer/query-account-coins-balance`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| memberId | false | string | User Id. It is **required** when you use master api key to check sub account coin balance |
-| [accountType](/docs/v5/enum#accounttype) | **true** | string | Account type |
-| coin | false | string | Coin name, uppercase only
+| Parameter                                | Required | Type   | Comments                                                                                  |
+| :--------------------------------------- | :------- | :----- | ----------------------------------------------------------------------------------------- |
+| memberId                                 | false    | string | User Id. It is **required** when you use master api key to check sub account coin balance |
+| [accountType](/docs/v5/enum#accounttype) | **true** | string | Account type                                                                              |
+| coin                                     | false    | string | Coin name, uppercase only                                                                 |
 
--   Can query multiple coins, separated by comma. `USDT,USDC,ETH`
+- Can query multiple coins, separated by comma. `USDT,USDC,ETH`
 
-**Note:** this field is **mandatory** for accountType=`UNIFIED`, and supports up to 10 coins each request |
-| withBonus | false | integer | `0`(default): not query bonus. `1`: query bonus |
+**Note:** this field is **mandatory** for accountType=`UNIFIED`, and supports up
+to 10 coins each request | | withBonus | false | integer | `0`(default): not
+query bonus. `1`: query bonus |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| [accountType](/docs/v5/enum#accounttype) | string | Account type |
-| memberId | string | UserID |
-| balance | array | Object |
-| \> coin | string | Currency |
-| \> walletBalance | string | Wallet balance |
-| \> transferBalance | string | Transferable balance |
-| \> bonus | string | Bonus |
+| Parameter                                | Type   | Comments             |
+| :--------------------------------------- | :----- | -------------------- |
+| [accountType](/docs/v5/enum#accounttype) | string | Account type         |
+| memberId                                 | string | UserID               |
+| balance                                  | array  | Object               |
+| \> coin                                  | string | Currency             |
+| \> walletBalance                         | string | Wallet balance       |
+| \> transferBalance                       | string | Transferable balance |
+| \> bonus                                 | string | Bonus                |
 
 [RUN >>](/docs/api-explorer/v5/asset/all-balance)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 

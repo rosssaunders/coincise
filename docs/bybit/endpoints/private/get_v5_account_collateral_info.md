@@ -1,6 +1,8 @@
 # Get Collateral Info
 
-Get the collateral information of the current unified margin account, including loan interest rate, loanable amount, collateral conversion rate, whether it can be mortgaged as margin, etc.
+Get the collateral information of the current unified margin account, including
+loan interest rate, loanable amount, collateral conversion rate, whether it can
+be mortgaged as margin, etc.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -8,36 +10,45 @@ GET `/v5/account/collateral-info`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| currency | false | string | Asset currency of all current collateral, uppercase only |
+| Parameter | Required | Type   | Comments                                                 |
+| :-------- | :------- | :----- | -------------------------------------------------------- |
+| currency  | false    | string | Asset currency of all current collateral, uppercase only |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| list | array | Object |
-| \> currency | string | Currency of all current collateral |
-| \> hourlyBorrowRate | string | Hourly borrow rate |
+| Parameter             | Type   | Comments                                                     |
+| :-------------------- | :----- | ------------------------------------------------------------ |
+| list                  | array  | Object                                                       |
+| \> currency           | string | Currency of all current collateral                           |
+| \> hourlyBorrowRate   | string | Hourly borrow rate                                           |
 | \> maxBorrowingAmount | string | Max borrow amount. This value is shared across main-sub UIDs |
-| \> freeBorrowingLimit | string | The maximum limit for interest-free borrowing
--   Only the borrowing caused by contracts unrealised loss has interest-free amount
+| \> freeBorrowingLimit | string | The maximum limit for interest-free borrowing                |
 
- |
-| \> freeBorrowAmount | string | The amount of borrowing within your total borrowing amount that is exempt from interest charges |
-| \> borrowAmount | string | Borrow amount |
-| \> otherBorrowAmount | string | The sum of borrowing amount for other accounts under the same main account |
-| \> freeBorrowingAmount | string | deprecated field, always return `""`, please refer to `freeBorrowingLimit` |
-| \> availableToBorrow | string | Available amount to borrow. This value is shared across main-sub UIDs |
-| \> borrowable | boolean | Whether currency can be borrowed |
-| \> borrowUsageRate | string | Borrow usage rate: sum of main & sub accounts borrowAmount/maxBorrowingAmount, it is an actual value, 0.5 means 50% |
-| \> marginCollateral | boolean | Whether it can be used as a margin collateral currency (platform), `true`: YES, `false`: NO-   When marginCollateral=false, then collateralSwitch is meaningless |
-| \> collateralSwitch | boolean | Whether the collateral is turned on by user (user), `true`: ON, `false`: OFF-   When marginCollateral=true, then collateralSwitch is meaningful |
-| \> collateralRatio | string | Due to the new Tiered Collateral value logic, this field will no longer be accurate starting on February 19, 2025. Please refer to [Get Tiered Collateral Ratio](/docs/v5/spot-margin-uta/tier-collateral-ratio) |
+- Only the borrowing caused by contracts unrealised loss has interest-free
+  amount
+
+| | \> freeBorrowAmount | string | The amount of borrowing within your total
+borrowing amount that is exempt from interest charges | | \> borrowAmount |
+string | Borrow amount | | \> otherBorrowAmount | string | The sum of borrowing
+amount for other accounts under the same main account | | \> freeBorrowingAmount
+| string | deprecated field, always return `""`, please refer to
+`freeBorrowingLimit` | | \> availableToBorrow | string | Available amount to
+borrow. This value is shared across main-sub UIDs | | \> borrowable | boolean |
+Whether currency can be borrowed | | \> borrowUsageRate | string | Borrow usage
+rate: sum of main & sub accounts borrowAmount/maxBorrowingAmount, it is an
+actual value, 0.5 means 50% | | \> marginCollateral | boolean | Whether it can
+be used as a margin collateral currency (platform), `true`: YES, `false`: NO-
+When marginCollateral=false, then collateralSwitch is meaningless | | \>
+collateralSwitch | boolean | Whether the collateral is turned on by user (user),
+`true`: ON, `false`: OFF- When marginCollateral=true, then collateralSwitch is
+meaningful | | \> collateralRatio | string | Due to the new Tiered Collateral
+value logic, this field will no longer be accurate starting on February
+19, 2025. Please refer to
+[Get Tiered Collateral Ratio](/docs/v5/spot-margin-uta/tier-collateral-ratio) |
 
 [RUN >>](/docs/api-explorer/v5/account/collateral-info)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 

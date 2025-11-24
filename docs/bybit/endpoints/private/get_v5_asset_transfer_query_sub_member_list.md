@@ -1,6 +1,7 @@
 # Get Sub UID
 
-Query the sub UIDs under a main UID. It returns up to 2000 sub accounts, if you need more, please call this [endpoint](/docs/v5/user/page-subuid).
+Query the sub UIDs under a main UID. It returns up to 2000 sub accounts, if you
+need more, please call this [endpoint](/docs/v5/user/page-subuid).
 
 info
 
@@ -16,14 +17,14 @@ None
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| subMemberIds | array<string\> | All sub UIDs under the main UID |
+| Parameter                | Type           | Comments                                          |
+| :----------------------- | :------------- | ------------------------------------------------- |
+| subMemberIds             | array<string\> | All sub UIDs under the main UID                   |
 | transferableSubMemberIds | array<string\> | All sub UIDs that have universal transfer enabled |
 
 [RUN >>](/docs/api-explorer/v5/asset/sub-uid-list)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
@@ -54,10 +55,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
       "1072055",
       "1119352"
     ],
-    "transferableSubMemberIds": [
-      "554117",
-      "592324"
-    ]
+    "transferableSubMemberIds": ["554117", "592324"]
   },
   "retExtInfo": {},
   "time": 1672147241320

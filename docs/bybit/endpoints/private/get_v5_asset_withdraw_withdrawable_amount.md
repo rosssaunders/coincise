@@ -4,8 +4,11 @@ info
 
 How can partial funds be subject to delayed withdrawal requests?
 
--   **On-chain deposit**: If the number of on-chain confirmations has not reached a risk-controlled level, a portion of the funds will be frozen for a period of time until they are unfrozen.
--   **Buying crypto**: If there is a risk, the funds will be frozen for a certain period of time and cannot be withdrawn.
+- **On-chain deposit**: If the number of on-chain confirmations has not reached
+  a risk-controlled level, a portion of the funds will be frozen for a period of
+  time until they are unfrozen.
+- **Buying crypto**: If there is a risk, the funds will be frozen for a certain
+  period of time and cannot be withdrawn.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -13,28 +16,28 @@ GET `/v5/asset/withdraw/withdrawable-amount`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| coin | **true** | string | Coin name, uppercase only |
+| Parameter | Required | Type   | Comments                  |
+| :-------- | :------- | :----- | ------------------------- |
+| coin      | **true** | string | Coin name, uppercase only |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| limitAmountUsd | string | The frozen amount due to risk, in USD |
-| withdrawableAmount | Object |  |
-| \> SPOT | Object | Spot wallet, it is not returned if spot wallet is removed |
-| \>> coin | string | Coin name |
-| \>> withdrawableAmount | string | Amount that can be withdrawn |
-| \>> availableBalance | string | Available balance |
-| \> FUND | Object | Funding wallet |
-| \>> coin | string | Coin name |
-| \>> withdrawableAmount | string | Amount that can be withdrawn |
-| \>> availableBalance | string | Available balance |
-| \> UTA | Object | Unified wallet |
-| \>> coin | string | Coin name |
-| \>> withdrawableAmount | string | Amount that can be withdrawn |
-| \>> availableBalance | string | Available balance |
+| Parameter              | Type   | Comments                                                  |
+| :--------------------- | :----- | --------------------------------------------------------- |
+| limitAmountUsd         | string | The frozen amount due to risk, in USD                     |
+| withdrawableAmount     | Object |                                                           |
+| \> SPOT                | Object | Spot wallet, it is not returned if spot wallet is removed |
+| \>> coin               | string | Coin name                                                 |
+| \>> withdrawableAmount | string | Amount that can be withdrawn                              |
+| \>> availableBalance   | string | Available balance                                         |
+| \> FUND                | Object | Funding wallet                                            |
+| \>> coin               | string | Coin name                                                 |
+| \>> withdrawableAmount | string | Amount that can be withdrawn                              |
+| \>> availableBalance   | string | Available balance                                         |
+| \> UTA                 | Object | Unified wallet                                            |
+| \>> coin               | string | Coin name                                                 |
+| \>> withdrawableAmount | string | Amount that can be withdrawn                              |
+| \>> availableBalance   | string | Available balance                                         |
 
 ### Request Example[​](#request-example "Direct link to heading")
 

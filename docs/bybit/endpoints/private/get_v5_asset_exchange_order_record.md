@@ -12,30 +12,30 @@ GET `/v5/asset/exchange/order-record`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| fromCoin | false | string | The currency to convert from, uppercase only. e.g,`BTC` |
-| toCoin | false | string | The currency to convert to, uppercase only. e.g,`USDT` |
-| limit | false | integer | Limit for data size per page. \[`1`, `50`\]. Default: `10` |
-| cursor | false | string | Cursor. Use the `nextPageCursor` token from the response to retrieve the next page of the result set |
+| Parameter | Required | Type    | Comments                                                                                             |
+| :-------- | :------- | :------ | ---------------------------------------------------------------------------------------------------- |
+| fromCoin  | false    | string  | The currency to convert from, uppercase only. e.g,`BTC`                                              |
+| toCoin    | false    | string  | The currency to convert to, uppercase only. e.g,`USDT`                                               |
+| limit     | false    | integer | Limit for data size per page. \[`1`, `50`\]. Default: `10`                                           |
+| cursor    | false    | string  | Cursor. Use the `nextPageCursor` token from the response to retrieve the next page of the result set |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| nextPageCursor | string | Refer to the `cursor` request parameter |
-| orderBody | array | Object |
-| \> fromCoin | string | The currency to convert from |
-| \> fromAmount | string | The amount to convert from |
-| \> toCoin | string | The currency to convert to |
-| \> toAmount | string | The amount to convert to |
-| \> exchangeRate | string | Exchange rate |
-| \> createdTime | string | Exchange created timestamp (sec) |
-| \> exchangeTxId | string | Exchange transaction ID |
+| Parameter       | Type   | Comments                                |
+| :-------------- | :----- | --------------------------------------- |
+| nextPageCursor  | string | Refer to the `cursor` request parameter |
+| orderBody       | array  | Object                                  |
+| \> fromCoin     | string | The currency to convert from            |
+| \> fromAmount   | string | The amount to convert from              |
+| \> toCoin       | string | The currency to convert to              |
+| \> toAmount     | string | The amount to convert to                |
+| \> exchangeRate | string | Exchange rate                           |
+| \> createdTime  | string | Exchange created timestamp (sec)        |
+| \> exchangeTxId | string | Exchange transaction ID                 |
 
 [RUN >>](/docs/api-explorer/v5/asset/exchange)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 

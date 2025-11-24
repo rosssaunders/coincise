@@ -8,31 +8,30 @@ GET `/v5/asset/exchange/convert-result-query`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| quoteTxId | **true** | string | Quote tx ID |
+| Parameter                                       | Required | Type   | Comments    |
+| :---------------------------------------------- | :------- | :----- | ----------- |
+| quoteTxId                                       | **true** | string | Quote tx ID |
 | [accountType](/docs/v5/enum#convertaccounttype) | **true** | string | Wallet type |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| result | object |  |
-| \> [accountType](/docs/v5/enum#convertaccounttype) | string | Wallet type |
-| \> exchangeTxId | string | Exchange tx ID, same as quote tx ID |
-| \> userId | string | User ID |
-| \> fromCoin | string | From coin |
-| \> fromCoinType | string | From coin type. `crypto` |
-| \> toCoin | string | To coin |
-| \> toCoinType | string | To coin type. `crypto` |
-| \> fromAmount | string | From coin amount (amount to sell) |
-| \> toAmount | string | To coin amount (amount to buy according to exchange rate) |
-| \> exchangeStatus | string | Exchange status-   init
+| Parameter                                          | Type   | Comments                                                  |
+| :------------------------------------------------- | :----- | --------------------------------------------------------- |
+| result                                             | object |                                                           |
+| \> [accountType](/docs/v5/enum#convertaccounttype) | string | Wallet type                                               |
+| \> exchangeTxId                                    | string | Exchange tx ID, same as quote tx ID                       |
+| \> userId                                          | string | User ID                                                   |
+| \> fromCoin                                        | string | From coin                                                 |
+| \> fromCoinType                                    | string | From coin type. `crypto`                                  |
+| \> toCoin                                          | string | To coin                                                   |
+| \> toCoinType                                      | string | To coin type. `crypto`                                    |
+| \> fromAmount                                      | string | From coin amount (amount to sell)                         |
+| \> toAmount                                        | string | To coin amount (amount to buy according to exchange rate) |
+| \> exchangeStatus                                  | string | Exchange status- init                                     |
 
--   failure |
-| \> extInfo | object | Reserved field, ignored for now |
-| \> convertRate | string | Exchange rate |
-| \> createdAt | string | Quote created time |
+- failure | | \> extInfo | object | Reserved field, ignored for now | | \>
+  convertRate | string | Exchange rate | | \> createdAt | string | Quote created
+  time |
 
 ### Request Example[​](#request-example "Direct link to heading")
 

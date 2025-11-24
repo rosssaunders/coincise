@@ -14,18 +14,18 @@ None
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| subAcctQty | string | The qty of sub account has been created |
-| maxSubAcctQty | string | The max limit of sub account can be created |
-| baseFeeRebateRate | Object | Rebate percentage of the base fee |
-| \> spot | string | Rebate percentage of the base fee for spot, e.g., 10.00% |
-| \> derivatives | string | Rebate percentage of the base fee for derivatives, e.g., 10.00% |
-| markupFeeRebateRate | Object | Rebate percentage of the mark up fee |
-| \> spot | string | Rebate percentage of the mark up fee for spot, e.g., 10.00% |
-| \> derivatives | string | Rebate percentage of the mark up fee for derivatives, e.g., 10.00% |
-| \> convert | string | Rebate percentage of the mark up fee for convert, e.g., 10.00% |
-| ts | string | System timestamp (ms) |
+| Parameter           | Type   | Comments                                                           |
+| :------------------ | :----- | ------------------------------------------------------------------ |
+| subAcctQty          | string | The qty of sub account has been created                            |
+| maxSubAcctQty       | string | The max limit of sub account can be created                        |
+| baseFeeRebateRate   | Object | Rebate percentage of the base fee                                  |
+| \> spot             | string | Rebate percentage of the base fee for spot, e.g., 10.00%           |
+| \> derivatives      | string | Rebate percentage of the base fee for derivatives, e.g., 10.00%    |
+| markupFeeRebateRate | Object | Rebate percentage of the mark up fee                               |
+| \> spot             | string | Rebate percentage of the mark up fee for spot, e.g., 10.00%        |
+| \> derivatives      | string | Rebate percentage of the mark up fee for derivatives, e.g., 10.00% |
+| \> convert          | string | Rebate percentage of the mark up fee for convert, e.g., 10.00%     |
+| ts                  | string | System timestamp (ms)                                              |
 
 ### Request Example[​](#request-example "Direct link to heading")
 

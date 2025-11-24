@@ -1,6 +1,7 @@
 # Get Exchange Entity List
 
-This endpoint is particularly used for **kyc=KOR users**. When withdraw funds, you need to fill entity id.
+This endpoint is particularly used for **kyc=KOR users**. When withdraw funds,
+you need to fill entity id.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -12,11 +13,11 @@ None
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| vasp | array | Exchange entity info |
+| Parameter       | Type   | Comments                                                                                                               |
+| :-------------- | :----- | ---------------------------------------------------------------------------------------------------------------------- |
+| vasp            | array  | Exchange entity info                                                                                                   |
 | \> vaspEntityId | string | Receiver platform id. When transfer to Upbit or other exchanges that not in the list, please use vaspEntityId='others' |
-| \> vaspName | string | Receiver platform name |
+| \> vaspName     | string | Receiver platform name                                                                                                 |
 
 ### Request Example[​](#request-example "Direct link to heading")
 

@@ -12,20 +12,20 @@ None
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| [unifiedMarginStatus](/docs/v5/enum#unifiedmarginstatus) | integer | Account status |
-| marginMode | string | `ISOLATED_MARGIN`, `REGULAR_MARGIN`, `PORTFOLIO_MARGIN` |
-| isMasterTrader | boolean | Whether this account is a leader (copytrading). `true`, `false` |
-| spotHedgingStatus | string | Whether the unified account enables Spot hedging. `ON`, `OFF` |
-| updatedTime | string | Account data updated timestamp (ms) |
-| dcpStatus | string | deprecated, always `OFF`. Please use [Get DCP Info](/docs/v5/account/dcp-info) |
-| timeWindow | integer | deprecated, always `0`. Please use [Get DCP Info](/docs/v5/account/dcp-info) |
-| smpGroup | integer | deprecated, always `0`. Please query [Get SMP Group ID](/docs/v5/account/smp-group) endpoint |
+| Parameter                                                | Type    | Comments                                                                                     |
+| :------------------------------------------------------- | :------ | -------------------------------------------------------------------------------------------- |
+| [unifiedMarginStatus](/docs/v5/enum#unifiedmarginstatus) | integer | Account status                                                                               |
+| marginMode                                               | string  | `ISOLATED_MARGIN`, `REGULAR_MARGIN`, `PORTFOLIO_MARGIN`                                      |
+| isMasterTrader                                           | boolean | Whether this account is a leader (copytrading). `true`, `false`                              |
+| spotHedgingStatus                                        | string  | Whether the unified account enables Spot hedging. `ON`, `OFF`                                |
+| updatedTime                                              | string  | Account data updated timestamp (ms)                                                          |
+| dcpStatus                                                | string  | deprecated, always `OFF`. Please use [Get DCP Info](/docs/v5/account/dcp-info)               |
+| timeWindow                                               | integer | deprecated, always `0`. Please use [Get DCP Info](/docs/v5/account/dcp-info)                 |
+| smpGroup                                                 | integer | deprecated, always `0`. Please query [Get SMP Group ID](/docs/v5/account/smp-group) endpoint |
 
 [RUN >>](/docs/api-explorer/v5/account/account-info)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
