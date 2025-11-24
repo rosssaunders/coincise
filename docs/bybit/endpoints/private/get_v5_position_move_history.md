@@ -4,7 +4,8 @@ You can query moved position data by master UID api key
 
 info
 
-[UTA2.0](/docs/v5/acct-mode#uta-20) inverse contract move position is not supported for now
+[UTA2.0](/docs/v5/acct-mode#uta-20) inverse contract move position is not
+supported for now
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -12,48 +13,48 @@ GET `/v5/position/move-history`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [category](/docs/v5/enum#category) | false | string | Product type-   [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10): `linear`, `spot`, `option` |
-| symbol | false | string | Symbol name, like `BTCUSDT`, uppercase only |
-| startTime | false | number | The order creation start timestamp. The interval is 7 days |
-| endTime | false | number | The order creation end timestamp. The interval is 7 days |
-| status | false | string | Order status. `Processing`, `Filled`, `Rejected` |
-| blockTradeId | false | string | Block trade ID |
-| limit | false | string | Limit for data size per page. \[`1`, `200`\]. Default: `20` |
-| cursor | false | string | Cursor. Use the `nextPageCursor` token from the response to retrieve the next page of the result set |
+| Parameter                          | Required | Type   | Comments                                                                                                           |
+| :--------------------------------- | :------- | :----- | ------------------------------------------------------------------------------------------------------------------ |
+| [category](/docs/v5/enum#category) | false    | string | Product type- [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10): `linear`, `spot`, `option` |
+| symbol                             | false    | string | Symbol name, like `BTCUSDT`, uppercase only                                                                        |
+| startTime                          | false    | number | The order creation start timestamp. The interval is 7 days                                                         |
+| endTime                            | false    | number | The order creation end timestamp. The interval is 7 days                                                           |
+| status                             | false    | string | Order status. `Processing`, `Filled`, `Rejected`                                                                   |
+| blockTradeId                       | false    | string | Block trade ID                                                                                                     |
+| limit                              | false    | string | Limit for data size per page. \[`1`, `200`\]. Default: `20`                                                        |
+| cursor                             | false    | string | Cursor. Use the `nextPageCursor` token from the response to retrieve the next page of the result set               |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| list | array | Object |
-| \> blockTradeId | string | Block trade ID |
-| \> [category](/docs/v5/enum#category) | string | Product type. `linear`, `spot`, `option` |
-| \> orderId | string | Bybit order ID |
-| \> userId | integer | User ID |
-| \> symbol | string | Symbol name |
-| \> side | string | Order side from taker's perspective. `Buy`, `Sell` |
-| \> price | string | Order price |
-| \> qty | string | Order quantity |
-| \> execFee | string | The fee for taker or maker in the base currency paid to the Exchange executing the block trade |
-| \> status | string | Block trade status. `Processing`, `Filled`, `Rejected` |
-| \> execId | string | The unique trade ID from the exchange |
-| \> resultCode | integer | The result code of the order. `0` means success |
-| \> resultMessage | string | The error message. `""` when resultCode=0 |
-| \> createdAt | number | The timestamp (ms) when the order is created |
-| \> updatedAt | number | The timestamp (ms) when the order is updated |
-| \> rejectParty | string | 
--   `""` means the status=`Filled`
--   `Taker`, `Maker` when status=`Rejected`
--   `bybit` means error is occurred on the Bybit side
+| Parameter                             | Type    | Comments                                                                                       |
+| :------------------------------------ | :------ | ---------------------------------------------------------------------------------------------- |
+| list                                  | array   | Object                                                                                         |
+| \> blockTradeId                       | string  | Block trade ID                                                                                 |
+| \> [category](/docs/v5/enum#category) | string  | Product type. `linear`, `spot`, `option`                                                       |
+| \> orderId                            | string  | Bybit order ID                                                                                 |
+| \> userId                             | integer | User ID                                                                                        |
+| \> symbol                             | string  | Symbol name                                                                                    |
+| \> side                               | string  | Order side from taker's perspective. `Buy`, `Sell`                                             |
+| \> price                              | string  | Order price                                                                                    |
+| \> qty                                | string  | Order quantity                                                                                 |
+| \> execFee                            | string  | The fee for taker or maker in the base currency paid to the Exchange executing the block trade |
+| \> status                             | string  | Block trade status. `Processing`, `Filled`, `Rejected`                                         |
+| \> execId                             | string  | The unique trade ID from the exchange                                                          |
+| \> resultCode                         | integer | The result code of the order. `0` means success                                                |
+| \> resultMessage                      | string  | The error message. `""` when resultCode=0                                                      |
+| \> createdAt                          | number  | The timestamp (ms) when the order is created                                                   |
+| \> updatedAt                          | number  | The timestamp (ms) when the order is updated                                                   |
+| \> rejectParty                        | string  |
 
- |
-| nextPageCursor | string | Used to get the next page data |
+- `""` means the status=`Filled`
+- `Taker`, `Maker` when status=`Rejected`
+- `bybit` means error is occurred on the Bybit side
+
+| | nextPageCursor | string | Used to get the next page data |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/position/move-history?limit=1&status=Filled HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1697523024244X-BAPI-RECV-WINDOW: 5000

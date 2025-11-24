@@ -12,13 +12,13 @@ None
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| smpGroup | integer | Smp group ID. If the UID has no group, it is `0` by default |
+| Parameter | Type    | Comments                                                    |
+| :-------- | :------ | ----------------------------------------------------------- |
+| smpGroup  | integer | Smp group ID. If the UID has no group, it is `0` by default |
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/account/smp-group HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1702363848192X-BAPI-RECV-WINDOW: 5000
@@ -29,7 +29,20 @@ GET /v5/account/smp-group HTTP/1.1Host: api.bybit.comX-BAPI-SIGN: XXXXXXX-BAPI-A
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getSMPGroup()  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "xxxxxxxxxxxxxxxxxx",
+  secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+})
+client
+  .getSMPGroup()
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")

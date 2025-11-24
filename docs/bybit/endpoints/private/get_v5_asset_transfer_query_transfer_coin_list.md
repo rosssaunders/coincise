@@ -1,6 +1,7 @@
 # Get Transferable Coin
 
-Query the transferable coin list between each [account type](/docs/v5/enum#accounttype)
+Query the transferable coin list between each
+[account type](/docs/v5/enum#accounttype)
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -8,24 +9,24 @@ GET `/v5/asset/transfer/query-transfer-coin-list`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
+| Parameter                                    | Required | Type   | Comments          |
+| :------------------------------------------- | :------- | :----- | ----------------- |
 | [fromAccountType](/docs/v5/enum#accounttype) | **true** | string | From account type |
-| [toAccountType](/docs/v5/enum#accounttype) | **true** | string | To account type |
+| [toAccountType](/docs/v5/enum#accounttype)   | **true** | string | To account type   |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| list | array | A list of coins (as strings) |
+| Parameter | Type  | Comments                     |
+| :-------- | :---- | ---------------------------- |
+| list      | array | A list of coins (as strings) |
 
 [RUN >>](/docs/api-explorer/v5/asset/transferable-coin)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/asset/transfer/query-transfer-coin-list?fromAccountType=UNIFIED&toAccountType=CONTRACT HTTP/1.1Host: api-testnet.bybit.comX-BAPI-SIGN: XXXXXX-BAPI-API-KEY: xxxxxxxxxxxxxxxxxxX-BAPI-TIMESTAMP: 1672144322595X-BAPI-RECV-WINDOW: 5000
@@ -36,7 +37,20 @@ from pybit.unified_trading import HTTPsession = HTTP(    testnet=True,    api_ke
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({  testnet: true,  key: 'xxxxxxxxxxxxxxxxxx',  secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',});client  .getTransferableCoinList('UNIFIED', 'CONTRACT')  .then((response) => {    console.log(response);  })  .catch((error) => {    console.error(error);  });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({
+  testnet: true,
+  key: "xxxxxxxxxxxxxxxxxx",
+  secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+})
+client
+  .getTransferableCoinList("UNIFIED", "CONTRACT")
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
@@ -46,10 +60,7 @@ const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({ 
   "retCode": 0,
   "retMsg": "success",
   "result": {
-    "list": [
-      "BTC",
-      "ETH"
-    ]
+    "list": ["BTC", "ETH"]
   },
   "retExtInfo": {},
   "time": 1672144322954

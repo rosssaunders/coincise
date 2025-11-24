@@ -1,6 +1,7 @@
 # Get Kline
 
-Query for historical klines (also known as candles/candlesticks). Charts are returned in groups based on the requested interval.
+Query for historical klines (also known as candles/candlesticks). Charts are
+returned in groups based on the requested interval.
 
 > **Covers: Spot / USDT contract / USDC contract / Inverse contract**
 
@@ -10,43 +11,43 @@ GET `/v5/market/kline`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type | Comments |
-| :-- | :-- | :-- | --- |
-| [category](/docs/v5/enum#category) | false | string | Product type. `spot`,`linear`,`inverse`-   When `category` is not passed, use `linear` by default |
-| [symbol](/docs/v5/enum#symbol) | **true** | string | Symbol name, like `BTCUSDT`, uppercase only |
-| [interval](/docs/v5/enum#interval) | **true** | string | Kline interval. `1`,`3`,`5`,`15`,`30`,`60`,`120`,`240`,`360`,`720`,`D`,`W`,`M` |
-| start | false | integer | The start timestamp (ms) |
-| end | false | integer | The end timestamp (ms) |
-| limit | false | integer | Limit for data size per page. \[`1`, `1000`\]. Default: `200` |
+| Parameter                          | Required | Type    | Comments                                                                                        |
+| :--------------------------------- | :------- | :------ | ----------------------------------------------------------------------------------------------- |
+| [category](/docs/v5/enum#category) | false    | string  | Product type. `spot`,`linear`,`inverse`- When `category` is not passed, use `linear` by default |
+| [symbol](/docs/v5/enum#symbol)     | **true** | string  | Symbol name, like `BTCUSDT`, uppercase only                                                     |
+| [interval](/docs/v5/enum#interval) | **true** | string  | Kline interval. `1`,`3`,`5`,`15`,`30`,`60`,`120`,`240`,`360`,`720`,`D`,`W`,`M`                  |
+| start                              | false    | integer | The start timestamp (ms)                                                                        |
+| end                                | false    | integer | The end timestamp (ms)                                                                          |
+| limit                              | false    | integer | Limit for data size per page. \[`1`, `1000`\]. Default: `200`                                   |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter | Type | Comments |
-| :-- | :-- | --- |
-| category | string | Product type |
-| symbol | string | Symbol name |
-| list | array | 
+| Parameter | Type   | Comments     |
+| :-------- | :----- | ------------ |
+| category  | string | Product type |
+| symbol    | string | Symbol name  |
+| list      | array  |
 
--   Sort in reverse by `startTime`
+- Sort in reverse by `startTime`
 
- |
-| \> list\[0\]: startTime | string | Start time of the candle (ms) |
-| \> list\[1\]: openPrice | string | Open price |
-| \> list\[2\]: highPrice | string | Highest price |
-| \> list\[3\]: lowPrice | string | Lowest price |
-| \> list\[4\]: closePrice | string | Close price. *Is the last traded price when the candle is not closed* |
-| \> list\[5\]: volume | string | Trade volume-   USDT or USDC contract: unit is base coin (e.g., BTC)
--   Inverse contract: unit is quote coin (e.g., USD) |
-| \> list\[6\]: turnover | string | Turnover.-   USDT or USDC contract: unit is quote coin (e.g., USDT)
--   Inverse contract: unit is base coin (e.g., BTC) |
+| | \> list\[0\]: startTime | string | Start time of the candle (ms) | | \>
+list\[1\]: openPrice | string | Open price | | \> list\[2\]: highPrice | string
+| Highest price | | \> list\[3\]: lowPrice | string | Lowest price | | \>
+list\[4\]: closePrice | string | Close price. _Is the last traded price when the
+candle is not closed_ | | \> list\[5\]: volume | string | Trade volume- USDT or
+USDC contract: unit is base coin (e.g., BTC)
+
+- Inverse contract: unit is quote coin (e.g., USD) | | \> list\[6\]: turnover |
+  string | Turnover.- USDT or USDC contract: unit is quote coin (e.g., USDT)
+- Inverse contract: unit is base coin (e.g., BTC) |
 
 [RUN >>](/docs/api-explorer/v5/market/kline)
 
-* * *
+---
 
 ### Request Example[​](#request-example "Direct link to heading")
 
--   Node.js
+- Node.js
 
 ```bash
 GET /v5/market/kline?category=inverse&symbol=BTCUSD&interval=60&start=1670601600000&end=1670608800000 HTTP/1.1Host: api-testnet.bybit.com
@@ -65,7 +66,22 @@ import com.bybit.api.client.domain.CategoryType;import com.bybit.api.client.doma
 ```
 
 ```javascript
-const { RestClientV5 } = require('bybit-api');const client = new RestClientV5({    testnet: true,});client    .getKline({        category: 'inverse',        symbol: 'BTCUSD',        interval: '60',        start: 1670601600000,        end: 1670608800000,    })    .then((response) => {        console.log(response);    })    .catch((error) => {        console.error(error);    });
+const { RestClientV5 } = require("bybit-api")
+const client = new RestClientV5({ testnet: true })
+client
+  .getKline({
+    category: "inverse",
+    symbol: "BTCUSD",
+    interval: "60",
+    start: 1670601600000,
+    end: 1670608800000
+  })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 ```
 
 ### Response Example[​](#response-example "Direct link to heading")
