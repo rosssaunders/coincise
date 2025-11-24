@@ -3,7 +3,7 @@ name: KuCoin Docs Update
 on:
   schedule:
     # Run every Sunday at 00:00 UTC (weekly, following standard pattern)
-    - cron: "0 0 * * 0"
+    - cron: "0 0 * * *"
   workflow_dispatch: # Allow manual triggering
   push:
     paths:
