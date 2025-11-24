@@ -13,7 +13,7 @@ import { createTurndownBuilder } from "../../shared/turndown.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const BASE_URL = "https://mexcdevelop.github.io/apidocs/spot_v3_en"
+const BASE_URL = "https://www.mexc.com/api-docs/spot-v3/general-info"
 const OUTPUT_DIR = path.resolve(__dirname, "../../../docs/mexc")
 
 /**
@@ -39,7 +39,7 @@ const writeFile = (filePath, content) => {
  */
 const extractSectionByTitle = async (page, sectionTitle) => {
   const html = await page.evaluate(title => {
-    const contentNode = document.querySelector(".content")
+    const contentNode = document.querySelector("main") || document.querySelector(".theme-doc-markdown")
     if (!contentNode) return ""
 
     const h1Elements = Array.from(contentNode.querySelectorAll("h1"))
@@ -70,14 +70,9 @@ const extractSectionByTitle = async (page, sectionTitle) => {
 const extractRateLimits = async (page, turndownService) => {
   console.log("Extracting rate limits information...")
 
-  const html = await extractSectionByTitle(page, "General Info")
-  if (!html) {
-    return "# Rate Limits\n\nNo rate limits documentation found.\n"
-  }
-
-  // Extract only the LIMITS section
+  // Extract only the LIMITS section from the current page
   const limitsHtml = await page.evaluate(() => {
-    const contentNode = document.querySelector(".content")
+    const contentNode = document.querySelector("main") || document.querySelector(".theme-doc-markdown")
     if (!contentNode) return ""
 
     // Find the LIMITS h2 heading
@@ -104,7 +99,7 @@ const extractRateLimits = async (page, turndownService) => {
     return `<h1>Rate Limits</h1>${content.innerHTML}`
   })
 
-  const markdown = turndownService.turndown(limitsHtml || html)
+  const markdown = turndownService.turndown(limitsHtml)
   return markdown || "# Rate Limits\n\nNo rate limits documentation found.\n"
 }
 
@@ -114,9 +109,9 @@ const extractRateLimits = async (page, turndownService) => {
 const extractAuthentication = async (page, turndownService) => {
   console.log("Extracting authentication information...")
 
-  // Extract SIGNED and Header sections from General Info
+  // Extract SIGNED and Header sections from the current page
   const authHtml = await page.evaluate(() => {
-    const contentNode = document.querySelector(".content")
+    const contentNode = document.querySelector("main") || document.querySelector(".theme-doc-markdown")
     if (!contentNode) return ""
 
     const content = document.createElement("div")
@@ -174,7 +169,7 @@ const extractNetworkConnectivity = async (page, turndownService) => {
   console.log("Extracting network connectivity information...")
 
   const html = await page.evaluate(() => {
-    const contentNode = document.querySelector(".content")
+    const contentNode = document.querySelector("main") || document.querySelector(".theme-doc-markdown")
     if (!contentNode) return ""
 
     const content = document.createElement("div")
@@ -255,16 +250,43 @@ const extractNetworkConnectivity = async (page, turndownService) => {
 const extractErrorCodes = async (page, turndownService) => {
   console.log("Extracting error codes information...")
 
-  // MEXC doesn't have a dedicated error codes section in spot docs
-  // We'll extract from FAQs or create a placeholder
-  const html = await extractSectionByTitle(page, "FAQs")
+  // Navigate to General Info page which has Error Code section
+  await page.goto("https://www.mexc.com/api-docs/spot-v3/general-info", {
+    waitUntil: "networkidle2",
+    timeout: 60000
+  })
+  await page.waitForSelector("main", { timeout: 30000 })
 
-  if (html) {
-    const markdown = turndownService.turndown(html)
-    return `# Error Codes\n\n${markdown}`
-  }
+  const errorCodesHtml = await page.evaluate(() => {
+    const contentNode = document.querySelector("main") || document.querySelector(".theme-doc-markdown")
+    if (!contentNode) return ""
 
-  return `# Error Codes\n\nFor error codes and troubleshooting, please refer to the HTTP Return Codes section in Network Connectivity documentation.\n\nCommon error codes:\n- HTTP 4XX: Client-side errors (malformed requests)\n- HTTP 403: WAF limit violated\n- HTTP 429: Rate limit exceeded\n- HTTP 5XX: Server-side errors\n`
+    // Find the Error Code h2 heading
+    const h2Elements = Array.from(contentNode.querySelectorAll("h2"))
+    const errorH2 = h2Elements.find(h2 =>
+      h2.textContent.trim().toLowerCase().includes("error code")
+    )
+
+    if (!errorH2) return ""
+
+    // Collect content until next h2 or h1
+    const content = document.createElement("div")
+    let currentNode = errorH2.nextElementSibling
+
+    while (
+      currentNode &&
+      currentNode.nodeName !== "H1" &&
+      currentNode.nodeName !== "H2"
+    ) {
+      content.appendChild(currentNode.cloneNode(true))
+      currentNode = currentNode.nextElementSibling
+    }
+
+    return `<h1>Error Codes</h1>${content.innerHTML}`
+  })
+
+  const markdown = turndownService.turndown(errorCodesHtml)
+  return markdown || "# Error Codes\n\nNo error codes documentation found.\n"
 }
 
 /**
@@ -273,15 +295,28 @@ const extractErrorCodes = async (page, turndownService) => {
 const extractResponseFormats = async (page, turndownService) => {
   console.log("Extracting response formats information...")
 
-  // Extract Public API Definitions section
-  const html = await extractSectionByTitle(page, "Public API Definitions")
+  // Navigate to Public API Definitions page
+  await page.goto("https://www.mexc.com/api-docs/spot-v3/public-api-definitions", {
+    waitUntil: "networkidle2",
+    timeout: 60000
+  })
+  await page.waitForSelector("main", { timeout: 30000 })
 
-  if (html) {
-    const markdown = turndownService.turndown(html)
-    return `# Response Formats\n\n${markdown}`
-  }
+  const html = await page.evaluate(() => {
+    // Find the markdown content container
+    const markdownDiv = document.querySelector(".theme-doc-markdown") ||
+                       document.querySelector("article") ||
+                       document.querySelector("main")
+    if (!markdownDiv) return ""
 
-  return "# Response Formats\n\nNo response formats documentation found.\n"
+    return markdownDiv.innerHTML
+  })
+
+  // Convert to markdown and replace the H1
+  let markdown = turndownService.turndown(html)
+  markdown = markdown.replace(/^#\s+[^\n]+\n*/m, '# Response Formats\n\n')
+
+  return markdown || "# Response Formats\n\nNo response formats documentation found.\n"
 }
 
 /**
@@ -290,14 +325,28 @@ const extractResponseFormats = async (page, turndownService) => {
 const extractChangeLog = async (page, turndownService) => {
   console.log("Extracting change log information...")
 
-  const html = await extractSectionByTitle(page, "Change Log")
+  // Navigate to Change Log page
+  await page.goto("https://www.mexc.com/api-docs/spot-v3/change-log", {
+    waitUntil: "networkidle2",
+    timeout: 60000
+  })
+  await page.waitForSelector("main", { timeout: 30000 })
 
-  if (html) {
-    const markdown = turndownService.turndown(html)
-    return `# Change Log\n\n${markdown}`
-  }
+  const html = await page.evaluate(() => {
+    // Find the markdown content container
+    const markdownDiv = document.querySelector(".theme-doc-markdown") ||
+                       document.querySelector("article") ||
+                       document.querySelector("main")
+    if (!markdownDiv) return ""
 
-  return "# Change Log\n\nNo change log documentation found.\n"
+    return markdownDiv.innerHTML
+  })
+
+  // Convert to markdown and replace the H1
+  let markdown = turndownService.turndown(html)
+  markdown = markdown.replace(/^#\s+[^\n]+\n*/m, '# Change Log\n\n')
+
+  return markdown || "# Change Log\n\nNo change log documentation found.\n"
 }
 
 /**
@@ -320,7 +369,7 @@ const main = async () => {
     })
 
     // Wait for content to load
-    await page.waitForSelector(".content", { timeout: 30000 })
+    await page.waitForSelector("main", { timeout: 30000 })
 
     // Create turndown service
     const turndownService = createTurndownBuilder().build()

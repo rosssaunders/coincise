@@ -4,6 +4,7 @@ on:
   schedule:
     # Run every Saturday at 00:00 UTC (midnight Friday night)
     # Changed from daily to weekly due to comprehensive extraction coverage
+    - cron: '0 0 * * 6'
   workflow_dispatch: # Allow manual triggering
   push:
     paths:

@@ -1,12 +1,14 @@
-# Test Connectivity
+# GET /api/v3/ping
+
+**Source:** https://www.mexc.com/api-docs/spot-v3/market-data-endpoints#test-connectivity
 
 > Response
 
-```
+```json
 {}
 ```
 
-- **GET** `/api/v3/ping`
+-   **GET** `/api/v3/ping`
 
 Test connectivity to the Rest API.
 
@@ -15,7 +17,3 @@ Test connectivity to the Rest API.
 Parameter:
 
 NONE
-
----
-
-**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#test-connectivity

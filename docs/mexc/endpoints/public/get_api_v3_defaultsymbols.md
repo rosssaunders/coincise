@@ -1,28 +1,20 @@
-# API default symbol
+# GET /api/v3/defaultSymbols
+
+**Source:** https://www.mexc.com/api-docs/spot-v3/market-data-endpoints#api-default-symbol
 
 > Request
 
-```
+```bash
 GET /api/v3/defaultSymbols
 ```
 
 > Response
 
-```
-{
-    "code": 200,
-    "data": [
-        "GENE1USDT",
-        "SNTUSDT",
-        "SQUAWKUSDT",
-        "HEGICUSDT",
-        "GUMUSDT"
-    ],
-    "msg": null
-}
+```json
+{    "code": 200,    "data": [        "GENE1USDT",        "SNTUSDT",        "SQUAWKUSDT",        "HEGICUSDT",        "GUMUSDT"    ],    "msg": null}
 ```
 
-- **GET** `/api/v3/defaultSymbols`
+-   **GET** `/api/v3/defaultSymbols`
 
 **Weight(IP):** 1
 
@@ -32,10 +24,6 @@ NONE
 
 **Response**
 
-| Name   | Type   | Description |
-| ------ | ------ | ----------- |
-| symbol | string | symbol      |
-
----
-
-**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#api-default-symbol
+| Name | Type | Description |
+| --- | --- | --- |
+| symbol | string | symbol |

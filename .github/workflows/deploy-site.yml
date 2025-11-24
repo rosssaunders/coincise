@@ -1,0 +1,108 @@
+name: Deploy Documentation Site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'site/**'
+      - 'tools/llms/**'
+      - 'tools/website/**'
+      - '.github/workflows/deploy-site.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('site/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install Python dependencies
+        run: pip install -r site/requirements.txt
+
+      - name: Generate LLM resources
+        run: |
+          node tools/llms/generate-llms-enhanced.js
+          node tools/llms/generate-json-index.js
+
+      - name: Build MkDocs site
+        run: cd site && mkdocs build --strict
+
+      - name: Copy LLM resources to dist
+        run: |
+          # Copy llms.txt files
+          cp llms.txt dist/
+          cp llms-full.txt dist/
+
+          # Create .well-known directory
+          mkdir -p dist/.well-known
+          cp llms.txt dist/.well-known/llms.txt
+
+          # Create api directory
+          mkdir -p dist/api
+          cp api-index.json dist/api/index.json
+
+          # Copy raw markdown files
+          mkdir -p dist/raw
+          cp -r docs/* dist/raw/
+
+          # Create redirect for raw index
+          cat > dist/raw/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <meta charset="utf-8">
+              <title>Raw Markdown Files - Coincise</title>
+              <meta http-equiv="refresh" content="0;url=../llms.txt">
+          </head>
+          <body>
+              <p>Redirecting to <a href="../llms.txt">llms.txt</a>...</p>
+          </body>
+          </html>
+          EOF
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

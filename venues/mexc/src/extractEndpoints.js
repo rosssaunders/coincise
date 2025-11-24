@@ -13,7 +13,6 @@ import { createTurndownBuilder } from "../../shared/turndown.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const BASE_URL = "https://mexcdevelop.github.io/apidocs/spot_v3_en"
 const OUTPUT_DIR = path.resolve(__dirname, "../../../docs/mexc/endpoints")
 
 /**
@@ -182,80 +181,79 @@ const isPrivateEndpoint = (title, content) => {
 }
 
 /**
- * Extract all endpoints from a section
+ * Extract all endpoints from current page
  */
-const extractEndpointsFromSection = async (
-  page,
-  turndownService,
-  sectionTitle
-) => {
-  console.log(`Extracting endpoints from ${sectionTitle} section...`)
+const extractEndpointsFromPage = async (page, turndownService, pageUrl) => {
+  console.log(`Extracting endpoints from ${pageUrl}...`)
 
-  const endpoints = await page.evaluate(section => {
-    const contentNode = document.querySelector(".content")
+  const endpoints = await page.evaluate(() => {
+    const contentNode = document.querySelector("main") || document.querySelector(".theme-doc-markdown")
     if (!contentNode) return []
 
-    // Find the section H1
-    const h1Elements = Array.from(contentNode.querySelectorAll("h1"))
-    const sectionH1 = h1Elements.find(h1 =>
-      h1.textContent.trim().toLowerCase().includes(section.toLowerCase())
-    )
-
-    if (!sectionH1) return []
-
     const endpoints = []
-    let currentNode = sectionH1.nextElementSibling
+    const h2Elements = Array.from(contentNode.querySelectorAll("h2"))
 
-    // Iterate through nodes until we hit the next H1
-    while (currentNode && currentNode.nodeName !== "H1") {
-      if (currentNode.nodeName === "H2") {
-        const endpointTitle = currentNode.textContent.trim()
-        const endpointId = currentNode.id || ""
+    h2Elements.forEach(h2 => {
+      const endpointTitle = h2.textContent.trim()
+      const endpointId = h2.id || ""
 
-        // Collect content for this endpoint until next H2 or H1
-        const content = document.createElement("div")
-        let contentNode = currentNode.nextElementSibling
+      // Collect content for this endpoint until next H2 or H1
+      const content = document.createElement("div")
+      let currentNode = h2.nextElementSibling
 
-        while (
-          contentNode &&
-          contentNode.nodeName !== "H1" &&
-          contentNode.nodeName !== "H2"
-        ) {
-          content.appendChild(contentNode.cloneNode(true))
-          contentNode = contentNode.nextElementSibling
-        }
+      while (
+        currentNode &&
+        currentNode.nodeName !== "H1" &&
+        currentNode.nodeName !== "H2"
+      ) {
+        content.appendChild(currentNode.cloneNode(true))
+        currentNode = currentNode.nextElementSibling
+      }
 
-        // Extract HTTP method and path from content
-        // Look for UL element containing the method and path
-        const ulElement = content.querySelector("ul")
-        let method = ""
-        let path = ""
+      // Extract HTTP method and path from content
+      // Look for UL element or paragraph containing the method and path
+      const ulElement = content.querySelector("ul")
+      const pElements = Array.from(content.querySelectorAll("p"))
 
-        if (ulElement) {
-          const text = ulElement.textContent.trim()
-          const match = text.match(/^(GET|POST|DELETE|PUT)\s+(.+)$/)
-          if (match) {
-            method = match[1]
-            path = match[2]
-          }
-        }
+      let method = ""
+      let path = ""
 
-        if (method && path) {
-          endpoints.push({
-            title: endpointTitle,
-            id: endpointId,
-            method: method,
-            path: path,
-            html: `<h1>${endpointTitle}</h1>${content.innerHTML}`
-          })
+      // Try UL first
+      if (ulElement) {
+        const text = ulElement.textContent.trim()
+        const match = text.match(/^(GET|POST|DELETE|PUT|PATCH)\s+(.+)$/)
+        if (match) {
+          method = match[1]
+          path = match[2]
         }
       }
 
-      currentNode = currentNode.nextElementSibling
-    }
+      // Try paragraphs if UL didn't work
+      if (!method && pElements.length > 0) {
+        for (const p of pElements) {
+          const text = p.textContent.trim()
+          const match = text.match(/^(GET|POST|DELETE|PUT|PATCH)\s+(.+)$/)
+          if (match) {
+            method = match[1]
+            path = match[2]
+            break
+          }
+        }
+      }
+
+      if (method && path) {
+        endpoints.push({
+          title: endpointTitle,
+          id: endpointId,
+          method: method,
+          path: path,
+          html: `<h1>${endpointTitle}</h1>${content.innerHTML}`
+        })
+      }
+    })
 
     return endpoints
-  }, sectionTitle)
+  })
 
   return endpoints
 }
@@ -273,15 +271,6 @@ const main = async () => {
     const page = await browser.newPage()
     await configurePage(page)
 
-    console.log(`Navigating to ${BASE_URL}...`)
-    await page.goto(BASE_URL, {
-      waitUntil: "networkidle2",
-      timeout: 60000
-    })
-
-    // Wait for content to load
-    await page.waitForSelector(".content", { timeout: 30000 })
-
     // Create turndown service with table support
     const turndownService = createTurndownBuilder()
       .withTablesWithoutHeaders()
@@ -291,26 +280,33 @@ const main = async () => {
     ensureDir(path.join(OUTPUT_DIR, "public"))
     ensureDir(path.join(OUTPUT_DIR, "private"))
 
-    // Sections to extract endpoints from
-    const sections = [
-      "Market Data Endpoints",
-      "Spot Account/Trade",
-      "Wallet Endpoints",
-      "Sub-Account Endpoints",
-      "Rebate Endpoints"
+    // Pages to extract endpoints from (each page now contains a section)
+    const pages = [
+      { url: "https://www.mexc.com/api-docs/spot-v3/market-data-endpoints", name: "Market Data Endpoints" },
+      { url: "https://www.mexc.com/api-docs/spot-v3/spot-account-trade", name: "Spot Account/Trade" },
+      { url: "https://www.mexc.com/api-docs/spot-v3/wallet-endpoints", name: "Wallet Endpoints" },
+      { url: "https://www.mexc.com/api-docs/spot-v3/subaccount-endpoints", name: "Sub-Account Endpoints" },
+      { url: "https://www.mexc.com/api-docs/spot-v3/rebate-endpoints", name: "Rebate Endpoints" }
     ]
 
     let publicCount = 0
     let privateCount = 0
 
-    for (const section of sections) {
-      const endpoints = await extractEndpointsFromSection(
+    for (const pageInfo of pages) {
+      console.log(`\nNavigating to ${pageInfo.name}...`)
+      await page.goto(pageInfo.url, {
+        waitUntil: "networkidle2",
+        timeout: 60000
+      })
+      await page.waitForSelector("main", { timeout: 30000 })
+
+      const endpoints = await extractEndpointsFromPage(
         page,
         turndownService,
-        section
+        pageInfo.url
       )
 
-      console.log(`Found ${endpoints.length} endpoints in ${section}`)
+      console.log(`Found ${endpoints.length} endpoints in ${pageInfo.name}`)
 
       for (const endpoint of endpoints) {
         const markdown = turndownService.turndown(endpoint.html)
@@ -324,7 +320,7 @@ const main = async () => {
 
         const fullMarkdown = `${h1}
 
-**Source:** ${BASE_URL}#${endpoint.id}
+**Source:** ${pageInfo.url}#${endpoint.id}
 
 ${contentWithoutH1}
 `

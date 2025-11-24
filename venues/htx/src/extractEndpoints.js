@@ -58,8 +58,26 @@ const generateFilename = (method, path) => {
  */
 const waitForMenu = async page => {
   console.log("Waiting for menu element to load...")
-  await page.waitForSelector("ul#sliderMenu.ant-menu", { timeout: 30000 })
-  console.log("✅ Menu element loaded successfully")
+  try {
+    await page.waitForSelector("ul#sliderMenu.ant-menu", {
+      timeout: 30000,
+      visible: true
+    })
+    console.log("✅ Menu element loaded successfully")
+  } catch (error) {
+    console.log("⚠️  Menu selector timeout - checking if menu exists anyway...")
+    const menuExists = await page.evaluate(() => {
+      const menu = document.querySelector("ul#sliderMenu.ant-menu")
+      return menu ? { exists: true, visible: menu.offsetParent !== null } : null
+    })
+    console.log("Menu status:", menuExists)
+    if (!menuExists || !menuExists.exists) {
+      throw error
+    }
+    console.log("✅ Menu exists and will proceed anyway")
+  }
+  // Additional wait to ensure menu is fully interactive
+  await new Promise(resolve => setTimeout(resolve, 2000))
 }
 
 /**

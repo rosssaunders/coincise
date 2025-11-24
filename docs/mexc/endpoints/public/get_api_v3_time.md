@@ -1,21 +1,17 @@
-# Check Server Time
+# GET /api/v3/time
+
+**Source:** https://www.mexc.com/api-docs/spot-v3/market-data-endpoints#check-server-time
 
 > Response
 
-```
-{
-    "serverTime" : 1645539742000
-}
+```json
+{    "serverTime" : 1645539742000}
 ```
 
-- **GET** `/api/v3/time`
+-   **GET** `/api/v3/time`
 
 **Weight(IP):** 1
 
 Parameter:
 
 NONE
-
----
-
-**Source:** https://mexcdevelop.github.io/apidocs/spot_v3_en#check-server-time

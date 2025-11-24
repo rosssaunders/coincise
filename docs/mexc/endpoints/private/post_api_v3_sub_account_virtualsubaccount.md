@@ -1,32 +1,26 @@
-# Create a Sub-account(For Master Account)
+# POST / api/v3/sub-account/virtualSubAccount
+
+**Source:** https://www.mexc.com/api-docs/spot-v3/subaccount-endpoints#create-a-sub-accountfor-master-account
 
 Create a sub-account from the master account.
 
 > Response
 
-```
-{
-    "subAccount":"mexc1",
-    "note":"1"
-}
+```json
+{    "subAccount":"mexc1",    "note":"1"}
 ```
 
-- POST / api/v3/sub-account/virtualSubAccount
+-   POST / api/v3/sub-account/virtualSubAccount
 
-**Permission:** SPOT_ACCOUNT_READ
+**Permission:** SPOT\_ACCOUNT\_READ
 
 **Weight(IP):** 1
 
 Parameters:
 
-| Name       | Type   | Mandatory | Description       |
-| ---------- | ------ | --------- | ----------------- |
-| subAccount | STRING | YES       | Sub-account Name  |
-| note       | STRING | YES       | Sub-account notes |
-| recvWindow | LONG   | NO        |                   |
-| timestamp  | LONG   | YES       |                   |
-
----
-
-**Source:**
-https://mexcdevelop.github.io/apidocs/spot_v3_en#create-a-sub-account-for-master-account
+| Name | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| subAccount | STRING | YES | Sub-account Name |
+| note | STRING | YES | Sub-account notes |
+| recvWindow | LONG | NO |  |
+| timestamp | LONG | YES |  |

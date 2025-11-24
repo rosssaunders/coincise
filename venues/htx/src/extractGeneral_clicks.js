@@ -7,7 +7,7 @@
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
-import { launchBrowser } from "../../shared/puppeteer.js"
+import { launchBrowser, configurePage } from "../../shared/puppeteer.js"
 import { createTurndownBuilder } from "../../shared/turndown.js"
 
 const __filename = fileURLToPath(import.meta.url)
@@ -68,11 +68,30 @@ const extractSectionByMenuPath = async (page, menuPath, description) => {
   // Navigate to base URL
   await page.goto(BASE_URL, {
     waitUntil: "networkidle0",
-    timeout: 30000
+    timeout: 60000
   })
 
-  // Wait for menu to load
-  await page.waitForSelector("ul#sliderMenu.ant-menu", { timeout: 10000 })
+  // Wait for menu to load with increased timeout and visibility check
+  try {
+    await page.waitForSelector("ul#sliderMenu.ant-menu", {
+      timeout: 30000,
+      visible: true
+    })
+    console.log(`  ✅ Menu loaded successfully`)
+  } catch (error) {
+    console.log(`  ⚠️  Menu selector timeout - checking if menu exists anyway...`)
+    const menuExists = await page.evaluate(() => {
+      const menu = document.querySelector("ul#sliderMenu.ant-menu")
+      return menu ? { exists: true, visible: menu.offsetParent !== null } : null
+    })
+    console.log(`  Menu status:`, menuExists)
+    if (!menuExists || !menuExists.exists) {
+      throw error
+    }
+  }
+
+  // Additional wait to ensure menu is fully interactive
+  await new Promise(resolve => setTimeout(resolve, 2000))
 
   // Click through each level of the menu path
   for (let i = 0; i < menuPath.length; i++) {
@@ -92,11 +111,19 @@ const extractSectionByMenuPath = async (page, menuPath, description) => {
 
     if (!clicked) {
       console.log(`  ⚠️  Menu item "${menuText}" not found`)
+      // Log available menu items for debugging
+      const availableItems = await page.evaluate(() => {
+        const items = document.querySelectorAll('[role="menuitem"]')
+        return Array.from(items)
+          .slice(0, 20)
+          .map(item => item.textContent.trim())
+      })
+      console.log(`  Available menu items:`, availableItems)
       return null
     }
 
     // Wait for menu to expand/content to load
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    await new Promise(resolve => setTimeout(resolve, 1500))
   }
 
   // Wait longer for final content to load
@@ -178,8 +205,8 @@ const main = async () => {
   try {
     const page = await browser.newPage()
 
-    // Set viewport
-    await page.setViewport({ width: 1280, height: 800 })
+    // Configure page with proper timeouts
+    await configurePage(page)
 
     const turndownService = createTurndownBuilder().build()
 

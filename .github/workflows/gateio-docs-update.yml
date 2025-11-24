@@ -20,7 +20,7 @@ jobs:
       docs_dir: 'docs/gateio/'
       install_command: 'cd venues/gateio && pnpm install --frozen-lockfile'
       puppeteer_command: 'cd venues/gateio && pnpm exec puppeteer browsers install chrome'
-      extract_command: 'cd venues/gateio && pnpm run extract:change-log && pnpm run extract:general && pnpm run extract:account && pnpm run extract:subaccount && pnpm run extract:collateral-loan && pnpm run extract:multi-collateral-loan && pnpm run extract:isolated-margin && pnpm run extract:earn && pnpm run extract:earnuni && pnpm run extract:flash-swap && pnpm run extract:rebate && pnpm run extract:wallet && pnpm run extract:withdrawal && pnpm run extract:unified && pnpm run extract:spot && pnpm run extract:options && pnpm run extract:futures && pnpm run extract:delivery && pnpm run extract:websocket-spot && pnpm run extract:websocket-delivery && pnpm run extract:websocket-futures && pnpm run extract:websocket-options && pnpm run extract:websocket-unified'
+      extract_command: 'cd venues/gateio && pnpm run extract:all'
       pr_branch: 'gateio-docs-update'
     secrets:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}

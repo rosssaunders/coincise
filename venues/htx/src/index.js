@@ -48,8 +48,26 @@ async function scrapePageForId(browser, url, ids) {
 
     // Wait for the specific menu element to be loaded
     logger.info("Waiting for menu element to load...")
-    await page.waitForSelector("ul#sliderMenu.ant-menu", { timeout: 30000 })
-    logger.info("Menu element loaded successfully")
+    try {
+      await page.waitForSelector("ul#sliderMenu.ant-menu", {
+        timeout: 30000,
+        visible: true
+      })
+      logger.info("Menu element loaded successfully")
+    } catch (error) {
+      logger.info("Menu selector timeout - checking if menu exists anyway...")
+      const menuExists = await page.evaluate(() => {
+        const menu = document.querySelector("ul#sliderMenu.ant-menu")
+        return menu ? { exists: true, visible: menu.offsetParent !== null } : null
+      })
+      logger.info("Menu status:", menuExists)
+      if (!menuExists || !menuExists.exists) {
+        throw error
+      }
+      logger.info("Menu exists and will proceed anyway")
+    }
+    // Additional wait to ensure menu is fully interactive
+    await new Promise(resolve => setTimeout(resolve, 2000))
 
     // Click through all menu items and submenus recursively
     await page.evaluate(async () => {
@@ -213,8 +231,26 @@ async function scrapePageForEndpoint(browser, url) {
 
     // Wait for the specific menu element to be loaded
     logger.info("Waiting for menu element to load...")
-    await page.waitForSelector("ul#sliderMenu.ant-menu", { timeout: 30000 })
-    logger.info("Menu element loaded successfully")
+    try {
+      await page.waitForSelector("ul#sliderMenu.ant-menu", {
+        timeout: 30000,
+        visible: true
+      })
+      logger.info("Menu element loaded successfully")
+    } catch (error) {
+      logger.info("Menu selector timeout - checking if menu exists anyway...")
+      const menuExists = await page.evaluate(() => {
+        const menu = document.querySelector("ul#sliderMenu.ant-menu")
+        return menu ? { exists: true, visible: menu.offsetParent !== null } : null
+      })
+      logger.info("Menu status:", menuExists)
+      if (!menuExists || !menuExists.exists) {
+        throw error
+      }
+      logger.info("Menu exists and will proceed anyway")
+    }
+    // Additional wait to ensure menu is fully interactive
+    await new Promise(resolve => setTimeout(resolve, 2000))
 
     // Extract content from the main API documentation container
     logger.info("Extracting content from API documentation container...")

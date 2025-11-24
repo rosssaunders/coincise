@@ -15,7 +15,7 @@ jobs:
     with:
       venue_name: 'Coinbase INTX'
       docs_dir: 'docs/coinbase/intx/'
-      install_command: 'cd venues/coinbase/intx && pnpm install --no-frozen-lockfile'
+      install_command: 'pnpm install --filter @coincise/coinbase-intx'
       puppeteer_command: 'cd venues/coinbase/intx && pnpm exec puppeteer browsers install chrome'
       extract_command: 'cd venues/coinbase/intx && pnpm run extract:all'
       pr_branch: 'docs/coinbase-intx-update'
