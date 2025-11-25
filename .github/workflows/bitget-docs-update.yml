@@ -25,6 +25,4 @@ jobs:
         - Updated API documentation from https://www.bitget.com/api-doc
         - Extracted general documentation (authentication, rate limits, network connectivity, etc.)
         - Extracted endpoint documentation
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+    secrets: inherit

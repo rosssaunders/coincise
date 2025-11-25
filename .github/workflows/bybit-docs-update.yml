@@ -20,6 +20,4 @@ jobs:
       docs_dir: 'docs/bybit/'
       extract_command: 'cd venues/bybit && pnpm run extract:all'
       pr_branch: 'docs/bybit-update'
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+    secrets: inherit

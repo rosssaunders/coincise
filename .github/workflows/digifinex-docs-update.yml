@@ -22,6 +22,4 @@ jobs:
       puppeteer_command: 'cd venues/digifinex && pnpm exec puppeteer browsers install chrome'
       extract_command: 'cd venues/digifinex && pnpm run extract:general && pnpm run extract:endpoints && pnpm run extract:websocket-github'
       pr_branch: 'digifinex-docs-update'
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+    secrets: inherit

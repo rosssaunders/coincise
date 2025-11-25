@@ -21,6 +21,4 @@ jobs:
       pr_branch: 'docs/deribit-update'
       pr_body_template: |
         Automated update of Deribit API documentation.
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+    secrets: inherit

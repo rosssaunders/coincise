@@ -19,6 +19,4 @@ jobs:
       puppeteer_command: 'cd venues/coinbase/intx && pnpm exec puppeteer browsers install chrome'
       extract_command: 'cd venues/coinbase/intx && pnpm run extract:all'
       pr_branch: 'docs/coinbase-intx-update'
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+    secrets: inherit

@@ -27,6 +27,4 @@ jobs:
         - Updated API documentation from https://mexcdevelop.github.io/apidocs/spot_v3_en
         - Extracted general documentation (authentication, network connectivity, rate limits, etc.)
         - Extracted endpoint documentation (60 endpoints: 9 public, 51 private)
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+    secrets: inherit

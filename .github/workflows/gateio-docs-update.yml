@@ -22,6 +22,4 @@ jobs:
       puppeteer_command: 'cd venues/gateio && pnpm exec puppeteer browsers install chrome'
       extract_command: 'cd venues/gateio && pnpm run extract:all'
       pr_branch: 'gateio-docs-update'
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+    secrets: inherit

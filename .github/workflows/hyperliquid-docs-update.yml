@@ -23,6 +23,4 @@ jobs:
       puppeteer_command: 'cd venues/hyperliquid && pnpm exec puppeteer browsers install chrome'
       extract_command: 'cd venues/hyperliquid && pnpm run extract:all'
       pr_branch: 'docs/hyperliquid-update'
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+    secrets: inherit

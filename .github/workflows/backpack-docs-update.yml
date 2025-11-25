@@ -22,6 +22,4 @@ jobs:
         - Updated API documentation from https://docs.backpack.exchange
         - Extracted general documentation (authentication, network connectivity, changelog, etc.)
         - Extracted endpoint documentation
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+    secrets: inherit

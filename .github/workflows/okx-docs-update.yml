@@ -24,6 +24,4 @@ jobs:
       extract_command: 'cd venues/okx && pnpm run extract:all'
       pr_branch: 'okx-docs-update'
       pr_title: 'OKX API Documentation Update - Standardized Format'
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+    secrets: inherit

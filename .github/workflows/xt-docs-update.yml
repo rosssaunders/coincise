@@ -19,6 +19,4 @@ jobs:
       puppeteer_command: 'pnpm exec puppeteer browsers install chrome'
       extract_command: 'cd venues/xt && pnpm run extract:all'
       pr_branch: 'docs/xt-update'
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+    secrets: inherit

@@ -24,6 +24,4 @@ jobs:
       install_python_dependencies_command: 'pip install pyyaml'
       extract_command: 'python3 fetch_spec.py && cd venues/bullish && pnpm run extract:all'
       pr_branch: 'bullish-docs-update'
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+    secrets: inherit

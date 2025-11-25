@@ -22,6 +22,4 @@ jobs:
       puppeteer_command: 'cd venues/bitfinex && pnpm exec puppeteer browsers install chrome'
       extract_command: 'cd venues/bitfinex && pnpm run extract:general && pnpm run extract:endpoints'
       pr_branch: 'bitfinex-docs-update'
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+    secrets: inherit

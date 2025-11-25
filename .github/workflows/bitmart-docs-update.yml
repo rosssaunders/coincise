@@ -24,6 +24,4 @@ jobs:
         - Extracted individual endpoint documentation for Spot and Futures APIs
         - Endpoints organized into public/private directories
         - Extracted endpoint documentation
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+    secrets: inherit

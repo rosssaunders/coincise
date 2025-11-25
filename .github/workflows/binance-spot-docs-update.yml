@@ -25,6 +25,4 @@ jobs:
         - Updated API documentation from https://developers.binance.com/docs/binance-spot-api-docs
         - Extracted general documentation (authentication, rate limits, error codes, etc.)
         - Extracted endpoint documentation (REST, WebSocket, FIX, SBE)
-    secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+    secrets: inherit

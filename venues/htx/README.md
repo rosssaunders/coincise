@@ -153,6 +153,35 @@ Otherwise classified as public.
 
 ## Troubleshooting
 
+### Known Issue: Geo-Blocking
+
+**HTX appears to geo-block access from certain regions, including GitHub Actions runners (US data centers).**
+
+**Symptoms:**
+- Timeouts when waiting for page selectors (especially `ul#sliderMenu`)
+- Menu elements never load despite correct selectors
+- Works locally but fails consistently in CI/CD environments
+- Extended retry mechanisms and timeout increases do not resolve the issue
+
+**Root Cause:**
+HTX restricts access from certain jurisdictions. GitHub Actions runners are hosted in US data centers which appear to be blocked.
+
+**Workarounds:**
+
+1. **Manual Extraction** (Recommended):
+   ```bash
+   cd venues/htx
+   pnpm install
+   pnpm run extract:all
+   ```
+   Then commit the updated documentation files.
+
+2. **Self-Hosted Runner**: Use a GitHub Actions self-hosted runner in an allowed region
+
+3. **VPN/Proxy**: Configure the workflow to route through a VPN or proxy service in an allowed region
+
+**Status**: The GitHub Actions workflow (`htx-docs-update.yml`) is **expected to fail** due to geo-blocking. Manual extraction is required.
+
 ### HTX Website Access Issues
 
 The HTX website may implement anti-bot measures that can cause 403 errors or
@@ -162,12 +191,12 @@ timeout issues. If extractions fail:
 2. Verify the selectors haven't changed (menu structure, content containers)
 3. Try increasing timeout values
 4. Run during off-peak hours when servers are less loaded
-5. Check GitHub Actions workflows for successful runs
+5. Check if your IP/region is being geo-blocked
 
 ### Common Issues
 
-- **Timeout waiting for menu**: HTX site may be slow to load or blocking access
-- **403 errors**: Site anti-bot protection may be active
+- **Timeout waiting for menu**: HTX site may be slow to load, blocking access, or geo-blocking your region
+- **403 errors**: Site anti-bot protection may be active or geo-blocking in effect
 - **Missing content**: Content selectors may have changed; check HTML structure
 - **Incorrect classification**: Public/private detection may need tuning based
   on new patterns
