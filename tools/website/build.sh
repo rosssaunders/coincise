@@ -30,14 +30,22 @@ else
     log "MkDocs dependencies already installed"
 fi
 
-# Step 3: Build MkDocs site
-log "Step 3: Building MkDocs site..."
+# Step 3: Prepare docs directory with homepage
+log "Step 3: Preparing docs directory..."
+# Copy index.md to docs/ temporarily (it's in .gitignore so won't be committed)
+cp "$REPO_ROOT/site/docs/index.md" "$REPO_ROOT/docs/index.md"
+
+# Step 4: Build MkDocs site
+log "Step 4: Building MkDocs site..."
 cd "$REPO_ROOT/site"
 # Note: Not using --strict because some source docs have broken internal links
 mkdocs build
 
-# Step 4: Copy LLM resources to dist
-log "Step 4: Copying LLM resources to dist..."
+# Clean up temporary index.md from docs/
+rm -f "$REPO_ROOT/docs/index.md"
+
+# Step 5: Copy LLM resources to dist
+log "Step 5: Copying LLM resources to dist..."
 cd "$REPO_ROOT"
 
 # Copy root llms.txt files
@@ -52,13 +60,13 @@ cp llms.txt dist/.well-known/llms.txt
 mkdir -p dist/api
 cp api-index.json dist/api/index.json
 
-# Step 5: Copy raw markdown files
-log "Step 5: Copying raw markdown files..."
+# Step 6: Copy raw markdown files
+log "Step 6: Copying raw markdown files..."
 mkdir -p dist/raw
 cp -r docs/* dist/raw/
 
-# Step 6: Create a simple index for raw files
-log "Step 6: Creating raw files index..."
+# Step 7: Create a simple index for raw files
+log "Step 7: Creating raw files index..."
 cat > dist/raw/index.html << 'EOF'
 <!DOCTYPE html>
 <html>
@@ -73,7 +81,7 @@ cat > dist/raw/index.html << 'EOF'
 </html>
 EOF
 
-# Step 7: Display statistics
+# Step 8: Display statistics
 log "Build complete!"
 log "Statistics:"
 echo "  - dist/ size: $(du -sh dist | cut -f1)"
