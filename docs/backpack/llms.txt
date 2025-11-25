@@ -1,11 +1,11 @@
 # Backpack API Documentation
 
-> 49 documentation files | ~41k tokens
+> 50 documentation files | ~42k tokens
 
 ## General Documentation
 
 - [Authentication](https://rosssaunders.github.io/coincise/raw/backpack/authentication.md): Signed requests are required for any API calls that mutate state. Additionally,
-- [Change Log](https://rosssaunders.github.io/coincise/raw/backpack/change_log.md): - Add j and k fields to the order update stream (take profit limit price and
+- [Change Log](https://rosssaunders.github.io/coincise/raw/backpack/change_log.md): - Backstop liquidation fills now include a non-zero tradeId field on an
 - [Error Codes](https://rosssaunders.github.io/coincise/raw/backpack/error_codes.md): Please refer to the API documentation for error code information.
 - [Network Connectivity](https://rosssaunders.github.io/coincise/raw/backpack/network_connectivity.md): The API is hosted at https://api.backpack.exchange/ and the WS API is hosted at
 - [Rate Limits](https://rosssaunders.github.io/coincise/raw/backpack/rate_limits.md): Please refer to the API documentation for rate limit information.
@@ -54,6 +54,7 @@
 - [GET Get Open Orders](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_open_orders.md)
 - [GET Get Open Positions](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_open_positions.md)
 - [GET Get Order History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_order_history.md)
+- [GET Get Position History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_position_history.md)
 - [GET Get Quote History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_quote_history.md)
 - [GET Get Rfq History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_rfq_history.md)
 - [GET Get Settlement History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_settlement_history.md)

@@ -1,14 +1,14 @@
 # Coincise - Crypto API Documentation
 
 > LLM-friendly cryptocurrency exchange API documentation covering 20 exchanges
-> with 2,960 endpoint documents optimized for context windows.
+> with 2,961 endpoint documents optimized for context windows.
 
 This repository provides clean markdown documentation for major crypto exchange APIs.
 Documentation is updated weekly and structured for optimal LLM consumption.
 
 ## Quick Access
 
-- [Complete Index with Summaries](https://rosssaunders.github.io/coincise/llms-full.txt): All 2,960 documents with summaries
+- [Complete Index with Summaries](https://rosssaunders.github.io/coincise/llms-full.txt): All 2,961 documents with summaries
 - [JSON Metadata Index](https://rosssaunders.github.io/coincise/api/index.json): Machine-readable documentation index
 - [Raw Markdown Files](https://rosssaunders.github.io/coincise/raw/): Direct markdown access
 
@@ -16,7 +16,7 @@ Documentation is updated weekly and structured for optimal LLM consumption.
 
 ### Backpack
 
-49 documents | ~41k tokens
+50 documents | ~42k tokens
 
 **General:**
 - [Authentication](https://rosssaunders.github.io/coincise/raw/backpack/authentication.md)
@@ -26,7 +26,7 @@ Documentation is updated weekly and structured for optimal LLM consumption.
 - [Rate Limits](https://rosssaunders.github.io/coincise/raw/backpack/rate_limits.md)
 - [Response Formats](https://rosssaunders.github.io/coincise/raw/backpack/response_formats.md)
 
-**Endpoints:** 19 public, 24 private
+**Endpoints:** 19 public, 25 private
 
 ### Binance
 

@@ -1,15 +1,15 @@
 {
   "version": "1.0.0",
-  "generated": "2025-11-25T08:46:58.018Z",
+  "generated": "2025-11-25T22:08:54.283Z",
   "baseUrl": "https://rosssaunders.github.io/coincise",
-  "totalDocuments": 2960,
-  "totalEstimatedTokens": 8154689,
+  "totalDocuments": 2961,
+  "totalEstimatedTokens": 8156125,
   "exchanges": [
     {
       "id": "backpack",
       "name": "Backpack",
       "slug": "backpack",
-      "documentCount": 49,
+      "documentCount": 50,
       "general": [
         {
           "title": "Authentication",
@@ -17,7 +17,7 @@
           "htmlUrl": "https://rosssaunders.github.io/coincise/backpack/authentication/",
           "rawUrl": "https://rosssaunders.github.io/coincise/raw/backpack/authentication.md",
           "summary": "Signed requests are required for any API calls that mutate state. Additionally,",
-          "estimatedTokens": 1504,
+          "estimatedTokens": 1516,
           "type": "authentication"
         },
         {
@@ -25,8 +25,8 @@
           "path": "change_log.md",
           "htmlUrl": "https://rosssaunders.github.io/coincise/backpack/change_log/",
           "rawUrl": "https://rosssaunders.github.io/coincise/raw/backpack/change_log.md",
-          "summary": "- Add j and k fields to the order update stream (take profit limit price and",
-          "estimatedTokens": 2131,
+          "summary": "- Backstop liquidation fills now include a non-zero tradeId field on an",
+          "estimatedTokens": 2253,
           "type": "change_log"
         },
         {
@@ -241,7 +241,7 @@
           "htmlUrl": "https://rosssaunders.github.io/coincise/backpack/endpoints/public/get_depth/",
           "rawUrl": "https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_depth.md",
           "summary": "depth.",
-          "estimatedTokens": 386,
+          "estimatedTokens": 404,
           "method": "GET",
           "apiPath": null,
           "type": "public",
@@ -458,6 +458,18 @@
           "rawUrl": "https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_order_history.md",
           "summary": "order history.",
           "estimatedTokens": 2155,
+          "method": "GET",
+          "apiPath": null,
+          "type": "private",
+          "category": "trading"
+        },
+        {
+          "title": "Get Position History",
+          "path": "endpoints/private/get_position_history.md",
+          "htmlUrl": "https://rosssaunders.github.io/coincise/backpack/endpoints/private/get_position_history/",
+          "rawUrl": "https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_position_history.md",
+          "summary": "position history.",
+          "estimatedTokens": 1284,
           "method": "GET",
           "apiPath": null,
           "type": "private",

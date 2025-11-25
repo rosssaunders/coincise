@@ -1,6 +1,6 @@
 # Coincise - Complete Documentation Index
 
-> 2,960 API documentation files | ~8.2M estimated tokens | Updated: 2025-11-25
+> 2,961 API documentation files | ~8.2M estimated tokens | Updated: 2025-11-25
 
 Complete index of all cryptocurrency exchange API documentation with summaries and token estimates.
 
@@ -8,8 +8,8 @@ Complete index of all cryptocurrency exchange API documentation with summaries a
 
 ### General Documentation
 
-- [Authentication](https://rosssaunders.github.io/coincise/raw/backpack/authentication.md): Signed requests are required for any API calls that mutate state. Additionally, (~1,504 tokens)
-- [Change Log](https://rosssaunders.github.io/coincise/raw/backpack/change_log.md): - Add j and k fields to the order update stream (take profit limit price and (~2,131 tokens)
+- [Authentication](https://rosssaunders.github.io/coincise/raw/backpack/authentication.md): Signed requests are required for any API calls that mutate state. Additionally, (~1,516 tokens)
+- [Change Log](https://rosssaunders.github.io/coincise/raw/backpack/change_log.md): - Backstop liquidation fills now include a non-zero tradeId field on an (~2,253 tokens)
 - [Error Codes](https://rosssaunders.github.io/coincise/raw/backpack/error_codes.md): Please refer to the API documentation for error code information. (~20 tokens)
 - [Network Connectivity](https://rosssaunders.github.io/coincise/raw/backpack/network_connectivity.md): The API is hosted at https://api.backpack.exchange/ and the WS API is hosted at (~33 tokens)
 - [Rate Limits](https://rosssaunders.github.io/coincise/raw/backpack/rate_limits.md): Please refer to the API documentation for rate limit information. (~20 tokens)
@@ -23,7 +23,7 @@ Complete index of all cryptocurrency exchange API documentation with summaries a
 - [GET Get Borrow Lend Market History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_borrow_lend_market_history.md): borrow lend market history. (~487 tokens)
 - [GET Get Borrow Lend Markets](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_borrow_lend_markets.md): borrow lend markets. (~1,404 tokens)
 - [GET Get Collateral](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_collateral.md): collateral. (~297 tokens)
-- [GET Get Depth](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_depth.md): depth. (~386 tokens)
+- [GET Get Depth](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_depth.md): depth. (~404 tokens)
 - [GET Get Estimated Liquidation Price](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_estimated_liquidation_price.md): estimated liquidation price. (~393 tokens)
 - [GET Get Funding Interval Rates](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_funding_interval_rates.md): funding interval rates. (~609 tokens)
 - [GET Get Historical Trades](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_historical_trades.md): historical trades. (~523 tokens)
@@ -58,6 +58,7 @@ Complete index of all cryptocurrency exchange API documentation with summaries a
 - [GET Get Open Orders](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_open_orders.md): open orders. (~1,807 tokens)
 - [GET Get Open Positions](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_open_positions.md): open positions. (~1,563 tokens)
 - [GET Get Order History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_order_history.md): order history. (~2,155 tokens)
+- [GET Get Position History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_position_history.md): position history. (~1,284 tokens)
 - [GET Get Quote History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_quote_history.md): quote history. (~1,056 tokens)
 - [GET Get Rfq History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_rfq_history.md): RFQ history. (~1,263 tokens)
 - [GET Get Settlement History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_settlement_history.md): settlement history. (~890 tokens)

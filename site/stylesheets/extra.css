@@ -9,15 +9,21 @@
   background-color: var(--md-code-bg-color);
   padding: 0.2em 0.4em;
   border-radius: 4px;
+  color: var(--md-accent-fg-color); /* Neon accent for code */
 }
 
 /* Parameter tables - optimize for API docs */
 .md-typeset table:not([class]) {
   font-size: 0.85rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
 }
 
 .md-typeset table:not([class]) th {
   white-space: nowrap;
+  background-color: rgba(255, 255, 255, 0.05); /* Glass header */
+  color: var(--md-accent-fg-color);
 }
 
 .md-typeset table:not([class]) td {
@@ -27,11 +33,13 @@
 /* Code blocks */
 .md-typeset pre > code {
   font-size: 0.8rem;
+  font-family: "JetBrains Mono", monospace; /* Ensure mono font */
 }
 
 /* LLM resources announcement bar */
 .md-announce {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%); /* Dark gradient */
+  border-bottom: 1px solid var(--md-accent-fg-color); /* Neon line */
 }
 
 .md-announce__inner {
@@ -39,18 +47,19 @@
 }
 
 .md-announce a {
-  color: #fff;
-  text-decoration: underline;
-  font-weight: 500;
+  color: var(--md-accent-fg-color);
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .md-announce a:hover {
-  color: #e0e0e0;
+  color: #fff;
+  text-shadow: 0 0 8px var(--md-accent-fg-color); /* Neon glow */
 }
 
 /* Improve table readability */
 .md-typeset table:not([class]) tr:nth-child(even) {
-  background-color: var(--md-default-bg-color--light);
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
 /* HTTP method badges */
@@ -68,7 +77,7 @@
 .md-typeset h2 {
   margin-top: 2rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--md-default-fg-color--lightest);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .md-typeset h3 {
@@ -79,6 +88,8 @@
 .md-typeset .highlight pre {
   max-height: 400px;
   overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
 }
 
 /* Mobile improvements */
@@ -91,4 +102,45 @@
   .md-typeset table:not([class]) td {
     padding: 0.4rem 0.6rem;
   }
+}
+
+/* --- Crypto / Premium Theme Additions --- */
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a; 
+}
+::-webkit-scrollbar-thumb {
+  background: #334155; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--md-accent-fg-color); 
+}
+
+/* Admonitions (Glassmorphism) */
+.md-typeset .admonition,
+.md-typeset details {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Links with neon hover */
+.md-typeset a {
+  transition: all 0.2s ease;
+}
+.md-typeset a:hover {
+  text-shadow: 0 0 8px var(--md-accent-fg-color);
+}
+
+/* Sidebar navigation active state */
+.md-nav__item .md-nav__link--active {
+  color: var(--md-accent-fg-color);
+  font-weight: 700;
 }
