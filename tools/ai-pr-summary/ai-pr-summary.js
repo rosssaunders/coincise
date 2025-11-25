@@ -64,43 +64,50 @@ export async function generatePrSummary(
           "\n\n[...diff truncated...]"
         : detailedDiff
 
-    const prompt = `You are analyzing changes made to cryptocurrency exchange API documentation. Based on the git diff below, generate a concise but informative PR summary that explains what documentation was updated.
+    const prompt = `Summarize this git diff of API documentation changes.
 
-Focus on:
-- Which API endpoints or sections were modified
-- What types of changes were made (new endpoints, parameter updates, documentation improvements, etc.)
-- Keep it professional and concise
-- Use bullet points for readability
+RULES:
+- One bullet per file changed
+- Format: \`filename\`: [what changed in under 12 words]
+- State ONLY facts. No meta-commentary.
+- Do NOT use: "for clarity", "for readability", "improved", "updated", "enhanced"
+- Do NOT explain why changes were made
+- Do NOT mention what didn't change
+- Maximum 8 bullets total
 
-Git diff:
-\`\`\`
-${truncatedDiff}
-\`\`\`
+GOOD examples:
+- \`rate_limits.md\`: Added new rate limit tier for VIP users
+- \`authentication.md\`: Added ED25519 signature method
+- \`get_order.md\`: New \`clientOrderId\` parameter
 
-File changes summary:
-\`\`\`
+BAD examples (never do this):
+- "Text clarification / readability improvement" ❌
+- "Slightly rephrased the description for clarity" ❌
+- "No functional changes; formatting only" ❌
+
+Files changed:
 ${gitDiff}
-\`\`\`
 
-Generate a detailed PR summary with bullet points that explains the documentation changes clearly and professionally.`
+Diff:
+${truncatedDiff}`
 
     console.error("About to call OpenAI API with:")
-    console.error("Model: gpt-5-mini")
+    console.error("Model: gpt-5.1")
     console.error("Service tier: flex")
     console.error("Prompt length:", prompt.length)
-    console.error("Max completion tokens: 3000")
+    console.error("Max completion tokens: 500")
 
     const response = await openai.responses.create({
       model: "gpt-5.1",
       instructions:
-        "You are a technical documentation assistant that creates clear, concise PR summaries for API documentation updates.",
+        "Output only bullet points. No introductions, conclusions, or explanations. Be terse.",
       input: [
         {
           role: "user",
           content: prompt
         }
       ],
-      max_output_tokens: 3000,
+      max_output_tokens: 500,
       service_tier: "flex"
     })
 
