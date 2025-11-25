@@ -257,6 +257,24 @@ importers:
         specifier: 1.0.2
         version: 1.0.2
 
+  venues/coinbase/intx:
+    dependencies:
+      js-yaml:
+        specifier: ^4.1.0
+        version: 4.1.1
+      jsdom:
+        specifier: 27.0.0
+        version: 27.0.0
+      puppeteer:
+        specifier: ^24.31.0
+        version: 24.31.0
+      turndown:
+        specifier: 7.2.1
+        version: 7.2.1
+      turndown-plugin-gfm:
+        specifier: 1.0.2
+        version: 1.0.2
+
   venues/cryptocom:
     dependencies:
       turndown:
