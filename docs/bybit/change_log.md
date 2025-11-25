@@ -5,6 +5,13 @@ On this page
 
 # V5
 
+## 2025-11-25[​](#2025-11-25 "Direct link to heading")
+
+### Websocket API[​](#websocket-api "Direct link to heading")
+
+- The push frequency of Orderbook Level 1000 data will be changed from 300ms to
+  200ms.
+
 ## 2025-11-17[​](#2025-11-17 "Direct link to heading")
 
 ### REST API[​](#rest-api "Direct link to heading")
@@ -44,7 +51,7 @@ On this page
   - The interval between the order transaction's startTime and endTime has been
     changed from 7 days to 30 days
 
-### Websocket API[​](#websocket-api "Direct link to heading")
+### Websocket API[​](#websocket-api-1 "Direct link to heading")
 
 - [Tickers](/docs/v5/websocket/public/ticker) \[UPDATE\]
   - Spot Push frequency changes from Real-time to 50ms
@@ -124,7 +131,7 @@ On this page
   - `createType` has new enumeration value: `CreateByBboOrder`, used to indicate
     BBO Order
 
-### WebSocket API[​](#websocket-api-1 "Direct link to heading")
+### WebSocket API[​](#websocket-api-2 "Direct link to heading")
 
 - [Order](/docs/v5/websocket/private/order) \[UPDATE\]
   - `createType` has new enumeration value: `CreateByBboOrder`, used to indicate
@@ -148,7 +155,7 @@ On this page
 - [Manual Repay](/docs/v5/account/repay) \[NEW\]
   - Add a new endpoint for UTA manual repay
 
-### WebSocket API[​](#websocket-api-2 "Direct link to heading")
+### WebSocket API[​](#websocket-api-3 "Direct link to heading")
 
 - [Ticker](/docs/v5/websocket/public/ticker) \[UPDATE\]
   - Add new response fields `basisRateYear`, `fundingIntervalHour`, `fundingCap`
@@ -246,7 +253,7 @@ On this page
 - [Get ADL Alert](/docs/v5/market/adl-alert) \[NEW\]
 - [Get Index Price Components](/docs/v5/market/index-components) \[NEW\]
 
-### WebSocket API[​](#websocket-api-3 "Direct link to heading")
+### WebSocket API[​](#websocket-api-4 "Direct link to heading")
 
 - [ADL Alert](/docs/v5/websocket/public/adl-alert) \[NEW\]
   - Add new topic to push grouped insurance pool ADL alert and information
@@ -265,7 +272,7 @@ On this page
 - [Get Trade History](/docs/v5/order/execution) \[UPDATE\]
   - Response field `feeCurrency` supports derivatives trading
 
-### WebSocket API[​](#websocket-api-4 "Direct link to heading")
+### WebSocket API[​](#websocket-api-5 "Direct link to heading")
 
 - [Execution](/docs/v5/websocket/private/execution) \[UPDATE\]
   - Add `feeCurrency` to return trading fee currency
@@ -283,7 +290,7 @@ On this page
 - [Get Wallet Balance](/docs/v5/account/wallet-balance) \[UPDATE\]
   - Add new response fields: `spotBorrow`
 
-### WebSocket API[​](#websocket-api-5 "Direct link to heading")
+### WebSocket API[​](#websocket-api-6 "Direct link to heading")
 
 - [Wallet](/docs/v5/websocket/private/wallet) \[UPDATE\]
   - Add new response fields: `spotBorrow`
@@ -298,7 +305,7 @@ On this page
 
 ## 2025-09-11[​](#2025-09-11 "Direct link to heading")
 
-### WebSocket API[​](#websocket-api-6 "Direct link to heading")
+### WebSocket API[​](#websocket-api-7 "Direct link to heading")
 
 - [Orderbook](/docs/v5/websocket/public/orderbook) \[REMOVE\]
   - Remove level 500 orderbooks for futures
@@ -359,7 +366,7 @@ On this page
 
 ## 2025-08-14[​](#2025-08-14 "Direct link to heading")
 
-### WebSocket API[​](#websocket-api-7 "Direct link to heading")
+### WebSocket API[​](#websocket-api-8 "Direct link to heading")
 
 - [Orderbook](/docs/v5/websocket/public/orderbook) \[UPDATE\]
   - Add level 1000 orderbooks for spot and futures
@@ -394,7 +401,7 @@ On this page
 
 ## 2025-08-05[​](#2025-08-05 "Direct link to heading")
 
-### Websocket API[​](#websocket-api-8 "Direct link to heading")
+### Websocket API[​](#websocket-api-9 "Direct link to heading")
 
 - [Trade](/docs/v5/websocket/public/trade) \[UPDATE\]
   - Add `seq`
@@ -435,7 +442,7 @@ On this page
 - [Get Transaction Log (UTA)](/docs/v5/account/transaction-log) \[UPDATE\]
   - Add new enum "VAT" for `extraFees` field for ARE VAT tax
 
-### Websocket API[​](#websocket-api-9 "Direct link to heading")
+### Websocket API[​](#websocket-api-10 "Direct link to heading")
 
 - [RPI Orderbook](/docs/v5/websocket/public/orderbook-rpi) \[UPDATE\]
   - Support Perpetual & Futures
@@ -457,7 +464,7 @@ On this page
 
 ## 2025-07-15[​](#2025-07-15 "Direct link to heading")
 
-### Websocket API[​](#websocket-api-10 "Direct link to heading")
+### Websocket API[​](#websocket-api-11 "Direct link to heading")
 
 - [RPI Orderbook](/docs/v5/websocket/public/orderbook-rpi) \[NEW\]
   - Add new topic to push the orderbook feed with RPI quote
@@ -469,7 +476,7 @@ On this page
 - [Get System Status](/docs/v5/system-status) \[NEW\]
   - Add new endpoint to get system status
 
-### Websocket API[​](#websocket-api-11 "Direct link to heading")
+### Websocket API[​](#websocket-api-12 "Direct link to heading")
 
 - [Websocket GET System Status](/docs/v5/websocket/system/system-status) \[NEW\]
   - Add new topic to get system status
@@ -480,7 +487,7 @@ On this page
 
 - Add new api hostname `https://api.bybitgeorgia.ge` for Georgia users
 
-### Websocket API[​](#websocket-api-12 "Direct link to heading")
+### Websocket API[​](#websocket-api-13 "Direct link to heading")
 
 - Add new stream hostname `wss://stream.bybitgeorgia.ge` for Georgia users
 
@@ -494,7 +501,7 @@ On this page
 - [Get Position Info](/docs/v5/position) \[UPDATE\]
   - Add new response fields: `positionIMByMp`,`positionMMByMp`
 
-### Websocket API[​](#websocket-api-13 "Direct link to heading")
+### Websocket API[​](#websocket-api-14 "Direct link to heading")
 
 - [Wallet](/docs/v5/websocket/private/wallet) \[UPDATE\]
   - Add new fields:
@@ -513,7 +520,7 @@ On this page
 - [Get Transaction Log (UTA)](/docs/v5/account/transaction-log) \[UPDATE\]
   - Add new enum "GST" for `extraFees` field for Indian GST tax
 
-### Websocket API[​](#websocket-api-14 "Direct link to heading")
+### Websocket API[​](#websocket-api-15 "Direct link to heading")
 
 - [Execution](/docs/v5/websocket/private/execution) \[UPDATE\]
   - Add `extraFees` for Indian GST tax
@@ -530,7 +537,7 @@ On this page
 - [Get Trade History](/docs/v5/order/execution) \[UPDATED\]
   - Add `execFeeV2` for FutureSpread Spot leg trading fee only
 
-### Websocket API[​](#websocket-api-15 "Direct link to heading")
+### Websocket API[​](#websocket-api-16 "Direct link to heading")
 
 - [Spread Execution](/docs/v5/spread/websocket/private/execution) \[UPDATE\]
   - Add `execFeeV2` for Spot leg trading fee
@@ -564,7 +571,7 @@ On this page
 - [Get Order Price Limit](/docs/v5/market/order-price-limit) \[NEW\]
   - Add new endpoint which is used to get order price limit
 
-### WebSocket API[​](#websocket-api-16 "Direct link to heading")
+### WebSocket API[​](#websocket-api-17 "Direct link to heading")
 
 - [Order Price Limit](/docs/v5/websocket/public/order-price-limit) \[NEW\]
   - Add new websocket topic "priceLimit" which is used to get order price limit
@@ -726,7 +733,7 @@ On this page
   & Futures\]
   - Add a new response field `isRPITrade`
 
-### Websocket API[​](#websocket-api-17 "Direct link to heading")
+### Websocket API[​](#websocket-api-18 "Direct link to heading")
 
 - [Websocket Trade Service](/docs/v5/websocket/trade/guideline)\[Perpetual &
   Futures\]
@@ -739,7 +746,7 @@ On this page
 
 ## 2025-03-20[​](#2025-03-20 "Direct link to heading")
 
-### WebSocket API[​](#websocket-api-18 "Direct link to heading")
+### WebSocket API[​](#websocket-api-19 "Direct link to heading")
 
 - [Orderbook](/docs/v5/websocket/public/orderbook) \[UPDATE\]
   - Spot and Futures orderbook.1 pushes snapshot message only
@@ -768,7 +775,7 @@ On this page
   - Add a new response param `slippageToleranceType`
   - Add a new response param `slippageTolerance`
 
-### Websocket API[​](#websocket-api-19 "Direct link to heading")
+### Websocket API[​](#websocket-api-20 "Direct link to heading")
 
 - [Order](/docs/v5/websocket/private/order) \[UPDATE\]
   - Add a new response param `slippageToleranceType`
@@ -776,7 +783,7 @@ On this page
 
 ## 2025-02-26[​](#2025-02-26 "Direct link to heading")
 
-### Websocket API[​](#websocket-api-20 "Direct link to heading")
+### Websocket API[​](#websocket-api-21 "Direct link to heading")
 
 - [Websocket Trade Service](/docs/v5/websocket/trade/guideline)\[UPDATE\]
   - Add a new response field `retExtInfo` in each
@@ -795,7 +802,7 @@ On this page
   - [Get Stake/Redeem Order History](/docs/v5/earn/order-history)
   - [Get Staked Position](/docs/v5/earn/position)
 
-### Websocket API[​](#websocket-api-21 "Direct link to heading")
+### Websocket API[​](#websocket-api-22 "Direct link to heading")
 
 - [All Liquidation](/docs/v5/websocket/public/all-liquidation) \[NEW\]
   - A new topic to get full liquidation occurred in Bybit exchange.
@@ -838,7 +845,7 @@ On this page
 - [Get Public Recent Trading History](/docs/v5/market/recent-trade) \[Spot\]
   - Add a new response field `isRPITrade`
 
-### Websocket API[​](#websocket-api-22 "Direct link to heading")
+### Websocket API[​](#websocket-api-23 "Direct link to heading")
 
 - [Websocket Trade Service](/docs/v5/websocket/trade/guideline)\[Spot\]
   - "timeInForce" request parameter supports `RPI` when creating orders
@@ -930,7 +937,7 @@ On this page
 - [Get Exchange Broker Earning](/docs/v5/broker/exchange-earning) \[UPDATE\]
   - Add a new response field `execId`
 
-### Websocket API[​](#websocket-api-23 "Direct link to heading")
+### Websocket API[​](#websocket-api-24 "Direct link to heading")
 
 - [Wallet](/docs/v5/websocket/private/wallet) \[UPDATE\]
   - For accountType=`UNIFIED`, the response field `availableToWithdraw` is
@@ -1000,7 +1007,7 @@ On this page
 
 ## 2024-10-15[​](#2024-10-15 "Direct link to heading")
 
-### Websocket API[​](#websocket-api-24 "Direct link to heading")
+### Websocket API[​](#websocket-api-25 "Direct link to heading")
 
 - Add websocket domain `stream.bybit-tr.com` for the users registered from
   "[www.bybit-tr.com"](http://www.bybit-tr.com%22). For these users, now you can
@@ -1016,7 +1023,7 @@ On this page
 
 ## 2024-09-29[​](#2024-09-29 "Direct link to heading")
 
-### Websocket API[​](#websocket-api-25 "Direct link to heading")
+### Websocket API[​](#websocket-api-26 "Direct link to heading")
 
 - [Order](/docs/v5/websocket/private/order) \[UPDATE\]
   - Add new response field `closedPnl`
@@ -1078,7 +1085,7 @@ On this page
 
 ## 2024-07-30[​](#2024-07-30 "Direct link to heading")
 
-### Websocket API[​](#websocket-api-26 "Direct link to heading")
+### Websocket API[​](#websocket-api-27 "Direct link to heading")
 
 - [Fast Execution](/docs/v5/websocket/private/fast-execution) \[UPDATE\]
   - Add response field `isMaker`
@@ -1095,7 +1102,7 @@ On this page
 
 ## 2024-07-09[​](#2024-07-09 "Direct link to heading")
 
-### Websocket API[​](#websocket-api-27 "Direct link to heading")
+### Websocket API[​](#websocket-api-28 "Direct link to heading")
 
 - [Fast Execution](/docs/v5/websocket/private/fast-execution) \[UPDATE\]
   - Add categorised topic, `execution.fast.linear`, `execution.fast.inverse`
@@ -1159,7 +1166,7 @@ On this page
   - `3200419`: Unable to switch to Portfolio margin due to active pre-market
     Perpetual orders and positions
 
-### Websocket API[​](#websocket-api-28 "Direct link to heading")
+### Websocket API[​](#websocket-api-29 "Direct link to heading")
 
 - [Tickers](/docs/v5/websocket/public/ticker) \[UPDATE\]
   - Pre-market contract: add new response fields `preOpenPrice`, `preQty`,
@@ -1187,7 +1194,7 @@ On this page
 - [Get DCP Info](/docs/v5/account/dcp-info) \[NEW\]
   - Add a new API used to query dcp config data
 
-### Websocket API[​](#websocket-api-29 "Direct link to heading")
+### Websocket API[​](#websocket-api-30 "Direct link to heading")
 
 - [Dcp](/docs/v5/websocket/private/dcp) \[UPDATE\]
   - Deprecate the topic name `dcp`
@@ -1195,7 +1202,7 @@ On this page
 
 ## 2024-06-14[​](#2024-06-14 "Direct link to heading")
 
-### Websocket API[​](#websocket-api-30 "Direct link to heading")
+### Websocket API[​](#websocket-api-31 "Direct link to heading")
 
 - [Fast Execution](/docs/v5/websocket/private/fast-execution) \[UPDATE\]
   - `orderLinkId` will be also output for a maker trade, but the value will be
@@ -1216,7 +1223,7 @@ On this page
 - [Get Affiliate User Info](/docs/v5/affiliate/affiliate-info) \[UPDATE\]
   - Add a new response field `KycLevel`
 
-### Websocket API[​](#websocket-api-31 "Direct link to heading")
+### Websocket API[​](#websocket-api-32 "Direct link to heading")
 
 - [Fast Execution](/docs/v5/websocket/private/fast-execution) \[NEW\]
   - Provide a lower latency execution event
@@ -1261,7 +1268,7 @@ On this page
 
 ## 2024-05-06[​](#2024-05-06 "Direct link to heading")
 
-### Websocket API[​](#websocket-api-32 "Direct link to heading")
+### Websocket API[​](#websocket-api-33 "Direct link to heading")
 
 - [Websocket Trade Guideline](/docs/v5/websocket/trade/guideline#url) \[UPDATE\]
   - The websocket order entry feature is officially launched on 06/May/2024 8AM
@@ -1298,7 +1305,7 @@ On this page
   - When `startTime` & `endTime` are not passed together, API returns 30 days data by default
   ```
 
-### Websocket API[​](#websocket-api-33 "Direct link to heading")
+### Websocket API[​](#websocket-api-34 "Direct link to heading")
 
 - [Websocket Trade Guideline](/docs/v5/websocket/trade/guideline#request-parameters-1)
   \[UPDATE\]
@@ -1338,14 +1345,14 @@ On this page
 - [Get Sub UID List (Limited)](/docs/v5/user/subuid-list) \[UPDATE\]
   - Return up to 10k sub accounts
 
-### Websocket API[​](#websocket-api-34 "Direct link to heading")
+### Websocket API[​](#websocket-api-35 "Direct link to heading")
 
 - [Websocket Trade Guideline](/docs/v5/websocket/trade/guideline#url) \[UPDATE\]
   - URL uses `wss` as prefix
 
 ## 2024-03-28[​](#2024-03-28 "Direct link to heading")
 
-### Websocket API[​](#websocket-api-35 "Direct link to heading")
+### Websocket API[​](#websocket-api-36 "Direct link to heading")
 
 - [Websocket Trade Guideline](/docs/v5/websocket/trade/guideline#request-parameters-1)
   \[UPDATE\]
@@ -1413,7 +1420,7 @@ On this page
   - `cumRealisedPnl` is deprecated for Option
   - Add new response fields `delta`, `vega`, `theta`, `gamma` for Option
 
-### Websocket API[​](#websocket-api-36 "Direct link to heading")
+### Websocket API[​](#websocket-api-37 "Direct link to heading")
 
 - [Position](/docs/v5/websocket/private/position) \[UPDATE\]
   - Add new response field `sessionAvgPrice` for USDC contracts
@@ -1428,7 +1435,7 @@ On this page
 - [Get Public Recent Trading History](/docs/v5/market/recent-trade)
   - Add new response fields for Option only. `mP`, `iP`, `mIv`, `iv`
 
-### Websocket API[​](#websocket-api-37 "Direct link to heading")
+### Websocket API[​](#websocket-api-38 "Direct link to heading")
 
 - [Trade](/docs/v5/websocket/public/trade)
   - Add new stream fields for Option only. `mP`, `iP`, `mIv`, `iv`
@@ -1538,7 +1545,7 @@ On this page
   - Add new enum "BidirectionalTpslOrder" for `orderFilter`
   - Add new enum "BidirectionalTpslOrder" for `stopOrderType`
 
-### Websocket API[​](#websocket-api-38 "Direct link to heading")
+### Websocket API[​](#websocket-api-39 "Direct link to heading")
 
 - [Order](/docs/v5/websocket/private/order) \[UPDATE\]
   - Add new enum "BidirectionalTpslOrder" for `stopOrderType`
@@ -1608,7 +1615,7 @@ On this page
 - [Get Order History](/docs/v5/order/order-list) \[UPDATE\]
   - Add a new response param `marketUnit`
 
-### Websocket API[​](#websocket-api-39 "Direct link to heading")
+### Websocket API[​](#websocket-api-40 "Direct link to heading")
 
 - [Order](/docs/v5/websocket/private/order) \[UPDATE\]
   - Add a new response param `marketUnit`
@@ -1623,7 +1630,7 @@ On this page
 
 ## 2023-12-14[​](#2023-12-14 "Direct link to heading")
 
-### Websocket API[​](#websocket-api-40 "Direct link to heading")
+### Websocket API[​](#websocket-api-41 "Direct link to heading")
 
 - [Orderbook](/docs/v5/websocket/public/orderbook) \[UPDATE\]
   - Add a new field `cts`
@@ -1641,7 +1648,7 @@ On this page
 - [Get SMP Group ID](/docs/v5/account/smp-group) \[NEW\]
   - Add a new endpoint to get smp group ID
 
-### Websocket API[​](#websocket-api-41 "Direct link to heading")
+### Websocket API[​](#websocket-api-42 "Direct link to heading")
 
 - [Order](/docs/v5/websocket/private/order) \[UPDATE\]
   - Add a response field `createType`
@@ -1679,7 +1686,7 @@ On this page
 - [Get Account Info](/docs/v5/account/account-info) \[UPDATE\]
   - Add a new response field `spotHedgingStatus`
 
-### Websocket API[​](#websocket-api-42 "Direct link to heading")
+### Websocket API[​](#websocket-api-43 "Direct link to heading")
 
 - [Wallet](/docs/v5/websocket/private/wallet) \[UPDATE\]
   - Add a new response field `spotHedgingQty`
@@ -1764,7 +1771,7 @@ On this page
   - UTA Spot: add new response field `ocoTriggerBy`, and the value can be
     `OcoTriggerByUnknown`, `OcoTriggerByTp`, `OcoTriggerBySl`
 
-### Websocket API[​](#websocket-api-43 "Direct link to heading")
+### Websocket API[​](#websocket-api-44 "Direct link to heading")
 
 - [Order](/docs/v5/websocket/private/order) \[UPDATE\]
   - UTA Spot: add new response field `ocoTriggerBy`, and the value can be
@@ -1780,7 +1787,7 @@ On this page
 - [Confirm New Risk Limit](/docs/v5/position/confirm-mmr) \[NEW\]
   - Add a new endpoint
 
-### Websocket API[​](#websocket-api-44 "Direct link to heading")
+### Websocket API[​](#websocket-api-45 "Direct link to heading")
 
 - [Position](/docs/v5/websocket/private/position) \[UPDATE\]
   - Add response field `isReduceOnly`, `mmrSysUpdatedTime`,
@@ -1798,7 +1805,7 @@ On this page
 
 ## 2023-10-09[​](#2023-10-09 "Direct link to heading")
 
-### Websocket API[​](#websocket-api-45 "Direct link to heading")
+### Websocket API[​](#websocket-api-46 "Direct link to heading")
 
 - [Orderbook](/docs/v5/websocket/public/orderbook) \[Spot\]
   - Add a new level 200 data with frequency 200ms
@@ -1830,7 +1837,7 @@ On this page
   - `type` has new enumeration values: `SPOT_REPAYMENT_SELL`,
     `SPOT_REPAYMENT_BUY` (Unified Trading Account)
 
-### Websocket API[​](#websocket-api-46 "Direct link to heading")
+### Websocket API[​](#websocket-api-47 "Direct link to heading")
 
 - [Order](/docs/v5/websocket/private/order) \[UPDATE\]
   - `stopOrderType` has new enumeration value: `OcoOrder`, used to indicate the
@@ -1854,7 +1861,7 @@ On this page
     interest-free borrowing. If the unrealized loss portion exceeds this limit,
     all borrowings will be subject to interest.
 
-### WebSocket API[​](#websocket-api-47 "Direct link to heading")
+### WebSocket API[​](#websocket-api-48 "Direct link to heading")
 
 - [Position](/docs/v5/websocket/private/position) \[UPDATE\]
   - Add response field `seq`
@@ -2019,7 +2026,7 @@ On this page
   - Add new response field `borrowUsageRate`
   - `availableToBorrow` is a shared value across main-sub uids
 
-### Websocket API[​](#websocket-api-48 "Direct link to heading")
+### Websocket API[​](#websocket-api-49 "Direct link to heading")
 
 - [Wallet](/docs/v5/websocket/private/wallet) \[UPDATE\]
   - `availableToBorrow` always returns `""` because main-sub uids share borrow
@@ -2067,7 +2074,7 @@ On this page
     `StopOrder`, stopOrderType reuses `Stop` for Futures and Spot conditional
     order
 
-### Websocket API[​](#websocket-api-49 "Direct link to heading")
+### Websocket API[​](#websocket-api-50 "Direct link to heading")
 
 - [Order](/docs/v5/websocket/private/order) \[UPDATE\]
   - stopOrderType reuses `Stop` for Futures and Spot conditional order
@@ -2088,7 +2095,7 @@ On this page
 - [Get Wallet Balance](/docs/v5/account/wallet-balance)
   - Add new response field `collateralSwitch`
 
-### WebSocket API[​](#websocket-api-50 "Direct link to heading")
+### WebSocket API[​](#websocket-api-51 "Direct link to heading")
 
 - [Position](/docs/v5/websocket/private/position)
   - Adjust `liqPrice` value logic. It only has value when
@@ -2159,7 +2166,7 @@ On this page
 
 ## 2023-06-26[​](#2023-06-26 "Direct link to heading")
 
-### WebSocket API[​](#websocket-api-51 "Direct link to heading")
+### WebSocket API[​](#websocket-api-52 "Direct link to heading")
 
 - [Orderbook](/docs/v5/websocket/public/orderbook) \[Spot\]
   - Improve the push frequency from 100ms to 20ms of level 50
@@ -2245,7 +2252,7 @@ On this page
 - [Add Or Reduce Margin](/docs/v5/position/manual-add-margin) \[UPDATE\]
   - A brand new endpoint is used to add or reduce specific margin you want
 
-### WebSocket API[​](#websocket-api-52 "Direct link to heading")
+### WebSocket API[​](#websocket-api-53 "Direct link to heading")
 
 - [Position](/docs/v5/websocket/private/position) \[UPDATE\]
   - Add new response param `positionBalance`
@@ -2279,7 +2286,7 @@ On this page
   - Add new request params for new TP/SL `tpslMode`, `tpLimitPrice`,
     `slLimitPrice`, `tpOrderType`, `slOrderType`
 
-### WebSocket API[​](#websocket-api-53 "Direct link to heading")
+### WebSocket API[​](#websocket-api-54 "Direct link to heading")
 
 - [Position](/docs/v5/websocket/private/position) \[UPDATE\]
   - `tpslMode` in the position is deprecated
@@ -2332,7 +2339,7 @@ On this page
 - [Get Account Info](/docs/v5/account/account-info) \[UPDATE\]
   - add new response fields `dcpStatus`, `timeWindow`, `smpGroup`
 
-### WebSocket API[​](#websocket-api-54 "Direct link to heading")
+### WebSocket API[​](#websocket-api-55 "Direct link to heading")
 
 - [Order](/docs/v5/websocket/private/order) \[UPDATE\]
   - add new response fields `smpType`, `smpOrderId`, `smpGroup`
@@ -2365,7 +2372,7 @@ On this page
 - [Get Position Info](/docs/v5/position) \[UPDATE\]
   - add response param `adlRankIndicator`
 
-### WebSocket API[​](#websocket-api-55 "Direct link to heading")
+### WebSocket API[​](#websocket-api-56 "Direct link to heading")
 
 - [Position](/docs/v5/websocket/private/position) \[UPDATE\]
   - add response param `adlRankIndicator`
@@ -2396,7 +2403,7 @@ On this page
   \[UPDATE\]
   - Support to use Sub acct api key to request
 
-### WebSocket API[​](#websocket-api-56 "Direct link to heading")
+### WebSocket API[​](#websocket-api-57 "Direct link to heading")
 
 - [Wallet](/docs/v5/websocket/private/wallet) \[UPDATE\]
   - Add a new response field `accountLTV`
@@ -2464,7 +2471,7 @@ On this page
   \[NEW\]
   - New api to get internal deposit on Bybit platform
 
-### WebSocket API[​](#websocket-api-57 "Direct link to heading")
+### WebSocket API[​](#websocket-api-58 "Direct link to heading")
 
 - [Wallet](/docs/v5/websocket/private/wallet) \[UPDATE\]
   - Add a new field `bonus`
@@ -2537,7 +2544,7 @@ On this page
   - For portfolio margin mode, `totalOrderIM`, `totalPositionIM`,
     `totoalPositionMM` returns ""
 
-### WebSocket API[​](#websocket-api-58 "Direct link to heading")
+### WebSocket API[​](#websocket-api-59 "Direct link to heading")
 
 - [Position](/docs/v5/websocket/private/position) \[UPDATE\]
   - For portfolio margin mode, `positionIM`, `positionMM`, `leverage`,
@@ -2554,7 +2561,7 @@ On this page
   - `usdIndexPrice` has been added to response. It means USD index price, which
     can be empty.
 
-### WebSocket API[​](#websocket-api-59 "Direct link to heading")
+### WebSocket API[​](#websocket-api-60 "Direct link to heading")
 
 - [Tickers](/docs/v5/websocket/public/ticker) \[spot\]
   - `usdIndexPrice` has been added to stream. It means USD index price, which
@@ -2565,7 +2572,7 @@ On this page
 
 ## 2023-01-09[​](#2023-01-09 "Direct link to heading")
 
-### WebSocket API[​](#websocket-api-60 "Direct link to heading")
+### WebSocket API[​](#websocket-api-61 "Direct link to heading")
 
 - [Tickers](/docs/v5/websocket/public/ticker) \[linear contract & inverse
   contract\]
@@ -2573,6 +2580,8 @@ On this page
     timestamp (ms) `1672905600000`
   - `predicatedFundingRate` has been removed from stream
 
+- [2025-11-25](#2025-11-25)
+  - [Websocket API](#websocket-api)
 - [2025-11-17](#2025-11-17)
   - [REST API](#rest-api)
 - [2025-11-13](#2025-11-13)
@@ -2581,7 +2590,7 @@ On this page
   - [REST API](#rest-api-2)
 - [2025-11-04](#2025-11-04)
   - [REST API](#rest-api-3)
-  - [Websocket API](#websocket-api)
+  - [Websocket API](#websocket-api-1)
 - [2025-11-03](#2025-11-03)
   - [REST API](#rest-api-4)
 - [2025-10-23](#2025-10-23)
@@ -2590,10 +2599,10 @@ On this page
   - [REST API](#rest-api-6)
 - [2025-10-21](#2025-10-21)
   - [REST API](#rest-api-7)
-  - [WebSocket API](#websocket-api-1)
+  - [WebSocket API](#websocket-api-2)
 - [2025-10-16](#2025-10-16)
   - [REST API](#rest-api-8)
-  - [WebSocket API](#websocket-api-2)
+  - [WebSocket API](#websocket-api-3)
 - [2025-10-14](#2025-10-14)
   - [REST API](#rest-api-9)
 - [2025-10-10](#2025-10-10)
@@ -2608,17 +2617,17 @@ On this page
   - [REST API](#rest-api-14)
 - [2025-09-23](#2025-09-23)
   - [REST API](#rest-api-15)
-  - [WebSocket API](#websocket-api-3)
+  - [WebSocket API](#websocket-api-4)
 - [2025-09-18](#2025-09-18)
   - [REST API](#rest-api-16)
-  - [WebSocket API](#websocket-api-4)
+  - [WebSocket API](#websocket-api-5)
 - [2025-09-16](#2025-09-16)
   - [REST API](#rest-api-17)
-  - [WebSocket API](#websocket-api-5)
+  - [WebSocket API](#websocket-api-6)
 - [2025-09-15](#2025-09-15)
   - [REST API](#rest-api-18)
 - [2025-09-11](#2025-09-11)
-  - [WebSocket API](#websocket-api-6)
+  - [WebSocket API](#websocket-api-7)
 - [2025-09-09](#2025-09-09)
   - [REST API](#rest-api-19)
 - [2025-09-08](#2025-09-08)
@@ -2630,7 +2639,7 @@ On this page
 - [2025-08-26](#2025-08-26)
   - [REST API](#rest-api-23)
 - [2025-08-14](#2025-08-14)
-  - [WebSocket API](#websocket-api-7)
+  - [WebSocket API](#websocket-api-8)
 - [2025-08-13](#2025-08-13)
   - [REST API](#rest-api-24)
 - [2025-08-07](#2025-08-07)
@@ -2638,40 +2647,40 @@ On this page
 - [2025-08-06](#2025-08-06)
   - [REST API](#rest-api-26)
 - [2025-08-05](#2025-08-05)
-  - [Websocket API](#websocket-api-8)
+  - [Websocket API](#websocket-api-9)
 - [2025-07-31](#2025-07-31)
   - [REST API](#rest-api-27)
 - [2025-07-25](#2025-07-25)
   - [REST API](#rest-api-28)
 - [2025-07-22](#2025-07-22)
   - [REST API](#rest-api-29)
-  - [Websocket API](#websocket-api-9)
+  - [Websocket API](#websocket-api-10)
 - [2025-07-17](#2025-07-17)
   - [REST API](#rest-api-30)
 - [2025-07-16](#2025-07-16)
   - [REST API](#rest-api-31)
 - [2025-07-15](#2025-07-15)
-  - [Websocket API](#websocket-api-10)
+  - [Websocket API](#websocket-api-11)
 - [2025-07-08](#2025-07-08)
   - [REST API](#rest-api-32)
-  - [Websocket API](#websocket-api-11)
+  - [Websocket API](#websocket-api-12)
 - [2025-07-04](#2025-07-04)
   - [REST API](#rest-api-33)
-  - [Websocket API](#websocket-api-12)
+  - [Websocket API](#websocket-api-13)
 - [2025-07-03](#2025-07-03)
   - [REST API](#rest-api-34)
-  - [Websocket API](#websocket-api-13)
+  - [Websocket API](#websocket-api-14)
 - [2025-06-30](#2025-06-30)
   - [REST API](#rest-api-35)
-  - [Websocket API](#websocket-api-14)
+  - [Websocket API](#websocket-api-15)
 - [2025-06-26](#2025-06-26)
   - [REST API](#rest-api-36)
-  - [Websocket API](#websocket-api-15)
+  - [Websocket API](#websocket-api-16)
 - [2025-06-24](#2025-06-24)
   - [REST API](#rest-api-37)
 - [2025-06-19](#2025-06-19)
   - [REST API](#rest-api-38)
-  - [WebSocket API](#websocket-api-16)
+  - [WebSocket API](#websocket-api-17)
 - [2025-06-12](#2025-06-12)
   - [REST API](#rest-api-39)
 - [2025-06-10](#2025-06-10)
@@ -2700,24 +2709,24 @@ On this page
   - [REST API](#rest-api-51)
 - [2025-04-01](#2025-04-01)
   - [REST API](#rest-api-52)
-  - [Websocket API](#websocket-api-17)
+  - [Websocket API](#websocket-api-18)
 - [2025-03-20](#2025-03-20)
-  - [WebSocket API](#websocket-api-18)
+  - [WebSocket API](#websocket-api-19)
 - [2025-03-05](#2025-03-05)
   - [REST API](#rest-api-53)
 - [2025-02-27](#2025-02-27)
   - [REST API](#rest-api-54)
-  - [Websocket API](#websocket-api-19)
-- [2025-02-26](#2025-02-26)
   - [Websocket API](#websocket-api-20)
+- [2025-02-26](#2025-02-26)
+  - [Websocket API](#websocket-api-21)
 - [2025-02-20](#2025-02-20)
   - [REST API](#rest-api-55)
-  - [Websocket API](#websocket-api-21)
+  - [Websocket API](#websocket-api-22)
 - [2025-02-19](#2025-02-19)
   - [REST API](#rest-api-56)
 - [2025-02-18](#2025-02-18)
   - [REST API](#rest-api-57)
-  - [Websocket API](#websocket-api-22)
+  - [Websocket API](#websocket-api-23)
 - [2025-02-17](#2025-02-17)
   - [REST API](#rest-api-58)
 - [2025-02-13](#2025-02-13)
@@ -2728,7 +2737,7 @@ On this page
   - [REST API](#rest-api-61)
 - [2025-01-09](#2025-01-09)
   - [REST API](#rest-api-62)
-  - [Websocket API](#websocket-api-23)
+  - [Websocket API](#websocket-api-24)
 - [2025-01-02](#2025-01-02)
   - [REST API](#rest-api-63)
 - [2024-12-12](#2024-12-12)
@@ -2745,11 +2754,11 @@ On this page
 - [2024-10-30](#2024-10-30)
   - [REST API](#rest-api-69)
 - [2024-10-15](#2024-10-15)
-  - [Websocket API](#websocket-api-24)
+  - [Websocket API](#websocket-api-25)
 - [2024-10-11](#2024-10-11)
   - [REST API](#rest-api-70)
 - [2024-09-29](#2024-09-29)
-  - [Websocket API](#websocket-api-25)
+  - [Websocket API](#websocket-api-26)
 - [2024-09-12](#2024-09-12)
   - [REST API](#rest-api-71)
 - [2024-08-29](#2024-08-29)
@@ -2761,30 +2770,30 @@ On this page
 - [2024-08-06](#2024-08-06)
   - [REST API](#rest-api-75)
 - [2024-07-30](#2024-07-30)
-  - [Websocket API](#websocket-api-26)
+  - [Websocket API](#websocket-api-27)
 - [2024-07-25](#2024-07-25)
   - [REST API](#rest-api-76)
 - [2024-07-09](#2024-07-09)
-  - [Websocket API](#websocket-api-27)
+  - [Websocket API](#websocket-api-28)
 - [2024-07-04](#2024-07-04)
   - [REST API](#rest-api-77)
 - [2024-07-03](#2024-07-03)
 - [2024-07-01](#2024-07-01)
 - [2024-06-27](#2024-06-27)
   - [REST API](#rest-api-78)
-  - [Websocket API](#websocket-api-28)
+  - [Websocket API](#websocket-api-29)
 - [2024-06-20](#2024-06-20)
   - [REST API](#rest-api-79)
 - [2024-06-18](#2024-06-18)
   - [REST API](#rest-api-80)
-  - [Websocket API](#websocket-api-29)
-- [2024-06-14](#2024-06-14)
   - [Websocket API](#websocket-api-30)
+- [2024-06-14](#2024-06-14)
+  - [Websocket API](#websocket-api-31)
 - [2024-06-13](#2024-06-13)
   - [REST API](#rest-api-81)
 - [2024-06-06](#2024-06-06)
   - [REST API](#rest-api-82)
-  - [Websocket API](#websocket-api-31)
+  - [Websocket API](#websocket-api-32)
 - [2024-06-04](#2024-06-04)
   - [REST API](#rest-api-83)
 - [2024-05-30](#2024-05-30)
@@ -2792,12 +2801,12 @@ On this page
 - [2024-05-09](#2024-05-09)
   - [REST API](#rest-api-85)
 - [2024-05-06](#2024-05-06)
-  - [Websocket API](#websocket-api-32)
+  - [Websocket API](#websocket-api-33)
 - [2024-04-25](#2024-04-25)
   - [REST API](#rest-api-86)
 - [2024-04-23](#2024-04-23)
   - [REST API](#rest-api-87)
-  - [Websocket API](#websocket-api-33)
+  - [Websocket API](#websocket-api-34)
 - [2024-04-15](#2024-04-15)
   - [REST API](#rest-api-88)
 - [2024-04-11](#2024-04-11)
@@ -2806,9 +2815,9 @@ On this page
   - [REST API](#rest-api-90)
 - [2024-04-01](#2024-04-01)
   - [REST API](#rest-api-91)
-  - [Websocket API](#websocket-api-34)
-- [2024-03-28](#2024-03-28)
   - [Websocket API](#websocket-api-35)
+- [2024-03-28](#2024-03-28)
+  - [Websocket API](#websocket-api-36)
 - [2024-03-22](#2024-03-22)
 - [2024-03-21](#2024-03-21)
 - [2024-03-13](#2024-03-13)
@@ -2821,10 +2830,10 @@ On this page
   - [REST API](#rest-api-95)
 - [2024-03-05](#2024-03-05)
   - [REST API](#rest-api-96)
-  - [Websocket API](#websocket-api-36)
+  - [Websocket API](#websocket-api-37)
 - [2024-03-04](#2024-03-04)
   - [REST API](#rest-api-97)
-  - [Websocket API](#websocket-api-37)
+  - [Websocket API](#websocket-api-38)
 - [2024-03-01](#2024-03-01)
   - [REST API](#rest-api-98)
 - [2024-02-29](#2024-02-29)
@@ -2843,7 +2852,7 @@ On this page
   - [REST API](#rest-api-105)
 - [2024-01-15](#2024-01-15)
   - [REST API](#rest-api-106)
-  - [Websocket API](#websocket-api-38)
+  - [Websocket API](#websocket-api-39)
 - [2024-01-11](#2024-01-11)
   - [REST API](#rest-api-107)
 - [2024-01-09](#2024-01-09)
@@ -2856,21 +2865,21 @@ On this page
   - [REST API](#rest-api-111)
 - [2023-12-22](#2023-12-22)
   - [REST API](#rest-api-112)
-  - [Websocket API](#websocket-api-39)
+  - [Websocket API](#websocket-api-40)
 - [2023-12-20](#2023-12-20)
   - [REST API](#rest-api-113)
 - [2023-12-14](#2023-12-14)
-  - [Websocket API](#websocket-api-40)
+  - [Websocket API](#websocket-api-41)
 - [2023-12-12](#2023-12-12)
   - [REST API](#rest-api-114)
-  - [Websocket API](#websocket-api-41)
+  - [Websocket API](#websocket-api-42)
 - [2023-12-07](#2023-12-07)
   - [REST API](#rest-api-115)
 - [2023-12-04](#2023-12-04)
   - [REST API](#rest-api-116)
 - [2023-11-16](#2023-11-16)
   - [REST API](#rest-api-117)
-  - [Websocket API](#websocket-api-42)
+  - [Websocket API](#websocket-api-43)
 - [2023-11-14](#2023-11-14)
   - [REST API](#rest-api-118)
 - [2023-11-09](#2023-11-09)
@@ -2883,22 +2892,22 @@ On this page
   - [REST API](#rest-api-122)
 - [2023-10-26](#2023-10-26)
   - [REST API](#rest-api-123)
-  - [Websocket API](#websocket-api-43)
+  - [Websocket API](#websocket-api-44)
 - [2023-10-25](#2023-10-25)
   - [REST API](#rest-api-124)
-  - [Websocket API](#websocket-api-44)
+  - [Websocket API](#websocket-api-45)
 - [2023-10-17](#2023-10-17)
   - [REST API](#rest-api-125)
 - [2023-10-09](#2023-10-09)
-  - [Websocket API](#websocket-api-45)
+  - [Websocket API](#websocket-api-46)
 - [2023-09-28](#2023-09-28)
   - [REST API](#rest-api-126)
 - [2023-09-25](#2023-09-25)
   - [REST API](#rest-api-127)
-  - [Websocket API](#websocket-api-46)
+  - [Websocket API](#websocket-api-47)
 - [2023-09-21](#2023-09-21)
   - [REST API](#rest-api-128)
-  - [WebSocket API](#websocket-api-47)
+  - [WebSocket API](#websocket-api-48)
 - [2023-09-18](#2023-09-18)
   - [REST API](#rest-api-129)
 - [2023-09-14](#2023-09-14)
@@ -2921,17 +2930,17 @@ On this page
   - [REST API](#rest-api-138)
 - [2023-08-11](#2023-08-11)
   - [REST API](#rest-api-139)
-  - [Websocket API](#websocket-api-48)
+  - [Websocket API](#websocket-api-49)
 - [2023-08-10](#2023-08-10)
   - [REST API](#rest-api-140)
 - [2023-08-08](#2023-08-08)
   - [REST API](#rest-api-141)
 - [2023-08-07](#2023-08-07)
   - [REST API](#rest-api-142)
-  - [Websocket API](#websocket-api-49)
+  - [Websocket API](#websocket-api-50)
 - [2023-07-31](#2023-07-31)
   - [REST API](#rest-api-143)
-  - [WebSocket API](#websocket-api-50)
+  - [WebSocket API](#websocket-api-51)
 - [2023-07-24](#2023-07-24)
   - [REST API](#rest-api-144)
 - [2023-07-13](#2023-07-13)
@@ -2939,7 +2948,7 @@ On this page
 - [2023-07-04](#2023-07-04)
   - [REST API](#rest-api-146)
 - [2023-06-26](#2023-06-26)
-  - [WebSocket API](#websocket-api-51)
+  - [WebSocket API](#websocket-api-52)
 - [2023-06-24](#2023-06-24)
   - [REST API](#rest-api-147)
 - [2023-06-15](#2023-06-15)
@@ -2954,12 +2963,12 @@ On this page
   - [REST API](#rest-api-152)
 - [2023-06-01](#2023-06-01)
   - [REST API](#rest-api-153)
-  - [WebSocket API](#websocket-api-52)
+  - [WebSocket API](#websocket-api-53)
 - [2023-05-30](#2023-05-30)
   - [REST API](#rest-api-154)
 - [2023-05-23](#2023-05-23)
   - [REST API](#rest-api-155)
-  - [WebSocket API](#websocket-api-53)
+  - [WebSocket API](#websocket-api-54)
 - [2023-05-10](#2023-05-10)
   - [REST API](#rest-api-156)
 - [2023-05-05](#2023-05-05)
@@ -2968,19 +2977,19 @@ On this page
   - [REST API](#rest-api-158)
 - [2023-04-20](#2023-04-20)
   - [REST API](#rest-api-159)
-  - [WebSocket API](#websocket-api-54)
+  - [WebSocket API](#websocket-api-55)
 - [2023-04-06](#2023-04-06)
   - [REST API](#rest-api-160)
 - [2023-04-04](#2023-04-04)
   - [REST API](#rest-api-161)
 - [2023-04-04](#2023-04-04-1)
   - [REST API](#rest-api-162)
-  - [WebSocket API](#websocket-api-55)
+  - [WebSocket API](#websocket-api-56)
 - [2023-03-24](#2023-03-24)
   - [REST API](#rest-api-163)
 - [2023-03-23](#2023-03-23)
   - [REST API](#rest-api-164)
-  - [WebSocket API](#websocket-api-56)
+  - [WebSocket API](#websocket-api-57)
 - [2023-03-22](#2023-03-22)
   - [REST API](#rest-api-165)
 - [2023-03-15](#2023-03-15)
@@ -2991,7 +3000,7 @@ On this page
   - [REST API](#rest-api-168)
 - [2023-02-28](#2023-02-28)
   - [REST API](#rest-api-169)
-  - [WebSocket API](#websocket-api-57)
+  - [WebSocket API](#websocket-api-58)
 - [2023-02-20](#2023-02-20)
   - [REST API](#rest-api-170)
 - [2023-02-15](#2023-02-15)
@@ -3002,9 +3011,9 @@ On this page
   - [REST API](#rest-api-173)
 - [2023-01-19](#2023-01-19)
   - [REST API](#rest-api-174)
-  - [WebSocket API](#websocket-api-58)
+  - [WebSocket API](#websocket-api-59)
 - [2023-01-16](#2023-01-16)
   - [REST API](#rest-api-175)
-  - [WebSocket API](#websocket-api-59)
-- [2023-01-09](#2023-01-09)
   - [WebSocket API](#websocket-api-60)
+- [2023-01-09](#2023-01-09)
+  - [WebSocket API](#websocket-api-61)
