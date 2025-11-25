@@ -78,9 +78,8 @@ const extractSectionByMenuPath = async (page, menuPath, description) => {
 
   while (!menuLoaded && retries < maxRetries) {
     try {
-      await page.waitForSelector("ul#sliderMenu.ant-menu", {
-        timeout: 60000,
-        visible: true
+      await page.waitForSelector("ul#sliderMenu", {
+        timeout: 60000
       })
       console.log(`  ✅ Menu loaded successfully`)
       menuLoaded = true
@@ -88,7 +87,7 @@ const extractSectionByMenuPath = async (page, menuPath, description) => {
       retries++
       console.log(`  ⚠️  Menu selector timeout (attempt ${retries}/${maxRetries}) - checking if menu exists anyway...`)
       const menuExists = await page.evaluate(() => {
-        const menu = document.querySelector("ul#sliderMenu.ant-menu")
+        const menu = document.querySelector("ul#sliderMenu")
         if (!menu) {
           // Log what selectors ARE available for debugging
           const allMenus = document.querySelectorAll('ul')
@@ -96,10 +95,11 @@ const extractSectionByMenuPath = async (page, menuPath, description) => {
             exists: false,
             visible: false,
             totalUls: allMenus.length,
-            ulIds: Array.from(allMenus).map(ul => ul.id || 'no-id').slice(0, 10)
+            ulIds: Array.from(allMenus).map(ul => ul.id || 'no-id').slice(0, 10),
+            ulClasses: Array.from(allMenus).map(ul => ul.className || 'no-class').slice(0, 10)
           }
         }
-        return { exists: true, visible: menu.offsetParent !== null }
+        return { exists: true, visible: menu.offsetParent !== null, className: menu.className }
       })
       console.log(`  Menu status:`, menuExists)
 

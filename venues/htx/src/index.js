@@ -54,9 +54,8 @@ async function scrapePageForId(browser, url, ids) {
 
     while (!menuLoaded && retries < maxRetries) {
       try {
-        await page.waitForSelector("ul#sliderMenu.ant-menu", {
-          timeout: 60000,
-          visible: true
+        await page.waitForSelector("ul#sliderMenu", {
+          timeout: 60000
         })
         logger.info("Menu element loaded successfully")
         menuLoaded = true
@@ -64,7 +63,7 @@ async function scrapePageForId(browser, url, ids) {
         retries++
         logger.info(`Menu selector timeout (attempt ${retries}/${maxRetries}) - checking if menu exists anyway...`)
         const menuExists = await page.evaluate(() => {
-          const menu = document.querySelector("ul#sliderMenu.ant-menu")
+          const menu = document.querySelector("ul#sliderMenu")
           if (!menu) {
             // Log what selectors ARE available for debugging
             const allMenus = document.querySelectorAll('ul')
@@ -72,10 +71,11 @@ async function scrapePageForId(browser, url, ids) {
               exists: false,
               visible: false,
               totalUls: allMenus.length,
-              ulIds: Array.from(allMenus).map(ul => ul.id || 'no-id').slice(0, 10)
+              ulIds: Array.from(allMenus).map(ul => ul.id || 'no-id').slice(0, 10),
+              ulClasses: Array.from(allMenus).map(ul => ul.className || 'no-class').slice(0, 10)
             }
           }
-          return { exists: true, visible: menu.offsetParent !== null }
+          return { exists: true, visible: menu.offsetParent !== null, className: menu.className }
         })
         logger.info("Menu status:", menuExists)
 
@@ -263,9 +263,8 @@ async function scrapePageForEndpoint(browser, url) {
 
     while (!menuLoaded && retries < maxRetries) {
       try {
-        await page.waitForSelector("ul#sliderMenu.ant-menu", {
-          timeout: 60000,
-          visible: true
+        await page.waitForSelector("ul#sliderMenu", {
+          timeout: 60000
         })
         logger.info("Menu element loaded successfully")
         menuLoaded = true
@@ -273,7 +272,7 @@ async function scrapePageForEndpoint(browser, url) {
         retries++
         logger.info(`Menu selector timeout (attempt ${retries}/${maxRetries}) - checking if menu exists anyway...`)
         const menuExists = await page.evaluate(() => {
-          const menu = document.querySelector("ul#sliderMenu.ant-menu")
+          const menu = document.querySelector("ul#sliderMenu")
           if (!menu) {
             // Log what selectors ARE available for debugging
             const allMenus = document.querySelectorAll('ul')
@@ -281,10 +280,11 @@ async function scrapePageForEndpoint(browser, url) {
               exists: false,
               visible: false,
               totalUls: allMenus.length,
-              ulIds: Array.from(allMenus).map(ul => ul.id || 'no-id').slice(0, 10)
+              ulIds: Array.from(allMenus).map(ul => ul.id || 'no-id').slice(0, 10),
+              ulClasses: Array.from(allMenus).map(ul => ul.className || 'no-class').slice(0, 10)
             }
           }
-          return { exists: true, visible: menu.offsetParent !== null }
+          return { exists: true, visible: menu.offsetParent !== null, className: menu.className }
         })
         logger.info("Menu status:", menuExists)
 
