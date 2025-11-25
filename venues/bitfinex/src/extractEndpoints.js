@@ -386,6 +386,29 @@ const extractEndpointContent = async (page, endpointUrl, turndownService) => {
       if (line.trim() === 'Language') {
         continue
       }
+
+      // Remove ReadMe.io platform junk - Body Params section
+      if (line.trim() === 'Body Params' ||
+          line.trim() === 'RAW_BODY' ||
+          line.trim() === 'json' ||
+          line.trim().startsWith('Defaults to') ||
+          line.trim() === '{}' ||
+          line.trim() === 'Responses') {
+        continue
+      }
+
+      // Remove malformed curl commands (with escaped dashes)
+      if (line.includes('\\--request') ||
+          line.includes('\\--url') ||
+          line.includes('\\--header') ||
+          line.includes('\\--data')) {
+        continue
+      }
+
+      // Remove "curl" line that precedes malformed curl blocks
+      if (line.trim().match(/^curl\s*(\\)?$/)) {
+        continue
+      }
     }
 
     cleanedLines.push(line)
