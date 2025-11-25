@@ -1,5 +1,26 @@
 # Changelog
 
+## \[November 19, 2025\] New isRwa Field Added to Get Contract Information API Response[​](#november-19-2025-new-isrwa-field-added-to-get-contract-information-api-response "Direct link to november-19-2025-new-isrwa-field-added-to-get-contract-information-api-response")
+
+Interface:
+
+- /api/v2/mix/market/contracts
+
+Changes：
+
+- New `isRwa` Field Added to Get Contract Information API Response
+
+## \[November 8, 2025\] WebSocket has added a new futures equity channel.[​](#november-8-2025-websocket-has-added-a-new-futures-equity-channel "Direct link to november-8-2025-websocket-has-added-a-new-futures-equity-channel")
+
+Websocket: futures equity channel  
+Changes: WebSocket has added a new futures equity channel.
+
+## \[November 8, 2025\] WebSocket Supports Broker API Code[​](#november-8-2025-websocket-supports-broker-api-code "Direct link to november-8-2025-websocket-supports-broker-api-code")
+
+Websocket: place order channel  
+Changes: The order placement channel supports passing the Broker API Code to
+receive rebates.
+
 ## \[November 7, 2025\] Add Maximum Openable Quantity API[​](#november-7-2025-add-maximum-openable-quantity-api "Direct link to november-7-2025-add-maximum-openable-quantity-api")
 
 Interface:
