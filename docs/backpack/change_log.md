@@ -1,5 +1,18 @@
 ## [](#section/Changelog)Changelog
 
+## [](#section/Changelog/2025-11-12)2025-11-12
+
+- Backstop liquidation fills now include a non-zero `tradeId` field on an
+  on-going basis. Previously such fills had a zero `tradeId`. This applies to
+  the `/fills` endpoint as well as the trade stream.
+
+## [](#section/Changelog/2025-11-10)2025-11-10
+
+- Add a specific error message for withdrawal attempts to non-2FA exempt
+  withdrawal addresses.
+- Set a default limit of `1000` levels each side of the book for `/depth`
+  endpoint.
+
 ## [](#section/Changelog/2025-10-23)2025-10-23
 
 - Add `j` and `k` fields to the order update stream (take profit limit price and
