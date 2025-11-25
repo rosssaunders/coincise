@@ -10,10 +10,7 @@ Required (Private Endpoint)
 
 ## Simulated Trading
 
-You can use the API for simulated (paper) trading. Some features—such as
-withdrawals, deposits, subscriptions, and redemptions—are not supported.
-
-Simulation API endpoints:
+Simulation API Domain:
 
 - REST:`https://demo-api-cloud-v2.bitmart.com`
 - WebSocket Public
@@ -21,5 +18,23 @@ Simulation API endpoints:
 - WebSocket Private
   Channel:`wss://openapi-wsdemo-v2.bitmart.com/user?protocol=1.1`
 
-The simulation environment shares the same accounts as the live environment. If
-you already have an account, you can log in directly.
+### Important Notes
+
+#### 1\. **The API keys for the Simulated-Environment and the Prod-Environment are same.**
+
+If you already have an API key, you can directly call the Simulated-Environment
+using its domain. The API paths are the same as in the Prod-Environment.
+
+#### 2\. In the Simulated-Environment, **USDX is represented as USDT in the API**.
+
+For example:
+
+- The trading pair `BTCUSDX` will appear as `BTCUSDT` in the API.
+- When placing orders, please also use `symbol=BTCUSDT`.
+
+#### 3\. The above domain supports **only futures trading** in the Simulated-Environment.
+
+It does **not** support spot trading, withdrawals, deposits, transfers, or any
+other functions.
+
+---
