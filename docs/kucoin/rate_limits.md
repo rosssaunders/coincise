@@ -78,10 +78,10 @@ avoid IP rate limit issues.
 With the exception of **Public** resource pool endpoints, all other resource
 pools are **based on UID**, and the request header will carry the rate limit
 information of the resource pool, such as the remaining rate limit times, rate
-limit cycle time, etc. The rate limits of the sub-account and the master account
-are independent of each other at the API request level; that is to say, if the
-demand for such interface access is relatively large, it can also be solved by
-using the sub-account.
+limit cycle time, etc. The rate limits of theRestriction Dimensionsub-account
+and the master account are independent of each other at the API request level;
+that is to say, if the demand for such interface access is relatively large, it
+can also be solved by using the sub-account.
 
 In addition to the regular rate limit, server overload may also trigger the rate
 limit. After the rate limit, the error code is 429000, but the request header
@@ -97,27 +97,40 @@ send your KuCoin account, reason and approximate trading volume to
 
 ## Websocket Rate Limit[#](#websocket-rate-limit)
 
-### 1\. Number of Connections[#](#1-number-of-connections)
+**1\. Maximum Concurrent Connections**
 
-Number of connections per user ID: ≤ 800
+Limit: ≤ 800 concurrent connections
 
-### 2\. Connection Times[#](#2-connection-times)
+Dimension: Per user ID (UID) for private (authenticated) interfaces; per IP
+address for public (unauthenticated) interfaces
 
-Connection Limit: 30 per minute
+Note: Master and sub-accounts are completely independent (different UIDs)
 
-### 3\. Number of Uplink Messages[#](#3-number-of-uplink-messages)
+**2\. Connection Establishment Rate**
 
-Message limit sent to the server: 100 per 10 seconds
+Limit: 30 connections per minute
 
-### 4\. Topic Subscription Limit[#](#4-topic-subscription-limit)
+Dimension: Per connection (not aggregated by UID or IP)
 
-Maximum number of batch subscriptions at a time: 100 topics
+**3\. Outgoing Messages (client to server)**
 
-### 5\. Subscription limit for each connection[#](#5-subscription-limit-for-each-connection)
+Limit: 100 messages / 10 seconds
 
-400 topics (there is no such restriction for Futures)
+Dimension: Per connection
 
-Modified at 5 months ago
+**4\. Subscription/Unsubscription Requests**
+
+Max topics per single request: 100
+
+Dimension: Per connection
+
+**5\. Total Subscribed Topics per Connection**
+
+Spot / Margin: ≤ 400 topics
+
+Futures: No limit
+
+Modified at 4 days ago
 
 [
 
@@ -152,13 +165,3 @@ On this page
 [5\. Private Endpoint Rate Limit](#5-private-endpoint-rate-limit-1)
 
 [Websocket Rate Limit](#websocket-rate-limit)
-
-[1\. Number of Connections](#1-number-of-connections)
-
-[2\. Connection Times](#2-connection-times)
-
-[3\. Number of Uplink Messages](#3-number-of-uplink-messages)
-
-[4\. Topic Subscription Limit](#4-topic-subscription-limit)
-
-[5\. Subscription limit for each connection](#5-subscription-limit-for-each-connection)

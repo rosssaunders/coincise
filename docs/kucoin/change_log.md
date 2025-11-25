@@ -4,6 +4,36 @@ Copy Page
 
 # Change Log
 
+##### 2025.11.24[#](#20251124)
+
+Below endpoints added **effectiveFundingRateCycleStartTime** and
+**currentFundingRateGranularity** response parameter.
+
+\[Futures Modify\]
+[Get Symbol](/docs-new/rest/futures-trading/market-data/get-symbol)
+
+\[Futures Modify\]
+[Get All Symbols](/docs-new/rest/futures-trading/market-data/get-all-symbols)
+
+##### 2025.11.21[#](#20251121)
+
+\[Add\] [Get Kumining](/docs-new/rest/affiliate/get-kumining)
+
+##### 2025.11.17[#](#20251117)
+
+\[Modify\] [WebSocket Ticker V2](/docs-new/3470080w0) Added descriptions for the
+**sn** and **sequence** fields to the Futures TickerV2 WebSocket topic.
+
+##### 2025.11.14[#](#20251114)
+
+\[Add\] [Broker Fast API Service](/docs-new/rest/broker/api-broker/fast-api)
+Verify A Token (WIP)
+
+\[Modify\]
+[Get Apikey Info](/docs-new/rest/account-info/account-funding/get-apikey-info)
+Added new fields in the response "parentUid", "region", "kycStatus", "expiredAt"
+and "thirdPartyApp"
+
 ##### 2025.10.24[#](#20251024)
 
 \[Margin Add\]
@@ -623,7 +653,7 @@ Added the tradeType response parameter.
 
 \[Add\] **The new version of the API documentation is now online.**
 
-Modified at 16 days ago
+Modified at about 21 hours ago
 
 [
 
@@ -642,6 +672,14 @@ Market Making Incentive Scheme
 [LLMs.txt](/docs-new/llms.txt)
 
 On this page
+
+[2025.11.24](#20251124)
+
+[2025.11.21](#20251121)
+
+[2025.11.17](#20251117)
+
+[2025.11.14](#20251114)
 
 [2025.10.24](#20251024)
 
