@@ -30,4 +30,4 @@ constructed based on the action and does not necessarily match.
 
 [PreviousError responses](/hyperliquid-docs/for-developers/api/error-responses)[NextRate limits and user limits](/hyperliquid-docs/for-developers/api/rate-limits-and-user-limits)
 
-Last updated 5 months ago
+Last updated 6 months ago
