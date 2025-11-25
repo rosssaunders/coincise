@@ -1,6 +1,6 @@
 # Error Codes
 
-# [#](#gate-api-v4-105-26) Gate API v4.105.26
+# [#](#gate-api-v4-105-29) Gate API v4.105.29
 
 Welcome to Gate API APIv4 provides operations related to spot, margin, and
 contract trading, including public interfaces for querying market data and
@@ -122,6 +122,34 @@ customer service or others, otherwise there will be serious asset risk. If it
 has been accidentally leaked, please delete the existing API and rebuild it.
 
 # [#](#changelog) Changelog
+
+**v4.105.29**
+
+- Add `deal` field in `GET /spot/my_trades` endpoint response to display total
+  deal amount
+- Add `options_order_loss` field in `GET /unified/accounts` endpoint response to
+  display options order loss in USDT, effective in portfolio margin mode
+- Update `spot_order_loss` field description in `GET /unified/accounts` endpoint
+  response to clarify it represents spot order loss, effective in cross-currency
+  margin mode and portfolio margin mode
+- Update `cross_balance` and `iso_balance` field descriptions in
+  `GET /unified/accounts` endpoint response, now effective in both
+  single-currency margin mode and cross-currency margin mode
+
+**v4.105.28**
+
+- Add `block_number` field in `DELETE /withdrawals/{withdrawal_id}` endpoint
+  response to display block number
+- Update `cross_balance` and `iso_balance` field descriptions in
+  `GET /unified/accounts` endpoint response, now effective in both
+  single-currency margin mode and cross-currency margin mode
+
+**v4.105.27**
+
+- Update `status` field descriptions in `DepositRecord`, `WithdrawalRecord`, and
+  `WithdrawalsDel` models for better clarity
+- Remove `FINAL` status from deposit status enum, optimize `DONE` status
+  description
 
 **v4.105.24**
 
@@ -448,7 +476,7 @@ to the new interface as soon as possible
 - Add
   `cross_balance`、`iso_balance`、`im`、`mm`、`imr`、`mmr`、`margin_balance`、`available_margin`
   field in `GET /unified/accounts` response
-- `PUT /unified/unified_mode` endpoint, Added single-currency margin mode
+- `PUT /unified/unified_mode` endpoint，Added single-currency margin mode
 
 **v4.87.0**
 
@@ -547,7 +575,7 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2024-08-05
 
-- New feature: add `GET /sub_accounts/unified_mode` endpoint, Get sub-account
+- New feature: add `GET /sub_accounts/unified_mode` endpoint，Get sub-account
   mode
 - Add `from`、`to` field in `GET /rebate/broker/commission_history` query
 - Add `from`、`to` field in `GET /rebate/broker/transaction_history` query
@@ -556,7 +584,7 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2024-07-22
 
-- New feature: add `GET /rebate/partner/sub_list` endpoint, Partner subordinate
+- New feature: add `GET /rebate/partner/sub_list` endpoint，Partner subordinate
   list
 - Add `page`、`limit` field in `GET /flash_swap/currency_pairs` query
 - Add `order_id`、`currency_pair`、`account` field in
@@ -568,9 +596,9 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2024-07-08
 
-- New feature: add `GET /delivery/{settle}/risk_limit_tiers` endpoint, querying
+- New feature: add `GET /delivery/{settle}/risk_limit_tiers` endpoint，querying
   risk limit levels
-- New feature: add `GET /rebate/partner/transaction_history` endpoint, partners
+- New feature: add `GET /rebate/partner/transaction_history` endpoint，partners
   to get the transaction history of recommended users
 - Add `borrow_type` field in `GET /unified/loan_records` response
 - Add `accum_size` field in `GET /futures/{settle}/position_close` response
@@ -579,7 +607,7 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2024-06-24
 
-- New feature: add `GET /account/debit_fee` endpoint, query GT deduction
+- New feature: add `GET /account/debit_fee` endpoint，query GT deduction
   configuration.
 - New feature: add `POST /account/debit_fee` endpoint, to enable or disable GT
   deduction for the current account.
@@ -828,7 +856,7 @@ field in `POST /futures/{settle}/dual_mode` response.
 
 2023-07-03
 
-- Add new [frequency limit rule](#frequency-limit-rule), the new rule is
+- Add new [frequency limit rule](#frequency-limit-rule)，the new rule is
   expected to take effect on 2023-07-10 (UTC+8)
 - In the `GET /futures/{settle}/orders` API endpoint, the request field
   `contract` has been modified to be optional instead of mandatory.
@@ -1586,7 +1614,7 @@ _Important update_
 
 Gate Order matching follows Price Priority > Time priority principle.
 
-Suppose that the order book is as follows:
+Suppose that the order book is as follows：
 
 | Order | Order time | Ask/Selling price |
 | ----- | ---------- | ----------------- |
@@ -1636,7 +1664,7 @@ endpoint will be deprecated, and the new version of the endpoint can be found in
 the /margin/uni endpoint group. For detailed endpoint migration, please refer to
 the following table:"
 
-Margin account related endpoints:
+Margin account related endpoints：
 
 | Name                                                           | Path                         | Deprecated | New Path |
 | -------------------------------------------------------------- | ---------------------------- | ---------- | -------- |
@@ -1648,7 +1676,7 @@ Margin account related endpoints:
 | Get the max transferable amount for a specific margin currency | GET /margin/transferable     | No         | `-`      |
 
 The margin lending and borrowing related APIs have been migrated to the
-`/margin/uni` API group:
+`/margin/uni` API group：
 
 | Name                                                          | Old Path                                   | Deprecated | New Path                                       |
 | ------------------------------------------------------------- | ------------------------------------------ | ---------- | ---------------------------------------------- |
@@ -1829,7 +1857,7 @@ Earning, collateral etc |
 
 **Rate Limit**
 
-Each request to the API response header will contain the following fields::
+Each request to the API response header will contain the following fields:：
 
 - X-Gate-RateLimit-Requests-Remain - your remaining requests for current
   endpoint
@@ -2013,7 +2041,7 @@ The HTTP status code 2XX will be returned when all operations are successful.
 401 indicates that there is a problem with the certification. Other 4xx status
 codes indicate that the request is invalid. If it is a 5xx error, the server has
 encountered an unknown serious error when processing the request. Please give
-feedback as soon as possible.
+feedback as soon as possible。
 
 **Return Status**
 
@@ -2033,12 +2061,12 @@ feedback as soon as possible.
 | Type             | Description                                                                                  |
 | ---------------- | -------------------------------------------------------------------------------------------- |
 | `string`         | String type, in double quotation marks. Price and amount are also formatted in string format |
-| `integer`        | 32-bit integer, Mainly related to status codes, size, times, etc.                            |
-| `integer(int64)` | 64-bit integer, Mainly involves ID and higher precision timestamp                            |
+| `integer`        | 32-bit integer，Mainly related to status codes, size, times, etc.                            |
+| `integer(int64)` | 64-bit integer，Mainly involves ID and higher precision timestamp                            |
 | `float`          | Floating point number. Some time and stat fields use float.                                  |
-| `object`         | Object, Contains a child object{}                                                            |
-| `array`          | List, Includes multiple groups of content                                                    |
-| `boolean`        | true is true, false is false                                                                 |
+| `object`         | Object，Contains a child object{}                                                            |
+| `array`          | List，Includes multiple groups of content                                                    |
+| `boolean`        | true is true，false is false                                                                 |
 
 ## [#](#portfolio-margin-account) Portfolio Margin Account
 
@@ -2190,9 +2218,9 @@ New request body parameter:
 
 New response fields:
 
-| Name    | Type   | Required | Restriction | Description                |
-| ------- | ------ | -------- | ----------- | -------------------------- |
-| stp_act | string | No       | none        | STP Strategies, including: |
+| Name    | Type   | Required | Restriction | Description                 |
+| ------- | ------ | -------- | ----------- | --------------------------- |
+| stp_act | string | No       | none        | STP Strategies, including： |
 
 \- cn  
 \- co  
@@ -3380,7 +3408,7 @@ Suppose the key we used is `key`, while the secret is `secret`.
 	GET /api/v4/futures/orders?contract=BTC_USD&status=finished&limit=50 HTTP/1.1
 ```
 
-Signature string:
+Signature string：
 
 ```
 	GET\n
@@ -3390,7 +3418,7 @@ Signature string:
 	1541993715
 ```
 
-Explanation:
+Explanation：
 
 - `/api/v4/futures/orders`: request url
 - `contract=BTC_USD&status=finished&limit=50`: keep the query string as it is in
@@ -3410,7 +3438,7 @@ Signature generated
 	{"contract":"BTC_USD","type":"limit","size":100,"price":6800,"time_in_force":"gtc"}
 ```
 
-Signature string:
+Signature string：
 
 ```
 	POST\n
@@ -3420,7 +3448,7 @@ Signature string:
 	1541993715
 ```
 
-Explanation:
+Explanation：
 
 - request query string is empty, use plain empty string
 - use the hashed result of the json-string-formatted request body
@@ -3803,16 +3831,17 @@ _Cancel withdrawal with specified ID_
 
 Status Code **202**
 
-| Name        | Type   | Description                                       |
-| ----------- | ------ | ------------------------------------------------- |
-| » id        | string | Record ID                                         |
-| » txid      | string | Hash record of the withdrawal                     |
-| » timestamp | string | Operation time                                    |
-| » amount    | string | Token amount                                      |
-| » currency  | string | Currency name                                     |
-| » address   | string | Withdrawal address. Required for withdrawals      |
-| » memo      | string | Additional remarks with regards to the withdrawal |
-| » status    | string | Transaction Status                                |
+| Name           | Type   | Description                                       |
+| -------------- | ------ | ------------------------------------------------- |
+| » id           | string | Record ID                                         |
+| » txid         | string | Hash record of the withdrawal                     |
+| » timestamp    | string | Operation time                                    |
+| » amount       | string | Token amount                                      |
+| » currency     | string | Currency name                                     |
+| » address      | string | Withdrawal address. Required for withdrawals      |
+| » memo         | string | Additional remarks with regards to the withdrawal |
+| » block_number | string | Block Number                                      |
+| » status       | string | Transaction Status                                |
 
 \- BCODE: Deposit Code Operation  
 \- CANCEL: Cancelled  
@@ -3889,6 +3918,7 @@ curl -X $method $full_url \
   "txid": "128988928203223323290",
   "amount": "222.61",
   "memo": "",
+  "block_number": "18217349",
   "status": "DONE",
   "chain": "TRX"
 }
@@ -4132,7 +4162,7 @@ Status Code **200**
 | » withdraw_order_id | string | Client order id, up to 32 length and can only include 0-9, A-Z, a-z, underscore(\_), hyphen(-) or dot(.) |
 | » timestamp         | string | Operation time                                                                                           |
 | » amount            | string | Token amount                                                                                             |
-| » fee               | string | Fee                                                                                                      |
+| » fee               | string | fee                                                                                                      |
 | » currency          | string | Currency name                                                                                            |
 | » address           | string | Withdrawal address                                                                                       |
 | » type              | string | Business Type                                                                                            |
@@ -5137,7 +5167,7 @@ Status Code **200**
 | » uid             | string  | User ID                                                                                                                                                           |
 | » available       | array   | Margin account balances                                                                                                                                           |
 | »» _None_         | object  | Margin account information for a trading pair. `base` corresponds to base currency account information, `quote` corresponds to quote currency account information |
-| »»» currency_pair | string  | Trading pair                                                                                                                                                      |
+| »»» currency_pair | string  | Currency pair                                                                                                                                                     |
 | »»» account_type  | string  | Account type: risk - risk rate account, mmr - maintenance margin rate account, inactive - market not activated                                                    |
 | »»» leverage      | string  | User's current market leverage multiplier                                                                                                                         |
 | »»» locked        | boolean | Whether the account is locked                                                                                                                                     |
@@ -6288,7 +6318,7 @@ Status Code **200**
 | » receive_uid | integer(int64) | Recipient User ID  |
 | » currency    | string         | Currency name      |
 | » amount      | string         | Transfer amount    |
-| » create_time | integer(int64) | Creation time      |
+| » create_time | integer(int64) | Created time       |
 | » status      | string         | Withdrawal status: |
 
 \- CREATING: Creating  
@@ -6384,7 +6414,7 @@ _Create a new sub-account_
 | Name         | In   | Type   | Required | Description                                                                                                          |
 | ------------ | ---- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------- |
 | body         | body | object | true     | none                                                                                                                 |
-| » remark     | body | string | false    | Note                                                                                                                 |
+| » remark     | body | string | false    | Remark                                                                                                               |
 | » login_name | body | string | true     | Sub-account login name: Only letters, numbers and underscores are supported, cannot contain other invalid characters |
 | » password   | body | string | false    | The sub-account's password. (Default: the same as main account's password)                                           |
 | » email      | body | string | false    | The sub-account's email address. (Default: the same as main account's email address)                                 |
@@ -6401,7 +6431,7 @@ Status Code **201**
 
 | Name          | Type           | Description                                                                                                          |
 | ------------- | -------------- | -------------------------------------------------------------------------------------------------------------------- |
-| » remark      | string         | Note                                                                                                                 |
+| » remark      | string         | Remark                                                                                                               |
 | » login_name  | string         | Sub-account login name: Only letters, numbers and underscores are supported, cannot contain other invalid characters |
 | » password    | string         | The sub-account's password. (Default: the same as main account's password)                                           |
 | » email       | string         | The sub-account's email address. (Default: the same as main account's email address)                                 |
@@ -6513,7 +6543,7 @@ Status Code **200**
 | Name          | Type           | Description                                                                                                          |
 | ------------- | -------------- | -------------------------------------------------------------------------------------------------------------------- |
 | _None_        | array          | none                                                                                                                 |
-| » remark      | string         | Note                                                                                                                 |
+| » remark      | string         | Remark                                                                                                               |
 | » login_name  | string         | Sub-account login name: Only letters, numbers and underscores are supported, cannot contain other invalid characters |
 | » password    | string         | The sub-account's password. (Default: the same as main account's password)                                           |
 | » email       | string         | The sub-account's email address. (Default: the same as main account's email address)                                 |
@@ -6609,7 +6639,7 @@ Status Code **200**
 
 | Name          | Type           | Description                                                                                                          |
 | ------------- | -------------- | -------------------------------------------------------------------------------------------------------------------- |
-| » remark      | string         | Note                                                                                                                 |
+| » remark      | string         | Remark                                                                                                               |
 | » login_name  | string         | Sub-account login name: Only letters, numbers and underscores are supported, cannot contain other invalid characters |
 | » password    | string         | The sub-account's password. (Default: the same as main account's password)                                           |
 | » email       | string         | The sub-account's email address. (Default: the same as main account's email address)                                 |
@@ -7536,7 +7566,7 @@ Status Code **200**
 | »»» funding                      | string         | Uniloan financial management amount, effective when turned on as a unified account margin switch                                                                                                                                |
 | »»» funding_version              | string         | Funding version                                                                                                                                                                                                                 |
 | »»» cross_balance                | string         | Full margin balance is valid in single currency margin mode, and is 0 in other modes such as cross currency margin/combined margin mode                                                                                         |
-| »»» iso_balance                  | string         | Isolated margin balance is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                      |
+| »»» iso_balance                  | string         | Isolated Margin Balance applies to Single-Currency Margin Mode and Cross-Currency Margin Mode, and is 0 in other modes such as Portfolio Margin Mode.                                                                           |
 | »»» im                           | string         | Full-position initial margin is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                                 |
 | »»» mm                           | string         | Cross margin maintenance margin, valid in single-currency margin mode, 0 in other modes such as cross-currency margin/combined margin mode                                                                                      |
 | »»» imr                          | string         | Full-position initial margin rate is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode                                                                            |
@@ -7556,7 +7586,8 @@ Status Code **200**
 | »» unified_account_total_liab    | string         | Total unified account borrowed amount, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                |
 | »» unified_account_total_equity  | string         | Total unified account equity, valid in single currency margin/cross-currency margin/combined margin mode                                                                                                                        |
 | »» leverage                      | string         | Actual leverage ratio, valid in cross-currency margin/combined margin mode                                                                                                                                                      |
-| »» spot_order_loss               | string         | Total pending order loss, in USDT, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode                                                                                    |
+| »» spot_order_loss               | string         | Spot Pending Order Loss, in USDT, effective only in Cross-Currency Margin Mode and Portfolio Margin Mode.                                                                                                                       |
+| »» options_order_loss            | string         | Option Pending Order Loss, in USDT, effective only in Portfolio Margin Mode.                                                                                                                                                    |
 | »» spot_hedge                    | boolean        | Spot hedging status: true - enabled, false - disabled                                                                                                                                                                           |
 | »» use_funding                   | boolean        | Whether to use Earn funds as margin                                                                                                                                                                                             |
 | »» is_all_collateral             | boolean        | Whether all currencies are used as margin: true - all currencies as margin, false - no                                                                                                                                          |
@@ -8169,7 +8200,7 @@ Status Code **200**
 | _None_           | array          | \[Borrowing\]                                                       |
 | » _None_         | object         | Borrowing                                                           |
 | »» currency      | string         | Currency                                                            |
-| »» currency_pair | string         | Trading pair                                                        |
+| »» currency_pair | string         | Currency pair                                                       |
 | »» amount        | string         | Amount to Repay                                                     |
 | »» type          | string         | Loan type: platform borrowing - platform, margin borrowing - margin |
 | »» create_time   | integer(int64) | Created time                                                        |
@@ -8271,7 +8302,7 @@ Status Code **200**
 | »» type           | string         | Type: `borrow` - borrow, `repay` - repay                                                                                                                                                                                                 |
 | »» repayment_type | string         | Repayment type: none - No repayment type, manual_repay - Manual repayment, auto_repay - Automatic repayment, cancel_auto_repay - Automatic repayment after order cancellation, different_currencies_repayment - Cross-currency repayment |
 | »» borrow_type    | string         | Borrowing type, returned when querying loan records: manual_borrow - Manual borrowing, auto_borrow - Automatic borrowing                                                                                                                 |
-| »» currency_pair  | string         | Trading pair                                                                                                                                                                                                                             |
+| »» currency_pair  | string         | Currency pair                                                                                                                                                                                                                            |
 | »» currency       | string         | Currency                                                                                                                                                                                                                                 |
 | »» amount         | string         | Borrow or repayment amount                                                                                                                                                                                                               |
 | »» create_time    | integer(int64) | Created time                                                                                                                                                                                                                             |
@@ -8374,7 +8405,7 @@ Status Code **200**
 | _None_           | array          | \[Interest Deduction Record\]                                  |
 | » _None_         | object         | Interest Deduction Record                                      |
 | »» currency      | string         | Currency name                                                  |
-| »» currency_pair | string         | Trading pair                                                   |
+| »» currency_pair | string         | Currency pair                                                  |
 | »» actual_rate   | string         | Actual Rate                                                    |
 | »» interest      | string         | Interest                                                       |
 | »» status        | integer        | Status: 0 - fail, 1 - success                                  |
@@ -9212,8 +9243,8 @@ _Portfolio margin calculator output_
 `original_position` - Original position  
 `long_delta_original_position` - Positive delta + Original position  
 `short_delta_original_position` - Negative delta + Original position | | »»»»»
-profit*loss_ranges | array | Results of 33 stress scenarios for MR1 | | »»»»»»
-\_None* | object | Profit and loss range | | »»»»»»» price_percentage | string |
+profit_loss_ranges | array | Results of 33 stress scenarios for MR1 | | »»»»»»
+_None_ | object | Profit and loss range | | »»»»»»» price_percentage | string |
 Percentage change in price | | »»»»»»» implied_volatility_percentage | string |
 Percentage change in implied volatility | | »»»»»»» profit_loss | string | PnL |
 | »»»»»» max_loss | object | Profit and loss range | | »»»»»»» price_percentage
@@ -9936,9 +9967,9 @@ _Margin account list_
 
 ### Parameters
 
-| Name          | In    | Type   | Required | Description  |
-| ------------- | ----- | ------ | -------- | ------------ |
-| currency_pair | query | string | false    | Trading pair |
+| Name          | In    | Type   | Required | Description   |
+| ------------- | ----- | ------ | -------- | ------------- |
+| currency_pair | query | string | false    | Currency pair |
 
 ### Responses
 
@@ -9954,7 +9985,7 @@ Status Code **200**
 | ---------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | _None_           | array   | \[Margin account information for a trading pair. `base` corresponds to base currency account information, `quote` corresponds to quote currency account information\] |
 | » _None_         | object  | Margin account information for a trading pair. `base` corresponds to base currency account information, `quote` corresponds to quote currency account information     |
-| »» currency_pair | string  | Trading pair                                                                                                                                                          |
+| »» currency_pair | string  | Currency pair                                                                                                                                                         |
 | »» account_type  | string  | Account type: risk - risk rate account, mmr - maintenance margin rate account, inactive - market not activated                                                        |
 | »» leverage      | string  | User's current market leverage multiplier                                                                                                                             |
 | »» locked        | boolean | Whether the account is locked                                                                                                                                         |
@@ -10452,7 +10483,7 @@ _Get maximum transferable amount for isolated margin_
 | Name          | In    | Type   | Required | Description                      |
 | ------------- | ----- | ------ | -------- | -------------------------------- |
 | currency      | query | string | true     | Query by specified currency name |
-| currency_pair | query | string | false    | Trading pair                     |
+| currency_pair | query | string | false    | Currency pair                    |
 
 ### Responses
 
@@ -10469,7 +10500,7 @@ _MarginTransferable_
 | Name            | Type   | Description             |
 | --------------- | ------ | ----------------------- |
 | » currency      | string | Currency detail         |
-| » currency_pair | string | Trading pair            |
+| » currency_pair | string | Currency pair           |
 | » amount        | string | Max transferable amount |
 
 WARNING
@@ -10551,7 +10582,7 @@ Status Code **200**
 | -------------------------- | ------ | --------------------------------------- |
 | _None_                     | array  | \[Currency pair of the loan\]           |
 | » _None_                   | object | Currency pair of the loan               |
-| »» currency_pair           | string | Trading pair                            |
+| »» currency_pair           | string | Currency pair                           |
 | »» base_min_borrow_amount  | string | Minimum borrow amount of base currency  |
 | »» quote_min_borrow_amount | string | Minimum borrow amount of quote currency |
 | »» leverage                | string | Position leverage                       |
@@ -10605,9 +10636,9 @@ _Get lending market details_
 
 ### Parameters
 
-| Name          | In   | Type   | Required | Description  |
-| ------------- | ---- | ------ | -------- | ------------ |
-| currency_pair | path | string | true     | Trading pair |
+| Name          | In   | Type   | Required | Description   |
+| ------------- | ---- | ------ | -------- | ------------- |
+| currency_pair | path | string | true     | Currency pair |
 
 ### Responses
 
@@ -10623,7 +10654,7 @@ _Currency pair of the loan_
 
 | Name                      | Type   | Description                             |
 | ------------------------- | ------ | --------------------------------------- |
-| » currency_pair           | string | Trading pair                            |
+| » currency_pair           | string | Currency pair                           |
 | » base_min_borrow_amount  | string | Minimum borrow amount of base currency  |
 | » quote_min_borrow_amount | string | Minimum borrow amount of quote currency |
 | » leverage                | string | Position leverage                       |
@@ -10771,7 +10802,7 @@ _Borrow or repay_
 | » type          | body | string  | true     | Type: `borrow` - borrow, `repay` - repay                                                                  |
 | » amount        | body | string  | true     | Borrow or repayment amount                                                                                |
 | » repaid_all    | body | boolean | false    | Full repayment. For repayment operations only. When `true`, overrides `amount` and repays the full amount |
-| » currency_pair | body | string  | true     | Trading pair                                                                                              |
+| » currency_pair | body | string  | true     | Currency pair                                                                                             |
 
 #### [#](#enumerated-values-8) Enumerated Values
 
@@ -10856,7 +10887,7 @@ _Query loans_
 
 | Name          | In    | Type           | Required | Description                                         |
 | ------------- | ----- | -------------- | -------- | --------------------------------------------------- |
-| currency_pair | query | string         | false    | Trading pair                                        |
+| currency_pair | query | string         | false    | Currency pair                                       |
 | currency      | query | string         | false    | Query by specified currency name                    |
 | page          | query | integer(int32) | false    | Page number                                         |
 | limit         | query | integer        | false    | Maximum number of records returned in a single list |
@@ -10876,7 +10907,7 @@ Status Code **200**
 | _None_           | array          | \[Borrowing\]                                                       |
 | » _None_         | object         | Borrowing                                                           |
 | »» currency      | string         | Currency                                                            |
-| »» currency_pair | string         | Trading pair                                                        |
+| »» currency_pair | string         | Currency pair                                                       |
 | »» amount        | string         | Amount to Repay                                                     |
 | »» type          | string         | Loan type: platform borrowing - platform, margin borrowing - margin |
 | »» create_time   | integer(int64) | Created time                                                        |
@@ -10958,7 +10989,7 @@ _Query loan records_
 | ------------- | ----- | -------------- | -------- | --------------------------------------------------- |
 | type          | query | string         | false    | Type: `borrow` - borrow, `repay` - repay            |
 | currency      | query | string         | false    | Query by specified currency name                    |
-| currency_pair | query | string         | false    | Trading pair                                        |
+| currency_pair | query | string         | false    | Currency pair                                       |
 | page          | query | integer(int32) | false    | Page number                                         |
 | limit         | query | integer        | false    | Maximum number of records returned in a single list |
 
@@ -10983,7 +11014,7 @@ Status Code **200**
 | ---------------- | -------------- | ---------------------------------------- |
 | » _None_         | object         | Borrowing Records                        |
 | »» type          | string         | Type: `borrow` - borrow, `repay` - repay |
-| »» currency_pair | string         | Trading pair                             |
+| »» currency_pair | string         | Currency pair                            |
 | »» currency      | string         | Currency                                 |
 | »» amount        | string         | Borrow or repayment amount               |
 | »» create_time   | integer(int64) | Created time                             |
@@ -11061,7 +11092,7 @@ _Query interest deduction records_
 
 | Name          | In    | Type           | Required | Description                                         |
 | ------------- | ----- | -------------- | -------- | --------------------------------------------------- |
-| currency_pair | query | string         | false    | Trading pair                                        |
+| currency_pair | query | string         | false    | Currency pair                                       |
 | currency      | query | string         | false    | Query by specified currency name                    |
 | page          | query | integer(int32) | false    | Page number                                         |
 | limit         | query | integer        | false    | Maximum number of records returned in a single list |
@@ -11095,7 +11126,7 @@ Status Code **200**
 | _None_           | array          | \[Interest Deduction Record\]                                  |
 | » _None_         | object         | Interest Deduction Record                                      |
 | »» currency      | string         | Currency name                                                  |
-| »» currency_pair | string         | Trading pair                                                   |
+| »» currency_pair | string         | Currency pair                                                  |
 | »» actual_rate   | string         | Actual Rate                                                    |
 | »» interest      | string         | Interest                                                       |
 | »» status        | integer        | Status: 0 - fail, 1 - success                                  |
@@ -11178,7 +11209,7 @@ _Query maximum borrowable amount by currency_
 | Name          | In    | Type   | Required | Description                      |
 | ------------- | ----- | ------ | -------- | -------------------------------- |
 | currency      | query | string | true     | Query by specified currency name |
-| currency_pair | query | string | true     | Trading pair                     |
+| currency_pair | query | string | true     | Currency pair                    |
 
 ### Responses
 
@@ -11195,7 +11226,7 @@ _MaxUniBorrowable_
 | Name            | Type   | Description        |
 | --------------- | ------ | ------------------ |
 | » currency      | string | Currency           |
-| » currency_pair | string | Trading pair       |
+| » currency_pair | string | Currency pair      |
 | » borrowable    | string | Maximum borrowable |
 
 WARNING
@@ -11265,9 +11296,9 @@ _Query user's own leverage lending tiers in current market_
 
 ### Parameters
 
-| Name          | In    | Type   | Required | Description  |
-| ------------- | ----- | ------ | -------- | ------------ |
-| currency_pair | query | string | true     | Trading pair |
+| Name          | In    | Type   | Required | Description   |
+| ------------- | ----- | ------ | -------- | ------------- |
+| currency_pair | query | string | true     | Currency pair |
 
 ### Responses
 
@@ -11356,9 +11387,9 @@ _Query current market leverage lending tiers_
 
 ### Parameters
 
-| Name          | In    | Type   | Required | Description  |
-| ------------- | ----- | ------ | -------- | ------------ |
-| currency_pair | query | string | true     | Trading pair |
+| Name          | In    | Type   | Required | Description   |
+| ------------- | ----- | ------ | -------- | ------------- |
+| currency_pair | query | string | true     | Currency pair |
 
 ### Responses
 
@@ -11506,9 +11537,9 @@ accounts
 
 ### Parameters
 
-| Name          | In    | Type   | Required | Description  |
-| ------------- | ----- | ------ | -------- | ------------ |
-| currency_pair | query | string | false    | Trading pair |
+| Name          | In    | Type   | Required | Description   |
+| ------------- | ----- | ------ | -------- | ------------- |
+| currency_pair | query | string | false    | Currency pair |
 
 ### Responses
 
@@ -11524,7 +11555,7 @@ Status Code **200**
 | ---------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | _None_           | array   | \[Margin account information for a trading pair. `base` corresponds to base currency account information, `quote` corresponds to quote currency account information\] |
 | » _None_         | object  | Margin account information for a trading pair. `base` corresponds to base currency account information, `quote` corresponds to quote currency account information     |
-| »» currency_pair | string  | Trading pair                                                                                                                                                          |
+| »» currency_pair | string  | Currency pair                                                                                                                                                         |
 | »» account_type  | string  | Account type: risk - risk rate account, mmr - maintenance margin rate account, inactive - market not activated                                                        |
 | »» leverage      | string  | User's current market leverage multiplier                                                                                                                             |
 | »» locked        | boolean | Whether the account is locked                                                                                                                                         |
@@ -11651,9 +11682,9 @@ Status Code **200**
 | » currency            | string  | Currency symbol                                                                 |
 | » name                | string  | Currency name                                                                   |
 | » delisted            | boolean | Whether currency is de-listed                                                   |
-| » withdraw_disabled   | boolean | Whether withdrawal is suspended (deprecated)                                    |
-| » withdraw_delayed    | boolean | Whether withdrawal has delay (deprecated)                                       |
-| » deposit_disabled    | boolean | Whether deposit is suspended (deprecated)                                       |
+| » withdraw_disabled   | boolean | Whether currency's withdrawal is disabled (deprecated)                          |
+| » withdraw_delayed    | boolean | Whether currency's withdrawal is delayed (deprecated)                           |
+| » deposit_disabled    | boolean | Whether currency's deposit is disabled (deprecated)                             |
 | » trade_disabled      | boolean | Whether currency's trading is disabled                                          |
 | » fixed_rate          | string  | Fixed fee rate. Only for fixed rate currencies, not valid for normal currencies |
 | » chain               | string  | The main chain corresponding to the coin                                        |
@@ -11760,9 +11791,9 @@ Status Code **200**
 | » currency            | string  | Currency symbol                                                                 |
 | » name                | string  | Currency name                                                                   |
 | » delisted            | boolean | Whether currency is de-listed                                                   |
-| » withdraw_disabled   | boolean | Whether withdrawal is suspended (deprecated)                                    |
-| » withdraw_delayed    | boolean | Whether withdrawal has delay (deprecated)                                       |
-| » deposit_disabled    | boolean | Whether deposit is suspended (deprecated)                                       |
+| » withdraw_disabled   | boolean | Whether currency's withdrawal is disabled (deprecated)                          |
+| » withdraw_delayed    | boolean | Whether currency's withdrawal is delayed (deprecated)                           |
+| » deposit_disabled    | boolean | Whether currency's deposit is disabled (deprecated)                             |
 | » trade_disabled      | boolean | Whether currency's trading is disabled                                          |
 | » fixed_rate          | string  | Fixed fee rate. Only for fixed rate currencies, not valid for normal currencies |
 | » chain               | string  | The main chain corresponding to the coin                                        |
@@ -11860,7 +11891,7 @@ Status Code **200**
 | ------------------- | ------- | ---------------------------------------------------------------- |
 | _None_              | array   | \[Spot currency pair\]                                           |
 | » _None_            | object  | Spot currency pair                                               |
-| »» id               | string  | Trading pair                                                     |
+| »» id               | string  | Currency pair                                                    |
 | »» base             | string  | Base currency                                                    |
 | »» base_name        | string  | Base currency name                                               |
 | »» quote            | string  | Quote currency                                                   |
@@ -11957,9 +11988,9 @@ _Query single currency pair details_
 
 ### Parameters
 
-| Name          | In   | Type   | Required | Description  |
-| ------------- | ---- | ------ | -------- | ------------ |
-| currency_pair | path | string | true     | Trading pair |
+| Name          | In   | Type   | Required | Description   |
+| ------------- | ---- | ------ | -------- | ------------- |
+| currency_pair | path | string | true     | Currency pair |
 
 ### Responses
 
@@ -11975,7 +12006,7 @@ _Spot currency pair_
 
 | Name               | Type    | Description                                                      |
 | ------------------ | ------- | ---------------------------------------------------------------- |
-| » id               | string  | Trading pair                                                     |
+| » id               | string  | Currency pair                                                    |
 | » base             | string  | Base currency                                                    |
 | » base_name        | string  | Base currency name                                               |
 | » quote            | string  | Quote currency                                                   |
@@ -12073,10 +12104,10 @@ all information
 
 ### Parameters
 
-| Name          | In    | Type   | Required | Description  |
-| ------------- | ----- | ------ | -------- | ------------ |
-| currency_pair | query | string | false    | Trading pair |
-| timezone      | query | string | false    | Timezone     |
+| Name          | In    | Type   | Required | Description   |
+| ------------- | ----- | ------ | -------- | ------------- |
+| currency_pair | query | string | false    | Currency pair |
+| timezone      | query | string | false    | Timezone      |
 
 #### [#](#enumerated-values-12) Enumerated Values
 
@@ -12098,7 +12129,7 @@ Status Code **200**
 
 | Name                | Type           | Description                                                                                                            |
 | ------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| » currency_pair     | string         | Trading pair                                                                                                           |
+| » currency_pair     | string         | Currency pair                                                                                                          |
 | » last              | string         | Last trading price                                                                                                     |
 | » lowest_ask        | string         | Recent lowest ask                                                                                                      |
 | » lowest_size       | string         | Latest seller's lowest price quantity; not available for batch queries; available for single queries, empty if no data |
@@ -12181,7 +12212,7 @@ sorted from low to high
 
 | Name          | In    | Type    | Required | Description                                                                                   |
 | ------------- | ----- | ------- | -------- | --------------------------------------------------------------------------------------------- |
-| currency_pair | query | string  | true     | Trading pair                                                                                  |
+| currency_pair | query | string  | true     | Currency pair                                                                                 |
 | interval      | query | string  | false    | Price precision for depth aggregation, 0 means no aggregation, defaults to 0 if not specified |
 | limit         | query | integer | false    | Number of depth levels                                                                        |
 | with_id       | query | boolean | false    | Return order book update ID                                                                   |
@@ -12283,7 +12314,7 @@ is 100,000, that is, limit \* (page - 1) <= 100,000.
 
 | Name          | In    | Type           | Required | Description                                                                                   |
 | ------------- | ----- | -------------- | -------- | --------------------------------------------------------------------------------------------- |
-| currency_pair | query | string         | true     | Trading pair                                                                                  |
+| currency_pair | query | string         | true     | Currency pair                                                                                 |
 | limit         | query | integer(int32) | false    | Maximum number of items returned in list. Default: 100, minimum: 1, maximum: 1000             |
 | last_id       | query | string         | false    | Use the ID of the last record in the previous list as the starting point for the next list    |
 | reverse       | query | boolean        | false    | Whether to retrieve data less than `last_id`. Default returns records greater than `last_id`. |
@@ -12337,6 +12368,7 @@ Status Code **200**
 | » sequence_id                                            | string | Consecutive trade ID within a single market.                   |
 | Used to track and identify trades in the specific market |
 | » text                                                   | string | User-defined information, not returned in public endpoints     |
+| » deal                                                   | String | Total Executed Value                                           |
 
 #### [#](#enumerated-values-13) Enumerated Values
 
@@ -12393,7 +12425,8 @@ curl -X GET https://api.gateio.ws/api/v4/spot/trades?currency_pair=BTC_USDT \
     "point_fee": "0",
     "gt_fee": "0",
     "sequence_id": "588018",
-    "text": "t-test"
+    "text": "t-test",
+    "deal": "0.0045"
   }
 ]
 ```
@@ -12411,7 +12444,7 @@ limit when specifying from, to and interval
 
 | Name          | In    | Type           | Required | Description                                                                                                                                              |
 | ------------- | ----- | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| currency_pair | query | string         | true     | Trading pair                                                                                                                                             |
+| currency_pair | query | string         | true     | Currency pair                                                                                                                                            |
 | limit         | query | integer        | false    | Maximum number of recent data points to return. `limit` conflicts with `from` and `to`. If either `from` or `to` is specified, request will be rejected. |
 | from          | query | integer(int64) | false    | Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified                                     |
 | to            | query | integer(int64) | false    | Specify the end time of the K-line chart, defaults to current time if not specified, note that the time format is Unix timestamp with second precision   |
@@ -12543,7 +12576,7 @@ Status Code **200**
 | » gt_maker_fee  | string         | Maker fee rate with GT deduction. Returns 0 if GT deduction is disabled              |
 | » loan_fee      | string         | Loan fee rate of margin lending                                                      |
 | » point_type    | string         | Point card type: 0 - Original version, 1 - New version since 202009                  |
-| » currency_pair | string         | Trading pair                                                                         |
+| » currency_pair | string         | Currency pair                                                                        |
 | » debit_fee     | integer        | Deduction types for rates, 1 - GT deduction, 2 - Point card deduction, 3 - VIP rates |
 
 WARNING
@@ -12645,7 +12678,7 @@ Status Code **200**
 | »» gt_maker_fee            | string         | Maker fee rate with GT deduction. Returns 0 if GT deduction is disabled              |
 | »» loan_fee                | string         | Loan fee rate of margin lending                                                      |
 | »» point_type              | string         | Point card type: 0 - Original version, 1 - New version since 202009                  |
-| »» currency_pair           | string         | Trading pair                                                                         |
+| »» currency_pair           | string         | Currency pair                                                                        |
 | »» debit_fee               | integer        | Deduction types for rates, 1 - GT deduction, 2 - Point card deduction, 3 - VIP rates |
 
 WARNING
@@ -12948,10 +12981,10 @@ _Batch place orders_
 
 Batch order requirements:
 
-1.  Custom order field `text` is required
-2.  At most 4 trading pairs, maximum 10 orders each, are allowed in one request
-3.  No mixture of spot orders and margin orders, i.e. `account` must be
-    identical for all orders
+1.  Custom order field `text` must be specified
+2.  Up to 4 currency pairs per request, with up to 10 orders per currency pair
+3.  Spot orders and margin orders cannot be mixed; all `account` fields in the
+    same request must be identical
 
 ### Parameters
 
@@ -13034,9 +13067,9 @@ use this field to set self-trade prevetion strategies
 
 1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
 self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy.  
+strategy。  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter.  
+passing the `stp_act` parameter。  
 3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
 return '-'
 
@@ -13222,7 +13255,7 @@ Status Code **200**
 
 | Name            | Type    | Description                                                           |
 | --------------- | ------- | --------------------------------------------------------------------- |
-| » currency_pair | string  | Trading pair                                                          |
+| » currency_pair | string  | Currency pair                                                         |
 | » total         | integer | Total number of open orders for this trading pair on the current page |
 | » orders        | array   | none                                                                  |
 | »» _None_       | object  | Spot order details                                                    |
@@ -14181,17 +14214,17 @@ curl -X $method $full_url -d "$body_param" -H "Content-Type: application/json" \
 
 _List orders_
 
-`status` is set to `open`, that is, when querying the pending order list, only
-`page` and `limit` paging control are supported. `limit` The maximum setting is
-only 100. Does not support `side` and `from`, `to` parameters for querying by
-time range.
+When `status` is set to `open` (i.e., when querying pending order lists), only
+`page` and `limit` pagination controls are supported. `limit` can only be set to
+a maximum of 100. The `side` parameter and time range query parameters `from`
+and `to` are not supported.
 
-`status` when querying historical orders, in addition to paging query, it also
-supports `from` and `to` query by time range. In addition, it also supports
-setting the `side` parameter to filter unilateral history.
+When `status` is set to `finished` (i.e., when querying historical orders), in
+addition to pagination queries, `from` and `to` time range queries are also
+supported. Additionally, the `side` parameter can be set to filter one-sided
+history.
 
-The parameters for time range filtering are all processed according to the
-**end** time of the order.
+Time range filter parameters are processed according to the order end time.
 
 ### Parameters
 
@@ -14464,7 +14497,7 @@ under that account
 
 | Name           | In     | Type   | Required | Description                                                                                                                                      |
 | -------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| currency_pair  | query  | string | false    | Trading pair                                                                                                                                     |
+| currency_pair  | query  | string | false    | Currency pair                                                                                                                                    |
 | side           | query  | string | false    | Specify all bids or all asks, both included if not specified                                                                                     |
 | account        | query  | string | false    | Specify account type                                                                                                                             |
 | action_mode    | query  | string | false    | Processing Mode                                                                                                                                  |
@@ -15122,11 +15155,11 @@ cancellation operation.
 | Name            | In     | Type   | Required | Description                                                                                                                                      |
 | --------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | order_id        | path   | string | true     | The order ID returned when the order was successfully created or the custom ID specified by the user's creation (i.e. the `text` field).         |
-| currency_pair   | query  | string | false    | Trading pair                                                                                                                                     |
+| currency_pair   | query  | string | false    | Currency pair                                                                                                                                    |
 | account         | query  | string | false    | Specify query account                                                                                                                            |
 | x-gate-exptime  | header | string | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected |
 | body            | body   | object | true     | none                                                                                                                                             |
-| » currency_pair | body   | string | false    | Trading pair                                                                                                                                     |
+| » currency_pair | body   | string | false    | Currency pair                                                                                                                                    |
 | » account       | body   | string | false    | Specify query account                                                                                                                            |
 | » amount        | body   | string | false    | Trading quantity. Either `amount` or `price` must be specified                                                                                   |
 | » price         | body   | string | false    | Trading price. Either `amount` or `price` must be specified                                                                                      |
@@ -15403,7 +15436,7 @@ revoked.
 | Name           | In     | Type   | Required | Description                                                                                                                                      |
 | -------------- | ------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | order_id       | path   | string | true     | The order ID returned when the order was successfully created or the custom ID specified by the user's creation (i.e. the `text` field).         |
-| currency_pair  | query  | string | true     | Trading pair                                                                                                                                     |
+| currency_pair  | query  | string | true     | Currency pair                                                                                                                                    |
 | account        | query  | string | false    | Specify query account                                                                                                                            |
 | action_mode    | query  | string | false    | Processing Mode                                                                                                                                  |
 | x-gate-exptime | header | string | false    | Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected |
@@ -15722,6 +15755,7 @@ Status Code **200**
 | » sequence_id                                            | string | Consecutive trade ID within a single market.                   |
 | Used to track and identify trades in the specific market |
 | » text                                                   | string | User-defined information, not returned in public endpoints     |
+| » deal                                                   | String | Total Executed Value                                           |
 
 #### [#](#enumerated-values-25) Enumerated Values
 
@@ -15799,7 +15833,8 @@ curl -X $method $full_url \
     "point_fee": "0",
     "gt_fee": "0",
     "sequence_id": "588018",
-    "text": "t-test"
+    "text": "t-test",
+    "deal": "0.0045"
   }
 ]
 ```
@@ -16071,9 +16106,9 @@ use this field to set self-trade prevetion strategies
 
 1\. After users join the `STP Group`, he can pass `stp_act` to limit the user's
 self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn`
-strategy.  
+strategy。  
 2\. When the user does not join the `STP group`, an error will be returned when
-passing the `stp_act` parameter.  
+passing the `stp_act` parameter。  
 3\. If the user did not use 'stp_act' when placing the order, 'stp_act' will
 return '-'
 
@@ -16313,7 +16348,7 @@ _Create price-triggered order_
 | »» rule          | body | string                                                    | true     | Price trigger condition                                                                                                                                             |
 | »» expiration    | body | integer                                                   | true     | Maximum wait time for trigger condition (in seconds). Order will be cancelled if timeout                                                                            |
 | » put            | body | object                                                    | true     | none                                                                                                                                                                |
-| »» type          | body | string                                                    | false    | Order type, default to `limit`                                                                                                                                      |
+| »» type          | body | string                                                    | false    | Order type，default to `limit`                                                                                                                                      |
 | »» side          | body | string                                                    | true     | Order side                                                                                                                                                          |
 | »» price         | body | string                                                    | true     | Order price                                                                                                                                                         |
 | »» amount        | body | string                                                    | true     | Trading quantity, refers to the trading quantity of the trading currency, i.e., the currency that needs to be traded, for example, the quantity of BTC in BTC_USDT. |
@@ -16331,7 +16366,7 @@ _Create price-triggered order_
 - `>=`: triggered when market price is greater than or equal to `price`
 - `<=`: triggered when market price is less than or equal to `price`
 
-**»» type**: Order type, default to `limit`
+**»» type**: Order type，default to `limit`
 
 - limit : Limit Order
 - market : Market Order
@@ -17692,7 +17727,7 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 | contract | query | string  | true     | Futures contract                                                                              |
 | interval | query | string  | false    | Price precision for depth aggregation, 0 means no aggregation, defaults to 0 if not specified |
 | limit    | query | integer | false    | Number of depth levels                                                                        |
-| with_id  | query | boolean | false    | Whether to return depth update ID. This ID increments by 1 each time depth changes            |
+| with_id  | query | boolean | false    | Whether to return depth update ID. This ID increments by 1 each time the depth changes        |
 
 #### [#](#enumerated-values-32) Enumerated Values
 
@@ -17719,11 +17754,11 @@ Status Code **200**
 | » asks                      | array          | Ask Depth                                                                                                      |
 | »» futures_order_book_item  | object         | none                                                                                                           |
 | »»» p                       | string         | Price (quote currency)                                                                                         |
-| »»» s                       | integer(int64) | Amount                                                                                                         |
+| »»» s                       | integer(int64) | Size                                                                                                           |
 | »» bids                     | array          | Bid Depth                                                                                                      |
 | »»» futures_order_book_item | object         | none                                                                                                           |
 | »»»» p                      | string         | Price (quote currency)                                                                                         |
-| »»»» s                      | integer(int64) | Amount                                                                                                         |
+| »»»» s                      | integer(int64) | Size                                                                                                           |
 
 This operation does not require authentication
 
@@ -24057,13 +24092,16 @@ _Modify a Single Auto Order_
 | » price         | body | string                                                                      | false    | Represents the modified trading price. A value of 0 indicates a market order.                                                                                                                          |
 | » trigger_price | body | string                                                                      | false    | Modified Trigger Price                                                                                                                                                                                 |
 | » price_type    | body | integer(int32)                                                              | false    | Reference price type. 0 - Latest trade price, 1 - Mark price, 2 - Index price                                                                                                                          |
-| » auto_size     | body | string                                                                      | false    | 单仓模式不需设置auto_size                                                                                                                                                                              |
+| » auto_size     | body | string                                                                      | false    | One-way Mode: auto_size is not required                                                                                                                                                                |
 | settle          | path | string                                                                      | true     | Settle currency                                                                                                                                                                                        |
 | order_id        | path | string                                                                      | true     | ID returned when order is successfully created                                                                                                                                                         |
 
 #### [#](#detailed-descriptions-41) Detailed descriptions
 
-**» auto_size**: 单仓模式不需设置auto_size
+**» auto_size**: One-way Mode: auto_size is not required Hedge Mode partial
+closing (size≠0): auto_size is not required Hedge Mode full closing (size=0):
+auto_size must be set, close_long for closing long positions, close_short for
+closing short positions
 
 #### [#](#enumerated-values-87) Enumerated Values
 
@@ -24381,7 +24419,7 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 | contract | query | string  | true     | Futures contract                                                                              |
 | interval | query | string  | false    | Price precision for depth aggregation, 0 means no aggregation, defaults to 0 if not specified |
 | limit    | query | integer | false    | Number of depth levels                                                                        |
-| with_id  | query | boolean | false    | Whether to return depth update ID. This ID increments by 1 each time depth changes            |
+| with_id  | query | boolean | false    | Whether to return depth update ID. This ID increments by 1 each time the depth changes        |
 
 #### [#](#enumerated-values-90) Enumerated Values
 
@@ -24410,11 +24448,11 @@ Status Code **200**
 | » asks                      | array          | Ask Depth                                                                                                      |
 | »» futures_order_book_item  | object         | none                                                                                                           |
 | »»» p                       | string         | Price (quote currency)                                                                                         |
-| »»» s                       | integer(int64) | Amount                                                                                                         |
+| »»» s                       | integer(int64) | Size                                                                                                           |
 | »» bids                     | array          | Bid Depth                                                                                                      |
 | »»» futures_order_book_item | object         | none                                                                                                           |
 | »»»» p                      | string         | Price (quote currency)                                                                                         |
-| »»»» s                      | integer(int64) | Amount                                                                                                         |
+| »»»» s                      | integer(int64) | Size                                                                                                           |
 
 This operation does not require authentication
 
@@ -27815,7 +27853,7 @@ Status Code **200**
 | » _None_               | object         | Options contract details                                                                                                                            |
 | »» name                | string         | Options contract name                                                                                                                               |
 | »» tag                 | string         | Tag                                                                                                                                                 |
-| »» create_time         | number(double) | Creation time                                                                                                                                       |
+| »» create_time         | number(double) | Created time                                                                                                                                        |
 | »» expiration_time     | number(double) | Expiration time                                                                                                                                     |
 | »» is_call             | boolean        | `true` means call options, `false` means put options                                                                                                |
 | »» multiplier          | string         | Multiplier used in converting from invoicing to settlement currency                                                                                 |
@@ -27932,7 +27970,7 @@ _Options contract details_
 | --------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | » name                | string         | Options contract name                                                                                                                               |
 | » tag                 | string         | Tag                                                                                                                                                 |
-| » create_time         | number(double) | Creation time                                                                                                                                       |
+| » create_time         | number(double) | Created time                                                                                                                                        |
 | » expiration_time     | number(double) | Expiration time                                                                                                                                     |
 | » is_call             | boolean        | `true` means call options, `false` means put options                                                                                                |
 | » multiplier          | string         | Multiplier used in converting from invoicing to settlement currency                                                                                 |
@@ -28317,7 +28355,7 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 | contract | query | string  | true     | Options contract name                                                                         |
 | interval | query | string  | false    | Price precision for depth aggregation, 0 means no aggregation, defaults to 0 if not specified |
 | limit    | query | integer | false    | Number of depth levels                                                                        |
-| with_id  | query | boolean | false    | Whether to return depth update ID. This ID increments by 1 each time depth changes            |
+| with_id  | query | boolean | false    | Whether to return depth update ID. This ID increments by 1 each time the depth changes        |
 
 #### [#](#enumerated-values-120) Enumerated Values
 
@@ -28345,11 +28383,11 @@ Status Code **200**
 | » asks                      | array          | Ask Depth                                                                                                      |
 | »» futures_order_book_item  | object         | none                                                                                                           |
 | »»» p                       | string         | Price (quote currency)                                                                                         |
-| »»» s                       | integer(int64) | Amount                                                                                                         |
+| »»» s                       | integer(int64) | Size                                                                                                           |
 | »» bids                     | array          | Bid Depth                                                                                                      |
 | »»» futures_order_book_item | object         | none                                                                                                           |
 | »»»» p                      | string         | Price (quote currency)                                                                                         |
-| »»»» s                      | integer(int64) | Amount                                                                                                         |
+| »»»» s                      | integer(int64) | Size                                                                                                           |
 
 This operation does not require authentication
 
@@ -28897,8 +28935,8 @@ Status Code **200**
 | » short_enabled                                                        | boolean        | If the account is allowed to short                                                          |
 | » mmp_enabled                                                          | boolean        | Whether to enable MMP                                                                       |
 | » liq_triggered                                                        | boolean        | Whether to trigger position liquidation                                                     |
-| » margin_mode                                                          | integer(int32) | ｜ Margin模式:                                                                              |
-| \- 0: 经典SpotMargin模式 - 1: 跨CurrencyMargin模式 - 2: 组合Margin模式 |
+| » margin_mode                                                          | integer(int32) | ｜ Margin模式：                                                                             |
+| \- 0：经典SpotMargin模式 - 1：跨CurrencyMargin模式 - 2：组合Margin模式 |
 | » unrealised_pnl                                                       | string         | Unrealized PNL                                                                              |
 | » init_margin                                                          | string         | Initial position margin                                                                     |
 | » maint_margin                                                         | string         | Position maintenance margin                                                                 |
@@ -29062,7 +29100,7 @@ Status Code **200**
 \- fee: Trading fee  
 \- refr: Referrer rebate  
 \- point_dnw: point_fee: POINT Trading fee  
-\- point_refr: POINT Referrer rebate | | » text | string | Note |
+\- point_refr: POINT Referrer rebate | | » text | string | Remark |
 
 WARNING
 
@@ -33028,7 +33066,7 @@ _Place multi-currency collateral order_
 | » collateral_currencies | body | array   | false    | Collateral currency and amount                                                          |
 | »» CollateralCurrency   | body | object  | false    | none                                                                                    |
 | »»» currency            | body | string  | false    | Currency                                                                                |
-| »»» amount              | body | string  | false    | Amount                                                                                  |
+| »»» amount              | body | string  | false    | Size                                                                                    |
 
 ### Responses
 
@@ -33442,7 +33480,7 @@ _Multi-currency collateral repayment_
 | » repay_items         | body | array          | true     | Repay Currency Item                                                           |
 | »» MultiLoanRepayItem | body | object         | false    | none                                                                          |
 | »»» currency          | body | string         | false    | Repayment currency                                                            |
-| »»» amount            | body | string         | false    | Amount                                                                        |
+| »»» amount            | body | string         | false    | Size                                                                          |
 | »»» repaid_all        | body | boolean        | true     | Repayment method, set to true for full repayment, false for partial repayment |
 
 ### Responses
@@ -33760,7 +33798,7 @@ _Add or withdraw collateral_
 | » type        | body | string         | true     | Operation type: append - add collateral, redeem - withdraw collateral |
 | » collaterals | body | array          | false    | Collateral currency list                                              |
 | »» currency   | body | string         | false    | Currency                                                              |
-| »» amount     | body | string         | false    | Amount                                                                |
+| »» amount     | body | string         | false    | Size                                                                  |
 
 ### Responses
 
@@ -34671,7 +34709,7 @@ Status Code **200**
 | » copies            | string         | Units               |
 | » invest_amount     | string         | Investment Quantity |
 | » settlement_amount | string         | Settlement Quantity |
-| » create_time       | integer(int32) | Creation time       |
+| » create_time       | integer(int32) | Created time        |
 | » complete_time     | integer(int32) | Completed Time      |
 | » status            | string         | Status:             |
 
@@ -35327,7 +35365,7 @@ _On-chain token swap for earned coins_
 | body     | body | object         | true     | none                                 |
 | » coin   | body | string         | true     | Currency                             |
 | » side   | body | string         | true     | 0 - Stake 1 - Redeem                 |
-| » amount | body | string         | true     | Amount                               |
+| » amount | body | string         | true     | Size                                 |
 | » pid    | body | integer(int32) | false    | DeFi-type Mining Protocol Identifier |
 
 ### Responses
@@ -35474,7 +35512,7 @@ Status Code **200**
 | »» redeem_stamp    | integer | Redemption credit time         |
 | »» createStamp     | integer | Order time                     |
 | »» exchange_amount | string  | Exchange rate                  |
-| »» fee             | string  | Fee                            |
+| »» fee             | string  | fee                            |
 
 WARNING
 
@@ -35596,7 +35634,7 @@ Status Code **200**
 | »» amount             | string  | Amount                           |
 | »» reward_coin        | string  | Reward currency                  |
 | »» interest           | string  | Interest amount                  |
-| »» fee                | string  | Fee                              |
+| »» fee                | string  | fee                              |
 | »» status             | integer | Status                           |
 | »» bonus_date         | string  | Date                             |
 | »» should_bonus_stamp | integer | Scheduled distribution timestamp |
@@ -35983,7 +36021,7 @@ _Query All Main Account Key Information_
 \- `alpha`: alpha  
 \- `crossx`: cross-exchange | | »» read_only | boolean | Read Only | | » key |
 object | API Key details | | »» mode | integer(int32) | Mode: 1 - Classic mode,
-2 - Legacy unified mode | | » created_at | string | Creation time | | »
+2 - Legacy unified mode | | » created_at | string | Created time | | »
 updated_at | string | Last Update Time | | » last_access | string | Last Access
 Time |
 
@@ -36205,7 +36243,7 @@ Only the main account is allowed to create a new STP user group
 | » id          | body | integer(int64) | false    | STP Group ID   |
 | » name        | body | string         | true     | STP Group name |
 | » creator_id  | body | integer(int64) | false    | Creator ID     |
-| » create_time | body | integer(int64) | false    | Creation time  |
+| » create_time | body | integer(int64) | false    | Created time   |
 
 ### Responses
 
@@ -36222,7 +36260,7 @@ Status Code **200**
 | » id          | integer(int64) | STP Group ID   |
 | » name        | string         | STP Group name |
 | » creator_id  | integer(int64) | Creator ID     |
-| » create_time | integer(int64) | Creation time  |
+| » create_time | integer(int64) | Created time   |
 
 WARNING
 
@@ -36323,7 +36361,7 @@ Status Code **200**
 | » id          | integer(int64) | STP Group ID   |
 | » name        | string         | STP Group name |
 | » creator_id  | integer(int64) | Creator ID     |
-| » create_time | integer(int64) | Creation time  |
+| » create_time | integer(int64) | Created time   |
 
 WARNING
 
@@ -36412,12 +36450,12 @@ in the current STP group
 
 Status Code **200**
 
-| Name          | Type           | Description   |
-| ------------- | -------------- | ------------- |
-| _None_        | array          | none          |
-| » user_id     | integer(int64) | User ID       |
-| » stp_id      | integer(int64) | STP Group ID  |
-| » create_time | integer(int64) | Creation time |
+| Name          | Type           | Description  |
+| ------------- | -------------- | ------------ |
+| _None_        | array          | none         |
+| » user_id     | integer(int64) | User ID      |
+| » stp_id      | integer(int64) | STP Group ID |
+| » create_time | integer(int64) | Created time |
 
 WARNING
 
@@ -36508,12 +36546,12 @@ _Add users to the STP user group_
 
 Status Code **200**
 
-| Name          | Type           | Description   |
-| ------------- | -------------- | ------------- |
-| _None_        | array          | none          |
-| » user_id     | integer(int64) | User ID       |
-| » stp_id      | integer(int64) | STP Group ID  |
-| » create_time | integer(int64) | Creation time |
+| Name          | Type           | Description  |
+| ------------- | -------------- | ------------ |
+| _None_        | array          | none         |
+| » user_id     | integer(int64) | User ID      |
+| » stp_id      | integer(int64) | STP Group ID |
+| » create_time | integer(int64) | Created time |
 
 WARNING
 
@@ -36615,12 +36653,12 @@ _Delete users from the STP user group_
 
 Status Code **200**
 
-| Name          | Type           | Description   |
-| ------------- | -------------- | ------------- |
-| _None_        | array          | none          |
-| » user_id     | integer(int64) | User ID       |
-| » stp_id      | integer(int64) | STP Group ID  |
-| » create_time | integer(int64) | Creation time |
+| Name          | Type           | Description  |
+| ------------- | -------------- | ------------ |
+| _None_        | array          | none         |
+| » user_id     | integer(int64) | User ID      |
+| » stp_id      | integer(int64) | STP Group ID |
+| » create_time | integer(int64) | Created time |
 
 WARNING
 
@@ -36866,7 +36904,7 @@ Status Code **200**
 
 | Name                 | Type           | Description                                                             |
 | -------------------- | -------------- | ----------------------------------------------------------------------- |
-| » currency_pair      | string         | Trading pair                                                            |
+| » currency_pair      | string         | Currency pair                                                           |
 | » total              | integer(int64) | Total                                                                   |
 | » list               | array          | List of transaction history                                             |
 | »» AgencyTransaction | object         | none                                                                    |
@@ -36875,7 +36913,7 @@ Status Code **200**
 | »»» group_name       | string         | Group name                                                              |
 | »»» fee              | string         | Fee                                                                     |
 | »»» fee_asset        | string         | Fee currency                                                            |
-| »»» currency_pair    | string         | Trading pair                                                            |
+| »»» currency_pair    | string         | Currency pair                                                           |
 | »»» amount           | string         | Transaction amount                                                      |
 | »»» amount_asset     | string         | Commission Asset                                                        |
 | »»» source           | string         | Commission source: SPOT - Spot commission, FUTURES - Futures commission |
@@ -36982,7 +37020,7 @@ Status Code **200**
 
 | Name                  | Type           | Description                                                             |
 | --------------------- | -------------- | ----------------------------------------------------------------------- |
-| » currency_pair       | string         | Trading pair                                                            |
+| » currency_pair       | string         | Currency pair                                                           |
 | » total               | integer(int64) | Total                                                                   |
 | » list                | array          | List of commission history                                              |
 | »» AgencyCommission   | object         | none                                                                    |
@@ -37099,7 +37137,7 @@ Status Code **200**
 | »»» group_name        | string         | Group name                                                              |
 | »»» fee               | string         | Fee                                                                     |
 | »»» fee_asset         | string         | Fee currency                                                            |
-| »»» currency_pair     | string         | Trading pair                                                            |
+| »»» currency_pair     | string         | Currency pair                                                           |
 | »»» amount            | string         | Transaction amount                                                      |
 | »»» amount_asset      | string         | Commission Asset                                                        |
 | »»» source            | string         | Commission source: SPOT - Spot commission, FUTURES - Futures commission |
@@ -37432,7 +37470,7 @@ Status Code **200**
 | »»» fee_asset                 | string         | Fee currency                                               |
 | »»» rebate_fee                | string         | The income from rebates, converted to USDT                 |
 | »»» source                    | string         | Commission transaction type: Spot, Futures, Options, Alpha |
-| »»» currency_pair             | string         | Trading pair                                               |
+| »»» currency_pair             | string         | Currency pair                                              |
 | »»» sub_broker_info           | object         | Sub-broker information                                     |
 | »»»» user_id                  | integer(int64) | Sub-broker user ID                                         |
 | »»»» original_commission_rate | string         | Sub-broker original commission rate                        |
@@ -37554,7 +37592,7 @@ Status Code **200**
 | »»» user_id                   | integer(int64) | User ID                                                    |
 | »»» group_name                | string         | Group name                                                 |
 | »»» fee                       | string         | Fee amount (USDT)                                          |
-| »»» currency_pair             | string         | Trading pair                                               |
+| »»» currency_pair             | string         | Currency pair                                              |
 | »»» amount                    | string         | Transaction amount                                         |
 | »»» fee_asset                 | string         | Fee currency                                               |
 | »»» source                    | string         | Commission transaction type: Spot, Futures, Options, Alpha |
@@ -37857,7 +37895,7 @@ curl -X $method $full_url \
 ip_whitelist | array | false | none | IP whitelist (list will be cleared if no
 value is passed) | | key | string | false | read-only | API Key | | state |
 integer(int32) | false | read-only | Status: 1-Normal 2-Frozen 3-Locked | |
-created_at | integer(int64) | false | read-only | Creation time | | updated_at |
+created_at | integer(int64) | false | read-only | Created time | | updated_at |
 integer(int64) | false | read-only | Last Update Time | | last_access |
 integer(int64) | false | read-only | Last Access Time |
 
@@ -37918,7 +37956,7 @@ _Spot price order details_
 \- `<=`: triggered when market price is less than or equal to `price` | | »
 expiration | integer | true | none | Maximum wait time for trigger condition (in
 seconds). Order will be cancelled if timeout | | put | object | true | none |
-none | | » type | string | false | none | Order type, default to `limit`
+none | | » type | string | false | none | Order type，default to `limit`
 
 \- limit : Limit Order  
 \- market : Market Order | | » side | string | true | none | Order side
@@ -37944,8 +37982,8 @@ none | The source of the order, including:
 \- api: API call  
 \- app: Mobile app | | id | integer(int64) | false | read-only | Auto order ID |
 | user | integer | false | read-only | User ID | | market | string | true | none
-| Market | | ctime | integer(int64) | false | read-only | Creation time | |
-ftime | integer(int64) | false | read-only | End time | | fired_order_id |
+| Market | | ctime | integer(int64) | false | read-only | Created time | | ftime
+| integer(int64) | false | read-only | End time | | fired_order_id |
 integer(int64) | false | read-only | ID of the order created after trigger | |
 status | string | false | read-only | Status
 
@@ -38608,8 +38646,8 @@ last_price | | » expiration | integer | false | none | Maximum wait time for
 trigger condition (in seconds). Order will be cancelled if timeout | | id |
 integer(int64) | false | read-only | Auto order ID | | user | integer | false |
 read-only | User ID | | create_time | number(double) | false | read-only |
-Creation time | | finish_time | number(double) | false | read-only | End time |
-| trade_id | integer(int64) | false | read-only | ID of the order created after
+Created time | | finish_time | number(double) | false | read-only | End time | |
+trade_id | integer(int64) | false | read-only | ID of the order created after
 trigger | | status | string | false | read-only | Order status
 
 \- `open`: Active  
@@ -38708,11 +38746,11 @@ _Modify Price Order Details_
 | price         | string         | false    | none         | Represents the modified trading price. A value of 0 indicates a market order.                                                                                                                          |
 | trigger_price | string         | false    | none         | Modified Trigger Price                                                                                                                                                                                 |
 | price_type    | integer(int32) | false    | none         | Reference price type. 0 - Latest trade price, 1 - Mark price, 2 - Index price                                                                                                                          |
-| auto_size     | string         | false    | none         | 单仓模式不需设置auto_size                                                                                                                                                                              |
+| auto_size     | string         | false    | none         | One-way Mode: auto_size is not required                                                                                                                                                                |
 
-双仓模式部分平仓(size≠0)时, 不需设置auto_size  
-双仓模式全部平仓(size=0)时, 必须设置auto_size, close_long 平多头,
-close_short 平空头 |
+Hedge Mode partial closing (size≠0): auto_size is not required  
+Hedge Mode full closing (size=0): auto_size must be set, close_long for closing
+long positions, close_short for closing short positions |
 
 #### [#](#enumerated-values-143) Enumerated Values
 
