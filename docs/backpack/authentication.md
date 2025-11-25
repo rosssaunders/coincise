@@ -71,6 +71,7 @@ orderHistoryQueryAll
 orderQuery
 orderQueryAll
 pnlHistoryQueryAll
+positionHistoryQueryAll
 positionQuery
 quoteSubmit
 strategyCancel
@@ -83,7 +84,7 @@ withdraw
 withdrawalQueryAll
 ```
 
-`accountQuery balanceQuery borrowLendExecute borrowHistoryQueryAll collateralQuery depositAddressQuery depositQueryAll fillHistoryQueryAll fundingHistoryQueryAll interestHistoryQueryAll orderCancel orderCancelAll orderExecute orderHistoryQueryAll orderQuery orderQueryAll pnlHistoryQueryAll positionQuery quoteSubmit strategyCancel strategyCancelAll strategyCreate strategyHistoryQueryAll strategyQuery strategyQueryAll withdraw withdrawalQueryAll`
+`accountQuery balanceQuery borrowLendExecute borrowHistoryQueryAll collateralQuery depositAddressQuery depositQueryAll fillHistoryQueryAll fundingHistoryQueryAll interestHistoryQueryAll orderCancel orderCancelAll orderExecute orderHistoryQueryAll orderQuery orderQueryAll pnlHistoryQueryAll positionHistoryQueryAll positionQuery quoteSubmit strategyCancel strategyCancelAll strategyCreate strategyHistoryQueryAll strategyQuery strategyQueryAll withdraw withdrawalQueryAll`
 
 The correct instruction type should be prefixed to the signing string. The
 instruction types for each request are documented alongside the request.
