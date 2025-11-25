@@ -72,7 +72,7 @@ such as a Destination Tag, Memo, or Message. If the deposit address of the
 receiving exchange includes a secondary address, you must provide this field
 when submitting a withdrawal request.
 
-Updated 16 days ago
+Updated 7 days ago
 
 ---
 
@@ -188,7 +188,7 @@ xxxxxxxxxx
 
 \]
 
-Updated 16 days ago
+Updated 7 days ago
 
 ---
 

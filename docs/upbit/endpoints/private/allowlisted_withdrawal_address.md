@@ -185,7 +185,7 @@ string | null
 
 Type of individual wallet.(Only Singapore)
 
-Updated 16 days ago
+Updated 7 days ago
 
 ---
 
@@ -325,7 +325,7 @@ xxxxxxxxxx
 
 \]
 
-Updated 16 days ago
+Updated 7 days ago
 
 ---
 

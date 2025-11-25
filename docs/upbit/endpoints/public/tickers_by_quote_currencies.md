@@ -303,7 +303,7 @@ required
 
 Message describing the cause of the error.
 
-Updated about 1 month ago
+Updated 7 days ago
 
 ---
 
@@ -561,7 +561,7 @@ xxxxxxxxxx
 
     "trade\_time": "152857",
 
-Updated about 1 month ago
+Updated 7 days ago
 
 ---
 
