@@ -21,18 +21,38 @@ export async function generatePrSummary(
       timeout: 15 * 60 * 1000 // 15 minutes timeout for Flex processing
     })
 
-    // Get git diff for staged changes
-    const gitDiff = execSync("git diff --staged --name-status", {
+    // Get git diff - try staged first, then unstaged, then against origin/main
+    let gitDiff = execSync("git diff --staged --name-status", {
       cwd: workingDir,
       encoding: "utf8"
     }).trim()
+
+    let diffCommand = "git diff --staged --unified=3"
+
+    // If no staged changes, check unstaged changes
+    if (!gitDiff) {
+      gitDiff = execSync("git diff --name-status", {
+        cwd: workingDir,
+        encoding: "utf8"
+      }).trim()
+      diffCommand = "git diff --unified=3"
+    }
+
+    // If still no changes, compare against origin/main (for PRs)
+    if (!gitDiff) {
+      gitDiff = execSync("git diff origin/main --name-status", {
+        cwd: workingDir,
+        encoding: "utf8"
+      }).trim()
+      diffCommand = "git diff origin/main --unified=3"
+    }
 
     if (!gitDiff) {
       return "No changes detected in this update."
     }
 
     // Get more detailed diff for modified files (limited to avoid token limits)
-    const detailedDiff = execSync("git diff --staged --unified=3", {
+    const detailedDiff = execSync(diffCommand, {
       cwd: workingDir,
       encoding: "utf8"
     })
