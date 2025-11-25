@@ -1,6 +1,7 @@
 # POST /api/v3/capital/deposit/address
 
-**Source:** https://www.mexc.com/api-docs/spot-v3/wallet-endpoints#generate-deposit-address-supporting-network
+**Source:**
+https://www.mexc.com/api-docs/spot-v3/wallet-endpoints#generate-deposit-address-supporting-network
 
 > Request
 
@@ -11,29 +12,42 @@ post /api/v3/capital/deposit/address?coin=EOS&network=EOS&timestamp={{timestamp}
 > Response
 
 ```json
-[  {      "coin": "USDT",      "network": "TRC20",      "address": "TXobiKkdciupZrhdvZyTSSLjE8CmZAufS",      "tag": null  },  {     "coin": "EOS",     "network": "EOS",     "address": "zzqqqqqqqqqq",     "memo": "MX10068"  }]
+[
+  {
+    "coin": "USDT",
+    "network": "TRC20",
+    "address": "TXobiKkdciupZrhdvZyTSSLjE8CmZAufS",
+    "tag": null
+  },
+  {
+    "coin": "EOS",
+    "network": "EOS",
+    "address": "zzqqqqqqqqqq",
+    "memo": "MX10068"
+  }
+]
 ```
 
--   **POST** `/api/v3/capital/deposit/address`
+- **POST** `/api/v3/capital/deposit/address`
 
-**Permission:** SPOT\_WITHDRAW\_WRITE
+**Permission:** SPOT_WITHDRAW_WRITE
 
 **Weight(IP):** 1
 
 Parameters:
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| coin | string | YES | coin |
-| network | string | YES | deposit network |
-| timestamp | string | YES | timestamp |
-| signature | string | YES | signature |
+| Name      | Type   | Mandatory | Description     |
+| --------- | ------ | --------- | --------------- |
+| coin      | string | YES       | coin            |
+| network   | string | YES       | deposit network |
+| timestamp | string | YES       | timestamp       |
+| signature | string | YES       | signature       |
 
 Response:
 
-| Name | Description |
-| --- | --- |
+| Name    | Description     |
+| ------- | --------------- |
 | address | deposit address |
-| coin | coin |
-| memo | memo |
-| network | network |
+| coin    | coin            |
+| memo    | memo            |
+| network | network         |

@@ -11,24 +11,24 @@ GET /api/v3/uid?timestamp={{timestamp}}&signature={[{signature]}
 > response
 
 ```json
-{"uid":"209302839"}
+{ "uid": "209302839" }
 ```
 
 **GET** `/api/v3/uid`
 
-**Permission:** SPOT\_ACCOUNT\_READ
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
 **Request**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| timestamp | string | Yes | timestamp |
-| signature | string | Yes | signature |
+| Name      | Type   | Mandatory | Description |
+| --------- | ------ | --------- | ----------- |
+| timestamp | string | Yes       | timestamp   |
+| signature | string | Yes       | signature   |
 
 **Response**
 
-| Name | Type | Description |
-| --- | --- | --- |
-| uid | string | account uid |
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| uid  | string | account uid |

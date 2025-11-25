@@ -1,6 +1,7 @@
 # GET api/v3/mxDeduct/enable
 
-**Source:** https://www.mexc.com/api-docs/spot-v3/spot-account-trade#query-mx-deduct-status
+**Source:**
+https://www.mexc.com/api-docs/spot-v3/spot-account-trade#query-mx-deduct-status
 
 > Request
 
@@ -11,25 +12,30 @@ get api/v3/mxDeduct/enable
 > Response
 
 ```json
-{  "data":{    "mxDeductEnable":false  },  "code":0,  "msg":"success",  "timestamp":1669109672717}
+{
+  "data": { "mxDeductEnable": false },
+  "code": 0,
+  "msg": "success",
+  "timestamp": 1669109672717
+}
 ```
 
--   **GET** `api/v3/mxDeduct/enable`
+- **GET** `api/v3/mxDeduct/enable`
 
-**Permission:** SPOT\_DEAL\_READ
+**Permission:** SPOT_DEAL_READ
 
 **Weight(IP):** 1
 
 **Parameters:**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| recvWindow | long | no | recvWindow |
-| timestamp | long | yes | timestamp |
-| signature | string | yes | signature |
+| Name       | Type   | Mandatory | Description |
+| ---------- | ------ | --------- | ----------- |
+| recvWindow | long   | no        | recvWindow  |
+| timestamp  | long   | yes       | timestamp   |
+| signature  | string | yes       | signature   |
 
 **Response:**
 
-| Name | Type | Description |
-| --- | --- | --- |
+| Name           | Type    | Description               |
+| -------------- | ------- | ------------------------- |
 | mxDeductEnable | boolean | true:enable,false:disable |
