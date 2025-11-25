@@ -77,6 +77,10 @@ on:
       PAT_GITHUB:
         required: true
 
+concurrency:
+  group: docs-update-${{ inputs.pr_branch }}
+  cancel-in-progress: false
+
 jobs:
   update-docs:
     runs-on: ubuntu-latest
