@@ -5,10 +5,12 @@
 The API is available at the following endpoints:
 
 - **PRODUCTION**: `https://api.exchange.bullish.com/trading-api`
+- **COINDESK PRODUCTION**: `https://api.trade.coindesk.com/trading-api`
 - **PRODUCTION**: `https://registered.api.exchange.bullish.com/trading-api`
 - **PRODUCTION (Direct Connect)**: `https://prod.access.bullish.com/trading-api`
 - **SECURITY SANDBOX**: `https://api.bugbounty.bullish.com/trading-api`
 - **API SANDBOX**: `https://api.simnext.bullish-test.com/trading-api`
+- **COINDESK API SANDBOX**: `https://api.trade-simnext.coindesk.com/trading-api`
 - **API SANDBOX**: `https://registered.api.simnext.bullish-test.com/trading-api`
 - **API SANDBOX (Direct Connect)**:
   `https://simnext.access.bullish.com/trading-api`

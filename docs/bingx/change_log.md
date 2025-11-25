@@ -1,5 +1,11 @@
 # Change Log
 
+2025-11-25
+
+Standardize input and output parameters, unifying them to BTC-USDT.
+
+- Spot Trading: Upgraded the Spot ticker price endpoint from v1 to v2.
+
 2025-11-13
 
 Added Copy Trading Endpoints and USDT-M Perpetual Contract Endpoints

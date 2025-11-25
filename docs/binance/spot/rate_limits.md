@@ -41,7 +41,8 @@
 
 - Every successful order response will contain a
   `X-MBX-ORDER-COUNT-(intervalNum)(intervalLetter)` header indicating how many
-  orders you have placed for that interval. To monitor this, refer to
+  orders you have placed for that interval.
+  To monitor this, refer to
   [`GET api/v3/rateLimit/order`](/docs/binance-spot-api-docs/rest-api/account-endpoints#query-unfilled-order-count).
 - Rejected/unsuccessful orders are not guaranteed to have `X-MBX-ORDER-COUNT-**`
   headers in the response.

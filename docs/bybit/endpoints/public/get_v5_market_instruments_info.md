@@ -104,6 +104,7 @@ token from the response to retrieve the next page of the result set |
 | \>>> auctionFeeRate                                                                | string        | The trading fee rate during auction phase- There is no trading fee until entering continues trading phase                                                                                                           |
 | \>>> takerFeeRate                                                                  | string        | The taker fee rate during continues trading phase                                                                                                                                                                   |
 | \>>> makerFeeRate                                                                  | string        | The maker fee rate during continues trading phase                                                                                                                                                                   |
+| \>> skipCallAuction                                                                | boolean       | `false`, `true` Whether the pre-market contract skips the call auction phase                                                                                                                                        |
 
 | Parameter                         | Type   | Comments                                    |
 | --------------------------------- | ------ | ------------------------------------------- |

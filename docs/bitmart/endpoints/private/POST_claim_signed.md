@@ -10,7 +10,7 @@ Required (Private Endpoint)
 
 ## Claim (SIGNED)
 
-`Simulated claim`
+`Add available funds to the futures account (Only available in the Simulated-Environment)`
 
 #### Request URL
 
