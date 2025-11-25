@@ -9,12 +9,17 @@ Welcome to the _Bullish Trading API_ documentation!
 This documentation provides resource descriptions and endpoints usage
 instructions for the API.
 
+CoinDesk Trading services are provided by Bullish via regulated subsidiaries in
+select locations. The features and functionality detailed in this Bullish API
+documentation also apply to CoinDesk Trading users. The base URLs
+`api.exchange.bullish.com` and `api.trade.coindesk.com` are interchangeable.
+
 The API:
 
 - follows [REST](https://en.wikipedia.org/wiki/Representational_state_transfer)
   conventions
-- has the base URL `api.exchange.bullish.com` (unless one of the sandbox
-  environments is being used)
+- has the base URL `api.exchange.bullish.com` or `api.trade.coindesk.com`
+  (unless one of the sandbox environments is being used)
 - has endpoints under the below categories:
   - Authenticated endpoints for private client data e.g.
     [Get Orders](#get-/v2/orders) endpoint
