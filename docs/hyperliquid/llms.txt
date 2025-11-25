@@ -1,0 +1,70 @@
+# Hyperliquid API Documentation
+
+> 58 documentation files | ~31k tokens
+
+## General Documentation
+
+- [Authentication](https://rosssaunders.github.io/coincise/raw/hyperliquid/authentication.md): It is recommended to use an existing SDK instead of manually generating
+- [Change Log](https://rosssaunders.github.io/coincise/raw/hyperliquid/change_log.md): For the latest changes and updates to the Hyperliquid API, please refer to the
+- [Error Codes](https://rosssaunders.github.io/coincise/raw/hyperliquid/error_codes.md): https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/error-responses
+- [Network Connectivity](https://rosssaunders.github.io/coincise/raw/hyperliquid/network_connectivity.md): Hyperliquid API provides public REST and WebSocket endpoints for trading and
+- [Rate Limits](https://rosssaunders.github.io/coincise/raw/hyperliquid/rate_limits.md): The following rate limits apply per IP address:
+- [Response Formats](https://rosssaunders.github.io/coincise/raw/hyperliquid/response_formats.md): https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/notation
+
+## Public Endpoints
+
+- [POST Candle Snapshot](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/public/candle_snapshot.md)
+- [POST Check Builder Fee Approval](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/public/check_builder_fee_approval.md)
+- [POST L2 Book Snapshot](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/public/l2_book_snapshot.md)
+- [POST Query Aligned Quote Token Status](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/public/query_aligned_quote_token_status.md)
+- [POST Retrieve Details For A Vault](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/public/retrieve_details_for_a_vault.md)
+- [POST Retrieve Mids For All Coins](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/public/retrieve_mids_for_all_coins.md)
+- [Websocket Api](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/public/websocket_api.md)
+
+## Private Endpoints
+
+- [POST Approve A Builder Fee](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/approve_a_builder_fee.md)
+- [POST Approve An Api Wallet](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/approve_an_api_wallet.md)
+- [POST Cancel A Twap Order](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/cancel_a_twap_order.md)
+- [POST Cancel Order S](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/cancel_order_s.md)
+- [POST Cancel Order S By Cloid](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/cancel_order_s_by_cloid.md)
+- [POST Core Spot Transfer](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/core_spot_transfer.md)
+- [POST Core Usdc Transfer](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/core_usdc_transfer.md)
+- [POST Delegate Or Undelegate Stake From Validator](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/delegate_or_undelegate_stake_from_validator.md)
+- [POST Deposit Into Staking](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/deposit_into_staking.md)
+- [POST Deposit Or Withdraw From A Vault](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/deposit_or_withdraw_from_a_vault.md)
+- [POST Enable Hip 3 Dex Abstraction](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/enable_hip_3_dex_abstraction.md)
+- [Enable Hip 3 Dex Abstraction Agent](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/enable_hip_3_dex_abstraction_agent.md)
+- [POST Initiate A Withdrawal Request](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/initiate_a_withdrawal_request.md)
+- [POST Invalidate Pending Nonce Noop](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/invalidate_pending_nonce_noop.md)
+- [POST Modify An Order](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/modify_an_order.md)
+- [POST Modify Multiple Orders](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/modify_multiple_orders.md)
+- [POST Place A Twap Order](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/place_a_twap_order.md)
+- [POST Place An Order](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/place_an_order.md)
+- [POST Query A User S Fees](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/query_a_user_s_fees.md)
+- [POST Query A User S Hip 3 Dex Abstraction State](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/query_a_user_s_hip_3_dex_abstraction_state.md)
+- [POST Query A User S Portfolio](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/query_a_user_s_portfolio.md)
+- [POST Query A User S Referral Information](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/query_a_user_s_referral_information.md)
+- [POST Query A User S Role](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/query_a_user_s_role.md)
+- [POST Query A User S Staking Delegations](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/query_a_user_s_staking_delegations.md)
+- [POST Query A User S Staking History](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/query_a_user_s_staking_history.md)
+- [POST Query A User S Staking Rewards](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/query_a_user_s_staking_rewards.md)
+- [POST Query A User S Staking Summary](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/query_a_user_s_staking_summary.md)
+- [POST Query Order Status By Oid Or Cloid](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/query_order_status_by_oid_or_cloid.md)
+- [POST Query User Rate Limits](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/query_user_rate_limits.md)
+- [POST Reserve Additional Actions](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/reserve_additional_actions.md)
+- [POST Retrieve A User S Fills](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/retrieve_a_user_s_fills.md)
+- [POST Retrieve A User S Fills By Time](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/retrieve_a_user_s_fills_by_time.md)
+- [POST Retrieve A User S Historical Orders](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/retrieve_a_user_s_historical_orders.md)
+- [POST Retrieve A User S Open Orders](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/retrieve_a_user_s_open_orders.md)
+- [POST Retrieve A User S Open Orders With Additional Frontend Info](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/retrieve_a_user_s_open_orders_with_additional_frontend_info.md)
+- [POST Retrieve A User S Subaccounts](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/retrieve_a_user_s_subaccounts.md)
+- [POST Retrieve A User S Twap Slice Fills](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/retrieve_a_user_s_twap_slice_fills.md)
+- [POST Retrieve A User S Vault Deposits](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/retrieve_a_user_s_vault_deposits.md)
+- [POST Schedule Cancel Dead Man S Switch](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/schedule_cancel_dead_man_s_switch.md)
+- [POST Send Asset](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/send_asset.md)
+- [POST Transfer From Spot Account To Perp Account And Vice Versa](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/transfer_from_spot_account_to_perp_account_and_vice_versa.md)
+- [POST Update Isolated Margin](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/update_isolated_margin.md)
+- [POST Update Leverage](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/update_leverage.md)
+- [Validator Vote On Risk Free Rate For Aligned Quote Asset](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/validator_vote_on_risk_free_rate_for_aligned_quote_asset.md)
+- [POST Withdraw From Staking](https://rosssaunders.github.io/coincise/raw/hyperliquid/endpoints/private/withdraw_from_staking.md)

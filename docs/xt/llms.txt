@@ -1,0 +1,57 @@
+# XT.com API Documentation
+
+> 45 documentation files | ~25k tokens
+
+## General Documentation
+
+- [Authentication](https://rosssaunders.github.io/coincise/raw/xt/authentication.md): Since XT needs to provide some open interfaces for third-party platforms, the
+- [Change Log](https://rosssaunders.github.io/coincise/raw/xt/change_log.md): XT.com does not provide a dedicated API changelog in their documentation. Please
+- [Error Codes](https://rosssaunders.github.io/coincise/raw/xt/error_codes.md): | httpStatus | Description                                                                                           |
+- [Network Connectivity](https://rosssaunders.github.io/coincise/raw/xt/network_connectivity.md): Production environment:
+- [Rate Limits](https://rosssaunders.github.io/coincise/raw/xt/rate_limits.md): Some interfaces will have limited flow control (the corresponding interface will
+- [Response Formats](https://rosssaunders.github.io/coincise/raw/xt/response_formats.md): All interface returns are in JSON format.
+
+## Public Endpoints
+
+- [GET Get Full Ticker](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_full_ticker.md)
+- [GET Get Get 24h Statistics Ticker](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_get_24h_statistics_ticker.md)
+- [GET Get Get A Single Currency Asset](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_get_a_single_currency_asset.md)
+- [GET Get Get Client Ip](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_get_client_ip.md)
+- [GET Get Get Currency Information](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_get_currency_information.md)
+- [GET Get Get Deposit History](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_get_deposit_history.md)
+- [GET Get Get Depth Data](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_get_depth_data.md)
+- [GET Get Get K Line Data](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_get_k_line_data.md)
+- [GET Get Get Latest Prices Ticker](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_get_latest_prices_ticker.md)
+- [GET Get Get Server Time](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_get_server_time.md)
+- [GET Get Get Supported Currencies](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_get_supported_currencies.md)
+- [GET Get Get Symbol Information](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_get_symbol_information.md)
+- [GET Get Get The Best Pending Order Ticker](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_get_the_best_pending_order_ticker.md)
+- [GET Get Get The Deposit Address](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_get_the_deposit_address.md)
+- [GET Get Query Historical Transaction List](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_query_historical_transaction_list.md)
+- [GET Get Query The List Of Recent Transactions](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_query_the_list_of_recent_transactions.md)
+- [GET Get Withdraw Detail](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_withdraw_detail.md)
+- [GET Get Withdrawal History](https://rosssaunders.github.io/coincise/raw/xt/endpoints/public/get_withdrawal_history.md)
+
+## Private Endpoints
+
+- [DELETE Delete Cancel The Current Pending Order](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/delete_cancel_the_current_pending_order.md)
+- [DELETE Delete Cancell Batch Order](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/delete_cancell_batch_order.md)
+- [DELETE Delete Cancell Order](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/delete_cancell_order.md)
+- [GET Get Get A List Of Currency Assets](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/get_get_a_list_of_currency_assets.md)
+- [GET Get Get A Single Currency Asset](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/get_get_a_single_currency_asset.md)
+- [GET Get Get Batch](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/get_get_batch.md)
+- [GET Get Get Deposit History](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/get_get_deposit_history.md)
+- [GET Get Get Single Order](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/get_get_single_order.md)
+- [GET Get Get The Deposit Address](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/get_get_the_deposit_address.md)
+- [GET Get Query Historical Orders](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/get_query_historical_orders.md)
+- [GET Get Query Single](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/get_query_single.md)
+- [GET Get Query The Current Pending Order](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/get_query_the_current_pending_order.md)
+- [GET Get Query Trade](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/get_query_trade.md)
+- [GET Get Withdraw](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/get_withdraw.md)
+- [GET Get Withdraw Detail](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/get_withdraw_detail.md)
+- [GET Get Withdrawal History](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/get_withdrawal_history.md)
+- [POST Post Submit Batch Order](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/post_submit_batch_order.md)
+- [POST Post Submit Order](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/post_submit_order.md)
+- [POST Post Transfer Between Sub Account Business Systems](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/post_transfer_between_sub_account_business_systems.md)
+- [POST Post Transfer Between User Business Systems](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/post_transfer_between_user_business_systems.md)
+- [PUT Put Update Order Limit](https://rosssaunders.github.io/coincise/raw/xt/endpoints/private/put_update_order_limit.md)

@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "Concise Crypto Currency Exchange APIs",
   "scripts": {
-    "format": "prettier --write \"**/*.{js,md}\""
+    "format": "prettier --write \"**/*.{js,md}\"",
+    "site:generate-llms": "node tools/llms/generate-llms-enhanced.js",
+    "site:generate-json": "node tools/llms/generate-json-index.js",
+    "site:generate": "npm run site:generate-llms && npm run site:generate-json",
+    "site:build": "./tools/website/build.sh",
+    "site:dev": "cd site && mkdocs serve --dev-addr localhost:8000"
   },
   "dependencies": {
     "jsdom": "^27.2.0",

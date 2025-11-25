@@ -1,0 +1,93 @@
+# MEXC API Documentation
+
+> 81 documentation files | ~133k tokens
+
+## General Documentation
+
+- [Authentication](https://rosssaunders.github.io/coincise/raw/mexc/authentication.md): Relevant parameters in the header
+- [Change Log](https://rosssaunders.github.io/coincise/raw/mexc/change_log.md): -   The /api/v3/rebate/affiliate/commission API requires the parameters "startTime" and "endTime"
+- [Error Codes](https://rosssaunders.github.io/coincise/raw/mexc/error_codes.md): The following error information can be returend
+- [Network Connectivity](https://rosssaunders.github.io/coincise/raw/mexc/network_connectivity.md): The base endpoint is:
+- [Private Rest Api](https://rosssaunders.github.io/coincise/raw/mexc/broker/private_rest_api.md): MEXC is committed to building crypto infrastructure, with API broker partners
+- [Private Rest Api](https://rosssaunders.github.io/coincise/raw/mexc/contract/private_rest_api.md): > general data structures
+- [Private Rest Api](https://rosssaunders.github.io/coincise/raw/mexc/spot/private_rest_api.md): The base endpoint is:
+- [Private Websocket Api](https://rosssaunders.github.io/coincise/raw/mexc/spot/private_websocket_api.md): - LIMIT (Limit order)
+- [Public Rest Api](https://rosssaunders.github.io/coincise/raw/mexc/contract/public_rest_api.md): > general data structures
+- [Public Rest Api](https://rosssaunders.github.io/coincise/raw/mexc/spot/public_rest_api.md): The base endpoint is:
+- [Public Websocket Api](https://rosssaunders.github.io/coincise/raw/mexc/spot/public_websocket_api.md): - LIMIT (Limit order)
+- [Rate Limits](https://rosssaunders.github.io/coincise/raw/mexc/rate_limits.md): There is rate limit for API access frequency, upon exceed client will get code 429: Too many requests. The account is used as the basic unit...
+- [Response Formats](https://rosssaunders.github.io/coincise/raw/mexc/response_formats.md): -   LIMIT (Limit order)
+- [Websocket Api](https://rosssaunders.github.io/coincise/raw/mexc/contract/websocket_api.md): > general data structures
+
+## Public Endpoints
+
+- [GET Get Api V3 Avgprice](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/public/get_api_v3_avgprice.md)
+- [GET Get Api V3 Capital Config Getall](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/public/get_api_v3_capital_config_getall.md)
+- [GET Get Api V3 Defaultsymbols](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/public/get_api_v3_defaultsymbols.md)
+- [GET Get Api V3 Exchangeinfo](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/public/get_api_v3_exchangeinfo.md)
+- [GET Get Api V3 Klines](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/public/get_api_v3_klines.md)
+- [GET Get Api V3 Ping](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/public/get_api_v3_ping.md)
+- [GET Get Api V3 Ticker 24hr](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/public/get_api_v3_ticker_24hr.md)
+- [GET Get Api V3 Ticker Price](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/public/get_api_v3_ticker_price.md)
+- [GET Get Api V3 Time](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/public/get_api_v3_time.md)
+
+## Private Endpoints
+
+- [DELETE Delete Api V3 Capital Withdraw](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/delete_api_v3_capital_withdraw.md)
+- [DELETE Delete Api V3 Openorders](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/delete_api_v3_openorders.md)
+- [DELETE Delete Api V3 Order](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/delete_api_v3_order.md)
+- [DELETE Delete Api V3 Strategy Group](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/delete_api_v3_strategy_group.md)
+- [DELETE Delete Api V3 Strategy Group Uid](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/delete_api_v3_strategy_group_uid.md)
+- [DELETE Delete Api V3 Sub Account Apikey](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/delete_api_v3_sub_account_apikey.md)
+- [GET Get Api V3 Account](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_account.md)
+- [GET Get Api V3 Aggtrades](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_aggtrades.md)
+- [GET Get Api V3 Allorders](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_allorders.md)
+- [GET Get Api V3 Capital Convert](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_capital_convert.md)
+- [GET Get Api V3 Capital Convert List](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_capital_convert_list.md)
+- [GET Get Api V3 Capital Deposit Address](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_capital_deposit_address.md)
+- [GET Get Api V3 Capital Deposit Hisrec](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_capital_deposit_hisrec.md)
+- [GET Get Api V3 Capital Sub Account Universaltransfer](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_capital_sub_account_universaltransfer.md)
+- [GET Get Api V3 Capital Transfer](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_capital_transfer.md)
+- [GET Get Api V3 Capital Transfer Internal](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_capital_transfer_internal.md)
+- [GET Get Api V3 Capital Transfer Tranid](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_capital_transfer_tranid.md)
+- [GET Get Api V3 Capital Withdraw Address](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_capital_withdraw_address.md)
+- [GET Get Api V3 Capital Withdraw History](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_capital_withdraw_history.md)
+- [GET Get Api V3 Depth](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_depth.md)
+- [GET Get Api V3 Kyc Status](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_kyc_status.md)
+- [GET Get Api V3 Mxdeduct Enable](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_mxdeduct_enable.md)
+- [GET Get Api V3 Mytrades](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_mytrades.md)
+- [GET Get Api V3 Openorders](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_openorders.md)
+- [GET Get Api V3 Order](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_order.md)
+- [GET Get Api V3 Rebate Affiliate Campaign](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_rebate_affiliate_campaign.md)
+- [GET Get Api V3 Rebate Affiliate Commission](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_rebate_affiliate_commission.md)
+- [GET Get Api V3 Rebate Affiliate Commission Detail](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_rebate_affiliate_commission_detail.md)
+- [GET Get Api V3 Rebate Affiliate Referral](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_rebate_affiliate_referral.md)
+- [GET Get Api V3 Rebate Affiliate Subaffiliates](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_rebate_affiliate_subaffiliates.md)
+- [GET Get Api V3 Rebate Affiliate Withdraw](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_rebate_affiliate_withdraw.md)
+- [GET Get Api V3 Rebate Detail](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_rebate_detail.md)
+- [GET Get Api V3 Rebate Detail Kickback](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_rebate_detail_kickback.md)
+- [GET Get Api V3 Rebate Refercode](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_rebate_refercode.md)
+- [GET Get Api V3 Rebate Taxquery](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_rebate_taxquery.md)
+- [GET Get Api V3 Selfsymbols](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_selfsymbols.md)
+- [GET Get Api V3 Strategy Group](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_strategy_group.md)
+- [GET Get Api V3 Strategy Group Uid](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_strategy_group_uid.md)
+- [GET Get Api V3 Sub Account Asset](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_sub_account_asset.md)
+- [GET Get Api V3 Sub Account List](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_sub_account_list.md)
+- [GET Get Api V3 Ticker Bookticker](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_ticker_bookticker.md)
+- [GET Get Api V3 Tradefee](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_tradefee.md)
+- [GET Get Api V3 Trades](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_trades.md)
+- [GET Get Api V3 Uid](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/get_api_v3_uid.md)
+- [POST Post Api V3 Batchorders](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/post_api_v3_batchorders.md)
+- [POST Post Api V3 Capital Convert](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/post_api_v3_capital_convert.md)
+- [POST Post Api V3 Capital Deposit Address](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/post_api_v3_capital_deposit_address.md)
+- [POST Post Api V3 Capital Sub Account Universaltransfer](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/post_api_v3_capital_sub_account_universaltransfer.md)
+- [POST Post Api V3 Capital Transfer](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/post_api_v3_capital_transfer.md)
+- [POST Post Api V3 Capital Transfer Internal](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/post_api_v3_capital_transfer_internal.md)
+- [POST Post Api V3 Capital Withdraw](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/post_api_v3_capital_withdraw.md)
+- [POST Post Api V3 Capital Withdraw Apply](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/post_api_v3_capital_withdraw_apply.md)
+- [POST Post Api V3 Mxdeduct Enable](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/post_api_v3_mxdeduct_enable.md)
+- [POST Post Api V3 Order](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/post_api_v3_order.md)
+- [POST Post Api V3 Order Test](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/post_api_v3_order_test.md)
+- [POST Post Api V3 Strategy Group](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/post_api_v3_strategy_group.md)
+- [POST Post Api V3 Sub Account Apikey](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/post_api_v3_sub_account_apikey.md)
+- [POST Post Api V3 Sub Account Virtualsubaccount](https://rosssaunders.github.io/coincise/raw/mexc/endpoints/private/post_api_v3_sub_account_virtualsubaccount.md)

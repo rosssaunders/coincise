@@ -1,0 +1,45 @@
+# DigiFinex API Documentation
+
+> 33 documentation files | ~22k tokens
+
+## General Documentation
+
+- [Authentication](https://rosssaunders.github.io/coincise/raw/digifinex/authentication.md): You could create API Key in "Account - API setting".
+- [Change Log](https://rosssaunders.github.io/coincise/raw/digifinex/change_log.md): DigiFinex does not maintain a public changelog in their API documentation.
+- [Error Codes](https://rosssaunders.github.io/coincise/raw/digifinex/error_codes.md): | code  | Description                                                                                                                       ...
+- [Network Connectivity](https://rosssaunders.github.io/coincise/raw/digifinex/network_connectivity.md): | Address                          | Applicable Sites | Applicable Functions | Applicable Trading Pairs |
+- [Rate Limits](https://rosssaunders.github.io/coincise/raw/digifinex/rate_limits.md): In order to provide a better API trading environment, avoid malicious
+- [Response Formats](https://rosssaunders.github.io/coincise/raw/digifinex/response_formats.md): All API responses from DigiFinex follow a consistent JSON format.
+- [Websocket Api](https://rosssaunders.github.io/coincise/raw/digifinex/websocket_api.md): > Note: This documentation is automatically synchronized from the official
+
+## Public Endpoints
+
+- [GET Get V3 Kline](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/public/get_v3_kline.md)
+- [GET Get V3 Margin Currencies](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/public/get_v3_margin_currencies.md)
+- [GET Get V3 Margin Symbols](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/public/get_v3_margin_symbols.md)
+- [GET Get V3 Markets](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/public/get_v3_markets.md)
+- [GET Get V3 Order Book](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/public/get_v3_order_book.md)
+- [GET Get V3 Ping](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/public/get_v3_ping.md)
+- [GET Get V3 Spot Symbols](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/public/get_v3_spot_symbols.md)
+- [GET Get V3 Ticker](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/public/get_v3_ticker.md)
+- [GET Get V3 Time](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/public/get_v3_time.md)
+- [GET Get V3 Trades](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/public/get_v3_trades.md)
+- [GET Get V3 Trades Symbols](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/public/get_v3_trades_symbols.md)
+
+## Private Endpoints
+
+- [GET Get V3 7bmarket 7d E2 80 8b Order E2 80 8b Detail](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/private/get_v3_7bmarket_7d_e2_80_8b_order_e2_80_8b_detail.md)
+- [GET Get V3 7bmarket 7d Financelog](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/private/get_v3_7bmarket_7d_financelog.md)
+- [GET Get V3 7bmarket 7d Mytrades](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/private/get_v3_7bmarket_7d_mytrades.md)
+- [GET Get V3 7bmarket 7d Order](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/private/get_v3_7bmarket_7d_order.md)
+- [GET Get V3 7bmarket 7d Order Current](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/private/get_v3_7bmarket_7d_order_current.md)
+- [GET Get V3 7bmarket 7d Order History](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/private/get_v3_7bmarket_7d_order_history.md)
+- [GET Get V3 Currencies](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/private/get_v3_currencies.md)
+- [GET Get V3 Margin E2 80 8b Assets](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/private/get_v3_margin_e2_80_8b_assets.md)
+- [GET Get V3 Margin E2 80 8b Positions](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/private/get_v3_margin_e2_80_8b_positions.md)
+- [GET Get V3 Spot Assets](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/private/get_v3_spot_assets.md)
+- [POST Post V3 7bmarket 7d E2 80 8b Order E2 80 8b Batch New](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/private/post_v3_7bmarket_7d_e2_80_8b_order_e2_80_8b_batch_new.md)
+- [POST Post V3 7bmarket 7d Order Cancel](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/private/post_v3_7bmarket_7d_order_cancel.md)
+- [POST Post V3 7bmarket 7d Order New](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/private/post_v3_7bmarket_7d_order_new.md)
+- [POST Post V3 Margin Position Close](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/private/post_v3_margin_position_close.md)
+- [POST Post V3 Transfer](https://rosssaunders.github.io/coincise/raw/digifinex/endpoints/private/post_v3_transfer.md)

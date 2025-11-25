@@ -1,4 +1,5 @@
 packages:
   - 'venues/*'
   - 'venues/coinbase/exchange'
+  - 'venues/coinbase/intx'
   - 'tools/*'

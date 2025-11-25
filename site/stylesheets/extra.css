@@ -1,0 +1,94 @@
+/* Exchange navigation styling */
+.md-nav__item--nested > .md-nav__link {
+  font-weight: 600;
+}
+
+/* API endpoint styling */
+.md-typeset h1 code,
+.md-typeset h2 code {
+  background-color: var(--md-code-bg-color);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+/* Parameter tables - optimize for API docs */
+.md-typeset table:not([class]) {
+  font-size: 0.85rem;
+}
+
+.md-typeset table:not([class]) th {
+  white-space: nowrap;
+}
+
+.md-typeset table:not([class]) td {
+  vertical-align: top;
+}
+
+/* Code blocks */
+.md-typeset pre > code {
+  font-size: 0.8rem;
+}
+
+/* LLM resources announcement bar */
+.md-announce {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.md-announce__inner {
+  color: white;
+}
+
+.md-announce a {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.md-announce a:hover {
+  color: #e0e0e0;
+}
+
+/* Improve table readability */
+.md-typeset table:not([class]) tr:nth-child(even) {
+  background-color: var(--md-default-bg-color--light);
+}
+
+/* HTTP method badges */
+.md-typeset h1:first-child {
+  border-bottom: 2px solid var(--md-primary-fg-color);
+  padding-bottom: 0.5rem;
+}
+
+/* Source link styling */
+.md-typeset p strong:first-child a {
+  color: var(--md-accent-fg-color);
+}
+
+/* Better spacing for endpoint docs */
+.md-typeset h2 {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset h3 {
+  margin-top: 1.5rem;
+}
+
+/* Response/Request example blocks */
+.md-typeset .highlight pre {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Mobile improvements */
+@media screen and (max-width: 76.1875em) {
+  .md-typeset table:not([class]) {
+    font-size: 0.75rem;
+  }
+
+  .md-typeset table:not([class]) th,
+  .md-typeset table:not([class]) td {
+    padding: 0.4rem 0.6rem;
+  }
+}

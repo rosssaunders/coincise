@@ -1,0 +1,79 @@
+# Bullish API Documentation
+
+> 67 documentation files | ~76k tokens
+
+## General Documentation
+
+- [Authentication](https://rosssaunders.github.io/coincise/raw/bullish/authentication.md): Type: http
+- [Change Log](https://rosssaunders.github.io/coincise/raw/bullish/change_log.md): - new fields in V1CancelAllOrders -
+- [Error Codes](https://rosssaunders.github.io/coincise/raw/bullish/error_codes.md): For comprehensive error and rejection codes, see the
+- [Network Connectivity](https://rosssaunders.github.io/coincise/raw/bullish/network_connectivity.md): The API is available at the following endpoints:
+- [Overview](https://rosssaunders.github.io/coincise/raw/bullish/overview.md): Version: 1.0.0
+- [Rate Limits](https://rosssaunders.github.io/coincise/raw/bullish/rate_limits.md): The below mentioned public endpoints will be rate limited. For more information
+- [Response Formats](https://rosssaunders.github.io/coincise/raw/bullish/response_formats.md): The API returns responses in JSON format.
+
+## Public Endpoints
+
+- [GET Get V1 Assets](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_assets.md)
+- [GET Get V1 Assets Symbol](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_assets_symbol.md)
+- [GET Get V1 Expiry Prices Symbol](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_expiry_prices_symbol.md)
+- [GET Get V1 History Markets Symbol](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_history_markets_symbol.md)
+- [GET Get V1 History Markets Symbol Funding Rate](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_history_markets_symbol_funding_rate.md)
+- [GET Get V1 History Markets Symbol Trades](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_history_markets_symbol_trades.md)
+- [GET Get V1 Index Prices](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_index_prices.md)
+- [GET Get V1 Index Prices Assetsymbol](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_index_prices_assetsymbol.md)
+- [GET Get V1 Markets](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_markets.md)
+- [GET Get V1 Markets Symbol](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_markets_symbol.md)
+- [GET Get V1 Markets Symbol Candle](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_markets_symbol_candle.md)
+- [GET Get V1 Markets Symbol Orderbook Hybrid](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_markets_symbol_orderbook_hybrid.md)
+- [GET Get V1 Markets Symbol Tick](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_markets_symbol_tick.md)
+- [GET Get V1 Markets Symbol Trades](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_markets_symbol_trades.md)
+- [GET Get V1 Nonce](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_nonce.md)
+- [GET Get V1 Option Ladder](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_option_ladder.md)
+- [GET Get V1 Option Ladder Symbol](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_option_ladder_symbol.md)
+- [GET Get V1 Time](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_time.md)
+- [GET Get V1 Users Hmac Login](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/get_v1_users_hmac_login.md)
+- [POST Post V2 Users Login](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/public/post_v2_users_login.md)
+
+## Private Endpoints
+
+- [DELETE Delete V1 Wallets Withdrawal Instructions Destinationid](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/delete_v1_wallets_withdrawal_instructions_destinationid.md)
+- [GET Get V1 Accounts Asset](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_accounts_asset.md)
+- [GET Get V1 Accounts Asset Symbol](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_accounts_asset_symbol.md)
+- [GET Get V1 Accounts Trading Accounts](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_accounts_trading_accounts.md)
+- [GET Get V1 Accounts Trading Accounts Tradingaccountid](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_accounts_trading_accounts_tradingaccountid.md)
+- [GET Get V1 Derivatives Positions](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_derivatives_positions.md)
+- [GET Get V1 History Borrow Interest](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_history_borrow_interest.md)
+- [GET Get V1 History Derivatives Settlement](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_history_derivatives_settlement.md)
+- [GET Get V1 History Trades](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_history_trades.md)
+- [GET Get V1 History Transfer](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_history_transfer.md)
+- [GET Get V1 Trades](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_trades.md)
+- [GET Get V1 Trades Tradeid](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_trades_tradeid.md)
+- [GET Get V1 Users Logout](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_users_logout.md)
+- [GET Get V1 Wallets Deposit Instructions Crypto Symbol](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_wallets_deposit_instructions_crypto_symbol.md)
+- [GET Get V1 Wallets Deposit Instructions Fiat Symbol](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_wallets_deposit_instructions_fiat_symbol.md)
+- [GET Get V1 Wallets Limits Symbol](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_wallets_limits_symbol.md)
+- [GET Get V1 Wallets Self Hosted Verification Attempts](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_wallets_self_hosted_verification_attempts.md)
+- [GET Get V1 Wallets Transactions](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_wallets_transactions.md)
+- [GET Get V1 Wallets Withdrawal Instructions Crypto Symbol](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_wallets_withdrawal_instructions_crypto_symbol.md)
+- [GET Get V1 Wallets Withdrawal Instructions Fiat Symbol](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v1_wallets_withdrawal_instructions_fiat_symbol.md)
+- [GET Get V2 Amm Instructions](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v2_amm_instructions.md)
+- [GET Get V2 Amm Instructions Instructionid](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v2_amm_instructions_instructionid.md)
+- [GET Get V2 History Orders](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v2_history_orders.md)
+- [GET Get V2 Mmp Configuration](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v2_mmp_configuration.md)
+- [GET Get V2 Orders](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v2_orders.md)
+- [GET Get V2 Orders Orderid](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v2_orders_orderid.md)
+- [GET Get V2 Otc Trades](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v2_otc_trades.md)
+- [GET Get V2 Otc Trades Otctradeid](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/get_v2_otc_trades_otctradeid.md)
+- [POST Post V1 Command](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/post_v1_command.md)
+- [POST Post V1 Simulate Portfolio Margin](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/post_v1_simulate_portfolio_margin.md)
+- [POST Post V1 Wallets Self Hosted Initiate](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/post_v1_wallets_self_hosted_initiate.md)
+- [POST Post V1 Wallets Withdrawal](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/post_v1_wallets_withdrawal.md)
+- [POST Post V2 Amm Instructions](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/post_v2_amm_instructions.md)
+- [POST Post V2 Command](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/post_v2_command.md)
+- [POST Post V2 Command Amend](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/post_v2_command_amend.md)
+- [POST Post V2 Command Cancellations](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/post_v2_command_cancellations.md)
+- [POST Post V2 Mmp Configuration](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/post_v2_mmp_configuration.md)
+- [POST Post V2 Orders](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/post_v2_orders.md)
+- [POST Post V2 Otc Command](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/post_v2_otc_command.md)
+- [POST Post V2 Otc Trades](https://rosssaunders.github.io/coincise/raw/bullish/endpoints/private/post_v2_otc_trades.md)

@@ -1,0 +1,84 @@
+# Crypto.com API Documentation
+
+> 72 documentation files | ~73k tokens
+
+## General Documentation
+
+- [Authentication](https://rosssaunders.github.io/coincise/raw/cryptocom/authentication.md): Before sending any requests, you'll need to generate a new API key.
+- [Change Log](https://rosssaunders.github.io/coincise/raw/cryptocom/change_log.md): - On 2025-02-27 8:00 UTC,
+- [Error Codes](https://rosssaunders.github.io/coincise/raw/cryptocom/error_codes.md): These codes are shared by both the response, and the reason field for rejected
+- [Network Connectivity](https://rosssaunders.github.io/coincise/raw/cryptocom/network_connectivity.md): Note: REST API requests need to be sent as "Content Type: application/json"
+- [Rate Limits](https://rosssaunders.github.io/coincise/raw/cryptocom/rate_limits.md): For authenticated calls, rate limits are per API method, per API key:
+- [Response Formats](https://rosssaunders.github.io/coincise/raw/cryptocom/response_formats.md): | Name     | Type   | Description                                              |
+
+## Public Endpoints
+
+- [POST Post Public Auth](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/public/post_public_auth.md)
+- [POST Post Public Get Announcements](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/public/post_public_get_announcements.md)
+- [POST Post Public Get Book](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/public/post_public_get_book.md)
+- [POST Post Public Get Candlestick](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/public/post_public_get_candlestick.md)
+- [POST Post Public Get Expired Settlement Price](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/public/post_public_get_expired_settlement_price.md)
+- [POST Post Public Get Instruments](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/public/post_public_get_instruments.md)
+- [POST Post Public Get Insurance](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/public/post_public_get_insurance.md)
+- [POST Post Public Get Risk Parameters](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/public/post_public_get_risk_parameters.md)
+- [POST Post Public Get Tickers](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/public/post_public_get_tickers.md)
+- [POST Post Public Get Trades](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/public/post_public_get_trades.md)
+- [POST Post Public Get Valuations](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/public/post_public_get_valuations.md)
+- [POST Post Public Staking Get Conversion Rate](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/public/post_public_staking_get_conversion_rate.md)
+
+## Private Endpoints
+
+- [POST Post Private Advanced Cancel All Orders](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_advanced_cancel_all_orders.md)
+- [POST Post Private Advanced Cancel Order](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_advanced_cancel_order.md)
+- [POST Post Private Advanced Cancel Oto](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_advanced_cancel_oto.md)
+- [POST Post Private Advanced Cancel Otoco](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_advanced_cancel_otoco.md)
+- [POST Post Private Advanced Create Oto](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_advanced_create_oto.md)
+- [POST Post Private Advanced Create Otoco](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_advanced_create_otoco.md)
+- [POST Post Private Advanced Get Open Orders](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_advanced_get_open_orders.md)
+- [POST Post Private Advanced Get Order Detail](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_advanced_get_order_detail.md)
+- [POST Post Private Advanced Get Order History](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_advanced_get_order_history.md)
+- [POST Post Private Amend Order](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_amend_order.md)
+- [POST Post Private Cancel All Orders](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_cancel_all_orders.md)
+- [POST Post Private Cancel Order](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_cancel_order.md)
+- [POST Post Private Change Account Leverage](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_change_account_leverage.md)
+- [POST Post Private Change Account Settings](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_change_account_settings.md)
+- [POST Post Private Close Position](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_close_position.md)
+- [POST Post Private Create Order](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_create_order.md)
+- [POST Post Private Create Subaccount Transfer](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_create_subaccount_transfer.md)
+- [POST Post Private Create Withdrawal](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_create_withdrawal.md)
+- [POST Post Private Fiat Fiat Create Withdraw](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_fiat_fiat_create_withdraw.md)
+- [POST Post Private Fiat Fiat Deposit History](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_fiat_fiat_deposit_history.md)
+- [POST Post Private Fiat Fiat Deposit Info](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_fiat_fiat_deposit_info.md)
+- [POST Post Private Fiat Fiat Get Bank Accounts](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_fiat_fiat_get_bank_accounts.md)
+- [POST Post Private Fiat Fiat Transaction Limit](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_fiat_fiat_transaction_limit.md)
+- [POST Post Private Fiat Fiat Transaction Quota](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_fiat_fiat_transaction_quota.md)
+- [POST Post Private Fiat Fiat Withdraw History](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_fiat_fiat_withdraw_history.md)
+- [POST Post Private Get Account Settings](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_account_settings.md)
+- [POST Post Private Get Accounts](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_accounts.md)
+- [POST Post Private Get Cancel On Disconnect](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_cancel_on_disconnect.md)
+- [POST Post Private Get Currency Networks](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_currency_networks.md)
+- [POST Post Private Get Deposit Address](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_deposit_address.md)
+- [POST Post Private Get Deposit History](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_deposit_history.md)
+- [POST Post Private Get Fee Rate](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_fee_rate.md)
+- [POST Post Private Get Instrument Fee Rate](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_instrument_fee_rate.md)
+- [POST Post Private Get Open Orders](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_open_orders.md)
+- [POST Post Private Get Order Detail](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_order_detail.md)
+- [POST Post Private Get Order History](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_order_history.md)
+- [POST Post Private Get Positions](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_positions.md)
+- [POST Post Private Get Subaccount Balances](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_subaccount_balances.md)
+- [POST Post Private Get Trades](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_trades.md)
+- [POST Post Private Get Transactions](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_transactions.md)
+- [POST Post Private Get Withdrawal History](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_get_withdrawal_history.md)
+- [POST Post Private Set Cancel On Disconnect](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_set_cancel_on_disconnect.md)
+- [POST Post Private Staking Convert](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_staking_convert.md)
+- [POST Post Private Staking Get Convert History](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_staking_get_convert_history.md)
+- [POST Post Private Staking Get Open Convert](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_staking_get_open_convert.md)
+- [POST Post Private Staking Get Open Stake](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_staking_get_open_stake.md)
+- [POST Post Private Staking Get Reward History](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_staking_get_reward_history.md)
+- [POST Post Private Staking Get Stake History](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_staking_get_stake_history.md)
+- [POST Post Private Staking Get Staking Instruments](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_staking_get_staking_instruments.md)
+- [POST Post Private Staking Get Staking Position](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_staking_get_staking_position.md)
+- [POST Post Private Staking Stake](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_staking_stake.md)
+- [POST Post Private Staking Unstake](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_staking_unstake.md)
+- [POST Post Private User Balance](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_user_balance.md)
+- [POST Post Private User Balance History](https://rosssaunders.github.io/coincise/raw/cryptocom/endpoints/private/post_private_user_balance_history.md)

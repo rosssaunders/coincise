@@ -1,0 +1,61 @@
+# Backpack API Documentation
+
+> 49 documentation files | ~41k tokens
+
+## General Documentation
+
+- [Authentication](https://rosssaunders.github.io/coincise/raw/backpack/authentication.md): Signed requests are required for any API calls that mutate state. Additionally,
+- [Change Log](https://rosssaunders.github.io/coincise/raw/backpack/change_log.md): - Add j and k fields to the order update stream (take profit limit price and
+- [Error Codes](https://rosssaunders.github.io/coincise/raw/backpack/error_codes.md): Please refer to the API documentation for error code information.
+- [Network Connectivity](https://rosssaunders.github.io/coincise/raw/backpack/network_connectivity.md): The API is hosted at https://api.backpack.exchange/ and the WS API is hosted at
+- [Rate Limits](https://rosssaunders.github.io/coincise/raw/backpack/rate_limits.md): Please refer to the API documentation for rate limit information.
+- [Response Formats](https://rosssaunders.github.io/coincise/raw/backpack/response_formats.md): All responses from the Backpack Exchange API follow standard JSON format.
+
+## Public Endpoints
+
+- [GET Get All Mark Prices](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_all_mark_prices.md)
+- [GET Get An Estimated Liquidation Price For Potential Borrow Lend Position](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_an_estimated_liquidation_price_for_potential_borrow_lend_position.md)
+- [GET Get Assets](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_assets.md)
+- [GET Get Borrow Lend Market History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_borrow_lend_market_history.md)
+- [GET Get Borrow Lend Markets](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_borrow_lend_markets.md)
+- [GET Get Collateral](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_collateral.md)
+- [GET Get Depth](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_depth.md)
+- [GET Get Estimated Liquidation Price](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_estimated_liquidation_price.md)
+- [GET Get Funding Interval Rates](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_funding_interval_rates.md)
+- [GET Get Historical Trades](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_historical_trades.md)
+- [GET Get K Lines](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_k_lines.md)
+- [GET Get Market](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_market.md)
+- [GET Get Markets](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_markets.md)
+- [GET Get Open Interest](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_open_interest.md)
+- [GET Get Recent Trades](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_recent_trades.md)
+- [GET Get System Time](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_system_time.md)
+- [GET Get Ticker](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_ticker.md)
+- [GET Get Tickers](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_tickers.md)
+- [GET Get Wallets](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/public/get_wallets.md)
+
+## Private Endpoints
+
+- [GET Get Account](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_account.md)
+- [GET Get Balances](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_balances.md)
+- [GET Get Borrow History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_borrow_history.md)
+- [GET Get Borrow Lend Positions](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_borrow_lend_positions.md)
+- [GET Get Borrow Position History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_borrow_position_history.md)
+- [GET Get Collateral](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_collateral.md)
+- [GET Get Deposit Address](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_deposit_address.md)
+- [GET Get Deposits](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_deposits.md)
+- [GET Get Dust Conversion History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_dust_conversion_history.md)
+- [GET Get Fill History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_fill_history.md)
+- [GET Get Funding Payments](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_funding_payments.md)
+- [GET Get Interest History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_interest_history.md)
+- [GET Get Max Borrow Quantity](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_max_borrow_quantity.md)
+- [GET Get Max Order Quantity](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_max_order_quantity.md)
+- [GET Get Max Withdrawal Quantity](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_max_withdrawal_quantity.md)
+- [GET Get Open Order](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_open_order.md)
+- [GET Get Open Orders](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_open_orders.md)
+- [GET Get Open Positions](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_open_positions.md)
+- [GET Get Order History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_order_history.md)
+- [GET Get Quote History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_quote_history.md)
+- [GET Get Rfq History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_rfq_history.md)
+- [GET Get Settlement History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_settlement_history.md)
+- [GET Get Strategy History](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_strategy_history.md)
+- [GET Get Withdrawals](https://rosssaunders.github.io/coincise/raw/backpack/endpoints/private/get_withdrawals.md)

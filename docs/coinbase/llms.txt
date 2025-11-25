@@ -1,0 +1,90 @@
+# Coinbase API Documentation
+
+> 78 documentation files | ~29k tokens
+
+## General Documentation
+
+- [Authentication](https://rosssaunders.github.io/coincise/raw/coinbase/authentication.md): ](#private-endpoints)
+- [Authentication](https://rosssaunders.github.io/coincise/raw/coinbase/intx/authentication.md): ](#generating-an-api-key)
+- [Change Log](https://rosssaunders.github.io/coincise/raw/coinbase/change_log.md): API documentation
+- [Change Log](https://rosssaunders.github.io/coincise/raw/coinbase/intx/change_log.md): API documentation
+- [Error Codes](https://rosssaunders.github.io/coincise/raw/coinbase/error_codes.md): See the API documentation for error code information.
+- [Error Codes](https://rosssaunders.github.io/coincise/raw/coinbase/intx/error_codes.md): No specific error code information found. Please refer to the main API
+- [Network Connectivity](https://rosssaunders.github.io/coincise/raw/coinbase/intx/network_connectivity.md): API documentation
+- [Network Connectivity](https://rosssaunders.github.io/coincise/raw/coinbase/network_connectivity.md): Report incorrect code
+- [Rate Limits](https://rosssaunders.github.io/coincise/raw/coinbase/intx/rate_limits.md): API documentation
+- [Rate Limits](https://rosssaunders.github.io/coincise/raw/coinbase/rate_limits.md): ](#rest-api-rate-limits)
+- [Response Formats](https://rosssaunders.github.io/coincise/raw/coinbase/intx/response_formats.md): No specific response format information found. Please refer to the main API
+- [Response Formats](https://rosssaunders.github.io/coincise/raw/coinbase/response_formats.md): ](#timestamps)
+
+## Public Endpoints
+
+- [GET Getasset](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getasset.md)
+- [GET Getassetnetworks](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getassetnetworks.md)
+- [GET Getassets](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getassets.md)
+- [GET Getfeeratetiers](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getfeeratetiers.md)
+- [GET Getindexcandles](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getindexcandles.md)
+- [GET Getindexcomposition](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getindexcomposition.md)
+- [GET Getindexcompositionhistory](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getindexcompositionhistory.md)
+- [GET Getindexprice](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getindexprice.md)
+- [GET Getinstrument](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getinstrument.md)
+- [GET Getinstrumentcandles](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getinstrumentcandles.md)
+- [GET Getinstrumentfunding](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getinstrumentfunding.md)
+- [GET Getinstrumentquote](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getinstrumentquote.md)
+- [GET Getinstruments](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getinstruments.md)
+- [GET Getinstrumentvolumesdaily](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getinstrumentvolumesdaily.md)
+- [GET Getpositionoffsets](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getpositionoffsets.md)
+- [GET Getstatistics](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/public/getstatistics.md)
+
+## Private Endpoints
+
+- [POST Automarginenabled](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/automarginenabled.md)
+- [DELETE Cancelorder](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/cancelorder.md)
+- [DELETE Cancelorders](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/cancelorders.md)
+- [POST Counterpartywithdraw](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/counterpartywithdraw.md)
+- [POST Createaddress](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/createaddress.md)
+- [POST Createcounterpartyid](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/createcounterpartyid.md)
+- [POST Createorder](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/createorder.md)
+- [POST Createportfolio](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/createportfolio.md)
+- [POST Createportfolioassettransfer](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/createportfolioassettransfer.md)
+- [POST Createportfoliopositiontransfer](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/createportfoliopositiontransfer.md)
+- [POST Crosscollateralenabled](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/crosscollateralenabled.md)
+- [POST Fee Estimate](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/fee_estimate.md)
+- [GET Getaccount](https://rosssaunders.github.io/coincise/raw/coinbase/endpoints/private/getaccount.md)
+- [GET Getaccountledger](https://rosssaunders.github.io/coincise/raw/coinbase/endpoints/private/getaccountledger.md)
+- [GET Getaccounts](https://rosssaunders.github.io/coincise/raw/coinbase/endpoints/private/getaccounts.md)
+- [GET Getaddressbook](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getaddressbook.md)
+- [GET Getcounterpartywithdrawallimit](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getcounterpartywithdrawallimit.md)
+- [GET Getmultiportfoliofills](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getmultiportfoliofills.md)
+- [GET Getorder](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getorder.md)
+- [GET Getorders](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getorders.md)
+- [GET Getportfolio](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfolio.md)
+- [GET Getportfolioassettransferlimit](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfolioassettransferlimit.md)
+- [GET Getportfoliobalance](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfoliobalance.md)
+- [GET Getportfoliobalances](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfoliobalances.md)
+- [GET Getportfoliodetail](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfoliodetail.md)
+- [GET Getportfoliofills](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfoliofills.md)
+- [GET Getportfolioloan](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfolioloan.md)
+- [GET Getportfolioloans](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfolioloans.md)
+- [GET Getportfoliomargincallstatus](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfoliomargincallstatus.md)
+- [GET Getportfolioposition](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfolioposition.md)
+- [GET Getportfoliopositionlimits](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfoliopositionlimits.md)
+- [GET Getportfoliopositionlimitsallinstruments](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfoliopositionlimitsallinstruments.md)
+- [GET Getportfoliopositionlimitsinstrument](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfoliopositionlimitsinstrument.md)
+- [GET Getportfoliopositions](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfoliopositions.md)
+- [GET Getportfolios](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfolios.md)
+- [GET Getportfoliosfeerates](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfoliosfeerates.md)
+- [GET Getportfoliosummary](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/getportfoliosummary.md)
+- [GET Gettransfer](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/gettransfer.md)
+- [GET Gettransfers](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/gettransfers.md)
+- [PUT Modifyorder](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/modifyorder.md)
+- [PATCH Patchportfolio](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/patchportfolio.md)
+- [GET Portfolioloanavailability](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/portfolioloanavailability.md)
+- [POST Previeworder](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/previeworder.md)
+- [POST Previewupdateportfolioloan](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/previewupdateportfolioloan.md)
+- [POST Setportfoliomarginoverride](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/setportfoliomarginoverride.md)
+- [PUT Updateportfolio](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/updateportfolio.md)
+- [POST Updateportfolioloan](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/updateportfolioloan.md)
+- [POST Validate Address](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/validate_address.md)
+- [POST Validatecounterpartyid](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/validatecounterpartyid.md)
+- [POST Withdraw](https://rosssaunders.github.io/coincise/raw/coinbase/intx/endpoints/private/withdraw.md)

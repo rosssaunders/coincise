@@ -1,0 +1,187 @@
+# KuCoin API Documentation
+
+> 175 documentation files | ~1268k tokens
+
+## General Documentation
+
+- [Authentication](https://rosssaunders.github.io/coincise/raw/kucoin/authentication.md): Before being able to sign any requests, you must create an API key via the
+- [Change Log](https://rosssaunders.github.io/coincise/raw/kucoin/change_log.md): \[Margin Add\]
+- [Error Codes](https://rosssaunders.github.io/coincise/raw/kucoin/error_codes.md): - 200 - Success
+- [Futures Api](https://rosssaunders.github.io/coincise/raw/kucoin/rest/futures_api.md): <a id="opId001"></a>
+- [Futures Api](https://rosssaunders.github.io/coincise/raw/kucoin/ws/futures_api.md): > Code samples
+- [Futures Fundingfees](https://rosssaunders.github.io/coincise/raw/kucoin/rest/futures/futures-fundingfees.md): <a id="opId001"></a>
+- [Futures Market](https://rosssaunders.github.io/coincise/raw/kucoin/rest/futures/futures-market.md): <a id="opId001"></a>
+- [Futures Order](https://rosssaunders.github.io/coincise/raw/kucoin/rest/futures/futures-order.md): <a id="opId001"></a>
+- [Futures Positions](https://rosssaunders.github.io/coincise/raw/kucoin/rest/futures/futures-positions.md): <a id="opId001"></a>
+- [Futures Private](https://rosssaunders.github.io/coincise/raw/kucoin/ws/futures/futures-private.md): > Code samples
+- [Futures Public](https://rosssaunders.github.io/coincise/raw/kucoin/ws/futures/futures-public.md): > Code samples
+- [Margin Api](https://rosssaunders.github.io/coincise/raw/kucoin/rest/margin_api.md): <a id="opId001"></a>
+- [Margin Api](https://rosssaunders.github.io/coincise/raw/kucoin/ws/margin_api.md): > Code samples
+- [Margin Credit](https://rosssaunders.github.io/coincise/raw/kucoin/rest/margin/margin-credit.md): <a id="opId001"></a>
+- [Margin Debit](https://rosssaunders.github.io/coincise/raw/kucoin/rest/margin/margin-debit.md): <a id="opId001"></a>
+- [Margin Market](https://rosssaunders.github.io/coincise/raw/kucoin/rest/margin/margin-market.md): <a id="opId001"></a>
+- [Margin Order](https://rosssaunders.github.io/coincise/raw/kucoin/rest/margin/margin-order.md): <a id="opId001"></a>
+- [Margin Private](https://rosssaunders.github.io/coincise/raw/kucoin/ws/margin/margin-private.md): > Code samples
+- [Margin Public](https://rosssaunders.github.io/coincise/raw/kucoin/ws/margin/margin-public.md): > Code samples
+- [Margin Risklimit](https://rosssaunders.github.io/coincise/raw/kucoin/rest/margin/margin-risklimit.md): <a id="opId001"></a>
+- [Network Connectivity](https://rosssaunders.github.io/coincise/raw/kucoin/network_connectivity.md): Welcome to KuCoin’s trader and developer documentation. These documents outline
+- [Rate Limit Docs](https://rosssaunders.github.io/coincise/raw/kucoin/rate_limit_docs.md): The specific rules of REST rate limit are as follows:
+- [Rate Limits](https://rosssaunders.github.io/coincise/raw/kucoin/rate_limits.md): The specific rules of REST rate limit are as follows:
+- [Response Formats](https://rosssaunders.github.io/coincise/raw/kucoin/response_formats.md): All KuCoin API responses follow a standard JSON format:
+- [Spot Api](https://rosssaunders.github.io/coincise/raw/kucoin/rest/spot_api.md): <a id="opId001"></a>
+- [Spot Api](https://rosssaunders.github.io/coincise/raw/kucoin/ws/spot_api.md): > Code samples
+- [Spot Market](https://rosssaunders.github.io/coincise/raw/kucoin/rest/spot/spot-market.md): <a id="opId001"></a>
+- [Spot Order](https://rosssaunders.github.io/coincise/raw/kucoin/rest/spot/spot-order.md): <a id="opId001"></a>
+- [Spot Private](https://rosssaunders.github.io/coincise/raw/kucoin/ws/spot/spot-private.md): > Code samples
+- [Spot Public](https://rosssaunders.github.io/coincise/raw/kucoin/ws/spot/spot-public.md): > Code samples
+
+## Public Endpoints
+
+- [GET Get Api V1 Alltickers](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_alltickers.md)
+- [GET Get Api V1 Contract Funding Rates](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_contract_funding_rates.md)
+- [GET Get Api V1 Contracts Active](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_contracts_active.md)
+- [GET Get Api V1 Contracts Symbol](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_contracts_symbol.md)
+- [GET Get Api V1 Funding Rate Symbol Current](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_funding_rate_symbol_current.md)
+- [GET Get Api V1 Index Query](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_index_query.md)
+- [GET Get Api V1 Interest Query](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_interest_query.md)
+- [GET Get Api V1 Isolated Symbols](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_isolated_symbols.md)
+- [GET Get Api V1 Kline Query](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_kline_query.md)
+- [GET Get Api V1 Level2 Depth Size](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_level2_depth_size.md)
+- [GET Get Api V1 Level2 Snapshot](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_level2_snapshot.md)
+- [GET Get Api V1 Margin Config](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_margin_config.md)
+- [GET Get Api V1 Mark Price Symbol Current](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_mark_price_symbol_current.md)
+- [GET Get Api V1 Market Alltickers](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_market_alltickers.md)
+- [GET Get Api V1 Market Callauctiondata](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_market_callauctiondata.md)
+- [GET Get Api V1 Market Candles](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_market_candles.md)
+- [GET Get Api V1 Market Histories](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_market_histories.md)
+- [GET Get Api V1 Market Orderbook Callauction Level2 Size](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_market_orderbook_callauction_level2_size.md)
+- [GET Get Api V1 Market Orderbook Level1](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_market_orderbook_level1.md)
+- [GET Get Api V1 Market Orderbook Level2 Size](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_market_orderbook_level2_size.md)
+- [GET Get Api V1 Market Stats](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_market_stats.md)
+- [GET Get Api V1 Markets](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_markets.md)
+- [GET Get Api V1 My Ip](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_my_ip.md)
+- [GET Get Api V1 Premium Query](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_premium_query.md)
+- [GET Get Api V1 Prices](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_prices.md)
+- [GET Get Api V1 Status](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_status.md)
+- [GET Get Api V1 Ticker](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_ticker.md)
+- [GET Get Api V1 Timestamp](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_timestamp.md)
+- [GET Get Api V1 Trade History](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_trade_history.md)
+- [GET Get Api V1 Trade Statistics](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v1_trade_statistics.md)
+- [GET Get Api V2 Symbols](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v2_symbols.md)
+- [GET Get Api V2 Symbols Symbol](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v2_symbols_symbol.md)
+- [GET Get Api V3 Announcements](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v3_announcements.md)
+- [GET Get Api V3 Currencies](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v3_currencies.md)
+- [GET Get Api V3 Currencies Currency](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v3_currencies_currency.md)
+- [GET Get Api V3 Etf Info](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v3_etf_info.md)
+- [GET Get Api V3 Margin Symbols](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v3_margin_symbols.md)
+- [GET Get Api V3 Mark Price All Symbols](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v3_mark_price_all_symbols.md)
+- [GET Get Api V3 Project Marketinterestrate](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/get_api_v3_project_marketinterestrate.md)
+- [POST Post Api V1 Bullet Public](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/public/post_api_v1_bullet_public.md)
+
+## Private Endpoints
+
+- [DELETE Delete Api V1 Hf Orders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_hf_orders.md)
+- [DELETE Delete Api V1 Hf Orders Cancel Orderid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_hf_orders_cancel_orderid.md)
+- [DELETE Delete Api V1 Hf Orders Cancelall](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_hf_orders_cancelall.md)
+- [DELETE Delete Api V1 Hf Orders Client Order Clientoid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_hf_orders_client_order_clientoid.md)
+- [DELETE Delete Api V1 Hf Orders Orderid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_hf_orders_orderid.md)
+- [DELETE Delete Api V1 Hf Orders Sync Client Order Clientoid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_hf_orders_sync_client_order_clientoid.md)
+- [DELETE Delete Api V1 Hf Orders Sync Orderid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_hf_orders_sync_orderid.md)
+- [DELETE Delete Api V1 Order Client Order Clientoid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_order_client_order_clientoid.md)
+- [DELETE Delete Api V1 Orders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_orders.md)
+- [DELETE Delete Api V1 Orders Client Order Clientoid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_orders_client_order_clientoid.md)
+- [DELETE Delete Api V1 Orders Multi Cancel](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_orders_multi_cancel.md)
+- [DELETE Delete Api V1 Orders Orderid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_orders_orderid.md)
+- [DELETE Delete Api V1 Stop Order Cancel](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_stop_order_cancel.md)
+- [DELETE Delete Api V1 Stop Order Cancelorderbyclientoid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_stop_order_cancelorderbyclientoid.md)
+- [DELETE Delete Api V1 Stop Order Orderid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_stop_order_orderid.md)
+- [DELETE Delete Api V1 Stoporders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v1_stoporders.md)
+- [DELETE Delete Api V3 Hf Margin Orders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v3_hf_margin_orders.md)
+- [DELETE Delete Api V3 Hf Margin Orders Client Order Clientoid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v3_hf_margin_orders_client_order_clientoid.md)
+- [DELETE Delete Api V3 Hf Margin Orders Orderid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v3_hf_margin_orders_orderid.md)
+- [DELETE Delete Api V3 Oco Client Order Clientoid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v3_oco_client_order_clientoid.md)
+- [DELETE Delete Api V3 Oco Order Orderid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v3_oco_order_orderid.md)
+- [DELETE Delete Api V3 Oco Orders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v3_oco_orders.md)
+- [DELETE Delete Api V3 Orders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/delete_api_v3_orders.md)
+- [GET Get Api V1 Contracts Risk Limit Symbol](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_contracts_risk_limit_symbol.md)
+- [GET Get Api V1 Fills](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_fills.md)
+- [GET Get Api V1 Funding History](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_funding_history.md)
+- [GET Get Api V1 Hf Fills](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_hf_fills.md)
+- [GET Get Api V1 Hf Orders Active](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_hf_orders_active.md)
+- [GET Get Api V1 Hf Orders Active Page](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_hf_orders_active_page.md)
+- [GET Get Api V1 Hf Orders Active Symbols](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_hf_orders_active_symbols.md)
+- [GET Get Api V1 Hf Orders Client Order Clientoid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_hf_orders_client_order_clientoid.md)
+- [GET Get Api V1 Hf Orders Dead Cancel All Query](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_hf_orders_dead_cancel_all_query.md)
+- [GET Get Api V1 Hf Orders Done](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_hf_orders_done.md)
+- [GET Get Api V1 Hf Orders Orderid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_hf_orders_orderid.md)
+- [GET Get Api V1 History Positions](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_history_positions.md)
+- [GET Get Api V1 Limit Fills](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_limit_fills.md)
+- [GET Get Api V1 Limit Orders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_limit_orders.md)
+- [GET Get Api V1 Margin Maxwithdrawmargin](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_margin_maxwithdrawmargin.md)
+- [GET Get Api V1 Openorderstatistics](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_openorderstatistics.md)
+- [GET Get Api V1 Order Client Order Clientoid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_order_client_order_clientoid.md)
+- [GET Get Api V1 Orders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_orders.md)
+- [GET Get Api V1 Orders Byclientoid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_orders_byclientoid.md)
+- [GET Get Api V1 Orders Order Id](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_orders_order_id.md)
+- [GET Get Api V1 Orders Orderid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_orders_orderid.md)
+- [GET Get Api V1 Position](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_position.md)
+- [GET Get Api V1 Positions](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_positions.md)
+- [GET Get Api V1 Recentdoneorders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_recentdoneorders.md)
+- [GET Get Api V1 Recentfills](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_recentfills.md)
+- [GET Get Api V1 Stop Order](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_stop_order.md)
+- [GET Get Api V1 Stop Order Orderid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_stop_order_orderid.md)
+- [GET Get Api V1 Stop Order Queryorderbyclientoid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_stop_order_queryorderbyclientoid.md)
+- [GET Get Api V1 Stoporders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v1_stoporders.md)
+- [GET Get Api V2 Batchgetcrossorderlimit](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v2_batchgetcrossorderlimit.md)
+- [GET Get Api V2 Getcrossuserleverage](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v2_getcrossuserleverage.md)
+- [GET Get Api V2 Getmaxopensize](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v2_getmaxopensize.md)
+- [GET Get Api V2 Position Getmarginmode](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v2_position_getmarginmode.md)
+- [GET Get Api V3 Hf Margin Fills](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_hf_margin_fills.md)
+- [GET Get Api V3 Hf Margin Order Active Symbols](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_hf_margin_order_active_symbols.md)
+- [GET Get Api V3 Hf Margin Orders Active](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_hf_margin_orders_active.md)
+- [GET Get Api V3 Hf Margin Orders Client Order Clientoid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_hf_margin_orders_client_order_clientoid.md)
+- [GET Get Api V3 Hf Margin Orders Done](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_hf_margin_orders_done.md)
+- [GET Get Api V3 Hf Margin Orders Orderid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_hf_margin_orders_orderid.md)
+- [GET Get Api V3 Margin Borrow](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_margin_borrow.md)
+- [GET Get Api V3 Margin Currencies](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_margin_currencies.md)
+- [GET Get Api V3 Margin Interest](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_margin_interest.md)
+- [GET Get Api V3 Margin Repay](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_margin_repay.md)
+- [GET Get Api V3 Market Orderbook Level2](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_market_orderbook_level2.md)
+- [GET Get Api V3 Oco Client Order Clientoid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_oco_client_order_clientoid.md)
+- [GET Get Api V3 Oco Order Details Orderid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_oco_order_details_orderid.md)
+- [GET Get Api V3 Oco Order Orderid](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_oco_order_orderid.md)
+- [GET Get Api V3 Oco Orders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_oco_orders.md)
+- [GET Get Api V3 Project List](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_project_list.md)
+- [GET Get Api V3 Purchase Orders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_purchase_orders.md)
+- [GET Get Api V3 Redeem Orders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/get_api_v3_redeem_orders.md)
+- [POST Post Api V1 Bullet Private](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_bullet_private.md)
+- [POST Post Api V1 Hf Orders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_hf_orders.md)
+- [POST Post Api V1 Hf Orders Alter](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_hf_orders_alter.md)
+- [POST Post Api V1 Hf Orders Dead Cancel All](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_hf_orders_dead_cancel_all.md)
+- [POST Post Api V1 Hf Orders Multi](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_hf_orders_multi.md)
+- [POST Post Api V1 Hf Orders Multi Sync](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_hf_orders_multi_sync.md)
+- [POST Post Api V1 Hf Orders Sync](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_hf_orders_sync.md)
+- [POST Post Api V1 Hf Orders Test](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_hf_orders_test.md)
+- [POST Post Api V1 Margin Order](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_margin_order.md)
+- [POST Post Api V1 Margin Order Test](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_margin_order_test.md)
+- [POST Post Api V1 Margin Withdrawmargin](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_margin_withdrawmargin.md)
+- [POST Post Api V1 Orders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_orders.md)
+- [POST Post Api V1 Orders Multi](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_orders_multi.md)
+- [POST Post Api V1 Orders Test](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_orders_test.md)
+- [POST Post Api V1 Position Margin Auto Deposit Status](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_position_margin_auto_deposit_status.md)
+- [POST Post Api V1 Position Margin Deposit Margin](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_position_margin_deposit_margin.md)
+- [POST Post Api V1 Position Risk Limit Level Change](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_position_risk_limit_level_change.md)
+- [POST Post Api V1 St Orders](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_st_orders.md)
+- [POST Post Api V1 Stop Order](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v1_stop_order.md)
+- [POST Post Api V2 Changecrossuserleverage](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v2_changecrossuserleverage.md)
+- [POST Post Api V2 Position Batchchangemarginmode](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v2_position_batchchangemarginmode.md)
+- [POST Post Api V2 Position Changemarginmode](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v2_position_changemarginmode.md)
+- [POST Post Api V3 Hf Margin Order](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v3_hf_margin_order.md)
+- [POST Post Api V3 Hf Margin Order Test](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v3_hf_margin_order_test.md)
+- [POST Post Api V3 Lend Purchase Update](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v3_lend_purchase_update.md)
+- [POST Post Api V3 Margin Borrow](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v3_margin_borrow.md)
+- [POST Post Api V3 Margin Repay](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v3_margin_repay.md)
+- [POST Post Api V3 Oco Order](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v3_oco_order.md)
+- [POST Post Api V3 Position Update User Leverage](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v3_position_update_user_leverage.md)
+- [POST Post Api V3 Purchase](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v3_purchase.md)
+- [POST Post Api V3 Redeem](https://rosssaunders.github.io/coincise/raw/kucoin/endpoints/private/post_api_v3_redeem.md)

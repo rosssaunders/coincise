@@ -1,0 +1,75 @@
+site_name: Coincise - Crypto API Documentation
+site_description: LLM-friendly cryptocurrency exchange API documentation
+site_url: https://rosssaunders.github.io/coincise/
+repo_url: https://github.com/rosssaunders/coincise
+repo_name: rosssaunders/coincise
+
+# Read from existing docs/ without modification
+docs_dir: ../docs
+site_dir: ../dist
+
+theme:
+  name: material
+  custom_dir: overrides
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+
+# Disable search entirely to avoid Material search plugin conflict
+# with docs that have 'search: true' in YAML frontmatter (from KuCoin Widdershins output)
+plugins:
+  - awesome-pages:
+      collapse_single_pages: false
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/rosssaunders/coincise
+
+extra_css:
+  - stylesheets/extra.css

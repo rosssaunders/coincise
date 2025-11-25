@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block announce %}
+<strong>LLM Resources:</strong>
+<a href="{{ config.site_url }}llms.txt">llms.txt</a> |
+<a href="{{ config.site_url }}llms-full.txt">Full Index</a> |
+<a href="{{ config.site_url }}api/index.json">JSON API</a> |
+<a href="{{ config.site_url }}raw/">Raw Markdown</a>
+{% endblock %}

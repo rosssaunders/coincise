@@ -1,0 +1,48 @@
+# Upbit API Documentation
+
+> 36 documentation files | ~47k tokens
+
+## General Documentation
+
+- [Authentication](https://rosssaunders.github.io/coincise/raw/upbit/authentication.md): Please refer to the API documentation for authentication details.
+- [Change Log](https://rosssaunders.github.io/coincise/raw/upbit/change_log.md): Dear Traders,
+- [Error Codes](https://rosssaunders.github.io/coincise/raw/upbit/error_codes.md): Please refer to the API documentation for error code details.
+- [Network Connectivity](https://rosssaunders.github.io/coincise/raw/upbit/network_connectivity.md): Base URL: https://api.upbit.com
+- [Rate Limits](https://rosssaunders.github.io/coincise/raw/upbit/rate_limits.md): Please refer to the API documentation for rate limiting details.
+- [Response Formats](https://rosssaunders.github.io/coincise/raw/upbit/response_formats.md): Please refer to the API documentation for response format details.
+
+## Public Endpoints
+
+- [Days Candles](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/public/days_candles.md)
+- [Listing Market List](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/public/listing_market_list.md)
+- [Months Candles](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/public/months_candles.md)
+- [Order Book List](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/public/order_book_list.md)
+- [Order Book Policy](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/public/order_book_policy.md)
+- [Recent Trades History](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/public/recent_trades_history.md)
+- [Seconds Candles](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/public/seconds_candles.md)
+- [Tickers By Quote Currencies](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/public/tickers_by_quote_currencies.md)
+- [Tickers By Trading Pair](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/public/tickers_by_trading_pair.md)
+- [Wallet Status](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/public/wallet_status.md)
+- [Weeks Candles](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/public/weeks_candles.md)
+- [Years Candles](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/public/years_candles.md)
+
+## Private Endpoints
+
+- [Allowlisted Withdrawal Address](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/allowlisted_withdrawal_address.md)
+- [Available Balance Information](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/available_balance_information.md)
+- [Available Deposit Information](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/available_deposit_information.md)
+- [Available Order Information](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/available_order_information.md)
+- [Cancel And New Order](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/cancel_and_new_order.md)
+- [Deposit Address Generation](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/deposit_address_generation.md)
+- [Deposit List Inquiry](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/deposit_list_inquiry.md)
+- [Digital Asset Withdrawal](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/digital_asset_withdrawal.md)
+- [General Deposit Address Inquiry](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/general_deposit_address_inquiry.md)
+- [Individual Deposit Address Inquiry](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/individual_deposit_address_inquiry.md)
+- [Individual Deposit Inquiry](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/individual_deposit_inquiry.md)
+- [Individual Order Inquiry](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/individual_order_inquiry.md)
+- [Individual Withdrawal Inquiry](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/individual_withdrawal_inquiry.md)
+- [Order](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/order.md)
+- [Order Cancel](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/order_cancel.md)
+- [Order List Cancel](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/order_list_cancel.md)
+- [Overall Account Inquiry](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/overall_account_inquiry.md)
+- [Withdrawal List Inquiry](https://rosssaunders.github.io/coincise/raw/upbit/endpoints/private/withdrawal_list_inquiry.md)

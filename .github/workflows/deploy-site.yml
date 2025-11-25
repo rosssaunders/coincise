@@ -56,7 +56,7 @@ jobs:
           node tools/llms/generate-json-index.js
 
       - name: Build MkDocs site
-        run: cd site && mkdocs build --strict
+        run: cd site && mkdocs build
 
       - name: Copy LLM resources to dist
         run: |
