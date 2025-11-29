@@ -5,7 +5,6 @@ language_tabs:
   - python: Python
 toc_footers: []
 includes: []
-search: true
 highlight_theme: darkula
 headingLevel: 2
 ---

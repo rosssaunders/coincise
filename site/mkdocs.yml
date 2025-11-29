@@ -34,9 +34,8 @@ theme:
   icon:
     repo: fontawesome/brands/github
 
-# Disable search entirely to avoid Material search plugin conflict
-# with docs that have 'search: true' in YAML frontmatter (from KuCoin Widdershins output)
 plugins:
+  - search
   - awesome-pages:
       collapse_single_pages: false
 
