@@ -1,3 +1,25 @@
 nav:
-  - Venues:
-      - ...
+  - Home: index.md
+  - Top Tier:
+      - Binance: binance
+      - Coinbase: coinbase
+      - OKX: okx
+      - Bybit: bybit
+      - KuCoin: kucoin
+      - Gate.io: gateio
+      - HTX: htx
+  - Growth:
+      - Bitget: bitget
+      - MEXC: mexc
+      - BingX: bingx
+      - BitMart: bitmart
+      - XT: xt
+      - DigiFinex: digifinex
+      - Upbit: upbit
+      - Bitfinex: bitfinex
+  - Specialized:
+      - Deribit: deribit
+      - Hyperliquid: hyperliquid
+      - Bullish: bullish
+      - Backpack: backpack
+      - Crypto.com: cryptocom
