@@ -1,0 +1,97 @@
+# GET /api/v5/account/bills-history-archive
+
+Source:
+[https://www.okx.com/docs-v5/en/#trading-account-rest-api-get-bills-details-since-2021](https://www.okx.com/docs-v5/en/#trading-account-rest-api-get-bills-details-since-2021)
+
+### Get bills details (since 2021)
+
+Apply for bill data since 1 February, 2021 except for the current quarter.
+
+#### Rate Limit: 10 requests per 2 seconds
+
+#### Rate limit rule: User ID
+
+#### Permission: Read
+
+#### HTTP Request
+
+`GET /api/v5/account/bills-history-archive`
+
+#### Request Parameters
+
+| Parameter | Type   | Required | Description                                    |
+| --------- | ------ | -------- | ---------------------------------------------- |
+| year      | String | Yes      | 4 digits year                                  |
+| quarter   | String | Yes      | Quarter, valid value is `Q1`, `Q2`, `Q3`, `Q4` |
+
+#### Response Parameters
+
+| **Parameter**                                                                                                                                              | **Type** | **Description**                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------ |
+| fileHref                                                                                                                                                   | String   | Download file link.                                                                                          |
+| The expiration of every link is 5 and a half hours. If you already apply the files for the same quarter, then it don’t need to apply again within 30 days. |
+| ts                                                                                                                                                         | String   | The first request time when the server receives. Unix timestamp format in milliseconds, e.g. `1597026383085` |
+| state                                                                                                                                                      | String   | Download link status                                                                                         |
+| "finished" "ongoing" "failed": Failed, please apply again                                                                                                  |
+
+It is only applicable to the data from the unified account.
+
+#### Field descriptions in the decompressed CSV file
+
+| **Parameter** | **Type** | **Description**                                                                                       |
+| ------------- | -------- | ----------------------------------------------------------------------------------------------------- |
+| instType      | String   | Instrument type                                                                                       |
+| billId        | String   | Bill ID                                                                                               |
+| subType       | String   | Bill subtype                                                                                          |
+| ts            | String   | The time when the balance complete update, Unix timestamp format in milliseconds, e.g.`1597026383085` |
+| balChg        | String   | Change in balance amount at the account level                                                         |
+| posBalChg     | String   | Change in balance amount at the position level                                                        |
+| bal           | String   | Balance at the account level                                                                          |
+| posBal        | String   | Balance at the position level                                                                         |
+| sz            | String   | Quantity                                                                                              |
+| px            | String   | Price which related to subType                                                                        |
+
+- Trade filled price for `1`: Buy `2`: Sell `3`: Open long `4`: Open short `5`:
+  Close long `6`: Close short `204`: block trade buy `205`: block trade sell
+  `206`: block trade open long `207`: block trade open short `208`: block trade
+  close long `209`: block trade close short `114`: Forced repayment buy `115`:
+  Forced repayment sell
+- Liquidation Price for `100`: Partial liquidation close long `101`: Partial
+  liquidation close short `102`: Partial liquidation buy `103`: Partial
+  liquidation sell `104`: Liquidation long `105`: Liquidation short `106`:
+  Liquidation buy `107`: Liquidation sell `16`: Repay forcibly `17`: Repay
+  interest by borrowing forcibly `110`: Liquidation transfer in `111`:
+  Liquidation transfer out
+- Delivery price for `112`: Delivery long `113`: Delivery short
+- Exercise price for `170`: Exercised `171`: Counterparty exercised `172`:
+  Expired OTM
+- Mark price for `173`: Funding fee expense `174`: Funding fee income | | ccy |
+  String | Account balance currency | | pnl | String | Profit and loss | | fee |
+  String | Fee  
+  Negative number represents the user transaction fee charged by the platform.  
+  Positive number represents rebate.  
+  [Trading fee rule](/en/fees) | | mgnMode | String | Margin mode  
+  `isolated` `cross` `cash`  
+  When bills are not generated by trading, the field returns "" | | instId |
+  String | Instrument ID, e.g. `BTC-USDT` | | ordId | String | Order ID  
+  Return order ID when the type is `2`/`5`/`9`  
+  Return "" when there is no order. | | execType | String | Liquidity taker or
+  maker  
+  `T`: taker `M`: maker | | interest | String | Interest | | tag | String |
+  Order tag | | fillTime | String | Last filled time | | tradeId | String | Last
+  traded ID | | clOrdId | String | Client Order ID as assigned by the client  
+  A combination of case-sensitive alphanumerics, all numbers, or all letters of
+  up to 32 characters. | | fillIdxPx | String | Index price at the moment of
+  trade execution  
+  For cross currency spot pairs, it returns baseCcy-USDT index price. For
+  example, for LTC-ETH, this field returns the index price of LTC-USDT. | |
+  fillMarkPx | String | Mark price when filled  
+  Applicable to FUTURES/SWAP/OPTIONS, return "" for other instrument types | |
+  fillPxVol | String | Implied volatility when filled  
+  Only applicable to options; return "" for other instrument types | | fillPxUsd
+  | String | Options price when filled, in the unit of USD  
+  Only applicable to options; return "" for other instrument types | |
+  fillMarkVol | String | Mark volatility when filled  
+  Only applicable to options; return "" for other instrument types | | fillFwdPx
+  | String | Forward price when filled  
+  Only applicable to options; return "" for other instrument types |
