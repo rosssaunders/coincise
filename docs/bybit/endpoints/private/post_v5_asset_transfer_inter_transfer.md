@@ -3,12 +3,6 @@
 Create the internal transfer between different
 [account types](/docs/v5/enum#accounttype) under the same UID.
 
-tip
-
-- Please refer to
-  [transferable coin list API](/docs/v5/asset/transfer/transferable-coin) to
-  find out more.
-
 ### HTTP Request[​](#http-request "Direct link to heading")
 
 POST `/v5/asset/transfer/inter-transfer`

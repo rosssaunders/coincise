@@ -9,30 +9,15 @@ info
   wallet for auto-transfer after deposit by this API.
 - Only **main** UID can access.
 
-tip
-
-- [UTA2.0](/docs/v5/acct-mode#uta-20) has `FUND`, `UNIFIED`
-- [UTA1.0](/docs/v5/acct-mode#uta-10) has `FUND`, `UNIFIED`, `CONTRACT`(for
-  inverse derivatives)
-- Classic account has `FUND`, `CONTRACT`(for inverse derivatives and
-  derivatives), `SPOT`
-
 ### HTTP Request[​](#http-request "Direct link to heading")
 
 POST `/v5/asset/deposit/deposit-to-account`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                                | Required | Type   | Comments     |
-| :--------------------------------------- | :------- | :----- | ------------ |
-| [accountType](/docs/v5/enum#accounttype) | **true** | string | Account type |
-
-- `UNIFIED`
-- `SPOT`
-- `CONTRACT`
-- `FUND`
-
-|
+| Parameter                                | Required | Type   | Comments                       |
+| :--------------------------------------- | :------- | :----- | ------------------------------ |
+| [accountType](/docs/v5/enum#accounttype) | **true** | string | Account type `UNIFIED`, `FUND` |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 

@@ -8,19 +8,12 @@ POST `/v5/position/set-auto-add-margin`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                          | Required | Type   | Comments     |
-| :--------------------------------- | :------- | :----- | ------------ |
-| [category](/docs/v5/enum#category) | **true** | string | Product type |
-
-- [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10):
-  `linear` (USDT Contract, USDC Contract)
-- Classic account: `linear` (USDT Perps)
-
-| | symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only | |
-autoAddMargin | **true** | integer | Turn on/off. `0`: off. `1`: on | |
-[positionIdx](/docs/v5/enum#positionidx) | false | integer | Used to identify
-positions in different position modes. For hedge mode position, this param is
-**required**
+| Parameter                                | Required | Type    | Comments                                                                                                    |
+| :--------------------------------------- | :------- | :------ | ----------------------------------------------------------------------------------------------------------- |
+| [category](/docs/v5/enum#category)       | **true** | string  | Product type `linear` (USDT Contract, USDC Contract)                                                        |
+| symbol                                   | **true** | string  | Symbol name, like `BTCUSDT`, uppercase only                                                                 |
+| autoAddMargin                            | **true** | integer | Turn on/off. `0`: off. `1`: on                                                                              |
+| [positionIdx](/docs/v5/enum#positionidx) | false    | integer | Used to identify positions in different position modes. For hedge mode position, this param is **required** |
 
 - `0`: one-way mode
 - `1`: hedge-mode Buy side

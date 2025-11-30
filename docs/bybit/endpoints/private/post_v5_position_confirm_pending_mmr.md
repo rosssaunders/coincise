@@ -14,14 +14,10 @@ POST `/v5/position/confirm-pending-mmr`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                          | Required | Type   | Comments     |
-| :--------------------------------- | :------- | :----- | ------------ |
-| [category](/docs/v5/enum#category) | **true** | string | Product type |
-
-- Unified account: `linear`, `inverse`
-- Classic account: `linear`, `inverse`
-
-| | symbol | **true** | string | Symbol name |
+| Parameter                          | Required | Type   | Comments                         |
+| :--------------------------------- | :------- | :----- | -------------------------------- |
+| [category](/docs/v5/enum#category) | **true** | string | Product type `linear`, `inverse` |
+| symbol                             | **true** | string | Symbol name                      |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 

@@ -2,8 +2,6 @@
 
 Set the user's maximum leverage in spot cross margin
 
-> **Covers: Margin trade (Unified Account)**
-
 caution
 
 Your account needs to activate spot margin first; i.e., you must have finished

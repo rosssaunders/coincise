@@ -8,11 +8,11 @@ GET `/v5/order/spot-borrow-check`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                          | Required | Type   | Comments                                                                                       |
-| :--------------------------------- | :------- | :----- | ---------------------------------------------------------------------------------------------- |
-| [category](/docs/v5/enum#category) | **true** | string | Product type- [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10): `spot` |
-| symbol                             | **true** | string | Symbol name                                                                                    |
-| side                               | **true** | string | Transaction side. `Buy`,`Sell`                                                                 |
+| Parameter                          | Required | Type   | Comments                       |
+| :--------------------------------- | :------- | :----- | ------------------------------ |
+| [category](/docs/v5/enum#category) | **true** | string | Product type `spot`            |
+| symbol                             | **true** | string | Symbol name                    |
+| side                               | **true** | string | Transaction side. `Buy`,`Sell` |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 

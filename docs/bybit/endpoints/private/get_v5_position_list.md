@@ -5,15 +5,10 @@ etc.
 
 info
 
-**[UTA2.0](/docs/v5/acct-mode#uta-20)(inverse)**
+**category="inverse"**
 
 1.  You can query all open positions with `/v5/position/list?category=inverse`;
 2.  Cannot query multiple symbols in one request
-
-**[UTA1.0](/docs/v5/acct-mode#uta-10)(inverse) & Classic (inverse)**
-
-1.  You can query all open positions with `/v5/position/list?category=inverse`;
-2.  `symbol` parameter can pass up to 10 symbols, e.g., `symbol=BTCUSD,ETHUSD`
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -21,15 +16,10 @@ GET `/v5/position/list`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                          | Required | Type   | Comments     |
-| :--------------------------------- | :------- | :----- | ------------ |
-| [category](/docs/v5/enum#category) | **true** | string | Product type |
-
-- [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10):
-  `linear`, `inverse`, `option`
-- Classic account: `linear`, `inverse`
-
-| | symbol | false | string | Symbol name, like `BTCUSDT`, uppercase only
+| Parameter                          | Required | Type   | Comments                                    |
+| :--------------------------------- | :------- | :----- | ------------------------------------------- |
+| [category](/docs/v5/enum#category) | **true** | string | Product type `linear`, `inverse`, `option`  |
+| symbol                             | false    | string | Symbol name, like `BTCUSDT`, uppercase only |
 
 - If `symbol` passed, it returns data regardless of having position or not.
 - If `symbol`\=null and `settleCoin` specified, it returns position size greater
@@ -58,31 +48,17 @@ result set |
 
 | | \> riskId | integer | Risk tier ID  
 _for portfolio margin mode, this field returns 0, which means risk limit rules
-are invalid_ | | \> riskLimitValue | string | Risk limit value  
+are invalid_ | | \> riskLimitValue | string | Risk limit value, become
+meaningless when auto risk-limit tier is applied  
 _for portfolio margin mode, this field returns 0, which means risk limit rules
 are invalid_ | | \> symbol | string | Symbol name | | \> side | string |
-Position side. `Buy`: long, `Sell`: short
-
-- one-way mode: classic & [UTA1.0](/docs/v5/acct-mode#uta-10)(inverse), an empty
-  position returns `None`.
-- [UTA2.0](/docs/v5/acct-mode#uta-20)(linear, inverse) &
-  [UTA1.0](/docs/v5/acct-mode#uta-10)(linear): either one-way or hedge mode
-  returns an empty string `""` for an empty position.
-
-| | \> size | string | Position size, always positive | | \> avgPrice | string |
-Average entry price- For USDC Perp & Futures, it indicates average entry price,
-and it will not be changed with 8-hour session settlement | | \> positionValue |
-string | Position value | | \> tradeMode | integer | Trade mode
-
-- Classic & [UTA1.0](/docs/v5/acct-mode#uta-10)(inverse): `0`: cross-margin,
-  `1`: isolated margin
-- [UTA2.0](/docs/v5/acct-mode#uta-20),
-  [UTA1.0](/docs/v5/acct-mode#uta-10)(execpt inverse): deprecated, always `0`,
-  check [Get Account Info](/docs/v5/account/account-info) to know the margin
-  mode
-
-| | \> autoAddMargin | integer | Whether to add margin automatically when using
-isolated margin mode- `0`: false
+Position side. `Buy`: long, `Sell`: short  
+return an empty string `""` for an empty position | | \> size | string |
+Position size, always positive | | \> avgPrice | string | Average entry price-
+For USDC Perp & Futures, it indicates average entry price, and it will not be
+changed with 8-hour session settlement | | \> positionValue | string | Position
+value | | \> autoAddMargin | integer | Whether to add margin automatically when
+using isolated margin mode- `0`: false
 
 - `1`: true | | \> [positionStatus](/docs/v5/enum#positionstatus) | String |
   Position status. `Normal`, `Liq`, `Adl` | | \> leverage | string | Position
@@ -91,42 +67,32 @@ isolated margin mode- `0`: false
   are invalid_ | | \> markPrice | string | Mark price | | \> liqPrice | string |
   Position liquidation price
 
-- [UTA2.0](/docs/v5/acct-mode#uta-20)(isolated margin),
-  [UTA1.0](/docs/v5/acct-mode#uta-10)(isolated margin),
-  [UTA1.0](/docs/v5/acct-mode#uta-10)(inverse), Classic account:  
+- Isolated margin:  
   it is the real price for isolated and cross positions, and keeps `""` when
   liqPrice <= minPrice or liqPrice >= maxPrice
-- [UTA2.0](/docs/v5/acct-mode#uta-20)(Cross margin),
-  [UTA1.0](/docs/v5/acct-mode#uta-10)(Cross margin):  
+- Cross margin:  
   it is an **estimated** price for cross positions(because the unified mode
   controls the risk rate according to the account), and keeps `""` when liqPrice
   <= minPrice or liqPrice >= maxPrice
 
 _this field is empty for Portfolio Margin Mode, and no liquidation price will be
-provided_ | | \> bustPrice | string | Bankruptcy price: Only applicable to the
-classic account | | \> positionIM | string | Initial margin- Classic &
-[UTA1.0](/docs/v5/acct-mode#uta-10)(inverse): ignore this field
-
-- UTA portfolio margin mode, it returns "" | | \> positionIMByMp | string |
-  Initial margin calculated by mark price- Classic &
-  [UTA1.0](/docs/v5/acct-mode#uta-10)(inverse) : ignore this field
-- UTA portfolio margin mode, it returns "" | | \> positionMM | string |
-  Maintenance margin- Classic & [UTA1.0](/docs/v5/acct-mode#uta-10)(inverse):
-  ignore this field
-- UTA portfolio margin mode, it returns "" | | \> positionMMByMp | string |
-  Maintenance margin calculated by mark price- Classic &
-  [UTA1.0](/docs/v5/acct-mode#uta-10)(inverse) : ignore this field
-- UTA portfolio margin mode, it returns "" | | \> positionBalance | string |
-  Position margin- Classic & [UTA1.0](/docs/v5/acct-mode#uta-10)(inverse) can
-  refer to this field to get the position initial margin plus position closing
-  fee | | \> takeProfit | string | Take profit price | | \> stopLoss | string |
-  Stop loss price | | \> trailingStop | string | Trailing stop (The distance
-  from market price) | | \> sessionAvgPrice | string | USDC contract session avg
-  price, it is the same figure as avg entry price shown in the web UI | | \>
-  delta | string | Delta | | \> gamma | string | Gamma | | \> vega | string |
-  Vega | | \> theta | string | Theta | | \> unrealisedPnl | string | Unrealised
-  PnL | | \> curRealisedPnl | string | The realised PnL for the current holding
-  position | | \> cumRealisedPnl | string | Cumulative realised pnl
+provided_ | | \> positionIM | string | Initial margin, the same value as
+`positionIMByMp`, please note this change
+[The New Margin Calculation: Adjustments and Implications](https://www.bybit.com/en/help-center/article/Understanding-the-Adjustment-and-Impact-of-the-New-Margin-Calculation)-
+Portfolio margin mode: returns "" | | \> positionIMByMp | string | Initial
+margin calculated by mark price, the same value as `positionIM`- Portfolio
+margin mode: returns "" | | \> positionMM | string | Maintenance margin, the
+same value as `positionMMByMp`- Portfolio margin mode: returns "" | | \>
+positionMMByMp | string | Maintenance margin calculated by mark price, the same
+value as `positionMM`- Portfolio margin mode: returns "" | | \> takeProfit |
+string | Take profit price | | \> stopLoss | string | Stop loss price | | \>
+trailingStop | string | Trailing stop (the distance from market price) | | \>
+sessionAvgPrice | string | USDC contract session avg price, it is the same
+figure as avg entry price shown in the web UI | | \> delta | string | Delta | |
+\> gamma | string | Gamma | | \> vega | string | Vega | | \> theta | string |
+Theta | | \> unrealisedPnl | string | Unrealised PnL | | \> curRealisedPnl |
+string | The realised PnL for the current holding position | | \> cumRealisedPnl
+| string | Cumulative realised pnl
 
 - Futures & Perps: it is the all time cumulative realised P&L
 - Option: always "", meaningless
@@ -179,7 +145,11 @@ position update
 - Only meaningful for isolated margin & cross margin of USDT Perp, USDC Perp,
   USDC Futures, Inverse Perp and Inverse Futures, meaningless for others
 
-| | \> tpslMode | string | deprecated, always "Full" |
+| | \> tpslMode | string | **Deprecated**, always "Full" | | \> bustPrice |
+string | **Deprecated**, always `""` | | \> positionBalance | string |
+**Deprecated**, can refer to `positionIM` or `positionIMByMp` field | | \>
+tradeMode | integer | **Deprecated**, always `0`, check
+[Get Account Info](/docs/v5/account/account-info) to know the margin mode |
 
 [RUN >>](/docs/api-explorer/v5/position/position-info)
 

@@ -32,16 +32,11 @@ POST `/v5/position/set-tpsl-mode`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                          | Required | Type   | Comments     |
-| :--------------------------------- | :------- | :----- | ------------ |
-| [category](/docs/v5/enum#category) | **true** | string | Product type |
-
-- Unified account: `linear`, `inverse`
-- Classic account: `linear`, `inverse`. _Please note that `category` is **not**
-  involved with business logic_
-
-| | symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only | |
-tpSlMode | **true** | string | TP/SL mode. `Full`,`Partial` |
+| Parameter                          | Required | Type   | Comments                                    |
+| :--------------------------------- | :------- | :----- | ------------------------------------------- |
+| [category](/docs/v5/enum#category) | **true** | string | Product type `linear`, `inverse`            |
+| symbol                             | **true** | string | Symbol name, like `BTCUSDT`, uppercase only |
+| tpSlMode                           | **true** | string | TP/SL mode. `Full`,`Partial`                |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 

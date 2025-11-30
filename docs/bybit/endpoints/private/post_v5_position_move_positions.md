@@ -3,11 +3,6 @@
 You can move positions between sub-master, master-sub, or sub-sub UIDs when
 necessary
 
-tip
-
-[UTA2.0](/docs/v5/acct-mode#uta-20) inverse contract move position is supported
-now
-
 info
 
 - UIDs must be the same master-sub account relationship
@@ -38,13 +33,9 @@ POST `/v5/position/move-positions`
 - Must be in one-way mode for Futures
 
 | | list | **true** | array | Object. Up to 25 legs per request | | \>
-[category](/docs/v5/enum#category) | **true** | string | Product type
-
-- [UTA2.0](/docs/v5/acct-mode#uta-20):`linear`, `spot`, `option`,`inverse`
-- [UTA1.0](/docs/v5/acct-mode#uta-10): `linear`, `spot`, `option`
-
-| | \> symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only
-| | \> price | **true** | string | Trade price
+[category](/docs/v5/enum#category) | **true** | string | Product type `linear`,
+`spot`, `option`,`inverse` | | \> symbol | **true** | string | Symbol name, like
+`BTCUSDT`, uppercase only | | \> price | **true** | string | Trade price
 
 - `linear`&`inverse`: the price needs to be between \[95% of mark price, 105% of
   mark price\]

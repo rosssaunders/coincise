@@ -12,8 +12,6 @@ tip
   [Get Single Coin Balance](/docs/v5/asset/balance/account-coin-balance) to
   check transfer safe amount.
 - You can not transfer between the same UID.
-- Currently, the funding wallet only supports outgoing transfers in
-  cryptocurrency, not in fiat currency.
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 

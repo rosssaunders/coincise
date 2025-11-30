@@ -86,52 +86,9 @@ forceChain | false | integer | Whether or not to force an on-chain withdrawal
 | | requestId | false | string | Customised ID, globally unique, it is used for
 idempotent verification- A combination of letters (case sensitive) and numbers,
 which can be pure letters or pure numbers and the length must be between 1 and
-32 digits | | beneficiary | false | Object | Travel rule info. It is
-**required** for kyc/kyb=KOR (Korean), kyc=IND (India) users, and users who
-registered in [Bybit Turkey(TR)](https://www.bybit-tr.com/en-TR/),
-[Bybit Kazakhstan(KZ)](https://www.bybit.kz/kk-KAZ/), Bybit Indonesia (ID) | |
-\> vaspEntityId | false | string | Receiver exchange entity Id. Please call this
-[endpoint](/docs/v5/asset/withdraw/vasp-list) to get this ID.- **Required**
-param for Korean users
+32 digits |
 
-- **Ignored by** TR, KZ users | | \> beneficiaryName | false | string | Receiver
-  exchange user KYC name  
-  **Rules for Korean users**:- Please refer to target exchange kyc name
-- When vaspEntityId="others", this field can be null **Rules for TR, KZ, kyc=IND
-  users**: it is a **required** param, fill with individual name or company name
-  | | \> beneficiaryLegalType | false | string | Beneficiary legal type,
-  `individual`(default), `company`- **Required** param for TR, KZ, kyc=IND users
-- Korean users can ignore | | \> beneficiaryWalletType | false | string |
-  Beneficiary wallet type, `0`: custodial/exchange wallet (default), `1`: non
-  custodial/exchane wallet- **Required** param for TR, KZ, kyc=IND users
-- Korean users can ignore | | \> beneficiaryUnhostedWalletType | false | string
-  | Beneficiary unhosted wallet type, `0`: Your own wallet, `1`: others' wallet-
-  **Required** param for TR, KZ, kyc=IND users when "beneficiaryWalletType=1"
-- Korean users can ignore | | \> beneficiaryPoiNumber | false | string |
-  Beneficiary ducument number- **Required** param for TR, KZ users
-- Korean users can ignore | | \> beneficiaryPoiType | false | string |
-  Beneficiary ducument type- **Required** param for TR, KZ users: ID card,
-  Passport, driver license, residence permit, Business ID, etc
-- Korean users can ignore | | \> beneficiaryPoiIssuingCountry | false | string |
-  Beneficiary ducument issuing country- **Required** param for TR, KZ users:
-  refer to [Alpha-3 country code](https://www.iban.com/country-codes)
-- Korean users can ignore | | \> beneficiaryPoiExpiredDate | false | string |
-  Beneficiary ducument expiry date- **Required** param for TR, KZ users:
-  yyyy-mm-dd format, e.g., "1990-02-15"
-- Korean users can ignore | | \> beneficiaryAddressCountry | false | string |
-  Beneficiary country- **Required** param for UAE users only, e.g.,`IDN` | | \>
-  beneficiaryAddressState | false | string | Beneficiary state- **Required**
-  param for UAE users only, e.g., "ABC" | | \> beneficiaryAddressCity | false |
-  string | Beneficiary city- **Required** param for UAE users only, e.g.,
-  "Jakarta" | | \> beneficiaryAddressBuilding | false | string | Beneficiary
-  building address- **Required** param for UAE users only | | \>
-  beneficiaryAddressStreet | false | string | Beneficiary street address-
-  **Required** param for UAE users only | | \> beneficiaryAddressPostalCode |
-  false | string | Beneficiary address post code- **Required** param for UAE
-  users only | | \> beneficiaryDateOfBirth | false | string | Beneficiary date
-  of birth- **Required** param for UAE users only | | \> beneficiaryPlaceOfBirth
-  | false | string | Beneficiary birth place- **Required** param for UAE users
-  onl |
+<table border="0.8"><tbody><tr><td>beneficiary</td><td>false</td><td>Object</td><td>Travel rule info. It is <b>required</b> for kyc/kyb=KOR (Korean), kyc=IND (India) users, and users who registered in <a href="https://www.bybit-tr.com/en-TR/" target="_blank" rel="noopener noreferrer">Bybit Turkey(TR)</a>, <a href="https://www.bybit.kz/kk-KAZ/" target="_blank" rel="noopener noreferrer">Bybit Kazakhstan(KZ)</a>, Bybit Indonesia (ID</td></tr><tr><td>&gt; vaspEntityId</td><td>false</td><td>Object</td><td>Receiver exchange entity Id. Please call this <a href="/docs/v5/asset/withdraw/vasp-list">endpoint</a> to get this ID.<li><b>Required</b> param for Korean users</li><li><b>Ignored by </b>TR, KZ users</li></td></tr><tr><td>&gt; vaspEntityId</td><td>false</td><td>string</td><td>Receiver exchange entity Id. Please call this <a href="/docs/v5/asset/withdraw/vasp-list">endpoint</a> to get this ID.<li><b>Required</b> param for Korean users</li><li><b>Ignored by </b>TR, KZ users</li></td></tr><tr><td>&gt; beneficiaryName</td><td>false</td><td>string</td><td>Receiver exchange user KYC name<br><b>Rules for Korean users</b>:<li>Please refer to target exchange kyc name</li><li>When vaspEntityId="others", this field can be null</li><b>Rules for TR, KZ, kyc=IND users</b>: it is a <b>required</b> param, fill with individual name or company name</td></tr><tr><td>&gt; beneficiaryLegalType</td><td>false</td><td>string</td><td>Beneficiary legal type, <code>individual</code>(default), <code>company</code><li><b>Required</b> param for TR, KZ, kyc=IND users</li><li>Korean users can ignore</li></td></tr><tr><td>&gt; beneficiaryWalletType</td><td>false</td><td>string</td><td>Beneficiary wallet type, <code>0</code>: custodial/exchange wallet (default), <code>1</code>: non custodial/exchane wallet<li><b>Required</b> param for TR, KZ, kyc=IND users</li><li>Korean users can ignore</li></td></tr><tr><td>&gt; beneficiaryUnhostedWalletType</td><td>false</td><td>string</td><td>Beneficiary unhosted wallet type, <code>0</code>: Your own wallet, <code>1</code>: others' wallet<li><b>Required</b> param for TR, KZ, kyc=IND users when "beneficiaryWalletType=1"</li><li>Korean users can ignore</li></td></tr><tr><td>&gt; beneficiaryPoiNumber</td><td>false</td><td>string</td><td>Beneficiary ducument number<li><b>Required</b> param for TR, KZ users</li><li>Korean users can ignore</li></td></tr><tr><td>&gt; beneficiaryPoiType</td><td>false</td><td>string</td><td>Beneficiary ducument type<li><b>Required</b> param for TR, KZ users: ID card, Passport, driver license, residence permit, Business ID, etc</li><li>Korean users can ignore</li></td></tr><tr><td>&gt; beneficiaryPoiIssuingCountry</td><td>false</td><td>string</td><td>Beneficiary ducument issuing country<li><b>Required</b> param for TR, KZ users: refer to <a href="https://www.iban.com/country-codes" target="_blank" rel="noopener noreferrer">Alpha-3 country code</a></li><li>Korean users can ignore</li></td></tr><tr><td>&gt; beneficiaryPoiExpiredDate</td><td>false</td><td>string</td><td>Beneficiary ducument expiry date<li><b>Required</b> param for TR, KZ users: yyyy-mm-dd format, e.g., "1990-02-15"</li><li>Korean users can ignore</li></td></tr><tr><td>&gt; beneficiaryAddressCountry</td><td>false</td><td>string</td><td>Beneficiary country<li><b>Required</b> param for UAE users only, e.g.,<code>IDN</code></li></td></tr><tr><td>&gt; beneficiaryAddressState</td><td>false</td><td>string</td><td>Beneficiary state<li><b>Required</b> param for UAE users only, e.g., "ABC"</li></td></tr><tr><td>&gt; beneficiaryAddressCity</td><td>false</td><td>string</td><td>Beneficiary city<li><b>Required</b> param for UAE users only, e.g., "Jakarta"</li></td></tr><tr><td>&gt; beneficiaryAddressBuilding</td><td>false</td><td>string</td><td>Beneficiary building address<li><b>Required</b> param for UAE users only</li></td></tr><tr><td>&gt; beneficiaryAddressStreet</td><td>false</td><td>string</td><td>Beneficiary street address<li><b>Required</b> param for UAE users only</li></td></tr><tr><td>&gt; beneficiaryAddressPostalCode</td><td>false</td><td>string</td><td>Beneficiary address post code<li><b>Required</b> param for UAE users only</li></td></tr><tr><td>&gt; beneficiaryDateOfBirth</td><td>false</td><td>string</td><td>Beneficiary date of birth<li><b>Required</b> param for UAE users only</li></td></tr><tr><td>&gt; beneficiaryPlaceOfBirth</td><td>false</td><td>string</td><td>Beneficiary birth place<li><b>Required</b> param for UAE users onl</li></td></tr></tbody></table>
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
@@ -174,7 +131,7 @@ client
   })
 ```
 
-### Response Example[​](#response-example "Direct link to heading")
+### Response Example[​](#response-parameters "Direct link to heading")
 
 ```json
 {

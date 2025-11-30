@@ -2,8 +2,6 @@
 
 Turn on / off spot margin trade
 
-> **Covers: Margin trade (Unified Account)**
-
 caution
 
 Your account needs to activate spot margin first; i.e., you must have finished

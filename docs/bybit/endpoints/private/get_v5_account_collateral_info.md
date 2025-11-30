@@ -30,21 +30,22 @@ GET `/v5/account/collateral-info`
 | | \> freeBorrowAmount | string | The amount of borrowing within your total
 borrowing amount that is exempt from interest charges | | \> borrowAmount |
 string | Borrow amount | | \> otherBorrowAmount | string | The sum of borrowing
-amount for other accounts under the same main account | | \> freeBorrowingAmount
-| string | deprecated field, always return `""`, please refer to
-`freeBorrowingLimit` | | \> availableToBorrow | string | Available amount to
-borrow. This value is shared across main-sub UIDs | | \> borrowable | boolean |
-Whether currency can be borrowed | | \> borrowUsageRate | string | Borrow usage
-rate: sum of main & sub accounts borrowAmount/maxBorrowingAmount, it is an
-actual value, 0.5 means 50% | | \> marginCollateral | boolean | Whether it can
-be used as a margin collateral currency (platform), `true`: YES, `false`: NO-
-When marginCollateral=false, then collateralSwitch is meaningless | | \>
-collateralSwitch | boolean | Whether the collateral is turned on by user (user),
-`true`: ON, `false`: OFF- When marginCollateral=true, then collateralSwitch is
-meaningful | | \> collateralRatio | string | Due to the new Tiered Collateral
-value logic, this field will no longer be accurate starting on February
-19, 2025. Please refer to
+amount for other accounts under the same main account | | \> availableToBorrow |
+string | Available amount to borrow. This value is shared across main-sub UIDs |
+| \> borrowable | boolean | Whether currency can be borrowed | | \>
+borrowUsageRate | string | Borrow usage rate: sum of main & sub accounts
+borrowAmount/maxBorrowingAmount, it is an actual value, 0.5 means 50% | | \>
+marginCollateral | boolean | Whether it can be used as a margin collateral
+currency (platform), `true`: YES, `false`: NO- When marginCollateral=false, then
+collateralSwitch is meaningless | | \> collateralSwitch | boolean | Whether the
+collateral is turned on by user (user), `true`: ON, `false`: OFF- When
+marginCollateral=true, then collateralSwitch is meaningful | | \>
+collateralRatio | string | **Deprecated** field. Due to the new Tiered
+Collateral value logic, this field will no longer be accurate starting on
+February 19, 2025. Please refer to
 [Get Tiered Collateral Ratio](/docs/v5/spot-margin-uta/tier-collateral-ratio) |
+| \> freeBorrowingAmount | string | **Deprecated** field, always return `""`,
+please refer to `freeBorrowingLimit` |
 
 [RUN >>](/docs/api-explorer/v5/account/collateral-info)
 

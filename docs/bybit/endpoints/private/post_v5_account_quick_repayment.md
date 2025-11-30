@@ -4,6 +4,10 @@ You can manually repay the liabilities of Unified account
 
 > **Permission**: USDC Contracts
 
+info
+
+BYUSDT will not be used for repayment.
+
 ### HTTP Request[​](#http-request "Direct link to heading")
 
 POST `/v5/account/quick-repayment`

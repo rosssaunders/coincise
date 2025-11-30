@@ -21,9 +21,7 @@ consultation and application. The default time window is 10 seconds.
 ## Applicable[​](#applicable "Direct link to heading")
 
 Effective for **Inverse Perp / Inverse Futures / USDT Perp / USDT Futures / USDC
-Perp / USDC Futures / Spot / options** ([UTA2.0](/docs/v5/acct-mode#uta-20))  
-Effective for **USDT Perp / USDT Futures / USDC Perp / USDC Futures / Spot /
-options** ([UTA1.0](/docs/v5/acct-mode#uta-10))
+Perp / USDC Futures / Spot / options**
 
 tip
 

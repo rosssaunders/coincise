@@ -2,27 +2,22 @@
 
 You can query moved position data by master UID api key
 
-info
-
-[UTA2.0](/docs/v5/acct-mode#uta-20) inverse contract move position is not
-supported for now
-
 ### HTTP Request[​](#http-request "Direct link to heading")
 
 GET `/v5/position/move-history`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                          | Required | Type   | Comments                                                                                                           |
-| :--------------------------------- | :------- | :----- | ------------------------------------------------------------------------------------------------------------------ |
-| [category](/docs/v5/enum#category) | false    | string | Product type- [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10): `linear`, `spot`, `option` |
-| symbol                             | false    | string | Symbol name, like `BTCUSDT`, uppercase only                                                                        |
-| startTime                          | false    | number | The order creation start timestamp. The interval is 7 days                                                         |
-| endTime                            | false    | number | The order creation end timestamp. The interval is 7 days                                                           |
-| status                             | false    | string | Order status. `Processing`, `Filled`, `Rejected`                                                                   |
-| blockTradeId                       | false    | string | Block trade ID                                                                                                     |
-| limit                              | false    | string | Limit for data size per page. \[`1`, `200`\]. Default: `20`                                                        |
-| cursor                             | false    | string | Cursor. Use the `nextPageCursor` token from the response to retrieve the next page of the result set               |
+| Parameter                          | Required | Type   | Comments                                                                                             |
+| :--------------------------------- | :------- | :----- | ---------------------------------------------------------------------------------------------------- |
+| [category](/docs/v5/enum#category) | false    | string | Product type `linear`, `inverse`, `spot`, `option`                                                   |
+| symbol                             | false    | string | Symbol name, like `BTCUSDT`, uppercase only                                                          |
+| startTime                          | false    | number | The order creation start timestamp. The interval is 7 days                                           |
+| endTime                            | false    | number | The order creation end timestamp. The interval is 7 days                                             |
+| status                             | false    | string | Order status. `Processing`, `Filled`, `Rejected`                                                     |
+| blockTradeId                       | false    | string | Block trade ID                                                                                       |
+| limit                              | false    | string | Limit for data size per page. \[`1`, `200`\]. Default: `20`                                          |
+| cursor                             | false    | string | Cursor. Use the `nextPageCursor` token from the response to retrieve the next page of the result set |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 

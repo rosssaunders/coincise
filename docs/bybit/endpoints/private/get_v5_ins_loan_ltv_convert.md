@@ -2,6 +2,14 @@
 
 Get your loan-to-value (LTV) ratio.
 
+important
+
+In cases where an institutional user makes frequent transfers, LTV calculations
+may become inaccurate, and this endpoint will return retCode = 100016, retMsg =
+"Transfers within your risk unit are too frequent. Please reduce the transfer
+frequency and try again." If you encounter this error, it is recommended to
+reduce the transfer frequency first and retry
+
 ### HTTP Request[​](#http-request "Direct link to heading")
 
 GET `/v5/ins-loan/ltv-convert`

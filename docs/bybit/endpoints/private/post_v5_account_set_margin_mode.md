@@ -2,12 +2,6 @@
 
 Default is regular margin mode
 
-info
-
-- This switch does not work for the inverse trading in
-  [UTA1.0](/docs/v5/acct-mode#uta-10), which margin mode is set per symbol.
-  Please use [Switch Cross/Isolated Margin](/docs/v5/position/cross-isolate)
-
 ### HTTP Request[​](#http-request "Direct link to heading")
 
 POST `/v5/account/set-margin-mode`

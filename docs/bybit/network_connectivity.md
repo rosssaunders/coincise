@@ -1,6 +1,3 @@
-- [](/docs/)
-- Introduction
-
 On this page
 
 # Introduction
@@ -94,14 +91,6 @@ can use to check for any insurance fund updates on the Bybit platform.
 The API documentation has been revised and proofread to improve clarity and
 reduce confusion. Any parts of the previous documentation that were not clear
 have been revised to provide better explanations.
-
-[
-
-Next
-
-Integration Guidance
-
-](/docs/v5/guide)
 
 - [Overview](#overview)
 - [Current API Coverage](#current-api-coverage)

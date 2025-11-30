@@ -2,33 +2,17 @@
 
 Query user's closed profit and loss records
 
-info
-
-- Classic account: the results are sorted by `updatedTime` in descending order.
-- [UTA2.0](/docs/v5/acct-mode#uta-20),
-  [UTA1.0](/docs/v5/acct-mode#uta-10)(except inverse): the results are sorted by
-  `createdTime` in descending order, this will be constant with classic account
-  afterwards
-- [UTA2.0](/docs/v5/acct-mode#uta-20),
-  [UTA1.0](/docs/v5/acct-mode#uta-10)(except inverse): support getting the past
-  730 days historical data
-
 ### HTTP Request[​](#http-request "Direct link to heading")
 
 GET `/v5/position/closed-pnl`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                          | Required | Type   | Comments     |
-| :--------------------------------- | :------- | :----- | ------------ |
-| [category](/docs/v5/enum#category) | **true** | string | Product type |
-
-- [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10):
-  `linear`(USDT Contract, USDC Contract), `inverse`, `option`
-- Classic account: `linear`(USDT Perps), `inverse`
-
-| | symbol | false | string | Symbol name, like `BTCUSDT`, uppercase only | |
-startTime | false | integer | The start timestamp (ms)
+| Parameter                          | Required | Type    | Comments                                            |
+| :--------------------------------- | :------- | :------ | --------------------------------------------------- |
+| [category](/docs/v5/enum#category) | **true** | string  | Product type `linear`(USDT Contract, USDC Contract) |
+| symbol                             | false    | string  | Symbol name, like `BTCUSDT`, uppercase only         |
+| startTime                          | false    | integer | The start timestamp (ms)                            |
 
 - startTime and endTime are not passed, return 7 days by default
 - Only startTime is passed, return range between startTime and startTime+7 days
