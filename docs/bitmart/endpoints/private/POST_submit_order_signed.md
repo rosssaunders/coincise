@@ -45,7 +45,7 @@ oneway mode
 \-`2`\=buy(reduce only)  
 \-`3`\=sell(reduce only)  
 \-`4`\=sell | | leverage | String | No | Order leverage | | open_type | String |
-No | Open type, required at close position  
+No | Open type  
 \-`cross`  
 \-`isolated` | | mode | Int | No | Order mode  
 \-`1`\=GTC(default)  
