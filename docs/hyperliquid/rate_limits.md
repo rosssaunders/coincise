@@ -82,4 +82,4 @@ based rate limiting, but as `n` requests for address-based rate limiting.
 
 [PreviousSigning](/hyperliquid-docs/for-developers/api/signing)[NextActivation gas fee](/hyperliquid-docs/for-developers/api/activation-gas-fee)
 
-Last updated 1 month ago
+Last updated 2 months ago
