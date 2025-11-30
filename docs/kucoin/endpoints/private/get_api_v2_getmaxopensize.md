@@ -19,9 +19,9 @@ Get Maximum Open Position Size.
 | --------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------ |
 | symbol    | required | string  | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
 | price     | required | string  | Order Price                                                                                                        |
-|           |
+|  |
 | leverage  | required | integer | Leverage                                                                                                           |
-|           |
+|  |
 
 ## Responses
 
@@ -33,6 +33,6 @@ Get Maximum Open Position Size.
 | data                 | required | object  |                                                                                                                    |
 | data.symbol          | required | string  | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
 | data.maxBuyOpenSize  | required | integer | Maximum buy size (unit: lot)                                                                                       |
-|                      |
+|  |
 | data.maxSellOpenSize | required | integer | Maximum buy size (unit: lot)                                                                                       |
-|                      |
+|  |

@@ -24,7 +24,7 @@ This interface is to obtain all Spot active stop order lists
 | startAt     | optional | integer | Start time (milisecond)                                                                                                     |
 | endAt       | optional | integer | End time (milisecond)                                                                                                       |
 | currentPage | optional | integer | Current page                                                                                                                |
-|             |
+|  |
 | orderIds    | optional | string  | Comma seperated order ID list                                                                                               |
 | pageSize    | optional | integer | Page size                                                                                                                   |
 | stop        | optional | string  | Order type: stop: stop loss order, oco: oco order                                                                           |
