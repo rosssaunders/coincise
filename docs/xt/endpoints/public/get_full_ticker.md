@@ -42,6 +42,7 @@ Not Required (Public Endpoint)
   "mc": "SUCCESS",
   "ma": [],
   "result": [
+<<<<<<< Updated upstream
     {
       "s": "btc_usdt",
       "t": 1662444879425,
@@ -60,4 +61,24 @@ Not Required (Public Endpoint)
     }
   ]
 }
+=======
+        {
+          "s": "btc_usdt",
+          "t": 1662444879425,
+          "cv": "0.00",
+          "cr": "0.0000",
+          "o": "200.00",
+          "l": "200.00",
+          "h": "200.00",
+          "c": "200.00",
+          "q": "0.002",
+          "v": "0.40",
+          "ap": null,
+          "aq": null,
+          "bp": null,
+          "bq": null
+          }
+      ]
+  }
+>>>>>>> Stashed changes
 ```

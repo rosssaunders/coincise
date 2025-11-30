@@ -29,5 +29,10 @@ Required (Private Endpoint)
 ## Response Example
 
 ```json
-{  "rc": 0,  "mc": "SUCCESS",  "ma": [],  "result": 123456
+{
+  "rc": 0,
+  "mc": "SUCCESS",
+  "ma": [],
+  "result": 123456
+}
 ```
