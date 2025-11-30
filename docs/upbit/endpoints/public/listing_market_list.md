@@ -137,7 +137,7 @@ required
 
 Message describing the cause of the error.
 
-Updated about 1 month ago
+Updated 1 day ago
 
 ---
 
@@ -273,7 +273,7 @@ xxxxxxxxxx
 
 \]
 
-Updated about 1 month ago
+Updated 1 day ago
 
 ---
 
