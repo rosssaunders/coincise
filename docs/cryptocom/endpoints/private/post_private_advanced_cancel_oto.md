@@ -36,7 +36,19 @@ Cancel a OTO order on the Exchange. This call is asynchronous, so the response
 is simply a confirmation of the request. The `user.advanced.order` subscription
 can be used to check when each of the orders is successfully cancelled.
 
-### Request Params
+The `user.order` subscription can be used to check when each of the orders is
+successfully cancelled.
+
+### Request Params (List of Orders)
+
+| Name             | Type            | Required | Description                                                   |
+| ---------------- | --------------- | -------- | ------------------------------------------------------------- |
+| order_list       | array of orders | Y        | For non contingency orders, A list of orders to be cancelled  |
+| instrument_name  | string          | N        | Instrument name of contingency order, e.g., ETH_CRO, BTC_USDT |
+| contingency_type | string          | Y        | Must be value "LIST"                                          |
+| `order_list`     | array of orders | Y        | `LIST`: 1-10 orders                                           |
+
+Content of each order in `order_list`
 
 | Name    | Type   | Required | Description |
 | ------- | ------ | -------- | ----------- |

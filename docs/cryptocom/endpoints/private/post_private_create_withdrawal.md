@@ -71,7 +71,7 @@ yet available for you.
 
 ### Applies To
 
-REST Websocket (User API)
+REST
 
 ### REST Method
 

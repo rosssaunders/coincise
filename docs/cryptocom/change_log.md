@@ -1,5 +1,8 @@
 ## Breaking Change Schedule
 
+- On 2025-12-17 8:00 UTC,  
+  The current trigger order creation/cancellation will be migrated to Advanced
+  Order Management API.
 - On 2025-02-27 8:00 UTC,  
   For `book.{instrument_name}.{depth}`, the full snapshot subscription
   (`book_subscription_type=SNAPSHOT`) `100ms` frequency is removed.  
@@ -22,6 +25,12 @@
   instrument specific subscription.
 
 ## Change Logs
+
+- 2025-03-26
+  - `transaction_time` was added into `user.order.{instrument_name}`
+
+- 2025-11-18
+  - `public/get-risk-parameters` was added new columns
 
 - 2025-10-16
   - `Advanced Order Management API` section was updated
