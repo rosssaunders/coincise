@@ -79,8 +79,6 @@ string
 
 required
 
-Defaults to trade:1m:tBTCUSD
-
 Check [Available candles](/reference/rest-public-candles#available-candles)
 table to understand how to compose this argument.
 
@@ -89,8 +87,6 @@ section
 string
 
 required
-
-Defaults to hist
 
 Available values: "last", "hist".
 
@@ -123,9 +119,3 @@ int32
 Number of records in response (max. 10000).
 
 Response
-
-curl \--request GET \\
-
-     \--url https://api-pub.bitfinex.com/v2/candles/trade%3A1m%3AtBTCUSD/hist \\
-
-     \--header 'accept: application/json'

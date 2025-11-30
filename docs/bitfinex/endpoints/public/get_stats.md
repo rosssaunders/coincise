@@ -56,8 +56,6 @@ string
 
 required
 
-Defaults to pos.size
-
 Available keys: "funding.size", "credits.size", "credits.size.sym", "pos.size",
 "vol.1d", "vol.7d", "vol.30d", "vwap"
 
@@ -66,8 +64,6 @@ size
 string
 
 required
-
-Defaults to 1m
 
 Available values: '1m' (for keys: "pos.size", "funding.size", "credits.size",
 "credits.size.sym"), "30m" (for keys: vol.1d, vol.7d, vol.30d), "1d" (for keys:
@@ -79,8 +75,6 @@ string
 
 required
 
-Defaults to tBTCUSD
-
 The symbol you want information about. (e.g. tBTCUSD, tETHUSD, fUSD, fBTC) (used
 for keys: "pos.size", "funding.size", "credits.size", "credits.size.sym",
 "vwap", "vol1d/7d/30d").
@@ -91,8 +85,6 @@ string
 
 required
 
-Defaults to long
-
 Used to specify the side for "pos.size" key. Available values: "long", "short".
 Only for non-funding queries. Used to specify the trading pair on
 credits.size.sym.
@@ -102,8 +94,6 @@ section
 string
 
 required
-
-Defaults to hist
 
 Available values: "last", "hist".
 
@@ -136,9 +126,3 @@ int32
 Number of records in response (max. 10000).
 
 Response
-
-curl \--request GET \\
-
-     \--url https://api-pub.bitfinex.com/v2/stats1/pos.size:1m:tBTCUSD:long/hist \\
-
-     \--header 'accept: application/json'

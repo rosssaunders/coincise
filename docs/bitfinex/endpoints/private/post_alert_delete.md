@@ -19,34 +19,10 @@ string
 
 required
 
-Defaults to tBTCUSD
-
 price
 
 string
 
 required
 
-Defaults to 600
-
-Body Params
-
 RAW_BODY
-
-json
-
-Defaults to {}
-
-{}
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/alert/price:tBTCUSD:600/del \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '{}'

@@ -48,11 +48,7 @@ string
 
 required
 
-Defaults to tBTCUSD
-
 The symbol for which to retrieve trade history (e.g. tBTCUSD, tETHUSD, ...).
-
-Body Params
 
 start
 
@@ -81,11 +77,3 @@ int32
 +1: sort in ascending order | -1: sort in descending order (by MTS field).
 
 Response
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/trades/tBTCUSD/hist \\
-
-     \--header 'Content-Type: application/json' \\
-
-     \--header 'accept: application/json'

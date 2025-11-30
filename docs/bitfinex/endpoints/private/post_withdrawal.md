@@ -89,15 +89,11 @@ Withdrawal array (Index [4])
 | [5]   | AMOUNT         | Int    | Amount of the withdrawal                                            |
 | [8]   | WITHDRAWAL_FEE | Int    | Fee on withdrawal                                                   |
 
-Body Params
-
 wallet
 
 string
 
 required
-
-Defaults to trading
 
 Select the wallet from which to transfer (exchange, margin, funding (can also
 use the old labels which are exchange, trading and deposit respectively))
@@ -107,8 +103,6 @@ method
 string
 
 required
-
-Defaults to bitcoin
 
 Method of withdrawal. For an up-to-date mapping of methods and their respective
 currencies see:
@@ -120,15 +114,11 @@ amount
 
 string
 
-Defaults to 1234
-
 Amount of Withdrawal (not used for LNX)
 
 address
 
 string
-
-Defaults to xxxx1234
 
 Destination address (not used for LNX)
 
@@ -147,8 +137,6 @@ Specify a tag/memo/etc.
 fee_deduct
 
 int32
-
-Defaults to 0
 
 Set to 1 to deduct the withdrawal fee from the withdrawal amount
 
@@ -212,18 +200,6 @@ string
 Destination entity corporate name for travel rule purpose. (use either
 dest_firstname + dest_lastname or dest_corp_name, not required if
 beneficiary_self = true)
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/withdraw \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '
 
 {
 

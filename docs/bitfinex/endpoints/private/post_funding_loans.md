@@ -49,24 +49,4 @@ required
 
 Symbol (fUSD, ...), Omit for all symbols (see example)
 
-Body Params
-
 RAW_BODY
-
-json
-
-Defaults to {}
-
-{}
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/funding/loans/Symbol \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '{}'

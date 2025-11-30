@@ -32,8 +32,6 @@ Response array
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 type
 
 string
@@ -51,13 +49,3 @@ on). If the changes object is also passed, keep funding status will change as
 specified in the changes object.
 
 id
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/funding/keep \\
-
-     \--header 'Content-Type: application/json' \\
-
-     \--header 'accept: application/json'

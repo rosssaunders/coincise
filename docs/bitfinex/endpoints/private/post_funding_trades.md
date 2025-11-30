@@ -40,8 +40,6 @@ required
 
 Symbol (fUSD, ...) , Omit for all symbols (see example)
 
-Body Params
-
 start
 
 int64
@@ -59,13 +57,3 @@ limit
 int32
 
 Number of records
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/funding/trades/Symbol/hist \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json'

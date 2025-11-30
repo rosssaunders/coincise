@@ -38,15 +38,7 @@ keys
 
 string
 
-Defaults to tBTCF0:USTF0,tETHF0:USTF0
-
 The key or keys (separate by commas) of the pairs to fetch status information.
 To fetch information for all pairs use the key value 'ALL'.
 
 Response
-
-curl \--request GET \\
-
-     \--url 'https://api-pub.bitfinex.com/v2/status/deriv?keys=tBTCF0%3AUSTF0%2CtETHF0%3AUSTF0' \\
-
-     \--header 'accept: application/json'

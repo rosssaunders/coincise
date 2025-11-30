@@ -26,8 +26,6 @@ Login info arrays (index [0...n])
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 start
 
 int64
@@ -45,13 +43,3 @@ limit
 int32
 
 Number of records (Max: 250)
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/logins/hist \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json'
