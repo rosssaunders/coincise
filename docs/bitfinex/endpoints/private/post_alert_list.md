@@ -27,24 +27,4 @@ Alert arrays (Index [0...n])
 
 **Ratelimit**: 45 req/min
 
-Body Params
-
 RAW_BODY
-
-json
-
-Defaults to {}
-
-{}
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/alerts \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '{}'

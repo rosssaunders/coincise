@@ -58,14 +58,4 @@ string
 
 required
 
-Defaults to tBTCUSD
-
 The symbol you want information about. (e.g. tBTCUSD, tETHUSD, fUSD, fBTC)
-
-Responses
-
-curl \--request GET \\
-
-     \--url https://api-pub.bitfinex.com/v2/ticker/tBTCUSD \\
-
-     \--header 'accept: application/json'

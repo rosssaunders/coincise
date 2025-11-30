@@ -90,8 +90,6 @@ Order data array
 
 | --- | --- | | Rate Limit: | 90 reqs/min (requests per minute) |
 
-Body Params
-
 id
 
 int64
@@ -183,11 +181,3 @@ Object to pass order meta data. Options: 'aff_code' (to pass affiliate codes),
 Example: meta: {aff_code: "AFF_CODE_HERE", make_visible: 1}
 
 Response
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/order/update \\
-
-     \--header 'Content-Type: application/json' \\
-
-     \--header 'accept: application/json'

@@ -36,11 +36,3 @@ VASP objects (index [0...n])
 | ---- | ------ | ----------- |
 | id   | String | VASP ID     |
 | name | String | VASP name   |
-
-Responses
-
-curl \--request GET \\
-
-     \--url https://api.bitfinex.com/v2/ext/vasps \\
-
-     \--header 'accept: application/json'

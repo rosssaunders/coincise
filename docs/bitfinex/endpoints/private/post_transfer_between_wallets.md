@@ -43,15 +43,11 @@ Transfer array (index [4])
 > wallet. If the destination is 'margin' and the currency_to is 'USTF0', the
 > funds will end up in the derivatives wallet.
 
-Body Params
-
 from
 
 string
 
 required
-
-Defaults to trading
 
 Select the wallet from which to transfer (exchange, margin, funding (can also
 use the old labels which are exchange, trading and deposit respectively))
@@ -62,8 +58,6 @@ string
 
 required
 
-Defaults to exchange
-
 Select the wallet to transfer to (exchange, margin, funding (can also use the
 old labels which are exchange, trading and deposit respectively))
 
@@ -73,15 +67,11 @@ string
 
 required
 
-Defaults to UST
-
 Select the currency that you would like to transfer (USD, UST, BTC, ....)
 
 currency_to
 
 string
-
-Defaults to USTF0
 
 Select the currency that you would like to exchange to (USTF0 === USDT for
 derivatives pairs)
@@ -91,8 +81,6 @@ amount
 string
 
 required
-
-Defaults to 123.45
 
 Select the amount to transfer
 
@@ -116,18 +104,6 @@ object
 
 Required only when email_dst or user_id_dst is present and auth token is used
 instead of api credentials
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/transfer \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '
 
 {
 

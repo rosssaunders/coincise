@@ -74,24 +74,4 @@ required
 
 "base" | SYMBOL | sym_all
 
-Body Params
-
 RAW_BODY
-
-json
-
-Defaults to {}
-
-{}
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/info/margin/key \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '{}'

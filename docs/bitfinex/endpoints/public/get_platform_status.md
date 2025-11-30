@@ -39,9 +39,3 @@ Response Fields
 | --- | --- | | Rate Limit: | 30 reqs/min (requests per minute) |
 
 Response
-
-curl \--request GET \\
-
-     \--url https://api-pub.bitfinex.com/v2/platform/status \\
-
-     \--header 'accept: application/json'

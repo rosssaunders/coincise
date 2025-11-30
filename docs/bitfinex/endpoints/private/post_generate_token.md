@@ -31,23 +31,17 @@ Response data
 | ----- | ----- | ------ | ------------------------------ |
 | [0]   | TOKEN | string | Generated authentication token |
 
-Body Params
-
 scope
 
 string
 
 required
 
-Defaults to api
-
 scope of the token, set it to `api`
 
 ttl
 
 int32
-
-Defaults to 120
 
 time to live in seconds
 
@@ -63,8 +57,6 @@ writePermission
 
 boolean
 
-Defaults to false
-
 token write permission for the caps
 
 truefalse
@@ -74,18 +66,6 @@ truefalse
 string
 
 user's ip address
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/token \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '
 
 {
 

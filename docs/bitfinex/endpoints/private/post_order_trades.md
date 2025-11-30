@@ -37,8 +37,6 @@ string
 
 required
 
-Defaults to tETHUSD
-
 The trading pair symbol for which to retrieve order trades (e.g. tBTCUSD,
 tETHUSD, ...).
 
@@ -50,24 +48,6 @@ required
 
 The ID of the order for which to retrieve order trades.
 
-Body Params
-
 RAW_BODY
 
-json
-
-Defaults to {}
-
-{}
-
 Response
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/order/tETHUSD:id/trades \\
-
-     \--header 'Content-Type: application/json' \\
-
-     \--header 'accept: application/json' \\
-
-     \--data '{}'

@@ -32,8 +32,6 @@ Position snapshot entry arrays (index [0...n])
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 start
 
 integer
@@ -57,13 +55,3 @@ id
 integer
 
 Position id (can be passed to retrieve a specific position)
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/positions/snap \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json'

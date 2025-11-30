@@ -81,8 +81,6 @@ string
 
 required
 
-Defaults to list
-
 **Valid action values:** : 'map', 'list', 'info', 'fees', 'spec'
 
 Object
@@ -90,8 +88,6 @@ Object
 string
 
 required
-
-Defaults to pair
 
 **Valid object values for the map action:** 'currency', 'tx'.  
 **Valid object values for the list action:** 'currency', 'pair',
@@ -106,8 +102,6 @@ string
 
 required
 
-Defaults to exchange
-
 **_The detail parameter is only required for the below action:object
 values:_**  
 A **map:currency** request requires one of the following **detail** values:  
@@ -121,12 +115,4 @@ A **list:currency** request can optionally use the following **detail** value:
 A **info:tx** request requires the following **detail** value:  
 'status'.
 
-Responses
-
 Request
-
-curl \--request GET \\
-
-     \--url https://api-pub.bitfinex.com/v2/conf/pub:list:pair:exchange \\
-
-     \--header 'accept: application/json'

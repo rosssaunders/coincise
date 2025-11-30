@@ -37,8 +37,6 @@ string
 
 required
 
-Defaults to tBTCUSD
-
 The symbol you want information about.
 
 amount
@@ -46,8 +44,6 @@ amount
 string
 
 required
-
-Defaults to 1.123
 
 Amount. Positive for buy, negative for sell (ex. "1.123")
 
@@ -64,9 +60,3 @@ string
 Limit rate/price (ex. "1000.5").
 
 Response
-
-curl \--request POST \\
-
-     \--url 'https://api-pub.bitfinex.com/v2/calc/trade/avg?symbol=tBTCUSD&amount=1.123' \\
-
-     \--header 'accept: application/json'

@@ -30,8 +30,6 @@ Response data
 
 Deposit address arrays (Index [4])**Ratelimit**: 10 req/min
 
-Body Params
-
 method
 
 string
@@ -55,14 +53,4 @@ int32
 
 Number of items per page, should be between 20-100, default is 20
 
-Responses
-
 Request
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/deposit/address/all \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json'
