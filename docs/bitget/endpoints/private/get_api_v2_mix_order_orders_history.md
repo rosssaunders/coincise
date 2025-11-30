@@ -211,9 +211,10 @@ strategy_oco_limit: Strategy-OCO Limit Order
 strategy_oco_trigger: Strategy-OCO Trigger Order  
 modify_order_limit: Limit Modify Order  
 strategy_regular_buy: Strategy-Regular Buy  
-strategy_grid_middle: Strategy-Neutral Grid | | \>cTime | String | Creation time
-| | \>uTime | String | Last updated time | | \>presetStopSurplusPrice | String |
-Take profit price | | \>presetStopLossPrice | String | Stop loss price | |
-\>posAvg | String | Average position price |
+strategy_grid_middle: Strategy-Neutral Grid | | \>liqPrice | String |
+liquidation price | | \>cTime | String | Creation time | | \>uTime | String |
+Last updated time | | \>presetStopSurplusPrice | String | Take profit price | |
+\>presetStopLossPrice | String | Stop loss price | | \>posAvg | String | Average
+position price |
 
 > **Source:** https://www.bitget.com/api-doc/contract/trade/Get-Orders-History

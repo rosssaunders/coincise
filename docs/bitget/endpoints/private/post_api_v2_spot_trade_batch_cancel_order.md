@@ -6,6 +6,11 @@ Frequency limit:10 times/1s (UID)
 
 Cancel Orders in Batch
 
+- For batch cancellation (simultaneously revoking multiple orders for the same
+  symbol), it is not permitted to mix the use of orderId and clientOid. The
+  identifiers used must be consistent across all orders in the batch. Otherwise,
+  orders that only submit a clientOid will fail to be cancelled.
+
 ### HTTP Request[​](#http-request "Direct link to HTTP Request")
 
 - POST /api/v2/spot/trade/batch-cancel-order
