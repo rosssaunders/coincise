@@ -13,19 +13,13 @@ POST `/v5/order/cancel`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                          | Required | Type   | Comments     |
-| :--------------------------------- | :------- | :----- | ------------ |
-| [category](/docs/v5/enum#category) | **true** | string | Product type |
-
-- [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10):
-  `linear`, `inverse`, `spot`, `option`
-- classic account: `linear`, `inverse`, `spot`
-
-| | symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only | |
-orderId | false | string | Order ID. Either `orderId` or `orderLinkId` is
-**required** | | orderLinkId | false | string | User customised order ID. Either
-`orderId` or `orderLinkId` is **required** | | orderFilter | false | string |
-Spot trading **only**- `Order`
+| Parameter                          | Required | Type   | Comments                                                                    |
+| :--------------------------------- | :------- | :----- | --------------------------------------------------------------------------- |
+| [category](/docs/v5/enum#category) | **true** | string | Product type. `linear`, `inverse`, `spot`, `option`                         |
+| symbol                             | **true** | string | Symbol name, like `BTCUSDT`, uppercase only                                 |
+| orderId                            | false    | string | Order ID. Either `orderId` or `orderLinkId` is **required**                 |
+| orderLinkId                        | false    | string | User customised order ID. Either `orderId` or `orderLinkId` is **required** |
+| orderFilter                        | false    | string | Spot trading **only**- `Order`                                              |
 
 - `tpslOrder`
 - `StopOrder` If not passed, `Order` by default |

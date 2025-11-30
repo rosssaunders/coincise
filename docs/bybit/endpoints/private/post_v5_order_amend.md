@@ -10,20 +10,14 @@ POST `/v5/order/amend`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                          | Required | Type   | Comments     |
-| :--------------------------------- | :------- | :----- | ------------ |
-| [category](/docs/v5/enum#category) | **true** | string | Product type |
-
-- [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10):
-  `linear`, `inverse`, `spot`, `option`
-- classic account: `linear`, `inverse`, `spot`
-
-| | symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only | |
-orderId | false | string | Order ID. Either `orderId` or `orderLinkId` is
-required | | orderLinkId | false | string | User customised order ID. Either
-`orderId` or `orderLinkId` is required | | orderIv | false | string | Implied
-volatility. `option` **only**. Pass the real value, e.g for 10%, 0.1 should be
-passed | | triggerPrice | false | string |
+| Parameter                          | Required | Type   | Comments                                                                                      |
+| :--------------------------------- | :------- | :----- | --------------------------------------------------------------------------------------------- |
+| [category](/docs/v5/enum#category) | **true** | string | Product type `linear`, `inverse`, `spot`, `option`                                            |
+| symbol                             | **true** | string | Symbol name, like `BTCUSDT`, uppercase only                                                   |
+| orderId                            | false    | string | Order ID. Either `orderId` or `orderLinkId` is required                                       |
+| orderLinkId                        | false    | string | User customised order ID. Either `orderId` or `orderLinkId` is required                       |
+| orderIv                            | false    | string | Implied volatility. `option` **only**. Pass the real value, e.g for 10%, 0.1 should be passed |
+| triggerPrice                       | false    | string |
 
 - For Perps & Futures, it is the conditional order trigger price. If you expect
   the price to rise to trigger your conditional order, make sure:  
@@ -43,22 +37,20 @@ mode
 
 Valid for `linear` & `inverse` | | takeProfit | false | string | Take profit
 price after modification. If pass "0", it means cancel the existing take profit
-of the order. Do not pass it if you do not want to modify the take profit.
-_valid for `spot`(UTA), `linear`, `inverse`_ | | stopLoss | false | string |
-Stop loss price after modification. If pass "0", it means cancel the existing
-stop loss of the order. Do not pass it if you do not want to modify the stop
-loss. _valid for `spot`(UTA), `linear`, `inverse`_ | |
-[tpTriggerBy](/docs/v5/enum#triggerby) | false | string | The price type to
-trigger take profit. When set a take profit, this param is **required** if no
-initial value for the order | | [slTriggerBy](/docs/v5/enum#triggerby) | false |
-string | The price type to trigger stop loss. When set a take profit, this param
-is **required** if no initial value for the order | |
-[triggerBy](/docs/v5/enum#triggerby) | false | string | Trigger price type | |
-tpLimitPrice | false | string | Limit order price when take profit is triggered.
-Only working when original order sets partial limit tp/sl. _valid for
-`spot`(UTA), `linear`, `inverse`_ | | slLimitPrice | false | string | Limit
-order price when stop loss is triggered. Only working when original order sets
-partial limit tp/sl. _valid for `spot`(UTA), `linear`, `inverse`_ |
+of the order. Do not pass it if you do not want to modify the take profit | |
+stopLoss | false | string | Stop loss price after modification. If pass "0", it
+means cancel the existing stop loss of the order. Do not pass it if you do not
+want to modify the stop loss | | [tpTriggerBy](/docs/v5/enum#triggerby) | false
+| string | The price type to trigger take profit. When set a take profit, this
+param is **required** if no initial value for the order | |
+[slTriggerBy](/docs/v5/enum#triggerby) | false | string | The price type to
+trigger stop loss. When set a take profit, this param is **required** if no
+initial value for the order | | [triggerBy](/docs/v5/enum#triggerby) | false |
+string | Trigger price type | | tpLimitPrice | false | string | Limit order
+price when take profit is triggered. Only working when original order sets
+partial limit tp/sl. _Option not supported_ | | slLimitPrice | false | string |
+Limit order price when stop loss is triggered. Only working when original order
+sets partial limit tp/sl. _Option not supported\`_ |
 
 info
 

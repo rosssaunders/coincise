@@ -17,14 +17,13 @@ POST `/v5/order/cancel-batch`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                                                         | Required | Type   | Comments                                                                                 |
-| :---------------------------------------------------------------- | :------- | :----- | ---------------------------------------------------------------------------------------- |
-| [category](/docs/v5/enum#category)                                | **true** | string | Product type- [UTA2.0](/docs/v5/acct-mode#uta-20): `linear`, `option`, `spot`, `inverse` |
-| - [UTA1.0](/docs/v5/acct-mode#uta-10): `linear`, `option`, `spot` |
-| request                                                           | **true** | array  | Object                                                                                   |
-| \> symbol                                                         | **true** | string | Symbol name, like `BTCUSDT`, uppercase only                                              |
-| \> orderId                                                        | false    | string | Order ID. Either `orderId` or `orderLinkId` is required                                  |
-| \> orderLinkId                                                    | false    | string | User customised order ID. Either `orderId` or `orderLinkId` is required                  |
+| Parameter                          | Required | Type   | Comments                                                                |
+| :--------------------------------- | :------- | :----- | ----------------------------------------------------------------------- |
+| [category](/docs/v5/enum#category) | **true** | string | Product type `linear`, `option`, `spot`, `inverse`                      |
+| request                            | **true** | array  | Object                                                                  |
+| \> symbol                          | **true** | string | Symbol name, like `BTCUSDT`, uppercase only                             |
+| \> orderId                         | false    | string | Order ID. Either `orderId` or `orderLinkId` is required                 |
+| \> orderLinkId                     | false    | string | User customised order ID. Either `orderId` or `orderLinkId` is required |
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 

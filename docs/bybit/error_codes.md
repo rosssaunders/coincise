@@ -695,9 +695,9 @@ Enums Definitions
 
 Next
 
-Get Lending Coin Info
+Get Asset Info (Spot)
 
-](/docs/v5/abandon/coin-info)
+](/docs/v5/abandon/asset-info)
 
 - [HTTP Code](#http-code)
 - [WS OE General code](#ws-oe-general-code)

@@ -1,8 +1,6 @@
 # Get Status And Leverage
 
-Query the Spot margin status and leverage of Unified account
-
-> **Covers: Margin trade (Unified Account)**
+Query the Spot margin status and leverage
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 

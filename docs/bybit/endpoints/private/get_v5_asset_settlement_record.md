@@ -8,12 +8,11 @@ GET `/v5/asset/settlement-record`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                                                      | Required | Type    | Comments                                                                   |
-| :------------------------------------------------------------- | :------- | :------ | -------------------------------------------------------------------------- |
-| [category](/docs/v5/enum#category)                             | **true** | string  | Product type- [UTA2.0](/docs/v5/acct-mode#uta-20): `linear`(USDC contract) |
-| - [UTA1.0](/docs/v5/acct-mode#uta-10): `linear`(USDC contract) |
-| symbol                                                         | false    | string  | Symbol name, like `BTCPERP`, uppercase only                                |
-| startTime                                                      | false    | integer | The start timestamp (ms)                                                   |
+| Parameter                          | Required | Type    | Comments                                    |
+| :--------------------------------- | :------- | :------ | ------------------------------------------- |
+| [category](/docs/v5/enum#category) | **true** | string  | Product type `linear`(USDC contract)        |
+| symbol                             | false    | string  | Symbol name, like `BTCPERP`, uppercase only |
+| startTime                          | false    | integer | The start timestamp (ms)                    |
 
 - startTime and endTime are not passed, return 30 days by default
 - Only startTime is passed, return range between startTime and startTime + 30

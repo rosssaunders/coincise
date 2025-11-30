@@ -15,12 +15,10 @@ info
 
 info
 
-**Spot**: classic account - cancel up to 500 orders; Unified account - no
-limit  
-**Futures**: classic account - cancel up to 500 orders; Unified account - cancel
-up to 500 orders (System **picks up 500 orders randomly to cancel** when you
-have over 500 orders)  
-**Options**: Unified account - no limit
+**Spot**: no limit  
+**Futures**: cancel up to 500 orders (System **picks up 500 orders randomly to
+cancel** when you have over 500 orders)  
+**Options**: no limit
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -28,27 +26,13 @@ POST `/v5/order/cancel-all`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                          | Required | Type   | Comments     |
-| :--------------------------------- | :------- | :----- | ------------ |
-| [category](/docs/v5/enum#category) | **true** | string | Product type |
-
-- [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10):
-  `linear`, `inverse`, `spot`, `option`
-- classic account: `linear`, `inverse`, `spot`
-
-| | symbol | false | string | Symbol name, like `BTCUSDT`, uppercase only  
-`linear`&`inverse`: **Required** if not passing baseCoin or settleCoin | |
-baseCoin | false | string | Base coin, uppercase only
-
-- `linear` & `inverse`(classic account): If cancel all by baseCoin, it will
-  cancel all linear & inverse orders. **Required** if not passing symbol or
-  settleCoin
-- `linear` & `inverse`(Unified account): If cancel all by baseCoin, it will
-  cancel all corresponding category orders. **Required** if not passing symbol
-  or settleCoin
-- `spot`(classic account): invalid
-
-| | settleCoin | false | string | Settle coin, uppercase only
+| Parameter                                                              | Required | Type   | Comments                                                                                                                                                                                |
+| :--------------------------------------------------------------------- | :------- | :----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [category](/docs/v5/enum#category)                                     | **true** | string | Product type. `linear`, `inverse`, `spot`, `option`                                                                                                                                     |
+| symbol                                                                 | false    | string | Symbol name, like `BTCUSDT`, uppercase only                                                                                                                                             |
+| `linear`&`inverse`: **Required** if not passing baseCoin or settleCoin |
+| baseCoin                                                               | false    | string | Base coin, uppercase only. `linear` & `inverse`: If cancel all by baseCoin, it will cancel all of the corresponding category's orders. **Required** if not passing symbol or settleCoin |
+| settleCoin                                                             | false    | string | Settle coin, uppercase only                                                                                                                                                             |
 
 - `linear` & `inverse`: **Required** if not passing symbol or baseCoin
 - `option`: USDT or USDC
@@ -84,12 +68,12 @@ websocket to confirm the order status.
 
 ### Response Parameters[​](#response-parameters "Direct link to heading")
 
-| Parameter      | Type   | Comments                                                                                                                 |
-| :------------- | :----- | ------------------------------------------------------------------------------------------------------------------------ |
-| list           | array  | Object                                                                                                                   |
-| \> orderId     | string | Order ID                                                                                                                 |
-| \> orderLinkId | string | User customised order ID                                                                                                 |
-| success        | string | "1": success, "0": fail- [UTA1.0](/docs/v5/acct-mode#uta-10)(inverse), classic(linear, inverse) do not return this field |
+| Parameter      | Type   | Comments                                                                                          |
+| :------------- | :----- | ------------------------------------------------------------------------------------------------- |
+| list           | array  | Object                                                                                            |
+| \> orderId     | string | Order ID                                                                                          |
+| \> orderLinkId | string | User customised order ID                                                                          |
+| success        | string | "1": success, "0": fail. [UTA1.0](/docs/v5/acct-mode#uta-10) (inverse) does not return this field |
 
 ### Request Example[​](#request-example "Direct link to heading")
 

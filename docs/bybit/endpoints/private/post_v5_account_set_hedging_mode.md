@@ -1,6 +1,6 @@
 # Set Spot Hedging
 
-You can turn on/off Spot hedging feature in Portfolio margin for Unified account
+You can turn on/off Spot hedging feature in Portfolio margin
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 

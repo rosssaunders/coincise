@@ -16,8 +16,6 @@ the blockchain.
 
 Rules
 
-- The maximum difference between the start time and the end time is 30 days.
-
 ### HTTP Request[​](#http-request "Direct link to heading")
 
 GET `/v5/asset/deposit/query-internal-record`

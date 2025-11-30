@@ -15,16 +15,15 @@ POST `/v5/order/amend-batch`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                                                         | Required | Type   | Comments                                                                                      |
-| :---------------------------------------------------------------- | :------- | :----- | --------------------------------------------------------------------------------------------- |
-| [category](/docs/v5/enum#category)                                | **true** | string | Product type- [UTA2.0](/docs/v5/acct-mode#uta-20): `linear`, `option`, `spot`, `inverse`      |
-| - [UTA1.0](/docs/v5/acct-mode#uta-10): `linear`, `option`, `spot` |
-| request                                                           | **true** | array  | Object                                                                                        |
-| \> symbol                                                         | **true** | string | Symbol name, like `BTCUSDT`, uppercase only                                                   |
-| \> orderId                                                        | false    | string | Order ID. Either `orderId` or `orderLinkId` is required                                       |
-| \> orderLinkId                                                    | false    | string | User customised order ID. Either `orderId` or `orderLinkId` is required                       |
-| \> orderIv                                                        | false    | string | Implied volatility. `option` **only**. Pass the real value, e.g for 10%, 0.1 should be passed |
-| \> triggerPrice                                                   | false    | string |
+| Parameter                          | Required | Type   | Comments                                                                                      |
+| :--------------------------------- | :------- | :----- | --------------------------------------------------------------------------------------------- |
+| [category](/docs/v5/enum#category) | **true** | string | Product type `linear`, `option`, `spot`, `inverse`                                            |
+| request                            | **true** | array  | Object                                                                                        |
+| \> symbol                          | **true** | string | Symbol name, like `BTCUSDT`, uppercase only                                                   |
+| \> orderId                         | false    | string | Order ID. Either `orderId` or `orderLinkId` is required                                       |
+| \> orderLinkId                     | false    | string | User customised order ID. Either `orderId` or `orderLinkId` is required                       |
+| \> orderIv                         | false    | string | Implied volatility. `option` **only**. Pass the real value, e.g for 10%, 0.1 should be passed |
+| \> triggerPrice                    | false    | string |
 
 - For Perps & Futures, it is the conditional order trigger price. If you expect
   the price to rise to trigger your conditional order, make sure:  

@@ -11,13 +11,8 @@ account manager
 
 info
 
-- **Support [UTA2.0](/docs/v5/acct-mode#uta-20):**  
-  USDT Perpetuals, USDT Futures, USDC Perpetuals, USDC Futures, Inverse
+- Support USDT Perpetuals, USDT Futures, USDC Perpetuals, USDC Futures, Inverse
   Perpetuals, Inverse Futures \[DERIVATIVES\]  
-  Spot \[SPOT\]  
-  Options \[OPTIONS\]
-- **Support [UTA1.0](/docs/v5/acct-mode#uta-10):**  
-  USDT Perpetuals, USDT Futures, USDC Perpetuals, USDC Futures \[DERIVATIVES\]  
   Spot \[SPOT\]  
   Options \[OPTIONS\]
 

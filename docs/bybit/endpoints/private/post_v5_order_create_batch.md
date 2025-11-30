@@ -20,7 +20,7 @@ info
   number of request sent, e.g., by default, option trading rate limit is 10 reqs
   per sec, so you can send up to 20 \* 10 = 200 orders in one second.
 - **Perpetual, Futures, Spot rate limit instruction**, please check
-  [here](/docs/v5/rate-limit#api-rate-limit-rules-for-vips)
+  [here](/docs/v5/rate-limit#instructions-for-batch-endpoints)
 - **Risk control limit notice:**  
   Bybit will monitor on your API requests. When the total number of orders of a
   single user (aggregated the number of orders across main account and
@@ -35,28 +35,27 @@ POST `/v5/order/create-batch`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                                                         | Required | Type    | Comments                                                                                                                   |
-| :---------------------------------------------------------------- | :------- | :------ | -------------------------------------------------------------------------------------------------------------------------- |
-| [category](/docs/v5/enum#category)                                | **true** | string  | Product type- [UTA2.0](/docs/v5/acct-mode#uta-20): `linear`, `option`, `spot`, `inverse`                                   |
-| - [UTA1.0](/docs/v5/acct-mode#uta-10): `linear`, `option`, `spot` |
-| request                                                           | **true** | array   | Object                                                                                                                     |
-| \> symbol                                                         | **true** | string  | Symbol name, like `BTCUSDT`, uppercase only                                                                                |
-| \> isLeverage                                                     | false    | integer | Whether to borrow. Valid for **Unified `spot`** only. `0`(default): false then spot trading, `1`: true then margin trading |
-| \> side                                                           | **true** | string  | `Buy`, `Sell`                                                                                                              |
-| \> [orderType](/docs/v5/enum#ordertype)                           | **true** | string  | `Market`, `Limit`                                                                                                          |
-| \> qty                                                            | **true** | string  | Order quantity                                                                                                             |
+| Parameter                               | Required | Type    | Comments                                                                                                 |
+| :-------------------------------------- | :------- | :------ | -------------------------------------------------------------------------------------------------------- |
+| [category](/docs/v5/enum#category)      | **true** | string  | Product type `linear`, `option`, `spot`, `inverse`                                                       |
+| request                                 | **true** | array   | Object                                                                                                   |
+| \> symbol                               | **true** | string  | Symbol name, like `BTCUSDT`, uppercase only                                                              |
+| \> isLeverage                           | false    | integer | Whether to borrow, `spot`\*\* only. `0`(default): false then spot trading, `1`: true then margin trading |
+| \> side                                 | **true** | string  | `Buy`, `Sell`                                                                                            |
+| \> [orderType](/docs/v5/enum#ordertype) | **true** | string  | `Market`, `Limit`                                                                                        |
+| \> qty                                  | **true** | string  | Order quantity                                                                                           |
 
-    -   Spot: set `marketUnit` for market order qty unit, `quoteCoin` for market buy by default, `baseCoin` for market sell by default
-    -   Perps, Futures & Option: always use base coin as unit
-
-- Perps & Futures: if you pass `qty`\="0" and specify
+- Spot: set `marketUnit` for market order qty unit, `quoteCoin` for market buy
+  by default, `baseCoin` for market sell by default
+- Perps, Futures & Option: always use base coin as unit.
+- Perps & Futures: If you pass `qty`\="0" and specify
   `reduceOnly`\=true&`closeOnTrigger`\=true, you can close the position up to
   `maxMktOrderQty` or `maxOrderQty` shown on
   [Get Instruments Info](/docs/v5/market/instrument) of current symbol
 
 | | \> marketUnit | false | string | The unit for `qty` when create **Spot
-market** orders for **UTA account**, orderFilter=tpslOrder and StopOrder are
-supported as well.- `baseCoin`: for example, buy BTCUSDT, then "qty" unit is BTC
+market** orders, `orderFilter`\="tpslOrder" and "StopOrder" are supported as
+well.- `baseCoin`: for example, buy BTCUSDT, then "qty" unit is BTC
 
 - `quoteCoin`: for example, sell BTCUSDT, then "qty" unit is USDT | | \> price |
   false | string | Order price
@@ -87,8 +86,7 @@ Valid for `spot` **only** | | \> triggerPrice | false | string |
   the price to rise to trigger your conditional order, make sure:  
   _triggerPrice > market price_  
   Else, _triggerPrice < market price_
-- For spot, it is the orderFilter=tpslOrder, or orderFilter=stopOrder trigger
-  price
+- For spot, it is the `orderFilter`\="tpslOrder", or "StopOrder" trigger price
 
 | | \> [triggerBy](/docs/v5/enum#triggerby) | false | string | Conditional order
 param (Perps & Futures). Trigger price type. `LastPrice`, `IndexPrice`,
@@ -158,22 +156,20 @@ Valid for `linear`, `inverse` | | \> tpLimitPrice | false | string | The limit
 order price when take profit price is triggered
 
 - `linear`&`inverse`: only works when tpslMode=Partial and tpOrderType=Limit
-- Spot(UTA): it is required when the order has `takeProfit` and
-  `tpOrderType=Limit`
+- Spot: it is required when the order has `takeProfit` and `tpOrderType=Limit`
 
 | | \> slLimitPrice | false | string | The limit order price when stop loss
 price is triggered
 
 - `linear`&`inverse`: only works when tpslMode=Partial and slOrderType=Limit
-- Spot(UTA): it is required when the order has `stopLoss` and
-  `slOrderType=Limit`
+- Spot: it is required when the order has `stopLoss` and `slOrderType=Limit`
 
 | | \> tpOrderType | false | string | The order type when take profit is
 triggered
 
 - `linear`&`inverse`: `Market`(default), `Limit`. For tpslMode=Full, it only
   supports tpOrderType=Market
-- Spot(UTA):  
+- Spot:  
   `Market`: when you set "takeProfit",  
   `Limit`: when you set "takeProfit" and "tpLimitPrice"
 
@@ -181,7 +177,7 @@ triggered
 
 - `linear`&`inverse`: `Market`(default), `Limit`. For tpslMode=Full, it only
   supports slOrderType=Market
-- Spot(UTA):  
+- Spot:  
   `Market`: when you set "stopLoss",  
   `Limit`: when you set "stopLoss" and "slLimitPrice"
 

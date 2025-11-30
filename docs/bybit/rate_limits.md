@@ -58,37 +58,6 @@ response header shown in the code panel:
 
 #### Trade[​](#trade "Direct link to heading")
 
-- Classic account
-- UTA1.0 Pro
-- UTA2.0 Pro
-
-| Method               | Path               | Classic account | upgradable |
-| -------------------- | ------------------ | :-------------: | ---------- | --- |
-| inverse              | linear             |      spot       |
-| POST                 | /v5/order/create   |      10/s       | 20/s       | Y   |
-| /v5/order/amend      | 10/s               |      10/s       | Y          |
-| /v5/order/cancel     | 10/s               |      20/s       | Y          |
-| /v5/order/cancel-all | 10/s               |      20/s       | Y          |
-| GET                  | /v5/order/realtime |      10/s       | 20/s       | N   |
-| /v5/order/history    | 10/s               |      20/s       | N          |
-| /v5/execution/list   | 10/s               |      20/s       | N          |
-
-| Method                            | Path               | UTA1.0 Pro | upgradable |
-| --------------------------------- | ------------------ | :--------: | ---------- | ---- | ---- | --- |
-| inverse                           | linear             |   option   | spot       |
-| POST                              | /v5/order/create   |    10/s    | 10/s       | 10/s | 20/s | Y   |
-| /v5/order/amend                   | 10/s               |    10/s    | 10/s       | 20/s | Y    |
-| /v5/order/cancel                  | 10/s               |    10/s    | 10/s       | 20/s | Y    |
-| /v5/order/cancel-all              | 10/s               |    10/s    | 1/s        | 20/s | Y    |
-| /v5/order/create-batch            | \-                 |    10/s    | 10/s       | 20/s | Y    |
-| /v5/order/amend-batch             | \-                 |    10/s    | 10/s       | 20/s | Y    |
-| /v5/order/cancel-batch            | \-                 |    10/s    | 10/s       | 20/s | Y    |
-| /v5/order/disconnected-cancel-all | \-                 |    5/s     | N          |
-| GET                               | /v5/order/realtime |    10/s    | 50/s       | N    |
-| /v5/order/history                 | 10/s               |    50/s    | N          |
-| /v5/execution/list                | 10/s               |    50/s    | N          |
-| /v5/order/spot-borrow-check       | \-                 |    50/s    | N          |
-
 | Method                            | Path               | UTA2.0 Pro | upgradable |
 | --------------------------------- | ------------------ | :--------: | ---------- | ---- | --- |
 | inverse                           | linear             |   option   | spot       |
@@ -107,24 +76,6 @@ response header shown in the code panel:
 
 #### Position[​](#position "Direct link to heading")
 
-- Classic account
-- UTA1.0 Pro
-- UTA2.0 Pro
-
-| Method                  | Path                      | Classic account | upgradable |
-| ----------------------- | ------------------------- | :-------------: | ---------- | --- |
-| inverse                 | linear                    |      spot       |
-| GET                     | /v5/position/list         |      10/s       | \-         | N   |
-| /v5/position/closed-pnl | 10/s                      |       \-        | N          |
-| POST                    | /v5/position/set-leverage |      10/s       | \-         | N   |
-
-| Method                  | Path                      | UTA1.0 Pro | upgradable |
-| ----------------------- | ------------------------- | :--------: | ---------- | --- | --- | --- |
-| inverse                 | linear                    |   option   | spot       |
-| GET                     | /v5/position/list         |    10/s    | 50/s       | \-  | N   |
-| /v5/position/closed-pnl | 10/s                      |    50/s    | \-         | \-  | N   |
-| POST                    | /v5/position/set-leverage |    10/s    | 10/s       | \-  | \-  | N   |
-
 | Method                  | Path                      | UTA2.0 Pro | upgradable |
 | ----------------------- | ------------------------- | :--------: | ---------- | --- | --- | --- |
 | inverse                 | linear                    |   option   | spot       |
@@ -134,45 +85,21 @@ response header shown in the code panel:
 
 #### Account[​](#account "Direct link to heading")
 
-- Classic account
-- UTA1.0 Pro
-- UTA2.0 Pro
-
-| Method                     | Path                                 |      | Limit | upgradable |
-| -------------------------- | ------------------------------------ | ---- | ----- | ---------- |
-| GET                        | /v5/account/contract-transaction-log |      | 10/s  | N          |
-| /v5/account/wallet-balance | accountType=SPOT                     | 20/s | N     |
-| accountType=CONTRACT       | 10/s                                 | N    |
-| /v5/account/fee-rate       | category=linear                      | 10/s | N     |
-| category=spot              | 5/s                                  | N    |
-| category=option            | 5/s                                  | N    |
-
-| Method                      | Path                       |                      | Limit | upgradable |
-| --------------------------- | -------------------------- | -------------------- | ----- | ---------- |
-| GET                         | /v5/account/wallet-balance | accountType=CONTRACT | 50/s  | N          |
-| accountType=UNIFIED         |
-| /v5/account/withdrawal      |                            | 50/s                 | N     |
-| /v5/account/borrow-history  |                            | 50/s                 | N     |
-| /v5/account/collateral-info |                            | 50/s                 | N     |
-| /v5/asset/coin-greeks       |                            | 50/s                 | N     |
-| /v5/account/transaction-log | accountType=UNIFIED        | 50/s                 | N     |
-| /v5/account/fee-rate        | category=linear            | 10/s                 | N     |
-| category=spot               | 5/s                        | N                    |
-| category=option             | 5/s                        | N                    |
-| category=inverse            | 10/s                       | N                    |
-
-| Method                      | Path                       |                     | Limit | upgradable |
-| --------------------------- | -------------------------- | ------------------- | ----- | ---------- |
-| GET                         | /v5/account/wallet-balance | accountType=UNIFIED | 50/s  | N          |
-| /v5/account/withdrawal      |                            | 50/s                | N     |
-| /v5/account/borrow-history  |                            | 50/s                | N     |
-| /v5/account/collateral-info |                            | 50/s                | N     |
-| /v5/asset/coin-greeks       |                            | 50/s                | N     |
-| /v5/account/transaction-log | accountType=UNIFIED        | 50/s                | N     |
-| /v5/account/fee-rate        | category=linear            | 10/s                | N     |
-| category=spot               | 5/s                        | N                   |
-| category=option             | 5/s                        | N                   |
-| category=inverse            | 10/s                       | N                   |
+| Method                       | Path                       |                     | Limit | upgradable |
+| ---------------------------- | -------------------------- | ------------------- | ----- | ---------- |
+| GET                          | /v5/account/wallet-balance | accountType=UNIFIED | 50/s  | N          |
+| /v5/account/withdrawal       |                            | 50/s                | N     |
+| /v5/account/borrow-history   |                            | 50/s                | N     |
+| /v5/account/borrow           |                            | 1/s                 | N     |
+| /v5/account/repay            |                            | 1/s                 | N     |
+| /v5/account/no-convert-repay |                            | 1/s                 | N     |
+| /v5/account/collateral-info  |                            | 50/s                | N     |
+| /v5/asset/coin-greeks        |                            | 50/s                | N     |
+| /v5/account/transaction-log  | accountType=UNIFIED        | 50/s                | N     |
+| /v5/account/fee-rate         | category=linear            | 10/s                | N     |
+| category=spot                | 5/s                        | N                   |
+| category=option              | 5/s                        | N                   |
+| category=inverse             | 10/s                       | N                   |
 
 #### Asset[​](#asset "Direct link to heading")
 
@@ -201,14 +128,6 @@ response header shown in the code panel:
 
 <table border="0.8"><tbody><tr><th>Method</th><th>Path</th><th>Limit</th><td>upgradable</td></tr><tr><td rowspan="7">POST</td><td>v5/user/create-sub-member</td><td>1 req/s</td><td>N</td></tr><tr><td>/v5/user/create-sub-api</td><td>1 req/s</td><td>N</td></tr><tr><td>/v5/user/frozen-sub-member</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/update-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/update-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/delete-api</td><td>5 req/s</td><td>N</td></tr><tr><td>/v5/user/delete-sub-api</td><td>5 req/s</td><td>N</td></tr><tr><td rowspan="3">GET</td><td>/v5/user/query-sub-members</td><td>10 req/s</td><td>N</td></tr><tr><td>/v5/user/query-api</td><td>10 req/s</td><td>N</td></tr><tr><td>/v5/user/aff-customer-info</td><td>10 req/s</td><td>N</td></tr></tbody></table>
 
-#### Spot Leverage Token[​](#spot-leverage-token "Direct link to heading")
-
-| Method |               Path                | Limit    | Upgradable |
-| :----- | :-------------------------------: | -------- | ---------- |
-| GET    | /v5/spot-lever-token/order-record | 50 req/s | N          |
-| POST   |   /v5/spot-lever-token/purchase   | 20 req/s | N          |
-| POST   |    /v5/spot-lever-token/redeem    | 20 req/s | N          |
-
 #### Spot Margin Trade (UTA)[​](#spot-margin-trade-uta "Direct link to heading")
 
 <table border="0.8"><tbody><tr><td>For now, there is no limit for endpoints under this category</td></tr></tbody></table>
@@ -225,7 +144,9 @@ response header shown in the code panel:
 | GET    | [Get Spread Order History](/docs/v5/spread/trade/order-history) | 50 req/s | N          |
 | GET    | [Get Spread Trade History](/docs/v5/spread/trade/trade-history) | 50 req/s | N          |
 
-instructions for batch endpoints
+## Instructions for batch endpoints[​](#instructions-for-batch-endpoints "Direct link to heading")
+
+tip
 
 The batch order endpoint, which includes operations for creating, amending, and
 canceling, has its own rate limit and does not share it with single requests,
@@ -274,6 +195,6 @@ API Rate Limit Rules for VIPs
     - [Account](#account)
     - [Asset](#asset)
     - [User](#user)
-    - [Spot Leverage Token](#spot-leverage-token)
     - [Spot Margin Trade (UTA)](#spot-margin-trade-uta)
     - [Spread Trading](#spread-trading)
+- [Instructions for batch endpoints](#instructions-for-batch-endpoints)

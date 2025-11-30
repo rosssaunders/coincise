@@ -13,22 +13,16 @@ POST `/v5/position/set-leverage`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                          | Required | Type   | Comments     |
-| :--------------------------------- | :------- | :----- | ------------ |
-| [category](/docs/v5/enum#category) | **true** | string | Product type |
-
-- [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10):
-  `linear`, `inverse`
-- Classic account: `linear`, `inverse`
-
-| | symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only | |
-buyLeverage | **true** | string | \[`1`, max leverage\]
+| Parameter                          | Required | Type   | Comments                                    |
+| :--------------------------------- | :------- | :----- | ------------------------------------------- |
+| [category](/docs/v5/enum#category) | **true** | string | Product type `linear`, `inverse`            |
+| symbol                             | **true** | string | Symbol name, like `BTCUSDT`, uppercase only |
+| buyLeverage                        | **true** | string | \[`1`, max leverage\]                       |
 
 - one-way mode: `buyLeverage` must be the same as `sellLeverage`
 - Hedge mode:  
-  Classic account & UTA (isolated margin): `buyLeverage` and `sellLeverage` can
-  be different;  
-  UTA (cross margin): `buyLeverage` must be the same as `sellLeverage`
+  isolated margin: `buyLeverage` and `sellLeverage` can be different;  
+  cross margin: `buyLeverage` must be the same as `sellLeverage`
 
 | | sellLeverage | **true** | string | \[`1`, max leverage\] |
 

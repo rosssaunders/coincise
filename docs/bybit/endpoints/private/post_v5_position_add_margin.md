@@ -8,19 +8,12 @@ POST `/v5/position/add-margin`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                          | Required | Type   | Comments     |
-| :--------------------------------- | :------- | :----- | ------------ |
-| [category](/docs/v5/enum#category) | **true** | string | Product type |
-
-- [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10):
-  `linear`, `inverse`
-- Classic account: `linear`, `inverse`
-
-| | symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only | |
-margin | **true** | string | Add or reduce. To add, then `10`; To reduce, then
-`-10`. Support up to 4 decimal | | [positionIdx](/docs/v5/enum#positionidx) |
-false | integer | Used to identify positions in different position modes. For
-hedge mode position, this param is **required**
+| Parameter                                | Required | Type    | Comments                                                                                                    |
+| :--------------------------------------- | :------- | :------ | ----------------------------------------------------------------------------------------------------------- |
+| [category](/docs/v5/enum#category)       | **true** | string  | Product type `linear`, `inverse`                                                                            |
+| symbol                                   | **true** | string  | Symbol name, like `BTCUSDT`, uppercase only                                                                 |
+| margin                                   | **true** | string  | Add or reduce. To add, then `10`; To reduce, then `-10`. Support up to 4 decimal                            |
+| [positionIdx](/docs/v5/enum#positionidx) | false    | integer | Used to identify positions in different position modes. For hedge mode position, this param is **required** |
 
 - `0`: one-way mode
 - `1`: hedge-mode Buy side

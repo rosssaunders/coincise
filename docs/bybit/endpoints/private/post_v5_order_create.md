@@ -81,52 +81,32 @@ info
   If reduceOnly=true and order qty > max order qty, the order will automatically
   be split up into multiple orders.
 
-Spot Stop Order
-
-Spot supports TP/SL order, Conditional order, however, the system logic is
-different between classic account and Unified account  
-**classic account:** When the stop order is created, you will get an order ID.
-After it is triggered, you will get a new order ID  
-**Unified account:** When the stop order is created, you will get an order ID.
-After it is triggered, the order ID will not be changed
-
 ### HTTP Request[​](#http-request "Direct link to heading")
 
 POST `/v5/order/create`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter | Required | Type   | Comments     |
-| :-------- | :------- | :----- | ------------ |
-| category  | **true** | string | Product type |
+| Parameter                                                                                                        | Required | Type    | Comments                                              |
+| :--------------------------------------------------------------------------------------------------------------- | :------- | :------ | ----------------------------------------------------- |
+| category                                                                                                         | **true** | string  | Product type `linear`, `inverse`, `spot`, `option`    |
+| symbol                                                                                                           | **true** | string  | Symbol name, like `BTCUSDT`, uppercase only           |
+| isLeverage                                                                                                       | false    | integer | Whether to borrow.- `0`(default): false, spot trading |
+| - `1`: true, margin trading, _make sure you turn on margin trading, and set the relevant currency as collateral_ |
+| side                                                                                                             | **true** | string  | `Buy`, `Sell`                                         |
+| [orderType](/docs/v5/enum#ordertype)                                                                             | **true** | string  | `Market`, `Limit`                                     |
+| qty                                                                                                              | **true** | string  | Order quantity                                        |
 
-- [UTA2.0](/docs/v5/acct-mode#uta-20), [UTA1.0](/docs/v5/acct-mode#uta-10):
-  `linear`, `inverse`, `spot`, `option`
-- classic account: `linear`, `inverse`, `spot`
-
-| | symbol | **true** | string | Symbol name, like `BTCUSDT`, uppercase only | |
-isLeverage | false | integer | Whether to borrow. **Unified account Spot
-trading** only.- `0`(default): false, spot trading
-
-- `1`: true, margin trading, _make sure you turn on margin trading, and set the
-  relevant currency as collateral_ | | side | **true** | string | `Buy`, `Sell`
-  | | [orderType](/docs/v5/enum#ordertype) | **true** | string | `Market`,
-  `Limit` | | qty | **true** | string | Order quantity
-
-      -   Spot: Market Buy order by value by default, you can set `marketUnit` field to choose order by value or qty for market orders
-      -   Perps, Futures & Option: always order by qty
-
-      -   Spot: Market Buy order by value by default
-      -   Perps, Futures: always order by qty
-
+- Spot: Market Buy order by value by default, you can set `marketUnit` field to
+  choose order by value or qty for market orders
+- Perps, Futures & Option: always order by qty
 - Perps & Futures: if you pass `qty`\="0" and specify
   `reduceOnly`\=true&`closeOnTrigger`\=true, you can close the position up to
   `maxMktOrderQty` or `maxOrderQty` shown on
   [Get Instruments Info](/docs/v5/market/instrument) of current symbol
 
 | | marketUnit | false | string | Select the unit for `qty` when create **Spot
-market** orders for **UTA account**- `baseCoin`: for example, buy BTCUSDT, then
-"qty" unit is BTC
+market** orders- `baseCoin`: for example, buy BTCUSDT, then "qty" unit is BTC
 
 - `quoteCoin`: for example, sell BTCUSDT, then "qty" unit is USDT | |
   slippageToleranceType | false | string | Slippage tolerance Type for **market
@@ -204,16 +184,16 @@ _`option` orderLinkId rules_:
 
 - **required** param
 
-| | takeProfit | false | string | Take profit price- UTA: Spot Limit order
-supports take profit, stop loss or limit take profit, limit stop loss when
-creating an order | | stopLoss | false | string | Stop loss price- UTA: Spot
-Limit order supports take profit, stop loss or limit take profit, limit stop
-loss when creating an order | | [tpTriggerBy](/docs/v5/enum#triggerby) | false |
-string | The price type to trigger take profit. `MarkPrice`, `IndexPrice`,
-default: `LastPrice`. Valid for `linear` & `inverse` | |
-[slTriggerBy](/docs/v5/enum#triggerby) | false | string | The price type to
-trigger stop loss. `MarkPrice`, `IndexPrice`, default: `LastPrice`. Valid for
-`linear` & `inverse` | | reduceOnly | false | boolean |
+| | takeProfit | false | string | Take profit price- Spot Limit order supports
+take profit, stop loss or limit take profit, limit stop loss when creating an
+order | | stopLoss | false | string | Stop loss price- Spot Limit order supports
+take profit, stop loss or limit take profit, limit stop loss when creating an
+order | | [tpTriggerBy](/docs/v5/enum#triggerby) | false | string | The price
+type to trigger take profit. `MarkPrice`, `IndexPrice`, default: `LastPrice`.
+Valid for `linear` & `inverse` | | [slTriggerBy](/docs/v5/enum#triggerby) |
+false | string | The price type to trigger stop loss. `MarkPrice`, `IndexPrice`,
+default: `LastPrice`. Valid for `linear` & `inverse` | | reduceOnly | false |
+boolean |
 [What is a reduce-only order?](https://www.bybit.com/en/help-center/article/Reduce-Only-Order)
 `true` means your position can only reduce in size if this order is triggered.
 
@@ -245,21 +225,19 @@ Valid for `linear` & `inverse` | | tpLimitPrice | false | string | The limit
 order price when take profit price is triggered
 
 - `linear` & `inverse`: only works when tpslMode=Partial and tpOrderType=Limit
-- Spot(UTA): it is required when the order has `takeProfit` and
-  "tpOrderType"=`Limit`
+- Spot: it is required when the order has `takeProfit` and "tpOrderType"=`Limit`
 
 | | slLimitPrice | false | string | The limit order price when stop loss price
 is triggered
 
 - `linear` & `inverse`: only works when tpslMode=Partial and slOrderType=Limit
-- Spot(UTA): it is required when the order has `stopLoss` and
-  "slOrderType"=`Limit`
+- Spot: it is required when the order has `stopLoss` and "slOrderType"=`Limit`
 
 | | tpOrderType | false | string | The order type when take profit is triggered
 
 - `linear` & `inverse`: `Market`(default), `Limit`. For tpslMode=Full, it only
   supports tpOrderType=Market
-- Spot(UTA):  
+- Spot:  
   `Market`: when you set "takeProfit",  
   `Limit`: when you set "takeProfit" and "tpLimitPrice"
 
@@ -267,7 +245,7 @@ is triggered
 
 - `linear` & `inverse`: `Market`(default), `Limit`. For tpslMode=Full, it only
   supports slOrderType=Market
-- Spot(UTA):  
+- Spot:  
   `Market`: when you set "stopLoss",  
   `Limit`: when you set "stopLoss" and "slLimitPrice"
 

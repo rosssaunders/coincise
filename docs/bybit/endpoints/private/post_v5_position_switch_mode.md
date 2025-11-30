@@ -31,14 +31,13 @@ tip
 
 ### The position-switch ability for each contract[​](#the-position-switch-ability-for-each-contract "Direct link to heading")
 
-|                   | Classic account                  | UTA1.0                           | UTA2.0                           |
-| ----------------- | -------------------------------- | -------------------------------- | -------------------------------- |
-| USDT perpetual    | **Support one-way & hedge-mode** | **Support one-way & hedge-mode** | **Support one-way & hedge-mode** |
-| USDT futures      | N/A                              | Support one-way **only**         | Support one-way **only**         |
-| USDC perpetual    | N/A                              | Support one-way **only**         | Support one-way **only**         |
-| USDC futures      | N/A                              | Support one-way **only**         | Support one-way **only**         |
-| Inverse perpetual | Support one-way **only**         | Support one-way **only**         | Support one-way **only**         |
-| Inverse futures   | **Support one-way & hedge-mode** | **Support one-way & hedge-mode** | Support one-way **only**         |
+|                   | UTA2.0                           |
+| ----------------- | -------------------------------- |
+| USDT perpetual    | **Support one-way & hedge-mode** |
+| USDT futures      | Support one-way **only**         |
+| USDC perpetual    | Support one-way **only**         |
+| Inverse perpetual | Support one-way **only**         |
+| Inverse futures   | Support one-way **only**         |
 
 ### HTTP Request[​](#http-request "Direct link to heading")
 
@@ -46,19 +45,12 @@ POST `/v5/position/switch-mode`
 
 ### Request Parameters[​](#request-parameters "Direct link to heading")
 
-| Parameter                          | Required | Type   | Comments     |
-| :--------------------------------- | :------- | :----- | ------------ |
-| [category](/docs/v5/enum#category) | **true** | string | Product type |
-
-- [UTA2.0](/docs/v5/acct-mode#uta-20): `linear`, USDT Contract
-- [UTA1.0](/docs/v5/acct-mode#uta-10): `linear`, USDT Contract; `inverse`,
-  Inverse Futures
-- Classic: `linear`, USDT Perp; `inverse`, Inverse Futures
-
-| | symbol | false | string | Symbol name, like `BTCUSDT`, uppercase only.
-Either `symbol` or `coin` is **required**. `symbol` has a higher priority | |
-coin | false | string | Coin, uppercase only | | mode | **true** | integer |
-Position mode. `0`: Merged Single. `3`: Both Sides |
+| Parameter                          | Required | Type    | Comments                                                                                                               |
+| :--------------------------------- | :------- | :------ | ---------------------------------------------------------------------------------------------------------------------- |
+| [category](/docs/v5/enum#category) | **true** | string  | Product type `linear`, USDT Contract                                                                                   |
+| symbol                             | false    | string  | Symbol name, like `BTCUSDT`, uppercase only. Either `symbol` or `coin` is **required**. `symbol` has a higher priority |
+| coin                               | false    | string  | Coin, uppercase only                                                                                                   |
+| mode                               | **true** | integer | Position mode. `0`: Merged Single. `3`: Both Sides                                                                     |
 
 [RUN >>](/docs/api-explorer/v5/position/position-mode)
 
