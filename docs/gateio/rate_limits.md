@@ -59,7 +59,7 @@ Earning, collateral etc |
 
 **Rate Limit**
 
-Each request to the API response header will contain the following fields::
+Each request to the API response header will contain the following fields:：
 
 - X-Gate-RateLimit-Requests-Remain - your remaining requests for current
   endpoint
@@ -243,7 +243,7 @@ The HTTP status code 2XX will be returned when all operations are successful.
 401 indicates that there is a problem with the certification. Other 4xx status
 codes indicate that the request is invalid. If it is a 5xx error, the server has
 encountered an unknown serious error when processing the request. Please give
-feedback as soon as possible.
+feedback as soon as possible。
 
 **Return Status**
 
@@ -263,12 +263,12 @@ feedback as soon as possible.
 | Type             | Description                                                                                  |
 | ---------------- | -------------------------------------------------------------------------------------------- |
 | `string`         | String type, in double quotation marks. Price and amount are also formatted in string format |
-| `integer`        | 32-bit integer, Mainly related to status codes, size, times, etc.                            |
-| `integer(int64)` | 64-bit integer, Mainly involves ID and higher precision timestamp                            |
+| `integer`        | 32-bit integer，Mainly related to status codes, size, times, etc.                            |
+| `integer(int64)` | 64-bit integer，Mainly involves ID and higher precision timestamp                            |
 | `float`          | Floating point number. Some time and stat fields use float.                                  |
-| `object`         | Object, Contains a child object{}                                                            |
-| `array`          | List, Includes multiple groups of content                                                    |
-| `boolean`        | true is true, false is false                                                                 |
+| `object`         | Object，Contains a child object{}                                                            |
+| `array`          | List，Includes multiple groups of content                                                    |
+| `boolean`        | true is true，false is false                                                                 |
 
 ## [#](#portfolio-margin-account) Portfolio Margin Account
 
@@ -420,9 +420,9 @@ New request body parameter:
 
 New response fields:
 
-| Name    | Type   | Required | Restriction | Description                |
-| ------- | ------ | -------- | ----------- | -------------------------- |
-| stp_act | string | No       | none        | STP Strategies, including: |
+| Name    | Type   | Required | Restriction | Description                 |
+| ------- | ------ | -------- | ----------- | --------------------------- |
+| stp_act | string | No       | none        | STP Strategies, including： |
 
 \- cn  
 \- co  
@@ -1404,7 +1404,7 @@ The HTTP status code 2XX will be returned when all operations are successful.
 401 indicates that there is a problem with the certification. Other 4xx status
 codes indicate that the request is invalid. If it is a 5xx error, the server has
 encountered an unknown serious error when processing the request. Please give
-feedback as soon as possible.
+feedback as soon as possible。
 
 **Return Status**
 
@@ -1424,11 +1424,11 @@ feedback as soon as possible.
 | Type             | Description                                                                                  |
 | ---------------- | -------------------------------------------------------------------------------------------- |
 | `string`         | String type, in double quotation marks. Price and amount are also formatted in string format |
-| `integer`        | 32-bit integer, Mainly related to status codes, size, times, etc.                            |
-| `integer(int64)` | 64-bit integer, Mainly involves ID and higher precision timestamp                            |
+| `integer`        | 32-bit integer，Mainly related to status codes, size, times, etc.                            |
+| `integer(int64)` | 64-bit integer，Mainly involves ID and higher precision timestamp                            |
 | `float`          | Floating point number. Some time and stat fields use float.                                  |
-| `object`         | Object, Contains a child object{}                                                            |
-| `array`          | List, Includes multiple groups of content                                                    |
-| `boolean`        | true is true, false is false                                                                 |
+| `object`         | Object，Contains a child object{}                                                            |
+| `array`          | List，Includes multiple groups of content                                                    |
+| `boolean`        | true is true，false is false                                                                 |
 
 ## [#](#portfolio-margin-account) Portfolio Margin Account
