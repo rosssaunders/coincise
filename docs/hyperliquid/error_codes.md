@@ -52,4 +52,4 @@ historical order statuses can be found
 
 [PreviousTimeouts and heartbeats](/hyperliquid-docs/for-developers/api/websocket/timeouts-and-heartbeats)[NextSigning](/hyperliquid-docs/for-developers/api/signing)
 
-Last updated 4 months ago
+Last updated 5 months ago
