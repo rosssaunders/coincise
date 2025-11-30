@@ -30,8 +30,6 @@ Response data
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 id
 
 int64
@@ -41,13 +39,3 @@ required
 Offer ID (retrievable via the
 [Funding Loans](/reference#rest-auth-funding-loans) and
 [Funding Credits](/reference#rest-auth-funding-credits) endpoints)
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/funding/close \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json'

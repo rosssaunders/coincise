@@ -80,8 +80,6 @@ string
 
 required
 
-Defaults to vol
-
 Allowed values: "plu_diff" for unrealized profit (period delta); "plu" for
 unrealized profit (inception); "vol" for volume; "plr" for realized profit
 
@@ -90,8 +88,6 @@ Time_Frame
 string
 
 required
-
-Defaults to 3h
 
 Available values: "3h", "1w", "1M" - see table below for available time frames
 per key
@@ -102,8 +98,6 @@ string
 
 required
 
-Defaults to tBTCUSD
-
 The symbol you want information about. (e.g. tBTCUSD, tETHUSD, tGLOBAL:USD) -
 see table below for available symbols per key
 
@@ -113,8 +107,6 @@ string
 
 required
 
-Defaults to hist
-
 Available values: "hist"
 
 Query Params
@@ -123,15 +115,11 @@ sort
 
 int32
 
-Defaults to -1
-
 if = 1 it sorts results returned with old > new
 
 start
 
 int64
-
-Defaults to null
 
 Millisecond start time
 
@@ -139,24 +127,12 @@ end
 
 int64
 
-Defaults to null
-
 Millisecond end time
 
 limit
 
 int32
 
-Defaults to 125
-
 Number of records (Max: 10000)
 
-Responses
-
 Request
-
-curl \--request GET \\
-
-     \--url 'https://api-pub.bitfinex.com/v2/rankings/vol:3h:tBTCUSD/hist?sort=-1&start=null&end=null&limit=125' \\
-
-     \--header 'accept: application/json'

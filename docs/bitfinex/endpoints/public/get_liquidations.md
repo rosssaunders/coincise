@@ -56,9 +56,3 @@ int32
 Number of records in response (max. 500).
 
 Response
-
-curl \--request GET \\
-
-     \--url https://api-pub.bitfinex.com/v2/liquidations/hist \\
-
-     \--header 'accept: application/json'

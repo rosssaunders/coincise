@@ -43,8 +43,6 @@ required
 
 Symbol (tBTCUSD, ...) , Omit for all symbols (see example)
 
-Body Params
-
 start
 
 int64
@@ -61,8 +59,6 @@ limit
 
 int32
 
-Defaults to 25
-
 Number of records (Max 500)
 
 id
@@ -72,15 +68,3 @@ array of int64s
 Allows you to retrieve specific orders by order ID (id: [ID1, ID2, ID3])
 
 id
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/orders/otc/Symbol/hist \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '{"limit":25}'

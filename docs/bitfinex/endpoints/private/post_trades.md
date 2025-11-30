@@ -39,8 +39,6 @@ Response Fields
 
 | --- | --- | | Rate Limit: | 90 reqs/min (requests per minute) |
 
-Body Params
-
 start
 
 int64
@@ -68,11 +66,3 @@ int32
 +1: sort in ascending order | -1: sort in descending order (by MTS field).
 
 Response
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/trades/hist \\
-
-     \--header 'Content-Type: application/json' \\
-
-     \--header 'accept: application/json'

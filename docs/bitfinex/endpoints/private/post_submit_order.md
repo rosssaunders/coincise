@@ -102,15 +102,11 @@ Order data array
 
 | --- | --- | | Rate Limit: | 90 reqs/min (requests per minute) |
 
-Body Params
-
 type
 
 string
 
 required
-
-Defaults to EXCHANGE LIMIT
 
 The type of the order (see list above).
 
@@ -120,8 +116,6 @@ string
 
 required
 
-Defaults to tBTCUSD
-
 The trading pair symbol to submit the order on.
 
 amount
@@ -130,8 +124,6 @@ string
 
 required
 
-Defaults to 0.1
-
 Amount of order (positive for buy, negative for sell).
 
 price
@@ -139,8 +131,6 @@ price
 string
 
 required
-
-Defaults to 10000
 
 Price of the order.
 
@@ -206,16 +196,6 @@ Object to pass order meta data. Options: 'aff_code' (to pass affiliate codes),
 Example: meta: {aff_code: "AFF_CODE_HERE", make_visible: 1}
 
 Response
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/order/submit \\
-
-     \--header 'Content-Type: application/json' \\
-
-     \--header 'accept: application/json' \\
-
-     \--data '
 
 {
 

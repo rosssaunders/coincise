@@ -56,8 +56,6 @@ position claim |
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 id
 
 int64
@@ -70,21 +68,7 @@ amount
 
 string
 
-Defaults to "0.001"
-
 Optional amount, used to perform a partial claim.
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/position/claim \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '
 
 {
 

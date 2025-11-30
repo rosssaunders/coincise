@@ -36,27 +36,11 @@ maximum values.
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 symbol
 
 string
 
-Defaults to tBTCF0:USTF0
-
 The derivative symbol, e.g. tBTCF0:USTF0
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/calc/deriv/collateral/limits \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '
 
 {
 

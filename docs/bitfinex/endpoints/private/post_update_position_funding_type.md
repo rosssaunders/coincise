@@ -18,8 +18,6 @@ Response Fields
 | [6]   | STATUS | string | Status of the notification; it may vary over time (SUCCESS, ERROR, FAILURE, ...) |
 | [7]   | TEXT   | string | Additional notification description                                              |
 
-Body Params
-
 symbol
 
 string
@@ -33,11 +31,3 @@ integer
 Provide the desired funding type setting (0 for daily and 1 for term funding)
 
 Response
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/position/update/funding/type \\
-
-     \--header 'Content-Type: application/json' \\
-
-     \--header 'accept: application/json'

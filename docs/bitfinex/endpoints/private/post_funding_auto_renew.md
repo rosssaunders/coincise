@@ -33,15 +33,11 @@ Funding offer array (index 4)
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 status
 
 int32
 
 required
-
-Defaults to 1
 
 1 to activate, 0 to deactivate
 
@@ -51,15 +47,11 @@ string
 
 required
 
-Defaults to USD
-
 Currency for which to enable auto-renew
 
 amount
 
 string
-
-Defaults to 123.45
 
 Amount to be auto-renewed (Minimum 50 USD equivalent). Defaultst to the amount
 currently provided if omitted.
@@ -75,21 +67,7 @@ period
 
 int32
 
-Defaults to 2
-
 Period in days. Defaults to 2 if omitted.
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/funding/auto \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '
 
 {
 

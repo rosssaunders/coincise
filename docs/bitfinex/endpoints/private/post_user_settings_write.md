@@ -26,26 +26,6 @@ Allows you to create custom settings by creating key: value pairs.
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 RAW_BODY
 
-json
-
-Defaults to {}
-
-{}
-
-Responses
-
 Request
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/settings/set \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '{}'
