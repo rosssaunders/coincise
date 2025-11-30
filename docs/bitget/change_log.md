@@ -1,5 +1,22 @@
 # Changelog
 
+## \[November 27, 2025\] A new return field, 'liqPrice', has been added to the futures historical order.[​](#november-27-2025-a-new-return-field-liqprice-has-been-added-to-the-futures-historical-order "Direct link to november-27-2025-a-new-return-field-liqprice-has-been-added-to-the-futures-historical-order")
+
+Interface:
+
+- /api/v2/mix/order/orders-history Changes：
+- A new return field, 'liqPrice', has been added to the futures historical
+  order.
+
+## \[November 26, 2025\] Websocket Added new ADL notification channel[​](#november-26-2025-websocket-added-new-adl-notification-channel "Direct link to november-26-2025-websocket-added-new-adl-notification-channel")
+
+Websocket: ADL notification channel  
+Changes: Websocket Added new ADL notification channel
+
+## \[November 26, 2025\] Add new FAQ Q15[​](#november-26-2025-add-new-faq-q15 "Direct link to november-26-2025-add-new-faq-q15")
+
+Changes:Add new FAQ Q15
+
 ## \[November 19, 2025\] New isRwa Field Added to Get Contract Information API Response[​](#november-19-2025-new-isrwa-field-added-to-get-contract-information-api-response "Direct link to november-19-2025-new-isrwa-field-added-to-get-contract-information-api-response")
 
 Interface:
