@@ -54,15 +54,11 @@ Deposit address arrays (Index [4])
 
 **Ratelimit**: 10 req/min
 
-Body Params
-
 wallet
 
 string
 
 required
-
-Defaults to trading
 
 Select the wallet from which to transfer (exchange, margin, funding (can also
 use the old labels which are exchange, trading and deposit respectively))
@@ -73,8 +69,6 @@ string
 
 required
 
-Defaults to bitcoin
-
 Method of deposit (methods accepted: “bitcoin”, “litecoin”, “ethereum”,
 “tetheruso", “tetherusl", “tetherusx", “tetheruss", "ethereumc", "zcash",
 "monero", "iota"). For an up-to-date listing of supported currencies see:
@@ -84,22 +78,8 @@ op_renew
 
 int32
 
-Defaults to 0
-
 Input 1 to generate a new deposit address (old addresses remain valid). Defaults
 to 0 if omitted, which will return the existing deposit address
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/deposit/address \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '
 
 {
 

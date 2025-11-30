@@ -23,8 +23,6 @@ Response data
 | BFX_AMOUNT        | string | Amount in BTC                                       |
 | STATUS            | string | Invoice/payment status                              |
 
-Body Params
-
 action
 
 string
@@ -42,14 +40,4 @@ required
 
 Query params
 
-Responses
-
 Request
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/ext/invoice/payments \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json'

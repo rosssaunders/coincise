@@ -23,15 +23,11 @@ Response data
 | status      | string  | Withdrawal status                         |
 | fee         | string  | Fee charged for the withdrawal            |
 
-Body Params
-
 provider
 
 string
 
 required
-
-Defaults to thalex
 
 Specify the provider ('thalex')
 
@@ -58,18 +54,6 @@ object
 required
 
 Provide a tfaToken object to validate the request with U2F 2FA
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/ext/wallets/withdrawals/request \\
-
-     \--header 'Content-Type: application/json' \\
-
-     \--header 'accept: application/json' \\
-
-     \--data '
 
 {
 

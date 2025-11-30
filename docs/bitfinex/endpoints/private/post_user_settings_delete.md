@@ -25,12 +25,4 @@ Allows you to delete custom settings.
 
 **Ratelimit**: 90 req/min
 
-Responses
-
 Request
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/settings/del \\
-
-     \--header 'accept: application/json'

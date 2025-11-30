@@ -51,8 +51,6 @@ Funding offer array (Index [4])
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 id
 
 int64
@@ -60,13 +58,3 @@ int64
 required
 
 Offer ID
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/funding/offer/cancel \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json'

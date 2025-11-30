@@ -22,13 +22,9 @@ the given symbol.
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 symbol
 
 string
-
-Defaults to tBTCF0:USTF0
 
 The derivative symbol, e.g. tBTCF0:USTF0
 
@@ -36,21 +32,7 @@ collateral
 
 float
 
-Defaults to 1150.61
-
 The amount of collateral to apply to the open position
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/deriv/collateral/set \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '
 
 {
 

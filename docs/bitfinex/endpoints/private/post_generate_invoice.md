@@ -27,15 +27,11 @@ Response data
 | [1]   | INVOICE      | String | Requested invoice |
 | [4]   | AMOUNT       | String | Amount of invoice |
 
-Body Params
-
 wallet
 
 string
 
 required
-
-Defaults to exchange
 
 Select the wallet that will receive the invoice payment. Currently only
 'exchange' is available
@@ -46,8 +42,6 @@ string
 
 required
 
-Defaults to LNX
-
 Select the currency for which you wish to generate an invoice. Currently only
 LNX (Bitcoin Lightning Network) is available.
 
@@ -57,21 +51,7 @@ string
 
 required
 
-Defaults to 0
-
 Amount that you wish to deposit (in BTC; min 0.000001, max 0.02)
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/deposit/invoice \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '
 
 {
 

@@ -31,24 +31,6 @@ Wallet arrays
 
 | --- | --- | | Rate Limit: | 90 reqs/min (requests per minute) |
 
-Body Params
-
 RAW_BODY
 
-json
-
-Defaults to {}
-
-{}
-
 Response
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/wallets \\
-
-     \--header 'Content-Type: application/json' \\
-
-     \--header 'accept: application/json' \\
-
-     \--data '{}'

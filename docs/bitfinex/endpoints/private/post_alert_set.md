@@ -21,8 +21,6 @@ Response data
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 type
 
 string
@@ -52,13 +50,3 @@ count
 integer
 
 Set the number of times an alert can trigger (ex. 100)
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/alert/set \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json'

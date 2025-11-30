@@ -36,15 +36,11 @@ Position audit entry arrays (index [0...n])
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 id
 
 array of int64s
 
 required
-
-Defaults to ,,,
 
 Array of id's to audit
 
@@ -67,18 +63,6 @@ limit
 int32
 
 Number of records (Max 250)
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/positions/audit \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '
 
 {
 
