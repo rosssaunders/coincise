@@ -1,6 +1,7 @@
 # GET /api/v3/rebate/detail/kickback
 
-**Source:** https://www.mexc.com/api-docs/spot-v3/rebate-endpoints#get-self-rebate-records-detail
+**Source:**
+https://www.mexc.com/api-docs/spot-v3/rebate-endpoints#get-self-rebate-records-detail
 
 > request
 
@@ -16,34 +17,35 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
 
 **Http Request**
 
--   **GET** `/api/v3/rebate/detail/kickback`
+- **GET** `/api/v3/rebate/detail/kickback`
 
-**Permission:** SPOT\_ACCOUNT\_READ
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
 **Request**
 
-| Name | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| startTime | long | NO |  |
-| endTime | long | NO |  |
-| page | int | NO | default 1 |
-| recvWindow | long | NO |  |
-| timestamp | long | YES |  |
-| signature | string | YES |  |
+| Name       | Type   | Mandatory | Description |
+| ---------- | ------ | --------- | ----------- |
+| startTime  | long   | NO        |             |
+| endTime    | long   | NO        |             |
+| page       | int    | NO        | default 1   |
+| recvWindow | long   | NO        |             |
+| timestamp  | long   | YES       |             |
+| signature  | string | YES       |             |
 
 **Response**
 
-| Name | Type | Description |
-| --- | --- | --- |
-| asset | string | rebate asset |
-| type | string | rebate type: spot futures |
-| rate | string | rebate rate |
-| amount | string | rebate amount |
-| uid | string | Invitee uid |
-| account | string | Invitee account |
-| tradeTime | long | trade time |
-| updateTime | long | update time |
+| Name       | Type   | Description               |
+| ---------- | ------ | ------------------------- |
+| asset      | string | rebate asset              |
+| type       | string | rebate type: spot futures |
+| rate       | string | rebate rate               |
+| amount     | string | rebate amount             |
+| uid        | string | Invitee uid               |
+| account    | string | Invitee account           |
+| tradeTime  | long   | trade time                |
+| updateTime | long   | update time               |
 
-If startTime and endTime are not sent, the recent 1 year's data will be returned.
+If startTime and endTime are not sent, the recent 1 year's data will be
+returned.

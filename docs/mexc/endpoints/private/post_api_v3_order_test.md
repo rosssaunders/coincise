@@ -1,6 +1,7 @@
 # POST /api/v3/order/test
 
-**Source:** https://www.mexc.com/api-docs/spot-v3/spot-account-trade#test-new-order
+**Source:**
+https://www.mexc.com/api-docs/spot-v3/spot-account-trade#test-new-order
 
 > Response
 
@@ -8,9 +9,9 @@
 {}
 ```
 
--   **POST** `/api/v3/order/test`
+- **POST** `/api/v3/order/test`
 
-**Permission:** SPOT\_DEAL\_WRITE
+**Permission:** SPOT_DEAL_WRITE
 
 **Weight(IP):** 1
 
