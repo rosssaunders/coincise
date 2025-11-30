@@ -8,7 +8,7 @@ combos, or only the list of combos in the given state.
 | Parameter | Required | Type   | Enum                   | Description                                                      |
 | --------- | -------- | ------ | ---------------------- | ---------------------------------------------------------------- |
 | currency  | true     | string | BTC ETH USDC USDT EURR | The currency symbol                                              |
-| state     | false    | string | active inactive        | Combo state, if not provided combos of all states are considered |
+| state     | false    | string | rfq active inactive    | Combo state, if not provided combos of all states are considered |
 
 ### Response
 

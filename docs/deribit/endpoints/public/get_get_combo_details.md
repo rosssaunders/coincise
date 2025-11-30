@@ -19,5 +19,5 @@ Retrieves information about a combo
 | result.instrument_id          | integer | Instrument ID result.legs array of object                                                                                                           |
 | result.legs[].amount          | integer | Size multiplier of a leg. A negative value indicates that the trades on given leg are in opposite direction to the combo trades they originate from |
 | result.legs[].instrument_name | string  | Unique instrument identifier                                                                                                                        |
-| result.state                  | string  | Combo state: "active", "inactive"                                                                                                                   |
+| result.state                  | string  | Combo state: "rfq", "active", "inactive"                                                                                                            |
 | result.state_timestamp        | integer | The timestamp (milliseconds since the Unix epoch)                                                                                                   |
