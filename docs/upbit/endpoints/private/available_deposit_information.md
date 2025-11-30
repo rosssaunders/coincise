@@ -162,7 +162,7 @@ required
 
 Message describing the cause of the error.
 
-Updated 16 days ago
+Updated 1 day ago
 
 ---
 
@@ -235,7 +235,7 @@ due to a network upgrade",
 
 }
 
-Updated 16 days ago
+Updated 1 day ago
 
 ---
 
