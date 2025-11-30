@@ -14,24 +14,11 @@ they require separate accounts and credentials (API keys) to authenticate using
 private methods - test credentials do not work in production environment and
 vice versa.
 
-To see the list of your API keys check the
-[Account > API](https://www.deribit.com/account/BTC/api) tab, where you'll also
-find a link to which allows you to test JSON-RPC API, both via HTTP and
-Websocket.
+To see the list of your API keys check **Account > API** tab, where you'll also
+find a link to API Console (`>_ Api Console`) which allows you to test JSON-RPC
+API, both via HTTP and Websocket.
 
-**Quick access links:**
-
-- [API Management](https://www.deribit.com/account/BTC/api) - Manage your API
-  keys and settings
-- [Test Environment](https://test.deribit.com) - Testing environment for API
-  development
-- [Production](https://www.deribit.com) - Production trading platform
-- \- Interactive API testing tool
-- [Support Center](https://support.deribit.com) - Documentation and help
-  articles
-- [Rate Limits](https://support.deribit.com/hc/en-us/articles/25944617523357-Rate-Limits) -
-  API usage limits and guidelines
-- [Error Codes](#rpc-error-codes) - HTTP and Websocket RPC Error codes
+- [Error Codes](#rpc-error-codes) (HTTP and Websocket RPC Error codes)
 
 ## Naming
 
