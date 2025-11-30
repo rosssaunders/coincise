@@ -19,7 +19,7 @@ recommended. It is recommended to use cross margin instead.
 | Parameter | Required | Type    | Description            |
 | --------- | -------- | ------- | ---------------------- |
 | symbol    | required | string  | Symbol of the contract |
-|           |
+|  |
 | status    | required | boolean | Status                 |
 
 ## Responses

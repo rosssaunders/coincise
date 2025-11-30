@@ -30,14 +30,14 @@ specific contract (only valid for Isolated Margin).
 | data                  | required | array   |                                                                                                                    |
 | data[].symbol         | required | string  | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
 | data[].level          | required | integer | Level                                                                                                              |
-|                       |
+|  |
 | data[].maxRiskLimit   | required | integer | Upper limit USDT (included)                                                                                        |
-|                       |
+|  |
 | data[].minRiskLimit   | required | integer | Lower limit USDT                                                                                                   |
-|                       |
+|  |
 | data[].maxLeverage    | required | integer | Max. leverage                                                                                                      |
-|                       |
+|  |
 | data[].initialMargin  | required | number  | Initial margin rate                                                                                                |
-|                       |
+|  |
 | data[].maintainMargin | required | number  | Maintenance margin rate                                                                                            |
-|                       |
+|  |

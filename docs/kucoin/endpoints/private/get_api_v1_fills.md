@@ -43,13 +43,13 @@ requested data is not real-time.
 | data.items                  | required | array   |                                                                                                                    |
 | data.items[].symbol         | required | string  | Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) |
 | data.items[].tradeId        | required | string  | Trade ID                                                                                                           |
-|                             |
+|  |
 | data.items[].orderId        | required | string  | Order ID                                                                                                           |
-|                             |
+|  |
 | data.items[].side           | required | string  | Transaction side                                                                                                   |
 | data.items[].liquidity      | required | string  | Liquidity-taker or -maker                                                                                          |
 | data.items[].forceTaker     | required | boolean | Whether to force processing as a taker                                                                             |
-|                             |
+|  |
 | data.items[].price          | required | string  | Filled price                                                                                                       |
 | data.items[].size           | required | integer | Filled amount                                                                                                      |
 | data.items[].value          | required | string  | Order value                                                                                                        |
@@ -67,8 +67,8 @@ requested data is not real-time.
 | data.items[].fee            | required | string  | Trading fee                                                                                                        |
 | data.items[].orderType      | required | string  | Order type                                                                                                         |
 | data.items[].tradeType      | required | string  | Trade type (trade, liquid, adl or settlement)                                                                      |
-|                             |
+|  |
 | data.items[].createdAt      | required | integer | Order creation time                                                                                                |
-|                             |
+|  |
 | data.items[].openFeeTaxPay  | required | string  | Opening tax fee (Only KYC users in some regions have this parameter)                                               |
 | data.items[].closeFeeTaxPay | required | string  | Close tax fee (Only KYC users in some regions have this parameter)                                                 |
