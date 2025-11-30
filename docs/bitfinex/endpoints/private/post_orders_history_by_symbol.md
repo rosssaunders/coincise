@@ -60,11 +60,7 @@ string
 
 required
 
-Defaults to tBTCUSD
-
 The symbol for which to retrieve order history (e.g. tBTCUSD, tETHUSD, ...).
-
-Body Params
 
 start
 
@@ -95,11 +91,3 @@ Allows users to retrieve specific orders by Order ID (id: [ID1, ID2, ID3]).
 id
 
 Response
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/orders/tBTCUSD/hist \\
-
-     \--header 'Content-Type: application/json' \\
-
-     \--header 'accept: application/json'

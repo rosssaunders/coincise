@@ -61,8 +61,6 @@ string
 
 required
 
-Defaults to tBTCUSD
-
 The symbol you want information about. (e.g. tBTCUSD, tETHUSD, fUSD, fBTC)
 
 precision
@@ -70,8 +68,6 @@ precision
 string
 
 required
-
-Defaults to P0
 
 Level of price aggregation (P0, P1, P2, P3, P4 and R0).
 
@@ -81,14 +77,4 @@ len
 
 int32
 
-Defaults to 25
-
 Number of price points ("1", "25", "100").
-
-Responses
-
-curl \--request GET \\
-
-     \--url 'https://api-pub.bitfinex.com/v2/book/tBTCUSD/P0?len=25' \\
-
-     \--header 'accept: application/json'

@@ -60,12 +60,8 @@ string
 
 required
 
-Defaults to tBTCUSD
-
 The trading pair symbol you want to fetch the orders about (e.g. tBTCUSD,
 tLTCBTC, ...).
-
-Body Params
 
 id
 
@@ -95,11 +91,3 @@ string
 Provide alongside a cid to filter based on Client ID. Format: "YYYY-MM-DD"
 
 Response
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/orders/tBTCUSD \\
-
-     \--header 'Content-Type: application/json' \\
-
-     \--header 'accept: application/json'

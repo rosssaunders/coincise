@@ -70,13 +70,9 @@ property with a value of an array of arrays detailing each order operation. (Max
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 type
 
 string
-
-Defaults to EXCHANGE_LIMIT
 
 Order Type: LIMIT, EXCHANGE LIMIT, MARKET, EXCHANGE MARKET, STOP, EXCHANGE STOP,
 STOP LIMIT, EXCHANGE STOP LIMIT, TRAILING STOP, EXCHANGE TRAILING STOP, FOK,
@@ -86,15 +82,11 @@ symbol
 
 string
 
-Defaults to tBTCUSD
-
 Symbol for desired pair
 
 price
 
 string
-
-Defaults to 123.45
 
 Price of order
 
@@ -102,23 +94,17 @@ amount
 
 string
 
-Defaults to 1.2345
-
 Amount of order (positive for buy, negative for sell)
 
 flags
 
 int32
 
-Defaults to 0
-
 Optional see [https://docs.bitfinex.com/v2/docs/flag-values](/docs/flag-values)
 
 lev
 
 int32
-
-Defaults to 10
 
 Set the leverage for a derivative order, supported by derivative symbol orders
 only. The value should be between 1 and 100 inclusive. The field is optional, if
@@ -128,23 +114,17 @@ price_trailing
 
 string
 
-Defaults to 1
-
 The trailing price for a trailing stop order
 
 price_aux_limit
 
 string
 
-Defaults to 10
-
 Auxiliary Limit price (for STOP LIMIT)
 
 price_oco_stop
 
 string
-
-Defaults to 10
 
 OCO stop price
 
@@ -157,8 +137,6 @@ Group Order ID (int45)
 tif
 
 string
-
-Defaults to YYYY-MM-DD HH:MM:SS
 
 Time-In-Force: datetime for automatic order cancellation (e.g. 2020-01-15
 10:45:23).
@@ -180,31 +158,15 @@ cid_date
 
 string
 
-Defaults to YYYY-MM-DD
-
 Client Order ID Date
 
 all
 
 int32
 
-Defaults to 1
-
 Cancel all open orders if value is set to: 1
 
-Responses
-
 Request
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/order/multi \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '
 
 {
 

@@ -49,24 +49,4 @@ Response data
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 RAW_BODY
-
-json
-
-Defaults to {}
-
-{}
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/info/user \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '{}'

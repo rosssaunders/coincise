@@ -26,8 +26,6 @@ endpoint.
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 keys
 
 array of strings
@@ -38,14 +36,4 @@ The keys for which you wish to retrieve the values.
 
 keys\*
 
-Responses
-
 Request
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/settings \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json'

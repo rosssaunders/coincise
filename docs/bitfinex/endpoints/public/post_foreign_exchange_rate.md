@@ -19,15 +19,11 @@ Response Fields
 
 | --- | --- | | Rate Limit: | 90 reqs/min (requests per minute) |
 
-Body Params
-
 ccy1
 
 string
 
 required
-
-Defaults to BTC
 
 1st currency (base currency).
 
@@ -37,21 +33,9 @@ string
 
 required
 
-Defaults to USD
-
 2nd currency (quote currency).
 
 Response
-
-curl \--request POST \\
-
-     \--url https://api-pub.bitfinex.com/v2/calc/fx \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '
 
 {
 

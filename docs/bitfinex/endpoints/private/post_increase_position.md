@@ -54,15 +54,11 @@ Position increase array
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 symbol
 
 string
 
 required
-
-Defaults to tBTCUSD
 
 Trading pair on which you wish to open a position
 
@@ -72,21 +68,7 @@ string
 
 required
 
-Defaults to 123
-
 Amount of the position. (positive for long, negative for short)
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/position/increase \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '
 
 {
 

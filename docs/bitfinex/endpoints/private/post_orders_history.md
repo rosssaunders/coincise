@@ -51,8 +51,6 @@ Response Fields
 
 | --- | --- | | Rate Limit: | 90 reqs/min (requests per minute) |
 
-Body Params
-
 start
 
 int64
@@ -82,11 +80,3 @@ Allows users to retrieve specific orders by Order ID (id: [ID1, ID2, ID3]).
 id
 
 Response
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/orders/hist \\
-
-     \--header 'Content-Type: application/json' \\
-
-     \--header 'accept: application/json'

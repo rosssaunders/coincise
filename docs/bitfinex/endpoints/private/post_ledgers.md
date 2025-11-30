@@ -74,8 +74,6 @@ Currency (BTC, ...) For an up-to-date listing of supported currencies see:
 [https://api.bitfinex.com/v2/conf/pub:map:currency:label](https://api.bitfinex.com/v2/conf/pub:map:currency:label)
 (Can be omitted to retrieve Ledgers for all currencies)
 
-Body Params
-
 category
 
 int32
@@ -106,13 +104,3 @@ wallet
 string
 
 Wallet name e.g. exchange, margin, funding
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/ledgers/Currency/hist \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json'

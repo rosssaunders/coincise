@@ -76,8 +76,6 @@ Order data array
 
 | --- | --- | | Rate Limit: | 90 reqs/min (requests per minute) |
 
-Body Params
-
 id
 
 integer
@@ -102,11 +100,3 @@ date
 An YYYY-MM-DD date to provide along with an order's CID.
 
 Response
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/order/cancel \\
-
-     \--header 'Content-Type: application/json' \\
-
-     \--header 'accept: application/json'

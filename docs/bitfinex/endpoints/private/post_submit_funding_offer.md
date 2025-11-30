@@ -90,15 +90,11 @@ Funding offer array (Index [4])
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 type
 
 string
 
 required
-
-Defaults to LIMIT
 
 Order Type (LIMIT, FRRDELTAVAR, FRRDELTAFIX)
 
@@ -108,8 +104,6 @@ string
 
 required
 
-Defaults to fUSD
-
 Symbol for desired pair (fUSD, fBTC, etc..)
 
 amount
@@ -117,8 +111,6 @@ amount
 string
 
 required
-
-Defaults to 123.45
 
 Amount (positive for offer, negative for bid)
 
@@ -128,8 +120,6 @@ string
 
 required
 
-Defaults to 0.001
-
 Daily rate
 
 period
@@ -138,29 +128,13 @@ int32
 
 required
 
-Defaults to 2
-
 Time period of offer. Minimum 2 days. Maximum 120 days.
 
 flags
 
 int32
 
-Defaults to 0
-
 Optional see [https://docs.bitfinex.com/v2/docs/flag-values](/docs/flag-values)
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/funding/offer/submit \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '
 
 {
 

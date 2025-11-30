@@ -30,20 +30,8 @@ offers in the specified currency.
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 currency
 
 string
 
 Currency for which to cancel all offers (USD, BTC, UST ...)
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/funding/offer/cancel/all \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json'

@@ -23,8 +23,6 @@ Response data
 | status      | string  | Deposit status                            |
 | fee         | string  | Fee charged for the deposit               |
 
-Body Params
-
 provider
 
 string
@@ -56,13 +54,3 @@ object
 required
 
 Provide a tfaToken object to validate the request with U2F 2FA
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/ext/wallets/deposits/request \\
-
-     \--header 'Content-Type: application/json' \\
-
-     \--header 'accept: application/json'
