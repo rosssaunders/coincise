@@ -50,8 +50,6 @@ required
 
 Symbol (fUSD, ...) , Omit for all symbols (see example)
 
-Body Params
-
 start
 
 int64
@@ -68,18 +66,4 @@ limit
 
 string
 
-Defaults to 25
-
 Number of records (Max 500)
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/funding/credits/Symbol/hist \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json' \\
-
-     \--data '{"limit":"25"}'

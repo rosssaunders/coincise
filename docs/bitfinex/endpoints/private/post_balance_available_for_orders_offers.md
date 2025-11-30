@@ -17,8 +17,6 @@ Calculate the balance available for orders/offers
 
 **Ratelimit**: 90 req/min
 
-Body Params
-
 symbol
 
 string
@@ -54,14 +52,4 @@ string
 
 Leverage that you want to use in calculating the max order amount (DERIV only)
 
-Responses
-
 Request
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/calc/order/avail \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json'

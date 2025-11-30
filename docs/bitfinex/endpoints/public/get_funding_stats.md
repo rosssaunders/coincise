@@ -29,8 +29,6 @@ string
 
 required
 
-Defaults to fUSD
-
 The symbol you want information about. (e.g. fUSD, fBTC, fETH, ...)
 
 Query Params

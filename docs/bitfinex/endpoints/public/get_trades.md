@@ -45,8 +45,6 @@ string
 
 required
 
-Defaults to tBTCUSD
-
 The symbol you want information about. (e.g. tBTCUSD, tETHUSD, fUSD, fBTC)
 
 Query Params
@@ -55,15 +53,11 @@ limit
 
 int32
 
-Defaults to 125
-
 Number of records in response (max. 10000).
 
 sort
 
 int32
-
-Defaults to -1
 
 +1: sort in ascending order | -1: sort in descending order (by MTS field).
 
@@ -82,9 +76,3 @@ If end is given, only records with MTS <= end (milliseconds) will be given as
 response.
 
 Response
-
-curl \--request GET \\
-
-     \--url 'https://api-pub.bitfinex.com/v2/trades/tBTCUSD/hist?limit=125&sort=-1' \\
-
-     \--header 'accept: application/json'

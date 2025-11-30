@@ -79,15 +79,7 @@ string
 
 required
 
-Defaults to ALL
-
 The symbols you want information about as a comma separated list, or ALL for
 every symbol (examples of possible symbols: tBTCUSD, tETHUSD, fUSD, fBTC, ...).
 
 Response
-
-curl \--request GET \\
-
-     \--url 'https://api-pub.bitfinex.com/v2/tickers?symbols=ALL' \\
-
-     \--header 'accept: application/json'

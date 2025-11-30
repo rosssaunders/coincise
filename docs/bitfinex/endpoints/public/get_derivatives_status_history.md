@@ -39,8 +39,6 @@ string
 
 required
 
-Defaults to tBTCF0:USTF0
-
 The key of the pairs to obtain history information. (e.g. tBTCF0:USTF0,
 tETHF0:USTF0, ...)
 
@@ -73,9 +71,3 @@ int32
 Number of records in response (max. 5000).
 
 Response
-
-curl \--request GET \\
-
-     \--url https://api-pub.bitfinex.com/v2/status/deriv/tBTCF0%3AUSTF0/hist \\
-
-     \--header 'accept: application/json'

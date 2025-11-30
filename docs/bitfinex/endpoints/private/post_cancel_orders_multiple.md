@@ -68,8 +68,6 @@ Order data arrays
 
 | --- | --- | | Rate Limit: | 90 reqs/min (requests per minute) |
 
-Body Params
-
 id
 
 integer
@@ -84,8 +82,6 @@ An array containing the GIDs of the orders to delete.
 
 cid
 
-json
-
 An array of tuples containing the cid and cid_date pairs of the orders to
 delete.
 
@@ -96,11 +92,3 @@ int32
 If set to 1, cancels all open orders (both trading and derivative)
 
 Response
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/w/order/cancel/multi \\
-
-     \--header 'Content-Type: application/json' \\
-
-     \--header 'accept: application/json'

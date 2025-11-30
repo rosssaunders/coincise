@@ -47,8 +47,6 @@ Currency (BTC, ...). For an up-to-date listing of supported currencies see:
 [https://api.bitfinex.com/v2/conf/pub:map:currency:label](https://api.bitfinex.com/v2/conf/pub:map:currency:label) -
 Currency param can be omitted to retrieve recent movements for all currencies.
 
-Body Params
-
 start
 
 int64
@@ -82,13 +80,3 @@ address
 string
 
 Optional deposit address filter
-
-Responses
-
-curl \--request POST \\
-
-     \--url https://api.bitfinex.com/v2/auth/r/movements/Currency/hist \\
-
-     \--header 'accept: application/json' \\
-
-     \--header 'content-type: application/json'
