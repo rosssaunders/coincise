@@ -122,7 +122,7 @@ Suppose the key we used is `key`, while the secret is `secret`.
 	GET /api/v4/futures/orders?contract=BTC_USD&status=finished&limit=50 HTTP/1.1
 ```
 
-Signature string:
+Signature string：
 
 ```
 	GET\n
@@ -132,7 +132,7 @@ Signature string:
 	1541993715
 ```
 
-Explanation:
+Explanation：
 
 - `/api/v4/futures/orders`: request url
 - `contract=BTC_USD&status=finished&limit=50`: keep the query string as it is in
@@ -152,7 +152,7 @@ Signature generated
 	{"contract":"BTC_USD","type":"limit","size":100,"price":6800,"time_in_force":"gtc"}
 ```
 
-Signature string:
+Signature string：
 
 ```
 	POST\n
@@ -162,7 +162,7 @@ Signature string:
 	1541993715
 ```
 
-Explanation:
+Explanation：
 
 - request query string is empty, use plain empty string
 - use the hashed result of the json-string-formatted request body
@@ -293,7 +293,7 @@ Suppose the key we used is `key`, while the secret is `secret`.
 	GET /api/v4/futures/orders?contract=BTC_USD&status=finished&limit=50 HTTP/1.1
 ```
 
-Signature string:
+Signature string：
 
 ```
 	GET\n
@@ -303,7 +303,7 @@ Signature string:
 	1541993715
 ```
 
-Explanation:
+Explanation：
 
 - `/api/v4/futures/orders`: request url
 - `contract=BTC_USD&status=finished&limit=50`: keep the query string as it is in
@@ -323,7 +323,7 @@ Signature generated
 	{"contract":"BTC_USD","type":"limit","size":100,"price":6800,"time_in_force":"gtc"}
 ```
 
-Signature string:
+Signature string：
 
 ```
 	POST\n
@@ -333,7 +333,7 @@ Signature string:
 	1541993715
 ```
 
-Explanation:
+Explanation：
 
 - request query string is empty, use plain empty string
 - use the hashed result of the json-string-formatted request body
@@ -464,7 +464,7 @@ Suppose the key we used is `key`, while the secret is `secret`.
 	GET /api/v4/futures/orders?contract=BTC_USD&status=finished&limit=50 HTTP/1.1
 ```
 
-Signature string:
+Signature string：
 
 ```
 	GET\n
@@ -474,7 +474,7 @@ Signature string:
 	1541993715
 ```
 
-Explanation:
+Explanation：
 
 - `/api/v4/futures/orders`: request url
 - `contract=BTC_USD&status=finished&limit=50`: keep the query string as it is in
@@ -494,7 +494,7 @@ Signature generated
 	{"contract":"BTC_USD","type":"limit","size":100,"price":6800,"time_in_force":"gtc"}
 ```
 
-Signature string:
+Signature string：
 
 ```
 	POST\n
@@ -504,7 +504,7 @@ Signature string:
 	1541993715
 ```
 
-Explanation:
+Explanation：
 
 - request query string is empty, use plain empty string
 - use the hashed result of the json-string-formatted request body
@@ -635,7 +635,7 @@ Suppose the key we used is `key`, while the secret is `secret`.
 	GET /api/v4/futures/orders?contract=BTC_USD&status=finished&limit=50 HTTP/1.1
 ```
 
-Signature string:
+Signature string：
 
 ```
 	GET\n
@@ -645,7 +645,7 @@ Signature string:
 	1541993715
 ```
 
-Explanation:
+Explanation：
 
 - `/api/v4/futures/orders`: request url
 - `contract=BTC_USD&status=finished&limit=50`: keep the query string as it is in
@@ -665,7 +665,7 @@ Signature generated
 	{"contract":"BTC_USD","type":"limit","size":100,"price":6800,"time_in_force":"gtc"}
 ```
 
-Signature string:
+Signature string：
 
 ```
 	POST\n
@@ -675,7 +675,7 @@ Signature string:
 	1541993715
 ```
 
-Explanation:
+Explanation：
 
 - request query string is empty, use plain empty string
 - use the hashed result of the json-string-formatted request body
